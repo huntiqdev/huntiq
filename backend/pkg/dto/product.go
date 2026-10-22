@@ -10,6 +10,7 @@ type ProductFilter struct {
 	MinPrice            *float64
 	MaxPrice            *float64
 	LocationID          *int
+	LocationHierarchyID *int  // Data-driven location hierarchy node ID
 	Region              *string
 	Zone                *string
 	Subcity             *string
@@ -32,6 +33,7 @@ type CreateProductRequest struct {
 	Item                string                 `json:"item"`
 	Condition           string                 `json:"condition"`
 	LocationID          *int                   `json:"location_id"`
+	LocationHierarchyID *int                   `json:"location_hierarchy_id,omitempty"`
 	Region              string                 `json:"region"`
 	Zone                string                 `json:"zone,omitempty"`
 	Subcity             string                 `json:"subcity,omitempty"`
@@ -67,13 +69,14 @@ type UpdateProductRequest struct {
 	Subcategory         *string                `json:"subcategory"`
 	Item                *string                `json:"item"`
 	Attributes          map[string]interface{} `json:"attributes,omitempty"`
-	Condition    *string  `json:"condition"`
-	LocationID   *int     `json:"location_id"`
-	Kebele       *string  `json:"kebele,omitempty"`
-	SpecificArea *string  `json:"specific_area,omitempty"`
-	Latitude     *float64 `json:"latitude,omitempty"`
-	Longitude    *float64 `json:"longitude,omitempty"`
-	ImageURLs    []string `json:"image_urls"`
+	Condition           *string                `json:"condition"`
+	LocationID          *int                   `json:"location_id"`
+	LocationHierarchyID *int                   `json:"location_hierarchy_id,omitempty"`
+	Kebele              *string                `json:"kebele,omitempty"`
+	SpecificArea        *string                `json:"specific_area,omitempty"`
+	Latitude            *float64               `json:"latitude,omitempty"`
+	Longitude           *float64               `json:"longitude,omitempty"`
+	ImageURLs           []string               `json:"image_urls"`
 	
 	// Rental fields (only for listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`
@@ -83,5 +86,6 @@ type UpdateProductRequest struct {
 	AvailableFrom       *string  `json:"available_from,omitempty"`
 	AvailableUntil      *string  `json:"available_until,omitempty"`
 }
+
 
 

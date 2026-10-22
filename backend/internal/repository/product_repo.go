@@ -49,7 +49,8 @@ const sqlProductSelectCols = `
 	       p.rental_price, p.rental_duration_value, p.rental_duration_unit,
 	       p.deposit_amount, p.available_from, p.available_until,
 	       COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
-	       p.category_hierarchy_id
+	       p.category_hierarchy_id,
+	       p.location_hierarchy_id
 	FROM products p
 	LEFT JOIN categories c ON c.id = p.category_id
 	LEFT JOIN locations  l ON l.id = p.location_id
@@ -72,7 +73,8 @@ const sqlGetProductByID = `
 	        p.deposit_amount, p.available_from, p.available_until,
 	        COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
 	        p.current_tenant_id, p.rented_until,
-	        p.category_hierarchy_id
+	        p.category_hierarchy_id,
+	        p.location_hierarchy_id
 	 FROM products p
 	 LEFT JOIN categories c ON c.id = p.category_id
 	 LEFT JOIN locations  l ON l.id = p.location_id
@@ -95,13 +97,13 @@ const sqlCreateProduct = `
 		listing_duration_days, startup_fee_percent, weekly_increment_percent, total_fee_percent, total_fee_amount,
 		kebele, specific_area, latitude, longitude,
 		listing_type, rental_price, rental_duration_value, rental_duration_unit, deposit_amount, available_from, available_until,
-		category_hierarchy_id
+		category_hierarchy_id, location_hierarchy_id
 	) VALUES (
 		$1, $2, $3, $4, $5, $6, $7, $8, $9, 'pending',
 		$10, $11, $12, $13, $14,
 		$15, $16, $17, $18,
 		$19, $20, $21, $22, $23, $24, $25,
-		$26
+		$26, $27
 	) RETURNING id`
 
 const sqlCreateProductImage = `
@@ -115,8 +117,9 @@ const sqlUpdateProduct = `
 	     rental_price=$13, rental_duration_value=$14, rental_duration_unit=$15,
 	     deposit_amount=$16, available_from=$17, available_until=$18,
 	     category_hierarchy_id=COALESCE($19, $4),
+	     location_hierarchy_id=COALESCE($20, location_hierarchy_id),
 	     status='pending', admin_notes='', updated_at=NOW()
-	 WHERE id=$20 AND seller_id=$21 AND status IN ('pending','rejected')`
+	 WHERE id=$21 AND seller_id=$22 AND status IN ('pending','rejected')`
 
 const sqlDeleteProductImages = `DELETE FROM product_images WHERE product_id=$1`
 
@@ -210,17 +213,32 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 	if f.MaxPrice != nil {
 		args, _ = addWhere(&wb, args, " AND p.price <= ", *f.MaxPrice)
 	}
-	if f.LocationID != nil {
+	if f.LocationHierarchyID != nil {
+		idx := len(args) + 1
+		wb.WriteString(fmt.Sprintf(` AND p.location_hierarchy_id IN (SELECT id FROM get_location_descendants($%d))`, idx))
+		args = append(args, *f.LocationHierarchyID)
+	} else if f.LocationID != nil {
 		args, _ = addWhere(&wb, args, " AND p.location_id = ", *f.LocationID)
 	}
 	if f.Woreda != nil && *f.Woreda != "" {
 		args, _ = addWhere(&wb, args, " AND l.woreda ILIKE ", likeWrap(*f.Woreda))
 	} else if f.Subcity != nil && *f.Subcity != "" {
-		args, _ = addWhere(&wb, args, " AND l.subcity ILIKE ", likeWrap(*f.Subcity))
+		idx := len(args) + 1
+		wb.WriteString(fmt.Sprintf(` AND (l.subcity ILIKE $%d OR p.location_hierarchy_id IN (SELECT id FROM location_hierarchy WHERE name_en ILIKE $%d))`, idx, idx))
+		args = append(args, likeWrap(*f.Subcity))
 	} else if f.Zone != nil && *f.Zone != "" {
 		args, _ = addWhere(&wb, args, " AND l.zone ILIKE ", likeWrap(*f.Zone))
 	} else if f.Region != nil && *f.Region != "" {
-		args, _ = addWhere(&wb, args, " AND l.region ILIKE ", likeWrap(*f.Region))
+		idx := len(args) + 1
+		wb.WriteString(fmt.Sprintf(` AND (
+			l.region ILIKE $%d
+			OR p.location_hierarchy_id IN (
+				SELECT d.id FROM location_hierarchy r
+				CROSS JOIN LATERAL get_location_descendants(r.id) d
+				WHERE r.name_en ILIKE $%d
+			)
+		)`, idx, idx))
+		args = append(args, likeWrap(*f.Region))
 	}
 	
 	// Enhanced search with brand detection and synonym expansion
@@ -305,6 +323,7 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 			&listingType, &p.RentalPrice, &p.RentalDurationValue, &rentalDurationUnit,
 			&p.DepositAmount, &availableFrom, &availableUntil, &p.IsCurrentlyRented,
 			&p.CategoryHierarchyID,
+			&p.LocationHierarchyID,
 		); err != nil {
 			return nil, err
 		}
@@ -383,6 +402,7 @@ func (r *ProductRepo) GetByID(ctx context.Context, id int) (*models.Product, err
 		&p.DepositAmount, &availableFrom, &availableUntil, &p.IsCurrentlyRented,
 		&p.CurrentTenantID, &p.RentedUntil,
 		&p.CategoryHierarchyID,
+		&p.LocationHierarchyID,
 	)
 	if err != nil {
 		return nil, err
@@ -446,7 +466,7 @@ func (r *ProductRepo) Create(ctx context.Context, p *models.Product, imageURLs [
 		p.ListingDurationDays, p.StartupFeePercent, p.WeeklyIncrementPercent, p.TotalFeePercent, p.TotalFeeAmount,
 		nullStr(p.Kebele), nullStr(p.SpecificArea), p.Latitude, p.Longitude,
 		p.ListingType, p.RentalPrice, p.RentalDurationValue, nullStrPtr(p.RentalDurationUnit), p.DepositAmount, nullStrPtr(p.AvailableFrom), nullStrPtr(p.AvailableUntil),
-		catHierarchyID,
+		catHierarchyID, p.LocationHierarchyID,
 	).Scan(&id)
 	if err != nil {
 		return 0, err
@@ -473,6 +493,7 @@ func (r *ProductRepo) Update(ctx context.Context, p *models.Product, imageURLs [
 		p.RentalPrice, p.RentalDurationValue, nullStrPtr(p.RentalDurationUnit),
 		p.DepositAmount, nullStrPtr(p.AvailableFrom), nullStrPtr(p.AvailableUntil),
 		p.CategoryHierarchyID,
+		p.LocationHierarchyID,
 		p.ID, p.SellerID,
 	)
 	if err != nil {

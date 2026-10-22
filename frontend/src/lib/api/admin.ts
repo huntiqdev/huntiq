@@ -240,4 +240,33 @@ export const adminApi = {
     fetchAPI<any>(`/admin/categories/${categoryId}/attributes`, { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
   adminRemoveAttributeFromCategory: (categoryId: number, attributeId: number, token: string) =>
     fetchAPI<any>(`/admin/categories/${categoryId}/attributes/${attributeId}`, { method: 'DELETE', headers: authHeaders(token) }),
+
+  // ── Location Hierarchy Management ──────────────────────────────────────────
+  adminGetLocationHierarchy: (params?: { parent_id?: number; level?: number; search?: string }, token?: string) => {
+    const cleanParams: Record<string, string> = {};
+    if (params?.parent_id !== undefined) cleanParams.parent_id = String(params.parent_id);
+    if (params?.level !== undefined) cleanParams.level = String(params.level);
+    if (params?.search) cleanParams.search = params.search;
+    const q = Object.keys(cleanParams).length > 0 ? '?' + new URLSearchParams(cleanParams).toString() : '';
+    return fetchAPI<any>(`/admin/location-hierarchy${q}`, { headers: token ? authHeaders(token) : undefined })
+      .then(r => Array.isArray(r) ? r : (r?.data ?? []));
+  },
+  adminGetLocationHierarchyItem: (id: number, token?: string) =>
+    fetchAPI<any>(`/admin/location-hierarchy/${id}`, { headers: token ? authHeaders(token) : undefined })
+      .then(r => r?.data ?? r),
+  adminCreateLocationHierarchy: (data: any, token: string) =>
+    fetchAPI<any>('/admin/location-hierarchy', { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminUpdateLocationHierarchy: (id: number, data: any, token: string) =>
+    fetchAPI<any>(`/admin/location-hierarchy/${id}`, { method: 'PUT', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminDeleteLocationHierarchy: (id: number, token: string) =>
+    fetchAPI<any>(`/admin/location-hierarchy/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
+  adminImportLocationHierarchy: (data: { items: any[] }, token: string) =>
+    fetchAPI<any>('/admin/location-hierarchy/import', { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminTestGeocode: (latitude: number, longitude: number, language = 'en', token?: string) =>
+    fetchAPI<any>('/admin/location-hierarchy/test-geocode', {
+      method: 'POST',
+      body: JSON.stringify({ latitude, longitude, language }),
+      headers: token ? authHeaders(token) : undefined,
+    }).then(r => r?.data ?? r),
 };
+

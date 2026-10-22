@@ -305,6 +305,7 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 		Item:                   req.Item,
 		Condition:              cond,
 		LocationID:             req.LocationID,
+		LocationHierarchyID:    req.LocationHierarchyID,
 		Kebele:                 req.Kebele,
 		SpecificArea:           req.SpecificArea,
 		Latitude:               req.Latitude,
@@ -432,6 +433,9 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 	}
 	if req.LocationID != nil {
 		existing.LocationID = req.LocationID
+	}
+	if req.LocationHierarchyID != nil {
+		existing.LocationHierarchyID = req.LocationHierarchyID
 	}
 	if req.Kebele != nil {
 		existing.Kebele = *req.Kebele

@@ -58,6 +58,7 @@ func main() {
 	attributeRepo := repository.NewAttributeRepo(db)
 	searchRepo := repository.NewSearchRepo(db)
 	locationRepo := repository.NewLocationRepo(db)
+	locationHierarchyRepo := repository.NewLocationHierarchyRepo(db)
 	userRepo := repository.NewUserRepo(db).WithOTPCrypto(otpCrypto)
 	txRepo := repository.NewTransactionRepo(db)
 	adminRepo := repository.NewAdminRepo(db)
@@ -108,7 +109,7 @@ func main() {
 	productSvc := service.NewProductService(productRepo, categoryRepo, locationRepo, userRepo).
 		WithBackendBase(cfg.AppBaseURL).
 		WithAttributeRepo(attributeRepo)
-	locationSvc := service.NewLocationService(locationRepo)
+	locationSvc := service.NewLocationService(locationRepo).WithHierarchy(locationHierarchyRepo)
 	categoryHierarchySvc := service.NewCategoryHierarchyService(categoryHierarchyRepo)
 	attributeSvc := service.NewAttributeService(attributeRepo)
 	authSvc := service.NewAuthService(userRepo, cfg.JWTSecret).
@@ -337,6 +338,12 @@ func main() {
 	api.Get("/locations/woredas", locationHandler.ListWoredas)
 	api.Get("/locations/search", locationHandler.SearchLocations)
 
+	// Location Hierarchy & GPS Reverse Geocoding (Public)
+	api.Post("/locations/reverse-geocode", locationHandler.ReverseGeocode)
+	api.Get("/locations/tree", locationHandler.GetLocationTree)
+	api.Get("/locations/children", locationHandler.ListChildren)
+	api.Get("/locations/search-hierarchy", locationHandler.SearchHierarchy)
+
 	// Public banners (buyer/seller hero)
 	api.Get("/banners", bannerHandler.ListPublic)
 
@@ -507,11 +514,20 @@ func main() {
 	admin.Get("/sellers", mw.RequirePermission("sellers"), adminHandler.ListSellers)
 	admin.Put("/sellers/:id/active", mw.RequirePermission("sellers"), adminHandler.SetSellerActive)
 
-	// Locations
+	// Locations (Legacy)
 	admin.Get("/locations", mw.RequirePermission("locations"), adminHandler.ListLocations)
 	admin.Post("/locations", mw.RequirePermission("locations"), adminHandler.AddLocation)
 	admin.Put("/locations/:id", mw.RequirePermission("locations"), adminHandler.UpdateLocation)
 	admin.Delete("/locations/:id", mw.RequirePermission("locations"), adminHandler.DeleteLocation)
+
+	// Location Hierarchy & Geocoding Admin Management
+	admin.Get("/location-hierarchy", mw.RequirePermission("locations"), locationHandler.AdminListLocations)
+	admin.Get("/location-hierarchy/:id", mw.RequirePermission("locations"), locationHandler.AdminGetLocation)
+	admin.Post("/location-hierarchy", mw.RequirePermission("locations"), locationHandler.AdminCreateLocation)
+	admin.Put("/location-hierarchy/:id", mw.RequirePermission("locations"), locationHandler.AdminUpdateLocation)
+	admin.Delete("/location-hierarchy/:id", mw.RequirePermission("locations"), locationHandler.AdminDeleteLocation)
+	admin.Post("/location-hierarchy/import", mw.RequirePermission("locations"), locationHandler.AdminImportLocations)
+	admin.Post("/location-hierarchy/test-geocode", mw.RequirePermission("locations"), locationHandler.ReverseGeocode)
 
 	// Analytics
 	admin.Get("/analytics/overview", mw.RequirePermission("analytics"), adminHandler.AnalyticsOverview)

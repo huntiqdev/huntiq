@@ -20,9 +20,13 @@ func NewCategoryHierarchyRepo(db *pgxpool.Pool) *CategoryHierarchyRepo {
 // GetByID retrieves a category with its breadcrumb path
 func (r *CategoryHierarchyRepo) GetByID(ctx context.Context, id int, lang string) (*models.CategoryHierarchy, error) {
 	query := `
-		SELECT id, parent_id, name_en, name_am, name_om, slug, description,
-		       level, path, display_order, icon, is_active, is_leaf,
-		       meta_title, meta_description, created_at, updated_at
+		SELECT id, parent_id,
+		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''),
+		       COALESCE(slug, ''), COALESCE(description, ''),
+		       level, COALESCE(path, ''), display_order,
+		       COALESCE(icon, ''), is_active, is_leaf,
+		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
+		       created_at, updated_at
 		FROM category_hierarchy
 		WHERE id = $1`
 	
@@ -49,9 +53,13 @@ func (r *CategoryHierarchyRepo) GetByID(ctx context.Context, id int, lang string
 // GetBySlug retrieves a category by its slug
 func (r *CategoryHierarchyRepo) GetBySlug(ctx context.Context, slug string, lang string) (*models.CategoryHierarchy, error) {
 	query := `
-		SELECT id, parent_id, name_en, name_am, name_om, slug, description,
-		       level, path, display_order, icon, is_active, is_leaf,
-		       meta_title, meta_description, created_at, updated_at
+		SELECT id, parent_id,
+		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''),
+		       COALESCE(slug, ''), COALESCE(description, ''),
+		       level, COALESCE(path, ''), display_order,
+		       COALESCE(icon, ''), is_active, is_leaf,
+		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
+		       created_at, updated_at
 		FROM category_hierarchy
 		WHERE slug = $1`
 	
@@ -112,9 +120,13 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 	}
 
 	query := fmt.Sprintf(`
-		SELECT id, parent_id, name_en, name_am, name_om, slug, description,
-		       level, path, display_order, icon, is_active, is_leaf,
-		       meta_title, meta_description, created_at, updated_at
+		SELECT id, parent_id,
+		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''),
+		       COALESCE(slug, ''), COALESCE(description, ''),
+		       level, COALESCE(path, ''), display_order,
+		       COALESCE(icon, ''), is_active, is_leaf,
+		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
+		       created_at, updated_at
 		FROM category_hierarchy
 		%s
 		ORDER BY display_order ASC, name_en ASC
@@ -396,9 +408,13 @@ func (r *CategoryHierarchyRepo) DeleteCategory(ctx context.Context, id int) erro
 func (r *CategoryHierarchyRepo) GetCategoryStats(ctx context.Context, categoryID int) (*models.CategoryWithStats, error) {
 	query := `
 		SELECT 
-			c.id, c.parent_id, c.name_en, c.name_am, c.name_om, c.slug, c.description,
-			c.level, c.path, c.display_order, c.icon, c.is_active, c.is_leaf,
-			c.meta_title, c.meta_description, c.created_at, c.updated_at,
+			c.id, c.parent_id,
+			COALESCE(c.name_en, ''), COALESCE(c.name_am, ''), COALESCE(c.name_om, ''),
+			COALESCE(c.slug, ''), COALESCE(c.description, ''),
+			c.level, COALESCE(c.path, ''), c.display_order,
+			COALESCE(c.icon, ''), c.is_active, c.is_leaf,
+			COALESCE(c.meta_title, ''), COALESCE(c.meta_description, ''),
+			c.created_at, c.updated_at,
 			COALESCE(s.product_count, 0) AS product_count,
 			COALESCE(s.approved_count, 0) AS approved_count,
 			COALESCE(s.pending_count, 0) AS pending_count

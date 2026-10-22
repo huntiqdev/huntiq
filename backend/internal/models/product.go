@@ -3,10 +3,11 @@ package models
 import "time"
 
 type Product struct {
-	ID          int        `json:"id"`
-	SellerID    int        `json:"seller_id"`
-	LocationID  *int       `json:"location_id"`
-	Title       string     `json:"title"`
+	ID                  int        `json:"id"`
+	SellerID            int        `json:"seller_id"`
+	LocationID          *int       `json:"location_id"`
+	LocationHierarchyID *int       `json:"location_hierarchy_id,omitempty"`
+	Title               string     `json:"title"`
 	Price               float64            `json:"price"`
 	Description         string             `json:"description"`
 	CategoryID          *int               `json:"category_id"`

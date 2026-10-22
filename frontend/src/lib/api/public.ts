@@ -73,4 +73,18 @@ export const publicApi = {
     fetchAPI<Record<string, string>>('/public/payment-settings'),
   getBanners: (type: 'buyer' | 'seller') =>
     fetchAPI<any[]>(`/banners?type=${type}`).then(r => r ?? []),
+  reverseGeocode: (latitude: number, longitude: number, language = 'en') =>
+    fetchAPI<any>('/locations/reverse-geocode', {
+      method: 'POST',
+      body: JSON.stringify({ latitude, longitude, language }),
+    }),
+  getLocationTree: (lang = 'en') =>
+    fetchAPI<any[]>(`/locations/tree?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  getLocationChildren: (parentId?: number, lang = 'en') => {
+    const q = parentId !== undefined ? `?parent_id=${parentId}&lang=${encodeURIComponent(lang)}` : `?lang=${encodeURIComponent(lang)}`;
+    return fetchAPI<any[]>(`/locations/children${q}`).then(r => r ?? []);
+  },
+  searchLocationHierarchy: (query: string, lang = 'en') =>
+    fetchAPI<any[]>(`/locations/search-hierarchy?q=${encodeURIComponent(query)}&lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
 };
+

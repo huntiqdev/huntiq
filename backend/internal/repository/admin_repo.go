@@ -273,7 +273,7 @@ func (r *AdminRepo) ReviewProduct(ctx context.Context, productID, adminID int, s
 	var tag interface{ RowsAffected() int64 }
 	var err error
 	if status == "approved" {
-		tag, err = r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+		tag, err = r.db.Exec(ctx, `
 			UPDATE products
 			SET status=$1, admin_notes=$2, reviewed_by=$3, reviewed_at=NOW(), updated_at=NOW(),
 			    expires_at = CASE
@@ -284,7 +284,7 @@ func (r *AdminRepo) ReviewProduct(ctx context.Context, productID, adminID int, s
 			WHERE id=$4`,
 			status, notes, adminID, productID)
 	} else {
-		tag, err = r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+		tag, err = r.db.Exec(ctx, `
 			UPDATE products
 			SET status=$1, admin_notes=$2, reviewed_by=$3, reviewed_at=NOW(), updated_at=NOW()
 			WHERE id=$4`,
@@ -399,7 +399,7 @@ func (r *AdminRepo) AddLocation(ctx context.Context, l models.Location) (int, er
 }
 
 func (r *AdminRepo) UpdateLocation(ctx context.Context, l models.Location) error {
-	_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `
 		UPDATE locations SET region=$1, zone=$2, subcity=$3, woreda=$4 WHERE id=$5`,
 		l.Region, l.Zone, l.Subcity, l.Woreda, l.ID)
 	return err
@@ -706,7 +706,7 @@ func (r *AdminRepo) UpdateSetting(ctx context.Context, key, value string, adminI
 	// Read old value for audit log
 	var oldValue string
 	_ = r.db.QueryRow(ctx, `SELECT value FROM platform_settings WHERE key=$1`, key).Scan(&oldValue) //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `
 		INSERT INTO platform_settings (key, value, updated_by, updated_at)
 		VALUES ($1, $2, $3, NOW())
 		ON CONFLICT (key) DO UPDATE SET value=$2, updated_by=$3, updated_at=NOW()`,
@@ -715,7 +715,7 @@ func (r *AdminRepo) UpdateSetting(ctx context.Context, key, value string, adminI
 		return err
 	}
 	// Write audit log (non-fatal — don't fail the update if log insert fails)
-	_, _ = r.db.Exec(ctx, ` //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
+	_, _ = r.db.Exec(ctx, `
 		INSERT INTO settings_change_log (admin_id, setting_key, old_value, new_value, changed_at)
 		VALUES ($1, $2, $3, $4, NOW())`,
 		adminID, key, oldValue, value)
@@ -726,7 +726,7 @@ func (r *AdminRepo) UpdateSetting(ctx context.Context, key, value string, adminI
 func (r *AdminRepo) UpdateSettingWithReason(ctx context.Context, key, value, reason string, adminID int) error {
 	var oldValue string
 	_ = r.db.QueryRow(ctx, `SELECT value FROM platform_settings WHERE key=$1`, key).Scan(&oldValue) //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `
 		INSERT INTO platform_settings (key, value, updated_by, updated_at)
 		VALUES ($1, $2, $3, NOW())
 		ON CONFLICT (key) DO UPDATE SET value=$2, updated_by=$3, updated_at=NOW()`,
@@ -738,7 +738,7 @@ func (r *AdminRepo) UpdateSettingWithReason(ctx context.Context, key, value, rea
 	if reason != "" {
 		reasonVal = reason
 	}
-	_, _ = r.db.Exec(ctx, ` //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
+	_, _ = r.db.Exec(ctx, `
 		INSERT INTO settings_change_log (admin_id, setting_key, old_value, new_value, reason, changed_at)
 		VALUES ($1, $2, $3, $4, $5, NOW())`,
 		adminID, key, oldValue, value, reasonVal)
@@ -834,7 +834,7 @@ func (r *AdminRepo) ListAdminNotifications(ctx context.Context, adminID int, adm
 }
 
 func (r *AdminRepo) MarkNotificationRead(ctx context.Context, notifID, adminID int) error {
-	_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `
 		UPDATE admin_notifications
 		SET read_by = array_append(read_by, $1),
 		    is_read  = TRUE
@@ -848,7 +848,7 @@ func (r *AdminRepo) CreateAdminNotification(ctx context.Context, title, message,
 	if targetRole != "" {
 		tr = targetRole
 	}
-	_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `
 		INSERT INTO admin_notifications (title, message, type, target_role)
 		VALUES ($1, $2, $3, $4)`,
 		title, message, ntype, tr)
@@ -1070,7 +1070,7 @@ func (r *AdminRepo) CreateAdmin(ctx context.Context, name, phone, email, passwor
 }
 
 func (r *AdminRepo) UpdateAdminRole(ctx context.Context, adminID int, adminRole string) error {
-	tag, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	tag, err := r.db.Exec(ctx, `
 		UPDATE users SET admin_role=$1::admin_role, updated_at=NOW()
 		WHERE id=$2 AND role='admin'`,
 		adminRole, adminID)
@@ -1137,7 +1137,7 @@ func (r *AdminRepo) SetAdminPermissions(ctx context.Context, adminID int, permis
 
 	// Upsert all known permissions
 	for _, perm := range models.AllAdminPermissions {
-		_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+		_, err := r.db.Exec(ctx, `
 			INSERT INTO admin_permissions (admin_id, permission, enabled, updated_at)
 			VALUES ($1, $2, $3, NOW())
 			ON CONFLICT (admin_id, permission) DO UPDATE SET enabled=$3, updated_at=NOW()`,
@@ -1165,7 +1165,7 @@ func (r *AdminRepo) HasPermission(ctx context.Context, adminID int, permission s
 // ── Admin Activity Logs ───────────────────────────────────────────────────────
 
 func (r *AdminRepo) InsertAdminLog(ctx context.Context, l models.AdminLog) error {
-	_, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `
 		INSERT INTO admin_logs (admin_id, product_id, target_user_id, action, notes, details, ip_address, created_at)
 		VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`,
 		l.AdminID, l.ProductID, l.TargetUserID, l.Action, l.Notes, l.Details, l.IPAddress)
@@ -1280,7 +1280,7 @@ func (r *AdminRepo) SetSellerTier(ctx context.Context, userID int, tier string, 
 		return err
 	}
 	// The DB trigger trg_update_products_on_seller_tier handles cascading to products.
-	_, _ = r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, _ = r.db.Exec(ctx, `
 		INSERT INTO user_tier_history (user_id, tier_type, old_tier, new_tier, changed_by, reason)
 		VALUES ($1, 'seller', $2, $3, $4, $5)`,
 		userID, oldTier, tier, changedBy, reason)
@@ -1297,7 +1297,7 @@ func (r *AdminRepo) SetBuyerTier(ctx context.Context, userID int, tier string, c
 	if err != nil {
 		return err
 	}
-	_, _ = r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, _ = r.db.Exec(ctx, `
 		INSERT INTO user_tier_history (user_id, tier_type, old_tier, new_tier, changed_by, reason)
 		VALUES ($1, 'buyer', $2, $3, $4, $5)`,
 		userID, oldTier, tier, changedBy, reason)
@@ -1527,7 +1527,7 @@ func (r *AdminRepo) approveUpgradeRequest(ctx context.Context, requestID, adminI
 	var role, requestedTier, status string
 	var amount float64
 	var reference, payerPhone, paymentMethod string
-	err = tx.QueryRow(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	err = tx.QueryRow(ctx, `
 		SELECT user_id, role, requested_tier, status, amount, reference, payer_phone, payment_method
 		FROM upgrade_requests WHERE id=$1`,
 		requestID).Scan(&userID, &role, &requestedTier, &status, &amount, &reference, &payerPhone, &paymentMethod)
@@ -1544,7 +1544,7 @@ func (r *AdminRepo) approveUpgradeRequest(ctx context.Context, requestID, adminI
 	} else {
 		_, err = tx.Exec(ctx, `UPDATE users SET buyer_tier=$1::buyer_tier, buyer_tier_paid_at=NOW(), updated_at=NOW() WHERE id=$2`, requestedTier, userID) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		if err == nil {
-			_, err = tx.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+			_, err = tx.Exec(ctx, `
 				INSERT INTO buyer_tier_payments (buyer_id, tier, amount, reference, payer_phone, payment_method)
 				VALUES ($1, $2::buyer_tier, $3, $4, $5, $6)`,
 				userID, requestedTier, amount, reference, payerPhone, paymentMethod)
@@ -1554,7 +1554,7 @@ func (r *AdminRepo) approveUpgradeRequest(ctx context.Context, requestID, adminI
 		return err
 	}
 
-	_, err = tx.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err = tx.Exec(ctx, `
 		UPDATE upgrade_requests SET status='approved', reviewed_by=$1, reviewed_at=NOW(), updated_at=NOW()
 		WHERE id=$2`, adminID, requestID)
 	if err != nil {
@@ -1573,7 +1573,7 @@ func (r *AdminRepo) RejectBuyerUpgradeRequest(ctx context.Context, requestID, ad
 }
 
 func (r *AdminRepo) rejectUpgradeRequest(ctx context.Context, requestID, adminID int, reason string) error {
-	tag, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	tag, err := r.db.Exec(ctx, `
 		UPDATE upgrade_requests
 		SET status='rejected', reviewed_by=$1, reviewed_at=NOW(),
 		    reject_reason=NULLIF($2,''), updated_at=NOW()
@@ -1649,7 +1649,7 @@ func (r *AdminRepo) ListPendingFeePayments(ctx context.Context) ([]map[string]in
 // Sets fee_paid=TRUE and fee_payment_pending=FALSE.
 // Only then does the payment count as collected revenue in profit reports.
 func (r *AdminRepo) VerifyListingFeePayment(ctx context.Context, productID, adminID int) error {
-	tag, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	tag, err := r.db.Exec(ctx, `
 		UPDATE products
 		SET fee_paid = TRUE,
 		    fee_paid_at = NOW(),
@@ -1674,7 +1674,7 @@ func (r *AdminRepo) RejectListingFeePayment(ctx context.Context, productID, admi
 	if reason != "" {
 		note += " " + reason
 	}
-	tag, err := r.db.Exec(ctx, ` //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	tag, err := r.db.Exec(ctx, `
 		UPDATE products
 		SET fee_payment_pending = FALSE,
 		    admin_notes = $3,

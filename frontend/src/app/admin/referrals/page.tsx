@@ -31,7 +31,7 @@ export default function AdminReferralsPage() {
 
   const approve = async (id: number) => {
     if (!user?.token) return;
-    await api.adminApproveReferralWithdrawal(id, user.token);
+    await api.adminApproveReferralWithdrawal(id, '', user.token);
     load();
   };
 
@@ -45,7 +45,8 @@ export default function AdminReferralsPage() {
 
   const markPaid = async (id: number) => {
     if (!user?.token) return;
-    await api.adminMarkReferralWithdrawalPaid(id, user.token);
+    const ref = prompt('Payment reference / transaction ID:') || 'MANUAL-PAID';
+    await api.adminMarkReferralWithdrawalPaid(id, ref, user.token);
     load();
   };
 

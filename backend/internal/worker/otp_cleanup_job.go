@@ -35,11 +35,12 @@ func runOTPCleanup(db *pgxpool.Pool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	// Delete OTP rows that are either used or expired and older than 7 days
+	// Delete OTP rows that are either verified or expired and older than 7 days
 	tag, err := db.Exec(ctx,
 		`DELETE FROM otp_codes
-		 WHERE (used = TRUE OR expires_at < NOW())
-		   AND created_at < NOW() - INTERVAL '7 days'`)
+		 WHERE ((status IN ('verified', 'expired') OR expires_at < NOW())
+		   AND created_at < NOW() - INTERVAL '7 days')
+		    OR (status = 'locked' AND created_at < NOW() - INTERVAL '24 hours')`)
 	if err != nil {
 		log.Printf("[otp-cleanup] otp_codes cleanup failed: %v", err) //nolint:gosec
 		logJobFailed(db, jobID, err.Error())

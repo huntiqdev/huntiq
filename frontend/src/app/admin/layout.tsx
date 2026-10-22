@@ -4,7 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { Spinner } from '@/components/ui/Spinner';
 import Link from 'next/link';
-import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search } from 'lucide-react';
+import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin } from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
 
@@ -26,6 +26,7 @@ function AdminSidebar() {
         { href: '/admin/products',  label: 'Products & Listings', icon: Package,   visible: hasAdminPermission('pending') || hasAdminPermission('products') },
         { href: '/admin/categories',label: 'Categories',          icon: FolderTree, visible: isSuperAdmin || hasAdminPermission('categories') },
         { href: '/admin/attributes', label: 'Attributes',         icon: Tag,        visible: isSuperAdmin || hasAdminPermission('categories') },
+        { href: '/admin/locations', label: 'Locations & GPS',     icon: MapPin,     visible: isSuperAdmin || hasAdminPermission('locations') || hasAdminPermission('categories') },
         { href: '/admin/search',    label: 'Search Analytics',    icon: Search,     visible: isSuperAdmin || hasAdminPermission('analytics') },
       ],
     },

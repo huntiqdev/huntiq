@@ -56,6 +56,13 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 		}
 		f.LocationID = &id
 	}
+	if v := c.Query("location_hierarchy_id"); v != "" {
+		id, err := strconv.Atoi(v)
+		if err != nil {
+			return response.BadRequest(c, "invalid location_hierarchy_id")
+		}
+		f.LocationHierarchyID = &id
+	}
 	// Location hierarchy params — most specific takes precedence
 	if v := c.Query("woreda"); v != "" {
 		f.Woreda = &v
