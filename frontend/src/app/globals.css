@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --admin-bg:         #0f1117;
+    --admin-surface:    #161b27;
+    --admin-border:     rgba(255,255,255,0.05);
+    --admin-text:       rgba(255,255,255,0.9);
+    --admin-text-muted: rgba(255,255,255,0.4);
+
+    /* Light theme — hybrid purple-to-blue gradient */
+    --page-bg-from:  #f5f3ff; /* violet-50  */
+    --page-bg-mid:   #ede9fe; /* violet-100 */
+    --page-bg-to:    #dbeafe; /* blue-100   */
+
+    /* Premium UI Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    
+    --glass-bg-dark: rgba(0, 0, 0, 0.4);
+    --glass-border-dark: rgba(255, 255, 255, 0.05);
+    --glass-shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  html {
+    /* Fixed gradient so it covers the full viewport even on short pages */
+    background: linear-gradient(
+      135deg,
+      #f5f3ff  0%,
+      #ede9fe  30%,
+      #e0e7ff  60%,
+      #dbeafe 100%
+    );
+    background-attachment: fixed;
+    min-height: 100%;
+  }
+
+  html.dark {
+    background: #09090b; /* zinc-950 */
+    background-attachment: fixed;
+  }
+
+  body {
+    @apply text-zinc-900 dark:text-zinc-100 min-h-screen;
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .duration-600 { transition-duration: 600ms; }
+
+  .admin-bg           { background-color: var(--admin-bg); }
+  .admin-surface      { background-color: var(--admin-surface); }
+  .admin-surface-hover{ background-color: color-mix(in srgb, var(--admin-surface) 80%, white 20%); }
+  .admin-border       { border-color: var(--admin-border); }
+  .admin-text         { color: var(--admin-text); }
+  .admin-text-muted   { color: var(--admin-text-muted); }
+
+  /* Thin scrollbar for admin sidebar / panels */
+  .admin-scrollbar::-webkit-scrollbar        { width: 4px; }
+  .admin-scrollbar::-webkit-scrollbar-track  { background: transparent; }
+  .admin-scrollbar::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+  .admin-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+  .admin-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent; }
+
+  /* Reusable tier gradient text */
+  .tier-gradient-text {
+    background: linear-gradient(90deg, #eab308, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Reusable tier gradient border/bg */
+  .tier-gradient-bg {
+    background: linear-gradient(135deg, #fef08a 0%, #e9d5ff 50%, #c084fc 100%);
+  }
+
+  /* Premium Glassmorphism Utility Classes */
+  .glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .dark .glass-panel {
+    background: var(--glass-bg-dark);
+    border: 1px solid var(--glass-border-dark);
+    box-shadow: var(--glass-shadow-dark);
+  }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+

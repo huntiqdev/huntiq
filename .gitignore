@@ -1,0 +1,39 @@
+# Secrets — never commit these
+backend/.env
+backend/.env.local
+frontend/.env.local
+**/.env.local
+**/*.env.local
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/tsconfig.tsbuildinfo
+
+# Go build artifacts
+backend/bin/
+backend/tmp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Uploads (local dev only — use cloud storage in prod)
+backend/uploads/products/
+backend/uploads/*.jpg
+backend/uploads/*.jpeg
+backend/uploads/*.png
+backend/uploads/*.webp
+
+# Keep uploads dir structure
+!backend/uploads/.gitkeep

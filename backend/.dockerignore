@@ -1,0 +1,8 @@
+.env
+.env.*
+uploads/
+*.test
+*.md
+.git
+.gitignore
+Dockerfile
