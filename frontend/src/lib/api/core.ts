@@ -37,7 +37,8 @@ function isTokenExpired(token: string): boolean {
 
 // Check if online
 function isOnline(): boolean {
-  return typeof navigator !== 'undefined' ? navigator.onLine : true;
+  if (typeof window === 'undefined') return true;
+  return typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean' ? navigator.onLine : true;
 }
 
 // Sleep utility for retry delays

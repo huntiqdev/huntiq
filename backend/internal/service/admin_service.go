@@ -15,9 +15,10 @@ import (
 )
 
 type AdminService struct {
-	repo        *repository.AdminRepo
-	referralSvc *ReferralService
-	sellerSvc   *SellerService
+	repo           *repository.AdminRepo
+	referralSvc    *ReferralService
+	sellerSvc      *SellerService
+	sessionRevoker func(ctx context.Context, userID int, reason string) error
 }
 
 func NewAdminService(repo repository.AdminRepository) *AdminService {
@@ -33,6 +34,12 @@ func (s *AdminService) WithReferralService(r *ReferralService) *AdminService {
 // WithSellerService injects the seller service for sending seller notifications.
 func (s *AdminService) WithSellerService(ss *SellerService) *AdminService {
 	s.sellerSvc = ss
+	return s
+}
+
+// WithSessionRevoker injects a callback to revoke server-side sessions when roles or access change.
+func (s *AdminService) WithSessionRevoker(revoker func(ctx context.Context, userID int, reason string) error) *AdminService {
+	s.sessionRevoker = revoker
 	return s
 }
 
@@ -336,10 +343,26 @@ func (s *AdminService) CreateAdmin(ctx context.Context, name, phone, email, pass
 		}
 		return 0, errors.New("invalid password")
 	}
-	// Only 'normal' admins can be created via this API — super admins are seeded manually.
-	if adminRole != "normal" {
-		adminRole = "normal"
+	if adminRole == "" {
+		adminRole = models.RoleOperationsAdmin
 	}
+	// Platform Owner accounts cannot be provisioned via web API; they require direct bootstrap
+	if adminRole == models.RolePlatformOwner || adminRole == models.LegacyRoleSuper {
+		return 0, errors.New("Platform Owner accounts cannot be provisioned via the web API")
+	}
+
+	validRoles := map[string]bool{
+		models.RolePlatformAdmin:   true,
+		models.RoleSecurityAdmin:   true,
+		models.RoleOperationsAdmin: true,
+		models.RoleModerator:       true,
+		models.RoleSupportAgent:    true,
+		models.LegacyRoleNormal:    true,
+	}
+	if !validRoles[adminRole] {
+		return 0, errors.New("invalid admin_role: must be platform_admin, security_admin, operations_admin, moderator, or support_agent")
+	}
+
 	hash, err := security.HashPassword(password)
 	if err != nil {
 		return 0, fmt.Errorf("failed to hash password: %w", err)
@@ -348,26 +371,65 @@ func (s *AdminService) CreateAdmin(ctx context.Context, name, phone, email, pass
 	if err != nil {
 		return 0, err
 	}
-	// Grant default permissions — super admin can restrict/expand later via /admin/admins
-	_ = s.repo.SetAdminPermissions(ctx, id, models.DefaultAdminPermissions)
+	// Grant baseline permissions based on domain role, or default permissions for legacy normal
+	var defaultPerms []string
+	if domainPerms, ok := models.RoleDomainPermissions[adminRole]; ok {
+		for p := range domainPerms {
+			defaultPerms = append(defaultPerms, p)
+		}
+	} else {
+		defaultPerms = models.DefaultAdminPermissions
+	}
+	_ = s.repo.SetAdminPermissions(ctx, id, defaultPerms)
 	return id, nil
 }
 
 func (s *AdminService) UpdateAdminRole(ctx context.Context, adminID int, adminRole string) error {
-	if adminRole != "normal" && adminRole != "super" {
-		return errors.New("admin_role must be 'normal' or 'super'")
+	validRoles := map[string]bool{
+		models.RolePlatformOwner:   true,
+		models.RolePlatformAdmin:   true,
+		models.RoleSecurityAdmin:   true,
+		models.RoleOperationsAdmin: true,
+		models.RoleModerator:       true,
+		models.RoleSupportAgent:    true,
+		models.LegacyRoleSuper:     true,
+		models.LegacyRoleNormal:    true,
 	}
-	// Prevent demoting the last super admin — always keep at least one.
-	if adminRole == "normal" {
-		count, err := s.repo.CountSuperAdmins(ctx)
-		if err != nil {
-			return err
-		}
-		if count <= 1 {
-			return errors.New("cannot demote the last super admin")
+	if !validRoles[adminRole] {
+		return errors.New("admin_role must be a valid enterprise role: platform_owner, platform_admin, security_admin, operations_admin, moderator, or support_agent")
+	}
+	// Prevent demoting the last platform owner / super admin — always keep at least one.
+	if adminRole != models.RolePlatformOwner && adminRole != models.LegacyRoleSuper {
+		isSuper, _ := s.repo.IsAdminSuper(ctx, adminID)
+		if isSuper {
+			count, err := s.repo.CountSuperAdmins(ctx)
+			if err != nil {
+				return err
+			}
+			if count <= 1 {
+				return errors.New("cannot demote the last Platform Owner")
+			}
 		}
 	}
-	return s.repo.UpdateAdminRole(ctx, adminID, adminRole)
+	if err := s.repo.UpdateAdminRole(ctx, adminID, adminRole); err != nil {
+		return err
+	}
+
+	// Reset domain baseline permissions for the newly assigned role
+	var newPerms []string
+	if perms, ok := models.RoleDomainPermissions[adminRole]; ok {
+		for p := range perms {
+			newPerms = append(newPerms, p)
+		}
+	}
+	_ = s.repo.SetAdminPermissions(ctx, adminID, newPerms)
+
+	// Immediately invalidate all active server-side sessions so stale permissions cannot be used
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, adminID, "admin_role_updated")
+	}
+
+	return nil
 }
 
 func (s *AdminService) DeleteAdmin(ctx context.Context, adminID int) error {
@@ -379,7 +441,13 @@ func (s *AdminService) DeleteAdmin(ctx context.Context, adminID int) error {
 	if isSuper {
 		return errors.New("super admins cannot be deleted via the API")
 	}
-	return s.repo.DeleteAdmin(ctx, adminID)
+	if err := s.repo.DeleteAdmin(ctx, adminID); err != nil {
+		return err
+	}
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, adminID, "admin_deleted")
+	}
+	return nil
 }
 
 // ── Granular Permissions ──────────────────────────────────────────────────────
@@ -604,7 +672,13 @@ func (s *AdminService) IssueWarning(ctx context.Context, userID, adminID int, re
 }
 
 func (s *AdminService) BanUser(ctx context.Context, userID, adminID int, reason string) error {
-	return s.repo.BanUser(ctx, userID, adminID, reason)
+	if err := s.repo.BanUser(ctx, userID, adminID, reason); err != nil {
+		return err
+	}
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, userID, "user_banned")
+	}
+	return nil
 }
 
 func (s *AdminService) CheckSystemHealth(ctx context.Context) (map[string]interface{}, error) {
@@ -649,7 +723,18 @@ func (s *AdminService) ListAbuseReports(ctx context.Context, f models.AbuseRepor
 }
 
 func (s *AdminService) ReviewAbuseReport(ctx context.Context, reportID, adminID int, status, actionTaken, notes string) error {
-	return s.repo.ReviewAbuseReport(ctx, reportID, adminID, status, actionTaken, notes)
+	reportedUserID, err := s.repo.ReviewAbuseReport(ctx, reportID, adminID, status, actionTaken, notes)
+	if err != nil {
+		return err
+	}
+	if actionTaken == "banned" && reportedUserID != nil && *reportedUserID > 0 {
+		reason := "Account banned via abuse report #" + strconv.Itoa(reportID)
+		if notes != "" {
+			reason += ": " + notes
+		}
+		_ = s.BanUser(ctx, *reportedUserID, adminID, reason)
+	}
+	return nil
 }
 
 func (s *AdminService) UpdateAbuseReportPriority(ctx context.Context, reportID int, priority string) error {

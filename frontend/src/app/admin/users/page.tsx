@@ -9,7 +9,8 @@ import { useRouter } from 'next/navigation';
 import { AdminRoleManagerModal } from '@/components/admin/enterprise/AdminRoleManagerModal';
 
 export default function AdminUsersPage() {
-  const { user, isSuperAdmin, loading: authLoading } = useAuth();
+  const { user, isSuperAdmin, isPlatformOwner, loading: authLoading } = useAuth();
+  const canManageAdmins = isPlatformOwner || isSuperAdmin;
   const router = useRouter();
 
   const [admins, setAdmins] = useState<any[]>([]);
@@ -30,14 +31,14 @@ export default function AdminUsersPage() {
   }, [user]);
 
   useEffect(() => {
-    if (!authLoading && !isSuperAdmin) {
+    if (!authLoading && !canManageAdmins) {
       router.push('/admin/dashboard');
       return;
     }
-    if (isSuperAdmin) {
+    if (canManageAdmins) {
       loadAdmins();
     }
-  }, [isSuperAdmin, authLoading, router, loadAdmins]);
+  }, [canManageAdmins, authLoading, router, loadAdmins]);
 
   const handleDelete = async (id: number) => {
     if (!user || !confirm('Are you sure you want to revoke access for this admin account?')) return;
@@ -117,14 +118,38 @@ export default function AdminUsersPage() {
                       <div className="text-[11px] font-mono text-zinc-500">{a.phone}</div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
-                        a.admin_role === 'super'
-                          ? 'bg-red-500/15 text-red-400 border border-red-500/30'
-                          : 'bg-blue-500/15 text-blue-400 border border-blue-500/30'
-                      }`}>
-                        <Shield size={12} />
-                        {a.admin_role === 'super' ? 'Super Admin' : 'Sub-Admin Manager'}
-                      </span>
+                      {(() => {
+                        const role = a.admin_role || 'operations_admin';
+                        let badgeColor = 'bg-zinc-800 text-zinc-300 border-zinc-700';
+                        let roleName = 'Staff Admin';
+
+                        if (role === 'platform_owner' || role === 'super') {
+                          badgeColor = 'bg-red-500/15 text-red-400 border-red-500/30';
+                          roleName = 'Platform Owner';
+                        } else if (role === 'platform_admin') {
+                          badgeColor = 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30';
+                          roleName = 'Platform Admin';
+                        } else if (role === 'security_admin') {
+                          badgeColor = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
+                          roleName = 'Security Admin';
+                        } else if (role === 'operations_admin' || role === 'normal') {
+                          badgeColor = 'bg-amber-500/15 text-amber-400 border-amber-500/30';
+                          roleName = 'Operations Admin';
+                        } else if (role === 'moderator') {
+                          badgeColor = 'bg-blue-500/15 text-blue-400 border-blue-500/30';
+                          roleName = 'Content Moderator';
+                        } else if (role === 'support_agent') {
+                          badgeColor = 'bg-purple-500/15 text-purple-400 border-purple-500/30';
+                          roleName = 'Support Agent';
+                        }
+
+                        return (
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${badgeColor}`}>
+                            <Shield size={12} />
+                            {roleName}
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td className="px-6 py-4 text-right">
                       {user?.id !== a.id ? (

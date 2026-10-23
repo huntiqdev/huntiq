@@ -142,8 +142,12 @@ export default async function ProductDetailPage({ params }: Props) {
             </div>
           )}
 
-          {/* Dynamic product attributes (specs) */}
-          <ProductAttributes productId={product.id} />
+          {/* Dynamic product attributes (specs) with server-enforced tier gating */}
+          <ProductAttributes
+            productId={product.id}
+            requiredBuyerTier={product.required_buyer_tier}
+            specificationsLocked={product.specifications_locked}
+          />
 
           <BuyButton product={product} />
         </div>

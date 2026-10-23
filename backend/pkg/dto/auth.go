@@ -75,3 +75,26 @@ type DemandSelectionResponse struct {
 	NextPath string `json:"next_path"`
 	Message  string `json:"message"`
 }
+
+type ActivateCapabilityRequest struct {
+	Capability   string                 `json:"capability"` // seller | landlord | renter
+	BusinessName string                 `json:"business_name,omitempty"`
+	Preference   string                 `json:"preference,omitempty"` // sale | rent | both
+	Metadata     map[string]interface{} `json:"metadata,omitempty"`
+}
+
+type AuthUserResponse struct {
+	ID               int      `json:"id"`
+	Name             string   `json:"name"`
+	Phone            string   `json:"phone"`
+	Email            string   `json:"email"`
+	BusinessName     string   `json:"business_name,omitempty"`
+	Role             string   `json:"role"`
+	AdminRole        string   `json:"admin_role,omitempty"`
+	Tier             string   `json:"tier"`
+	BuyerTier        string   `json:"buyer_tier"`
+	SellerPreference string   `json:"seller_preference,omitempty"`
+	Capabilities     []string `json:"capabilities"`
+	Token            string   `json:"token,omitempty"`
+}
+

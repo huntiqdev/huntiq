@@ -6,11 +6,12 @@ import { api } from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
 import { 
   Settings, Save, AlertCircle, Shield, DollarSign, 
-  Layers, CreditCard, Megaphone, CheckCircle2, ShieldAlert, Calculator 
+  Layers, CreditCard, Megaphone, CheckCircle2, ShieldAlert, Calculator, Fingerprint 
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { IPTrackingSecurity } from '@/components/admin/enterprise/IPTrackingSecurity';
 import { FeeControlEngine } from '@/components/admin/enterprise/FeeControlEngine';
+import { AdminPasskeyManager } from '@/components/admin/enterprise/AdminPasskeyManager';
 
 interface SettingMeta {
   label: string;
@@ -47,6 +48,7 @@ const SETTING_METADATA: Record<string, SettingMeta> = {
 
 const CATEGORIES = [
   { id: 'general', label: 'General & Security', icon: Shield },
+  { id: 'passkeys', label: 'Passkeys & Biometrics', icon: Fingerprint },
   { id: 'ip_security', label: 'IP Defense Firewall', icon: ShieldAlert },
   { id: 'fee_engine', label: 'Deep Fee Engine', icon: Calculator },
   { id: 'fees', label: 'Fees & Commissions', icon: DollarSign },
@@ -56,17 +58,18 @@ const CATEGORIES = [
 ] as const;
 
 export default function AdminSettingsPage() {
-  const { user, isSuperAdmin, hasAdminPermission, loading: authLoading } = useAuth();
+  const { user, isSuperAdmin, isPlatformOwner, isPlatformAdmin, hasAdminPermission, loading: authLoading } = useAuth();
   const router = useRouter();
   
   const [settingsMap, setSettingsMap] = useState<Record<string, string>>({});
   const [activeCategory, setActiveCategory] = useState<string>('general');
+  const [changeReason, setChangeReason] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const canAccess = isSuperAdmin || hasAdminPermission('settings');
+  const canAccess = isSuperAdmin || isPlatformOwner || isPlatformAdmin || hasAdminPermission('settings');
 
   useEffect(() => {
     if (!authLoading && !canAccess) {
@@ -95,12 +98,18 @@ export default function AdminSettingsPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
+    const reason = changeReason.trim() || prompt('Enter administrative reason for this configuration change:') || '';
+    if (!reason.trim()) {
+      setError('An audit reason is required to modify platform configuration.');
+      return;
+    }
     setSaving(true);
     setError('');
     setSuccess('');
     try {
-      await api.adminUpdateSettings(settingsMap, user.token);
-      setSuccess('Settings updated successfully');
+      await api.adminUpdateSettingsWithReason(settingsMap, reason.trim(), user.token);
+      setSuccess('Settings updated and logged to audit trail successfully');
+      setChangeReason('');
       setTimeout(() => setSuccess(''), 3000);
     } catch (err: any) {
       setError(err?.message || 'Failed to save settings');
@@ -154,6 +163,10 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* Special Module Views */}
+      {activeCategory === 'passkeys' && (
+        <AdminPasskeyManager />
+      )}
+
       {activeCategory === 'ip_security' && (
         <IPTrackingSecurity />
       )}
@@ -163,7 +176,7 @@ export default function AdminSettingsPage() {
       )}
 
       {/* Standard Settings View */}
-      {activeCategory !== 'ip_security' && activeCategory !== 'fee_engine' && (
+      {activeCategory !== 'passkeys' && activeCategory !== 'ip_security' && activeCategory !== 'fee_engine' && (
         <form onSubmit={handleSave} className="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-xl">
           <div className="p-6 space-y-6 divide-y divide-zinc-800">
             {Object.keys(settingsMap)
@@ -217,11 +230,20 @@ export default function AdminSettingsPage() {
               })}
           </div>
 
-          <div className="bg-zinc-950 p-6 border-t border-zinc-800 flex items-center justify-between">
+          <div className="bg-zinc-950 p-6 border-t border-zinc-800 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+            <div className="flex-1 max-w-md">
+              <input
+                type="text"
+                placeholder="Audit Change Reason (e.g. Q4 fee adjustment, security policy update)"
+                value={changeReason}
+                onChange={(e) => setChangeReason(e.target.value)}
+                className="w-full bg-zinc-900 border border-zinc-800 text-white rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-orange-500"
+              />
+            </div>
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-black px-6 py-3 rounded-xl transition-all shadow-lg shadow-orange-600/20"
+              className="flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-black px-6 py-3 rounded-xl transition-all shadow-lg shadow-orange-600/20"
             >
               {saving ? <Spinner size={16} className="text-white" /> : <Save size={16} />}
               Save Configuration

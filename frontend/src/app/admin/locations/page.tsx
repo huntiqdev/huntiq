@@ -81,7 +81,7 @@ const EMPTY_FORM = {
 
 export default function AdminLocationsPage() {
   const { user, isSuperAdmin, hasAdminPermission } = useAuth();
-  const token = typeof window !== 'undefined' ? localStorage.getItem('token') || '' : '';
+  const token = user?.token || (typeof window !== 'undefined' ? localStorage.getItem('token') || '' : '');
 
   // Tabs: 'tree' | 'list' | 'geocoding' | 'import'
   const [activeTab, setActiveTab] = useState<'tree' | 'list' | 'geocoding' | 'import'>('tree');

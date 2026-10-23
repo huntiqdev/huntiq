@@ -253,7 +253,7 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 			// Brand detected - boost brand matches in attributes
 			idx := len(args) + 1
 			wb.WriteString(fmt.Sprintf(` AND (
-				search_vector @@ plainto_tsquery('simple', $%d)
+				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR EXISTS (
 					SELECT 1 FROM product_attributes pa
 					WHERE pa.product_id = p.id
@@ -264,7 +264,7 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 		} else {
 			// Standard full-text search with synonym expansion
 			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND search_vector @@ plainto_tsquery('simple', $%d)", idx))
+			wb.WriteString(fmt.Sprintf(" AND search_vector @@ websearch_to_tsquery('simple', $%d)", idx))
 			args = append(args, searchTerm)
 		}
 	}

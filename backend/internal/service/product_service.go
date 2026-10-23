@@ -158,6 +158,39 @@ func (s *ProductService) PreviewListingFee(ctx context.Context, sellerID int, pr
 	return CalculateListingFeeWithSettings(SellerTier(tierStr), price, durationDays, feeSettings), nil
 }
 
+// prohibitedKeywords defines illicit and dangerous goods blocked across EN, AM, OR, and TI.
+var prohibitedKeywords = []struct {
+	term     string
+	category string
+}{
+	// Weapons & Explosives (EN)
+	{"firearm", "weapons"}, {"handgun", "weapons"}, {"pistol", "weapons"},
+	{"rifle", "weapons"}, {"ammunition", "weapons"}, {"explosive", "explosives"},
+	{"grenade", "explosives"}, {"bomb", "explosives"},
+	// Weapons & Explosives (AM, OR, TI)
+	{"ሽጉጥ", "weapons"}, {"ጠመንጃ", "weapons"}, {"ጥይት", "weapons"}, {"ቦምብ", "explosives"},
+	{"qawwee", "weapons"}, {"rasaasa", "weapons"}, {"bombaa", "explosives"},
+	{"ቦምባ", "explosives"},
+	// Narcotics & Controlled Substances
+	{"cocaine", "controlled_substances"}, {"heroin", "controlled_substances"},
+	{"methamphetamine", "controlled_substances"}, {"opium", "controlled_substances"},
+	{"ኮኬይን", "controlled_substances"}, {"ሄሮይን", "controlled_substances"},
+	{"kookeeyinii", "controlled_substances"}, {"heeroyinii", "controlled_substances"},
+	// Counterfeits & Financial Fraud
+	{"counterfeit money", "fraud"}, {"fake currency", "fraud"}, {"fake notes", "fraud"},
+	{"የሐሰት ገንዘብ", "fraud"}, {"qarshii sobaa", "fraud"}, {"ናይ ሓሶት ቅርሺ", "fraud"},
+}
+
+func checkProhibitedContent(title, description string) error {
+	combined := strings.ToLower(title + " " + description)
+	for _, pk := range prohibitedKeywords {
+		if strings.Contains(combined, strings.ToLower(pk.term)) {
+			return fmt.Errorf("listing contains prohibited item (%s: '%s') — policy violation", pk.category, pk.term)
+		}
+	}
+	return nil
+}
+
 func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req dto.CreateProductRequest) (*models.Product, error) {
 	// Load all content limits from DB — admin can change these at any time
 	minImages := s.getSettingInt(ctx, constants.SettingMinImagesPerListing, constants.DefaultMinImages)
@@ -172,6 +205,11 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 	}
 	if len(req.Title) > maxTitle {
 		return nil, fmt.Errorf("title must be %d characters or fewer", maxTitle)
+	}
+
+	// Trust & Safety: Block prohibited illegal goods and dangerous items
+	if err := checkProhibitedContent(req.Title, req.Description); err != nil {
+		return nil, err
 	}
 
 	// Anti-Spam: Check for duplicates within the last 24h

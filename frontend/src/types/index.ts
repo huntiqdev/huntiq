@@ -42,6 +42,7 @@ export interface Product {
   specific_area?: string;
   latitude?: number;
   longitude?: number;
+  location_hierarchy_id?: number;
   expires_at?: string;
   listing_duration_days?: number;
   total_fee_percent?: number;
@@ -49,6 +50,7 @@ export interface Product {
   fee_paid?: boolean;
   seller_tier: string; // normal | gold | premium — used for image blur logic
   required_buyer_tier: string; // normal | gold | premium — minimum buyer tier to order
+  specifications_locked?: boolean;
   
   // Rental fields (only populated when listing_type='rent')
   listing_type: 'sale' | 'rent';
@@ -79,6 +81,7 @@ export interface ProductFilters {
   min_price?: number;
   max_price?: number;
   location_id?: number;
+  location_hierarchy_id?: number;
   region?: string;
   zone?: string;
   subcity?: string;

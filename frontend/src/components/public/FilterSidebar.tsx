@@ -44,6 +44,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
     if (minPrice) f.min_price = Number(minPrice);
     if (maxPrice) f.max_price = Number(maxPrice);
     if (condition) f.condition = condition;
+    if (locationQuery.location_hierarchy_id) f.location_hierarchy_id = locationQuery.location_hierarchy_id;
     if (locationQuery.woreda) f.woreda = locationQuery.woreda;
     else if (locationQuery.subcity) f.subcity = locationQuery.subcity;
     else if (locationQuery.zone) f.zone = locationQuery.zone;
@@ -54,6 +55,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
     if (f.category_id) p.set('category_id', String(f.category_id));
     if (f.subcategory) p.set('subcategory', f.subcategory);
     if (f.item) p.set('item', f.item);
+    if (f.location_hierarchy_id) p.set('location_hierarchy_id', String(f.location_hierarchy_id));
     if (f.woreda) p.set('woreda', f.woreda);
     else if (f.subcity) p.set('subcity', f.subcity);
     else if (f.zone) p.set('zone', f.zone);

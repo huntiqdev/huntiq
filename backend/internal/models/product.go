@@ -46,8 +46,9 @@ type Product struct {
 	Attributes []ProductAttribute `json:"attributes,omitempty"`
 
 	// Tier access control
-	RequiredBuyerTier string `json:"required_buyer_tier,omitempty"`
-	SellerActive      bool   `json:"seller_active"`
+	RequiredBuyerTier    string `json:"required_buyer_tier,omitempty"`
+	SpecificationsLocked bool   `json:"specifications_locked"`
+	SellerActive         bool   `json:"seller_active"`
 
 	// Sold tracking
 	SoldAt *time.Time `json:"sold_at,omitempty"`

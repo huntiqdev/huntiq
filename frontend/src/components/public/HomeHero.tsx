@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
+import { ProductCard } from '@/components/public/ProductCard';
+import { RentalProductCard } from '@/components/public/RentalProductCard';
 
 const CATEGORIES = [
   { emoji: '📱', key: 'electronics' },
@@ -399,15 +401,27 @@ export function HomeHero() {
   const catLabel = (key: string) => (t.categories as any)[key] ?? key;
   const [settings, setSettings] = useState<any>(null);
   const [recentProducts, setRecentProducts] = useState<any[]>([]);
-  const [platformStats, setPlatformStats] = useState<{ products: number; categories: number } | null>(null);
+  const [rentalProducts, setRentalProducts] = useState<any[]>([]);
+  const [conditionFilter, setConditionFilter] = useState<'all' | 'new' | 'used'>('all');
 
   useEffect(() => {
     api.getPublicPaymentSettings().then(setSettings).catch(() => {});
     // Load recent approved listings for homepage preview
     api.getProducts({ limit: 8, page: 1 })
-      .then(data => setRecentProducts(Array.isArray(data) ? data.slice(0, 8) : []))
+      .then(data => setRecentProducts(Array.isArray(data) ? data : []))
+      .catch(() => {});
+
+    // Load active rental and leasing opportunities
+    api.getProducts({ listing_type: 'rent', limit: 4, page: 1 })
+      .then(data => setRentalProducts(Array.isArray(data) ? data : []))
       .catch(() => {});
   }, []);
+
+  const filteredRecent = recentProducts.filter(p => {
+    if (conditionFilter === 'all') return true;
+    if (conditionFilter === 'new') return p.condition === 'new';
+    return p.condition !== 'new';
+  });
 
   return (
     <>
@@ -426,7 +440,7 @@ export function HomeHero() {
           <div className="w-full max-w-3xl">
             <div className="grid grid-cols-4 gap-3 sm:gap-4">
               {[
-                { v: recentProducts.length > 0 ? '✓' : '…', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/20' },
+                { v: recentProducts.length > 0 ? `${recentProducts.length}+` : '100+', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/20' },
                 { v: '23+', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
                 { v: '4', l: t.ui.stat_languages ?? 'Languages', icon: <Globe size={18} />, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-900/20' },
                 { v: '100%', l: t.ui.stat_verified ?? 'Verified', icon: <CheckCircle2 size={18} />, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
@@ -453,9 +467,17 @@ export function HomeHero() {
 
           {/* Category quick links */}
           <div className="w-full">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-6 h-6 rounded-lg bg-orange-600/10 flex items-center justify-center"><Tag size={13} className="text-orange-600" /></div>
-              <span className="text-xs font-black uppercase tracking-widest text-zinc-400">{t.ui.browse_by_category}</span>
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-lg bg-orange-600/10 flex items-center justify-center"><Tag size={13} className="text-orange-600" /></div>
+                <span className="text-xs font-black uppercase tracking-widest text-zinc-400">{t.ui.browse_by_category}</span>
+              </div>
+              <Link
+                href="/products"
+                className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1"
+              >
+                <span>Browse All</span> <ArrowRight size={11} />
+              </Link>
             </div>
             <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
               {CATEGORIES.map(({ emoji, key }) => (
@@ -468,55 +490,160 @@ export function HomeHero() {
             </div>
           </div>
 
-          {/* Recent listings — real data from API */}
-          {recentProducts.length > 0 && (
-            <div className="w-full">
-              <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-lg bg-green-600/10 flex items-center justify-center">
-                    <TrendingUp size={13} className="text-green-600" />
-                  </div>
-                  <span className="text-xs font-black uppercase tracking-widest text-zinc-400">
-                    {(t.ui as any).latest_listings ?? t.ui.recent_products ?? 'Latest Listings'}
-                  </span>
+          {/* Featured Marketplace Listings (with condition tabs) */}
+          <div className="w-full">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-green-600/10 flex items-center justify-center">
+                  <TrendingUp size={15} className="text-green-600" />
                 </div>
-                <Link href="/products"
-                  className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1">
-                  {t.ui.view_all ?? 'View all'} <ArrowRight size={11} />
+                <div>
+                  <h3 className="text-base sm:text-lg font-black tracking-tight text-zinc-900 dark:text-white leading-none">
+                    {(t.ui as any).latest_listings ?? t.ui.recent_products ?? 'Featured Listings'}
+                  </h3>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">
+                    Verified items for sale across Ethiopia
+                  </p>
+                </div>
+              </div>
+
+              {/* Condition Filter Pills */}
+              <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl text-xs font-bold self-start sm:self-auto">
+                <button
+                  onClick={() => setConditionFilter('all')}
+                  className={`px-3 py-1 rounded-lg transition-all ${
+                    conditionFilter === 'all'
+                      ? 'bg-white dark:bg-zinc-900 text-orange-600 shadow-sm'
+                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                  }`}
+                >
+                  All Items
+                </button>
+                <button
+                  onClick={() => setConditionFilter('new')}
+                  className={`px-3 py-1 rounded-lg transition-all ${
+                    conditionFilter === 'new'
+                      ? 'bg-white dark:bg-zinc-900 text-orange-600 shadow-sm'
+                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                  }`}
+                >
+                  Brand New
+                </button>
+                <button
+                  onClick={() => setConditionFilter('used')}
+                  className={`px-3 py-1 rounded-lg transition-all ${
+                    conditionFilter === 'used'
+                      ? 'bg-white dark:bg-zinc-900 text-orange-600 shadow-sm'
+                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                  }`}
+                >
+                  Pre-Owned
+                </button>
+              </div>
+            </div>
+
+            {filteredRecent.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-4">
+                {filteredRecent.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 px-4 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30">
+                <Package size={36} className="mx-auto text-zinc-300 dark:text-zinc-600 mb-2" />
+                <p className="text-sm font-bold text-zinc-600 dark:text-zinc-400">
+                  No listings found for this condition
+                </p>
+                <Link
+                  href="/products"
+                  className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-orange-600 text-white hover:bg-orange-700 transition-colors"
+                >
+                  <span>Explore All Products</span>
+                  <ArrowRight size={12} />
                 </Link>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {recentProducts.map(p => (
-                  <Link key={p.id} href={`/products/${p.id}`}
-                    className="group bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-                    <div className="aspect-square bg-zinc-100 dark:bg-zinc-800 overflow-hidden relative">
-                      {p.images?.[0] ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.images[0].image_url} alt={p.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-zinc-300">
-                          <Package size={28} />
-                        </div>
-                      )}
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-2 pb-1.5 pt-4">
-                        <p className="text-white text-[10px] font-black">
-                          ETB {Number(p.price) >= 1000
-                            ? `${(Number(p.price) / 1000).toFixed(Number(p.price) % 1000 === 0 ? 0 : 1)}k`
-                            : Number(p.price).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="px-2 py-2">
-                      <p className="text-[10px] font-bold leading-tight line-clamp-2 text-zinc-800 dark:text-zinc-200">
-                        {p.title}
-                      </p>
-                    </div>
-                  </Link>
+            )}
+          </div>
+
+          {/* Rental & Leasing Section (Real Data from API) */}
+          {rentalProducts.length > 0 && (
+            <div className="w-full pt-6 border-t border-zinc-200/60 dark:border-zinc-800">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-teal-600/10 flex items-center justify-center">
+                    <span className="text-base">🏠</span>
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-black tracking-tight text-zinc-900 dark:text-white leading-none">
+                      Rental & Leasing Opportunities
+                    </h3>
+                    <p className="text-[11px] text-zinc-400 mt-0.5">
+                      Homes, apartments, commercial spaces, and vehicles for rent
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/products?type=rent"
+                  className="text-xs font-bold text-teal-600 hover:underline flex items-center gap-1"
+                >
+                  <span>Browse All Rentals</span> <ArrowRight size={11} />
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+                {rentalProducts.map(product => (
+                  <RentalProductCard key={product.id} product={product} />
                 ))}
               </div>
             </div>
           )}
+
+          {/* Seller & Landlord Onboarding Section */}
+          <div className="w-full rounded-3xl bg-gradient-to-br from-orange-600 via-orange-500 to-amber-600 text-white p-6 sm:p-10 shadow-xl overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 max-w-2xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-black uppercase tracking-wider text-white">
+                <Store size={13} />
+                <span>Join SellBuy Marketplace</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+                Start Selling or Renting Properties Across Ethiopia
+              </h3>
+              <p className="text-sm sm:text-base text-white/90 leading-relaxed">
+                Connect with thousands of buyers and tenants in Addis Ababa and all regional cities. Fast listing verification and direct buyer calls.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 pb-2">
+                {[
+                  { step: '01', title: 'Free Account', desc: 'Register in seconds with your Ethiopian phone number.' },
+                  { step: '02', title: 'Post Listings', desc: 'Add 2–4 clear photos, set price, and pick your location.' },
+                  { step: '03', title: 'Connect & Earn', desc: 'Fast review within 24h — receive orders directly.' },
+                ].map(({ step, title, desc }) => (
+                  <div key={step} className="bg-white/15 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
+                    <span className="text-[10px] font-black text-amber-200">{step}</span>
+                    <p className="text-xs font-black text-white mt-0.5">{title}</p>
+                    <p className="text-[11px] text-white/80 leading-relaxed mt-0.5">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/sell"
+                  className="px-6 py-3 rounded-xl bg-white text-orange-600 font-black text-xs sm:text-sm shadow-lg hover:bg-orange-50 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
+                >
+                  <Store size={16} />
+                  <span>List An Item Or Property</span>
+                </Link>
+                <Link
+                  href="/help"
+                  className="px-5 py-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm backdrop-blur-sm transition-all flex items-center gap-1.5"
+                >
+                  <HelpCircle size={15} />
+                  <span>How It Works</span>
+                </Link>
+              </div>
+            </div>
+          </div>
 
           {/* Tier System */}
           <div className="w-full pt-12 border-t border-yellow-200/60 dark:border-zinc-800">

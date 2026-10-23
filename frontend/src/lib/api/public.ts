@@ -70,7 +70,12 @@ export const publicApi = {
    * Used by SettingsProvider for frontend configuration
    */
   getPublicSettings: () =>
-    fetchAPI<Record<string, string>>('/public/payment-settings'),
+    fetchAPI<Record<string, string>>('/public/settings'),
+  submitContactMessage: (data: { name: string; email: string; message: string }) =>
+    fetchAPI<{ success: boolean; message: string }>('/contact', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   getBanners: (type: 'buyer' | 'seller') =>
     fetchAPI<any[]>(`/banners?type=${type}`).then(r => r ?? []),
   reverseGeocode: (latitude: number, longitude: number, language = 'en') =>

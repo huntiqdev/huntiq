@@ -268,5 +268,32 @@ export const adminApi = {
       body: JSON.stringify({ latitude, longitude, language }),
       headers: token ? authHeaders(token) : undefined,
     }).then(r => r?.data ?? r),
+
+  // ── Financial Planning & Analysis (FP&A) ──────────────────────────────────
+  adminGetFinanceForecast: (params: { scenario?: string; horizon?: number }, token: string) => {
+    const q = '?' + new URLSearchParams({
+      scenario: params.scenario ?? 'base',
+      horizon: String(params.horizon ?? 60),
+    }).toString();
+    return fetchAPI<any>(`/admin/finance/forecast${q}`, { headers: authHeaders(token) }).then(r => r?.data ?? r);
+  },
+  adminGetFinanceScenarios: (params: { horizon?: number }, token: string) => {
+    const q = '?' + new URLSearchParams({ horizon: String(params.horizon ?? 60) }).toString();
+    return fetchAPI<any>(`/admin/finance/scenarios${q}`, { headers: authHeaders(token) }).then(r => r?.data ?? r);
+  },
+  adminGetFinanceCapacity20M: (token: string) =>
+    fetchAPI<any>('/admin/finance/capacity-20m', { headers: authHeaders(token) }).then(r => r?.data ?? r),
+  adminGetFinanceTaxRules: (token: string) =>
+    fetchAPI<any>('/admin/finance/tax-rules', { headers: authHeaders(token) }).then(r => r?.data ?? r ?? []),
+  adminGetFinanceActuals: (token: string) =>
+    fetchAPI<any>('/admin/finance/actuals', { headers: authHeaders(token) }).then(r => r?.data ?? r ?? []),
+  adminGetFinanceAuditLogs: (token: string) =>
+    fetchAPI<any>('/admin/finance/audit-logs', { headers: authHeaders(token) }).then(r => r?.data ?? r ?? []),
+  adminUpdateFinanceAssumptions: (data: { scenario_id: string; section: string; payload: any }, token: string) =>
+    fetchAPI<any>('/admin/finance/assumptions', { method: 'PUT', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminResetFinanceAssumptions: (data: { scenario_id: string }, token: string) =>
+    fetchAPI<any>('/admin/finance/assumptions/reset', { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminExportFinanceURL: (scenario = 'base', horizon = 60, format = 'csv') =>
+    `/api/admin/finance/export?scenario=${scenario}&horizon=${horizon}&format=${format}`,
 };
 

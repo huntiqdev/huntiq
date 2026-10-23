@@ -1038,7 +1038,7 @@ func (r *AdminRepo) ListAdmins(ctx context.Context) ([]models.User, error) {
 		validPerms[p] = true
 	}
 	for i, u := range users {
-		if u.AdminRole == "normal" {
+		if u.AdminRole != "platform_owner" && u.AdminRole != "super" {
 			raw, _ := r.GetAdminPermissions(ctx, u.ID)
 			filtered := make([]string, 0, len(raw))
 			for _, p := range raw {
@@ -1090,7 +1090,7 @@ func (r *AdminRepo) DeleteAdmin(ctx context.Context, adminID int) error {
 
 func (r *AdminRepo) CountSuperAdmins(ctx context.Context) (int, error) {
 	var count int
-	err := r.db.QueryRow(ctx, `SELECT COUNT(*) FROM users WHERE role='admin' AND admin_role='super'`).Scan(&count) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	err := r.db.QueryRow(ctx, `SELECT COUNT(*) FROM users WHERE role='admin' AND (admin_role='super' OR admin_role='platform_owner')`).Scan(&count) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	return count, err
 }
 
@@ -1101,7 +1101,7 @@ func (r *AdminRepo) IsAdminSuper(ctx context.Context, adminID int) (bool, error)
 		// No row = not an admin at all
 		return false, nil
 	}
-	return adminRole == "super", nil
+	return adminRole == "super" || adminRole == "platform_owner", nil
 }
 
 // ── Granular Permissions ──────────────────────────────────────────────────────
@@ -1713,7 +1713,7 @@ func (r *AdminRepo) CheckSystemHealth(ctx context.Context) (map[string]interface
 	rows, err := r.db.Query(ctx, `
 		SELECT id, name, email 
 		FROM users 
-		WHERE role='admin' AND admin_role='normal' 
+		WHERE role='admin' AND admin_role NOT IN ('super', 'platform_owner') 
 		AND id NOT IN (SELECT admin_id FROM admin_permissions)`)
 	if err == nil {
 		defer rows.Close()
@@ -2060,25 +2060,31 @@ func (r *AdminRepo) ListAbuseReports(ctx context.Context, f models.AbuseReportFi
 	return reports, total, rows.Err()
 }
 
-// ReviewAbuseReport updates the status and resolution of an abuse report
-func (r *AdminRepo) ReviewAbuseReport(ctx context.Context, reportID, adminID int, status, actionTaken, notes string) error {
+// ReviewAbuseReport updates the status and resolution of an abuse report and returns reported_user_id if any
+func (r *AdminRepo) ReviewAbuseReport(ctx context.Context, reportID, adminID int, status, actionTaken, notes string) (*int, error) {
 	validStatus := map[string]bool{"investigating": true, "resolved": true, "dismissed": true}
 	if !validStatus[status] {
-		return fmt.Errorf("invalid status: must be investigating, resolved, or dismissed")
+		return nil, fmt.Errorf("invalid status: must be investigating, resolved, or dismissed")
 	}
 	
-	tag, err := r.db.Exec(ctx, //nolint:gosec
+	var reportedUserID *int
+	var reportedProductID *int
+	err := r.db.QueryRow(ctx, //nolint:gosec
 		`UPDATE abuse_reports
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), action_taken=$3, resolution_notes=$4, updated_at=NOW()
-		 WHERE id=$5`,
-		status, adminID, actionTaken, notes, reportID)
+		 WHERE id=$5
+		 RETURNING reported_user_id, reported_product_id`,
+		status, adminID, actionTaken, notes, reportID).Scan(&reportedUserID, &reportedProductID)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	if tag.RowsAffected() == 0 {
-		return fmt.Errorf("report not found")
+	
+	// If action is removed, reject the reported product to hide from marketplace
+	if actionTaken == "removed" && reportedProductID != nil && *reportedProductID > 0 {
+		_, _ = r.db.Exec(ctx, `UPDATE products SET status='rejected', rejection_reason=$1, updated_at=NOW() WHERE id=$2`, notes, *reportedProductID)
 	}
-	return nil
+
+	return reportedUserID, nil
 }
 
 // UpdateAbuseReportPriority changes the priority of an abuse report

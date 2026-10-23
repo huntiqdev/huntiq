@@ -51,6 +51,7 @@ type AuthService struct {
 	referralSvc    *ReferralService
 	otpCrypto      *security.OTPCrypto
 	settingsReader func(ctx context.Context, key string) string
+	sessionCreator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)
 	// cached otp_required setting — refreshed every 60s to avoid a DB hit on every login
 	otpRequiredCache    bool
 	otpRequiredCachedAt time.Time
@@ -106,6 +107,12 @@ func (s *AuthService) WithOTPCrypto(otpCrypto *security.OTPCrypto) *AuthService 
 // WithSettingsReader injects a function to read platform settings
 func (s *AuthService) WithSettingsReader(reader func(ctx context.Context, key string) string) *AuthService {
 	s.settingsReader = reader
+	return s
+}
+
+// WithSessionCreator injects a function to create an admin session upon successful login
+func (s *AuthService) WithSessionCreator(creator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)) *AuthService {
+	s.sessionCreator = creator
 	return s
 }
 
@@ -499,43 +506,47 @@ func (s *AuthService) AdminLoginStep1(ctx context.Context, req dto.LoginRequest)
 		return "", false, errors.New("invalid credentials")
 	}
 
-	// Super admins always bypass OTP — they are trusted accounts created by the system.
-	// Normal sub-admins always require OTP regardless of the global otp_required setting.
-	if u.AdminRole == "super" {
-		token, err := security.GenerateJWTFull(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, s.jwtSecret)
-		if err != nil {
-			return "", false, err
-		}
-		safeGo(func() { s.recordLogin(u) })
-		return token, true, nil // true = OTP bypassed (super admin only)
-	}
-
-	// All other cases (normal sub-admin OR super admin when OTP is required)
-	// send OTP to email, return email for step 2.
+	// Mandatory MFA: Super admins and platform owners NEVER bypass second-factor authentication.
+	// All administrative accounts must verify second factor before access is granted.
 	if err := s.SendEmailOTP(ctx, u.Email, "login"); err != nil {
 		return "", false, fmt.Errorf("failed to send OTP: %w", err)
 	}
-	return u.Email, false, nil // false = OTP required, email returned for step 2
+	return u.Email, false, nil // false = second-factor OTP required, email returned for step 2
 }
 
-// AdminLoginStep2 verifies the email OTP for sub-admins and issues a JWT.
-func (s *AuthService) AdminLoginStep2(ctx context.Context, email, code string) (string, error) {
+// AdminLoginStep2 verifies the email OTP for sub-admins and issues a session-bound JWT and raw session token.
+func (s *AuthService) AdminLoginStep2(ctx context.Context, email, code, ip, userAgent string) (string, string, error) {
 	if err := s.repo.VerifyEmailOTP(ctx, email, code, "login"); err != nil {
-		return "", err
+		return "", "", err
 	}
 	u, err := s.repo.GetAdminByEmail(ctx, email)
 	if err != nil {
-		return "", errors.New("user not found")
+		return "", "", errors.New("user not found")
 	}
 	if !u.IsActive {
-		return "", errors.New("account is inactive — contact support")
+		return "", "", errors.New("account is inactive — contact support")
 	}
-	token, err := security.GenerateJWTFull(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, s.jwtSecret)
+
+	var sessionToken string
+	var sessionID int
+	if s.sessionCreator != nil {
+		portal := "staff"
+		if u.AdminRole == models.RolePlatformOwner || u.AdminRole == models.LegacyRoleSuper {
+			portal = "executive"
+		}
+		var err error
+		sessionToken, sessionID, err = s.sessionCreator(ctx, u.ID, portal, ip, userAgent)
+		if err != nil {
+			return "", "", fmt.Errorf("failed to create admin session: %w", err)
+		}
+	}
+
+	token, err := security.GenerateAdminJWT(u.ID, u.AdminRole, sessionID, sessionToken, s.jwtSecret)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 	safeGo(func() { s.recordLogin(u) })
-	return token, nil
+	return token, sessionToken, nil
 }
 
 // GetOTPLogs returns paginated OTP log entries for the admin panel.
@@ -638,6 +649,30 @@ func (s *AuthService) ForgotPasswordReset(ctx context.Context, phone, role, code
 	// This unblocks users who registered but never completed OTP.
 	_ = s.repo.SetOTPVerifiedForRole(ctx, phone, role)
 	return nil
+}
+
+// UnifiedForgotPasswordSend sends a reset OTP to the phone for any registered user.
+func (s *AuthService) UnifiedForgotPasswordSend(ctx context.Context, phone string) error {
+	if phone == "" {
+		return errors.New("phone is required")
+	}
+	u, err := s.repo.GetByPhone(ctx, phone)
+	if err != nil {
+		return nil // do not enumerate accounts
+	}
+	return s.ForgotPasswordSend(ctx, phone, u.Role)
+}
+
+// UnifiedForgotPasswordReset verifies the reset OTP and updates password for any registered user.
+func (s *AuthService) UnifiedForgotPasswordReset(ctx context.Context, phone, code, newPassword string) error {
+	if phone == "" || code == "" || newPassword == "" {
+		return errors.New("phone, code, and new_password are required")
+	}
+	u, err := s.repo.GetByPhone(ctx, phone)
+	if err != nil {
+		return errors.New("account not found")
+	}
+	return s.ForgotPasswordReset(ctx, phone, u.Role, code, newPassword)
 }
 
 // AdminForgotPasswordSend sends an OTP to the admin's email for password reset.
@@ -963,4 +998,267 @@ func (s *AuthService) MarkBuyerNotificationRead(ctx context.Context, notifID, us
 // SetDemand updates the user's current demand (FIND or LIST) after registration
 func (s *AuthService) SetDemand(ctx context.Context, userID int, demand string) error {
 	return s.repo.SetDemand(ctx, userID, demand)
+}
+
+// ── Unified Authentication & Multi-Role Capabilities ─────────────────────────
+
+// UnifiedRegister creates a single user identity with default 'buyer' capability.
+// If requested, it can also activate 'seller' and/or 'landlord' capabilities immediately.
+func (s *AuthService) UnifiedRegister(ctx context.Context, req dto.RegisterRequest) (*models.User, string, error) {
+	if req.Name == "" || req.Phone == "" || req.Password == "" {
+		return nil, "", errors.New("name, phone and password are required")
+	}
+
+	phoneResult := validations.ValidateEthiopianPhone(req.Phone)
+	if !phoneResult.Valid {
+		return nil, "", errors.New("invalid phone number — must be a valid Ethiopian phone number")
+	}
+	req.Phone = phoneResult.Normalized
+
+	if valid, errKey := validations.ValidatePassword(req.Password); !valid {
+		return nil, "", errors.New(validations.PasswordErrorMessage(errKey))
+	}
+
+	role := req.Role
+	if role != "seller" {
+		role = "buyer"
+	}
+
+	hash, err := security.HashPassword(req.Password)
+	if err != nil {
+		return nil, "", err
+	}
+
+	email := req.Email
+	if email == "" {
+		suffix, err := randHex(4)
+		if err != nil {
+			return nil, "", fmt.Errorf("failed to generate email: %w", err)
+		}
+		email = fmt.Sprintf("user_%s@noemail.local", suffix)
+	}
+
+	sellerPref := req.SellerPreference
+	if sellerPref == "" && role == "seller" {
+		sellerPref = "sale"
+	}
+
+	u := &models.User{
+		Name:             req.Name,
+		Phone:            req.Phone,
+		BusinessName:     req.BusinessName,
+		Email:            email,
+		PasswordHash:     hash,
+		Role:             role,
+		IsActive:         true,
+		SellerPreference: sellerPref,
+		Capabilities:     []string{"buyer"},
+	}
+
+	if role == "seller" {
+		u.Capabilities = append(u.Capabilities, "seller")
+	}
+	if sellerPref == "rent" || sellerPref == "both" {
+		u.Capabilities = append(u.Capabilities, "landlord")
+	}
+
+	id, err := s.repo.Create(ctx, u)
+	if err != nil {
+		if isDuplicatePhone(err) {
+			existing, lookupErr := s.repo.GetByPhone(ctx, req.Phone)
+			if lookupErr == nil && !existing.OTPVerified {
+				_ = s.repo.UpdateUnverifiedRegistration(ctx, req.Phone, existing.Role, hash, req.Name, email)
+				safeGo(func() {
+					s.logActivity(context.Background(), "register_retry", req.Phone, req.Email, "unified", "", "unverified re-register")
+				})
+				return nil, "", errors.New("otp_pending: phone registered but not yet verified — resend OTP")
+			}
+			safeGo(func() {
+				s.logActivity(context.Background(), "register_fail", req.Phone, req.Email, "unified", "", "duplicate phone")
+			})
+			return nil, "", errors.New("phone number already registered — please sign in instead")
+		}
+		if isDuplicateEmail(err) {
+			safeGo(func() {
+				s.logActivity(context.Background(), "register_fail", req.Phone, req.Email, "unified", "", "duplicate email")
+			})
+			return nil, "", errors.New("email address already in use — please use a different email or sign in")
+		}
+		safeGo(func() {
+			s.logActivity(context.Background(), "register_fail", req.Phone, req.Email, "unified", "", err.Error())
+		})
+		return nil, "", err
+	}
+
+	u.ID = id
+	s.repo.PopulateCapabilities(ctx, u)
+
+	safeGo(func() { s.logActivity(context.Background(), "register_ok", req.Phone, req.Email, "unified", "", "") })
+
+	if !s.IsOTPRequired(ctx) {
+		_ = s.repo.SetOTPVerifiedForRole(ctx, req.Phone, role)
+		u.OTPVerified = true
+	} else {
+		otpCtx, otpCancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer otpCancel()
+		otpErr := s.SendOTP(otpCtx, dto.OTPRequest{
+			Phone:    req.Phone,
+			Purpose:  "register",
+			UserType: role,
+		})
+		if otpErr != nil {
+			log.Printf("[AuthService] auto-send OTP failed for %s: %v", sanitizeLog(req.Phone), otpErr)
+			return nil, "", fmt.Errorf("registration succeeded but OTP delivery failed — please try again")
+		}
+	}
+
+	if req.ReferralCode != "" && s.referralSvc != nil {
+		safeGo(func() {
+			s.referralSvc.SetInvitedByOnRegister(context.Background(), id, req.ReferralCode)
+		})
+	}
+
+	token, err := security.GenerateJWTWithCapabilities(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
+	if err != nil {
+		return nil, "", err
+	}
+
+	return u, token, nil
+}
+
+// UnifiedLogin authenticates by phone or email without requiring role specification.
+// Returns the user entity with all their active capabilities and a multi-role JWT.
+func (s *AuthService) UnifiedLogin(ctx context.Context, req dto.LoginRequest) (*models.User, string, error) {
+	if req.Password == "" {
+		return nil, "", errors.New("password is required")
+	}
+
+	var u *models.User
+	var err error
+
+	switch {
+	case req.Email != "":
+		if req.Phone != "" {
+			return nil, "", errors.New("provide either email or phone, not both")
+		}
+		u, err = s.repo.GetByEmail(ctx, req.Email)
+	case req.Phone != "":
+		phoneResult := validations.ValidateEthiopianPhone(req.Phone)
+		if !phoneResult.Valid {
+			return nil, "", errors.New("invalid phone number — must be a valid Ethiopian phone number")
+		}
+		req.Phone = phoneResult.Normalized
+		u, err = s.repo.GetByPhone(ctx, req.Phone)
+	default:
+		return nil, "", errors.New("email or phone is required")
+	}
+
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, "", errors.New("invalid credentials")
+		}
+		return nil, "", err
+	}
+
+	if !u.IsActive {
+		return nil, "", errors.New("account is inactive — contact support")
+	}
+
+	if !security.CheckPassword(u.PasswordHash, req.Password) {
+		safeGo(func() {
+			s.logActivity(context.Background(), "login_fail", req.Phone, req.Email, u.Role, "", "wrong password")
+		})
+		return nil, "", errors.New("invalid credentials")
+	}
+
+	if s.IsOTPRequired(ctx) && !u.OTPVerified {
+		return nil, "", errors.New("otp_pending: phone not verified — please complete OTP verification first")
+	}
+
+	s.repo.PopulateCapabilities(ctx, u)
+
+	token, err := security.GenerateJWTWithCapabilities(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
+	if err != nil {
+		return nil, "", err
+	}
+
+	safeGo(func() { s.logActivity(context.Background(), "login_ok", req.Phone, req.Email, u.Role, "", "") })
+	safeGo(func() { s.recordLogin(u) })
+
+	return u, token, nil
+}
+
+// GetMe retrieves the authenticated user's current profile and active capabilities.
+func (s *AuthService) GetMe(ctx context.Context, userID int) (*models.User, error) {
+	u, err := s.repo.GetByID(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+	s.repo.PopulateCapabilities(ctx, u)
+	return u, nil
+}
+
+// ActivateCapability activates an additional capability (seller, landlord, renter) for an authenticated user.
+func (s *AuthService) ActivateCapability(ctx context.Context, userID int, req dto.ActivateCapabilityRequest) (*models.User, string, error) {
+	allowedCaps := map[string]bool{
+		"seller":   true,
+		"landlord": true,
+		"renter":   true,
+		"buyer":    true,
+	}
+	capName := strings.ToLower(strings.TrimSpace(req.Capability))
+	if !allowedCaps[capName] {
+		return nil, "", fmt.Errorf("invalid capability: %s (must be buyer, seller, landlord, or renter)", req.Capability)
+	}
+
+	u, err := s.repo.GetByID(ctx, userID)
+	if err != nil {
+		return nil, "", errors.New("user not found")
+	}
+	if !u.IsActive {
+		return nil, "", errors.New("account is inactive")
+	}
+
+	meta := req.Metadata
+	if meta == nil {
+		meta = make(map[string]interface{})
+	}
+	if req.BusinessName != "" {
+		meta["business_name"] = req.BusinessName
+	}
+	if req.Preference != "" {
+		meta["preference"] = req.Preference
+	}
+
+	if err := s.repo.ActivateCapability(ctx, userID, capName, meta); err != nil {
+		return nil, "", fmt.Errorf("failed to activate capability: %w", err)
+	}
+
+	// Refresh user object and capabilities
+	u, err = s.repo.GetByID(ctx, userID)
+	if err != nil {
+		return nil, "", err
+	}
+	s.repo.PopulateCapabilities(ctx, u)
+
+	token, err := security.GenerateJWTWithCapabilities(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
+	if err != nil {
+		return nil, "", err
+	}
+
+	safeGo(func() {
+		s.logActivity(context.Background(), "capability_activate", u.Phone, u.Email, capName, "", "")
+	})
+
+	return u, token, nil
+}
+
+// SuspendCapability suspends a specific capability for a user
+func (s *AuthService) SuspendCapability(ctx context.Context, userID int, capability string, reason string) error {
+	return s.repo.SuspendCapability(ctx, userID, capability, reason)
+}
+
+// GetCapabilities returns the user's active capabilities
+func (s *AuthService) GetCapabilities(ctx context.Context, userID int) ([]string, error) {
+	return s.repo.GetCapabilities(ctx, userID)
 }

@@ -9,14 +9,15 @@ function fmt(n: any) { return n != null ? `ETB ${Number(n).toLocaleString()}` : 
 function fmtNum(n: any) { return n != null ? Number(n).toLocaleString() : '—'; }
 
 export default function AdminProfitPage() {
-  const { user, isSuperAdmin } = useAuth();
+  const { user, isSuperAdmin, isPlatformOwner, isPlatformAdmin, hasAdminPermission } = useAuth();
+  const canViewProfit = isSuperAdmin || isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit');
   const [summary, setSummary] = useState<any>(null);
   const [byTier, setByTier] = useState<any[]>([]);
   const [monthly, setMonthly] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
-    if (!user?.token || !isSuperAdmin) return;
+    if (!user?.token || !canViewProfit) return;
     setLoading(true);
     try {
       const [s, t, m] = await Promise.allSettled([
@@ -32,10 +33,10 @@ export default function AdminProfitPage() {
 
   useEffect(() => { load(); }, [user]); // eslint-disable-line
 
-  if (!isSuperAdmin) return (
+  if (!canViewProfit) return (
     <div className="flex flex-col items-center justify-center h-64 gap-3 text-zinc-500">
       <DollarSign size={32} className="opacity-20" />
-      <p>Super admin access required</p>
+      <p>Finance authorization required (Platform Owner, Platform Administrator, or profit permission)</p>
     </div>
   );
 

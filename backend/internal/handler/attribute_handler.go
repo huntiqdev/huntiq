@@ -9,11 +9,17 @@ import (
 )
 
 type AttributeHandler struct {
-	svc *service.AttributeService
+	svc        *service.AttributeService
+	productSvc *service.ProductService
 }
 
 func NewAttributeHandler(svc *service.AttributeService) *AttributeHandler {
 	return &AttributeHandler{svc: svc}
+}
+
+func (h *AttributeHandler) WithProductService(productSvc *service.ProductService) *AttributeHandler {
+	h.productSvc = productSvc
+	return h
 }
 
 // ListAttributeDefinitions returns all attribute definitions
@@ -71,6 +77,26 @@ func (h *AttributeHandler) GetProductAttributes(c *fiber.Ctx) error {
 		})
 	}
 
+	// Verify buyer tier authorization before retrieving specifications
+	if h.productSvc != nil {
+		prod, err := h.productSvc.GetByID(c.Context(), id)
+		if err == nil && prod != nil {
+			userTier, _ := c.Locals("buyerTier").(string)
+			role, _ := c.Locals("role").(string)
+			adminRole, _ := c.Locals("adminRole").(string)
+			isAdmin := role == "admin" || adminRole != ""
+
+			if !isTierAuthorized(userTier, prod.RequiredBuyerTier, isAdmin) {
+				return c.JSON(fiber.Map{
+					"success":       true,
+					"data":          []models.ProductAttribute{},
+					"locked":        true,
+					"required_tier": prod.RequiredBuyerTier,
+				})
+			}
+		}
+	}
+
 	attrs, err := h.svc.GetProductAttributes(c.Context(), id)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -82,6 +108,7 @@ func (h *AttributeHandler) GetProductAttributes(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"success": true,
 		"data":    attrs,
+		"locked":  false,
 	})
 }
 

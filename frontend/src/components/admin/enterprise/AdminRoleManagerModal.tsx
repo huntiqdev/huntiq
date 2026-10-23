@@ -35,7 +35,7 @@ export function AdminRoleManagerModal({ isOpen, onClose, onSuccess }: AdminRoleM
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [adminRole, setAdminRole] = useState<'sub' | 'super'>('sub');
+  const [adminRole, setAdminRole] = useState<string>('operations_admin');
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>(['products', 'analytics']);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -111,38 +111,36 @@ export function AdminRoleManagerModal({ isOpen, onClose, onSuccess }: AdminRoleM
           
           {/* Role Selection Tabs */}
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-zinc-300 uppercase tracking-wider">Select Administrative Scope:</label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setAdminRole('sub')}
-                className={`p-4 rounded-2xl border text-left transition-all ${
-                  adminRole === 'sub'
-                    ? 'bg-blue-600/15 border-blue-500 text-white'
-                    : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800'
-                }`}
-              >
-                <div className="flex items-center gap-2 font-bold text-sm text-white">
-                  <Shield size={16} className="text-blue-400" /> Sub-Admin (Manager)
-                </div>
-                <p className="text-xs text-zinc-400 mt-1">Custom RBAC permissions scope for standard managers.</p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setAdminRole('super')}
-                className={`p-4 rounded-2xl border text-left transition-all ${
-                  adminRole === 'super'
-                    ? 'bg-red-600/15 border-red-500 text-white'
-                    : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800'
-                }`}
-              >
-                <div className="flex items-center gap-2 font-bold text-sm text-white">
-                  <ShieldAlert size={16} className="text-red-400" /> Super Admin
-                </div>
-                <p className="text-xs text-zinc-400 mt-1">Full global system access, fee overrides & role creation.</p>
-              </button>
+            <label className="block text-xs font-bold text-zinc-300 uppercase tracking-wider">Enterprise Administrative Role:</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              {[
+                { id: 'platform_admin', name: 'Platform Admin', desc: 'System configuration & platform operations', color: 'indigo' },
+                { id: 'security_admin', name: 'Security Admin', desc: 'Audit monitoring & incident investigation', color: 'emerald' },
+                { id: 'operations_admin', name: 'Operations Admin', desc: 'Routine operational management', color: 'amber' },
+                { id: 'moderator', name: 'Content Moderator', desc: 'Listing reviews & report handling', color: 'blue' },
+                { id: 'support_agent', name: 'Support Agent', desc: 'Customer support & assistance', color: 'purple' },
+              ].map((role) => (
+                <button
+                  key={role.id}
+                  type="button"
+                  onClick={() => setAdminRole(role.id as any)}
+                  className={`p-3 rounded-xl border text-left transition-all ${
+                    adminRole === role.id
+                      ? 'bg-orange-600/15 border-orange-500 text-white shadow-md'
+                      : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-850 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 font-bold text-xs text-white">
+                    <Shield size={14} className={adminRole === role.id ? 'text-orange-400' : 'text-zinc-500'} />
+                    <span>{role.name}</span>
+                  </div>
+                  <p className="text-[10px] text-zinc-400 mt-1 leading-snug">{role.desc}</p>
+                </button>
+              ))}
             </div>
+            <p className="text-[10px] text-zinc-500 italic mt-1">
+              * Note: Platform Owner is Tier-0 root governance and can only be provisioned via the secure offline bootstrap utility.
+            </p>
           </div>
 
           {/* Account Details */}

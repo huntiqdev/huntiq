@@ -21,7 +21,8 @@ interface CategoryNode {
 const EMPTY_FORM = { name_en: '', name_am: '', name_om: '', slug: '', description: '', is_leaf: false, is_active: true, display_order: 0, parent_id: null as number | null };
 
 export default function CategoriesAdminPage() {
-  const { user, isSuperAdmin } = useAuth();
+  const { user, isSuperAdmin, isPlatformOwner, isPlatformAdmin, hasAdminPermission } = useAuth();
+  const canManage = isSuperAdmin || isPlatformOwner || isPlatformAdmin || hasAdminPermission('categories');
   const [tree, setTree] = useState<CategoryNode[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
@@ -131,7 +132,7 @@ export default function CategoriesAdminPage() {
           </div>
 
           <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-            {isSuperAdmin && (
+            {canManage && (
               <>
                 <button
                   onClick={() => openCreate(node.id)}
@@ -177,7 +178,7 @@ export default function CategoriesAdminPage() {
           <button onClick={fetchTree} className="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors">
             <RefreshCw className="w-4 h-4 text-zinc-400" />
           </button>
-          {isSuperAdmin && (
+          {canManage && (
             <button
               onClick={() => openCreate()}
               className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-bold transition-colors"
@@ -198,7 +199,7 @@ export default function CategoriesAdminPage() {
           <div className="p-8 text-center text-zinc-500">
             <FolderTree className="w-12 h-12 mx-auto mb-3 opacity-20" />
             <p>No categories yet.</p>
-            {isSuperAdmin && (
+            {canManage && (
               <button onClick={() => openCreate()} className="mt-4 px-4 py-2 bg-orange-600 text-white rounded-lg text-sm font-bold">
                 Create First Category
               </button>

@@ -22,7 +22,8 @@ const EMPTY_FORM = {
 };
 
 export default function AttributesAdminPage() {
-  const { user, isSuperAdmin } = useAuth();
+  const { user, isSuperAdmin, isPlatformOwner, isPlatformAdmin, hasAdminPermission } = useAuth();
+  const canManage = isSuperAdmin || isPlatformOwner || isPlatformAdmin || hasAdminPermission('categories');
   const [attributes, setAttributes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -95,7 +96,7 @@ export default function AttributesAdminPage() {
           <button onClick={fetchAttributes} className="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors">
             <RefreshCw className="w-4 h-4 text-zinc-400" />
           </button>
-          {isSuperAdmin && (
+          {canManage && (
             <button onClick={() => { setForm({ ...EMPTY_FORM }); setError(''); setShowModal(true); }}
               className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-bold transition-colors">
               <Plus className="w-4 h-4" /> New Attribute

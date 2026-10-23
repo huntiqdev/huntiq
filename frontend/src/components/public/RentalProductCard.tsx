@@ -25,34 +25,24 @@ const TIER_BADGE: Record<string, { label: string; cls: string }> = {
   premium: { label: 'P', cls: 'bg-purple-600 text-white' },
 };
 
-// ── Image blur logic ──────────────────────────────────────────────────────────
-function useImageBlur(product: Product) {
-  const { buyerTier } = useAuth();
-  const sellerTier = product.seller_tier;
-  if (!sellerTier || sellerTier === 'normal') return false;
-  if (sellerTier === 'gold')    return buyerTier !== 'gold' && buyerTier !== 'premium';
-  if (sellerTier === 'premium') return buyerTier !== 'premium';
-  return false;
-}
-
-function BlurOverlay({ tier }: { tier: string }) {
+// ── Tier indicator helpers for restricted specifications ──────────────────────
+function TierSpecBadge({ tier }: { tier?: string }) {
+  if (!tier || tier === 'normal') return null;
+  const isGold = tier === 'gold';
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-lg z-10 gap-1">
-      <Lock size={14} className="text-white/80" />
-      <p className="text-white text-[9px] font-black uppercase tracking-wider text-center px-1 leading-tight">
-        {tier === 'premium' ? 'Premium' : 'Gold'}<br />buyer only
-      </p>
-      <Link href="/buyer/dashboard"
-        className="text-[9px] font-black bg-orange-600 text-white px-2 py-0.5 rounded-full hover:bg-orange-500 transition-colors mt-0.5">
-        Upgrade
-      </Link>
+    <div
+      className={`absolute top-1 right-1 z-10 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider flex items-center gap-0.5 shadow-sm ${
+        isGold ? 'bg-amber-500 text-white' : 'bg-purple-600 text-white'
+      }`}
+    >
+      <Lock size={7} />
+      <span>{isGold ? 'Gold' : 'Premium'}</span>
     </div>
   );
 }
 
 export function RentalProductCard({ product }: Props) {
   const [imgIdx, setImgIdx] = useState(0);
-  const blurred = useImageBlur(product);
   const sellerTier = product.seller_tier;
   const tierBadge = sellerTier ? TIER_BADGE[sellerTier] : null;
 
@@ -86,10 +76,10 @@ export function RentalProductCard({ product }: Props) {
             alt={product.title}
             fill
             unoptimized={isUnoptimized(thumb)}
-            className={`object-cover transition-transform duration-500 group-hover:scale-105 ${blurred ? 'blur-xl scale-110' : ''}`}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 480px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
           />
-          {blurred && <BlurOverlay tier={sellerTier ?? 'gold'} />}
+          <TierSpecBadge tier={product.required_buyer_tier} />
 
           {/* Rental Price — bottom left */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-1.5 pb-1 pt-4">
@@ -146,7 +136,7 @@ export function RentalProductCard({ product }: Props) {
           )}
 
           {/* Image dots — only if multiple */}
-          {total > 1 && !blurred && (
+          {total > 1 && (
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-0.5">
               {Array.from({ length: total }).map((_, i) => (
                 <button key={i}

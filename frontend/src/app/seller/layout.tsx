@@ -139,7 +139,7 @@ function SidebarContent({
 }
 
 export default function SellerLayout({ children }: { children: React.ReactNode }) {
-  const { user, isSeller, loading, logout } = useAuth();
+  const { user, isSeller, isLandlord, loading, logout, activateCapability } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -153,8 +153,8 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
   const isAuthPage = pathname === '/seller/login' || pathname === '/seller/register';
 
   useEffect(() => {
-    if (!loading && !isAuthPage && !isSeller) router.replace('/auth?as=seller');
-  }, [loading, isSeller, isAuthPage, router]);
+    if (!loading && !isAuthPage && !user) router.replace('/auth?intent=sell');
+  }, [loading, user, isAuthPage, router]);
 
   useEffect(() => {
     if (!user || !isSeller) return;
@@ -177,7 +177,42 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
 
   if (isAuthPage) return <>{children}</>;
   if (loading) return null;
-  if (!isSeller) return null;
+  if (!user) return null;
+
+  // If user is logged in but hasn't activated seller capability yet
+  if (!isSeller) {
+    return (
+      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-2xl text-center space-y-4">
+          <div className="w-14 h-14 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto text-white shadow-lg shadow-orange-600/30">
+            <ShoppingBag size={28} />
+          </div>
+          <div>
+            <h2 className="text-xl font-black text-zinc-900 dark:text-white">Activate Seller Studio</h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+              You are signed in to your SellBuy account. Activate the seller capability to start listing products, managing inventory, and receiving orders.
+            </p>
+          </div>
+          <div className="pt-2 flex flex-col gap-2">
+            <button
+              onClick={async () => {
+                await activateCapability('seller');
+              }}
+              className="w-full py-3.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-black text-sm shadow-lg shadow-orange-600/25 transition-all active:scale-95"
+            >
+              Activate & Enter Seller Studio
+            </button>
+            <Link
+              href="/"
+              className="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 font-semibold py-2"
+            >
+              Back to Marketplace
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const tierRank = TIER_RANK[sellerTier] ?? 0;
 
@@ -189,7 +224,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
     visibleNav, lockedNav,
     onClose:  () => setSidebarOpen(false),
     onHelp:   () => setHelpOpen(true),
-    onLogout: () => { logout(); router.push('/auth?as=seller'); },
+    onLogout: () => { logout(); router.push('/auth'); },
   };
 
   return (

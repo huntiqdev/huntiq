@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { SearchBar } from '@/components/public/SearchBar';
+import { UserAccountMenu } from '@/components/layout/UserAccountMenu';
 import { Globe, Moon, Sun, ShoppingBag, ChevronDown,
   HelpCircle, X, ChevronRight, Shield, Zap, ImageIcon, MapPin, User,
 } from 'lucide-react';
@@ -150,12 +151,15 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
   );
 }
 
+import { CategoryDrawer } from '@/components/public/CategoryDrawer';
+
 // ── Header ───────────────────────────────────────────────────────────────────
 export function Header() {
   const { t, locale, setLocale, locales, localeLabels } = useLocale();
   const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [categoryDrawerOpen, setCategoryDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -171,16 +175,13 @@ export function Header() {
     localStorage.setItem('habesha_theme', next ? 'dark' : 'light');
   };
 
-  const isBuyPage = pathname === '/products' || pathname.startsWith('/products/');
   const isSellPage = pathname === '/sell';
-  const isHomePage = pathname === '/';
   const ctaHref = isSellPage ? '/products' : '/sell';
-  const ctaLabel = isSellPage ? t.nav.buy : t.nav.sell;
+  const ctaLabel = isSellPage ? (t.nav.buy ?? 'Buy') : (t.nav.sell ?? 'Start Selling');
 
   // Close lang dropdown on outside click
   useEffect(() => {
     if (!langOpen) return;
-    // Use setTimeout so this listener is added AFTER the current click event finishes
     const id = setTimeout(() => {
       const close = () => setLangOpen(false);
       document.addEventListener('click', close, { once: true });
@@ -199,106 +200,213 @@ export function Header() {
 
   const isRentActive = pathname === '/rent' || (pathname === '/products' && currentType === 'rent');
   const isBuyActive = (pathname === '/products' && currentType !== 'rent') || pathname === '/buy';
+  const isPropertyActive = pathname.startsWith('/products') && (pathname.includes('property') || (typeof window !== 'undefined' && window.location.search.includes('cat=property')));
 
   return (
     <>
       {helpOpen && <HelpPanel onClose={() => setHelpOpen(false)} />}
+      <CategoryDrawer
+        isOpen={categoryDrawerOpen}
+        onClose={() => setCategoryDrawerOpen(false)}
+      />
 
-      <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md bg-white/90 dark:bg-zinc-950/90 border-zinc-200 dark:border-zinc-800 overflow-visible">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center gap-2">
-
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="relative w-8 h-8 rounded-xl overflow-hidden flex items-center justify-center bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm group-hover:scale-105 transition-transform">
-              <img src="/huntiq.png" alt="HUNTIQ" className="w-full h-full object-contain p-0.5" />
-            </div>
-            <span className="text-base font-black tracking-tight text-zinc-900 dark:text-white hidden sm:block">
-              {t.ui.app_name}
-            </span>
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1 ml-2 border-r border-zinc-200 dark:border-zinc-800 pr-3 mr-1">
-            <Link href="/"
-              className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${pathname === '/' ? 'bg-orange-600 text-white' : 'opacity-60 hover:opacity-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}>
-              {t.footer.home}
-            </Link>
-            <Link href="/products?type=sale"
-              className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${isBuyActive ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'opacity-60 hover:opacity-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}>
-              🛒 {t.nav.buy ?? 'Buy'}
-            </Link>
-            <Link href="/products?type=rent"
-              className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${isRentActive ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20' : 'opacity-60 hover:opacity-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}>
-              🏠 {t.nav.rental ?? 'Rental'}
-            </Link>
-          </nav>
-
-          {/* Search — hidden on home page */}
-          <div className="flex-1 min-w-0 hidden md:block mx-2">
-            {!isHomePage && <SearchBar />}
-          </div>
-
-          {/* Right actions */}
-          <div className="flex items-center gap-1 ml-auto">
-
-            {/* My Profile link for authenticated sellers */}
-            {pathname.startsWith('/seller/') && !pathname.includes('/login') && !pathname.includes('/register') && (
-              <Link href="/seller/profile"
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-500">
-                <User size={14} />
-                <span>My Profile</span>
+      <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md bg-white/95 dark:bg-zinc-950/95 border-zinc-200 dark:border-zinc-800 transition-colors">
+        
+        {/* ── Top Utility Row ──────────────────────────────────────────────── */}
+        <div className="hidden sm:block border-b border-zinc-100 dark:border-zinc-850/80 bg-zinc-50/80 dark:bg-zinc-900/40 text-[11px] text-zinc-500 dark:text-zinc-400">
+          <div className="max-w-7xl mx-auto px-4 h-7 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5 font-medium">
+                <Shield size={12} className="text-green-600" />
+                <span>Verified Marketplace • 100% Ethiopian Listings</span>
+              </span>
+              <span className="text-zinc-300 dark:text-zinc-700">|</span>
+              <Link href="/contact" className="hover:text-orange-600 transition-colors">
+                {t.footer.contact ?? 'Contact Us'}
               </Link>
-            )}
-
-            {/* Language */}
-            <div className="relative">
-              <button onClick={() => setLangOpen(v => !v)}
-                className="flex items-center gap-1 px-2 py-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-xs font-black uppercase">
-                <Globe size={14} />
-                <span className="hidden sm:inline">{locale}</span>
-                <ChevronDown size={10} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+              <button onClick={() => setHelpOpen(true)} className="hover:text-orange-600 transition-colors">
+                {t.footer.help ?? 'Help Center'}
               </button>
-              {langOpen && (
-                <div className="absolute right-0 mt-2 w-44 rounded-2xl border shadow-2xl z-50 overflow-hidden bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
-                  {locales.map((l: string) => (
-                    <button key={l} onClick={() => { setLocale(l); setLangOpen(false); }}
-                      className={`w-full text-left px-4 py-2.5 text-sm font-bold hover:bg-orange-600 hover:text-white transition-colors flex items-center justify-between ${locale === l ? 'text-orange-600' : ''}`}>
-                      {localeLabels[l] ?? l.toUpperCase()}
-                      {locale === l && <span className="w-2 h-2 rounded-full bg-orange-600 inline-block" />}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
 
-            {/* Dark/Light */}
-            <button onClick={toggleDark}
-              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
-              {mounted ? (dark ? <Sun size={16} /> : <Moon size={16} />) : <span className="w-4 h-4 block" />}
-            </button>
+            <div className="flex items-center gap-3">
+              {/* Language Selector */}
+              <div className="relative">
+                <button
+                  onClick={() => setLangOpen(v => !v)}
+                  className="flex items-center gap-1 hover:text-orange-600 transition-colors font-bold uppercase tracking-wider text-[10px]"
+                >
+                  <Globe size={12} />
+                  <span>{localeLabels[locale] ?? locale.toUpperCase()}</span>
+                  <ChevronDown size={10} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {langOpen && (
+                  <div className="absolute right-0 mt-1.5 w-40 rounded-2xl border shadow-2xl z-50 overflow-hidden bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
+                    {locales.map((l: string) => (
+                      <button
+                        key={l}
+                        onClick={() => { setLocale(l); setLangOpen(false); }}
+                        className={`w-full text-left px-3.5 py-2 text-xs font-bold hover:bg-orange-600 hover:text-white transition-colors flex items-center justify-between ${
+                          locale === l ? 'text-orange-600' : ''
+                        }`}
+                      >
+                        {localeLabels[l] ?? l.toUpperCase()}
+                        {locale === l && <span className="w-1.5 h-1.5 rounded-full bg-orange-600 inline-block" />}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-            {/* Help */}
-            <button onClick={() => setHelpOpen(true)}
-              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-zinc-500 hover:text-orange-600 dark:text-zinc-400 dark:hover:text-orange-500">
-              <HelpCircle size={16} />
-            </button>
-
-            {/* CTA — hidden on homepage (hero has the big cards) */}
-            {!isHomePage && (
-              <Link href={ctaHref}
-                className="bg-orange-600 hover:bg-orange-700 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm shadow-lg shadow-orange-600/20 transition-all active:scale-95 ml-1">
-                {ctaLabel}
-              </Link>
-            )}
+              {/* Dark / Light Toggle */}
+              <button
+                onClick={toggleDark}
+                className="p-1 rounded-md hover:text-orange-600 transition-colors"
+                aria-label="Toggle dark mode"
+              >
+                {mounted ? (dark ? <Sun size={13} /> : <Moon size={13} />) : <span className="w-3.5 h-3.5 block" />}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile search — hidden on home page */}
-        {!isHomePage && (
-          <div className="md:hidden px-4 pb-3 bg-white/90 dark:bg-zinc-950/90 pb-[env(safe-area-inset-bottom,12px)]">
+        {/* ── Main Header Row ──────────────────────────────────────────────── */}
+        <div className="max-w-7xl mx-auto px-4 h-15 py-2 flex items-center gap-2 sm:gap-4">
+
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden flex items-center justify-center bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm group-hover:scale-105 transition-transform">
+              <img src="/huntiq.png" alt="SellBuy" className="w-full h-full object-contain p-0.5" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-base sm:text-lg font-black tracking-tight leading-none text-zinc-900 dark:text-white">
+                {t.ui.app_name}
+              </span>
+              <span className="text-[9px] font-bold text-orange-600 uppercase tracking-widest hidden sm:block">
+                Marketplace
+              </span>
+            </div>
+          </Link>
+
+          {/* Category Drawer Trigger Button */}
+          <button
+            onClick={() => setCategoryDrawerOpen(true)}
+            className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-900 hover:border-orange-500 hover:text-orange-600 transition-all text-xs font-black uppercase tracking-wider shrink-0"
+          >
+            <div className="w-4 h-4 flex flex-col justify-between py-0.5">
+              <span className="w-full h-0.5 bg-current rounded-full" />
+              <span className="w-3/4 h-0.5 bg-current rounded-full" />
+              <span className="w-full h-0.5 bg-current rounded-full" />
+            </div>
+            <span>{t.nav.categories ?? 'Categories'}</span>
+          </button>
+
+          {/* Global Search Bar (Prominent, Always Visible) */}
+          <div className="flex-1 min-w-0 mx-1 sm:mx-2">
             <SearchBar />
           </div>
-        )}
+
+          {/* Right Header Controls */}
+          <div className="flex items-center gap-1.5 sm:gap-2 ml-auto shrink-0">
+
+            {/* User Account / Role Menu */}
+            <UserAccountMenu />
+
+            {/* Sell / List CTA Button */}
+            <Link
+              href={ctaHref}
+              className="bg-orange-600 hover:bg-orange-700 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm shadow-md shadow-orange-600/25 transition-all active:scale-95 flex items-center gap-1"
+            >
+              <span>+</span>
+              <span className="hidden sm:inline">{ctaLabel}</span>
+              <span className="sm:hidden">Sell</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* ── Secondary Navigation Row ─────────────────────────────────────── */}
+        <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/50 dark:bg-zinc-950/50 overflow-x-auto no-scrollbar">
+          <div className="max-w-7xl mx-auto px-4 h-9 flex items-center gap-1 sm:gap-2 text-xs font-bold whitespace-nowrap">
+            <button
+              onClick={() => setCategoryDrawerOpen(true)}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors uppercase tracking-wider text-[11px] font-black shrink-0 mr-1"
+            >
+              <span>☰ All Categories</span>
+              <ChevronDown size={11} />
+            </button>
+            <span className="text-zinc-200 dark:text-zinc-800">|</span>
+
+            <Link
+              href="/products?type=sale"
+              className={`px-2.5 py-1 rounded-lg transition-colors ${
+                isBuyActive
+                  ? 'bg-orange-600 text-white font-black'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
+              }`}
+            >
+              🛒 {t.nav.buy ?? 'Buy'}
+            </Link>
+
+            <Link
+              href="/products?type=rent"
+              className={`px-2.5 py-1 rounded-lg transition-colors ${
+                isRentActive
+                  ? 'bg-teal-600 text-white font-black'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
+              }`}
+            >
+              🏠 {t.nav.rental ?? 'Rental'}
+            </Link>
+
+            <Link
+              href="/products?cat=property"
+              className={`px-2.5 py-1 rounded-lg transition-colors ${
+                isPropertyActive
+                  ? 'bg-emerald-600 text-white font-black'
+                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
+              }`}
+            >
+              🏢 Land & Property
+            </Link>
+
+            <Link
+              href="/products?cat=electronics"
+              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+            >
+              📱 Electronics
+            </Link>
+
+            <Link
+              href="/products?cat=vehicles"
+              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+            >
+              🚗 Vehicles
+            </Link>
+
+            <Link
+              href="/products?cat=agriculture"
+              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+            >
+              🌾 Agriculture
+            </Link>
+
+            <Link
+              href="/products"
+              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+            >
+              ✨ New Listings
+            </Link>
+
+            <div className="ml-auto hidden lg:flex items-center gap-2 pl-3">
+              <Link
+                href="/contact"
+                className="text-zinc-500 hover:text-orange-600 text-[11px] font-semibold transition-colors"
+              >
+                Customer Support
+              </Link>
+            </div>
+          </div>
+        </div>
       </header>
     </>
   );

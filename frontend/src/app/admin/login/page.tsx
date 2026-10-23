@@ -1,21 +1,87 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { api } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
-import { Spinner } from '@/components/ui/Spinner';
-import { ShieldCheck, Mail, Lock, KeyRound } from 'lucide-react';
+import Link from 'next/link';
+import {
+  ShieldAlert,
+  Server,
+  ShieldCheck,
+  Users,
+  Fingerprint,
+  ArrowRight,
+  Lock,
+  ChevronRight,
+  Shield,
+} from 'lucide-react';
 
-export default function AdminLoginPage() {
+interface PortalCard {
+  title: string;
+  badge: string;
+  badgeClass: string;
+  desc: string;
+  href: string;
+  icon: any;
+  iconColor: string;
+  borderHover: string;
+  roles: string;
+  securityLevel: string;
+}
+
+const PORTALS: PortalCard[] = [
+  {
+    title: 'Platform Owner',
+    badge: 'Tier-0 Governance',
+    badgeClass: 'bg-red-500/10 text-red-400 border-red-500/30',
+    desc: 'Ultimate authorized platform governance, root configuration, and administrative provisioning.',
+    href: '/executive-console/login',
+    icon: ShieldAlert,
+    iconColor: 'text-red-400 bg-red-950/40 border-red-500/20',
+    borderHover: 'hover:border-red-500/50 hover:shadow-red-500/10',
+    roles: 'Platform Owner',
+    securityLevel: 'Passkey Required (User Verification Enforced)',
+  },
+  {
+    title: 'Platform Administrator',
+    badge: 'Operations & Config',
+    badgeClass: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30',
+    desc: 'Platform configuration, service administration, system settings, and catalog structure management.',
+    href: '/platform-console/login',
+    icon: Server,
+    iconColor: 'text-indigo-400 bg-indigo-950/40 border-indigo-500/20',
+    borderHover: 'hover:border-indigo-500/50 hover:shadow-indigo-500/10',
+    roles: 'Platform Administrator',
+    securityLevel: 'Passkey Required (User Verification Enforced)',
+  },
+  {
+    title: 'Security Administrator',
+    badge: 'Security & Audit',
+    badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    desc: 'Security incident monitoring, tamper-resistant audit logs, session revocation, and access reviews.',
+    href: '/security-console/login',
+    icon: ShieldCheck,
+    iconColor: 'text-emerald-400 bg-emerald-950/40 border-emerald-500/20',
+    borderHover: 'hover:border-emerald-500/50 hover:shadow-emerald-500/10',
+    roles: 'Security Administrator',
+    securityLevel: 'Passkey Required (User Verification Enforced)',
+  },
+  {
+    title: 'Enterprise Staff Access',
+    badge: 'Operations & Support',
+    badgeClass: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
+    desc: 'Routine catalog management, listing moderation, seller verification, and customer inquiries.',
+    href: '/staff/login',
+    icon: Users,
+    iconColor: 'text-orange-400 bg-orange-950/40 border-orange-500/20',
+    borderHover: 'hover:border-orange-500/50 hover:shadow-orange-500/10',
+    roles: 'Operations Admin, Content Moderator, Support Agent',
+    securityLevel: 'Passkey Recommended / Mandatory Staff MFA',
+  },
+];
+
+export default function AdminPortalDirectoryPage() {
   const router = useRouter();
-  const { user, login } = useAuth();
-  
-  const [step, setStep] = useState<1 | 2>(1);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [code, setCode] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const { user } = useAuth();
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -23,114 +89,88 @@ export default function AdminLoginPage() {
     }
   }, [user, router]);
 
-  const handleStep1 = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-      const res = await api.adminLogin({ email, password });
-      if (res.is_super) {
-        await login(res.token!);
-        router.push('/admin/dashboard');
-      } else {
-        setStep(2);
-      }
-    } catch (err: any) {
-      setError(err?.message || 'Login failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleStep2 = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-      const res = await api.adminLoginVerifyOTP({ email, code });
-      await login(res.token);
-      router.push('/admin/dashboard');
-    } catch (err: any) {
-      setError(err?.message || 'OTP verification failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-zinc-950">
-      <div className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-        {/* Glow effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-orange-500/10 blur-[100px] pointer-events-none" />
-        
-        <div className="relative z-10">
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/20 mb-4">
-              <ShieldCheck className="text-white" size={32} />
-            </div>
-            <h1 className="text-2xl font-black text-white text-center">Admin Access</h1>
-            <p className="text-zinc-400 text-sm mt-1 text-center font-semibold">
-              {step === 1 ? 'Authorized personnel only' : 'Enter the OTP sent to your email'}
-            </p>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8 selection:bg-orange-600 selection:text-white">
+      {/* Background ambient gradient glow */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-orange-600/5 blur-[160px] rounded-full" />
+      </div>
+
+      <div className="max-w-5xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center">
+        {/* Header */}
+        <div className="text-center space-y-3 mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-bold text-zinc-400">
+            <Shield size={14} className="text-orange-500" />
+            <span>HUNTIQ Privileged Security Architecture</span>
           </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+            Administrative Access Portals
+          </h1>
+          <p className="text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto font-normal">
+            Select your assigned administrative portal. Privileged roles require phishing-resistant
+            hardware passkey verification with zero biometric exposure.
+          </p>
+        </div>
 
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl mb-6 font-bold text-center">
-              {error}
-            </div>
-          )}
+        {/* Portal Selection Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
+          {PORTALS.map((portal) => {
+            const Icon = portal.icon;
+            return (
+              <Link
+                key={portal.title}
+                href={portal.href}
+                className={`group relative bg-zinc-900/80 border border-zinc-800/90 rounded-3xl p-6 sm:p-7 transition-all duration-200 hover:-translate-y-1 shadow-lg ${portal.borderHover}`}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`p-3 rounded-2xl border ${portal.iconColor}`}>
+                    <Icon size={24} />
+                  </div>
+                  <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border ${portal.badgeClass}`}>
+                    {portal.badge}
+                  </span>
+                </div>
 
-          {step === 1 ? (
-            <form onSubmit={handleStep1} className="space-y-4">
-              <div>
-                <label className="text-xs font-black text-zinc-500 uppercase tracking-widest mb-1 block">Email</label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
-                  <input type="email" required
-                    className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl pl-12 pr-4 py-3 font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all"
-                    value={email} onChange={e => setEmail(e.target.value)}
-                  />
+                <h2 className="text-lg font-black text-white group-hover:text-orange-400 transition-colors flex items-center gap-2">
+                  <span>{portal.title}</span>
+                  <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-orange-400" />
+                </h2>
+
+                <p className="text-zinc-400 text-xs leading-relaxed mt-2 mb-4 font-normal">
+                  {portal.desc}
+                </p>
+
+                <div className="pt-4 border-t border-zinc-800/60 space-y-1.5 text-[11px]">
+                  <div className="flex items-center justify-between text-zinc-400">
+                    <span className="text-zinc-500 font-semibold">Authorized:</span>
+                    <span className="font-bold text-zinc-300">{portal.roles}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-zinc-400">
+                    <span className="text-zinc-500 font-semibold">Assurance:</span>
+                    <span className="font-medium text-zinc-400 flex items-center gap-1">
+                      <Fingerprint size={12} className="text-zinc-400" />
+                      {portal.securityLevel}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <label className="text-xs font-black text-zinc-500 uppercase tracking-widest mb-1 block">Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
-                  <input type="password" required
-                    className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl pl-12 pr-4 py-3 font-semibold focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all"
-                    value={password} onChange={e => setPassword(e.target.value)}
-                  />
-                </div>
-              </div>
-              <button disabled={loading}
-                className="w-full bg-orange-600 hover:bg-orange-500 text-white font-black py-4 rounded-xl mt-4 shadow-lg shadow-orange-600/20 transition-all active:scale-[0.98] flex justify-center disabled:opacity-50">
-                {loading ? <Spinner size={20} className="text-white" /> : 'Sign In'}
-              </button>
-            </form>
-          ) : (
-            <form onSubmit={handleStep2} className="space-y-4">
-              <div>
-                <label className="text-xs font-black text-zinc-500 uppercase tracking-widest mb-1 block">Authentication Code</label>
-                <div className="relative">
-                  <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={18} />
-                  <input type="text" required
-                    className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl pl-12 pr-4 py-3 font-mono font-bold tracking-widest focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all text-center text-lg"
-                    value={code} onChange={e => setCode(e.target.value)}
-                  />
-                </div>
-              </div>
-              <button disabled={loading}
-                className="w-full bg-orange-600 hover:bg-orange-500 text-white font-black py-4 rounded-xl mt-4 shadow-lg shadow-orange-600/20 transition-all active:scale-[0.98] flex justify-center disabled:opacity-50">
-                {loading ? <Spinner size={20} className="text-white" /> : 'Verify Code'}
-              </button>
-              <button type="button" onClick={() => setStep(1)}
-                className="w-full text-zinc-500 font-bold text-sm mt-4 hover:text-zinc-300">
-                Back to Login
-              </button>
-            </form>
-          )}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Security Policy Footnote */}
+        <div className="bg-zinc-900/40 border border-zinc-900 rounded-2xl p-4 text-center max-w-2xl mx-auto">
+          <p className="text-[11px] text-zinc-500 leading-relaxed">
+            HUNTIQ enforces strict separation of duties and zero-trust backend authorization.
+            All administrative access ceremonies, session rotations, and audit events are cryptographically recorded.
+          </p>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="text-center text-xs text-zinc-600 mt-8 relative z-10">
+        &copy; {new Date().getFullYear()} HUNTIQ (SellBuy) Enterprise Security Platform. All rights reserved.
+      </footer>
     </div>
   );
 }

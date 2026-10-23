@@ -8,18 +8,31 @@ export interface AuthUser {
   adminRole: string; // normal | super (admins only)
   buyerTier: string;
   sellerPreference?: string; // sale | rent | both (sellers only)
+  capabilities: string[];
   token: string;
 }
 
 interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
-  login: (token: string) => Promise<void>;
+  login: (token: string, sessionToken?: string) => Promise<void>;
   logout: () => Promise<void>;
   isAdmin: boolean;
   isSuperAdmin: boolean;
+  isPlatformOwner: boolean;
+  isPlatformAdmin: boolean;
+  isSecurityAdmin: boolean;
+  isOperationsAdmin: boolean;
+  isModerator: boolean;
+  isSupportAgent: boolean;
+  adminRole: string;
   isSeller: boolean;
   isBuyer: boolean;
+  isLandlord: boolean;
+  isRenter: boolean;
+  capabilities: string[];
+  hasCapability: (cap: string) => boolean;
+  activateCapability: (capability: string, businessName?: string, preference?: string) => Promise<{ success: boolean; error?: string }>;
   buyerTier: string;
   sellerPreference: string;
   canViewGoldImages: boolean;
@@ -31,12 +44,25 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue>({
   user: null, loading: true, login: async () => {}, logout: async () => {},
-  isAdmin: false, isSuperAdmin: false, isSeller: false, isBuyer: false,
+  isAdmin: false, isSuperAdmin: false,
+  isPlatformOwner: false, isPlatformAdmin: false, isSecurityAdmin: false,
+  isOperationsAdmin: false, isModerator: false, isSupportAgent: false,
+  adminRole: '',
+  isSeller: false, isBuyer: false, isLandlord: false, isRenter: false,
+  capabilities: [], hasCapability: () => false, activateCapability: async () => ({ success: false }),
   buyerTier: 'normal', sellerPreference: 'sale', canViewGoldImages: false, canViewPremiumImages: false,
   adminPermissions: [], hasAdminPermission: () => false, refreshAdminPermissions: async () => {},
 });
 
-function parseJWT(token: string): { user_id: number; role: string; admin_role?: string; buyer_tier?: string; seller_preference?: string; exp?: number } | null {
+function parseJWT(token: string): {
+  user_id: number;
+  role: string;
+  admin_role?: string;
+  buyer_tier?: string;
+  seller_preference?: string;
+  capabilities?: string[];
+  exp?: number;
+} | null {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
@@ -49,7 +75,24 @@ function userFromToken(token: string): AuthUser | null {
   const p = parseJWT(token);
   if (!p) return null;
   if (p.exp && p.exp * 1000 < Date.now() - 10_000) return null;
-  return { id: p.user_id, role: p.role, adminRole: p.admin_role ?? '', buyerTier: p.buyer_tier ?? 'normal', sellerPreference: p.seller_preference, token };
+
+  // Derive additive capabilities
+  let caps: string[] = Array.isArray(p.capabilities) && p.capabilities.length > 0 ? p.capabilities : [];
+  if (caps.length === 0) {
+    caps = ['buyer'];
+    if (p.role === 'seller') caps.push('seller');
+    if (p.seller_preference === 'rent' || p.seller_preference === 'both') caps.push('landlord');
+  }
+
+  return {
+    id: p.user_id,
+    role: p.role,
+    adminRole: p.admin_role ?? '',
+    buyerTier: p.buyer_tier ?? 'normal',
+    sellerPreference: p.seller_preference,
+    capabilities: caps,
+    token,
+  };
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -124,11 +167,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, [user?.role, user?.adminRole, fetchPermissions]);
 
-  const login = async (token: string) => {
+  const login = async (token: string, sessionToken?: string) => {
     await fetch('/api/auth/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ token, session_token: sessionToken }),
     });
     const u = userFromToken(token);
     setUser(u);
@@ -148,9 +191,60 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const buyerTier = user?.buyerTier ?? 'normal';
   const sellerPreference = user?.sellerPreference ?? 'sale';
+  const capabilities = user?.capabilities ?? [];
+  const adminRole = user?.adminRole ?? '';
+
+  const isPlatformOwner = adminRole === 'platform_owner' || adminRole === 'super';
+  const isPlatformAdmin = adminRole === 'platform_admin';
+  const isSecurityAdmin = adminRole === 'security_admin';
+  const isOperationsAdmin = adminRole === 'operations_admin';
+  const isModerator = adminRole === 'moderator';
+  const isSupportAgent = adminRole === 'support_agent';
+
+  const hasCapability = useCallback((cap: string): boolean => {
+    if (!user) return false;
+    if (capabilities.includes(cap)) return true;
+    if (cap === 'buyer') return true; // all authenticated marketplace users have buyer capabilities
+    if (cap === 'seller' && user.role === 'seller') return true;
+    if (cap === 'landlord' && (sellerPreference === 'rent' || sellerPreference === 'both')) return true;
+    return false;
+  }, [user, capabilities, sellerPreference]);
+
+  const isSeller = hasCapability('seller');
+  const isBuyer = hasCapability('buyer');
+  const isLandlord = hasCapability('landlord');
+  const isRenter = hasCapability('renter') || isBuyer;
+
+  const activateCapability = async (capability: string, businessName?: string, preference?: string) => {
+    if (!user) return { success: false, error: 'Not authenticated' };
+    try {
+      const res = await fetch(`${API_URL}/auth/capabilities/activate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({
+          capability,
+          business_name: businessName,
+          preference,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        return { success: false, error: data.error || 'Failed to activate capability' };
+      }
+      if (data.data?.token) {
+        await login(data.data.token);
+      }
+      return { success: true };
+    } catch (err: any) {
+      return { success: false, error: err.message || 'Network error' };
+    }
+  };
 
   const hasAdminPermission = (perm: string) => {
-    if (isSuperAdmin) return true;
+    if (isPlatformOwner || isSuperAdmin) return true;
     return adminPermissions.includes(perm);
   };
 
@@ -158,9 +252,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider value={{
       user, loading, login, logout,
       isAdmin:  user?.role === 'admin',
-      isSuperAdmin,
-      isSeller: user?.role === 'seller',
-      isBuyer:  user?.role === 'buyer',
+      isSuperAdmin: isPlatformOwner || isSuperAdmin,
+      isPlatformOwner,
+      isPlatformAdmin,
+      isSecurityAdmin,
+      isOperationsAdmin,
+      isModerator,
+      isSupportAgent,
+      adminRole,
+      isSeller,
+      isBuyer,
+      isLandlord,
+      isRenter,
+      capabilities,
+      hasCapability,
+      activateCapability,
       buyerTier,
       sellerPreference,
       canViewGoldImages:    buyerTier === 'gold' || buyerTier === 'premium',

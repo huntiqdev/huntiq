@@ -8,22 +8,30 @@ import { ArrowLeft } from 'lucide-react';
 
 function NewProductContent() {
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, loading, isSeller, isLandlord, activateCapability } = useAuth();
   const { t } = useLocaleContext();
   const searchParams = useSearchParams();
   const listingType = searchParams?.get('type') || 'sale';
+  const isRental = listingType === 'rent';
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/auth?as=seller');
+    if (loading) return;
+    if (!user) {
+      router.push(`/auth?intent=${isRental ? 'rent' : 'sell'}`);
+      return;
     }
-  }, [user, loading, router]);
+    // Contextual capability activation for authenticated users
+    if (!isRental && !isSeller) {
+      activateCapability('seller').catch(() => {});
+    } else if (isRental && !isLandlord) {
+      activateCapability('landlord').catch(() => {});
+    }
+  }, [user, loading, isRental, isSeller, isLandlord, activateCapability, router]);
 
   if (loading || !user) {
     return null;
   }
 
-  const isRental = listingType === 'rent';
   const pageTitle = isRental 
     ? (t as any).demand?.landlord_title || 'List Property for Rent'
     : (t as any).demand?.sell_title || 'List Product for Sale';

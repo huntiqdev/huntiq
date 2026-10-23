@@ -88,14 +88,28 @@ export default function AdminProductsPage() {
     if (!user || selectedIds.length === 0) return;
     const notes = status === 'rejected' ? (prompt('Rejection note for bulk action:') || 'Bulk rejected') : 'Bulk approved';
     setProcessingBulk(true);
+    const succeeded: number[] = [];
+    const failed: number[] = [];
     try {
-      for (const id of selectedIds) {
-        await api.adminReviewProduct(id, { status, notes }, user.token);
+      const batchSize = 5;
+      for (let i = 0; i < selectedIds.length; i += batchSize) {
+        const batch = selectedIds.slice(i, i + batchSize);
+        await Promise.allSettled(
+          batch.map(async (id) => {
+            try {
+              await api.adminReviewProduct(id, { status, notes }, user.token);
+              succeeded.push(id);
+            } catch {
+              failed.push(id);
+            }
+          })
+        );
       }
-      setProducts((prev) => prev.filter((p) => !selectedIds.includes(p.id)));
-      setSelectedIds([]);
-    } catch (err) {
-      alert('Some items failed during bulk action');
+      setProducts((prev) => prev.filter((p) => !succeeded.includes(p.id)));
+      setSelectedIds((prev) => prev.filter((id) => !succeeded.includes(id)));
+      if (failed.length > 0) {
+        alert(`${succeeded.length} items successfully updated, but ${failed.length} failed.`);
+      }
     } finally {
       setProcessingBulk(false);
     }

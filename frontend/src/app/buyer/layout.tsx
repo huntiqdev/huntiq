@@ -6,8 +6,9 @@ import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
 import {
   LayoutDashboard, User, LogOut, Menu, ChevronRight,
-  ShoppingBag, Lock, ShoppingCart, Gift,
+  ShoppingBag, Lock, ShoppingCart, Gift, Home, Sparkles,
 } from 'lucide-react';
+import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
 
 const NAV_ITEMS = [
@@ -23,12 +24,20 @@ interface BuyerSidebarProps {
   userId?: number;
   pathname: string;
   tierRank: number;
+  isSeller: boolean;
+  isLandlord: boolean;
+  onActivateSeller: () => void;
+  onActivateLandlord: () => void;
   onClose: () => void;
   onLogout: () => void;
 }
 
 // Defined outside BuyerLayout to prevent remount on every render (avoids hydration issues)
-function BuyerSidebarContent({ buyerName, buyerTier, userId, pathname, tierRank, onClose, onLogout }: BuyerSidebarProps) {
+function BuyerSidebarContent({
+  buyerName, buyerTier, userId, pathname, tierRank,
+  isSeller, isLandlord, onActivateSeller, onActivateLandlord,
+  onClose, onLogout,
+}: BuyerSidebarProps) {
   const TierIcon = TIER_ICON[buyerTier];
   return (
     <div className="flex flex-col h-full">
@@ -79,6 +88,57 @@ function BuyerSidebarContent({ buyerName, buyerTier, userId, pathname, tierRank,
           );
         })}
 
+        {/* Marketplace Capabilities */}
+        <div className="pt-3 mt-2 border-t border-zinc-100 dark:border-zinc-800 space-y-1">
+          <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 mb-1">
+            Marketplace Capabilities
+          </p>
+
+          {isSeller ? (
+            <Link
+              href="/seller/dashboard"
+              onClick={onClose}
+              className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-all"
+            >
+              <ShoppingBag size={15} />
+              <span className="flex-1">Seller Studio</span>
+              <span className="text-[8px] bg-green-500/15 text-green-600 dark:text-green-400 font-black px-1.5 py-0.5 rounded-md">Active</span>
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => { onClose(); onActivateSeller(); }}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-all text-left"
+            >
+              <ShoppingBag size={15} />
+              <span className="flex-1">Start Selling</span>
+              <span className="text-[8px] bg-orange-600 text-white font-black px-1.5 py-0.5 rounded-md">Activate</span>
+            </button>
+          )}
+
+          {isLandlord ? (
+            <Link
+              href="/seller/products?preference=rent"
+              onClick={onClose}
+              className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all"
+            >
+              <Home size={15} />
+              <span className="flex-1">Landlord Console</span>
+              <span className="text-[8px] bg-green-500/15 text-green-600 dark:text-green-400 font-black px-1.5 py-0.5 rounded-md">Active</span>
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => { onClose(); onActivateLandlord(); }}
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all text-left"
+            >
+              <Home size={15} />
+              <span className="flex-1">List for Rent</span>
+              <span className="text-[8px] bg-teal-600 text-white font-black px-1.5 py-0.5 rounded-md">Activate</span>
+            </button>
+          )}
+        </div>
+
         {/* Upgrade CTA */}
         {buyerTier === 'normal' && (
           <div className="pt-2 mt-1 border-t border-zinc-100 dark:border-zinc-800">
@@ -121,20 +181,20 @@ function BuyerSidebarContent({ buyerName, buyerTier, userId, pathname, tierRank,
 const NOOP = () => {};
 
 export default function BuyerLayout({ children }: { children: React.ReactNode }) {
-  const { user, isBuyer, loading, logout, buyerTier: jwtTier } = useAuth();
+  const { user, isBuyer, isSeller, isLandlord, loading, logout, buyerTier: jwtTier } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [buyerName, setBuyerName] = useState<string | null>(null);
-  // Live tier from profile — may differ from JWT if admin changed it since last login
   const [liveTier, setLiveTier] = useState<string | null>(null);
+  const [activationCap, setActivationCap] = useState<'seller' | 'landlord' | null>(null);
   const buyerTier = liveTier ?? jwtTier;
 
   const isAuthPage = pathname === '/buyer/login' || pathname === '/buyer/register';
 
   useEffect(() => {
-    if (!loading && !isAuthPage && !isBuyer) router.replace('/auth?as=buyer');
-  }, [loading, isBuyer, isAuthPage, router]);
+    if (!loading && !isAuthPage && !user) router.replace('/auth');
+  }, [loading, user, isAuthPage, router]);
 
   useEffect(() => {
     if (!user || !isBuyer) return;
@@ -148,15 +208,18 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
 
   if (isAuthPage) return <>{children}</>;
   if (loading) return null;
-  if (!isBuyer) return null;
+  if (!user) return null;
 
   const tierRank = TIER_RANK[buyerTier] ?? 0;
   const TierIcon = TIER_ICON[buyerTier] as React.ElementType | undefined;
 
-  const handleLogout = () => { logout(); router.push('/auth?as=buyer'); };
+  const handleLogout = () => { logout(); router.push('/auth'); };
 
   const sidebarProps: BuyerSidebarProps = {
     buyerName, buyerTier, userId: user?.id, pathname, tierRank,
+    isSeller, isLandlord,
+    onActivateSeller: () => setActivationCap('seller'),
+    onActivateLandlord: () => setActivationCap('landlord'),
     onClose: () => setSidebarOpen(false),
     onLogout: handleLogout,
   };
@@ -205,6 +268,19 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
 
         <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
       </div>
+
+      {/* 1-Click Capability Activation Modal */}
+      {activationCap && (
+        <CapabilityActivationModal
+          isOpen={!!activationCap}
+          capability={activationCap}
+          onClose={() => setActivationCap(null)}
+          onSuccess={() => {
+            if (activationCap === 'seller') router.push('/seller/dashboard');
+            else router.push('/seller/products?preference=rent');
+          }}
+        />
+      )}
     </div>
   );
 }

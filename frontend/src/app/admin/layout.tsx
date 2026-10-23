@@ -4,46 +4,83 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { Spinner } from '@/components/ui/Spinner';
 import Link from 'next/link';
-import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin } from 'lucide-react';
+import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin, DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2 } from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
 
 function AdminSidebar() {
-  const { isSuperAdmin, hasAdminPermission, logout } = useAuth();
+  const {
+    isSuperAdmin, isPlatformOwner, isPlatformAdmin, isSecurityAdmin,
+    isOperationsAdmin, isModerator, isSupportAgent, adminRole,
+    hasAdminPermission, logout
+  } = useAuth();
   const pathname = usePathname();
+
+  const roleLabel = isPlatformOwner ? 'Platform Owner'
+    : isPlatformAdmin ? 'Platform Administrator'
+    : isSecurityAdmin ? 'Security Administrator'
+    : isOperationsAdmin ? 'Operations Administrator'
+    : isModerator ? 'Content Moderator'
+    : isSupportAgent ? 'Customer Support Agent'
+    : isSuperAdmin ? 'Super Admin'
+    : 'Enterprise Staff';
+
+  const roleBadgeStyle = isPlatformOwner
+    ? 'text-red-400 border-red-500/30 bg-red-950/30'
+    : isPlatformAdmin
+    ? 'text-indigo-400 border-indigo-500/30 bg-indigo-950/30'
+    : isSecurityAdmin
+    ? 'text-emerald-400 border-emerald-500/30 bg-emerald-950/30'
+    : 'text-orange-400 border-orange-500/30 bg-orange-950/30';
 
   const navigationGroups = [
     {
       title: 'OPERATIONS & CONTROL',
       links: [
         { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard, visible: true },
-        { href: '/admin/operations', label: 'Operations Monitor', icon: Activity, visible: isSuperAdmin || hasAdminPermission('operations') },
+        { href: '/admin/operations', label: 'Operations Monitor', icon: Activity, visible: isPlatformOwner || isPlatformAdmin || isSecurityAdmin || isOperationsAdmin || hasAdminPermission('operations') },
       ],
     },
     {
       title: 'LISTINGS & CATALOG',
       links: [
-        { href: '/admin/products',  label: 'Products & Listings', icon: Package,   visible: hasAdminPermission('pending') || hasAdminPermission('products') },
-        { href: '/admin/categories',label: 'Categories',          icon: FolderTree, visible: isSuperAdmin || hasAdminPermission('categories') },
-        { href: '/admin/attributes', label: 'Attributes',         icon: Tag,        visible: isSuperAdmin || hasAdminPermission('categories') },
-        { href: '/admin/locations', label: 'Locations & GPS',     icon: MapPin,     visible: isSuperAdmin || hasAdminPermission('locations') || hasAdminPermission('categories') },
-        { href: '/admin/search',    label: 'Search Analytics',    icon: Search,     visible: isSuperAdmin || hasAdminPermission('analytics') },
+        { href: '/admin/products',  label: 'Products & Listings', icon: Package,   visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || isModerator || hasAdminPermission('pending') || hasAdminPermission('products') },
+        { href: '/admin/categories',label: 'Categories',          icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
+        { href: '/admin/attributes', label: 'Attributes',         icon: Tag,        visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
+        { href: '/admin/locations', label: 'Locations & GPS',     icon: MapPin,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('locations') || hasAdminPermission('categories') },
+        { href: '/admin/search',    label: 'Search Analytics',    icon: Search,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('analytics') },
+      ],
+    },
+    {
+      title: 'MEMBERSHIPS & MONETIZATION',
+      links: [
+        { href: '/admin/upgrades', label: 'Tier Upgrades', icon: ArrowUpCircle, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('seller_upgrades') || hasAdminPermission('buyer_upgrades') },
+        { href: '/admin/premium-users', label: 'Premium Subscribers', icon: Crown, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('premium_users') },
+        { href: '/admin/referrals', label: 'Referral Payouts', icon: Share2, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('referrals') },
+      ],
+    },
+    {
+      title: 'FINANCE & PLANNING',
+      links: [
+        { href: '/admin/finance', label: 'Financial Planning & FP&A', icon: TrendingUp, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit') || hasAdminPermission('finance') },
+        { href: '/admin/profit', label: 'Historical Profit Analytics', icon: DollarSign, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit') },
       ],
     },
     {
       title: 'GOVERNANCE & SYSTEM',
       links: [
-        { href: '/admin/users', label: 'Admin Accounts', icon: Users, visible: isSuperAdmin },
-        { href: '/admin/settings', label: 'Platform Settings', icon: Settings, visible: isSuperAdmin || hasAdminPermission('settings') },
+        { href: '/admin/users', label: 'Admin Accounts', icon: Users, visible: isPlatformOwner },
+        { href: '/admin/settings', label: 'Platform Settings', icon: Settings, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('settings') },
+        { href: '/admin/logs', label: 'Security & Audit Logs', icon: FileText, visible: isPlatformOwner || isSecurityAdmin || hasAdminPermission('logs') },
       ],
     },
     {
       title: 'TRUST & COMPLIANCE',
       links: [
-        { href: '/admin/verification', label: 'Seller Verification', icon: BadgeCheck, visible: isSuperAdmin || hasAdminPermission('seller_verification') },
-        { href: '/admin/trust-safety', label: 'Trust & Safety', icon: AlertTriangle, visible: isSuperAdmin || hasAdminPermission('trust_safety') },
-        { href: '/admin/refunds', label: 'Refund Requests', icon: FileText, visible: isSuperAdmin || hasAdminPermission('refunds') },
-        { href: '/admin/appeals', label: 'Account Appeals', icon: Scale, visible: isSuperAdmin || hasAdminPermission('appeals') },
+        { href: '/admin/verification', label: 'Seller Verification', icon: BadgeCheck, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('seller_verification') },
+        { href: '/admin/trust-safety', label: 'Trust & Safety', icon: AlertTriangle, visible: isPlatformOwner || isPlatformAdmin || isSecurityAdmin || isOperationsAdmin || isModerator || hasAdminPermission('trust_safety') },
+        { href: '/admin/refunds', label: 'Refund Requests', icon: FileText, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('refunds') },
+        { href: '/admin/appeals', label: 'Account Appeals', icon: Scale, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('appeals') },
       ],
     },
   ];
@@ -56,9 +93,9 @@ function AdminSidebar() {
         </div>
         <div>
           <h2 className="text-base font-black text-white leading-none">Enterprise Portal</h2>
-          <p className="text-[10px] text-orange-400 font-bold uppercase tracking-widest mt-1">
-            {isSuperAdmin ? 'Super Admin Mode' : 'Manager Portal'}
-          </p>
+          <span className={`inline-block text-[10px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md border ${roleBadgeStyle}`}>
+            {roleLabel}
+          </span>
         </div>
       </div>
       

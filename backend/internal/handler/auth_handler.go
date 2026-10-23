@@ -11,9 +11,10 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
+	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
 	"github.com/your-org/used-tools-marketplace/internal/service"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/errors"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
 	"github.com/your-org/used-tools-marketplace/pkg/validations"
@@ -185,7 +186,7 @@ func (h *AuthHandler) AdminLogin(c *fiber.Ctx) error {
 	})
 }
 
-// POST /api/admin/login/verify  — Step 2: verify email OTP → issues JWT
+// POST /api/admin/login/verify  — Step 2: verify email OTP → issues JWT and session
 func (h *AuthHandler) AdminLoginVerifyOTP(c *fiber.Ctx) error {
 	var req dto.AdminOTPRequest
 	if err := c.BodyParser(&req); err != nil {
@@ -194,11 +195,28 @@ func (h *AuthHandler) AdminLoginVerifyOTP(c *fiber.Ctx) error {
 	if req.Email == "" || req.Code == "" {
 		return response.BadRequest(c, "email and code are required")
 	}
-	token, err := h.svc.AdminLoginStep2(c.Context(), req.Email, req.Code)
+	ip := c.IP()
+	if ip == "" {
+		ip = "127.0.0.1"
+	}
+	token, sessionToken, err := h.svc.AdminLoginStep2(c.Context(), req.Email, req.Code, ip, c.Get("User-Agent"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
 	}
-	return response.OK(c, dto.LoginResponse{Token: token})
+	if sessionToken != "" {
+		c.Cookie(&fiber.Cookie{
+			Name:     "hm_admin_session",
+			Value:    sessionToken,
+			Path:     "/",
+			MaxAge:   12 * 3600,
+			HTTPOnly: true,
+			SameSite: "Lax",
+		})
+	}
+	return response.OK(c, fiber.Map{
+		"token":         token,
+		"session_token": sessionToken,
+	})
 }
 
 // POST /api/auth/otp/send  — send OTP to phone
@@ -284,7 +302,7 @@ func (h *AuthHandler) ListOTPLogs(c *fiber.Ctx) error {
 	f := OTPLogFilter{
 		Phone: truncate(c.Query("phone"), 20), Email: truncate(c.Query("email"), 100),
 		UserType: userTypeFilter,
-		Status: statusFilter, ShowPlainOTP: c.Locals("adminRole") == "super",
+		Status: statusFilter, ShowPlainOTP: c.Locals("adminRole") == models.RolePlatformOwner || c.Locals("adminRole") == models.LegacyRoleSuper,
 		Page: page, Limit: limit,
 	}
 	logs, total, err := h.svc.GetOTPLogs(c.Context(), f)
@@ -394,6 +412,45 @@ func (h *AuthHandler) SellerForgotPassword(c *fiber.Ctx) error { return h.forgot
 func (h *AuthHandler) SellerResetPassword(c *fiber.Ctx) error  { return h.resetPassword(c, "seller") }
 func (h *AuthHandler) BuyerForgotPassword(c *fiber.Ctx) error  { return h.forgotPassword(c, "buyer") }
 func (h *AuthHandler) BuyerResetPassword(c *fiber.Ctx) error   { return h.resetPassword(c, "buyer") }
+
+// POST /api/auth/forgot-password — Unified password reset request
+func (h *AuthHandler) UnifiedForgotPassword(c *fiber.Ctx) error {
+	var body struct {
+		Phone string `json:"phone"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
+	if !phoneResult.Valid {
+		return response.AppError(c, errors.ValPhoneInvalid())
+	}
+	_ = h.svc.UnifiedForgotPasswordSend(c.Context(), phoneResult.Normalized)
+	return response.OK(c, fiber.Map{"message": "if an account exists, an OTP has been sent"})
+}
+
+// POST /api/auth/reset-password — Unified password reset completion
+func (h *AuthHandler) UnifiedResetPassword(c *fiber.Ctx) error {
+	var body struct {
+		Phone       string `json:"phone"`
+		Code        string `json:"code"`
+		NewPassword string `json:"new_password"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
+	if !phoneResult.Valid {
+		return response.AppError(c, errors.ValPhoneInvalid())
+	}
+	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
+		return response.AppError(c, errors.ValPasswordMin())
+	}
+	if err := h.svc.UnifiedForgotPasswordReset(c.Context(), phoneResult.Normalized, body.Code, body.NewPassword); err != nil {
+		return response.BadRequest(c, err.Error())
+	}
+	return response.OK(c, fiber.Map{"message": "password reset successfully"})
+}
 
 // POST /api/admin/forgot-password — send OTP to email for admin password reset
 func (h *AuthHandler) AdminForgotPassword(c *fiber.Ctx) error {
@@ -525,3 +582,107 @@ func (h *AuthHandler) SetDemand(c *fiber.Ctx) error {
 	})
 }
 
+// ── Unified Authentication & Capability Handlers ─────────────────────────────
+
+// POST /api/auth/register — Single unified registration endpoint for all users
+func (h *AuthHandler) UnifiedRegister(c *fiber.Ctx) error {
+	var req dto.RegisterRequest
+	if err := c.BodyParser(&req); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+
+	user, token, err := h.svc.UnifiedRegister(c.Context(), req)
+	if err != nil {
+		if strings.HasPrefix(err.Error(), "otp_pending:") {
+			return response.OK(c, fiber.Map{"otp_pending": true, "otp_required": true, "phone": req.Phone})
+		}
+		return response.BadRequest(c, err.Error())
+	}
+
+	if h.svc.IsOTPRequired(c.Context()) && !user.OTPVerified {
+		return response.OK(c, fiber.Map{
+			"otp_required": true,
+			"phone":        user.Phone,
+			"message":      "Please enter the OTP sent to your phone",
+		})
+	}
+
+	return response.OK(c, fiber.Map{
+		"user":         user,
+		"token":        token,
+		"capabilities": user.Capabilities,
+		"otp_required": false,
+	})
+}
+
+// POST /api/auth/login — Single unified login endpoint for all users
+func (h *AuthHandler) UnifiedLogin(c *fiber.Ctx) error {
+	var req dto.LoginRequest
+	if err := c.BodyParser(&req); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+
+	user, token, err := h.svc.UnifiedLogin(c.Context(), req)
+	if err != nil {
+		if strings.HasPrefix(err.Error(), "otp_pending:") {
+			return response.OK(c, fiber.Map{"otp_pending": true, "otp_required": true, "phone": req.Phone})
+		}
+		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
+	}
+
+	return response.OK(c, fiber.Map{
+		"user":         user,
+		"token":        token,
+		"capabilities": user.Capabilities,
+	})
+}
+
+// GET /api/auth/me — Current authenticated user profile with active capabilities
+func (h *AuthHandler) GetMe(c *fiber.Ctx) error {
+	userID, err := mustUserID(c)
+	if err != nil {
+		return err
+	}
+	user, err := h.svc.GetMe(c.Context(), userID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusNotFound, "user not found")
+	}
+	return response.OK(c, user)
+}
+
+// POST /api/auth/capabilities/activate — 1-click capability activation (seller, landlord, etc.)
+func (h *AuthHandler) ActivateCapability(c *fiber.Ctx) error {
+	userID, err := mustUserID(c)
+	if err != nil {
+		return err
+	}
+	var req dto.ActivateCapabilityRequest
+	if err := c.BodyParser(&req); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+
+	user, token, err := h.svc.ActivateCapability(c.Context(), userID, req)
+	if err != nil {
+		return response.BadRequest(c, err.Error())
+	}
+
+	return response.OK(c, fiber.Map{
+		"user":         user,
+		"token":        token,
+		"capabilities": user.Capabilities,
+		"message":      "Capability activated successfully",
+	})
+}
+
+// GET /api/auth/capabilities — List user's active capabilities
+func (h *AuthHandler) GetCapabilities(c *fiber.Ctx) error {
+	userID, err := mustUserID(c)
+	if err != nil {
+		return err
+	}
+	caps, err := h.svc.GetCapabilities(c.Context(), userID)
+	if err != nil {
+		return response.InternalError(c, err)
+	}
+	return response.OK(c, fiber.Map{"capabilities": caps})
+}

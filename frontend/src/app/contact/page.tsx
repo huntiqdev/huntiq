@@ -1,16 +1,29 @@
 'use client';
 import { useState, FormEvent } from 'react';
 import { useLocale } from '@/hooks/useLocale';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { api } from '@/lib/api';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function ContactPage() {
   const { t } = useLocale();
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    setError('');
+    setLoading(true);
+    try {
+      await api.submitContactMessage(form);
+      setSent(true);
+      setForm({ name: '', email: '', message: '' });
+    } catch (err: any) {
+      setError(err?.message || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,27 +68,47 @@ export default function ContactPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs font-semibold">
+                  <AlertCircle size={15} className="shrink-0" />
+                  <span>{error}</span>
+                </div>
+              )}
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.your_name}</label>
                 <input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800"
+                  disabled={loading}
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50"
                   placeholder={t.ui.your_name} />
               </div>
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.email_address}</label>
                 <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800"
+                  disabled={loading}
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50"
                   placeholder="you@example.com" />
               </div>
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.message}</label>
                 <textarea required rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 resize-none"
+                  disabled={loading}
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 resize-none disabled:opacity-50"
                   placeholder={t.ui.message_placeholder} />
               </div>
               <button type="submit"
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white rounded-xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-colors">
-                <Send size={16} />{t.ui.send_message}
+                disabled={loading}
+                className="w-full bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white rounded-xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-colors">
+                {loading ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>{t.ui.please_wait || 'Please wait...'}</span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    <span>{t.ui.send_message}</span>
+                  </>
+                )}
               </button>
             </form>
           )}

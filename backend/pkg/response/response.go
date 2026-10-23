@@ -101,3 +101,7 @@ func InternalError(c *fiber.Ctx, err error) error {
 func Unauthorized(c *fiber.Ctx, msg string) error {
 	return c.Status(fiber.StatusUnauthorized).JSON(envelope{Success: false, Error: msg})
 }
+
+func Forbidden(c *fiber.Ctx, msg string) error {
+	return c.Status(fiber.StatusForbidden).JSON(envelope{Success: false, Error: msg})
+}

@@ -8,14 +8,15 @@ import { Spinner } from '@/components/ui/Spinner';
 const WITHDRAWAL_TABS = ['pending', 'approved', 'rejected', 'paid'];
 
 export default function AdminReferralsPage() {
-  const { user, isSuperAdmin } = useAuth();
+  const { user, isSuperAdmin, isPlatformOwner, isPlatformAdmin, hasAdminPermission } = useAuth();
+  const canManageReferrals = isSuperAdmin || isPlatformOwner || isPlatformAdmin || hasAdminPermission('referrals');
   const [overview, setOverview] = useState<any>(null);
   const [withdrawals, setWithdrawals] = useState<any[]>([]);
   const [wStatus, setWStatus] = useState('pending');
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
-    if (!user?.token || !isSuperAdmin) return;
+    if (!user?.token || !canManageReferrals) return;
     setLoading(true);
     try {
       const [ov, wd] = await Promise.allSettled([
@@ -50,10 +51,10 @@ export default function AdminReferralsPage() {
     load();
   };
 
-  if (!isSuperAdmin) return (
+  if (!canManageReferrals) return (
     <div className="flex flex-col items-center justify-center h-64 gap-3 text-zinc-500">
       <Gift size={32} className="opacity-20" />
-      <p>Super admin access required</p>
+      <p>Referral management authorization required (Platform Owner, Platform Administrator, or referrals permission)</p>
     </div>
   );
 

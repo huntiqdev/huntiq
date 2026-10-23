@@ -1,6 +1,9 @@
 package handlers
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
@@ -296,4 +299,48 @@ func (h *BuyerHandler) CreateAccountAppeal(c *fiber.Ctx) error {
 	ap.ID = id
 	ap.Status = "pending"
 	return response.Created(c, ap)
+}
+
+// POST /api/contact
+func (h *BuyerHandler) SubmitContactMessage(c *fiber.Ctx) error {
+	var body struct {
+		Name    string `json:"name"`
+		Email   string `json:"email"`
+		Message string `json:"message"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+	name := strings.TrimSpace(body.Name)
+	email := strings.TrimSpace(body.Email)
+	msg := strings.TrimSpace(body.Message)
+	if name == "" || email == "" || msg == "" {
+		return response.BadRequest(c, "name, email, and message are required")
+	}
+
+	// 1. Notify platform admins immediately
+	title := fmt.Sprintf("Support Inquiry: %s", name)
+	content := fmt.Sprintf("From: %s <%s>\nMessage:\n%s", name, email, msg)
+	_ = h.adminSvc.CreateNotification(c.Context(), title, content, "info", "")
+
+	// 2. Persist audit trail in reports
+	var reporterID *int
+	role := "anonymous"
+	if uid, err := mustUserID(c); err == nil && uid > 0 {
+		reporterID = &uid
+		role = "user"
+	}
+	rep := &models.AbuseReport{
+		ReporterID:   reporterID,
+		ReporterRole: role,
+		Reason:       "Customer Contact / Support: " + name,
+		Description:  msg + " (Contact Email: " + email + ")",
+		Priority:     "low",
+	}
+	_, _ = h.adminSvc.CreateAbuseReport(c.Context(), rep)
+
+	return response.OK(c, fiber.Map{
+		"success": true,
+		"message": "support inquiry received successfully",
+	})
 }

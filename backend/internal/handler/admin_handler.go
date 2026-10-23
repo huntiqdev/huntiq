@@ -178,8 +178,8 @@ func (h *AdminHandler) ListSellers(c *fiber.Ctx) error {
 	if sellers == nil {
 		sellers = []models.User{}
 	}
-	// Hide sensitive profit data for non-super admins
-	if adminRole(c) != "super" {
+	// Hide sensitive profit data for non-platform owner
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.LegacyRoleSuper {
 		for i := range sellers {
 			sellers[i].NetProfit = 0
 		}
@@ -298,8 +298,8 @@ func (h *AdminHandler) AnalyticsOverview(c *fiber.Ctx) error {
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	// Normal admins cannot see financial totals
-	if adminRole(c) != "super" {
+	// Financial totals restricted to Platform Owner and Platform Admin
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.RolePlatformAdmin && adminRole(c) != models.LegacyRoleSuper {
 		delete(data, "total_revenue")
 		delete(data, "total_volume")
 		delete(data, "listing_fee_revenue")
@@ -327,8 +327,8 @@ func (h *AdminHandler) AnalyticsMonthly(c *fiber.Ctx) error {
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	// Normal admins cannot see revenue figures
-	if adminRole(c) != "super" {
+	// Revenue figures restricted to Platform Owner and Platform Admin
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.RolePlatformAdmin && adminRole(c) != models.LegacyRoleSuper {
 		for _, row := range data {
 			delete(row, "revenue")
 			delete(row, "volume")
@@ -367,8 +367,8 @@ func (h *AdminHandler) GetSettings(c *fiber.Ctx) error {
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	// Normal admins cannot see financial/fee settings
-	if adminRole(c) != "super" {
+	// Financial/fee settings restricted to Platform Owner and Platform Admin
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.RolePlatformAdmin && adminRole(c) != models.LegacyRoleSuper {
 		for _, k := range []string{"broker_fee_rate", "referral_commission_rate",
 			"normal_startup_fee", "gold_startup_fee",
 			"premium_startup_fee", "normal_weekly_increment", "gold_weekly_increment",
@@ -474,8 +474,8 @@ func (h *AdminHandler) UpdateSettings(c *fiber.Ctx) error {
 			return response.BadRequest(c, "unknown setting key: "+k)
 		}
 	}
-	// Normal admins cannot update financial settings
-	if adminRole(c) != "super" {
+	// Financial settings updates restricted to Platform Owner and Platform Admin
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.RolePlatformAdmin && adminRole(c) != models.LegacyRoleSuper {
 		restricted := map[string]bool{
 			"broker_fee_rate": true, "referral_commission_rate": true,
 			"normal_startup_fee": true, "gold_startup_fee": true,
@@ -487,7 +487,7 @@ func (h *AdminHandler) UpdateSettings(c *fiber.Ctx) error {
 		}
 		for k := range body {
 			if restricted[k] {
-				return response.BadRequest(c, "insufficient permissions to update "+k)
+				return response.ForbiddenCode(c, "insufficient permissions to update "+k, apperrors.ErrPermDenied)
 			}
 		}
 	}
@@ -678,8 +678,8 @@ func (h *AdminHandler) UpdateSettingsWithReason(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	if adminRole(c) != "super" {
-		return response.BadRequest(c, "only super admins can use this endpoint")
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.RolePlatformAdmin && adminRole(c) != models.LegacyRoleSuper {
+		return fiber.NewError(fiber.StatusForbidden, "platform administrator access required")
 	}
 	var body struct {
 		Settings map[string]string `json:"settings"`
@@ -804,9 +804,14 @@ func (h *AdminHandler) GetMyPermissions(c *fiber.Ctx) error {
 		return err
 	}
 	role := adminRole(c)
-	if role == "super" {
-		// Super admins have all permissions — return empty to signal "all"
-		return response.OK(c, fiber.Map{"permissions": []string{}, "is_super": true})
+	if role == models.RolePlatformOwner || role == models.LegacyRoleSuper {
+		// Platform Owner / Super admins have all permissions by default
+		return response.OK(c, fiber.Map{
+			"permissions":       []string{},
+			"is_super":          true,
+			"is_platform_owner": true,
+			"admin_role":        role,
+		})
 	}
 	perms, err := h.svc.GetAdminPermissions(c.Context(), adminID)
 	if err != nil {
@@ -815,7 +820,12 @@ func (h *AdminHandler) GetMyPermissions(c *fiber.Ctx) error {
 	if perms == nil {
 		perms = []string{}
 	}
-	return response.OK(c, fiber.Map{"permissions": perms, "is_super": false})
+	return response.OK(c, fiber.Map{
+		"permissions":       perms,
+		"is_super":          false,
+		"is_platform_owner": false,
+		"admin_role":        role,
+	})
 }
 
 // ── Sub-Admin Management (Super Admin Only) ───────────────────────────────────
@@ -832,10 +842,11 @@ func (h *AdminHandler) ListAdmins(c *fiber.Ctx) error {
 // POST /api/admin/admins
 func (h *AdminHandler) CreateAdmin(c *fiber.Ctx) error {
 	var body struct {
-		Name     string `json:"name"`
-		Phone    string `json:"phone"`
-		Email    string `json:"email"`
-		Password string `json:"password"`
+		Name      string `json:"name"`
+		Phone     string `json:"phone"`
+		Email     string `json:"email"`
+		Password  string `json:"password"`
+		AdminRole string `json:"admin_role"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
@@ -844,7 +855,7 @@ func (h *AdminHandler) CreateAdmin(c *fiber.Ctx) error {
 		return response.BadRequest(c, "name, phone, and password are required")
 	}
 	if body.Email == "" {
-		return response.BadRequest(c, "email is required — it is the unique identifier for sub-admins")
+		return response.BadRequest(c, "email is required — it is the unique identifier for administrative staff")
 	}
 	if valid, errKey := validations.ValidatePassword(body.Password); !valid {
 		if errKey == "password_min" {
@@ -852,27 +863,53 @@ func (h *AdminHandler) CreateAdmin(c *fiber.Ctx) error {
 		}
 		return response.BadRequest(c, "invalid password")
 	}
-	// admin_role is always "normal" — super admins are seeded manually, never created via API
-	id, err := h.svc.CreateAdmin(c.Context(), body.Name, body.Phone, body.Email, body.Password, "normal")
+
+	role := body.AdminRole
+	if role == "" {
+		role = models.RoleOperationsAdmin
+	}
+	// Platform Owner accounts cannot be provisioned via web API; they require direct bootstrap
+	if role == models.RolePlatformOwner || role == models.LegacyRoleSuper {
+		return response.BadRequest(c, "Platform Owner accounts cannot be provisioned via the web API")
+	}
+
+	validRoles := map[string]bool{
+		models.RolePlatformAdmin:   true,
+		models.RoleSecurityAdmin:   true,
+		models.RoleOperationsAdmin: true,
+		models.RoleModerator:       true,
+		models.RoleSupportAgent:    true,
+		models.LegacyRoleNormal:    true,
+	}
+	if !validRoles[role] {
+		return response.BadRequest(c, "invalid admin_role: must be platform_admin, security_admin, operations_admin, moderator, or support_agent")
+	}
+
+	id, err := h.svc.CreateAdmin(c.Context(), body.Name, body.Phone, body.Email, body.Password, role)
 	if err != nil {
 		errMsg := err.Error()
-		// Check for PostgreSQL unique constraint violations
-		// Phone: constraint is users_phone_role_key (phone + role composite)
 		if strings.Contains(errMsg, "users_phone_role_key") ||
 			strings.Contains(errMsg, "users_phone_key") ||
 			(strings.Contains(errMsg, "duplicate") && strings.Contains(errMsg, "phone")) {
 			return response.BadRequestCode(c, "phone number already in use by another admin", apperrors.ErrAuthPhoneAlreadyRegistered)
 		}
-		// Email: constraint is the global email UNIQUE column
 		if strings.Contains(errMsg, "users_email_key") ||
 			(strings.Contains(errMsg, "duplicate") && strings.Contains(errMsg, "email")) {
 			return response.BadRequestCode(c, "email address already in use", apperrors.ErrAuthEmailAlreadyInUse)
 		}
 		return response.BadRequest(c, errMsg)
 	}
+	callerID, _ := mustUserID(c)
+	h.svc.InsertAdminLog(c.Context(), models.AdminLog{
+		AdminID:      callerID,
+		TargetUserID: &id,
+		Action:       "ADMIN_CREATED",
+		Notes:        fmt.Sprintf("Created administrator id=%d, role=%s, email=%s", id, role, body.Email),
+		IPAddress:    c.IP(),
+	})
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"success": true,
-		"data":    fiber.Map{"id": id, "name": body.Name, "phone": body.Phone, "email": body.Email, "admin_role": "normal"},
+		"data":    fiber.Map{"id": id, "name": body.Name, "phone": body.Phone, "email": body.Email, "admin_role": role},
 	})
 }
 
@@ -882,16 +919,15 @@ func (h *AdminHandler) UpdateAdminRole(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	// Defense-in-depth: verify caller is super admin at the handler level,
-	// even though the route is already protected by RequireAdminLevel("super").
-	if adminRole(c) != "super" {
-		return fiber.NewError(fiber.StatusForbidden, "super admin access required")
+	callerRole := adminRole(c)
+	if callerRole != models.RolePlatformOwner && callerRole != models.LegacyRoleSuper {
+		return fiber.NewError(fiber.StatusForbidden, "only Platform Owner can modify administrator roles")
 	}
 	id, err := parseIDParam(c, "id")
 	if err != nil {
 		return err
 	}
-	// Prevent super admin from demoting themselves
+	// Prevent Platform Owner from self-modifying role
 	if id == callerID {
 		return response.BadRequest(c, "cannot change your own role")
 	}
@@ -901,9 +937,19 @@ func (h *AdminHandler) UpdateAdminRole(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
+	if body.AdminRole == models.RolePlatformOwner || body.AdminRole == models.LegacyRoleSuper {
+		return response.BadRequest(c, "Platform Owner promotion requires direct server bootstrap authorization")
+	}
 	if err := h.svc.UpdateAdminRole(c.Context(), id, body.AdminRole); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
+	h.svc.InsertAdminLog(c.Context(), models.AdminLog{
+		AdminID:      callerID,
+		TargetUserID: &id,
+		Action:       "ADMIN_ROLE_UPDATED",
+		Notes:        fmt.Sprintf("Updated administrator id=%d to role=%s", id, body.AdminRole),
+		IPAddress:    c.IP(),
+	})
 	return response.OK(c, fiber.Map{"message": "admin role updated"})
 }
 
@@ -924,6 +970,13 @@ func (h *AdminHandler) DeleteAdmin(c *fiber.Ctx) error {
 		// "super admins cannot be deleted" is a client logic error, not a server fault
 		return response.BadRequest(c, err.Error())
 	}
+	h.svc.InsertAdminLog(c.Context(), models.AdminLog{
+		AdminID:      callerID,
+		TargetUserID: &id,
+		Action:       "ADMIN_DELETED",
+		Notes:        fmt.Sprintf("Deleted administrator id=%d", id),
+		IPAddress:    c.IP(),
+	})
 	return response.OK(c, fiber.Map{"message": "admin deleted"})
 }
 
@@ -963,6 +1016,14 @@ func (h *AdminHandler) SetAdminPermissions(c *fiber.Ctx) error {
 		// "super admins cannot be set" is a client logic error, not a server fault
 		return response.BadRequest(c, err.Error())
 	}
+	callerID, _ := mustUserID(c)
+	h.svc.InsertAdminLog(c.Context(), models.AdminLog{
+		AdminID:      callerID,
+		TargetUserID: &id,
+		Action:       "ADMIN_PERMISSIONS_UPDATED",
+		Notes:        fmt.Sprintf("Updated permissions for administrator id=%d (count=%d)", id, len(body.Permissions)),
+		IPAddress:    c.IP(),
+	})
 	return response.OK(c, fiber.Map{"message": "permissions updated"})
 }
 
@@ -1302,6 +1363,11 @@ func (h *AdminHandler) GetPublicPaymentSettings(c *fiber.Ctx) error {
 	return response.OK(c, out)
 }
 
+// GET /api/public/settings — alias for public platform settings and company contact info
+func (h *AdminHandler) GetPublicSettings(c *fiber.Ctx) error {
+	return h.GetPublicPaymentSettings(c)
+}
+
 // ── Buyer Upgrade Requests ────────────────────────────────────────────────────
 
 // GET /api/admin/buyer-upgrade-requests?status=pending&page=1&limit=20
@@ -1401,8 +1467,8 @@ func (h *AdminHandler) BanUser(c *fiber.Ctx) error {
 		return err
 	}
 	// Defense-in-depth: only super admins can ban (permanent exclusion)
-	if adminRole(c) != "super" {
-		return fiber.NewError(fiber.StatusForbidden, "super admin access required to ban users")
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.LegacyRoleSuper {
+		return fiber.NewError(fiber.StatusForbidden, "platform owner access required to ban users")
 	}
 	userID, err := parseIDParam(c, "id")
 	if err != nil {
@@ -1429,8 +1495,8 @@ func (h *AdminHandler) BanUser(c *fiber.Ctx) error {
 
 // GET /api/admin/system/health
 func (h *AdminHandler) SystemHealth(c *fiber.Ctx) error {
-	if adminRole(c) != "super" {
-		return fiber.NewError(fiber.StatusForbidden, "super admin access required")
+	if adminRole(c) != models.RolePlatformOwner && adminRole(c) != models.RolePlatformAdmin && adminRole(c) != models.LegacyRoleSuper {
+		return fiber.NewError(fiber.StatusForbidden, "platform administrator access required")
 	}
 	report, err := h.svc.CheckSystemHealth(c.Context())
 	if err != nil {

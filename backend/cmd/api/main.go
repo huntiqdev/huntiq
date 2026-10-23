@@ -132,8 +132,32 @@ func main() {
 	// Inject admin service into auth so first-login notifications work
 	authSvc.WithAdminService(adminSvc)
 
+	// ── WebAuthn & Enterprise Admin Authentication Setup ─────────────────────
+	adminPasskeyRepo := repository.NewAdminPasskeyRepo(db)
+	rpID := security.DeriveRPID(cfg.FrontendURL)
+	rpOrigins := []string{cfg.FrontendURL, cfg.AppBaseURL, "http://localhost:3000", "http://localhost:8080"}
+	waManager, err := security.NewWebAuthnManager(rpID, rpOrigins)
+	if err != nil {
+		log.Fatalf("failed to initialize WebAuthn manager: %v", err)
+	}
+	adminAuthSvc := service.NewAdminAuthService(adminPasskeyRepo, userRepo, adminRepo, waManager, cfg.JWTSecret)
+	adminSvc.WithSessionRevoker(adminAuthSvc.RevokeAllSessions)
+	adminAuthHandler := handlers.NewAdminAuthHandler(adminAuthSvc, authSvc, adminSvc, !cfg.DevMode)
+
+	// Wire session creator into auth service for password+MFA admin logins
+	authSvc.WithSessionCreator(func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error) {
+		rawToken, sess, err := adminAuthSvc.CreateAdminSession(ctx, userID, portal, ip, ua)
+		if err != nil {
+			return "", 0, err
+		}
+		return rawToken, sess.ID, nil
+	})
+
 	// Initialize middleware with dependencies (no global state!)
 	mw := middleware.New(cfg.JWTSecret).
+		WithSessionValidator(adminAuthSvc.ValidateSession).
+		WithAdminSessionValidator(adminAuthSvc.ValidateSessionByID).
+		WithReauthValidator(adminAuthSvc.VerifyReauth).
 		WithIsActiveChecker(func(userID int) (bool, error) {
 			isActiveMu.Lock()
 			if e, ok := isActiveCache[userID]; ok && time.Now().Before(e.expires) {
@@ -193,13 +217,16 @@ func main() {
 	productHandler := handlers.NewProductHandler(productSvc, authSvc)
 	locationHandler := handlers.NewLocationHandler(locationSvc)
 	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc)
-	attributeHandler := handlers.NewAttributeHandler(attributeSvc)
+	attributeHandler := handlers.NewAttributeHandler(attributeSvc).WithProductService(productSvc)
 	authHandler := handlers.NewAuthHandler(authSvc).WithAdminService(adminSvc).WithDevMode(cfg.DevMode)
 	txHandler := handlers.NewTransactionHandler(txSvc)
 	adminHandler := handlers.NewAdminHandler(adminSvc, authSvc).WithCategoryRepo(categoryRepo).WithProductRepo(productRepo)
 	sellerHandler := handlers.NewSellerHandler(sellerSvc).WithAdminService(adminSvc)
 	bannerHandler := handlers.NewBannerHandler(bannerRepo)
 	buyerHandler  := handlers.NewBuyerHandler(authSvc).WithAdminService(adminSvc)
+	fpaRepo       := repository.NewFPARepo(db)
+	fpaSvc        := service.NewFPAService(fpaRepo)
+	fpaHandler    := handlers.NewFPAHandler(fpaSvc)
 	referralHandler := handlers.NewReferralHandler(referralSvc, cfg.FrontendURL).
 		WithAdminNotifier(func(ctx context.Context, userID int, amount float64) {
 			notifyCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -313,8 +340,8 @@ func main() {
 	})
 
 	// ── Public ──────────────────────────────────────────────────────────────
-	api.Get("/products", productHandler.List)
-	api.Get("/products/:id", productHandler.Get)
+	api.Get("/products", mw.OptionalAuth, productHandler.List)
+	api.Get("/products/:id", mw.OptionalAuth, productHandler.Get)
 	api.Get("/categories", productHandler.ListCategories)
 	api.Get("/categories/popular", productHandler.PopularCategories)
 	
@@ -328,7 +355,7 @@ func main() {
 	
 	// Attributes (Public)
 	api.Get("/attributes", attributeHandler.ListAttributeDefinitions)
-	api.Get("/products/:id/attributes", attributeHandler.GetProductAttributes)
+	api.Get("/products/:id/attributes", mw.OptionalAuth, attributeHandler.GetProductAttributes)
 	
 	api.Post("/orders", publicLimiter, mw.OptionalAuth, sellerHandler.CreateOrder)
 	api.Get("/fee-options", productHandler.FeeOptions)
@@ -350,9 +377,13 @@ func main() {
 	// Public payment settings (merchant phones — safe to expose, no auth)
 	api.Get("/public/payment-settings", adminHandler.GetPublicPaymentSettings)
 
+	// Public platform settings (company info, limits, public configurations)
+	api.Get("/public/settings", adminHandler.GetPublicSettings)
+
 	// Trust & Safety / Appeals (Public / User submission)
 	api.Post("/reports", buyerHandler.CreateAbuseReport)
 	api.Post("/appeals", buyerHandler.CreateAccountAppeal)
+	api.Post("/contact", publicLimiter, buyerHandler.SubmitContactMessage)
 
 	// Public promotion banner (admin-controlled announcement box)
 	api.Get("/public/promotion", adminHandler.GetPublicPromotion)
@@ -385,6 +416,15 @@ func main() {
 	api.Post("/auth/otp/verify", otpLimiter, authHandler.VerifyOTP)
 	api.Post("/auth/otp/login", authLimiter, authHandler.OTPLogin)
 	api.Post("/auth/demand", mw.RequireAuth, authHandler.SetDemand)
+
+	// ── Unified Authentication & Capabilities ────────────────────────────────
+	api.Post("/auth/register", authLimiter, authHandler.UnifiedRegister)
+	api.Post("/auth/login", authLimiter, authHandler.UnifiedLogin)
+	api.Get("/auth/me", mw.RequireAuth, authHandler.GetMe)
+	api.Get("/auth/capabilities", mw.RequireAuth, authHandler.GetCapabilities)
+	api.Post("/auth/capabilities/activate", mw.RequireAuth, authHandler.ActivateCapability)
+	api.Post("/auth/forgot-password", authLimiter, authHandler.UnifiedForgotPassword)
+	api.Post("/auth/reset-password", authLimiter, authHandler.UnifiedResetPassword)
 	api.Post("/seller/register", authLimiter, authHandler.Register)
 	api.Post("/seller/login", authLimiter, authHandler.Login)
 	api.Post("/seller/check", authLimiter, authHandler.CheckSellerExists)
@@ -399,6 +439,34 @@ func main() {
 	api.Post("/admin/login/verify", otpLimiter, authHandler.AdminLoginVerifyOTP)
 	api.Post("/admin/forgot-password", authLimiter, authHandler.AdminForgotPassword)
 	api.Post("/admin/reset-password", authLimiter, authHandler.AdminResetPassword)
+
+	// ── Enterprise Administrative Authentication & Passkeys ─────────────────
+	// Login begin / finish (supports both /admin/passkeys/* and /admin/auth/passkey/*)
+	api.Post("/admin/passkeys/login/begin", adminAuthHandler.BeginLogin)
+	api.Post("/admin/auth/passkey/login/begin", adminAuthHandler.BeginLogin)
+	api.Post("/admin/passkeys/login/finish", adminAuthHandler.FinishLogin)
+	api.Post("/admin/auth/passkey/login/verify", adminAuthHandler.FinishLogin)
+
+	// Registration begin / finish (requires admin authentication and active admin session)
+	api.Post("/admin/passkeys/register/begin", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.BeginRegistration)
+	api.Post("/admin/auth/passkey/register/begin", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.BeginRegistration)
+	api.Post("/admin/passkeys/register/finish", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.FinishRegistration)
+	api.Post("/admin/auth/passkey/register/verify", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.FinishRegistration)
+
+	// Passkey credential management
+	api.Get("/admin/passkeys", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.ListPasskeys)
+	api.Get("/admin/auth/passkey/list", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.ListPasskeys)
+	api.Delete("/admin/passkeys/:id", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.RevokePasskey)
+	api.Delete("/admin/auth/passkey/:id", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.RevokePasskey)
+
+	// Re-authentication
+	api.Post("/admin/reauth/begin", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.BeginReauth)
+	api.Post("/admin/reauth/finish", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.FinishReauth)
+	api.Post("/admin/auth/reauth", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.ReauthPassword)
+
+	// Session Revocation & Logout
+	api.Post("/admin/logout", adminAuthHandler.Logout)
+	api.Post("/admin/auth/session/revoke", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.RevokeSessionEndpoint)
 
 	// ── Seller (JWT + role=seller) ───────────────────────────────────────────
 	seller := api.Group("/seller", mw.RequireAuth, middleware.RequireRole("seller"))
@@ -534,7 +602,7 @@ func main() {
 	admin.Get("/analytics/heatmap", mw.RequirePermission("analytics"), adminHandler.AnalyticsHeatmap)
 	admin.Get("/analytics/monthly", mw.RequirePermission("analytics"), adminHandler.AnalyticsMonthly)
 	admin.Get("/analytics/gantt", mw.RequirePermission("analytics"), adminHandler.AnalyticsGantt)
-	admin.Get("/analytics/fee-revenue", middleware.RequireAdminLevel("super"), adminHandler.AnalyticsFeeRevenue)
+	admin.Get("/analytics/fee-revenue", middleware.RequirePlatformAdmin, adminHandler.AnalyticsFeeRevenue)
 
 	// Transactions — permission-gated (sensitive, off by default for new admins)
 	admin.Get("/transactions", mw.RequirePermission("transactions"), adminHandler.ListTransactions)
@@ -547,6 +615,19 @@ func main() {
 	admin.Get("/profit/weekly", mw.RequirePermission("profit"), adminHandler.ProfitWeekly)
 	admin.Get("/profit/annual", mw.RequirePermission("profit"), adminHandler.ProfitAnnual)
 
+	// Financial Planning & Analysis (FP&A) — permission-gated (sensitive: platform owners, platform admins, or profit/finance permission)
+	financeViewAuth := mw.RequireAnyPermission("profit", "finance", "finance:view")
+	financeManageAuth := mw.RequireAnyPermission("finance:manage", "finance_manage")
+	admin.Get("/finance/forecast", financeViewAuth, fpaHandler.GetForecast)
+	admin.Get("/finance/scenarios", financeViewAuth, fpaHandler.GetScenarios)
+	admin.Get("/finance/capacity-20m", financeViewAuth, fpaHandler.GetCapacityPlanning20M)
+	admin.Get("/finance/tax-rules", financeViewAuth, fpaHandler.GetTaxRules)
+	admin.Get("/finance/actuals", financeViewAuth, fpaHandler.GetActuals)
+	admin.Get("/finance/audit-logs", financeViewAuth, fpaHandler.GetAuditLogs)
+	admin.Put("/finance/assumptions", financeManageAuth, fpaHandler.UpdateAssumptions)
+	admin.Post("/finance/assumptions/reset", financeManageAuth, fpaHandler.ResetAssumptions)
+	admin.Get("/finance/export", financeViewAuth, fpaHandler.ExportForecast)
+
 	// Listing fee payment verification — admin must verify before revenue is counted
 	admin.Get("/fee-payments/pending", mw.RequirePermission("products"), adminHandler.ListPendingFeePayments)
 	admin.Put("/fee-payments/:id/verify", mw.RequirePermission("products"), adminHandler.VerifyListingFeePayment)
@@ -555,48 +636,48 @@ func main() {
 	// Settings
 	admin.Get("/settings", mw.RequirePermission("settings"), adminHandler.GetSettings)
 	admin.Put("/settings", mw.RequirePermission("settings"), adminHandler.UpdateSettings)
-	admin.Put("/settings/with-reason", middleware.RequireAdminLevel("super"), adminHandler.UpdateSettingsWithReason)
-	admin.Get("/settings/log", middleware.RequireAdminLevel("super"), adminHandler.SettingsChangeLog)
+	admin.Put("/settings/with-reason", middleware.RequirePlatformAdmin, adminHandler.UpdateSettingsWithReason)
+	admin.Get("/settings/log", middleware.RequirePlatformAdmin, adminHandler.SettingsChangeLog)
 
 	// User Governance
 	admin.Post("/users/:id/warn", mw.RequirePermission("sellers"), adminHandler.IssueWarning)
-	admin.Put("/users/:id/ban", middleware.RequireAdminLevel("super"), adminHandler.BanUser)
+	admin.Put("/users/:id/ban", middleware.RequirePlatformOwner, adminHandler.BanUser)
 
 	// System Health
-	admin.Get("/system/health", middleware.RequireAdminLevel("super"), adminHandler.SystemHealth)
-	admin.Post("/system/health/repair", middleware.RequireAdminLevel("super"), adminHandler.RepairSystemHealth)
+	admin.Get("/system/health", middleware.RequirePlatformAdmin, adminHandler.SystemHealth)
+	admin.Post("/system/health/repair", middleware.RequirePlatformAdmin, adminHandler.RepairSystemHealth)
 
 	// Notifications
 	admin.Get("/notifications", mw.RequirePermission("notifications"), adminHandler.ListNotifications)
 	admin.Put("/notifications/:id/read", mw.RequirePermission("notifications"), adminHandler.MarkNotificationRead)
-	admin.Post("/notifications", middleware.RequireAdminLevel("super"), adminHandler.CreateNotification)
+	admin.Post("/notifications", middleware.RequirePlatformAdmin, adminHandler.CreateNotification)
 
 	// Categories (Legacy)
 	admin.Get("/categories", mw.RequirePermission("categories"), adminHandler.ListCategories)
-	admin.Post("/categories", middleware.RequireAdminLevel("super"), adminHandler.CreateCategory)
-	admin.Put("/categories/:id", middleware.RequireAdminLevel("super"), adminHandler.UpdateCategory)
-	admin.Delete("/categories/:id", middleware.RequireAdminLevel("super"), adminHandler.DeleteCategory)
+	admin.Post("/categories", middleware.RequirePlatformAdmin, adminHandler.CreateCategory)
+	admin.Put("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.UpdateCategory)
+	admin.Delete("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.DeleteCategory)
 	
 	// Category Hierarchy Management (Admin)
 	admin.Get("/category-hierarchy", mw.RequirePermission("categories"), categoryHandler.ListCategories)
 	admin.Get("/category-hierarchy/:id/stats", mw.RequirePermission("categories"), categoryHandler.GetCategoryStats)
-	admin.Post("/category-hierarchy", middleware.RequireAdminLevel("super"), categoryHandler.CreateCategory)
-	admin.Put("/category-hierarchy/:id", middleware.RequireAdminLevel("super"), categoryHandler.UpdateCategory)
-	admin.Delete("/category-hierarchy/:id", middleware.RequireAdminLevel("super"), categoryHandler.DeleteCategory)
+	admin.Post("/category-hierarchy", middleware.RequirePlatformAdmin, categoryHandler.CreateCategory)
+	admin.Put("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.UpdateCategory)
+	admin.Delete("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.DeleteCategory)
 	
 	// Attribute Management (Admin)
 	admin.Get("/attributes", mw.RequirePermission("categories"), attributeHandler.ListAttributeDefinitions)
-	admin.Post("/attributes", middleware.RequireAdminLevel("super"), attributeHandler.CreateAttributeDefinition)
-	admin.Post("/categories/:id/attributes", middleware.RequireAdminLevel("super"), attributeHandler.AssignAttributeToCategory)
-	admin.Delete("/categories/:id/attributes/:attribute_id", middleware.RequireAdminLevel("super"), attributeHandler.RemoveAttributeFromCategory)
+	admin.Post("/attributes", middleware.RequirePlatformAdmin, attributeHandler.CreateAttributeDefinition)
+	admin.Post("/categories/:id/attributes", middleware.RequirePlatformAdmin, attributeHandler.AssignAttributeToCategory)
+	admin.Delete("/categories/:id/attributes/:attribute_id", middleware.RequirePlatformAdmin, attributeHandler.RemoveAttributeFromCategory)
 
-	// Sub-admin management — super admin only
-	admin.Get("/admins", middleware.RequireAdminLevel("super"), adminHandler.ListAdmins)
-	admin.Post("/admins", middleware.RequireAdminLevel("super"), adminHandler.CreateAdmin)
-	admin.Put("/admins/:id/role", middleware.RequireAdminLevel("super"), adminHandler.UpdateAdminRole)
-	admin.Delete("/admins/:id", middleware.RequireAdminLevel("super"), adminHandler.DeleteAdmin)
-	admin.Get("/admins/:id/permissions", middleware.RequireAdminLevel("super"), adminHandler.GetAdminPermissions)
-	admin.Put("/admins/:id/permissions", middleware.RequireAdminLevel("super"), adminHandler.SetAdminPermissions)
+	// Sub-admin management — platform owner only
+	admin.Get("/admins", middleware.RequirePlatformOwner, adminHandler.ListAdmins)
+	admin.Post("/admins", middleware.RequirePlatformOwner, adminHandler.CreateAdmin)
+	admin.Put("/admins/:id/role", middleware.RequirePlatformOwner, adminHandler.UpdateAdminRole)
+	admin.Delete("/admins/:id", middleware.RequirePlatformOwner, adminHandler.DeleteAdmin)
+	admin.Get("/admins/:id/permissions", middleware.RequirePlatformOwner, adminHandler.GetAdminPermissions)
+	admin.Put("/admins/:id/permissions", middleware.RequirePlatformOwner, adminHandler.SetAdminPermissions)
 
 	// Hero banners — permission-gated
 	admin.Get("/banners", mw.RequirePermission("banners"), bannerHandler.ListAll)
@@ -604,20 +685,18 @@ func main() {
 	admin.Put("/banners/:id", mw.RequirePermission("banners"), bannerHandler.Update)
 	admin.Delete("/banners/:id", mw.RequirePermission("banners"), bannerHandler.Delete)
 
-	// Admin activity logs — permission-gated (sensitive, off by default)
-	admin.Get("/logs", middleware.RequireAdminLevel("super"), adminHandler.ListAdminLogs)
-	admin.Delete("/logs", middleware.RequireAdminLevel("super"), adminHandler.DeleteAdminLogs)
+	// Admin activity logs — security admin, platform owner, or explicit logs permission (immutable audit trail)
+	admin.Get("/logs", mw.RequireAnyPermission("logs"), adminHandler.ListAdminLogs)
 
-	// OTP logs — permission-gated; bulk delete is super admin only (destructive)
-	admin.Get("/otp-logs", mw.RequirePermission("otp_logs"), authHandler.ListOTPLogs)
-	admin.Delete("/otp-logs", middleware.RequireAdminLevel("super"), authHandler.DeleteOTPLogs)
+	// OTP logs — security admin, platform owner, or explicit otp_logs permission
+	admin.Get("/otp-logs", mw.RequireAnyPermission("otp_logs"), authHandler.ListOTPLogs)
 
-	// User activity logs — super admin only (full funnel: register/login/otp events)
-	admin.Get("/activity-logs", middleware.RequireAdminLevel("super"), authHandler.ListActivityLogs)
+	// User activity logs — security admin, platform owner, or explicit audit permission
+	admin.Get("/activity-logs", mw.RequireAnyPermission("logs", "otp_logs"), authHandler.ListActivityLogs)
 
-	// Tier management — super admin only (structural change)
-	admin.Put("/users/:id/seller-tier", middleware.RequireAdminLevel("super"), adminHandler.SetSellerTier)
-	admin.Put("/users/:id/buyer-tier", middleware.RequireAdminLevel("super"), adminHandler.SetBuyerTier)
+	// Tier management — platform owner only (structural change)
+	admin.Put("/users/:id/seller-tier", middleware.RequirePlatformOwner, adminHandler.SetSellerTier)
+	admin.Put("/users/:id/buyer-tier", middleware.RequirePlatformOwner, adminHandler.SetBuyerTier)
 	admin.Get("/users/:id/tier-history", mw.RequirePermission("premium_users"), adminHandler.GetTierHistory)
 	admin.Get("/premium-users", mw.RequirePermission("premium_users"), adminHandler.ListPremiumUsers)
 
@@ -634,11 +713,11 @@ func main() {
 	// Category popularity (admin view with full stats)
 	admin.Get("/categories/popularity", mw.RequirePermission("category_trends"), adminHandler.CategoryPopularity)
 
-	// Referral overview (super admin only — shown on profit page)
-	admin.Get("/referral/overview", middleware.RequireAdminLevel("super"), referralHandler.AdminOverview)
-	admin.Get("/referral/list", middleware.RequireAdminLevel("super"), referralHandler.AdminList)
-	admin.Put("/referral/users/:id/suspend", middleware.RequireAdminLevel("super"), referralHandler.AdminSetSuspended)
-	admin.Put("/referral/users/:id/block", middleware.RequireAdminLevel("super"), referralHandler.AdminSetBlocked)
+	// Referral overview (platform admin or platform owner)
+	admin.Get("/referral/overview", middleware.RequirePlatformAdmin, referralHandler.AdminOverview)
+	admin.Get("/referral/list", middleware.RequirePlatformAdmin, referralHandler.AdminList)
+	admin.Put("/referral/users/:id/suspend", middleware.RequirePlatformOwner, referralHandler.AdminSetSuspended)
+	admin.Put("/referral/users/:id/block", middleware.RequirePlatformOwner, referralHandler.AdminSetBlocked)
 	// Withdrawal management — super admin OR admin with 'withdrawals' permission
 	admin.Get("/referral/withdrawals", mw.RequirePermissionOrSuper("withdrawals"), referralHandler.AdminListWithdrawals)
 	admin.Put("/referral/withdrawals/:id/approve", mw.RequirePermissionOrSuper("withdrawals"), referralHandler.AdminApproveWithdrawal)

@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"crypto/subtle"
+	"encoding/json"
 	"fmt"
 	"math/big"
 	"strconv"
@@ -92,7 +93,31 @@ func (r *UserRepo) Create(ctx context.Context, u *models.User) (int, error) {
 		RETURNING id`,
 		u.Name, u.Phone, u.BusinessName, u.Email, u.PasswordHash, role, u.IsActive, refCode, sellerPref,
 	).Scan(&id)
-	return id, err
+	if err != nil {
+		return 0, err
+	}
+
+	// Always activate 'buyer' capability for all registered users
+	_, _ = r.db.Exec(ctx, `
+		INSERT INTO user_capabilities (user_id, capability, status) 
+		VALUES ($1, 'buyer', 'active') 
+		ON CONFLICT (user_id, capability) DO NOTHING`, id)
+
+	// If registered as seller or has seller/landlord preference, activate respective capabilities
+	if role == "seller" || u.HasCapability("seller") {
+		_, _ = r.db.Exec(ctx, `
+			INSERT INTO user_capabilities (user_id, capability, status) 
+			VALUES ($1, 'seller', 'active') 
+			ON CONFLICT (user_id, capability) DO NOTHING`, id)
+	}
+	if sellerPref == "rent" || sellerPref == "both" || u.HasCapability("landlord") {
+		_, _ = r.db.Exec(ctx, `
+			INSERT INTO user_capabilities (user_id, capability, status) 
+			VALUES ($1, 'landlord', 'active') 
+			ON CONFLICT (user_id, capability) DO NOTHING`, id)
+	}
+
+	return id, nil
 }
 
 // CreateOrGet inserts a new user or returns the existing user's ID on (phone, role) conflict.
@@ -119,25 +144,120 @@ func (r *UserRepo) CreateOrGet(ctx context.Context, u *models.User) (int, error)
 		RETURNING id`,
 		u.Name, u.Phone, u.BusinessName, u.Email, u.PasswordHash, role, u.IsActive, refCode, sellerPref,
 	).Scan(&id)
-	return id, err
+	if err != nil {
+		return 0, err
+	}
+
+	_, _ = r.db.Exec(ctx, `INSERT INTO user_capabilities (user_id, capability, status) VALUES ($1, 'buyer', 'active') ON CONFLICT DO NOTHING`, id)
+	if role == "seller" {
+		_, _ = r.db.Exec(ctx, `INSERT INTO user_capabilities (user_id, capability, status) VALUES ($1, 'seller', 'active') ON CONFLICT DO NOTHING`, id)
+	}
+	return id, nil
+}
+
+// GetCapabilities returns the active capability names for a user
+func (r *UserRepo) GetCapabilities(ctx context.Context, userID int) ([]string, error) {
+	rows, err := r.db.Query(ctx, `
+		SELECT capability FROM user_capabilities 
+		WHERE user_id = $1 AND status = 'active' 
+		ORDER BY capability ASC`, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var caps []string
+	for rows.Next() {
+		var c string
+		if err := rows.Scan(&c); err == nil {
+			caps = append(caps, c)
+		}
+	}
+	if len(caps) == 0 {
+		caps = []string{"buyer"}
+	}
+	return caps, nil
+}
+
+// ActivateCapability adds or restores an active capability for a user
+func (r *UserRepo) ActivateCapability(ctx context.Context, userID int, capability string, metadata map[string]interface{}) error {
+	metaJSON, _ := json.Marshal(metadata)
+	_, err := r.db.Exec(ctx, `
+		INSERT INTO user_capabilities (user_id, capability, status, activated_at, metadata)
+		VALUES ($1, $2, 'active', NOW(), $3)
+		ON CONFLICT (user_id, capability) DO UPDATE
+		SET status = 'active', activated_at = NOW(), metadata = COALESCE(user_capabilities.metadata, '{}'::jsonb) || EXCLUDED.metadata`,
+		userID, capability, metaJSON)
+	if err != nil {
+		return err
+	}
+	// If activating seller or landlord, update seller_preference and role where helpful for backward compatibility
+	if capability == "seller" {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET role = 'seller' WHERE id = $1 AND role = 'buyer'`, userID)
+	} else if capability == "landlord" {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET seller_preference = CASE WHEN seller_preference = 'sale' THEN 'both' ELSE 'rent' END WHERE id = $1`, userID)
+	}
+	if bn, ok := metadata["business_name"].(string); ok && bn != "" {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET business_name = $1 WHERE id = $2 AND (business_name IS NULL OR business_name = '')`, bn, userID)
+	}
+	return nil
+}
+
+// SuspendCapability marks a capability as suspended
+func (r *UserRepo) SuspendCapability(ctx context.Context, userID int, capability string, reason string) error {
+	_, err := r.db.Exec(ctx, `
+		UPDATE user_capabilities
+		SET status = 'suspended',
+		    metadata = jsonb_set(COALESCE(metadata, '{}'::jsonb), '{suspend_reason}', to_jsonb($3::text))
+		WHERE user_id = $1 AND capability = $2`,
+		userID, capability, reason)
+	return err
+}
+
+// PopulateCapabilities populates the Capabilities slice on a models.User
+func (r *UserRepo) PopulateCapabilities(ctx context.Context, u *models.User) {
+	if u == nil {
+		return
+	}
+	caps, err := r.GetCapabilities(ctx, u.ID)
+	if err == nil && len(caps) > 0 {
+		u.Capabilities = caps
+	} else {
+		u.Capabilities = []string{"buyer"}
+		if u.Role == "seller" {
+			u.Capabilities = append(u.Capabilities, "seller")
+		}
+	}
 }
 
 func (r *UserRepo) GetByPhone(ctx context.Context, phone string) (*models.User, error) {
-	return scanUser(r.db.QueryRow(ctx,
+	u, err := scanUser(r.db.QueryRow(ctx,
 		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE phone = $1 ORDER BY created_at DESC LIMIT 1", phone))
+	if err == nil && u != nil {
+		r.PopulateCapabilities(ctx, u)
+	}
+	return u, err
 }
 
 // GetByPhoneAndRole returns a user matching both phone and role.
-// Use this for login to correctly distinguish seller vs buyer with the same phone.
 func (r *UserRepo) GetByPhoneAndRole(ctx context.Context, phone, role string) (*models.User, error) {
-	return scanUser(r.db.QueryRow(ctx,
+	u, err := scanUser(r.db.QueryRow(ctx,
 		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE phone = $1 AND role = $2", phone, role))
+	if err == nil && u != nil {
+		r.PopulateCapabilities(ctx, u)
+	}
+	return u, err
 }
 
 func (r *UserRepo) GetByEmail(ctx context.Context, email string) (*models.User, error) {
-	return scanUser(r.db.QueryRow(ctx,
+	u, err := scanUser(r.db.QueryRow(ctx,
 		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE email = $1", email))
+	if err == nil && u != nil {
+		r.PopulateCapabilities(ctx, u)
+	}
+	return u, err
 }
+
 
 // GetAdminByEmail is a safe version for admin login that handles missing/null enum columns gracefully.
 func (r *UserRepo) GetAdminByEmail(ctx context.Context, email string) (*models.User, error) {
@@ -159,12 +279,19 @@ func (r *UserRepo) GetAdminByEmail(ctx context.Context, email string) (*models.U
 		&u.BuyerTier, &u.OTPVerified,
 		&u.CreatedAt, &u.UpdatedAt,
 	)
-	return u, err
+	if err != nil {
+		return nil, err
+	}
+	return u, nil
 }
 
 func (r *UserRepo) GetByID(ctx context.Context, id int) (*models.User, error) {
-	return scanUser(r.db.QueryRow(ctx,
+	u, err := scanUser(r.db.QueryRow(ctx,
 		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE id = $1", id))
+	if err == nil && u != nil {
+		r.PopulateCapabilities(ctx, u)
+	}
+	return u, err
 }
 
 func (r *UserRepo) UpdatePassword(ctx context.Context, id int, hash string) error {

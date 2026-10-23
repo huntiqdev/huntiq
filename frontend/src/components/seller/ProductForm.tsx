@@ -159,6 +159,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         specific_area: location.specific_area,
         latitude: location.latitude,
         longitude: location.longitude,
+        location_hierarchy_id: location.location_hierarchy_id,
         listing_duration_days: listingDays,
         listing_type: isRental ? 'rent' : 'sale',
       };
@@ -371,6 +372,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             subcity: product.location?.subcity, woreda: product.location?.woreda,
             kebele: product.kebele, specific_area: product.specific_area,
             latitude: product.latitude, longitude: product.longitude,
+            location_hierarchy_id: product.location_hierarchy_id,
           } : {}} />
       </div>
 

@@ -6,18 +6,22 @@ import { Spinner } from '@/components/ui/Spinner';
 import {
   User, Phone, Mail, Building2, Star, CheckCircle, AlertCircle,
   Lock, Eye, EyeOff, TrendingUp, Plus, X, Info,
+  ShoppingBag, Home, ArrowUpRight,
 } from 'lucide-react';
+import Link from 'next/link';
 import { SellerTier, getTierThresholds, getTierFeeParams } from '@/lib/constants/fees';
 import { ReferralCard } from '@/components/referral/ReferralCard';
+import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 
 export default function SellerProfilePage() {
-  const { user } = useAuth();
+  const { user, isSeller, isLandlord } = useAuth();
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
   const [additionalPhones, setAdditionalPhones] = useState<string[]>([]);
+  const [activationCap, setActivationCap] = useState<'seller' | 'landlord' | null>(null);
 
   const [pwForm, setPwForm] = useState({ current: '', next: '', confirm: '' });
   const [showPw, setShowPw] = useState({ current: false, next: false, confirm: false });
@@ -278,6 +282,94 @@ export default function SellerProfilePage() {
           );
         })()}
       </div>
+
+      {/* Marketplace Capabilities */}
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-black uppercase tracking-wider text-zinc-400">
+            Marketplace Capabilities
+          </p>
+          <span className="text-[10px] text-zinc-500 font-medium">Unified Account</span>
+        </div>
+
+        <div className="space-y-2">
+          {/* Buyer */}
+          <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
+                <User size={15} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">Buyer Activity</p>
+                <p className="text-[10px] text-zinc-400">Discover and purchase products across Ethiopia</p>
+              </div>
+            </div>
+            <Link
+              href="/buyer/dashboard"
+              className="text-xs font-bold text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1"
+            >
+              <span>Portal</span>
+              <ArrowUpRight size={12} />
+            </Link>
+          </div>
+
+          {/* Seller */}
+          <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
+                <ShoppingBag size={15} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">Seller Studio</p>
+                <p className="text-[10px] text-zinc-400">List items, manage stock, and receive orders</p>
+              </div>
+            </div>
+            <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
+              Active
+            </span>
+          </div>
+
+          {/* Landlord */}
+          <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-teal-100 dark:bg-teal-950/40 text-teal-600 flex items-center justify-center">
+                <Home size={15} />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">Landlord Console</p>
+                <p className="text-[10px] text-zinc-400">List properties and rentable assets</p>
+              </div>
+            </div>
+            {isLandlord ? (
+              <Link
+                href="/seller/products?preference=rent"
+                className="text-xs font-bold text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1"
+              >
+                <span>Console</span>
+                <ArrowUpRight size={12} />
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setActivationCap('landlord')}
+                className="text-[11px] font-bold bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-1 rounded-lg transition-all"
+              >
+                Activate
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* 1-Click Activation Modal */}
+      {activationCap && (
+        <CapabilityActivationModal
+          isOpen={!!activationCap}
+          capability={activationCap}
+          onClose={() => setActivationCap(null)}
+          onSuccess={() => {}}
+        />
+      )}
 
       {/* Referral */}
       <ReferralCard role="seller" />

@@ -24,6 +24,24 @@ func NewProductHandler(svc *service.ProductService, authSvc *service.AuthService
 	return &ProductHandler{svc: svc, authSvc: authSvc}
 }
 
+// isTierAuthorized verifies if the requester's buyer tier satisfies the product's required buyer tier.
+func isTierAuthorized(userTier, requiredTier string, isAdmin bool) bool {
+	if isAdmin {
+		return true
+	}
+	if requiredTier == "" || requiredTier == "normal" {
+		return true
+	}
+	tierRank := map[string]int{
+		"guest":   0,
+		"":        0,
+		"normal":  1,
+		"gold":    2,
+		"premium": 3,
+	}
+	return tierRank[userTier] >= tierRank[requiredTier]
+}
+
 // GET /api/products
 func (h *ProductHandler) List(c *fiber.Ctx) error {
 	f := dto.ProductFilter{}
@@ -111,6 +129,22 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 	if err != nil {
 		return response.InternalError(c, err)
 	}
+
+	// Resolve requester tier & admin status from context
+	userTier, _ := c.Locals("buyerTier").(string)
+	role, _ := c.Locals("role").(string)
+	adminRole, _ := c.Locals("adminRole").(string)
+	isAdmin := role == "admin" || adminRole != ""
+
+	for i := range products {
+		if !isTierAuthorized(userTier, products[i].RequiredBuyerTier, isAdmin) {
+			products[i].SpecificationsLocked = true
+			products[i].Attributes = nil // Strip restricted specifications from search/list results
+		} else {
+			products[i].SpecificationsLocked = false
+		}
+	}
+
 	return response.OKList(c, products)
 }
 
@@ -134,6 +168,21 @@ func (h *ProductHandler) Get(c *fiber.Ctx) error {
 	if product.ExpiresAt != nil && product.ExpiresAt.Before(timeNow()) {
 		return response.NotFound(c, "product not found")
 	}
+
+	// Resolve requester tier & admin status from context
+	userTier, _ := c.Locals("buyerTier").(string)
+	role, _ := c.Locals("role").(string)
+	adminRole, _ := c.Locals("adminRole").(string)
+	isAdmin := role == "admin" || adminRole != ""
+
+	// Server-enforced specification locking: unauthorized users receive clean public data without restricted specs
+	if !isTierAuthorized(userTier, product.RequiredBuyerTier, isAdmin) {
+		product.SpecificationsLocked = true
+		product.Attributes = nil // Strip restricted specifications from response payload
+	} else {
+		product.SpecificationsLocked = false
+	}
+
 	return response.OK(c, product)
 }
 
