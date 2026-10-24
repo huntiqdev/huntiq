@@ -171,7 +171,10 @@ func (h *AdminHandler) DeleteProduct(c *fiber.Ctx) error {
 // GET /api/admin/sellers
 func (h *AdminHandler) ListSellers(c *fiber.Ctx) error {
 	page, limit := parsePagination(c, 50, 200)
-	sellers, total, err := h.svc.ListSellers(c.Context(), page, limit)
+	search := strings.TrimSpace(c.Query("search"))
+	status := strings.TrimSpace(c.Query("status"))
+	tier := strings.TrimSpace(c.Query("tier"))
+	sellers, total, err := h.svc.ListSellersFiltered(c.Context(), page, limit, search, status, tier)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
@@ -228,7 +231,14 @@ func (h *AdminHandler) SetSellerActive(c *fiber.Ctx) error {
 // GET /api/admin/transactions  — permission-gated
 func (h *AdminHandler) ListTransactions(c *fiber.Ctx) error {
 	page, limit := parsePagination(c, 50, 200)
-	txns, total, err := h.svc.ListAllTransactions(c.Context(), page, limit)
+	search := strings.TrimSpace(c.Query("search"))
+	status := strings.TrimSpace(c.Query("status"))
+	method := strings.TrimSpace(c.Query("method"))
+	txType := strings.TrimSpace(c.Query("type"))
+	fromDate := strings.TrimSpace(c.Query("from_date"))
+	toDate := strings.TrimSpace(c.Query("to_date"))
+
+	txns, total, err := h.svc.ListAllTransactionsFiltered(c.Context(), page, limit, search, status, method, txType, fromDate, toDate)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
@@ -1673,10 +1683,14 @@ func (h *AdminHandler) ReviewAbuseReport(c *fiber.Ctx) error {
 	var body struct {
 		Status      string `json:"status"` // 'investigating', 'resolved', 'dismissed'
 		ActionTaken string `json:"action_taken"`
+		Action      string `json:"action"`
 		Notes       string `json:"notes"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
+	}
+	if body.ActionTaken == "" && body.Action != "" {
+		body.ActionTaken = body.Action
 	}
 	
 	if body.Status == "" {

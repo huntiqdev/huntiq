@@ -24,7 +24,10 @@ export default function AdminReferralsPage() {
         api.adminListReferralWithdrawals(wStatus, user.token),
       ]);
       if (ov.status === 'fulfilled') setOverview(ov.value);
-      if (wd.status === 'fulfilled') setWithdrawals(wd.value ?? []);
+      if (wd.status === 'fulfilled') {
+        const val: any = wd.value;
+        setWithdrawals(Array.isArray(val) ? val : Array.isArray(val?.withdrawals) ? val.withdrawals : []);
+      }
     } finally { setLoading(false); }
   };
 

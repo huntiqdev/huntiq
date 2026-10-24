@@ -97,7 +97,7 @@ var RoleDomainPermissions = map[string]map[string]bool{
 	RolePlatformAdmin: {
 		"dashboard": true, "settings": true, "categories": true, "category_trends": true,
 		"analytics": true, "locations": true, "banners": true, "notifications": true,
-		"profit": true, "finance": true,
+		"profit": true, "finance": true, "sellers": true, "transactions": true,
 	},
 	RoleSecurityAdmin: {
 		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,

@@ -13,10 +13,54 @@ export const adminApi = {
     fetchAPI<any>(`/admin/products/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
   adminGetSellers: (token: string) =>
     fetchAPI<any>('/admin/sellers', { headers: authHeaders(token) }).then(r => Array.isArray(r) ? r : (r?.data ?? [])),
+  adminListSellers: (
+    params: { page?: number; limit?: number; search?: string; status?: string; tier?: string },
+    token: string
+  ) => {
+    const q = new URLSearchParams();
+    if (params.page) q.set('page', String(params.page));
+    if (params.limit) q.set('limit', String(params.limit));
+    if (params.search) q.set('search', params.search);
+    if (params.status) q.set('status', params.status);
+    if (params.tier) q.set('tier', params.tier);
+    const query = q.toString() ? `?${q.toString()}` : '';
+    return fetchAPI<{ data: any[]; total: number; page: number; limit: number }>(
+      `/admin/sellers${query}`,
+      { headers: authHeaders(token) }
+    );
+  },
   adminSetSellerActive: (id: number, active: boolean, reason: string, token: string) =>
     fetchAPI<any>(`/admin/sellers/${id}/active`, { method: 'PUT', body: JSON.stringify({ active, reason }), headers: authHeaders(token) }),
   adminGetTransactions: (token: string) =>
     fetchAPI<any>('/admin/transactions', { headers: authHeaders(token) }).then(r => Array.isArray(r) ? r : (r?.data ?? [])),
+  adminListTransactions: (
+    params: {
+      page?: number;
+      limit?: number;
+      search?: string;
+      status?: string;
+      method?: string;
+      type?: string;
+      from_date?: string;
+      to_date?: string;
+    },
+    token: string
+  ) => {
+    const q = new URLSearchParams();
+    if (params.page) q.set('page', String(params.page));
+    if (params.limit) q.set('limit', String(params.limit));
+    if (params.search) q.set('search', params.search);
+    if (params.status) q.set('status', params.status);
+    if (params.method) q.set('method', params.method);
+    if (params.type) q.set('type', params.type);
+    if (params.from_date) q.set('from_date', params.from_date);
+    if (params.to_date) q.set('to_date', params.to_date);
+    const query = q.toString() ? `?${q.toString()}` : '';
+    return fetchAPI<{ data: any[]; total: number; page: number; limit: number }>(
+      `/admin/transactions${query}`,
+      { headers: authHeaders(token) }
+    );
+  },
   adminUpdateTransactionStatus: (id: number, status: string, token: string) =>
     fetchAPI<any>(`/admin/transactions/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }), headers: authHeaders(token) }),
   adminGetLocations: (token: string) =>
@@ -185,8 +229,15 @@ export const adminApi = {
   // ── Trust & Safety ───────────────────────────────────────────────────────
   adminGetAbuseReports: (status: string, token: string) =>
     fetchAPI<any[]>(`/admin/trust/reports?status=${encodeURIComponent(status)}`, { headers: authHeaders(token) }).then(r => r ?? []),
-  adminReviewAbuseReport: (id: number, data: { status: string; action: string; notes: string }, token: string) =>
-    fetchAPI<any>(`/admin/trust/reports/${id}/review`, { method: 'PUT', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminReviewAbuseReport: (id: number, data: { status: string; action: string; notes: string; action_taken?: string }, token: string) =>
+    fetchAPI<any>(`/admin/trust/reports/${id}/review`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        ...data,
+        action_taken: data.action_taken || data.action,
+      }),
+      headers: authHeaders(token),
+    }),
   adminUpdateAbuseReportPriority: (id: number, priority: string, token: string) =>
     fetchAPI<any>(`/admin/trust/reports/${id}/priority`, { method: 'PUT', body: JSON.stringify({ priority }), headers: authHeaders(token) }),
 

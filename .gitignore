@@ -1,12 +1,12 @@
-# Secrets — never commit these
+# Secrets — never commit
 backend/.env
 backend/.env.local
 frontend/.env.local
-**/.env.local
-**/*.env.local
 
-# Node
+# Dependencies — install via setup.sh
 frontend/node_modules/
+
+# Build output
 frontend/.next/
 frontend/tsconfig.tsbuildinfo
 
@@ -18,22 +18,10 @@ backend/tmp/
 .DS_Store
 Thumbs.db
 
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Logs
-*.log
-logs/
-
-# Uploads (local dev only — use cloud storage in prod)
+# Uploads (local only)
 backend/uploads/products/
 backend/uploads/*.jpg
 backend/uploads/*.jpeg
 backend/uploads/*.png
 backend/uploads/*.webp
-
-# Keep uploads dir structure
 !backend/uploads/.gitkeep

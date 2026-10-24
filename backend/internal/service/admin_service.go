@@ -97,12 +97,26 @@ func (s *AdminService) ListSellers(ctx context.Context, page, limit int) ([]mode
 	return s.repo.ListSellersPaged(ctx, page, limit)
 }
 
+func (s *AdminService) ListSellersFiltered(ctx context.Context, page, limit int, search, status, tier string) ([]models.User, int, error) {
+	return s.repo.ListSellersFilteredPaged(ctx, page, limit, search, status, tier)
+}
+
 func (s *AdminService) SetSellerActive(ctx context.Context, sellerID int, active bool, reason string) error {
-	return s.repo.SetSellerActive(ctx, sellerID, active, reason)
+	if err := s.repo.SetSellerActive(ctx, sellerID, active, reason); err != nil {
+		return err
+	}
+	if !active && s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, sellerID, fmt.Sprintf("seller_deactivated: %s", reason))
+	}
+	return nil
 }
 
 func (s *AdminService) ListAllTransactions(ctx context.Context, page, limit int) ([]models.Transaction, int, error) {
 	return s.repo.ListAllTransactionsPaged(ctx, page, limit)
+}
+
+func (s *AdminService) ListAllTransactionsFiltered(ctx context.Context, page, limit int, search, status, paymentMethod, txType, dateFrom, dateTo string) ([]models.Transaction, int, error) {
+	return s.repo.ListAllTransactionsFilteredPaged(ctx, page, limit, search, status, paymentMethod, txType, dateFrom, dateTo)
 }
 
 func (s *AdminService) AddLocation(ctx context.Context, l models.Location) (int, error) {
@@ -671,6 +685,16 @@ func (s *AdminService) IssueWarning(ctx context.Context, userID, adminID int, re
 	return nil
 }
 
+func (s *AdminService) SuspendUser(ctx context.Context, userID, adminID int, reason string) error {
+	if err := s.repo.SuspendUser(ctx, userID, adminID, reason); err != nil {
+		return err
+	}
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, userID, "user_suspended")
+	}
+	return nil
+}
+
 func (s *AdminService) BanUser(ctx context.Context, userID, adminID int, reason string) error {
 	if err := s.repo.BanUser(ctx, userID, adminID, reason); err != nil {
 		return err
@@ -727,12 +751,12 @@ func (s *AdminService) ReviewAbuseReport(ctx context.Context, reportID, adminID 
 	if err != nil {
 		return err
 	}
-	if actionTaken == "banned" && reportedUserID != nil && *reportedUserID > 0 {
-		reason := "Account banned via abuse report #" + strconv.Itoa(reportID)
-		if notes != "" {
-			reason += ": " + notes
+	if reportedUserID != nil && *reportedUserID > 0 {
+		if actionTaken == "banned" && s.sessionRevoker != nil {
+			_ = s.sessionRevoker(ctx, *reportedUserID, "user_banned")
+		} else if actionTaken == "suspended" && s.sessionRevoker != nil {
+			_ = s.sessionRevoker(ctx, *reportedUserID, "user_suspended")
 		}
-		_ = s.BanUser(ctx, *reportedUserID, adminID, reason)
 	}
 	return nil
 }

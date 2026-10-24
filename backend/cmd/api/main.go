@@ -141,7 +141,12 @@ func main() {
 		log.Fatalf("failed to initialize WebAuthn manager: %v", err)
 	}
 	adminAuthSvc := service.NewAdminAuthService(adminPasskeyRepo, userRepo, adminRepo, waManager, cfg.JWTSecret)
-	adminSvc.WithSessionRevoker(adminAuthSvc.RevokeAllSessions)
+	adminSvc.WithSessionRevoker(func(ctx context.Context, userID int, reason string) error {
+		isActiveMu.Lock()
+		delete(isActiveCache, userID)
+		isActiveMu.Unlock()
+		return adminAuthSvc.RevokeAllSessions(ctx, userID, reason)
+	})
 	adminAuthHandler := handlers.NewAdminAuthHandler(adminAuthSvc, authSvc, adminSvc, !cfg.DevMode)
 
 	// Wire session creator into auth service for password+MFA admin logins

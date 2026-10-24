@@ -4,7 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { Spinner } from '@/components/ui/Spinner';
 import Link from 'next/link';
-import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin, DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2 } from 'lucide-react';
+import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin, DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2, Store, Receipt } from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
 
@@ -38,6 +38,7 @@ function AdminSidebar() {
       title: 'OPERATIONS & CONTROL',
       links: [
         { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard, visible: true },
+        { href: '/admin/sellers', label: 'Sellers Directory', icon: Store, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('sellers') },
         { href: '/admin/operations', label: 'Operations Monitor', icon: Activity, visible: isPlatformOwner || isPlatformAdmin || isSecurityAdmin || isOperationsAdmin || hasAdminPermission('operations') },
       ],
     },
@@ -62,6 +63,7 @@ function AdminSidebar() {
     {
       title: 'FINANCE & PLANNING',
       links: [
+        { href: '/admin/transactions', label: 'Transactions Ledger', icon: Receipt, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('transactions') },
         { href: '/admin/finance', label: 'Financial Planning & FP&A', icon: TrendingUp, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit') || hasAdminPermission('finance') },
         { href: '/admin/profit', label: 'Historical Profit Analytics', icon: DollarSign, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit') },
       ],

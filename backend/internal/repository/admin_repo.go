@@ -151,6 +151,10 @@ func (r *AdminRepo) ListProductsByStatusPaged(ctx context.Context, status string
 }
 
 func (r *AdminRepo) ListSellersPaged(ctx context.Context, page, limit int) ([]models.User, int, error) {
+	return r.ListSellersFilteredPaged(ctx, page, limit, "", "", "")
+}
+
+func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit int, search, status, tier string) ([]models.User, int, error) {
 	if limit <= 0 || limit > 200 {
 		limit = 50
 	}
@@ -158,21 +162,59 @@ func (r *AdminRepo) ListSellersPaged(ctx context.Context, page, limit int) ([]mo
 		page = 1
 	}
 	offset := (page - 1) * limit
+
+	whereClauses := []string{"u.role='seller'"}
+	args := []interface{}{}
+	argIdx := 1
+
+	if search != "" {
+		whereClauses = append(whereClauses, fmt.Sprintf("(u.name ILIKE $%d OR u.phone ILIKE $%d OR u.business_name ILIKE $%d OR u.email ILIKE $%d)", argIdx, argIdx, argIdx, argIdx))
+		args = append(args, "%"+search+"%")
+		argIdx++
+	}
+
+	if status == "active" {
+		whereClauses = append(whereClauses, fmt.Sprintf("u.is_active = $%d", argIdx))
+		args = append(args, true)
+		argIdx++
+	} else if status == "inactive" || status == "deactivated" {
+		whereClauses = append(whereClauses, fmt.Sprintf("u.is_active = $%d", argIdx))
+		args = append(args, false)
+		argIdx++
+	}
+
+	if tier != "" && tier != "all" {
+		whereClauses = append(whereClauses, fmt.Sprintf("u.tier = $%d", argIdx))
+		args = append(args, tier)
+		argIdx++
+	}
+
+	whereSQL := strings.Join(whereClauses, " AND ")
+
+	countQuery := fmt.Sprintf("SELECT COUNT(*) FROM users u WHERE %s", whereSQL)
 	var total int
-	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM users WHERE role='seller'`).Scan(&total) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	//nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	rows, err := r.db.Query(ctx, `
+	err := r.db.QueryRow(ctx, countQuery, args...).Scan(&total)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	dataQuery := fmt.Sprintf(`
 		SELECT u.id, u.name, u.phone, COALESCE(u.business_name,''), COALESCE(u.email,''),
 		       u.rating, u.role, u.is_active,
 		       COALESCE(u.tier::text,'normal') AS tier,
 		       COALESCE(u.total_value_sold,0) AS total_value_sold,
 		       COALESCE(ps.net_profit, 0) AS net_profit,
+		       COALESCE(u.deactivation_reason,'') AS deactivation_reason,
 		       u.created_at, u.updated_at
 		FROM users u
 		LEFT JOIN seller_profit_summary ps ON ps.seller_id = u.id
-		WHERE u.role='seller'
+		WHERE %s
 		ORDER BY u.created_at DESC
-		LIMIT $1 OFFSET $2`, limit, offset)
+		LIMIT $%d OFFSET $%d`, whereSQL, argIdx, argIdx+1)
+
+	args = append(args, limit, offset)
+
+	rows, err := r.db.Query(ctx, dataQuery, args...)
 	if err != nil {
 		return nil, 0, err
 	}
@@ -182,7 +224,7 @@ func (r *AdminRepo) ListSellersPaged(ctx context.Context, page, limit int) ([]mo
 		var u models.User
 		if err := rows.Scan(&u.ID, &u.Name, &u.Phone, &u.BusinessName, &u.Email,
 			&u.Rating, &u.Role, &u.IsActive, &u.Tier, &u.TotalValueSold,
-			&u.NetProfit, &u.CreatedAt, &u.UpdatedAt); err != nil {
+			&u.NetProfit, &u.DeactivationReason, &u.CreatedAt, &u.UpdatedAt); err != nil {
 			return nil, 0, err
 		}
 		users = append(users, u)
@@ -191,6 +233,10 @@ func (r *AdminRepo) ListSellersPaged(ctx context.Context, page, limit int) ([]mo
 }
 
 func (r *AdminRepo) ListAllTransactionsPaged(ctx context.Context, page, limit int) ([]models.Transaction, int, error) {
+	return r.ListAllTransactionsFilteredPaged(ctx, page, limit, "", "", "", "", "", "")
+}
+
+func (r *AdminRepo) ListAllTransactionsFilteredPaged(ctx context.Context, page, limit int, search, status, paymentMethod, txType, dateFrom, dateTo string) ([]models.Transaction, int, error) {
 	if limit <= 0 || limit > 200 {
 		limit = 50
 	}
@@ -198,23 +244,96 @@ func (r *AdminRepo) ListAllTransactionsPaged(ctx context.Context, page, limit in
 		page = 1
 	}
 	offset := (page - 1) * limit
+
+	whereClauses := []string{"1=1"}
+	args := []interface{}{}
+	argIdx := 1
+
+	if search != "" {
+		if idVal, err := strconv.Atoi(search); err == nil && idVal > 0 {
+			whereClauses = append(whereClauses, fmt.Sprintf("(t.id = $%d OR t.payment_reference ILIKE $%d OR t.buyer_name ILIKE $%d OR t.buyer_phone ILIKE $%d OR t.payer_phone ILIKE $%d)", argIdx, argIdx+1, argIdx+1, argIdx+1, argIdx+1))
+			args = append(args, idVal, "%"+search+"%")
+			argIdx += 2
+		} else {
+			whereClauses = append(whereClauses, fmt.Sprintf("(t.payment_reference ILIKE $%d OR t.buyer_name ILIKE $%d OR t.buyer_phone ILIKE $%d OR t.payer_phone ILIKE $%d)", argIdx, argIdx, argIdx, argIdx))
+			args = append(args, "%"+search+"%")
+			argIdx++
+		}
+	}
+
+	if status != "" && status != "all" {
+		whereClauses = append(whereClauses, fmt.Sprintf("t.status = $%d", argIdx))
+		args = append(args, status)
+		argIdx++
+	}
+
+	if paymentMethod != "" && paymentMethod != "all" {
+		whereClauses = append(whereClauses, fmt.Sprintf("t.payment_method = $%d", argIdx))
+		args = append(args, paymentMethod)
+		argIdx++
+	}
+
+	if txType != "" && txType != "all" {
+		whereClauses = append(whereClauses, fmt.Sprintf("t.transaction_type = $%d", argIdx))
+		args = append(args, txType)
+		argIdx++
+	}
+
+	if dateFrom != "" {
+		if tFrom, err := time.Parse("2006-01-02", dateFrom); err == nil {
+			whereClauses = append(whereClauses, fmt.Sprintf("t.created_at >= $%d", argIdx))
+			args = append(args, tFrom)
+			argIdx++
+		}
+	}
+
+	if dateTo != "" {
+		if tTo, err := time.Parse("2006-01-02", dateTo); err == nil {
+			tToEnd := tTo.Add(24*time.Hour - time.Nanosecond)
+			whereClauses = append(whereClauses, fmt.Sprintf("t.created_at <= $%d", argIdx))
+			args = append(args, tToEnd)
+			argIdx++
+		}
+	}
+
+	whereSQL := strings.Join(whereClauses, " AND ")
+
+	countQuery := fmt.Sprintf("SELECT COUNT(*) FROM transactions t WHERE %s", whereSQL)
 	var total int
-	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM transactions`).Scan(&total) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	//nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	rows, err := r.db.Query(ctx, `
-		SELECT id, product_id, COALESCE(seller_id,0), buyer_name, buyer_phone, amount, broker_fee, seller_gets, status, COALESCE(notes,''), created_at, updated_at
-		FROM transactions
-		ORDER BY created_at DESC
-		LIMIT $1 OFFSET $2`, limit, offset)
+	err := r.db.QueryRow(ctx, countQuery, args...).Scan(&total)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	dataQuery := fmt.Sprintf(`
+		SELECT t.id, t.user_id, COALESCE(t.product_id, 0), COALESCE(t.seller_id, 0),
+		       COALESCE(t.buyer_name, ''), COALESCE(t.buyer_phone, ''),
+		       t.amount, COALESCE(t.fee_amount, 0), COALESCE(t.broker_fee, 0), COALESCE(t.seller_gets, 0),
+		       COALESCE(t.transaction_type, 'listing_fee'), COALESCE(t.payment_method, ''),
+		       COALESCE(t.payment_reference, ''), COALESCE(t.payer_phone, ''),
+		       t.status, COALESCE(t.notes, ''), t.created_at, t.updated_at
+		FROM transactions t
+		WHERE %s
+		ORDER BY t.created_at DESC
+		LIMIT $%d OFFSET $%d`, whereSQL, argIdx, argIdx+1)
+
+	args = append(args, limit, offset)
+
+	rows, err := r.db.Query(ctx, dataQuery, args...)
 	if err != nil {
 		return nil, 0, err
 	}
 	defer rows.Close()
+
 	var txns []models.Transaction
 	for rows.Next() {
 		var t models.Transaction
-		if err := rows.Scan(&t.ID, &t.ProductID, &t.SellerID, &t.BuyerName, &t.BuyerPhone,
-			&t.Amount, &t.BrokerFee, &t.SellerGets, &t.Status, &t.Notes, &t.CreatedAt, &t.UpdatedAt); err != nil {
+		if err := rows.Scan(&t.ID, &t.UserID, &t.ProductID, &t.SellerID,
+			&t.BuyerName, &t.BuyerPhone,
+			&t.Amount, &t.FeeAmount, &t.BrokerFee, &t.SellerGets,
+			&t.TransactionType, &t.PaymentMethod,
+			&t.PaymentReference, &t.PayerPhone,
+			&t.Status, &t.Notes, &t.CreatedAt, &t.UpdatedAt); err != nil {
 			return nil, 0, err
 		}
 		txns = append(txns, t)
@@ -1698,11 +1817,76 @@ func (r *AdminRepo) IssueWarning(ctx context.Context, userID, adminID int, reaso
 	return err
 }
 
-func (r *AdminRepo) BanUser(ctx context.Context, userID, adminID int, reason string) error {
-	// 1. Mark as banned and inactive
+func (r *AdminRepo) SuspendUser(ctx context.Context, userID, adminID int, reason string) error {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Mark user as inactive, explicitly NOT banned, set referral_suspended and deactivation_reason
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	_, err := r.db.Exec(ctx, `UPDATE users SET is_banned=TRUE, is_active=FALSE, deactivation_reason=$1, updated_at=NOW() WHERE id=$2`, reason, userID)
-	return err
+	tag, err := tx.Exec(ctx,
+		`UPDATE users 
+		 SET is_active=FALSE, is_banned=FALSE, referral_suspended=TRUE, deactivation_reason=$1, updated_at=NOW() 
+		 WHERE id=$2`,
+		reason, userID)
+	if err != nil {
+		return err
+	}
+	if tag.RowsAffected() == 0 {
+		return fmt.Errorf("user with id %d not found", userID)
+	}
+
+	// 2. Suspend capabilities in user_capabilities
+	//nolint:gosec
+	_, err = tx.Exec(ctx,
+		`UPDATE user_capabilities 
+		 SET status='suspended', 
+		     metadata=jsonb_set(COALESCE(metadata, '{}'::jsonb), '{suspend_reason}', to_jsonb($2::text)) 
+		 WHERE user_id=$1`,
+		userID, reason)
+	if err != nil {
+		return err
+	}
+
+	return tx.Commit(ctx)
+}
+
+func (r *AdminRepo) BanUser(ctx context.Context, userID, adminID int, reason string) error {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Mark as permanently banned, inactive, referral permanently blocked
+	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	tag, err := tx.Exec(ctx,
+		`UPDATE users 
+		 SET is_banned=TRUE, is_active=FALSE, referral_suspended=TRUE, referral_permanently_blocked=TRUE, referral_block_reason=$1, deactivation_reason=$1, updated_at=NOW() 
+		 WHERE id=$2`,
+		reason, userID)
+	if err != nil {
+		return err
+	}
+	if tag.RowsAffected() == 0 {
+		return fmt.Errorf("user with id %d not found", userID)
+	}
+
+	// 2. Revoke user capabilities
+	//nolint:gosec
+	_, err = tx.Exec(ctx,
+		`UPDATE user_capabilities 
+		 SET status='revoked', 
+		     metadata=jsonb_set(COALESCE(metadata, '{}'::jsonb), '{ban_reason}', to_jsonb($2::text)) 
+		 WHERE user_id=$1`,
+		userID, reason)
+	if err != nil {
+		return err
+	}
+
+	return tx.Commit(ctx)
 }
 
 func (r *AdminRepo) CheckSystemHealth(ctx context.Context) (map[string]interface{}, error) {
@@ -2066,10 +2250,16 @@ func (r *AdminRepo) ReviewAbuseReport(ctx context.Context, reportID, adminID int
 	if !validStatus[status] {
 		return nil, fmt.Errorf("invalid status: must be investigating, resolved, or dismissed")
 	}
+
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
 	
 	var reportedUserID *int
 	var reportedProductID *int
-	err := r.db.QueryRow(ctx, //nolint:gosec
+	err = tx.QueryRow(ctx, //nolint:gosec
 		`UPDATE abuse_reports
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), action_taken=$3, resolution_notes=$4, updated_at=NOW()
 		 WHERE id=$5
@@ -2079,9 +2269,63 @@ func (r *AdminRepo) ReviewAbuseReport(ctx context.Context, reportID, adminID int
 		return nil, err
 	}
 	
-	// If action is removed, reject the reported product to hide from marketplace
-	if actionTaken == "removed" && reportedProductID != nil && *reportedProductID > 0 {
-		_, _ = r.db.Exec(ctx, `UPDATE products SET status='rejected', rejection_reason=$1, updated_at=NOW() WHERE id=$2`, notes, *reportedProductID)
+	// If action is removed or content_removed, reject the reported product to hide from marketplace
+	if (actionTaken == "removed" || actionTaken == "content_removed") && reportedProductID != nil && *reportedProductID > 0 {
+		_, _ = tx.Exec(ctx, `UPDATE products SET status='rejected', rejection_reason=$1, updated_at=NOW() WHERE id=$2`, notes, *reportedProductID)
+	}
+
+	// If action is suspended, atomically deactivate user and suspend capabilities
+	if actionTaken == "suspended" && reportedUserID != nil && *reportedUserID > 0 {
+		reason := "Account suspended via abuse report #" + strconv.Itoa(reportID)
+		if notes != "" {
+			reason += ": " + notes
+		}
+		_, err = tx.Exec(ctx,
+			`UPDATE users 
+			 SET is_active=FALSE, is_banned=FALSE, referral_suspended=TRUE, deactivation_reason=$1, updated_at=NOW() 
+			 WHERE id=$2`,
+			reason, *reportedUserID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to suspend user: %w", err)
+		}
+		_, err = tx.Exec(ctx,
+			`UPDATE user_capabilities 
+			 SET status='suspended', 
+			     metadata=jsonb_set(COALESCE(metadata, '{}'::jsonb), '{suspend_reason}', to_jsonb($2::text)) 
+			 WHERE user_id=$1`,
+			*reportedUserID, reason)
+		if err != nil {
+			return nil, fmt.Errorf("failed to suspend user capabilities: %w", err)
+		}
+	}
+
+	// If action is banned, atomically ban user and revoke capabilities
+	if actionTaken == "banned" && reportedUserID != nil && *reportedUserID > 0 {
+		reason := "Account banned via abuse report #" + strconv.Itoa(reportID)
+		if notes != "" {
+			reason += ": " + notes
+		}
+		_, err = tx.Exec(ctx,
+			`UPDATE users 
+			 SET is_banned=TRUE, is_active=FALSE, referral_suspended=TRUE, referral_permanently_blocked=TRUE, referral_block_reason=$1, deactivation_reason=$1, updated_at=NOW() 
+			 WHERE id=$2`,
+			reason, *reportedUserID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to ban user: %w", err)
+		}
+		_, err = tx.Exec(ctx,
+			`UPDATE user_capabilities 
+			 SET status='revoked', 
+			     metadata=jsonb_set(COALESCE(metadata, '{}'::jsonb), '{ban_reason}', to_jsonb($2::text)) 
+			 WHERE user_id=$1`,
+			*reportedUserID, reason)
+		if err != nil {
+			return nil, fmt.Errorf("failed to revoke user capabilities: %w", err)
+		}
+	}
+
+	if err := tx.Commit(ctx); err != nil {
+		return nil, err
 	}
 
 	return reportedUserID, nil
