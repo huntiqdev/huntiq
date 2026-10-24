@@ -56,6 +56,23 @@ func Generate6000LeafTaxonomy() []NestedCategoryDef {
 		}
 	}
 
+	// 3. Add all 6 domain catalog groups (Domains 01 to 60)
+	allCatalogs := append([]DomainCatalogDef{}, GetCatalogDomains01To10()...)
+	allCatalogs = append(allCatalogs, GetCatalogDomains11To20()...)
+	allCatalogs = append(allCatalogs, GetCatalogDomains21To30()...)
+	allCatalogs = append(allCatalogs, GetCatalogDomains31To40()...)
+	allCatalogs = append(allCatalogs, GetCatalogDomains41To50()...)
+	allCatalogs = append(allCatalogs, GetCatalogDomains51To60()...)
+
+	for _, dom := range allCatalogs {
+		for subIdx, sub := range dom.Subcategories {
+			addNode(dom.RootSlug, sub.Slug, sub.NameEN, sub.NameAM, sub.NameOM, sub.NameTI, false, subIdx+1)
+			for leafIdx, leaf := range sub.Items {
+				addNode(sub.Slug, leaf.Slug, leaf.NameEN, leaf.NameAM, leaf.NameOM, leaf.NameTI, true, leafIdx+1)
+			}
+		}
+	}
+
 	return list
 }
 

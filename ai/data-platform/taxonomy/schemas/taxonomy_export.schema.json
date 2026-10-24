@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HUNTIQTaxonomyExportSchema",
+  "description": "Deterministic export schema for authoritative HUNTIQ marketplace taxonomy consumed by ML models",
+  "type": "object",
+  "required": [
+    "export_id",
+    "exported_at",
+    "backend_version",
+    "total_categories",
+    "root_count",
+    "leaf_count",
+    "categories"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "export_id": {
+      "type": "string",
+      "description": "Unique deterministic export identifier"
+    },
+    "exported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "backend_version": {
+      "type": "string"
+    },
+    "total_categories": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "root_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "leaf_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "slug", "parent_id", "level", "is_leaf"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Authoritative database integer ID"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "parent_id": {
+            "type": ["integer", "null"]
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "is_leaf": {
+            "type": "boolean"
+          },
+          "icon": {
+            "type": ["string", "null"]
+          },
+          "translations": {
+            "type": "object",
+            "description": "Key-value mapping of locale codes (am, om, ti) to translated names"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

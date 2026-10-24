@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HUNTIQQueryIntentContract",
+  "description": "Contract specification for search query intent classification samples and inference payloads",
+  "type": "object",
+  "required": ["sample_id", "query", "locale", "intent", "created_at"],
+  "additionalProperties": false,
+  "properties": {
+    "sample_id": {
+      "type": "string",
+      "description": "Synthetic or anonymized sample identifier"
+    },
+    "query": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Raw sanitized search query entered by the user"
+    },
+    "locale": {
+      "type": "string",
+      "enum": ["en", "am", "om", "ti"],
+      "description": "Language locale of the query: English, Amharic, Afaan Oromoo, or Tigrinya"
+    },
+    "intent": {
+      "type": "string",
+      "enum": [
+        "buy_product",
+        "rent_property",
+        "find_service",
+        "job_search",
+        "vehicle_search",
+        "price_check",
+        "ambiguous"
+      ],
+      "description": "Authoritative intent label assigned to the query"
+    },
+    "confidence_threshold": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Minimum required confidence score for automated downstream routing"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

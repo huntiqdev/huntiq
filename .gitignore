@@ -25,3 +25,43 @@ backend/uploads/*.jpeg
 backend/uploads/*.png
 backend/uploads/*.webp
 !backend/uploads/.gitkeep
+
+# Python & AI Service
+ai/.env
+ai/.env.local
+.venv/
+*/.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Data Platform & Model Weights
+ai/data-platform/ml/datasets/raw/*
+!ai/data-platform/ml/datasets/raw/.gitkeep
+ai/data-platform/ml/datasets/interim/*
+!ai/data-platform/ml/datasets/interim/.gitkeep
+ai/data-platform/ml/datasets/processed/*
+!ai/data-platform/ml/datasets/processed/.gitkeep
+ai/data-platform/ml/datasets/evaluation/*
+!ai/data-platform/ml/datasets/evaluation/.gitkeep
+ai/data-platform/ml/models/*.joblib
+ai/data-platform/ml/models/*.onnx
+ai/data-platform/ml/models/*.pt
+ai/data-platform/ml/models/*.bin
+!ai/data-platform/ml/models/.gitkeep
+
+# Taxonomy Exports
+ai/data-platform/taxonomy/sources/*
+!ai/data-platform/taxonomy/sources/.gitkeep
+ai/data-platform/taxonomy/generated/*
+!ai/data-platform/taxonomy/generated/.gitkeep
+

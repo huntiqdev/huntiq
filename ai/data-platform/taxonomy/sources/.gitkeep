@@ -1,0 +1,2 @@
+# Directory for raw taxonomy export files from PostgreSQL.
+# Production taxonomy exports are excluded from git.

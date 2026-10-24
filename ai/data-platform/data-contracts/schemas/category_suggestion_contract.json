@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HUNTIQCategorySuggestionContract",
+  "description": "Contract specification for listing taxonomy category suggestions and training records",
+  "type": "object",
+  "required": ["sample_id", "title", "description", "target_category_id", "created_at"],
+  "additionalProperties": false,
+  "properties": {
+    "sample_id": {
+      "type": "string",
+      "description": "Synthetic or anonymized sample identifier"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 150,
+      "description": "Listing title"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 3000,
+      "description": "Sanitized listing description text (PII scrubbed)"
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Key-value attributes such as brand, model, condition, location"
+    },
+    "target_category_id": {
+      "type": "integer",
+      "description": "Authoritative database integer ID from PostgreSQL categories table"
+    },
+    "category_path": {
+      "type": "string",
+      "description": "Hierarchical human-readable category path (e.g., Electronics > Phones > Smartphones)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
