@@ -270,7 +270,7 @@ export function GlobalSearchModal({ isOpen, onClose, onSelectResult }: GlobalSea
             <span><kbd className="px-1.5 py-0.5 bg-zinc-800 border border-zinc-700 rounded text-zinc-300">↑↓</kbd> Navigate</span>
             <span><kbd className="px-1.5 py-0.5 bg-zinc-800 border border-zinc-700 rounded text-zinc-300">↵</kbd> Open</span>
           </div>
-          <div>SellBuy Live Search Engine</div>
+          <div>HUNTIQ Live Search Engine</div>
         </div>
       </div>
     </div>

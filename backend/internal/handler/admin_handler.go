@@ -174,7 +174,11 @@ func (h *AdminHandler) ListSellers(c *fiber.Ctx) error {
 	search := strings.TrimSpace(c.Query("search"))
 	status := strings.TrimSpace(c.Query("status"))
 	tier := strings.TrimSpace(c.Query("tier"))
-	sellers, total, err := h.svc.ListSellersFiltered(c.Context(), page, limit, search, status, tier)
+	strategy := strings.TrimSpace(c.Query("strategy"))
+	if strategy == "" {
+		strategy = strings.TrimSpace(c.Query("preference"))
+	}
+	sellers, total, err := h.svc.ListSellersFiltered(c.Context(), page, limit, search, status, tier, strategy)
 	if err != nil {
 		return response.InternalError(c, err)
 	}

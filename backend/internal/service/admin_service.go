@@ -97,8 +97,8 @@ func (s *AdminService) ListSellers(ctx context.Context, page, limit int) ([]mode
 	return s.repo.ListSellersPaged(ctx, page, limit)
 }
 
-func (s *AdminService) ListSellersFiltered(ctx context.Context, page, limit int, search, status, tier string) ([]models.User, int, error) {
-	return s.repo.ListSellersFilteredPaged(ctx, page, limit, search, status, tier)
+func (s *AdminService) ListSellersFiltered(ctx context.Context, page, limit int, search, status, tier, strategy string) ([]models.User, int, error) {
+	return s.repo.ListSellersFilteredPaged(ctx, page, limit, search, status, tier, strategy)
 }
 
 func (s *AdminService) SetSellerActive(ctx context.Context, sellerID int, active bool, reason string) error {

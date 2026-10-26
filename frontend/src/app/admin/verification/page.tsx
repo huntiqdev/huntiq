@@ -63,8 +63,8 @@ export default function VerificationPage() {
             <BadgeCheck className="w-6 h-6 text-emerald-400" />
           </div>
           <div>
-            <h1 className="text-xl font-black text-white">Seller Verification</h1>
-            <p className="text-xs text-zinc-400">Review submitted identity and business documents</p>
+            <h1 className="text-xl font-black text-white">Provider Verification (Sellers & Landlords)</h1>
+            <p className="text-xs text-zinc-400">Review submitted identity, merchant registration, and property deed credentials</p>
           </div>
         </div>
         <button onClick={fetchDocs} className="p-2 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors">

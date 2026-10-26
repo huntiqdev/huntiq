@@ -1,27 +1,73 @@
 package handlers
 
 import (
+	"context"
 	"errors"
+	"log"
 	"strconv"
+	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/jackc/pgx/v5"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/service"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
 )
 
 // timeNow is a package-level variable so tests can override it.
 var timeNow = time.Now
 
+// SearchLogger abstracts search analytics recording for testability and loose coupling.
+type SearchLogger interface {
+	LogSearch(ctx context.Context, query string, resultCount int, categoryID *int, filters map[string]interface{}, userID *int, sessionID, ipAddress string) error
+}
+
+type searchLogEvent struct {
+	query       string
+	resultCount int
+	categoryID  *int
+	filters     map[string]interface{}
+	userID      *int
+	sessionID   string
+	ipAddress   string
+}
+
 type ProductHandler struct {
-	svc     *service.ProductService
-	authSvc *service.AuthService
+	svc          *service.ProductService
+	authSvc      *service.AuthService
+	searchChan   chan searchLogEvent
+	logger       SearchLogger
+	droppedCount uint64
 }
 
 func NewProductHandler(svc *service.ProductService, authSvc *service.AuthService) *ProductHandler {
 	return &ProductHandler{svc: svc, authSvc: authSvc}
+}
+
+// DroppedSearchEvents returns the number of search events dropped due to queue saturation.
+func (h *ProductHandler) DroppedSearchEvents() uint64 {
+	return atomic.LoadUint64(&h.droppedCount)
+}
+
+// WithSearchLogger wires a bounded non-blocking worker for search query recording.
+func (h *ProductHandler) WithSearchLogger(logger SearchLogger) *ProductHandler {
+	if logger == nil {
+		return h
+	}
+	h.logger = logger
+	h.searchChan = make(chan searchLogEvent, 500)
+	go func() {
+		for ev := range h.searchChan {
+			ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+			if err := h.logger.LogSearch(ctx, ev.query, ev.resultCount, ev.categoryID, ev.filters, ev.userID, ev.sessionID, ev.ipAddress); err != nil {
+				log.Printf("search analytics logging failed: %v", err)
+			}
+			cancel()
+		}
+	}()
+	return h
 }
 
 // isTierAuthorized verifies if the requester's buyer tier satisfies the product's required buyer tier.
@@ -52,6 +98,17 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 			return response.BadRequest(c, "invalid category_id")
 		}
 		f.CategoryID = &id
+	}
+	if v := c.Query("category_hierarchy_id"); v != "" {
+		id, err := strconv.Atoi(v)
+		if err != nil {
+			return response.BadRequest(c, "invalid category_hierarchy_id")
+		}
+		f.CategoryHierarchyID = &id
+	}
+	f.IncludeDescendants = true
+	if v := c.Query("include_descendants"); v == "false" || v == "0" {
+		f.IncludeDescendants = false
 	}
 	if v := c.Query("min_price"); v != "" {
 		p, err := strconv.ParseFloat(v, 64)
@@ -142,6 +199,44 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 			products[i].Attributes = nil // Strip restricted specifications from search/list results
 		} else {
 			products[i].SpecificationsLocked = false
+		}
+	}
+
+	// Asynchronously record search analytics on the first page of search results
+	if h.searchChan != nil && f.Search != nil && strings.TrimSpace(*f.Search) != "" && f.Page == 1 {
+		var uid *int
+		if uVal := c.Locals("userID"); uVal != nil {
+			if id, ok := uVal.(int); ok && id > 0 {
+				uid = &id
+			}
+		}
+		filters := map[string]interface{}{}
+		if f.CategoryID != nil {
+			filters["category_id"] = *f.CategoryID
+		}
+		if f.CategoryHierarchyID != nil {
+			filters["category_hierarchy_id"] = *f.CategoryHierarchyID
+		}
+		if f.Condition != nil {
+			filters["condition"] = *f.Condition
+		}
+		if f.ListingType != nil {
+			filters["listing_type"] = *f.ListingType
+		}
+		ev := searchLogEvent{
+			query:       strings.TrimSpace(*f.Search),
+			resultCount: len(products),
+			categoryID:  f.CategoryID,
+			filters:     filters,
+			userID:      uid,
+			sessionID:   c.Get("X-Session-ID"),
+			ipAddress:   c.IP(),
+		}
+		select {
+		case h.searchChan <- ev:
+		default:
+			// Queue full under burst traffic; drop non-blocking to protect response latency
+			atomic.AddUint64(&h.droppedCount, 1)
 		}
 	}
 

@@ -367,7 +367,10 @@ export default function SellerProfilePage() {
           isOpen={!!activationCap}
           capability={activationCap}
           onClose={() => setActivationCap(null)}
-          onSuccess={() => {}}
+          onSuccess={() => {
+            setActivationCap(null);
+            setSuccess('Capability activated successfully!');
+          }}
         />
       )}
 

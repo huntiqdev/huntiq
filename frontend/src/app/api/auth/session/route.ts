@@ -62,43 +62,10 @@ export async function DELETE() {
 
 // GET /api/auth/session — read tokens from cookies (server→client handoff on mount)
 export async function GET(req: NextRequest) {
-  let token = req.cookies.get(JWT_COOKIE)?.value ?? null;
-  let sessionToken = req.cookies.get(ADMIN_SESSION_COOKIE)?.value ?? null;
+  const token = req.cookies.get(JWT_COOKIE)?.value ?? null;
+  const sessionToken = req.cookies.get(ADMIN_SESSION_COOKIE)?.value ?? null;
 
-  const qToken = req.nextUrl.searchParams.get('token');
-  const qSession = req.nextUrl.searchParams.get('session_token');
-  const redirectUrl = req.nextUrl.searchParams.get('redirect');
-
-  if (process.env.NODE_ENV !== 'production' && (qToken || qSession)) {
-    if (qToken) token = qToken;
-    if (qSession) sessionToken = qSession;
-  }
-
-  const res = redirectUrl
-    ? NextResponse.redirect(new URL(redirectUrl, req.url))
-    : NextResponse.json({ token, session_token: sessionToken });
-
-  if (process.env.NODE_ENV !== 'production' && (qToken || qSession)) {
-    if (token) {
-      res.cookies.set(JWT_COOKIE, token, {
-        httpOnly: true,
-        secure: SECURE,
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 24,
-      });
-    }
-    if (sessionToken) {
-      res.cookies.set(ADMIN_SESSION_COOKIE, sessionToken, {
-        httpOnly: true,
-        secure: SECURE,
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 8,
-      });
-    }
-  }
-
+  const res = NextResponse.json({ token, session_token: sessionToken });
   res.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate');
   return res;
 }

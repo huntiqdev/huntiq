@@ -10,15 +10,22 @@ import (
 )
 
 func main() {
-	dsn := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		getenv("DB_HOST", "localhost"),
-		getenv("DB_PORT", "5432"),
-		getenv("DB_USER", "postgres"),
-		getenv("DB_PASSWORD", "gedam"),
-		getenv("DB_NAME", "hulubedej_db"),
-		getenv("DB_SSLMODE", "disable"),
-	)
+	dsn := os.Getenv("DATABASE_URL")
+	if dsn == "" {
+		pass := os.Getenv("DB_PASSWORD")
+		if pass == "" {
+			log.Fatal("[FATAL] DB_PASSWORD environment variable is required (or set DATABASE_URL)")
+		}
+		dsn = fmt.Sprintf(
+			"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+			getenv("DB_HOST", "localhost"),
+			getenv("DB_PORT", "5432"),
+			getenv("DB_USER", "postgres"),
+			pass,
+			getenv("DB_NAME", "hulubedej_db"),
+			getenv("DB_SSLMODE", "disable"),
+		)
+	}
 
 	ctx := context.Background()
 	db, err := pgxpool.New(ctx, dsn)
@@ -136,10 +143,10 @@ func main() {
 				continue
 			}
 
-			// Update child materialized path: parentPath + parentID + "/"
-			childPath := fmt.Sprintf("%s%d/", parentPath, parentID)
+			// Update child materialized path: parentPath + childID + "/"
+			childPath := fmt.Sprintf("%s%d/", parentPath, childID)
 			if parentPath == "" || parentPath == "/" {
-				childPath = fmt.Sprintf("/%d/", parentID)
+				childPath = fmt.Sprintf("/%d/%d/", parentID, childID)
 			}
 			_, _ = db.Exec(ctx, `UPDATE category_hierarchy SET path = $1 WHERE id = $2`, childPath, childID)
 

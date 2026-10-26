@@ -13,16 +13,7 @@ import { api } from '@/lib/api';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
 
-const CATEGORIES = [
-  { emoji: '📱', key: 'electronics' },
-  { emoji: '🚗', key: 'vehicles' },
-  { emoji: '🏠', key: 'property' },
-  { emoji: '👗', key: 'clothing' },
-  { emoji: '🌾', key: 'agriculture' },
-  { emoji: '🛋️', key: 'furniture' },
-  { emoji: '🍎', key: 'food' },
-  { emoji: '💼', key: 'business' },
-];
+
 
 interface Banner {
   id: number;
@@ -397,12 +388,31 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
 
 // ── Main Hero ────────────────────────────────────────────────────────────────
 export function HomeHero() {
-  const { t } = useLocale();
-  const catLabel = (key: string) => (t.categories as any)[key] ?? key;
+  const { t, locale } = useLocale();
+  const [rootCategories, setRootCategories] = useState<any[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [categoriesError, setCategoriesError] = useState<string | null>(null);
   const [settings, setSettings] = useState<any>(null);
   const [recentProducts, setRecentProducts] = useState<any[]>([]);
   const [rentalProducts, setRentalProducts] = useState<any[]>([]);
   const [conditionFilter, setConditionFilter] = useState<'all' | 'new' | 'used'>('all');
+
+  useEffect(() => {
+    setLoadingCategories(true);
+    setCategoriesError(null);
+    api.getRootCategories(locale)
+      .then(cats => {
+        if (Array.isArray(cats) && cats.length > 0) {
+          setRootCategories(cats);
+        } else {
+          return api.getCategories().then(c => setRootCategories(Array.isArray(c) ? c : []));
+        }
+      })
+      .catch(() => {
+        setCategoriesError('Unable to load categories');
+      })
+      .finally(() => setLoadingCategories(false));
+  }, [locale]);
 
   useEffect(() => {
     api.getPublicPaymentSettings().then(setSettings).catch(() => {});
@@ -479,15 +489,55 @@ export function HomeHero() {
                 <span>Browse All</span> <ArrowRight size={11} />
               </Link>
             </div>
-            <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
-              {CATEGORIES.map(({ emoji, key }) => (
-                <Link key={key} href={`/products?cat=${key}`}
-                  className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-600/10 hover:-translate-y-1.5 transition-all duration-200">
-                  <span className="text-2xl sm:text-3xl group-hover:scale-125 transition-transform duration-200">{emoji}</span>
-                  <span className="text-[9px] sm:text-[10px] font-bold text-zinc-500 dark:text-zinc-400 text-center leading-tight capitalize">{catLabel(key)}</span>
-                </Link>
-              ))}
-            </div>
+            {loadingCategories ? (
+              <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div key={i} className="animate-pulse flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200/50 dark:border-zinc-800">
+                    <div className="w-8 h-8 rounded-full bg-zinc-200 dark:bg-zinc-700" />
+                    <div className="w-12 h-2.5 rounded bg-zinc-200 dark:bg-zinc-700" />
+                  </div>
+                ))}
+              </div>
+            ) : categoriesError && rootCategories.length === 0 ? (
+              <div className="text-center py-6 border border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl">
+                <p className="text-xs text-zinc-500">{categoriesError}</p>
+                <button
+                  onClick={() => {
+                    setLoadingCategories(true);
+                    api.getRootCategories(locale)
+                      .then(setRootCategories)
+                      .catch(() => setCategoriesError('Unable to load categories'))
+                      .finally(() => setLoadingCategories(false));
+                  }}
+                  className="mt-2 text-xs font-bold text-orange-600 hover:underline"
+                >
+                  Retry
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
+                {rootCategories.slice(0, 16).map((cat) => {
+                  const label = cat.name || cat.name_en || cat.slug;
+                  const icon = cat.icon || (cat.image_url ? (
+                    <img src={cat.image_url} alt={label} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
+                  ) : '📦');
+                  return (
+                    <Link
+                      key={cat.id || cat.slug}
+                      href={`/products?category_hierarchy_id=${cat.id}&cat=${cat.slug}`}
+                      className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-600/10 hover:-translate-y-1.5 transition-all duration-200"
+                    >
+                      <span className="text-2xl sm:text-3xl group-hover:scale-125 transition-transform duration-200 flex items-center justify-center min-h-[36px]">
+                        {typeof icon === 'string' ? icon : icon}
+                      </span>
+                      <span className="text-[9px] sm:text-[10px] font-bold text-zinc-600 dark:text-zinc-300 text-center leading-tight line-clamp-1 capitalize">
+                        {label}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Featured Marketplace Listings (with condition tabs) */}
@@ -603,7 +653,7 @@ export function HomeHero() {
             <div className="relative z-10 max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-black uppercase tracking-wider text-white">
                 <Store size={13} />
-                <span>Join SellBuy Marketplace</span>
+                <span>Join HUNTIQ Marketplace</span>
               </div>
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
                 Start Selling or Renting Properties Across Ethiopia

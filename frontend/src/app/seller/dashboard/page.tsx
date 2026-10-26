@@ -369,8 +369,14 @@ export default function SellerDashboardPage() {
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
           </p>
         </div>
-        <Link href="/seller/products"
-          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors shadow-md shadow-orange-600/20">
+        <Link
+          href={sellerPreference === 'rent' ? '/seller/products?preference=rent&new=1' : '/seller/products?new=1'}
+          className={`flex items-center gap-2 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors shadow-md ${
+            sellerPreference === 'rent'
+              ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20'
+              : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
+          }`}
+        >
           <Plus size={15} /> {labels.addButton}
         </Link>
       </div>

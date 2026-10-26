@@ -1,7 +1,10 @@
 # ── Build stage ───────────────────────────────────────────────────────────────
-FROM golang:1.22-alpine AS builder
+FROM golang:1.26-alpine AS builder
 
 WORKDIR /app
+
+# ca-certificates and tzdata for build/downloads
+RUN apk add --no-cache git ca-certificates tzdata
 
 # Cache dependency downloads
 COPY go.mod go.sum ./
@@ -10,31 +13,29 @@ RUN go mod download
 # Copy all source
 COPY . .
 
-# Build all binaries in one RUN so any source change busts the whole layer
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o api          ./cmd/api && \
-    CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o migrate      ./cmd/migrate && \
-    CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o seed_admin   ./cmd/seed_admin && \
-    CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o seed_products ./cmd/seed_products
+# Build API binary
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/bin/api ./cmd/api
 
 # ── Runtime stage ─────────────────────────────────────────────────────────────
-FROM alpine:3.19
+FROM alpine:3.20
 
-# ca-certificates required for TLS connection to Nhost PostgreSQL
+# ca-certificates required for TLS connection to PostgreSQL / external services
 RUN apk add --no-cache ca-certificates tzdata
+
+# Create non-root system user
+RUN addgroup -g 10001 huntiq && \
+    adduser -u 10001 -G huntiq -s /bin/sh -D appuser
 
 WORKDIR /app
 
-COPY --from=builder /app/api          ./api
-COPY --from=builder /app/migrate      ./migrate
-COPY --from=builder /app/seed_admin   ./seed_admin
-COPY --from=builder /app/seed_products ./seed_products
-COPY --from=builder /app/migrations     ./migrations
+COPY --from=builder /app/bin/api ./api
 
-RUN mkdir -p /app/uploads
+# Setup uploads directory with appropriate permissions
+RUN mkdir -p /app/uploads && chown -R appuser:huntiq /app
 
-COPY start.sh ./start.sh
-RUN chmod +x ./start.sh
+USER appuser
 
 EXPOSE 8080
 
-CMD ["./start.sh"]
+ENTRYPOINT ["./api"]
+

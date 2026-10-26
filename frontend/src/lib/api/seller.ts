@@ -55,6 +55,12 @@ export const sellerApi = {
     fetchAPI<any>('/seller/preference', { method: 'PUT', body: JSON.stringify(data), headers: authHeaders(token) }),
   sellerGetFeePreview: (price: number, tier: string, days: number, token: string) =>
     fetchAPI<any>(`/seller/fee-preview?price=${price}&tier=${tier}&days=${days}`, { headers: authHeaders(token) }),
+  saveProductAttributes: (productId: number, data: { category_id: number; attributes: any[] }, token: string) =>
+    fetchAPI<any>(`/seller/products/${productId}/attributes`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: authHeaders(token),
+    }),
   uploadImage: async (file: File, token: string): Promise<string> => {
     const form = new FormData();
     form.append('image', file);

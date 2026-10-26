@@ -1,14 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { SearchBar } from '@/components/public/SearchBar';
 import { UserAccountMenu } from '@/components/layout/UserAccountMenu';
 import { Globe, Moon, Sun, ShoppingBag, ChevronDown,
   HelpCircle, X, ChevronRight, Shield, Zap, ImageIcon, MapPin, User,
 } from 'lucide-react';
+import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
 // Language list is now driven by i18n registry — no hardcoding needed.
 // To add a new language: add its JSON + register in i18n.ts. Header auto-updates.
@@ -189,14 +190,16 @@ export function Header() {
     return () => clearTimeout(id);
   }, [langOpen]);
 
-  const [currentType, setCurrentType] = useState<string | null>(null);
-
+function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => void }) {
+  const searchParams = useSearchParams();
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const p = new URLSearchParams(window.location.search);
-      setCurrentType(p.get('type'));
-    }
-  }, [pathname]);
+    const t = searchParams.get('type') || searchParams.get('listing_type');
+    onTypeChange(t);
+  }, [searchParams, onTypeChange]);
+  return null;
+}
+
+  const [currentType, setCurrentType] = useState<string | null>(null);
 
   const isRentActive = pathname === '/rent' || (pathname === '/products' && currentType === 'rent');
   const isBuyActive = (pathname === '/products' && currentType !== 'rent') || pathname === '/buy';
@@ -204,6 +207,9 @@ export function Header() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <TypeSync onTypeChange={setCurrentType} />
+      </Suspense>
       {helpOpen && <HelpPanel onClose={() => setHelpOpen(false)} />}
       <CategoryDrawer
         isOpen={categoryDrawerOpen}
@@ -274,19 +280,13 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 h-15 py-2 flex items-center gap-2 sm:gap-4">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden flex items-center justify-center bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm group-hover:scale-105 transition-transform">
-              <img src="/huntiq.png" alt="SellBuy" className="w-full h-full object-contain p-0.5" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-black tracking-tight leading-none text-zinc-900 dark:text-white">
-                {t.ui.app_name}
-              </span>
-              <span className="text-[9px] font-bold text-orange-600 uppercase tracking-widest hidden sm:block">
-                Marketplace
-              </span>
-            </div>
-          </Link>
+          <HuntiqLogo
+            size="sm"
+            showText
+            subtitle="Marketplace"
+            href="/"
+            priority
+          />
 
           {/* Category Drawer Trigger Button */}
           <button
@@ -336,28 +336,34 @@ export function Header() {
             </button>
             <span className="text-zinc-200 dark:text-zinc-800">|</span>
 
+            {/* ── Marketplace Pillars (Transaction Modes) ── */}
             <Link
               href="/products?type=sale"
-              className={`px-2.5 py-1 rounded-lg transition-colors ${
+              className={`px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 ${
                 isBuyActive
-                  ? 'bg-orange-600 text-white font-black'
+                  ? 'bg-orange-600 text-white font-black shadow-sm'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
               }`}
             >
-              🛒 {t.nav.buy ?? 'Buy'}
+              <span>🛒</span>
+              <span>{t.nav.buy ?? 'Buy'} (For Sale)</span>
             </Link>
 
             <Link
               href="/products?type=rent"
-              className={`px-2.5 py-1 rounded-lg transition-colors ${
+              className={`px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 ${
                 isRentActive
-                  ? 'bg-teal-600 text-white font-black'
+                  ? 'bg-teal-600 text-white font-black shadow-sm'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
               }`}
             >
-              🏠 {t.nav.rental ?? 'Rental'}
+              <span>🏠</span>
+              <span>{t.nav.rental ?? 'Rent'} (Rentals)</span>
             </Link>
 
+            <span className="text-zinc-300 dark:text-zinc-700 mx-1 font-light">|</span>
+
+            {/* ── Taxonomy Domains (Categories) ── */}
             <Link
               href="/products?cat=property"
               className={`px-2.5 py-1 rounded-lg transition-colors ${
@@ -366,7 +372,7 @@ export function Header() {
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
               }`}
             >
-              🏢 Land & Property
+              🏢 Real Estate & Property
             </Link>
 
             <Link

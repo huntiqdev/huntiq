@@ -304,3 +304,107 @@ func (h *CategoryHandler) GetCategoryStats(c *fiber.Ctx) error {
 		"data":    stats,
 	})
 }
+
+// GetRoots returns all active root/pillar categories (level = 1)
+// GET /api/categories/roots?lang=en
+func (h *CategoryHandler) GetRoots(c *fiber.Ctx) error {
+	lang := c.Query("lang", "en")
+	roots, err := h.svc.GetRoots(c.Context(), lang)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"error":   "failed to retrieve root categories",
+		})
+	}
+	return c.JSON(fiber.Map{
+		"success": true,
+		"data":    roots,
+	})
+}
+
+// CheckSlug checks if a category slug is available
+// GET /api/categories/check-slug?slug=xyz&exclude_id=12
+func (h *CategoryHandler) CheckSlug(c *fiber.Ctx) error {
+	slug := c.Query("slug")
+	if slug == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "slug query parameter is required",
+		})
+	}
+	excludeID := c.QueryInt("exclude_id", 0)
+	available, err := h.svc.CheckSlugAvailability(c.Context(), slug, excludeID)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"error":   "failed to check slug availability",
+		})
+	}
+	return c.JSON(fiber.Map{
+		"success":   true,
+		"available": available,
+		"slug":      slug,
+	})
+}
+
+// ReorderCategory updates a category's display order (admin only)
+// PUT /api/admin/categories/:id/reorder
+func (h *CategoryHandler) ReorderCategory(c *fiber.Ctx) error {
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "invalid category ID",
+		})
+	}
+	var body struct {
+		DisplayOrder int `json:"display_order"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "invalid request body",
+		})
+	}
+	if err := h.svc.ReorderCategory(c.Context(), id, body.DisplayOrder); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   err.Error(),
+		})
+	}
+	return c.JSON(fiber.Map{
+		"success": true,
+		"message": "category order updated successfully",
+	})
+}
+
+// SetCategoryStatus toggles active/inactive state of a category (admin only)
+// PUT /api/admin/categories/:id/status
+func (h *CategoryHandler) SetCategoryStatus(c *fiber.Ctx) error {
+	id, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "invalid category ID",
+		})
+	}
+	var body struct {
+		IsActive bool `json:"is_active"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "invalid request body",
+		})
+	}
+	if err := h.svc.SetCategoryStatus(c.Context(), id, body.IsActive); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   err.Error(),
+		})
+	}
+	return c.JSON(fiber.Map{
+		"success": true,
+		"message": "category status updated successfully",
+	})
+}

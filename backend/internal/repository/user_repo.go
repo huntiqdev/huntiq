@@ -192,10 +192,21 @@ func (r *UserRepo) ActivateCapability(ctx context.Context, userID int, capabilit
 		return err
 	}
 	// If activating seller or landlord, update seller_preference and role where helpful for backward compatibility
-	if capability == "seller" {
-		_, _ = r.db.Exec(ctx, `UPDATE users SET role = 'seller' WHERE id = $1 AND role = 'buyer'`, userID)
+	pref, _ := metadata["preference"].(string)
+	if pref == "sale" || pref == "rent" || pref == "both" {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET seller_preference = $1, role = CASE WHEN role = 'buyer' THEN 'seller' ELSE role END WHERE id = $2`, pref, userID)
+		if pref == "both" {
+			// Activate both seller and landlord capabilities
+			_, _ = r.db.Exec(ctx, `
+				INSERT INTO user_capabilities (user_id, capability, status, activated_at, metadata)
+				VALUES ($1, 'seller', 'active', NOW(), $2), ($1, 'landlord', 'active', NOW(), $2)
+				ON CONFLICT (user_id, capability) DO UPDATE SET status = 'active', activated_at = NOW()`,
+				userID, metaJSON)
+		}
+	} else if capability == "seller" {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET role = 'seller', seller_preference = 'sale' WHERE id = $1 AND role = 'buyer'`, userID)
 	} else if capability == "landlord" {
-		_, _ = r.db.Exec(ctx, `UPDATE users SET seller_preference = CASE WHEN seller_preference = 'sale' THEN 'both' ELSE 'rent' END WHERE id = $1`, userID)
+		_, _ = r.db.Exec(ctx, `UPDATE users SET seller_preference = 'rent', role = CASE WHEN role = 'buyer' THEN 'seller' ELSE role END WHERE id = $1`, userID)
 	}
 	if bn, ok := metadata["business_name"].(string); ok && bn != "" {
 		_, _ = r.db.Exec(ctx, `UPDATE users SET business_name = $1 WHERE id = $2 AND (business_name IS NULL OR business_name = '')`, bn, userID)

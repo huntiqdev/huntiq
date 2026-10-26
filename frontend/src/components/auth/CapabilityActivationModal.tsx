@@ -30,15 +30,16 @@ export function CapabilityActivationModal({
   const isLandlord = capability === 'landlord';
   const title = isLandlord ? 'Activate Landlord Capability' : 'Activate Seller Capability';
   const subtitle = isLandlord
-    ? 'Start listing houses, apartments, shops, and land for rent on SellBuy.'
+    ? 'Start listing houses, apartments, shops, and land for rent on HUNTIQ.'
     : 'Start listing and selling products, tools, and equipment across Ethiopia.';
 
   const handleActivate = async () => {
     setLoading(true);
     setError('');
     try {
+      const targetCap = preference === 'rent' ? 'landlord' : 'seller';
       const res = await activateCapability(
-        capability,
+        targetCap,
         businessName.trim() || undefined,
         preference
       );
@@ -72,12 +73,14 @@ export function CapabilityActivationModal({
         <div className="flex items-center gap-3.5 mb-5">
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg ${
-              isLandlord
+              preference === 'rent'
                 ? 'bg-teal-600 shadow-teal-600/30 text-white'
+                : preference === 'both'
+                ? 'bg-indigo-600 shadow-indigo-600/30 text-white'
                 : 'bg-orange-600 shadow-orange-600/30 text-white'
             }`}
           >
-            {isLandlord ? <Home size={24} /> : <ShoppingBag size={24} />}
+            {preference === 'rent' ? <Home size={24} /> : preference === 'both' ? <Sparkles size={24} /> : <ShoppingBag size={24} />}
           </div>
           <div>
             <h2 className="text-lg font-black tracking-tight">{title}</h2>
@@ -85,8 +88,40 @@ export function CapabilityActivationModal({
           </div>
         </div>
 
+        {/* Strategy Selector */}
+        <div className="space-y-1.5 mb-4">
+          <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block">
+            Provider Operational Strategy
+          </label>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { id: 'sale', label: '🛒 Goods', desc: 'Sell catalog items' },
+              { id: 'rent', label: '🏠 Rentals', desc: 'Lease properties/assets' },
+              { id: 'both', label: '🔄 Dual', desc: 'Sales & rentals' },
+            ].map((opt) => (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => setPreference(opt.id as 'sale' | 'rent' | 'both')}
+                className={`p-2 rounded-xl border text-left transition-all ${
+                  preference === opt.id
+                    ? opt.id === 'rent'
+                      ? 'border-teal-500 bg-teal-500/10 text-teal-400 font-bold'
+                      : opt.id === 'both'
+                      ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400 font-bold'
+                      : 'border-orange-500 bg-orange-500/10 text-orange-400 font-bold'
+                    : 'border-zinc-200 dark:border-white/10 hover:border-zinc-400 text-zinc-600 dark:text-zinc-400'
+                }`}
+              >
+                <div className="text-xs font-bold leading-tight">{opt.label}</div>
+                <div className="text-[9px] text-zinc-400 dark:text-zinc-500 mt-0.5">{opt.desc}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Benefits List */}
-        <div className="bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5 rounded-2xl p-4 mb-5 space-y-2.5">
+        <div className="bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/5 rounded-2xl p-4 mb-4 space-y-2">
           <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
             Included with your unified identity:
           </p>
@@ -96,7 +131,7 @@ export function CapabilityActivationModal({
           </div>
           <div className="flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300">
             <CheckCircle2 size={14} className="text-green-500 shrink-0" />
-            <span>Instant access to listing tools and seller studio</span>
+            <span>Instant access to listing tools and provider consoles</span>
           </div>
           <div className="flex items-center gap-2 text-xs text-zinc-700 dark:text-zinc-300">
             <CheckCircle2 size={14} className="text-green-500 shrink-0" />
@@ -105,18 +140,18 @@ export function CapabilityActivationModal({
         </div>
 
         {/* Optional Business Name */}
-        <div className="space-y-4 mb-6">
+        <div className="space-y-4 mb-4">
           <div>
             <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block mb-1.5">
-              {isLandlord ? 'Agency / Property Name' : 'Shop / Business Name'}{' '}
+              {preference === 'rent' ? 'Agency / Property Name' : 'Shop / Business Name'}{' '}
               <span className="normal-case font-normal text-zinc-400">(optional)</span>
             </label>
             <input
               type="text"
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
-              placeholder={isLandlord ? 'e.g. Addis Real Estate' : 'e.g. Bikila Hardware'}
-              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60 transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              placeholder={preference === 'rent' ? 'e.g. Addis Real Estate' : 'e.g. Bikila Hardware'}
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60 transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
             />
           </div>
         </div>

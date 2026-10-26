@@ -13,14 +13,14 @@
 ai/
 ├── AGENTS.md                  # This file
 ├── README.md                  # Human developer documentation
-├── pyproject.toml             # Pinned project metadata & dependencies
-├── uv.lock                    # Deterministic lockfile (MUST BE COMMITTED)
+├── pyproject.toml             # Unified uv workspace root & huntiq-ai package
+├── uv.lock                    # Unified monorepo lockfile (MUST BE COMMITTED)
 ├── .python-version            # Pinned Python version
 ├── .env.example               # Safe template with placeholder values
 ├── Dockerfile                 # Minimal, non-root container
 ├── .dockerignore              # Ignore venv, caches, tests, data-platform, docs
 │
-├── data-platform/             # Offline dataset governance, contracts, validator
+├── data-platform/             # Offline dataset governance, contracts, validator (workspace member)
 ├── docs/                      # Dedicated AI architecture, ADRs, security, runbooks
 │
 ├── src/
@@ -41,16 +41,19 @@ ai/
 │       │   └── security.py    # Internal pre-shared secret validation
 │       └── schemas/
 │           ├── __init__.py
+│           ├── common.py      # Shared enums (Locale, QueryIntent), RFC 7807 models
 │           └── health.py      # Health response schemas
 │
 └── tests/
     ├── conftest.py            # Shared fixtures (TestClient, mock settings)
     ├── unit/
+    │   ├── test_common_schemas.py # Validates common enums and RFC 7807 models
     │   ├── test_config.py     # Validates setting defaults & overrides
     │   ├── test_health.py     # Validates liveness & readiness logic
     │   └── test_security.py   # Validates token rejection and acceptance
     └── contract/
-        └── test_contract.py   # Validates response schema adherence
+        ├── test_contract.py   # Validates response schema adherence
+        └── test_contract_alignment.py # Validates JSON schema and Pydantic alignment
 ```
 
 ---
@@ -76,10 +79,11 @@ ai/
 
 ## 3. Dependency Management Commands
 
-- **Install/Sync dependencies:** `uv sync`
+- **Install/Sync workspace dependencies:** `uv sync --all-packages`
+- **Sync runtime only for production container:** `uv sync --package huntiq-ai --no-dev`
 - **Add a runtime dependency:** `uv add <package>`
 - **Add a dev/test dependency:** `uv add --dev <package>`
-- **Run test suite:** `uv run pytest -v`
+- **Run workspace test suite:** `uv run pytest -v` (runs both runtime and data-platform tests)
 - **Run lint check:** `uv run ruff check .`
 - **Run code format:** `uv run ruff format .`
 - **Start development server:** `uv run uvicorn huntiq_ai.main:app --reload --port 8000`

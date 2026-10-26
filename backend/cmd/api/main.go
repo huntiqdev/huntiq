@@ -4,8 +4,11 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
+	"os/signal"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -66,9 +69,6 @@ func main() {
 	bannerRepo := repository.NewBannerRepo(db)
 	referralRepo := repository.NewReferralRepo(db)
 	
-	// Search repo for analytics (used by product handler)
-	_ = searchRepo // Reserved for future search analytics integration
-	
 	// Search handler for admin analytics
 	searchHandler := handlers.NewSearchHandler(searchRepo)
 
@@ -108,7 +108,8 @@ func main() {
 	// Services with OTP crypto injected
 	productSvc := service.NewProductService(productRepo, categoryRepo, locationRepo, userRepo).
 		WithBackendBase(cfg.AppBaseURL).
-		WithAttributeRepo(attributeRepo)
+		WithAttributeRepo(attributeRepo).
+		WithCategoryHierarchyRepo(categoryHierarchyRepo)
 	locationSvc := service.NewLocationService(locationRepo).WithHierarchy(locationHierarchyRepo)
 	categoryHierarchySvc := service.NewCategoryHierarchyService(categoryHierarchyRepo)
 	attributeSvc := service.NewAttributeService(attributeRepo)
@@ -219,7 +220,7 @@ func main() {
 		})
 
 	// Handlers
-	productHandler := handlers.NewProductHandler(productSvc, authSvc)
+	productHandler := handlers.NewProductHandler(productSvc, authSvc).WithSearchLogger(searchRepo)
 	locationHandler := handlers.NewLocationHandler(locationSvc)
 	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc)
 	attributeHandler := handlers.NewAttributeHandler(attributeSvc).WithProductService(productSvc)
@@ -348,10 +349,10 @@ func main() {
 	api.Get("/products", mw.OptionalAuth, productHandler.List)
 	api.Get("/products/:id", mw.OptionalAuth, productHandler.Get)
 	api.Get("/categories", productHandler.ListCategories)
-	api.Get("/categories/popular", productHandler.PopularCategories)
-	
-	// Category Hierarchy (Public)
+	api.Get("/categories/roots", categoryHandler.GetRoots)
 	api.Get("/categories/tree", categoryHandler.GetCategoryTree)
+	api.Get("/categories/popular", productHandler.PopularCategories)
+	api.Get("/categories/check-slug", categoryHandler.CheckSlug)
 	api.Get("/categories/slug/:slug", categoryHandler.GetCategoryBySlug)
 	api.Get("/categories/:id", categoryHandler.GetCategory)
 	api.Get("/categories/:id/children", categoryHandler.GetCategoryChildren)
@@ -668,6 +669,8 @@ func main() {
 	admin.Get("/category-hierarchy/:id/stats", mw.RequirePermission("categories"), categoryHandler.GetCategoryStats)
 	admin.Post("/category-hierarchy", middleware.RequirePlatformAdmin, categoryHandler.CreateCategory)
 	admin.Put("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.UpdateCategory)
+	admin.Put("/category-hierarchy/:id/status", mw.RequirePermission("categories"), categoryHandler.SetCategoryStatus)
+	admin.Put("/category-hierarchy/:id/reorder", mw.RequirePermission("categories"), categoryHandler.ReorderCategory)
 	admin.Delete("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.DeleteCategory)
 	
 	// Attribute Management (Admin)
@@ -767,6 +770,40 @@ func main() {
 		log.Println("⚠️  DEV MODE: /api/dev/otp and /api/dev/otp/decrypt endpoints enabled — disable in production (set APP_ENV=production)") //nolint:gosec // G117: error/value from internal source, not user-controlled input
 	}
 
-	log.Printf("Server starting on port %s", cfg.AppPort) //nolint:gosec // G117: error/value from internal source, not user-controlled input
-	log.Fatal(app.Listen(":" + cfg.AppPort))
+	// Start server in background listener goroutine
+	serverErr := make(chan error, 1)
+	go func() {
+		log.Printf("Server starting on port %s", cfg.AppPort) //nolint:gosec // G117: error/value from internal source, not user-controlled input
+		if err := app.Listen(":" + cfg.AppPort); err != nil {
+			serverErr <- err
+		}
+	}()
+
+	// Wait for OS termination signal or startup failure
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+
+	select {
+	case err := <-serverErr:
+		log.Fatalf("Server startup or listener failed: %v", err)
+	case sig := <-quit:
+		log.Printf("Received signal %v — initiating graceful shutdown...", sig)
+	}
+
+	// 1. Cancel background worker and scheduled job contexts
+	log.Println("Stopping background workers and jobs...")
+	jobCancel()
+
+	// 2. Shut down Fiber HTTP server with a 10-second timeout
+	log.Println("Shutting down HTTP server with timeout...")
+	if err := app.ShutdownWithTimeout(10 * time.Second); err != nil {
+		log.Printf("HTTP server shutdown warning: %v", err)
+	} else {
+		log.Println("HTTP server shut down gracefully.")
+	}
+
+	// 3. Close database connection pool
+	log.Println("Closing database connection pool...")
+	db.Close()
+	log.Println("Graceful shutdown completed.")
 }

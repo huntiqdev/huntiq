@@ -29,6 +29,8 @@ import {
   ArrowUpDown,
   Building2,
   Star,
+  Home,
+  Layers,
 } from 'lucide-react';
 
 interface Seller {
@@ -71,6 +73,7 @@ export default function AdminSellersPage() {
   // Search & Filter state
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [personaFilter, setPersonaFilter] = useState<'all' | 'sale' | 'rent' | 'both'>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
   const [tierFilter, setTierFilter] = useState<'all' | 'normal' | 'gold' | 'premium'>('all');
   const [page, setPage] = useState(1);
@@ -119,6 +122,7 @@ export default function AdminSellersPage() {
           search: searchQuery || undefined,
           status: statusFilter === 'all' ? undefined : statusFilter,
           tier: tierFilter === 'all' ? undefined : tierFilter,
+          strategy: personaFilter === 'all' ? undefined : personaFilter,
         },
         user.token
       );
@@ -131,7 +135,7 @@ export default function AdminSellersPage() {
     } finally {
       setLoading(false);
     }
-  }, [user?.token, page, limit, searchQuery, statusFilter, tierFilter]);
+  }, [user?.token, page, limit, searchQuery, statusFilter, tierFilter, personaFilter]);
 
   useEffect(() => {
     loadSellers();
@@ -181,7 +185,16 @@ export default function AdminSellersPage() {
   // Quick summary counts
   const activeCount = sellers.filter((s) => s.is_active).length;
   const deactivatedCount = sellers.filter((s) => !s.is_active).length;
-  const premiumGoldCount = sellers.filter((s) => s.tier === 'gold' || s.tier === 'premium').length;
+  const goodsSellersCount = sellers.filter(
+    (s) => (s.seller_preference || 'sale') === 'sale' || s.seller_preference === 'both'
+  ).length;
+  const landlordsCount = sellers.filter(
+    (s) => s.seller_preference === 'rent' || s.seller_preference === 'both'
+  ).length;
+  const dualCount = sellers.filter((s) => s.seller_preference === 'both').length;
+
+  // With server-side strategy filtering, sellers is already filtered by personaFilter
+  const displayedSellers = sellers;
 
   return (
     <div className="space-y-6">
@@ -212,18 +225,18 @@ export default function AdminSellersPage() {
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-gradient-to-br from-orange-600 to-amber-600 text-white rounded-2xl shadow-lg shadow-orange-600/20">
+          <div className="p-3 bg-gradient-to-br from-orange-600 via-amber-600 to-teal-600 text-white rounded-2xl shadow-lg shadow-orange-600/20">
             <Store size={26} />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-black text-white tracking-tight">Sellers Directory</h1>
+              <h1 className="text-2xl font-black text-white tracking-tight">Providers Directory: Sellers & Landlords</h1>
               <span className="px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-orange-600/10 text-orange-400 border border-orange-500/20">
-                {totalCount} Total Registered
+                {totalCount} Total Providers
               </span>
             </div>
             <p className="text-xs text-zinc-400 mt-0.5">
-              Discover, audit, inspect, and manage verified marketplace merchant accounts across Ethiopia.
+              Discover, audit, inspect, and manage verified goods sellers, rental landlords, and hybrid providers across Ethiopia.
             </p>
           </div>
         </div>
@@ -246,53 +259,51 @@ export default function AdminSellersPage() {
         <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">
-              Total Sellers
+              Total Providers
             </span>
             <Store size={16} className="text-zinc-400" />
           </div>
           <div className="text-2xl font-black text-white mt-2">{totalCount}</div>
-          <div className="text-[10px] text-zinc-500 mt-1 font-medium">All registered merchants</div>
+          <div className="text-[10px] text-zinc-500 mt-1 font-medium">All registered supply partners</div>
+        </div>
+
+        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-orange-400 uppercase tracking-wider">
+              Goods Sellers (Sale)
+            </span>
+            <Store size={16} className="text-orange-400" />
+          </div>
+          <div className="text-2xl font-black text-orange-400 mt-2">
+            {loading ? '-' : goodsSellersCount}
+          </div>
+          <div className="text-[10px] text-zinc-500 mt-1 font-medium">Retail & wholesale merchants</div>
+        </div>
+
+        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-teal-400 uppercase tracking-wider">
+              Landlords & Hosts (Rent)
+            </span>
+            <Home size={16} className="text-teal-400" />
+          </div>
+          <div className="text-2xl font-black text-teal-400 mt-2">
+            {loading ? '-' : landlordsCount}
+          </div>
+          <div className="text-[10px] text-zinc-500 mt-1 font-medium">Properties & rental assets ({dualCount} dual)</div>
         </div>
 
         <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">
-              Active Status
+              Active Authorized
             </span>
             <CheckCircle2 size={16} className="text-emerald-400" />
           </div>
           <div className="text-2xl font-black text-emerald-400 mt-2">
             {loading ? '-' : activeCount}
           </div>
-          <div className="text-[10px] text-zinc-500 mt-1 font-medium">
-            Authorized to list & trade
-          </div>
-        </div>
-
-        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-red-400 uppercase tracking-wider">
-              Deactivated
-            </span>
-            <XCircle size={16} className="text-red-400" />
-          </div>
-          <div className="text-2xl font-black text-red-400 mt-2">
-            {loading ? '-' : deactivatedCount}
-          </div>
-          <div className="text-[10px] text-zinc-500 mt-1 font-medium">Restricted / Suspended</div>
-        </div>
-
-        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-2xl">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider">
-              Gold & Premium
-            </span>
-            <Crown size={16} className="text-amber-400" />
-          </div>
-          <div className="text-2xl font-black text-amber-400 mt-2">
-            {loading ? '-' : premiumGoldCount}
-          </div>
-          <div className="text-[10px] text-zinc-500 mt-1 font-medium">Tier upgraded merchants</div>
+          <div className="text-[10px] text-zinc-500 mt-1 font-medium">Authorized to list & trade</div>
         </div>
       </div>
 
@@ -322,6 +333,37 @@ export default function AdminSellersPage() {
             )}
           </div>
 
+          {/* Provider Strategy Filter */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
+            {(
+              [
+                { id: 'all', label: 'All Providers' },
+                { id: 'sale', label: '🛒 Goods Sellers' },
+                { id: 'rent', label: '🏠 Landlords' },
+                { id: 'both', label: '🔄 Dual (Both)' },
+              ] as const
+            ).map((p) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setPersonaFilter(p.id);
+                  setPage(1);
+                }}
+                className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                  personaFilter === p.id
+                    ? p.id === 'rent'
+                      ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
+                      : p.id === 'both'
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
+                      : 'bg-orange-600 text-white shadow-md shadow-orange-600/20'
+                    : 'bg-zinc-950 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800/80'
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+
           {/* Status Filter */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0">
             {(
@@ -339,7 +381,7 @@ export default function AdminSellersPage() {
                 }}
                 className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                   statusFilter === tab.id
-                    ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20'
+                    ? 'bg-zinc-700 text-white shadow-md'
                     : 'bg-zinc-950 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800/80'
                 }`}
               >
@@ -377,7 +419,7 @@ export default function AdminSellersPage() {
         </div>
 
         {/* Active Filter Badges */}
-        {(searchQuery || statusFilter !== 'all' || tierFilter !== 'all') && (
+        {(searchQuery || statusFilter !== 'all' || tierFilter !== 'all' || personaFilter !== 'all') && (
           <div className="flex items-center gap-2 pt-2 border-t border-zinc-800/60 text-xs">
             <span className="text-zinc-500 font-bold text-[11px] uppercase tracking-wider">
               Filtered By:
@@ -386,6 +428,14 @@ export default function AdminSellersPage() {
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 text-xs font-medium">
                 Query: &quot;{searchQuery}&quot;
                 <button onClick={() => setSearchInput('')} className="hover:text-white">
+                  <X size={12} />
+                </button>
+              </span>
+            )}
+            {personaFilter !== 'all' && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 text-xs font-medium capitalize">
+                Strategy: {personaFilter === 'sale' ? 'Goods Sellers' : personaFilter === 'rent' ? 'Landlords' : 'Dual Providers'}
+                <button onClick={() => setPersonaFilter('all')} className="hover:text-white">
                   <X size={12} />
                 </button>
               </span>
@@ -409,6 +459,7 @@ export default function AdminSellersPage() {
             <button
               onClick={() => {
                 setSearchInput('');
+                setPersonaFilter('all');
                 setStatusFilter('all');
                 setTierFilter('all');
                 setPage(1);
@@ -446,9 +497,10 @@ export default function AdminSellersPage() {
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="border-b border-zinc-800 bg-zinc-950/50 text-zinc-400 font-bold uppercase tracking-wider text-[11px]">
-                <th className="py-4 px-4">Merchant</th>
+                <th className="py-4 px-4">Provider</th>
                 <th className="py-4 px-4">Contact Info</th>
-                <th className="py-4 px-4">Business Details</th>
+                <th className="py-4 px-4">Strategy & Role</th>
+                <th className="py-4 px-4">Business Profile</th>
                 <th className="py-4 px-4">Tier & Rating</th>
                 <th className="py-4 px-4">Account Status</th>
                 <th className="py-4 px-4">Registered</th>
@@ -476,6 +528,9 @@ export default function AdminSellersPage() {
                       </div>
                     </td>
                     <td className="py-4 px-4">
+                      <div className="h-4 w-24 bg-zinc-800 rounded" />
+                    </td>
+                    <td className="py-4 px-4">
                       <div className="h-3 w-20 bg-zinc-800 rounded" />
                     </td>
                     <td className="py-4 px-4">
@@ -492,23 +547,24 @@ export default function AdminSellersPage() {
                     </td>
                   </tr>
                 ))
-              ) : sellers.length === 0 ? (
+              ) : displayedSellers.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-14 text-center">
+                  <td colSpan={8} className="py-14 text-center">
                     <div className="max-w-sm mx-auto space-y-3">
                       <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center text-zinc-500 mx-auto">
                         <Store size={24} />
                       </div>
-                      <div className="text-sm font-bold text-white">No sellers found</div>
+                      <div className="text-sm font-bold text-white">No providers found</div>
                       <p className="text-xs text-zinc-400">
-                        {searchQuery || statusFilter !== 'all' || tierFilter !== 'all'
-                          ? 'No merchant records match your active search filters. Try resetting the filter criteria.'
-                          : 'No registered sellers exist in the marketplace directory yet.'}
+                        {searchQuery || statusFilter !== 'all' || tierFilter !== 'all' || personaFilter !== 'all'
+                          ? 'No merchant or landlord records match your active search filters. Try resetting the filter criteria.'
+                          : 'No registered sellers or landlords exist in the marketplace directory yet.'}
                       </p>
-                      {(searchQuery || statusFilter !== 'all' || tierFilter !== 'all') && (
+                      {(searchQuery || statusFilter !== 'all' || tierFilter !== 'all' || personaFilter !== 'all') && (
                         <button
                           onClick={() => {
                             setSearchInput('');
+                            setPersonaFilter('all');
                             setStatusFilter('all');
                             setTierFilter('all');
                           }}
@@ -521,8 +577,9 @@ export default function AdminSellersPage() {
                   </td>
                 </tr>
               ) : (
-                sellers.map((seller) => {
+                displayedSellers.map((seller) => {
                   const isDeactivated = !seller.is_active;
+                  const pref = seller.seller_preference || 'sale';
 
                   return (
                     <tr
@@ -532,7 +589,13 @@ export default function AdminSellersPage() {
                       {/* Merchant Name & ID */}
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-orange-600/10 border border-orange-500/20 text-orange-400 flex items-center justify-center font-black text-xs shrink-0 group-hover:scale-105 transition-transform">
+                          <div className={`w-9 h-9 rounded-xl border flex items-center justify-center font-black text-xs shrink-0 group-hover:scale-105 transition-transform ${
+                            pref === 'rent'
+                              ? 'bg-teal-600/10 border-teal-500/20 text-teal-400'
+                              : pref === 'both'
+                              ? 'bg-indigo-600/10 border-indigo-500/20 text-indigo-400'
+                              : 'bg-orange-600/10 border-orange-500/20 text-orange-400'
+                          }`}>
                             {seller.name.slice(0, 2).toUpperCase()}
                           </div>
                           <div>
@@ -567,21 +630,33 @@ export default function AdminSellersPage() {
                         </div>
                       </td>
 
-                      {/* Business & Preference */}
+                      {/* Strategy & Role Badge */}
+                      <td className="py-3.5 px-4">
+                        {pref === 'rent' ? (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-950/60 border border-teal-500/30 text-teal-300 text-[11px] font-bold">
+                            <Home size={12} className="text-teal-400" /> Landlord (Rent)
+                          </span>
+                        ) : pref === 'both' ? (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold">
+                            <Layers size={12} className="text-indigo-400" /> Dual (Sale & Rent)
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-950/60 border border-orange-500/30 text-orange-300 text-[11px] font-bold">
+                            <Store size={12} className="text-orange-400" /> Seller (Sale)
+                          </span>
+                        )}
+                      </td>
+
+                      {/* Business Details */}
                       <td className="py-3.5 px-4">
                         <div className="space-y-0.5">
                           <div className="font-bold text-zinc-200 truncate max-w-[160px]">
                             {seller.business_name || (
-                              <span className="text-zinc-500 italic">Individual Seller</span>
+                              <span className="text-zinc-500 italic">Individual Partner</span>
                             )}
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wide">
-                              Scope:
-                            </span>
-                            <span className="px-1.5 py-0.2 rounded bg-zinc-800 text-[10px] text-zinc-300 font-medium capitalize">
-                              {seller.seller_preference || 'sale'}
-                            </span>
+                          <div className="text-[10px] text-zinc-500 font-mono">
+                            {seller.capabilities?.join(', ') || 'merchant'}
                           </div>
                         </div>
                       </td>
@@ -868,13 +943,46 @@ export default function AdminSellersPage() {
                   </div>
                 </div>
 
-                <div className="p-3.5 bg-zinc-950/60 rounded-xl border border-zinc-800/80">
+                <div className="p-3.5 bg-zinc-950/60 rounded-xl border border-zinc-800/80 col-span-2">
                   <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-bold block">
-                    Operating Preference
+                    Marketplace Provider Strategy & Role
                   </span>
-                  <span className="text-sm font-bold text-zinc-200 capitalize mt-0.5 block">
-                    {inspectSeller.seller_preference || 'Sale'}
-                  </span>
+                  <div className="flex items-center gap-2 mt-1">
+                    {inspectSeller.seller_preference === 'rent' ? (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-950/60 border border-teal-500/30 text-teal-300 text-xs font-bold">
+                        <Home size={13} className="text-teal-400" /> Rental Landlord / Host (Rentals)
+                      </span>
+                    ) : inspectSeller.seller_preference === 'both' ? (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-xs font-bold">
+                        <Layers size={13} className="text-indigo-400" /> Dual Provider (Goods Seller & Rental Landlord)
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-950/60 border border-orange-500/30 text-orange-300 text-xs font-bold">
+                        <Store size={13} className="text-orange-400" /> Goods Seller (Sales Only)
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mt-1.5">
+                    {inspectSeller.seller_preference === 'rent'
+                      ? 'Authorized to list residential/commercial properties, land, vehicles, or equipment for rent or lease.'
+                      : inspectSeller.seller_preference === 'both'
+                      ? 'Authorized for both direct item sales and long/short-term asset leasing across the platform.'
+                      : 'Authorized to list physical retail and wholesale products for direct purchase by buyers.'}
+                  </p>
+                  <div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-zinc-800/60">
+                    <span className="text-[10px] text-zinc-500 uppercase font-mono">Capabilities:</span>
+                    {(inspectSeller.capabilities && inspectSeller.capabilities.length > 0
+                      ? inspectSeller.capabilities
+                      : ['buyer', inspectSeller.seller_preference === 'rent' ? 'landlord' : 'seller']
+                    ).map((cap) => (
+                      <span
+                        key={cap}
+                        className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-zinc-800 text-zinc-300 border border-zinc-700"
+                      >
+                        {cap}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="p-3.5 bg-zinc-950/60 rounded-xl border border-zinc-800/80">

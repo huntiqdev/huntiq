@@ -24,9 +24,14 @@ function daysRemaining(expiresAt: string | null | undefined): number | null {
 }
 
 function SellerProductsContent() {
-  const { user } = useAuth();
+  const { user, sellerPreference } = useAuth();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const isRentMode = searchParams.get('preference') === 'rent' || sellerPreference === 'rent';
+  const isBothMode = sellerPreference === 'both';
+  const pageTitle = isRentMode ? 'My Properties & Rentals' : isBothMode ? 'My Listings (Sales & Rentals)' : 'My Products';
+  const addBtnLabel = isRentMode ? 'Add Rental Property' : isBothMode ? 'Add Listing' : 'Add Product';
+
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -82,12 +87,14 @@ function SellerProductsContent() {
     <div className="space-y-4 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-black text-zinc-900 dark:text-white">My Products</h1>
+          <h1 className="text-xl font-black text-zinc-900 dark:text-white">{pageTitle}</h1>
           <p className="text-xs text-zinc-500 mt-0.5">{products.length} total listings</p>
         </div>
         <button onClick={() => setShowCreate(true)}
-          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors shadow-md shadow-orange-600/20">
-          <Plus size={15} /> Add Product
+          className={`flex items-center gap-2 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors shadow-md ${
+            isRentMode ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
+          }`}>
+          <Plus size={15} /> {addBtnLabel}
         </button>
       </div>
 
@@ -224,8 +231,12 @@ function SellerProductsContent() {
       )}
 
       {showCreate && (
-        <Modal title="Add New Product" onClose={() => { setShowCreate(false); setIntentCondition(undefined); }}>
+        <Modal
+          title={isRentMode ? "Add New Rental Property / Asset" : isBothMode ? "Add New Listing" : "Add New Product"}
+          onClose={() => { setShowCreate(false); setIntentCondition(undefined); }}
+        >
           <ProductForm
+            listingType={isRentMode ? 'rent' : 'sale'}
             initialCondition={intentCondition}
             onSuccess={() => {
               setShowCreate(false);
@@ -241,7 +252,10 @@ function SellerProductsContent() {
         </Modal>
       )}
       {editing && (
-        <Modal title="Edit Product" onClose={() => setEditing(null)}>
+        <Modal
+          title={editing?.listing_type === 'rent' ? "Edit Rental Property" : "Edit Product"}
+          onClose={() => setEditing(null)}
+        >
           <ProductForm product={editing} onSuccess={() => { setEditing(null); load(); }} />
         </Modal>
       )}

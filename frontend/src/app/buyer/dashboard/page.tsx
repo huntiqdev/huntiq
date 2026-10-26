@@ -75,22 +75,22 @@ export default function BuyerDashboardPage() {
         <div className="flex items-center gap-1.5 mt-0.5">
           {buyerTier === 'gold'    && <Star  size={11} className="text-yellow-500" />}
           {buyerTier === 'premium' && <Crown size={11} className="text-purple-500" />}
-          <p className={`text-xs font-bold capitalize ${TIER_COLOR[buyerTier]}`}>{buyerTier} buyer</p>
+          <p className={`text-xs font-bold capitalize ${TIER_COLOR[buyerTier]}`}>{buyerTier} customer (Buyer & Renter)</p>
         </div>
       </div>
 
       {/* KPIs */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Pending',   value: pending,   color: 'text-blue-500',    bg: 'bg-blue-100 dark:bg-blue-900/30' },
-          { label: 'Accepted',  value: accepted,  color: 'text-green-500',   bg: 'bg-green-100 dark:bg-green-900/30' },
-          { label: 'Completed', value: completed, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-900/30' },
+          { label: 'Pending Requests',   value: pending,   color: 'text-blue-500',    bg: 'bg-blue-100 dark:bg-blue-900/30' },
+          { label: 'Accepted Orders',  value: accepted,  color: 'text-green-500',   bg: 'bg-green-100 dark:bg-green-900/30' },
+          { label: 'Completed Deals', value: completed, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-900/30' },
         ].map(({ label, value, color, bg }) => (
           <div key={label} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4">
             <div className={`w-8 h-8 rounded-xl ${bg} flex items-center justify-center mb-2`}>
-              {label === 'Pending'   && <Clock       size={14} className={color} />}
-              {label === 'Accepted'  && <CheckCircle size={14} className={color} />}
-              {label === 'Completed' && <Sparkles    size={14} className={color} />}
+              {label.startsWith('Pending')   && <Clock       size={14} className={color} />}
+              {label.startsWith('Accepted')  && <CheckCircle size={14} className={color} />}
+              {label.startsWith('Completed') && <Sparkles    size={14} className={color} />}
             </div>
             <p className={`text-2xl font-black ${color}`}>{value}</p>
             <p className="text-xs text-zinc-500 mt-0.5">{label}</p>
@@ -108,8 +108,8 @@ export default function BuyerDashboardPage() {
                 {buyerTier === 'premium' ? <Crown size={16} className="text-white" /> : <Star size={16} className="text-white" />}
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30">Buyer Tier</p>
-                <p className="text-sm font-black text-white capitalize">{buyerTier}</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/30">Customer Access Tier</p>
+                <p className="text-sm font-black text-white capitalize">{buyerTier} Member</p>
               </div>
             </div>
             {buyerTier !== 'premium' && (
@@ -135,7 +135,7 @@ export default function BuyerDashboardPage() {
         </div>
       </div>
 
-      {/* Quick links */}
+      {/* Quick links: Buy vs Rent */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Link href="/buyer/orders"
           className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all">
@@ -143,19 +143,19 @@ export default function BuyerDashboardPage() {
             <ShoppingCart size={16} />
           </div>
           <div className="flex-1">
-            <p className="font-bold text-zinc-900 dark:text-white text-sm">My Requests</p>
-            <p className="text-xs text-zinc-400">{orders.length} total order{orders.length !== 1 ? 's' : ''}</p>
+            <p className="font-bold text-zinc-900 dark:text-white text-sm">My Purchases & Orders</p>
+            <p className="text-xs text-zinc-400">{orders.length} total request{orders.length !== 1 ? 's' : ''}</p>
           </div>
           <ArrowUpRight size={14} className="text-zinc-300" />
         </Link>
-        <Link href="/products"
+        <Link href="/products?type=rent"
           className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all">
-          <div className="w-9 h-9 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600">
+          <div className="w-9 h-9 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600">
             <Package size={16} />
           </div>
           <div className="flex-1">
-            <p className="font-bold text-zinc-900 dark:text-white text-sm">Browse Products</p>
-            <p className="text-xs text-zinc-400">Find tools &amp; equipment</p>
+            <p className="font-bold text-zinc-900 dark:text-white text-sm">Browse Rental Properties</p>
+            <p className="text-xs text-zinc-400">Leases & Landlord listings</p>
           </div>
           <ArrowUpRight size={14} className="text-zinc-300" />
         </Link>

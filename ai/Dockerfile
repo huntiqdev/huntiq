@@ -20,11 +20,12 @@ ENV PYTHONUNBUFFERED=1 \
 
 # Install dependencies into virtual environment
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev --no-install-project
+RUN uv sync --frozen --no-dev --no-install-project --package huntiq-ai
 
 # Copy application source code
+COPY README.md ./
 COPY src/ ./src/
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-dev --package huntiq-ai
 
 # Set permissions and switch to non-root user
 RUN chown -R appuser:huntiq /app

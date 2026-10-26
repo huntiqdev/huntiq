@@ -117,103 +117,116 @@ export function UserAccountMenu() {
             </div>
 
             {/* Marketplace Capabilities Switcher */}
-            <div className="space-y-1 mb-3">
-              <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
-                Marketplace Spaces
-              </p>
-
-              {/* Buyer Portal */}
-              <Link
-                href="/buyer/dashboard"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              >
-                <div className="flex items-center gap-2.5">
-                  <User size={15} className="text-zinc-400" />
-                  <span>Buyer Portal</span>
-                </div>
-                <span className="text-[10px] text-zinc-400 font-normal">Active</span>
-              </Link>
-
-              {/* Seller Studio */}
-              {isSeller ? (
+            <div className="space-y-2 mb-3">
+              {/* Consumer Persona: Buyer & Renter */}
+              <div>
+                <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
+                  Customer Hub (Demand Side)
+                </p>
                 <Link
-                  href="/seller/dashboard"
+                  href="/buyer/dashboard"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                 >
                   <div className="flex items-center gap-2.5">
-                    <ShoppingBag size={15} className="text-orange-500" />
-                    <span>Seller Studio</span>
+                    <User size={15} className="text-zinc-400" />
+                    <span>Buyer & Renter Portal</span>
                   </div>
-                  <span className="text-[10px] text-green-500 font-bold">Enabled</span>
+                  <span className="text-[10px] text-zinc-400 font-normal">Active</span>
                 </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(false);
-                    setActivationCap('seller');
-                  }}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors text-left"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Sparkles size={15} />
-                    <span>Activate Seller Studio</span>
-                  </div>
-                  <span className="text-[9px] uppercase tracking-wider font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded">
-                    New
-                  </span>
-                </button>
-              )}
+              </div>
 
-              {/* Landlord Console */}
-              {isLandlord ? (
-                <Link
-                  href="/seller/products?preference=rent"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Home size={15} className="text-teal-500" />
-                    <span>Landlord Console</span>
-                  </div>
-                  <span className="text-[10px] text-green-500 font-bold">Enabled</span>
-                </Link>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(false);
-                    setActivationCap('landlord');
-                  }}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-colors text-left"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Home size={15} />
-                    <span>Activate Landlord Console</span>
-                  </div>
-                  <span className="text-[9px] uppercase tracking-wider font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded">
-                    Rent
-                  </span>
-                </button>
-              )}
+              {/* Provider Personas: Seller & Landlord */}
+              <div>
+                <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
+                  Provider Studios (Supply Side)
+                </p>
+
+                {/* Seller Studio */}
+                {isSeller ? (
+                  <Link
+                    href="/seller/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <ShoppingBag size={15} className="text-orange-500" />
+                      <span>Seller Studio (Goods Sales)</span>
+                    </div>
+                    <span className="text-[10px] text-green-500 font-bold">Enabled</span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setActivationCap('seller');
+                    }}
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors text-left"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Sparkles size={15} />
+                      <span>Activate Seller Studio</span>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-wider font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded">
+                      Sale
+                    </span>
+                  </button>
+                )}
+
+                {/* Landlord Console */}
+                {isLandlord ? (
+                  <Link
+                    href="/seller/products?preference=rent"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Home size={15} className="text-teal-500" />
+                      <span>Landlord Console (Rentals)</span>
+                    </div>
+                    <span className="text-[10px] text-green-500 font-bold">Enabled</span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      setActivationCap('landlord');
+                    }}
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-colors text-left"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Home size={15} />
+                      <span>Activate Landlord Console</span>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-wider font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded">
+                      Rent
+                    </span>
+                  </button>
+                )}
+              </div>
 
               {/* Admin Panel (Elevated permissions only) */}
               {isAdmin && (
-                <Link
-                  href="/admin/dashboard"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Shield size={15} />
-                    <span>Admin Control Center</span>
-                  </div>
-                  <span className="text-[9px] uppercase font-bold bg-red-600 text-white px-1.5 py-0.5 rounded">
-                    Admin
-                  </span>
-                </Link>
+                <div>
+                  <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
+                    Platform Governance
+                  </p>
+                  <Link
+                    href="/admin/dashboard"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Shield size={15} />
+                      <span>Admin Control Center</span>
+                    </div>
+                    <span className="text-[9px] uppercase font-bold bg-red-600 text-white px-1.5 py-0.5 rounded">
+                      Admin
+                    </span>
+                  </Link>
+                </div>
               )}
             </div>
 

@@ -160,3 +160,11 @@ func TestConcurrentCacheAccess(t *testing.T) {
 
 	wg.Wait()
 }
+
+func TestNominatimUserAgent(t *testing.T) {
+	provider := NewNominatimProvider(nil)
+	expectedUA := "HUNTIQ-Universal-Marketplace/1.0"
+	if provider.userAgent != expectedUA {
+		t.Errorf("expected Nominatim User-Agent %q, got %q", expectedUA, provider.userAgent)
+	}
+}

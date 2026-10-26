@@ -2,28 +2,19 @@
 import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
-import { CATEGORY_TREE } from '@/lib/constants/categoryTree';
+import { api } from '@/lib/api';
 import { Search, X, ChevronDown, Tag, Layers, Hash, MapPin } from 'lucide-react';
-import enT from '@/lib/language/en.json';
 
-// ── Build a flat searchable index from the full category tree ────────────────
 interface SearchEntry {
+  id: number;
   type: 'category' | 'subcategory' | 'item';
+  label: string;
+  labelEn: string;
+  catId: number;
   catSlug: string;
   subSlug?: string;
   itemSlug?: string;
-  // display labels filled at render time from translations
-}
-
-const SEARCH_INDEX: SearchEntry[] = [];
-for (const [cat, subs] of Object.entries(CATEGORY_TREE)) {
-  SEARCH_INDEX.push({ type: 'category', catSlug: cat });
-  for (const [sub, items] of Object.entries(subs)) {
-    SEARCH_INDEX.push({ type: 'subcategory', catSlug: cat, subSlug: sub });
-    for (const item of items) {
-      SEARCH_INDEX.push({ type: 'item', catSlug: cat, subSlug: sub, itemSlug: item });
-    }
-  }
+  breadcrumb?: string;
 }
 
 // Simple fuzzy: every char of needle must appear in order in haystack
@@ -64,54 +55,83 @@ const TYPE_COLOR = {
 
 // ── Component ────────────────────────────────────────────────────────────────
 export function SearchBar() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const router = useRouter();
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(-1);
+  const [searchIndex, setSearchIndex] = useState<SearchEntry[]>([]);
   const [locationSuggestions, setLocationSuggestions] = useState<any[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // label helpers
-  const catLabel = useCallback((slug: string) =>
-    (t.categories as any)[slug] ?? slug.replace(/_/g, ' '), [t]);
-  const itemLabel = useCallback((slug: string) =>
-    (t.items as any)[slug] ?? slug.replace(/_/g, ' '), [t]);
+  // Build searchable index dynamically from authoritative database taxonomy
+  useEffect(() => {
+    api.getCategoryTree(locale).then(tree => {
+      if (!Array.isArray(tree)) return;
+      const idx: SearchEntry[] = [];
+      for (const root of tree) {
+        const rootLabel = root.name || root.name_en || root.slug;
+        const rootEn = root.name_en || root.name || root.slug;
+        idx.push({
+          id: root.id,
+          type: 'category',
+          label: rootLabel,
+          labelEn: rootEn,
+          catId: root.id,
+          catSlug: root.slug,
+        });
+        if (root.children) {
+          for (const sub of root.children) {
+            const subLabel = sub.name || sub.name_en || sub.slug;
+            const subEn = sub.name_en || sub.name || sub.slug;
+            idx.push({
+              id: sub.id,
+              type: 'subcategory',
+              label: subLabel,
+              labelEn: subEn,
+              catId: root.id,
+              catSlug: root.slug,
+              subSlug: sub.slug,
+              breadcrumb: rootLabel,
+            });
+            if (sub.children) {
+              for (const item of sub.children) {
+                const itemLabel = item.name || item.name_en || item.slug;
+                const itemEn = item.name_en || item.name || item.slug;
+                idx.push({
+                  id: item.id,
+                  type: 'item',
+                  label: itemLabel,
+                  labelEn: itemEn,
+                  catId: root.id,
+                  catSlug: root.slug,
+                  subSlug: sub.slug,
+                  itemSlug: item.slug,
+                  breadcrumb: `${rootLabel} › ${subLabel}`,
+                });
+              }
+            }
+          }
+        }
+      }
+      setSearchIndex(idx);
+    }).catch(() => {});
+  }, [locale]);
 
-  // English labels always available for scoring (so search works regardless of locale)
-  const catLabelEn = useCallback((slug: string) =>
-    (enT.categories as any)[slug] ?? slug.replace(/_/g, ' '), []);
-  const itemLabelEn = useCallback((slug: string) =>
-    (enT.items as any)[slug] ?? slug.replace(/_/g, ' '), []);
-
-  const getLabel = useCallback((e: SearchEntry): string => {
-    if (e.type === 'category') return catLabel(e.catSlug);
-    if (e.type === 'subcategory') return itemLabel(e.subSlug!);
-    return itemLabel(e.itemSlug!);
-  }, [catLabel, itemLabel]);
-
-  const getLabelEn = useCallback((e: SearchEntry): string => {
-    if (e.type === 'category') return catLabelEn(e.catSlug);
-    if (e.type === 'subcategory') return itemLabelEn(e.subSlug!);
-    return itemLabelEn(e.itemSlug!);
-  }, [catLabelEn, itemLabelEn]);
-
-  const getBreadcrumb = useCallback((e: SearchEntry): string => {
-    if (e.type === 'category') return '';
-    if (e.type === 'subcategory') return catLabel(e.catSlug);
-    return `${catLabel(e.catSlug)} › ${itemLabel(e.subSlug!)}`;
-  }, [catLabel, itemLabel]);
+  const getLabel = useCallback((e: SearchEntry): string => e.label, []);
+  const getLabelEn = useCallback((e: SearchEntry): string => e.labelEn, []);
+  const getBreadcrumb = useCallback((e: SearchEntry): string => e.breadcrumb || '', []);
 
   // Score against both locale label AND English label — whichever is higher wins
-  const scoreEntry = useCallback((e: SearchEntry, q: string): number => {
-    return Math.max(score(getLabel(e), q), score(getLabelEn(e), q));
-  }, [getLabel, getLabelEn]);
+  const scoreEntry = useCallback((e: SearchEntry, query: string): number => {
+    return Math.max(score(e.label, query), score(e.labelEn, query));
+  }, []);
 
   // Compute suggestions
   const suggestions = q.trim().length >= 1
-    ? SEARCH_INDEX
+    ? searchIndex
         .map(e => ({ e, s: scoreEntry(e, q.trim()) }))
         .filter(x => x.s > 0)
         .sort((a, b) => b.s - a.s || a.e.type.localeCompare(b.e.type))
@@ -119,8 +139,8 @@ export function SearchBar() {
         .map(x => x.e)
     : [];
 
-  // All categories for the "browse" dropdown (shown when input is empty & focused)
-  const allCategories = SEARCH_INDEX.filter(e => e.type === 'category');
+  // All root categories for the "browse" dropdown (shown when input is empty & focused)
+  const allCategories = searchIndex.filter(e => e.type === 'category');
 
   const displayList = q.trim().length >= 1 ? suggestions : allCategories;
 
@@ -145,23 +165,11 @@ export function SearchBar() {
   };
 
   const buildUrl = (e: SearchEntry) => {
-    // We need category_id from the API — but we only have slug here.
-    // Navigate with slug as search param; the products page will handle it.
-    // Better: navigate with category slug as a special param.
     const p = new URLSearchParams();
-    // We'll pass catSlug as a hint; products page reads category_id from URL.
-    // For now navigate with search=label so the text search picks it up,
-    // AND pass category slug so the bar can highlight it.
-    if (e.type === 'category') {
-      p.set('cat', e.catSlug);
-    } else if (e.type === 'subcategory') {
-      p.set('cat', e.catSlug);
-      p.set('subcategory', e.subSlug!);
-    } else {
-      p.set('cat', e.catSlug);
-      p.set('subcategory', e.subSlug!);
-      p.set('item', e.itemSlug!);
-    }
+    p.set('category_hierarchy_id', String(e.id));
+    p.set('cat', e.catSlug);
+    if (e.subSlug) p.set('subcategory', e.subSlug);
+    if (e.itemSlug) p.set('item', e.itemSlug);
     return `/products?${p.toString()}`;
   };
 

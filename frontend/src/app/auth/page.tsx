@@ -1,5 +1,5 @@
 'use client';
-// Unified SellBuy Master Authentication Page
+// Unified HUNTIQ Master Authentication Page
 import { useState, useEffect, useRef, Suspense, FormEvent } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -15,6 +15,7 @@ import {
   ShoppingBag, Phone, Lock, User, Building2, Mail,
   Eye, EyeOff, AlertCircle, CheckCircle2, ArrowLeft, Sparkles, Home,
 } from 'lucide-react';
+import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 import PasswordStrength, { validatePasswordStrength } from '@/components/forms/PasswordStrength';
 
 type Tab = 'login' | 'register';
@@ -697,14 +698,13 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="w-11 h-11 bg-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-600/30">
-            <ShoppingBag size={22} className="text-white" />
-          </div>
-          <div>
-            <p className="font-black text-zinc-900 dark:text-white text-lg leading-none">{u.app_name}</p>
-            <p className="text-[10px] text-zinc-400 dark:text-white/40 uppercase tracking-widest mt-1 font-semibold">{u.sign_in_or_create}</p>
-          </div>
+        <div className="mb-8">
+          <HuntiqLogo
+            size="lg"
+            showText
+            subtitle={u.sign_in_or_create ?? 'Sign in or create account'}
+            href="/"
+          />
         </div>
         <Suspense fallback={null}>
           <AuthContent />

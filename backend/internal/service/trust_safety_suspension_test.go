@@ -15,31 +15,12 @@ import (
 )
 
 func setupTestDB(t *testing.T) (*pgxpool.Pool, func()) {
-	if os.Getenv("JWT_SECRET") == "" {
-		os.Setenv("JWT_SECRET", "cRbQBaeoQakbnOO2FNC7BNzQf8UkubRxkhMxpIqKYEtXN4Y9o9g7pJwKQcHCUnmi")
-	}
-	if os.Getenv("OTP_ENCRYPT_KEY") == "" {
-		os.Setenv("OTP_ENCRYPT_KEY", "yEr0PYPyolvDVLDJ8JaNtx6yln3cI+54fkRSulMCVHA=")
-	}
-	if os.Getenv("ALLOW_ORIGIN") == "" {
-		os.Setenv("ALLOW_ORIGIN", "http://localhost:3000")
-	}
-	if os.Getenv("FRONTEND_URL") == "" {
-		os.Setenv("FRONTEND_URL", "http://localhost:3000")
-	}
-	if os.Getenv("APP_BASE_URL") == "" {
-		os.Setenv("APP_BASE_URL", "http://localhost:8080")
-	}
-	if os.Getenv("DB_HOST") == "" {
-		os.Setenv("DB_HOST", "localhost")
-		os.Setenv("DB_PORT", "5432")
-		os.Setenv("DB_USER", "postgres")
-		os.Setenv("DB_PASSWORD", "gedam")
-		os.Setenv("DB_NAME", "hulubedej_db")
-		os.Setenv("DB_SSLMODE", "disable")
+	if os.Getenv("DB_PASSWORD") == "" && os.Getenv("DATABASE_URL") == "" {
+		t.Skip("Skipping database-dependent test: DB_PASSWORD or DATABASE_URL not set in environment")
+		return nil, nil
 	}
 
-	cfg := config.Load()
+	cfg := config.NewTestConfig()
 	db, err := database.NewPool(cfg)
 	if err != nil {
 		t.Skipf("Skipping database-dependent test: DB connection failed: %v", err)

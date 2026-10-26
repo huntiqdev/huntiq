@@ -15,6 +15,8 @@ import {
   Shield,
 } from 'lucide-react';
 
+import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
+
 interface PortalCard {
   title: string;
   badge: string;
@@ -98,7 +100,8 @@ export default function AdminPortalDirectoryPage() {
 
       <div className="max-w-5xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center">
         {/* Header */}
-        <div className="text-center space-y-3 mb-12">
+        <div className="text-center space-y-3 mb-12 flex flex-col items-center">
+          <HuntiqLogo size="lg" className="mb-2" />
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-bold text-zinc-400">
             <Shield size={14} className="text-orange-500" />
             <span>HUNTIQ Privileged Security Architecture</span>
@@ -169,7 +172,7 @@ export default function AdminPortalDirectoryPage() {
 
       {/* Footer */}
       <footer className="text-center text-xs text-zinc-600 mt-8 relative z-10">
-        &copy; {new Date().getFullYear()} HUNTIQ (SellBuy) Enterprise Security Platform. All rights reserved.
+        &copy; {new Date().getFullYear()} HUNTIQ Universal Marketplace Platform. All rights reserved.
       </footer>
     </div>
   );

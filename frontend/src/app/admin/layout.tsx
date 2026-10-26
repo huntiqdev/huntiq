@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin, DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2, Store, Receipt } from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
+import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
 function AdminSidebar() {
   const {
@@ -38,14 +39,14 @@ function AdminSidebar() {
       title: 'OPERATIONS & CONTROL',
       links: [
         { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard, visible: true },
-        { href: '/admin/sellers', label: 'Sellers Directory', icon: Store, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('sellers') },
+        { href: '/admin/sellers', label: 'Sellers & Landlords', icon: Store, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('sellers') },
         { href: '/admin/operations', label: 'Operations Monitor', icon: Activity, visible: isPlatformOwner || isPlatformAdmin || isSecurityAdmin || isOperationsAdmin || hasAdminPermission('operations') },
       ],
     },
     {
       title: 'LISTINGS & CATALOG',
       links: [
-        { href: '/admin/products',  label: 'Products & Listings', icon: Package,   visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || isModerator || hasAdminPermission('pending') || hasAdminPermission('products') },
+        { href: '/admin/products',  label: 'Products & Rentals', icon: Package,   visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || isModerator || hasAdminPermission('pending') || hasAdminPermission('products') },
         { href: '/admin/categories',label: 'Categories',          icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
         { href: '/admin/attributes', label: 'Attributes',         icon: Tag,        visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
         { href: '/admin/locations', label: 'Locations & GPS',     icon: MapPin,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('locations') || hasAdminPermission('categories') },
@@ -79,7 +80,7 @@ function AdminSidebar() {
     {
       title: 'TRUST & COMPLIANCE',
       links: [
-        { href: '/admin/verification', label: 'Seller Verification', icon: BadgeCheck, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('seller_verification') },
+        { href: '/admin/verification', label: 'Provider Verification', icon: BadgeCheck, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('seller_verification') },
         { href: '/admin/trust-safety', label: 'Trust & Safety', icon: AlertTriangle, visible: isPlatformOwner || isPlatformAdmin || isSecurityAdmin || isOperationsAdmin || isModerator || hasAdminPermission('trust_safety') },
         { href: '/admin/refunds', label: 'Refund Requests', icon: FileText, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('refunds') },
         { href: '/admin/appeals', label: 'Account Appeals', icon: Scale, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('appeals') },
@@ -90,11 +91,9 @@ function AdminSidebar() {
   return (
     <aside className="w-64 bg-zinc-950 text-zinc-300 min-h-screen flex flex-col shrink-0 border-r border-zinc-900/80 hidden lg:flex">
       <div className="p-5 flex items-center gap-3 border-b border-zinc-900">
-        <div className="p-2 bg-orange-600/10 text-orange-500 rounded-xl border border-orange-500/20">
-          <ShieldCheck size={22} />
-        </div>
+        <HuntiqLogo size="sm" href="/admin/dashboard" />
         <div>
-          <h2 className="text-base font-black text-white leading-none">Enterprise Portal</h2>
+          <h2 className="text-base font-black text-white leading-none">HUNTIQ Admin</h2>
           <span className={`inline-block text-[10px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md border ${roleBadgeStyle}`}>
             {roleLabel}
           </span>

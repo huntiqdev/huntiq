@@ -42,7 +42,6 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   const [selectedType, setSelectedType] = useState<'sale' | 'rent'>(product?.listing_type ?? listingType);
   const isRental = selectedType === 'rent';
   
-  const [categories, setCategories] = useState<any[]>([]);
   const [sellerTier, setSellerTier] = useState<SellerTier>('normal');
   const [location, setLocation] = useState<LocationValue>(product ? {
     region: product.location?.region,
@@ -87,7 +86,6 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   const [loading, setLoading] = useState(false);
   const [tierLoaded, setTierLoaded] = useState(false);
 
-  useEffect(() => { api.getCategories().then(setCategories).catch(() => {}); }, []);
   useEffect(() => {
     if (!user) return;
     api.getSellerStats(user.token).then((s: any) => {
@@ -139,14 +137,21 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     }
     if (imageURLs.length < 2) { setError('Minimum 2 images are required'); return; }
     if (imageURLs.length > maxImages) { setError(`Your tier allows max ${maxImages} images`); return; }
+    if (!form.category_id && !form.category_hierarchy_id) {
+      setError('Please select a valid marketplace category');
+      return;
+    }
 
     setLoading(true); setError('');
     try {
+      const legacyIdNum = form.category_id ? Number(form.category_id) : undefined;
+      const validLegacyId = legacyIdNum && legacyIdNum >= 1 && legacyIdNum <= 11 ? legacyIdNum : undefined;
+
       const basePayload = {
         title: form.title,
         description: form.description,
-        category_id: form.category_id ? Number(form.category_id) : undefined,
-        category_hierarchy_id: form.category_hierarchy_id ? Number(form.category_hierarchy_id) : (form.category_id ? Number(form.category_id) : undefined),
+        category_id: validLegacyId,
+        category_hierarchy_id: form.category_hierarchy_id ? Number(form.category_hierarchy_id) : (validLegacyId ?? undefined),
         subcategory: form.subcategory,
         item: form.item,
         condition: form.condition,
@@ -165,9 +170,11 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       };
 
       const todayStr = new Date().toISOString().split('T')[0];
+      const rentalPriceNum = parseFloat(String(rentalForm.rental_price)) || 0;
       const payload = isRental ? {
-        ...basePayload, price: 0,
-        rental_price: parseFloat(String(rentalForm.rental_price)),
+        ...basePayload,
+        price: rentalPriceNum,
+        rental_price: rentalPriceNum,
         rental_duration_value: rentalForm.min_duration ? parseInt(rentalForm.min_duration) : 1,
         rental_duration_unit: 'month',
         deposit_amount: rentalForm.deposit ? parseFloat(String(rentalForm.deposit)) : undefined,
@@ -178,6 +185,30 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       if (product) {
         await api.updateSellerProduct(product.id, payload, user.token);
         productId = product.id;
+
+        // Save dynamic attributes if any were filled
+        if (form.category_hierarchy_id && Object.keys(attributeValues).length > 0) {
+          const attrPayload = applicableAttributes
+            .filter(attr => attributeValues[attr.slug] !== undefined && attributeValues[attr.slug] !== '')
+            .map(attr => {
+              const val = attributeValues[attr.slug];
+              const base: any = { attribute_id: attr.attribute_id };
+              if (attr.data_type === 'number' || attr.data_type === 'range') base.value_number = parseFloat(val);
+              else if (attr.data_type === 'boolean') base.value_boolean = val === true || val === 'true';
+              else base.value_text = String(val);
+              return base;
+            });
+          if (attrPayload.length > 0 && form.category_hierarchy_id) {
+            try {
+              await api.saveProductAttributes(
+                productId,
+                { category_id: form.category_hierarchy_id, attributes: attrPayload },
+                user.token
+              );
+            } catch { /* non-critical, don't fail the whole submission */ }
+          }
+        }
+
         onSuccess();
       } else {
         const created = await api.createSellerProduct(payload, user.token);
@@ -195,13 +226,13 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
               else base.value_text = String(val);
               return base;
             });
-          if (attrPayload.length > 0) {
+          if (attrPayload.length > 0 && form.category_hierarchy_id) {
             try {
-              await fetch(`/api/seller/products/${productId}/attributes`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user.token}` },
-                body: JSON.stringify({ category_id: form.category_hierarchy_id, attributes: attrPayload }),
-              });
+              await api.saveProductAttributes(
+                productId,
+                { category_id: form.category_hierarchy_id, attributes: attrPayload },
+                user.token
+              );
             } catch { /* non-critical, don't fail the whole submission */ }
           }
         }
@@ -318,30 +349,24 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           rows={3} className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all resize-none" />
       </div>
 
-      {/* Category selector — legacy flat categories for backward compat */}
+      {/* Unified Category Selector */}
       <div className="flex flex-col gap-1">
         <label className={lbl}>{t.ui.selectCategory}</label>
-        <select className={cls} value={form.category_id}
-          onChange={e => setForm(f => ({ ...f, category_id: e.target.value, subcategory: '', item: '' }))}>
-          <option value="">{t.ui.selectCategoryOption}</option>
-          {categories.map(c => <option key={c.id} value={c.id}>{label('categories', c.slug)}</option>)}
-        </select>
-      </div>
-
-      {/* New hierarchical category selector */}
-      <div className="flex flex-col gap-1">
-        <label className={lbl}>Specific Category (Hierarchical)</label>
         <CategoryTreeSelector
-          value={form.category_hierarchy_id ?? undefined}
+          value={form.category_hierarchy_id ?? (form.category_id ? Number(form.category_id) : undefined)}
           onChange={(id) => {
-            setForm(f => ({ ...f, category_hierarchy_id: id }));
+            setForm(f => ({
+              ...f,
+              category_hierarchy_id: id,
+              category_id: id && id <= 11 ? String(id) : '',
+            }));
             setAttributeValues({});
           }}
-          placeholder="Select specific subcategory..."
+          placeholder={t.ui.selectCategoryOption || 'Select a category...'}
         />
         {form.category_hierarchy_id && (
           <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">
-            ✓ Hierarchical category selected — dynamic attributes loaded below
+            ✓ Category selected — dynamic attributes loaded below
           </p>
         )}
       </div>

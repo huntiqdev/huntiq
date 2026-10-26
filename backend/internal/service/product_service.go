@@ -32,15 +32,22 @@ func (s *ProductService) isAllowedImageURL(u string) bool {
 
 type ProductService struct {
 	repo        *repository.ProductRepo
-	catRepo     *repository.CategoryRepo
-	locRepo     *repository.LocationRepo
-	userRepo    *repository.UserRepo
-	attrRepo    *repository.AttributeRepo
-	backendBase string // base URL of this server, used to validate /uploads/ image URLs
+	catRepo          *repository.CategoryRepo
+	catHierarchyRepo *repository.CategoryHierarchyRepo
+	locRepo          *repository.LocationRepo
+	userRepo         *repository.UserRepo
+	attrRepo         *repository.AttributeRepo
+	backendBase      string // base URL of this server, used to validate /uploads/ image URLs
 }
 
 func NewProductService(repo repository.ProductRepository, catRepo repository.CategoryRepository, locRepo repository.LocationRepository, userRepo repository.UserRepository) *ProductService {
 	return &ProductService{repo: repo, catRepo: catRepo, locRepo: locRepo, userRepo: userRepo}
+}
+
+// WithCategoryHierarchyRepo sets the category hierarchy repository for strict database taxonomy validation.
+func (s *ProductService) WithCategoryHierarchyRepo(r *repository.CategoryHierarchyRepo) *ProductService {
+	s.catHierarchyRepo = r
+	return s
 }
 
 // WithAttributeRepo sets the attribute repository for dynamic product attributes.
@@ -191,6 +198,39 @@ func checkProhibitedContent(title, description string) error {
 	return nil
 }
 
+// MapRootSlugToLegacyCategoryID maps any canonical root domain slug or ID to the authoritative
+// legacy 11-category ID (1..11) to guarantee foreign-key integrity and backward compatibility.
+func MapRootSlugToLegacyCategoryID(slug string, rootID int) int {
+	// If rootID is already within the 1..11 legacy category range, preserve it directly.
+	if rootID >= 1 && rootID <= 11 {
+		return rootID
+	}
+	switch slug {
+	case "electronics", "electronics-mobile", "computers-it", "telecom-networking", "cameras-optics", "gaming-vr", "tv-audio":
+		return 1 // Electronics
+	case "vehicles", "vehicles-cars", "motorcycles-bajaj", "bicycles-mobility", "trucks-commercial-transport", "vehicle-parts-accessories", "vehicle-rental-logistics":
+		return 2 // Vehicles
+	case "property", "property-sale", "property-rent", "land-farms", "commercial-real-estate":
+		return 3 // Property & Real Estate
+	case "home", "home-appliances", "furniture-furnishings", "kitchen-household":
+		return 4 // Home & Living
+	case "fashion", "clothing-apparel", "shoes-bags", "jewelry-luxury":
+		return 5 // Fashion & Clothing
+	case "agriculture", "agriculture-farming", "crops-grains-seeds", "livestock-poultry", "animal-feed-supplies":
+		return 6 // Agriculture & Farming
+	case "business", "business-opportunities", "retail-wholesale", "industrial-machinery", "tools-workshop", "construction-materials", "construction-machinery", "architecture-engineering", "plumbing-electrical", "raw-materials-chemicals", "energy-solar-power", "water-irrigation-equipment", "packaging-shipping", "software-it-services", "office-supplies":
+		return 7 // Business & Industry
+	case "services", "jobs-recruitment", "cvs-talent", "freelance-gigs", "professional-services", "business-services", "travel-tourism", "events-production":
+		return 8 // Services & Jobs
+	case "lifestyle", "beauty-personal-care", "health-medical", "sports-fitness", "art-crafts-antiques", "music-instruments", "toys-baby-products", "pet-supplies", "food-groceries", "restaurants-catering", "coffee-tea-beverages":
+		return 9 // Lifestyle & Wellness
+	case "education", "books-publishing", "education-training":
+		return 10 // Education & Learning
+	default:
+		return 11 // Other
+	}
+}
+
 func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req dto.CreateProductRequest) (*models.Product, error) {
 	// Load all content limits from DB — admin can change these at any time
 	minImages := s.getSettingInt(ctx, constants.SettingMinImagesPerListing, constants.DefaultMinImages)
@@ -200,6 +240,40 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 	if len(req.ImageURLs) < minImages {
 		return nil, fmt.Errorf("minimum %d images required", minImages)
 	}
+
+	// ── Listing type validation ──
+	listingType := req.ListingType
+	if listingType == "" {
+		listingType = "sale" // default
+	}
+	if listingType != "sale" && listingType != "rent" {
+		return nil, errors.New("listing_type must be 'sale' or 'rent'")
+	}
+	
+	// ── Rental-specific validation & price synchronization ──
+	if listingType == "rent" {
+		if req.RentalPrice == nil || *req.RentalPrice <= 0 {
+			return nil, errors.New("rental_price is required for rent listings")
+		}
+		if req.RentalDurationValue == nil || *req.RentalDurationValue <= 0 {
+			return nil, errors.New("rental_duration_value is required for rent listings")
+		}
+		if req.RentalDurationUnit == nil || *req.RentalDurationUnit == "" {
+			return nil, errors.New("rental_duration_unit is required for rent listings")
+		}
+		validUnits := map[string]bool{"hour": true, "day": true, "week": true, "month": true, "year": true}
+		if !validUnits[*req.RentalDurationUnit] {
+			return nil, errors.New("rental_duration_unit must be: hour, day, week, month, or year")
+		}
+		if req.AvailableFrom == nil || *req.AvailableFrom == "" {
+			return nil, errors.New("available_from date is required for rent listings")
+		}
+		// For rental listings, synchronize price from rental_price if not set to satisfy DB CHECK (price > 0)
+		if req.Price <= 0 {
+			req.Price = *req.RentalPrice
+		}
+	}
+
 	if req.Title == "" || req.Price <= 0 {
 		return nil, errors.New("title and a positive price are required")
 	}
@@ -220,35 +294,6 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 
 	if len(req.Description) > maxDesc {
 		return nil, fmt.Errorf("description must be %d characters or fewer", maxDesc)
-	}
-	
-	// ── Listing type validation ──
-	listingType := req.ListingType
-	if listingType == "" {
-		listingType = "sale" // default
-	}
-	if listingType != "sale" && listingType != "rent" {
-		return nil, errors.New("listing_type must be 'sale' or 'rent'")
-	}
-	
-	// ── Rental-specific validation ──
-	if listingType == "rent" {
-		if req.RentalPrice == nil || *req.RentalPrice <= 0 {
-			return nil, errors.New("rental_price is required for rent listings")
-		}
-		if req.RentalDurationValue == nil || *req.RentalDurationValue <= 0 {
-			return nil, errors.New("rental_duration_value is required for rent listings")
-		}
-		if req.RentalDurationUnit == nil || *req.RentalDurationUnit == "" {
-			return nil, errors.New("rental_duration_unit is required for rent listings")
-		}
-		validUnits := map[string]bool{"hour": true, "day": true, "week": true, "month": true, "year": true}
-		if !validUnits[*req.RentalDurationUnit] {
-			return nil, errors.New("rental_duration_unit must be: hour, day, week, month, or year")
-		}
-		if req.AvailableFrom == nil || *req.AvailableFrom == "" {
-			return nil, errors.New("available_from date is required for rent listings")
-		}
 	}
 	
 	// Validate image URLs — must be /uploads/ paths or trusted CDN URLs
@@ -328,16 +373,66 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 	default:
 		cond = "good" // "used", "" or anything else → good
 	}
+	// ── Category Hierarchy & Legacy Category Resolution ──
 	catHierarchyID := req.CategoryHierarchyID
 	if catHierarchyID == nil {
 		catHierarchyID = req.CategoryID
+	}
+	if catHierarchyID == nil {
+		return nil, errors.New("category is required")
+	}
+
+	var legacyCatID *int
+	if s.catHierarchyRepo != nil {
+		valid, active, err := s.catHierarchyRepo.ValidateCategory(ctx, *catHierarchyID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to validate category: %w", err)
+		}
+		if !valid {
+			return nil, errors.New("invalid category: category does not exist in taxonomy")
+		}
+		if !active {
+			return nil, errors.New("cannot create listing under an inactive or archived category")
+		}
+
+		// Resolve authoritative legacy category ID (1..11) by walking up to the root ancestor
+		rootID, rootSlug, err := s.catHierarchyRepo.GetRootAncestor(ctx, *catHierarchyID)
+		if err == nil {
+			mappedID := MapRootSlugToLegacyCategoryID(rootSlug, rootID)
+			legacyCatID = &mappedID
+		} else if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 {
+			legacyCatID = req.CategoryID
+		} else {
+			defaultID := 11 // Other
+			legacyCatID = &defaultID
+		}
+
+		// If a valid legacy CategoryID (1..11) was also explicitly supplied, verify relationship
+		if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 && *req.CategoryID != *catHierarchyID {
+			isDescendant, err := s.catHierarchyRepo.IsDescendantOf(ctx, *catHierarchyID, *req.CategoryID)
+			if err != nil {
+				return nil, fmt.Errorf("failed to validate category hierarchy relationship: %w", err)
+			}
+			if !isDescendant {
+				return nil, errors.New("invalid category selection: subcategory does not belong to the selected parent category")
+			}
+			legacyCatID = req.CategoryID
+		}
+	} else if catHierarchyID != nil && s.catRepo != nil {
+		_, err := s.catRepo.GetByID(ctx, *catHierarchyID)
+		if err != nil {
+			return nil, errors.New("invalid category: category does not exist")
+		}
+		if *catHierarchyID >= 1 && *catHierarchyID <= 11 {
+			legacyCatID = catHierarchyID
+		}
 	}
 	p := &models.Product{
 		SellerID:               sellerID,
 		Title:                  req.Title,
 		Price:                  req.Price,
 		Description:            req.Description,
-		CategoryID:             req.CategoryID,
+		CategoryID:             legacyCatID,
 		CategoryHierarchyID:    catHierarchyID,
 		Subcategory:            req.Subcategory,
 		Item:                   req.Item,
@@ -439,10 +534,18 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		existing.Title = *req.Title
 	}
 	if req.Price != nil {
-		if *req.Price <= 0 {
-			return errors.New("price must be greater than zero")
+		if existing.ListingType == "rent" && *req.Price <= 0 {
+			if req.RentalPrice != nil && *req.RentalPrice > 0 {
+				existing.Price = *req.RentalPrice
+			} else if existing.RentalPrice != nil && *existing.RentalPrice > 0 {
+				existing.Price = *existing.RentalPrice
+			}
+		} else {
+			if *req.Price <= 0 {
+				return errors.New("price must be greater than zero")
+			}
+			existing.Price = *req.Price
 		}
-		existing.Price = *req.Price
 	}
 	if req.Description != nil {
 		if len(*req.Description) > maxDesc {
@@ -450,8 +553,67 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		}
 		existing.Description = *req.Description
 	}
-	if req.CategoryID != nil {
-		existing.CategoryID = req.CategoryID
+	if req.CategoryHierarchyID != nil || req.CategoryID != nil {
+		var catHierarchyID *int
+		var legacyCatID *int
+
+		if req.CategoryHierarchyID != nil {
+			catHierarchyID = req.CategoryHierarchyID
+		} else if req.CategoryID != nil {
+			catHierarchyID = req.CategoryID
+		}
+
+		if catHierarchyID != nil && s.catHierarchyRepo != nil {
+			valid, active, err := s.catHierarchyRepo.ValidateCategory(ctx, *catHierarchyID)
+			if err != nil {
+				return fmt.Errorf("failed to validate category: %w", err)
+			}
+			if !valid {
+				return errors.New("invalid category: category does not exist in taxonomy")
+			}
+			if !active {
+				return errors.New("cannot assign an inactive or archived category")
+			}
+
+			// Resolve authoritative legacy category ID (1..11) by walking up to the root ancestor
+			rootID, rootSlug, err := s.catHierarchyRepo.GetRootAncestor(ctx, *catHierarchyID)
+			if err == nil {
+				mappedID := MapRootSlugToLegacyCategoryID(rootSlug, rootID)
+				legacyCatID = &mappedID
+			} else if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 {
+				legacyCatID = req.CategoryID
+			} else if existing.CategoryID != nil && *existing.CategoryID >= 1 && *existing.CategoryID <= 11 {
+				legacyCatID = existing.CategoryID
+			} else {
+				defaultID := 11 // Other
+				legacyCatID = &defaultID
+			}
+
+			// If a legacy CategoryID (1..11) was also explicitly supplied, verify relationship
+			if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 && *req.CategoryID != *catHierarchyID {
+				if legacyCatID != nil && *req.CategoryID != *legacyCatID {
+					isDescendant, err := s.catHierarchyRepo.IsDescendantOf(ctx, *catHierarchyID, *req.CategoryID)
+					if err != nil {
+						return fmt.Errorf("failed to validate category hierarchy relationship: %w", err)
+					}
+					if !isDescendant {
+						return errors.New("invalid category selection: subcategory does not belong to the selected parent category")
+					}
+				}
+				legacyCatID = req.CategoryID
+			}
+		} else if catHierarchyID != nil && s.catRepo != nil {
+			_, err := s.catRepo.GetByID(ctx, *catHierarchyID)
+			if err != nil {
+				return errors.New("invalid category: category does not exist")
+			}
+			if *catHierarchyID >= 1 && *catHierarchyID <= 11 {
+				legacyCatID = catHierarchyID
+			}
+		}
+
+		existing.CategoryHierarchyID = catHierarchyID
+		existing.CategoryID = legacyCatID
 	}
 	if req.Condition != nil {
 		cond := *req.Condition
@@ -491,6 +653,9 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 	if existing.ListingType == "rent" {
 		if req.RentalPrice != nil {
 			existing.RentalPrice = req.RentalPrice
+			if req.Price == nil || *req.Price <= 0 {
+				existing.Price = *req.RentalPrice
+			}
 		}
 		if req.RentalDurationValue != nil {
 			existing.RentalDurationValue = req.RentalDurationValue
@@ -509,9 +674,6 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		}
 	}
 
-	if req.CategoryHierarchyID != nil {
-		existing.CategoryHierarchyID = req.CategoryHierarchyID
-	}
 
 	if err := s.repo.Update(ctx, existing, req.ImageURLs); err != nil {
 		return err

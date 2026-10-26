@@ -49,7 +49,7 @@ export function IPTrackingSecurity() {
           attemptCount: 1,
           status: status,
           timestamp: l.created_at ? new Date(l.created_at).toLocaleTimeString() : 'Just now',
-          userAgent: l.notes || 'SellBuy Unified Core API'
+          userAgent: l.notes || 'HUNTIQ Unified Core API'
         };
       });
       setLogs(mapped);

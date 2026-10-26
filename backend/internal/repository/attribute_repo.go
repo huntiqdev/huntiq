@@ -19,8 +19,16 @@ func NewAttributeRepo(db *pgxpool.Pool) *AttributeRepo {
 // GetAttributeDefinition retrieves an attribute by ID
 func (r *AttributeRepo) GetAttributeDefinition(ctx context.Context, id int) (*models.AttributeDefinition, error) {
 	query := `
-		SELECT id, name_en, name_am, name_om, slug, description, data_type,
-		       validation_rules, unit, is_required, is_searchable, is_filterable,
+		SELECT id,
+		       COALESCE(name_en,'') AS name_en,
+		       COALESCE(name_am,'') AS name_am,
+		       COALESCE(name_om,'') AS name_om,
+		       slug,
+		       COALESCE(description,'') AS description,
+		       data_type,
+		       validation_rules,
+		       COALESCE(unit,'') AS unit,
+		       is_required, is_searchable, is_filterable,
 		       display_order, created_at, updated_at
 		FROM attribute_definitions
 		WHERE id = $1`
@@ -48,8 +56,16 @@ func (r *AttributeRepo) GetAttributeDefinition(ctx context.Context, id int) (*mo
 // GetAttributeBySlug retrieves an attribute definition by slug
 func (r *AttributeRepo) GetAttributeBySlug(ctx context.Context, slug string) (*models.AttributeDefinition, error) {
 	query := `
-		SELECT id, name_en, name_am, name_om, slug, description, data_type,
-		       validation_rules, unit, is_required, is_searchable, is_filterable,
+		SELECT id,
+		       COALESCE(name_en,'') AS name_en,
+		       COALESCE(name_am,'') AS name_am,
+		       COALESCE(name_om,'') AS name_om,
+		       slug,
+		       COALESCE(description,'') AS description,
+		       data_type,
+		       validation_rules,
+		       COALESCE(unit,'') AS unit,
+		       is_required, is_searchable, is_filterable,
 		       display_order, created_at, updated_at
 		FROM attribute_definitions
 		WHERE slug = $1`
@@ -125,7 +141,10 @@ func (r *AttributeRepo) ListAttributeDefinitions(ctx context.Context) ([]models.
 // GetCategoryAttributes retrieves attributes for a category
 func (r *AttributeRepo) GetCategoryAttributes(ctx context.Context, categoryID int) ([]models.ApplicableAttribute, error) {
 	query := `
-		SELECT * FROM get_category_attributes($1)`
+		SELECT attribute_id, name_en, slug, data_type,
+		       validation_rules, COALESCE(unit, ''), is_required,
+		       is_filterable, display_order
+		FROM get_category_attributes($1)`
 	
 	rows, err := r.db.Query(ctx, query, categoryID)
 	if err != nil {
@@ -133,7 +152,7 @@ func (r *AttributeRepo) GetCategoryAttributes(ctx context.Context, categoryID in
 	}
 	defer rows.Close()
 	
-	var attrs []models.ApplicableAttribute
+	attrs := []models.ApplicableAttribute{}
 	for rows.Next() {
 		var attr models.ApplicableAttribute
 		var validationJSON []byte
@@ -163,7 +182,8 @@ func (r *AttributeRepo) GetProductAttributes(ctx context.Context, productID int)
 		SELECT pa.id, pa.product_id, pa.attribute_id,
 		       pa.value_text, pa.value_number, pa.value_boolean,
 		       pa.value_date, pa.value_json, pa.created_at, pa.updated_at,
-		       ad.name_en, ad.name_am, ad.name_om, ad.slug, ad.data_type, ad.unit
+		       COALESCE(ad.name_en,''), COALESCE(ad.name_am,''), COALESCE(ad.name_om,''),
+		       ad.slug, ad.data_type, COALESCE(ad.unit,'')
 		FROM product_attributes pa
 		JOIN attribute_definitions ad ON ad.id = pa.attribute_id
 		WHERE pa.product_id = $1
@@ -175,7 +195,7 @@ func (r *AttributeRepo) GetProductAttributes(ctx context.Context, productID int)
 	}
 	defer rows.Close()
 	
-	var attrs []models.ProductAttribute
+	attrs := []models.ProductAttribute{}
 	for rows.Next() {
 		var attr models.ProductAttribute
 		var valueJSON []byte

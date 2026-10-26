@@ -9,7 +9,30 @@ export interface Category {
   sort_order?: number;
   is_active?: boolean;
   parent_id?: number;
+  icon?: string;
+  image_url?: string;
   children?: Category[];
+}
+
+export interface CategoryHierarchyItem {
+  id: number;
+  name: string;
+  name_en?: string;
+  name_am?: string;
+  name_om?: string;
+  name_ti?: string;
+  slug: string;
+  parent_id?: number | null;
+  level: number;
+  path?: string;
+  display_order: number;
+  icon?: string;
+  image_url?: string;
+  is_active: boolean;
+  is_leaf?: boolean;
+  product_count?: number;
+  breadcrumbs?: Array<{ id: number; name: string; slug: string; level: number }>;
+  children?: CategoryHierarchyItem[];
 }
 
 export interface ProductImage {

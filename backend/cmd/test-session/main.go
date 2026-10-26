@@ -14,11 +14,14 @@ import (
 )
 
 func main() {
+	if os.Getenv("DB_PASSWORD") == "" && os.Getenv("DATABASE_URL") == "" {
+		log.Fatal("[FATAL] DB_PASSWORD environment variable is required (or set DATABASE_URL)")
+	}
 	if os.Getenv("JWT_SECRET") == "" {
-		os.Setenv("JWT_SECRET", "cRbQBaeoQakbnOO2FNC7BNzQf8UkubRxkhMxpIqKYEtXN4Y9o9g7pJwKQcHCUnmi")
+		os.Setenv("JWT_SECRET", "test-session-ephemeral-jwt-secret-value-32chars!")
 	}
 	if os.Getenv("OTP_ENCRYPT_KEY") == "" {
-		os.Setenv("OTP_ENCRYPT_KEY", "yEr0PYPyolvDVLDJ8JaNtx6yln3cI+54fkRSulMCVHA=")
+		os.Setenv("OTP_ENCRYPT_KEY", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")
 	}
 	if os.Getenv("ALLOW_ORIGIN") == "" {
 		os.Setenv("ALLOW_ORIGIN", "http://localhost:3000")
@@ -29,13 +32,11 @@ func main() {
 	if os.Getenv("APP_BASE_URL") == "" {
 		os.Setenv("APP_BASE_URL", "http://localhost:8080")
 	}
-	if os.Getenv("DB_HOST") == "" {
-		os.Setenv("DB_HOST", "localhost")
-		os.Setenv("DB_PORT", "5432")
+	if os.Getenv("DB_USER") == "" {
 		os.Setenv("DB_USER", "postgres")
-		os.Setenv("DB_PASSWORD", "gedam")
+	}
+	if os.Getenv("DB_NAME") == "" {
 		os.Setenv("DB_NAME", "hulubedej_db")
-		os.Setenv("DB_SSLMODE", "disable")
 	}
 
 	cfg := config.Load()

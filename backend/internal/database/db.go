@@ -21,6 +21,10 @@ func ensureSchema(ctx context.Context, pool *pgxpool.Pool) error {
 			PRIMARY KEY (admin_id, permission)
 		);
 		CREATE INDEX IF NOT EXISTS idx_admin_permissions_admin ON admin_permissions(admin_id);
+
+		ALTER TABLE admin_notifications
+			ADD COLUMN IF NOT EXISTS type VARCHAR(50) NOT NULL DEFAULT 'info',
+			ADD COLUMN IF NOT EXISTS read_by INT[] NOT NULL DEFAULT '{}';
 	`)
 	return err
 }

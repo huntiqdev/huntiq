@@ -14,7 +14,7 @@ export const adminApi = {
   adminGetSellers: (token: string) =>
     fetchAPI<any>('/admin/sellers', { headers: authHeaders(token) }).then(r => Array.isArray(r) ? r : (r?.data ?? [])),
   adminListSellers: (
-    params: { page?: number; limit?: number; search?: string; status?: string; tier?: string },
+    params: { page?: number; limit?: number; search?: string; status?: string; tier?: string; strategy?: string },
     token: string
   ) => {
     const q = new URLSearchParams();
@@ -23,6 +23,7 @@ export const adminApi = {
     if (params.search) q.set('search', params.search);
     if (params.status) q.set('status', params.status);
     if (params.tier) q.set('tier', params.tier);
+    if (params.strategy) q.set('strategy', params.strategy);
     const query = q.toString() ? `?${q.toString()}` : '';
     return fetchAPI<{ data: any[]; total: number; page: number; limit: number }>(
       `/admin/sellers${query}`,
@@ -281,6 +282,10 @@ export const adminApi = {
     fetchAPI<any>(`/admin/category-hierarchy/${id}`, { method: 'DELETE', headers: authHeaders(token) }),
   adminGetCategoryHierarchyStats: (id: number, token: string) =>
     fetchAPI<any>(`/admin/category-hierarchy/${id}/stats`, { headers: authHeaders(token) }),
+  adminSetCategoryStatus: (id: number, is_active: boolean, token: string) =>
+    fetchAPI<any>(`/admin/category-hierarchy/${id}/status`, { method: 'PUT', body: JSON.stringify({ is_active }), headers: authHeaders(token) }),
+  adminReorderCategory: (id: number, display_order: number, token: string) =>
+    fetchAPI<any>(`/admin/category-hierarchy/${id}/reorder`, { method: 'PUT', body: JSON.stringify({ display_order }), headers: authHeaders(token) }),
 
   // ── Attribute Definitions ────────────────────────────────────────────────
   adminGetAttributes: (token: string) =>

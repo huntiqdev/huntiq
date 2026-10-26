@@ -133,7 +133,7 @@ func NewNominatimProvider(repo *repository.LocationHierarchyRepo) *NominatimProv
 			Timeout: 4 * time.Second,
 		},
 		repo:      repo,
-		userAgent: "SELLBUY-Ethiopian-Marketplace/1.0",
+		userAgent: "HUNTIQ-Universal-Marketplace/1.0",
 	}
 }
 

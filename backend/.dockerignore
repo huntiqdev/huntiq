@@ -6,3 +6,6 @@ uploads/
 .git
 .gitignore
 Dockerfile
+bin/
+api
+seed-taxonomy

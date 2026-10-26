@@ -13,12 +13,14 @@ import {
 import Link from 'next/link';
 
 type TabType = 'pending' | 'all' | 'fee_claims';
-type DomainFilter = 'all' | 'sell' | 'rent' | 'lease';
+type PillarFilter = 'all' | 'sale' | 'rent';
+type ConditionFilter = 'all' | 'new' | 'used';
 
 export default function AdminProductsPage() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>('pending');
-  const [domainFilter, setDomainFilter] = useState<DomainFilter>('all');
+  const [pillarFilter, setPillarFilter] = useState<PillarFilter>('all');
+  const [conditionFilter, setConditionFilter] = useState<ConditionFilter>('all');
   const [products, setProducts] = useState<Product[]>([]);
   const [feeClaims, setFeeClaims] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -116,8 +118,19 @@ export default function AdminProductsPage() {
   };
 
   const filteredProducts = products.filter((p) => {
-    if (domainFilter === 'all') return true;
-    return (p.listing_type || 'sell').toLowerCase() === domainFilter;
+    // 1. Pillar filter (sale vs rent)
+    if (pillarFilter !== 'all') {
+      const lt = (p.listing_type || 'sale').toLowerCase();
+      if (pillarFilter === 'sale' && lt !== 'sale' && lt !== 'sell') return false;
+      if (pillarFilter === 'rent' && lt !== 'rent' && lt !== 'lease') return false;
+    }
+    // 2. Condition filter (new vs used)
+    if (conditionFilter !== 'all') {
+      const cond = (p.condition || '').toLowerCase();
+      if (conditionFilter === 'new' && cond !== 'new') return false;
+      if (conditionFilter === 'used' && cond === 'new') return false;
+    }
+    return true;
   });
 
   const toggleSelect = (id: number) => {
@@ -217,25 +230,68 @@ export default function AdminProductsPage() {
           </button>
         </div>
 
-        {/* Domain Vertical Filter */}
+        {/* Pillar & Condition Multi-Dimensional Filters */}
         {activeTab !== 'fee_claims' && (
-          <div className="flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 rounded-xl p-1">
-            <span className="text-[10px] font-black uppercase text-zinc-500 px-2 flex items-center gap-1">
-              <Filter size={12} /> Domain:
-            </span>
-            {(['all', 'sell', 'rent', 'lease'] as DomainFilter[]).map((df) => (
-              <button
-                key={df}
-                onClick={() => setDomainFilter(df)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-colors ${
-                  domainFilter === df
-                    ? 'bg-zinc-800 text-orange-400 border border-zinc-700'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                {df}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Pillar: Sale vs Rent */}
+            <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-xl p-1">
+              <span className="text-[10px] font-black uppercase text-zinc-500 px-2 flex items-center gap-1">
+                <Filter size={12} /> Pillar:
+              </span>
+              {(
+                [
+                  { id: 'all', label: 'All' },
+                  { id: 'sale', label: '🛒 Sale (Seller)' },
+                  { id: 'rent', label: '🏠 Rent (Landlord)' },
+                ] as const
+              ).map((pf) => (
+                <button
+                  key={pf.id}
+                  onClick={() => setPillarFilter(pf.id)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-colors ${
+                    pillarFilter === pf.id
+                      ? pf.id === 'rent'
+                        ? 'bg-teal-600 text-white shadow-sm'
+                        : pf.id === 'sale'
+                        ? 'bg-orange-600 text-white shadow-sm'
+                        : 'bg-zinc-800 text-white border border-zinc-700'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {pf.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Condition: New vs Used */}
+            <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-xl p-1">
+              <span className="text-[10px] font-black uppercase text-zinc-500 px-2">
+                Condition:
+              </span>
+              {(
+                [
+                  { id: 'all', label: 'All' },
+                  { id: 'new', label: '🆕 New' },
+                  { id: 'used', label: '♻️ Used' },
+                ] as const
+              ).map((cf) => (
+                <button
+                  key={cf.id}
+                  onClick={() => setConditionFilter(cf.id)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-colors ${
+                    conditionFilter === cf.id
+                      ? cf.id === 'new'
+                        ? 'bg-green-600 text-white shadow-sm'
+                        : cf.id === 'used'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'bg-zinc-800 text-white border border-zinc-700'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {cf.label}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -375,8 +431,12 @@ export default function AdminProductsPage() {
                     </button>
                   )}
 
-                  <span className="absolute bottom-3 left-3 bg-zinc-950/80 backdrop-blur px-2.5 py-1 rounded-lg text-[10px] font-black uppercase text-orange-400 border border-zinc-800">
-                    {p.listing_type || 'SELL'}
+                  <span className={`absolute bottom-3 left-3 backdrop-blur px-2.5 py-1 rounded-lg text-[10px] font-black uppercase border ${
+                    (p.listing_type || 'sale') === 'rent'
+                      ? 'bg-teal-950/80 text-teal-300 border-teal-500/40'
+                      : 'bg-orange-950/80 text-orange-300 border-orange-500/40'
+                  }`}>
+                    {(p.listing_type || 'sale') === 'rent' ? '🏠 RENT (Landlord)' : '🛒 SALE (Seller)'}
                   </span>
 
                   <Link
@@ -391,19 +451,38 @@ export default function AdminProductsPage() {
                 <div className="p-5 flex-1 flex flex-col gap-3">
                   <div>
                     <h3 className="font-black text-white text-base line-clamp-1">{p.title}</h3>
-                    <p className="text-sm font-mono font-bold text-orange-500 mt-0.5">
-                      ETB {Number(p.price).toLocaleString()}
-                    </p>
+                    {(p.listing_type || 'sale') === 'rent' ? (
+                      <div>
+                        <p className="text-sm font-mono font-bold text-teal-400 mt-0.5">
+                          ETB {Number(p.rental_price || p.price).toLocaleString()} / {p.rental_duration_unit || 'month'}
+                        </p>
+                        {p.deposit_amount && p.deposit_amount > 0 ? (
+                          <p className="text-[10px] text-zinc-400 font-mono">
+                            Deposit: ETB {Number(p.deposit_amount).toLocaleString()}
+                          </p>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <p className="text-sm font-mono font-bold text-orange-500 mt-0.5">
+                        ETB {Number(p.price).toLocaleString()}
+                      </p>
+                    )}
                   </div>
 
                   <div className="text-xs text-zinc-400 space-y-1 bg-zinc-950/50 p-3 rounded-2xl border border-zinc-800/80">
                     <p className="flex justify-between">
-                      <span className="text-zinc-500">Seller ID:</span>
+                      <span className="text-zinc-500">Provider ID:</span>
                       <span className="font-mono text-zinc-300">#{p.seller_id}</span>
                     </p>
-                    <p className="flex justify-between">
+                    <p className="flex justify-between items-center">
                       <span className="text-zinc-500">Condition:</span>
-                      <span className="font-bold text-zinc-300 uppercase">{p.condition || 'USED'}</span>
+                      <span className={`font-bold text-[10px] px-2 py-0.5 rounded uppercase ${
+                        (p.condition || '').toLowerCase() === 'new'
+                          ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-500/30'
+                          : 'bg-zinc-800 text-zinc-300 border border-zinc-700'
+                      }`}>
+                        {(p.condition || 'USED').toUpperCase()}
+                      </span>
                     </p>
                     <p className="flex justify-between">
                       <span className="text-zinc-500">Status:</span>
@@ -439,9 +518,9 @@ export default function AdminProductsPage() {
                     />
                   </th>
                 )}
-                <th className="py-4 px-6">Product & Domain</th>
-                <th className="py-4 px-4">Price</th>
-                <th className="py-4 px-4">Seller ID</th>
+                <th className="py-4 px-6">Listing & Mode</th>
+                <th className="py-4 px-4">Price / Terms</th>
+                <th className="py-4 px-4">Provider ID</th>
                 <th className="py-4 px-4">Status</th>
                 {activeTab === 'pending' && <th className="py-4 px-6 text-right">Moderation</th>}
               </tr>
@@ -472,14 +551,29 @@ export default function AdminProductsPage() {
                       </div>
                       <div>
                         <p className="font-black text-white line-clamp-1">{p.title}</p>
-                        <span className="text-[9px] font-black uppercase text-orange-400 tracking-wider">
-                          {p.listing_type || 'SELL'}
-                        </span>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className={`text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded ${
+                            (p.listing_type || 'sale') === 'rent'
+                              ? 'bg-teal-500/10 text-teal-400 border border-teal-500/20'
+                              : 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
+                          }`}>
+                            {(p.listing_type || 'sale') === 'rent' ? '🏠 Rent (Landlord)' : '🛒 Sale (Seller)'}
+                          </span>
+                          <span className="text-[9px] font-bold text-zinc-400 uppercase">
+                            {p.condition || 'Used'}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </td>
                   <td className="py-4 px-4 font-mono font-bold text-zinc-300">
-                    ETB {Number(p.price).toLocaleString()}
+                    {(p.listing_type || 'sale') === 'rent' ? (
+                      <span className="text-teal-400">
+                        ETB {Number(p.rental_price || p.price).toLocaleString()} / {p.rental_duration_unit || 'mo'}
+                      </span>
+                    ) : (
+                      <span>ETB {Number(p.price).toLocaleString()}</span>
+                    )}
                   </td>
                   <td className="py-4 px-4 font-mono text-zinc-400">#{p.seller_id}</td>
                   <td className="py-4 px-4">

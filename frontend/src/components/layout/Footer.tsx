@@ -14,6 +14,7 @@ import {
   FileText,
   Lock,
 } from 'lucide-react';
+import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
 const LOCALES: Locale[] = ['en', 'am', 'or', 'ti'];
 const LOCALE_NAMES: Record<Locale, string> = {
@@ -33,19 +34,12 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           {/* Col 1: Brand & Identity */}
           <div className="col-span-2 md:col-span-1 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="relative w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md">
-                <img src="/huntiq.png" alt="SellBuy" className="w-full h-full object-contain p-0.5" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-lg font-black text-zinc-900 dark:text-white leading-none">
-                  {t.ui.app_name}
-                </span>
-                <span className="text-[10px] font-bold text-orange-600 uppercase tracking-wider">
-                  Universal Marketplace
-                </span>
-              </div>
-            </div>
+            <HuntiqLogo
+              size="md"
+              showText
+              subtitle="Universal Marketplace"
+              href="/"
+            />
             <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
               {t.footer.tagline ?? 'The premier universal marketplace for buying, selling, and renting across Ethiopia.'}
             </p>
@@ -180,7 +174,7 @@ export function Footer() {
         {/* Bottom Strip */}
         <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-zinc-200 dark:border-zinc-800 gap-3">
           <p className="text-xs font-medium text-zinc-500 text-center sm:text-left">
-            {t.footer.copyright ?? '© 2026 SellBuy. All rights reserved across Ethiopia.'}
+            {t.footer.copyright ?? '© 2026 HUNTIQ. All rights reserved across Ethiopia.'}
           </p>
           <div className="flex items-center gap-4 text-xs font-bold text-zinc-500">
             <span className="flex items-center gap-1">

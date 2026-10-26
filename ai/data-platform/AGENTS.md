@@ -63,8 +63,18 @@ ai/data-platform/
 
 ## 3. Verification Commands
 
+The data platform is a member of the root `uv` workspace (`ai/pyproject.toml`) with unified lockfile `ai/uv.lock`.
+
 Run dataset contract and quality validation tests:
 ```bash
 cd ai/data-platform
 uv run pytest tests/ -v
 ```
+Or from the workspace root:
+```bash
+cd ai
+uv run pytest data-platform/tests/ -v
+# Or run all 35 workspace tests:
+uv run pytest -v
+```
+

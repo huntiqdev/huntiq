@@ -151,10 +151,10 @@ func (r *AdminRepo) ListProductsByStatusPaged(ctx context.Context, status string
 }
 
 func (r *AdminRepo) ListSellersPaged(ctx context.Context, page, limit int) ([]models.User, int, error) {
-	return r.ListSellersFilteredPaged(ctx, page, limit, "", "", "")
+	return r.ListSellersFilteredPaged(ctx, page, limit, "", "", "", "")
 }
 
-func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit int, search, status, tier string) ([]models.User, int, error) {
+func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit int, search, status, tier, strategy string) ([]models.User, int, error) {
 	if limit <= 0 || limit > 200 {
 		limit = 50
 	}
@@ -163,7 +163,7 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 	}
 	offset := (page - 1) * limit
 
-	whereClauses := []string{"u.role='seller'"}
+	whereClauses := []string{"(u.role='seller' OR u.seller_preference IN ('rent', 'both') OR EXISTS (SELECT 1 FROM user_capabilities uc WHERE uc.user_id = u.id AND uc.capability IN ('seller', 'landlord') AND uc.status = 'active'))"}
 	args := []interface{}{}
 	argIdx := 1
 
@@ -189,6 +189,14 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		argIdx++
 	}
 
+	if strategy == "sale" {
+		whereClauses = append(whereClauses, "(COALESCE(u.seller_preference, 'sale') = 'sale' OR u.seller_preference = 'both')")
+	} else if strategy == "rent" {
+		whereClauses = append(whereClauses, "u.seller_preference IN ('rent', 'both')")
+	} else if strategy == "both" {
+		whereClauses = append(whereClauses, "u.seller_preference = 'both'")
+	}
+
 	whereSQL := strings.Join(whereClauses, " AND ")
 
 	countQuery := fmt.Sprintf("SELECT COUNT(*) FROM users u WHERE %s", whereSQL)
@@ -205,6 +213,7 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		       COALESCE(u.total_value_sold,0) AS total_value_sold,
 		       COALESCE(ps.net_profit, 0) AS net_profit,
 		       COALESCE(u.deactivation_reason,'') AS deactivation_reason,
+		       COALESCE(u.seller_preference,'sale') AS seller_preference,
 		       u.created_at, u.updated_at
 		FROM users u
 		LEFT JOIN seller_profit_summary ps ON ps.seller_id = u.id
@@ -224,8 +233,17 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		var u models.User
 		if err := rows.Scan(&u.ID, &u.Name, &u.Phone, &u.BusinessName, &u.Email,
 			&u.Rating, &u.Role, &u.IsActive, &u.Tier, &u.TotalValueSold,
-			&u.NetProfit, &u.DeactivationReason, &u.CreatedAt, &u.UpdatedAt); err != nil {
+			&u.NetProfit, &u.DeactivationReason, &u.SellerPreference, &u.CreatedAt, &u.UpdatedAt); err != nil {
 			return nil, 0, err
+		}
+		if len(u.Capabilities) == 0 {
+			u.Capabilities = []string{"buyer"}
+			if u.Role == "seller" || u.SellerPreference == "sale" || u.SellerPreference == "both" {
+				u.Capabilities = append(u.Capabilities, "seller")
+			}
+			if u.SellerPreference == "rent" || u.SellerPreference == "both" {
+				u.Capabilities = append(u.Capabilities, "landlord")
+			}
 		}
 		users = append(users, u)
 	}
@@ -967,10 +985,19 @@ func (r *AdminRepo) CreateAdminNotification(ctx context.Context, title, message,
 	if targetRole != "" {
 		tr = targetRole
 	}
+	priority := "normal"
+	switch ntype {
+	case "error", "critical":
+		priority = "high"
+	case "warning":
+		priority = "medium"
+	case "low":
+		priority = "low"
+	}
 	_, err := r.db.Exec(ctx, `
-		INSERT INTO admin_notifications (title, message, type, target_role)
-		VALUES ($1, $2, $3, $4)`,
-		title, message, ntype, tr)
+		INSERT INTO admin_notifications (title, message, type, priority, target_role)
+		VALUES ($1, $2, $3, $4, $5)`,
+		title, message, ntype, priority, tr)
 	return err
 }
 

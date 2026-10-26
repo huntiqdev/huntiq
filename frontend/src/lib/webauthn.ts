@@ -1,5 +1,5 @@
 /**
- * Enterprise WebAuthn / Passkey Client Utilities for HUNTIQ (SellBuy)
+ * Enterprise WebAuthn / Passkey Client Utilities for HUNTIQ Universal Marketplace
  *
  * Implements FIDO2 / WebAuthn browser ceremonies supporting compatible platform
  * authenticators (Touch ID, Face ID, Windows Hello, Android Biometrics) and

@@ -158,3 +158,38 @@ func getEnvInt(key string, fallback int) int {
 	}
 	return fallback
 }
+
+// NewTestConfig returns an isolated, safe in-memory configuration for testing.
+// Secret fields use ephemeral mock test values if not set in the environment.
+// Live database fields default to environment variables without hardcoded fallback credentials.
+func NewTestConfig() *Config {
+	secret := os.Getenv("JWT_SECRET")
+	if len(secret) < 32 {
+		secret = "test-only-ephemeral-jwt-secret-value-32chars!"
+	}
+	otpKey := os.Getenv("OTP_ENCRYPT_KEY")
+	if len(otpKey) < 32 {
+		// Valid base64 encoding of 32 bytes of zeros for test isolation
+		otpKey = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+	}
+
+	return &Config{
+		DBHost:        getEnv("DB_HOST", "localhost"),
+		DBPort:        getEnv("DB_PORT", "5432"),
+		DBUser:        getEnv("DB_USER", "postgres"),
+		DBPassword:    getEnv("DB_PASSWORD", ""),
+		DBName:        getEnv("DB_NAME", "hulubedej_db"),
+		DBSSLMode:     getEnv("DB_SSLMODE", "disable"),
+		DBMaxConns:    5,
+		DBMinConns:    1,
+		AppPort:       "8080",
+		AppBaseURL:    "http://localhost:8080",
+		FrontendURL:   "http://localhost:3000",
+		JWTSecret:     secret,
+		AllowOrigin:   "http://localhost:3000",
+		OTPEncryptKey: otpKey,
+		DevMode:       true,
+		UploadDir:     "./uploads",
+		MaxUploadMB:   20,
+	}
+}

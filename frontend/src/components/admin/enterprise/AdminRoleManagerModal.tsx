@@ -179,7 +179,7 @@ export function AdminRoleManagerModal({ isOpen, onClose, onSuccess }: AdminRoleM
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@sellbuy.et"
+                placeholder="admin@huntiq.et"
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-orange-500"
                 required
               />

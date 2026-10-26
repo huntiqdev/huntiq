@@ -111,13 +111,13 @@ const sqlCreateProductImage = `
 
 const sqlUpdateProduct = `
 	UPDATE products
-	 SET title=$1, price=$2, description=$3, category_id=$4, subcategory=$5, item=$6,
+	 SET title=$1, price=$2, description=$3, category_id=$4::int, subcategory=$5, item=$6,
 	     condition=$7, location_id=$8, kebele=$9, specific_area=$10,
 	     latitude=$11, longitude=$12,
 	     rental_price=$13, rental_duration_value=$14, rental_duration_unit=$15,
 	     deposit_amount=$16, available_from=$17, available_until=$18,
-	     category_hierarchy_id=COALESCE($19, $4),
-	     location_hierarchy_id=COALESCE($20, location_hierarchy_id),
+	     category_hierarchy_id=COALESCE($19::int, category_hierarchy_id),
+	     location_hierarchy_id=COALESCE($20::int, location_hierarchy_id),
 	     status='pending', admin_notes='', updated_at=NOW()
 	 WHERE id=$21 AND seller_id=$22 AND status IN ('pending','rejected')`
 
@@ -195,16 +195,20 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 	// Support both legacy category_id and new category_hierarchy_id
 	if f.CategoryHierarchyID != nil {
 		if f.IncludeDescendants {
-			// Filter by category and all descendants using database function
+			// Filter by category and all descendants using database function, with fallback to legacy category_id
 			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND p.category_hierarchy_id IN (SELECT id FROM get_category_descendants($%d))", idx))
+			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id IN (SELECT id FROM get_category_descendants($%d)) OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx))
 			args = append(args, *f.CategoryHierarchyID)
 		} else {
-			args, _ = addWhere(&wb, args, " AND p.category_hierarchy_id = ", *f.CategoryHierarchyID)
+			idx := len(args) + 1
+			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id = $%d OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx))
+			args = append(args, *f.CategoryHierarchyID)
 		}
 	} else if f.CategoryID != nil {
-		// Legacy category_id filter (flat categories)
-		args, _ = addWhere(&wb, args, " AND p.category_id = ", *f.CategoryID)
+		// Legacy category_id filter (flat categories), with compatibility for new category_hierarchy_id
+		idx := len(args) + 1
+		wb.WriteString(fmt.Sprintf(" AND (p.category_id = $%d OR p.category_hierarchy_id = $%d)", idx, idx))
+		args = append(args, *f.CategoryID)
 	}
 	
 	if f.MinPrice != nil {

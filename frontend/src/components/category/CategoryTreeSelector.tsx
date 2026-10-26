@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { api } from '@/lib/api';
 import { ChevronDown, ChevronRight, Folder, FolderOpen } from 'lucide-react';
 
 interface CategoryNode {
@@ -42,13 +43,11 @@ export default function CategoryTreeSelector({
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch(`/api/categories/tree?lang=${language}`);
-      const data = await res.json();
-      if (data.success) {
-        setCategories(data.data || []);
-      }
+      const data = await api.getCategoryTree(language);
+      setCategories(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
+      setCategories([]);
     } finally {
       setLoading(false);
     }

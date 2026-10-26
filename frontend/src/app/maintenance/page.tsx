@@ -45,7 +45,7 @@ export default function MaintenancePage() {
         </div>
 
         <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">
-          Hulubedeje Marketplace
+          HUNTIQ Universal Marketplace
         </p>
       </div>
     </div>

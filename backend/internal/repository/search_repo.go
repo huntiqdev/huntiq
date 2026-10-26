@@ -40,17 +40,23 @@ func (r *SearchRepo) LogSearch(ctx context.Context, query string, resultCount in
 // LogClick records when a user clicks a search result
 func (r *SearchRepo) LogClick(ctx context.Context, query string, productID int, position int, userID *int, sessionID string) error {
 	normalizedQuery := ""
-	r.db.QueryRow(ctx, `SELECT normalize_query($1)`, query).Scan(&normalizedQuery)
+	_ = r.db.QueryRow(ctx, `SELECT normalize_query($1)`, query).Scan(&normalizedQuery)
+	if normalizedQuery == "" {
+		normalizedQuery = query
+	}
 	
 	_, err := r.db.Exec(ctx, `
 		UPDATE search_analytics
 		SET clicked_product_id = $1, clicked_position = $2
-		WHERE normalized_query = $3
-		  AND user_id IS NOT DISTINCT FROM $4
-		  AND session_id = $5
-		  AND created_at >= NOW() - INTERVAL '1 hour'
-		ORDER BY created_at DESC
-		LIMIT 1`,
+		WHERE id = (
+			SELECT id FROM search_analytics
+			WHERE normalized_query = $3
+			  AND user_id IS NOT DISTINCT FROM $4
+			  AND session_id = $5
+			  AND created_at >= NOW() - INTERVAL '1 hour'
+			ORDER BY created_at DESC
+			LIMIT 1
+		)`,
 		productID, position, normalizedQuery, userID, sessionID,
 	)
 	

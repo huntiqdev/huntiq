@@ -143,3 +143,16 @@ func (r *CategoryRepo) Delete(ctx context.Context, id int) error {
 	_, err := r.db.Exec(ctx, `DELETE FROM categories WHERE id=$1`, id) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	return err
 }
+
+func (r *CategoryRepo) GetByID(ctx context.Context, id int) (*models.Category, error) {
+	row := r.db.QueryRow(ctx,
+		`SELECT id, name, slug,
+		COALESCE(name_en, name, ''), COALESCE(name_am, ''), COALESCE(name_or, ''), COALESCE(name_ti, ''),
+		COALESCE(sort_order, 0), COALESCE(is_active, true), parent_id
+		FROM categories WHERE id=$1`, id)
+	c, err := scanCat(row)
+	if err != nil {
+		return nil, err
+	}
+	return &c, nil
+}

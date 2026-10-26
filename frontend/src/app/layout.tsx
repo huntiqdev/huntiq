@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: 'HUNTIQ — Ethiopia\'s Universal Marketplace',
   description: 'Buy, sell, and rent anything across Ethiopia. Find electronics, vehicles, property, agriculture, services, and more on HUNTIQ.',
   keywords: 'buy sell Ethiopia, Ethiopian marketplace, HUNTIQ, rent property Ethiopia, online market Ethiopia, Addis Ababa market',
+  icons: {
+    icon: '/huntiq.png',
+    shortcut: '/huntiq.png',
+    apple: '/huntiq.png',
+  },
 };
 
 // Runs before paint — prevents dark-mode flash without Next.js Script component.

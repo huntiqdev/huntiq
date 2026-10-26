@@ -6,7 +6,26 @@ import {
   Eye, CheckCircle2, Lock, Fingerprint, Copy, Check, MessageSquare, 
   AlertTriangle, FileCode, ShieldAlert, Sparkles, Bookmark, Info
 } from 'lucide-react';
-import { DataRowItem } from './EnterpriseDataTable';
+
+export interface DataRowItem {
+  id: string;
+  title: string;
+  category: string;
+  vertical: 'ecommerce' | 'rentals' | 'leases';
+  price: number;
+  pricePeriod?: string;
+  status: 'Approved' | 'Pending Review' | 'Suspended' | 'In Escrow';
+  verificationBadge: 'Verified Landlord' | 'Top Seller' | 'Pending Verification' | 'VIP Tenant';
+  dateCreated: string;
+  specDetails: {
+    skuOrUnit: string;
+    locationOrSeller: string;
+    escrowAmount?: number;
+    depositStatus?: string;
+    maintenanceHistory?: string;
+    documentsAvailable: string[];
+  };
+}
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
 
@@ -312,7 +331,7 @@ export function DocumentViewerModal({ isOpen, documentName, selectedRow, onClose
               {showWatermark && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-5 z-0">
                   <div className="text-zinc-500 font-extrabold text-5xl font-mono uppercase tracking-[0.2em] -rotate-45">
-                    SELLBUY COMPLIANCE
+                    HUNTIQ COMPLIANCE
                   </div>
                 </div>
               )}
@@ -324,7 +343,7 @@ export function DocumentViewerModal({ isOpen, documentName, selectedRow, onClose
                 <div className={`text-[10px] font-mono uppercase tracking-widest font-extrabold ${
                   filterMode === 'high-contrast' ? 'text-black' : 'text-orange-400'
                 }`}>
-                  SELLBUY ENTERPRISE SAAS COMPLIANCE LEDGER
+                  HUNTIQ ENTERPRISE SAAS COMPLIANCE LEDGER
                 </div>
                 <h2 className="text-lg font-black tracking-tight font-serif">
                   AGREEMENT OF LEASE & ESCROW LOCK
@@ -372,7 +391,7 @@ export function DocumentViewerModal({ isOpen, documentName, selectedRow, onClose
                   </div>
                   <p>
                     The agreed rental valuation stands at <strong className="text-orange-400 font-mono">${selectedRow.price.toLocaleString()}</strong>{selectedRow.pricePeriod || '/month'}. 
-                    A deposit of <strong className="text-emerald-400 font-mono">${selectedRow.specDetails.escrowAmount?.toLocaleString() || '3,600'}</strong> is verified as securely locked inside the **SellBuy Unified Escrow Vault**. This balance cannot be liquidated or disbursed without dual cryptographic signatures from the Lessor and Super Administrator.
+                    A deposit of <strong className="text-emerald-400 font-mono">${selectedRow.specDetails.escrowAmount?.toLocaleString() || '3,600'}</strong> is verified as securely locked inside the **HUNTIQ Unified Escrow Vault**. This balance cannot be liquidated or disbursed without dual cryptographic signatures from the Lessor and Super Administrator.
                   </p>
                 </div>
 
@@ -438,7 +457,7 @@ export function DocumentViewerModal({ isOpen, documentName, selectedRow, onClose
               <div className={`pt-4 mt-6 border-t flex items-center justify-between text-[9px] font-mono opacity-65 ${
                 filterMode === 'high-contrast' ? 'border-black' : 'border-zinc-800'
               }`}>
-                <span>SellBuy Compliance Engine v2.8</span>
+                <span>HUNTIQ Compliance Engine v2.8</span>
                 <span>Security Level: Tier 3 Audited</span>
               </div>
             </div>
@@ -677,7 +696,7 @@ export function DocumentViewerModal({ isOpen, documentName, selectedRow, onClose
                     <div className="space-y-2 border-t border-zinc-800/80 pt-3">
                       <div className="flex justify-between items-center text-[10px]">
                         <span className="text-zinc-500 font-bold uppercase tracking-wider">Signing Authority</span>
-                        <span className="text-zinc-300 font-mono">SellBuy Root CA v2</span>
+                        <span className="text-zinc-300 font-mono">HUNTIQ Root CA v2</span>
                       </div>
                       
                       <div className="flex justify-between items-center text-[10px]">

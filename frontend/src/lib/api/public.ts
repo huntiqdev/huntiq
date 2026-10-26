@@ -42,8 +42,14 @@ export const publicApi = {
   },
   getProduct: (id: number) => fetchAPI<any>(`/products/${id}`),
   getProductAttributes: (id: number) => fetchAPI<any[]>(`/products/${id}/attributes`).then(r => r ?? []),
-  getCategoryTree: (lang = 'en') => fetchAPI<any[]>(`/categories/tree?lang=${lang}`).then(r => r ?? []),
-  getCategoryBreadcrumbs: (id: number, lang = 'en') => fetchAPI<any[]>(`/categories/${id}/ancestors?lang=${lang}`).then(r => r ?? []),
+  getRootCategories: (lang = 'en') => fetchAPI<any[]>(`/categories/roots?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  getCategoryTree: (lang = 'en') => fetchAPI<any[]>(`/categories/tree?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  getCategoryChildren: (id: number, lang = 'en') => fetchAPI<any[]>(`/categories/${id}/children?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  getCategoryBySlug: (slug: string, lang = 'en') => fetchAPI<any>(`/categories/slug/${encodeURIComponent(slug)}?lang=${encodeURIComponent(lang)}`),
+  getCategoryById: (id: number, lang = 'en') => fetchAPI<any>(`/categories/${id}?lang=${encodeURIComponent(lang)}`),
+  checkCategorySlug: (slug: string, excludeId?: number) =>
+    fetchAPI<{ available: boolean; slug: string }>(`/categories/check-slug?slug=${encodeURIComponent(slug)}${excludeId ? `&exclude_id=${excludeId}` : ''}`),
+  getCategoryBreadcrumbs: (id: number, lang = 'en') => fetchAPI<any[]>(`/categories/${id}/ancestors?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
   getCategoryAttributes: (id: number) => fetchAPI<any[]>(`/categories/${id}/attributes`).then(r => r ?? []),
   getCategories: () => fetchAPI<any[]>('/categories').then(r => r ?? []),
   getPopularCategories: (days = 7, limit = 8) =>
