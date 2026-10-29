@@ -28,14 +28,30 @@ func Created(c *fiber.Ctx, data interface{}) error {
 
 // OKList sends a list response, guaranteeing [] instead of null for nil slices.
 func OKList(c *fiber.Ctx, data interface{}) error {
-	if data == nil {
-		return c.Status(fiber.StatusOK).JSON(envelope{Success: true, Data: []struct{}{}})
+	return OKListWithMeta(c, data, nil)
+}
+
+// OKListWithMeta sends a list response with optional advisory metadata.
+func OKListWithMeta(c *fiber.Ctx, data interface{}, meta interface{}) error {
+	safeData := data
+	if safeData == nil {
+		safeData = []struct{}{}
+	} else {
+		v := reflect.ValueOf(safeData)
+		if v.Kind() == reflect.Slice && v.IsNil() {
+			safeData = []struct{}{}
+		}
 	}
-	v := reflect.ValueOf(data)
-	if v.Kind() == reflect.Slice && v.IsNil() {
-		return c.Status(fiber.StatusOK).JSON(envelope{Success: true, Data: []struct{}{}})
+
+	if meta != nil {
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
+			"success": true,
+			"data":    safeData,
+			"meta":    meta,
+		})
 	}
-	return c.Status(fiber.StatusOK).JSON(envelope{Success: true, Data: data})
+
+	return c.Status(fiber.StatusOK).JSON(envelope{Success: true, Data: safeData})
 }
 
 // AppError sends a structured AppError response with both code and message.

@@ -1,87 +1,95 @@
-# HUNTIQ AI Service
+# HUNTIQ AI — Local Qwen3 4B System
 
-The internal AI inference microservice for **HUNTIQ** (Ethiopia's Universal Marketplace).
+This directory contains the local model configuration, offline model storage, evaluation suite, and Python tools for the HUNTIQ Local AI Assistant running on Ollama with `qwen3:4b`.
 
----
+## Architecture Overview
 
-## 1. Role and Boundaries
+1. **Local Model Storage:** Stored directly inside the project at `ai/models/ollama` (configured via `OLLAMA_MODELS` and container bind mounts).
+2. **Local Model Runtime:** Ollama running locally at `http://127.0.0.1:11434` with zero external cloud dependencies.
+3. **Base Pretrained Model:** `qwen3:4b` (4.0B parameters, Q4_K_M quantization).
+4. **Derived Model:** `huntiq-assistant:latest` built from [`Modelfile`](./Modelfile) with customized multilingual directives (English, Amharic, Afaan Oromoo, Tigrinya) and live marketplace tool definitions.
+5. **Trusted Sovereign Authority:** Go Backend (`backend/`) manages all authentication, authorization, session persistence, and parameter-safe database queries.
+6. **Database Source of Truth:** PostgreSQL 16. Listings and prices are retrieved dynamically via authorized Go tool executions; never hallucinated.
+7. **Frontend:** Next.js 15 + TypeScript conversational interface (`/ai`) and query-understanding search bar (`SearchBar.tsx`).
 
-- **Stateless Prediction Worker:** Provides query classification, category suggestions, and duplicate detection for the authoritative Go backend.
-- **Strict Boundary:** Does not write to PostgreSQL, does not manage user authentication, and is not exposed to the public internet.
-- **Inter-Service Security:** All requests require the `X-HUNTIQ-AI-SECRET` header.
+## Directory Structure
 
----
-
-## 2. Prerequisites
-
-- Python 3.12+ (tested on Python 3.14)
-- `uv` package manager (`curl -LsSf https://astral.sh/uv/install.sh | bash`)
-
----
-
-## 3. Local Development
-
-### 1. Setup Environment
-```bash
-cp .env.example .env
-uv sync
+```
+ai/
+├── Modelfile                  # Ollama Modelfile deriving huntiq-assistant from qwen3:4b
+├── README.md                  # System documentation
+├── .env.example               # Environment variables template
+├── requirements.txt           # Minimal Python dependencies
+├── pytest.ini                 # Pytest configuration
+├── scripts/
+│   ├── setup_local.sh         # Idempotent environment and model setup script
+│   └── verify_local.sh        # Diagnostic verification script
+├── models/
+│   ├── .gitkeep               # Preserves models directory in Git
+│   └── ollama/                # Local model weights, blobs, and manifests
+├── .venv/                     # Project-local Python virtual environment
+├── app/
+│   ├── __init__.py
+│   ├── config.py              # Ollama and assistant configuration
+│   ├── model_client.py        # Python client for Ollama API interaction
+│   ├── prompts.py             # Multilingual system prompts and tool schemas
+│   └── evaluation.py          # Multilingual and functional evaluation runner
+├── data/
+│   ├── README.md              # Offline training and evaluation data instructions
+│   └── .gitkeep
+└── tests/
+    ├── __init__.py
+    ├── test_model_client.py   # Ollama connection and chat contract tests
+    ├── test_prompts.py        # Prompt construction and multilingual integrity tests
+    └── test_offline_mode.py   # Verification that zero cloud/external calls occur
 ```
 
-### 2. Run Test Suite
+## Quick Start & Setup
+
+### 1. Automated Idempotent Setup
+Run the setup script from the project root:
 ```bash
-uv run pytest -v
+./ai/scripts/setup_local.sh
+```
+This automatically:
+- Ensures `ai/models/ollama` and `ai/.venv` exist.
+- Installs minimal dependencies from `ai/requirements.txt` into `ai/.venv`.
+- Verifies the local Ollama runtime mounted to `ai/models/ollama`.
+- Verifies `qwen3:4b` and builds `huntiq-assistant:latest` if missing.
+
+### 2. Verify Local Health & Offline Readiness
+Run the verification script:
+```bash
+./ai/scripts/verify_local.sh
+```
+This validates:
+- Daemon reachability (`127.0.0.1:11434`).
+- Storage presence in `ai/models/ollama/blobs`.
+- Registration of `qwen3:4b` and `huntiq-assistant:latest`.
+- Python unit tests in `ai/.venv`.
+- Live test inference from `huntiq-assistant:latest`.
+- Strict local loopback enforcement (no cloud LLM API calls).
+
+### 3. Interactive CLI Usage
+```bash
+ollama run huntiq-assistant
 ```
 
-### 3. Run Linting & Formatting
+## Python Virtual Environment
+
+Activate the local project virtualenv:
 ```bash
-uv run ruff check .
-uv run ruff format --check .
+source ai/.venv/bin/activate
+pytest ai/tests/ -v
 ```
 
-### 4. Start Local Server
-```bash
-uv run uvicorn huntiq_ai.main:app --host 127.0.0.1 --port 8000 --reload
-```
+## Configuration Reference
 
----
-
-## 4. Endpoints
-
-| Endpoint | Method | Auth | Description |
-| :--- | :--- | :--- | :--- |
-| `/health/live` | GET | None | Liveness check confirming process responsiveness. |
-| `/health/ready` | GET | None | Readiness check confirming configuration and models. |
-| `/api/v1/predict/query-intent` | POST | `X-HUNTIQ-AI-SECRET` | *(Planned)* Disambiguates search queries into canonical category filters. |
-| `/api/v1/predict/category-suggestion` | POST | `X-HUNTIQ-AI-SECRET` | *(Planned)* Suggests categories from title and description. |
-
----
-
-## 5. Current Implementation Status
-
-- [x] Typed settings with Pydantic (`core/config.py`).
-- [x] Structured JSON logging (`core/logging.py`).
-- [x] Inter-service secret verification (`core/security.py`).
-- [x] Standard error handling (`core/errors.py`).
-- [x] Liveness and readiness endpoints (`/health/live`, `/health/ready`).
-- [x] Bounded request payloads (64KB limit).
-- [x] Unit, integration, and contract tests.
-- [ ] *Predictive model weights and inference pipelines (deferred to Phase 2 after offline baseline evaluation).*
-
----
-
-## 6. Subsystems
-
-- **Inference Runtime (`src/huntiq_ai`):** Stateless FastAPI microservice running on private network.
-- **Offline Data Platform (`data-platform/`):** Dataset contracts, PII scrubbing, manifest validation, and model cards. See [`data-platform/README.md`](data-platform/README.md).
-
----
-
-## 7. Architecture & Platform Documentation
-
-All AI platform specifications, threat models, and runbooks are organized in [`docs/`](docs/):
-- [AI Architecture & Threat Model](docs/architecture/ai-architecture.md)
-- [Go / Python Integration Contract](docs/architecture/ai-integration.md)
-- [ADR-001: Boundaries & Stack](docs/decisions/ADR-001-ai-platform-boundaries.md)
-- [AI Data Security](docs/security/ai-data-security.md)
-- [AI Testing Strategy](docs/testing/ai-testing.md)
-- [Local Development Runbook](docs/runbooks/ai-local-development.md)
+| Variable | Default Value | Description |
+|---|---|---|
+| `OLLAMA_BASE_URL` | `http://127.0.0.1:11434` | Local Ollama daemon endpoint |
+| `OLLAMA_MODELS` | `$PROJECT_ROOT/ai/models/ollama` | Directory storing model blobs & manifests |
+| `OLLAMA_BASE_MODEL` | `qwen3:4b` | Base pretrained model |
+| `OLLAMA_HUNTIQ_MODEL` | `huntiq-assistant:latest` | Derived customized assistant |
+| `AI_REQUEST_TIMEOUT` | `90.0` | Timeout in seconds for CPU generation |
+| `AI_CONTEXT_LENGTH` | `4096` | Context window size in tokens |

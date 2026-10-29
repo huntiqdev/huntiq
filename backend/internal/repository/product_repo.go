@@ -187,7 +187,7 @@ const sqlPopularCategories = `
 	ORDER BY activity_score DESC
 	LIMIT $2`
 
-func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]models.Product, error) {
+func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilter) (string, []interface{}) {
 	args := []interface{}{"approved"}
 	var wb strings.Builder
 	wb.WriteString("p.status = $1 AND (p.expires_at IS NULL OR p.expires_at > NOW()) AND u.is_active = true")
@@ -289,13 +289,54 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 	if f.ListingType != nil && *f.ListingType != "" {
 		args, _ = addWhere(&wb, args, " AND p.listing_type = ", *f.ListingType)
 	}
+	if f.SellerTier != nil && *f.SellerTier != "" {
+		st := strings.ToLower(strings.TrimSpace(*f.SellerTier))
+		if st == "gold,premium" || st == "premium,gold" {
+			wb.WriteString(" AND u.tier IN ('gold', 'premium')")
+		} else if st == "gold" || st == "premium" || st == "normal" {
+			args, _ = addWhere(&wb, args, " AND u.tier = ", st)
+		}
+	}
+
+	return wb.String(), args
+}
+
+// CountApproved returns the exact total count of matching approved products in the database.
+func (r *ProductRepo) CountApproved(ctx context.Context, f dto.ProductFilter) (int, error) {
+	whereClause, args := r.buildApprovedWhere(ctx, f)
+	countQuery := `
+		SELECT COUNT(*)
+		FROM products p
+		LEFT JOIN categories c ON c.id = p.category_id
+		LEFT JOIN locations  l ON l.id = p.location_id
+		LEFT JOIN users      u ON u.id = p.seller_id
+		WHERE ` + whereClause
+	var count int
+	err := r.db.QueryRow(ctx, countQuery, args...).Scan(&count)
+	return count, err
+}
+
+func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]models.Product, error) {
+	whereClause, args := r.buildApprovedWhere(ctx, f)
 
 	idx := len(args) + 1
 	offset := (f.Page - 1) * f.Limit
 	args = append(args, f.Limit, offset)
 
-	query := sqlProductSelectCols + "\n\tWHERE " + wb.String() +
-		"\n\tORDER BY p.created_at DESC" +
+	orderClause := "ORDER BY p.created_at DESC"
+	if f.SortBy != nil {
+		switch *f.SortBy {
+		case "price_asc":
+			orderClause = "ORDER BY p.price ASC, p.created_at DESC"
+		case "price_desc":
+			orderClause = "ORDER BY p.price DESC, p.created_at DESC"
+		case "newest":
+			orderClause = "ORDER BY p.created_at DESC"
+		}
+	}
+
+	query := sqlProductSelectCols + "\n\tWHERE " + whereClause +
+		"\n\t" + orderClause +
 		"\n\tLIMIT $" + fmt.Sprintf("%d", idx) + " OFFSET $" + fmt.Sprintf("%d", idx+1) //nolint:gosec // G201: Building static SQL with computed $N placeholders
 	rows, err := r.db.Query(ctx, query, args...)
 	if err != nil {

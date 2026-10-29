@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -81,8 +82,11 @@ func (r *CategoryHierarchyRepo) GetBySlug(ctx context.Context, slug string, lang
 	return &cat, nil
 }
 
-// GetRoots returns all active root-level categories
+// GetRoots returns all active root-level categories sorted alphabetically by display language
 func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]models.CategoryHierarchy, error) {
+	if lang == "" {
+		lang = "en"
+	}
 	query := `
 		SELECT id, parent_id,
 		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
@@ -93,9 +97,18 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		       created_at, updated_at
 		FROM category_hierarchy
 		WHERE parent_id IS NULL AND is_active = true
-		ORDER BY display_order ASC, name_en ASC`
+		ORDER BY 
+			LOWER(TRIM(
+				CASE $1
+					WHEN 'am' THEN COALESCE(NULLIF(name_am, ''), name_en)
+					WHEN 'om' THEN COALESCE(NULLIF(name_om, ''), name_en)
+					WHEN 'or' THEN COALESCE(NULLIF(name_om, ''), name_en)
+					WHEN 'ti' THEN COALESCE(NULLIF(name_ti, ''), name_en)
+					ELSE name_en
+				END
+			)) ASC, id ASC`
 
-	rows, err := r.db.Query(ctx, query)
+	rows, err := r.db.Query(ctx, query, lang)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +129,25 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		categories = append(categories, cat)
 	}
 
-	return categories, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	// Canonical deterministic alphabetical sorting across environments
+	sort.Slice(categories, func(i, j int) bool {
+		nameI := strings.ToLower(strings.TrimSpace(categories[i].GetName(lang)))
+		nameJ := strings.ToLower(strings.TrimSpace(categories[j].GetName(lang)))
+		if nameI != nameJ {
+			return nameI < nameJ
+		}
+		return categories[i].ID < categories[j].ID
+	})
+
+	return categories, nil
+}
+
+func resolveCategoryName(cat models.CategoryHierarchy, lang string) string {
+	return cat.GetName(lang)
 }
 
 // ListCategories retrieves categories with optional filtering
@@ -166,6 +197,23 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 	}
 	offset := (page - 1) * limit
 
+	orderClause := "ORDER BY display_order ASC, name_en ASC, id ASC"
+	if f.Lang != "" {
+		langIdx := argIdx
+		args = append(args, f.Lang)
+		argIdx++
+		orderClause = fmt.Sprintf(`ORDER BY 
+			LOWER(TRIM(
+				CASE $%d
+					WHEN 'am' THEN COALESCE(NULLIF(name_am, ''), name_en)
+					WHEN 'om' THEN COALESCE(NULLIF(name_om, ''), name_en)
+					WHEN 'or' THEN COALESCE(NULLIF(name_om, ''), name_en)
+					WHEN 'ti' THEN COALESCE(NULLIF(name_ti, ''), name_en)
+					ELSE name_en
+				END
+			)) ASC, id ASC`, langIdx)
+	}
+
 	query := fmt.Sprintf(`
 		SELECT id, parent_id,
 		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
@@ -176,9 +224,9 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 		       created_at, updated_at
 		FROM category_hierarchy
 		%s
-		ORDER BY display_order ASC, name_en ASC
+		%s
 		LIMIT $%d OFFSET $%d
-	`, whereClause, argIdx, argIdx+1)
+	`, whereClause, orderClause, argIdx, argIdx+1)
 
 	args = append(args, limit, offset)
 
@@ -206,48 +254,27 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 	return categories, rows.Err()
 }
 
-// GetCategoryTree builds a full hierarchical tree
+// GetCategoryTree builds a full hierarchical tree with deterministic alphabetical sibling ordering
 func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string) ([]models.CategoryTree, error) {
+	if lang == "" {
+		lang = "en"
+	}
+
 	query := `
-		WITH RECURSIVE category_tree AS (
-			-- Root categories
-			SELECT c.id, c.parent_id,
-			       COALESCE(c.name_en,'') AS name_en,
-			       COALESCE(c.name_am,'') AS name_am,
-			       COALESCE(c.name_om,'') AS name_om,
-			       COALESCE(c.name_ti,'') AS name_ti,
-			       COALESCE(c.slug,'') AS slug,
-			       c.level, c.is_leaf,
-			       COALESCE(c.icon, '') AS icon,
-			       COALESCE(c.image_url, '') AS image_url,
-			       COALESCE(s.product_count, 0) AS product_count,
-			       c.display_order
-			FROM category_hierarchy c
-			LEFT JOIN category_stats s ON s.category_id = c.id
-			WHERE c.parent_id IS NULL AND c.is_active = true
-			
-			UNION ALL
-			
-			-- Child categories
-			SELECT c.id, c.parent_id,
-			       COALESCE(c.name_en,'') AS name_en,
-			       COALESCE(c.name_am,'') AS name_am,
-			       COALESCE(c.name_om,'') AS name_om,
-			       COALESCE(c.name_ti,'') AS name_ti,
-			       COALESCE(c.slug,'') AS slug,
-			       c.level, c.is_leaf,
-			       COALESCE(c.icon, '') AS icon,
-			       COALESCE(c.image_url, '') AS image_url,
-			       COALESCE(s.product_count, 0) AS product_count,
-			       c.display_order
-			FROM category_hierarchy c
-			INNER JOIN category_tree ct ON c.parent_id = ct.id
-			LEFT JOIN category_stats s ON s.category_id = c.id
-			WHERE c.is_active = true
-		)
-		SELECT id, parent_id, name_en, name_am, name_om, name_ti, slug, level, is_leaf, icon, image_url, product_count
-		FROM category_tree
-		ORDER BY level, display_order, id`
+		SELECT c.id, c.parent_id,
+		       COALESCE(c.name_en,'') AS name_en,
+		       COALESCE(c.name_am,'') AS name_am,
+		       COALESCE(c.name_om,'') AS name_om,
+		       COALESCE(c.name_ti,'') AS name_ti,
+		       COALESCE(c.slug,'') AS slug,
+		       c.level, c.is_leaf, c.is_active, c.display_order,
+		       COALESCE(c.icon, '') AS icon,
+		       COALESCE(c.image_url, '') AS image_url,
+		       COALESCE(s.product_count, 0) AS product_count
+		FROM category_hierarchy c
+		LEFT JOIN category_stats s ON s.category_id = c.id
+		WHERE c.is_active = true
+		ORDER BY c.level ASC, c.id ASC`
 
 	rows, err := r.db.Query(ctx, query)
 	if err != nil {
@@ -265,16 +292,39 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 		Slug         string
 		Level        int
 		IsLeaf       bool
+		IsActive     bool
+		DisplayOrder int
 		Icon         string
 		ImageURL     string
 		ProductCount int
+	}
+
+	getName := func(fc flatCat, l string) string {
+		switch l {
+		case "am":
+			if fc.NameAm != "" {
+				return fc.NameAm
+			}
+		case "om", "or":
+			if fc.NameOm != "" {
+				return fc.NameOm
+			}
+		case "ti":
+			if fc.NameTi != "" {
+				return fc.NameTi
+			}
+		}
+		if fc.NameEn != "" {
+			return fc.NameEn
+		}
+		return fc.Slug
 	}
 
 	var flat []flatCat
 	for rows.Next() {
 		var fc flatCat
 		err := rows.Scan(&fc.ID, &fc.ParentID, &fc.NameEn, &fc.NameAm, &fc.NameOm, &fc.NameTi,
-			&fc.Slug, &fc.Level, &fc.IsLeaf, &fc.Icon, &fc.ImageURL, &fc.ProductCount)
+			&fc.Slug, &fc.Level, &fc.IsLeaf, &fc.IsActive, &fc.DisplayOrder, &fc.Icon, &fc.ImageURL, &fc.ProductCount)
 		if err != nil {
 			return nil, err
 		}
@@ -285,62 +335,85 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 		return nil, err
 	}
 
-	catMap := make(map[int]*models.CategoryTree)
-
-	for _, fc := range flat {
-		name := fc.NameEn
-		switch lang {
-		case "am":
-			if fc.NameAm != "" {
-				name = fc.NameAm
+	// Sibling sorter: deterministic alphabetical by active display name, with ID tie-breaker
+	sortSiblings := func(nodes []*models.CategoryTree) {
+		sort.Slice(nodes, func(i, j int) bool {
+			nameI := strings.ToLower(strings.TrimSpace(nodes[i].Name))
+			nameJ := strings.ToLower(strings.TrimSpace(nodes[j].Name))
+			if nameI != nameJ {
+				return nameI < nameJ
 			}
-		case "om":
-			if fc.NameOm != "" {
-				name = fc.NameOm
-			}
-		case "ti":
-			if fc.NameTi != "" {
-				name = fc.NameTi
-			}
-		}
-
-		node := &models.CategoryTree{
-			ID:       fc.ID,
-			Name:     name,
-			NameEn:   fc.NameEn,
-			NameAm:   fc.NameAm,
-			NameOm:   fc.NameOm,
-			NameTi:   fc.NameTi,
-			Slug:     fc.Slug,
-			Level:    fc.Level,
-			IsLeaf:   fc.IsLeaf,
-			Icon:     fc.Icon,
-			ImageURL: fc.ImageURL,
-			Count:    fc.ProductCount,
-			Children: []models.CategoryTree{},
-		}
-		catMap[fc.ID] = node
+			return nodes[i].ID < nodes[j].ID
+		})
 	}
 
-	var roots []models.CategoryTree
+	allNodes := make(map[int]*models.CategoryTree, len(flat))
+	childrenByParent := make(map[int][]*models.CategoryTree)
+	var rootList []*models.CategoryTree
+
 	for _, fc := range flat {
-		node := catMap[fc.ID]
+		displayName := getName(fc, lang)
+
+		node := &models.CategoryTree{
+			ID:           fc.ID,
+			ParentID:     fc.ParentID,
+			Name:         displayName,
+			NameEn:       fc.NameEn,
+			NameAm:       fc.NameAm,
+			NameOm:       fc.NameOm,
+			NameTi:       fc.NameTi,
+			Slug:         fc.Slug,
+			Level:        fc.Level,
+			IsLeaf:       fc.IsLeaf,
+			IsActive:     fc.IsActive,
+			DisplayOrder: fc.DisplayOrder,
+			Icon:         fc.Icon,
+			ImageURL:     fc.ImageURL,
+			Count:        fc.ProductCount,
+			Children:     []models.CategoryTree{},
+		}
+		allNodes[fc.ID] = node
+	}
+
+	for _, fc := range flat {
+		node := allNodes[fc.ID]
 		if node == nil {
 			continue
 		}
-		if fc.ParentID == nil {
-			roots = append(roots, *node)
+		if fc.ParentID == nil || *fc.ParentID == 0 {
+			rootList = append(rootList, node)
 		} else {
-			if parent := catMap[*fc.ParentID]; parent != nil {
-				parent.Children = append(parent.Children, *node)
+			pid := *fc.ParentID
+			if _, parentExists := allNodes[pid]; parentExists {
+				childrenByParent[pid] = append(childrenByParent[pid], node)
+			} else {
+				// Fallback orphan protection: preserve node at root so it is never dropped
+				rootList = append(rootList, node)
 			}
 		}
 	}
 
-	for i, r := range roots {
-		if updated, ok := catMap[r.ID]; ok {
-			roots[i] = *updated
+	// Recursively construct tree so each parent maintains its own sorted slice of children at any depth
+	var buildTreeRecursive func(parent *models.CategoryTree) models.CategoryTree
+	buildTreeRecursive = func(parent *models.CategoryTree) models.CategoryTree {
+		res := *parent
+		children := childrenByParent[parent.ID]
+		if len(children) > 0 {
+			sortSiblings(children)
+			res.Children = make([]models.CategoryTree, len(children))
+			for idx, child := range children {
+				res.Children[idx] = buildTreeRecursive(child)
+			}
+		} else {
+			res.Children = []models.CategoryTree{}
 		}
+		return res
+	}
+
+	sortSiblings(rootList)
+	roots := make([]models.CategoryTree, len(rootList))
+	for i, root := range rootList {
+		roots[i] = buildTreeRecursive(root)
 	}
 
 	return roots, nil
@@ -352,7 +425,7 @@ func (r *CategoryHierarchyRepo) GetBreadcrumbs(ctx context.Context, categoryID i
 	switch lang {
 	case "am":
 		nameCol = "COALESCE(NULLIF(ch.name_am, ''), a.name_en)"
-	case "om":
+	case "om", "or":
 		nameCol = "COALESCE(NULLIF(ch.name_om, ''), a.name_en)"
 	case "ti":
 		nameCol = "COALESCE(NULLIF(ch.name_ti, ''), a.name_en)"

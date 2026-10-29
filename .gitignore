@@ -59,9 +59,7 @@ ai/data-platform/ml/models/*.pt
 ai/data-platform/ml/models/*.bin
 !ai/data-platform/ml/models/.gitkeep
 
-# Taxonomy Exports
-ai/data-platform/taxonomy/sources/*
-!ai/data-platform/taxonomy/sources/.gitkeep
-ai/data-platform/taxonomy/generated/*
-!ai/data-platform/taxonomy/generated/.gitkeep
+# Local Ollama Model Storage & Weights
+ai/models/*
+!ai/models/.gitkeep
 

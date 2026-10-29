@@ -10,9 +10,10 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const isAdmin  = pathname.startsWith('/admin');
   const isSeller = pathname.startsWith('/seller');
   const isBuyer  = pathname.startsWith('/buyer');
+  const isAI     = pathname.startsWith('/ai');
 
-  // Admin, seller, and buyer dashboards have their own full-screen layouts
-  if (isAdmin || isSeller || isBuyer) {
+  // Admin, seller, buyer, and AI workspaces have their own dedicated full-screen layouts
+  if (isAdmin || isSeller || isBuyer || isAI) {
     return <>{children}</>;
   }
 

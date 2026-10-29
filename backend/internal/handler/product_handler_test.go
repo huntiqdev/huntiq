@@ -7,6 +7,8 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
+
+	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
 )
 
 func TestTierAuthorizationLogic(t *testing.T) {
@@ -220,3 +222,18 @@ func TestProductHandler_SearchAnalytics_BoundedChannelNonBlocking(t *testing.T) 
 		t.Errorf("expected DroppedSearchEvents() = 1, got %d", h.DroppedSearchEvents())
 	}
 }
+
+func TestProductHandler_WithAIClient_Wiring(t *testing.T) {
+	h := &ProductHandler{}
+	if h.aiClient != nil {
+		t.Fatalf("expected aiClient to be nil initially")
+	}
+
+	client := aiclient.NewClient("http://localhost:8000", "test-secret")
+	h.WithAIClient(client)
+
+	if h.aiClient == nil || !h.aiClient.IsEnabled() {
+		t.Fatalf("expected aiClient to be wired and enabled")
+	}
+}
+

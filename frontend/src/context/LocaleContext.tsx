@@ -87,3 +87,4 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 }
 
 export const useLocaleContext = () => useContext(LocaleContext);
+export const useLocale = useLocaleContext;

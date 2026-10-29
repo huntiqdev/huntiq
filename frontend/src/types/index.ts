@@ -20,6 +20,7 @@ export interface CategoryHierarchyItem {
   name_en?: string;
   name_am?: string;
   name_om?: string;
+  name_or?: string;
   name_ti?: string;
   slug: string;
   parent_id?: number | null;
@@ -111,6 +112,10 @@ export interface ProductFilters {
   woreda?: string;
   search?: string;
   listing_type?: 'sale' | 'rent'; // Filter by listing type
+  sort_by?: 'price_asc' | 'price_desc' | 'newest';
+  mode?: 'ai' | 'manual';
+  locale?: string;
+  preferred_language?: string;
   page?: number;
   limit?: number;
 }

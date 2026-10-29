@@ -51,7 +51,7 @@ const RETRY_CONFIG = {
   retryableStatuses: [408, 429, 500, 502, 503, 504],
 };
 
-export async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
+export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: RequestInit): Promise<{ data: T; meta?: M }> {
   // Check network before starting
   if (!isOnline()) {
     throw new ApiError('No internet connection', 'NETWORK_OFFLINE', 0);
@@ -127,7 +127,10 @@ export async function fetchAPI<T>(endpoint: string, options?: RequestInit): Prom
       // Success - parse and return
       const json = await res.json();
       const result = ('data' in json) ? json.data : json;
-      return (result ?? null) as T;
+      return {
+        data: (result ?? null) as T,
+        meta: json.meta as M | undefined,
+      };
       
     } catch (error: any) {
       lastError = error;
@@ -165,6 +168,11 @@ export async function fetchAPI<T>(endpoint: string, options?: RequestInit): Prom
   
   // If we exhausted all retries
   throw lastError || new ApiError('Request failed after retries', 'REQUEST_FAILED', 0);
+}
+
+export async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const res = await fetchAPIWithMeta<T>(endpoint, options);
+  return res.data;
 }
 
 export function authHeaders(token: string) {

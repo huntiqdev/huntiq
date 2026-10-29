@@ -20,6 +20,8 @@ type ProductFilter struct {
 	Page                int
 	Limit               int
 	ListingType         *string // 'sale' or 'rent' filter
+	SortBy              *string // 'price_asc', 'price_desc', 'newest'
+	SellerTier          *string // 'gold', 'premium', or 'gold,premium'
 }
 
 // CreateProductRequest is used by sellers to submit a new product.

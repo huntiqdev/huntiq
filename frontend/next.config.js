@@ -8,6 +8,9 @@ const backendHost = process.env.NEXT_PUBLIC_BACKEND_HOST || '';
 
 const remotePatterns = [
   { protocol: 'http', hostname: 'localhost', port: '8080', pathname: '/uploads/**' },
+  { protocol: 'https', hostname: 'images.unsplash.com' },
+  { protocol: 'https', hostname: 'plus.unsplash.com' },
+  { protocol: 'https', hostname: '**.unsplash.com' },
 ];
 if (backendHost) {
   remotePatterns.push({ protocol: 'https', hostname: backendHost, pathname: '/uploads/**' });

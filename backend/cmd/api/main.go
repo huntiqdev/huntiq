@@ -22,6 +22,8 @@ import (
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
 	"github.com/your-org/used-tools-marketplace/internal/service"
+	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
+	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/security"
 	"github.com/your-org/used-tools-marketplace/internal/config"
 	"github.com/your-org/used-tools-marketplace/internal/database"
@@ -219,8 +221,23 @@ func main() {
 			return u.Tier, nil
 		})
 
+	// High-speed caching (Redis if reachable, resilient in-memory fallback)
+	appCache := cache.New(cfg.RedisAddr, cfg.RedisPassword, cfg.RedisDB)
+	defer appCache.Close()
+
 	// Handlers
-	productHandler := handlers.NewProductHandler(productSvc, authSvc).WithSearchLogger(searchRepo)
+	aiClient := aiclient.NewClient(cfg.AIServiceURL, cfg.AISecretKey).
+		WithOllama(cfg.OllamaURL, cfg.OllamaModel).
+		WithProvider(cfg.AIProvider)
+	aiConvRepo := repository.NewAIConversationRepo(db)
+	aiToolDispatcher := service.NewAIToolDispatcher(productRepo)
+	aiChatSvc := service.NewAIChatService(aiConvRepo, aiClient, aiToolDispatcher)
+	aiChatHandler := handlers.NewAIChatHandler(aiChatSvc)
+
+	productHandler := handlers.NewProductHandler(productSvc, authSvc).
+		WithSearchLogger(searchRepo).
+		WithAIClient(aiClient).
+		WithCache(appCache)
 	locationHandler := handlers.NewLocationHandler(locationSvc)
 	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc)
 	attributeHandler := handlers.NewAttributeHandler(attributeSvc).WithProductService(productSvc)
@@ -345,8 +362,21 @@ func main() {
 		},
 	})
 
+	// Search rate limiter — 60 requests/minute per IP to protect catalog & AI worker
+	searchLimiter := limiter.New(limiter.Config{
+		Max:          60,
+		Expiration:   1 * time.Minute,
+		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+				"success": false,
+				"error":   "search rate limit reached — please slow down",
+			})
+		},
+	})
+
 	// ── Public ──────────────────────────────────────────────────────────────
-	api.Get("/products", mw.OptionalAuth, productHandler.List)
+	api.Get("/products", searchLimiter, mw.OptionalAuth, productHandler.List)
 	api.Get("/products/:id", mw.OptionalAuth, productHandler.Get)
 	api.Get("/categories", productHandler.ListCategories)
 	api.Get("/categories/roots", categoryHandler.GetRoots)
@@ -429,6 +459,31 @@ func main() {
 	api.Get("/auth/me", mw.RequireAuth, authHandler.GetMe)
 	api.Get("/auth/capabilities", mw.RequireAuth, authHandler.GetCapabilities)
 	api.Post("/auth/capabilities/activate", mw.RequireAuth, authHandler.ActivateCapability)
+
+	// ── Conversational AI Workspace ──────────────────────────────────────────
+	// Public Stateless AI Chat (Free guest access, zero database writes, rate-limited by IP)
+	aiGuestLimiter := limiter.New(limiter.Config{
+		Max:          30,
+		Expiration:   1 * time.Minute,
+		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+				"success": false,
+				"error":   "AI assistant rate limit reached — please wait a minute and try again",
+			})
+		},
+	})
+	api.Post("/ai/chat", aiGuestLimiter, aiChatHandler.GuestChat)
+
+	// Authenticated Multi-Turn AI Sessions (Preserved for signed-in users)
+	ai := api.Group("/ai", mw.RequireAuth)
+	ai.Post("/conversations", aiChatHandler.CreateConversation)
+	ai.Get("/conversations", aiChatHandler.ListConversations)
+	ai.Get("/conversations/:id", aiChatHandler.GetConversation)
+	ai.Patch("/conversations/:id", aiChatHandler.UpdateConversation)
+	ai.Delete("/conversations/:id", aiChatHandler.DeleteConversation)
+	ai.Post("/conversations/:id/messages", aiChatHandler.SendMessage)
+
 	api.Post("/auth/forgot-password", authLimiter, authHandler.UnifiedForgotPassword)
 	api.Post("/auth/reset-password", authLimiter, authHandler.UnifiedResetPassword)
 	api.Post("/seller/register", authLimiter, authHandler.Register)

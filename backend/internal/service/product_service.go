@@ -124,6 +124,10 @@ func (s *ProductService) ListApproved(ctx context.Context, f dto.ProductFilter) 
 	return s.repo.ListApproved(ctx, f)
 }
 
+func (s *ProductService) CountApproved(ctx context.Context, f dto.ProductFilter) (int, error) {
+	return s.repo.CountApproved(ctx, f)
+}
+
 func (s *ProductService) GetByID(ctx context.Context, id int) (*models.Product, error) {
 	if id <= 0 {
 		return nil, errors.New("invalid product id")

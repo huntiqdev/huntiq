@@ -1,41 +1,31 @@
-# ── Build stage ───────────────────────────────────────────────────────────────
-FROM golang:1.26-alpine AS builder
+# Multi-stage Dockerfile for HUNTIQ Go Backend API
+FROM golang:1.24-alpine AS builder
 
-WORKDIR /app
+WORKDIR /build
 
-# ca-certificates and tzdata for build/downloads
-RUN apk add --no-cache git ca-certificates tzdata
+RUN apk add --no-cache git ca-certificates
 
-# Cache dependency downloads
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy all source
 COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /build/huntiq-api ./cmd/api
 
-# Build API binary
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/bin/api ./cmd/api
-
-# ── Runtime stage ─────────────────────────────────────────────────────────────
+# Final minimal runtime image
 FROM alpine:3.20
 
-# ca-certificates required for TLS connection to PostgreSQL / external services
 RUN apk add --no-cache ca-certificates tzdata
-
-# Create non-root system user
-RUN addgroup -g 10001 huntiq && \
-    adduser -u 10001 -G huntiq -s /bin/sh -D appuser
 
 WORKDIR /app
 
-COPY --from=builder /app/bin/api ./api
+COPY --from=builder /build/huntiq-api /app/huntiq-api
 
-# Setup uploads directory with appropriate permissions
-RUN mkdir -p /app/uploads && chown -R appuser:huntiq /app
-
-USER appuser
+# Uploads directory
+RUN mkdir -p /app/uploads
 
 EXPOSE 8080
 
-ENTRYPOINT ["./api"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
 
+ENTRYPOINT ["/app/huntiq-api"]

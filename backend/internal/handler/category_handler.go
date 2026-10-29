@@ -108,10 +108,13 @@ func (h *CategoryHandler) ListCategories(c *fiber.Ctx) error {
 	if search := c.Query("search"); search != "" {
 		filter.SearchTerm = search
 	}
+	if lang := c.Query("lang"); lang != "" {
+		filter.Lang = lang
+	}
 	if page := c.QueryInt("page", 1); page > 0 {
 		filter.Page = page
 	}
-	if limit := c.QueryInt("limit", 50); limit > 0 && limit <= 100 {
+	if limit := c.QueryInt("limit", 50); limit > 0 && limit <= 500 {
 		filter.Limit = limit
 	}
 
@@ -141,10 +144,12 @@ func (h *CategoryHandler) GetCategoryChildren(c *fiber.Ctx) error {
 		})
 	}
 
+	lang := c.Query("lang", "en")
 	filter := models.CategoryFilter{
 		ParentID: &id,
+		Lang:     lang,
 		Page:     1,
-		Limit:    100,
+		Limit:    500,
 	}
 	
 	active := true

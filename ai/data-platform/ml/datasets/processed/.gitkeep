@@ -1,2 +1,0 @@
-# Placeholder for processed, split datasets (train/val/test).
-# Production datasets remain on object storage and are not committed to git.

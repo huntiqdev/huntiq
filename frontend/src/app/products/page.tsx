@@ -12,9 +12,12 @@ import { FilterSidebar } from '@/components/public/FilterSidebar';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
+import { SearchAIMeta } from '@/lib/api/public';
+import { AIChatInterface } from '@/components/public/AIChatInterface';
 import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
   LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
+  Sparkles, ShieldCheck, Sliders, ShieldAlert, Brain,
 } from 'lucide-react';
 
 // ── Tier banner shown to buyers ───────────────────────────────────────────────
@@ -116,6 +119,9 @@ function ProductsContent() {
   const [activeWoreda, setActiveWoreda] = useState<string>('');
   const [activeCondition, setActiveCondition] = useState<'all' | 'new' | 'used'>('all');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
+  const [searchMode, setSearchMode] = useState<'ai' | 'manual'>('manual');
+  const [searchMeta, setSearchMeta] = useState<SearchAIMeta | null>(null);
+  const [showReasoning, setShowReasoning] = useState(false);
 
   useEffect(() => {
     api.getCategoryTree(locale)
@@ -140,6 +146,13 @@ function ProductsContent() {
     const catSlugParam = searchParams.get('cat');
     const sub = searchParams.get('subcategory');
     const item = searchParams.get('item');
+
+    const modeParam = searchParams.get('mode');
+    if (modeParam === 'ai') {
+      setSearchMode('ai');
+    } else {
+      setSearchMode('manual');
+    }
 
     const typeParam = searchParams.get('type');
     if (typeParam === 'sale' || typeParam === 'rent' || typeParam === 'all') {
@@ -200,11 +213,43 @@ function ProductsContent() {
     const apiFilters: ProductFilters = { ...filters };
     if (activeCondition !== 'all') apiFilters.condition = activeCondition;
     if (listingType !== 'all') apiFilters.listing_type = listingType;
-    api.getProducts(apiFilters)
-      .then(data => setProducts(data))
-      .catch(() => setProducts([]))
+    apiFilters.mode = searchMode;
+    apiFilters.locale = locale;
+    apiFilters.preferred_language = locale;
+
+    api.getProductsWithMeta(apiFilters)
+      .then(({ products: data, meta }) => {
+        setProducts(data);
+        setSearchMeta(meta ?? null);
+      })
+      .catch(() => {
+        setProducts([]);
+        setSearchMeta(null);
+      })
       .finally(() => setLoading(false));
-  }, [filters, activeCondition, listingType]);
+  }, [filters, activeCondition, listingType, searchMode, locale]);
+
+  const toggleMode = (newMode: 'ai' | 'manual') => {
+    setSearchMode(newMode);
+    const p = new URLSearchParams(searchParams.toString());
+    if (newMode === 'ai') {
+      p.set('mode', 'ai');
+    } else {
+      p.delete('mode');
+    }
+    const qStr = p.toString();
+    router.push(qStr ? `/products?${qStr}` : '/products');
+  };
+
+  if (searchMode === 'ai') {
+    return (
+      <AIChatInterface
+        onExit={() => toggleMode('manual')}
+        initialQuery={filters.search || ''}
+        locale={locale}
+      />
+    );
+  }
 
   const findNodeById = (nodes: Category[], id?: number): Category | undefined => {
     if (!id) return undefined;
@@ -372,12 +417,25 @@ function ProductsContent() {
         </div>
       )}
 
-      {/* Popular categories strip */}
+      {/* Popular categories strip & AI Mode button */}
       {!loading && (
-        <PopularCategoriesStrip
-          categories={categories}
-          onSelect={catId => { setActiveCatId(catId); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(catId)); }}
-        />
+        <div className="flex items-center justify-between gap-2 px-[2%] sm:px-[4%] lg:px-[6%] pt-1">
+          <div className="flex-1 min-w-0">
+            <PopularCategoriesStrip
+              categories={categories}
+              onSelect={catId => { setActiveCatId(catId); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(catId)); }}
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => toggleMode('ai')}
+            title="Open HUNTIQ AI Shopping Assistant"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 text-white font-black text-xs shadow-md shadow-orange-600/25 active:scale-95 transition-all shrink-0 ml-2"
+          >
+            <Sparkles size={13} className="animate-pulse" />
+            <span>AI Mode</span>
+          </button>
+        </div>
       )}
 
       {/* ── Page body ── */}

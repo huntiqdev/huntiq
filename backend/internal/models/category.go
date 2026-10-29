@@ -45,6 +45,28 @@ type CategoryHierarchy struct {
 	Breadcrumbs     []CategoryBreadcrumb `json:"breadcrumbs,omitempty"`
 }
 
+// GetName returns the localized name for the requested language with fallback to English and Slug.
+func (c CategoryHierarchy) GetName(lang string) string {
+	switch lang {
+	case "am":
+		if c.NameAm != "" {
+			return c.NameAm
+		}
+	case "om", "or":
+		if c.NameOm != "" {
+			return c.NameOm
+		}
+	case "ti":
+		if c.NameTi != "" {
+			return c.NameTi
+		}
+	}
+	if c.NameEn != "" {
+		return c.NameEn
+	}
+	return c.Slug
+}
+
 // CategoryBreadcrumb represents a single breadcrumb in the category path
 type CategoryBreadcrumb struct {
 	ID    int    `json:"id"`
@@ -63,19 +85,44 @@ type CategoryWithStats struct {
 
 // CategoryTree represents a full category tree structure
 type CategoryTree struct {
-	ID        int            `json:"id"`
-	Name      string         `json:"name"`
-	NameEn    string         `json:"name_en,omitempty"`
-	NameAm    string         `json:"name_am,omitempty"`
-	NameOm    string         `json:"name_om,omitempty"`
-	NameTi    string         `json:"name_ti,omitempty"`
-	Slug      string         `json:"slug"`
-	Level     int            `json:"level"`
-	IsLeaf    bool           `json:"is_leaf"`
-	Icon      string         `json:"icon,omitempty"`
-	ImageURL  string         `json:"image_url,omitempty"`
-	Count     int            `json:"count"` // Product count
-	Children  []CategoryTree `json:"children,omitempty"`
+	ID           int            `json:"id"`
+	ParentID     *int           `json:"parent_id,omitempty"`
+	Name         string         `json:"name"`
+	NameEn       string         `json:"name_en,omitempty"`
+	NameAm       string         `json:"name_am,omitempty"`
+	NameOm       string         `json:"name_om,omitempty"`
+	NameTi       string         `json:"name_ti,omitempty"`
+	Slug         string         `json:"slug"`
+	Level        int            `json:"level"`
+	IsLeaf       bool           `json:"is_leaf"`
+	IsActive     bool           `json:"is_active"`
+	DisplayOrder int            `json:"display_order"`
+	Icon         string         `json:"icon,omitempty"`
+	ImageURL     string         `json:"image_url,omitempty"`
+	Count        int            `json:"count"` // Product count
+	Children     []CategoryTree `json:"children,omitempty"`
+}
+
+// GetName returns the localized name for the requested language with fallback to NameEn.
+func (c CategoryTree) GetName(lang string) string {
+	switch lang {
+	case "am":
+		if c.NameAm != "" {
+			return c.NameAm
+		}
+	case "om", "or":
+		if c.NameOm != "" {
+			return c.NameOm
+		}
+	case "ti":
+		if c.NameTi != "" {
+			return c.NameTi
+		}
+	}
+	if c.NameEn != "" {
+		return c.NameEn
+	}
+	return c.Name
 }
 
 // PopularCategory holds a category with its recent activity score.
@@ -90,12 +137,13 @@ type PopularCategory struct {
 
 // CategoryFilter for querying categories
 type CategoryFilter struct {
-	ParentID    *int
-	Level       *int
-	IsActive    *bool
-	IsLeaf      *bool
-	SearchTerm  string
+	ParentID     *int
+	Level        *int
+	IsActive     *bool
+	IsLeaf       *bool
+	SearchTerm   string
 	IncludeStats bool
-	Page        int
-	Limit       int
+	Lang         string
+	Page         int
+	Limit        int
 }

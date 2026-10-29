@@ -40,25 +40,17 @@ if [ ! -f .env ]; then
 fi
 cd ..
 
-# ── 3. AI Service (Python FastAPI) ────────────────────────
+# ── 3. AI Service (Local Qwen3 4B on Ollama) ────────────────
 echo ""
-echo "🤖 Setting up Python AI service dependencies..."
-cd ai
-if command -v uv >/dev/null 2>&1; then
-  uv sync
-  echo "✅ AI service virtual environment and dependencies synchronized"
-else
-  echo "⚠️ 'uv' is not installed. To install: curl -LsSf https://astral.sh/uv/install.sh | sh"
-  echo "   Then run: cd ai && uv sync"
-fi
+echo "🤖 Setting up Local AI service (Ollama + Qwen3 4B)..."
+bash ai/scripts/setup_local.sh
+echo "✅ Local AI environment and models ready"
 
 # Copy env if missing
-if [ ! -f .env ]; then
-  cp .env.example .env
+if [ ! -f ai/.env ]; then
+  cp ai/.env.example ai/.env
   echo "📄 Created ai/.env from .env.example"
-  echo "   → Verify HUNTIQ_AI_SECRET_KEY matches backend config"
 fi
-cd ..
 
 echo ""
 echo "=============================="
@@ -66,11 +58,10 @@ echo "  Setup complete!"
 echo "=============================="
 echo ""
 echo "Next steps:"
-echo "  1. Edit backend/.env         (DB credentials, JWT_SECRET, OTP_ENCRYPT_KEY)"
-echo "  2. Edit frontend/.env.local  (NEXT_PUBLIC_API_URL)"
-echo "  3. Edit ai/.env              (HUNTIQ_AI_SECRET_KEY)"
-echo "  4. Start Backend API:        cd backend && go run ./cmd/api"
-echo "  5. Start Next.js Frontend:   cd frontend && npm run dev"
-echo "  6. Start AI Worker:          cd ai && uv run uvicorn huntiq_ai.main:app --port 8000"
-echo "  7. Seed Admin & Categories:  cd backend && go run ./cmd/seed"
+echo "  🚀 Start Everything in One Command: ./run.sh"
+echo "     (or individually:)"
+echo "     • Frontend  : cd frontend && npm run dev"
+echo "     • Backend   : cd backend && go run ./cmd/api"
+echo "     • Local AI  : ollama run huntiq-assistant"
+echo "     • Verify AI : ./ai/scripts/verify_local.sh"
 echo ""

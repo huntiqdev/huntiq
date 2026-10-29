@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
-import { Search, X, ChevronDown, Tag, Layers, Hash, MapPin } from 'lucide-react';
+import { Search, X, ChevronDown, Tag, Layers, Hash, MapPin, Sparkles, Sliders } from 'lucide-react';
 
 interface SearchEntry {
   id: number;
@@ -270,24 +270,36 @@ export function SearchBar() {
           onChange={handleChange}
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder={t.nav.search}
+          placeholder={t.nav?.search || 'Search products, vehicles, electronics...'}
           autoComplete="off"
-          className="w-full pl-9 pr-8 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-sm outline-none focus:ring-2 focus:ring-orange-600 transition-all"
+          className="w-full pl-9 pr-24 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-sm outline-none focus:ring-2 focus:ring-orange-600 transition-all"
         />
-        {q ? (
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+          {q && (
+            <button
+              type="button"
+              onClick={clear}
+              className="text-zinc-400 hover:text-zinc-600 transition-colors p-1"
+            >
+              <X size={14} />
+            </button>
+          )}
           <button
             type="button"
-            onClick={clear}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 transition-colors"
+            onClick={() => {
+              if (q.trim()) {
+                router.push(`/ai?q=${encodeURIComponent(q.trim())}`);
+              } else {
+                router.push('/ai');
+              }
+            }}
+            title="Open HUNTIQ AI Conversational Workspace"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider transition-all bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 text-white shadow-sm shadow-orange-600/30 active:scale-95"
           >
-            <X size={14} />
+            <Sparkles size={11} className="animate-pulse" />
+            <span>AI Mode</span>
           </button>
-        ) : (
-          <ChevronDown
-            size={13}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none"
-          />
-        )}
+        </div>
       </form>
 
       {/* Dropdown */}

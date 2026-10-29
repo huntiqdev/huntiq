@@ -27,6 +27,14 @@ type Config struct {
 	DevMode       bool
 	UploadDir     string // directory for uploaded files
 	MaxUploadMB   int    // max file upload size in MB
+	AIServiceURL  string // internal AI worker URL (default: http://127.0.0.1:8000)
+	AISecretKey   string // pre-shared authentication secret for AI worker
+	AIProvider    string // AI Provider type: "ollama", "python", or "mock" (default: "ollama")
+	OllamaURL     string // Ollama daemon endpoint (default: http://127.0.0.1:11434)
+	OllamaModel   string // Target Ollama model name (default: "huntiq-assistant:latest")
+	RedisAddr     string // Redis server address (e.g. 127.0.0.1:6379)
+	RedisPassword string // Redis authentication password
+	RedisDB       int    // Redis database index (default: 0)
 }
 
 func Load() *Config {
@@ -92,6 +100,14 @@ func Load() *Config {
 		DevMode:       devMode,
 		UploadDir:     getEnv("UPLOAD_DIR", "./uploads"),
 		MaxUploadMB:   getEnvInt("MAX_UPLOAD_MB", 20),
+		AIServiceURL:  getEnv("AI_SERVICE_URL", "http://127.0.0.1:8000"),
+		AISecretKey:   getEnv("AI_SECRET_KEY", ""),
+		AIProvider:    getEnv("AI_PROVIDER", "ollama"),
+		OllamaURL:     getEnv("OLLAMA_URL", "http://127.0.0.1:11434"),
+		OllamaModel:   getEnv("OLLAMA_MODEL", "huntiq-assistant:latest"),
+		RedisAddr:     getEnv("REDIS_ADDR", ""),
+		RedisPassword: getEnv("REDIS_PASSWORD", ""),
+		RedisDB:       getEnvInt("REDIS_DB", 0),
 	}
 }
 
@@ -191,5 +207,13 @@ func NewTestConfig() *Config {
 		DevMode:       true,
 		UploadDir:     "./uploads",
 		MaxUploadMB:   20,
+		AIServiceURL:  "http://localhost:8000",
+		AISecretKey:   "test-secret",
+		AIProvider:    "mock",
+		OllamaURL:     "http://127.0.0.1:11434",
+		OllamaModel:   "qwen3.5:4b",
+		RedisAddr:     "",
+		RedisPassword: "",
+		RedisDB:       0,
 	}
 }

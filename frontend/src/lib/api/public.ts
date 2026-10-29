@@ -1,4 +1,74 @@
-import { fetchAPI, authHeaders, API_URL, ApiError } from './core';
+import { fetchAPI, fetchAPIWithMeta, authHeaders, API_URL, ApiError } from './core';
+
+export interface RealTimePriceStats {
+  min_price: number;
+  avg_price: number;
+  max_price: number;
+  currency: string;
+}
+
+export interface RealTimeTopPick {
+  id: number;
+  title: string;
+  price: number;
+  seller_tier: string;
+  badge: string;
+  reason: string;
+}
+
+export interface RealTimeProductAnalysis {
+  total_analyzed: number;
+  total_matching?: number;
+  premium_count: number;
+  gold_count: number;
+  normal_count: number;
+  price_stats: RealTimePriceStats;
+  top_premium_pick?: RealTimeTopPick;
+  top_gold_pick?: RealTimeTopPick;
+  market_verdict: string;
+  deal_ratings?: Array<{
+    product_id: number;
+    deal_score: number;
+    badge: string;
+    value_verdict: string;
+  }>;
+  execution_time_ms?: number;
+}
+
+export interface ReasoningStep {
+  step: number;
+  title: string;
+  detail: string;
+}
+
+export interface MarketplaceReasoningChain {
+  intent_breakdown: string;
+  market_feasibility: string;
+  trade_off_analysis: string;
+  inspection_protocol: string;
+  steps: ReasoningStep[];
+}
+
+export interface SearchAIMeta {
+  ai_mode: boolean;
+  normalized_query?: string;
+  cleaned_search_term?: string;
+  sort_by?: string;
+  primary_intent?: string;
+  localized_answer?: string;
+  detected_locale?: string;
+  deep_parameters?: Record<string, any>;
+  pii_detected?: boolean;
+  is_safe?: boolean;
+  safety_flags?: string[];
+  real_time_analysis?: RealTimeProductAnalysis;
+  market_verdict?: string;
+  reasoning_chain?: MarketplaceReasoningChain;
+  total_matching?: number;
+  returned_count?: number;
+  page?: number;
+  limit?: number;
+}
 
 export interface PublicPaymentSettings {
   telebirr_merchant_phone: string;
@@ -27,7 +97,7 @@ export interface PublicPaymentSettings {
 }
 
 export const publicApi = {
-  getProducts: (params?: Record<string, any>) => {
+  getProductsWithMeta: (params?: Record<string, any>) => {
     // Clean undefined values and map filter keys to backend format
     const cleanParams: Record<string, string> = {};
     if (params) {
@@ -38,7 +108,13 @@ export const publicApi = {
       });
     }
     const query = Object.keys(cleanParams).length > 0 ? '?' + new URLSearchParams(cleanParams).toString() : '';
-    return fetchAPI<any[]>(`/products${query}`).then(r => r ?? []);
+    return fetchAPIWithMeta<any[], SearchAIMeta>(`/products${query}`).then(r => ({
+      products: r.data ?? [],
+      meta: r.meta,
+    }));
+  },
+  getProducts: (params?: Record<string, any>) => {
+    return publicApi.getProductsWithMeta(params).then(r => r.products);
   },
   getProduct: (id: number) => fetchAPI<any>(`/products/${id}`),
   getProductAttributes: (id: number) => fetchAPI<any[]>(`/products/${id}/attributes`).then(r => r ?? []),

@@ -1,2 +1,0 @@
-# Placeholder for serialized model artifacts.
-# Production model weights (.joblib, .pt, .onnx) are versioned in model registries or S3, not git.

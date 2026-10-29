@@ -37,7 +37,7 @@ const CONDITIONS = ['new', 'used'] as const;
 
 export function ProductForm({ product, onSuccess, initialCondition, listingType = 'sale' }: Props) {
   const { user } = useAuth();
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const router = useRouter();
   const [selectedType, setSelectedType] = useState<'sale' | 'rent'>(product?.listing_type ?? listingType);
   const isRental = selectedType === 'rent';
@@ -354,6 +354,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         <label className={lbl}>{t.ui.selectCategory}</label>
         <CategoryTreeSelector
           value={form.category_hierarchy_id ?? (form.category_id ? Number(form.category_id) : undefined)}
+          language={locale}
           onChange={(id) => {
             setForm(f => ({
               ...f,

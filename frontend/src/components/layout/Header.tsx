@@ -7,7 +7,7 @@ import { useLocale } from '@/hooks/useLocale';
 import { SearchBar } from '@/components/public/SearchBar';
 import { UserAccountMenu } from '@/components/layout/UserAccountMenu';
 import { Globe, Moon, Sun, ShoppingBag, ChevronDown,
-  HelpCircle, X, ChevronRight, Shield, Zap, ImageIcon, MapPin, User,
+  HelpCircle, X, ChevronRight, Shield, Zap, ImageIcon, MapPin, User, Sparkles,
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
@@ -327,6 +327,14 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
         {/* ── Secondary Navigation Row ─────────────────────────────────────── */}
         <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/50 dark:bg-zinc-950/50 overflow-x-auto no-scrollbar">
           <div className="max-w-7xl mx-auto px-4 h-9 flex items-center gap-1 sm:gap-2 text-xs font-bold whitespace-nowrap">
+            <Link
+              href="/ai"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 text-white uppercase tracking-wider text-[11px] font-black shrink-0 shadow-sm shadow-orange-600/20 active:scale-95 transition-all mr-1"
+            >
+              <Sparkles size={12} className="animate-pulse" />
+              <span>AI Mode</span>
+            </Link>
+
             <button
               onClick={() => setCategoryDrawerOpen(true)}
               className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors uppercase tracking-wider text-[11px] font-black shrink-0 mr-1"
