@@ -52,7 +52,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   // Restore persisted locale on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('habesha_locale');
+      const saved = localStorage.getItem('huntiq_locale') || localStorage.getItem('habesha_locale');
       if (saved && ['en', 'am', 'or', 'ti'].includes(saved)) {
         setLocaleState(saved as Locale);
       }
@@ -61,7 +61,10 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);
-    try { localStorage.setItem('habesha_locale', l); } catch {}
+    try {
+      localStorage.setItem('huntiq_locale', l);
+      localStorage.setItem('habesha_locale', l);
+    } catch {}
   };
   const enDict = translations.en as Record<string, any>;
   const localeDict = translations[locale] as Record<string, any>;
