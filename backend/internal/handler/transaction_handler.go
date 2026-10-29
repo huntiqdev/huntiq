@@ -17,6 +17,10 @@ func NewTransactionHandler(svc *service.TransactionService) *TransactionHandler 
 
 // POST /api/transactions
 func (h *TransactionHandler) Create(c *fiber.Ctx) error {
+	sellerID, err := mustUserID(c)
+	if err != nil {
+		return err
+	}
 	var req dto.CreateTransactionRequest
 	if err := c.BodyParser(&req); err != nil {
 		return response.BadRequest(c, "invalid request body")
@@ -30,7 +34,7 @@ func (h *TransactionHandler) Create(c *fiber.Ctx) error {
 	if req.Amount <= 0 {
 		return response.BadRequest(c, "amount must be greater than zero")
 	}
-	txn, err := h.svc.Create(c.Context(), req)
+	txn, err := h.svc.Create(c.Context(), sellerID, req)
 	if err != nil {
 		return response.BadRequest(c, err.Error())
 	}

@@ -147,3 +147,16 @@ cd ai && uv run pytest -v
 # Python AI Linter & Formatting Checks (100% Clean)
 cd ai && uv run ruff check . && uv run ruff format --check .
 ```
+
+---
+
+## 6. Deep Adversarial Audit: Discovered Vulnerabilities & Hardened Fixes
+
+| Vulnerability ID | Subsystem | Severity | Attack Vector / Root Cause | Hardened Remediation |
+|---|---|---|---|---|
+| **VULN-2026-001** | `internal/handler/attribute_handler.go` | **CRITICAL** (IDOR) | Authenticated seller could send `POST /api/seller/products/:id/attributes` specifying any arbitrary product ID, overwriting competitors' listing specifications. Category mismatch could bypass schema. | Injected `mustUserID(c)`, verified product ownership via `GetByIDAndSeller(ctx, productID, sellerID)`, strictly restricted updates to `pending`/`rejected` status, and enforced category taxonomy alignment. |
+| **VULN-2026-002** | `internal/repository/transaction_repo.go` | **CRITICAL** (Sabotage) | Any authenticated seller could invoke `POST /api/transactions` for another seller's product. `CreateAndSell` locked and marked the listing as `sold` without seller ownership validation. | Added `sellerID` ownership constraint inside `CreateAndSell` atomic transaction (`WHERE id = $1 AND seller_id = $2 FOR UPDATE`). Unauthorized attempts immediately abort with zero DB mutations. |
+| **VULN-2026-003** | `internal/service/product_service.go` | **HIGH** (Policy Bypass) | While `CreateForSeller` called `checkProhibitedContent`, `UpdateForSeller` never invoked prohibited keyword checking. A seller could edit an approved listing into weapons or narcotics. | Injected `checkProhibitedContent(existing.Title, existing.Description)` into `UpdateForSeller`. Added positive checks on `RentalPrice`, `RentalDurationValue`, and non-negative `DepositAmount`. |
+| **VULN-2026-004** | `internal/service/seller_service.go` | **HIGH** (Wash Trading) | In `POST /api/orders`, buyer ID was never extracted from JWT context or compared to seller ID. Sellers could place fake orders on their own listings to inflate velocity or exploit referral rules. | Added `BuyerID *int` server-injected claim in `CreateOrderRequest` and enforced `req.BuyerID != sellerID` blocking self-ordering wash trades. |
+| **VULN-2026-005** | `pkg/dto/order.go` & `seller_service.go` | **MEDIUM** (Input Validation) | `offer_price` was not bounded, allowing negative or zero offers (`-500 ETB`) to be stored in `order_requests`. Unformatted phone numbers bypassed normalization. | Enforced `offer_price > 0`, and normalized all buyer and payer phone numbers via `validations.ValidateEthiopianPhone`. |
+

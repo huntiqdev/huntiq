@@ -207,6 +207,10 @@ func (h *SellerHandler) CreateOrder(c *fiber.Ctx) error {
 	} else {
 		req.BuyerTier = "normal"
 	}
+	// Inject authenticated buyer ID if present to prevent self-ordering wash trades
+	if uid, ok := c.Locals("userID").(int); ok && uid > 0 {
+		req.BuyerID = &uid
+	}
 	order, err := h.svc.CreateOrderRequest(c.Context(), req)
 	if err != nil {
 		return response.BadRequest(c, err.Error())

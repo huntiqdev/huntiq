@@ -9,6 +9,7 @@ import (
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
+	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
 
 type SellerService struct {
@@ -63,6 +64,16 @@ func (s *SellerService) CreateOrderRequest(ctx context.Context, req dto.CreateOr
 	if req.BuyerName == "" || req.BuyerPhone == "" {
 		return nil, errors.New("buyer_name and buyer_phone are required")
 	}
+	phoneRes := validations.ValidateEthiopianPhone(req.BuyerPhone)
+	if !phoneRes.Valid {
+		return nil, errors.New("invalid Ethiopian phone number for buyer_phone")
+	}
+	req.BuyerPhone = phoneRes.Normalized
+
+	if req.OfferPrice != nil && *req.OfferPrice <= 0 {
+		return nil, errors.New("offer_price must be greater than zero")
+	}
+
 	if req.ProductID <= 0 {
 		return nil, errors.New("product_id is required")
 	}
@@ -70,6 +81,12 @@ func (s *SellerService) CreateOrderRequest(ctx context.Context, req dto.CreateOr
 	if err != nil {
 		return nil, errors.New("product not found or not available")
 	}
+
+	// Security: Prevent self-ordering wash trading
+	if req.BuyerID != nil && *req.BuyerID == sellerID {
+		return nil, errors.New("cannot create an order request on your own product")
+	}
+
 	// Enforce order hierarchy:
 	// normal product → any buyer
 	// gold product   → buyer must be gold or premium
@@ -125,6 +142,12 @@ func (s *SellerService) SubmitUpgradeRequest(ctx context.Context, sellerID int, 
 	if payerPhone == "" {
 		return 0, errors.New("payer_phone is required")
 	}
+	phoneResult := validations.ValidateEthiopianPhone(payerPhone)
+	if !phoneResult.Valid {
+		return 0, errors.New("invalid Ethiopian phone number for payer_phone")
+	}
+	payerPhone = phoneResult.Normalized
+
 	if reference == "" {
 		return 0, errors.New("payment reference is required")
 	}

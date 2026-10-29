@@ -33,7 +33,7 @@ func NewTransactionRepo(db *pgxpool.Pool) *TransactionRepo {
 //  5. Marks the product as 'sold'.
 //
 // All steps run inside a single DB transaction — either all succeed or all roll back.
-func (r *TransactionRepo) CreateAndSell(ctx context.Context, t *models.Transaction) (int, error) {
+func (r *TransactionRepo) CreateAndSell(ctx context.Context, sellerID int, t *models.Transaction) (int, error) {
 	tx, err := r.db.Begin(ctx)
 	if err != nil {
 		return 0, err
@@ -41,7 +41,7 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, t *models.Transacti
 	defer tx.Rollback(ctx) //nolint:errcheck
 
 	// Step 1 — lock the product row so no concurrent request can also buy it.
-	var sellerID int
+	var productSellerID int
 	var status string
 	var expiresAt *time.Time
 	var productPrice float64
@@ -51,9 +51,14 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, t *models.Transacti
 		FROM products
 		WHERE id = $1
 		FOR UPDATE`, t.ProductID,
-	).Scan(&sellerID, &status, &expiresAt, &productPrice)
+	).Scan(&productSellerID, &status, &expiresAt, &productPrice)
 	if err != nil {
 		return 0, fmt.Errorf("product not found: %w", err)
+	}
+
+	// Security: Verify the seller recording this transaction actually owns the product.
+	if sellerID > 0 && productSellerID != sellerID {
+		return 0, errors.New("product does not belong to you")
 	}
 
 	// Step 2 — re-verify status inside the lock.

@@ -8,6 +8,7 @@ import (
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
+	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
 
 type TransactionService struct {
@@ -27,7 +28,7 @@ func (s *TransactionService) WithReferralService(r *ReferralService) *Transactio
 	return s
 }
 
-func (s *TransactionService) Create(ctx context.Context, req dto.CreateTransactionRequest) (*models.Transaction, error) {
+func (s *TransactionService) Create(ctx context.Context, sellerID int, req dto.CreateTransactionRequest) (*models.Transaction, error) {
 	if req.BuyerName == "" || req.BuyerPhone == "" {
 		return nil, errors.New("buyer_name and buyer_phone are required")
 	}
@@ -38,6 +39,12 @@ func (s *TransactionService) Create(ctx context.Context, req dto.CreateTransacti
 		return nil, errors.New("amount must be greater than zero")
 	}
 
+	phoneRes := validations.ValidateEthiopianPhone(req.BuyerPhone)
+	if !phoneRes.Valid {
+		return nil, errors.New("invalid Ethiopian phone number for buyer_phone")
+	}
+	req.BuyerPhone = phoneRes.Normalized
+
 	t := &models.Transaction{
 		ProductID:  req.ProductID,
 		BuyerName:  req.BuyerName,
@@ -46,9 +53,9 @@ func (s *TransactionService) Create(ctx context.Context, req dto.CreateTransacti
 		Notes:      req.Notes,
 	}
 
-	// CreateAndSell is atomic: locks the product, verifies it's still approved,
+	// CreateAndSell is atomic: locks the product, verifies ownership and approval,
 	// inserts the transaction, and marks the product sold — all in one DB transaction.
-	sellerID, err := s.repo.CreateAndSell(ctx, t)
+	actualSellerID, err := s.repo.CreateAndSell(ctx, sellerID, t)
 	if err != nil {
 		return nil, err
 	}
@@ -56,8 +63,8 @@ func (s *TransactionService) Create(ctx context.Context, req dto.CreateTransacti
 	// Non-fatal: tier progression failure doesn't invalidate the completed sale.
 	// Use seller_gets (net payout), not the gross amount — total_value_sold tracks
 	// what the seller actually earned, which is the correct basis for tier thresholds.
-	if err := s.userRepo.UpdateTotalValueSold(ctx, sellerID, t.SellerGets); err != nil {
-		log.Printf("[TransactionService] failed to update seller %d total_value_sold: %v", sellerID, err) //nolint:gosec // G117: error/value from internal source, not user-controlled input
+	if err := s.userRepo.UpdateTotalValueSold(ctx, actualSellerID, t.SellerGets); err != nil {
+		log.Printf("[TransactionService] failed to update seller %d total_value_sold: %v", actualSellerID, err) //nolint:gosec // G117: error/value from internal source, not user-controlled input
 	}
 
 	// Non-fatal: record referral commission for the seller's inviter.
@@ -67,7 +74,7 @@ func (s *TransactionService) Create(ctx context.Context, req dto.CreateTransacti
 		srcID := t.ID
 		safeGo(func() {
 			s.referralSvc.MaybeRecordCommission(
-				context.Background(), sellerID, t.BrokerFee,
+				context.Background(), actualSellerID, t.BrokerFee,
 				"product_purchase", "seller", "",
 				&srcID,
 			)

@@ -7,9 +7,10 @@ type CreateOrderRequest struct {
 	BuyerEmail string   `json:"buyer_email"`
 	Message    string   `json:"message"`
 	OfferPrice *float64 `json:"offer_price"`
-	// BuyerTier is injected server-side from the JWT claim — never from the request body.
-	// The "-" tag prevents clients from supplying this field.
+	// BuyerTier and BuyerID are injected server-side from the JWT claim — never from the request body.
+	// The "-" tag prevents clients from supplying these fields.
 	BuyerTier string `json:"-"`
+	BuyerID   *int   `json:"-"`
 }
 
 type UpdateOrderRequest struct {

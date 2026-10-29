@@ -115,9 +115,13 @@ func (h *AttributeHandler) GetProductAttributes(c *fiber.Ctx) error {
 // SetProductAttributes sets multiple product attributes
 // POST /api/seller/products/:id/attributes
 func (h *AttributeHandler) SetProductAttributes(c *fiber.Ctx) error {
+	sellerID, err := mustUserID(c)
+	if err != nil {
+		return err
+	}
 	idParam := c.Params("id")
 	productID, err := strconv.Atoi(idParam)
-	if err != nil {
+	if err != nil || productID <= 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "invalid product ID",
@@ -125,14 +129,52 @@ func (h *AttributeHandler) SetProductAttributes(c *fiber.Ctx) error {
 	}
 
 	var req struct {
-		CategoryID int                      `json:"category_id"`
+		CategoryID int                       `json:"category_id"`
 		Attributes []models.ProductAttribute `json:"attributes"`
 	}
-	
+
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "invalid request body",
+		})
+	}
+
+	// Sovereign Authority: Verify seller owns this product and product is in editable state
+	if h.productSvc != nil {
+		prod, err := h.productSvc.GetByIDAndSeller(c.Context(), productID, sellerID)
+		if err != nil || prod == nil {
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+				"success": false,
+				"error":   "product not found or does not belong to you",
+			})
+		}
+		if prod.Status != "pending" && prod.Status != "rejected" {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"success": false,
+				"error":   "only pending or rejected products can be edited",
+			})
+		}
+		// Default or validate category against product's authoritative category
+		if req.CategoryID <= 0 {
+			if prod.CategoryID != nil {
+				req.CategoryID = *prod.CategoryID
+			} else if prod.CategoryHierarchyID != nil {
+				req.CategoryID = *prod.CategoryHierarchyID
+			}
+		} else if (prod.CategoryID != nil && req.CategoryID != *prod.CategoryID) &&
+			(prod.CategoryHierarchyID != nil && req.CategoryID != *prod.CategoryHierarchyID) {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"success": false,
+				"error":   "category_id does not match the product category",
+			})
+		}
+	}
+
+	if req.CategoryID <= 0 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "category_id is required",
 		})
 	}
 

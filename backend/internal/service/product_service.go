@@ -277,6 +277,9 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 			req.Price = *req.RentalPrice
 		}
 	}
+	if req.DepositAmount != nil && *req.DepositAmount < 0 {
+		return nil, errors.New("deposit_amount cannot be negative")
+	}
 
 	if req.Title == "" || req.Price <= 0 {
 		return nil, errors.New("title and a positive price are required")
@@ -557,6 +560,12 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		}
 		existing.Description = *req.Description
 	}
+
+	// Trust & Safety: Block prohibited illegal goods and dangerous items on update
+	if err := checkProhibitedContent(existing.Title, existing.Description); err != nil {
+		return err
+	}
+
 	if req.CategoryHierarchyID != nil || req.CategoryID != nil {
 		var catHierarchyID *int
 		var legacyCatID *int
@@ -656,18 +665,31 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 	// Rental fields — only update if listing_type is 'rent'
 	if existing.ListingType == "rent" {
 		if req.RentalPrice != nil {
+			if *req.RentalPrice <= 0 {
+				return errors.New("rental_price must be greater than zero")
+			}
 			existing.RentalPrice = req.RentalPrice
 			if req.Price == nil || *req.Price <= 0 {
 				existing.Price = *req.RentalPrice
 			}
 		}
 		if req.RentalDurationValue != nil {
+			if *req.RentalDurationValue <= 0 {
+				return errors.New("rental_duration_value must be greater than zero")
+			}
 			existing.RentalDurationValue = req.RentalDurationValue
 		}
 		if req.RentalDurationUnit != nil {
+			validUnits := map[string]bool{"hour": true, "day": true, "week": true, "month": true, "year": true}
+			if !validUnits[*req.RentalDurationUnit] {
+				return errors.New("rental_duration_unit must be: hour, day, week, month, or year")
+			}
 			existing.RentalDurationUnit = req.RentalDurationUnit
 		}
 		if req.DepositAmount != nil {
+			if *req.DepositAmount < 0 {
+				return errors.New("deposit_amount cannot be negative")
+			}
 			existing.DepositAmount = req.DepositAmount
 		}
 		if req.AvailableFrom != nil {
@@ -716,6 +738,14 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 
 func (s *ProductService) ListForSeller(ctx context.Context, sellerID int) ([]models.Product, error) {
 	return s.repo.ListBySeller(ctx, sellerID)
+}
+
+// GetByIDAndSeller returns a product verifying seller ownership.
+func (s *ProductService) GetByIDAndSeller(ctx context.Context, id, sellerID int) (*models.Product, error) {
+	if id <= 0 || sellerID <= 0 {
+		return nil, errors.New("invalid product id or seller id")
+	}
+	return s.repo.GetByIDAndSeller(ctx, id, sellerID)
 }
 
 
