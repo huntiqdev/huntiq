@@ -9,6 +9,7 @@ frontend/node_modules/
 # Build output
 frontend/.next/
 frontend/tsconfig.tsbuildinfo
+frontend/AGENTS.md
 
 # Go build artifacts
 backend/bin/

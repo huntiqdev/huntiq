@@ -10,8 +10,8 @@
 ```
 huntiq/
 ├── backend/            # PILLAR 1: Sovereign Authority (Business logic, Auth, DB mutations, Categories, backend/docs)
-├── frontend/           # PILLAR 2: Presentation Layer (Next.js 15 App Router, Tailwind CSS, Localized UI, frontend/docs)
-└── ai/                 # PILLAR 3: AI Platform (FastAPI inference worker, offline data platform, ai/docs)
+├── frontend/           # PILLAR 2: Presentation Layer (Next.js 16 App Router, Tailwind CSS, Localized UI)
+└── ai/                 # PILLAR 3: AI Platform (Local Ollama inference runtime, offline data platform)
 ```
 
 ### Invariant Rules:
