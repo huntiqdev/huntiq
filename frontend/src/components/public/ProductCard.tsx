@@ -97,7 +97,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
         </div>
 
         {/* Info */}
-        <div className="overflow-y-auto p-5 flex flex-col gap-3">
+        <div className="overflow-y-auto p-5 flex flex-col gap-3 flex-1">
           <div className="flex flex-wrap gap-1.5">
             {product.category && (
               <span className="text-[10px] font-black uppercase tracking-widest text-orange-600 bg-orange-600/10 px-2 py-1 rounded-lg">
@@ -131,22 +131,23 @@ function DetailDrawer({ product, onClose, onBuy }: {
           {product.description && (
             <p className="text-sm leading-relaxed opacity-70">{product.description}</p>
           )}
+        </div>
 
-          <div className="flex gap-3 pt-1">
-            <button type="button" onClick={onBuy}
-              className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-colors active:scale-95 ${
-                product.listing_type === 'rent'
-                  ? 'bg-teal-600 hover:bg-teal-700'
-                  : 'bg-orange-600 hover:bg-orange-700'
-              }`}>
-              {product.listing_type === 'rent' ? <ShoppingBag size={16} /> : <ShoppingBag size={16} />}
-              {product.listing_type === 'rent' ? (t.ui.rent_now ?? 'Rent / Contact Landlord') : t.ui.buy_now}
-            </button>
-            <Link href={`/products/${product.id}`}
-              className="px-4 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-700 font-bold text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-              {t.ui.details}
-            </Link>
-          </div>
+        {/* Pinned Priority Action Bar */}
+        <div className="shrink-0 p-4 border-t border-zinc-100 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur flex gap-3 pb-[calc(env(safe-area-inset-bottom,12px)+8px)]">
+          <button type="button" onClick={onBuy}
+            className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-colors active:scale-95 ${
+              product.listing_type === 'rent'
+                ? 'bg-teal-600 hover:bg-teal-700'
+                : 'bg-orange-600 hover:bg-orange-700'
+            }`}>
+            <ShoppingBag size={16} />
+            {product.listing_type === 'rent' ? (t.ui.rent_now ?? 'Rent / Contact Landlord') : t.ui.buy_now}
+          </button>
+          <Link href={`/products/${product.id}`}
+            className="px-4 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-700 font-bold text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+            {t.ui.details}
+          </Link>
         </div>
       </div>
     </div>

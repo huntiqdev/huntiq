@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from 'react';
 import { api } from '@/lib/api';
 import { Product } from '@/types';
 import { useLocale } from '@/hooks/useLocale';
@@ -35,11 +35,11 @@ export function BuyModal({ product, onClose }: Props) {
   // Fetch buyer profile phone once — skip if already loaded
   const [buyerPhone, setBuyerPhone] = useState<string | null>(null);
   const [buyerName, setBuyerName] = useState<string | null>(null);
-  const fetchedRef = useState(false);
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
-    if (!isBuyer || !user || fetchedRef[0]) return;
-    fetchedRef[1](true);
+    if (!isBuyer || !user || fetchedRef.current) return;
+    fetchedRef.current = true;
     api.getBuyerProfile(user.token).then(p => {
       if (p?.phone) setBuyerPhone(p.phone);
       if (p?.name) setBuyerName(p.name);
@@ -93,9 +93,9 @@ export function BuyModal({ product, onClose }: Props) {
   const tierLocked = buyerRank < requiredRank;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
       <div className="absolute inset-0" onClick={onClose} />
-      <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-sm p-6">
+      <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-sm max-h-[92vh] overflow-y-auto p-5 sm:p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">

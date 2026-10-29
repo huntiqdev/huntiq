@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 import { api } from '@/lib/api';
 
 /**
@@ -92,7 +92,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSettings = async () => {
+  const fetchSettings = useCallback(async () => {
     try {
       const data = await api.getPublicSettings();
       setSettings(data as PlatformSettings);
@@ -101,17 +101,32 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       console.error('[SettingsProvider] Failed to load settings:', err);
       setError(err?.message || 'Failed to load settings');
       // Don't clear existing settings on refresh errors
-      if (!settings) {
-        setSettings(null); // First load failed, set null to use defaults
-      }
+      setSettings(prev => prev ?? null);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Initial load
   useEffect(() => {
-    fetchSettings();
+    let active = true;
+    void (async () => {
+      try {
+        const data = await api.getPublicSettings();
+        if (active) {
+          setSettings(data as PlatformSettings);
+          setError(null);
+        }
+      } catch (err: any) {
+        if (active) {
+          console.error('[SettingsProvider] Failed to load settings:', err);
+          setError(err?.message || 'Failed to load settings');
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+    return () => { active = false; };
   }, []);
 
   // Auto-refresh every 5 minutes
@@ -121,20 +136,17 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     }, 5 * 60 * 1000); // 5 minutes
 
     return () => clearInterval(interval);
-  }, [settings]);
+  }, [fetchSettings]);
 
   // Refresh on window focus (user returns to tab)
   useEffect(() => {
     const handleFocus = () => {
-      // Only refresh if settings are already loaded (avoid double-load on mount)
-      if (settings) {
-        fetchSettings();
-      }
+      fetchSettings();
     };
 
     window.addEventListener('focus', handleFocus);
     return () => window.removeEventListener('focus', handleFocus);
-  }, [settings]);
+  }, [fetchSettings]);
 
   return (
     <SettingsContext.Provider value={{ settings, loading, error, refresh: fetchSettings }}>

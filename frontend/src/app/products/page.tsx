@@ -477,7 +477,7 @@ function ProductsContent() {
                         5 on md (≥768px), 6 on lg+ (≥1024px)
                   With sidebar: effectively 5 on lg, 6 on xl
                 */}
-                <div className="grid grid-cols-3 min-[480px]:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6 gap-2">
+                <div className="grid grid-cols-2 min-[360px]:grid-cols-3 min-[480px]:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-2.5">
                   {products.slice(0, visibleCount).map(p => (
                     p.listing_type === 'rent'
                       ? <RentalProductCard key={p.id} product={p} />

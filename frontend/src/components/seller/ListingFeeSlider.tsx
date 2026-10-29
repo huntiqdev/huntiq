@@ -70,6 +70,10 @@ export function ListingFeeSlider({ price, tier = 'normal', selectedDays, onChang
     return '1 year';
   };
 
+  const expiryDateStr = useMemo(() => {
+    return new Date(Date.now() + selectedDays * 86_400_000).toLocaleDateString();
+  }, [selectedDays]);
+
   return (
     <div className="flex flex-col gap-3 bg-zinc-50 dark:bg-zinc-800/60 rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700">
 
@@ -138,7 +142,7 @@ export function ListingFeeSlider({ price, tier = 'normal', selectedDays, onChang
         <Clock size={11} className="text-orange-600 shrink-0" />
         <span>
           {t.ui.selected_label}: <strong className="text-zinc-800 dark:text-zinc-200">{durationLabel(selectedDays)}</strong>
-          {' '}— expires {new Date(Date.now() + selectedDays * 86_400_000).toLocaleDateString()}
+          {' '}— expires {expiryDateStr}
         </span>
       </div>
 

@@ -29,7 +29,7 @@ export function Footer() {
 
   return (
     <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 pt-12 pb-8">
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-24 md:pb-8">
         {/* 5-Column Grid */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           {/* Col 1: Brand & Identity */}

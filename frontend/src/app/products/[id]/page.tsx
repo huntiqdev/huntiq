@@ -46,7 +46,7 @@ export default async function ProductDetailPage({ params }: Props) {
   const condition = product.condition ?? '';
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-5xl mx-auto px-4 pt-6 pb-24 md:py-8">
       {/* Breadcrumbs */}
       {(product as any).category_hierarchy_id && (
         <div className="mb-4">

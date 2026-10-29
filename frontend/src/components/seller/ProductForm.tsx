@@ -96,29 +96,24 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     }).catch(() => { setTierLoaded(true); });
   }, [user]);
 
-  useEffect(() => {
-    if (!tierLoaded) return;
-    if (product) return;
-    if (imageURLs.some(u => u.trim())) return;
-    setImageURLs([]);
-  }, [tierLoaded]); // eslint-disable-line react-hooks/exhaustive-deps
-
   // Fetch applicable attributes when category_hierarchy_id changes
   useEffect(() => {
+    let active = true;
     if (!form.category_hierarchy_id) {
-      setApplicableAttributes([]);
+      setApplicableAttributes(prev => (prev.length === 0 ? prev : []));
       return;
     }
     api.getCategoryAttributes(form.category_hierarchy_id)
-      .then(data => setApplicableAttributes(Array.isArray(data) ? data : []))
-      .catch(() => setApplicableAttributes([]));
+      .then(data => {
+        if (active) setApplicableAttributes(Array.isArray(data) ? data : []);
+      })
+      .catch(() => {
+        if (active) setApplicableAttributes([]);
+      });
+    return () => { active = false; };
   }, [form.category_hierarchy_id]);
 
   const maxImages = MAX_IMAGES_PER_TIER[sellerTier] ?? 2;
-
-  useEffect(() => {
-    if (imageURLs.length > maxImages) setImageURLs(prev => prev.slice(0, maxImages));
-  }, [maxImages, imageURLs.length]);
 
   const setAttrValue = (slug: string, value: any) => {
     setAttributeValues(prev => ({ ...prev, [slug]: value }));

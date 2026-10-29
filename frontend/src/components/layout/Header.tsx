@@ -309,6 +309,44 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
           {/* Right Header Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2 ml-auto shrink-0">
 
+            {/* Mobile Language Selector (sm:hidden) */}
+            <div className="relative sm:hidden">
+              <button
+                type="button"
+                onClick={() => setLangOpen(v => !v)}
+                className="flex items-center gap-1 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-black text-[11px] uppercase tracking-wider bg-zinc-50 dark:bg-zinc-900"
+                aria-label="Select language"
+              >
+                <Globe size={13} className="text-orange-600" />
+                <span>{locale === 'am' ? 'አማ' : locale === 'ti' ? 'ትግ' : locale.toUpperCase()}</span>
+              </button>
+              {langOpen && (
+                <div className="absolute right-0 mt-1.5 w-40 rounded-2xl border shadow-2xl z-50 overflow-hidden bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800">
+                  {locales.map((l: string) => (
+                    <button
+                      key={l}
+                      onClick={() => { setLocale(l); setLangOpen(false); }}
+                      className={`w-full text-left px-3.5 py-2 text-xs font-bold hover:bg-orange-600 hover:text-white transition-colors flex items-center justify-between ${
+                        locale === l ? 'text-orange-600' : ''
+                      }`}
+                    >
+                      {localeLabels[l] ?? l.toUpperCase()}
+                      {locale === l && <span className="w-1.5 h-1.5 rounded-full bg-orange-600 inline-block" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Dark / Light Toggle (sm:hidden) */}
+            <button
+              onClick={toggleDark}
+              className="sm:hidden p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600 bg-zinc-50 dark:bg-zinc-900 transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {mounted ? (dark ? <Sun size={13} /> : <Moon size={13} />) : <span className="w-3.5 h-3.5 block" />}
+            </button>
+
             {/* User Account / Role Menu */}
             <UserAccountMenu />
 

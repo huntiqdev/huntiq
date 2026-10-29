@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useState, useEffect, useRef, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, useCallback, useMemo, ReactNode } from 'react';
 import { API_URL, api } from '@/lib/api';
 
 export interface AuthUser {
@@ -147,7 +147,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [fetchPermissions]);
 
   const userRef = useRef<AuthUser | null>(null);
-  userRef.current = user;
+
+  useEffect(() => {
+    userRef.current = user;
+  }, [user]);
 
   useEffect(() => {
     if (!user || user.role !== 'admin') return;
@@ -165,7 +168,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       clearInterval(interval);
       window.removeEventListener('focus', onFocus);
     };
-  }, [user?.role, user?.adminRole, fetchPermissions]);
+  }, [user, fetchPermissions]);
 
   const login = async (token: string, sessionToken?: string) => {
     await fetch('/api/auth/session', {
@@ -191,7 +194,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const buyerTier = user?.buyerTier ?? 'normal';
   const sellerPreference = user?.sellerPreference ?? 'sale';
-  const capabilities = user?.capabilities ?? [];
+  const capabilities = useMemo(() => user?.capabilities ?? [], [user?.capabilities]);
   const adminRole = user?.adminRole ?? '';
 
   const isPlatformOwner = adminRole === 'platform_owner' || adminRole === 'super';
