@@ -135,6 +135,31 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
     return <Tag size={16} className="text-zinc-400" />;
   };
 
+  const getCatLabel = (node: CategoryNode) => {
+    if (node.slug && (t.categories as any)?.[node.slug]) {
+      return (t.categories as any)[node.slug];
+    }
+    if (locale === 'am' && node.name_am) return node.name_am;
+    if ((locale === 'or' || locale === 'om') && node.name_om) return node.name_om;
+    if (locale === 'ti' && node.name_ti) return node.name_ti;
+    if (locale === 'en' && node.name_en) return node.name_en;
+    return node.name || node.name_en || node.slug?.replace(/_/g, ' ') || '';
+  };
+
+  const getSubLabel = (sub: CategoryNode, parentSlug?: string) => {
+    if (parentSlug && (t.sub_categories as any)?.[parentSlug]?.[sub.slug]) {
+      return (t.sub_categories as any)[parentSlug][sub.slug];
+    }
+    if ((t.items as any)?.[sub.slug]) {
+      return (t.items as any)[sub.slug];
+    }
+    if (locale === 'am' && sub.name_am) return sub.name_am;
+    if ((locale === 'or' || locale === 'om') && sub.name_om) return sub.name_om;
+    if (locale === 'ti' && sub.name_ti) return sub.name_ti;
+    if (locale === 'en' && sub.name_en) return sub.name_en;
+    return sub.name || sub.name_en || sub.slug?.replace(/_/g, ' ') || '';
+  };
+
   return (
     <div className="fixed inset-0 z-[70] flex items-stretch">
       {/* Backdrop */}
@@ -245,7 +270,7 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                     >
                       <div className="flex items-center gap-2.5 truncate">
                         <span className="shrink-0">{renderIcon(cat)}</span>
-                        <span className="truncate">{cat.name || cat.name_en || cat.slug}</span>
+                        <span className="truncate">{getCatLabel(cat)}</span>
                       </div>
                       <div className="flex items-center gap-1 shrink-0">
                         {childCount > 0 && (
@@ -278,10 +303,10 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                       <span className="text-2xl">{renderIcon(activeCategory)}</span>
                       <div>
                         <h3 className="text-base font-black text-zinc-900 dark:text-white">
-                          {activeCategory.name || activeCategory.name_en || activeCategory.slug}
+                          {getCatLabel(activeCategory)}
                         </h3>
                         <p className="text-[11px] text-zinc-400">
-                          Authoritative catalog items under {activeCategory.name || activeCategory.name_en}
+                          {getCatLabel(activeCategory)}
                         </p>
                       </div>
                     </div>
@@ -293,7 +318,7 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                       }
                       className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-black text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors"
                     >
-                      <span>View All</span>
+                      <span>{locale === 'am' ? 'ሁሉንም እይ' : locale === 'or' ? 'Hunda Ilaali' : locale === 'ti' ? 'ንኹሉ ርኣይ' : 'View All'}</span>
                       <ArrowRight size={12} />
                     </button>
                   </div>
@@ -312,7 +337,7 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                             className="text-xs font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200 hover:text-orange-600 dark:hover:text-orange-400 flex items-center gap-1.5 group text-left"
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-orange-600" />
-                            <span>{sub.name || sub.name_en || sub.slug}</span>
+                            <span>{getSubLabel(sub, activeCategory.slug)}</span>
                             <ChevronRight
                               size={11}
                               className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-600"
@@ -367,13 +392,13 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                         className="flex items-center gap-2.5 text-xs font-black text-zinc-900 dark:text-white hover:text-orange-600 text-left flex-1"
                       >
                         <span className="shrink-0">{renderIcon(cat)}</span>
-                        <span>{cat.name || cat.name_en || cat.slug}</span>
+                        <span>{getCatLabel(cat)}</span>
                       </button>
                       {cat.children && cat.children.length > 0 && (
                         <button
                           onClick={() => setExpandedMobileCat(isExpanded ? null : cat.id)}
                           className="p-1.5 rounded-lg text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                          aria-label={`Expand ${cat.name || cat.name_en}`}
+                          aria-label={`Expand ${getCatLabel(cat)}`}
                         >
                           <ChevronDown
                             size={16}
@@ -397,7 +422,7 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                               }
                               className="text-xs font-bold text-orange-600 flex items-center gap-1 text-left"
                             >
-                              <span>{sub.name || sub.name_en || sub.slug}</span>
+                              <span>{getSubLabel(sub, cat.slug)}</span>
                               <ArrowRight size={10} />
                             </button>
                             {sub.children && sub.children.length > 0 && (

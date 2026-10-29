@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { Home, Search, PlusCircle, User } from 'lucide-react';
+import { Home, Search, PlusCircle, User, Sparkles } from 'lucide-react';
 
 export function ClientShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,6 +25,17 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
       <main className="min-h-screen pb-20 md:pb-0">{children}</main>
       <Footer />
       
+      {/* Floating AI Assistant Action Button — Dedicated single entrypoint at right bottom */}
+      <Link
+        href="/ai"
+        aria-label="Open HUNTIQ AI Assistant"
+        title="Open HUNTIQ AI Shopping Assistant"
+        className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-tr from-orange-600 via-amber-600 to-orange-500 text-white shadow-xl shadow-orange-600/35 hover:scale-110 active:scale-95 transition-all flex items-center justify-center border-2 border-white/20 group"
+      >
+        <Sparkles size={22} className="animate-pulse" />
+        <span className="sr-only">HUNTIQ AI</span>
+      </Link>
+
       {/* Mobile Bottom Navigation — hidden on product detail pages to prioritize the sticky Buy/Contact CTA */}
       {!isProductDetail && (
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 z-50 px-6 py-3 flex items-center justify-between pb-[env(safe-area-inset-bottom,12px)]">

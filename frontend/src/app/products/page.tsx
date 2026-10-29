@@ -281,7 +281,6 @@ function ProductsContent() {
     }
     if (sub) p.set('subcategory', sub);
     if (item) p.set('item', item);
-    if (search) p.set('search', search);
     const l = loc ?? { region: activeRegion || undefined, zone: activeZone || undefined, subcity: activeSubcity || undefined, woreda: activeWoreda || undefined };
     if (l.woreda) p.set('woreda', l.woreda);
     else if (l.subcity) p.set('subcity', l.subcity);
@@ -290,22 +289,38 @@ function ProductsContent() {
     return `/products${p.toString() ? '?' + p.toString() : ''}`;
   };
 
-  const catLabel = (slug: string) => (t.categories as any)[slug] ?? slug.replace(/_/g, ' ');
-  const itemLabel = (key: string) => {
-    // For subcategory keys: check sub_categories[activeCatSlug] first
-    const fromSub = activeCatSlug ? (t.sub_categories as any)?.[activeCatSlug]?.[key] : undefined;
-    if (fromSub) return fromSub;
-    const fromItems = (t.items as any)?.[key];
-    if (fromItems) return fromItems;
-    return key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  const getCatDisplayName = (cat?: Category) => {
+    if (!cat) return '';
+    if (cat.slug && (t.categories as any)?.[cat.slug]) {
+      return (t.categories as any)[cat.slug];
+    }
+    if (locale === 'am' && (cat as any).name_am) return (cat as any).name_am;
+    if ((locale === 'or' || locale === 'om') && (cat as any).name_om) return (cat as any).name_om;
+    if (locale === 'ti' && (cat as any).name_ti) return (cat as any).name_ti;
+    if (locale === 'en' && (cat as any).name_en) return (cat as any).name_en;
+    return cat.name || (cat as any).name_en || cat.slug?.replace(/_/g, ' ') || '';
+  };
+
+  const getSubDisplayName = (sub?: Category) => {
+    if (!sub) return '';
+    const sSlug = sub.slug;
+    if (activeCatSlug && (t.sub_categories as any)?.[activeCatSlug]?.[sSlug]) {
+      return (t.sub_categories as any)[activeCatSlug][sSlug];
+    }
+    if ((t.items as any)?.[sSlug]) {
+      return (t.items as any)[sSlug];
+    }
+    if (locale === 'am' && (sub as any).name_am) return (sub as any).name_am;
+    if ((locale === 'or' || locale === 'om') && (sub as any).name_om) return (sub as any).name_om;
+    if (locale === 'ti' && (sub as any).name_ti) return (sub as any).name_ti;
+    if (locale === 'en' && (sub as any).name_en) return (sub as any).name_en;
+    return sub.name || (sub as any).name_en || sSlug.replace(/_/g, ' ');
   };
 
   return (
     <>
-      {/* ── Sticky nav ── */}
-      <div className="sticky top-14 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
-
-        {/* Category pills */}
+      {/* ── 3rd Row: Categories list (Compact sticky bar, single row) ── */}
+      <div className="sticky top-14 z-30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-[2%] sm:px-[4%] lg:px-[6%]">
           <button onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
             className={`flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${!activeCatId ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
@@ -317,92 +332,77 @@ function ProductsContent() {
               onClick={() => { setActiveCatId(cat.id); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(cat.id)); }}
               className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
                 }`}>
-              {catLabel(cat.slug)}
+              {getCatDisplayName(cat)}
             </button>
           ))}
         </div>
-
-        {/* Dimension 1: Marketplace Pillar (Transaction Mode) */}
-        <div className="flex items-center gap-1.5 px-[2%] sm:px-[4%] lg:px-[6%] py-1.5 border-t border-zinc-100 dark:border-zinc-800 bg-gradient-to-r from-orange-50/50 via-teal-50/30 to-transparent dark:from-zinc-900/60">
-          <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 shrink-0 mr-1">{t.ui.listing_type_label ?? 'Marketplace Pillar:'}</span>
-          {(['all', 'sale', 'rent'] as const).map(type => (
-            <button key={type} onClick={() => { 
-              setListingType(type); 
-              setVisibleCount(24);
-              router.push(buildUrl(activeCatId, activeSub, activeItem, filters.search, undefined, type));
-            }}
-              className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide transition-all shrink-0 flex items-center gap-1 ${listingType === type
-                ? type === 'sale' ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20'
-                  : type === 'rent' ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
-                    : 'bg-zinc-800 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-md'
-                : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
-                }`}>
-              {type === 'all' ? (t.ui.listing_type_all ?? '🌐 All Listings') 
-                : type === 'sale' ? (t.ui.listing_type_sale ?? '🛒 Buy (Seller Goods)') 
-                : (t.ui.listing_type_rent ?? '🏠 Rent (Landlord Rentals)')}
-            </button>
-          ))}
-        </div>
-
-        {/* Dimension 2: Condition filter — Physical state of items (orthogonal to Pillar & Category) */}
-        <div className="flex items-center gap-1.5 px-[2%] sm:px-[4%] lg:px-[6%] pb-2 pt-1 border-t border-zinc-100 dark:border-zinc-850">
-          <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 shrink-0 mr-1">{t.ui.condition_label ?? 'Physical Condition:'}</span>
-          {(['all', 'new', 'used'] as const).map(c => (
-            <button key={c} onClick={() => { setActiveCondition(c); setVisibleCount(24); }}
-              className={`px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide transition-all shrink-0 ${activeCondition === c
-                ? c === 'new' ? 'bg-green-600 text-white'
-                  : c === 'used' ? 'bg-blue-600 text-white'
-                    : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900'
-                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
-                }`}>
-              {c === 'all' ? (t.ui.condition_all ?? 'All') : c === 'new' ? (t.ui.condition_new_badge ?? '🆕 Brand New') : (t.ui.condition_used_badge ?? '♻️ Used / Pre-owned')}
-            </button>
-          ))}
-        </div>
-
-        {/* Subcategory pills */}
-        {subcategoryNodes.length > 0 && (
-          <div className="border-t border-zinc-100 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/60">
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1.5 px-[2%] sm:px-[4%] lg:px-[6%]">
-              <ChevronRight size={10} className="text-orange-500 shrink-0 opacity-60" />
-              {subcategoryNodes.map(s => {
-                const sSlug = s.slug;
-                const sLabel = s.name || s.name_en || sSlug;
-                return (
-                  <button key={s.id || sSlug}
-                    onClick={() => { setActiveSub(activeSub === sSlug ? undefined : sSlug); setActiveItem(undefined); router.push(buildUrl(activeCatId, activeSub === sSlug ? undefined : sSlug)); }}
-                    className={`px-2.5 py-1 rounded-full whitespace-nowrap font-bold text-[10px] transition-all shrink-0 ${activeSub === sSlug ? 'bg-zinc-800 dark:bg-zinc-100 text-white dark:text-zinc-900' : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-zinc-400'
-                      }`}>
-                    {sLabel}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Item pills */}
-        {itemNodes.length > 0 && (
-          <div className="border-t border-zinc-100 dark:border-zinc-800/60 bg-orange-50/50 dark:bg-orange-950/20">
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1.5 px-[2%] sm:px-[4%] lg:px-[6%]">
-              <ChevronRight size={10} className="text-orange-500 shrink-0 opacity-60" />
-              <ChevronRight size={10} className="text-orange-500 shrink-0 opacity-40 -ml-2.5" />
-              {itemNodes.map(i => {
-                const iSlug = i.slug;
-                const iLabel = i.name || i.name_en || iSlug;
-                return (
-                  <button key={i.id || iSlug}
-                    onClick={() => { setActiveItem(activeItem === iSlug ? undefined : iSlug); router.push(buildUrl(activeCatId, activeSub, activeItem === iSlug ? undefined : iSlug)); }}
-                    className={`px-2 py-0.5 rounded-full whitespace-nowrap font-bold text-[9px] transition-all shrink-0 ${activeItem === iSlug ? 'bg-orange-600 text-white shadow-sm' : 'bg-white dark:bg-zinc-800 border border-orange-200 dark:border-orange-900 text-zinc-600 dark:text-zinc-400 hover:border-orange-400'
-                      }`}>
-                    {iLabel}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Systematic Subcategory & Item Navigation Banner (Non-sticky, compact — never covers the mobile screen on scroll) */}
+      {activeCatNode && (
+        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col gap-2 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 text-xs font-black">
+              <span className="text-orange-600 font-extrabold">{getCatDisplayName(activeCatNode)}</span>
+              {activeSubNode && (
+                <>
+                  <ChevronRight size={11} className="text-zinc-400" />
+                  <span className="text-zinc-800 dark:text-zinc-200">{getSubDisplayName(activeSubNode)}</span>
+                </>
+              )}
+              {activeItem && (
+                <>
+                  <ChevronRight size={11} className="text-zinc-400" />
+                  <span className="text-zinc-600 dark:text-zinc-400">{activeItem}</span>
+                </>
+              )}
+            </div>
+            <button
+              onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
+              className="text-[11px] font-bold text-zinc-400 hover:text-orange-600 flex items-center gap-1 transition-colors"
+            >
+              <X size={12} />
+              <span>{t.ui.clear_filter ?? 'Clear'}</span>
+            </button>
+          </div>
+
+          {subcategoryNodes.length > 0 && (
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
+              {subcategoryNodes.map(s => (
+                <button
+                  key={s.id || s.slug}
+                  onClick={() => { setActiveSub(activeSub === s.slug ? undefined : s.slug); setActiveItem(undefined); router.push(buildUrl(activeCatId, activeSub === s.slug ? undefined : s.slug)); }}
+                  className={`px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                    activeSub === s.slug
+                      ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm'
+                      : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-orange-500'
+                  }`}
+                >
+                  {getSubDisplayName(s)}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {itemNodes.length > 0 && (
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-zinc-200/60 dark:border-zinc-800/60">
+              {itemNodes.map(i => (
+                <button
+                  key={i.id || i.slug}
+                  onClick={() => { setActiveItem(activeItem === i.slug ? undefined : i.slug); router.push(buildUrl(activeCatId, activeSub, activeItem === i.slug ? undefined : i.slug)); }}
+                  className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold whitespace-nowrap transition-all ${
+                    activeItem === i.slug
+                      ? 'bg-orange-600 text-white shadow-sm'
+                      : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600'
+                  }`}
+                >
+                  {i.name || i.slug}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Tier banner */}
       <TierBanner />
@@ -417,24 +417,13 @@ function ProductsContent() {
         </div>
       )}
 
-      {/* Popular categories strip & AI Mode button */}
+      {/* Popular categories strip (clean full-width, single floating AI button used instead) */}
       {!loading && (
-        <div className="flex items-center justify-between gap-2 px-[2%] sm:px-[4%] lg:px-[6%] pt-1">
-          <div className="flex-1 min-w-0">
-            <PopularCategoriesStrip
-              categories={categories}
-              onSelect={catId => { setActiveCatId(catId); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(catId)); }}
-            />
-          </div>
-          <button
-            type="button"
-            onClick={() => toggleMode('ai')}
-            title="Open HUNTIQ AI Shopping Assistant"
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 text-white font-black text-xs shadow-md shadow-orange-600/25 active:scale-95 transition-all shrink-0 ml-2"
-          >
-            <Sparkles size={13} className="animate-pulse" />
-            <span>AI Mode</span>
-          </button>
+        <div className="px-[2%] sm:px-[4%] lg:px-[6%] pt-1">
+          <PopularCategoriesStrip
+            categories={categories}
+            onSelect={catId => { setActiveCatId(catId); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(catId)); }}
+          />
         </div>
       )}
 
@@ -453,13 +442,31 @@ function ProductsContent() {
           <div className="flex-1 min-w-0">
 
             {/* Top bar */}
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs font-bold text-zinc-400">
-                {loading ? '…' : `${products.length} ${t.ui.results_count ?? 'results'}`}
-              </p>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-2">
+                <p className="text-xs font-bold text-zinc-400">
+                  {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
+                </p>
+
+                {/* Condition filter pills — compact inline */}
+                <div className="flex items-center gap-1 ml-2">
+                  {(['all', 'new', 'used'] as const).map(c => (
+                    <button key={c} onClick={() => { setActiveCondition(c); setVisibleCount(24); }}
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide transition-all shrink-0 ${activeCondition === c
+                        ? c === 'new' ? 'bg-green-600 text-white'
+                          : c === 'used' ? 'bg-blue-600 text-white'
+                            : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900'
+                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+                        }`}>
+                      {c === 'all' ? (t.ui?.condition_all ?? 'All') : c === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <button onClick={() => setFilterOpen(true)}
                 className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all">
-                <SlidersHorizontal size={12} /> {t.ui.filters}
+                <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
               </button>
             </div>
 

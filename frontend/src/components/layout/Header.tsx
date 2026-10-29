@@ -349,104 +349,72 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
 
             {/* User Account / Role Menu */}
             <UserAccountMenu />
-
-            {/* Sell / List CTA Button */}
-            <Link
-              href={ctaHref}
-              className="bg-orange-600 hover:bg-orange-700 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl font-black text-xs sm:text-sm shadow-md shadow-orange-600/25 transition-all active:scale-95 flex items-center gap-1"
-            >
-              <span>+</span>
-              <span className="hidden sm:inline">{ctaLabel}</span>
-              <span className="sm:hidden">Sell</span>
-            </Link>
           </div>
         </div>
 
-        {/* ── Secondary Navigation Row ─────────────────────────────────────── */}
-        <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/50 dark:bg-zinc-950/50 overflow-x-auto no-scrollbar">
-          <div className="max-w-7xl mx-auto px-4 h-9 flex items-center gap-1 sm:gap-2 text-xs font-bold whitespace-nowrap">
-            <Link
-              href="/ai"
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 text-white uppercase tracking-wider text-[11px] font-black shrink-0 shadow-sm shadow-orange-600/20 active:scale-95 transition-all mr-1"
-            >
-              <Sparkles size={12} className="animate-pulse" />
-              <span>AI Mode</span>
-            </Link>
-
+        {/* ── Secondary Navigation Row: 2nd place (All Categories + Buy, Sell, Rent, Landlord) ── */}
+        <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-sm overflow-x-auto no-scrollbar">
+          <div className="max-w-7xl mx-auto px-4 h-9 sm:h-10 flex items-center gap-1.5 sm:gap-2.5 text-xs font-bold whitespace-nowrap">
+            
+            {/* All Categories Button */}
             <button
               onClick={() => setCategoryDrawerOpen(true)}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors uppercase tracking-wider text-[11px] font-black shrink-0 mr-1"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 hover:bg-orange-600 hover:text-white transition-all text-xs font-black uppercase tracking-wider shrink-0 shadow-sm"
             >
-              <span>☰ All Categories</span>
+              <span>☰</span>
+              <span>{(t.nav as any).categories ?? 'All Categories'}</span>
               <ChevronDown size={11} />
             </button>
+
             <span className="text-zinc-200 dark:text-zinc-800">|</span>
 
-            {/* ── Marketplace Pillars (Transaction Modes) ── */}
+            {/* Side to All Categories: Buy, Sell, Rent, Landlord (Fully Localized, Zero English Mixing) */}
             <Link
               href="/products?type=sale"
-              className={`px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 ${
-                isBuyActive
-                  ? 'bg-orange-600 text-white font-black shadow-sm'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+                pathname === '/products' && currentType === 'sale'
+                  ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
+                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
               }`}
             >
               <span>🛒</span>
-              <span>{t.nav.buy ?? 'Buy'} (For Sale)</span>
+              <span>{t.nav?.buy ?? 'Buy'}</span>
+            </Link>
+
+            <Link
+              href="/sell"
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+                pathname === '/sell'
+                  ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
+                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
+              }`}
+            >
+              <span>🏷️</span>
+              <span>{t.nav?.sell?.split('/')[0]?.trim() ?? 'Sell'}</span>
             </Link>
 
             <Link
               href="/products?type=rent"
-              className={`px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 ${
-                isRentActive
-                  ? 'bg-teal-600 text-white font-black shadow-sm'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+                pathname === '/products' && currentType === 'rent'
+                  ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
+                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
               }`}
             >
               <span>🏠</span>
-              <span>{t.nav.rental ?? 'Rent'} (Rentals)</span>
+              <span>{t.nav?.rental ?? 'Rent'}</span>
             </Link>
 
-            <span className="text-zinc-300 dark:text-zinc-700 mx-1 font-light">|</span>
-
-            {/* ── Taxonomy Domains (Categories) ── */}
             <Link
-              href="/products?cat=property"
-              className={`px-2.5 py-1 rounded-lg transition-colors ${
-                isPropertyActive
-                  ? 'bg-emerald-600 text-white font-black'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900'
+              href="/seller/product/new?type=rent"
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+                pathname.includes('/seller/product/new')
+                  ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
+                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
               }`}
             >
-              🏢 Real Estate & Property
-            </Link>
-
-            <Link
-              href="/products?cat=electronics"
-              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-            >
-              📱 Electronics
-            </Link>
-
-            <Link
-              href="/products?cat=vehicles"
-              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-            >
-              🚗 Vehicles
-            </Link>
-
-            <Link
-              href="/products?cat=agriculture"
-              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-            >
-              🌾 Agriculture
-            </Link>
-
-            <Link
-              href="/products"
-              className="px-2.5 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-            >
-              ✨ New Listings
+              <span>🔑</span>
+              <span>{locale === 'am' ? 'አከራይ' : locale === 'or' ? 'Abbaa Qabeenyaa' : locale === 'ti' ? 'ኣካራዪ' : 'Landlord'}</span>
             </Link>
 
             <div className="ml-auto hidden lg:flex items-center gap-2 pl-3">
@@ -454,7 +422,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
                 href="/contact"
                 className="text-zinc-500 hover:text-orange-600 text-[11px] font-semibold transition-colors"
               >
-                Customer Support
+                {t.footer?.contact ?? 'Contact Us'}
               </Link>
             </div>
           </div>
