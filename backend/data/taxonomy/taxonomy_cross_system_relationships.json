@@ -1,0 +1,175 @@
+{
+  "cross_system_domains": [
+    {
+      "canonical_domain_code": "DOM_TECH_SOFTWARE_DEV",
+      "canonical_domain_name": "Software Engineering & Cloud Development",
+      "domain_description": "Software architecture, application programming, web development, DevOps, and cloud systems engineering.",
+      "manifestations": {
+        "System B (Professional Services)": {
+          "root_id": 237,
+          "root_code": "ROOT_SRV_SOFTWARE_CLOUD_DEV",
+          "root_name": "Software Engineering, Cloud & Web Development Services",
+          "business_model": "B2B Agency / Dev Shop / IT Consultancy",
+          "typical_pricing": "hourly_rate_or_project_milestone"
+        },
+        "System C (Employment & Occupations)": {
+          "root_id": 247,
+          "root_code": "ROOT_JOB_SOFTWARE_IT",
+          "root_name": "Software Development, Data & Technology Careers",
+          "isco_08_code": "2512 Software Developers",
+          "business_model": "Salaried Corporate / Civil Service Employment",
+          "typical_contract": "permanent_or_annual_contract"
+        },
+        "System D (Freelance & Online Gigs)": {
+          "root_ids": [
+            259,
+            260
+          ],
+          "root_codes": [
+            "ROOT_GIG_REMOTE_SOFTWARE_DEV",
+            "ROOT_GIG_WEB_MOBILE_DEV"
+          ],
+          "root_name": "Remote Software Engineering & DevOps Gig Contracts",
+          "business_model": "Independent Freelance Gig / Global Remote Task",
+          "typical_contract": "task_based_or_hourly_contract"
+        },
+        "System E (Tenders & Procurement)": {
+          "root_id": 280,
+          "root_code": "ROOT_PROM_CORPORATE_PROCUREMENT",
+          "procurement_subsector": "Enterprise Software & IT Infrastructure Procurement",
+          "business_model": "Public / Corporate Competitive RFP Tender"
+        }
+      }
+    },
+    {
+      "canonical_domain_code": "DOM_CREATIVE_GRAPHIC_DESIGN",
+      "canonical_domain_name": "Graphic Design, Branding & UI/UX",
+      "domain_description": "Visual branding, digital user interface design, 3D modeling, motion graphics, and graphic illustration.",
+      "manifestations": {
+        "System B (Professional Services)": {
+          "root_id": 239,
+          "root_code": "ROOT_SRV_GRAPHIC_DESIGN_UIUX",
+          "root_name": "Graphic Design, Branding & UI/UX Creative Services",
+          "business_model": "Creative Agency / Studio Retainer"
+        },
+        "System C (Employment & Occupations)": {
+          "root_id": 247,
+          "root_code": "ROOT_JOB_SOFTWARE_IT",
+          "occupation_title": "UI/UX & Product Designer",
+          "isco_08_code": "2166 Graphic and Multimedia Designers"
+        },
+        "System D (Freelance & Online Gigs)": {
+          "root_ids": [
+            263,
+            267
+          ],
+          "root_codes": [
+            "ROOT_GIG_UIUX_GRAPHIC_DESIGN",
+            "ROOT_GIG_VIDEO_EDITING_ANIMATION"
+          ],
+          "root_name": "Remote UI/UX, Graphic & 3D Design Contracts",
+          "business_model": "Freelance Gig / Design Contest"
+        }
+      }
+    },
+    {
+      "canonical_domain_code": "DOM_FIN_ACCOUNTING_AUDIT",
+      "canonical_domain_name": "Accounting, Tax Advisory & Financial Audit",
+      "domain_description": "Bookkeeping, management accounting, statutory auditing, tax compliance, and financial forecasting.",
+      "manifestations": {
+        "System B (Professional Services)": {
+          "root_id": 234,
+          "root_code": "ROOT_SRV_ACCOUNTING_TAX_AUDIT",
+          "root_name": "Accounting, Tax Advisory & Financial Audit Services",
+          "business_model": "Licensed Accounting / Audit Firm"
+        },
+        "System C (Employment & Occupations)": {
+          "root_id": 249,
+          "root_code": "ROOT_JOB_FINANCE_ACCOUNTING",
+          "root_name": "Finance, Banking, Accounting & Audit Vacancies",
+          "isco_08_code": "2411 Accountants"
+        },
+        "System D (Freelance & Online Gigs)": {
+          "root_id": 268,
+          "root_code": "ROOT_GIG_FINANCIAL_MODELING",
+          "root_name": "Remote Financial Modeling & Bookkeeping Gigs",
+          "business_model": "Remote Virtual Bookkeeper / Financial Analyst Gig"
+        }
+      }
+    },
+    {
+      "canonical_domain_code": "DOM_MKT_DIGITAL_MARKETING",
+      "canonical_domain_name": "Digital Marketing, Advertising & SEO",
+      "domain_description": "Search engine optimization, performance advertising, social media marketing, and commercial sales promotion.",
+      "manifestations": {
+        "System B (Professional Services)": {
+          "root_id": 241,
+          "root_code": "ROOT_SRV_MARKETING_ADVERTISING",
+          "root_name": "Digital Marketing, SEO & Commercial Advertising",
+          "business_model": "Marketing Agency Retainer"
+        },
+        "System C (Employment & Occupations)": {
+          "root_id": 253,
+          "root_code": "ROOT_JOB_SALES_MARKETING",
+          "root_name": "Sales, Commercial Marketing & Business Development Roles",
+          "isco_08_code": "2431 Advertising and Marketing Professionals"
+        },
+        "System D (Freelance & Online Gigs)": {
+          "root_id": 266,
+          "root_code": "ROOT_GIG_DIGITAL_MARKETING_SEO",
+          "root_name": "Freelance Digital Marketing, SEO & Ads Management",
+          "business_model": "Independent Campaign Manager Gig"
+        }
+      }
+    },
+    {
+      "canonical_domain_code": "DOM_LANG_TRANSLATION_LOCALIZATION",
+      "canonical_domain_name": "Translation, Interpretation & Localization",
+      "domain_description": "Legal translation, document localization across Amharic, Oromo, Tigrinya, English, Arabic, and interpretation services.",
+      "manifestations": {
+        "System B (Professional Services)": {
+          "root_id": 240,
+          "root_code": "ROOT_SRV_TRANSLATION_LOCALIZATION",
+          "root_name": "Translation, Localization & Interpretation Services",
+          "business_model": "Certified Translation Bureau"
+        },
+        "System D (Freelance & Online Gigs)": {
+          "root_ids": [
+            261,
+            264
+          ],
+          "root_codes": [
+            "ROOT_GIG_DATA_ENTRY_TRANSCRIPTION",
+            "ROOT_GIG_COPYWRITING_WRITING"
+          ],
+          "root_name": "Data Entry, Audio Transcription & Annotation Tasks",
+          "business_model": "Per-Word / Per-Hour Freelance Translation"
+        }
+      }
+    },
+    {
+      "canonical_domain_code": "DOM_ENG_CIVIL_ARCHITECTURE",
+      "canonical_domain_name": "Civil Engineering & Architectural Design",
+      "domain_description": "Building structural engineering, architectural blueprints, geotechnical survey, and construction supervision.",
+      "manifestations": {
+        "System B (Professional Services)": {
+          "root_id": 236,
+          "root_code": "ROOT_SRV_ARCHITECTURE_ENGINEERING",
+          "root_name": "Architecture, Structural & Civil Engineering Services",
+          "business_model": "Architectural Consulting Firm"
+        },
+        "System C (Employment & Occupations)": {
+          "root_id": 250,
+          "root_code": "ROOT_JOB_ENGINEERING_CONSTRUCTION",
+          "root_name": "Engineering, Construction & Technical Architecture Roles",
+          "isco_08_code": "2142 Civil Engineers"
+        },
+        "System E (Tenders & Procurement)": {
+          "root_id": 279,
+          "root_code": "ROOT_PROM_GOVERNMENT_TENDERS",
+          "procurement_subsector": "Public Infrastructure Construction & Engineering Tenders"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "SERV_EVENTS",
+  "root_family": {
+    "id": "root-event-production-services",
+    "slug": "events-staging-audiovisual-production-services",
+    "code": "SERV_EVENTS",
+    "level": 1,
+    "canonical_name": "Events, Wedding Staging \u0026 Audio-Visual Production",
+    "definition": "Wedding hall floral decorations, wedding tent rentals, professional audio concert line-arrays, event photography, and master of ceremonies.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "PartyPopper",
+    "translations": {
+      "am": "የሰርግ፣ የዝግጅት ማስዋብ እና የድምጽ ኪራይ አገልግሎቶች",
+      "or": "Qophii Sirna Cidhaa fi Miidhagina Sagantaa",
+      "ti": "ናይ መርዓ፣ ናይ መደባት ምድላውን ናይ ድምጺ ክራይን ኣገልግሎት"
+    },
+    "children": [
+      {
+        "id": "sf-wedding-decor-tents",
+        "slug": "wedding-ceremony-decor-tent-rentals",
+        "code": "SERV_WEDDING_DECOR",
+        "level": 2,
+        "canonical_name": "Wedding Ceremony Decor, Stage Lighting \u0026 Tent Rentals",
+        "definition": "Luxury bridal stage floral backdrops, Chiavari chairs, red carpets, and waterproof banquet canopy tents.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የሰርግ ማድመቂያዎች፣ ድንኳኖች እና የመድረክ ጌጦች",
+          "or": "Dunkana Cidhaa fi Miidhagina Waltajjii",
+          "ti": "ናይ መርዓ ድንኳናት፣ መንበርን ናይ መድረኽ ስልማትን"
+        }
+      }
+    ]
+  }
+}

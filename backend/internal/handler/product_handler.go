@@ -40,13 +40,14 @@ type searchLogEvent struct {
 }
 
 type ProductHandler struct {
-	svc          *service.ProductService
-	authSvc      *service.AuthService
-	aiClient     *aiclient.Client
-	cache        cache.Cache
-	searchChan   chan searchLogEvent
-	logger       SearchLogger
-	droppedCount uint64
+	svc                  *service.ProductService
+	authSvc              *service.AuthService
+	categoryHierarchySvc *service.CategoryHierarchyService
+	aiClient             *aiclient.Client
+	cache                cache.Cache
+	searchChan           chan searchLogEvent
+	logger               SearchLogger
+	droppedCount         uint64
 }
 
 func NewProductHandler(svc *service.ProductService, authSvc *service.AuthService) *ProductHandler {
@@ -56,6 +57,12 @@ func NewProductHandler(svc *service.ProductService, authSvc *service.AuthService
 // DroppedSearchEvents returns the number of search events dropped due to queue saturation.
 func (h *ProductHandler) DroppedSearchEvents() uint64 {
 	return atomic.LoadUint64(&h.droppedCount)
+}
+
+// WithCategoryHierarchy attaches the category hierarchy service for real taxonomy lookups.
+func (h *ProductHandler) WithCategoryHierarchy(s *service.CategoryHierarchyService) *ProductHandler {
+	h.categoryHierarchySvc = s
+	return h
 }
 
 // WithAIClient attaches the AI service client for intelligent query understanding.
@@ -255,6 +262,8 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 						_ = h.cache.Set(c.Context(), cacheKey, marshaled, 24*time.Hour)
 					}
 				}
+			} else {
+				aiResp = h.aiClient.FallbackUnderstandQuery(params)
 			}
 		}
 
@@ -419,7 +428,7 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 	if intentStr, ok := searchMeta["primary_intent"].(string); ok && intentStr == "count_listings" {
 		itemLabel := ""
 		if cl, ok := searchMeta["cleaned_search_term"].(string); ok && cl != "" {
-			itemLabel = cl
+			itemLabel = aiclient.GetLocalizedEntityTerm(cl, prefLang)
 		} else if f.Search != nil {
 			itemLabel = *f.Search
 		}
@@ -435,6 +444,45 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 			searchMeta["localized_answer"] = fmt.Sprintf("ኣብ ዳታቤዝ ዕዳጋ ኣብዚ እዋን %d ንጡፋት ናይ '%s' ዝርዝራት ኣለዉ።", totalMatching, itemLabel)
 		default:
 			searchMeta["localized_answer"] = fmt.Sprintf("Found %d active '%s' listings matching your criteria in the marketplace.", totalMatching, itemLabel)
+		}
+	} else if searchMode == "ai" && totalMatching == 0 {
+		itemLabel := ""
+		if cl, ok := searchMeta["cleaned_search_term"].(string); ok && cl != "" {
+			itemLabel = aiclient.GetLocalizedEntityTerm(cl, prefLang)
+		} else if f.Search != nil {
+			itemLabel = *f.Search
+		}
+		if itemLabel != "" {
+			switch prefLang {
+			case "am":
+				searchMeta["localized_answer"] = fmt.Sprintf("በHUNTIQ ዳታቤዝ ውስጥ ለ'%s' በአሁኑ ሰዓት የሚስማማ የተረጋገጠ ዝርዝር አልተገኘም። እባክዎ የፍለጋ ቃላትን በማስተካከል ወይም የዋጋ ገደቡን በማስፋት ይሞክሩ።", itemLabel)
+			case "om":
+				searchMeta["localized_answer"] = fmt.Sprintf("Kuusaa gabaa HUNTIQ keessatti '%s' tiif yeroo ammaa tarreeffamni walsimu hin argamne. Maaloo jechoota biroo fayyadamuun ykn daangaa gatii jijjiiruun yaalaa.", itemLabel)
+			case "ti":
+				searchMeta["localized_answer"] = fmt.Sprintf("ኣብ ዳታቤዝ HUNTIQ ን'%s' ኣብዚ እዋን ዝሰማማዕ ዝተረጋገፀ ዝርዝር ኣይተረኽበን። በጃኹም ናይ ፍለጋ ቃላት ወይ ደረት ዋጋ ብምስትኻኻል ፈትኑ።", itemLabel)
+			default:
+				searchMeta["localized_answer"] = fmt.Sprintf("I searched our live marketplace database for '%s', but found no approved listings matching those exact criteria right now. You might try searching for broader keywords, adjusting your budget, or checking a different location.", itemLabel)
+			}
+		}
+	} else if searchMode == "ai" && totalMatching > 0 {
+		if ans, ok := searchMeta["localized_answer"].(string); !ok || ans == "" {
+			itemLabel := ""
+			if cl, ok := searchMeta["cleaned_search_term"].(string); ok && cl != "" {
+				itemLabel = aiclient.GetLocalizedEntityTerm(cl, prefLang)
+			}
+			if itemLabel == "" && f.Search != nil {
+				itemLabel = *f.Search
+			}
+			switch prefLang {
+			case "am":
+				searchMeta["localized_answer"] = fmt.Sprintf("በHUNTIQ ዳታቤዝ ውስጥ ለ'%s' %d የተረጋገጡ ዝርዝሮች ተገኝተዋል:", itemLabel, totalMatching)
+			case "om":
+				searchMeta["localized_answer"] = fmt.Sprintf("Kuusaa gabaa HUNTIQ keessatti '%s' tiif tarreeffamoota mirkanaa'an %d argamaniiru:", itemLabel, totalMatching)
+			case "ti":
+				searchMeta["localized_answer"] = fmt.Sprintf("ኣብ ዳታቤዝ HUNTIQ ን'%s' %d ዝተረጋገፁ ዝርዝራት ተረኺቦም ኣለዉ:", itemLabel, totalMatching)
+			default:
+				searchMeta["localized_answer"] = fmt.Sprintf("Found %d verified listings for '%s' in the live marketplace database:", totalMatching, itemLabel)
+			}
 		}
 	}
 
@@ -707,5 +755,51 @@ func (h *ProductHandler) SellerList(c *fiber.Ctx) error {
 		return response.InternalError(c, err)
 	}
 	return response.OKList(c, products)
+}
+
+// POST /api/products/auto-categorize
+func (h *ProductHandler) AutoCategorize(c *fiber.Ctx) error {
+	var req struct {
+		Title       string `json:"title"`
+		Description string `json:"description"`
+		Locale      string `json:"locale"`
+	}
+	if err := c.BodyParser(&req); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+	if strings.TrimSpace(req.Title) == "" && strings.TrimSpace(req.Description) == "" {
+		return response.BadRequest(c, "title or description is required")
+	}
+
+	locale := req.Locale
+	if locale == "" {
+		locale = "en"
+	}
+
+	var res *aiclient.AutoCategorizeResult
+	var err error
+	if h.aiClient != nil {
+		res, err = h.aiClient.AutoCategorizeProduct(c.Context(), aiclient.AutoCategorizeRequest{
+			Title:       req.Title,
+			Description: req.Description,
+			Locale:      locale,
+		})
+	}
+	if res == nil || err != nil {
+		res = aiclient.FallbackAutoCategorize(aiclient.AutoCategorizeRequest{
+			Title:       req.Title,
+			Description: req.Description,
+			Locale:      locale,
+		})
+	}
+
+	// Enrich with real database CategoryHierarchyID if available
+	if h.categoryHierarchySvc != nil && res.CategorySlug != "" {
+		if cat, err := h.categoryHierarchySvc.GetBySlug(c.Context(), res.CategorySlug, locale); err == nil && cat != nil {
+			res.CategoryHierarchyID = cat.ID
+		}
+	}
+
+	return response.OK(c, res)
 }
 

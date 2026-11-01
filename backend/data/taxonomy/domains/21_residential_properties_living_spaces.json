@@ -1,0 +1,226 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "REAL_RESIDENTIAL",
+  "root_family": {
+    "id": "root-residential-properties",
+    "slug": "residential-properties-living-spaces",
+    "code": "REAL_RESIDENTIAL",
+    "level": 1,
+    "canonical_name": "Residential Properties \u0026 Living Spaces",
+    "definition": "Physical residential housing units, condominium apartments, detached luxury villas, townhouses, and studio suites.",
+    "inclusion_rules": [
+      "Condominium apartments",
+      "Real estate developer apartments",
+      "Detached villas",
+      "Townhouses",
+      "Studio apartments"
+    ],
+    "exclusion_rules": [
+      "Commercial office spaces (see Commercial Properties)",
+      "Bare residential plots without building structures (see Land \u0026 Acreage)"
+    ],
+    "examples": [
+      "2-bedroom CMC apartment",
+      "Luxury villa in Bole Atlas",
+      "Studio apartment in Yeka",
+      "40/60 condominium unit"
+    ],
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Home",
+    "translations": {
+      "am": "የመኖሪያ ቤቶች እና አፓርታማዎች",
+      "or": "Manni Jireenyaa fi Appaartamaa",
+      "ti": "ናይ መንበሪ ኣባይትን ኣፓርታማታትን"
+    },
+    "aliases": {
+      "am": [
+        "ቤት",
+        "የመኖሪያ ቤት",
+        "አፓርታማ",
+        "ቪላ",
+        "ኮንዶሚኒየም",
+        "ኮንዶ",
+        "ስቱዲዮ"
+      ],
+      "en": [
+        "residential",
+        "house",
+        "apartment",
+        "villa",
+        "condo",
+        "condominium",
+        "real estate",
+        "living space"
+      ],
+      "or": [
+        "mana",
+        "mana jireenyaa",
+        "appaartamaa",
+        "viilaa",
+        "kondominiyemii"
+      ],
+      "ti": [
+        "ቤት",
+        "ናይ መንበሪ ቤት",
+        "ኣፓርታማ",
+        "ቪላ",
+        "ኮንዶሚኒየም"
+      ]
+    },
+    "children": [
+      {
+        "id": "sf-apartments-condos",
+        "slug": "apartments-condominiums-flats",
+        "code": "PROP_APARTMENTS",
+        "level": 2,
+        "canonical_name": "Multi-Unit Apartments \u0026 Condominium Flats",
+        "definition": "Multi-story residential apartment units, luxury penthouses, developer apartment flats, and government 20/80 and 40/60 condominium housing.",
+        "status": "active",
+        "is_leaf": false,
+        "translations": {
+          "am": "አፓርታማዎች እና የኮንዶሚኒየም ቤቶች",
+          "or": "Appaartamaa fi Kondominiyemii",
+          "ti": "ኣፓርታማታትን ኮንዶሚኒየምን"
+        },
+        "children": [
+          {
+            "id": "cat-standard-apartments",
+            "slug": "modern-developer-apartments",
+            "code": "APT_MODERN",
+            "level": 3,
+            "canonical_name": "Modern Developer Apartments \u0026 Flats",
+            "definition": "Private real estate developments (Ayat, Tsehay, Noah, Gift, Flintstone, Emaar) with elevators, backup generators, and designated parking.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "ዘመናዊ የሪል እስቴት አፓርታማዎች",
+              "or": "Appaartamaa Ammayyaa Daldalaa",
+              "ti": "ዘመናዊ ናይ ሪል እስቴት ኣፓርታማታት"
+            },
+            "identifiers": [
+              {
+                "type": "UNSPSC",
+                "code": "80131502",
+                "name": "Apartment or condominium rental or sale"
+              }
+            ],
+            "attributes": [
+              {
+                "slug": "property-area-sqm",
+                "name_en": "Floor Area (m²)",
+                "data_type": "number",
+                "unit": "m²",
+                "is_required": true,
+                "is_filterable": true
+              },
+              {
+                "slug": "bedrooms-count",
+                "name_en": "Number of Bedrooms",
+                "data_type": "number",
+                "is_required": true,
+                "is_filterable": true
+              },
+              {
+                "slug": "bathrooms-count",
+                "name_en": "Number of Bathrooms",
+                "data_type": "number",
+                "is_required": true,
+                "is_filterable": true
+              },
+              {
+                "slug": "furnishing-status",
+                "name_en": "Furnishing Status",
+                "data_type": "select",
+                "is_required": true,
+                "is_filterable": true,
+                "validation_rules": {
+                  "options": [
+                    "Furnished",
+                    "Semi-Furnished",
+                    "Unfurnished"
+                  ]
+                }
+              },
+              {
+                "slug": "property-deed-type",
+                "name_en": "Title Deed / Documentation",
+                "data_type": "select",
+                "is_required": false,
+                "is_filterable": true,
+                "validation_rules": {
+                  "options": [
+                    "Digital Land Certificate / Carte",
+                    "Holding Certificate",
+                    "Sub-lease Agreement",
+                    "Under Construction Contract"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "cat-condominium-units",
+            "slug": "public-condominium-units",
+            "code": "APT_CONDO",
+            "level": 3,
+            "canonical_name": "Public Condominium Units (ኮንዶሚኒየም)",
+            "definition": "Studio, 1-bedroom, 2-bedroom, and 3-bedroom government scheme condominium units.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የኮንዶሚኒየም ቤቶች (20/80 እና 40/60)",
+              "or": "Kondominiyemii (20/80 fi 40/60)",
+              "ti": "ናይ ኮንዶሚኒየም ኣባይቲ"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sf-villas-compound-houses",
+        "slug": "detached-villas-compound-houses",
+        "code": "PROP_VILLAS",
+        "level": 2,
+        "canonical_name": "Detached Villas \u0026 Private Compound Residences",
+        "definition": "Single-family standalone homes, compound villas with private gardens, security gates, and servant quarters.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ቪላዎች እና የጊቢ ውስጥ ቤቶች",
+          "or": "Viilaa fi Manni Compound Qabu",
+          "ti": "ቪላታትን ናይ ውሽጢ ቀጽሪ ኣባይትን"
+        },
+        "aliases": {
+          "am": [
+            "ቪላ",
+            "የጊቢ ቤት",
+            "ቪላ ቤት",
+            "ቪላዎች"
+          ],
+          "en": [
+            "villa",
+            "detached house",
+            "compound house",
+            "mansion"
+          ],
+          "or": [
+            "viilaa",
+            "mana qe'ee"
+          ],
+          "ti": [
+            "ቪላ",
+            "ናይ ቀጽሪ ቤት"
+          ]
+        }
+      }
+    ]
+  }
+}

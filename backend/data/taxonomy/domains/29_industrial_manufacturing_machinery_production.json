@@ -1,0 +1,68 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "IND_MACHINERY",
+  "root_family": {
+    "id": "root-industrial-machinery",
+    "slug": "industrial-manufacturing-machinery-production",
+    "code": "IND_MACHINERY",
+    "level": 1,
+    "canonical_name": "Industrial Manufacturing Machinery \u0026 Production Lines",
+    "definition": "Factory production machinery, plastic bottle blow molding systems, commercial grain flour mills, packaging equipment, and industrial boilers.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Cpu",
+    "translations": {
+      "am": "የኢንዱስትሪ ማሽነሪዎች እና የማምረቻ መስመሮች",
+      "or": "Maashinoota Warshaa fi Oomishaa",
+      "ti": "ናይ ኢንዱስትሪ ማሽነሪታትን መስመር ምፍራይን"
+    },
+    "children": [
+      {
+        "id": "sf-grain-flour-mills",
+        "slug": "commercial-grain-flour-mills",
+        "code": "MACH_MILLS",
+        "level": 2,
+        "canonical_name": "Commercial Grain Flour Mills \u0026 Teff Cleaning Plants (የወፍጮ ማሽኖች)",
+        "definition": "High-capacity electric and diesel grain milling machines, teff destoners, seed cleaners, and hammer mills.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የእህል መፍጫ ወፍጮዎች እና የጤፍ ማበጠሪያዎች",
+          "or": "Wafchoo Midhaanii fi Meeshaa Qulqulleessituu",
+          "ti": "ናይ እኽሊ መጥሓኒታትን መጽረይትን"
+        },
+        "aliases": {
+          "am": [
+            "ወፍጮ",
+            "የእህል ወፍጮ",
+            "የጤፍ ወፍጮ",
+            "ማበጠሪያ"
+          ],
+          "en": [
+            "grain mill",
+            "flour mill",
+            "teff cleaner",
+            "destoner",
+            "hammer mill"
+          ],
+          "or": [
+            "wafchoo",
+            "maashina midhaanii"
+          ],
+          "ti": [
+            "መጥሓኒ",
+            "ናይ እኽሊ ወፍጮ"
+          ]
+        }
+      }
+    ]
+  }
+}

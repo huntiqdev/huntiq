@@ -1,0 +1,250 @@
+{
+  "version": "2.0.0",
+  "framework": "HUNTIQ Orthogonal Marketplace Dimensions",
+  "governing_rule": "Dimensions represent the HOW, WHEN, and UNDER WHAT TERMS an item or opportunity is offered. Dimensions must NEVER be created as taxonomy categories.",
+  "dimensions": {
+    "transaction_mode": {
+      "description": "The legal and economic nature of the exchange.",
+      "applicable_systems": [
+        "System A",
+        "System B",
+        "System C",
+        "System D",
+        "System E"
+      ],
+      "allowed_values": [
+        {
+          "code": "for_sale",
+          "label": "For Sale",
+          "description": "Outright transfer of asset ownership."
+        },
+        {
+          "code": "for_rent",
+          "label": "For Rent",
+          "description": "Temporary residential or consumer rental."
+        },
+        {
+          "code": "for_lease",
+          "label": "For Lease",
+          "description": "Long-term commercial real estate or machinery lease."
+        },
+        {
+          "code": "for_exchange",
+          "label": "Barter / Exchange",
+          "description": "Asset swap or trade-in."
+        },
+        {
+          "code": "job_hiring",
+          "label": "Hiring Vacancy",
+          "description": "Employer seeking salaried talent."
+        },
+        {
+          "code": "gig_seeking",
+          "label": "Gig Contract",
+          "description": "Client seeking freelance task completion."
+        },
+        {
+          "code": "tender_bidding",
+          "label": "Competitive Tender",
+          "description": "Procuring entity requesting sealed bids."
+        },
+        {
+          "code": "grant_application",
+          "label": "Grant / Scholarship",
+          "description": "Funding call for proposals or applications."
+        },
+        {
+          "code": "service_booking",
+          "label": "Book Service",
+          "description": "Client scheduling professional service delivery."
+        }
+      ]
+    },
+    "work_arrangement": {
+      "description": "Physical presence requirement for jobs and gigs.",
+      "applicable_systems": [
+        "System C",
+        "System D",
+        "System B"
+      ],
+      "allowed_values": [
+        {
+          "code": "on_site",
+          "label": "On-Site",
+          "description": "Requires presence at specific company office or site."
+        },
+        {
+          "code": "hybrid",
+          "label": "Hybrid",
+          "description": "Combination of remote work and scheduled office days."
+        },
+        {
+          "code": "remote",
+          "label": "100% Remote",
+          "description": "Can be performed from any location."
+        }
+      ]
+    },
+    "engagement_type": {
+      "description": "Contractual duration and commitment of employment.",
+      "applicable_systems": [
+        "System C",
+        "System D"
+      ],
+      "allowed_values": [
+        {
+          "code": "permanent",
+          "label": "Permanent / Indefinite",
+          "description": "Full-time long-term employment."
+        },
+        {
+          "code": "contract",
+          "label": "Fixed-Term Contract",
+          "description": "Project-specific or annual contract."
+        },
+        {
+          "code": "temporary",
+          "label": "Temporary / Casual",
+          "description": "Short-term seasonal or cover employment."
+        },
+        {
+          "code": "internship",
+          "label": "Internship / TVET",
+          "description": "University graduate or vocational internship."
+        },
+        {
+          "code": "freelance_gig",
+          "label": "Freelance / Task Gig",
+          "description": "Independent contractor milestone task."
+        },
+        {
+          "code": "part_time",
+          "label": "Part-Time",
+          "description": "Partial weekly hours."
+        },
+        {
+          "code": "full_time",
+          "label": "Full-Time",
+          "description": "Standard 40-48 hours work week."
+        }
+      ]
+    },
+    "item_condition": {
+      "description": "Physical wear and operational state of tangible merchandise.",
+      "applicable_systems": [
+        "System A"
+      ],
+      "allowed_values": [
+        {
+          "code": "new",
+          "label": "Brand New (Sealed)",
+          "description": "Original manufacturer packaging unopened."
+        },
+        {
+          "code": "open_box",
+          "label": "Open Box (Like New)",
+          "description": "Opened, inspected, pristine condition."
+        },
+        {
+          "code": "refurbished",
+          "label": "Certified Refurbished",
+          "description": "Professionally restored, tested, with warranty."
+        },
+        {
+          "code": "used_like_new",
+          "label": "Used \u2014 Like New",
+          "description": "Flawless condition, minimal prior usage."
+        },
+        {
+          "code": "used_good",
+          "label": "Used \u2014 Good",
+          "description": "Fully functional, normal cosmetic wear."
+        },
+        {
+          "code": "used_fair",
+          "label": "Used \u2014 Fair",
+          "description": "Functional with noticeable scratches or signs of wear."
+        },
+        {
+          "code": "for_parts",
+          "label": "For Parts / Not Working",
+          "description": "Damaged or salvage unit for components."
+        }
+      ]
+    },
+    "seniority_level": {
+      "description": "Professional career stage requirement.",
+      "applicable_systems": [
+        "System C",
+        "System D"
+      ],
+      "allowed_values": [
+        {
+          "code": "internship",
+          "label": "Internship / Trainee",
+          "experience_years": "0 years"
+        },
+        {
+          "code": "entry_level",
+          "label": "Entry Level / Junior",
+          "experience_years": "0-2 years"
+        },
+        {
+          "code": "mid_level",
+          "label": "Mid-Level Specialist",
+          "experience_years": "2-5 years"
+        },
+        {
+          "code": "senior",
+          "label": "Senior Professional",
+          "experience_years": "5-8 years"
+        },
+        {
+          "code": "lead",
+          "label": "Lead / Manager",
+          "experience_years": "8-12 years"
+        },
+        {
+          "code": "executive",
+          "label": "Director / Executive C-Suite",
+          "experience_years": "12+ years"
+        }
+      ]
+    },
+    "listing_and_promotion_status": {
+      "description": "State machine flags governing listing lifecycle, publication, and visibility.",
+      "applicable_systems": [
+        "All Systems A-G"
+      ],
+      "dimensions": {
+        "listing_status": [
+          "draft",
+          "pending_approval",
+          "active",
+          "sold",
+          "rented",
+          "expired",
+          "archived"
+        ],
+        "moderation_status": [
+          "auto_approved",
+          "under_review",
+          "flagged_by_community",
+          "rejected_compliance"
+        ],
+        "promotion_status": [
+          "standard_free",
+          "featured_homepage",
+          "top_of_category",
+          "urgent_deal"
+        ],
+        "membership_entitlement": [
+          "free_tier",
+          "verified_seller",
+          "verified_merchant_store",
+          "enterprise_partner"
+        ]
+      }
+    }
+  }
+}

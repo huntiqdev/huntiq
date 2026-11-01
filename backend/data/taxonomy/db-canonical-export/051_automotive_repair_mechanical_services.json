@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.52969017Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "automotive-repair-mechanical-services",
+  "root_family": {
+    "id": 7750,
+    "parent_id": null,
+    "slug": "automotive-repair-mechanical-services",
+    "level": 0,
+    "path": "/7750/",
+    "canonical_name": "Automotive Repair, Mechanics \u0026 Bodywork Services",
+    "name_en": "Automotive Repair, Mechanics \u0026 Bodywork Services",
+    "name_am": "የመኪና ጋራዥ ጥገና እና የሜካኒክ አገልግሎቶች",
+    "name_om": "Tajaajila Suphaa Konkolaataa fi Gaaraajii",
+    "name_ti": "ናይ መኪና ጋራጅ ጽገናን ሜካኒክን ኣገልግሎት",
+    "definition": "Professional garage mechanic services, engine overhaul, computerized OBD2 diagnostics, transmission repair, and accident panel beating/spray painting.",
+    "display_order": 0,
+    "icon": "Car",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.760666Z",
+    "updated_at": "2026-11-01T11:27:00.760666Z",
+    "translations": {
+      "am": "የመኪና ጋራዥ ጥገና እና የሜካኒክ አገልግሎቶች",
+      "en": "Automotive Repair, Mechanics \u0026 Bodywork Services",
+      "or": "Tajaajila Suphaa Konkolaataa fi Gaaraajii",
+      "ti": "ናይ መኪና ጋራጅ ጽገናን ሜካኒክን ኣገልግሎት"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7751,
+        "parent_id": 7750,
+        "slug": "garage-engine-mechanical-overhaul",
+        "level": 1,
+        "path": "/7750/7751/",
+        "canonical_name": "Automotive Garage Mechanics \u0026 Engine Overhauls (ጋራዥ)",
+        "name_en": "Automotive Garage Mechanics \u0026 Engine Overhauls (ጋራዥ)",
+        "name_am": "የመኪና ሞተር እና የሜካኒክ ጥገና (ጋራዥ)",
+        "name_om": "Suphaa Mootora Konkolaataa (Gaaraajii)",
+        "name_ti": "ናይ መኪና ሞተር ጽገና (ጋራጅ)",
+        "definition": "Complete engine rebuilding, cylinder head skimming, timing belt replacement, and computerized vehicle diagnostics.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.767558Z",
+        "updated_at": "2026-11-01T11:27:00.767558Z",
+        "translations": {
+          "am": "የመኪና ሞተር እና የሜካኒክ ጥገና (ጋራዥ)",
+          "en": "Automotive Garage Mechanics \u0026 Engine Overhauls (ጋራዥ)",
+          "or": "Suphaa Mootora Konkolaataa (Gaaraajii)",
+          "ti": "ናይ መኪና ሞተር ጽገና (ጋራጅ)"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

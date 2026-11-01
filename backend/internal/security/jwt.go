@@ -9,6 +9,8 @@ import (
 
 type Claims struct {
 	UserID           int      `json:"user_id"`
+	Name             string   `json:"name,omitempty"`
+	Phone            string   `json:"phone,omitempty"`
 	Role             string   `json:"role"`
 	AdminRole        string   `json:"admin_role,omitempty"`
 	BuyerTier        string   `json:"buyer_tier,omitempty"`
@@ -68,7 +70,23 @@ func GenerateJWTFull(userID int, role, adminRole, buyerTier, sellerPreference, s
 }
 
 func GenerateJWTWithCapabilities(userID int, role, adminRole, buyerTier, sellerPreference string, capabilities []string, secret string) (string, error) {
+	return GenerateJWTWithProfile(userID, "", "", role, adminRole, buyerTier, sellerPreference, capabilities, secret)
+}
+
+func GenerateJWTWithProfile(userID int, name, phone, role, adminRole, buyerTier, sellerPreference string, capabilities []string, secret string) (string, error) {
 	now := time.Now()
+	if len(capabilities) == 0 {
+		if role == "seller" {
+			capabilities = []string{"buyer", "seller"}
+			if sellerPreference == "rent" || sellerPreference == "both" {
+				capabilities = append(capabilities, "landlord")
+			}
+		} else if role == "buyer" {
+			capabilities = []string{"buyer"}
+		} else if role == "admin" {
+			capabilities = []string{"buyer", "seller", "admin"}
+		}
+	}
 	// Ensure 'buyer' is always in capabilities for any registered user
 	hasBuyer := false
 	for _, c := range capabilities {
@@ -83,6 +101,8 @@ func GenerateJWTWithCapabilities(userID int, role, adminRole, buyerTier, sellerP
 
 	claims := Claims{
 		UserID:           userID,
+		Name:             name,
+		Phone:            phone,
 		Role:             role,
 		AdminRole:        adminRole,
 		BuyerTier:        buyerTier,

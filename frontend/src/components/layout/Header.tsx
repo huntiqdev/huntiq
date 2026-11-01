@@ -152,15 +152,12 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
   );
 }
 
-import { CategoryDrawer } from '@/components/public/CategoryDrawer';
-
 // ── Header ───────────────────────────────────────────────────────────────────
 export function Header() {
   const { t, locale, setLocale, locales, localeLabels } = useLocale();
   const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
-  const [categoryDrawerOpen, setCategoryDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -211,10 +208,6 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
         <TypeSync onTypeChange={setCurrentType} />
       </Suspense>
       {helpOpen && <HelpPanel onClose={() => setHelpOpen(false)} />}
-      <CategoryDrawer
-        isOpen={categoryDrawerOpen}
-        onClose={() => setCategoryDrawerOpen(false)}
-      />
 
       <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md bg-white/95 dark:bg-zinc-950/95 border-zinc-200 dark:border-zinc-800 transition-colors">
         
@@ -224,7 +217,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5 font-medium">
                 <Shield size={12} className="text-green-600" />
-                <span>Verified Marketplace • 100% Ethiopian Listings</span>
+                <span>{(t.nav as any)?.verified_ethiopian_listings ?? 'Verified Marketplace • 100% Ethiopian Listings'}</span>
               </span>
               <span className="text-zinc-300 dark:text-zinc-700">|</span>
               <Link href="/contact" className="hover:text-orange-600 transition-colors">
@@ -288,19 +281,6 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
             priority
           />
 
-          {/* Category Drawer Trigger Button */}
-          <button
-            onClick={() => setCategoryDrawerOpen(true)}
-            className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-900 hover:border-orange-500 hover:text-orange-600 transition-all text-xs font-black uppercase tracking-wider shrink-0"
-          >
-            <div className="w-4 h-4 flex flex-col justify-between py-0.5">
-              <span className="w-full h-0.5 bg-current rounded-full" />
-              <span className="w-3/4 h-0.5 bg-current rounded-full" />
-              <span className="w-full h-0.5 bg-current rounded-full" />
-            </div>
-            <span>{t.nav.categories ?? 'Categories'}</span>
-          </button>
-
           {/* Global Search Bar (Prominent, Always Visible) */}
           <div className="flex-1 min-w-0 mx-1 sm:mx-2">
             <SearchBar />
@@ -314,7 +294,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
               <button
                 type="button"
                 onClick={() => setLangOpen(v => !v)}
-                className="flex items-center gap-1 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-black text-[11px] uppercase tracking-wider bg-zinc-50 dark:bg-zinc-900"
+                className="flex items-center gap-1 p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-black text-[11px] uppercase tracking-wider bg-zinc-50 dark:bg-zinc-900 tap-bounce active:scale-90"
                 aria-label="Select language"
               >
                 <Globe size={13} className="text-orange-600" />
@@ -326,7 +306,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
                     <button
                       key={l}
                       onClick={() => { setLocale(l); setLangOpen(false); }}
-                      className={`w-full text-left px-3.5 py-2 text-xs font-bold hover:bg-orange-600 hover:text-white transition-colors flex items-center justify-between ${
+                      className={`w-full text-left px-3.5 py-2 text-xs font-bold hover:bg-orange-600 hover:text-white transition-colors flex items-center justify-between tap-bounce ${
                         locale === l ? 'text-orange-600' : ''
                       }`}
                     >
@@ -341,7 +321,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
             {/* Mobile Dark / Light Toggle (sm:hidden) */}
             <button
               onClick={toggleDark}
-              className="sm:hidden p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600 bg-zinc-50 dark:bg-zinc-900 transition-colors"
+              className="sm:hidden p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600 bg-zinc-50 dark:bg-zinc-900 transition-colors tap-bounce active:scale-90"
               aria-label="Toggle dark mode"
             >
               {mounted ? (dark ? <Sun size={13} /> : <Moon size={13} />) : <span className="w-3.5 h-3.5 block" />}
@@ -356,22 +336,10 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
         <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-sm overflow-x-auto no-scrollbar">
           <div className="max-w-7xl mx-auto px-4 h-9 sm:h-10 flex items-center gap-1.5 sm:gap-2.5 text-xs font-bold whitespace-nowrap">
             
-            {/* All Categories Button */}
-            <button
-              onClick={() => setCategoryDrawerOpen(true)}
-              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 hover:bg-orange-600 hover:text-white transition-all text-xs font-black uppercase tracking-wider shrink-0 shadow-sm"
-            >
-              <span>☰</span>
-              <span>{(t.nav as any).categories ?? 'All Categories'}</span>
-              <ChevronDown size={11} />
-            </button>
-
-            <span className="text-zinc-200 dark:text-zinc-800">|</span>
-
-            {/* Side to All Categories: Buy, Sell, Rent, Landlord (Fully Localized, Zero English Mixing) */}
+            {/* Navigation links: Buy, Sell, Rent, Landlord (Fully Localized, Zero English Mixing) */}
             <Link
               href="/products?type=sale"
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
                 pathname === '/products' && currentType === 'sale'
                   ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
@@ -383,7 +351,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
 
             <Link
               href="/sell"
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
                 pathname === '/sell'
                   ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
@@ -395,7 +363,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
 
             <Link
               href="/products?type=rent"
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
                 pathname === '/products' && currentType === 'rent'
                   ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
@@ -407,7 +375,7 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
 
             <Link
               href="/seller/product/new?type=rent"
-              className={`px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
                 pathname.includes('/seller/product/new')
                   ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'

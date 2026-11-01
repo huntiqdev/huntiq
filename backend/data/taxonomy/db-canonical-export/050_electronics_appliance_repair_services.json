@@ -1,0 +1,133 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.529381931Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "electronics-appliance-repair-services",
+  "root_family": {
+    "id": 7747,
+    "parent_id": null,
+    "slug": "electronics-appliance-repair-services",
+    "level": 0,
+    "path": "/7747/",
+    "canonical_name": "Consumer Electronics \u0026 Appliance Repair Services",
+    "name_en": "Consumer Electronics \u0026 Appliance Repair Services",
+    "name_am": "የኤሌክትሮኒክስ፣ የስልክ እና የቤት እቃዎች ጥገና አገልግሎት",
+    "name_om": "Tajaajila Suphaa Elektirooniksii fi Bilbilaa",
+    "name_ti": "ናይ ኤሌክትሮኒክስን ስልኪን ጽገና ኣገልግሎት",
+    "definition": "Professional diagnostic, maintenance, screen replacement, and hardware repair services for smartphones, laptops, TVs, and home appliances.",
+    "display_order": 0,
+    "icon": "Wrench",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.70994Z",
+    "updated_at": "2026-11-01T11:27:00.70994Z",
+    "translations": {
+      "am": "የኤሌክትሮኒክስ፣ የስልክ እና የቤት እቃዎች ጥገና አገልግሎት",
+      "en": "Consumer Electronics \u0026 Appliance Repair Services",
+      "or": "Tajaajila Suphaa Elektirooniksii fi Bilbilaa",
+      "ti": "ናይ ኤሌክትሮኒክስን ስልኪን ጽገና ኣገልግሎት"
+    },
+    "aliases": {
+      "am": [
+        "ላፕቶፕ ጥገና",
+        "ስልክ ጥገና",
+        "ስክሪን ቅየራ",
+        "የስልክ ጥገና",
+        "ፍሪጅ ጥገና"
+      ],
+      "en": [
+        "appliance repair",
+        "electronics repair service",
+        "laptop repair",
+        "phone repair",
+        "screen replacement"
+      ],
+      "or": [
+        "suphaa bilbilaa",
+        "suphaa kompiitaraa"
+      ],
+      "ti": [
+        "ምቕያር ስክሪን",
+        "ጽገና ላፕቶፕ",
+        "ጽገና ስልኪ"
+      ]
+    },
+    "children": [
+      {
+        "id": 7748,
+        "parent_id": 7747,
+        "slug": "smartphone-screen-hardware-repair-services",
+        "level": 1,
+        "path": "/7747/7748/",
+        "canonical_name": "Smartphone Screen \u0026 Hardware Repair Services (የስልክ ጥገና)",
+        "name_en": "Smartphone Screen \u0026 Hardware Repair Services (የስልክ ጥገና)",
+        "name_am": "የስማርትፎን ስክሪን ቅየራ እና የሃርድዌር ጥገና አገልግሎት",
+        "name_om": "Tajaajila Suphaa Iskiriinii fi Haardiweerii Bilbilaa",
+        "name_ti": "ናይ ስማርትፎን ስክሪን ምቕያርን ጽገናን ኣገልግሎት",
+        "definition": "Certified bench technician labor for cracked touchscreen digitizer replacement, IC chip micro-soldering, and charging port repair.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.737242Z",
+        "updated_at": "2026-11-01T11:27:00.737242Z",
+        "translations": {
+          "am": "የስማርትፎን ስክሪን ቅየራ እና የሃርድዌር ጥገና አገልግሎት",
+          "en": "Smartphone Screen \u0026 Hardware Repair Services (የስልክ ጥገና)",
+          "or": "Tajaajila Suphaa Iskiriinii fi Haardiweerii Bilbilaa",
+          "ti": "ናይ ስማርትፎን ስክሪን ምቕያርን ጽገናን ኣገልግሎት"
+        },
+        "aliases": {
+          "am": [
+            "ስክሪን መቀየር",
+            "የተሰበረ መስታወት ጥገና",
+            "የአይፎን ጥገና"
+          ],
+          "en": [
+            "broken glass repair",
+            "display fix",
+            "iphone repair",
+            "screen replacement service"
+          ],
+          "or": [
+            "suphaa iskiriinii"
+          ],
+          "ti": [
+            "ጽገና ስክሪን"
+          ]
+        }
+      },
+      {
+        "id": 7749,
+        "parent_id": 7747,
+        "slug": "refrigerator-ac-appliance-maintenance",
+        "level": 1,
+        "path": "/7747/7749/",
+        "canonical_name": "Refrigerator, AC \u0026 Major Appliance Repair Services (ፍሪጅ ጥገና)",
+        "name_en": "Refrigerator, AC \u0026 Major Appliance Repair Services (ፍሪጅ ጥገና)",
+        "name_am": "የፍሪጅ ጋዝ ሙሌት እና የቤት እቃዎች ጥገና አገልግሎት",
+        "name_om": "Tajaajila Suphaa Firiijii fi Meeshaa Manaa",
+        "name_ti": "ናይ ፍሪጅ ጋዝ ምምላእን ጽገናን ኣገልግሎት",
+        "definition": "On-site diagnostic technicians for refrigeration gas charging, thermostat calibration, and motor rewinding.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.758729Z",
+        "updated_at": "2026-11-01T11:27:00.758729Z",
+        "translations": {
+          "am": "የፍሪጅ ጋዝ ሙሌት እና የቤት እቃዎች ጥገና አገልግሎት",
+          "en": "Refrigerator, AC \u0026 Major Appliance Repair Services (ፍሪጅ ጥገና)",
+          "or": "Tajaajila Suphaa Firiijii fi Meeshaa Manaa",
+          "ti": "ናይ ፍሪጅ ጋዝ ምምላእን ጽገናን ኣገልግሎት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

@@ -19,6 +19,7 @@ import {
   LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
   Sparkles, ShieldCheck, Sliders, ShieldAlert, Brain,
 } from 'lucide-react';
+import { formatLocationParts } from '@/types/location';
 
 // ── Tier banner shown to buyers ───────────────────────────────────────────────
 function TierBanner() {
@@ -198,11 +199,11 @@ function ProductsContent() {
     const subcity = searchParams.get('subcity');
     const zone = searchParams.get('zone');
     const region = searchParams.get('region');
-    if (woreda) { f.woreda = woreda; setActiveWoreda(woreda); setActiveSubcity(''); setActiveZone(''); setActiveRegion(''); }
-    else if (subcity) { f.subcity = subcity; setActiveSubcity(subcity); setActiveWoreda(''); setActiveZone(''); setActiveRegion(''); }
-    else if (zone) { f.zone = zone; setActiveZone(zone); setActiveSubcity(''); setActiveWoreda(''); setActiveRegion(''); }
-    else if (region) { f.region = region; setActiveRegion(region); setActiveZone(''); setActiveSubcity(''); setActiveWoreda(''); }
-    else { setActiveRegion(''); setActiveZone(''); setActiveSubcity(''); setActiveWoreda(''); }
+
+    if (woreda) { f.woreda = woreda; setActiveWoreda(woreda); } else { setActiveWoreda(''); }
+    if (subcity) { f.subcity = subcity; setActiveSubcity(subcity); } else { setActiveSubcity(''); }
+    if (zone) { f.zone = zone; setActiveZone(zone); } else { setActiveZone(''); }
+    if (region) { f.region = region; setActiveRegion(region); } else { setActiveRegion(''); }
 
     setFilters(f);
   }, [searchParams, categories]);
@@ -269,7 +270,8 @@ function ProductsContent() {
   const activeSubNode = subcategoryNodes.find(s => s.slug === activeSub || String(s.id) === activeSub);
   const itemNodes = activeSubNode?.children ?? [];
 
-  const activeLocLabel = activeWoreda || activeSubcity || activeZone || activeRegion;
+  const activeLocParts = formatLocationParts({ region: activeRegion, zone: activeZone, subcity: activeSubcity, woreda: activeWoreda }, locale);
+  const activeLocLabel = activeLocParts.join(' › ');
 
   const buildUrl = (catId?: number, sub?: string, item?: string, search?: string, loc?: { region?: string; zone?: string; subcity?: string; woreda?: string }, overrideType?: 'all' | 'sale' | 'rent') => {
     const p = new URLSearchParams();
@@ -317,6 +319,22 @@ function ProductsContent() {
     return sub.name || (sub as any).name_en || sSlug.replace(/_/g, ' ');
   };
 
+  const getItemDisplayName = (item?: Category | string) => {
+    if (!item) return '';
+    const slug = typeof item === 'string' ? item : item.slug;
+    if (slug && (t.items as any)?.[slug]) {
+      return (t.items as any)[slug];
+    }
+    if (typeof item === 'object') {
+      if (locale === 'am' && (item as any).name_am) return (item as any).name_am;
+      if ((locale === 'or' || locale === 'om') && ((item as any).name_om || (item as any).name_or)) return (item as any).name_om || (item as any).name_or;
+      if (locale === 'ti' && (item as any).name_ti) return (item as any).name_ti;
+      if (locale === 'en' && (item as any).name_en) return (item as any).name_en;
+      return item.name || (item as any).name_en || slug?.replace(/_/g, ' ') || '';
+    }
+    return slug.replace(/_/g, ' ');
+  };
+
   return (
     <>
       {/* ── 3rd Row: Categories list (Compact sticky bar, single row) ── */}
@@ -353,7 +371,7 @@ function ProductsContent() {
               {activeItem && (
                 <>
                   <ChevronRight size={11} className="text-zinc-400" />
-                  <span className="text-zinc-600 dark:text-zinc-400">{activeItem}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{getItemDisplayName(activeItem)}</span>
                 </>
               )}
             </div>
@@ -396,7 +414,7 @@ function ProductsContent() {
                       : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600'
                   }`}
                 >
-                  {i.name || i.slug}
+                  {getItemDisplayName(i)}
                 </button>
               ))}
             </div>
@@ -480,11 +498,14 @@ function ProductsContent() {
             ) : (
               <>
                 {/*
-                  Grid: 3 cols on mobile (≥360px), 4 on sm (≥480px),
-                        5 on md (≥768px), 6 on lg+ (≥1024px)
-                  With sidebar: effectively 5 on lg, 6 on xl
+                  Smartphone-optimized Grid:
+                  - 2 columns on mobile (≥320px) for generous touch targets & readable photos
+                  - 3 columns on sm (≥640px)
+                  - 4 columns on md (≥768px)
+                  - 5 columns on lg (≥1024px)
+                  - 6 columns on xl (≥1280px)
                 */}
-                <div className="grid grid-cols-2 min-[360px]:grid-cols-3 min-[480px]:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-3.5">
                   {products.slice(0, visibleCount).map(p => (
                     p.listing_type === 'rent'
                       ? <RentalProductCard key={p.id} product={p} />
@@ -495,7 +516,7 @@ function ProductsContent() {
                 {products.length > visibleCount && (
                   <div className="flex justify-center mt-8">
                     <button onClick={() => setVisibleCount(v => v + 24)}
-                      className="flex flex-col items-center gap-2 group">
+                      className="flex flex-col items-center gap-2 group tap-bounce">
                       <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-30 group-hover:opacity-80 transition-opacity">
                         {t.ui.get_more}
                       </span>
@@ -514,8 +535,8 @@ function ProductsContent() {
       {/* Mobile filter drawer */}
       {filterOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setFilterOpen(false)} />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-zinc-50 dark:bg-zinc-950 p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setFilterOpen(false)} />
+          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-zinc-50 dark:bg-zinc-950 p-4 pb-[max(24px,env(safe-area-inset-bottom,24px))] shadow-2xl animate-in slide-in-from-bottom duration-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2 font-black text-sm">
                 <SlidersHorizontal size={15} className="text-orange-600" />

@@ -30,28 +30,119 @@ import { useLocale } from '@/context/LocaleContext';
 import { aiApi, AIConversationItem, AIMessageItem, AIListingCard } from '@/lib/api/ai';
 import { publicApi } from '@/lib/api/public';
 
-const SUGGESTED_PROMPTS = [
-  {
-    icon: Search,
-    title: 'Available Listings',
-    prompt: 'What products and rentals are available right now?',
+const PROMPTS_BY_LOCALE: Record<string, Array<{ icon: any; title: string; prompt: string }>> = {
+  en: [
+    { icon: Search, title: 'Available Listings', prompt: 'What products and rentals are available right now?' },
+    { icon: Sparkles, title: 'Find Phones in Addis', prompt: 'Find Samsung Galaxy or iPhone in Addis Ababa.' },
+    { icon: Compass, title: 'Apartments for Rent', prompt: 'I need an apartment for rent in Addis Ababa.' },
+    { icon: ShieldCheck, title: 'How to Post a Listing', prompt: 'How do I post an apartment or product on HUNTIQ?' },
+  ],
+  am: [
+    { icon: Search, title: 'የሚገኙ ዝርዝሮች', prompt: 'በአሁኑ ሰዓት ምን አይነት እቃዎች እና የቤት ኪራዮች ይገኛሉ?' },
+    { icon: Sparkles, title: 'ስልኮች በአዲስ አበባ', prompt: 'በአዲስ አበባ ውስጥ ሳምሰንግ ጋላክሲ ወይም አይፎን ፈልግልኝ።' },
+    { icon: Compass, title: 'የሚከራይ አፓርታማ', prompt: 'በአዲስ አበባ ውስጥ የሚከራይ የመኖሪያ አፓርታማ እፈልጋለሁ።' },
+    { icon: ShieldCheck, title: 'ምርት እንዴት ይለጠፋል?', prompt: 'በHUNTIQ ላይ ምርት ወይም ቤት እንዴት መለጠፍ እችላለሁ?' },
+  ],
+  or: [
+    { icon: Search, title: 'Tarreeffamoota Jiran', prompt: 'Yeroo ammaa oomishaaleen fi manneen kireeffaman maalfaatu jiru?' },
+    { icon: Sparkles, title: 'Bilbila Finfinnee keessaa', prompt: 'Finfinnee keessatti Samsung Galaxy ykn iPhone naaf barbaadi.' },
+    { icon: Compass, title: 'Manneen Kireeffaman', prompt: 'Finfinnee keessatti mana kireeffamu barbaada.' },
+    { icon: ShieldCheck, title: 'Akkamitti Maxxansu?', prompt: 'HUNTIQ irratti akkamittan oomisha ykn mana maxxansuu danda\'a?' },
+  ],
+  ti: [
+    { icon: Search, title: 'ዘለዉ ዝርዝራት', prompt: 'ኣብዚ እዋን እንታይ ዓይነት ፍርያትን ናይ ገዛ ክራይን ኣለዉ?' },
+    { icon: Sparkles, title: 'ተንቀሳቓሲ ስልኪ ኣብ ኣዲስ ኣበባ', prompt: 'ኣብ ኣዲስ ኣበባ ሳምሰንግ ጋላክሲ ወይ ኣይፎን ድለየለይ።' },
+    { icon: Compass, title: 'ዝካረ ኣፓርታማ', prompt: 'ኣብ ኣዲስ ኣበባ ዝካረ ናይ መኖርያ ኣፓርታማ እደሊ ኣለኹ።' },
+    { icon: ShieldCheck, title: 'ፍርያት ብኸመይ ይልጠፍ?', prompt: 'ኣብ HUNTIQ ፍርያት ወይ ገዛ ብኸመይ ክልጥፍ ይኽእል?' },
+  ],
+};
+
+const AI_UI_STRINGS: Record<string, Record<string, string>> = {
+  en: {
+    heroTitle: 'What can I help you with today?',
+    heroSubtitle: 'Ask general knowledge questions, generate code, explore Ethiopian market listings, or compare products across Addis Ababa and beyond.',
+    inputPlaceholder: 'Ask HUNTIQ AI anything, or search products across Ethiopia...',
+    connected: 'Connected',
+    backMarket: 'Back to Marketplace',
+    newChat: 'New Chat',
+    searchChats: 'Search chats...',
+    recentConversations: 'Recent Conversations',
+    guestAccessTitle: 'Free Guest Access',
+    guestAccessDesc: 'Ask questions and search verified live marketplace listings freely without an account.',
+    marketplace: 'Marketplace',
+    thinking: 'HUNTIQ AI is thinking & querying marketplace services...',
+    retry: 'Retry',
+    disclaimer: 'HUNTIQ AI answers general questions and retrieves live marketplace listings. Always verify details before transactions.',
+    authoritativeListings: 'Authoritative Database Listings',
+    copy: 'Copy',
+    copied: 'Copied',
+    loading: 'Loading HUNTIQ AI...',
+    failedLoad: 'Failed to load conversation history.',
   },
-  {
-    icon: Sparkles,
-    title: 'Find Phones in Addis',
-    prompt: 'Find Samsung Galaxy or iPhone in Addis Ababa.',
+  am: {
+    heroTitle: 'ዛሬ በምን ልርዳዎት?',
+    heroSubtitle: 'አጠቃላይ ጥያቄዎችን ይጠይቁ፣ የኢትዮጵያ የገበያ ዝርዝሮችን ይመልከቱ፣ ወይም በአዲስ አበባና በመላው ሀገሪቱ የሚገኙ ምርቶችን ያወዳድሩ።',
+    inputPlaceholder: 'የፈለጉትን ይጠይቁ፣ ወይም በኢትዮጵያ ያሉ ምርቶችን ይፈልጉ...',
+    connected: 'የተገናኘ',
+    backMarket: 'ወደ ገበያው ተመለስ',
+    newChat: 'አዲስ ውይይት',
+    searchChats: 'ውይይቶችን ፈልግ...',
+    recentConversations: 'የቅርብ ውይይቶች',
+    guestAccessTitle: 'ነጻ የእንግዳ አገልግሎት',
+    guestAccessDesc: 'ያለ መለያ ጥያቄዎችን ይጠይቁ እና የቀጥታ የተረጋገጡ ዝርዝሮችን በነጻ ይፈልጉ።',
+    marketplace: 'ገበያ',
+    thinking: 'HUNTIQ AI እያሰበ እና የቀጥታ ዳታቤዙን እየፈተሸ ነው...',
+    retry: 'እንደገና ሞክር',
+    disclaimer: 'HUNTIQ AI አጠቃላይ መረጃዎችን እና የቀጥታ ዝርዝሮችን ያቀርባል። ማንኛውንም ግብይት ከመፈጸምዎ በፊት ዝርዝሩን ያረጋግጡ።',
+    authoritativeListings: 'የተረጋገጡ የዳታቤዝ ዝርዝሮች',
+    copy: 'ቅዳ',
+    copied: 'ተቀድቷል',
+    loading: 'HUNTIQ AI በመጫን ላይ...',
+    failedLoad: 'የውይይት ታሪክን መጫን አልተቻለም።',
   },
-  {
-    icon: Compass,
-    title: 'Apartments for Rent',
-    prompt: 'I need an apartment for rent in Addis Ababa.',
+  or: {
+    heroTitle: 'Har\'a maaliin isin gargaaruu danda\'a?',
+    heroSubtitle: 'Gaaffilee walii-galaa gaafadhaa, tarreeffamoota gabaa Itoophiyaa sakatta\'aa, ykn oomishaalee Finfinnee fi naannoo ishee jiran wal-bira qabaa.',
+    inputPlaceholder: 'Waan fedhe gaafadhaa, ykn oomishaalee Itoophiyaa keessaa barbaadaa...',
+    connected: 'Walsimateera',
+    backMarket: 'Gara Gabaatti Deebi\'aa',
+    newChat: 'Haasaa Haaraa',
+    searchChats: 'Haasaawwan barbaadi...',
+    recentConversations: 'Haasaawwan Dhihoo',
+    guestAccessTitle: 'Tajaajila Keessummaa Bilisaa',
+    guestAccessDesc: 'Akkaawuntii malee gaaffii gaafadhaa fi tarreeffamoota mirkanaa\'an bilisaan sakatta\'aa.',
+    marketplace: 'Gabaa',
+    thinking: 'HUNTIQ AI yaadaa fi kuusaa gabaa gaafachaa jira...',
+    retry: 'Irra Deebi\'ii Yaali',
+    disclaimer: 'HUNTIQ AI gaaffilee deebisa akkasumas tarreeffamoota gabaa fida. Daldala raawwachuu keessan dura mirkaneeffadhaa.',
+    authoritativeListings: 'Tarreeffamoota Kuusaa Mirkanaa\'an',
+    copy: 'Garagalchi',
+    copied: 'Garagalfameera',
+    loading: 'HUNTIQ AI fe\'amaa jira...',
+    failedLoad: 'Seenaa haasaa fe\'uun hin danda\'amne.',
   },
-  {
-    icon: ShieldCheck,
-    title: 'How to Post a Listing',
-    prompt: 'How do I post an apartment or product on HUNTIQ?',
+  ti: {
+    heroTitle: 'ሎሚ ብምንታይ ክሕግዘኩም እኽእል?',
+    heroSubtitle: 'ሓፈሻዊ ሕቶታት ሕተቱ፣ ናይ ኢትዮጵያ ዕዳጋ ዝርዝራት ርኣዩ፣ ወይ ኣብ ኣዲስ ኣበባን ካልኦት ቦታታትን ዘለዉ ፍርያት ኣነጻጽሩ።',
+    inputPlaceholder: 'ዝደለይዎ ሕተቱ፣ ወይ ኣብ ኢትዮጵያ ዘለዉ ፍርያት ድለዩ...',
+    connected: 'ተተሓሒዙ',
+    backMarket: 'ናብ ዕዳጋ ተመለስ',
+    newChat: 'ሓድሽ ዕላል',
+    searchChats: 'ዕላላት ድለይ...',
+    recentConversations: 'ናይ ቀረባ ዕላላት',
+    guestAccessTitle: 'ናጻ ናይ ጋሻ ኣገልግሎት',
+    guestAccessDesc: 'ብዘይ ኣካውንት ሕቶታት ሕተቱ ከምኡ’ውን ዝተረጋገፁ ዝርዝራት ብናጻ ድለዩ።',
+    marketplace: 'ዕዳጋ',
+    thinking: 'HUNTIQ AI ይሓስብን ዳታቤዝ ይፈትሽን ኣሎ...',
+    retry: 'ደጊምካ ፈትን',
+    disclaimer: 'HUNTIQ AI ሓፈሻዊ ሓበሬታታትን ቀጥታዊ ዝርዝራትን የቕርብ። ቅድሚ ምግዛእ ወይ ምሻጥ ዝርዝር ሓበሬታ ኣረጋግጹ።',
+    authoritativeListings: 'ዝተረጋገፁ ናይ ዳታቤዝ ዝርዝራት',
+    copy: 'ቅዳሕ',
+    copied: 'ተቐዲሑ',
+    loading: 'HUNTIQ AI ይጽዓን ኣሎ...',
+    failedLoad: 'ናይ ዕላል ታሪኽ ምጽዓን ኣይተኻእለን።',
   },
-];
+};
 
 function AIWorkspaceContent() {
   const router = useRouter();
@@ -60,6 +151,9 @@ function AIWorkspaceContent() {
 
   const { user } = useAuth();
   const { locale } = useLocale();
+  const activeLocale = (locale === 'om' ? 'or' : locale) || 'en';
+  const str = AI_UI_STRINGS[activeLocale] || AI_UI_STRINGS.en;
+  const suggestedPrompts = PROMPTS_BY_LOCALE[activeLocale] || PROMPTS_BY_LOCALE.en;
 
   const [conversations, setConversations] = useState<AIConversationItem[]>([]);
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
@@ -112,7 +206,7 @@ function AIWorkspaceContent() {
       const conv = await aiApi.getConversation(user.token, id);
       setMessages(conv.messages || []);
     } catch (err: any) {
-      setErrorMsg('Failed to load conversation history.');
+      setErrorMsg(str.failedLoad);
     }
   };
 
@@ -120,7 +214,7 @@ function AIWorkspaceContent() {
     setErrorMsg(null);
     if (user?.token) {
       try {
-        const newConv = await aiApi.createConversation(user.token, 'New Chat');
+        const newConv = await aiApi.createConversation(user.token, str.newChat);
         setConversations((prev) => [newConv, ...prev]);
         setActiveConversationId(newConv.id);
         setMessages([]);
@@ -267,12 +361,20 @@ function AIWorkspaceContent() {
   );
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans relative">
+      {/* Mobile Sidebar Overlay Backdrop */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-25 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* ── LEFT AREA: Conversation Sidebar ─────────────────────────────────── */}
       <aside
         className={`${
-          sidebarOpen ? 'w-72 md:w-80' : 'w-0'
-        } transition-all duration-300 ease-in-out shrink-0 flex flex-col border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 relative z-30 overflow-hidden`}
+          sidebarOpen ? 'w-72 md:w-80 shadow-2xl md:shadow-none' : 'w-0'
+        } fixed md:relative inset-y-0 left-0 transition-all duration-300 ease-in-out shrink-0 flex flex-col border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 z-30 overflow-hidden`}
       >
         {/* Sidebar Header */}
         <div className="p-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
@@ -300,7 +402,7 @@ function AIWorkspaceContent() {
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-xs shadow-sm shadow-orange-600/20 active:scale-98 transition-all"
           >
             <Plus size={16} />
-            <span>New Chat</span>
+            <span>{str.newChat}</span>
           </button>
         </div>
 
@@ -313,7 +415,7 @@ function AIWorkspaceContent() {
                 type="text"
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                placeholder="Search chats..."
+                placeholder={str.searchChats}
                 className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-zinc-100 dark:bg-zinc-800/60 border border-transparent focus:border-orange-500 dark:focus:border-orange-500 outline-none transition-colors"
               />
             </div>
@@ -323,17 +425,17 @@ function AIWorkspaceContent() {
         {/* Conversation List */}
         <div className="flex-1 overflow-y-auto px-2 py-3 space-y-1">
           <div className="px-2 pb-1.5 text-[10px] font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-            Recent Conversations
+            {str.recentConversations}
           </div>
 
           {!user?.token && (
             <div className="p-3 m-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-200 text-xs">
               <div className="flex items-center gap-1.5 font-bold">
                 <Sparkles size={13} className="text-emerald-600 dark:text-emerald-400" />
-                <span>Free Guest Access</span>
+                <span>{str.guestAccessTitle}</span>
               </div>
               <p className="text-[11px] opacity-80 mt-1">
-                Ask questions and search verified live marketplace listings freely without an account.
+                {str.guestAccessDesc}
               </p>
             </div>
           )}
@@ -410,7 +512,7 @@ function AIWorkspaceContent() {
             className="flex items-center gap-1.5 hover:text-orange-600 font-bold transition-colors"
           >
             <ArrowLeft size={14} />
-            <span>Marketplace</span>
+            <span>{str.marketplace}</span>
           </Link>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-mono">v2.0</span>
         </div>
@@ -433,7 +535,7 @@ function AIWorkspaceContent() {
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-sm tracking-tight">HUNTIQ AI</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-300 dark:border-emerald-800">
-                Connected
+                {str.connected}
               </span>
             </div>
           </div>
@@ -443,7 +545,7 @@ function AIWorkspaceContent() {
               href="/products"
               className="text-xs font-bold text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center gap-1 transition-colors"
             >
-              <span>Back to Marketplace</span>
+              <span>{str.backMarket}</span>
               <ExternalLink size={13} />
             </Link>
           </div>
@@ -459,21 +561,21 @@ function AIWorkspaceContent() {
                   <Sparkles size={32} className="animate-pulse" />
                 </div>
                 <h1 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white tracking-tight">
-                  What can I help you with today?
+                  {str.heroTitle}
                 </h1>
                 <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-                  Ask general knowledge questions, generate code, explore Ethiopian market listings, or compare products across Addis Ababa and beyond.
+                  {str.heroSubtitle}
                 </p>
 
                 {/* Suggested Prompt Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8 text-left">
-                  {SUGGESTED_PROMPTS.map((item, idx) => {
+                  {suggestedPrompts.map((item, idx) => {
                     const Icon = item.icon;
                     return (
                       <button
                         key={idx}
                         onClick={() => handleSendMessage(item.prompt)}
-                        className="p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/60 hover:border-orange-500 dark:hover:border-orange-500/80 hover:shadow-md hover:shadow-orange-500/5 transition-all group flex flex-col justify-between"
+                        className="p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/60 hover:border-orange-500 dark:hover:border-orange-500/80 hover:shadow-md hover:shadow-orange-500/5 transition-all group flex flex-col justify-between tap-bounce active:scale-[0.98]"
                       >
                         <div className="flex items-center gap-2 mb-1.5">
                           <div className="p-1.5 rounded-lg bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400">
@@ -534,7 +636,7 @@ function AIWorkspaceContent() {
                             className="flex items-center gap-1 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
                           >
                             {copiedId === msg.id ? <CheckCheck size={12} className="text-emerald-500" /> : <Copy size={12} />}
-                            <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
+                            <span>{copiedId === msg.id ? str.copied : str.copy}</span>
                           </button>
                         </div>
                       )}
@@ -545,13 +647,13 @@ function AIWorkspaceContent() {
                       <div className="mt-3 w-full space-y-2">
                         <div className="flex items-center gap-1 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
                           <ShieldCheck size={13} className="text-emerald-500" />
-                          <span>Authoritative Database Listings ({listings.length})</span>
+                          <span>{str.authoritativeListings} ({listings.length})</span>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                           {listings.map((item) => (
                             <Link
                               key={item.id}
-                              href={item.detail_url}
+                              href={item.detail_url || `/products/${item.id}`}
                               target="_blank"
                               className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 hover:border-orange-500 transition-all flex gap-2.5 items-center group"
                             >
@@ -559,7 +661,7 @@ function AIWorkspaceContent() {
                                 {item.image_url ? (
                                   <img
                                     src={item.image_url}
-                                    alt={item.title}
+                                    alt={item.title || 'Product'}
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                                   />
                                 ) : (
@@ -571,10 +673,10 @@ function AIWorkspaceContent() {
                                   {item.title}
                                 </p>
                                 <p className="text-xs font-black text-orange-600 mt-0.5">
-                                  {item.price.toLocaleString()} {item.currency}
+                                  {item.price != null ? item.price.toLocaleString() : '—'} {item.currency || 'ETB'}
                                 </p>
                                 <div className="flex items-center gap-1.5 mt-1 text-[10px] text-zinc-400">
-                                  <span>{item.city}</span>
+                                  <span>{item.city || 'Addis Ababa'}</span>
                                   {item.seller_tier && item.seller_tier !== 'normal' && (
                                     <span className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold uppercase text-[9px]">
                                       {item.seller_tier}
@@ -606,7 +708,7 @@ function AIWorkspaceContent() {
                 </div>
                 <div className="px-4 py-3 rounded-2xl rounded-bl-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-orange-600 animate-ping" />
-                  <span className="text-zinc-500 font-medium">HUNTIQ AI is thinking & querying marketplace services...</span>
+                  <span className="text-zinc-500 font-medium">{str.thinking}</span>
                 </div>
               </div>
             )}
@@ -620,7 +722,7 @@ function AIWorkspaceContent() {
                   className="flex items-center gap-1 font-bold underline hover:no-underline ml-2"
                 >
                   <RotateCcw size={12} />
-                  <span>Retry</span>
+                  <span>{str.retry}</span>
                 </button>
               </div>
             )}
@@ -630,7 +732,7 @@ function AIWorkspaceContent() {
         </div>
 
         {/* ── BOTTOM AREA: Composer ─────────────────────────────────────────── */}
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md">
+        <div className="p-3 sm:p-4 pb-[max(16px,env(safe-area-inset-bottom,16px))] border-t border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md">
           <div className="max-w-3xl mx-auto">
             <form
               onSubmit={(e) => {
@@ -649,20 +751,20 @@ function AIWorkspaceContent() {
                     handleSendMessage();
                   }
                 }}
-                placeholder="Ask HUNTIQ AI anything, or search products across Ethiopia..."
+                placeholder={str.inputPlaceholder}
                 rows={1}
-                className="flex-1 max-h-32 p-2 text-xs sm:text-sm bg-transparent outline-none resize-none text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
+                className="flex-1 max-h-32 p-2 text-base sm:text-sm bg-transparent outline-none resize-none text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
               />
               <button
                 type="submit"
                 disabled={!inputMessage.trim() || loading}
-                className="p-2.5 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white disabled:opacity-40 disabled:pointer-events-none transition-all shadow-sm shadow-orange-600/30"
+                className="p-2.5 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white disabled:opacity-40 disabled:pointer-events-none transition-all shadow-sm shadow-orange-600/30 tap-bounce active:scale-95"
               >
                 <Send size={15} />
               </button>
             </form>
             <div className="mt-2 text-center text-[10px] text-zinc-400 dark:text-zinc-500">
-              HUNTIQ AI answers general questions and retrieves live marketplace listings. Always verify details before transactions.
+              {str.disclaimer}
             </div>
           </div>
         </div>

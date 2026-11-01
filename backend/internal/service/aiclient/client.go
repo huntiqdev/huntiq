@@ -162,8 +162,22 @@ func (c *Client) UnderstandQuery(ctx context.Context, query, locale string) (*Qu
 	})
 }
 
-// fallbackUnderstandQuery extracts search parameters deterministically in Go when remote AI worker is offline.
-func (c *Client) fallbackUnderstandQuery(params UnderstandQueryParams) *QueryUnderstandingResponse {
+// FallbackUnderstandQuery extracts search parameters deterministically in Go when remote AI worker is offline.
+func (c *Client) FallbackUnderstandQuery(params UnderstandQueryParams) *QueryUnderstandingResponse {
+	if params.Locale == "or" {
+		params.Locale = "om"
+	}
+	if params.PreferredLanguage == "or" {
+		params.PreferredLanguage = "om"
+	}
+	prefLang := params.PreferredLanguage
+	if prefLang == "" {
+		prefLang = params.Locale
+	}
+	if prefLang == "" {
+		prefLang = "en"
+	}
+
 	hasCommercial, args := ParseFallbackSearchArgs(nil, params.Query)
 	cleanTerm := cleanConversationalSearchTerm(params.Query)
 	if hasCommercial && args != nil {
@@ -176,6 +190,8 @@ func (c *Client) fallbackUnderstandQuery(params UnderstandQueryParams) *QueryUnd
 	lower := strings.ToLower(params.Query)
 	if strings.Contains(lower, "rent") || strings.Contains(lower, "ኪራይ") || strings.Contains(lower, "kiraa") || strings.Contains(lower, "ክራይ") {
 		primaryIntent = "rent_property"
+	} else if strings.Contains(lower, "how many") || strings.Contains(lower, "ስንት") || strings.Contains(lower, "meeqa") || strings.Contains(lower, "ክንደይ") {
+		primaryIntent = "count_listings"
 	}
 
 	deepParams := make(map[string]any)
@@ -196,22 +212,82 @@ func (c *Client) fallbackUnderstandQuery(params UnderstandQueryParams) *QueryUnd
 		}
 	}
 
+	displayTerm := GetLocalizedEntityTerm(cleanTerm, prefLang)
+	if displayTerm == "" {
+		displayTerm = cleanTerm
+	}
+
+	var localizedAnswer string
+	switch prefLang {
+	case "am":
+		if cleanTerm != "" {
+			localizedAnswer = fmt.Sprintf("የቀጥታ ገበያ ዳታቤዝ ለ'%s' ተፈልጓል። ከዚህ በታች የተረጋገጡ ዝርዝሮችን ማየት ይችላሉ።", displayTerm)
+		} else {
+			localizedAnswer = "በHUNTIQ የቀጥታ ገበያ ዳታቤዝ ውስጥ ያሉ የተረጋገጡ ዝርዝሮች ተገኝተዋል።"
+		}
+	case "om":
+		if cleanTerm != "" {
+			localizedAnswer = fmt.Sprintf("Kuusaa gabaa irraa '%s' tiif barbaadameera. Tarreeffamoota mirkanaa'an armaan gaditti argattu.", displayTerm)
+		} else {
+			localizedAnswer = "Tarreeffamoota mirkanaa'an kuusaa gabaa HUNTIQ keessatti argamaniiru."
+		}
+	case "ti":
+		if cleanTerm != "" {
+			localizedAnswer = fmt.Sprintf("ኣብ ዳታቤዝ ዕዳጋ ን'%s' ተደልዩ ኣሎ። ኣብ ታሕቲ ዘለዉ ዝተረጋገፁ ዝርዝራት ክትሪኡ ትኽእሉ ኢኹም።", displayTerm)
+		} else {
+			localizedAnswer = "ኣብ ዳታቤዝ ዕዳጋ HUNTIQ ዝተረጋገፁ ዝርዝራት ተረኺቦም ኣለዉ።"
+		}
+	default:
+		if cleanTerm != "" {
+			localizedAnswer = fmt.Sprintf("I searched our live marketplace database for '%s'. Here are the verified listings and market options.", displayTerm)
+		} else {
+			localizedAnswer = "Here are the verified listings matching your request in the live marketplace database."
+		}
+	}
+
+	reasoning := &MarketplaceReasoningChain{
+		IntentBreakdown:    fmt.Sprintf("Commercial search intent identified as '%s' for item '%s'.", primaryIntent, cleanTerm),
+		MarketFeasibility:  "Grounding results in live approved PostgreSQL marketplace listings.",
+		TradeOffAnalysis:   "Balancing price, location proximity, and verified seller tier.",
+		InspectionProtocol: "Encouraging safe physical inspection at major commercial hubs.",
+		Steps: []ReasoningStep{
+			{Step: 1, Title: "Query & Intent Parsing", Detail: fmt.Sprintf("Parsed user query in locale '%s', detected intent '%s'.", prefLang, primaryIntent)},
+			{Step: 2, Title: "Conversational Cleaning", Detail: fmt.Sprintf("Isolated clean search term '%s' from conversational tokens.", cleanTerm)},
+			{Step: 3, Title: "Taxonomy & Synonym Expansion", Detail: fmt.Sprintf("Mapped '%s' across Ethiopian languages (EN/AM/OM/TI) for full-text search.", cleanTerm)},
+			{Step: 4, Title: "Safe Exchange Guard", Detail: "Enforced safe marketplace verification protocol."},
+		},
+	}
+
 	return &QueryUnderstandingResponse{
 		NormalizedQuery:   strings.TrimSpace(params.Query),
 		CleanedSearchTerm: cleanTerm,
 		PrimaryIntent:     primaryIntent,
-		Confidence:        0.90,
-		DetectedLocale:    params.Locale,
+		Confidence:        0.92,
+		DetectedLocale:    prefLang,
 		ExtractedEntities: extracted,
 		DeepParameters:    deepParams,
+		LocalizedAnswer:   localizedAnswer,
+		ReasoningChain:    reasoning,
 		IsSafe:            true,
 	}
+}
+
+// fallbackUnderstandQuery internal alias for backward compatibility.
+func (c *Client) fallbackUnderstandQuery(params UnderstandQueryParams) *QueryUnderstandingResponse {
+	return c.FallbackUnderstandQuery(params)
 }
 
 // UnderstandQueryWithParams sends parameterized search query options to the internal AI worker.
 func (c *Client) UnderstandQueryWithParams(ctx context.Context, params UnderstandQueryParams) (*QueryUnderstandingResponse, error) {
 	if c == nil || !c.enabled || params.Query == "" {
 		return nil, fmt.Errorf("ai client disabled or empty query")
+	}
+
+	if params.Locale == "or" {
+		params.Locale = "om"
+	}
+	if params.PreferredLanguage == "or" {
+		params.PreferredLanguage = "om"
 	}
 
 	reqCtx, cancel := context.WithTimeout(ctx, 400*time.Millisecond)
@@ -425,6 +501,9 @@ func ComputeDeterministicAnalysis(req ProductAnalysisRequest) *ProductAnalysisRe
 	if lang == "" {
 		lang = strings.ToLower(strings.TrimSpace(req.Locale))
 	}
+	if lang == "or" {
+		lang = "om"
+	}
 
 	totalMatching := req.TotalMatching
 	if totalMatching == 0 {
@@ -610,6 +689,10 @@ func (c *Client) SendChatMessage(ctx context.Context, req ChatMessageRequest) (*
 		}
 	}
 
+	if req.Locale == "or" {
+		req.Locale = "om"
+	}
+
 	// 1. Ollama Provider (Primary Local Model for English/Latin)
 	// Ge'ez script (Amharic & Tigrinya) and Ethiopian languages (om, am, ti) are routed to sovereign authority
 	// because small 1.5B LLMs lack Ethiopian low-resource tokenizers and falsely trigger safety guardrails.
@@ -674,6 +757,9 @@ func (c *Client) sendPythonChat(ctx context.Context, req ChatMessageRequest) (*C
 
 func (c *Client) fallbackChat(ctx context.Context, req ChatMessageRequest) (*ChatMessageResponse, error) {
 	t0 := time.Now()
+	if req.Locale == "or" {
+		req.Locale = "om"
+	}
 	if len(req.Messages) == 0 {
 		msg := "Hello! How can I assist you today?"
 		return &ChatMessageResponse{
@@ -760,6 +846,13 @@ func (c *Client) fallbackChat(ctx context.Context, req ChatMessageRequest) (*Cha
 	// 1. Greetings
 	if lowerQ == "hi" || lowerQ == "hello" || lowerQ == "hey" || lowerQ == "selam" || lowerQ == "ሰላም" || lowerQ == "akkam" {
 		msg := "Hello! I am HUNTIQ AI, your intelligent assistant for general inquiries and live marketplace discovery in Ethiopia. How can I help you today?"
+		if req.Locale == "am" || ContainsGeez(userText) {
+			msg = "ሰላም! እኔ የHUNTIQ AI ረዳት ነኝ። በኢትዮጵያ ውስጥ ምርቶችን እና አገልግሎቶችን ለመፈለግ እንዲሁም አጠቃላይ መረጃዎችን ለመስጠት ዝግጁ ነኝ። ዛሬ በምን ልርዳዎት?"
+		} else if req.Locale == "om" {
+			msg = "Akkam! Ani gargaaraa HUNTIQ AI ti. Itoophiyaa keessatti oomishaalee fi tajaajiloota barbaaduu akkasumas odeeffannoo kennuuf qophiidha. Har'a akkamittan isin gargaaruu danda'a?"
+		} else if req.Locale == "ti" {
+			msg = "ሰላም! ኣነ ናይ HUNTIQ AI ሓጋዚ እየ። ኣብ ኢትዮጵያ ውሽጢ ፍርያት ንምድላይን ሓፈሻዊ ሓበሬታ ንምርካብን ክሕግዘኩም ድሉው እየ። ሎሚ ብምንታይ ክሕግዘኩም?"
+		}
 		return &ChatMessageResponse{
 			Content:      &msg,
 			FinishReason: "stop",
@@ -823,6 +916,10 @@ func (c *Client) fallbackChat(ctx context.Context, req ChatMessageRequest) (*Cha
 	respMsg := "I am HUNTIQ's marketplace assistant. I can help you search verified products, vehicles, and property rentals across Ethiopia, or answer questions about buying, selling, and posting listings on HUNTIQ."
 	if req.Locale == "am" || ContainsGeez(userText) {
 		respMsg = "እኔ የHUNTIQ የገበያ ረዳት ነኝ። በኢትዮጵያ ውስጥ የተረጋገጡ ምርቶችን፣ ተሽከርካሪዎችን፣ የቤት ኪራዮችን ለመፈለግ ወይም በHUNTIQ ላይ ለመግዛትና ለመሸጥ የሚረዱ መመሪያዎችን ልሰጥዎ ዝግጁ ነኝ።"
+	} else if req.Locale == "om" {
+		respMsg = "Ani gargaaraa gabaa HUNTIQ ti. Itoophiyaa keessatti oomishaalee mirkanaa'an, konkolaattota fi manneen kireeffaman barbaaduu, ykn waa'ee bittaa fi gurgurtaa HUNTIQ irratti qajeelfama isiniif kennuuf qophiidha."
+	} else if req.Locale == "ti" {
+		respMsg = "ኣነ ናይ HUNTIQ ናይ ዕዳጋ ሓጋዚ እየ። ኣብ ኢትዮጵያ ውሽጢ ዝተረጋገፁ ፍርያት፣ ተሽከርከርቲ፣ ገዛውቲ ክራይ ንምድላይ ወይ ኣብ HUNTIQ ናይ ምሻጥን ምግዛእን ሓበሬታ ንምሃብ ድሉው እየ።"
 	}
 	return &ChatMessageResponse{
 		Content:      &respMsg,
@@ -944,18 +1041,25 @@ func isCommercialIntent(text string) bool {
 	}
 
 	commercialKeywords := []string{
-		"phone", "iphone", "samsung", "pixel", "android", "mobile",
-		"car", "toyota", "vitz", "corolla", "yaris", "suzuki", "hyundai", "vehicle",
+		"phone", "iphone", "samsung", "pixel", "android", "mobile", "smartphone",
+		"car", "toyota", "vitz", "corolla", "yaris", "suzuki", "hyundai", "vehicle", "automobile",
 		"laptop", "macbook", "dell", "hp", "lenovo", "computer", "pc",
-		"house", "apartment", "condo", "villa", "studio", "real estate", "land",
+		"house", "apartment", "condo", "villa", "studio", "real estate", "land", "property",
 		"tv", "television", "camera", "watch", "shoe", "shoes", "clothes", "dress",
+		"furniture", "sofa", "bed", "table", "chair", "tool", "tools", "generator", "drill",
 		"buy", "sell", "rent", "cheap", "cost", "price", "looking for", "find me",
 		"search for", "show me", "product", "products", "listing", "listings",
 		"available", "store", "wenna", "wanna", "want", "need",
+		"have you", "do you have", "you have", "you got", "got any", "is there", "are there",
+		"can i get", "can i have", "can you find", "give me",
 		"ስልክ", "መኪና", "ቤት", "ኮምፒውተር", "ላፕቶፕ", "እቃ", "ምርት", "መግዛት", "ፈልጋለሁ",
 		"ኪራይ", "ዋጋ", "አለ", "ሽያጭ", "ጫማ", "ልብስ", "ቦሌ", "አፓርታማ", "ኮንዶሚኒየም",
+		"አለዎት", "አለህ", "አለሽ", "አላችሁ", "ይኖራል", "ይገኛል", "ፈልጌ", "አሳየኝ", "ፈልግልኝ",
+		"ፈርኒቸር", "ሶፋ", "አልጋ", "ጀነሬተር", "ፍሪጅ", "ቴሌቪዥን", "ሰዓት",
 		"bilbila", "konkolaataa", "mana", "kompiitara", "bituu", "barbaada", "kiraa", "gatii", "meeshaa",
+		"qabduu", "qabdu", "qabdaa", "qabda", "jiraa", "jira", "farnichara", "siree",
 		"ሞባይል", "መኪና", "ገዛ", "ኮምፒውተር", "ክገዝእ", "ደልየ", "ክራይ", "ዋጋ", "ንብረት",
+		"ኣለኩም", "ኣለካ", "ኣለኪ", "ኣሎ", "ዓራት",
 	}
 
 	for _, kw := range commercialKeywords {
@@ -979,8 +1083,12 @@ func CleanConversationalSearchTerm(q string) string {
 		return ""
 	}
 
-	// 1. Strip punctuation
-	for _, ch := range []string{"?", "!", ".", ",", "\"", "'", ":", ";", "(", ")", "[", "]"} {
+	// 1. Strip Western and Ge'ez / Ethiopic punctuation
+	for _, ch := range []string{
+		"?", "!", ".", ",", "\"", "'", ":", ";", "(", ")", "[", "]", "{", "}",
+		"-", "_", "/", "\\", "@", "#", "$", "%", "^", "&", "*", "+", "=", "~", "`",
+		"፧", "፡", "።", "፣", "፤", "፦", "፠", "፨",
+	} {
 		cleaned = strings.ReplaceAll(cleaned, ch, " ")
 	}
 
@@ -992,27 +1100,76 @@ func CleanConversationalSearchTerm(q string) string {
 	lower = rxPriceK.ReplaceAllString(lower, " ")
 	lower = rxPriceETB.ReplaceAllString(lower, " ")
 
-	// Remove conversational prefixes and phrases in English
+	// Remove conversational prefixes and phrases in English (ordered by length descending)
 	fillerPhrases := []string{
 		"what products are available now",
 		"what products are available",
 		"what are available now",
 		"what are available",
 		"what products do you have",
+		"what products are there",
 		"what is available now",
 		"what is available",
+		"what do you have",
+		"what have you got",
+		"what have you",
+		"what do u have",
 		"can you find me a",
+		"can you find me an",
 		"can you find me",
+		"can you find a",
+		"can you find an",
 		"can you find",
+		"can you show me all",
+		"can you show me a",
+		"can you show me an",
 		"can you show me",
 		"can you show",
+		"can you give me a",
+		"can you give me",
+		"can i get a",
+		"can i get an",
+		"can i get",
+		"can i have a",
+		"can i have an",
+		"can i have",
+		"have you got any",
+		"have you got a",
+		"have you got an",
+		"have you got",
+		"have you any",
+		"have you a",
+		"have you an",
+		"have you",
+		"do you have any",
+		"do you have a",
+		"do you have an",
+		"do you have",
+		"do u have any",
+		"do u have a",
+		"do u have",
+		"you have any",
+		"you have a",
+		"you have an",
+		"you have",
+		"you got any",
+		"you got a",
+		"you got an",
+		"you got",
+		"got any",
+		"got a",
+		"tell me if you have",
+		"tell me about",
 		"i want to buy a",
+		"i want to buy an",
 		"i want to buy",
+		"i want to get a",
+		"i want to get an",
 		"i want to get",
+		"i want to rent a",
+		"i want to rent an",
 		"i want to rent",
-		"i need to buy",
-		"i need to find",
-		"i need to rent",
+		"i want to find",
 		"i want a",
 		"i want an",
 		"i want",
@@ -1022,6 +1179,13 @@ func CleanConversationalSearchTerm(q string) string {
 		"i wanna a",
 		"i wanna an",
 		"i wanna",
+		"i need to buy a",
+		"i need to buy",
+		"i need to get",
+		"i need to find a",
+		"i need to find",
+		"i need to rent a",
+		"i need to rent",
 		"i need a",
 		"i need an",
 		"i need",
@@ -1029,6 +1193,7 @@ func CleanConversationalSearchTerm(q string) string {
 		"looking for an",
 		"looking for",
 		"look for a",
+		"look for an",
 		"look for",
 		"find me a",
 		"find me an",
@@ -1039,20 +1204,37 @@ func CleanConversationalSearchTerm(q string) string {
 		"search for an",
 		"search for",
 		"search a",
+		"search an",
 		"show me all",
+		"show me a",
+		"show me an",
 		"show me",
+		"please find me a",
 		"please find me",
+		"please find a",
 		"please find",
+		"please show me all",
+		"please show me a",
 		"please show me",
 		"please show",
+		"please give me",
+		"where can i buy a",
+		"where can i buy an",
 		"where can i buy",
+		"where can i find a",
+		"where can i find an",
 		"where can i find",
-		"do you have any",
-		"do you have a",
-		"do you have",
-		"are there any",
+		"where can i get a",
+		"where can i get an",
+		"where can i get",
 		"is there any",
+		"is there a",
+		"is there an",
+		"is there",
+		"are there any",
+		"are there",
 		"give me a",
+		"give me an",
 		"give me",
 		"only ones",
 		"only one",
@@ -1073,14 +1255,41 @@ func CleanConversationalSearchTerm(q string) string {
 		lower = strings.ReplaceAll(lower, phrase, " ")
 	}
 
-	// Remove Ethiopian conversational filler phrases
+	// Remove Ethiopian conversational filler phrases (ordered by length descending)
 	ethiopianFillers := []string{
+		// Amharic phrases
 		"መግዛት እፈልጋለሁ", "መግዛት እፈልጋለው", "መግዛት ፈልጌ ነበር", "መግዛት ፈልጌ ነው",
-		"እፈልጋለሁ", "እፈልጋለው", "ፈልጌ ነበር", "ፈልጌ ነው",
-		"አለ ወይ", "አለ?", "እባክህ", "እባክሽ", "እባክዎ",
+		"እፈልጋለሁ", "እፈልጋለው", "ፈልጌ ነበር", "ፈልጌ ነው", "ፈልጌ",
+		"ማግኘት እፈልጋለሁ", "ማግኘት እችላለሁ", "ማግኘት ይቻላል",
+		"ማየት እፈልጋለሁ", "ማየት እችላለሁ",
+		"ዋጋው ስንት ነው", "ስንት ነው", "ዋጋው",
+		"አለ ወይ", "አለ እንዴ", "አለህ ወይ", "አለሽ ወይ", "አላችሁ ወይ",
+		"አለዎት", "አለህ", "አለሽ", "አላችሁ", "አሉን", "አሉ",
+		"ይኖራል", "ይገኛል", "ይኖር ይሆን",
+		"እባክህ", "እባክሽ", "እባክዎ", "እባካችሁ",
+		"አሳየኝ", "አሳዩኝ", "ፈልግልኝ", "ፈልጉልኝ",
 		"የሚሸጥ", "የሚከራይ", "ያገለገለ", "አዲስ",
-		"bituu barbaada", "bituu barbaadu", "barbaada", "bituu",
-		"ክገዝእ ደልየ", "ክገዝእ", "ደልየ", "ሓድሽ",
+		"ምን አለ", "ምን አሉ", "ምን እቃ አለ", "ምን ምርት አለ",
+
+		// Afaan Oromo phrases
+		"bituu barbaada", "bituu barbaadu", "barbaada", "barbaadu",
+		"qabduu", "qabdu", "qabdaa", "qabda",
+		"jiraa", "jira",
+		"akkamitti argadha", "argachuu danda'aa",
+		"na agarsiisi", "na agarsiisaa",
+		"naaf barbaadi", "naaf barbaadaa",
+		"gatiin meeqa", "gatii meeqa", "meeqa",
+		"maal qabdu", "maal jira",
+		"kan gurguramu", "kan kireeffamu", "haaraa",
+
+		// Tigrinya phrases
+		"ክገዝእ ደልየ", "ክገዝእ ደልየ ኣለኹ", "ክገዝእ", "ደልየ",
+		"ኣለኩም ዶ", "ኣለኩም", "ኣለካ ዶ", "ኣለካ", "ኣለኪ ዶ", "ኣለኪ",
+		"ኣሎ ድዩ", "ኣሎ", "ኣለዉ ዶ", "ኣለዉ",
+		"ክንዲይ እዩ", "ዋጋ ክንዲይ",
+		"ኣርእዩኒ", "ድለዩለይ",
+		"እንታይ ኣለኩም", "እንታይ ፍርያት ኣሎ",
+		"ሓድሽ", "ዝተጠቕመ", "ዝሽየጥ", "ዝክረይ",
 	}
 	sort.Slice(ethiopianFillers, func(i, j int) bool {
 		return len(ethiopianFillers[i]) > len(ethiopianFillers[j])
@@ -1096,19 +1305,55 @@ func CleanConversationalSearchTerm(q string) string {
 		lower = strings.ReplaceAll(lower, loc, " ")
 	}
 
-	// Remove stop words
+	// Remove stop words across English, Amharic, Afaan Oromo, and Tigrinya
 	words := strings.Fields(lower)
 	var finalWords []string
 	stopWords := map[string]bool{
+		// English stop words & auxiliary verbs
 		"a": true, "an": true, "the": true, "in": true, "at": true, "on": true,
 		"for": true, "to": true, "of": true, "with": true, "and": true, "or": true,
-		"is": true, "are": true, "now": true, "me": true, "my": true, "please": true,
-		"some": true, "any": true, "all": true, "only": true, "ones": true, "one": true,
+		"is": true, "are": true, "was": true, "were": true, "be": true, "been": true,
+		"now": true, "me": true, "my": true, "you": true, "your": true, "i": true, "we": true,
+		"us": true, "he": true, "she": true, "it": true, "they": true,
+		"please": true, "some": true, "any": true, "all": true, "only": true, "ones": true, "one": true,
 		"used": true, "new": true, "product": true, "products": true, "item": true, "items": true,
-		"listing": true, "listings": true,
+		"listing": true, "listings": true, "price": true, "cost": true,
+		"have": true, "has": true, "had": true, "do": true, "does": true, "did": true,
+		"can": true, "could": true, "will": true, "would": true, "get": true, "got": true,
+		"there": true,
+
+		// Amharic particles, copulas & question tokens
+		"አለ": true, "አሉ": true, "አለህ": true, "አለሽ": true, "አላችሁ": true, "አለዎት": true, "አሉን": true,
+		"ይኖራል": true, "ይገኛል": true, "ይኖር": true, "ነበር": true, "ነው": true, "ናት": true, "ናቸው": true,
+		"ወይ": true, "እንዴ": true, "ስለ": true, "ጋር": true, "ከ": true, "በ": true, "የ": true, "ወደ": true,
+		"እኔ": true, "አንተ": true, "አንቺ": true, "እርስዎ": true, "እኛ": true,
+		"ማግኘት": true, "መግዛት": true, "መከራየት": true, "አሳየኝ": true, "አሳዩኝ": true, "ፈልግልኝ": true, "ፈልጉልኝ": true,
+		"ምን": true, "የት": true, "እንዴት": true,
+		"ዋጋ": true, "ዋጋው": true, "ዋጋቸው": true, "ስንት": true, "ስንትነው": true,
+
+		// Afaan Oromo particles
+		"fi": true, "ykn": true, "itti": true, "irra": true, "booda": true, "keessatti": true, "jira": true, "jiraa": true, "jiru": true, "miti": true,
+		"qabdu": true, "qabduu": true, "qabda": true, "qabdaa": true, "argachuu": true, "barbaada": true, "barbaadu": true,
+		"naaf": true, "na": true, "agarsiisi": true, "agarsiisaa": true,
+		"maal": true, "akkam": true, "eessa": true,
+		"gatii": true, "gatiin": true, "meeqa": true,
+
+		// Tigrinya particles
+		"እዩ": true, "እያ": true, "እዮም": true, "ኣሎ": true, "ኣለዉ": true, "ዶ": true, "ድዩ": true,
+		"ኣለኩም": true, "ኣለካ": true, "ኣለኪ": true,
+		"ክገዝእ": true, "ደልየ": true, "ኣርእዩኒ": true, "ድለዩለይ": true,
+		"እንታይ": true, "ኣበይ": true, "ከመይ": true, "ክንዲይ": true,
 	}
 
 	for _, w := range words {
+		// Strip Amharic genitive prefix "የ" (e.g. "የስልክ" -> "ስልክ", "የመኪና" -> "መኪና", "የቤት" -> "ቤት")
+		if strings.HasPrefix(w, "የ") && len([]rune(w)) > 2 {
+			candidate := strings.TrimPrefix(w, "የ")
+			if _, ok := ethiopianKeywordMap[candidate]; ok || ContainsGeez(candidate) {
+				w = candidate
+			}
+		}
+
 		if !stopWords[w] && len(w) > 0 {
 			finalWords = append(finalWords, w)
 		}
@@ -1281,22 +1526,338 @@ func isOromoText(text string) bool {
 	}
 	return false
 }
+
 var ethiopianKeywordMap = map[string]string{
-	"ስልክ":         "phone",
-	"ሞባይል":       "phone",
-	"bilbila":     "phone",
-	"መኪና":        "car",
-	"konkolaataa": "car",
-	"ቤት":         "house",
-	"mana":        "house",
-	"ገዛ":          "house",
-	"ኮምፒውተር":     "laptop",
-	"ላፕቶፕ":       "laptop",
-	"kompiitara":  "laptop",
-	"ጫማ":          "shoes",
-	"ልብስ":        "clothes",
-	"አፓርታማ":      "apartment",
-	"condo":       "apartment",
+	"ስልክ":              "phone",
+	"ሞባይል":            "phone",
+	"ስማርትፎን":          "phone",
+	"አይፎን":            "phone",
+	"ሳምሰንግ":           "phone",
+	"bilbila":          "phone",
+	"moobaayilii":      "phone",
+	"ስልኪ":              "phone",
+	"መኪና":             "car",
+	"ተሽከርካሪ":          "car",
+	"ቶዮታ":             "car",
+	"ቪትዝ":             "car",
+	"ኮሮላ":             "car",
+	"konkolaataa":      "car",
+	"otoomobil":        "car",
+	"ቤት":              "house",
+	"ቪላ":              "house",
+	"ሪልስቴት":           "house",
+	"mana":             "house",
+	"viillaa":          "house",
+	"ገዛ":               "house",
+	"አፓርታማ":           "apartment",
+	"ኮንዶሚኒየም":        "apartment",
+	"ኮንዶ":             "apartment",
+	"ስቱዲዮ":            "apartment",
+	"apaartaamaa":      "apartment",
+	"kondoominiyeemii": "apartment",
+	"ኣፓርታማ":           "apartment",
+	"condo":            "apartment",
+	"ኮምፒውተር":          "laptop",
+	"ላፕቶፕ":            "laptop",
+	"ማክቡክ":            "laptop",
+	"kompiitara":       "laptop",
+	"laaptooppii":      "laptop",
+	"ጫማ":               "shoes",
+	"ስኒከር":            "shoes",
+	"kophee":           "shoes",
+	"ልብስ":             "clothes",
+	"ቀሚስ":             "clothes",
+	"ሱሪ":              "clothes",
+	"wayyaa":           "clothes",
+	"uffata":           "clothes",
+	"ክዳን":              "clothes",
+	"ቲቪ":               "tv",
+	"ቴሌቪዥን":           "tv",
+	"televizhinii":     "tv",
+	"tivii":            "tv",
+	"ሰዓት":              "watch",
+	"sa'aatii":         "watch",
+	"ፈርኒቸር":           "furniture",
+	"ሶፋ":               "furniture",
+	"አልጋ":              "furniture",
+	"ጠረጴዛ":            "furniture",
+	"ወንበር":             "furniture",
+	"farnichara":       "furniture",
+	"siree":            "furniture",
+	"ዓራት":              "furniture",
+	"ጀነሬተር":           "generator",
+	"መሰርሰሪያ":          "drill",
+}
+
+// marketplaceSynonymGroups defines bidirectional cross-lingual synonyms covering English, Amharic, Afaan Oromo, and Tigrinya.
+var marketplaceSynonymGroups = [][]string{
+	// Phones & Mobile Devices
+	{"phone", "phones", "mobile", "smartphone", "smartphones", "cellphone", "iphone", "samsung", "tecno", "infinix", "redmi", "xiaomi", "ስልክ", "ሞባይል", "ስማርትፎን", "አይፎን", "ሳምሰንግ", "bilbila", "moobaayilii", "ስልኪ"},
+	// Cars & Vehicles
+	{"car", "cars", "vehicle", "vehicles", "automobile", "toyota", "vitz", "corolla", "yaris", "suzuki", "hyundai", "መኪና", "ተሽከርካሪ", "ቶዮታ", "ቪትዝ", "ኮሮላ", "konkolaataa", "otoomobil"},
+	// Houses & Real Estate
+	{"house", "houses", "home", "villa", "villas", "real estate", "property", "residence", "ቤት", "ቪላ", "ሪልስቴት", "ኮንዶሚኒየም", "mana", "viillaa", "ገዛ"},
+	// Apartments & Condos
+	{"apartment", "apartments", "condo", "condos", "condominium", "studio", "flat", "አፓርታማ", "ኮንዶሚኒየም", "ኮንዶ", "ስቱዲዮ", "apaartaamaa", "kondoominiyeemii", "ኣፓርታማ"},
+	// Laptops & Computers
+	{"laptop", "laptops", "computer", "computers", "pc", "macbook", "dell", "hp", "lenovo", "ኮምፒውተር", "ላፕቶፕ", "ማክቡክ", "kompiitara", "laaptooppii"},
+	// Shoes & Footwear
+	{"shoe", "shoes", "sneakers", "boots", "loafers", "ጫማ", "ስኒከር", "ቡትስ", "kophee"},
+	// Clothes & Fashion
+	{"clothes", "clothing", "dress", "shirt", "pants", "suit", "jacket", "t-shirt", "ልብስ", "ቀሚስ", "ሱሪ", "ጃኬት", "ቲሸርት", "wayyaa", "uffata", "ክዳን"},
+	// Televisions & Screens
+	{"tv", "television", "smart tv", "screen", "ቲቪ", "ቴሌቪዥን", "televizhinii", "tivii"},
+	// Watches
+	{"watch", "watches", "smartwatch", "ሰዓት", "smart watch", "sa'aatii"},
+	// Furniture
+	{"furniture", "sofa", "bed", "table", "chair", "desk", "ፈርኒቸር", "ሶፋ", "አልጋ", "ጠረጴዛ", "ወንበር", "farnichara", "siree", "ዓራት"},
+	// Tools & Hardware
+	{"tool", "tools", "drill", "generator", "hammer", "saw", "መሣሪያ", "እቃ", "ጀነሬተር", "መሰርሰሪያ", "meeshaa"},
+}
+
+// GetSearchSynonyms returns cross-lingual synonyms matching the given term or any of its constituent words.
+func GetSearchSynonyms(term string) []string {
+	clean := strings.ToLower(strings.TrimSpace(term))
+	if clean == "" {
+		return nil
+	}
+
+	// Check if term matches mapped keyword
+	if mapped, ok := ethiopianKeywordMap[clean]; ok {
+		clean = mapped
+	}
+
+	words := strings.Fields(clean)
+
+	for _, group := range marketplaceSynonymGroups {
+		matched := false
+		cleanRunes := len([]rune(clean))
+		for _, member := range group {
+			memberRunes := len([]rune(member))
+			if clean == member || (memberRunes >= 2 && strings.Contains(clean, member)) || (cleanRunes >= 3 && strings.Contains(member, clean)) {
+				matched = true
+				break
+			}
+			for _, w := range words {
+				wRunes := len([]rune(w))
+				if w == member || (memberRunes >= 2 && strings.Contains(w, member)) || (wRunes >= 3 && strings.Contains(member, w)) {
+					matched = true
+					break
+				}
+			}
+			if matched {
+				break
+			}
+		}
+		if matched {
+			return group
+		}
+	}
+
+	return []string{clean}
+}
+
+// BuildSynonymTsQuery constructs a sanitized PostgreSQL tsquery string (e.g. "'phone' | 'ስልክ' | 'bilbila'")
+// for fast GIN index search matching across languages.
+func BuildSynonymTsQuery(term string) string {
+	syns := GetSearchSynonyms(term)
+	if len(syns) <= 1 {
+		return ""
+	}
+
+	seen := make(map[string]bool)
+	var tokens []string
+
+	for _, s := range syns {
+		// Only use single words for tsquery disjunction
+		s = strings.TrimSpace(s)
+		if s == "" || strings.Contains(s, " ") {
+			continue
+		}
+		// Sanitize special characters
+		sanitized := strings.Map(func(r rune) rune {
+			if r == '\'' || r == '"' || r == '\\' || r == '|' || r == '&' || r == '!' || r == '(' || r == ')' {
+				return -1
+			}
+			return r
+		}, s)
+		sanitized = strings.TrimSpace(sanitized)
+		if sanitized == "" || seen[sanitized] {
+			continue
+		}
+		seen[sanitized] = true
+		tokens = append(tokens, fmt.Sprintf("'%s'", sanitized))
+	}
+
+	if len(tokens) <= 1 {
+		return ""
+	}
+
+	return strings.Join(tokens, " | ")
+}
+
+// GetCanonicalEnglishTerm resolves any localized or alternative product term to its primary English catalog name.
+func GetCanonicalEnglishTerm(term string) string {
+	clean := strings.ToLower(strings.TrimSpace(term))
+	if clean == "" {
+		return ""
+	}
+	if mapped, ok := ethiopianKeywordMap[clean]; ok {
+		return mapped
+	}
+	cleanRunes := len([]rune(clean))
+	for _, group := range marketplaceSynonymGroups {
+		for _, m := range group {
+			mRunes := len([]rune(m))
+			if clean == m || (mRunes >= 2 && strings.Contains(clean, m)) || (cleanRunes >= 3 && strings.Contains(m, clean)) {
+				return group[0] // Primary English term
+			}
+		}
+	}
+	return clean
+}
+
+// GetLocalizedEntityTerm returns the entity name localized to the user's requested language.
+func GetLocalizedEntityTerm(term string, locale string) string {
+	canonical := GetCanonicalEnglishTerm(term)
+	loc := strings.ToLower(strings.TrimSpace(locale))
+
+	switch canonical {
+	case "phone":
+		switch loc {
+		case "am":
+			return "ስልክ"
+		case "om":
+			return "bilbila"
+		case "ti":
+			return "ሞባይል"
+		default:
+			return "phone"
+		}
+	case "car":
+		switch loc {
+		case "am":
+			return "መኪና"
+		case "om":
+			return "konkolaataa"
+		case "ti":
+			return "መኪና"
+		default:
+			return "car"
+		}
+	case "house":
+		switch loc {
+		case "am":
+			return "ቤት"
+		case "om":
+			return "mana"
+		case "ti":
+			return "ገዛ"
+		default:
+			return "house"
+		}
+	case "apartment":
+		switch loc {
+		case "am":
+			return "አፓርታማ"
+		case "om":
+			return "apaartaamaa"
+		case "ti":
+			return "ኣፓርታማ"
+		default:
+			return "apartment"
+		}
+	case "laptop":
+		switch loc {
+		case "am":
+			return "ላፕቶፕ"
+		case "om":
+			return "kompiitara"
+		case "ti":
+			return "ኮምፒውተር"
+		default:
+			return "laptop"
+		}
+	case "shoes", "shoe":
+		switch loc {
+		case "am":
+			return "ጫማ"
+		case "om":
+			return "kophee"
+		case "ti":
+			return "ጫማ"
+		default:
+			return "shoes"
+		}
+	case "clothes":
+		switch loc {
+		case "am":
+			return "ልብስ"
+		case "om":
+			return "wayyaa"
+		case "ti":
+			return "ክዳን"
+		default:
+			return "clothes"
+		}
+	case "tv":
+		switch loc {
+		case "am":
+			return "ቲቪ"
+		case "om":
+			return "televizhinii"
+		case "ti":
+			return "ቲቪ"
+		default:
+			return "TV"
+		}
+	case "watch":
+		switch loc {
+		case "am":
+			return "ሰዓት"
+		case "om":
+			return "sa'aatii"
+		case "ti":
+			return "ሰዓት"
+		default:
+			return "watch"
+		}
+	case "furniture":
+		switch loc {
+		case "am":
+			return "ፈርኒቸር"
+		case "om":
+			return "farnichara"
+		case "ti":
+			return "ፈርኒቸር"
+		default:
+			return "furniture"
+		}
+	case "generator":
+		switch loc {
+		case "am":
+			return "ጀነሬተር"
+		case "om":
+			return "jeneereetara"
+		case "ti":
+			return "ጀነሬተር"
+		default:
+			return "generator"
+		}
+	case "drill":
+		switch loc {
+		case "am":
+			return "መሰርሰሪያ"
+		case "om":
+			return "driiilii"
+		case "ti":
+			return "መሰርሰሪያ"
+		default:
+			return "drill"
+		}
+	default:
+		return term
+	}
 }
 
 

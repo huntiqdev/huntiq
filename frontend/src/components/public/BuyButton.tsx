@@ -15,7 +15,7 @@ export function BuyButton({ product }: { product: Product }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`mt-2 w-full text-white rounded-2xl py-4 font-bold text-lg transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 ${
+        className={`mt-2 w-full text-white rounded-2xl py-4 font-bold text-lg transition-all shadow-lg tap-bounce active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px] ${
           isRental 
             ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' 
             : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
@@ -29,16 +29,16 @@ export function BuyButton({ product }: { product: Product }) {
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 px-4 py-2.5 pb-[calc(env(safe-area-inset-bottom,12px)+6px)] shadow-2xl flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0 pr-1">
           <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider leading-none">
-            {isRental ? 'Rental Rate' : 'Total Price'}
+            {isRental ? (t.ui.rental_rate ?? 'Rental Rate') : (t.ui.total_price ?? 'Total Price')}
           </span>
           <span className={`text-base font-black truncate leading-tight mt-0.5 ${isRental ? 'text-teal-600' : 'text-orange-600'}`}>
-            ETB {isRental && product.rental_price ? product.rental_price.toLocaleString() : product.price.toLocaleString()}
+            ETB {isRental && product.rental_price != null ? product.rental_price.toLocaleString() : (product.price != null ? product.price.toLocaleString() : '—')}
           </span>
         </div>
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className={`flex-1 text-white rounded-xl py-3 px-4 font-black text-sm shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 ${
+          className={`flex-1 text-white rounded-xl py-3 px-4 font-black text-sm shadow-md transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 min-h-[44px] ${
             isRental 
               ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25' 
               : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/25'

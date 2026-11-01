@@ -15,9 +15,9 @@ const variants = {
 };
 
 const sizes = {
-  sm: 'px-3 py-1.5 text-xs rounded-lg',
-  md: 'px-4 py-2.5 text-sm rounded-xl',
-  lg: 'px-6 py-3.5 text-base rounded-2xl',
+  sm: 'px-3.5 py-2 text-xs rounded-xl min-h-[38px]',
+  md: 'px-4 py-2.5 text-sm rounded-xl min-h-[44px]',
+  lg: 'px-6 py-3.5 text-base rounded-2xl min-h-[48px]',
 };
 
 export function Button({ variant = 'primary', size = 'md', className, children, disabled, ...props }: Props) {
@@ -26,7 +26,7 @@ export function Button({ variant = 'primary', size = 'md', className, children, 
       {...props}
       disabled={disabled}
       className={cn(
-        'font-bold transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2',
+        'font-bold transition-all tap-bounce active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 select-none',
         variants[variant],
         sizes[size],
         className,

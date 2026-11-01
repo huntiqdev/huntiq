@@ -78,26 +78,26 @@ export default function ContactPage() {
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.your_name}</label>
                 <input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   disabled={loading}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50"
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50 transition-all"
                   placeholder={t.ui.your_name} />
               </div>
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.email_address}</label>
                 <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   disabled={loading}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50"
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50 transition-all"
                   placeholder="you@example.com" />
               </div>
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.message}</label>
                 <textarea required rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   disabled={loading}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 resize-none disabled:opacity-50"
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 resize-none disabled:opacity-50 transition-all"
                   placeholder={t.ui.message_placeholder} />
               </div>
               <button type="submit"
                 disabled={loading}
-                className="w-full bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white rounded-xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-colors">
+                className="w-full bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white rounded-xl py-3.5 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md">
                 {loading ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />

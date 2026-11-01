@@ -1,0 +1,38 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.556045773Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "lifestyle",
+  "root_family": {
+    "id": 9,
+    "parent_id": null,
+    "slug": "lifestyle",
+    "level": 0,
+    "path": "/9/",
+    "canonical_name": "Lifestyle \u0026 Wellness",
+    "name_en": "Lifestyle \u0026 Wellness",
+    "name_am": "የአኗኗር ዘይቤ",
+    "name_om": "Akkaataa Jireenyaa",
+    "name_ti": "ኣነባብራ",
+    "definition": "",
+    "display_order": 9,
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-10-22T01:57:37.540684Z",
+    "updated_at": "2026-10-26T12:35:05.312834Z",
+    "translations": {
+      "am": "የአኗኗር ዘይቤ",
+      "en": "Lifestyle \u0026 Wellness",
+      "or": "Akkaataa Jireenyaa",
+      "ti": "ኣነባብራ"
+    },
+    "aliases": {}
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "HOME_APPLIANCES",
+  "root_family": {
+    "id": "root-major-appliances",
+    "slug": "major-home-kitchen-appliances",
+    "code": "HOME_APPLIANCES",
+    "level": 1,
+    "canonical_name": "Major Home \u0026 Kitchen Appliances",
+    "definition": "Large white goods, double-door frost-free refrigerators, chest deep-freezers, front-load washing machines, and gas/electric cooking ranges.",
+    "inclusion_rules": [
+      "Refrigerators",
+      "Deep freezers",
+      "Washing machines",
+      "Electric stoves / cookers",
+      "Microwave ovens"
+    ],
+    "exclusion_rules": [
+      "Small blenders and electric mitad (see Small Domestic Appliances)"
+    ],
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Tv",
+    "translations": {
+      "am": "የቤት ውስጥ ትላልቅ ኤሌክትሮኒክስ (ፍሪጅ፣ ማጠቢያ ማሽን)",
+      "or": "Meeshaalee Manaa Gurguddoo (Firiijii fi Meeshaa Dhiqqaa)",
+      "ti": "ናይ ገዛ ዓበይቲ ኤሌክትሮኒክስ (ፍሪጅ፣ ማሽን ሕጽበ)"
+    },
+    "aliases": {
+      "am": [
+        "ፍሪጅ",
+        "ማቀዝቀዣ",
+        "የልብስ ማጠቢያ",
+        "ምድጃ",
+        "ኦቨን"
+      ],
+      "en": [
+        "appliances",
+        "refrigerator",
+        "fridge",
+        "freezer",
+        "washing machine",
+        "stove",
+        "oven"
+      ],
+      "or": [
+        "firiijii",
+        "maashina uffataa",
+        "eeksaasii"
+      ],
+      "ti": [
+        "ፍሪጅ",
+        "ናይ ክዳን ማሽን",
+        "እቶን"
+      ]
+    },
+    "children": [
+      {
+        "id": "sf-refrigerators-freezers",
+        "slug": "refrigerators-deep-freezers",
+        "code": "APP_REFRIGERATION",
+        "level": 2,
+        "canonical_name": "Refrigerators, Chest Freezers \u0026 Coolers (ፍሪጆች)",
+        "definition": "Energy-efficient inverter compressor refrigerators, upright frost-free freezers, and horizontal commercial chest freezers.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ፍሪጆች እና የበረዶ ማቀዝቀዣዎች",
+          "or": "Firiijii fi Kuusaa Qabbanaawaa",
+          "ti": "ፍሪጃትን ናይ በረድ መዝቀጥታትን"
+        },
+        "identifiers": [
+          {
+            "type": "UNSPSC",
+            "code": "52141501",
+            "name": "Domestic refrigerators"
+          }
+        ]
+      },
+      {
+        "id": "sf-washing-machines",
+        "slug": "automatic-washing-machines-dryers",
+        "code": "APP_LAUNDRY",
+        "level": 2,
+        "canonical_name": "Automatic Washing Machines \u0026 Tumble Dryers",
+        "definition": "Front-loading and top-loading automatic laundry washing machines and combo washer-dryers (6kg to 16kg).",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "አውቶማቲክ የልብስ ማጠቢያ ማሽኖች",
+          "or": "Maashina Uffata Dhiqu",
+          "ti": "ኣውቶማቲክ ናይ ክዳውንቲ መሕጸቢ ማሽናት"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,784 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "AGRI_CROPS",
+  "root_family": {
+    "id": "root-agri-crops",
+    "slug": "agriculture-crop-farming",
+    "code": "AGRI_CROPS",
+    "level": 1,
+    "canonical_name": "Agriculture \u0026 Crop Farming",
+    "definition": "Commercial and smallholder cultivation of cereal grains, oilseeds, pulses, stimulants, and staple field crops.",
+    "inclusion_rules": [
+      "Raw and dried whole grains",
+      "Legumes and pulse crops",
+      "Oilseed harvests",
+      "Cultivated field staple crops"
+    ],
+    "exclusion_rules": [
+      "Prepared grocery foods or packaged flour (see Food \u0026 Groceries)",
+      "Agricultural machinery and tractors (see Heavy Machinery)"
+    ],
+    "examples": [
+      "Teff grain",
+      "Wheat grain",
+      "Sesame seed",
+      "Faba beans",
+      "Chickpeas",
+      "Soybeans"
+    ],
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Wheat",
+    "translations": {
+      "am": "ግብርና እና የእህል ሰብሎች ልማት",
+      "or": "Qonnaa fi Oomisha Midhaanii",
+      "ti": "ሕርሻን ናይ እኽሊ ሰብልታትን"
+    },
+    "aliases": {
+      "am": [
+        "ግብርና",
+        "እህል",
+        "ሰብል",
+        "የእህል ምርት",
+        "የእርሻ ሰብል"
+      ],
+      "en": [
+        "agriculture",
+        "crops",
+        "farming",
+        "grains",
+        "harvest",
+        "field crops"
+      ],
+      "or": [
+        "qonnaa",
+        "midhaan",
+        "oomisha qonnaa",
+        "sanyii midhaanii"
+      ],
+      "ti": [
+        "ሕርሻ",
+        "እኽሊ",
+        "ሰብሊ",
+        "ፍርያት ሕርሻ"
+      ]
+    },
+    "children": [
+      {
+        "id": "sf-agri-cereals",
+        "slug": "cereal-grains-staples",
+        "code": "AGRI_CEREALS",
+        "level": 2,
+        "canonical_name": "Cereal Grains \u0026 Staple Crops",
+        "definition": "Major cereal grasses grown for edible starchy grain components.",
+        "inclusion_rules": [
+          "Teff",
+          "Wheat",
+          "Barley",
+          "Maize",
+          "Sorghum",
+          "Millet",
+          "Rice"
+        ],
+        "exclusion_rules": [
+          "Processed breakfast cereals",
+          "Wheat flour"
+        ],
+        "status": "active",
+        "is_leaf": false,
+        "translations": {
+          "am": "የእህል እህሎች እና ዋና ሰብሎች",
+          "or": "Midhaan Dhedhii fi Nyaata Bu'uuraa",
+          "ti": "እኽልታትን መሰረታዊ ሰብልታትን"
+        },
+        "aliases": {
+          "am": [
+            "የእህል ዓይነቶች",
+            "ጥራጥሬዎች"
+          ],
+          "en": [
+            "cereals",
+            "staple grains",
+            "cereal crops"
+          ],
+          "or": [
+            "gosoota midhaanii"
+          ],
+          "ti": [
+            "ዓይነታት እኽሊ"
+          ]
+        },
+        "children": [
+          {
+            "id": "cat-cereal-teff",
+            "slug": "teff-grain",
+            "code": "CEREAL_TEFF",
+            "level": 3,
+            "canonical_name": "Teff Grain (ጤፍ)",
+            "definition": "Endemic Ethiopian cereal grain essential for injera preparation.",
+            "status": "active",
+            "is_leaf": false,
+            "translations": {
+              "am": "የጤፍ እህል",
+              "or": "Midhaan Xaafii",
+              "ti": "እኽሊ ጣፍ"
+            },
+            "aliases": {
+              "am": [
+                "ጤፍ",
+                "የጤፍ እህል",
+                "ነጭ ጤፍ",
+                "ሰርገኛ ጤፍ",
+                "ቀይ ጤፍ",
+                "ማግና ጤፍ"
+              ],
+              "en": [
+                "teff",
+                "tef",
+                "eragrostis tef",
+                "white teff",
+                "brown teff"
+              ],
+              "or": [
+                "xaafii",
+                "midhaan xaafii",
+                "xaafii adii",
+                "xaafii diimaa"
+              ],
+              "ti": [
+                "ጣፍ",
+                "እኽሊ ጣፍ",
+                "ጻዕዳ ጣፍ",
+                "ቀይሕ ጣፍ"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Eragrostis tef",
+                "name": "Teff Botanical Species"
+              },
+              {
+                "type": "UNSPSC",
+                "code": "10151500",
+                "name": "Raw cereals and grains"
+              }
+            ],
+            "attributes": [
+              {
+                "slug": "crop-grade",
+                "name_en": "Teff Grade",
+                "data_type": "select",
+                "is_required": true,
+                "is_filterable": true,
+                "validation_rules": {
+                  "options": [
+                    "Magna (Super White)",
+                    "Nech (White)",
+                    "Sergegna (Mixed)",
+                    "Key (Brown/Red)"
+                  ]
+                }
+              },
+              {
+                "slug": "crop-origin-region",
+                "name_en": "Harvest Region",
+                "data_type": "select",
+                "is_required": false,
+                "is_filterable": true,
+                "validation_rules": {
+                  "options": [
+                    "Gojjam (Amhara)",
+                    "Shewa (Oromia)",
+                    "Wollo (Amhara)",
+                    "Tigray",
+                    "Other"
+                  ]
+                }
+              },
+              {
+                "slug": "moisture-content-percent",
+                "name_en": "Moisture Content (%)",
+                "data_type": "number",
+                "unit": "%",
+                "is_required": false,
+                "is_filterable": true
+              }
+            ],
+            "children": [
+              {
+                "id": "leaf-teff-magna",
+                "slug": "magna-super-white-teff",
+                "code": "TEFF_MAGNA",
+                "level": 4,
+                "canonical_name": "Magna Super-White Teff Grain",
+                "definition": "Premium grade bright-white teff grain cultivated in fertile highlands (East Gojjam, Ada'a/Bishoftu).",
+                "status": "active",
+                "is_leaf": true,
+                "translations": {
+                  "am": "ማግና ሱፐር ነጭ ጤፍ",
+                  "or": "Xaafii Adii Magnaa",
+                  "ti": "ማግና ጻዕዳ ጣፍ"
+                }
+              },
+              {
+                "id": "leaf-teff-sergegna",
+                "slug": "sergegna-mixed-teff",
+                "code": "TEFF_SERGEGNA",
+                "level": 4,
+                "canonical_name": "Sergegna Mixed Red \u0026 White Teff Grain",
+                "definition": "Nutrient-dense blended white and red grain teff offering optimal traditional sour-dough fermentation.",
+                "status": "active",
+                "is_leaf": true,
+                "translations": {
+                  "am": "ሰርገኛ ቅይጥ ጤፍ",
+                  "or": "Xaafii Makamaa Sargeenyaa",
+                  "ti": "ሰርገኛ ሕውስዋስ ጣፍ"
+                }
+              },
+              {
+                "id": "leaf-teff-key",
+                "slug": "key-brown-red-teff",
+                "code": "TEFF_KEY",
+                "level": 4,
+                "canonical_name": "Key Brown \u0026 Red Iron-Rich Teff Grain",
+                "definition": "High-iron content red and brown varieties cultivated across diverse microclimates.",
+                "status": "active",
+                "is_leaf": true,
+                "translations": {
+                  "am": "ቀይ / ቡናማ ጤፍ",
+                  "or": "Xaafii Diimaa",
+                  "ti": "ቀይሕ ጣፍ"
+                }
+              }
+            ]
+          },
+          {
+            "id": "cat-cereal-wheat",
+            "slug": "wheat-grain",
+            "code": "CEREAL_WHEAT",
+            "level": 3,
+            "canonical_name": "Wheat Grain (ስንዴ)",
+            "definition": "Bread wheat and durum wheat grains for milling, pasta production, and food manufacture.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የስንዴ እህል",
+              "or": "Midhaan Qamadii",
+              "ti": "እኽሊ ስርናይ"
+            },
+            "aliases": {
+              "am": [
+                "ስንዴ",
+                "የስንዴ እህል",
+                "የዳቦ ስንዴ"
+              ],
+              "en": [
+                "wheat",
+                "raw wheat",
+                "durum wheat",
+                "bread wheat"
+              ],
+              "or": [
+                "qamadii",
+                "midhaan qamadii"
+              ],
+              "ti": [
+                "ስርናይ",
+                "እኽሊ ስርናይ"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Triticum aestivum",
+                "name": "Bread Wheat"
+              },
+              {
+                "type": "UNSPSC",
+                "code": "10151501",
+                "name": "Raw wheat"
+              }
+            ]
+          },
+          {
+            "id": "cat-cereal-barley",
+            "slug": "barley-grain",
+            "code": "CEREAL_BARLEY",
+            "level": 3,
+            "canonical_name": "Barley Grain (ገብስ)",
+            "definition": "Food barley, malting barley for brewing, and feed barley.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የገብስ እህል",
+              "or": "Midhaan Garbuu",
+              "ti": "እኽሊ ስገም"
+            },
+            "aliases": {
+              "am": [
+                "ገብስ",
+                "የገብስ እህል",
+                "የቢራ ገብስ"
+              ],
+              "en": [
+                "barley",
+                "malt barley",
+                "food barley"
+              ],
+              "or": [
+                "garbuu",
+                "midhaan garbuu"
+              ],
+              "ti": [
+                "ስገም",
+                "እኽሊ ስገም"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Hordeum vulgare",
+                "name": "Barley"
+              },
+              {
+                "type": "UNSPSC",
+                "code": "10151502",
+                "name": "Raw barley"
+              }
+            ]
+          },
+          {
+            "id": "cat-cereal-maize",
+            "slug": "maize-corn-grain",
+            "code": "CEREAL_MAIZE",
+            "level": 3,
+            "canonical_name": "Maize \u0026 Corn Grain (በቆሎ)",
+            "definition": "Field corn, white maize, and yellow maize for human consumption, starch extraction, and animal feeds.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የበቆሎ እህል",
+              "or": "Boqqolloo",
+              "ti": "እኽሊ ኣፉን"
+            },
+            "aliases": {
+              "am": [
+                "በቆሎ",
+                "የበቆሎ እህል",
+                "ነጭ በቆሎ"
+              ],
+              "en": [
+                "maize",
+                "corn",
+                "grain corn",
+                "white maize"
+              ],
+              "or": [
+                "boqqolloo",
+                "midhaan boqqolloo"
+              ],
+              "ti": [
+                "ኣፉን",
+                "ዕፉን",
+                "እኽሊ ኣፉን"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Zea mays",
+                "name": "Maize"
+              },
+              {
+                "type": "UNSPSC",
+                "code": "10151503",
+                "name": "Raw corn"
+              }
+            ]
+          },
+          {
+            "id": "cat-cereal-sorghum",
+            "slug": "sorghum-grain",
+            "code": "CEREAL_SORGHUM",
+            "level": 3,
+            "canonical_name": "Sorghum Grain (ማሽላ)",
+            "definition": "Drought-tolerant sorghum grain for flatbreads, porridge, and traditional beverages.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የማሽላ እህል",
+              "or": "Mishingaa",
+              "ti": "እኽሊ መሸላ"
+            },
+            "aliases": {
+              "am": [
+                "ማሽላ",
+                "የማሽላ እህል"
+              ],
+              "en": [
+                "sorghum",
+                "milo",
+                "guinea corn"
+              ],
+              "or": [
+                "mishingaa"
+              ],
+              "ti": [
+                "መሸላ",
+                "እኽሊ መሸላ"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sf-agri-oilseeds",
+        "slug": "oilseeds-industrial-crops",
+        "code": "AGRI_OILSEEDS",
+        "level": 2,
+        "canonical_name": "Oilseeds \u0026 Industrial Export Crops",
+        "definition": "Seeds cultivated primarily for vegetable edible oil extraction and export trade.",
+        "inclusion_rules": [
+          "Sesame seed",
+          "Niger seed (Noug)",
+          "Linseed/Flaxseed",
+          "Soybeans",
+          "Sunflower seeds",
+          "Castor beans"
+        ],
+        "exclusion_rules": [
+          "Extracted and refined cooking oils (see Food \u0026 Groceries)"
+        ],
+        "status": "active",
+        "is_leaf": false,
+        "translations": {
+          "am": "የቅባት እህሎች እና የኢንዱስትሪ ሰብሎች",
+          "or": "Sanyii Zayitaa fi Oomisha Daldalaa",
+          "ti": "ናይ ቅብኣት እኽልታትን ንግዳዊ ሰብልታትን"
+        },
+        "aliases": {
+          "am": [
+            "የቅባት እህል",
+            "ሰሊጥ",
+            "ኑግ",
+            "ተልባ",
+            "ሱፍ"
+          ],
+          "en": [
+            "oilseeds",
+            "sesame",
+            "noug",
+            "flaxseed",
+            "linseed"
+          ],
+          "or": [
+            "sanyii zayitaa",
+            "saliixa",
+            "nuugii"
+          ],
+          "ti": [
+            "ናይ ቅብኣት እኽሊ",
+            "ሰሊጥ",
+            "ኑግ",
+            "ጣሊያን"
+          ]
+        },
+        "children": [
+          {
+            "id": "cat-oilseed-sesame",
+            "slug": "sesame-seed",
+            "code": "OILSEED_SESAME",
+            "level": 3,
+            "canonical_name": "Sesame Seed (ሰሊጥ)",
+            "definition": "White Humera, Wollega, and Metema export sesame seeds.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የሰሊጥ ፍሬ",
+              "or": "Sanyii Saliixaa",
+              "ti": "ፍረ ሰሊጥ"
+            },
+            "aliases": {
+              "am": [
+                "ሰሊጥ",
+                "የሰሊጥ ፍሬ",
+                "ሁመራ ሰሊጥ",
+                "ወለጋ ሰሊጥ"
+              ],
+              "en": [
+                "sesame",
+                "sesame seed",
+                "humera sesame",
+                "wollega sesame"
+              ],
+              "or": [
+                "saliixa",
+                "sanyii saliixaa"
+              ],
+              "ti": [
+                "ሰሊጥ",
+                "ፍረ ሰሊጥ",
+                "ሁመራ ሰሊጥ"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Sesamum indicum",
+                "name": "Sesame"
+              },
+              {
+                "type": "UNSPSC",
+                "code": "10151515",
+                "name": "Sesame seed"
+              }
+            ]
+          },
+          {
+            "id": "cat-oilseed-noug",
+            "slug": "niger-seed-noug",
+            "code": "OILSEED_NOUG",
+            "level": 3,
+            "canonical_name": "Niger Seed / Noug (ኑግ)",
+            "definition": "Indigenous Ethiopian high-oil content seed used for domestic culinary oil processing.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የኑግ ፍሬ",
+              "or": "Sanyii Nuugii",
+              "ti": "ፍረ ኑግ"
+            },
+            "aliases": {
+              "am": [
+                "ኑግ",
+                "የኑግ ፍሬ",
+                "ንፁህ ኑግ"
+              ],
+              "en": [
+                "noug",
+                "niger seed",
+                "neug"
+              ],
+              "or": [
+                "nuugii",
+                "sanyii nuugii"
+              ],
+              "ti": [
+                "ኑግ",
+                "ፍረ ኑግ"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Guizotia abyssinica",
+                "name": "Niger seed"
+              }
+            ]
+          },
+          {
+            "id": "cat-oilseed-flaxseed",
+            "slug": "linseed-flaxseed",
+            "code": "OILSEED_FLAX",
+            "level": 3,
+            "canonical_name": "Linseed \u0026 Flaxseed (ተልባ)",
+            "definition": "Brown and golden flaxseed harvested for food beverage preparation and omega-3 oil pressing.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የተልባ ፍሬ",
+              "or": "Talbaa",
+              "ti": "ፍረ እንጣጢዕ"
+            },
+            "aliases": {
+              "am": [
+                "ተልባ",
+                "የተልባ ፍሬ"
+              ],
+              "en": [
+                "flaxseed",
+                "linseed",
+                "flax"
+              ],
+              "or": [
+                "talbaa",
+                "sanyii talbaa"
+              ],
+              "ti": [
+                "እንጣጢዕ",
+                "ፍረ እንጣጢዕ"
+              ]
+            }
+          },
+          {
+            "id": "cat-oilseed-soybean",
+            "slug": "soybeans-grain",
+            "code": "OILSEED_SOY",
+            "level": 3,
+            "canonical_name": "Soybeans (አኩሪ አተር)",
+            "definition": "Commercial edible legumes cultivated for industrial soy processing, lecithin, and protein feed.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "አኩሪ አተር",
+              "or": "Soyaabinii",
+              "ti": "ኣኩሪ ኣተር"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sf-agri-pulses",
+        "slug": "pulses-legumes-beans",
+        "code": "AGRI_PULSES",
+        "level": 2,
+        "canonical_name": "Pulses, Legumes \u0026 Dried Beans",
+        "definition": "High-protein dried legume seeds harvested from pods for human food staples.",
+        "inclusion_rules": [
+          "Faba beans (Bakela)",
+          "Chickpeas (Shimbra)",
+          "Lentils (Misir)",
+          "Field peas (Ater)",
+          "Haricot beans (Boleqe)"
+        ],
+        "exclusion_rules": [
+          "Cooked stews or packaged shiro powder (see Food \u0026 Groceries)"
+        ],
+        "status": "active",
+        "is_leaf": false,
+        "translations": {
+          "am": "የጥራጥሬ ሰብሎች እና አተር/ምስር",
+          "or": "Oomisha Mi'eessituu fi Boqqolloo",
+          "ti": "ጥራጥሬታትን ዓተርን ምስርን"
+        },
+        "children": [
+          {
+            "id": "cat-pulse-lentils",
+            "slug": "dried-lentils",
+            "code": "PULSE_LENTIL",
+            "level": 3,
+            "canonical_name": "Dried Lentils (ምስር)",
+            "definition": "Red, brown, and green whole and split dried lentils.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የምስር ክክ / ፍሬ",
+              "or": "Misira",
+              "ti": "ምስሪ"
+            },
+            "aliases": {
+              "am": [
+                "ምስር",
+                "የምስር ክክ",
+                "ቀይ ምስር"
+              ],
+              "en": [
+                "lentils",
+                "red lentils",
+                "brown lentils",
+                "misir"
+              ],
+              "or": [
+                "misira",
+                "misira diimaa"
+              ],
+              "ti": [
+                "ምስሪ",
+                "ቀይሕ ምስሪ"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Lens culinaris",
+                "name": "Lentil"
+              }
+            ]
+          },
+          {
+            "id": "cat-pulse-chickpeas",
+            "slug": "chickpeas-shimbra",
+            "code": "PULSE_CHICKPEA",
+            "level": 3,
+            "canonical_name": "Chickpeas (ሽምብራ)",
+            "definition": "Desi and Kabuli whole dried chickpeas used for roasting, boiling, and shiro base.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የሽምብራ ፍሬ",
+              "or": "Shumburaa",
+              "ti": "ዓተር ጓጓ"
+            },
+            "aliases": {
+              "am": [
+                "ሽምብራ",
+                "የሽምብራ ፍሬ"
+              ],
+              "en": [
+                "chickpeas",
+                "garbanzo beans",
+                "shimbra"
+              ],
+              "or": [
+                "shumburaa"
+              ],
+              "ti": [
+                "ዓተር ጓጓ",
+                "ሽምብራ"
+              ]
+            },
+            "identifiers": [
+              {
+                "type": "TAXONOMIC",
+                "code": "Cicer arietinum",
+                "name": "Chickpea"
+              }
+            ]
+          },
+          {
+            "id": "cat-pulse-faba-beans",
+            "slug": "faba-beans-bakela",
+            "code": "PULSE_FABA",
+            "level": 3,
+            "canonical_name": "Faba Beans / Broad Beans (ባቄላ)",
+            "definition": "Dried large faba beans for foul preparation and food staples.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የባቄላ ፍሬ",
+              "or": "Baqqelaa",
+              "ti": "ባልዶንጓ"
+            },
+            "aliases": {
+              "am": [
+                "ባቄላ",
+                "የባቄላ ፍሬ"
+              ],
+              "en": [
+                "faba beans",
+                "broad beans",
+                "bakela"
+              ],
+              "or": [
+                "baqqelaa"
+              ],
+              "ti": [
+                "ባልዶንጓ",
+                "ባቄላ"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

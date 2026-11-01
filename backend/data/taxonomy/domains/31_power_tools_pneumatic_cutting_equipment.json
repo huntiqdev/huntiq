@@ -1,0 +1,70 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "TOOLS_POWER",
+  "root_family": {
+    "id": "root-power-tools",
+    "slug": "power-tools-pneumatic-cutting-equipment",
+    "code": "TOOLS_POWER",
+    "level": 1,
+    "canonical_name": "Power Tools, Pneumatic Tools \u0026 Cutting Equipment",
+    "definition": "Cordless brushless drills, rotary hammer drills, angle grinders, circular saws, and pneumatic impact wrenches (Bosch, DeWalt, Makita, Ingco).",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Zap",
+    "translations": {
+      "am": "የኤሌክትሪክ እና የባትሪ እጅ ማሽኖች (ድሪል፣ ግራይንደር)",
+      "or": "Maashinoota Harka Elektirikii (Diriilii fi Giraayindara)",
+      "ti": "ናይ ኤሌክትሪክ መሳርሒታት (ድሪልን ግራይንደርን)"
+    },
+    "children": [
+      {
+        "id": "sf-angle-grinders-drills",
+        "slug": "rotary-hammer-drills-angle-grinders",
+        "code": "POWER_DRILLS",
+        "level": 2,
+        "canonical_name": "Rotary Hammer Drills, Impact Drivers \u0026 Angle Grinders",
+        "definition": "SDS-plus rotary hammer drills, 4.5-inch and 9-inch metal cutting angle grinders, and cordless drivers.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ድሪሎች፣ ግራይንደሮች እና የኮንክሪት መበሻዎች",
+          "or": "Diriilii fi Giraayindara",
+          "ti": "ድሪላትን ግራይንደራትን"
+        },
+        "aliases": {
+          "am": [
+            "ድሪል",
+            "ግራይንደር",
+            "የብረት መቁረጫ",
+            "የእንጨት መቁረጫ"
+          ],
+          "en": [
+            "power tool",
+            "drill",
+            "grinder",
+            "angle grinder",
+            "rotary hammer",
+            "bosch",
+            "ingco"
+          ],
+          "or": [
+            "diriilii",
+            "giraayindara"
+          ],
+          "ti": [
+            "ድሪል",
+            "ግራይንደር"
+          ]
+        }
+      }
+    ]
+  }
+}

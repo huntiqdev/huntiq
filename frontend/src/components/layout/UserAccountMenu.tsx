@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useLocaleContext } from '@/context/LocaleContext';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import {
   User,
@@ -29,6 +30,8 @@ export function UserAccountMenu() {
     logout,
   } = useAuth();
   const router = useRouter();
+  const { t } = useLocaleContext();
+  const u = ((t as any)?.ui ?? {}) as Record<string, string>;
 
   const [isOpen, setIsOpen] = useState(false);
   const [activationCap, setActivationCap] = useState<'seller' | 'landlord' | null>(null);
@@ -54,13 +57,16 @@ export function UserAccountMenu() {
     return (
       <Link
         href="/auth"
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/30 transition-all border border-orange-600/30"
+        className="flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full text-xs font-black uppercase tracking-wider text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/30 transition-all border border-orange-600/30 tap-bounce active:scale-95"
       >
         <User size={14} />
-        <span>Sign In</span>
+        <span>{u.tab_sign_in || 'Sign In'}</span>
       </Link>
     );
   }
+
+  const displayName = user.name || u.account_title || 'Account';
+  const displayInitial = (user.name?.[0] || user.role?.[0] || 'U').toUpperCase();
 
   const handleSignOut = async () => {
     setIsOpen(false);
@@ -74,13 +80,14 @@ export function UserAccountMenu() {
         {/* User Button */}
         <button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center gap-2 p-1 pl-2 pr-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 text-xs font-bold"
+          className="flex items-center gap-2 p-1 pl-2 pr-2.5 min-h-[36px] rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 text-xs font-bold tap-bounce active:scale-95"
+          aria-label="User account menu"
         >
           <div className="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center font-black text-xs">
-            {user.role?.[0]?.toUpperCase() || 'U'}
+            {displayInitial}
           </div>
-          <span className="hidden sm:inline text-zinc-800 dark:text-zinc-200">
-            Account
+          <span className="max-w-[90px] sm:max-w-[140px] truncate text-zinc-800 dark:text-zinc-200">
+            {displayName}
           </span>
           <ChevronDown
             size={12}
@@ -95,15 +102,20 @@ export function UserAccountMenu() {
             <div className="p-3 bg-zinc-50 dark:bg-white/[0.03] rounded-2xl mb-3 border border-zinc-200/60 dark:border-white/5">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
-                  Unified Identity
+                  {u.unified_identity || 'Unified Identity'}
                 </span>
                 <span className="text-[10px] bg-green-500/10 text-green-500 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <CheckCircle2 size={10} /> Active
+                  <CheckCircle2 size={10} /> {u.status_active || 'Active'}
                 </span>
               </div>
-              <p className="text-xs font-bold text-zinc-900 dark:text-white truncate">
-                User #{user.id}
+              <p className="text-sm font-black text-zinc-900 dark:text-white truncate">
+                {user.name || `User #${user.id}`}
               </p>
+              {user.phone && (
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium truncate">
+                  {user.phone}
+                </p>
+              )}
               <div className="flex flex-wrap gap-1 mt-2">
                 {capabilities.map((cap) => (
                   <span
@@ -121,7 +133,7 @@ export function UserAccountMenu() {
               {/* Consumer Persona: Buyer & Renter */}
               <div>
                 <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
-                  Customer Hub (Demand Side)
+                  {u.customer_hub_title || 'Customer Hub (Demand Side)'}
                 </p>
                 <Link
                   href="/buyer/dashboard"
@@ -130,16 +142,16 @@ export function UserAccountMenu() {
                 >
                   <div className="flex items-center gap-2.5">
                     <User size={15} className="text-zinc-400" />
-                    <span>Buyer & Renter Portal</span>
+                    <span>{u.buyer_renter_portal || 'Buyer & Renter Portal'}</span>
                   </div>
-                  <span className="text-[10px] text-zinc-400 font-normal">Active</span>
+                  <span className="text-[10px] text-zinc-400 font-normal">{u.status_active || 'Active'}</span>
                 </Link>
               </div>
 
               {/* Provider Personas: Seller & Landlord */}
               <div>
                 <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
-                  Provider Studios (Supply Side)
+                  {u.provider_studios_title || 'Provider Studios (Supply Side)'}
                 </p>
 
                 {/* Seller Studio */}
@@ -151,9 +163,9 @@ export function UserAccountMenu() {
                   >
                     <div className="flex items-center gap-2.5">
                       <ShoppingBag size={15} className="text-orange-500" />
-                      <span>Seller Studio (Goods Sales)</span>
+                      <span>{u.seller_studio || 'Seller Studio (Goods Sales)'}</span>
                     </div>
-                    <span className="text-[10px] text-green-500 font-bold">Enabled</span>
+                    <span className="text-[10px] text-green-500 font-bold">{u.status_enabled || 'Enabled'}</span>
                   </Link>
                 ) : (
                   <button
@@ -166,7 +178,7 @@ export function UserAccountMenu() {
                   >
                     <div className="flex items-center gap-2.5">
                       <Sparkles size={15} />
-                      <span>Activate Seller Studio</span>
+                      <span>{u.activate_seller_studio || 'Activate Seller Studio'}</span>
                     </div>
                     <span className="text-[9px] uppercase tracking-wider font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded">
                       Sale
@@ -183,9 +195,9 @@ export function UserAccountMenu() {
                   >
                     <div className="flex items-center gap-2.5">
                       <Home size={15} className="text-teal-500" />
-                      <span>Landlord Console (Rentals)</span>
+                      <span>{u.landlord_console || 'Landlord Console (Rentals)'}</span>
                     </div>
-                    <span className="text-[10px] text-green-500 font-bold">Enabled</span>
+                    <span className="text-[10px] text-green-500 font-bold">{u.status_enabled || 'Enabled'}</span>
                   </Link>
                 ) : (
                   <button
@@ -198,7 +210,7 @@ export function UserAccountMenu() {
                   >
                     <div className="flex items-center gap-2.5">
                       <Home size={15} />
-                      <span>Activate Landlord Console</span>
+                      <span>{u.activate_landlord_console || 'Activate Landlord Console'}</span>
                     </div>
                     <span className="text-[9px] uppercase tracking-wider font-bold bg-teal-600 text-white px-1.5 py-0.5 rounded">
                       Rent
@@ -211,7 +223,7 @@ export function UserAccountMenu() {
               {isAdmin && (
                 <div>
                   <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 py-1">
-                    Platform Governance
+                    {u.platform_governance || 'Platform Governance'}
                   </p>
                   <Link
                     href="/admin/dashboard"
@@ -220,7 +232,7 @@ export function UserAccountMenu() {
                   >
                     <div className="flex items-center gap-2.5">
                       <Shield size={15} />
-                      <span>Admin Control Center</span>
+                      <span>{u.admin_control_center || 'Admin Control Center'}</span>
                     </div>
                     <span className="text-[9px] uppercase font-bold bg-red-600 text-white px-1.5 py-0.5 rounded">
                       Admin
@@ -238,7 +250,7 @@ export function UserAccountMenu() {
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors"
               >
                 <PlusCircle size={15} />
-                <span>Create New Listing</span>
+                <span>{u.create_new_listing || 'Create New Listing'}</span>
               </Link>
               <button
                 type="button"
@@ -246,7 +258,7 @@ export function UserAccountMenu() {
                 className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors text-left"
               >
                 <LogOut size={15} />
-                <span>Sign Out</span>
+                <span>{u.sign_out || 'Sign Out'}</span>
               </button>
             </div>
           </div>

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.52377844Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "industrial-chemicals-raw-substances-reagents",
+  "root_family": {
+    "id": 7707,
+    "parent_id": null,
+    "slug": "industrial-chemicals-raw-substances-reagents",
+    "level": 0,
+    "path": "/7707/",
+    "canonical_name": "Industrial Chemicals, Raw Substances \u0026 Reagents",
+    "name_en": "Industrial Chemicals, Raw Substances \u0026 Reagents",
+    "name_am": "የኢንዱስትሪ ኬሚካሎች፣ ጥሬ እቃዎች እና ሬጀንቶች",
+    "name_om": "Keemikaala Warshaa fi Meeshaalee Dhedhii",
+    "name_ti": "ናይ ኢንዱስትሪ ኬሚካላትን ጥረ ነገራትን",
+    "definition": "Textile dyes, leather tanning salts, industrial surfactants, caustic soda, hydrochloric acid, laboratory reagents, and raw plastics.",
+    "display_order": 0,
+    "icon": "FlaskConical",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.206114Z",
+    "updated_at": "2026-11-01T11:27:00.206114Z",
+    "translations": {
+      "am": "የኢንዱስትሪ ኬሚካሎች፣ ጥሬ እቃዎች እና ሬጀንቶች",
+      "en": "Industrial Chemicals, Raw Substances \u0026 Reagents",
+      "or": "Keemikaala Warshaa fi Meeshaalee Dhedhii",
+      "ti": "ናይ ኢንዱስትሪ ኬሚካላትን ጥረ ነገራትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7708,
+        "parent_id": 7707,
+        "slug": "industrial-processing-chemicals-salts",
+        "level": 1,
+        "path": "/7707/7708/",
+        "canonical_name": "Industrial Processing Chemicals \u0026 Salts",
+        "name_en": "Industrial Processing Chemicals \u0026 Salts",
+        "name_am": "የማምረቻ ኬሚካሎች (ኮስቲክ ሶዳ፣ አሲድ)",
+        "name_om": "Keemikaala Oomishaa fi Qoricha",
+        "name_ti": "ናይ ምፍራይ ኬሚካላት",
+        "definition": "Bulk caustic soda (sodium hydroxide, CAS 1310-73-2), sulfuric acid, sodium hypochlorite, and industrial detergents.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.209724Z",
+        "updated_at": "2026-11-01T11:27:00.209724Z",
+        "translations": {
+          "am": "የማምረቻ ኬሚካሎች (ኮስቲክ ሶዳ፣ አሲድ)",
+          "en": "Industrial Processing Chemicals \u0026 Salts",
+          "or": "Keemikaala Oomishaa fi Qoricha",
+          "ti": "ናይ ምፍራይ ኬሚካላት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

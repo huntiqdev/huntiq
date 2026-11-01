@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "FORESTRY_TIMBER",
+  "root_family": {
+    "id": "root-forestry",
+    "slug": "forestry-logging-timber",
+    "code": "FORESTRY_TIMBER",
+    "level": 1,
+    "canonical_name": "Forestry, Logging \u0026 Raw Timber",
+    "definition": "Commercial timber plantations, eucalyptus poles, raw sawn timber logs, bamboo culms, and certified wood harvests.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Trees",
+    "translations": {
+      "am": "ደን ልማት፣ የዛፍ ቁራጮች እና ግንድ",
+      "or": "Misooma Bosonaa fi Muka",
+      "ti": "ልምዓት ደንን ዕንጨይትን"
+    },
+    "children": [
+      {
+        "id": "sf-raw-timber-poles",
+        "slug": "raw-timber-poles-logs",
+        "code": "FORESTRY_LOGS",
+        "level": 2,
+        "canonical_name": "Eucalyptus Poles, Bamboo \u0026 Sawmill Logs",
+        "definition": "Construction poles, highland bamboo culms, and unprocessed raw hardwood logs.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የባህር ዛፍ ቋሚዎች፣ የቀርከሃ ዛፍ እና ግንድ",
+          "or": "Utubaa Baargamoo fi Mukkeen Ijaarsaa",
+          "ti": "ናይ ባሕሪ ዛፍ ኣዕኑድን ቃንጫን"
+        }
+      }
+    ]
+  }
+}

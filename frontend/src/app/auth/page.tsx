@@ -22,23 +22,36 @@ type Tab = 'login' | 'register';
 type Step = 'form' | 'otp' | 'forgot' | 'forgot-otp' | 'forgot-reset';
 
 const ACCENT_BTN = 'bg-orange-600 shadow-orange-600/25 hover:bg-orange-500';
-const INPUT_CLS = 'w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/30 outline-none transition-all focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60';
+const INPUT_CLS = 'w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/30 outline-none transition-all focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60';
 const LBL_CLS = 'text-[10px] font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 block mb-1.5';
 
 function AuthContent() {
-  const { login, activateCapability } = useAuth();
+  const { user, login, logout, activateCapability } = useAuth();
   const router = useRouter();
   const params = useSearchParams();
   const { t } = useLocaleContext();
   const u = (t as any).ui as Record<string, string>;
   const errors = (t as any).errors as Record<string, string>;
 
+  type AccountType = 'buyer' | 'seller' | 'landlord';
+
+  const asParam = params.get('as');
   const intent = params.get('intent');
   const condition = params.get('condition');
   const refCode = params.get('ref') ?? '';
   const redirectUrl = params.get('redirect') ?? '';
 
-  const [tab, setTab] = useState<Tab>(refCode ? 'register' : 'login');
+  const initialAccountType: AccountType =
+    asParam === 'seller' || intent === 'sell'
+      ? 'seller'
+      : asParam === 'landlord' || intent === 'rent'
+      ? 'landlord'
+      : 'buyer';
+
+  const [accountType, setAccountType] = useState<AccountType>(initialAccountType);
+  const [tab, setTab] = useState<Tab>(
+    refCode || asParam === 'seller' || asParam === 'landlord' ? 'register' : 'login'
+  );
   const [step, setStep] = useState<Step>('form');
   const [error, setError] = useState('');
   const [errorType, setErrorType] = useState<ErrorType>('unknown');
@@ -178,7 +191,7 @@ function AuthContent() {
     setLoading(true);
     try {
       const res = await api.unifiedLogin({ phone: pr.normalized, password: loginPassword });
-      await login(res.token);
+      await login(res.token, undefined, res.user);
       await handlePostAuth(res.user);
     } catch (err: any) {
       const msg: string = err?.message ?? '';
@@ -216,12 +229,17 @@ function AuthContent() {
 
     setLoading(true);
     try {
+      const selectedRole = accountType === 'buyer' ? 'buyer' : 'seller';
+      const selectedSellerPref = accountType === 'landlord' ? 'rent' : accountType === 'seller' ? 'sale' : undefined;
+
       const regRes: any = await api.unifiedRegister({
         name: regForm.name.trim(),
         phone: pr.normalized,
         password: regForm.password,
         email: regForm.email.trim() || undefined,
         business_name: regForm.business_name.trim() || undefined,
+        role: selectedRole,
+        seller_preference: selectedSellerPref,
         referral_code: refCode || undefined,
       });
 
@@ -229,8 +247,13 @@ function AuthContent() {
 
       // If OTP disabled globally
       if (regRes?.otp_required === false) {
+        if (regRes?.token && regRes?.user) {
+          await login(regRes.token, undefined, regRes.user);
+          await handlePostAuth(regRes.user);
+          return;
+        }
         const loginRes = await api.unifiedLogin({ phone: pr.normalized, password: regForm.password });
-        await login(loginRes.token);
+        await login(loginRes.token, undefined, loginRes.user);
         await handlePostAuth(loginRes.user);
         return;
       }
@@ -269,7 +292,7 @@ function AuthContent() {
     try {
       await api.verifyOTP(regPhone, code, 'register');
       const res = await api.unifiedLogin({ phone: regPhone, password: regForm.password });
-      await login(res.token);
+      await login(res.token, undefined, res.user);
       await handlePostAuth(res.user);
     } catch (err: any) {
       if (err?.message?.startsWith('otp_pending:')) {
@@ -385,6 +408,53 @@ function AuthContent() {
     );
   }
 
+  // If already authenticated on this browser, show welcome-back screen with quick actions
+  if (user) {
+    return (
+      <div className="space-y-6 text-center animate-fade-in py-4">
+        <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-orange-600 to-amber-600 text-white mx-auto flex items-center justify-center font-black text-2xl shadow-xl shadow-orange-600/25">
+          {(user.name?.[0] || user.phone?.[0] || 'U').toUpperCase()}
+        </div>
+        <div>
+          <h2 className="text-xl font-black text-zinc-900 dark:text-white">
+            {u.already_signed_in_title || 'Welcome back,'} {user.name || user.phone}
+          </h2>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+            {u.already_signed_in_desc || 'You are currently signed into HUNTIQ on this device.'}
+          </p>
+          <div className="flex items-center justify-center gap-1.5 mt-3 flex-wrap">
+            {user.capabilities?.map((cap) => (
+              <span key={cap} className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">
+                {cap === 'seller' ? (u.reg_seller_title || 'Seller') : cap === 'landlord' ? (u.reg_landlord_title || 'Landlord') : (u.reg_buyer_title || 'Buyer')}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2.5 pt-2">
+          <button
+            type="button"
+            onClick={() => handlePostAuth(user)}
+            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-700 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-orange-600/25 transition-all active:scale-98"
+          >
+            {u.continue_dashboard || 'Continue to Marketplace Dashboard'}
+          </button>
+
+          <button
+            type="button"
+            onClick={async () => {
+              await logout();
+              setStep('form');
+            }}
+            className="w-full py-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 font-bold text-xs transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900"
+          >
+            {u.switch_account || 'Sign Out / Switch Account'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // ── Main View (Unified Sign In / Create Account) ───────────────────────────
   return (
     <div className="space-y-5">
@@ -393,9 +463,11 @@ function AuthContent() {
         <div className="flex items-start gap-2.5 bg-orange-500/10 border border-orange-500/25 rounded-2xl p-3.5">
           <Sparkles size={16} className="text-orange-500 shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-black text-orange-600 dark:text-orange-400">Ready to Sell?</p>
+            <p className="text-xs font-black text-orange-600 dark:text-orange-400">
+              {u.ready_to_sell_title || 'Ready to Sell?'}
+            </p>
             <p className="text-[11px] text-orange-700/80 dark:text-orange-300/80 mt-0.5">
-              Sign in or create your single account. You will proceed directly to list your item immediately.
+              {u.ready_to_sell_desc || 'Sign in or create your single account. You will proceed directly to list your item immediately.'}
             </p>
           </div>
         </div>
@@ -405,9 +477,11 @@ function AuthContent() {
         <div className="flex items-start gap-2.5 bg-amber-500/10 border border-amber-500/25 rounded-2xl p-3.5">
           <Home size={16} className="text-amber-500 shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-black text-amber-600 dark:text-amber-400">Listing a Rental Property?</p>
+            <p className="text-xs font-black text-amber-600 dark:text-amber-400">
+              {u.listing_rental_title || 'Listing a Rental Property?'}
+            </p>
             <p className="text-[11px] text-amber-700/80 dark:text-amber-300/80 mt-0.5">
-              One account connects you to tenants. Sign in or create an account to publish your rental listing.
+              {u.listing_rental_desc || 'One account connects you to tenants. Sign in or create an account to publish your rental listing.'}
             </p>
           </div>
         </div>
@@ -432,7 +506,7 @@ function AuthContent() {
             key={tb}
             type="button"
             onClick={() => setTab(tb)}
-            className={`flex-1 py-2.5 rounded-xl text-sm font-black transition-all ${
+            className={`flex-1 py-2.5 rounded-xl text-sm font-black transition-all tap-bounce active:scale-95 ${
               tab === tb
                 ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20'
                 : 'text-zinc-500 dark:text-white/40 hover:text-zinc-800 dark:hover:text-white/70'
@@ -515,6 +589,101 @@ function AuthContent() {
       {/* ── Unified Register Form ────────────────────────────────────────── */}
       {tab === 'register' && (
         <form onSubmit={handleRegister} className="space-y-3.5">
+          {/* Account Type Selector (Disambiguating Buyer vs Seller vs Landlord) */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className={LBL_CLS}>{u.reg_select_type || 'Select Account Type'}</label>
+              <span className="text-[10px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider">
+                {u.reg_as_badge || 'Registering as'}: {accountType === 'seller' ? (u.reg_seller_title || 'Seller') : accountType === 'landlord' ? (u.reg_landlord_title || 'Landlord') : (u.reg_buyer_title || 'Buyer')}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {/* Buyer / Consumer Card */}
+              <button
+                type="button"
+                onClick={() => setAccountType('buyer')}
+                className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
+                  accountType === 'buyer'
+                    ? 'bg-orange-50/80 dark:bg-orange-950/40 border-orange-500 shadow-sm ring-1 ring-orange-500/30'
+                    : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                    accountType === 'buyer' ? 'bg-orange-600 text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                  }`}>
+                    <User size={13} />
+                  </div>
+                  {accountType === 'buyer' && <CheckCircle2 size={14} className="text-orange-600 dark:text-orange-400" />}
+                </div>
+                <div>
+                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
+                    {u.reg_buyer_title || 'Buyer / Consumer'}
+                  </p>
+                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
+                    {u.reg_buyer_desc || 'Shop, rent items, place orders, chat with sellers'}
+                  </p>
+                </div>
+              </button>
+
+              {/* Seller / Merchant Card */}
+              <button
+                type="button"
+                onClick={() => setAccountType('seller')}
+                className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
+                  accountType === 'seller'
+                    ? 'bg-orange-50/80 dark:bg-orange-950/40 border-orange-500 shadow-sm ring-1 ring-orange-500/30'
+                    : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                    accountType === 'seller' ? 'bg-orange-600 text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                  }`}>
+                    <ShoppingBag size={13} />
+                  </div>
+                  {accountType === 'seller' && <CheckCircle2 size={14} className="text-orange-600 dark:text-orange-400" />}
+                </div>
+                <div>
+                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
+                    {u.reg_seller_title || 'Seller / Merchant'}
+                  </p>
+                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
+                    {u.reg_seller_desc || 'Post items for sale and reach thousands across Ethiopia'}
+                  </p>
+                </div>
+              </button>
+
+              {/* Landlord / Rental Host Card */}
+              <button
+                type="button"
+                onClick={() => setAccountType('landlord')}
+                className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
+                  accountType === 'landlord'
+                    ? 'bg-teal-50/80 dark:bg-teal-950/40 border-teal-500 shadow-sm ring-1 ring-teal-500/30'
+                    : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                    accountType === 'landlord' ? 'bg-teal-600 text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                  }`}>
+                    <Home size={13} />
+                  </div>
+                  {accountType === 'landlord' && <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />}
+                </div>
+                <div>
+                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
+                    {u.reg_landlord_title || 'Landlord / Host'}
+                  </p>
+                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
+                    {u.reg_landlord_desc || 'Rent out tools, vehicles, equipment, or properties'}
+                  </p>
+                </div>
+              </button>
+            </div>
+          </div>
+
           <PhoneField
             value={regPhone}
             onChange={e => { setRegPhone(e.target.value); setRegPhoneErr(''); }}
@@ -541,13 +710,15 @@ function AuthContent() {
           <div>
             <label className={LBL_CLS}>
               <Building2 size={9} className="inline mr-1" />{u.business_name_label}{' '}
-              <span className="normal-case font-normal text-zinc-400 dark:text-white/30">({u.optional_label})</span>
+              <span className="normal-case font-normal text-zinc-400 dark:text-white/30">
+                ({accountType === 'buyer' ? u.optional_label : (accountType === 'seller' ? (u.shop_store_name || 'Shop / Store Name') : (u.agency_host_name || 'Agency / Host Name'))})
+              </span>
             </label>
             <div className="relative">
               <Building2 size={13} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/30 pointer-events-none" />
               <input
                 className={INPUT_CLS + ' pl-10'}
-                placeholder="Shop or Trade name (optional)"
+                placeholder={accountType === 'seller' ? (u.shop_store_placeholder || 'Your Shop or Store Name (optional)') : accountType === 'landlord' ? (u.agency_host_placeholder || 'Your Property or Agency Name (optional)') : (u.business_name_placeholder || 'Business Name (optional)')}
                 value={regForm.business_name}
                 onChange={setReg('business_name')}
               />
@@ -631,7 +802,7 @@ function AuthContent() {
       {/* Account flexibility footnote */}
       <div className="bg-zinc-100/70 dark:bg-white/[0.03] border border-zinc-200/70 dark:border-white/5 rounded-2xl p-3.5 mt-2 text-center">
         <p className="text-[11px] font-medium text-zinc-600 dark:text-white/50 leading-relaxed">
-          ✨ One account for everything. Browse, buy, sell items, or rent property anytime without creating separate accounts.
+          {u.account_flexibility_note || '✨ One account for everything. Browse, buy, sell items, or rent property anytime without creating separate accounts.'}
         </p>
       </div>
     </div>
@@ -685,7 +856,7 @@ function SubmitBtn({ loading, label, waitLabel }: {
     <button
       type="submit"
       disabled={loading}
-      className={`w-full ${ACCENT_BTN} text-white py-3.5 rounded-xl font-black text-sm transition-all disabled:opacity-50 shadow-lg`}
+      className={`w-full ${ACCENT_BTN} text-white py-3.5 rounded-xl font-black text-sm transition-all disabled:opacity-50 shadow-lg tap-bounce active:scale-95`}
     >
       {loading ? waitLabel : label}
     </button>

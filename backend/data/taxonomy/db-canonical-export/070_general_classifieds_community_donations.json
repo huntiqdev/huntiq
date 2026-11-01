@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.533179707Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "general-classifieds-community-donations",
+  "root_family": {
+    "id": 7791,
+    "parent_id": null,
+    "slug": "general-classifieds-community-donations",
+    "level": 0,
+    "path": "/7791/",
+    "canonical_name": "General Classifieds, Community \u0026 Item Donations",
+    "name_en": "General Classifieds, Community \u0026 Item Donations",
+    "name_am": "አጠቃላይ ማስታወቂያዎች፣ የጠፉ እቃዎች እና ልገሳ",
+    "name_om": "Beeksisa Waliigalaa, Meeshaa Bade fi Kennaa",
+    "name_ti": "ሓፈሻዊ ምልክታታት፣ ዝጠፍኡ ኣቑሑትን ልገሳን",
+    "definition": "Community announcements, lost \u0026 found document notices (National ID, Kebele ID, passport, driver license), and charitable non-profit item donations.",
+    "display_order": 0,
+    "icon": "Megaphone",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:01.019995Z",
+    "updated_at": "2026-11-01T11:27:01.019995Z",
+    "translations": {
+      "am": "አጠቃላይ ማስታወቂያዎች፣ የጠፉ እቃዎች እና ልገሳ",
+      "en": "General Classifieds, Community \u0026 Item Donations",
+      "or": "Beeksisa Waliigalaa, Meeshaa Bade fi Kennaa",
+      "ti": "ሓፈሻዊ ምልክታታት፣ ዝጠፍኡ ኣቑሑትን ልገሳን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7792,
+        "parent_id": 7791,
+        "slug": "lost-found-official-documents",
+        "level": 1,
+        "path": "/7791/7792/",
+        "canonical_name": "Lost \u0026 Found Official Credentials \u0026 Documents (የጠፉ ሰነዶች)",
+        "name_en": "Lost \u0026 Found Official Credentials \u0026 Documents (የጠፉ ሰነዶች)",
+        "name_am": "የጠፉ መታወቂያዎች፣ ፓስፖርት እና ሰነዶች",
+        "name_om": "Waraqaa Eenyummaa fi Paaspoortii Bade",
+        "name_ti": "ዝጠፍኡ መታወቒታት፣ ፓስፖርትን ሰነዳትን",
+        "definition": "Community lost and found notices for Fayda digital IDs, passports, vehicle libre titles, and academic degree certificates.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:01.024194Z",
+        "updated_at": "2026-11-01T11:27:01.024194Z",
+        "translations": {
+          "am": "የጠፉ መታወቂያዎች፣ ፓስፖርት እና ሰነዶች",
+          "en": "Lost \u0026 Found Official Credentials \u0026 Documents (የጠፉ ሰነዶች)",
+          "or": "Waraqaa Eenyummaa fi Paaspoortii Bade",
+          "ti": "ዝጠፍኡ መታወቒታት፣ ፓስፖርትን ሰነዳትን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

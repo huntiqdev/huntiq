@@ -1,0 +1,143 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.52165421Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "commercial-properties-offices-retail",
+  "root_family": {
+    "id": 7676,
+    "parent_id": null,
+    "slug": "commercial-properties-offices-retail",
+    "level": 0,
+    "path": "/7676/",
+    "canonical_name": "Commercial Properties, Offices \u0026 Retail Spaces",
+    "name_en": "Commercial Properties, Offices \u0026 Retail Spaces",
+    "name_am": "የንግድ ቤቶች፣ ቢሮዎች እና ሱቆች",
+    "name_om": "Manni Daldalaa, Biiroo fi Suuqii",
+    "name_ti": "ናይ ንግዲ ኣባይቲ፣ ቢሮታትን ድኳናትን",
+    "definition": "Office spaces, commercial retail mall shops, banks, showrooms, and entire mixed-use commercial buildings.",
+    "display_order": 0,
+    "icon": "Building2",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.860837Z",
+    "updated_at": "2026-11-01T11:26:59.860837Z",
+    "translations": {
+      "am": "የንግድ ቤቶች፣ ቢሮዎች እና ሱቆች",
+      "en": "Commercial Properties, Offices \u0026 Retail Spaces",
+      "or": "Manni Daldalaa, Biiroo fi Suuqii",
+      "ti": "ናይ ንግዲ ኣባይቲ፣ ቢሮታትን ድኳናትን"
+    },
+    "aliases": {
+      "am": [
+        "ሞል",
+        "ሱቅ",
+        "ሾውሩም",
+        "ቢሮ",
+        "የንግድ ቤት",
+        "የገበያ አዳራሽ"
+      ],
+      "en": [
+        "commercial",
+        "commercial building",
+        "mall shop",
+        "office",
+        "retail space",
+        "shop"
+      ],
+      "or": [
+        "biiroo",
+        "mana daldalaa",
+        "moolii",
+        "suuqii"
+      ],
+      "ti": [
+        "ሞል",
+        "ቢሮ",
+        "ናይ ንግዲ ቤት",
+        "ድኳን"
+      ]
+    },
+    "children": [
+      {
+        "id": 7677,
+        "parent_id": 7676,
+        "slug": "retail-shops-shopping-mall-spaces",
+        "level": 1,
+        "path": "/7676/7677/",
+        "canonical_name": "Retail Shops, Boutiques \u0026 Shopping Mall Spaces (ሱቆች)",
+        "name_en": "Retail Shops, Boutiques \u0026 Shopping Mall Spaces (ሱቆች)",
+        "name_am": "የሞል ሱቆች እና የችርቻሮ ንግድ ቦታዎች",
+        "name_om": "Suuqii Daldalaa fi Moolii",
+        "name_ti": "ናይ ሞል ድኳናትን ናይ ንግዲ ቦታታትን",
+        "definition": "Enclosed retail shops inside commercial malls, street-level retail boutiques, and Merkato wholesale stalls.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.894143Z",
+        "updated_at": "2026-11-01T11:26:59.894143Z",
+        "translations": {
+          "am": "የሞል ሱቆች እና የችርቻሮ ንግድ ቦታዎች",
+          "en": "Retail Shops, Boutiques \u0026 Shopping Mall Spaces (ሱቆች)",
+          "or": "Suuqii Daldalaa fi Moolii",
+          "ti": "ናይ ሞል ድኳናትን ናይ ንግዲ ቦታታትን"
+        },
+        "aliases": {
+          "am": [
+            "ሱቅ",
+            "ቡቲክ",
+            "የመርካቶ ሱቅ",
+            "የመደብር ቦታ",
+            "የሞል ሱቅ"
+          ],
+          "en": [
+            "boutique",
+            "mall space",
+            "merkato shop",
+            "retail shop",
+            "shop"
+          ],
+          "or": [
+            "suuqii",
+            "suuqii moolii"
+          ],
+          "ti": [
+            "ናይ ሞል ድኳን",
+            "ድኳን"
+          ]
+        }
+      },
+      {
+        "id": 7678,
+        "parent_id": 7676,
+        "slug": "corporate-office-suites-floors",
+        "level": 1,
+        "path": "/7676/7678/",
+        "canonical_name": "Corporate Office Suites \u0026 Entire Commercial Floors",
+        "name_en": "Corporate Office Suites \u0026 Entire Commercial Floors",
+        "name_am": "የቢሮ ክፍሎች እና ሙሉ ህንጻዎች",
+        "name_om": "Kutaa Biiroo fi Gamoo Daldalaa",
+        "name_ti": "ናይ ቢሮ ክፍልታትን ሙሉእ ህንጻታትን",
+        "definition": "Partitioned professional office units, executive suites, open-plan workspaces, and whole commercial floors.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.918045Z",
+        "updated_at": "2026-11-01T11:26:59.918045Z",
+        "translations": {
+          "am": "የቢሮ ክፍሎች እና ሙሉ ህንጻዎች",
+          "en": "Corporate Office Suites \u0026 Entire Commercial Floors",
+          "or": "Kutaa Biiroo fi Gamoo Daldalaa",
+          "ti": "ናይ ቢሮ ክፍልታትን ሙሉእ ህንጻታትን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

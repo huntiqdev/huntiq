@@ -204,18 +204,21 @@ func (r *ReferralRepo) AcceptInvitationByCode(ctx context.Context, userID int, r
 	// Prevent A refers B, B refers A (and deeper chains A→B→C→A).
 	// We check if the current user (userID) is an ancestor of the intended inviter.
 	var isCircular bool
-	_ = r.db.QueryRow(ctx, `
+	err = r.db.QueryRow(ctx, `
 		WITH RECURSIVE referral_chain AS (
-			-- Start with the intended inviter's own inviter
-			SELECT invited_by FROM users WHERE id = $1
+			-- Start with the intended inviter
+			SELECT id, invited_by FROM users WHERE id = $1
 			UNION ALL
 			-- Walk up the chain of inviters
-			SELECT u.invited_by FROM users u
+			SELECT u.id, u.invited_by FROM users u
 			INNER JOIN referral_chain rc ON rc.invited_by = u.id
 			WHERE u.invited_by IS NOT NULL
 		)
-		SELECT EXISTS (SELECT 1 FROM referral_chain WHERE invited_by = $2 OR id = $2)`,
+		SELECT EXISTS (SELECT 1 FROM referral_chain WHERE id = $2 OR invited_by = $2)`,
 		inviterID, userID).Scan(&isCircular)
+	if err != nil {
+		return fmt.Errorf("referral chain verification failed: %w", err)
+	}
 
 	if isCircular {
 		return fmt.Errorf("circular referral detected — you cannot accept an invitation from someone you already refer (directly or indirectly)")

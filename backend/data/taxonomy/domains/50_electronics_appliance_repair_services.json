@@ -1,0 +1,120 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "SERV_REPAIR_ELEC",
+  "root_family": {
+    "id": "root-electronics-repair-services",
+    "slug": "electronics-appliance-repair-services",
+    "code": "SERV_REPAIR_ELEC",
+    "level": 1,
+    "canonical_name": "Consumer Electronics \u0026 Appliance Repair Services",
+    "definition": "Professional diagnostic, maintenance, screen replacement, and hardware repair services for smartphones, laptops, TVs, and home appliances.",
+    "inclusion_rules": [
+      "Smartphone screen fitting and glass replacement labor",
+      "Laptop motherboard chip-level repair",
+      "Refrigerator gas refilling and compressor replacement",
+      "TV panel troubleshooting"
+    ],
+    "exclusion_rules": [
+      "Physical replacement screens and display parts without labor (see Consumer Electronics)"
+    ],
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Wrench",
+    "translations": {
+      "am": "የኤሌክትሮኒክስ፣ የስልክ እና የቤት እቃዎች ጥገና አገልግሎት",
+      "or": "Tajaajila Suphaa Elektirooniksii fi Bilbilaa",
+      "ti": "ናይ ኤሌክትሮኒክስን ስልኪን ጽገና ኣገልግሎት"
+    },
+    "aliases": {
+      "am": [
+        "ስልክ ጥገና",
+        "የስልክ ጥገና",
+        "ስክሪን ቅየራ",
+        "ላፕቶፕ ጥገና",
+        "ፍሪጅ ጥገና"
+      ],
+      "en": [
+        "phone repair",
+        "screen replacement",
+        "laptop repair",
+        "appliance repair",
+        "electronics repair service"
+      ],
+      "or": [
+        "suphaa bilbilaa",
+        "suphaa kompiitaraa"
+      ],
+      "ti": [
+        "ጽገና ስልኪ",
+        "ምቕያር ስክሪን",
+        "ጽገና ላፕቶፕ"
+      ]
+    },
+    "children": [
+      {
+        "id": "sf-phone-repair-labor",
+        "slug": "smartphone-screen-hardware-repair-services",
+        "code": "SERV_PHONE_FIX",
+        "level": 2,
+        "canonical_name": "Smartphone Screen \u0026 Hardware Repair Services (የስልክ ጥገና)",
+        "definition": "Certified bench technician labor for cracked touchscreen digitizer replacement, IC chip micro-soldering, and charging port repair.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የስማርትፎን ስክሪን ቅየራ እና የሃርድዌር ጥገና አገልግሎት",
+          "or": "Tajaajila Suphaa Iskiriinii fi Haardiweerii Bilbilaa",
+          "ti": "ናይ ስማርትፎን ስክሪን ምቕያርን ጽገናን ኣገልግሎት"
+        },
+        "aliases": {
+          "am": [
+            "የአይፎን ጥገና",
+            "ስክሪን መቀየር",
+            "የተሰበረ መስታወት ጥገና"
+          ],
+          "en": [
+            "iphone repair",
+            "screen replacement service",
+            "display fix",
+            "broken glass repair"
+          ],
+          "or": [
+            "suphaa iskiriinii"
+          ],
+          "ti": [
+            "ጽገና ስክሪን"
+          ]
+        },
+        "identifiers": [
+          {
+            "type": "UNSPSC",
+            "code": "81112403",
+            "name": "Computer and telephone hardware repair service"
+          }
+        ]
+      },
+      {
+        "id": "sf-refrigerator-appliance-service",
+        "slug": "refrigerator-ac-appliance-maintenance",
+        "code": "SERV_APPLIANCE_FIX",
+        "level": 2,
+        "canonical_name": "Refrigerator, AC \u0026 Major Appliance Repair Services (ፍሪጅ ጥገና)",
+        "definition": "On-site diagnostic technicians for refrigeration gas charging, thermostat calibration, and motor rewinding.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የፍሪጅ ጋዝ ሙሌት እና የቤት እቃዎች ጥገና አገልግሎት",
+          "or": "Tajaajila Suphaa Firiijii fi Meeshaa Manaa",
+          "ti": "ናይ ፍሪጅ ጋዝ ምምላእን ጽገናን ኣገልግሎት"
+        }
+      }
+    ]
+  }
+}

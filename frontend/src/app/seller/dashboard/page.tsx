@@ -42,20 +42,20 @@ function KPI({ icon: Icon, label, value, color, href, alert }: {
   icon: any; label: string; value: string | number; color: string; href?: string; alert?: boolean;
 }) {
   const inner = (
-    <div className={`bg-white dark:bg-zinc-900 border rounded-2xl p-4 flex items-start gap-3 hover:shadow-md transition-all ${
+    <div className={`bg-white dark:bg-zinc-900 border rounded-2xl p-3 sm:p-4 flex items-start gap-2.5 sm:gap-3 hover:shadow-md transition-all ${
       alert ? 'border-red-200 dark:border-red-800' : 'border-zinc-200 dark:border-zinc-800'
-    } ${href ? 'cursor-pointer' : ''}`}>
-      <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
-        <Icon size={16} />
+    } ${href ? 'cursor-pointer tap-bounce active:scale-95' : ''}`}>
+      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
+        <Icon size={15} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-xl font-black text-zinc-900 dark:text-white">{value}</p>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{label}</p>
+        <p className="text-base sm:text-xl font-black text-zinc-900 dark:text-white leading-tight truncate">{value}</p>
+        <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 truncate">{label}</p>
       </div>
       {href && <ArrowUpRight size={13} className="ml-auto text-zinc-300 dark:text-zinc-600 shrink-0" />}
     </div>
   );
-  return href ? <Link href={href}>{inner}</Link> : inner;
+  return href ? <Link href={href} className="block">{inner}</Link> : inner;
 }
 
 function TierCard({ stats, upgradePrices, tierThresholds, onUpgrade }: {

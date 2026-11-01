@@ -104,12 +104,13 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, sellerID int, t *mo
 	t.SellerGets = math.Round((t.Amount-t.BrokerFee)*100) / 100
 
 	// Step 4 — insert transaction with computed fees and seller_id for audit trail.
+	// Always attribute the transaction to the product's true verified seller.
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	err = tx.QueryRow(ctx, `
 		INSERT INTO transactions (product_id, seller_id, buyer_name, buyer_phone, amount, broker_fee, seller_gets, notes)
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 		RETURNING id, broker_fee, seller_gets`,
-		t.ProductID, sellerID, t.BuyerName, t.BuyerPhone, t.Amount, t.BrokerFee, t.SellerGets, t.Notes,
+		t.ProductID, productSellerID, t.BuyerName, t.BuyerPhone, t.Amount, t.BrokerFee, t.SellerGets, t.Notes,
 	).Scan(&t.ID, &t.BrokerFee, &t.SellerGets)
 	if err != nil {
 		return 0, err
@@ -124,7 +125,7 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, sellerID int, t *mo
 		return 0, err
 	}
 
-	return sellerID, tx.Commit(ctx)
+	return productSellerID, tx.Commit(ctx)
 }
 
 // UpdateStatus changes a transaction's status. Valid transitions:

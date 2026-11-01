@@ -1,0 +1,413 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.518356468Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "consumer-electronics-mobile-devices",
+  "root_family": {
+    "id": 7629,
+    "parent_id": null,
+    "slug": "consumer-electronics-mobile-devices",
+    "level": 0,
+    "path": "/7629/",
+    "canonical_name": "Consumer Electronics \u0026 Mobile Devices",
+    "name_en": "Consumer Electronics \u0026 Mobile Devices",
+    "name_am": "ኤሌክትሮኒክስ እና የሞባይል ስልኮች",
+    "name_om": "Elektirooniksii fi Meeshaalee Moobaayilii",
+    "name_ti": "ኤሌክትሮኒክስን ናይ ሞባይል ስልኪታትን",
+    "definition": "Handheld mobile telephony equipment, smartphones, feature phones, cellular tablets, and wearable electronics.",
+    "display_order": 0,
+    "icon": "Smartphone",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.206282Z",
+    "updated_at": "2026-11-01T11:26:59.206282Z",
+    "translations": {
+      "am": "ኤሌክትሮኒክስ እና የሞባይል ስልኮች",
+      "en": "Consumer Electronics \u0026 Mobile Devices",
+      "or": "Elektirooniksii fi Meeshaalee Moobaayilii",
+      "ti": "ኤሌክትሮኒክስን ናይ ሞባይል ስልኪታትን"
+    },
+    "aliases": {
+      "am": [
+        "ሞባይል",
+        "ስልክ",
+        "ስልኮች",
+        "ስማርትፎን",
+        "ተንቀሳቃሽ ስልክ",
+        "ኤሌክትሮኒክስ"
+      ],
+      "en": [
+        "cell phone",
+        "cellphones",
+        "electronics",
+        "mobile",
+        "phones",
+        "smartphones"
+      ],
+      "or": [
+        "bilbila",
+        "elektirooniksii",
+        "ismaartfooni",
+        "moobaayilii"
+      ],
+      "ti": [
+        "ሞባይል",
+        "ስልኪ",
+        "ስማርትፎን",
+        "ኤሌክትሮኒክስ"
+      ]
+    },
+    "children": [
+      {
+        "id": 7630,
+        "parent_id": 7629,
+        "slug": "mobile-handsets-smartphones",
+        "level": 1,
+        "path": "/7629/7630/",
+        "canonical_name": "Mobile Handsets \u0026 Smartphones",
+        "name_en": "Mobile Handsets \u0026 Smartphones",
+        "name_am": "ስማርትፎኖች እና የሞባይል ቀፎዎች",
+        "name_om": "Ismaartfoonii fi Bilbila Harkaa",
+        "name_ti": "ስማርትፎናትን ናይ ኢድ ስልኪታትን",
+        "definition": "Touchscreen smartphones running iOS, Android, or HarmonyOS, as well as ruggedized keypad feature phones.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": false,
+        "created_at": "2026-11-01T11:26:59.243371Z",
+        "updated_at": "2026-11-01T11:26:59.243371Z",
+        "translations": {
+          "am": "ስማርትፎኖች እና የሞባይል ቀፎዎች",
+          "en": "Mobile Handsets \u0026 Smartphones",
+          "or": "Ismaartfoonii fi Bilbila Harkaa",
+          "ti": "ስማርትፎናትን ናይ ኢድ ስልኪታትን"
+        },
+        "aliases": {
+          "am": [
+            "ስማርትፎን",
+            "ቀፎ",
+            "አንድሮይድ ስልክ",
+            "አይፎን",
+            "የሞባይል ቀፎ"
+          ],
+          "en": [
+            "cellphones",
+            "mobile handsets",
+            "smartphones",
+            "touchscreen phones"
+          ],
+          "or": [
+            "bilbila harkaa",
+            "ismaartfooni"
+          ],
+          "ti": [
+            "ስማርትፎን",
+            "ቀፎ ስልኪ"
+          ]
+        },
+        "children": [
+          {
+            "id": 7631,
+            "parent_id": 7630,
+            "slug": "touchscreen-smartphones",
+            "level": 2,
+            "path": "/7629/7630/7631/",
+            "canonical_name": "Touchscreen Smartphones (ዘመናዊ ስልኮች)",
+            "name_en": "Touchscreen Smartphones (ዘመናዊ ስልኮች)",
+            "name_am": "ዘመናዊ የንክኪ ስክሪን ስልኮች",
+            "name_om": "Bilbila Ismaartii Iskiriinii",
+            "name_ti": "ናይ ንክኪ ስክሪን ዘመናዊ ስልኪታት",
+            "definition": "Capacitive touchscreen cellular devices supporting 4G/5G broadband, mobile applications, and high-resolution cameras.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": false,
+            "created_at": "2026-11-01T11:26:59.275367Z",
+            "updated_at": "2026-11-01T11:26:59.275367Z",
+            "translations": {
+              "am": "ዘመናዊ የንክኪ ስክሪን ስልኮች",
+              "en": "Touchscreen Smartphones (ዘመናዊ ስልኮች)",
+              "or": "Bilbila Ismaartii Iskiriinii",
+              "ti": "ናይ ንክኪ ስክሪን ዘመናዊ ስልኪታት"
+            },
+            "aliases": {
+              "am": [
+                "ስማርት ስልክ",
+                "አንድሮይድ",
+                "አይፎን",
+                "የንክኪ ስልክ"
+              ],
+              "en": [
+                "5g phone",
+                "android phone",
+                "galaxy phone",
+                "iphone",
+                "smartphone"
+              ],
+              "or": [
+                "bilbila ammayyaa",
+                "bilbila iskiriinii"
+              ],
+              "ti": [
+                "ስልኪ ንክኪ",
+                "ዘመናዊ ስልኪ"
+              ]
+            },
+            "children": [
+              {
+                "id": 7632,
+                "parent_id": 7631,
+                "slug": "flagship-tier-smartphones",
+                "level": 3,
+                "path": "/7629/7630/7631/7632/",
+                "canonical_name": "Flagship \u0026 Ultra-Premium Smartphones",
+                "name_en": "Flagship \u0026 Ultra-Premium Smartphones",
+                "name_am": "ፍላግሺፕ እና ከፍተኛ ደረጃ ስማርትፎኖች",
+                "name_om": "Ismaartfoonii Sadarkaa Olaanaa",
+                "name_ti": "ላዕለዋይ ደረጃ ዘመናዊ ስልኪታት",
+                "definition": "Top-tier performance devices featuring advanced optical zoom cameras, titanium/aluminum chassis, and high-refresh OLED displays.",
+                "display_order": 0,
+                "is_active": true,
+                "is_leaf": true,
+                "created_at": "2026-11-01T11:26:59.320753Z",
+                "updated_at": "2026-11-01T11:26:59.320753Z",
+                "translations": {
+                  "am": "ፍላግሺፕ እና ከፍተኛ ደረጃ ስማርትፎኖች",
+                  "en": "Flagship \u0026 Ultra-Premium Smartphones",
+                  "or": "Ismaartfoonii Sadarkaa Olaanaa",
+                  "ti": "ላዕለዋይ ደረጃ ዘመናዊ ስልኪታት"
+                },
+                "aliases": {}
+              },
+              {
+                "id": 7633,
+                "parent_id": 7631,
+                "slug": "midrange-budget-smartphones",
+                "level": 3,
+                "path": "/7629/7630/7631/7633/",
+                "canonical_name": "Mid-Range \u0026 Everyday Budget Smartphones",
+                "name_en": "Mid-Range \u0026 Everyday Budget Smartphones",
+                "name_am": "መካከለኛ እና ተመጣጣኝ ዋጋ ያላቸው ስልኮች",
+                "name_om": "Ismaartfoonii Giddu-galeessaa fi Gatii Madaalawaa",
+                "name_ti": "ማእከላይን ህዝባዊ ዋጋን ዘለዎም ስልኪታት",
+                "definition": "Value-optimized smartphones balancing battery endurance, dual/triple camera configurations, and cost accessibility.",
+                "display_order": 0,
+                "is_active": true,
+                "is_leaf": true,
+                "created_at": "2026-11-01T11:26:59.3246Z",
+                "updated_at": "2026-11-01T11:26:59.3246Z",
+                "translations": {
+                  "am": "መካከለኛ እና ተመጣጣኝ ዋጋ ያላቸው ስልኮች",
+                  "en": "Mid-Range \u0026 Everyday Budget Smartphones",
+                  "or": "Ismaartfoonii Giddu-galeessaa fi Gatii Madaalawaa",
+                  "ti": "ማእከላይን ህዝባዊ ዋጋን ዘለዎም ስልኪታት"
+                },
+                "aliases": {}
+              }
+            ]
+          },
+          {
+            "id": 7634,
+            "parent_id": 7630,
+            "slug": "feature-keypad-phones",
+            "level": 2,
+            "path": "/7629/7630/7634/",
+            "canonical_name": "Feature Phones \u0026 Keypad Handsets (የቁልፍ ስልኮች)",
+            "name_en": "Feature Phones \u0026 Keypad Handsets (የቁልፍ ስልኮች)",
+            "name_am": "የቁልፍ / ባትሪ ስልኮች",
+            "name_om": "Bilbila Qabduu (Batirii)",
+            "name_ti": "ናይ ቁልፊ / ባትሪ ስልኪታት",
+            "definition": "Push-button physical keypad mobile handsets with ultra-long battery standby, FM radios, and flashlights.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:59.327552Z",
+            "updated_at": "2026-11-01T11:26:59.327552Z",
+            "translations": {
+              "am": "የቁልፍ / ባትሪ ስልኮች",
+              "en": "Feature Phones \u0026 Keypad Handsets (የቁልፍ ስልኮች)",
+              "or": "Bilbila Qabduu (Batirii)",
+              "ti": "ናይ ቁልፊ / ባትሪ ስልኪታት"
+            },
+            "aliases": {
+              "am": [
+                "ኖኪያ ባትሪ",
+                "አይቴል",
+                "የቁልፍ ስልክ",
+                "የባትሪ ስልክ"
+              ],
+              "en": [
+                "button phone",
+                "feature phone",
+                "itel phone",
+                "keypad phone",
+                "nokia torch"
+              ],
+              "or": [
+                "bilbila batirii",
+                "bilbila qabduu"
+              ],
+              "ti": [
+                "ናይ ቁልፊ ስልኪ",
+                "ናይ ባትሪ ስልኪ"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": 7635,
+        "parent_id": 7629,
+        "slug": "mobile-phone-replacement-parts",
+        "level": 1,
+        "path": "/7629/7635/",
+        "canonical_name": "Mobile Phone Physical Replacement Parts",
+        "name_en": "Mobile Phone Physical Replacement Parts",
+        "name_am": "የሞባይል ስልክ መለዋወጫ እቃዎች እና ስክሪኖች",
+        "name_om": "Qaama Jijjiirraa Bilbila Harkaa",
+        "name_ti": "ናይ ሞባይል ስልኪ መለዋወጢ ኣቑሑት",
+        "definition": "Physical hardware replacement items and spare modules for mobile handset repair.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": false,
+        "created_at": "2026-11-01T11:26:59.352954Z",
+        "updated_at": "2026-11-01T11:26:59.352954Z",
+        "translations": {
+          "am": "የሞባይል ስልክ መለዋወጫ እቃዎች እና ስክሪኖች",
+          "en": "Mobile Phone Physical Replacement Parts",
+          "or": "Qaama Jijjiirraa Bilbila Harkaa",
+          "ti": "ናይ ሞባይል ስልኪ መለዋወጢ ኣቑሑት"
+        },
+        "aliases": {},
+        "children": [
+          {
+            "id": 7636,
+            "parent_id": 7635,
+            "slug": "replacement-screens-lcd-oled",
+            "level": 2,
+            "path": "/7629/7635/7636/",
+            "canonical_name": "Replacement Phone Screens \u0026 OLED Displays",
+            "name_en": "Replacement Phone Screens \u0026 OLED Displays",
+            "name_am": "የሞባይል መለዋወጫ ስክሪኖች",
+            "name_om": "Iskiriinii Jijjiirraa Bilbilaa",
+            "name_ti": "ናይ ሞባይል መለዋወጢ ስክሪናት",
+            "definition": "Physical digitizer glass and complete LCD/AMOLED replacement display screens.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:59.358151Z",
+            "updated_at": "2026-11-01T11:26:59.358151Z",
+            "translations": {
+              "am": "የሞባይል መለዋወጫ ስክሪኖች",
+              "en": "Replacement Phone Screens \u0026 OLED Displays",
+              "or": "Iskiriinii Jijjiirraa Bilbilaa",
+              "ti": "ናይ ሞባይል መለዋወጢ ስክሪናት"
+            },
+            "aliases": {
+              "am": [
+                "ስክሪን መለዋወጫ",
+                "ኤልሲዲ",
+                "የሞባይል መስታወት",
+                "የስልክ ስክሪን"
+              ],
+              "en": [
+                "lcd screen",
+                "oled panel",
+                "phone display",
+                "replacement screen",
+                "touch glass"
+              ],
+              "or": [
+                "fuula bilbilaa",
+                "iskiriinii bilbilaa"
+              ],
+              "ti": [
+                "መስታወት ስልኪ",
+                "ናይ ስልኪ ስክሪን"
+              ]
+            }
+          },
+          {
+            "id": 7637,
+            "parent_id": 7635,
+            "slug": "phone-replacement-batteries",
+            "level": 2,
+            "path": "/7629/7635/7637/",
+            "canonical_name": "Internal Replacement Phone Batteries",
+            "name_en": "Internal Replacement Phone Batteries",
+            "name_am": "የሞባይል ባትሪዎች",
+            "name_om": "Baatirii Jijjiirraa Bilbilaa",
+            "name_ti": "ናይ ሞባይል መለዋወጢ ባትሪታት",
+            "definition": "Lithium-ion and lithium-polymer internal replacement cells for mobile handsets.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:59.393373Z",
+            "updated_at": "2026-11-01T11:26:59.393373Z",
+            "translations": {
+              "am": "የሞባይል ባትሪዎች",
+              "en": "Internal Replacement Phone Batteries",
+              "or": "Baatirii Jijjiirraa Bilbilaa",
+              "ti": "ናይ ሞባይል መለዋወጢ ባትሪታት"
+            },
+            "aliases": {}
+          }
+        ]
+      },
+      {
+        "id": 7638,
+        "parent_id": 7629,
+        "slug": "mobile-phone-accessories",
+        "level": 1,
+        "path": "/7629/7638/",
+        "canonical_name": "Mobile Phone Accessories",
+        "name_en": "Mobile Phone Accessories",
+        "name_am": "የሞባይል ስልክ ተጨማሪ እቃዎች",
+        "name_om": "Meeshaalee Dabalataa Bilbilaa",
+        "name_ti": "ናይ ሞባይል ስልኪ ተወሳኺ ኣቑሑት",
+        "definition": "Protective cases, tempered glass, wall chargers, power banks, and cables for mobile devices.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.398232Z",
+        "updated_at": "2026-11-01T11:26:59.398232Z",
+        "translations": {
+          "am": "የሞባይል ስልክ ተጨማሪ እቃዎች",
+          "en": "Mobile Phone Accessories",
+          "or": "Meeshaalee Dabalataa Bilbilaa",
+          "ti": "ናይ ሞባይል ስልኪ ተወሳኺ ኣቑሑት"
+        },
+        "aliases": {
+          "am": [
+            "ኬብል",
+            "የስልክ ቻርጀር",
+            "የስልክ ከቨር",
+            "ፓወር ባንክ"
+          ],
+          "en": [
+            "charger",
+            "phone accessories",
+            "phone case",
+            "power bank",
+            "usb cable"
+          ],
+          "or": [
+            "chaarjara",
+            "hagooggii bilbilaa",
+            "paawor baankii"
+          ],
+          "ti": [
+            "ቻርጀር",
+            "ናይ ስልኪ ከቨር",
+            "ፓወር ባንክ"
+          ]
+        }
+      }
+    ]
+  }
+}

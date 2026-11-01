@@ -1,0 +1,89 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.523588799Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "power-generation-diesel-generators-storage",
+  "root_family": {
+    "id": 7705,
+    "parent_id": null,
+    "slug": "power-generation-diesel-generators-storage",
+    "level": 0,
+    "path": "/7705/",
+    "canonical_name": "Power Generation, Diesel Generators \u0026 Energy Storage",
+    "name_en": "Power Generation, Diesel Generators \u0026 Energy Storage",
+    "name_am": "የኤሌክትሪክ ጀነሬተሮች እና የኢነርጂ ማከማቻ",
+    "name_om": "Jenereetara fi Meeshaalee Elektirikii",
+    "name_ti": "ናይ ኤሌክትሪክ ጀነሬተራትን ጸዓትን",
+    "definition": "Soundproof silent diesel generators (Perkins, Cummins, Baudouin, Ricardo engines from 10kVA to 1500kVA), automatic transfer switches (ATS), and industrial batteries.",
+    "display_order": 0,
+    "icon": "Activity",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.184561Z",
+    "updated_at": "2026-11-01T11:27:00.184561Z",
+    "translations": {
+      "am": "የኤሌክትሪክ ጀነሬተሮች እና የኢነርጂ ማከማቻ",
+      "en": "Power Generation, Diesel Generators \u0026 Energy Storage",
+      "or": "Jenereetara fi Meeshaalee Elektirikii",
+      "ti": "ናይ ኤሌክትሪክ ጀነሬተራትን ጸዓትን"
+    },
+    "aliases": {
+      "am": [
+        "የናፍጣ ጀነሬተር",
+        "ድምፅ አልባ ጀነሬተር",
+        "ጀነሬተር",
+        "ፐርኪንስ ጀነሬተር"
+      ],
+      "en": [
+        "ats",
+        "diesel generator",
+        "generator",
+        "genset",
+        "perkins generator",
+        "silent generator"
+      ],
+      "or": [
+        "jenereetara",
+        "jenereetara diizilii"
+      ],
+      "ti": [
+        "ናይ ዲዘል ጀነሬተር",
+        "ጀነሬተር"
+      ]
+    },
+    "children": [
+      {
+        "id": 7706,
+        "parent_id": 7705,
+        "slug": "soundproof-silent-diesel-generators",
+        "level": 1,
+        "path": "/7705/7706/",
+        "canonical_name": "Soundproof Silent Commercial Diesel Generators (ጀነሬተሮች)",
+        "name_en": "Soundproof Silent Commercial Diesel Generators (ጀነሬተሮች)",
+        "name_am": "ድምጽ አልባ የናፍጣ ጀነሬተሮች (ፐርኪንስ / ካሚንስ)",
+        "name_om": "Jenereetara Sagalee Hin Qabne (Diizilii)",
+        "name_ti": "ድምጺ ዘይብሎም ናይ ዲዘል ጀነሬተራት",
+        "definition": "Heavy-duty water-cooled diesel gensets equipped with sound-attenuated acoustic canopies and deep-sea digital controllers.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.202508Z",
+        "updated_at": "2026-11-01T11:27:00.202508Z",
+        "translations": {
+          "am": "ድምጽ አልባ የናፍጣ ጀነሬተሮች (ፐርኪንስ / ካሚንስ)",
+          "en": "Soundproof Silent Commercial Diesel Generators (ጀነሬተሮች)",
+          "or": "Jenereetara Sagalee Hin Qabne (Diizilii)",
+          "ti": "ድምጺ ዘይብሎም ናይ ዲዘል ጀነሬተራት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

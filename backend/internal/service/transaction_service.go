@@ -45,6 +45,16 @@ func (s *TransactionService) Create(ctx context.Context, sellerID int, req dto.C
 	}
 	req.BuyerPhone = phoneRes.Normalized
 
+	// Security: Prevent self-dealing wash trading by using the seller's own phone number
+	if s.userRepo != nil && sellerID > 0 {
+		sellerUser, err := s.userRepo.GetByID(ctx, sellerID)
+		if err == nil && sellerUser != nil {
+			if sellerUser.Phone == req.BuyerPhone {
+				return nil, errors.New("cannot create a transaction with your own phone number as the buyer")
+			}
+		}
+	}
+
 	t := &models.Transaction{
 		ProductID:  req.ProductID,
 		BuyerName:  req.BuyerName,

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "RETAIL_POS",
+  "root_family": {
+    "id": "root-retail-pos",
+    "slug": "retail-pos-cash-registers-store-fixtures",
+    "code": "RETAIL_POS",
+    "level": 1,
+    "canonical_name": "Retail Point of Sale (POS), Cash Registers \u0026 Store Fixtures",
+    "definition": "Fiscal electronic cash registers (ERCA certified F-POS), barcode laser scanners, thermal receipt printers, and supermarket shelving gondolas.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "CreditCard",
+    "translations": {
+      "am": "የችርቻሮ ሽያጭ መመዝገቢያ (ካሽ ሬጂስተር) እና ባርኮድ ስካነር",
+      "or": "Meeshaalee Galii Daldalaa (Kaash Reejistara)",
+      "ti": "ናይ ንግዲ መመዝገቢ (ካሽ ሬጂስተር)ን ባርኮድ ስካነርን"
+    },
+    "children": [
+      {
+        "id": "sf-fiscal-cash-registers",
+        "slug": "fiscal-electronic-cash-registers",
+        "code": "POS_REGISTERS",
+        "level": 2,
+        "canonical_name": "ERCA-Certified Fiscal Electronic Cash Registers (ካሽ ሬጂስተር)",
+        "definition": "Government-accredited electronic sales register machines (Datecs, Daisy, Tremol) with GPRS telecommunication modules.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የገቢዎች እውቅና ያላቸው የሽያጭ መመዝገቢያ ማሽኖች (ካሽ ሬጂስተር)",
+          "or": "Maashina Galii Galmeessu (Kaash Reejistara)",
+          "ti": "ናይ ግብሪ ፍቓድ ዘለዎም ናይ መሸጢ ማሽናት"
+        },
+        "aliases": {
+          "am": [
+            "ካሽ ሬጂስተር",
+            "የሽያጭ ማሽን",
+            "የገቢዎች ማሽን",
+            "ቴርማል ፕሪንተር"
+          ],
+          "en": [
+            "cash register",
+            "pos machine",
+            "fiscal machine",
+            "datecs",
+            "receipt printer"
+          ],
+          "or": [
+            "kaash reejistara"
+          ],
+          "ti": [
+            "ካሽ ሬጂስተር"
+          ]
+        }
+      }
+    ]
+  }
+}

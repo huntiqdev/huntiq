@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { ClientShell } from '@/components/layout/ClientShell';
 import { LocaleProvider } from '@/context/LocaleContext';
@@ -15,14 +16,18 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before paint — prevents dark-mode flash without Next.js Script component.
+// Runs before paint — prevents dark-mode flash without hydration errors.
 const themeScript = `try{var t=localStorage.getItem('habesha_theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <Script
+          id="theme-detector"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
       </head>
       <body className="dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
         <LocaleProvider>

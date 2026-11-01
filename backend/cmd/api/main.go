@@ -237,9 +237,19 @@ func main() {
 	productHandler := handlers.NewProductHandler(productSvc, authSvc).
 		WithSearchLogger(searchRepo).
 		WithAIClient(aiClient).
+		WithCategoryHierarchy(categoryHierarchySvc).
 		WithCache(appCache)
 	locationHandler := handlers.NewLocationHandler(locationSvc)
-	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc)
+	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc).
+		WithCache(appCache).
+		WithAdminLogger(func(ctx context.Context, adminID int, action, notes string) {
+			adminSvc.InsertAdminLog(ctx, models.AdminLog{
+				AdminID:   adminID,
+				Action:    action,
+				Notes:     notes,
+				IPAddress: "",
+			})
+		})
 	attributeHandler := handlers.NewAttributeHandler(attributeSvc).WithProductService(productSvc)
 	authHandler := handlers.NewAuthHandler(authSvc).WithAdminService(adminSvc).WithDevMode(cfg.DevMode)
 	txHandler := handlers.NewTransactionHandler(txSvc)
@@ -377,6 +387,7 @@ func main() {
 
 	// ── Public ──────────────────────────────────────────────────────────────
 	api.Get("/products", searchLimiter, mw.OptionalAuth, productHandler.List)
+	api.Post("/products/auto-categorize", searchLimiter, mw.OptionalAuth, productHandler.AutoCategorize)
 	api.Get("/products/:id", mw.OptionalAuth, productHandler.Get)
 	api.Get("/categories", productHandler.ListCategories)
 	api.Get("/categories/roots", categoryHandler.GetRoots)

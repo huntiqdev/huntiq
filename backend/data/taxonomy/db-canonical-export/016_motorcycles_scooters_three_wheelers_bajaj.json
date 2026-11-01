@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.520526948Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "motorcycles-scooters-three-wheelers-bajaj",
+  "root_family": {
+    "id": 7659,
+    "parent_id": null,
+    "slug": "motorcycles-scooters-three-wheelers-bajaj",
+    "level": 0,
+    "path": "/7659/",
+    "canonical_name": "Motorcycles, Scooters \u0026 Three-Wheelers (Bajaj)",
+    "name_en": "Motorcycles, Scooters \u0026 Three-Wheelers (Bajaj)",
+    "name_am": "ሞተር ሳይክሎች፣ ስኩተሮች እና ባጃጆች",
+    "name_om": "Moophedii fi Baajaajii",
+    "name_ti": "ሞተር ሳይክላትን ባጃጃትን",
+    "definition": "Three-wheeled passenger auto-rickshaws (Bajaj RE, TVS King, Piaggio), cargo tricycles, and delivery motorbikes.",
+    "display_order": 0,
+    "icon": "Bike",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.644063Z",
+    "updated_at": "2026-11-01T11:26:59.644063Z",
+    "translations": {
+      "am": "ሞተር ሳይክሎች፣ ስኩተሮች እና ባጃጆች",
+      "en": "Motorcycles, Scooters \u0026 Three-Wheelers (Bajaj)",
+      "or": "Moophedii fi Baajaajii",
+      "ti": "ሞተር ሳይክላትን ባጃጃትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7660,
+        "parent_id": 7659,
+        "slug": "three-wheeled-auto-rickshaws-bajaj",
+        "level": 1,
+        "path": "/7659/7660/",
+        "canonical_name": "Three-Wheeled Auto-Rickshaws \u0026 Bajaj",
+        "name_en": "Three-Wheeled Auto-Rickshaws \u0026 Bajaj",
+        "name_am": "ባጃጆች እና ባለ ሶስት እግር ተሽከርካሪዎች",
+        "name_om": "Baajaajii fi Konkolaataa Miila Sadii",
+        "name_ti": "ባጃጃትን ባለ ሰለስተ እግሪ ተሽከርከርትን",
+        "definition": "Passenger urban transport three-wheelers (Bajaj RE 4S, TVS King Deluxe) and rear cargo tricycles.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.648519Z",
+        "updated_at": "2026-11-01T11:26:59.648519Z",
+        "translations": {
+          "am": "ባጃጆች እና ባለ ሶስት እግር ተሽከርካሪዎች",
+          "en": "Three-Wheeled Auto-Rickshaws \u0026 Bajaj",
+          "or": "Baajaajii fi Konkolaataa Miila Sadii",
+          "ti": "ባጃጃትን ባለ ሰለስተ እግሪ ተሽከርከርትን"
+        },
+        "aliases": {
+          "am": [
+            "ባለ 3 እግር",
+            "ባጃጅ",
+            "ቲቪኤስ",
+            "የከተማ ባጃጅ"
+          ],
+          "en": [
+            "auto rickshaw",
+            "bajaj",
+            "keke",
+            "three wheeler",
+            "tvs king"
+          ],
+          "or": [
+            "baajaajii",
+            "baajaajii miila sadii"
+          ],
+          "ti": [
+            "ባለ 3 እግሪ",
+            "ባጃጅ"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -25,15 +25,15 @@ export default function SellPage() {
         </div>
 
         {/* Three main options */}
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
+        <div className="grid md:grid-cols-3 gap-3.5 sm:gap-4 mb-8">
           {/* SELL PRODUCTS */}
           <Link
             href="/auth?as=seller&preference=sale"
-            className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-orange-600 p-6 flex flex-col items-center gap-4 transition-all hover:shadow-xl active:scale-95 bg-white dark:bg-zinc-900"
+            className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-750 hover:border-orange-600 p-4 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 transition-all hover:shadow-xl tap-bounce active:scale-[0.98] bg-white dark:bg-zinc-900"
           >
-            <div className="text-5xl">🛒</div>
+            <div className="text-4xl sm:text-5xl">🛒</div>
             <div className="text-center">
-              <p className="font-black text-lg mb-1">{u.sell_products ?? 'Sell Products'}</p>
+              <p className="font-black text-base sm:text-lg mb-1">{u.sell_products ?? 'Sell Products'}</p>
               <p className="text-xs text-zinc-500 leading-relaxed">{u.sell_products_desc ?? 'List items for one-time purchase'}</p>
             </div>
             <div className="mt-auto pt-2 flex items-center gap-1 text-orange-600 text-xs font-bold group-hover:gap-2 transition-all">
@@ -44,14 +44,14 @@ export default function SellPage() {
           {/* RENT PROPERTY (LANDLORD) */}
           <Link
             href="/auth?as=seller&preference=rent"
-            className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-blue-600 p-6 flex flex-col items-center gap-4 transition-all hover:shadow-xl active:scale-95 bg-white dark:bg-zinc-900"
+            className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-750 hover:border-teal-600 p-4 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 transition-all hover:shadow-xl tap-bounce active:scale-[0.98] bg-white dark:bg-zinc-900"
           >
-            <div className="text-5xl">🏠</div>
+            <div className="text-4xl sm:text-5xl">🏠</div>
             <div className="text-center">
-              <p className="font-black text-lg mb-1">{u.rent_property ?? 'Rent Property'}</p>
+              <p className="font-black text-base sm:text-lg mb-1">{u.rent_property ?? 'Rent Property'}</p>
               <p className="text-xs text-zinc-500 leading-relaxed">{u.rent_property_desc ?? 'List properties for rental'}</p>
             </div>
-            <div className="mt-auto pt-2 flex items-center gap-1 text-blue-600 text-xs font-bold group-hover:gap-2 transition-all">
+            <div className="mt-auto pt-2 flex items-center gap-1 text-teal-600 text-xs font-bold group-hover:gap-2 transition-all">
               {u.register ?? 'Register'} <ArrowRight size={12} />
             </div>
           </Link>
@@ -59,11 +59,11 @@ export default function SellPage() {
           {/* BOTH */}
           <Link
             href="/auth?as=seller&preference=both"
-            className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-purple-600 p-6 flex flex-col items-center gap-4 transition-all hover:shadow-xl active:scale-95 bg-white dark:bg-zinc-900"
+            className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-750 hover:border-purple-600 p-4 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 transition-all hover:shadow-xl tap-bounce active:scale-[0.98] bg-white dark:bg-zinc-900"
           >
-            <div className="text-5xl">🔄</div>
+            <div className="text-4xl sm:text-5xl">🔄</div>
             <div className="text-center">
-              <p className="font-black text-lg mb-1">{u.both_option ?? 'Both'}</p>
+              <p className="font-black text-base sm:text-lg mb-1">{u.both_option ?? 'Both'}</p>
               <p className="text-xs text-zinc-500 leading-relaxed">{u.both_option_desc ?? 'Sell products AND rent properties'}</p>
             </div>
             <div className="mt-auto pt-2 flex items-center gap-1 text-purple-600 text-xs font-bold group-hover:gap-2 transition-all">
@@ -73,15 +73,15 @@ export default function SellPage() {
         </div>
 
         {/* How it works */}
-        <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
+        <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 sm:p-6">
           <p className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-4">
             {u.how_it_works ?? 'How it works'}
           </p>
-          <div className="grid md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {HOW_IT_WORKS.map(s => (
-              <div key={s.n} className="flex flex-col items-center text-center gap-2">
-                <span className="w-10 h-10 rounded-xl bg-orange-600/10 text-orange-600 text-sm font-black flex items-center justify-center">{s.n}</span>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{s.text}</p>
+              <div key={s.n} className="flex flex-col items-center text-center gap-2 p-2 rounded-xl bg-white/60 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800/60">
+                <span className="w-9 h-9 rounded-xl bg-orange-600/10 text-orange-600 text-xs font-black flex items-center justify-center">{s.n}</span>
+                <p className="text-[11px] sm:text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{s.text}</p>
               </div>
             ))}
           </div>

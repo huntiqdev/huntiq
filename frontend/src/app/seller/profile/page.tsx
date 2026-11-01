@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, FormEvent } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
 import {
@@ -15,6 +16,8 @@ import { CapabilityActivationModal } from '@/components/auth/CapabilityActivatio
 
 export default function SellerProfilePage() {
   const { user, isSeller, isLandlord } = useAuth();
+  const { t, locale } = useLocale();
+  const u = (t as any)?.ui ?? {};
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -87,22 +90,22 @@ export default function SellerProfilePage() {
     finally { setPwSaving(false); }
   };
 
-  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all';
+  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all text-zinc-900 dark:text-zinc-100';
   const lbl = 'text-xs font-bold text-zinc-500 dark:text-zinc-400 block mb-1';
 
   const PW_LABELS: Record<'current' | 'next' | 'confirm', string> = {
-    current: 'Current Password',
-    next:    'New Password',
-    confirm: 'Confirm New Password',
+    current: u.current_password_label || 'Current Password',
+    next:    u.new_password_label || 'New Password',
+    confirm: u.confirm_new_password_label || 'Confirm New Password',
   };
 
   if (loading) return <div className="flex items-center justify-center h-64"><Spinner /></div>;
-  if (!profile) return <p className="text-zinc-400">Profile not found.</p>;
+  if (!profile) return <p className="text-zinc-400">{u.profile_not_found || 'Profile not found.'}</p>;
 
   return (
     <div className="space-y-5 max-w-lg">
       <div>
-        <h1 className="text-xl font-black text-zinc-900 dark:text-white">Profile</h1>
+        <h1 className="text-xl font-black text-zinc-900 dark:text-white">{u.my_profile || u.profile || 'Profile'}</h1>
         <p className="text-xs text-zinc-500 mt-0.5">Manage your seller account</p>
       </div>
 
@@ -126,24 +129,24 @@ export default function SellerProfilePage() {
 
         <form onSubmit={handleProfileSubmit} className="p-5 space-y-4">
           <div>
-            <label className={lbl}><User size={11} className="inline mr-1" />Full Name</label>
+            <label className={lbl}><User size={11} className="inline mr-1" />{u.full_name || 'Full Name'}</label>
             <input value={profile.name} onChange={e => setProfile((p: any) => ({ ...p, name: e.target.value }))}
               className={cls} placeholder="Your name" />
           </div>
           <div>
-            <label className={lbl}><Building2 size={11} className="inline mr-1" />Business Name</label>
+            <label className={lbl}><Building2 size={11} className="inline mr-1" />{u.business_name || 'Business Name'}</label>
             <input value={profile.business_name ?? ''} onChange={e => setProfile((p: any) => ({ ...p, business_name: e.target.value }))}
               className={cls} placeholder="Optional" />
           </div>
           <div>
-            <label className={lbl}><Mail size={11} className="inline mr-1" />Email</label>
+            <label className={lbl}><Mail size={11} className="inline mr-1" />{u.email_label || 'Email'}</label>
             <input type="email" value={profile.email} onChange={e => setProfile((p: any) => ({ ...p, email: e.target.value }))}
               className={cls} />
           </div>
 
           {/* Primary phone — always read-only */}
           <div>
-            <label className={lbl}><Phone size={11} className="inline mr-1" />Primary Phone (login, cannot change)</label>
+            <label className={lbl}><Phone size={11} className="inline mr-1" />{u.phone || 'Phone'} (login, cannot change)</label>
             <input value={profile.phone} disabled className={cls + ' opacity-50 cursor-not-allowed'} />
           </div>
 
@@ -216,7 +219,7 @@ export default function SellerProfilePage() {
 
           <button type="submit" disabled={saving}
             className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-bold text-sm transition-colors disabled:opacity-50">
-            {saving ? 'Saving…' : 'Save Changes'}
+            {saving ? (u.saving || 'Saving…') : (u.save_changes || 'Save Changes')}
           </button>
         </form>
       </div>
@@ -287,9 +290,9 @@ export default function SellerProfilePage() {
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-3">
         <div className="flex items-center justify-between">
           <p className="text-xs font-black uppercase tracking-wider text-zinc-400">
-            Marketplace Capabilities
+            {u.customer_hub_title || 'Marketplace Capabilities'}
           </p>
-          <span className="text-[10px] text-zinc-500 font-medium">Unified Account</span>
+          <span className="text-[10px] text-zinc-500 font-medium">{u.unified_identity || 'Unified Account'}</span>
         </div>
 
         <div className="space-y-2">
@@ -300,15 +303,15 @@ export default function SellerProfilePage() {
                 <User size={15} />
               </div>
               <div>
-                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">Buyer Activity</p>
-                <p className="text-[10px] text-zinc-400">Discover and purchase products across Ethiopia</p>
+                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{u.buyer_renter_portal || 'Buyer Activity'}</p>
+                <p className="text-[10px] text-zinc-400">{u.reg_buyer_desc || 'Discover and purchase products across Ethiopia'}</p>
               </div>
             </div>
             <Link
               href="/buyer/dashboard"
               className="text-xs font-bold text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1"
             >
-              <span>Portal</span>
+              <span>{u.portal || 'Portal'}</span>
               <ArrowUpRight size={12} />
             </Link>
           </div>
@@ -320,12 +323,12 @@ export default function SellerProfilePage() {
                 <ShoppingBag size={15} />
               </div>
               <div>
-                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">Seller Studio</p>
-                <p className="text-[10px] text-zinc-400">List items, manage stock, and receive orders</p>
+                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{u.seller_studio || 'Seller Studio'}</p>
+                <p className="text-[10px] text-zinc-400">{u.reg_seller_desc || 'List items, manage stock, and receive orders'}</p>
               </div>
             </div>
             <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full">
-              Active
+              {u.status_active || 'Active'}
             </span>
           </div>
 
@@ -336,8 +339,8 @@ export default function SellerProfilePage() {
                 <Home size={15} />
               </div>
               <div>
-                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">Landlord Console</p>
-                <p className="text-[10px] text-zinc-400">List properties and rentable assets</p>
+                <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{u.landlord_console || 'Landlord Console'}</p>
+                <p className="text-[10px] text-zinc-400">{u.reg_landlord_desc || 'List properties and rentable assets'}</p>
               </div>
             </div>
             {isLandlord ? (
@@ -345,7 +348,7 @@ export default function SellerProfilePage() {
                 href="/seller/products?preference=rent"
                 className="text-xs font-bold text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1"
               >
-                <span>Console</span>
+                <span>{u.console || 'Console'}</span>
                 <ArrowUpRight size={12} />
               </Link>
             ) : (
@@ -354,7 +357,7 @@ export default function SellerProfilePage() {
                 onClick={() => setActivationCap('landlord')}
                 className="text-[11px] font-bold bg-teal-600 hover:bg-teal-500 text-white px-2.5 py-1 rounded-lg transition-all"
               >
-                Activate
+                {u.activate_label || 'Activate'}
               </button>
             )}
           </div>
@@ -378,14 +381,15 @@ export default function SellerProfilePage() {
       <ReferralCard role="seller" />
 
       {/* Change password */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5">        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100 dark:border-zinc-800">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5">
+        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100 dark:border-zinc-800">
           <Lock size={15} className="text-orange-600" />
-          <h2 className="font-bold text-zinc-900 dark:text-white">Change Password</h2>
+          <h2 className="font-bold text-zinc-900 dark:text-white">{u.change_password || 'Change Password'}</h2>
         </div>
         {pwSuccess && (
           <div className="flex items-center gap-2 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl px-3 py-2 mb-4">
             <CheckCircle size={13} className="text-green-600 shrink-0" />
-            <p className="text-xs text-green-700 dark:text-green-400">Password updated!</p>
+            <p className="text-xs text-green-700 dark:text-green-400">{u.password_updated_success || 'Password updated!'}</p>
           </div>
         )}
         <form onSubmit={handlePasswordSubmit} className="space-y-3">
@@ -405,8 +409,8 @@ export default function SellerProfilePage() {
           ))}
           {pwError && <p className="text-xs text-red-500 bg-red-50 dark:bg-red-900/20 px-3 py-2 rounded-xl">{pwError}</p>}
           <button type="submit" disabled={pwSaving}
-            className="w-full bg-zinc-800 dark:bg-zinc-700 hover:bg-zinc-700 dark:hover:bg-zinc-600 text-white py-2.5 rounded-xl font-bold text-sm transition-colors disabled:opacity-50">
-            {pwSaving ? 'Updating…' : 'Update Password'}
+            className="w-full bg-zinc-800 dark:bg-zinc-700 hover:bg-zinc-700 dark:hover:bg-zinc-600 text-white py-3 min-h-[44px] rounded-xl font-bold text-sm transition-all tap-bounce active:scale-95 disabled:opacity-50">
+            {pwSaving ? (u.saving || 'Updating…') : (u.save_changes || 'Update Password')}
           </button>
         </form>
       </div>

@@ -1,0 +1,1038 @@
+[
+  {
+    "language": "am",
+    "alias": "\u121a\u1325\u121a\u1323",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7618,
+        "name_en": "Tomatoes, Peppers & Irish Potatoes",
+        "name_am": "\u1272\u121b\u1272\u121d\u1363 \u1243\u122a\u12eb \u12a5\u1293 \u12f5\u1295\u127d",
+        "level": 2,
+        "path": "/7614/7615/7618/",
+        "is_leaf": true,
+        "parent_name": "Fresh Vegetables & Allium Crops"
+      },
+      {
+        "id": 7738,
+        "name_en": "Traditional Spices, Berbere & Shiro Powders (\u1260\u122d\u1260\u122c \u12a5\u1293 \u123d\u122e)",
+        "name_am": "\u12e8\u12c8\u1325 \u1260\u122d\u1260\u122c\u1363 \u12e8\u123d\u122e \u12f1\u1244\u1275 \u12a5\u1293 \u12e8\u1245\u1218\u121d \u12d3\u12ed\u1290\u1276\u127d",
+        "level": 1,
+        "path": "/7737/7738/",
+        "is_leaf": true,
+        "parent_name": "Food, Groceries & Traditional Spices"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Traditional Spices, Berbere & Shiro Powders (\u1260\u122d\u1260\u122c \u12a5\u1293 \u123d\u122e)\" (Level 1) and specific child \"Tomatoes, Peppers & Irish Potatoes\" (Level 2).",
+    "recommended_target_id": 7618,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7618 (\"Tomatoes, Peppers & Irish Potatoes\"). Drop alias from parent ID 7738. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u1230\u120a\u1325",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7608,
+        "name_en": "Sesame Seed (\u1230\u120a\u1325)",
+        "name_am": "\u12e8\u1230\u120a\u1325 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7608/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Sesame Seed (\u1230\u120a\u1325)\" (Level 2).",
+    "recommended_target_id": 7608,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7608 (\"Sesame Seed (\u1230\u120a\u1325)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u1231\u1245",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7677,
+        "name_en": "Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)",
+        "name_am": "\u12e8\u121e\u120d \u1231\u1246\u127d \u12a5\u1293 \u12e8\u127d\u122d\u127b\u122e \u1295\u130d\u12f5 \u1266\u1273\u12ce\u127d",
+        "level": 1,
+        "path": "/7676/7677/",
+        "is_leaf": true,
+        "parent_name": "Commercial Properties, Offices & Retail Spaces"
+      },
+      {
+        "id": 7676,
+        "name_en": "Commercial Properties, Offices & Retail Spaces",
+        "name_am": "\u12e8\u1295\u130d\u12f5 \u1264\u1276\u127d\u1363 \u1262\u122e\u12ce\u127d \u12a5\u1293 \u1231\u1246\u127d",
+        "level": 0,
+        "path": "/7676/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Commercial Properties, Offices & Retail Spaces\" (Level 0) and specific child \"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\" (Level 1).",
+    "recommended_target_id": 7677,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7677 (\"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\"). Drop alias from parent ID 7676. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u1232\u121a\u1295\u1276",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7685,
+        "name_en": "Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)",
+        "name_am": "\u1356\u122d\u1275\u120b\u1295\u12f5 \u1232\u121a\u1295\u1276 (\u12f3\u1295\u130e\u1274\u1363 \u1219\u1308\u122d\u1363 \u12f0\u122d\u1263)",
+        "level": 1,
+        "path": "/7684/7685/",
+        "is_leaf": true,
+        "parent_name": "Construction Materials, Masonry & Aggregates"
+      },
+      {
+        "id": 7684,
+        "name_en": "Construction Materials, Masonry & Aggregates",
+        "name_am": "\u12e8\u130d\u1295\u1263\u1273 \u12a5\u1243\u12ce\u127d\u1363 \u1232\u121a\u1295\u1276\u1363 \u12a0\u1238\u12cb \u12a5\u1293 \u1265\u120e\u12ac\u1275",
+        "level": 0,
+        "path": "/7684/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Construction Materials, Masonry & Aggregates\" (Level 0) and specific child \"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\" (Level 1).",
+    "recommended_target_id": 7685,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7685 (\"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\"). Drop alias from parent ID 7684. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u1235\u121b\u122d\u1275\u134e\u1295",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7630,
+        "name_en": "Mobile Handsets & Smartphones",
+        "name_am": "\u1235\u121b\u122d\u1275\u134e\u1296\u127d \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1240\u134e\u12ce\u127d",
+        "level": 1,
+        "path": "/7629/7630/",
+        "is_leaf": false,
+        "parent_name": "Consumer Electronics & Mobile Devices"
+      },
+      {
+        "id": 7629,
+        "name_en": "Consumer Electronics & Mobile Devices",
+        "name_am": "\u12a4\u120c\u12ad\u1275\u122e\u1292\u12ad\u1235 \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1235\u120d\u12ae\u127d",
+        "level": 0,
+        "path": "/7629/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Consumer Electronics & Mobile Devices\" (Level 0) and specific child \"Mobile Handsets & Smartphones\" (Level 1).",
+    "recommended_target_id": 7630,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7630 (\"Mobile Handsets & Smartphones\"). Drop alias from parent ID 7629. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u126a\u120b",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7675,
+        "name_en": "Detached Villas & Private Compound Residences",
+        "name_am": "\u126a\u120b\u12ce\u127d \u12a5\u1293 \u12e8\u130a\u1262 \u12cd\u1235\u1325 \u1264\u1276\u127d",
+        "level": 1,
+        "path": "/7671/7675/",
+        "is_leaf": true,
+        "parent_name": "Residential Properties & Living Spaces"
+      },
+      {
+        "id": 7671,
+        "name_en": "Residential Properties & Living Spaces",
+        "name_am": "\u12e8\u1218\u1296\u122a\u12eb \u1264\u1276\u127d \u12a5\u1293 \u12a0\u1353\u122d\u1273\u121b\u12ce\u127d",
+        "level": 0,
+        "path": "/7671/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Residential Properties & Living Spaces\" (Level 0) and specific child \"Detached Villas & Private Compound Residences\" (Level 1).",
+    "recommended_target_id": 7675,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7675 (\"Detached Villas & Private Compound Residences\"). Drop alias from parent ID 7671. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u126a\u1275\u12dd",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7653,
+        "name_en": "Hatchbacks & Compact City Cars (\u126a\u1275\u12dd \u12a5\u1293 \u1275\u1293\u1295\u123d \u1218\u12aa\u1296\u127d)",
+        "name_am": "\u1200\u127d\u1263\u12ad \u12a5\u1293 \u12e8\u1273\u1218\u1241 \u1275\u1293\u1295\u123d \u1218\u12aa\u1296\u127d (\u126a\u1275\u12dd)",
+        "level": 1,
+        "path": "/7651/7653/",
+        "is_leaf": true,
+        "parent_name": "Passenger Vehicles & Automobiles"
+      },
+      {
+        "id": 7651,
+        "name_en": "Passenger Vehicles & Automobiles",
+        "name_am": "\u1270\u123d\u12a8\u122d\u12ab\u122a\u12ce\u127d \u12a5\u1293 \u12e8\u1218\u1295\u1308\u12f0\u129b \u1218\u12aa\u1296\u127d",
+        "level": 0,
+        "path": "/7651/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Passenger Vehicles & Automobiles\" (Level 0) and specific child \"Hatchbacks & Compact City Cars (\u126a\u1275\u12dd \u12a5\u1293 \u1275\u1293\u1295\u123d \u1218\u12aa\u1296\u127d)\" (Level 1).",
+    "recommended_target_id": 7653,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7653 (\"Hatchbacks & Compact City Cars (\u126a\u1275\u12dd \u12a5\u1293 \u1275\u1293\u1295\u123d \u1218\u12aa\u1296\u127d)\"). Drop alias from parent ID 7651. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u1270\u120d\u1263",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7609,
+        "name_en": "Linseed & Flaxseed (\u1270\u120d\u1263)",
+        "name_am": "\u12e8\u1270\u120d\u1263 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7609/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Linseed & Flaxseed (\u1270\u120d\u1263)\" (Level 2).",
+    "recommended_target_id": 7609,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7609 (\"Linseed & Flaxseed (\u1270\u120d\u1263)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u1291\u130d",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 254,
+        "name_en": "Niger Seed / Noug (\u1291\u130d)",
+        "name_am": "\u12e8\u1291\u130d \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/254/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds and Pulses (Export Quality)"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Niger Seed / Noug (\u1291\u130d)\" (Level 2).",
+    "recommended_target_id": 254,
+    "recommended_action": "Retain alias exclusively on leaf node ID 254 (\"Niger Seed / Noug (\u1291\u130d)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u12a0\u12ed\u134e\u1295",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7631,
+        "name_en": "Touchscreen Smartphones (\u12d8\u1218\u1293\u12ca \u1235\u120d\u12ae\u127d)",
+        "name_am": "\u12d8\u1218\u1293\u12ca \u12e8\u1295\u12ad\u12aa \u1235\u12ad\u122a\u1295 \u1235\u120d\u12ae\u127d",
+        "level": 2,
+        "path": "/7629/7630/7631/",
+        "is_leaf": false,
+        "parent_name": "Mobile Handsets & Smartphones"
+      },
+      {
+        "id": 7630,
+        "name_en": "Mobile Handsets & Smartphones",
+        "name_am": "\u1235\u121b\u122d\u1275\u134e\u1296\u127d \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1240\u134e\u12ce\u127d",
+        "level": 1,
+        "path": "/7629/7630/",
+        "is_leaf": false,
+        "parent_name": "Consumer Electronics & Mobile Devices"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Mobile Handsets & Smartphones\" (Level 1) and specific child \"Touchscreen Smartphones (\u12d8\u1218\u1293\u12ca \u1235\u120d\u12ae\u127d)\" (Level 2).",
+    "recommended_target_id": 7631,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7631 (\"Touchscreen Smartphones (\u12d8\u1218\u1293\u12ca \u1235\u120d\u12ae\u127d)\"). Drop alias from parent ID 7630. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u12ab\u121c\u122b",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 6446,
+        "name_en": "Mirrorless & DSLR Digital Cameras",
+        "name_am": "\u12e8\u134e\u1276 \u12a5\u1293 \u12e8\u126a\u12f2\u12ee \u12ab\u121c\u122b\u12ce\u127d",
+        "level": 1,
+        "path": "/7648/6446/",
+        "is_leaf": true,
+        "parent_name": "Cameras, Photography and Optics"
+      },
+      {
+        "id": 7766,
+        "name_en": "CCTV IP Cameras & Network Video Recorders (\u1232\u1232\u1272\u126a)",
+        "name_am": "\u12e8\u1232\u1232\u1272\u126a \u12ab\u121c\u122b\u12ce\u127d \u12a5\u1293 \u122a\u12ae\u122d\u12f0\u122e\u127d (NVR/DVR)",
+        "level": 1,
+        "path": "/7765/7766/",
+        "is_leaf": true,
+        "parent_name": "Security Systems, Surveillance, CCTV & Access Control"
+      }
+    ],
+    "diagnosis": "Legacy vs Canonical Tree Collision: maps to legacy ID 6446 and canonical ID 7766.",
+    "recommended_target_id": 7766,
+    "recommended_action": "Migrate all products from legacy ID 6446 to canonical ID 7766. Re-target alias strictly to canonical ID 7766."
+  },
+  {
+    "language": "am",
+    "alias": "\u12e8\u1235\u12b3\u122d \u1218\u1208\u12aa\u12eb",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7730,
+        "name_en": "Diagnostic Monitors & Vitals Checkers (BP, Glucose, Oximeter)",
+        "name_am": "\u12e8\u12f0\u121d \u130d\u134a\u1275 \u12a5\u1293 \u12e8\u1235\u12b3\u122d \u1218\u1208\u12aa\u12eb \u1218\u1233\u122a\u12eb\u12ce\u127d",
+        "level": 1,
+        "path": "/7729/7730/",
+        "is_leaf": true,
+        "parent_name": "Healthcare, Medical Devices & Diagnostic Equipment"
+      },
+      {
+        "id": 7729,
+        "name_en": "Healthcare, Medical Devices & Diagnostic Equipment",
+        "name_am": "\u12e8\u1205\u12ad\u121d\u1293 \u1218\u1233\u122a\u12eb\u12ce\u127d \u12a5\u1293 \u12e8\u1324\u1293 \u121d\u122d\u1218\u122b \u12a5\u1243\u12ce\u127d",
+        "level": 0,
+        "path": "/7729/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Healthcare, Medical Devices & Diagnostic Equipment\" (Level 0) and specific child \"Diagnostic Monitors & Vitals Checkers (BP, Glucose, Oximeter)\" (Level 1).",
+    "recommended_target_id": 7730,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7730 (\"Diagnostic Monitors & Vitals Checkers (BP, Glucose, Oximeter)\"). Drop alias from parent ID 7729. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u12e8\u130d\u134a\u1275 \u1218\u1208\u12aa\u12eb",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7730,
+        "name_en": "Diagnostic Monitors & Vitals Checkers (BP, Glucose, Oximeter)",
+        "name_am": "\u12e8\u12f0\u121d \u130d\u134a\u1275 \u12a5\u1293 \u12e8\u1235\u12b3\u122d \u1218\u1208\u12aa\u12eb \u1218\u1233\u122a\u12eb\u12ce\u127d",
+        "level": 1,
+        "path": "/7729/7730/",
+        "is_leaf": true,
+        "parent_name": "Healthcare, Medical Devices & Diagnostic Equipment"
+      },
+      {
+        "id": 7729,
+        "name_en": "Healthcare, Medical Devices & Diagnostic Equipment",
+        "name_am": "\u12e8\u1205\u12ad\u121d\u1293 \u1218\u1233\u122a\u12eb\u12ce\u127d \u12a5\u1293 \u12e8\u1324\u1293 \u121d\u122d\u1218\u122b \u12a5\u1243\u12ce\u127d",
+        "level": 0,
+        "path": "/7729/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Healthcare, Medical Devices & Diagnostic Equipment\" (Level 0) and specific child \"Diagnostic Monitors & Vitals Checkers (BP, Glucose, Oximeter)\" (Level 1).",
+    "recommended_target_id": 7730,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7730 (\"Diagnostic Monitors & Vitals Checkers (BP, Glucose, Oximeter)\"). Drop alias from parent ID 7729. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "am",
+    "alias": "\u134a\u120d\u1270\u122d",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7667,
+        "name_en": "Automotive Filters (Air, Oil, Fuel, Cabin)",
+        "name_am": "\u12e8\u12d8\u12ed\u1275\u1363 \u12e8\u1290\u12f3\u1305 \u12a5\u1293 \u12e8\u12a0\u12e8\u122d \u134a\u120d\u1270\u122e\u127d",
+        "level": 1,
+        "path": "/7663/7667/",
+        "is_leaf": true,
+        "parent_name": "Vehicle Parts, Replacement Components & Powertrain"
+      },
+      {
+        "id": 7663,
+        "name_en": "Vehicle Parts, Replacement Components & Powertrain",
+        "name_am": "\u12e8\u1270\u123d\u12a8\u122d\u12ab\u122a \u1218\u1208\u12cb\u12c8\u132b\u12ce\u127d \u12a5\u1293 \u12e8\u121e\u1270\u122d \u12a5\u1243\u12ce\u127d",
+        "level": 0,
+        "path": "/7663/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Vehicle Parts, Replacement Components & Powertrain\" (Level 0) and specific child \"Automotive Filters (Air, Oil, Fuel, Cabin)\" (Level 1).",
+    "recommended_target_id": 7667,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7667 (\"Automotive Filters (Air, Oil, Fuel, Cabin)\"). Drop alias from parent ID 7663. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "cellphones",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7630,
+        "name_en": "Mobile Handsets & Smartphones",
+        "name_am": "\u1235\u121b\u122d\u1275\u134e\u1296\u127d \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1240\u134e\u12ce\u127d",
+        "level": 1,
+        "path": "/7629/7630/",
+        "is_leaf": false,
+        "parent_name": "Consumer Electronics & Mobile Devices"
+      },
+      {
+        "id": 7629,
+        "name_en": "Consumer Electronics & Mobile Devices",
+        "name_am": "\u12a4\u120c\u12ad\u1275\u122e\u1292\u12ad\u1235 \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1235\u120d\u12ae\u127d",
+        "level": 0,
+        "path": "/7629/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Consumer Electronics & Mobile Devices\" (Level 0) and specific child \"Mobile Handsets & Smartphones\" (Level 1).",
+    "recommended_target_id": 7630,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7630 (\"Mobile Handsets & Smartphones\"). Drop alias from parent ID 7629. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "cement",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7685,
+        "name_en": "Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)",
+        "name_am": "\u1356\u122d\u1275\u120b\u1295\u12f5 \u1232\u121a\u1295\u1276 (\u12f3\u1295\u130e\u1274\u1363 \u1219\u1308\u122d\u1363 \u12f0\u122d\u1263)",
+        "level": 1,
+        "path": "/7684/7685/",
+        "is_leaf": true,
+        "parent_name": "Construction Materials, Masonry & Aggregates"
+      },
+      {
+        "id": 7684,
+        "name_en": "Construction Materials, Masonry & Aggregates",
+        "name_am": "\u12e8\u130d\u1295\u1263\u1273 \u12a5\u1243\u12ce\u127d\u1363 \u1232\u121a\u1295\u1276\u1363 \u12a0\u1238\u12cb \u12a5\u1293 \u1265\u120e\u12ac\u1275",
+        "level": 0,
+        "path": "/7684/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Construction Materials, Masonry & Aggregates\" (Level 0) and specific child \"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\" (Level 1).",
+    "recommended_target_id": 7685,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7685 (\"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\"). Drop alias from parent ID 7684. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "flaxseed",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7609,
+        "name_en": "Linseed & Flaxseed (\u1270\u120d\u1263)",
+        "name_am": "\u12e8\u1270\u120d\u1263 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7609/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Linseed & Flaxseed (\u1270\u120d\u1263)\" (Level 2).",
+    "recommended_target_id": 7609,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7609 (\"Linseed & Flaxseed (\u1270\u120d\u1263)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "linseed",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7609,
+        "name_en": "Linseed & Flaxseed (\u1270\u120d\u1263)",
+        "name_am": "\u12e8\u1270\u120d\u1263 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7609/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Linseed & Flaxseed (\u1270\u120d\u1263)\" (Level 2).",
+    "recommended_target_id": 7609,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7609 (\"Linseed & Flaxseed (\u1270\u120d\u1263)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "noug",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 254,
+        "name_en": "Niger Seed / Noug (\u1291\u130d)",
+        "name_am": "\u12e8\u1291\u130d \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/254/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds and Pulses (Export Quality)"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Niger Seed / Noug (\u1291\u130d)\" (Level 2).",
+    "recommended_target_id": 254,
+    "recommended_action": "Retain alias exclusively on leaf node ID 254 (\"Niger Seed / Noug (\u1291\u130d)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "sesame",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7608,
+        "name_en": "Sesame Seed (\u1230\u120a\u1325)",
+        "name_am": "\u12e8\u1230\u120a\u1325 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7608/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Sesame Seed (\u1230\u120a\u1325)\" (Level 2).",
+    "recommended_target_id": 7608,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7608 (\"Sesame Seed (\u1230\u120a\u1325)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "shop",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7677,
+        "name_en": "Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)",
+        "name_am": "\u12e8\u121e\u120d \u1231\u1246\u127d \u12a5\u1293 \u12e8\u127d\u122d\u127b\u122e \u1295\u130d\u12f5 \u1266\u1273\u12ce\u127d",
+        "level": 1,
+        "path": "/7676/7677/",
+        "is_leaf": true,
+        "parent_name": "Commercial Properties, Offices & Retail Spaces"
+      },
+      {
+        "id": 7676,
+        "name_en": "Commercial Properties, Offices & Retail Spaces",
+        "name_am": "\u12e8\u1295\u130d\u12f5 \u1264\u1276\u127d\u1363 \u1262\u122e\u12ce\u127d \u12a5\u1293 \u1231\u1246\u127d",
+        "level": 0,
+        "path": "/7676/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Commercial Properties, Offices & Retail Spaces\" (Level 0) and specific child \"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\" (Level 1).",
+    "recommended_target_id": 7677,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7677 (\"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\"). Drop alias from parent ID 7676. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "smartphones",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7630,
+        "name_en": "Mobile Handsets & Smartphones",
+        "name_am": "\u1235\u121b\u122d\u1275\u134e\u1296\u127d \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1240\u134e\u12ce\u127d",
+        "level": 1,
+        "path": "/7629/7630/",
+        "is_leaf": false,
+        "parent_name": "Consumer Electronics & Mobile Devices"
+      },
+      {
+        "id": 7629,
+        "name_en": "Consumer Electronics & Mobile Devices",
+        "name_am": "\u12a4\u120c\u12ad\u1275\u122e\u1292\u12ad\u1235 \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1235\u120d\u12ae\u127d",
+        "level": 0,
+        "path": "/7629/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Consumer Electronics & Mobile Devices\" (Level 0) and specific child \"Mobile Handsets & Smartphones\" (Level 1).",
+    "recommended_target_id": 7630,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7630 (\"Mobile Handsets & Smartphones\"). Drop alias from parent ID 7629. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "en",
+    "alias": "villa",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7675,
+        "name_en": "Detached Villas & Private Compound Residences",
+        "name_am": "\u126a\u120b\u12ce\u127d \u12a5\u1293 \u12e8\u130a\u1262 \u12cd\u1235\u1325 \u1264\u1276\u127d",
+        "level": 1,
+        "path": "/7671/7675/",
+        "is_leaf": true,
+        "parent_name": "Residential Properties & Living Spaces"
+      },
+      {
+        "id": 7671,
+        "name_en": "Residential Properties & Living Spaces",
+        "name_am": "\u12e8\u1218\u1296\u122a\u12eb \u1264\u1276\u127d \u12a5\u1293 \u12a0\u1353\u122d\u1273\u121b\u12ce\u127d",
+        "level": 0,
+        "path": "/7671/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Residential Properties & Living Spaces\" (Level 0) and specific child \"Detached Villas & Private Compound Residences\" (Level 1).",
+    "recommended_target_id": 7675,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7675 (\"Detached Villas & Private Compound Residences\"). Drop alias from parent ID 7671. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "firiinii",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7665,
+        "name_en": "Automotive Brake Pads & Shoes (\u12e8\u134d\u122c\u1295 \u132b\u121b / \u1263\u120c\u1273)",
+        "name_am": "\u12e8\u134a\u1275 \u12a5\u1293 \u12e8\u128b\u120b \u12e8\u134d\u122c\u1295 \u132b\u121b\u12ce\u127d (\u1263\u120c\u1273)",
+        "level": 2,
+        "path": "/7663/7664/7665/",
+        "is_leaf": true,
+        "parent_name": "Brake Systems & Friction Components"
+      },
+      {
+        "id": 7663,
+        "name_en": "Vehicle Parts, Replacement Components & Powertrain",
+        "name_am": "\u12e8\u1270\u123d\u12a8\u122d\u12ab\u122a \u1218\u1208\u12cb\u12c8\u132b\u12ce\u127d \u12a5\u1293 \u12e8\u121e\u1270\u122d \u12a5\u1243\u12ce\u127d",
+        "level": 0,
+        "path": "/7663/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Vehicle Parts, Replacement Components & Powertrain\" (Level 0) and specific child \"Automotive Brake Pads & Shoes (\u12e8\u134d\u122c\u1295 \u132b\u121b / \u1263\u120c\u1273)\" (Level 2).",
+    "recommended_target_id": 7665,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7665 (\"Automotive Brake Pads & Shoes (\u12e8\u134d\u122c\u1295 \u132b\u121b / \u1263\u120c\u1273)\"). Drop alias from parent ID 7663. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "ismaartfooni",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7630,
+        "name_en": "Mobile Handsets & Smartphones",
+        "name_am": "\u1235\u121b\u122d\u1275\u134e\u1296\u127d \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1240\u134e\u12ce\u127d",
+        "level": 1,
+        "path": "/7629/7630/",
+        "is_leaf": false,
+        "parent_name": "Consumer Electronics & Mobile Devices"
+      },
+      {
+        "id": 7629,
+        "name_en": "Consumer Electronics & Mobile Devices",
+        "name_am": "\u12a4\u120c\u12ad\u1275\u122e\u1292\u12ad\u1235 \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1235\u120d\u12ae\u127d",
+        "level": 0,
+        "path": "/7629/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Consumer Electronics & Mobile Devices\" (Level 0) and specific child \"Mobile Handsets & Smartphones\" (Level 1).",
+    "recommended_target_id": 7630,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7630 (\"Mobile Handsets & Smartphones\"). Drop alias from parent ID 7629. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "nuugii",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 254,
+        "name_en": "Niger Seed / Noug (\u1291\u130d)",
+        "name_am": "\u12e8\u1291\u130d \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/254/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds and Pulses (Export Quality)"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Niger Seed / Noug (\u1291\u130d)\" (Level 2).",
+    "recommended_target_id": 254,
+    "recommended_action": "Retain alias exclusively on leaf node ID 254 (\"Niger Seed / Noug (\u1291\u130d)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "saliixa",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7608,
+        "name_en": "Sesame Seed (\u1230\u120a\u1325)",
+        "name_am": "\u12e8\u1230\u120a\u1325 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7608/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Sesame Seed (\u1230\u120a\u1325)\" (Level 2).",
+    "recommended_target_id": 7608,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7608 (\"Sesame Seed (\u1230\u120a\u1325)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "simentoo",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7685,
+        "name_en": "Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)",
+        "name_am": "\u1356\u122d\u1275\u120b\u1295\u12f5 \u1232\u121a\u1295\u1276 (\u12f3\u1295\u130e\u1274\u1363 \u1219\u1308\u122d\u1363 \u12f0\u122d\u1263)",
+        "level": 1,
+        "path": "/7684/7685/",
+        "is_leaf": true,
+        "parent_name": "Construction Materials, Masonry & Aggregates"
+      },
+      {
+        "id": 7684,
+        "name_en": "Construction Materials, Masonry & Aggregates",
+        "name_am": "\u12e8\u130d\u1295\u1263\u1273 \u12a5\u1243\u12ce\u127d\u1363 \u1232\u121a\u1295\u1276\u1363 \u12a0\u1238\u12cb \u12a5\u1293 \u1265\u120e\u12ac\u1275",
+        "level": 0,
+        "path": "/7684/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Construction Materials, Masonry & Aggregates\" (Level 0) and specific child \"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\" (Level 1).",
+    "recommended_target_id": 7685,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7685 (\"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\"). Drop alias from parent ID 7684. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "suuqii",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7677,
+        "name_en": "Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)",
+        "name_am": "\u12e8\u121e\u120d \u1231\u1246\u127d \u12a5\u1293 \u12e8\u127d\u122d\u127b\u122e \u1295\u130d\u12f5 \u1266\u1273\u12ce\u127d",
+        "level": 1,
+        "path": "/7676/7677/",
+        "is_leaf": true,
+        "parent_name": "Commercial Properties, Offices & Retail Spaces"
+      },
+      {
+        "id": 7676,
+        "name_en": "Commercial Properties, Offices & Retail Spaces",
+        "name_am": "\u12e8\u1295\u130d\u12f5 \u1264\u1276\u127d\u1363 \u1262\u122e\u12ce\u127d \u12a5\u1293 \u1231\u1246\u127d",
+        "level": 0,
+        "path": "/7676/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Commercial Properties, Offices & Retail Spaces\" (Level 0) and specific child \"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\" (Level 1).",
+    "recommended_target_id": 7677,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7677 (\"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\"). Drop alias from parent ID 7676. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "or",
+    "alias": "viilaa",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7675,
+        "name_en": "Detached Villas & Private Compound Residences",
+        "name_am": "\u126a\u120b\u12ce\u127d \u12a5\u1293 \u12e8\u130a\u1262 \u12cd\u1235\u1325 \u1264\u1276\u127d",
+        "level": 1,
+        "path": "/7671/7675/",
+        "is_leaf": true,
+        "parent_name": "Residential Properties & Living Spaces"
+      },
+      {
+        "id": 7671,
+        "name_en": "Residential Properties & Living Spaces",
+        "name_am": "\u12e8\u1218\u1296\u122a\u12eb \u1264\u1276\u127d \u12a5\u1293 \u12a0\u1353\u122d\u1273\u121b\u12ce\u127d",
+        "level": 0,
+        "path": "/7671/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Residential Properties & Living Spaces\" (Level 0) and specific child \"Detached Villas & Private Compound Residences\" (Level 1).",
+    "recommended_target_id": 7675,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7675 (\"Detached Villas & Private Compound Residences\"). Drop alias from parent ID 7671. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u1230\u120a\u1325",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7608,
+        "name_en": "Sesame Seed (\u1230\u120a\u1325)",
+        "name_am": "\u12e8\u1230\u120a\u1325 \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/7608/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds & Industrial Export Crops"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Sesame Seed (\u1230\u120a\u1325)\" (Level 2).",
+    "recommended_target_id": 7608,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7608 (\"Sesame Seed (\u1230\u120a\u1325)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u1232\u121a\u1295\u1276",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7685,
+        "name_en": "Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)",
+        "name_am": "\u1356\u122d\u1275\u120b\u1295\u12f5 \u1232\u121a\u1295\u1276 (\u12f3\u1295\u130e\u1274\u1363 \u1219\u1308\u122d\u1363 \u12f0\u122d\u1263)",
+        "level": 1,
+        "path": "/7684/7685/",
+        "is_leaf": true,
+        "parent_name": "Construction Materials, Masonry & Aggregates"
+      },
+      {
+        "id": 7684,
+        "name_en": "Construction Materials, Masonry & Aggregates",
+        "name_am": "\u12e8\u130d\u1295\u1263\u1273 \u12a5\u1243\u12ce\u127d\u1363 \u1232\u121a\u1295\u1276\u1363 \u12a0\u1238\u12cb \u12a5\u1293 \u1265\u120e\u12ac\u1275",
+        "level": 0,
+        "path": "/7684/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Construction Materials, Masonry & Aggregates\" (Level 0) and specific child \"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\" (Level 1).",
+    "recommended_target_id": 7685,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7685 (\"Portland Cement & Hydraulic Binding Agents (\u1232\u121a\u1295\u1276)\"). Drop alias from parent ID 7684. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u1235\u121b\u122d\u1275\u134e\u1295",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7630,
+        "name_en": "Mobile Handsets & Smartphones",
+        "name_am": "\u1235\u121b\u122d\u1275\u134e\u1296\u127d \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1240\u134e\u12ce\u127d",
+        "level": 1,
+        "path": "/7629/7630/",
+        "is_leaf": false,
+        "parent_name": "Consumer Electronics & Mobile Devices"
+      },
+      {
+        "id": 7629,
+        "name_en": "Consumer Electronics & Mobile Devices",
+        "name_am": "\u12a4\u120c\u12ad\u1275\u122e\u1292\u12ad\u1235 \u12a5\u1293 \u12e8\u121e\u1263\u12ed\u120d \u1235\u120d\u12ae\u127d",
+        "level": 0,
+        "path": "/7629/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Consumer Electronics & Mobile Devices\" (Level 0) and specific child \"Mobile Handsets & Smartphones\" (Level 1).",
+    "recommended_target_id": 7630,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7630 (\"Mobile Handsets & Smartphones\"). Drop alias from parent ID 7629. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u1260\u122d\u1260\u1228",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7618,
+        "name_en": "Tomatoes, Peppers & Irish Potatoes",
+        "name_am": "\u1272\u121b\u1272\u121d\u1363 \u1243\u122a\u12eb \u12a5\u1293 \u12f5\u1295\u127d",
+        "level": 2,
+        "path": "/7614/7615/7618/",
+        "is_leaf": true,
+        "parent_name": "Fresh Vegetables & Allium Crops"
+      },
+      {
+        "id": 7738,
+        "name_en": "Traditional Spices, Berbere & Shiro Powders (\u1260\u122d\u1260\u122c \u12a5\u1293 \u123d\u122e)",
+        "name_am": "\u12e8\u12c8\u1325 \u1260\u122d\u1260\u122c\u1363 \u12e8\u123d\u122e \u12f1\u1244\u1275 \u12a5\u1293 \u12e8\u1245\u1218\u121d \u12d3\u12ed\u1290\u1276\u127d",
+        "level": 1,
+        "path": "/7737/7738/",
+        "is_leaf": true,
+        "parent_name": "Food, Groceries & Traditional Spices"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Traditional Spices, Berbere & Shiro Powders (\u1260\u122d\u1260\u122c \u12a5\u1293 \u123d\u122e)\" (Level 1) and specific child \"Tomatoes, Peppers & Irish Potatoes\" (Level 2).",
+    "recommended_target_id": 7618,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7618 (\"Tomatoes, Peppers & Irish Potatoes\"). Drop alias from parent ID 7738. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u126a\u120b",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7675,
+        "name_en": "Detached Villas & Private Compound Residences",
+        "name_am": "\u126a\u120b\u12ce\u127d \u12a5\u1293 \u12e8\u130a\u1262 \u12cd\u1235\u1325 \u1264\u1276\u127d",
+        "level": 1,
+        "path": "/7671/7675/",
+        "is_leaf": true,
+        "parent_name": "Residential Properties & Living Spaces"
+      },
+      {
+        "id": 7671,
+        "name_en": "Residential Properties & Living Spaces",
+        "name_am": "\u12e8\u1218\u1296\u122a\u12eb \u1264\u1276\u127d \u12a5\u1293 \u12a0\u1353\u122d\u1273\u121b\u12ce\u127d",
+        "level": 0,
+        "path": "/7671/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Residential Properties & Living Spaces\" (Level 0) and specific child \"Detached Villas & Private Compound Residences\" (Level 1).",
+    "recommended_target_id": 7675,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7675 (\"Detached Villas & Private Compound Residences\"). Drop alias from parent ID 7671. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u1291\u130d",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 254,
+        "name_en": "Niger Seed / Noug (\u1291\u130d)",
+        "name_am": "\u12e8\u1291\u130d \u134d\u122c",
+        "level": 2,
+        "path": "/7598/7607/254/",
+        "is_leaf": true,
+        "parent_name": "Oilseeds and Pulses (Export Quality)"
+      },
+      {
+        "id": 7607,
+        "name_en": "Oilseeds & Industrial Export Crops",
+        "name_am": "\u12e8\u1245\u1263\u1275 \u12a5\u1205\u120e\u127d \u12a5\u1293 \u12e8\u12a2\u1295\u12f1\u1235\u1275\u122a \u1230\u1265\u120e\u127d",
+        "level": 1,
+        "path": "/7598/7607/",
+        "is_leaf": false,
+        "parent_name": "Agriculture & Crop Farming"
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Oilseeds & Industrial Export Crops\" (Level 1) and specific child \"Niger Seed / Noug (\u1291\u130d)\" (Level 2).",
+    "recommended_target_id": 254,
+    "recommended_action": "Retain alias exclusively on leaf node ID 254 (\"Niger Seed / Noug (\u1291\u130d)\"). Drop alias from parent ID 7607. Subtree query in product_repo.go cascades automatically."
+  },
+  {
+    "language": "ti",
+    "alias": "\u12f5\u12b3\u1295",
+    "category_count": 2,
+    "conflicting_categories": [
+      {
+        "id": 7677,
+        "name_en": "Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)",
+        "name_am": "\u12e8\u121e\u120d \u1231\u1246\u127d \u12a5\u1293 \u12e8\u127d\u122d\u127b\u122e \u1295\u130d\u12f5 \u1266\u1273\u12ce\u127d",
+        "level": 1,
+        "path": "/7676/7677/",
+        "is_leaf": true,
+        "parent_name": "Commercial Properties, Offices & Retail Spaces"
+      },
+      {
+        "id": 7676,
+        "name_en": "Commercial Properties, Offices & Retail Spaces",
+        "name_am": "\u12e8\u1295\u130d\u12f5 \u1264\u1276\u127d\u1363 \u1262\u122e\u12ce\u127d \u12a5\u1293 \u1231\u1246\u127d",
+        "level": 0,
+        "path": "/7676/",
+        "is_leaf": false,
+        "parent_name": null
+      }
+    ],
+    "diagnosis": "Parent-Child Overlap: mapped to both parent \"Commercial Properties, Offices & Retail Spaces\" (Level 0) and specific child \"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\" (Level 1).",
+    "recommended_target_id": 7677,
+    "recommended_action": "Retain alias exclusively on leaf node ID 7677 (\"Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)\"). Drop alias from parent ID 7676. Subtree query in product_repo.go cascades automatically."
+  }
+]

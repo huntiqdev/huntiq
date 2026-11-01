@@ -1,0 +1,136 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.551674541Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "fashion",
+  "root_family": {
+    "id": 5,
+    "parent_id": null,
+    "slug": "fashion",
+    "level": 0,
+    "path": "/5/",
+    "canonical_name": "Fashion \u0026 Clothing",
+    "name_en": "Fashion \u0026 Clothing",
+    "name_am": "ፋሽን",
+    "name_om": "Faashinii",
+    "name_ti": "ፋሽን",
+    "definition": "",
+    "display_order": 5,
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-10-22T01:57:37.540684Z",
+    "updated_at": "2026-10-26T12:35:05.312834Z",
+    "translations": {
+      "am": "ፋሽን",
+      "en": "Fashion \u0026 Clothing",
+      "or": "Faashinii",
+      "ti": "ፋሽን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 30,
+        "parent_id": 5,
+        "slug": "mens-clothing",
+        "level": 1,
+        "path": "/5/30/",
+        "canonical_name": "Men's Fashion",
+        "name_en": "Men's Fashion",
+        "name_am": "የወንዶች ልብስ",
+        "name_om": "Uffata Dhiiraa",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 1,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "የወንዶች ልብስ",
+          "en": "Men's Fashion",
+          "or": "Uffata Dhiiraa"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 31,
+        "parent_id": 5,
+        "slug": "womens-clothing",
+        "level": 1,
+        "path": "/5/31/",
+        "canonical_name": "Women's Fashion",
+        "name_en": "Women's Fashion",
+        "name_am": "የሴቶች ልብስ",
+        "name_om": "Uffata Dubartootaa",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 2,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "የሴቶች ልብስ",
+          "en": "Women's Fashion",
+          "or": "Uffata Dubartootaa"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 32,
+        "parent_id": 5,
+        "slug": "traditional-habesha",
+        "level": 1,
+        "path": "/5/32/",
+        "canonical_name": "Traditional Habesha Attire",
+        "name_en": "Traditional Habesha Attire",
+        "name_am": "የሀበሻ ባህላዊ ልብስ",
+        "name_om": "Uffata Aadaa",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 3,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "የሀበሻ ባህላዊ ልብስ",
+          "en": "Traditional Habesha Attire",
+          "or": "Uffata Aadaa"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 33,
+        "parent_id": 5,
+        "slug": "shoes",
+        "level": 1,
+        "path": "/5/33/",
+        "canonical_name": "Shoes \u0026 Footwear",
+        "name_en": "Shoes \u0026 Footwear",
+        "name_am": "ጫማዎች",
+        "name_om": "Kophee",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 4,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "ጫማዎች",
+          "en": "Shoes \u0026 Footwear",
+          "or": "Kophee"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

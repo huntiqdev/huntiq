@@ -1,0 +1,91 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.521988232Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "land-plots-agricultural-development-acreage",
+  "root_family": {
+    "id": 7681,
+    "parent_id": null,
+    "slug": "land-plots-agricultural-development-acreage",
+    "level": 0,
+    "path": "/7681/",
+    "canonical_name": "Land Plots, Agricultural Estates \u0026 Development Acreage",
+    "name_en": "Land Plots, Agricultural Estates \u0026 Development Acreage",
+    "name_am": "መሬት፣ እርሻ ቦታዎች እና የልማት ይዞታዎች",
+    "name_om": "Lafa Jireenyaa, Qonnaa fi Daldalaa",
+    "name_ti": "መሬት፣ ናይ ሕርሻ ቦታታትን ናይ ልምዓት ይዞታታትን",
+    "definition": "Zoned residential plots, commercial development land, leased agricultural acreage, and industrial plots.",
+    "display_order": 0,
+    "icon": "MapPin",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.926489Z",
+    "updated_at": "2026-11-01T11:26:59.926489Z",
+    "translations": {
+      "am": "መሬት፣ እርሻ ቦታዎች እና የልማት ይዞታዎች",
+      "en": "Land Plots, Agricultural Estates \u0026 Development Acreage",
+      "or": "Lafa Jireenyaa, Qonnaa fi Daldalaa",
+      "ti": "መሬት፣ ናይ ሕርሻ ቦታታትን ናይ ልምዓት ይዞታታትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7682,
+        "parent_id": 7681,
+        "slug": "residential-building-land-plots",
+        "level": 1,
+        "path": "/7681/7682/",
+        "canonical_name": "Residential Building Land Plots (የመኖሪያ መሬት)",
+        "name_en": "Residential Building Land Plots (የመኖሪያ መሬት)",
+        "name_am": "የመኖሪያ ቤት መሬት ይዞታዎች",
+        "name_om": "Lafa Ijaarsa Jireenyaa",
+        "name_ti": "ናይ መንበሪ ቤት መሬት",
+        "definition": "Surveyed residential plots with certified municipal coordinates and registered lease rights.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.928375Z",
+        "updated_at": "2026-11-01T11:26:59.928375Z",
+        "translations": {
+          "am": "የመኖሪያ ቤት መሬት ይዞታዎች",
+          "en": "Residential Building Land Plots (የመኖሪያ መሬት)",
+          "or": "Lafa Ijaarsa Jireenyaa",
+          "ti": "ናይ መንበሪ ቤት መሬት"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 7683,
+        "parent_id": 7681,
+        "slug": "commercial-agricultural-farmland",
+        "level": 1,
+        "path": "/7681/7683/",
+        "canonical_name": "Commercial Agricultural Farmland \u0026 Irrigation Acreage",
+        "name_en": "Commercial Agricultural Farmland \u0026 Irrigation Acreage",
+        "name_am": "የንግድ እርሻ መሬት እና የመስኖ ይዞታዎች",
+        "name_om": "Lafa Qonnaa Daldalaa fi Jallisii",
+        "name_ti": "ናይ ንግዲ ሕርሻ መሬትን መስኖን",
+        "definition": "Hectares of arable agricultural farmland with river/groundwater access for commercial crops.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.933388Z",
+        "updated_at": "2026-11-01T11:26:59.933388Z",
+        "translations": {
+          "am": "የንግድ እርሻ መሬት እና የመስኖ ይዞታዎች",
+          "en": "Commercial Agricultural Farmland \u0026 Irrigation Acreage",
+          "or": "Lafa Qonnaa Daldalaa fi Jallisii",
+          "ti": "ናይ ንግዲ ሕርሻ መሬትን መስኖን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

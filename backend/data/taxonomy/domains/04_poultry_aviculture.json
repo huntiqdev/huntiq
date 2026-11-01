@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "POULTRY_AVIC",
+  "root_family": {
+    "id": "root-poultry",
+    "slug": "poultry-aviculture",
+    "code": "POULTRY_AVIC",
+    "level": 1,
+    "canonical_name": "Poultry \u0026 Aviculture",
+    "definition": "Domestic fowls, layer chickens, broiler meat birds, day-old chicks, turkeys, and hatching eggs.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Egg",
+    "translations": {
+      "am": "የዶሮ እርባታ እና አእዋፋት",
+      "or": "Horsiisa Lukkuu",
+      "ti": "ናይ ደርሆ መራብሕን ኣዕዋፍን"
+    },
+    "children": [
+      {
+        "id": "sf-poultry-chickens",
+        "slug": "chickens-layers-broilers",
+        "code": "POULTRY_CHICKEN",
+        "level": 2,
+        "canonical_name": "Commercial \u0026 Backyard Chickens (ዶሮዎች)",
+        "definition": "Day-old chicks, Sasso, Bovans Brown, and Cobb 500 layers and broilers.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የእንቁላል እና የስጋ ዶሮዎች",
+          "or": "Lukkuu Buuphaa fi Foonii",
+          "ti": "ናይ እንቋቑሖን ስጋን ደራሁ"
+        }
+      }
+    ]
+  }
+}

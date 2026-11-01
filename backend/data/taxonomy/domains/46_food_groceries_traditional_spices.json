@@ -1,0 +1,111 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "FOOD_GROCERIES",
+  "root_family": {
+    "id": "root-food-groceries",
+    "slug": "food-groceries-traditional-spices",
+    "code": "FOOD_GROCERIES",
+    "level": 1,
+    "canonical_name": "Food, Groceries \u0026 Traditional Spices",
+    "definition": "Culinary spices (Berbere, Shiro, Korarima, Black Cumin, Fenugreek), natural honey, refined cooking oils, and staple grocery provisions.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Utensils",
+    "translations": {
+      "am": "የምግብ ሸቀጦች፣ ቅመማ ቅመም፣ በርበሬ እና ማር",
+      "or": "Nyaata, Mi'eessituu, Barbaree fi Damma",
+      "ti": "መግብን ቀመማት፣ በርበረን መዓርን"
+    },
+    "children": [
+      {
+        "id": "sf-traditional-spices-berbere",
+        "slug": "traditional-spices-berbere-shiro",
+        "code": "SPICE_TRADITIONAL",
+        "level": 2,
+        "canonical_name": "Traditional Spices, Berbere \u0026 Shiro Powders (በርበሬ እና ሽሮ)",
+        "definition": "Sun-dried red pepper blends (Berbere), spiced roasted chickpea legume flour (Shiro), Korarima, and Mekelesha.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የወጥ በርበሬ፣ የሽሮ ዱቄት እና የቅመም ዓይነቶች",
+          "or": "Barbaree fi Daakuu Shiroo",
+          "ti": "በርበረ ጸብሒ፣ ዱቄት ሽሮን ቀመማትን"
+        },
+        "aliases": {
+          "am": [
+            "በርበሬ",
+            "ሽሮ",
+            "የወጥ በርበሬ",
+            "ኮረሪማ",
+            "ቅመም",
+            "ሚጥሚጣ"
+          ],
+          "en": [
+            "berbere",
+            "shiro",
+            "spices",
+            "korarima",
+            "ethiopian spice",
+            "chili powder"
+          ],
+          "or": [
+            "barbaree",
+            "daakuu shiroo",
+            "mi'eessituu"
+          ],
+          "ti": [
+            "በርበረ",
+            "ሽሮ",
+            "ቀመማት",
+            "ኮረሪማ"
+          ]
+        }
+      },
+      {
+        "id": "sf-natural-honey-bee-products",
+        "slug": "pure-natural-honey-bee-products",
+        "code": "FOOD_HONEY",
+        "level": 2,
+        "canonical_name": "Pure Natural Honey \u0026 Apiculture Products (ማር)",
+        "definition": "Raw white honey (Tigray, Gonder highlands), yellow multi-floral honey, and beeswax.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ንፁህ የተፈጥሮ ማር (ነጭ ማር፣ ቀይ ማር) እና ሰም",
+          "or": "Damma Uumamaa fi Gaagura",
+          "ti": "ንጹር ተፈጥሮኣዊ መዓር (ጻዕዳ መዓር)"
+        },
+        "aliases": {
+          "am": [
+            "ማር",
+            "ነጭ ማር",
+            "የተፈጥሮ ማር",
+            "ሰም"
+          ],
+          "en": [
+            "honey",
+            "white honey",
+            "raw honey",
+            "beeswax"
+          ],
+          "or": [
+            "damma",
+            "damma adii"
+          ],
+          "ti": [
+            "መዓር",
+            "ጻዕዳ መዓር"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.531678596Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "office-supplies-stationery-paper-consumables",
+  "root_family": {
+    "id": 7773,
+    "parent_id": null,
+    "slug": "office-supplies-stationery-paper-consumables",
+    "level": 0,
+    "path": "/7773/",
+    "canonical_name": "Office Supplies, Stationery \u0026 Printing Consumables",
+    "name_en": "Office Supplies, Stationery \u0026 Printing Consumables",
+    "name_am": "የቢሮ እቃዎች፣ ስቴሽነሪ እና የህትመት ቶነሮች",
+    "name_om": "Meeshaalee Biiroo fi Waraqaa",
+    "name_ti": "ናይ ቢሮ ንዋያት፣ ስቴሽነሪን ቶነርን",
+    "definition": "A4 copy paper reams, laser printer toner cartridges, arch lever box files, binding machines, and heavy-duty paper shredders.",
+    "display_order": 0,
+    "icon": "FileText",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.915057Z",
+    "updated_at": "2026-11-01T11:27:00.915057Z",
+    "translations": {
+      "am": "የቢሮ እቃዎች፣ ስቴሽነሪ እና የህትመት ቶነሮች",
+      "en": "Office Supplies, Stationery \u0026 Printing Consumables",
+      "or": "Meeshaalee Biiroo fi Waraqaa",
+      "ti": "ናይ ቢሮ ንዋያት፣ ስቴሽነሪን ቶነርን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7774,
+        "parent_id": 7773,
+        "slug": "a4-copy-paper-cartons-reams",
+        "level": 1,
+        "path": "/7773/7774/",
+        "canonical_name": "A4 White Copy Paper Cartons \u0026 Reams (A4 ወረቀት)",
+        "name_en": "A4 White Copy Paper Cartons \u0026 Reams (A4 ወረቀት)",
+        "name_am": "ኤ 4 የፎቶ ኮፒ ወረቀቶች በካርቶን",
+        "name_om": "Waraqaa Fotokoppii A4",
+        "name_ti": "A4 ናይ ፎቶ ኮፒ ወረቐት",
+        "definition": "80gsm and 75gsm multi-purpose high-speed laser photocopying paper reams (Double A, PaperOne, Chamex).",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.91878Z",
+        "updated_at": "2026-11-01T11:27:00.91878Z",
+        "translations": {
+          "am": "ኤ 4 የፎቶ ኮፒ ወረቀቶች በካርቶን",
+          "en": "A4 White Copy Paper Cartons \u0026 Reams (A4 ወረቀት)",
+          "or": "Waraqaa Fotokoppii A4",
+          "ti": "A4 ናይ ፎቶ ኮፒ ወረቐት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

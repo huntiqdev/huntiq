@@ -368,15 +368,16 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <header className="md:hidden h-14 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 gap-3 shrink-0">
           <button onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+            className="p-2.5 rounded-xl text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-90"
+            aria-label="Open menu">
             <Menu size={18} />
           </button>
-          <span className={`font-black text-sm ${isRentMode ? 'text-teal-600' : isDualMode ? 'text-indigo-600' : 'text-orange-600'}`}>
+          <span className={`font-black text-sm truncate ${isRentMode ? 'text-teal-600' : isDualMode ? 'text-indigo-600' : 'text-orange-600'}`}>
             {headerTitle}
           </span>
           <div className="ml-auto flex items-center gap-2">
             {unreadCount > 0 && (
-              <Link href="/seller/dashboard" className="relative p-1.5 rounded-lg text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors">
+              <Link href="/seller/dashboard" className="relative p-2 rounded-xl text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors tap-bounce active:scale-90" aria-label="Notifications">
                 <Bell size={16} />
                 <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-orange-500 text-white text-[9px] font-black rounded-full flex items-center justify-center">
                   {unreadCount > 9 ? '9+' : unreadCount}
@@ -384,11 +385,12 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
               </Link>
             )}
             <button onClick={() => setHelpOpen(true)}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors">
+              className="p-2 rounded-xl text-zinc-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors tap-bounce active:scale-90"
+              aria-label="Help">
               <HelpCircle size={16} />
             </button>
             <Link href={headerAddHref}
-              className={`flex items-center gap-1.5 text-white px-3 py-1.5 rounded-lg text-xs font-bold ${headerColorClass}`}>
+              className={`flex items-center gap-1.5 text-white px-3 py-2 min-h-[36px] rounded-xl text-xs font-bold shadow-sm tap-bounce active:scale-95 ${headerColorClass}`}>
               {headerButtonText}
             </Link>
           </div>
@@ -417,7 +419,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
           </Link>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-[max(24px,env(safe-area-inset-bottom,24px))]">{children}</main>
       </div>
     </div>
   );

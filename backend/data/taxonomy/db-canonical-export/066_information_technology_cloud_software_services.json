@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.532455776Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "information-technology-cloud-software-services",
+  "root_family": {
+    "id": 7783,
+    "parent_id": null,
+    "slug": "information-technology-cloud-software-services",
+    "level": 0,
+    "path": "/7783/",
+    "canonical_name": "Information Technology, Cloud \u0026 Software Services",
+    "name_en": "Information Technology, Cloud \u0026 Software Services",
+    "name_am": "የሶፍትዌር ልማት፣ የድረ-ገጽ እና የክላውድ ቴክኖሎጂ አገልግሎቶች",
+    "name_om": "Tajaajila Misooma Sooftiweerii fi Teekinoolojii",
+    "name_ti": "ናይ ሶፍትዌር ምዕባለ፣ ዌብሳይትን ቴክኖሎጂን ኣገልግሎት",
+    "definition": "Custom web and mobile application programming, cloud hosting infrastructure, cybersecurity penetration testing, and IT systems integration.",
+    "display_order": 0,
+    "icon": "Terminal",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.987596Z",
+    "updated_at": "2026-11-01T11:27:00.987596Z",
+    "translations": {
+      "am": "የሶፍትዌር ልማት፣ የድረ-ገጽ እና የክላውድ ቴክኖሎጂ አገልግሎቶች",
+      "en": "Information Technology, Cloud \u0026 Software Services",
+      "or": "Tajaajila Misooma Sooftiweerii fi Teekinoolojii",
+      "ti": "ናይ ሶፍትዌር ምዕባለ፣ ዌብሳይትን ቴክኖሎጂን ኣገልግሎት"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7784,
+        "parent_id": 7783,
+        "slug": "custom-web-mobile-app-development",
+        "level": 1,
+        "path": "/7783/7784/",
+        "canonical_name": "Custom Web Application \u0026 Mobile App Development",
+        "name_en": "Custom Web Application \u0026 Mobile App Development",
+        "name_am": "የሞባይል አፕሊኬሽን እና የድረ-ገጽ ማበልጸግ አገልግሎት",
+        "name_om": "Misooma Weebsaayitii fi Moobaayilii Appii",
+        "name_ti": "ናይ ሞባይል ኣፕሊኬሽንን ዌብሳይትን ምዕባለ",
+        "definition": "Full-stack React/Next.js and Flutter/Android development with payment gateway integration (Telebirr, CBE Birr, Chapa).",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.990945Z",
+        "updated_at": "2026-11-01T11:27:00.990945Z",
+        "translations": {
+          "am": "የሞባይል አፕሊኬሽን እና የድረ-ገጽ ማበልጸግ አገልግሎት",
+          "en": "Custom Web Application \u0026 Mobile App Development",
+          "or": "Misooma Weebsaayitii fi Moobaayilii Appii",
+          "ti": "ናይ ሞባይል ኣፕሊኬሽንን ዌብሳይትን ምዕባለ"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

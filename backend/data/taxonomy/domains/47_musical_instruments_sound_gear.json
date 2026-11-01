@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "MUSIC_INSTRUMENTS",
+  "root_family": {
+    "id": "root-musical-instruments",
+    "slug": "musical-instruments-sound-gear",
+    "code": "MUSIC_INSTRUMENTS",
+    "level": 1,
+    "canonical_name": "Musical Instruments \u0026 Audio Staging Gear",
+    "definition": "Traditional Ethiopian acoustic folk instruments (Kirar, Masinko, Kebero, Washint), modern electric synthesizers, keyboards, studio microphones, and stage audio.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Music",
+    "translations": {
+      "am": "ሙዚቃ፣ የሙዚቃ መሳሪያዎች እና የድምጽ እቃዎች",
+      "or": "Muuziqaa fi Meeshaalee Muuziqaa",
+      "ti": "ሙዚቃ፣ ናይ ሙዚቃ መሳርሒታትን ናይ ድምጺ ንዋያትን"
+    },
+    "children": [
+      {
+        "id": "sf-traditional-instruments",
+        "slug": "traditional-ethiopian-folk-instruments",
+        "code": "MUSIC_TRADITIONAL",
+        "level": 2,
+        "canonical_name": "Traditional Ethiopian Folk Instruments (ክራር፣ ማሲንቆ፣ ከበሮ)",
+        "definition": "Handcrafted five/six-string acoustic and electric Kirars, horsehair single-string Masinko fiddles, and leather-stretched church Kebero drums.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ባህላዊ የሙዚቃ መሳሪያዎች (ክራር፣ ማሲንቆ፣ ከበሮ፣ ዋሽንት)",
+          "or": "Meeshaalee Muuziqaa Aadaa (Kiraara, Masinqoo)",
+          "ti": "ባህላዊ መሳርሒታት ሙዚቃ (ክራር፣ ማሲንቆ፣ ከበሮ)"
+        },
+        "aliases": {
+          "am": [
+            "ክራር",
+            "ማሲንቆ",
+            "ከበሮ",
+            "ዋሽንት",
+            "የኤሌክትሪክ ክራር"
+          ],
+          "en": [
+            "kirar",
+            "krar",
+            "masinko",
+            "kebero",
+            "washint",
+            "traditional music"
+          ],
+          "or": [
+            "kiraara",
+            "masinqoo",
+            "kabaaroo"
+          ],
+          "ti": [
+            "ክራር",
+            "ማሲንቆ",
+            "ከበሮ"
+          ]
+        }
+      },
+      {
+        "id": "sf-electronic-keyboards",
+        "slug": "electronic-keyboards-synthesizers",
+        "code": "MUSIC_KEYBOARDS",
+        "level": 2,
+        "canonical_name": "Electronic Keyboards, Organs \u0026 Synthesizers (ኪቦርዶች)",
+        "definition": "Yamaha and Korg professional arranger workstations preloaded with Ethiopian oriental scales and rhythms.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የኤሌክትሮኒክስ ኪቦርዶች እና ኦርጋኖች (ያማሃ / ኮርግ)",
+          "or": "Kiiboordii fi Oorgaanii",
+          "ti": "ኪቦርዳትን ኦርጋናትን"
+        }
+      }
+    ]
+  }
+}

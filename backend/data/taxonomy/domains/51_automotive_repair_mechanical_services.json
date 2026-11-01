@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "SERV_AUTO_REPAIR",
+  "root_family": {
+    "id": "root-automotive-repair-services",
+    "slug": "automotive-repair-mechanical-services",
+    "code": "SERV_AUTO_REPAIR",
+    "level": 1,
+    "canonical_name": "Automotive Repair, Mechanics \u0026 Bodywork Services",
+    "definition": "Professional garage mechanic services, engine overhaul, computerized OBD2 diagnostics, transmission repair, and accident panel beating/spray painting.",
+    "inclusion_rules": [
+      "Engine overhauling labor",
+      "Computerized automotive diagnostics",
+      "Panel beating and spray oven painting",
+      "Suspension repair labor"
+    ],
+    "exclusion_rules": [
+      "Physical spare parts without service (see Vehicle Parts)",
+      "Complete automobiles (see Passenger Vehicles)"
+    ],
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Car",
+    "translations": {
+      "am": "የመኪና ጋራዥ ጥገና እና የሜካኒክ አገልግሎቶች",
+      "or": "Tajaajila Suphaa Konkolaataa fi Gaaraajii",
+      "ti": "ናይ መኪና ጋራጅ ጽገናን ሜካኒክን ኣገልግሎት"
+    },
+    "children": [
+      {
+        "id": "sf-garage-engine-mechanics",
+        "slug": "garage-engine-mechanical-overhaul",
+        "code": "AUTO_MECHANICS",
+        "level": 2,
+        "canonical_name": "Automotive Garage Mechanics \u0026 Engine Overhauls (ጋራዥ)",
+        "definition": "Complete engine rebuilding, cylinder head skimming, timing belt replacement, and computerized vehicle diagnostics.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የመኪና ሞተር እና የሜካኒክ ጥገና (ጋራዥ)",
+          "or": "Suphaa Mootora Konkolaataa (Gaaraajii)",
+          "ti": "ናይ መኪና ሞተር ጽገና (ጋራጅ)"
+        }
+      }
+    ]
+  }
+}

@@ -304,7 +304,7 @@ func (s *AuthService) loginWithRole(ctx context.Context, req dto.LoginRequest, r
 	if s.IsOTPRequired(ctx) && !u.OTPVerified {
 		return "", errors.New("otp_pending: phone not verified — please complete OTP verification first")
 	}
-	token, err := security.GenerateJWTFull(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, s.jwtSecret)
+	token, err := security.GenerateJWTWithProfile(u.ID, u.Name, u.Phone, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
 	if err != nil {
 		return "", err
 	}
@@ -474,7 +474,7 @@ func (s *AuthService) LoginWithOTP(ctx context.Context, phone, code, role string
 	}
 	// Mark phone as verified — OTP login proves ownership
 	_ = s.repo.SetOTPVerifiedForRole(ctx, phone, role)
-	token, err := security.GenerateJWTFull(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, s.jwtSecret)
+	token, err := security.GenerateJWTWithProfile(u.ID, u.Name, u.Phone, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
 	if err != nil {
 		return "", err
 	}
@@ -1118,7 +1118,7 @@ func (s *AuthService) UnifiedRegister(ctx context.Context, req dto.RegisterReque
 		})
 	}
 
-	token, err := security.GenerateJWTWithCapabilities(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
+	token, err := security.GenerateJWTWithProfile(u.ID, u.Name, u.Phone, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
 	if err != nil {
 		return nil, "", err
 	}
@@ -1177,7 +1177,7 @@ func (s *AuthService) UnifiedLogin(ctx context.Context, req dto.LoginRequest) (*
 
 	s.repo.PopulateCapabilities(ctx, u)
 
-	token, err := security.GenerateJWTWithCapabilities(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
+	token, err := security.GenerateJWTWithProfile(u.ID, u.Name, u.Phone, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
 	if err != nil {
 		return nil, "", err
 	}
@@ -1241,7 +1241,7 @@ func (s *AuthService) ActivateCapability(ctx context.Context, userID int, req dt
 	}
 	s.repo.PopulateCapabilities(ctx, u)
 
-	token, err := security.GenerateJWTWithCapabilities(u.ID, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
+	token, err := security.GenerateJWTWithProfile(u.ID, u.Name, u.Phone, u.Role, u.AdminRole, u.BuyerTier, u.SellerPreference, u.Capabilities, s.jwtSecret)
 	if err != nil {
 		return nil, "", err
 	}

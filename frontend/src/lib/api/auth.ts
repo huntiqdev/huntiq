@@ -16,8 +16,16 @@ async function checkExists(role: UserRole, phone: string): Promise<boolean> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ phone }),
   }).catch(() => null);
-  if (!res) return role === 'seller'; // seller: fail-safe true; buyer: false
-  return res.status !== 404;
+  if (!res) return false;
+  if (res.status === 200) {
+    try {
+      const data = await res.json();
+      return !!data.exists;
+    } catch {
+      return true;
+    }
+  }
+  return false;
 }
 
 export const authApi = {

@@ -245,7 +245,8 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <header className="md:hidden h-14 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 gap-3 shrink-0">
           <button onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+            className="p-2.5 rounded-xl text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-90"
+            aria-label="Open menu">
             <Menu size={18} />
           </button>
           <span className="font-black text-orange-600 text-sm">Buyer Panel</span>
@@ -266,7 +267,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
           </Link>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-[max(24px,env(safe-area-inset-bottom,24px))]">{children}</main>
       </div>
 
       {/* 1-Click Capability Activation Modal */}

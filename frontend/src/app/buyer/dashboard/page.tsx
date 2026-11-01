@@ -80,20 +80,20 @@ export default function BuyerDashboardPage() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {[
           { label: 'Pending Requests',   value: pending,   color: 'text-blue-500',    bg: 'bg-blue-100 dark:bg-blue-900/30' },
           { label: 'Accepted Orders',  value: accepted,  color: 'text-green-500',   bg: 'bg-green-100 dark:bg-green-900/30' },
           { label: 'Completed Deals', value: completed, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-900/30' },
         ].map(({ label, value, color, bg }) => (
-          <div key={label} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4">
-            <div className={`w-8 h-8 rounded-xl ${bg} flex items-center justify-center mb-2`}>
-              {label.startsWith('Pending')   && <Clock       size={14} className={color} />}
-              {label.startsWith('Accepted')  && <CheckCircle size={14} className={color} />}
-              {label.startsWith('Completed') && <Sparkles    size={14} className={color} />}
+          <div key={label} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-2.5 sm:p-4 transition-all">
+            <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl ${bg} flex items-center justify-center mb-1.5 sm:mb-2`}>
+              {label.startsWith('Pending')   && <Clock       size={13} className={color} />}
+              {label.startsWith('Accepted')  && <CheckCircle size={13} className={color} />}
+              {label.startsWith('Completed') && <Sparkles    size={13} className={color} />}
             </div>
-            <p className={`text-2xl font-black ${color}`}>{value}</p>
-            <p className="text-xs text-zinc-500 mt-0.5">{label}</p>
+            <p className={`text-lg sm:text-2xl font-black ${color}`}>{value}</p>
+            <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 leading-tight">{label}</p>
           </div>
         ))}
       </div>
@@ -114,7 +114,7 @@ export default function BuyerDashboardPage() {
             </div>
             {buyerTier !== 'premium' && (
               <Link href="/buyer/upgrade"
-                className="flex items-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-colors">
+                className="flex items-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-bounce active:scale-95 shadow-md">
                 Upgrade <ArrowUpRight size={11} />
               </Link>
             )}
@@ -138,26 +138,26 @@ export default function BuyerDashboardPage() {
       {/* Quick links: Buy vs Rent */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Link href="/buyer/orders"
-          className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all">
-          <div className="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+          className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all tap-bounce active:scale-95">
+          <div className="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 shrink-0">
             <ShoppingCart size={16} />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <p className="font-bold text-zinc-900 dark:text-white text-sm">My Purchases & Orders</p>
             <p className="text-xs text-zinc-400">{orders.length} total request{orders.length !== 1 ? 's' : ''}</p>
           </div>
-          <ArrowUpRight size={14} className="text-zinc-300" />
+          <ArrowUpRight size={14} className="text-zinc-300 shrink-0" />
         </Link>
         <Link href="/products?type=rent"
-          className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all">
-          <div className="w-9 h-9 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600">
+          className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all tap-bounce active:scale-95">
+          <div className="w-9 h-9 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 shrink-0">
             <Package size={16} />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <p className="font-bold text-zinc-900 dark:text-white text-sm">Browse Rental Properties</p>
             <p className="text-xs text-zinc-400">Leases & Landlord listings</p>
           </div>
-          <ArrowUpRight size={14} className="text-zinc-300" />
+          <ArrowUpRight size={14} className="text-zinc-300 shrink-0" />
         </Link>
       </div>
 

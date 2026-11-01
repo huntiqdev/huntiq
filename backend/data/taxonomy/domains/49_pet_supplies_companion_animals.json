@@ -1,0 +1,71 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "PET_SUPPLIES",
+  "root_family": {
+    "id": "root-pet-supplies",
+    "slug": "pet-supplies-companion-animals",
+    "code": "PET_SUPPLIES",
+    "level": 1,
+    "canonical_name": "Pet Supplies, Veterinary Care \u0026 Companion Animals",
+    "definition": "Registered domestic dogs (German Shepherd, Rottweiler, Boerboel puppies), cat food, dog biscuits, and metal cages.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Dog",
+    "translations": {
+      "am": "የቤት እንስሳት (ውሾች) እና የእንክብካቤ እቃዎች",
+      "or": "Horii Manaa (Saree) fi Kunuunsa Isaanii",
+      "ti": "ናይ ገዛ እንስሳታት (ኣኽላባት)ን መግብታትን"
+    },
+    "children": [
+      {
+        "id": "sf-companion-dogs-puppies",
+        "slug": "pedigree-dogs-puppies",
+        "code": "PET_DOGS",
+        "level": 2,
+        "canonical_name": "Purebred Dogs, Guard Dogs \u0026 Puppies (ውሾች)",
+        "definition": "Vaccinated German Shepherd, Rottweiler, Caucasian Shepherd, and Boerboel guard puppies and trained adult canines.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የዘር ውሾች እና ቡችሎች (ጀርመን ሼፐርድ፣ ሮትዋይለር)",
+          "or": "Ilmoo Saree fi Saree Eegumsaa",
+          "ti": "ናይ ዘርኢ ኣኽላባትን ሒሉታትን"
+        },
+        "aliases": {
+          "am": [
+            "ውሻ",
+            "ቡችላ",
+            "የቤት ውሻ",
+            "የጥበቃ ውሻ",
+            "ጀርመን ሼፐርድ"
+          ],
+          "en": [
+            "dog",
+            "dogs",
+            "puppy",
+            "puppies",
+            "german shepherd",
+            "rottweiler"
+          ],
+          "or": [
+            "saree",
+            "ilmoo saree"
+          ],
+          "ti": [
+            "ከልቢ",
+            "ሒሉ",
+            "ናይ ዘርኢ ከልቢ"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -91,7 +91,7 @@ function SellerProductsContent() {
           <p className="text-xs text-zinc-500 mt-0.5">{products.length} total listings</p>
         </div>
         <button onClick={() => setShowCreate(true)}
-          className={`flex items-center gap-2 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors shadow-md ${
+          className={`flex items-center gap-2 text-white px-4 py-2.5 min-h-[44px] rounded-xl text-sm font-bold transition-all shadow-md tap-bounce active:scale-95 ${
             isRentMode ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
           }`}>
           <Plus size={15} /> {addBtnLabel}
@@ -106,18 +106,18 @@ function SellerProductsContent() {
       )}
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1 max-w-xs">
+      <div className="flex flex-col sm:flex-row gap-2.5">
+        <div className="relative flex-1 w-full sm:max-w-xs">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Search products..."
-            className="w-full pl-9 pr-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all" />
+            className="w-full pl-9 pr-3 py-2 text-base sm:text-sm min-h-[42px] border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all text-zinc-900 dark:text-zinc-100" />
         </div>
         <div className="flex gap-1.5 flex-wrap">
           {FILTERS.map(s => (
             <button key={s} onClick={() => setFilter(s)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold capitalize transition-all ${
-                filter === s ? 'bg-orange-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              className={`px-3 py-1.5 min-h-[36px] rounded-xl text-xs font-bold capitalize transition-all tap-bounce active:scale-95 ${
+                filter === s ? 'bg-orange-600 text-white shadow-sm' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}>
               {s} ({counts[s]})
             </button>

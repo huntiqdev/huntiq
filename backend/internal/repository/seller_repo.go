@@ -286,6 +286,37 @@ func (r *SellerRepoExport) ListOrdersBySeller(ctx context.Context, sellerID int)
 
 // UpdateOrderStatus updates the status and optional seller note on an order request.
 func (r *SellerRepoExport) UpdateOrderStatus(ctx context.Context, orderID, sellerID int, status, note string) error {
+	var currentStatus string
+	err := r.db.QueryRow(ctx, `SELECT status FROM order_requests WHERE id=$1 AND seller_id=$2`, orderID, sellerID).Scan(&currentStatus)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return fmt.Errorf("order not found")
+		}
+		return err
+	}
+
+	// If status is identical, allow updating note
+	if currentStatus != status {
+		// Terminal states cannot be changed
+		if currentStatus == "completed" || currentStatus == "declined" || currentStatus == "cancelled" {
+			return fmt.Errorf("cannot update order: order is already %s", currentStatus)
+		}
+
+		// Enforce state transitions
+		switch currentStatus {
+		case "pending":
+			if status != "accepted" && status != "declined" && status != "cancelled" {
+				return fmt.Errorf("cannot transition order from pending to %s", status)
+			}
+		case "accepted":
+			if status != "completed" && status != "cancelled" {
+				return fmt.Errorf("cannot transition order from accepted to %s", status)
+			}
+		default:
+			return fmt.Errorf("invalid order state transition from %s to %s", currentStatus, status)
+		}
+	}
+
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	tag, err := r.db.Exec(ctx, sqlUpdateOrderStatus, status, note, orderID, sellerID)
 	if err != nil {

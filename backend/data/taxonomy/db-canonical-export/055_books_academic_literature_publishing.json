@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.530441137Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "books-academic-literature-publishing",
+  "root_family": {
+    "id": 7758,
+    "parent_id": null,
+    "slug": "books-academic-literature-publishing",
+    "level": 0,
+    "path": "/7758/",
+    "canonical_name": "Books, Academic Literature \u0026 Publishing",
+    "name_en": "Books, Academic Literature \u0026 Publishing",
+    "name_am": "መጻሕፍት፣ የትምህርት ህትመቶች እና ስነ-ጽሑፍ",
+    "name_om": "Kitaabota, Barreeffamoota Barnootaa fi Og-barruu",
+    "name_ti": "መጻሕፍቲ፣ ናይ ትምህርቲ ሕትመታትን ስነ-ጽሑፍን",
+    "definition": "University textbooks, national curriculum secondary school texts, Amharic/Afan Oromo/Tigrinya literature, and religious historical books.",
+    "display_order": 0,
+    "icon": "BookOpen",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.7933Z",
+    "updated_at": "2026-11-01T11:27:00.7933Z",
+    "translations": {
+      "am": "መጻሕፍት፣ የትምህርት ህትመቶች እና ስነ-ጽሑፍ",
+      "en": "Books, Academic Literature \u0026 Publishing",
+      "or": "Kitaabota, Barreeffamoota Barnootaa fi Og-barruu",
+      "ti": "መጻሕፍቲ፣ ናይ ትምህርቲ ሕትመታትን ስነ-ጽሑፍን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7759,
+        "parent_id": 7758,
+        "slug": "university-school-academic-textbooks",
+        "level": 1,
+        "path": "/7758/7759/",
+        "canonical_name": "School \u0026 University Academic Textbooks",
+        "name_en": "School \u0026 University Academic Textbooks",
+        "name_am": "የዩኒቨርሲቲ እና የትምህርት ቤት መማሪያ መጻሕፍት",
+        "name_om": "Kitaabota Barnootaa Yuunvarsiitii",
+        "name_ti": "ናይ ዩኒቨርሲቲን ቤት ትምህርትን መጻሕፍቲ",
+        "definition": "Medicine, engineering, law, economics, and natural science reference volumes and curriculum books.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.795219Z",
+        "updated_at": "2026-11-01T11:27:00.795219Z",
+        "translations": {
+          "am": "የዩኒቨርሲቲ እና የትምህርት ቤት መማሪያ መጻሕፍት",
+          "en": "School \u0026 University Academic Textbooks",
+          "or": "Kitaabota Barnootaa Yuunvarsiitii",
+          "ti": "ናይ ዩኒቨርሲቲን ቤት ትምህርትን መጻሕፍቲ"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

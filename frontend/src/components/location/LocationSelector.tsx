@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '@/lib/api';
 import { useLocale } from '@/hooks/useLocale';
-import { I18nLocation, locName, locPath } from '@/types/location';
+import { I18nLocation, locName, locPath, formatLocationParts, RECOMMENDED_ETHIOPIA_HUBS, type RecommendedHub } from '@/types/location';
 import { Search, X, MapPin, Lock, Navigation, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export interface LocationValue {
@@ -30,8 +30,8 @@ interface Props {
   defaultValue?: LocationValue;
 }
 
-const SEL = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-orange-600 transition-all';
-const INP = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-orange-600 transition-all';
+const SEL = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[42px] bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-orange-600 transition-all';
+const INP = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[42px] bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-orange-600 transition-all';
 
 export function LocationSelector({
   onChange,
@@ -242,8 +242,17 @@ export function LocationSelector({
 
   const hasSelection = region || zone || subcity || woreda;
 
-  // Selected Breadcrumb Path
-  const breadcrumbParts = [region, zone, subcity, woreda, kebele].filter(Boolean);
+  // Selected Breadcrumb Path - deduplicated & properly localized
+  const breadcrumbParts = formatLocationParts({ region, zone, subcity, woreda, kebele }, locale);
+
+  const applyHub = (hub: RecommendedHub) => {
+    setRegion(hub.region);
+    setZone(hub.zone ?? '');
+    setSubcity(hub.subcity ?? '');
+    setWoreda('');
+    setKebele('');
+    setSearch('');
+  };
 
   return (
     <div className="flex flex-col gap-2.5">
@@ -343,6 +352,30 @@ export function LocationSelector({
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Recommended Ethiopian Commercial Hubs (Quick single-tap selection) */}
+      {!hasSelection && (
+        <div className="flex flex-col gap-1">
+          <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
+            {locale === 'am' ? 'ተወዳጅ አካባቢዎች' : locale === 'ti' ? 'ተፈተውቲ ቦታታት' : locale === 'or' ? 'Bakkeewwan Filataman' : 'Popular Hubs'}
+          </p>
+          <div className="flex flex-wrap gap-1">
+            {RECOMMENDED_ETHIOPIA_HUBS.slice(0, 6).map(hub => {
+              const label = hub.name[locale as keyof typeof hub.name] || hub.name.en;
+              return (
+                <button
+                  key={hub.key}
+                  type="button"
+                  onClick={() => applyHub(hub)}
+                  className="text-[11px] font-bold px-2 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-orange-500/10 hover:text-orange-600 dark:hover:text-orange-400 transition-all border border-zinc-200/60 dark:border-zinc-700/60"
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 

@@ -1,0 +1,143 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.530614498Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "professional-occupations-careers-recruitment",
+  "root_family": {
+    "id": 7760,
+    "parent_id": null,
+    "slug": "professional-occupations-careers-recruitment",
+    "level": 0,
+    "path": "/7760/",
+    "canonical_name": "Professional Occupations, Careers \u0026 Recruitment",
+    "name_en": "Professional Occupations, Careers \u0026 Recruitment",
+    "name_am": "ክፍት የስራ ቦታዎች፣ ሙያዎች እና የቅጥር እድሎች",
+    "name_om": "Hojiiwwan, Ogummaa fi Qacarraa Hojjettootaa",
+    "name_ti": "ክፍቲ ናይ ስራሕ ቦታታት፣ ሞያታትን ምልመላን",
+    "definition": "Standardized occupational classifications for employment vacancies, professional candidate profiles, and skilled craftsmanship.",
+    "display_order": 0,
+    "icon": "Users",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.8022Z",
+    "updated_at": "2026-11-01T11:27:00.8022Z",
+    "translations": {
+      "am": "ክፍት የስራ ቦታዎች፣ ሙያዎች እና የቅጥር እድሎች",
+      "en": "Professional Occupations, Careers \u0026 Recruitment",
+      "or": "Hojiiwwan, Ogummaa fi Qacarraa Hojjettootaa",
+      "ti": "ክፍቲ ናይ ስራሕ ቦታታት፣ ሞያታትን ምልመላን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7761,
+        "parent_id": 7760,
+        "slug": "civil-mechanical-software-engineering-roles",
+        "level": 1,
+        "path": "/7760/7761/",
+        "canonical_name": "Engineering, Architecture \u0026 Technical Professions",
+        "name_en": "Engineering, Architecture \u0026 Technical Professions",
+        "name_am": "የምህንድስና እና የቴክኒክ ባለሙያዎች",
+        "name_om": "Ogeeyyii Injinariingii fi Teeknikaa",
+        "name_ti": "ናይ መሃንድስነትን ቴክኒክን ሰብ ሞያ",
+        "definition": "Civil engineers, electrical engineers, structural draughtsmen, and software engineers.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": false,
+        "created_at": "2026-11-01T11:27:00.806117Z",
+        "updated_at": "2026-11-01T11:27:00.806117Z",
+        "translations": {
+          "am": "የምህንድስና እና የቴክኒክ ባለሙያዎች",
+          "en": "Engineering, Architecture \u0026 Technical Professions",
+          "or": "Ogeeyyii Injinariingii fi Teeknikaa",
+          "ti": "ናይ መሃንድስነትን ቴክኒክን ሰብ ሞያ"
+        },
+        "aliases": {},
+        "children": [
+          {
+            "id": 7762,
+            "parent_id": 7761,
+            "slug": "civil-structural-engineers",
+            "level": 2,
+            "path": "/7760/7761/7762/",
+            "canonical_name": "Civil \u0026 Structural Engineers (ሲቪል መሃንዲስ)",
+            "name_en": "Civil \u0026 Structural Engineers (ሲቪል መሃንዲስ)",
+            "name_am": "የሲቪል እና የህንፃ ምህንድስና ባለሙያዎች",
+            "name_om": "Injinara Siiviilii fi Ijaarsaa",
+            "name_ti": "ናይ ሲቪልን ህንጻን መሃንዲሳት",
+            "definition": "Design, supervision, and site project management for building, road, and water infrastructure works.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:27:00.810124Z",
+            "updated_at": "2026-11-01T11:27:00.810124Z",
+            "translations": {
+              "am": "የሲቪል እና የህንፃ ምህንድስና ባለሙያዎች",
+              "en": "Civil \u0026 Structural Engineers (ሲቪል መሃንዲስ)",
+              "or": "Injinara Siiviilii fi Ijaarsaa",
+              "ti": "ናይ ሲቪልን ህንጻን መሃንዲሳት"
+            },
+            "aliases": {}
+          },
+          {
+            "id": 7763,
+            "parent_id": 7761,
+            "slug": "software-engineers-developers",
+            "level": 2,
+            "path": "/7760/7761/7763/",
+            "canonical_name": "Software Engineers, Full-Stack \u0026 App Developers",
+            "name_en": "Software Engineers, Full-Stack \u0026 App Developers",
+            "name_am": "የሶፍትዌር ምህንድስና እና አፕሊኬሽን አበልጻጊዎች",
+            "name_om": "Injinara Sooftiweerii fi Dizaayinaa",
+            "name_ti": "ናይ ሶፍትዌር መሃንዲሳትን ኣልማዕትን",
+            "definition": "Backend, frontend, mobile app development, and cloud systems engineering.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:27:00.813729Z",
+            "updated_at": "2026-11-01T11:27:00.813729Z",
+            "translations": {
+              "am": "የሶፍትዌር ምህንድስና እና አፕሊኬሽን አበልጻጊዎች",
+              "en": "Software Engineers, Full-Stack \u0026 App Developers",
+              "or": "Injinara Sooftiweerii fi Dizaayinaa",
+              "ti": "ናይ ሶፍትዌር መሃንዲሳትን ኣልማዕትን"
+            },
+            "aliases": {}
+          }
+        ]
+      },
+      {
+        "id": 7764,
+        "parent_id": 7760,
+        "slug": "medical-doctors-nursing-healthcare-roles",
+        "level": 1,
+        "path": "/7760/7764/",
+        "canonical_name": "Physicians, Nursing Staff \u0026 Allied Health Practitioners",
+        "name_en": "Physicians, Nursing Staff \u0026 Allied Health Practitioners",
+        "name_am": "የህክምና ዶክተሮች፣ ነርሶች እና የጤና ባለሙያዎች",
+        "name_om": "Ogeeyyii Fayyaa, Doktoorota fi Narsii",
+        "name_ti": "ናይ ሕክምና ሓካይም፣ ነርሳትን ሰብ ሞያ ጥዕናን",
+        "definition": "General practitioners, registered clinic nurses, pharmacists, and laboratory technologists.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.825699Z",
+        "updated_at": "2026-11-01T11:27:00.825699Z",
+        "translations": {
+          "am": "የህክምና ዶክተሮች፣ ነርሶች እና የጤና ባለሙያዎች",
+          "en": "Physicians, Nursing Staff \u0026 Allied Health Practitioners",
+          "or": "Ogeeyyii Fayyaa, Doktoorota fi Narsii",
+          "ti": "ናይ ሕክምና ሓካይም፣ ነርሳትን ሰብ ሞያ ጥዕናን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

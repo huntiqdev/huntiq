@@ -66,44 +66,44 @@ export default function DemandPage() {
         )}
 
         {/* Two Pillars */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8">
           {/* FIND Pillar */}
           <button
             onClick={() => handleDemand('FIND')}
             disabled={loading}
-            className="group relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative overflow-hidden bg-white dark:bg-zinc-900 rounded-2xl p-5 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-zinc-200 dark:border-zinc-800 hover:border-orange-500 dark:hover:border-orange-500 disabled:opacity-50 disabled:cursor-not-allowed tap-bounce active:scale-[0.98] text-left"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
             
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Search className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-100 dark:bg-orange-950/40 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                <Search className="w-7 h-7 sm:w-8 sm:h-8 text-orange-600 dark:text-orange-400" />
               </div>
               
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1.5 sm:mb-2">
                 {demand.find}
               </h2>
-              <p className="text-lg font-medium text-blue-600 dark:text-blue-400 mb-4">
+              <p className="text-base sm:text-lg font-medium text-orange-600 dark:text-orange-400 mb-3 sm:mb-4">
                 {demand.find_title}
               </p>
-              <p className="text-slate-600 dark:text-slate-300 mb-6">
+              <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-5 leading-relaxed">
                 {demand.find_description}
               </p>
               
-              <div className="flex flex-col gap-2 text-sm text-slate-700 dark:text-slate-300 mb-6">
+              <div className="flex flex-col gap-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
                   <span>{demand.find_buy}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-500 rounded-full"></div>
                   <span>{demand.find_rent}</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-blue-600 dark:text-blue-400 font-semibold group-hover:gap-4 transition-all">
+              <div className="flex items-center gap-2 text-orange-600 dark:text-orange-400 font-semibold group-hover:gap-3 transition-all text-sm">
                 <span>{demand.continue}</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
           </button>
@@ -112,39 +112,39 @@ export default function DemandPage() {
           <button
             onClick={() => handleDemand('LIST')}
             disabled={loading}
-            className="group relative overflow-hidden bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-200 dark:border-slate-700 hover:border-orange-400 dark:hover:border-orange-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative overflow-hidden bg-white dark:bg-zinc-900 rounded-2xl p-5 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-zinc-200 dark:border-zinc-800 hover:border-orange-500 dark:hover:border-orange-500 disabled:opacity-50 disabled:cursor-not-allowed tap-bounce active:scale-[0.98] text-left"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
             
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <ShoppingBag className="w-8 h-8 text-orange-600 dark:text-orange-400" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-100 dark:bg-orange-950/40 rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                <ShoppingBag className="w-7 h-7 sm:w-8 sm:h-8 text-orange-600 dark:text-orange-400" />
               </div>
               
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1.5 sm:mb-2">
                 {demand.list}
               </h2>
-              <p className="text-lg font-medium text-orange-600 dark:text-orange-400 mb-4">
+              <p className="text-base sm:text-lg font-medium text-orange-600 dark:text-orange-400 mb-3 sm:mb-4">
                 {demand.list_title}
               </p>
-              <p className="text-slate-600 dark:text-slate-300 mb-6">
+              <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-5 leading-relaxed">
                 {demand.list_description}
               </p>
               
-              <div className="flex flex-col gap-2 text-sm text-slate-700 dark:text-slate-300 mb-6">
+              <div className="flex flex-col gap-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 mb-6">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
                   <span>{demand.list_sell}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-teal-500 rounded-full"></div>
                   <span>{demand.list_landlord}</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-orange-600 dark:text-orange-400 font-semibold group-hover:gap-4 transition-all">
+              <div className="flex items-center gap-2 text-orange-600 dark:text-orange-400 font-semibold group-hover:gap-3 transition-all text-sm">
                 <span>{demand.continue}</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
           </button>

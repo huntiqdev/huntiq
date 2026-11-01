@@ -39,38 +39,109 @@ interface AIChatInterfaceProps {
   locale: string;
 }
 
-const FAQ_SUGGESTIONS = [
-  {
-    icon: '📱',
-    label: 'iPhone 15 Pro Price Check',
-    prompt: 'What is the fair market price for an Apple iPhone 15 Pro in Addis Ababa?',
+const FAQ_SUGGESTIONS_BY_LOCALE: Record<string, Array<{ icon: string; label: string; prompt: string }>> = {
+  en: [
+    { icon: '📱', label: 'iPhone 15 Pro Price Check', prompt: 'What is the fair market price for an Apple iPhone 15 Pro in Addis Ababa?' },
+    { icon: '🚗', label: 'Toyota Vitz Libre Verification', prompt: 'Toyota Vitz: What legal papers and Libre ownership documents should I check before paying?' },
+    { icon: '🏠', label: 'Apartments in Bole / CMC', prompt: 'Find furnished 2-bedroom rental apartments in Bole or CMC under 40,000 ETB.' },
+    { icon: '🛡️', label: 'Electronics Anti-Fraud Checklist', prompt: 'How to safely test used electronics and verify phone IMEI to avoid scams in Ethiopia?' },
+    { icon: '👑', label: 'Verified Merchant Deals', prompt: 'Show me active listings from Gold and Premium verified sellers in Addis Ababa.' },
+    { icon: '💻', label: 'MacBook Pro for Developers', prompt: 'Looking for a MacBook Pro M3 or powerful workstation laptop with warranty.' },
+  ],
+  am: [
+    { icon: '📱', label: 'የአይፎን 15 ፕሮ ዋጋ', prompt: 'በአዲስ አበባ ውስጥ የአፕል አይፎን 15 ፕሮ ትክክለኛ የገበያ ዋጋ ስንት ነው?' },
+    { icon: '🚗', label: 'የቶዮታ ቪትዝ ሊብሬ ምርመራ', prompt: 'ቶዮታ ቪትዝ፡ ከመክፈሌ በፊት ምን አይነት ህጋዊ ሰነዶችን እና ሊብሬ ማረጋገጥ አለብኝ?' },
+    { icon: '🏠', label: 'አፓርታማ በቦሌ / ሲኤምሲ', prompt: 'በቦሌ ወይም ሲኤምሲ ከ40,000 ብር በታች ባለ 2 መኝታ የተሟላ ኪራይ ቤት ፈልግልኝ።' },
+    { icon: '🛡️', label: 'የኤሌክትሮኒክስ ማጭበርበር መከላከያ', prompt: 'ስልኮችን ስገዛ ማጭበርበርን ለመከላከል የIMEI ቁጥር እና የደህንነት ሁኔታ እንዴት ማረጋገጥ እችላለሁ?' },
+    { icon: '👑', label: 'የተረጋገጡ ነጋዴዎች', prompt: 'በአዲስ አበባ ውስጥ ከወርቅ እና ፕሪሚየም የተረጋገጡ ሻጮች የቀረቡ እቃዎችን አሳየኝ።' },
+    { icon: '💻', label: 'ላፕቶፕ ለስራ', prompt: 'ዋስትና ያለው ማክቡክ ፕሮ ወይም ጠንካራ ላፕቶፕ እፈልጋለሁ።' },
+  ],
+  or: [
+    { icon: '📱', label: 'Gatii iPhone 15 Pro', prompt: 'Finfinnee keessatti gatiin gabaa sirrii Apple iPhone 15 Pro meeqa?' },
+    { icon: '🚗', label: 'Qorannoo Liibiree Toyota Vitz', prompt: 'Toyota Vitz: Kaffaluu koo dura waraqaalee seeraa fi liibiree akkamii qorachuu qaba?' },
+    { icon: '🏠', label: 'Mana Kireeffamu Boolee / CMC', prompt: 'Boolee ykn CMC keessatti mana kireeffamu kutaa 2 qabu gatiin 40,000 ETB gadi ta\'e naaf barbaadi.' },
+    { icon: '🛡️', label: 'Hanna Meeshaalee Elektirooniksii', prompt: 'Hanna irraa of eeguuf bilbila yoon bitu IMEI fi nageenya isaa akkamittan mirkaneessa?' },
+    { icon: '👑', label: 'Gurgurtoota Mirkanaa\'an', prompt: 'Gurgurtoota sadarkaa Warqii fi Piriimiyem Finfinnee keessa jiran irraa oomisha jiru na agarsiisi.' },
+    { icon: '💻', label: 'Laaptooppii Hojii', prompt: 'MacBook Pro ykn laaptooppii hojii qulqullina fi wabii qabu barbaada.' },
+  ],
+  ti: [
+    { icon: '📱', label: 'ዋጋ ኣይፎን 15 ፕሮ', prompt: 'ኣብ ኣዲስ ኣበባ ትኽክለኛ ናይ ዕዳጋ ዋጋ ኣፕል ኣይፎን 15 ፕሮ ክንደይ እዩ?' },
+    { icon: '🚗', label: 'ናይ ቶዮታ ቪትዝ ሊብሬ መርመራ', prompt: 'ቶዮታ ቪትዝ፡ ቅድሚ ምኽፋለይ እንታይ ሕጋዊ ሰነዳትን ሊብሬን ክምርምር ኣለኒ?' },
+    { icon: '🏠', label: 'ኣፓርታማ ኣብ ቦሌ / ሲኤምሲ', prompt: 'ኣብ ቦሌ ወይ ሲኤምሲ ትሕቲ 40,000 ቅርሺ ዝካረ ባለ 2 መደቀሲ ኣፓርታማ ድለየለይ።' },
+    { icon: '🛡️', label: 'ምክልኻል ምትላል ኤሌክትሮኒክስ', prompt: 'ምትላል ንምክልኻል ተንቀሳቓሲ ስልኪ ክገዝእ ከለኹ IMEI ቁጽርን ደሕንነትን ብኸመይ ይረጋገጽ?' },
+    { icon: '👑', label: 'ዝተረጋገፁ ነጋዶ', prompt: 'ኣብ ኣዲስ ኣበባ ካብ ወርቂን ፕሪሚየምን ዝተረጋገፁ ነጋዶ ዘለዉ ፍርያት ኣርእየኒ።' },
+    { icon: '💻', label: 'ላፕቶፕ ንስራሕ', prompt: 'ውሕስና ዘለዎ ማክቡክ ፕሮ ወይ ጽኑዕ ላፕቶፕ እደሊ ኣለኹ።' },
+  ],
+};
+
+const WELCOME_MESSAGES: Record<string, string> = {
+  en: 'Hello! I am your HUNTIQ Super AI Marketplace Advisor. I can analyze market prices, inspect seller trust tiers, guide vehicle Libre checks, and verify electronic specs in English, አማርኛ, Afaan Oromoo, or ትግርኛ. What are you looking to buy, rent, or investigate today?',
+  am: 'ሰላም! እኔ የHUNTIQ ሱፐር AI የገበያ አማካሪ ነኝ። የገበያ ዋጋን ለመተንተን፣ የሻጮችን አስተማማኝነት ደረጃ ለመፈተሽ፣ የመኪና ሊብሬ ምርመራዎችን ለመምራት እና የኤሌክትሮኒክስ እቃዎችን ለማረጋገጥ ዝግጁ ነኝ። ዛሬ ምን መግዛት፣ መከራየት ወይም መመርመር ይፈልጋሉ?',
+  or: 'Akkam! Ani gorsa gabaa HUNTIQ Super AI ti. Gatii gabaa xiinxaluu, sadarkaa amanamummaa gurgurtootaa qorachuu, qorannoo liibiree konkolaataa geggeessuu fi qulqullina meeshaalee mirkaneessuuf qophiidha. Har\'a maal bituu, kireeffachuu ykn qorachuu barbaaddu?',
+  ti: 'ሰላም! ኣነ ናይ HUNTIQ ሱፐር AI ናይ ዕዳጋ ኣማኻሪ እየ። ናይ ዕዳጋ ዋጋታት ንምትንታን፣ ደረጃ ተኣማንነት ነጋዶ ንምፍታሽ፣ ናይ መኪና ሊብሬ መርመራ ንምምራሕን ናይ ኤሌክትሮኒክስ ፍርያት ንምርግጋጽን ድሉው እየ። ሎሚ እንታይ ክትገዝኡ፣ ክትካረዩ ወይ ክትምርምሩ ትደልዩ?',
+};
+
+const RESET_MESSAGES: Record<string, string> = {
+  en: 'Chat history cleared. How else can I help your marketplace search today?',
+  am: 'የውይይት ታሪክ ጸድቷል። ዛሬ በገበያ ፍለጋዎ በምን ልርዳዎት?',
+  or: 'Seenaan haasaa haqameera. Har\'a gabaa keessatti akkamittan isin gargaaruu danda\'a?',
+  ti: 'ናይ ዕላል ታሪኽ ተደምሲሱ። ሎሚ ኣብ ናይ ዕዳጋ ድላይኩም ብምንታይ ክሕግዘኩም?',
+};
+
+const INTERFACE_UI: Record<string, Record<string, string>> = {
+  en: {
+    backCatalog: 'Back to Catalog',
+    title: 'HUNTIQ AI Advisor',
+    badge: 'Live Marketplace',
+    subtitle: 'Ethiopian Marketplace Intelligence · Live Database Search',
+    safetyBtn: 'Buyer Safety & Guide',
+    quickFaq: 'Quick Inquiries & Market FAQ Starters',
+    clickPrompt: 'Click any prompt to ask instantly',
+    placeholder: 'Ask HUNTIQ AI anything in English, አማርኛ, Afaan Oromoo, or ትግርኛ...',
+    ask: 'Ask',
+    safetyTitle: 'HUNTIQ Buyer Safety & Market Guide',
+    understood: 'Understood',
   },
-  {
-    icon: '🚗',
-    label: 'Toyota Vitz Libre Verification',
-    prompt: 'Toyota Vitz: What legal papers and Libre ownership documents should I check before paying?',
+  am: {
+    backCatalog: 'ወደ ካታሎግ ተመለስ',
+    title: 'HUNTIQ AI አማካሪ',
+    badge: 'የቀጥታ ገበያ',
+    subtitle: 'የኢትዮጵያ የገበያ መረጃ · የቀጥታ ዳታቤዝ ፍለጋ',
+    safetyBtn: 'የገዢዎች ደህንነት መመሪያ',
+    quickFaq: 'ፈጣን ጥያቄዎች እና የገበያ መመሪያዎች',
+    clickPrompt: 'ወዲያውኑ ለመጠየቅ ማንኛውንም ይጫኑ',
+    placeholder: 'የሚፈልጉትን ማንኛውንም ጥያቄ ይጠይቁ (ለምሳሌ፦ የአይፎን 15 ዋጋ፣ የቪትዝ ሊብሬ ምርመራ...)',
+    ask: 'ጠይቅ',
+    safetyTitle: 'የHUNTIQ የገዢዎች ደህንነት እና የገበያ መመሪያ',
+    understood: 'ተረድቻለሁ',
   },
-  {
-    icon: '🏠',
-    label: 'Apartments in Bole / CMC',
-    prompt: 'Find furnished 2-bedroom rental apartments in Bole or CMC under 40,000 ETB.',
+  or: {
+    backCatalog: 'Gara Kaatalaagiitti Deebi\'aa',
+    title: 'Gorsa HUNTIQ AI',
+    badge: 'Gabaa Kallattii',
+    subtitle: 'Odeeffannoo Gabaa Itoophiyaa · Sakatta\'a Kuusaa Kallattii',
+    safetyBtn: 'Nageenya Bittootaa',
+    quickFaq: 'Gaaffilee Ariifachiisaa fi Gorsa Gabaa',
+    clickPrompt: 'Battalumatti gaafachuuf cuqaasaa',
+    placeholder: 'Waan barbaaddan kamiyyuu gaafadhaa (fkn gatii iPhone 15, qorannoo konkolaataa)...',
+    ask: 'Gaafadhu',
+    safetyTitle: 'Qajeelfama Nageenya Bittootaa HUNTIQ',
+    understood: 'Hubadheera',
   },
-  {
-    icon: '🛡️',
-    label: 'Electronics Anti-Fraud Checklist',
-    prompt: 'How to safely test used electronics and verify phone IMEI to avoid scams in Ethiopia?',
+  ti: {
+    backCatalog: 'ናብ ካታሎግ ተመለስ',
+    title: 'HUNTIQ AI ኣማኻሪ',
+    badge: 'ቀጥታዊ ዕዳጋ',
+    subtitle: 'ናይ ኢትዮጵያ ዕዳጋ መረዳእታ · ቀጥታዊ ናይ ዳታቤዝ ድላይ',
+    safetyBtn: 'ደሕንነት ገዛእቲ',
+    quickFaq: 'ቅልጡፍ ሕቶታትን መምርሒታትን',
+    clickPrompt: 'ብቕጽበት ንምሕታት ጠውቑ',
+    placeholder: 'ዝደለይዎ ሕቶ ሕተቱ (ንኣብነት፦ ዋጋ ኣይፎን 15፣ መርመራ ሊብሬ ቪትዝ...)',
+    ask: 'ሕተት',
+    safetyTitle: 'ናይ HUNTIQ ናይ ገዛእቲ ደሕንነት መምርሒ',
+    understood: 'ተረዲኡኒ',
   },
-  {
-    icon: '👑',
-    label: 'Verified Merchant Deals',
-    prompt: 'Show me active listings from Gold and Premium verified sellers in Addis Ababa.',
-  },
-  {
-    icon: '💻',
-    label: 'MacBook Pro for Developers',
-    prompt: 'Looking for a MacBook Pro M3 or powerful workstation laptop with warranty.',
-  },
-];
+};
 
 interface ConversationContext {
   lastItem?: string;
@@ -81,6 +152,11 @@ interface ConversationContext {
 }
 
 export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInterfaceProps) {
+  const activeLocale = (locale === 'om' ? 'or' : locale) || 'en';
+  const ui = INTERFACE_UI[activeLocale] || INTERFACE_UI.en;
+  const faqs = FAQ_SUGGESTIONS_BY_LOCALE[activeLocale] || FAQ_SUGGESTIONS_BY_LOCALE.en;
+  const welcomeText = WELCOME_MESSAGES[activeLocale] || WELCOME_MESSAGES.en;
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputVal, setInputVal] = useState('');
   const [loading, setLoading] = useState(false);
@@ -106,7 +182,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
         {
           id: 'welcome',
           sender: 'ai',
-          text: 'Hello! I am your HUNTIQ Super AI Marketplace Advisor. I can analyze market prices, inspect seller trust tiers, guide vehicle Libre checks, and verify electronic specs in English, አማርኛ, Afaan Oromoo, or ትግርኛ. What are you looking to buy, rent, or investigate today?',
+          text: welcomeText,
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         },
       ]);
@@ -190,7 +266,13 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
       const aiText =
         res.meta?.localized_answer ||
         res.meta?.market_verdict ||
-        `I analyzed our live database listings for "${query}". Here are the market insights and verified options.`;
+        (activeLocale === 'am'
+          ? `የቀጥታ ዳታቤዝ ዝርዝሮችን ለ"${query}" ተንትኛለሁ።`
+          : activeLocale === 'om'
+          ? `Tarreeffamoota gabaa "${query}" tiif xiinxaleera.`
+          : activeLocale === 'ti'
+          ? `ናይ ቀጥታ ዝርዝራት ን"${query}" ተተንቲኑ ኣሎ።`
+          : `I analyzed our live database listings for "${query}". Here are the market insights and verified options.`);
 
       const aiMsgId = `ai-${Date.now()}`;
       const aiMsg: ChatMessage = {
@@ -208,10 +290,18 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
         setOpenReasoningMap(prev => ({ ...prev, [aiMsgId]: true }));
       }
     } catch {
+      const errorMsgText =
+        activeLocale === 'am'
+          ? 'ከ-AI ረዳት ጋር መገናኘት አልተቻለም። እባክዎ ጥቂት ቆይተው እንደገና ይሞክሩ።'
+          : activeLocale === 'om'
+          ? "Gargaaraa AI wajjin walqunnamuu hin dandeenye. Maaloo xiqqoo turanii irra deebi'aa yaalaa."
+          : activeLocale === 'ti'
+          ? 'ምስ AI ሓጋዚ ምርኻብ ኣይተኻእለን። በጃኹም ቁሩብ ጸኒሕኩም ደጊምኩም ፈትኑ።'
+          : 'I encountered an issue connecting to the AI inference worker. Please make sure the service is online or try asking your question again.';
       const errorMsg: ChatMessage = {
         id: `err-${Date.now()}`,
         sender: 'ai',
-        text: 'I encountered an issue connecting to the AI inference worker. Please make sure the service is online or try asking your question again.',
+        text: errorMsgText,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages(prev => [...prev, errorMsg]);
@@ -232,7 +322,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
       {
         id: 'welcome-reset',
         sender: 'ai',
-        text: 'Chat history cleared. How else can I help your marketplace search today?',
+        text: RESET_MESSAGES[activeLocale] || RESET_MESSAGES.en,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       },
     ]);
@@ -249,7 +339,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs font-bold transition-all text-zinc-700 dark:text-zinc-300"
           >
             <ArrowLeft size={14} />
-            <span>Back to Catalog</span>
+            <span>{ui.backCatalog}</span>
           </button>
 
           <div className="h-4 w-[1px] bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
@@ -261,14 +351,14 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-black text-sm text-zinc-900 dark:text-white">
-                  HUNTIQ AI Advisor
+                  {ui.title}
                 </span>
                 <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-800/60">
-                  Alibaba Style Chat
+                  {ui.badge}
                 </span>
               </div>
               <p className="text-[10px] text-zinc-400 hidden sm:block">
-                Ethiopian Marketplace Intelligence · Multi-Step Chain-of-Thought Reasoning
+                {ui.subtitle}
               </p>
             </div>
           </div>
@@ -281,7 +371,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/30 transition-colors"
           >
             <HelpCircle size={14} />
-            <span className="hidden sm:inline">Buyer Safety & FAQs</span>
+            <span className="hidden sm:inline">{ui.safetyBtn}</span>
           </button>
 
           <button
@@ -303,14 +393,14 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-black uppercase tracking-wider text-orange-700 dark:text-orange-400 flex items-center gap-1.5">
                 <Sparkles size={13} />
-                Quick Inquiries & Market FAQ Starters
+                {ui.quickFaq}
               </span>
               <span className="text-[10px] font-bold text-zinc-500">
-                Click any prompt to ask instantly
+                {ui.clickPrompt}
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-              {FAQ_SUGGESTIONS.map((faq, idx) => (
+              {faqs.map((faq, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -629,13 +719,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             value={inputVal}
             onChange={e => setInputVal(e.target.value)}
             disabled={loading}
-            placeholder={
-              locale === 'am'
-                ? 'የሚፈልጉትን ማንኛውንም ጥያቄ ይጠይቁ (ለምሳሌ፦ የአይፎን 15 ዋጋ፣ የቪትዝ ሊብሬ ምርመራ...)'
-                : locale === 'om'
-                ? 'Waan barbaaddan kamiyyuu gaafadhaa (fkn gatii iPhone 15, qorannoo konkolaataa)...'
-                : 'Ask HUNTIQ AI anything in English, አማርኛ, Afaan Oromoo, or ትግርኛ...'
-            }
+            placeholder={ui.placeholder}
             className="flex-1 px-4 py-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm outline-none focus:ring-2 focus:ring-orange-600 transition-all"
           />
           <button
@@ -643,7 +727,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             disabled={!inputVal.trim() || loading}
             className="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 disabled:opacity-40 text-white font-black text-sm shadow-md shadow-orange-600/30 flex items-center gap-1.5 transition-all active:scale-95"
           >
-            <span>Ask</span>
+            <span>{ui.ask}</span>
             <Send size={15} />
           </button>
         </form>
@@ -656,7 +740,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
             <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800">
               <div className="flex items-center gap-2">
                 <ShieldCheck size={20} className="text-orange-600" />
-                <h3 className="font-black text-base">HUNTIQ Buyer Safety & Market Guide</h3>
+                <h3 className="font-black text-base">{ui.safetyTitle}</h3>
               </div>
               <button
                 type="button"
@@ -714,7 +798,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
               onClick={() => setShowFaqModal(false)}
               className="w-full py-2.5 rounded-xl bg-orange-600 text-white font-bold text-xs"
             >
-              Understood
+              {ui.understood}
             </button>
           </div>
         </div>

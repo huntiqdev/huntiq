@@ -86,6 +86,11 @@ func (s *SellerService) CreateOrderRequest(ctx context.Context, req dto.CreateOr
 	if req.BuyerID != nil && *req.BuyerID == sellerID {
 		return nil, errors.New("cannot create an order request on your own product")
 	}
+	if sellerUser, err := s.repo.GetProfile(ctx, sellerID); err == nil && sellerUser != nil {
+		if sellerUser.Phone == req.BuyerPhone {
+			return nil, errors.New("cannot create an order request on your own product")
+		}
+	}
 
 	// Enforce order hierarchy:
 	// normal product → any buyer

@@ -116,7 +116,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
 
       {/* Dimension 1: Marketplace Pillar (Transaction Mode) */}
       <div className="space-y-1.5 bg-zinc-50 dark:bg-zinc-800/60 p-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-700/60">
-        <p className={lbl}>Marketplace Pillar</p>
+        <p className={lbl}>{(t.ui as any)?.marketplace_pillar ?? 'Marketplace'}</p>
         <div className="grid grid-cols-3 gap-1 bg-zinc-200/70 dark:bg-zinc-900 p-1 rounded-xl">
           <button
             type="button"
@@ -127,7 +127,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
                 : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
             }`}
           >
-            All
+            {t.ui?.condition_all ?? 'All'}
           </button>
           <button
             type="button"
@@ -138,7 +138,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
                 : 'text-zinc-500 hover:text-orange-600'
             }`}
           >
-            🛒 Buy
+            🛒 {t.nav?.buy ?? 'Buy'}
           </button>
           <button
             type="button"
@@ -149,7 +149,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
                 : 'text-zinc-500 hover:text-teal-600'
             }`}
           >
-            🏠 Rent
+            🏠 {t.nav?.rental ?? 'Rent'}
           </button>
         </div>
       </div>
@@ -212,9 +212,9 @@ export function FilterSidebar({ categories, onFilter }: Props) {
         </div>
       )}
 
-      {/* Dimension 3: Item Condition (Physical State) */}
+      {/* Dimension 3: Item Condition */}
       <div className="space-y-1.5">
-        <p className={lbl}>{t.ui.condition} (Physical State)</p>
+        <p className={lbl}>{t.ui.condition}</p>
         <select className={cls} value={condition} onChange={e => setCondition(e.target.value)}>
           <option value="">{t.ui.all_conditions}</option>
           {CONDITIONS.map(c => (
@@ -265,7 +265,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
           onClick={clear}
           className="flex items-center justify-center gap-1.5 border border-zinc-200 dark:border-zinc-700 rounded-xl py-2.5 text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
         >
-          <RotateCcw size={14} /> Clear
+          <RotateCcw size={14} /> {t.ui.clear_filter ?? 'Clear'}
         </button>
       </div>
     </aside>

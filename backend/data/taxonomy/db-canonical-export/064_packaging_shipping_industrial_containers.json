@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.532150611Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "packaging-shipping-industrial-containers",
+  "root_family": {
+    "id": 7779,
+    "parent_id": null,
+    "slug": "packaging-shipping-industrial-containers",
+    "level": 0,
+    "path": "/7779/",
+    "canonical_name": "Packaging, Shipping \u0026 Industrial Containers",
+    "name_en": "Packaging, Shipping \u0026 Industrial Containers",
+    "name_am": "የማሸጊያ ካርቶኖች፣ የሰብል ከረጢቶች እና ኮንቴነሮች",
+    "name_om": "Meeshaalee Qophii Saamsuu fi Saandooqa",
+    "name_ti": "መዐሸጊ ካርቶናት፣ ናይ እኽሊ ማዳበርያታትን መትሓዚታትን",
+    "definition": "Corrugated cardboard cartons, polypropylene (PP) woven agricultural grain bags, pallet stretch wrap, and IBC liquid storage containers.",
+    "display_order": 0,
+    "icon": "Box",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.948722Z",
+    "updated_at": "2026-11-01T11:27:00.948722Z",
+    "translations": {
+      "am": "የማሸጊያ ካርቶኖች፣ የሰብል ከረጢቶች እና ኮንቴነሮች",
+      "en": "Packaging, Shipping \u0026 Industrial Containers",
+      "or": "Meeshaalee Qophii Saamsuu fi Saandooqa",
+      "ti": "መዐሸጊ ካርቶናት፣ ናይ እኽሊ ማዳበርያታትን መትሓዚታትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7780,
+        "parent_id": 7779,
+        "slug": "polypropylene-woven-grain-sacks",
+        "level": 1,
+        "path": "/7779/7780/",
+        "canonical_name": "Polypropylene (PP) Woven Grain Sacks (የእህል ማዳበሪያ ከረጢት)",
+        "name_en": "Polypropylene (PP) Woven Grain Sacks (የእህል ማዳበሪያ ከረጢት)",
+        "name_am": "የ100 ኪሎ እና 50 ኪሎ የፕላስቲክ የእህል ከረጢቶች (ማዳበሪያ)",
+        "name_om": "Qaraaxii Midhaanii fi Xaa'oo (Kiiloo 100 fi 50)",
+        "name_ti": "ናይ 100 ኪሎን 50 ኪሎን ናይ እኽሊ ማዳበርያታት",
+        "definition": "50kg and 100kg reinforced woven plastic sacks for teff, wheat, coffee, and fertilizer transport.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.953355Z",
+        "updated_at": "2026-11-01T11:27:00.953355Z",
+        "translations": {
+          "am": "የ100 ኪሎ እና 50 ኪሎ የፕላስቲክ የእህል ከረጢቶች (ማዳበሪያ)",
+          "en": "Polypropylene (PP) Woven Grain Sacks (የእህል ማዳበሪያ ከረጢት)",
+          "or": "Qaraaxii Midhaanii fi Xaa'oo (Kiiloo 100 fi 50)",
+          "ti": "ናይ 100 ኪሎን 50 ኪሎን ናይ እኽሊ ማዳበርያታት"
+        },
+        "aliases": {
+          "am": [
+            "ማዳበሪያ",
+            "የቡና ከረጢት",
+            "የእህል ከረጢት",
+            "ጆንያ"
+          ],
+          "en": [
+            "grain sacks",
+            "jute bags",
+            "madaberia",
+            "packaging bags",
+            "pp bags"
+          ],
+          "or": [
+            "keeshaa",
+            "qaraaxii"
+          ],
+          "ti": [
+            "ማዳበርያ",
+            "ናይ እኽሊ ከረጢት"
+          ]
+        }
+      }
+    ]
+  }
+}

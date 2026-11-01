@@ -1,0 +1,137 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.525478478Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "small-domestic-appliances-cookware",
+  "root_family": {
+    "id": 7723,
+    "parent_id": null,
+    "slug": "small-domestic-appliances-cookware",
+    "level": 0,
+    "path": "/7723/",
+    "canonical_name": "Small Domestic Appliances \u0026 Traditional Cookware",
+    "name_en": "Small Domestic Appliances \u0026 Traditional Cookware",
+    "name_am": "ትናንሽ የቤት እቃዎች፣ የኤሌክትሪክ ምጣድ እና ጀበና",
+    "name_om": "Meeshaalee Kushiinaa fi Eelee Elektirikii",
+    "name_ti": "ናይ ክሽነ ንዋያት፣ ናይ ኤሌክትሪክ ምጣድን ጀበናን",
+    "definition": "Electric Injera baking pans (Mitad), electric coffee roasters, food blenders, meat mincers, water dispensers, and traditional clay coffee pots (Jebena).",
+    "display_order": 0,
+    "icon": "Flame",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.369009Z",
+    "updated_at": "2026-11-01T11:27:00.369009Z",
+    "translations": {
+      "am": "ትናንሽ የቤት እቃዎች፣ የኤሌክትሪክ ምጣድ እና ጀበና",
+      "en": "Small Domestic Appliances \u0026 Traditional Cookware",
+      "or": "Meeshaalee Kushiinaa fi Eelee Elektirikii",
+      "ti": "ናይ ክሽነ ንዋያት፣ ናይ ኤሌክትሪክ ምጣድን ጀበናን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7724,
+        "parent_id": 7723,
+        "slug": "electric-injera-baking-pans-mitad",
+        "level": 1,
+        "path": "/7723/7724/",
+        "canonical_name": "Electric Injera Baking Pans \u0026 Clay Plates (የኤሌክትሪክ ምጣድ)",
+        "name_en": "Electric Injera Baking Pans \u0026 Clay Plates (የኤሌክትሪክ ምጣድ)",
+        "name_am": "የኤሌክትሪክ የእንጀራ ምጣዶች",
+        "name_om": "Eelee Buddeenaa Elektirikii",
+        "name_ti": "ናይ ኤሌክትሪክ ናይ እንጀራ ምጣድ",
+        "definition": "Traditional heavy-clay and digital thermostat electric baking griddles essential for Ethiopian injera preparation.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.371426Z",
+        "updated_at": "2026-11-01T11:27:00.371426Z",
+        "translations": {
+          "am": "የኤሌክትሪክ የእንጀራ ምጣዶች",
+          "en": "Electric Injera Baking Pans \u0026 Clay Plates (የኤሌክትሪክ ምጣድ)",
+          "or": "Eelee Buddeenaa Elektirikii",
+          "ti": "ናይ ኤሌክትሪክ ናይ እንጀራ ምጣድ"
+        },
+        "aliases": {
+          "am": [
+            "ምጣድ",
+            "የሸክላ ምጣድ",
+            "የኤሌክትሪክ ምጣድ",
+            "የእንጀራ ምጣድ"
+          ],
+          "en": [
+            "baking pan",
+            "clay pan",
+            "electric mitad",
+            "injera mitad",
+            "mitad"
+          ],
+          "or": [
+            "eelee",
+            "eelee buddeenaa",
+            "eelee elektirikii"
+          ],
+          "ti": [
+            "ምጣድ",
+            "ናይ ኤሌክትሪክ ምጣድ"
+          ]
+        }
+      },
+      {
+        "id": 7725,
+        "parent_id": 7723,
+        "slug": "clay-coffee-pots-jebena-ceremony",
+        "level": 1,
+        "path": "/7723/7725/",
+        "canonical_name": "Traditional Clay Coffee Pots (Jebena) \u0026 Ceremony Sets",
+        "name_en": "Traditional Clay Coffee Pots (Jebena) \u0026 Ceremony Sets",
+        "name_am": "የቡና ጀበና፣ ሲኒዎች እና ረከቦቶች",
+        "name_om": "Jabanaa Bunaa fi Siinii",
+        "name_ti": "ጀበና ቡን፣ ሲኒታትን ረከቦትን",
+        "definition": "Handcrafted earthenware clay Jebenas, charcoal stoves (Keshkesh), ceramic Sini coffee cups, and woven Rekebot trays.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.404888Z",
+        "updated_at": "2026-11-01T11:27:00.404888Z",
+        "translations": {
+          "am": "የቡና ጀበና፣ ሲኒዎች እና ረከቦቶች",
+          "en": "Traditional Clay Coffee Pots (Jebena) \u0026 Ceremony Sets",
+          "or": "Jabanaa Bunaa fi Siinii",
+          "ti": "ጀበና ቡን፣ ሲኒታትን ረከቦትን"
+        },
+        "aliases": {
+          "am": [
+            "ረከቦት",
+            "ሲኒ",
+            "የቡና ጀበና",
+            "ጀበና"
+          ],
+          "en": [
+            "coffee ceremony",
+            "coffee pot",
+            "jebena",
+            "rekebot",
+            "sini"
+          ],
+          "or": [
+            "jabanaa",
+            "siinii"
+          ],
+          "ti": [
+            "ረከቦት",
+            "ሲኒ",
+            "ጀበና"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.532315136Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "professional-legal-financial-advisory-services",
+  "root_family": {
+    "id": 7781,
+    "parent_id": null,
+    "slug": "professional-legal-financial-advisory-services",
+    "level": 0,
+    "path": "/7781/",
+    "canonical_name": "Professional Legal, Financial, Audit \u0026 Advisory Services",
+    "name_en": "Professional Legal, Financial, Audit \u0026 Advisory Services",
+    "name_am": "የህግ፣ የኦዲት፣ የግብር እና የሂሳብ አያያዝ አገልግሎቶች",
+    "name_om": "Tajaajila Seeraa, Oodiitii fi Herregaa",
+    "name_ti": "ናይ ሕጊ፣ ኦዲት፣ ግብርን ሒሳብን ኣገልግሎት",
+    "definition": "Chartered certified accounting and auditing, Ethiopian corporate tax filing, commercial law contract preparation, and business feasibility studies.",
+    "display_order": 0,
+    "icon": "Scale",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.976192Z",
+    "updated_at": "2026-11-01T11:27:00.976192Z",
+    "translations": {
+      "am": "የህግ፣ የኦዲት፣ የግብር እና የሂሳብ አያያዝ አገልግሎቶች",
+      "en": "Professional Legal, Financial, Audit \u0026 Advisory Services",
+      "or": "Tajaajila Seeraa, Oodiitii fi Herregaa",
+      "ti": "ናይ ሕጊ፣ ኦዲት፣ ግብርን ሒሳብን ኣገልግሎት"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7782,
+        "parent_id": 7781,
+        "slug": "chartered-accounting-tax-audit-services",
+        "level": 1,
+        "path": "/7781/7782/",
+        "canonical_name": "Chartered Accounting, Tax Filing \u0026 External Audit Services",
+        "name_en": "Chartered Accounting, Tax Filing \u0026 External Audit Services",
+        "name_am": "የውጭ ኦዲት፣ የታክስ እና የቫት ማሳወቂያ አገልግሎት",
+        "name_om": "Tajaajila Oodiitii Alaa fi Taaksii",
+        "name_ti": "ናይ ደገ ኦዲትን ግብርን ኣገልግሎት",
+        "definition": "Certified audit reports, monthly VAT/TOT declarations to Ministry of Revenues, and statutory business financial statements.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.980206Z",
+        "updated_at": "2026-11-01T11:27:00.980206Z",
+        "translations": {
+          "am": "የውጭ ኦዲት፣ የታክስ እና የቫት ማሳወቂያ አገልግሎት",
+          "en": "Chartered Accounting, Tax Filing \u0026 External Audit Services",
+          "or": "Tajaajila Oodiitii Alaa fi Taaksii",
+          "ti": "ናይ ደገ ኦዲትን ግብርን ኣገልግሎት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

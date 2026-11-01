@@ -276,10 +276,8 @@ func (h *BuyerHandler) CreateAccountAppeal(c *fiber.Ctx) error {
 		return response.BadRequest(c, "invalid request body")
 	}
 	uid := body.UserID
-	if uid <= 0 {
-		if authUID, err := mustUserID(c); err == nil && authUID > 0 {
-			uid = authUID
-		}
+	if authUID, err := mustUserID(c); err == nil && authUID > 0 {
+		uid = authUID // Prevent account appeal impersonation
 	}
 	if uid <= 0 || body.AppealType == "" || body.Reason == "" {
 		return response.BadRequest(c, "user_id, appeal_type, and reason are required")

@@ -1,9 +1,10 @@
 'use client';
 import { useState, useRef, useEffect, useCallback, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
-import { Search, X, ChevronDown, Tag, Layers, Hash, MapPin, Sparkles, Sliders } from 'lucide-react';
+import { Search, X, ChevronDown, Tag, Layers, Hash, MapPin, Sliders } from 'lucide-react';
+import { locPath } from '@/types/location';
 
 interface SearchEntry {
   id: number;
@@ -56,7 +57,9 @@ const TYPE_COLOR = {
 // ── Component ────────────────────────────────────────────────────────────────
 export function SearchBar() {
   const { t, locale } = useLocale();
+  const u = (t as any)?.ui ?? {};
   const router = useRouter();
+  const pathname = usePathname();
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(-1);
@@ -72,7 +75,14 @@ export function SearchBar() {
       if (!Array.isArray(tree)) return;
       const idx: SearchEntry[] = [];
       for (const root of tree) {
-        const rootLabel = root.name || root.name_en || root.slug;
+        const rootLabel =
+          (locale === 'am' && root.name_am) ||
+          ((locale === 'or' || locale === 'om') && root.name_om) ||
+          (locale === 'ti' && root.name_ti) ||
+          (locale === 'en' && root.name_en) ||
+          root.name ||
+          root.name_en ||
+          root.slug;
         const rootEn = root.name_en || root.name || root.slug;
         idx.push({
           id: root.id,
@@ -84,7 +94,14 @@ export function SearchBar() {
         });
         if (root.children) {
           for (const sub of root.children) {
-            const subLabel = sub.name || sub.name_en || sub.slug;
+            const subLabel =
+              (locale === 'am' && sub.name_am) ||
+              ((locale === 'or' || locale === 'om') && sub.name_om) ||
+              (locale === 'ti' && sub.name_ti) ||
+              (locale === 'en' && sub.name_en) ||
+              sub.name ||
+              sub.name_en ||
+              sub.slug;
             const subEn = sub.name_en || sub.name || sub.slug;
             idx.push({
               id: sub.id,
@@ -98,7 +115,14 @@ export function SearchBar() {
             });
             if (sub.children) {
               for (const item of sub.children) {
-                const itemLabel = item.name || item.name_en || item.slug;
+                const itemLabel =
+                  (locale === 'am' && item.name_am) ||
+                  ((locale === 'or' || locale === 'om') && item.name_om) ||
+                  (locale === 'ti' && item.name_ti) ||
+                  (locale === 'en' && item.name_en) ||
+                  item.name ||
+                  item.name_en ||
+                  item.slug;
                 const itemEn = item.name_en || item.name || item.slug;
                 idx.push({
                   id: item.id,
@@ -157,10 +181,10 @@ export function SearchBar() {
 
   const buildLocationUrl = (r: any) => {
     const p = new URLSearchParams();
+    if (r.region) p.set('region', r.region);
+    if (r.zone) p.set('zone', r.zone);
+    if (r.subcity) p.set('subcity', r.subcity);
     if (r.woreda) p.set('woreda', r.woreda);
-    else if (r.subcity) p.set('subcity', r.subcity);
-    else if (r.zone) p.set('zone', r.zone);
-    else if (r.region) p.set('region', r.region);
     return `/products?${p.toString()}`;
   };
 
@@ -197,11 +221,18 @@ export function SearchBar() {
           setLocationSuggestions(results.slice(0, 3));
         } catch { setLocationSuggestions([]); }
       }, 300);
-      debounceRef.current = setTimeout(() => {
-        router.push(`/products?search=${encodeURIComponent(val)}`);
-      }, 500);
+      if (pathname === '/products') {
+        debounceRef.current = setTimeout(() => {
+          router.replace(`/products?search=${encodeURIComponent(val)}`);
+        }, 500);
+      }
     } else {
       setLocationSuggestions([]);
+      if (pathname === '/products') {
+        debounceRef.current = setTimeout(() => {
+          router.replace('/products');
+        }, 300);
+      }
     }
   };
 
@@ -272,33 +303,19 @@ export function SearchBar() {
           onKeyDown={handleKeyDown}
           placeholder={t.nav?.search || 'Search products, vehicles, electronics...'}
           autoComplete="off"
-          className="w-full pl-9 pr-24 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-sm outline-none focus:ring-2 focus:ring-orange-600 transition-all"
+          className="w-full pl-9 pr-9 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 transition-all"
         />
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+        <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
           {q && (
             <button
               type="button"
               onClick={clear}
-              className="text-zinc-400 hover:text-zinc-600 transition-colors p-1"
+              className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors p-1.5 tap-bounce active:scale-90"
+              aria-label="Clear search"
             >
               <X size={14} />
             </button>
           )}
-          <button
-            type="button"
-            onClick={() => {
-              if (q.trim()) {
-                router.push(`/ai?q=${encodeURIComponent(q.trim())}`);
-              } else {
-                router.push('/ai');
-              }
-            }}
-            title="Open HUNTIQ AI Conversational Workspace"
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider transition-all bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:from-orange-700 hover:to-amber-600 text-white shadow-sm shadow-orange-600/30 active:scale-95"
-          >
-            <Sparkles size={11} className="animate-pulse" />
-            <span>AI Mode</span>
-          </button>
         </div>
       </form>
 
@@ -307,44 +324,61 @@ export function SearchBar() {
         <div className="absolute top-full left-0 right-0 mt-2 rounded-2xl border shadow-2xl z-[200] bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 max-h-80 overflow-y-auto">
 
           {/* Location suggestions — shown when query matches a location */}
-          {locationSuggestions.length > 0 && (
-            <div className="border-b border-zinc-100 dark:border-zinc-800">
-              <div className="px-3 pt-2 pb-1">
-                <p className="text-[10px] font-black uppercase tracking-widest opacity-30">Locations</p>
+          {(() => {
+            const seen = new Set<string>();
+            const uniqueLocs = locationSuggestions.filter(r => {
+              const p = locPath(r, locale);
+              if (!p || seen.has(p)) return false;
+              seen.add(p);
+              return true;
+            });
+            if (uniqueLocs.length === 0) return null;
+
+            const locBadge = locale === 'am' ? 'አካባቢ' : locale === 'ti' ? 'ቦታ' : locale === 'or' ? 'bakka' : 'location';
+
+            return (
+              <div className="border-b border-zinc-100 dark:border-zinc-800">
+                <div className="px-3 pt-2 pb-1">
+                  <p className="text-[10px] font-black uppercase tracking-widest opacity-30">
+                    {u.search_locations_heading || 'Locations'}
+                  </p>
+                </div>
+                {uniqueLocs.map((r, i) => {
+                  const displayPath = locPath(r, locale);
+                  return (
+                    <button
+                      key={i}
+                      onMouseDown={() => { setOpen(false); router.push(buildLocationUrl(r)); }}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-orange-50 dark:hover:bg-orange-950/40 transition-colors"
+                    >
+                      <MapPin size={14} className="text-orange-600 shrink-0" />
+                      <p className="text-sm font-bold truncate">{displayPath}</p>
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 bg-orange-100 dark:bg-orange-900/40 text-orange-600">
+                        {locBadge}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
-              {locationSuggestions.map((r, i) => {
-                const parts = [r.region, r.zone, r.subcity, r.woreda].filter(Boolean);
-                return (
-                  <button
-                    key={i}
-                    onMouseDown={() => { setOpen(false); router.push(buildLocationUrl(r)); }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-orange-50 dark:hover:bg-orange-950/40 transition-colors"
-                  >
-                    <MapPin size={14} className="text-orange-600 shrink-0" />
-                    <p className="text-sm font-bold truncate">{parts.join(' › ')}</p>
-                    <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 bg-orange-100 dark:bg-orange-900/40 text-orange-600">location</span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
+            );
+          })()}
 
           {/* Header label */}
           <div className="px-3 pt-2.5 pb-1">
             <p className="text-[10px] font-black uppercase tracking-widest opacity-30">
-              {q.trim() ? `Results for "${q}"` : 'Browse Categories'}
+              {q.trim() ? `${u.results_for || 'Results for'} "${q}"` : (u.browse_categories || 'Browse Categories')}
             </p>
           </div>
 
           {displayList.length === 0 && q.trim().length >= 1 && (
             <div className="px-4 py-6 text-center">
-              <p className="text-sm font-bold opacity-40">No match for &quot;{q}&quot;</p>
-              <p className="text-xs opacity-30 mt-1">Try a different word or browse categories below</p>
+              <p className="text-sm font-bold opacity-40">{u.no_match_for || 'No match for'} &quot;{q}&quot;</p>
+              <p className="text-xs opacity-30 mt-1">{u.try_different_word || 'Try a different word or browse categories below'}</p>
               <button
                 onClick={() => { setQ(''); setOpen(true); }}
                 className="mt-3 text-xs font-bold text-orange-600 hover:underline"
               >
-                Browse all categories →
+                {u.browse_all_categories_arrow || 'Browse all categories →'}
               </button>
             </div>
           )}
@@ -402,7 +436,7 @@ export function SearchBar() {
               >
                 <Search size={14} className="text-orange-600 shrink-0" />
                 <p className="text-sm font-bold">
-                  Search products for &quot;<span className="text-orange-600">{q}</span>&quot;
+                  {u.search_products_for_query || 'Search products for'} &quot;<span className="text-orange-600">{q}</span>&quot;
                 </p>
               </button>
             </div>

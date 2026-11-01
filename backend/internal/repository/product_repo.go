@@ -8,6 +8,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
+	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
 )
 
 type ProductRepo struct{ db *pgxpool.Pool }
@@ -111,15 +112,20 @@ const sqlCreateProductImage = `
 
 const sqlUpdateProduct = `
 	UPDATE products
-	 SET title=$1, price=$2, description=$3, category_id=$4::int, subcategory=$5, item=$6,
-	     condition=$7, location_id=$8, kebele=$9, specific_area=$10,
+	 SET title=$1, price=$2, description=$3, category_id=COALESCE($4::int, category_id), subcategory=$5, item=$6,
+	     condition=$7, location_id=COALESCE($8::int, location_id), kebele=$9, specific_area=$10,
 	     latitude=$11, longitude=$12,
 	     rental_price=$13, rental_duration_value=$14, rental_duration_unit=$15,
 	     deposit_amount=$16, available_from=$17, available_until=$18,
 	     category_hierarchy_id=COALESCE($19::int, category_hierarchy_id),
 	     location_hierarchy_id=COALESCE($20::int, location_hierarchy_id),
+	     startup_fee_percent=COALESCE($21, startup_fee_percent),
+	     weekly_increment_percent=COALESCE($22, weekly_increment_percent),
+	     total_fee_percent=COALESCE($23, total_fee_percent),
+	     total_fee_amount=COALESCE($24, total_fee_amount),
+	     fee_paid=$25,
 	     status='pending', admin_notes='', updated_at=NOW()
-	 WHERE id=$21 AND seller_id=$22 AND status IN ('pending','rejected')`
+	 WHERE id=$26 AND seller_id=$27 AND status IN ('pending','rejected')`
 
 const sqlDeleteProductImages = `DELETE FROM product_images WHERE product_id=$1`
 
@@ -151,7 +157,9 @@ const sqlGetProductByIDAndSeller = `
 	        COALESCE(listing_type::text,'sale') AS listing_type,
 	        rental_price, rental_duration_value, rental_duration_unit,
 	        deposit_amount, available_from, available_until,
-	        COALESCE(is_currently_rented,FALSE) AS is_currently_rented
+	        COALESCE(is_currently_rented,FALSE) AS is_currently_rented,
+	        listing_duration_days, total_fee_percent, total_fee_amount,
+	        COALESCE(fee_paid,FALSE), COALESCE(fee_payment_pending,FALSE)
 	 FROM products WHERE id=$1 AND seller_id=$2`
 
 const sqlGetProductImages = `
@@ -245,31 +253,52 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 		args = append(args, likeWrap(*f.Region))
 	}
 	
-	// Enhanced search with brand detection and synonym expansion
+	// Enhanced search with brand detection, conversational cleaning, and multilingual synonym expansion
 	if f.Search != nil && *f.Search != "" {
 		searchTerm := *f.Search
-		
-		// Check for brand mentions
+		cleanTerm := aiclient.CleanConversationalSearchTerm(searchTerm)
+		if cleanTerm == "" {
+			cleanTerm = strings.TrimSpace(searchTerm)
+		}
+
+		synTsQuery := aiclient.BuildSynonymTsQuery(cleanTerm)
+
+		// Check for brand mentions using clean term
 		brandQuery := `SELECT brand_name FROM extract_brands($` + fmt.Sprintf("%d", len(args)+1) + `) LIMIT 1`
 		var detectedBrand *string
-		err := r.db.QueryRow(ctx, brandQuery, searchTerm).Scan(&detectedBrand)
-		if err == nil && detectedBrand != nil {
-			// Brand detected - boost brand matches in attributes
-			idx := len(args) + 1
+		_ = r.db.QueryRow(ctx, brandQuery, cleanTerm).Scan(&detectedBrand)
+
+		idxTerm := len(args) + 1
+		args = append(args, cleanTerm)
+
+		if synTsQuery != "" {
+			idxSyn := len(args) + 1
+			args = append(args, synTsQuery)
+
 			wb.WriteString(fmt.Sprintf(` AND (
 				search_vector @@ websearch_to_tsquery('simple', $%d)
+				OR search_vector @@ to_tsquery('simple', $%d)
+				OR p.title ILIKE '%%' || $%d || '%%'
 				OR EXISTS (
 					SELECT 1 FROM product_attributes pa
 					WHERE pa.product_id = p.id
 					  AND pa.value_text ILIKE '%%' || $%d || '%%'
 				)
-			)`, idx, idx))
-			args = append(args, searchTerm)
+				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
+				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
+			)`, idxTerm, idxSyn, idxTerm, idxTerm, idxTerm, idxTerm))
 		} else {
-			// Standard full-text search with synonym expansion
-			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND search_vector @@ websearch_to_tsquery('simple', $%d)", idx))
-			args = append(args, searchTerm)
+			wb.WriteString(fmt.Sprintf(` AND (
+				search_vector @@ websearch_to_tsquery('simple', $%d)
+				OR p.title ILIKE '%%' || $%d || '%%'
+				OR EXISTS (
+					SELECT 1 FROM product_attributes pa
+					WHERE pa.product_id = p.id
+					  AND pa.value_text ILIKE '%%' || $%d || '%%'
+				)
+				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
+				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
+			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
 		}
 	}
 	
@@ -539,6 +568,7 @@ func (r *ProductRepo) Update(ctx context.Context, p *models.Product, imageURLs [
 		p.DepositAmount, nullStrPtr(p.AvailableFrom), nullStrPtr(p.AvailableUntil),
 		p.CategoryHierarchyID,
 		p.LocationHierarchyID,
+		p.StartupFeePercent, p.WeeklyIncrementPercent, p.TotalFeePercent, p.TotalFeeAmount, p.FeePaid,
 		p.ID, p.SellerID,
 	)
 	if err != nil {
@@ -627,6 +657,8 @@ func (r *ProductRepo) GetByIDAndSeller(ctx context.Context, id, sellerID int) (*
 		&p.Status, &p.AdminNotes, &p.CreatedAt, &p.UpdatedAt,
 		&listingType, &p.RentalPrice, &p.RentalDurationValue, &rentalDurationUnit,
 		&p.DepositAmount, &availableFrom, &availableUntil, &p.IsCurrentlyRented,
+		&p.ListingDurationDays, &p.TotalFeePercent, &p.TotalFeeAmount,
+		&p.FeePaid, &p.FeePaymentPending,
 	)
 	if err != nil {
 		return nil, err

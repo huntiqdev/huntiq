@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.521253361Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "aircraft-aviation-drones-parts",
+  "root_family": {
+    "id": 7669,
+    "parent_id": null,
+    "slug": "aircraft-aviation-drones-parts",
+    "level": 0,
+    "path": "/7669/",
+    "canonical_name": "Aircraft, Aviation Parts \u0026 Drone Systems",
+    "name_en": "Aircraft, Aviation Parts \u0026 Drone Systems",
+    "name_am": "አውሮፕላኖች፣ ድሮኖች እና የአቪዬሽን እቃዎች",
+    "name_om": "Xiyyaara, Diroonii fi Meeshaalee Hawaa",
+    "name_ti": "ነፈርቲ፣ ድሮናትን ናይ ኣቪዬሽን ኣቑሑትን",
+    "definition": "Commercial UAVs, agricultural spray drones, aerial inspection quadcopters, avionics, and general aviation components.",
+    "display_order": 0,
+    "icon": "Plane",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.772883Z",
+    "updated_at": "2026-11-01T11:26:59.772883Z",
+    "translations": {
+      "am": "አውሮፕላኖች፣ ድሮኖች እና የአቪዬሽን እቃዎች",
+      "en": "Aircraft, Aviation Parts \u0026 Drone Systems",
+      "or": "Xiyyaara, Diroonii fi Meeshaalee Hawaa",
+      "ti": "ነፈርቲ፣ ድሮናትን ናይ ኣቪዬሽን ኣቑሑትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7670,
+        "parent_id": 7669,
+        "slug": "commercial-uavs-drones",
+        "level": 1,
+        "path": "/7669/7670/",
+        "canonical_name": "Commercial Drones \u0026 Agricultural Spraying UAVs",
+        "name_en": "Commercial Drones \u0026 Agricultural Spraying UAVs",
+        "name_am": "የግብርና እና የቪዲዮ ድሮኖች",
+        "name_om": "Diroonii Qonnaa fi Suuraa",
+        "name_ti": "ናይ ሕርሻን ቪዲዮን ድሮናት",
+        "definition": "DJI enterprise drones, crop-spraying multicopters, and topographical photogrammetry UAVs.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.7747Z",
+        "updated_at": "2026-11-01T11:26:59.7747Z",
+        "translations": {
+          "am": "የግብርና እና የቪዲዮ ድሮኖች",
+          "en": "Commercial Drones \u0026 Agricultural Spraying UAVs",
+          "or": "Diroonii Qonnaa fi Suuraa",
+          "ti": "ናይ ሕርሻን ቪዲዮን ድሮናት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

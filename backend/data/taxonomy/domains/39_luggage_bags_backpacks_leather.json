@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "FASH_BAGS",
+  "root_family": {
+    "id": "root-luggage-bags",
+    "slug": "luggage-bags-backpacks-leather",
+    "code": "FASH_BAGS",
+    "level": 1,
+    "canonical_name": "Luggage, Bags, Backpacks \u0026 Leather Goods",
+    "definition": "Handcrafted genuine leather handbags, laptop briefcases, school backpacks, duffel bags, and rolling travel suitcases.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Briefcase",
+    "translations": {
+      "am": "ቦርሳዎች፣ የቆዳ ቦርሳ እና የጉዞ ሻንጣዎች",
+      "or": "Boorsaa fi Shaaxaa Imalaa",
+      "ti": "ቦርሳታትን ናይ መገሻ ሻንጣታትን"
+    },
+    "children": [
+      {
+        "id": "sf-leather-handbags-totes",
+        "slug": "genuine-leather-handbags-briefcases",
+        "code": "BAG_LEATHER",
+        "level": 2,
+        "canonical_name": "Genuine Ethiopian Leather Handbags \u0026 Briefcases",
+        "definition": "Premium full-grain leather tote bags, cross-body purses, and professional executive laptop briefcases.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የእጅ የቆዳ ቦርሳዎች እና የላፕቶፕ ቦርሳ",
+          "or": "Boorsaa Gogaa Harkaa",
+          "ti": "ናይ ቆርበት ቦርሳታት"
+        }
+      }
+    ]
+  }
+}

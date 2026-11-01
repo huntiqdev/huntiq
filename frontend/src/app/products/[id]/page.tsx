@@ -113,9 +113,9 @@ export default async function ProductDetailPage({ params }: Props) {
           <h1 className="text-xl md:text-2xl font-black leading-tight">{product.title}</h1>
 
           <div className={`text-2xl md:text-3xl font-black ${product.listing_type === 'rent' ? 'text-teal-600' : 'text-orange-600'}`}>
-            ETB {product.listing_type === 'rent' && product.rental_price 
+            ETB {product.listing_type === 'rent' && product.rental_price != null
               ? `${product.rental_price.toLocaleString()} / ${product.rental_duration_value || 1} ${product.rental_duration_unit || 'month'}` 
-              : product.price.toLocaleString()}
+              : (product.price != null ? product.price.toLocaleString() : '—')}
           </div>
 
           {product.location && (
@@ -156,10 +156,10 @@ export default async function ProductDetailPage({ params }: Props) {
           <div className="mt-2 p-3.5 rounded-xl border border-amber-500/20 bg-amber-500/5 text-amber-900 dark:text-amber-200">
             <div className="flex items-center gap-2 mb-1.5 font-bold text-xs">
               <ShieldAlert size={14} className="text-amber-600 dark:text-amber-400 shrink-0" />
-              <span>HUNTIQ Safe Exchange Shield</span>
+              <span><ClientLabel k="ui.safe_exchange_title" /></span>
             </div>
             <p className="text-[11px] leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Always inspect physical items in person at a secure public location (e.g. Bole, Piazza, Mexico, Stadium, or regional commercial hub) before completing payment via Telebirr or CBE Birr. Never transfer advance deposits to unknown parties.
+              <ClientLabel k="ui.safe_exchange_desc" />
             </p>
           </div>
 
@@ -168,13 +168,13 @@ export default async function ProductDetailPage({ params }: Props) {
             <div className="mt-1 flex flex-wrap items-center gap-2">
               <span className="text-[11px] font-semibold text-zinc-500 flex items-center gap-1">
                 <Sparkles size={11} className="text-orange-500" />
-                Related AI Search:
+                <ClientLabel k="ui.related_ai_search" />:
               </span>
               <Link
                 href={`/products?q=${encodeURIComponent(product.category.name)}&mode=ai`}
                 className="text-[11px] font-medium bg-zinc-100 hover:bg-orange-50 dark:bg-zinc-800 dark:hover:bg-orange-950/40 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-700 transition-colors"
               >
-                More {product.category.name} listings →
+                <ClientLabel k="ui.more_listings_in" /> {product.category.name} →
               </Link>
             </div>
           )}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.531145607Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "fire-safety-firefighting-disaster-prevention",
+  "root_family": {
+    "id": 7767,
+    "parent_id": null,
+    "slug": "fire-safety-firefighting-disaster-prevention",
+    "level": 0,
+    "path": "/7767/",
+    "canonical_name": "Fire Safety, Firefighting \u0026 Disaster Prevention",
+    "name_en": "Fire Safety, Firefighting \u0026 Disaster Prevention",
+    "name_am": "የእሳት አደጋ መከላከያ እና የማስጠንቀቂያ እቃዎች",
+    "name_om": "Meeshaalee Balaa Ibidaa Ittisuu",
+    "name_ti": "ናይ ሓዊ ሓደጋ መከላኸልን መጥፍእን",
+    "definition": "Dry powder and CO2 fire extinguishers, optical smoke detectors, fire alarm sounders, and commercial fire hose reels.",
+    "display_order": 0,
+    "icon": "Flame",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.853015Z",
+    "updated_at": "2026-11-01T11:27:00.853015Z",
+    "translations": {
+      "am": "የእሳት አደጋ መከላከያ እና የማስጠንቀቂያ እቃዎች",
+      "en": "Fire Safety, Firefighting \u0026 Disaster Prevention",
+      "or": "Meeshaalee Balaa Ibidaa Ittisuu",
+      "ti": "ናይ ሓዊ ሓደጋ መከላኸልን መጥፍእን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7768,
+        "parent_id": 7767,
+        "slug": "portable-fire-extinguishers",
+        "level": 1,
+        "path": "/7767/7768/",
+        "canonical_name": "Portable Fire Extinguishers (CO2 \u0026 Dry Powder)",
+        "name_en": "Portable Fire Extinguishers (CO2 \u0026 Dry Powder)",
+        "name_am": "ተንቀሳቃሽ የእሳት ማጥፊያ ሲሊንደሮች",
+        "name_om": "Meeshaalee Ibida Dhaamsan",
+        "name_ti": "ተንቀሳቐስቲ ናይ ሓዊ መጥፍኢ ሲሊንደራት",
+        "definition": "ABC dry chemical powder and carbon dioxide portable fire canisters (2kg, 6kg, 9kg, 50kg trolley).",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.855483Z",
+        "updated_at": "2026-11-01T11:27:00.855483Z",
+        "translations": {
+          "am": "ተንቀሳቃሽ የእሳት ማጥፊያ ሲሊንደሮች",
+          "en": "Portable Fire Extinguishers (CO2 \u0026 Dry Powder)",
+          "or": "Meeshaalee Ibida Dhaamsan",
+          "ti": "ተንቀሳቐስቲ ናይ ሓዊ መጥፍኢ ሲሊንደራት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

@@ -1,0 +1,562 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.515798995Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "agriculture-crop-farming",
+  "root_family": {
+    "id": 7598,
+    "parent_id": null,
+    "slug": "agriculture-crop-farming",
+    "level": 0,
+    "path": "/7598/",
+    "canonical_name": "Agriculture \u0026 Crop Farming",
+    "name_en": "Agriculture \u0026 Crop Farming",
+    "name_am": "ግብርና እና የእህል ሰብሎች ልማት",
+    "name_om": "Qonnaa fi Oomisha Midhaanii",
+    "name_ti": "ሕርሻን ናይ እኽሊ ሰብልታትን",
+    "definition": "Commercial and smallholder cultivation of cereal grains, oilseeds, pulses, stimulants, and staple field crops.",
+    "display_order": 0,
+    "icon": "Wheat",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:58.777002Z",
+    "updated_at": "2026-11-01T11:26:58.777002Z",
+    "translations": {
+      "am": "ግብርና እና የእህል ሰብሎች ልማት",
+      "en": "Agriculture \u0026 Crop Farming",
+      "or": "Qonnaa fi Oomisha Midhaanii",
+      "ti": "ሕርሻን ናይ እኽሊ ሰብልታትን"
+    },
+    "aliases": {
+      "am": [
+        "ሰብል",
+        "እህል",
+        "የእህል ምርት",
+        "የእርሻ ሰብል",
+        "ግብርና"
+      ],
+      "en": [
+        "agriculture",
+        "crops",
+        "farming",
+        "field crops",
+        "grains",
+        "harvest"
+      ],
+      "or": [
+        "midhaan",
+        "oomisha qonnaa",
+        "qonnaa",
+        "sanyii midhaanii"
+      ],
+      "ti": [
+        "ሕርሻ",
+        "ሰብሊ",
+        "እኽሊ",
+        "ፍርያት ሕርሻ"
+      ]
+    },
+    "children": [
+      {
+        "id": 7599,
+        "parent_id": 7598,
+        "slug": "cereal-grains-staples",
+        "level": 1,
+        "path": "/7598/7599/",
+        "canonical_name": "Cereal Grains \u0026 Staple Crops",
+        "name_en": "Cereal Grains \u0026 Staple Crops",
+        "name_am": "የእህል እህሎች እና ዋና ሰብሎች",
+        "name_om": "Midhaan Dhedhii fi Nyaata Bu'uuraa",
+        "name_ti": "እኽልታትን መሰረታዊ ሰብልታትን",
+        "definition": "Major cereal grasses grown for edible starchy grain components.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": false,
+        "created_at": "2026-11-01T11:26:58.81441Z",
+        "updated_at": "2026-11-01T11:26:58.81441Z",
+        "translations": {
+          "am": "የእህል እህሎች እና ዋና ሰብሎች",
+          "en": "Cereal Grains \u0026 Staple Crops",
+          "or": "Midhaan Dhedhii fi Nyaata Bu'uuraa",
+          "ti": "እኽልታትን መሰረታዊ ሰብልታትን"
+        },
+        "aliases": {
+          "am": [
+            "የእህል ዓይነቶች",
+            "ጥራጥሬዎች"
+          ],
+          "en": [
+            "cereal crops",
+            "cereals",
+            "staple grains"
+          ],
+          "or": [
+            "gosoota midhaanii"
+          ],
+          "ti": [
+            "ዓይነታት እኽሊ"
+          ]
+        },
+        "children": [
+          {
+            "id": 7600,
+            "parent_id": 7599,
+            "slug": "teff-grain",
+            "level": 2,
+            "path": "/7598/7599/7600/",
+            "canonical_name": "Teff Grain (ጤፍ)",
+            "name_en": "Teff Grain (ጤፍ)",
+            "name_am": "የጤፍ እህል",
+            "name_om": "Midhaan Xaafii",
+            "name_ti": "እኽሊ ጣፍ",
+            "definition": "Endemic Ethiopian cereal grain essential for injera preparation.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": false,
+            "created_at": "2026-11-01T11:26:58.826772Z",
+            "updated_at": "2026-11-01T11:26:58.826772Z",
+            "translations": {
+              "am": "የጤፍ እህል",
+              "en": "Teff Grain (ጤፍ)",
+              "or": "Midhaan Xaafii",
+              "ti": "እኽሊ ጣፍ"
+            },
+            "aliases": {
+              "am": [
+                "ማግና ጤፍ",
+                "ሰርገኛ ጤፍ",
+                "ቀይ ጤፍ",
+                "ነጭ ጤፍ",
+                "የጤፍ እህል",
+                "ጤፍ"
+              ],
+              "en": [
+                "brown teff",
+                "eragrostis tef",
+                "tef",
+                "teff",
+                "white teff"
+              ],
+              "or": [
+                "midhaan xaafii",
+                "xaafii",
+                "xaafii adii",
+                "xaafii diimaa"
+              ],
+              "ti": [
+                "ቀይሕ ጣፍ",
+                "እኽሊ ጣፍ",
+                "ጣፍ",
+                "ጻዕዳ ጣፍ"
+              ]
+            },
+            "children": [
+              {
+                "id": 7601,
+                "parent_id": 7600,
+                "slug": "magna-super-white-teff",
+                "level": 3,
+                "path": "/7598/7599/7600/7601/",
+                "canonical_name": "Magna Super-White Teff Grain",
+                "name_en": "Magna Super-White Teff Grain",
+                "name_am": "ማግና ሱፐር ነጭ ጤፍ",
+                "name_om": "Xaafii Adii Magnaa",
+                "name_ti": "ማግና ጻዕዳ ጣፍ",
+                "definition": "Premium grade bright-white teff grain cultivated in fertile highlands (East Gojjam, Ada'a/Bishoftu).",
+                "display_order": 0,
+                "is_active": true,
+                "is_leaf": true,
+                "created_at": "2026-11-01T11:26:58.846658Z",
+                "updated_at": "2026-11-01T11:26:58.846658Z",
+                "translations": {
+                  "am": "ማግና ሱፐር ነጭ ጤፍ",
+                  "en": "Magna Super-White Teff Grain",
+                  "or": "Xaafii Adii Magnaa",
+                  "ti": "ማግና ጻዕዳ ጣፍ"
+                },
+                "aliases": {}
+              },
+              {
+                "id": 7602,
+                "parent_id": 7600,
+                "slug": "key-brown-red-teff",
+                "level": 3,
+                "path": "/7598/7599/7600/7602/",
+                "canonical_name": "Key Brown \u0026 Red Iron-Rich Teff Grain",
+                "name_en": "Key Brown \u0026 Red Iron-Rich Teff Grain",
+                "name_am": "ቀይ / ቡናማ ጤፍ",
+                "name_om": "Xaafii Diimaa",
+                "name_ti": "ቀይሕ ጣፍ",
+                "definition": "High-iron content red and brown varieties cultivated across diverse microclimates.",
+                "display_order": 0,
+                "is_active": true,
+                "is_leaf": true,
+                "created_at": "2026-11-01T11:26:58.857035Z",
+                "updated_at": "2026-11-01T11:26:58.857035Z",
+                "translations": {
+                  "am": "ቀይ / ቡናማ ጤፍ",
+                  "en": "Key Brown \u0026 Red Iron-Rich Teff Grain",
+                  "or": "Xaafii Diimaa",
+                  "ti": "ቀይሕ ጣፍ"
+                },
+                "aliases": {}
+              }
+            ]
+          },
+          {
+            "id": 7603,
+            "parent_id": 7599,
+            "slug": "wheat-grain",
+            "level": 2,
+            "path": "/7598/7599/7603/",
+            "canonical_name": "Wheat Grain (ስንዴ)",
+            "name_en": "Wheat Grain (ስንዴ)",
+            "name_am": "የስንዴ እህል",
+            "name_om": "Midhaan Qamadii",
+            "name_ti": "እኽሊ ስርናይ",
+            "definition": "Bread wheat and durum wheat grains for milling, pasta production, and food manufacture.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.860554Z",
+            "updated_at": "2026-11-01T11:26:58.860554Z",
+            "translations": {
+              "am": "የስንዴ እህል",
+              "en": "Wheat Grain (ስንዴ)",
+              "or": "Midhaan Qamadii",
+              "ti": "እኽሊ ስርናይ"
+            },
+            "aliases": {
+              "am": [
+                "ስንዴ",
+                "የስንዴ እህል",
+                "የዳቦ ስንዴ"
+              ],
+              "en": [
+                "bread wheat",
+                "durum wheat",
+                "raw wheat",
+                "wheat"
+              ],
+              "or": [
+                "midhaan qamadii",
+                "qamadii"
+              ],
+              "ti": [
+                "ስርናይ",
+                "እኽሊ ስርናይ"
+              ]
+            }
+          },
+          {
+            "id": 7604,
+            "parent_id": 7599,
+            "slug": "barley-grain",
+            "level": 2,
+            "path": "/7598/7599/7604/",
+            "canonical_name": "Barley Grain (ገብስ)",
+            "name_en": "Barley Grain (ገብስ)",
+            "name_am": "የገብስ እህል",
+            "name_om": "Midhaan Garbuu",
+            "name_ti": "እኽሊ ስገም",
+            "definition": "Food barley, malting barley for brewing, and feed barley.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.873867Z",
+            "updated_at": "2026-11-01T11:26:58.873867Z",
+            "translations": {
+              "am": "የገብስ እህል",
+              "en": "Barley Grain (ገብስ)",
+              "or": "Midhaan Garbuu",
+              "ti": "እኽሊ ስገም"
+            },
+            "aliases": {
+              "am": [
+                "የቢራ ገብስ",
+                "የገብስ እህል",
+                "ገብስ"
+              ],
+              "en": [
+                "barley",
+                "food barley",
+                "malt barley"
+              ],
+              "or": [
+                "garbuu",
+                "midhaan garbuu"
+              ],
+              "ti": [
+                "ስገም",
+                "እኽሊ ስገም"
+              ]
+            }
+          },
+          {
+            "id": 7605,
+            "parent_id": 7599,
+            "slug": "maize-corn-grain",
+            "level": 2,
+            "path": "/7598/7599/7605/",
+            "canonical_name": "Maize \u0026 Corn Grain (በቆሎ)",
+            "name_en": "Maize \u0026 Corn Grain (በቆሎ)",
+            "name_am": "የበቆሎ እህል",
+            "name_om": "Boqqolloo",
+            "name_ti": "እኽሊ ኣፉን",
+            "definition": "Field corn, white maize, and yellow maize for human consumption, starch extraction, and animal feeds.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.884493Z",
+            "updated_at": "2026-11-01T11:26:58.884493Z",
+            "translations": {
+              "am": "የበቆሎ እህል",
+              "en": "Maize \u0026 Corn Grain (በቆሎ)",
+              "or": "Boqqolloo",
+              "ti": "እኽሊ ኣፉን"
+            },
+            "aliases": {
+              "am": [
+                "በቆሎ",
+                "ነጭ በቆሎ",
+                "የበቆሎ እህል"
+              ],
+              "en": [
+                "corn",
+                "grain corn",
+                "maize",
+                "white maize"
+              ],
+              "or": [
+                "boqqolloo",
+                "midhaan boqqolloo"
+              ],
+              "ti": [
+                "ኣፉን",
+                "እኽሊ ኣፉን",
+                "ዕፉን"
+              ]
+            }
+          },
+          {
+            "id": 7606,
+            "parent_id": 7599,
+            "slug": "sorghum-grain",
+            "level": 2,
+            "path": "/7598/7599/7606/",
+            "canonical_name": "Sorghum Grain (ማሽላ)",
+            "name_en": "Sorghum Grain (ማሽላ)",
+            "name_am": "የማሽላ እህል",
+            "name_om": "Mishingaa",
+            "name_ti": "እኽሊ መሸላ",
+            "definition": "Drought-tolerant sorghum grain for flatbreads, porridge, and traditional beverages.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.899702Z",
+            "updated_at": "2026-11-01T11:26:58.899702Z",
+            "translations": {
+              "am": "የማሽላ እህል",
+              "en": "Sorghum Grain (ማሽላ)",
+              "or": "Mishingaa",
+              "ti": "እኽሊ መሸላ"
+            },
+            "aliases": {
+              "am": [
+                "ማሽላ",
+                "የማሽላ እህል"
+              ],
+              "en": [
+                "guinea corn",
+                "milo",
+                "sorghum"
+              ],
+              "or": [
+                "mishingaa"
+              ],
+              "ti": [
+                "መሸላ",
+                "እኽሊ መሸላ"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": 7607,
+        "parent_id": 7598,
+        "slug": "oilseeds-industrial-crops",
+        "level": 1,
+        "path": "/7598/7607/",
+        "canonical_name": "Oilseeds \u0026 Industrial Export Crops",
+        "name_en": "Oilseeds \u0026 Industrial Export Crops",
+        "name_am": "የቅባት እህሎች እና የኢንዱስትሪ ሰብሎች",
+        "name_om": "Sanyii Zayitaa fi Oomisha Daldalaa",
+        "name_ti": "ናይ ቅብኣት እኽልታትን ንግዳዊ ሰብልታትን",
+        "definition": "Seeds cultivated primarily for vegetable edible oil extraction and export trade.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": false,
+        "created_at": "2026-11-01T11:26:58.909057Z",
+        "updated_at": "2026-11-01T11:26:58.909057Z",
+        "translations": {
+          "am": "የቅባት እህሎች እና የኢንዱስትሪ ሰብሎች",
+          "en": "Oilseeds \u0026 Industrial Export Crops",
+          "or": "Sanyii Zayitaa fi Oomisha Daldalaa",
+          "ti": "ናይ ቅብኣት እኽልታትን ንግዳዊ ሰብልታትን"
+        },
+        "aliases": {
+          "am": [
+            "ሰሊጥ",
+            "ሱፍ",
+            "ተልባ",
+            "ኑግ",
+            "የቅባት እህል"
+          ],
+          "en": [
+            "flaxseed",
+            "linseed",
+            "noug",
+            "oilseeds",
+            "sesame"
+          ],
+          "or": [
+            "nuugii",
+            "saliixa",
+            "sanyii zayitaa"
+          ],
+          "ti": [
+            "ሰሊጥ",
+            "ኑግ",
+            "ናይ ቅብኣት እኽሊ",
+            "ጣሊያን"
+          ]
+        },
+        "children": [
+          {
+            "id": 7608,
+            "parent_id": 7607,
+            "slug": "sesame-seed",
+            "level": 2,
+            "path": "/7598/7607/7608/",
+            "canonical_name": "Sesame Seed (ሰሊጥ)",
+            "name_en": "Sesame Seed (ሰሊጥ)",
+            "name_am": "የሰሊጥ ፍሬ",
+            "name_om": "Sanyii Saliixaa",
+            "name_ti": "ፍረ ሰሊጥ",
+            "definition": "White Humera, Wollega, and Metema export sesame seeds.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.924377Z",
+            "updated_at": "2026-11-01T11:26:58.924377Z",
+            "translations": {
+              "am": "የሰሊጥ ፍሬ",
+              "en": "Sesame Seed (ሰሊጥ)",
+              "or": "Sanyii Saliixaa",
+              "ti": "ፍረ ሰሊጥ"
+            },
+            "aliases": {
+              "am": [
+                "ሁመራ ሰሊጥ",
+                "ሰሊጥ",
+                "ወለጋ ሰሊጥ",
+                "የሰሊጥ ፍሬ"
+              ],
+              "en": [
+                "humera sesame",
+                "sesame",
+                "sesame seed",
+                "wollega sesame"
+              ],
+              "or": [
+                "saliixa",
+                "sanyii saliixaa"
+              ],
+              "ti": [
+                "ሁመራ ሰሊጥ",
+                "ሰሊጥ",
+                "ፍረ ሰሊጥ"
+              ]
+            }
+          },
+          {
+            "id": 7609,
+            "parent_id": 7607,
+            "slug": "linseed-flaxseed",
+            "level": 2,
+            "path": "/7598/7607/7609/",
+            "canonical_name": "Linseed \u0026 Flaxseed (ተልባ)",
+            "name_en": "Linseed \u0026 Flaxseed (ተልባ)",
+            "name_am": "የተልባ ፍሬ",
+            "name_om": "Talbaa",
+            "name_ti": "ፍረ እንጣጢዕ",
+            "definition": "Brown and golden flaxseed harvested for food beverage preparation and omega-3 oil pressing.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.951609Z",
+            "updated_at": "2026-11-01T11:26:58.951609Z",
+            "translations": {
+              "am": "የተልባ ፍሬ",
+              "en": "Linseed \u0026 Flaxseed (ተልባ)",
+              "or": "Talbaa",
+              "ti": "ፍረ እንጣጢዕ"
+            },
+            "aliases": {
+              "am": [
+                "ተልባ",
+                "የተልባ ፍሬ"
+              ],
+              "en": [
+                "flax",
+                "flaxseed",
+                "linseed"
+              ],
+              "or": [
+                "sanyii talbaa",
+                "talbaa"
+              ],
+              "ti": [
+                "እንጣጢዕ",
+                "ፍረ እንጣጢዕ"
+              ]
+            }
+          },
+          {
+            "id": 7610,
+            "parent_id": 7607,
+            "slug": "soybeans-grain",
+            "level": 2,
+            "path": "/7598/7607/7610/",
+            "canonical_name": "Soybeans (አኩሪ አተር)",
+            "name_en": "Soybeans (አኩሪ አተር)",
+            "name_am": "አኩሪ አተር",
+            "name_om": "Soyaabinii",
+            "name_ti": "ኣኩሪ ኣተር",
+            "definition": "Commercial edible legumes cultivated for industrial soy processing, lecithin, and protein feed.",
+            "display_order": 0,
+            "is_active": true,
+            "is_leaf": true,
+            "created_at": "2026-11-01T11:26:58.964843Z",
+            "updated_at": "2026-11-01T11:26:58.964843Z",
+            "translations": {
+              "am": "አኩሪ አተር",
+              "en": "Soybeans (አኩሪ አተር)",
+              "or": "Soyaabinii",
+              "ti": "ኣኩሪ ኣተር"
+            },
+            "aliases": {}
+          }
+        ]
+      }
+    ]
+  }
+}

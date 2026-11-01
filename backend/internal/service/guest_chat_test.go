@@ -35,8 +35,17 @@ func TestGuestAI_OutOfDomainDetection(t *testing.T) {
 		"house for rent in CMC around 30000 birr",
 		"how much is Samsung Galaxy A54?",
 		"compare these two laptops for office work",
+		"have you phone?",
+		"have you a phone?",
+		"do you have a car?",
 		"ስልክ መግዛት እፈልጋለሁ",
+		"ስልክ አለዎት?",
+		"ስልክ አለህ?",
+		"መኪና አለህ?",
+		"ቤት አለዎት?",
 		"bilbila bituu barbaada",
+		"bilbila qabduu?",
+		"ሞባይል ኣለኩም?",
 	}
 
 	for _, q := range legitimateMarketplaceQueries {

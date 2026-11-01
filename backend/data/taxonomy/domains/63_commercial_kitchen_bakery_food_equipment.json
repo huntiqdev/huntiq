@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "REST_EQUIPMENT",
+  "root_family": {
+    "id": "root-commercial-kitchen",
+    "slug": "commercial-kitchen-bakery-food-equipment",
+    "code": "REST_EQUIPMENT",
+    "level": 1,
+    "canonical_name": "Commercial Kitchen, Bakery \u0026 Catering Equipment",
+    "definition": "Commercial deck bakery ovens, spiral dough kneaders, stainless steel food prep counters, shawarma broilers, and industrial deep fryers.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "UtensilsCrossed",
+    "translations": {
+      "am": "የዳቦ መጋገሪያ፣ የሆቴል እና የሬስቶራንት ማብሰያ እቃዎች",
+      "or": "Meeshaalee Kushiinaa Hoteelaa fi Daabboo",
+      "ti": "ናይ ዳቦ መጋገርያ፣ ናይ ሆቴልን ሬስቶራንትን መብሰሊ ንዋያት"
+    },
+    "children": [
+      {
+        "id": "sf-bakery-deck-ovens",
+        "slug": "bakery-deck-ovens-dough-mixers",
+        "code": "BAKE_EQUIPMENT",
+        "level": 2,
+        "canonical_name": "Commercial Bakery Deck Ovens \u0026 Spiral Dough Mixers",
+        "definition": "Electric and gas stone-hearth bread and pastry deck ovens, planetary cake mixers, and bread slicers.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የዳቦ መጋገሪያ ኦቨኖች እና የሊጥ ማቡኪያ ማሽኖች",
+          "or": "Ovenii Daabboo fi Maashina Boocaa",
+          "ti": "ናይ ዳቦ መጋገርያ እቶናትን መሐወሲታትን"
+        }
+      }
+    ]
+  }
+}

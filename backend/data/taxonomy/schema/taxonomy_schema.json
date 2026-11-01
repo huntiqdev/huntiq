@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huntiq.com/schemas/taxonomy.v2.json",
+  "title": "HUNTIQ Canonical Enterprise Taxonomy Schema",
+  "description": "Authoritative multilingual product, service, equipment, and material classification schema for HUNTIQ Universal Marketplace.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "taxonomy_version",
+    "source_language",
+    "supported_languages",
+    "domain_code",
+    "root_family"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "taxonomy_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "source_language": {
+      "type": "string",
+      "enum": ["en"]
+    },
+    "supported_languages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 4
+    },
+    "domain_code": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_]{2,10}$"
+    },
+    "root_family": {
+      "$ref": "#/$defs/categoryNode"
+    }
+  },
+  "$defs": {
+    "categoryNode": {
+      "type": "object",
+      "required": [
+        "id",
+        "slug",
+        "code",
+        "level",
+        "canonical_name",
+        "definition",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stable identifier for the category node"
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "code": {
+          "type": "string",
+          "description": "Compact uppercase taxonomic domain code"
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 2
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 10
+        },
+        "inclusion_rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exclusion_rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "examples": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "inactive", "archived", "pending_review"]
+        },
+        "is_leaf": {
+          "type": "boolean"
+        },
+        "translations": {
+          "type": "object",
+          "properties": {
+            "am": { "type": "string" },
+            "or": { "type": "string" },
+            "ti": { "type": "string" }
+          }
+        },
+        "aliases": {
+          "type": "object",
+          "properties": {
+            "en": { "type": "array", "items": { "type": "string" } },
+            "am": { "type": "array", "items": { "type": "string" } },
+            "or": { "type": "array", "items": { "type": "string" } },
+            "ti": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "code"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["UNSPSC", "GS1_GPC", "TAXONOMIC", "CAS", "ISCO_08", "HS_CODE", "CUSTOM"]
+              },
+              "code": { "type": "string" },
+              "name": { "type": "string" }
+            }
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["slug", "name_en", "data_type"],
+            "properties": {
+              "slug": { "type": "string" },
+              "name_en": { "type": "string" },
+              "data_type": { "type": "string" },
+              "unit": { "type": "string" },
+              "is_required": { "type": "boolean" },
+              "is_filterable": { "type": "boolean" },
+              "validation_rules": { "type": "object" }
+            }
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/categoryNode"
+          }
+        }
+      }
+    }
+  }
+}

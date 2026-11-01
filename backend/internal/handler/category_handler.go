@@ -1,25 +1,65 @@
 package handlers
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/service"
 )
 
 type CategoryHandler struct {
-	svc *service.CategoryHierarchyService
+	svc         *service.CategoryHierarchyService
+	cache       cache.Cache
+	adminLogger func(ctx context.Context, adminID int, action, notes string)
 }
 
 func NewCategoryHandler(svc *service.CategoryHierarchyService) *CategoryHandler {
 	return &CategoryHandler{svc: svc}
 }
 
+func (h *CategoryHandler) WithCache(c cache.Cache) *CategoryHandler {
+	h.cache = c
+	return h
+}
+
+func (h *CategoryHandler) WithAdminLogger(fn func(ctx context.Context, adminID int, action, notes string)) *CategoryHandler {
+	h.adminLogger = fn
+	return h
+}
+
+func (h *CategoryHandler) logAdminAction(c *fiber.Ctx, action, notes string) {
+	if h.adminLogger != nil {
+		adminID, _ := c.Locals("userID").(int)
+		h.adminLogger(c.Context(), adminID, action, notes)
+	}
+}
+
+func (h *CategoryHandler) invalidateCategoryCaches(ctx context.Context) {
+	if h.cache != nil {
+		for _, lang := range []string{"en", "am", "or", "ti", ""} {
+			_ = h.cache.Delete(ctx, fmt.Sprintf("category_tree_%s", lang))
+		}
+	}
+}
+
 // GetCategoryTree returns the full hierarchical category tree
 // GET /api/categories/tree?lang=en
 func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 	lang := c.Query("lang", "en")
+	cacheKey := fmt.Sprintf("category_tree_%s", lang)
+
+	if h.cache != nil {
+		if cached, ok := h.cache.Get(c.Context(), cacheKey); ok && len(cached) > 0 {
+			c.Set("Content-Type", "application/json")
+			return c.Send(cached)
+		}
+	}
 	
 	tree, err := h.svc.GetCategoryTree(c.Context(), lang)
 	if err != nil {
@@ -29,10 +69,16 @@ func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.JSON(fiber.Map{
+	respBytes, err := json.Marshal(fiber.Map{
 		"success": true,
 		"data":    tree,
 	})
+	if err == nil && h.cache != nil {
+		_ = h.cache.Set(c.Context(), cacheKey, respBytes, 1*time.Hour)
+	}
+
+	c.Set("Content-Type", "application/json")
+	return c.Send(respBytes)
 }
 
 // GetCategory returns a single category with breadcrumbs
@@ -216,6 +262,9 @@ func (h *CategoryHandler) CreateCategory(c *fiber.Ctx) error {
 		})
 	}
 
+	h.logAdminAction(c, "CREATE_CATEGORY", fmt.Sprintf("Created category ID=%d slug=%s name=%s", id, req.Slug, req.NameEn))
+	h.invalidateCategoryCaches(c.Context())
+
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"success": true,
 		"data": fiber.Map{
@@ -253,6 +302,9 @@ func (h *CategoryHandler) UpdateCategory(c *fiber.Ctx) error {
 		})
 	}
 
+	h.logAdminAction(c, "UPDATE_CATEGORY", fmt.Sprintf("Updated category ID=%d slug=%s name=%s", id, req.Slug, req.NameEn))
+	h.invalidateCategoryCaches(c.Context())
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"message": "category updated successfully",
@@ -277,6 +329,9 @@ func (h *CategoryHandler) DeleteCategory(c *fiber.Ctx) error {
 			"error":   err.Error(),
 		})
 	}
+
+	h.logAdminAction(c, "DELETE_CATEGORY", fmt.Sprintf("Deleted category ID=%d", id))
+	h.invalidateCategoryCaches(c.Context())
 
 	return c.JSON(fiber.Map{
 		"success": true,
@@ -377,6 +432,10 @@ func (h *CategoryHandler) ReorderCategory(c *fiber.Ctx) error {
 			"error":   err.Error(),
 		})
 	}
+
+	h.logAdminAction(c, "REORDER_CATEGORY", fmt.Sprintf("Reordered category ID=%d to order=%d", id, body.DisplayOrder))
+	h.invalidateCategoryCaches(c.Context())
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"message": "category order updated successfully",
@@ -408,6 +467,10 @@ func (h *CategoryHandler) SetCategoryStatus(c *fiber.Ctx) error {
 			"error":   err.Error(),
 		})
 	}
+
+	h.logAdminAction(c, "SET_CATEGORY_STATUS", fmt.Sprintf("Set category ID=%d is_active=%v", id, body.IsActive))
+	h.invalidateCategoryCaches(c.Context())
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"message": "category status updated successfully",

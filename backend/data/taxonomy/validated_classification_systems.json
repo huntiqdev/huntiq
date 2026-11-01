@@ -1,0 +1,229 @@
+{
+  "version": "2.0.0",
+  "framework": "HUNTIQ Multi-Dimensional Marketplace Classification Framework",
+  "governing_rule": "Taxonomy models intrinsic domain concepts (the WHAT). Orthogonal dimensions model engagement, transaction, condition, and fulfillment (the HOW).",
+  "systems": [
+    {
+      "system_id": "SYS_PROD",
+      "code": "A",
+      "name": "Products & Physical Assets",
+      "description": "Tangible goods, raw agricultural commodities, manufactured merchandise, machinery, vehicles, and physical real estate assets.",
+      "transaction_modes": [
+        "for_sale",
+        "for_rent",
+        "for_lease",
+        "auction",
+        "barter"
+      ],
+      "condition_dimension": [
+        "new",
+        "open_box",
+        "refurbished",
+        "used_like_new",
+        "used_good",
+        "used_fair"
+      ],
+      "fulfillment_modes": [
+        "local_pickup",
+        "courier_delivery",
+        "freight_shipping"
+      ],
+      "root_family_count": 147,
+      "example_roots": [
+        "Field Crops & Cereal Grains",
+        "Passenger Automobiles, Sedans & SUVs",
+        "Residential Multi-Family Apartments & Condos"
+      ]
+    },
+    {
+      "system_id": "SYS_SRV",
+      "code": "B",
+      "name": "Services & Professional Service Offerings",
+      "description": "Contractual business-to-business (B2B) and business-to-consumer (B2C) agency services, trades, repairs, and professional consultancy.",
+      "engagement_modes": [
+        "hourly_rate",
+        "fixed_project_fee",
+        "retainer",
+        "custom_quote"
+      ],
+      "delivery_modes": [
+        "on_premise",
+        "in_shop",
+        "remote_digital"
+      ],
+      "root_family_count": 16,
+      "example_roots": [
+        "Legal Services & Regulatory Compliance",
+        "Accounting, Tax Advisory & Financial Audit",
+        "Architecture & Civil Engineering Services"
+      ]
+    },
+    {
+      "system_id": "SYS_EMP",
+      "code": "C",
+      "name": "Employment & Occupations",
+      "description": "Direct salaried employment vacancies, civil service posts, corporate careers, and institutional recruitment aligned with ISCO-08 occupational standards.",
+      "employment_types": [
+        "full_time",
+        "part_time",
+        "permanent",
+        "temporary",
+        "internship",
+        "apprenticeship"
+      ],
+      "work_arrangements": [
+        "on_site",
+        "hybrid",
+        "remote"
+      ],
+      "experience_levels": [
+        "entry_level",
+        "mid_level",
+        "senior",
+        "lead",
+        "executive_c_suite"
+      ],
+      "root_family_count": 12,
+      "example_roots": [
+        "Software Development & Technology Careers",
+        "Healthcare, Medical Doctors & Clinical Nursing Roles",
+        "Finance, Banking & Audit Careers"
+      ]
+    },
+    {
+      "system_id": "SYS_GIG",
+      "code": "D",
+      "name": "Freelance, Contract & Online Opportunities",
+      "description": "Independent digital gig contracts, task-based freelance assignments, remote global tasks, and micro-work opportunities.",
+      "contract_types": [
+        "milestone_contract",
+        "hourly_gig",
+        "piece_rate_task",
+        "contest"
+      ],
+      "work_arrangements": [
+        "100_percent_remote",
+        "hybrid",
+        "field_contract"
+      ],
+      "payment_currencies": [
+        "ETB",
+        "USD",
+        "EUR",
+        "Crypto/Stablecoin"
+      ],
+      "root_family_count": 10,
+      "example_roots": [
+        "Remote Software Engineering & DevOps Gig Contracts",
+        "Remote UI/UX & Graphic Design Tasks",
+        "Data Entry, Audio Transcription & Annotation"
+      ]
+    },
+    {
+      "system_id": "SYS_OPP",
+      "code": "E",
+      "name": "Tenders, Procurement, Grants & Investment Opportunities",
+      "description": "Public government RFPs, corporate procurement tenders, NGO humanitarian funding calls, research grants, and university scholarships.",
+      "opportunity_types": [
+        "public_tender_rfp",
+        "private_corporate_rfq",
+        "ngo_humanitarian_grant",
+        "academic_scholarship",
+        "business_partnership"
+      ],
+      "compliance_requirements": [
+        "valid_tax_clearance",
+        "trade_license",
+        "bid_bond_cpo",
+        "prospectus"
+      ],
+      "root_family_count": 4,
+      "example_roots": [
+        "Public Government Procurement Tenders & RFPs",
+        "Corporate & Private Sector Procurement RFQs",
+        "NGO & Humanitarian Grants",
+        "Academic Scholarships"
+      ]
+    },
+    {
+      "system_id": "SYS_MED",
+      "code": "F",
+      "name": "News, Announcements & Media Content",
+      "description": "Official public notices, regulatory legal announcements, community cultural events, market price bulletins, and editorial journalism.",
+      "content_types": [
+        "public_regulatory_notice",
+        "community_announcement",
+        "market_price_bulletin",
+        "press_release",
+        "industry_news"
+      ],
+      "editorial_controls": [
+        "verified_publisher",
+        "moderation_approved",
+        "embargo_date"
+      ],
+      "root_family_count": 5,
+      "example_roots": [
+        "Official Public Notices & Regulatory Announcements",
+        "Community Cultural Events & Public Announcements",
+        "Published Literature & Periodicals"
+      ]
+    },
+    {
+      "system_id": "SYS_PRM",
+      "code": "G",
+      "name": "Promotions, Advertising & Campaigns",
+      "description": "Merchant promotional discount campaigns, flash sales, clearance deals, coupon bundles, and sponsored placement flags applied across any underlying category.",
+      "promotion_mechanics": [
+        "percentage_discount",
+        "fixed_price_reduction",
+        "buy_one_get_one",
+        "clearance_sale",
+        "bundle_deal"
+      ],
+      "governing_rule": "A promoted laptop remains categorized under SYS_PROD -> Laptops. The promotion is a metadata campaign dimension.",
+      "root_family_count": 2,
+      "example_roots": [
+        "Commercial Retail Discount Promotions & Sales Events",
+        "B2B Service Promotional Packages"
+      ]
+    }
+  ],
+  "orthogonal_dimensions": {
+    "transaction_type": [
+      "for_sale",
+      "for_rent",
+      "for_lease",
+      "job_hiring",
+      "gig_seeking",
+      "tender_bidding",
+      "grant_application",
+      "free_donation"
+    ],
+    "work_arrangement": [
+      "on_site",
+      "remote",
+      "hybrid"
+    ],
+    "item_condition": [
+      "new",
+      "open_box",
+      "refurbished",
+      "used_good",
+      "used_fair"
+    ],
+    "seniority_level": [
+      "internship",
+      "entry_level",
+      "mid_level",
+      "senior",
+      "executive"
+    ],
+    "listing_tier": [
+      "standard",
+      "featured",
+      "urgent",
+      "discounted_deal"
+    ]
+  }
+}

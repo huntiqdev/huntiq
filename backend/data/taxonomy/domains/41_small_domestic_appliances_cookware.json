@@ -1,0 +1,108 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "HOME_SMALL_APP",
+  "root_family": {
+    "id": "root-small-appliances",
+    "slug": "small-domestic-appliances-cookware",
+    "code": "HOME_SMALL_APP",
+    "level": 1,
+    "canonical_name": "Small Domestic Appliances \u0026 Traditional Cookware",
+    "definition": "Electric Injera baking pans (Mitad), electric coffee roasters, food blenders, meat mincers, water dispensers, and traditional clay coffee pots (Jebena).",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Flame",
+    "translations": {
+      "am": "ትናንሽ የቤት እቃዎች፣ የኤሌክትሪክ ምጣድ እና ጀበና",
+      "or": "Meeshaalee Kushiinaa fi Eelee Elektirikii",
+      "ti": "ናይ ክሽነ ንዋያት፣ ናይ ኤሌክትሪክ ምጣድን ጀበናን"
+    },
+    "children": [
+      {
+        "id": "sf-electric-injera-mitad",
+        "slug": "electric-injera-baking-pans-mitad",
+        "code": "APP_MITAD",
+        "level": 2,
+        "canonical_name": "Electric Injera Baking Pans \u0026 Clay Plates (የኤሌክትሪክ ምጣድ)",
+        "definition": "Traditional heavy-clay and digital thermostat electric baking griddles essential for Ethiopian injera preparation.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የኤሌክትሪክ የእንጀራ ምጣዶች",
+          "or": "Eelee Buddeenaa Elektirikii",
+          "ti": "ናይ ኤሌክትሪክ ናይ እንጀራ ምጣድ"
+        },
+        "aliases": {
+          "am": [
+            "ምጣድ",
+            "የኤሌክትሪክ ምጣድ",
+            "የእንጀራ ምጣድ",
+            "የሸክላ ምጣድ"
+          ],
+          "en": [
+            "injera mitad",
+            "electric mitad",
+            "mitad",
+            "baking pan",
+            "clay pan"
+          ],
+          "or": [
+            "eelee",
+            "eelee elektirikii",
+            "eelee buddeenaa"
+          ],
+          "ti": [
+            "ምጣድ",
+            "ናይ ኤሌክትሪክ ምጣድ"
+          ]
+        }
+      },
+      {
+        "id": "sf-traditional-jebena-sets",
+        "slug": "clay-coffee-pots-jebena-ceremony",
+        "code": "APP_JEBENA",
+        "level": 2,
+        "canonical_name": "Traditional Clay Coffee Pots (Jebena) \u0026 Ceremony Sets",
+        "definition": "Handcrafted earthenware clay Jebenas, charcoal stoves (Keshkesh), ceramic Sini coffee cups, and woven Rekebot trays.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የቡና ጀበና፣ ሲኒዎች እና ረከቦቶች",
+          "or": "Jabanaa Bunaa fi Siinii",
+          "ti": "ጀበና ቡን፣ ሲኒታትን ረከቦትን"
+        },
+        "aliases": {
+          "am": [
+            "ጀበና",
+            "የቡና ጀበና",
+            "ሲኒ",
+            "ረከቦት"
+          ],
+          "en": [
+            "jebena",
+            "coffee pot",
+            "sini",
+            "rekebot",
+            "coffee ceremony"
+          ],
+          "or": [
+            "jabanaa",
+            "siinii"
+          ],
+          "ti": [
+            "ጀበና",
+            "ሲኒ",
+            "ረከቦት"
+          ]
+        }
+      }
+    ]
+  }
+}

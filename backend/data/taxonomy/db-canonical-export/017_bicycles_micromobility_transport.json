@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.520665363Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "bicycles-micromobility-transport",
+  "root_family": {
+    "id": 7661,
+    "parent_id": null,
+    "slug": "bicycles-micromobility-transport",
+    "level": 0,
+    "path": "/7661/",
+    "canonical_name": "Bicycles, Micro-Mobility \u0026 Non-Motorized Transport",
+    "name_en": "Bicycles, Micro-Mobility \u0026 Non-Motorized Transport",
+    "name_am": "ብስክሌቶች እና ቀላል ተንቀሳቃሽ ተሽከርካሪዎች",
+    "name_om": "Saayikilii fi Geejjiba Salphaa",
+    "name_ti": "ብሽክለታታትን ቀለልቲ መጓዓዝያን",
+    "definition": "Mountain bicycles, urban commuter road bikes, children's pedal cycles, electric standup scooters, and cargo pushcarts.",
+    "display_order": 0,
+    "icon": "Compass",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.666831Z",
+    "updated_at": "2026-11-01T11:26:59.666831Z",
+    "translations": {
+      "am": "ብስክሌቶች እና ቀላል ተንቀሳቃሽ ተሽከርካሪዎች",
+      "en": "Bicycles, Micro-Mobility \u0026 Non-Motorized Transport",
+      "or": "Saayikilii fi Geejjiba Salphaa",
+      "ti": "ብሽክለታታትን ቀለልቲ መጓዓዝያን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7662,
+        "parent_id": 7661,
+        "slug": "pedal-bicycles-mountain-bikes",
+        "level": 1,
+        "path": "/7661/7662/",
+        "canonical_name": "Mountain Bikes, City Road Cycles \u0026 Hybrid Bicycles",
+        "name_en": "Mountain Bikes, City Road Cycles \u0026 Hybrid Bicycles",
+        "name_am": "የተራራ እና የመንገድ ብስክሌቶች",
+        "name_om": "Saayikilii Gaaraa fi Daandii",
+        "name_ti": "ናይ ጎቦን መንገዲን ብሽክለታታት",
+        "definition": "Multi-gear aluminum mountain bicycles, delivery cycles, and commuter road bikes.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.669731Z",
+        "updated_at": "2026-11-01T11:26:59.669731Z",
+        "translations": {
+          "am": "የተራራ እና የመንገድ ብስክሌቶች",
+          "en": "Mountain Bikes, City Road Cycles \u0026 Hybrid Bicycles",
+          "or": "Saayikilii Gaaraa fi Daandii",
+          "ti": "ናይ ጎቦን መንገዲን ብሽክለታታት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

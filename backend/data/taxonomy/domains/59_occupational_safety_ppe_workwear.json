@@ -1,0 +1,69 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "SAFETY_PPE",
+  "root_family": {
+    "id": "root-occupational-safety-ppe",
+    "slug": "occupational-safety-ppe-workwear",
+    "code": "SAFETY_PPE",
+    "level": 1,
+    "canonical_name": "Occupational Safety, Personal Protective Equipment \u0026 Workwear",
+    "definition": "Steel-toe industrial safety shoes, high-visibility reflective vests, hard hats, welding safety goggles, and chemical respirator masks.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "HardHat",
+    "translations": {
+      "am": "የስራ ላይ ደህንነት እና የጥበቃ አልባሳት (ሴፍቲ ጫማ፣ ቆብ)",
+      "or": "Meeshaalee Nageenya Hojii fi Eegumsaa (PPE)",
+      "ti": "ናይ ስራሕ ድሕንነትን መከላኸሊ ክዳውንትን"
+    },
+    "children": [
+      {
+        "id": "sf-safety-boots-helmets",
+        "slug": "steel-toe-safety-boots-hard-hats",
+        "code": "PPE_FOOT_HEAD",
+        "level": 2,
+        "canonical_name": "Steel-Toe Safety Boots \u0026 Industrial Hard Hats (ሴፍቲ ጫማ)",
+        "definition": "Puncture-resistant steel-toe work boots (Caterpillar, Delta Plus) and ABS dielectric construction safety helmets.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የብረት አፍ ሴፍቲ ጫማዎች እና የግንባታ ቆቦች",
+          "or": "Kophee Nageenyaa fi Qobfoo Ijaarsaa",
+          "ti": "ናይ ብረት ኣፍ ሴፍቲ ሳእኒታትን ቆብዕን"
+        },
+        "aliases": {
+          "am": [
+            "ሴፍቲ ጫማ",
+            "የስራ ጫማ",
+            "የግንባታ ቆብ",
+            "ሄልሜት"
+          ],
+          "en": [
+            "safety shoes",
+            "safety boots",
+            "steel toe",
+            "hard hat",
+            "ppe",
+            "helmet"
+          ],
+          "or": [
+            "kophee nageenyaa",
+            "qobfoo"
+          ],
+          "ti": [
+            "ሴፍቲ ሳእኒ",
+            "ቆብዕ"
+          ]
+        }
+      }
+    ]
+  }
+}

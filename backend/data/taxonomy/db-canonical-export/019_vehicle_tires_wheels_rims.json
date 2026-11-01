@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.521151306Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "vehicle-tires-wheels-rims",
+  "root_family": {
+    "id": 7668,
+    "parent_id": null,
+    "slug": "vehicle-tires-wheels-rims",
+    "level": 0,
+    "path": "/7668/",
+    "canonical_name": "Vehicle Tires, Wheels, Rims \u0026 Traction Systems",
+    "name_en": "Vehicle Tires, Wheels, Rims \u0026 Traction Systems",
+    "name_am": "የተሽከርካሪ ጎማዎች፣ ሪሞች እና ውስጠ-ጎማዎች",
+    "name_om": "Gommaa Konkolaataa fi Riimii",
+    "name_ti": "ናይ መካይን ጎማታትን ሪማትን",
+    "definition": "Passenger car radial tires, commercial truck tubeless tires, alloy rims, steel wheels, inner tubes, and tire repair patches.",
+    "display_order": 0,
+    "icon": "Disc",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.752975Z",
+    "updated_at": "2026-11-01T11:26:59.752975Z",
+    "translations": {
+      "am": "የተሽከርካሪ ጎማዎች፣ ሪሞች እና ውስጠ-ጎማዎች",
+      "en": "Vehicle Tires, Wheels, Rims \u0026 Traction Systems",
+      "or": "Gommaa Konkolaataa fi Riimii",
+      "ti": "ናይ መካይን ጎማታትን ሪማትን"
+    },
+    "aliases": {}
+  }
+}

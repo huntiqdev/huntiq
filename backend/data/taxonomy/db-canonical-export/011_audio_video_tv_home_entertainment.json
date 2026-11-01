@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.519579635Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "audio-video-tv-home-entertainment",
+  "root_family": {
+    "id": 7646,
+    "parent_id": null,
+    "slug": "audio-video-tv-home-entertainment",
+    "level": 0,
+    "path": "/7646/",
+    "canonical_name": "Audio, Video, TV \u0026 Home Entertainment",
+    "name_en": "Audio, Video, TV \u0026 Home Entertainment",
+    "name_am": "ቴሌቪዥን፣ የድምጽ ሲስተሞች እና የቤት መዝናኛ",
+    "name_om": "Televiziyinii fi Meeshaalee Sagalee",
+    "name_ti": "ቴሌቪዥን፣ ናይ ድምጺ ሲስተማትን ናይ ገዛ መዘናግዕን",
+    "definition": "Smart LED/QLED televisions, satellite receivers/decoders, home theatre speaker arrays, and studio headphones.",
+    "display_order": 0,
+    "icon": "Tv",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.475423Z",
+    "updated_at": "2026-11-01T11:26:59.475423Z",
+    "translations": {
+      "am": "ቴሌቪዥን፣ የድምጽ ሲስተሞች እና የቤት መዝናኛ",
+      "en": "Audio, Video, TV \u0026 Home Entertainment",
+      "or": "Televiziyinii fi Meeshaalee Sagalee",
+      "ti": "ቴሌቪዥን፣ ናይ ድምጺ ሲስተማትን ናይ ገዛ መዘናግዕን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7647,
+        "parent_id": 7646,
+        "slug": "smart-tvs-flat-panels",
+        "level": 1,
+        "path": "/7646/7647/",
+        "canonical_name": "Smart 4K UHD Televisions \u0026 Flat Panels",
+        "name_en": "Smart 4K UHD Televisions \u0026 Flat Panels",
+        "name_am": "ስማርት ቴሌቪዥኖች እና ፍላት ስክሪን",
+        "name_om": "Televiziyinii Ismaartii fi Iskiriinii Balleessaa",
+        "name_ti": "ስማርት ቴሌቪዥናትን ፍላት ስክሪንን",
+        "definition": "32-inch to 85-inch 4K UHD smart screens with Android TV, Tizen, and WebOS streaming capabilities.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.477045Z",
+        "updated_at": "2026-11-01T11:26:59.477045Z",
+        "translations": {
+          "am": "ስማርት ቴሌቪዥኖች እና ፍላት ስክሪን",
+          "en": "Smart 4K UHD Televisions \u0026 Flat Panels",
+          "or": "Televiziyinii Ismaartii fi Iskiriinii Balleessaa",
+          "ti": "ስማርት ቴሌቪዥናትን ፍላት ስክሪንን"
+        },
+        "aliases": {
+          "am": [
+            "ስማርት ቲቪ",
+            "ቲቪ",
+            "ቴሌቪዥን",
+            "ፍላት ቲቪ"
+          ],
+          "en": [
+            "4k tv",
+            "oled tv",
+            "smart tv",
+            "television",
+            "tv"
+          ],
+          "or": [
+            "televiziyinii",
+            "tiivii"
+          ],
+          "ti": [
+            "ቲቪ",
+            "ቴሌቪዥን"
+          ]
+        }
+      }
+    ]
+  }
+}

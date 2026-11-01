@@ -1,0 +1,118 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.525063683Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "major-home-kitchen-appliances",
+  "root_family": {
+    "id": 7720,
+    "parent_id": null,
+    "slug": "major-home-kitchen-appliances",
+    "level": 0,
+    "path": "/7720/",
+    "canonical_name": "Major Home \u0026 Kitchen Appliances",
+    "name_en": "Major Home \u0026 Kitchen Appliances",
+    "name_am": "የቤት ውስጥ ትላልቅ ኤሌክትሮኒክስ (ፍሪጅ፣ ማጠቢያ ማሽን)",
+    "name_om": "Meeshaalee Manaa Gurguddoo (Firiijii fi Meeshaa Dhiqqaa)",
+    "name_ti": "ናይ ገዛ ዓበይቲ ኤሌክትሮኒክስ (ፍሪጅ፣ ማሽን ሕጽበ)",
+    "definition": "Large white goods, double-door frost-free refrigerators, chest deep-freezers, front-load washing machines, and gas/electric cooking ranges.",
+    "display_order": 0,
+    "icon": "Tv",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.340209Z",
+    "updated_at": "2026-11-01T11:27:00.340209Z",
+    "translations": {
+      "am": "የቤት ውስጥ ትላልቅ ኤሌክትሮኒክስ (ፍሪጅ፣ ማጠቢያ ማሽን)",
+      "en": "Major Home \u0026 Kitchen Appliances",
+      "or": "Meeshaalee Manaa Gurguddoo (Firiijii fi Meeshaa Dhiqqaa)",
+      "ti": "ናይ ገዛ ዓበይቲ ኤሌክትሮኒክስ (ፍሪጅ፣ ማሽን ሕጽበ)"
+    },
+    "aliases": {
+      "am": [
+        "ማቀዝቀዣ",
+        "ምድጃ",
+        "ኦቨን",
+        "የልብስ ማጠቢያ",
+        "ፍሪጅ"
+      ],
+      "en": [
+        "appliances",
+        "freezer",
+        "fridge",
+        "oven",
+        "refrigerator",
+        "stove",
+        "washing machine"
+      ],
+      "or": [
+        "eeksaasii",
+        "firiijii",
+        "maashina uffataa"
+      ],
+      "ti": [
+        "ናይ ክዳን ማሽን",
+        "እቶን",
+        "ፍሪጅ"
+      ]
+    },
+    "children": [
+      {
+        "id": 7721,
+        "parent_id": 7720,
+        "slug": "refrigerators-deep-freezers",
+        "level": 1,
+        "path": "/7720/7721/",
+        "canonical_name": "Refrigerators, Chest Freezers \u0026 Coolers (ፍሪጆች)",
+        "name_en": "Refrigerators, Chest Freezers \u0026 Coolers (ፍሪጆች)",
+        "name_am": "ፍሪጆች እና የበረዶ ማቀዝቀዣዎች",
+        "name_om": "Firiijii fi Kuusaa Qabbanaawaa",
+        "name_ti": "ፍሪጃትን ናይ በረድ መዝቀጥታትን",
+        "definition": "Energy-efficient inverter compressor refrigerators, upright frost-free freezers, and horizontal commercial chest freezers.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.361997Z",
+        "updated_at": "2026-11-01T11:27:00.361997Z",
+        "translations": {
+          "am": "ፍሪጆች እና የበረዶ ማቀዝቀዣዎች",
+          "en": "Refrigerators, Chest Freezers \u0026 Coolers (ፍሪጆች)",
+          "or": "Firiijii fi Kuusaa Qabbanaawaa",
+          "ti": "ፍሪጃትን ናይ በረድ መዝቀጥታትን"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 7722,
+        "parent_id": 7720,
+        "slug": "automatic-washing-machines-dryers",
+        "level": 1,
+        "path": "/7720/7722/",
+        "canonical_name": "Automatic Washing Machines \u0026 Tumble Dryers",
+        "name_en": "Automatic Washing Machines \u0026 Tumble Dryers",
+        "name_am": "አውቶማቲክ የልብስ ማጠቢያ ማሽኖች",
+        "name_om": "Maashina Uffata Dhiqu",
+        "name_ti": "ኣውቶማቲክ ናይ ክዳውንቲ መሕጸቢ ማሽናት",
+        "definition": "Front-loading and top-loading automatic laundry washing machines and combo washer-dryers (6kg to 16kg).",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.365891Z",
+        "updated_at": "2026-11-01T11:27:00.365891Z",
+        "translations": {
+          "am": "አውቶማቲክ የልብስ ማጠቢያ ማሽኖች",
+          "en": "Automatic Washing Machines \u0026 Tumble Dryers",
+          "or": "Maashina Uffata Dhiqu",
+          "ti": "ኣውቶማቲክ ናይ ክዳውንቲ መሕጸቢ ማሽናት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

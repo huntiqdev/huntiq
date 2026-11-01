@@ -1,0 +1,276 @@
+{
+  "version": "2.0.0",
+  "audit_summary": {
+    "total_live_listings": 14,
+    "total_legacy_categories_in_db": 2380,
+    "total_canonical_035_categories_in_db": 195,
+    "approved_live_mappings": 14,
+    "orphaned_listings": 0
+  },
+  "live_product_mappings": [
+    {
+      "product_id": 3,
+      "title": "Modern Furnished 2-Bedroom Apartment CMC",
+      "before_category_id": 7112,
+      "before_category_name": "Furnished and Unfurnished Apartments for Rent",
+      "before_path": "/71/7112/",
+      "after_category_id": 7672,
+      "after_category_name": "Multi-Unit Apartments & Condominium Flats",
+      "after_path": "/7671/7672/",
+      "classification_system": "A. Products & Physical Assets (Real Estate)",
+      "transaction_mode": "for_rent",
+      "amenities": [
+        "furnished",
+        "2_bedroom"
+      ],
+      "reconciliation_reason": "Unifies apartment rentals with canonical multi-unit apartment hierarchy. Transaction modality (rent) is decoupled into the transaction dimension."
+    },
+    {
+      "product_id": 15,
+      "title": "Samsung Galaxy A54 5G 128GB Awesome Black",
+      "before_category_id": 12,
+      "before_category_name": "Mobile Phones",
+      "before_path": "/38/12/",
+      "after_category_id": 7631,
+      "after_category_name": "Touchscreen Smartphones (\u12d8\u1218\u1293\u12ca \u1235\u120d\u12ae\u127d)",
+      "after_path": "/7629/7630/7631/",
+      "classification_system": "A. Products & Physical Assets (Consumer Electronics)",
+      "transaction_mode": "for_sale",
+      "condition": "new",
+      "reconciliation_reason": "Maps legacy mobile phone parent to canonical touchscreen smartphone leaf node where all search aliases resolve."
+    },
+    {
+      "product_id": 23,
+      "title": "Toyota Vitz 2018 Automatic \u2014 Libre Verified",
+      "before_category_id": 74,
+      "before_category_name": "Vehicles and Automobiles",
+      "before_path": "/74/",
+      "after_category_id": 7653,
+      "after_category_name": "Hatchbacks & Compact City Cars (\u126a\u1275\u12dd \u12a5\u1293 \u1275\u1293\u1295\u123d \u1218\u12aa\u1296\u127d)",
+      "after_path": "/7651/7653/",
+      "classification_system": "A. Products & Physical Assets (Vehicles)",
+      "transaction_mode": "for_sale",
+      "condition": "used_good",
+      "reconciliation_reason": "Moves listing from top-level root vehicle category to specific Vitz / compact hatchback leaf node."
+    },
+    {
+      "product_id": 24,
+      "title": "Apple iPhone 15 Pro Max 256GB Natural Titanium",
+      "before_category_id": 12,
+      "before_category_name": "Mobile Phones",
+      "before_path": "/38/12/",
+      "after_category_id": 7631,
+      "after_category_name": "Touchscreen Smartphones (\u12d8\u1218\u1293\u12ca \u1235\u120d\u12ae\u127d)",
+      "after_path": "/7629/7630/7631/",
+      "classification_system": "A. Products & Physical Assets (Consumer Electronics)",
+      "transaction_mode": "for_sale",
+      "condition": "new",
+      "reconciliation_reason": "Aligns flagship smartphone with canonical smartphone node."
+    },
+    {
+      "product_id": 25,
+      "title": "Apple MacBook Pro 14\" M3 Pro 18GB RAM 512GB SSD Space Black",
+      "before_category_id": 14,
+      "before_category_name": "Computers & Laptops",
+      "before_path": "/1/14/",
+      "after_category_id": 7640,
+      "after_category_name": "Laptops, Notebooks & Mobile Workstations",
+      "after_path": "/7639/7640/",
+      "classification_system": "A. Products & Physical Assets (Computers & IT)",
+      "transaction_mode": "for_sale",
+      "condition": "new",
+      "reconciliation_reason": "Aligns laptop listing from legacy root 1 child to canonical laptop node."
+    },
+    {
+      "product_id": 26,
+      "title": "Luxury 3-Bedroom Furnished Villa in Bole Atlas",
+      "before_category_id": 7112,
+      "before_category_name": "Furnished and Unfurnished Apartments for Rent",
+      "before_path": "/71/7112/",
+      "after_category_id": 7675,
+      "after_category_name": "Detached Villas & Private Compound Residences",
+      "after_path": "/7671/7675/",
+      "classification_system": "A. Products & Physical Assets (Real Estate)",
+      "transaction_mode": "for_rent",
+      "reconciliation_reason": "Corrects severe misclassification where a luxury villa compound was listed under apartment rentals."
+    },
+    {
+      "product_id": 27,
+      "title": "Cozy Studio Apartment Furnished Yeka Signal",
+      "before_category_id": 7112,
+      "before_category_name": "Furnished and Unfurnished Apartments for Rent",
+      "before_path": "/71/7112/",
+      "after_category_id": 7672,
+      "after_category_name": "Multi-Unit Apartments & Condominium Flats",
+      "after_path": "/7671/7672/",
+      "classification_system": "A. Products & Physical Assets (Real Estate)",
+      "transaction_mode": "for_rent",
+      "reconciliation_reason": "Aligns studio apartment to canonical apartment node."
+    },
+    {
+      "product_id": 28,
+      "title": "Prime Commercial Retail Shop in Merkato Tana Mall",
+      "before_category_id": 7112,
+      "before_category_name": "Furnished and Unfurnished Apartments for Rent",
+      "before_path": "/71/7112/",
+      "after_category_id": 7677,
+      "after_category_name": "Retail Shops, Boutiques & Shopping Mall Spaces (\u1231\u1246\u127d)",
+      "after_path": "/7676/7677/",
+      "classification_system": "A. Products & Physical Assets (Real Estate)",
+      "transaction_mode": "for_rent",
+      "reconciliation_reason": "Corrects critical category error where a commercial shopping mall store was classified as a residential apartment."
+    },
+    {
+      "product_id": 29,
+      "title": "Dell XPS 15 9530 Intel Core i9 32GB RAM RTX 4070",
+      "before_category_id": 14,
+      "before_category_name": "Computers & Laptops",
+      "before_path": "/1/14/",
+      "after_category_id": 7640,
+      "after_category_name": "Laptops, Notebooks & Mobile Workstations",
+      "after_path": "/7639/7640/",
+      "classification_system": "A. Products & Physical Assets (Computers & IT)",
+      "transaction_mode": "for_sale",
+      "reconciliation_reason": "Aligns high-end workstation laptop to canonical laptop node."
+    },
+    {
+      "product_id": 30,
+      "title": "Traditional Handwoven Habesha Kemis with Pure Silk Tilet (\u12e8\u1200\u1260\u123b \u1240\u121a\u1235)",
+      "before_category_id": 47,
+      "before_category_name": "Clothing, Fashion and Apparel",
+      "before_path": "/47/",
+      "after_category_id": 7710,
+      "after_category_name": "Handwoven Habesha Kemis & Embroidered Dresses (\u12e8\u1200\u1260\u123b \u1240\u121a\u1235)",
+      "after_path": "/7709/7710/",
+      "classification_system": "A. Products & Physical Assets (Cultural Fashion)",
+      "transaction_mode": "for_sale",
+      "reconciliation_reason": "Re-aligns cultural dress from generic clothing root to specific Habesha Kemis canonical leaf node."
+    },
+    {
+      "product_id": 31,
+      "title": "Sony Alpha A7 IV Full-Frame Mirrorless Camera Body",
+      "before_category_id": 41,
+      "before_category_name": "Cameras, Photography and Optics",
+      "before_path": "/41/",
+      "after_category_id": 6446,
+      "after_category_name": "Mirrorless & DSLR Digital Cameras",
+      "after_path": "/7648/6446/",
+      "classification_system": "A. Products & Physical Assets (Photography)",
+      "transaction_mode": "for_sale",
+      "reconciliation_reason": "Aligns full-frame mirrorless camera to specific mirrorless/DSLR category."
+    },
+    {
+      "product_id": 32,
+      "title": "Tafe 75HP 4WD Agricultural Farm Tractor with Disc Plough",
+      "before_category_id": 80,
+      "before_category_name": "Agriculture, Farming and Agricultural Land",
+      "before_path": "/80/",
+      "after_category_id": 29,
+      "after_category_name": "Tractors & Farm Machinery",
+      "after_path": "/6/29/",
+      "classification_system": "A. Products & Physical Assets (Agricultural Machinery)",
+      "transaction_mode": "for_sale",
+      "reconciliation_reason": "Aligns tractor listing from broad agriculture root to specific farm machinery node."
+    },
+    {
+      "product_id": 33,
+      "title": "Perkins 25kVA Soundproof Silent Diesel Generator with ATS",
+      "before_category_id": 93,
+      "before_category_name": "Energy, Solar and Electrical Power Equipment",
+      "before_path": "/93/",
+      "after_category_id": 7706,
+      "after_category_name": "Soundproof Silent Commercial Diesel Generators (\u1300\u1290\u122c\u1270\u122e\u127d)",
+      "after_path": "/7705/7706/",
+      "classification_system": "A. Products & Physical Assets (Energy Equipment)",
+      "transaction_mode": "for_sale",
+      "reconciliation_reason": "Re-aligns diesel generator from energy root to specific soundproof generator node."
+    },
+    {
+      "product_id": 34,
+      "title": "Toyota Hilux 2.8 D-4D Double Cab 4x4 Automatic 2021",
+      "before_category_id": 74,
+      "before_category_name": "Vehicles and Automobiles",
+      "before_path": "/74/",
+      "after_category_id": 230,
+      "after_category_name": "Double Cabin Pickups (Hilux, D-Max)",
+      "after_path": "/77/227/230/",
+      "classification_system": "A. Products & Physical Assets (Vehicles)",
+      "transaction_mode": "for_sale",
+      "reconciliation_reason": "Moves pickup from generic vehicle root to dedicated Double Cabin Pickup (Hilux) category."
+    }
+  ],
+  "legacy_cluster_mappings": [
+    {
+      "legacy_root_id": 1,
+      "legacy_root_name": "Electronics",
+      "canonical_root_id": 7629,
+      "canonical_root_name": "Consumer Electronics & Mobile Devices",
+      "status": "approved",
+      "confidence": 1.0,
+      "reason": "Direct architectural alignment to canonical electronics root."
+    },
+    {
+      "legacy_root_id": 2,
+      "legacy_root_name": "Vehicles",
+      "canonical_root_id": 7651,
+      "canonical_root_name": "Passenger Vehicles & Automobiles",
+      "status": "approved",
+      "confidence": 1.0,
+      "reason": "Direct architectural alignment to canonical vehicle root."
+    },
+    {
+      "legacy_root_id": 3,
+      "legacy_root_name": "Property & Real Estate",
+      "canonical_root_id": 7671,
+      "canonical_root_name": "Residential Properties & Living Spaces",
+      "status": "approved",
+      "confidence": 1.0,
+      "reason": "Direct alignment. Commercial real estate maps to canonical 7676."
+    },
+    {
+      "legacy_root_id": 4,
+      "legacy_root_name": "Home & Living",
+      "canonical_root_id": 7723,
+      "canonical_root_name": "Small Domestic Appliances & Traditional Cookware",
+      "status": "approved",
+      "confidence": 0.95,
+      "reason": "Aligns with domestic appliances; furniture maps to canonical 45."
+    },
+    {
+      "legacy_root_id": 5,
+      "legacy_root_name": "Fashion & Clothing",
+      "canonical_root_id": 7709,
+      "canonical_root_name": "Traditional, Cultural & Ceremonial Attire",
+      "status": "approved",
+      "confidence": 0.95,
+      "reason": "Cultural fashion maps to 7709; ready-to-wear apparel maps to 47."
+    },
+    {
+      "legacy_root_id": 6,
+      "legacy_root_name": "Agriculture & Farming",
+      "canonical_root_id": 7598,
+      "canonical_root_name": "Agriculture, Crops, Seeds & Biological Production",
+      "status": "approved",
+      "confidence": 1.0,
+      "reason": "Direct architectural alignment to canonical agriculture root."
+    },
+    {
+      "legacy_root_id": 7,
+      "legacy_root_name": "Business & Industry",
+      "canonical_root_id": 7779,
+      "canonical_root_name": "Industrial Materials, Packaging & Supply Chain",
+      "status": "approved",
+      "confidence": 0.95,
+      "reason": "Aligns to canonical industrial packaging and equipment."
+    },
+    {
+      "legacy_root_id": 8,
+      "legacy_root_name": "Services & Jobs",
+      "canonical_root_id": 7787,
+      "canonical_root_name": "Technical Repair, Maintenance & Skilled Trades",
+      "status": "approved",
+      "confidence": 0.95,
+      "reason": "Technical trade services align to 7787; professional services map to System B."
+    }
+  ]
+}

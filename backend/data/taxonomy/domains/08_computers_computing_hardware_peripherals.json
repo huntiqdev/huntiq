@@ -1,0 +1,151 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "COMP_HARDWARE",
+  "root_family": {
+    "id": "root-computers-it",
+    "slug": "computers-computing-hardware-peripherals",
+    "code": "COMP_HARDWARE",
+    "level": 1,
+    "canonical_name": "Computers, Computing Hardware \u0026 Peripherals",
+    "definition": "Laptops, desktops, enterprise servers, computer internal hardware, monitors, printers, and storage media.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Laptop",
+    "translations": {
+      "am": "ኮምፒውተሮች፣ የኮምፒውተር ሃርድዌር እና ፔሪፌራልስ",
+      "or": "Kompiitara, Haardiweerii fi Meeshaalee Walqabatan",
+      "ti": "ኮምፒዩተራት፣ ናይ ኮምፒዩተር ሃርድዌርን ተዛመድቲ ኣቑሑትን"
+    },
+    "children": [
+      {
+        "id": "sf-laptops-notebooks",
+        "slug": "laptops-notebook-computers",
+        "code": "COMP_LAPTOPS",
+        "level": 2,
+        "canonical_name": "Laptops, Notebooks \u0026 Mobile Workstations",
+        "definition": "Portable personal computers including business ultrabooks, mobile workstations, and gaming laptops.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ላፕቶፖች እና ተንቀሳቃሽ ኮምፒውተሮች",
+          "or": "Laaptooppii fi Kompiitara Harkaa",
+          "ti": "ላፕቶፓትን ተንቀሳቐስቲ ኮምፒዩተራትን"
+        },
+        "aliases": {
+          "am": [
+            "ላፕቶፕ",
+            "ኮምፒውተር",
+            "ማክቡክ",
+            "ቲንክፓድ"
+          ],
+          "en": [
+            "laptop",
+            "notebook",
+            "macbook",
+            "thinkpad",
+            "workstation laptop"
+          ],
+          "or": [
+            "laaptooppii",
+            "kompiitara"
+          ],
+          "ti": [
+            "ላፕቶፕ",
+            "ኮምፒዩተር"
+          ]
+        },
+        "identifiers": [
+          {
+            "type": "UNSPSC",
+            "code": "43211503",
+            "name": "Notebook computers"
+          },
+          {
+            "type": "GS1_GPC",
+            "code": "10001452",
+            "name": "Laptops/Notebooks"
+          }
+        ],
+        "attributes": [
+          {
+            "slug": "processor-cpu",
+            "name_en": "Processor (CPU)",
+            "data_type": "text",
+            "is_required": true,
+            "is_filterable": true
+          },
+          {
+            "slug": "ram-capacity",
+            "name_en": "RAM Memory",
+            "data_type": "select",
+            "is_required": true,
+            "is_filterable": true,
+            "validation_rules": {
+              "options": [
+                "8GB",
+                "16GB",
+                "32GB",
+                "64GB",
+                "128GB"
+              ]
+            }
+          },
+          {
+            "slug": "storage-capacity",
+            "name_en": "Solid State Drive (SSD)",
+            "data_type": "select",
+            "is_required": true,
+            "is_filterable": true,
+            "validation_rules": {
+              "options": [
+                "256GB",
+                "512GB",
+                "1TB",
+                "2TB",
+                "4TB"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sf-desktop-computers",
+        "slug": "desktop-computers-all-in-ones",
+        "code": "COMP_DESKTOPS",
+        "level": 2,
+        "canonical_name": "Desktop Computers, Workstations \u0026 All-in-Ones",
+        "definition": "Tower desktop PCs, mini PCs, all-in-one workstations, and gaming battle-stations.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የጠረጴዛ ላይ ኮምፒውተሮች እና ወርክስቴሽኖች",
+          "or": "Kompiitara Minjaalaa",
+          "ti": "ናይ ጣውላ ኮምፒዩተራትን ዎርክስቴሽናትን"
+        }
+      },
+      {
+        "id": "sf-printers-scanners",
+        "slug": "printers-scanners-copiers",
+        "code": "COMP_PRINTERS",
+        "level": 2,
+        "canonical_name": "Printers, High-Speed Scanners \u0026 Copiers",
+        "definition": "Laser printers, continuous ink-tank color printers, POS receipt printers, and flatbed scanners.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ፕሪንተሮች፣ ስካነሮች እና የፎቶ ኮፒ ማሽኖች",
+          "or": "Pirintara, Iskaanara fi Koppii",
+          "ti": "ፕሪንተራት፣ ስካነራትን ፎቶ ኮፒን"
+        }
+      }
+    ]
+  }
+}

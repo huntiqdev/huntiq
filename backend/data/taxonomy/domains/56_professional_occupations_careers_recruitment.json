@@ -1,0 +1,113 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "CAREER_OCCUPATIONS",
+  "root_family": {
+    "id": "root-jobs-recruitment",
+    "slug": "professional-occupations-careers-recruitment",
+    "code": "CAREER_OCCUPATIONS",
+    "level": 1,
+    "canonical_name": "Professional Occupations, Careers \u0026 Recruitment",
+    "definition": "Standardized occupational classifications for employment vacancies, professional candidate profiles, and skilled craftsmanship.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Users",
+    "translations": {
+      "am": "ክፍት የስራ ቦታዎች፣ ሙያዎች እና የቅጥር እድሎች",
+      "or": "Hojiiwwan, Ogummaa fi Qacarraa Hojjettootaa",
+      "ti": "ክፍቲ ናይ ስራሕ ቦታታት፣ ሞያታትን ምልመላን"
+    },
+    "children": [
+      {
+        "id": "sf-engineering-professions",
+        "slug": "civil-mechanical-software-engineering-roles",
+        "code": "JOB_ENGINEERING",
+        "level": 2,
+        "canonical_name": "Engineering, Architecture \u0026 Technical Professions",
+        "definition": "Civil engineers, electrical engineers, structural draughtsmen, and software engineers.",
+        "status": "active",
+        "is_leaf": false,
+        "translations": {
+          "am": "የምህንድስና እና የቴክኒክ ባለሙያዎች",
+          "or": "Ogeeyyii Injinariingii fi Teeknikaa",
+          "ti": "ናይ መሃንድስነትን ቴክኒክን ሰብ ሞያ"
+        },
+        "children": [
+          {
+            "id": "cat-job-civil-engineer",
+            "slug": "civil-structural-engineers",
+            "code": "JOB_CIVIL_ENG",
+            "level": 3,
+            "canonical_name": "Civil \u0026 Structural Engineers (ሲቪል መሃንዲስ)",
+            "definition": "Design, supervision, and site project management for building, road, and water infrastructure works.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የሲቪል እና የህንፃ ምህንድስና ባለሙያዎች",
+              "or": "Injinara Siiviilii fi Ijaarsaa",
+              "ti": "ናይ ሲቪልን ህንጻን መሃንዲሳት"
+            },
+            "identifiers": [
+              {
+                "type": "ISCO_08",
+                "code": "2142",
+                "name": "Civil Engineers"
+              }
+            ]
+          },
+          {
+            "id": "cat-job-software-engineer",
+            "slug": "software-engineers-developers",
+            "code": "JOB_SOFTWARE_ENG",
+            "level": 3,
+            "canonical_name": "Software Engineers, Full-Stack \u0026 App Developers",
+            "definition": "Backend, frontend, mobile app development, and cloud systems engineering.",
+            "status": "active",
+            "is_leaf": true,
+            "translations": {
+              "am": "የሶፍትዌር ምህንድስና እና አፕሊኬሽን አበልጻጊዎች",
+              "or": "Injinara Sooftiweerii fi Dizaayinaa",
+              "ti": "ናይ ሶፍትዌር መሃንዲሳትን ኣልማዕትን"
+            },
+            "identifiers": [
+              {
+                "type": "ISCO_08",
+                "code": "2512",
+                "name": "Software Developers"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sf-healthcare-professions",
+        "slug": "medical-doctors-nursing-healthcare-roles",
+        "code": "JOB_HEALTHCARE",
+        "level": 2,
+        "canonical_name": "Physicians, Nursing Staff \u0026 Allied Health Practitioners",
+        "definition": "General practitioners, registered clinic nurses, pharmacists, and laboratory technologists.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የህክምና ዶክተሮች፣ ነርሶች እና የጤና ባለሙያዎች",
+          "or": "Ogeeyyii Fayyaa, Doktoorota fi Narsii",
+          "ti": "ናይ ሕክምና ሓካይም፣ ነርሳትን ሰብ ሞያ ጥዕናን"
+        },
+        "identifiers": [
+          {
+            "type": "ISCO_08",
+            "code": "2211",
+            "name": "Generalist Medical Practitioners"
+          }
+        ]
+      }
+    ]
+  }
+}

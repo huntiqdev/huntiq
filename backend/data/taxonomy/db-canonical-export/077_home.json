@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.547387174Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "home",
+  "root_family": {
+    "id": 4,
+    "parent_id": null,
+    "slug": "home",
+    "level": 0,
+    "path": "/4/",
+    "canonical_name": "Home \u0026 Living",
+    "name_en": "Home \u0026 Living",
+    "name_am": "ቤት እና የኑሮ",
+    "name_om": "Mana fi Jireeny",
+    "name_ti": "ቤትን ህይወት",
+    "definition": "",
+    "display_order": 4,
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-10-22T01:57:37.540684Z",
+    "updated_at": "2026-10-26T12:35:05.312834Z",
+    "translations": {
+      "am": "ቤት እና የኑሮ",
+      "en": "Home \u0026 Living",
+      "or": "Mana fi Jireeny",
+      "ti": "ቤትን ህይወት"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 34,
+        "parent_id": 4,
+        "slug": "furniture",
+        "level": 1,
+        "path": "/4/34/",
+        "canonical_name": "Furniture \u0026 Living",
+        "name_en": "Furniture \u0026 Living",
+        "name_am": "የቤት እቃዎችና ፈርኒቸር",
+        "name_om": "Meeshaa Manoo",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 1,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "የቤት እቃዎችና ፈርኒቸር",
+          "en": "Furniture \u0026 Living",
+          "or": "Meeshaa Manoo"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 35,
+        "parent_id": 4,
+        "slug": "kitchen-appliances",
+        "level": 1,
+        "path": "/4/35/",
+        "canonical_name": "Kitchen Appliances",
+        "name_en": "Kitchen Appliances",
+        "name_am": "የወጥ ቤት እቃዎች",
+        "name_om": "Meeshaa Kushiinaa",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 2,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "የወጥ ቤት እቃዎች",
+          "en": "Kitchen Appliances",
+          "or": "Meeshaa Kushiinaa"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

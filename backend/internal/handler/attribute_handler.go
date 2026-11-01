@@ -223,7 +223,7 @@ func (h *AttributeHandler) CreateAttributeDefinition(c *fiber.Ctx) error {
 func (h *AttributeHandler) AssignAttributeToCategory(c *fiber.Ctx) error {
 	idParam := c.Params("id")
 	categoryID, err := strconv.Atoi(idParam)
-	if err != nil {
+	if err != nil || categoryID <= 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "invalid category ID",
@@ -235,6 +235,13 @@ func (h *AttributeHandler) AssignAttributeToCategory(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "invalid request body",
+		})
+	}
+
+	if req.AttributeID <= 0 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "attribute_id is required",
 		})
 	}
 
@@ -257,7 +264,7 @@ func (h *AttributeHandler) AssignAttributeToCategory(c *fiber.Ctx) error {
 // DELETE /api/admin/categories/:id/attributes/:attribute_id
 func (h *AttributeHandler) RemoveAttributeFromCategory(c *fiber.Ctx) error {
 	categoryID, err := strconv.Atoi(c.Params("id"))
-	if err != nil {
+	if err != nil || categoryID <= 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "invalid category ID",
@@ -265,7 +272,7 @@ func (h *AttributeHandler) RemoveAttributeFromCategory(c *fiber.Ctx) error {
 	}
 
 	attributeID, err := strconv.Atoi(c.Params("attribute_id"))
-	if err != nil {
+	if err != nil || attributeID <= 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "invalid attribute ID",

@@ -1,0 +1,117 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.528453158Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "musical-instruments-sound-gear",
+  "root_family": {
+    "id": 7740,
+    "parent_id": null,
+    "slug": "musical-instruments-sound-gear",
+    "level": 0,
+    "path": "/7740/",
+    "canonical_name": "Musical Instruments \u0026 Audio Staging Gear",
+    "name_en": "Musical Instruments \u0026 Audio Staging Gear",
+    "name_am": "ሙዚቃ፣ የሙዚቃ መሳሪያዎች እና የድምጽ እቃዎች",
+    "name_om": "Muuziqaa fi Meeshaalee Muuziqaa",
+    "name_ti": "ሙዚቃ፣ ናይ ሙዚቃ መሳርሒታትን ናይ ድምጺ ንዋያትን",
+    "definition": "Traditional Ethiopian acoustic folk instruments (Kirar, Masinko, Kebero, Washint), modern electric synthesizers, keyboards, studio microphones, and stage audio.",
+    "display_order": 0,
+    "icon": "Music",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.628016Z",
+    "updated_at": "2026-11-01T11:27:00.628016Z",
+    "translations": {
+      "am": "ሙዚቃ፣ የሙዚቃ መሳሪያዎች እና የድምጽ እቃዎች",
+      "en": "Musical Instruments \u0026 Audio Staging Gear",
+      "or": "Muuziqaa fi Meeshaalee Muuziqaa",
+      "ti": "ሙዚቃ፣ ናይ ሙዚቃ መሳርሒታትን ናይ ድምጺ ንዋያትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7741,
+        "parent_id": 7740,
+        "slug": "traditional-ethiopian-folk-instruments",
+        "level": 1,
+        "path": "/7740/7741/",
+        "canonical_name": "Traditional Ethiopian Folk Instruments (ክራር፣ ማሲንቆ፣ ከበሮ)",
+        "name_en": "Traditional Ethiopian Folk Instruments (ክራር፣ ማሲንቆ፣ ከበሮ)",
+        "name_am": "ባህላዊ የሙዚቃ መሳሪያዎች (ክራር፣ ማሲንቆ፣ ከበሮ፣ ዋሽንት)",
+        "name_om": "Meeshaalee Muuziqaa Aadaa (Kiraara, Masinqoo)",
+        "name_ti": "ባህላዊ መሳርሒታት ሙዚቃ (ክራር፣ ማሲንቆ፣ ከበሮ)",
+        "definition": "Handcrafted five/six-string acoustic and electric Kirars, horsehair single-string Masinko fiddles, and leather-stretched church Kebero drums.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.633683Z",
+        "updated_at": "2026-11-01T11:27:00.633683Z",
+        "translations": {
+          "am": "ባህላዊ የሙዚቃ መሳሪያዎች (ክራር፣ ማሲንቆ፣ ከበሮ፣ ዋሽንት)",
+          "en": "Traditional Ethiopian Folk Instruments (ክራር፣ ማሲንቆ፣ ከበሮ)",
+          "or": "Meeshaalee Muuziqaa Aadaa (Kiraara, Masinqoo)",
+          "ti": "ባህላዊ መሳርሒታት ሙዚቃ (ክራር፣ ማሲንቆ፣ ከበሮ)"
+        },
+        "aliases": {
+          "am": [
+            "ማሲንቆ",
+            "ከበሮ",
+            "ክራር",
+            "ዋሽንት",
+            "የኤሌክትሪክ ክራር"
+          ],
+          "en": [
+            "kebero",
+            "kirar",
+            "krar",
+            "masinko",
+            "traditional music",
+            "washint"
+          ],
+          "or": [
+            "kabaaroo",
+            "kiraara",
+            "masinqoo"
+          ],
+          "ti": [
+            "ማሲንቆ",
+            "ከበሮ",
+            "ክራር"
+          ]
+        }
+      },
+      {
+        "id": 7742,
+        "parent_id": 7740,
+        "slug": "electronic-keyboards-synthesizers",
+        "level": 1,
+        "path": "/7740/7742/",
+        "canonical_name": "Electronic Keyboards, Organs \u0026 Synthesizers (ኪቦርዶች)",
+        "name_en": "Electronic Keyboards, Organs \u0026 Synthesizers (ኪቦርዶች)",
+        "name_am": "የኤሌክትሮኒክስ ኪቦርዶች እና ኦርጋኖች (ያማሃ / ኮርግ)",
+        "name_om": "Kiiboordii fi Oorgaanii",
+        "name_ti": "ኪቦርዳትን ኦርጋናትን",
+        "definition": "Yamaha and Korg professional arranger workstations preloaded with Ethiopian oriental scales and rhythms.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.660423Z",
+        "updated_at": "2026-11-01T11:27:00.660423Z",
+        "translations": {
+          "am": "የኤሌክትሮኒክስ ኪቦርዶች እና ኦርጋኖች (ያማሃ / ኮርግ)",
+          "en": "Electronic Keyboards, Organs \u0026 Synthesizers (ኪቦርዶች)",
+          "or": "Kiiboordii fi Oorgaanii",
+          "ti": "ኪቦርዳትን ኦርጋናትን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

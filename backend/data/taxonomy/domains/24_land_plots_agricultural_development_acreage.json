@@ -1,0 +1,60 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "REAL_LAND",
+  "root_family": {
+    "id": "root-land-acreage",
+    "slug": "land-plots-agricultural-development-acreage",
+    "code": "REAL_LAND",
+    "level": 1,
+    "canonical_name": "Land Plots, Agricultural Estates \u0026 Development Acreage",
+    "definition": "Zoned residential plots, commercial development land, leased agricultural acreage, and industrial plots.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "MapPin",
+    "translations": {
+      "am": "መሬት፣ እርሻ ቦታዎች እና የልማት ይዞታዎች",
+      "or": "Lafa Jireenyaa, Qonnaa fi Daldalaa",
+      "ti": "መሬት፣ ናይ ሕርሻ ቦታታትን ናይ ልምዓት ይዞታታትን"
+    },
+    "children": [
+      {
+        "id": "sf-residential-land-plots",
+        "slug": "residential-building-land-plots",
+        "code": "LAND_RESIDENTIAL",
+        "level": 2,
+        "canonical_name": "Residential Building Land Plots (የመኖሪያ መሬት)",
+        "definition": "Surveyed residential plots with certified municipal coordinates and registered lease rights.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የመኖሪያ ቤት መሬት ይዞታዎች",
+          "or": "Lafa Ijaarsa Jireenyaa",
+          "ti": "ናይ መንበሪ ቤት መሬት"
+        }
+      },
+      {
+        "id": "sf-agricultural-farmland-lease",
+        "slug": "commercial-agricultural-farmland",
+        "code": "LAND_AGRICULTURAL",
+        "level": 2,
+        "canonical_name": "Commercial Agricultural Farmland \u0026 Irrigation Acreage",
+        "definition": "Hectares of arable agricultural farmland with river/groundwater access for commercial crops.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የንግድ እርሻ መሬት እና የመስኖ ይዞታዎች",
+          "or": "Lafa Qonnaa Daldalaa fi Jallisii",
+          "ti": "ናይ ንግዲ ሕርሻ መሬትን መስኖን"
+        }
+      }
+    ]
+  }
+}

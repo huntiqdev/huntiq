@@ -448,31 +448,31 @@ export function HomeHero() {
 
           {/* Stats bar — values from real backend */}
           <div className="w-full max-w-3xl">
-            <div className="grid grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
               {[
                 { v: recentProducts.length > 0 ? `${recentProducts.length}+` : '100+', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/20' },
                 { v: '23+', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
                 { v: '4', l: t.ui.stat_languages ?? 'Languages', icon: <Globe size={18} />, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-900/20' },
                 { v: '100%', l: t.ui.stat_verified ?? 'Verified', icon: <CheckCircle2 size={18} />, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
               ].map(({ v, l, icon, color, bg }) => (
-                <div key={l} className={`flex flex-col items-center gap-2 py-4 px-2 rounded-2xl border border-zinc-200/60 dark:border-zinc-800 shadow-sm ${bg} transition-all hover:-translate-y-0.5 hover:shadow-md`}>
+                <div key={l} className={`flex flex-col items-center gap-1.5 sm:gap-2 py-3.5 sm:py-4 px-2 rounded-2xl border border-zinc-200/60 dark:border-zinc-800 shadow-sm ${bg} transition-all hover:-translate-y-0.5 hover:shadow-md`}>
                   <span className={color}>{icon}</span>
                   <span className={`text-xl sm:text-2xl lg:text-3xl font-black leading-none ${color}`}>{v}</span>
-                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-zinc-400">{l}</span>
+                  <span className="text-[10px] sm:text-[10px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 text-center">{l}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Trust strip */}
-          <div className="flex flex-wrap items-center justify-center gap-5 lg:gap-8 text-sm text-zinc-500 dark:text-zinc-400">
-            <span className="flex items-center gap-2 font-medium"><Shield size={16} className="text-green-500" /> {t.ui.secure_platform_short}</span>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 lg:gap-8 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+            <span className="flex items-center gap-1.5 font-medium"><Shield size={15} className="text-green-500" /> {t.ui.secure_platform_short}</span>
             <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700 hidden sm:block" />
-            <span className="flex items-center gap-2 font-medium"><Globe size={16} className="text-orange-500" /> {t.ui.four_languages}</span>
+            <span className="flex items-center gap-1.5 font-medium"><Globe size={15} className="text-orange-500" /> {t.ui.four_languages}</span>
             <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700 hidden sm:block" />
-            <span className="flex items-center gap-2 font-medium"><Zap size={16} className="text-blue-500" /> {t.ui.fast_and_free}</span>
+            <span className="flex items-center gap-1.5 font-medium"><Zap size={15} className="text-blue-500" /> {t.ui.fast_and_free}</span>
             <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700 hidden sm:block" />
-            <span className="flex items-center gap-2 font-medium"><Trophy size={16} className="text-yellow-500" /> {t.ui.tier_rewards ?? 'Tier Rewards'}</span>
+            <span className="flex items-center gap-1.5 font-medium"><Trophy size={15} className="text-yellow-500" /> {t.ui.tier_rewards ?? 'Tier Rewards'}</span>
           </div>
 
           {/* Category quick links */}
@@ -484,7 +484,7 @@ export function HomeHero() {
               </div>
               <Link
                 href="/products"
-                className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1 tap-bounce"
               >
                 <span>Browse All</span> <ArrowRight size={11} />
               </Link>
@@ -509,15 +509,23 @@ export function HomeHero() {
                       .catch(() => setCategoriesError('Unable to load categories'))
                       .finally(() => setLoadingCategories(false));
                   }}
-                  className="mt-2 text-xs font-bold text-orange-600 hover:underline"
+                  className="mt-2 text-xs font-bold text-orange-600 hover:underline tap-bounce"
                 >
                   Retry
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-4 sm:grid-cols-8 gap-3">
+              <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5 sm:gap-3">
                 {rootCategories.slice(0, 16).map((cat) => {
-                  const label = cat.name || cat.name_en || cat.slug;
+                  const label =
+                    (cat.slug && (t.categories as any)?.[cat.slug]) ||
+                    (locale === 'am' && (cat.name_am || (cat as any).NameAm)) ||
+                    ((locale === 'or' || locale === 'om') && (cat.name_om || cat.name_or || (cat as any).NameOm)) ||
+                    (locale === 'ti' && (cat.name_ti || (cat as any).NameTi)) ||
+                    (locale === 'en' && (cat.name_en || (cat as any).NameEn)) ||
+                    cat.name ||
+                    cat.name_en ||
+                    cat.slug?.replace(/_/g, ' ');
                   const icon = cat.icon || (cat.image_url ? (
                     <img src={cat.image_url} alt={label} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
                   ) : '📦');
@@ -525,12 +533,12 @@ export function HomeHero() {
                     <Link
                       key={cat.id || cat.slug}
                       href={`/products?category_hierarchy_id=${cat.id}&cat=${cat.slug}`}
-                      className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-600/10 hover:-translate-y-1.5 transition-all duration-200"
+                      className="group flex flex-col items-center gap-2 p-2.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-600/10 hover:-translate-y-1 transition-all duration-200 tap-bounce active:scale-95"
                     >
                       <span className="text-2xl sm:text-3xl group-hover:scale-125 transition-transform duration-200 flex items-center justify-center min-h-[36px]">
                         {typeof icon === 'string' ? icon : icon}
                       </span>
-                      <span className="text-[9px] sm:text-[10px] font-bold text-zinc-600 dark:text-zinc-300 text-center leading-tight line-clamp-1 capitalize">
+                      <span className="text-[10px] sm:text-xs font-bold text-zinc-700 dark:text-zinc-300 text-center leading-tight line-clamp-1 capitalize">
                         {label}
                       </span>
                     </Link>
@@ -561,7 +569,7 @@ export function HomeHero() {
               <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl text-xs font-bold self-start sm:self-auto">
                 <button
                   onClick={() => setConditionFilter('all')}
-                  className={`px-3 py-1 rounded-lg transition-all ${
+                  className={`px-3 py-1 rounded-lg transition-all tap-bounce active:scale-95 ${
                     conditionFilter === 'all'
                       ? 'bg-white dark:bg-zinc-900 text-orange-600 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
@@ -571,7 +579,7 @@ export function HomeHero() {
                 </button>
                 <button
                   onClick={() => setConditionFilter('new')}
-                  className={`px-3 py-1 rounded-lg transition-all ${
+                  className={`px-3 py-1 rounded-lg transition-all tap-bounce active:scale-95 ${
                     conditionFilter === 'new'
                       ? 'bg-white dark:bg-zinc-900 text-orange-600 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
@@ -581,7 +589,7 @@ export function HomeHero() {
                 </button>
                 <button
                   onClick={() => setConditionFilter('used')}
-                  className={`px-3 py-1 rounded-lg transition-all ${
+                  className={`px-3 py-1 rounded-lg transition-all tap-bounce active:scale-95 ${
                     conditionFilter === 'used'
                       ? 'bg-white dark:bg-zinc-900 text-orange-600 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'

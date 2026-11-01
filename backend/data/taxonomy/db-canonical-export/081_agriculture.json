@@ -1,0 +1,220 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.553237326Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "agriculture",
+  "root_family": {
+    "id": 6,
+    "parent_id": null,
+    "slug": "agriculture",
+    "level": 0,
+    "path": "/6/",
+    "canonical_name": "Agriculture \u0026 Farming",
+    "name_en": "Agriculture \u0026 Farming",
+    "name_am": "ግብርና",
+    "name_om": "Qonna",
+    "name_ti": "ሓረስታይ",
+    "definition": "",
+    "display_order": 6,
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-10-22T01:57:37.540684Z",
+    "updated_at": "2026-10-26T12:35:05.312834Z",
+    "translations": {
+      "am": "ግብርና",
+      "en": "Agriculture \u0026 Farming",
+      "or": "Qonna",
+      "ti": "ሓረስታይ"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 27,
+        "parent_id": 6,
+        "slug": "crops-coffee",
+        "level": 1,
+        "path": "/6/27/",
+        "canonical_name": "Crops \u0026 Coffee",
+        "name_en": "Crops \u0026 Coffee",
+        "name_am": "ሰብሎችና ቡና",
+        "name_om": "Midhaan fi Buna",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 1,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "ሰብሎችና ቡና",
+          "en": "Crops \u0026 Coffee",
+          "or": "Midhaan fi Buna"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 28,
+        "parent_id": 6,
+        "slug": "livestock",
+        "level": 1,
+        "path": "/6/28/",
+        "canonical_name": "Livestock \u0026 Cattle",
+        "name_en": "Livestock \u0026 Cattle",
+        "name_am": "የከብት እርባታ",
+        "name_om": "Beeylada",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 2,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "የከብት እርባታ",
+          "en": "Livestock \u0026 Cattle",
+          "or": "Beeylada"
+        },
+        "aliases": {},
+        "attributes": [
+          {
+            "attribute_id": 27,
+            "name": "Livestock Type",
+            "slug": "livestock-type",
+            "data_type": "select",
+            "is_required": true,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 4,
+            "validation_rules": {
+              "options": [
+                "Cattle",
+                "Sheep",
+                "Goats",
+                "Poultry",
+                "Camels",
+                "Donkeys"
+              ]
+            }
+          },
+          {
+            "attribute_id": 28,
+            "name": "Age",
+            "slug": "age",
+            "data_type": "number",
+            "unit": "years",
+            "is_required": false,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 5,
+            "validation_rules": {
+              "max": 50,
+              "min": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "parent_id": 6,
+        "slug": "tractors-equipment",
+        "level": 1,
+        "path": "/6/29/",
+        "canonical_name": "Tractors \u0026 Farm Machinery",
+        "name_en": "Tractors \u0026 Farm Machinery",
+        "name_am": "ትራክተሮችና ማሽነሪዎች",
+        "name_om": "Tiraaktaraa fi Maashinoota",
+        "name_ti": "",
+        "definition": "",
+        "display_order": 3,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-10-22T02:18:56.001188Z",
+        "updated_at": "2026-10-22T02:18:56.001188Z",
+        "translations": {
+          "am": "ትራክተሮችና ማሽነሪዎች",
+          "en": "Tractors \u0026 Farm Machinery",
+          "or": "Tiraaktaraa fi Maashinoota"
+        },
+        "aliases": {},
+        "attributes": [
+          {
+            "attribute_id": 24,
+            "name": "Equipment Type",
+            "slug": "equipment-type",
+            "data_type": "select",
+            "is_required": true,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 1,
+            "validation_rules": {
+              "options": [
+                "Tractor",
+                "Plough",
+                "Harvester",
+                "Seeder",
+                "Sprayer",
+                "Other"
+              ]
+            }
+          },
+          {
+            "attribute_id": 1,
+            "name": "Brand / Manufacturer",
+            "slug": "brand",
+            "data_type": "text",
+            "is_required": true,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 1,
+            "validation_rules": {
+              "maxLength": 100
+            }
+          },
+          {
+            "attribute_id": 25,
+            "name": "Horsepower",
+            "slug": "horsepower",
+            "data_type": "number",
+            "unit": "HP",
+            "is_required": false,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 2
+          },
+          {
+            "attribute_id": 26,
+            "name": "Working Hours",
+            "slug": "working-hours",
+            "data_type": "number",
+            "unit": "hours",
+            "is_required": false,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 3
+          },
+          {
+            "attribute_id": 11,
+            "name": "Year",
+            "slug": "year",
+            "data_type": "number",
+            "is_required": false,
+            "is_filterable": true,
+            "is_searchable": true,
+            "display_order": 3,
+            "validation_rules": {
+              "max": 2030,
+              "min": 1900
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

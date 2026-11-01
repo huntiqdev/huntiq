@@ -1,0 +1,26 @@
+{
+  "manifest_version": "2.0.0",
+  "timestamp": "2026-11-01T12:35:00Z",
+  "system_name": "HUNTIQ Universal Marketplace Classification Framework",
+  "database_verification": {
+    "database_name": "hulubedej_db",
+    "table": "category_hierarchy",
+    "total_rows": 2575,
+    "level_0_roots": 139,
+    "level_1_categories": 500,
+    "level_2_categories": 1878,
+    "level_3_categories": 58,
+    "active_listings_count": 14,
+    "category_aliases_count": 1038
+  },
+  "classification_systems_count": 7,
+  "root_families_count": 196,
+  "validated_super_families_count": 500,
+  "curated_super_families_harmonized": 43,
+  "synthetic_placeholders_eliminated": 1957,
+  "multilingual_alias_conflicts_remediated": 37,
+  "active_listings_reconciled": 14,
+  "orphaned_listings_count": 0,
+  "migration_036_status": "ON_HOLD_AWAITING_APPROVAL",
+  "production_database_status": "PRESERVED_UNMUTATED"
+}

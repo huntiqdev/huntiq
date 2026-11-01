@@ -93,6 +93,14 @@ func (s *AIChatService) SendMessage(
 		return nil, fmt.Errorf("message content cannot be empty")
 	}
 
+	locale = strings.ToLower(strings.TrimSpace(locale))
+	if locale == "" {
+		locale = "en"
+	}
+	if locale == "or" {
+		locale = "om"
+	}
+
 	// 1. Authorize user ownership
 	conv, err := s.conversationRepo.GetConversationByID(ctx, conversationID, userID)
 	if err != nil {
@@ -268,6 +276,9 @@ func (s *AIChatService) ProcessGuestChat(ctx context.Context, req GuestChatReque
 	if locale == "" {
 		locale = "en"
 	}
+	if locale == "or" {
+		locale = "om"
+	}
 
 	// 1. Out-of-Domain Guard (Coding tutorials, physics/math equations, biology, trivia)
 	if IsOutOfDomain(cleanMsg) {
@@ -348,15 +359,19 @@ func (s *AIChatService) synthesizeGroundedResponse(
 	if len(listings) == 0 {
 		searchTerm, _ := searchArgs["search_term"].(string)
 		if searchTerm != "" {
+			displayTerm := aiclient.GetLocalizedEntityTerm(searchTerm, locale)
+			if displayTerm == "" {
+				displayTerm = searchTerm
+			}
 			switch locale {
 			case "am":
-				return fmt.Sprintf("በHUNTIQ ዳታቤዝ ውስጥ ለ'%s' በአሁኑ ሰዓት የሚስማማ የተረጋገጠ ዝርዝር አልተገኘም። እባክዎ የፍለጋ ቃላትን በማስተካከል ወይም የዋጋ ገደቡን በማስፋት ይሞክሩ።", searchTerm)
+				return fmt.Sprintf("በHUNTIQ ዳታቤዝ ውስጥ ለ'%s' በአሁኑ ሰዓት የሚስማማ የተረጋገጠ ዝርዝር አልተገኘም። እባክዎ የፍለጋ ቃላትን በማስተካከል ወይም የዋጋ ገደቡን በማስፋት ይሞክሩ።", displayTerm)
 			case "om":
-				return fmt.Sprintf("Kuusaa gabaa HUNTIQ keessatti '%s' tiif yeroo ammaa tarreeffamni walsimu hin argamne. Maaloo jechoota biroo fayyadamuun ykn daangaa gatii jijjiiruun yaalaa.", searchTerm)
+				return fmt.Sprintf("Kuusaa gabaa HUNTIQ keessatti '%s' tiif yeroo ammaa tarreeffamni walsimu hin argamne. Maaloo jechoota biroo fayyadamuun ykn daangaa gatii jijjiiruun yaalaa.", displayTerm)
 			case "ti":
-				return fmt.Sprintf("ኣብ ዳታቤዝ HUNTIQ ን'%s' ኣብዚ እዋን ዝሰማማዕ ዝተረጋገፀ ዝርዝር ኣይተረኽበን። በጃኹም ናይ ፍለጋ ቃላት ወይ ደረት ዋጋ ብምስትኻኻል ፈትኑ።", searchTerm)
+				return fmt.Sprintf("ኣብ ዳታቤዝ HUNTIQ ን'%s' ኣብዚ እዋን ዝሰማማዕ ዝተረጋገፀ ዝርዝር ኣይተረኽበን። በጃኹም ናይ ፍለጋ ቃላት ወይ ደረት ዋጋ ብምስትኻኻል ፈትኑ።", displayTerm)
 			default:
-				return fmt.Sprintf("I searched our live marketplace database for '%s', but found no approved listings matching those exact criteria right now. You might try searching for broader keywords, adjusting your budget, or checking a different location.", searchTerm)
+				return fmt.Sprintf("I searched our live marketplace database for '%s', but found no approved listings matching those exact criteria right now. You might try searching for broader keywords, adjusting your budget, or checking a different location.", displayTerm)
 			}
 		}
 

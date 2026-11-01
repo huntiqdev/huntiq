@@ -58,13 +58,18 @@ export function CapabilityActivationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-2xl overflow-hidden p-6 text-zinc-900 dark:text-white">
+    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden p-5 sm:p-6 pb-[max(20px,env(safe-area-inset-bottom,20px))] sm:pb-6 text-zinc-900 dark:text-white">
+        {/* Mobile Grab Handle */}
+        <div className="pt-0 pb-2 flex justify-center sm:hidden shrink-0">
+          <div className="w-12 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full" />
+        </div>
+
         {/* Close Button */}
         <button
           onClick={onClose}
           disabled={loading}
-          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          className="absolute top-4 sm:top-5 right-4 sm:right-5 p-2 rounded-xl text-zinc-400 hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-90"
         >
           <X size={18} />
         </button>
@@ -169,7 +174,7 @@ export function CapabilityActivationModal({
             type="button"
             onClick={onClose}
             disabled={loading}
-            className="flex-1 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            className="flex-1 py-3 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-800 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-95"
           >
             Cancel
           </button>
@@ -177,7 +182,7 @@ export function CapabilityActivationModal({
             type="button"
             onClick={handleActivate}
             disabled={loading}
-            className={`flex-1 py-3 rounded-xl text-white text-xs font-black flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 disabled:opacity-50 ${
+            className={`flex-1 py-3 min-h-[44px] rounded-xl text-white text-xs font-black flex items-center justify-center gap-2 shadow-lg transition-all tap-bounce active:scale-95 disabled:opacity-50 ${
               isLandlord
                 ? 'bg-teal-600 hover:bg-teal-500 shadow-teal-600/30'
                 : 'bg-orange-600 hover:bg-orange-500 shadow-orange-600/30'

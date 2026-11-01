@@ -1,0 +1,89 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.522340306Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "structural-steel-metal-framing-rebar",
+  "root_family": {
+    "id": 7687,
+    "parent_id": null,
+    "slug": "structural-steel-metal-framing-rebar",
+    "level": 0,
+    "path": "/7687/",
+    "canonical_name": "Structural Steel, Metal Framing \u0026 Rebar",
+    "name_en": "Structural Steel, Metal Framing \u0026 Rebar",
+    "name_am": "የብረት ዘንጎች (ቆርቆሮ እና ባስቶሎ)",
+    "name_om": "Sibiila Ijaarsaa fi Qorqorroo",
+    "name_ti": "ናይ ህንጻ ብረታትን ቆርቆሮን",
+    "definition": "Deformed high-yield steel reinforcement rebar, RHS/SHS hollow tubing, H-beams, angle iron, and corrugated iron sheet framing.",
+    "display_order": 0,
+    "icon": "Grid",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.986174Z",
+    "updated_at": "2026-11-01T11:26:59.986174Z",
+    "translations": {
+      "am": "የብረት ዘንጎች (ቆርቆሮ እና ባስቶሎ)",
+      "en": "Structural Steel, Metal Framing \u0026 Rebar",
+      "or": "Sibiila Ijaarsaa fi Qorqorroo",
+      "ti": "ናይ ህንጻ ብረታትን ቆርቆሮን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7688,
+        "parent_id": 7687,
+        "slug": "deformed-reinforcement-steel-rebar",
+        "level": 1,
+        "path": "/7687/7688/",
+        "canonical_name": "Deformed Concrete Reinforcement Steel Rebar (ባስቶሎ)",
+        "name_en": "Deformed Concrete Reinforcement Steel Rebar (ባስቶሎ)",
+        "name_am": "የኮንክሪት ብረት ዘንጎች (ባስቶሎ)",
+        "name_om": "Sibiila Ijaarsa Konkiraatii (Baastoloo)",
+        "name_ti": "ናይ ህንጻ ብረት ዘንጊታት (ባስቶሎ)",
+        "definition": "Grade 60 and Grade 75 deformed rebars in diameters: 8mm, 10mm, 12mm, 14mm, 16mm, 20mm, 24mm, and 32mm.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.989429Z",
+        "updated_at": "2026-11-01T11:26:59.989429Z",
+        "translations": {
+          "am": "የኮንክሪት ብረት ዘንጎች (ባስቶሎ)",
+          "en": "Deformed Concrete Reinforcement Steel Rebar (ባስቶሎ)",
+          "or": "Sibiila Ijaarsa Konkiraatii (Baastoloo)",
+          "ti": "ናይ ህንጻ ብረት ዘንጊታት (ባስቶሎ)"
+        },
+        "aliases": {
+          "am": [
+            "ባለ 12 ብረት",
+            "ባለ 16 ብረት",
+            "ባስቶሎ",
+            "የኮንክሪት ብረት",
+            "የግንባታ ብረት"
+          ],
+          "en": [
+            "bastolo",
+            "deformed bar",
+            "rebar",
+            "reinforcement steel",
+            "steel bar"
+          ],
+          "or": [
+            "baastoloo",
+            "sibiila ijaarsaa"
+          ],
+          "ti": [
+            "ባስቶሎ",
+            "ናይ ህንጻ ብረት"
+          ]
+        }
+      }
+    ]
+  }
+}

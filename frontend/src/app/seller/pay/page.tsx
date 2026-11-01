@@ -130,7 +130,7 @@ function PayContent() {
           {PAYMENT_METHODS.map(m => (
             <button key={m.value}
               onClick={() => { setMethodId(m.value); setStep('confirm'); }}
-              className="w-full flex items-center gap-4 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 hover:border-orange-400 rounded-2xl p-4 transition-all text-left">
+              className="w-full flex items-center gap-4 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 hover:border-orange-400 rounded-2xl p-4 transition-all text-left tap-bounce active:scale-[0.98]">
               <span className="text-3xl">{m.emoji}</span>
               <div className="flex-1 min-w-0">
                 <p className="font-black text-zinc-900 dark:text-white">{m.label}</p>
@@ -312,11 +312,11 @@ function PayContent() {
           <div className="flex gap-2">
             <button type="button"
               onClick={() => { setStep('choose'); setError(''); setRef(''); setPhone(''); setPhoneError(''); setRefError(''); }}
-              className="flex-1 py-3 rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+              className="flex-1 py-3 min-h-[44px] rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-95">
               ← {t.ui.back}
             </button>
             <button type="submit" disabled={submitting}
-              className="flex-1 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+              className="flex-1 py-3 min-h-[44px] rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm transition-all tap-bounce active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 shadow-md shadow-orange-600/20">
               {submitting ? <><Spinner /> {t.ui.confirming}</> : t.ui.confirm_payment}
             </button>
           </div>

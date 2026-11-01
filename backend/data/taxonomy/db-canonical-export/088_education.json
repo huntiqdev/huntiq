@@ -1,0 +1,38 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.557147458Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "education",
+  "root_family": {
+    "id": 10,
+    "parent_id": null,
+    "slug": "education",
+    "level": 0,
+    "path": "/10/",
+    "canonical_name": "Education \u0026 Learning",
+    "name_en": "Education \u0026 Learning",
+    "name_am": "ትምህርት",
+    "name_om": "Barnoot",
+    "name_ti": "ትምህርቲ",
+    "definition": "",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-10-22T01:57:37.540684Z",
+    "updated_at": "2026-10-26T12:35:05.312834Z",
+    "translations": {
+      "am": "ትምህርት",
+      "en": "Education \u0026 Learning",
+      "or": "Barnoot",
+      "ti": "ትምህርቲ"
+    },
+    "aliases": {}
+  }
+}

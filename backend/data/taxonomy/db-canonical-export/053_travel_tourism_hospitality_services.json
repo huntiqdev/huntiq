@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.530047618Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "travel-tourism-hospitality-services",
+  "root_family": {
+    "id": 7754,
+    "parent_id": null,
+    "slug": "travel-tourism-hospitality-services",
+    "level": 0,
+    "path": "/7754/",
+    "canonical_name": "Travel, Tourism \u0026 Tour Operating Services",
+    "name_en": "Travel, Tourism \u0026 Tour Operating Services",
+    "name_am": "ጉዞ፣ ቱሪዝም እና የሀገር ውስጥ ጉብኝት አገልግሎቶች",
+    "name_om": "Tajaajila Imala fi Tuurizimii",
+    "name_ti": "መገሻ፣ ቱሪዝምን ናይ ውሽጢ ዓዲ ምብጻሕን ኣገልግሎት",
+    "definition": "Certified tourist itineraries (Lalibela, Simien Mountains, Danakil Depression, Omo Valley), tour guide services, and historic route travel packages.",
+    "display_order": 0,
+    "icon": "Compass",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.776619Z",
+    "updated_at": "2026-11-01T11:27:00.776619Z",
+    "translations": {
+      "am": "ጉዞ፣ ቱሪዝም እና የሀገር ውስጥ ጉብኝት አገልግሎቶች",
+      "en": "Travel, Tourism \u0026 Tour Operating Services",
+      "or": "Tajaajila Imala fi Tuurizimii",
+      "ti": "መገሻ፣ ቱሪዝምን ናይ ውሽጢ ዓዲ ምብጻሕን ኣገልግሎት"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7755,
+        "parent_id": 7754,
+        "slug": "historic-route-nature-tour-packages",
+        "level": 1,
+        "path": "/7754/7755/",
+        "canonical_name": "Historic Route \u0026 National Park Guided Tour Packages",
+        "name_en": "Historic Route \u0026 National Park Guided Tour Packages",
+        "name_am": "የታሪካዊ ስፍራዎች እና የብሔራዊ ፓርክ የጉዞ ጥቅሎች",
+        "name_om": "Qophii Imala Bakkeewwan Seenaa fi Paarkii",
+        "name_ti": "ናይ ታሪኻዊ ቦታታትን ፓርክታትን ናይ መገሻ ፓኬጃት",
+        "definition": "Organized all-inclusive trekking, historical exploration, and cultural photography expeditions.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.78257Z",
+        "updated_at": "2026-11-01T11:27:00.78257Z",
+        "translations": {
+          "am": "የታሪካዊ ስፍራዎች እና የብሔራዊ ፓርክ የጉዞ ጥቅሎች",
+          "en": "Historic Route \u0026 National Park Guided Tour Packages",
+          "or": "Qophii Imala Bakkeewwan Seenaa fi Paarkii",
+          "ti": "ናይ ታሪኻዊ ቦታታትን ፓርክታትን ናይ መገሻ ፓኬጃት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

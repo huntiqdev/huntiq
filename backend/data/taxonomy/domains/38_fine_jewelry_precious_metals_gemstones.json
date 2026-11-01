@@ -1,0 +1,124 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "FASH_JEWELRY",
+  "root_family": {
+    "id": "root-jewelry-gemstones",
+    "slug": "fine-jewelry-precious-metals-gemstones",
+    "code": "FASH_JEWELRY",
+    "level": 1,
+    "canonical_name": "Fine Jewelry, Precious Metals \u0026 Gemstones",
+    "definition": "Certified 21k/24k Ethiopian gold necklaces, wedding bands, Ethiopian Wollo precious crystal opals, and 925 sterling silver.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Gem",
+    "translations": {
+      "am": "ጌጣጌጥ፣ የወርቅ ስራዎች እና ውድ ማዕድናት (ኦፓል)",
+      "or": "Faaya Warqee, Meetaa fi Dhagaa Bareedduu",
+      "ti": "ስልማት፣ ናይ ወርቂ ስራሕትን ክቡራት ማዕድናትን"
+    },
+    "aliases": {
+      "am": [
+        "ወርቅ",
+        "ጌጣጌጥ",
+        "የወርቅ ጌጥ",
+        "የወሎ ኦፓል",
+        "ብር",
+        "ቀለበት",
+        "ሀብል"
+      ],
+      "en": [
+        "gold",
+        "jewelry",
+        "wollo opal",
+        "opal",
+        "silver",
+        "wedding ring",
+        "necklace"
+      ],
+      "or": [
+        "warqee",
+        "faaya",
+        "dhagaa bareedduu",
+        "meetii"
+      ],
+      "ti": [
+        "ወርቂ",
+        "ስልማት",
+        "ናይ ወርቂ ስልማት",
+        "ቀለቤት"
+      ]
+    },
+    "children": [
+      {
+        "id": "sf-gold-jewelry-sets",
+        "slug": "certified-gold-jewelry-bridal-sets",
+        "code": "JEWEL_GOLD",
+        "level": 2,
+        "canonical_name": "Certified Gold Jewelry \u0026 Bridal Sets (ወርቅ)",
+        "definition": "Hallmarked 18k, 21k, and 24k gold chains, rings, bangles, and bridal wedding jewelry sets.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የወርቅ ጌጣጌጦች እና የሰርግ ስብስቦች",
+          "or": "Faaya Warqee fi Qophii Cidhaa",
+          "ti": "ናይ ወርቂ ስልማታትን ናይ መርዓ ንዋያትን"
+        },
+        "identifiers": [
+          {
+            "type": "UNSPSC",
+            "code": "54111501",
+            "name": "Gold jewelry"
+          }
+        ],
+        "attributes": [
+          {
+            "slug": "gold-purity-karat",
+            "name_en": "Gold Purity (Karat)",
+            "data_type": "select",
+            "is_required": true,
+            "is_filterable": true,
+            "validation_rules": {
+              "options": [
+                "24 Karat (99.9%)",
+                "21 Karat (87.5%)",
+                "18 Karat (75.0%)",
+                "14 Karat"
+              ]
+            }
+          },
+          {
+            "slug": "weight-grams",
+            "name_en": "Gold Weight (grams)",
+            "data_type": "number",
+            "unit": "g",
+            "is_required": true,
+            "is_filterable": true
+          }
+        ]
+      },
+      {
+        "id": "sf-wollo-opals-gemstones",
+        "slug": "ethiopian-wollo-opals-gemstones",
+        "code": "JEWEL_OPALS",
+        "level": 2,
+        "canonical_name": "Ethiopian Wollo Hydrophane Opals \u0026 Loose Gems (ኦፓል)",
+        "definition": "World-renowned multi-color play-of-color hydrophane opals from Delanta/Wollo, rough and faceted gems.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የወሎ የተፈጥሮ ኦፓል እና የከበሩ ድንጋዮች",
+          "or": "Dhagaa Bareedduu Ooppaala Walloo",
+          "ti": "ናይ ወሎ ተፈጥሮኣዊ ኦፓል"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.519411429Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "telecommunications-networking-infrastructure",
+  "root_family": {
+    "id": 7644,
+    "parent_id": null,
+    "slug": "telecommunications-networking-infrastructure",
+    "level": 0,
+    "path": "/7644/",
+    "canonical_name": "Telecommunications \u0026 Networking Infrastructure",
+    "name_en": "Telecommunications \u0026 Networking Infrastructure",
+    "name_am": "ቴሌኮሙኒኬሽን እና የኔትወርክ መሰረተ ልማት",
+    "name_om": "Telekominikeeshinii fi Netwoorkii",
+    "name_ti": "ቴሌኮሙኒኬሽንን ናይ መርበብ ሓበሬታ ትሕተ-ቅርጽን",
+    "definition": "4G/5G Wi-Fi modems, enterprise routers, managed switches, fiber optic patch cables, and telecom antennas.",
+    "display_order": 0,
+    "icon": "Wifi",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.469928Z",
+    "updated_at": "2026-11-01T11:26:59.469928Z",
+    "translations": {
+      "am": "ቴሌኮሙኒኬሽን እና የኔትወርክ መሰረተ ልማት",
+      "en": "Telecommunications \u0026 Networking Infrastructure",
+      "or": "Telekominikeeshinii fi Netwoorkii",
+      "ti": "ቴሌኮሙኒኬሽንን ናይ መርበብ ሓበሬታ ትሕተ-ቅርጽን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7645,
+        "parent_id": 7644,
+        "slug": "wireless-routers-4g-5g-modems",
+        "level": 1,
+        "path": "/7644/7645/",
+        "canonical_name": "Wireless Routers, 4G/5G Pocket Modems \u0026 Access Points",
+        "name_en": "Wireless Routers, 4G/5G Pocket Modems \u0026 Access Points",
+        "name_am": "ዋይፋይ ራውተሮች እና የሞባይል ኢንተርኔት ሞደሞች",
+        "name_om": "Rawtara fi Moodeemii Intarneetii",
+        "name_ti": "ዋይፋይ ራውተራትን ናይ ኢንተርኔት ሞደማትን",
+        "definition": "Safaricom \u0026 Ethio Telecom compatible 4G/5G SIM routers, Wi-Fi 6 mesh nodes, and outdoor wireless bridges.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.473356Z",
+        "updated_at": "2026-11-01T11:26:59.473356Z",
+        "translations": {
+          "am": "ዋይፋይ ራውተሮች እና የሞባይል ኢንተርኔት ሞደሞች",
+          "en": "Wireless Routers, 4G/5G Pocket Modems \u0026 Access Points",
+          "or": "Rawtara fi Moodeemii Intarneetii",
+          "ti": "ዋይፋይ ራውተራትን ናይ ኢንተርኔት ሞደማትን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

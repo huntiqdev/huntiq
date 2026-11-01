@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "COMMUNITY_CLASSIFIEDS",
+  "root_family": {
+    "id": "root-general-classifieds",
+    "slug": "general-classifieds-community-donations",
+    "code": "COMMUNITY_CLASSIFIEDS",
+    "level": 1,
+    "canonical_name": "General Classifieds, Community \u0026 Item Donations",
+    "definition": "Community announcements, lost \u0026 found document notices (National ID, Kebele ID, passport, driver license), and charitable non-profit item donations.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Megaphone",
+    "translations": {
+      "am": "አጠቃላይ ማስታወቂያዎች፣ የጠፉ እቃዎች እና ልገሳ",
+      "or": "Beeksisa Waliigalaa, Meeshaa Bade fi Kennaa",
+      "ti": "ሓፈሻዊ ምልክታታት፣ ዝጠፍኡ ኣቑሑትን ልገሳን"
+    },
+    "children": [
+      {
+        "id": "sf-lost-and-found-documents",
+        "slug": "lost-found-official-documents",
+        "code": "COMM_LOST_FOUND",
+        "level": 2,
+        "canonical_name": "Lost \u0026 Found Official Credentials \u0026 Documents (የጠፉ ሰነዶች)",
+        "definition": "Community lost and found notices for Fayda digital IDs, passports, vehicle libre titles, and academic degree certificates.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የጠፉ መታወቂያዎች፣ ፓስፖርት እና ሰነዶች",
+          "or": "Waraqaa Eenyummaa fi Paaspoortii Bade",
+          "ti": "ዝጠፍኡ መታወቒታት፣ ፓስፖርትን ሰነዳትን"
+        }
+      }
+    ]
+  }
+}

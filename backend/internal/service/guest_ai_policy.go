@@ -26,7 +26,18 @@ func IsOutOfDomain(query string) bool {
 		strings.Contains(lower, "apartment") || strings.Contains(lower, "house") || strings.Contains(lower, "rent") ||
 		strings.Contains(lower, "price") || strings.Contains(lower, "cost") || strings.Contains(lower, "huntiq") ||
 		strings.Contains(lower, "buy") || strings.Contains(lower, "sell") || strings.Contains(lower, "etb") ||
-		strings.Contains(lower, "birr") || strings.Contains(lower, "specs") || strings.Contains(lower, "compare") {
+		strings.Contains(lower, "birr") || strings.Contains(lower, "specs") || strings.Contains(lower, "compare") ||
+		strings.Contains(lower, "ስልክ") || strings.Contains(lower, "ሞባይል") || strings.Contains(lower, "መኪና") ||
+		strings.Contains(lower, "ቤት") || strings.Contains(lower, "አፓርታማ") || strings.Contains(lower, "ኮንዶሚኒየም") ||
+		strings.Contains(lower, "ኮምፒውተር") || strings.Contains(lower, "ላፕቶፕ") || strings.Contains(lower, "ጫማ") ||
+		strings.Contains(lower, "ልብስ") || strings.Contains(lower, "ቲቪ") || strings.Contains(lower, "ቴሌቪዥን") ||
+		strings.Contains(lower, "ፈርኒቸር") || strings.Contains(lower, "ዋጋ") || strings.Contains(lower, "ብር") ||
+		strings.Contains(lower, "ኪራይ") || strings.Contains(lower, "ሽያጭ") || strings.Contains(lower, "እቃ") ||
+		strings.Contains(lower, "ምርት") || strings.Contains(lower, "bilbila") || strings.Contains(lower, "konkolaataa") ||
+		strings.Contains(lower, "mana") || strings.Contains(lower, "kompiitara") || strings.Contains(lower, "kiraa") ||
+		strings.Contains(lower, "gatii") || strings.Contains(lower, "meeshaa") || strings.Contains(lower, "bituu") ||
+		strings.Contains(lower, "ገዛ") || strings.Contains(lower, "ክራይ") || strings.Contains(lower, "ንብረት") ||
+		strings.Contains(lower, "ክገዝእ") {
 		// If it's explicitly asking to write code or solve physics equations, it's still out of domain
 		if rxCoding.MatchString(q) || rxScience.MatchString(q) {
 			return true
@@ -46,7 +57,7 @@ func GetOutOfDomainRedirection(locale string) string {
 	switch strings.ToLower(locale) {
 	case "am":
 		return "እኔ የHUNTIQ የገበያ ረዳት ነኝ። በኢትዮጵያ ውስጥ ያሉ ምርቶችን፣ መኪናዎችን፣ የቤትና አፓርታማ ኪራዮችን እና አገልግሎቶችን እንዲያገኙ ወይም ስለ HUNTIQ አጠቃቀም መረጃ ለመስጠት ዝግጁ ነኝ። ለትምህርት፣ ለፊዚክስ ወይም ለኮዲንግ ጥያቄዎች እባክዎን አጠቃላይ መድረኮችን ይጠቀሙ።"
-	case "om":
+	case "om", "or":
 		return "Ani gargaaraa gabaa HUNTIQ ti. Itoophiyaa keessatti oomishaalee, konkolaataa, kireeffannaa manaa fi tajaajiloota akka argattu ykn waa'ee HUNTIQ akka beektuuf nan gargaara. Gaaffilee barnootaa, koodii fi fiiziksiif maddoota biraa fayyadamaa."
 	case "ti":
 		return "ኣነ ናይ HUNTIQ ናይ ዕዳጋ ሓጋዚ እየ። ኣብ ኢትዮጵያ ፍርያት፣ መካይን፣ ናይ ገዛ ክራይን ካልኦት ኣገልግሎታትን ንምርካብ ወይ ብዛዕባ HUNTIQ ንምሕታት ክሕግዘኩም እኽእል እየ። ንትምህርታዊ፣ ፊዚክስ ወይ ኮዲንግ ሕቶታት ካልእ መድረኽ ተጠቐሙ።"
@@ -58,6 +69,7 @@ func GetOutOfDomainRedirection(locale string) string {
 // CheckPlatformFAQ checks if the user is asking about HUNTIQ features, registration, listing rules, or fees.
 func CheckPlatformFAQ(query, locale string) (bool, string) {
 	lower := strings.ToLower(strings.TrimSpace(query))
+	loc := strings.ToLower(strings.TrimSpace(locale))
 
 	// How to post / sell / list
 	if strings.Contains(lower, "how to post") || strings.Contains(lower, "how do i post") ||
@@ -67,10 +79,10 @@ func CheckPlatformFAQ(query, locale string) (bool, string) {
 		strings.Contains(lower, "akkamitti maxxansu") || strings.Contains(lower, "akkamitti gurguru") ||
 		strings.Contains(lower, "ከመይ ጌረ ይልጥፍ") {
 
-		switch locale {
+		switch loc {
 		case "am":
 			return true, "በHUNTIQ ላይ ምርት ወይም የቤት ኪራይ ለመለጠፍ የሚከተሉትን ቀላል ደረጃዎች ይከተሉ:\n\n1. ከላይ በሚገኘው ሜኑ ላይ **'ማስታወቂያ ልጠፍ'** (Post Listing) የሚለውን ይጫኑ።\n2. የሻጭ/አከራይ መለያ ከሌለዎት በስልክ ቁጥርዎ በነጻ ይመዝገቡና በOTP ያረጋግጡ።\n3. ተገቢውን ምድብ (ለምሳሌ፡ Real Estate > Apartments) እና ዓይነት (ሽያጭ ወይም ኪራይ) ይምረጡ።\n4. ዋጋ፣ ክልል/ክፍለ ከተማ፣ ማብራሪያና ጥራት ያላቸው ፎቶዎችን ያስገቡ።\n5. ያስገቡትን መረጃ ሲያጸድቁ ማስታወቂያዎ በቀጥታ በመላው ኢትዮጵያ ለገዢዎች ይታያል!"
-		case "om":
+		case "om", "or":
 			return true, "HUNTIQ irratti oomisha ykn kireeffannaa manaa maxxansuuf tarkaanfiiwwan kanneen hordofaa:\n\n1. Fuula gubbaarraa **'Post Listing'** jedhu cuqaasaa.\n2. Lakkoofsa bilbilaa keessaniin galmaa'aa OTP tiin mirkaneessaa.\n3. Ramaddii fi gosa gurgurtaa (Gurgurtaa ykn Kireeffannaa) filadhaa.\n4. Gatii, bakka (Magaalaa/Kutaa Magaalaa), ibsa fi suuraalee qulqulluu galchaa.\n5. Erga mirkanaa'ee booda tarreeffamni keessan guutuu Itoophiyaatti ni mul'ata!"
 		case "ti":
 			return true, "ኣብ HUNTIQ ፍርያት ወይ ናይ ገዛ ክራይ ንምልጣፍ ዝስዕቡ ቅደም ሰዓባት ተኸተሉ:\n\n1. ካብ ላዕለዋይ መዐደሊ **'Post Listing'** ዝብል ጠውቑ።\n2. ብቑጽሪ ስልክኹም ተመዝጊብኩም ብOTP ኣረጋግጹ።\n3. ምድብን ዓይነትን (ሽያጥ ወይ ክራይ) ምረጹ።\n4. ዋጋ፣ ቦታ፣ መግለጺን ፎቶታትን ብምእታው ኣጽድቑ።\n5. ንጡፍ ኮይኑ ኣብ መላእ ኢትዮጵያ ንተጠቃምቲ ይርአ!"
@@ -84,9 +96,13 @@ func CheckPlatformFAQ(query, locale string) (bool, string) {
 		strings.Contains(lower, "sign up") || strings.Contains(lower, "እንዴት ልመዝገብ") ||
 		strings.Contains(lower, "akkamitti galmaa'u") || strings.Contains(lower, "ከመይ ጌረ ይመዝገብ") {
 
-		switch locale {
+		switch loc {
 		case "am":
 			return true, "በHUNTIQ ላይ ለመመዝገብ:\n\n1. ከላይ **'ይመዝገቡ'** (Register) የሚለውን ይጫኑ።\n2. የኢትዮጵያ ስልክ ቁጥርዎን (09...) እና የይለፍ ቃል ያስገቡ።\n3. በስልክዎ የሚደርሰውን ባለ 6-አሃዝ የይለፍ ቃል (OTP) በማስገባት መለያዎን ያረጋግጡ።\n4. ገዢ፣ ሻጭ ወይም ሁለቱንም መሆን ይችላሉ። መመዝገብ ሙሉ በሙሉ ነፃ ነው!"
+		case "om", "or":
+			return true, "HUNTIQ irratti galmaa'uuf:\n\n1. Gubbaarratti **'Galmaa'aa'** (Register) kan jedhu cuqaasaa.\n2. Lakkoofsa bilbilaa Itoophiyaa (09...) fi jecha darbii (password) galchaa.\n3. Koodii OTP lakkoofsa 6 bilbila keessanitti ergameen mirkaneessaa.\n4. Bitaa, gurguraa ykn lachuu ta'uu dandeessu. Galmee bilisa!"
+		case "ti":
+			return true, "ኣብ HUNTIQ ንምምዝጋብ:\n\n1. ካብ ላዕሊ **'ተመዝገቡ'** (Register) ዝብል ጠውቑ።\n2. ቁጽሪ ስልኪ ኢትዮጵያ (09...) ከምኡ'ውን ፓስዎርድ የእትዉ።\n3. ብስልኩም ዝመጸ 6-ዲጂት OTP ብምእታው ኣረጋግጹ።\n4. ዓዳጊ፣ ሻያጢ ወይ ክልቲኦም ክትኮኑ ትኽእሉ ኢኹም። ምዝገባ 100% ናጻ እዩ!"
 		default:
 			return true, "To create an account on HUNTIQ:\n\n1. Click **'Register'** on the top right navigation.\n2. Enter your Ethiopian phone number (e.g., `09...`) and choose a secure password.\n3. Enter the 6-digit verification code (OTP) sent to your phone.\n4. You can freely switch between buyer and seller capabilities anytime. Registration is 100% free!"
 		}

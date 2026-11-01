@@ -93,22 +93,27 @@ export function BuyModal({ product, onClose }: Props) {
   const tierLocked = buyerRank < requiredRank;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
       <div className="absolute inset-0" onClick={onClose} />
-      <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-sm max-h-[92vh] overflow-y-auto p-5 sm:p-6">
+      <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-sm max-h-[92vh] overflow-y-auto p-5 sm:p-6 pb-[max(24px,env(safe-area-inset-bottom,24px))] sm:pb-6">
+        {/* Mobile Grab Handle */}
+        <div className="pt-0.5 pb-2 flex justify-center sm:hidden shrink-0">
+          <div className="w-12 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full" />
+        </div>
+
         {/* Header */}
-        <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${isRental ? 'bg-teal-100 dark:bg-teal-900/30' : 'bg-orange-100 dark:bg-orange-900/30'}`}>
               <Phone size={16} className={isRental ? 'text-teal-600' : 'text-orange-600'} />
             </div>
-            <h2 className="font-black text-base">
+            <h2 className="font-black text-base text-zinc-900 dark:text-white">
               {step === 'form' 
                 ? (isRental ? (u.contact_landlord ?? 'Contact Landlord') : (u.contact_seller ?? 'Contact Seller')) 
                 : (u.request_sent ?? 'Request Sent')}
             </h2>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+          <button type="button" onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-90" aria-label="Close">
             <X size={18} />
           </button>
         </div>
@@ -129,7 +134,7 @@ export function BuyModal({ product, onClose }: Props) {
                 : <><Crown size={10} className="inline" /> Premium</>}{' '}
               buyer tier to view full details.
             </p>
-            <Link href="/buyer/login" onClick={onClose}
+            <Link href={isBuyer ? '/buyer/upgrade' : '/auth?as=buyer'} onClick={onClose}
               className="inline-flex items-center gap-1.5 text-xs font-black px-3 py-1.5 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white transition-colors">
               {requiredTier === 'gold' ? <Star size={11} /> : <Crown size={11} />}
               Upgrade Now
@@ -145,8 +150,8 @@ export function BuyModal({ product, onClose }: Props) {
                 <p className="font-bold text-sm truncate">{product.title}</p>
                 <p className={`font-black text-sm ${isRental ? 'text-teal-600' : 'text-orange-600'}`}>
                   {isRental 
-                    ? `ETB ${product.rental_price ? product.rental_price.toLocaleString() : product.price.toLocaleString()} / month`
-                    : `ETB ${product.price.toLocaleString()}`}
+                    ? `ETB ${product.rental_price != null ? product.rental_price.toLocaleString() : (product.price != null ? product.price.toLocaleString() : '—')} / month`
+                    : `ETB ${product.price != null ? product.price.toLocaleString() : '—'}`}
                 </p>
               </div>
               <div className="text-[10px] text-zinc-400 text-right leading-tight">
@@ -247,7 +252,7 @@ export function BuyModal({ product, onClose }: Props) {
               )}
 
               <button type="submit" disabled={loading}
-                className={`w-full text-white rounded-xl py-3 text-sm font-bold shadow-lg transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 ${
+                className={`w-full text-white rounded-xl py-3 text-sm font-bold shadow-lg transition-all tap-bounce active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 min-h-[44px] ${
                   isRental 
                     ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' 
                     : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
@@ -260,7 +265,7 @@ export function BuyModal({ product, onClose }: Props) {
               {!isBuyer && (
                 <p className="text-center text-[11px] text-zinc-400">
                   Have a user account?{' '}
-                  <Link href="/buyer/login" onClick={onClose} className="text-orange-600 font-bold hover:underline">
+                  <Link href="/auth?as=buyer" onClick={onClose} className="text-orange-600 font-bold hover:underline">
                     Sign in
                   </Link>{' '}
                   for auto-fill

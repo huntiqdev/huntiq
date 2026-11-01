@@ -1,0 +1,38 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.560437651Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "other",
+  "root_family": {
+    "id": 11,
+    "parent_id": null,
+    "slug": "other",
+    "level": 0,
+    "path": "/11/",
+    "canonical_name": "Other",
+    "name_en": "Other",
+    "name_am": "ሌላ",
+    "name_om": "Kan biraa",
+    "name_ti": "ካልእ",
+    "definition": "",
+    "display_order": 11,
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-10-22T01:57:37.540684Z",
+    "updated_at": "2026-10-26T12:35:05.312834Z",
+    "translations": {
+      "am": "ሌላ",
+      "en": "Other",
+      "or": "Kan biraa",
+      "ti": "ካልእ"
+    },
+    "aliases": {}
+  }
+}

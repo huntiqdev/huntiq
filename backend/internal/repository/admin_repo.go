@@ -418,20 +418,20 @@ func (r *AdminRepo) ReviewProduct(ctx context.Context, productID, adminID int, s
 			      THEN NOW() + (listing_duration_days || ' days')::interval
 			      ELSE NULL
 			    END
-			WHERE id=$4`,
+			WHERE id=$4 AND status IN ('pending', 'rejected')`,
 			status, notes, adminID, productID)
 	} else {
 		tag, err = r.db.Exec(ctx, `
 			UPDATE products
 			SET status=$1, admin_notes=$2, reviewed_by=$3, reviewed_at=NOW(), updated_at=NOW()
-			WHERE id=$4`,
+			WHERE id=$4 AND status IN ('pending', 'rejected')`,
 			status, notes, adminID, productID)
 	}
 	if err != nil {
 		return err
 	}
 	if tag.RowsAffected() == 0 {
-		return fmt.Errorf("product with id %d not found", productID)
+		return fmt.Errorf("product with id %d not found or is in terminal state ('sold', 'expired')", productID)
 	}
 	return nil
 }
@@ -2635,6 +2635,60 @@ func (r *AdminRepo) CreateAbuseReport(ctx context.Context, report *models.AbuseR
 
 // CreateRefundRequest allows buyers/sellers to submit a refund/dispute request
 func (r *AdminRepo) CreateRefundRequest(ctx context.Context, req *models.RefundRequest) (int, error) {
+	if req.Amount <= 0 {
+		return 0, fmt.Errorf("refund amount must be greater than zero")
+	}
+	if req.Reason == "" {
+		return 0, fmt.Errorf("reason is required")
+	}
+
+	// If transaction_id is provided, validate ownership, status, and maximum amount
+	if req.TransactionID != nil && *req.TransactionID > 0 {
+		var txSellerID int
+		var txBuyerPhone string
+		var txAmount float64
+		var txProductID int
+		err := r.db.QueryRow(ctx, `
+			SELECT seller_id, buyer_phone, amount, product_id 
+			FROM transactions 
+			WHERE id = $1`, *req.TransactionID).Scan(&txSellerID, &txBuyerPhone, &txAmount, &txProductID)
+		if err != nil {
+			return 0, fmt.Errorf("transaction not found")
+		}
+
+		// Verify authorization against transaction parties
+		if req.RequesterRole == "seller" {
+			if txSellerID != req.RequesterID {
+				return 0, fmt.Errorf("you are not authorized to request a refund for this transaction")
+			}
+		} else if req.RequesterRole == "buyer" {
+			var requesterPhone string
+			_ = r.db.QueryRow(ctx, `SELECT phone FROM users WHERE id = $1`, req.RequesterID).Scan(&requesterPhone)
+			if requesterPhone == "" || requesterPhone != txBuyerPhone {
+				return 0, fmt.Errorf("you are not authorized to request a refund for this transaction")
+			}
+		}
+
+		if req.Amount > txAmount {
+			return 0, fmt.Errorf("refund amount (ETB %.2f) cannot exceed transaction amount (ETB %.2f)", req.Amount, txAmount)
+		}
+
+		// Prevent duplicate pending or processed refund requests for the same transaction
+		var hasExisting bool
+		_ = r.db.QueryRow(ctx, `
+			SELECT EXISTS (
+				SELECT 1 FROM refund_requests 
+				WHERE transaction_id = $1 AND status IN ('pending', 'approved', 'processed')
+			)`, *req.TransactionID).Scan(&hasExisting)
+		if hasExisting {
+			return 0, fmt.Errorf("a refund request has already been submitted for this transaction")
+		}
+
+		if req.ProductID == nil && txProductID > 0 {
+			req.ProductID = &txProductID
+		}
+	}
+
 	var id int
 	err := r.db.QueryRow(ctx,
 		`INSERT INTO refund_requests (transaction_id, product_id, requester_id, requester_role, amount, reason, description, evidence_urls, status)
@@ -2648,6 +2702,22 @@ func (r *AdminRepo) CreateRefundRequest(ctx context.Context, req *models.RefundR
 
 // CreateAccountAppeal allows a user to appeal an account ban or action
 func (r *AdminRepo) CreateAccountAppeal(ctx context.Context, appeal *models.AccountAppeal) (int, error) {
+	// Verify user exists in database
+	var userExists bool
+	_ = r.db.QueryRow(ctx, `SELECT EXISTS(SELECT 1 FROM users WHERE id=$1)`, appeal.UserID).Scan(&userExists)
+	if !userExists {
+		return 0, fmt.Errorf("user not found")
+	}
+
+	// Prevent duplicate pending appeal spam
+	var duplicatePending bool
+	_ = r.db.QueryRow(ctx,
+		`SELECT EXISTS(SELECT 1 FROM account_appeals WHERE user_id=$1 AND appeal_type=$2 AND status='pending')`,
+		appeal.UserID, appeal.AppealType).Scan(&duplicatePending)
+	if duplicatePending {
+		return 0, fmt.Errorf("an appeal of this type is already pending review")
+	}
+
 	var id int
 	err := r.db.QueryRow(ctx,
 		`INSERT INTO account_appeals (user_id, appeal_type, related_product_id, related_document_id, reason, evidence_urls, status)

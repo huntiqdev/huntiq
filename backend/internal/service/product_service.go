@@ -509,6 +509,11 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 	if existing.Status != "pending" && existing.Status != "rejected" {
 		return errors.New("only pending or rejected products can be edited")
 	}
+	if existing.FeePaymentPending {
+		return errors.New("cannot edit product while listing fee payment verification is pending — wait for admin review")
+	}
+	oldPrice := existing.Price
+	priceChanged := false
 	if len(req.ImageURLs) > 0 {
 		minImages := s.getSettingInt(ctx, constants.SettingMinImagesPerListing, constants.DefaultMinImages)
 		if len(req.ImageURLs) < minImages {
@@ -541,17 +546,22 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		existing.Title = *req.Title
 	}
 	if req.Price != nil {
+		var newP float64
 		if existing.ListingType == "rent" && *req.Price <= 0 {
 			if req.RentalPrice != nil && *req.RentalPrice > 0 {
-				existing.Price = *req.RentalPrice
+				newP = *req.RentalPrice
 			} else if existing.RentalPrice != nil && *existing.RentalPrice > 0 {
-				existing.Price = *existing.RentalPrice
+				newP = *existing.RentalPrice
 			}
 		} else {
 			if *req.Price <= 0 {
 				return errors.New("price must be greater than zero")
 			}
-			existing.Price = *req.Price
+			newP = *req.Price
+		}
+		if newP != oldPrice {
+			existing.Price = newP
+			priceChanged = true
 		}
 	}
 	if req.Description != nil {
@@ -670,7 +680,10 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 			}
 			existing.RentalPrice = req.RentalPrice
 			if req.Price == nil || *req.Price <= 0 {
-				existing.Price = *req.RentalPrice
+				if *req.RentalPrice != oldPrice {
+					existing.Price = *req.RentalPrice
+					priceChanged = true
+				}
 			}
 		}
 		if req.RentalDurationValue != nil {
@@ -700,6 +713,26 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		}
 	}
 
+
+	if priceChanged {
+		if existing.FeePaid && existing.Price > oldPrice {
+			existing.FeePaid = false // Price increased after fee payment — reset fee_paid
+		}
+		duration := 30
+		if existing.ListingDurationDays != nil && *existing.ListingDurationDays > 0 {
+			duration = *existing.ListingDurationDays
+		}
+		tierStr, _, terr := s.userRepo.GetTier(ctx, sellerID)
+		if terr != nil {
+			tierStr = string(TierNormal)
+		}
+		feeSettings := s.loadFeeSettings(ctx)
+		fee := CalculateListingFeeWithSettings(SellerTier(tierStr), existing.Price, duration, feeSettings)
+		existing.StartupFeePercent = &fee.StartupPct
+		existing.WeeklyIncrementPercent = &fee.WeeklyIncrementPct
+		existing.TotalFeePercent = &fee.TotalFeePercent
+		existing.TotalFeeAmount = &fee.TotalFeeAmount
+	}
 
 	if err := s.repo.Update(ctx, existing, req.ImageURLs); err != nil {
 		return err

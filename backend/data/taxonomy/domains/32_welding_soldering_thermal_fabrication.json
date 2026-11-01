@@ -1,0 +1,68 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "WELD_EQUIPMENT",
+  "root_family": {
+    "id": "root-welding-fabrication",
+    "slug": "welding-soldering-thermal-fabrication",
+    "code": "WELD_EQUIPMENT",
+    "level": 1,
+    "canonical_name": "Welding, Soldering \u0026 Thermal Fabrication Equipment",
+    "definition": "IGBT inverter arc welding machines, MIG/MAG gas welders, plasma cutters, welding electrodes, and autodarkening helmets.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Flame",
+    "translations": {
+      "am": "የብየዳ ማሽኖች እና የብረት ማያያዣ እቃዎች (ሳልዳቱራ)",
+      "or": "Maashina fi Meeshaalee Wal-qabsiisa Sibiilaa (Saldaaturaa)",
+      "ti": "ናይ ሳልዳቱራ ማሽነሪታትን ብየዳን"
+    },
+    "children": [
+      {
+        "id": "sf-arc-inverter-welders",
+        "slug": "inverter-arc-welding-machines",
+        "code": "WELD_INVERTERS",
+        "level": 2,
+        "canonical_name": "IGBT Inverter Arc Welders \u0026 Electrodes (ሳልዳቱራ)",
+        "definition": "200A to 400A digital inverter MMA welding machines and mild steel welding rods (E6013).",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "ኢንቨርተር የሳልዳቱራ ማሽኖች እና የኤሌክትሮድ ሽቦዎች",
+          "or": "Maashina Saldaaturaa fi Eelektiroodii",
+          "ti": "ናይ ሳልዳቱራ ማሽንን ኤሌክትሮድን"
+        },
+        "aliases": {
+          "am": [
+            "ሳልዳቱራ",
+            "የሳልዳቱራ ማሽን",
+            "ብየዳ",
+            "የብየዳ ሽቦ"
+          ],
+          "en": [
+            "welding machine",
+            "inverter welder",
+            "arc welder",
+            "saldatura",
+            "welding rod"
+          ],
+          "or": [
+            "saldaaturaa",
+            "maashina saldaaturaa"
+          ],
+          "ti": [
+            "ሳልዳቱራ",
+            "ናይ ሳልዳቱራ ማሽን"
+          ]
+        }
+      }
+    ]
+  }
+}

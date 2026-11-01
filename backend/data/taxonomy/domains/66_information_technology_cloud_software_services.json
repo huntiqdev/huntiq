@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "SERV_IT_CLOUD",
+  "root_family": {
+    "id": "root-it-cloud-services",
+    "slug": "information-technology-cloud-software-services",
+    "code": "SERV_IT_CLOUD",
+    "level": 1,
+    "canonical_name": "Information Technology, Cloud \u0026 Software Services",
+    "definition": "Custom web and mobile application programming, cloud hosting infrastructure, cybersecurity penetration testing, and IT systems integration.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Terminal",
+    "translations": {
+      "am": "የሶፍትዌር ልማት፣ የድረ-ገጽ እና የክላውድ ቴክኖሎጂ አገልግሎቶች",
+      "or": "Tajaajila Misooma Sooftiweerii fi Teekinoolojii",
+      "ti": "ናይ ሶፍትዌር ምዕባለ፣ ዌብሳይትን ቴክኖሎጂን ኣገልግሎት"
+    },
+    "children": [
+      {
+        "id": "sf-web-mobile-app-dev",
+        "slug": "custom-web-mobile-app-development",
+        "code": "SERV_DEV",
+        "level": 2,
+        "canonical_name": "Custom Web Application \u0026 Mobile App Development",
+        "definition": "Full-stack React/Next.js and Flutter/Android development with payment gateway integration (Telebirr, CBE Birr, Chapa).",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የሞባይል አፕሊኬሽን እና የድረ-ገጽ ማበልጸግ አገልግሎት",
+          "or": "Misooma Weebsaayitii fi Moobaayilii Appii",
+          "ti": "ናይ ሞባይል ኣፕሊኬሽንን ዌብሳይትን ምዕባለ"
+        }
+      }
+    ]
+  }
+}

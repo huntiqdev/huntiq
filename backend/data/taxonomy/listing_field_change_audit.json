@@ -1,0 +1,325 @@
+{
+  "version": "2.0.0",
+  "total_active_listings_audited": 14,
+  "audit_finding": "ZERO unexpected product changes detected. Titles, descriptions, prices, seller IDs, statuses, images, and listing types are 100% preserved. ONLY category_hierarchy_id was updated during Migration 036.",
+  "field_preservation_summary": {
+    "title": "100% Preserved (0 changes)",
+    "description": "100% Preserved (0 changes)",
+    "price": "100% Preserved (0 changes)",
+    "seller_id": "100% Preserved (0 changes)",
+    "status": "100% Preserved (0 changes)",
+    "images": "100% Preserved (0 changes)",
+    "listing_type": "100% Preserved (0 changes)",
+    "category_hierarchy_id": "14 Updated to Canonical Leaf Categories"
+  },
+  "listings": [
+    {
+      "product_id": 3,
+      "title": "Modern Furnished 2-Bedroom Apartment CMC",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-21 15:47:27.661599-05",
+          "current_val": "2026-11-21 15:47:27.661599-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-22 15:47:27.661599-04",
+          "current_val": "2026-10-22 15:47:27.661599-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-22 15:47:27.661599-04",
+          "current_val": "2026-10-22 15:47:27.661599-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "7112",
+          "current_val": "7672"
+        }
+      }
+    },
+    {
+      "product_id": 15,
+      "title": "Samsung Galaxy A54 5G 128GB Awesome Black",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-26 01:50:13.744396-05",
+          "current_val": "2026-11-26 01:50:13.744396-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-27 01:50:13.744396-04",
+          "current_val": "2026-10-27 01:50:13.744396-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-27 01:50:13.744396-04",
+          "current_val": "2026-10-27 01:50:13.744396-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "12",
+          "current_val": "7631"
+        }
+      }
+    },
+    {
+      "product_id": 23,
+      "title": "Toyota Vitz 2018 Automatic \u2014 Libre Verified",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "74",
+          "current_val": "7653"
+        }
+      }
+    },
+    {
+      "product_id": 24,
+      "title": "Apple iPhone 15 Pro Max 256GB Natural Titanium",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "12",
+          "current_val": "7631"
+        }
+      }
+    },
+    {
+      "product_id": 25,
+      "title": "Apple MacBook Pro 14\" M3 Pro 18GB RAM 512GB SSD Space Black",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "14",
+          "current_val": "7640"
+        }
+      }
+    },
+    {
+      "product_id": 26,
+      "title": "Luxury 3-Bedroom Furnished Villa in Bole Atlas",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "7112",
+          "current_val": "7675"
+        }
+      }
+    },
+    {
+      "product_id": 27,
+      "title": "Cozy Studio Apartment Furnished Yeka Signal",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "7112",
+          "current_val": "7672"
+        }
+      }
+    },
+    {
+      "product_id": 28,
+      "title": "Prime Commercial Retail Shop in Merkato Tana Mall",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "7112",
+          "current_val": "7677"
+        }
+      }
+    },
+    {
+      "product_id": 29,
+      "title": "Dell XPS 15 9530 Intel Core i9 32GB RAM RTX 4070",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "14",
+          "current_val": "7640"
+        }
+      }
+    },
+    {
+      "product_id": 30,
+      "title": "Traditional Handwoven Habesha Kemis with Pure Silk Tilet (\u12e8\u1200\u1260\u123b \u1240\u121a\u1235)",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "47",
+          "current_val": "7710"
+        }
+      }
+    },
+    {
+      "product_id": 31,
+      "title": "Sony Alpha A7 IV Full-Frame Mirrorless Camera Body",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "41",
+          "current_val": "6446"
+        }
+      }
+    },
+    {
+      "product_id": 32,
+      "title": "Tafe 75HP 4WD Agricultural Farm Tractor with Disc Plough",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "80",
+          "current_val": "29"
+        }
+      }
+    },
+    {
+      "product_id": 33,
+      "title": "Perkins 25kVA Soundproof Silent Diesel Generator with ATS",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "93",
+          "current_val": "7706"
+        }
+      }
+    },
+    {
+      "product_id": 34,
+      "title": "Toyota Hilux 2.8 D-4D Double Cab 4x4 Automatic 2021",
+      "changes": {
+        "expires_at": {
+          "backup_val": "2026-11-28 12:26:55.243236-05",
+          "current_val": "2026-11-28 12:26:55.243236-05:00"
+        },
+        "created_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "updated_at": {
+          "backup_val": "2026-10-29 12:26:55.243236-04",
+          "current_val": "2026-10-29 12:26:55.243236-04:00"
+        },
+        "category_hierarchy_id": {
+          "backup_val": "74",
+          "current_val": "230"
+        }
+      }
+    }
+  ]
+}

@@ -44,7 +44,7 @@ function NewProductContent() {
           className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back
+          {(t as any).ui?.back || 'Back'}
         </button>
 
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 md:p-8">

@@ -1,0 +1,140 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.527946754Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "food-groceries-traditional-spices",
+  "root_family": {
+    "id": 7737,
+    "parent_id": null,
+    "slug": "food-groceries-traditional-spices",
+    "level": 0,
+    "path": "/7737/",
+    "canonical_name": "Food, Groceries \u0026 Traditional Spices",
+    "name_en": "Food, Groceries \u0026 Traditional Spices",
+    "name_am": "የምግብ ሸቀጦች፣ ቅመማ ቅመም፣ በርበሬ እና ማር",
+    "name_om": "Nyaata, Mi'eessituu, Barbaree fi Damma",
+    "name_ti": "መግብን ቀመማት፣ በርበረን መዓርን",
+    "definition": "Culinary spices (Berbere, Shiro, Korarima, Black Cumin, Fenugreek), natural honey, refined cooking oils, and staple grocery provisions.",
+    "display_order": 0,
+    "icon": "Utensils",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.584513Z",
+    "updated_at": "2026-11-01T11:27:00.584513Z",
+    "translations": {
+      "am": "የምግብ ሸቀጦች፣ ቅመማ ቅመም፣ በርበሬ እና ማር",
+      "en": "Food, Groceries \u0026 Traditional Spices",
+      "or": "Nyaata, Mi'eessituu, Barbaree fi Damma",
+      "ti": "መግብን ቀመማት፣ በርበረን መዓርን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7738,
+        "parent_id": 7737,
+        "slug": "traditional-spices-berbere-shiro",
+        "level": 1,
+        "path": "/7737/7738/",
+        "canonical_name": "Traditional Spices, Berbere \u0026 Shiro Powders (በርበሬ እና ሽሮ)",
+        "name_en": "Traditional Spices, Berbere \u0026 Shiro Powders (በርበሬ እና ሽሮ)",
+        "name_am": "የወጥ በርበሬ፣ የሽሮ ዱቄት እና የቅመም ዓይነቶች",
+        "name_om": "Barbaree fi Daakuu Shiroo",
+        "name_ti": "በርበረ ጸብሒ፣ ዱቄት ሽሮን ቀመማትን",
+        "definition": "Sun-dried red pepper blends (Berbere), spiced roasted chickpea legume flour (Shiro), Korarima, and Mekelesha.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.587555Z",
+        "updated_at": "2026-11-01T11:27:00.587555Z",
+        "translations": {
+          "am": "የወጥ በርበሬ፣ የሽሮ ዱቄት እና የቅመም ዓይነቶች",
+          "en": "Traditional Spices, Berbere \u0026 Shiro Powders (በርበሬ እና ሽሮ)",
+          "or": "Barbaree fi Daakuu Shiroo",
+          "ti": "በርበረ ጸብሒ፣ ዱቄት ሽሮን ቀመማትን"
+        },
+        "aliases": {
+          "am": [
+            "ሚጥሚጣ",
+            "ሽሮ",
+            "ቅመም",
+            "በርበሬ",
+            "ኮረሪማ",
+            "የወጥ በርበሬ"
+          ],
+          "en": [
+            "berbere",
+            "chili powder",
+            "ethiopian spice",
+            "korarima",
+            "shiro",
+            "spices"
+          ],
+          "or": [
+            "barbaree",
+            "daakuu shiroo",
+            "mi'eessituu"
+          ],
+          "ti": [
+            "ሽሮ",
+            "ቀመማት",
+            "በርበረ",
+            "ኮረሪማ"
+          ]
+        }
+      },
+      {
+        "id": 7739,
+        "parent_id": 7737,
+        "slug": "pure-natural-honey-bee-products",
+        "level": 1,
+        "path": "/7737/7739/",
+        "canonical_name": "Pure Natural Honey \u0026 Apiculture Products (ማር)",
+        "name_en": "Pure Natural Honey \u0026 Apiculture Products (ማር)",
+        "name_am": "ንፁህ የተፈጥሮ ማር (ነጭ ማር፣ ቀይ ማር) እና ሰም",
+        "name_om": "Damma Uumamaa fi Gaagura",
+        "name_ti": "ንጹር ተፈጥሮኣዊ መዓር (ጻዕዳ መዓር)",
+        "definition": "Raw white honey (Tigray, Gonder highlands), yellow multi-floral honey, and beeswax.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.60898Z",
+        "updated_at": "2026-11-01T11:27:00.60898Z",
+        "translations": {
+          "am": "ንፁህ የተፈጥሮ ማር (ነጭ ማር፣ ቀይ ማር) እና ሰም",
+          "en": "Pure Natural Honey \u0026 Apiculture Products (ማር)",
+          "or": "Damma Uumamaa fi Gaagura",
+          "ti": "ንጹር ተፈጥሮኣዊ መዓር (ጻዕዳ መዓር)"
+        },
+        "aliases": {
+          "am": [
+            "ማር",
+            "ሰም",
+            "ነጭ ማር",
+            "የተፈጥሮ ማር"
+          ],
+          "en": [
+            "beeswax",
+            "honey",
+            "raw honey",
+            "white honey"
+          ],
+          "or": [
+            "damma",
+            "damma adii"
+          ],
+          "ti": [
+            "መዓር",
+            "ጻዕዳ መዓር"
+          ]
+        }
+      }
+    ]
+  }
+}

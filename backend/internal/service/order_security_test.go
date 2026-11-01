@@ -113,4 +113,45 @@ func TestTransactionService_Validation(t *testing.T) {
 			t.Fatalf("expected amount error, got %v", err)
 		}
 	})
+
+	t.Run("zero amount", func(t *testing.T) {
+		req := dto.CreateTransactionRequest{
+			ProductID:  1,
+			BuyerName:  "Dawit",
+			BuyerPhone: "+251911223344",
+			Amount:     0,
+		}
+		_, err := svc.Create(ctx, 1, req)
+		if err == nil || err.Error() != "amount must be greater than zero" {
+			t.Fatalf("expected amount error, got %v", err)
+		}
+	})
+
+	t.Run("missing product id", func(t *testing.T) {
+		req := dto.CreateTransactionRequest{
+			ProductID:  0,
+			BuyerName:  "Dawit",
+			BuyerPhone: "+251911223344",
+			Amount:     500,
+		}
+		_, err := svc.Create(ctx, 1, req)
+		if err == nil || err.Error() != "product_id is required" {
+			t.Fatalf("expected product_id required error, got %v", err)
+		}
+	})
+}
+
+func TestSellerService_UpdateOrderStatus_StatusValidation(t *testing.T) {
+	svc := &SellerService{}
+	ctx := context.Background()
+
+	t.Run("invalid order status", func(t *testing.T) {
+		req := dto.UpdateOrderRequest{
+			Status: "arbitrary_status",
+		}
+		err := svc.UpdateOrderStatus(ctx, 1, 1, req)
+		if err == nil || err.Error() != "invalid status" {
+			t.Fatalf("expected 'invalid status' error, got %v", err)
+		}
+	})
 }

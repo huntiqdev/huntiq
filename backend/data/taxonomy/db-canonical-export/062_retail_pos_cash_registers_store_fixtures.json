@@ -1,0 +1,86 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.531846402Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "retail-pos-cash-registers-store-fixtures",
+  "root_family": {
+    "id": 7775,
+    "parent_id": null,
+    "slug": "retail-pos-cash-registers-store-fixtures",
+    "level": 0,
+    "path": "/7775/",
+    "canonical_name": "Retail Point of Sale (POS), Cash Registers \u0026 Store Fixtures",
+    "name_en": "Retail Point of Sale (POS), Cash Registers \u0026 Store Fixtures",
+    "name_am": "የችርቻሮ ሽያጭ መመዝገቢያ (ካሽ ሬጂስተር) እና ባርኮድ ስካነር",
+    "name_om": "Meeshaalee Galii Daldalaa (Kaash Reejistara)",
+    "name_ti": "ናይ ንግዲ መመዝገቢ (ካሽ ሬጂስተር)ን ባርኮድ ስካነርን",
+    "definition": "Fiscal electronic cash registers (ERCA certified F-POS), barcode laser scanners, thermal receipt printers, and supermarket shelving gondolas.",
+    "display_order": 0,
+    "icon": "CreditCard",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.922962Z",
+    "updated_at": "2026-11-01T11:27:00.922962Z",
+    "translations": {
+      "am": "የችርቻሮ ሽያጭ መመዝገቢያ (ካሽ ሬጂስተር) እና ባርኮድ ስካነር",
+      "en": "Retail Point of Sale (POS), Cash Registers \u0026 Store Fixtures",
+      "or": "Meeshaalee Galii Daldalaa (Kaash Reejistara)",
+      "ti": "ናይ ንግዲ መመዝገቢ (ካሽ ሬጂስተር)ን ባርኮድ ስካነርን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7776,
+        "parent_id": 7775,
+        "slug": "fiscal-electronic-cash-registers",
+        "level": 1,
+        "path": "/7775/7776/",
+        "canonical_name": "ERCA-Certified Fiscal Electronic Cash Registers (ካሽ ሬጂስተር)",
+        "name_en": "ERCA-Certified Fiscal Electronic Cash Registers (ካሽ ሬጂስተር)",
+        "name_am": "የገቢዎች እውቅና ያላቸው የሽያጭ መመዝገቢያ ማሽኖች (ካሽ ሬጂስተር)",
+        "name_om": "Maashina Galii Galmeessu (Kaash Reejistara)",
+        "name_ti": "ናይ ግብሪ ፍቓድ ዘለዎም ናይ መሸጢ ማሽናት",
+        "definition": "Government-accredited electronic sales register machines (Datecs, Daisy, Tremol) with GPRS telecommunication modules.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.925296Z",
+        "updated_at": "2026-11-01T11:27:00.925296Z",
+        "translations": {
+          "am": "የገቢዎች እውቅና ያላቸው የሽያጭ መመዝገቢያ ማሽኖች (ካሽ ሬጂስተር)",
+          "en": "ERCA-Certified Fiscal Electronic Cash Registers (ካሽ ሬጂስተር)",
+          "or": "Maashina Galii Galmeessu (Kaash Reejistara)",
+          "ti": "ናይ ግብሪ ፍቓድ ዘለዎም ናይ መሸጢ ማሽናት"
+        },
+        "aliases": {
+          "am": [
+            "ቴርማል ፕሪንተር",
+            "ካሽ ሬጂስተር",
+            "የሽያጭ ማሽን",
+            "የገቢዎች ማሽን"
+          ],
+          "en": [
+            "cash register",
+            "datecs",
+            "fiscal machine",
+            "pos machine",
+            "receipt printer"
+          ],
+          "or": [
+            "kaash reejistara"
+          ],
+          "ti": [
+            "ካሽ ሬጂስተር"
+          ]
+        }
+      }
+    ]
+  }
+}

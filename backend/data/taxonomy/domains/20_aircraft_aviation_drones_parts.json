@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "TRANS_AVIATION",
+  "root_family": {
+    "id": "root-aviation-drones",
+    "slug": "aircraft-aviation-drones-parts",
+    "code": "TRANS_AVIATION",
+    "level": 1,
+    "canonical_name": "Aircraft, Aviation Parts \u0026 Drone Systems",
+    "definition": "Commercial UAVs, agricultural spray drones, aerial inspection quadcopters, avionics, and general aviation components.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "Plane",
+    "translations": {
+      "am": "አውሮፕላኖች፣ ድሮኖች እና የአቪዬሽን እቃዎች",
+      "or": "Xiyyaara, Diroonii fi Meeshaalee Hawaa",
+      "ti": "ነፈርቲ፣ ድሮናትን ናይ ኣቪዬሽን ኣቑሑትን"
+    },
+    "children": [
+      {
+        "id": "sf-commercial-drones",
+        "slug": "commercial-uavs-drones",
+        "code": "DRONE_UAV",
+        "level": 2,
+        "canonical_name": "Commercial Drones \u0026 Agricultural Spraying UAVs",
+        "definition": "DJI enterprise drones, crop-spraying multicopters, and topographical photogrammetry UAVs.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የግብርና እና የቪዲዮ ድሮኖች",
+          "or": "Diroonii Qonnaa fi Suuraa",
+          "ti": "ናይ ሕርሻን ቪዲዮን ድሮናት"
+        }
+      }
+    ]
+  }
+}

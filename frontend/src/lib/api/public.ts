@@ -96,6 +96,31 @@ export interface PublicPaymentSettings {
   otp_gateway: string;
 }
 
+export interface AutoCategorizeResult {
+  detected_title: string;
+  primary_intent: 'sale' | 'rent';
+  category_hierarchy_id: number;
+  category_slug: string;
+  root_category_name: string;
+  subcategory_name: string;
+  leaf_destination_name: string;
+  full_branch_path: string;
+  branch_path_localized: string;
+  legacy_category_id: number;
+  condition: 'new' | 'used';
+  suggested_price_etb: number;
+  price_range_min: number;
+  price_range_max: number;
+  suggested_description: string;
+  detected_locale: string;
+  brand?: string;
+  model?: string;
+  confidence: number;
+  human_error_corrected: boolean;
+  original_term?: string;
+  corrected_term?: string;
+}
+
 export const publicApi = {
   getProductsWithMeta: (params?: Record<string, any>) => {
     // Clean undefined values and map filter keys to backend format
@@ -173,5 +198,10 @@ export const publicApi = {
   },
   searchLocationHierarchy: (query: string, lang = 'en') =>
     fetchAPI<any[]>(`/locations/search-hierarchy?q=${encodeURIComponent(query)}&lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  autoCategorize: (data: { title?: string; description?: string; locale?: string }) =>
+    fetchAPI<AutoCategorizeResult>('/products/auto-categorize', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 };
 

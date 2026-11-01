@@ -1,0 +1,45 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_code": "EDU_TRAINING",
+  "root_family": {
+    "id": "root-education-training",
+    "slug": "education-vocational-training-tutoring",
+    "code": "EDU_TRAINING",
+    "level": 1,
+    "canonical_name": "Education, Vocational Training \u0026 Academic Tutoring",
+    "definition": "Technical and Vocational Education and Training (TVET Levels I–V), language instruction, software engineering bootcamps, and home academic tutoring.",
+    "status": "active",
+    "is_leaf": false,
+    "icon": "GraduationCap",
+    "translations": {
+      "am": "ትምህርት፣ የሙያ ስልጠና (TVET) እና የማጠናከሪያ ትምህርት",
+      "or": "Barnoota, Leenjii Ogummaa fi Qophii",
+      "ti": "ትምህርቲ፣ ናይ ሞያ ስልጠናን መተዓረዪ ትምህርትን"
+    },
+    "children": [
+      {
+        "id": "sf-tvet-vocational-courses",
+        "slug": "tvet-technical-vocational-training",
+        "code": "EDU_TVET",
+        "level": 2,
+        "canonical_name": "Technical \u0026 Vocational Training (TVET Levels I–V)",
+        "definition": "Accredited occupational certificate courses in automotive mechanics, electrical installation, construction masonry, and garment manufacturing.",
+        "status": "active",
+        "is_leaf": true,
+        "translations": {
+          "am": "የቴክኒክ እና ሙያ ስልጠና ኮርሶች (ደረጃ 1-5)",
+          "or": "Leenjii Teeknikaa fi Ogummaa (TVET)",
+          "ti": "ናይ ቴክኒክን ሞያን ስልጠናታት (TVET)"
+        }
+      }
+    ]
+  }
+}

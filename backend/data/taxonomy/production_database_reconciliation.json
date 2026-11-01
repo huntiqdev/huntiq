@@ -1,0 +1,49 @@
+{
+  "audit_timestamp": "2026-11-01T12:55:00Z",
+  "database_name": "hulubedej_db",
+  "audit_type": "POST_MIGRATION_INDEPENDENT_FORENSIC_AUDIT",
+  "database_metrics": {
+    "total_categories": 2575,
+    "categories_by_level": {
+      "level_0_roots": 139,
+      "level_1_super_families": 499,
+      "level_2_subcategories": 1881,
+      "level_3_specialized_leaf": 56
+    },
+    "level_reconciliation_formula": "139 + 499 + 1881 + 56 = 2575",
+    "level_0_matches_parent_null": true,
+    "total_active_listings": 14,
+    "orphaned_listings": 0,
+    "total_category_aliases": 1053,
+    "aliases_by_language": {
+      "am": 311,
+      "en": 380,
+      "or": 174,
+      "ti": 188
+    },
+    "materialized_path_mismatches": 0,
+    "self_parenting_cycles": 0
+  },
+  "backup_baseline_comparison": {
+    "backup_file": "backend/data/taxonomy/pre_migration_backup_hulubedej.sql",
+    "backup_sha256": "defcc214908ae1873433d276e2c685d898b219a2fe8a400a985ff56263db671c",
+    "backup_total_categories": 2575,
+    "backup_total_products": 14,
+    "backup_total_aliases": 1038,
+    "current_total_categories": 2575,
+    "current_total_products": 14,
+    "current_total_aliases": 1053,
+    "category_row_count_delta": 0,
+    "product_row_count_delta": 0,
+    "alias_row_count_delta": 15
+  },
+  "migration_036_execution_evidence": {
+    "is_archived_column_added": true,
+    "idx_category_hierarchy_archived_exists": true,
+    "trg_cascade_category_hierarchy_path_exists": true,
+    "corrupted_paths_repaired_count": 29,
+    "tigrinya_names_backfilled_count": 22,
+    "live_products_realigned_count": 14,
+    "parent_level_duplicate_aliases_pruned": 37
+  }
+}

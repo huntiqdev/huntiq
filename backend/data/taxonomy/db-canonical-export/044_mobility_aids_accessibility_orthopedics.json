@@ -1,0 +1,85 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.527155871Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "mobility-aids-accessibility-orthopedics",
+  "root_family": {
+    "id": 7732,
+    "parent_id": null,
+    "slug": "mobility-aids-accessibility-orthopedics",
+    "level": 0,
+    "path": "/7732/",
+    "canonical_name": "Mobility Aids, Accessibility \u0026 Orthopedic Equipment",
+    "name_en": "Mobility Aids, Accessibility \u0026 Orthopedic Equipment",
+    "name_am": "የመንቀሳቀሻ ድጋፍ ሰጪ እቃዎች (ዊልቸር፣ ክራንች)",
+    "name_om": "Meeshaalee Deeggarsa Sochii (Wiilcheerii)",
+    "name_ti": "ናይ ምንቅስቓስ ደገፍቲ ኣቑሑት (ዊልቸር፣ ክራንች)",
+    "definition": "Manual folding wheelchairs, motorized power wheelchairs, aluminum underarm crutches, walker rollators, and orthopedic braces.",
+    "display_order": 0,
+    "icon": "Accessibility",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.51886Z",
+    "updated_at": "2026-11-01T11:27:00.51886Z",
+    "translations": {
+      "am": "የመንቀሳቀሻ ድጋፍ ሰጪ እቃዎች (ዊልቸር፣ ክራንች)",
+      "en": "Mobility Aids, Accessibility \u0026 Orthopedic Equipment",
+      "or": "Meeshaalee Deeggarsa Sochii (Wiilcheerii)",
+      "ti": "ናይ ምንቅስቓስ ደገፍቲ ኣቑሑት (ዊልቸር፣ ክራንች)"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7733,
+        "parent_id": 7732,
+        "slug": "manual-motorized-wheelchairs",
+        "level": 1,
+        "path": "/7732/7733/",
+        "canonical_name": "Manual \u0026 Electric Wheelchairs \u0026 Mobility Walkers (ዊልቸር)",
+        "name_en": "Manual \u0026 Electric Wheelchairs \u0026 Mobility Walkers (ዊልቸር)",
+        "name_am": "የእጅ እና የሞተር ዊልቸሮች",
+        "name_om": "Wiilcheerii Harka fi Elektirikii",
+        "name_ti": "ናይ ኢድን ሞተርን ዊልቸራት",
+        "definition": "Chrome steel folding wheelchairs, commode wheelchairs, and electric powerchairs.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.522672Z",
+        "updated_at": "2026-11-01T11:27:00.522672Z",
+        "translations": {
+          "am": "የእጅ እና የሞተር ዊልቸሮች",
+          "en": "Manual \u0026 Electric Wheelchairs \u0026 Mobility Walkers (ዊልቸር)",
+          "or": "Wiilcheerii Harka fi Elektirikii",
+          "ti": "ናይ ኢድን ሞተርን ዊልቸራት"
+        },
+        "aliases": {
+          "am": [
+            "ክራንች",
+            "ዊልቸር",
+            "የአካል ጉዳተኞች ወንበር"
+          ],
+          "en": [
+            "crutches",
+            "electric wheelchair",
+            "walker",
+            "wheelchair"
+          ],
+          "or": [
+            "wiilcheerii"
+          ],
+          "ti": [
+            "ክራንች",
+            "ዊልቸር"
+          ]
+        }
+      }
+    ]
+  }
+}

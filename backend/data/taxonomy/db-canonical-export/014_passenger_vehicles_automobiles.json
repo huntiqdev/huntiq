@@ -1,0 +1,166 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.520056177Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "passenger-vehicles-automobiles",
+  "root_family": {
+    "id": 7651,
+    "parent_id": null,
+    "slug": "passenger-vehicles-automobiles",
+    "level": 0,
+    "path": "/7651/",
+    "canonical_name": "Passenger Vehicles \u0026 Automobiles",
+    "name_en": "Passenger Vehicles \u0026 Automobiles",
+    "name_am": "ተሽከርካሪዎች እና የመንገደኛ መኪኖች",
+    "name_om": "Konkolaattota fi Awutoomoobilii",
+    "name_ti": "ተሽከርከርትን ናይ ህዝቢ መካይንን",
+    "definition": "Complete registered passenger cars, sedans, hatchbacks, compact crossovers, SUVs, and luxury 4WD automobiles.",
+    "display_order": 0,
+    "icon": "Car",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:26:59.541244Z",
+    "updated_at": "2026-11-01T11:26:59.541244Z",
+    "translations": {
+      "am": "ተሽከርካሪዎች እና የመንገደኛ መኪኖች",
+      "en": "Passenger Vehicles \u0026 Automobiles",
+      "or": "Konkolaattota fi Awutoomoobilii",
+      "ti": "ተሽከርከርትን ናይ ህዝቢ መካይንን"
+    },
+    "aliases": {
+      "am": [
+        "ላንድክሩዘር",
+        "መኪና",
+        "ቪትዝ",
+        "ተሽከርካሪ",
+        "አውቶሞቢል",
+        "ኮሮላ"
+      ],
+      "en": [
+        "automobile",
+        "car",
+        "cars",
+        "passenger car",
+        "sedan",
+        "suv",
+        "vehicle"
+      ],
+      "or": [
+        "awutoomoobilii",
+        "konkolaataa",
+        "makiinaa"
+      ],
+      "ti": [
+        "መኪና",
+        "ተሽከርካሪ",
+        "ኣውቶሞቢል"
+      ]
+    },
+    "children": [
+      {
+        "id": 7652,
+        "parent_id": 7651,
+        "slug": "sedans-saloon-automobiles",
+        "level": 1,
+        "path": "/7651/7652/",
+        "canonical_name": "Sedans \u0026 Saloon Automobiles",
+        "name_en": "Sedans \u0026 Saloon Automobiles",
+        "name_am": "ሴዳን እና ሳሎን መኪኖች",
+        "name_om": "Konkolaataa Seedaanii",
+        "name_ti": "ሴዳን መካይን",
+        "definition": "Three-box passenger automobiles with separate compartments for engine, passenger cabin, and boot/trunk.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.571477Z",
+        "updated_at": "2026-11-01T11:26:59.571477Z",
+        "translations": {
+          "am": "ሴዳን እና ሳሎን መኪኖች",
+          "en": "Sedans \u0026 Saloon Automobiles",
+          "or": "Konkolaataa Seedaanii",
+          "ti": "ሴዳን መካይን"
+        },
+        "aliases": {}
+      },
+      {
+        "id": 7653,
+        "parent_id": 7651,
+        "slug": "hatchbacks-compact-cars",
+        "level": 1,
+        "path": "/7651/7653/",
+        "canonical_name": "Hatchbacks \u0026 Compact City Cars (ቪትዝ እና ትናንሽ መኪኖች)",
+        "name_en": "Hatchbacks \u0026 Compact City Cars (ቪትዝ እና ትናንሽ መኪኖች)",
+        "name_am": "ሀችባክ እና የታመቁ ትናንሽ መኪኖች (ቪትዝ)",
+        "name_om": "Konkolaattota Qancoo fi Haachbaakii",
+        "name_ti": "ሃችባክን ናይ ከተማ መካይንን",
+        "definition": "Two-box city runarounds (Toyota Vitz, Yaris, Suzuki Swift, Hyundai Grand i10) popular for fuel economy.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.574825Z",
+        "updated_at": "2026-11-01T11:26:59.574825Z",
+        "translations": {
+          "am": "ሀችባክ እና የታመቁ ትናንሽ መኪኖች (ቪትዝ)",
+          "en": "Hatchbacks \u0026 Compact City Cars (ቪትዝ እና ትናንሽ መኪኖች)",
+          "or": "Konkolaattota Qancoo fi Haachbaakii",
+          "ti": "ሃችባክን ናይ ከተማ መካይንን"
+        },
+        "aliases": {
+          "am": [
+            "ሀችባክ",
+            "ቪትዝ",
+            "ትንሽ መኪና",
+            "ያሪስ"
+          ],
+          "en": [
+            "compact car",
+            "hatchback",
+            "small car",
+            "suzuki swift",
+            "toyota vitz"
+          ],
+          "or": [
+            "konkolaataa xiqqoo",
+            "viitsii"
+          ],
+          "ti": [
+            "ቪትዝ",
+            "ንእሽቶ መኪና"
+          ]
+        }
+      },
+      {
+        "id": 7654,
+        "parent_id": 7651,
+        "slug": "suvs-4x4-offroad-vehicles",
+        "level": 1,
+        "path": "/7651/7654/",
+        "canonical_name": "SUVs, Crossovers \u0026 4x4 Off-Road Vehicles",
+        "name_en": "SUVs, Crossovers \u0026 4x4 Off-Road Vehicles",
+        "name_am": "ኤስዩቪ፣ ፎርዊል ድራይቭ እና 4x4 መኪኖች",
+        "name_om": "Konkolaataa Foor-wiilii fi Ees-Yuu-Vii",
+        "name_ti": "ኤስዩቪን 4x4 መካይንን",
+        "definition": "High-clearance all-wheel drive and four-wheel drive wagons (Land Cruiser, RAV4, Prado, Fortuner).",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:26:59.603003Z",
+        "updated_at": "2026-11-01T11:26:59.603003Z",
+        "translations": {
+          "am": "ኤስዩቪ፣ ፎርዊል ድራይቭ እና 4x4 መኪኖች",
+          "en": "SUVs, Crossovers \u0026 4x4 Off-Road Vehicles",
+          "or": "Konkolaataa Foor-wiilii fi Ees-Yuu-Vii",
+          "ti": "ኤስዩቪን 4x4 መካይንን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

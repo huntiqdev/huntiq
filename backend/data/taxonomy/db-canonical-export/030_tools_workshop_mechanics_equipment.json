@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.522965182Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "tools-workshop-mechanics-equipment",
+  "root_family": {
+    "id": 7696,
+    "parent_id": null,
+    "slug": "tools-workshop-mechanics-equipment",
+    "level": 0,
+    "path": "/7696/",
+    "canonical_name": "Tools, Workshop \u0026 Mechanics Equipment",
+    "name_en": "Tools, Workshop \u0026 Mechanics Equipment",
+    "name_am": "የእጅ መሳሪያዎች፣ የሜካኒክ እና የዎርክሾፕ እቃዎች",
+    "name_om": "Meeshaalee Harka fi Suphaa",
+    "name_ti": "መሳርሒታት ኢድን ናይ ዎርክሾፕ ንዋያትን",
+    "definition": "Professional hand toolsets, combination spanners, ratchets, socket sets, hydraulic floor jacks, and workbench vices.",
+    "display_order": 0,
+    "icon": "Wrench",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.093722Z",
+    "updated_at": "2026-11-01T11:27:00.093722Z",
+    "translations": {
+      "am": "የእጅ መሳሪያዎች፣ የሜካኒክ እና የዎርክሾፕ እቃዎች",
+      "en": "Tools, Workshop \u0026 Mechanics Equipment",
+      "or": "Meeshaalee Harka fi Suphaa",
+      "ti": "መሳርሒታት ኢድን ናይ ዎርክሾፕ ንዋያትን"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7697,
+        "parent_id": 7696,
+        "slug": "mechanic-hand-toolsets-spanners",
+        "level": 1,
+        "path": "/7696/7697/",
+        "canonical_name": "Mechanics Toolsets, Spanners \u0026 Socket Kits",
+        "name_en": "Mechanics Toolsets, Spanners \u0026 Socket Kits",
+        "name_am": "የመፍቻ ቁልፎች፣ ካቻቪቴዎች እና የሜካኒክ እቃዎች",
+        "name_om": "Qulfoo fi Meeshaalee Suphaa Konkolaataa",
+        "name_ti": "መፍትሕታት፣ ካቻቪተታትን ናይ መካኒክ ኣቑሑትን",
+        "definition": "Chrome-vanadium combination wrenches, 1/2-inch drive metric socket sets, and screwdrivers.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.096422Z",
+        "updated_at": "2026-11-01T11:27:00.096422Z",
+        "translations": {
+          "am": "የመፍቻ ቁልፎች፣ ካቻቪቴዎች እና የሜካኒክ እቃዎች",
+          "en": "Mechanics Toolsets, Spanners \u0026 Socket Kits",
+          "or": "Qulfoo fi Meeshaalee Suphaa Konkolaataa",
+          "ti": "መፍትሕታት፣ ካቻቪተታትን ናይ መካኒክ ኣቑሑትን"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

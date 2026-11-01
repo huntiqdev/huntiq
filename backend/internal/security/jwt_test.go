@@ -40,4 +40,25 @@ func TestTierHierarchyAndJWTClaims(t *testing.T) {
 	if normClaims.BuyerTier != "normal" {
 		t.Errorf("expected BuyerTier 'normal', got %q", normClaims.BuyerTier)
 	}
+
+	// 3. Generate JWT with Profile (Name, Phone, Capabilities)
+	profileToken, err := security.GenerateJWTWithProfile(55, "Abebe Bikila", "+251911223344", "seller", "", "normal", "sale", []string{"buyer", "seller"}, secret)
+	if err != nil {
+		t.Fatalf("Failed to generate Profile JWT: %v", err)
+	}
+
+	profileClaims, err := security.ParseJWT(profileToken, secret)
+	if err != nil {
+		t.Fatalf("Failed to parse Profile JWT: %v", err)
+	}
+
+	if profileClaims.Name != "Abebe Bikila" {
+		t.Errorf("expected Name 'Abebe Bikila', got %q", profileClaims.Name)
+	}
+	if profileClaims.Phone != "+251911223344" {
+		t.Errorf("expected Phone '+251911223344', got %q", profileClaims.Phone)
+	}
+	if !profileClaims.HasCapability("seller") {
+		t.Errorf("expected seller capability to be true")
+	}
 }

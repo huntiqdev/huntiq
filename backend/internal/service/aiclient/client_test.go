@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 	"time"
 )
@@ -275,9 +276,45 @@ func TestCleanConversationalSearchTerm(t *testing.T) {
 		{"I need an apartment for rent", "apartment"},
 		{"What products are available now?", ""},
 		{"What is available?", ""},
+		// Conversational questions in English
+		{"have you phone?", "phone"},
+		{"have you a phone?", "phone"},
+		{"have you got any phone?", "phone"},
+		{"do you have phone?", "phone"},
+		{"do you have a phone?", "phone"},
+		{"can i get a phone?", "phone"},
+		{"is there a phone?", "phone"},
+		{"do you have a car?", "car"},
+		{"have you got a laptop?", "laptop"},
+		// Conversational questions in Amharic
 		{"ስልክ መግዛት እፈልጋለሁ", "ስልክ"},
+		{"ስልክ አለዎት?", "ስልክ"},
+		{"ስልክ አለህ?", "ስልክ"},
+		{"ስልክ አለሽ?", "ስልክ"},
+		{"ስልክ አላችሁ?", "ስልክ"},
+		{"ስልክ አለ?", "ስልክ"},
+		{"ስልክ አለ ወይ?", "ስልክ"},
+		{"ስልክ አለ እንዴ?", "ስልክ"},
+		{"ስልክ ፈልጌ ነው", "ስልክ"},
+		{"ስልክ ፈልጌ ነበር", "ስልክ"},
+		{"ስልክ ይኖራል?", "ስልክ"},
+		{"ስልክ ይገኛል?", "ስልክ"},
+		{"ስልክ ማግኘት እችላለሁ?", "ስልክ"},
+		{"ስልክ ስንት ነው?", "ስልክ"},
+		{"የስልክ ዋጋ ስንት ነው?", "ስልክ"},
+		{"መኪና አለዎት?", "መኪና"},
+		{"መኪና አለህ?", "መኪና"},
+		{"ቤት አለዎት?", "ቤት"},
+		// Conversational questions in Afaan Oromo
 		{"Bilbila bituu barbaada", "bilbila"},
+		{"bilbila qabduu?", "bilbila"},
+		{"bilbila qabdu?", "bilbila"},
+		{"bilbila jiraa?", "bilbila"},
+		{"konkolaataa qabdu?", "konkolaataa"},
+		// Conversational questions in Tigrinya
 		{"ሞባይል ክገዝእ ደልየ", "ሞባይል"},
+		{"ሞባይል ኣለኩም?", "ሞባይል"},
+		{"መኪና ኣለካ?", "መኪና"},
 	}
 
 	for _, tc := range tests {
@@ -393,4 +430,114 @@ func TestParseFallbackSearchArgs_MultiTurnInheritance(t *testing.T) {
 		t.Errorf("expected max_price=40000.0, got %v", args["max_price"])
 	}
 }
+
+func TestConversationalSearchQuestions(t *testing.T) {
+	// English conversational question
+	hasIntent, args := ParseFallbackSearchArgs(nil, "have you phone?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'have you phone?'")
+	}
+	if args["search_term"] != "phone" {
+		t.Errorf("expected search_term='phone', got %v", args["search_term"])
+	}
+
+	// Amharic conversational question
+	hasIntent, args = ParseFallbackSearchArgs(nil, "ስልክ አለዎት?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'ስልክ አለዎት?'")
+	}
+	if args["search_term"] != "phone" {
+		t.Errorf("expected search_term='phone', got %v", args["search_term"])
+	}
+	if args["localized_term"] != "ስልክ" {
+		t.Errorf("expected localized_term='ስልክ', got %v", args["localized_term"])
+	}
+
+	// Amharic car question
+	hasIntent, args = ParseFallbackSearchArgs(nil, "መኪና አለህ?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'መኪና አለህ?'")
+	}
+	if args["search_term"] != "car" {
+		t.Errorf("expected search_term='car', got %v", args["search_term"])
+	}
+
+	// Afaan Oromoo phone question
+	hasIntent, args = ParseFallbackSearchArgs(nil, "bilbila qabduu?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'bilbila qabduu?'")
+	}
+	if args["search_term"] != "phone" {
+		t.Errorf("expected search_term='phone', got %v", args["search_term"])
+	}
+
+	// Afaan Oromoo car question
+	hasIntent, args = ParseFallbackSearchArgs(nil, "konkolaataa qabdaa?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'konkolaataa qabdaa?'")
+	}
+	if args["search_term"] != "car" {
+		t.Errorf("expected search_term='car', got %v", args["search_term"])
+	}
+
+	// Tigrinya phone question
+	hasIntent, args = ParseFallbackSearchArgs(nil, "ስልኪ ኣለኩም ዶ?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'ስልኪ ኣለኩም ዶ?'")
+	}
+	if args["search_term"] != "phone" {
+		t.Errorf("expected search_term='phone', got %v", args["search_term"])
+	}
+
+	// English "do you have a car?"
+	hasIntent, args = ParseFallbackSearchArgs(nil, "do you have a car?")
+	if !hasIntent {
+		t.Fatalf("expected hasIntent=true for 'do you have a car?'")
+	}
+	if args["search_term"] != "car" {
+		t.Errorf("expected search_term='car', got %v", args["search_term"])
+	}
+}
+
+func TestSearchSynonymsAndLocalization(t *testing.T) {
+	// 1. Synonym group for phone
+	syns := GetSearchSynonyms("phone")
+	if len(syns) <= 1 {
+		t.Fatalf("expected multiple synonyms for 'phone', got %v", syns)
+	}
+
+	// 2. Cross-lingual mapping from Amharic 'ስልክ'
+	amharicSyns := GetSearchSynonyms("ስልክ")
+	hasIphone := false
+	for _, s := range amharicSyns {
+		if s == "iphone" {
+			hasIphone = true
+			break
+		}
+	}
+	if !hasIphone {
+		t.Errorf("expected 'iphone' in synonyms for Amharic 'ስልክ', got %v", amharicSyns)
+	}
+
+	// 3. TsQuery construction
+	tsQuery := BuildSynonymTsQuery("phone")
+	if !strings.Contains(tsQuery, "'phone'") || !strings.Contains(tsQuery, "'ስልክ'") {
+		t.Errorf("expected tsquery to contain both 'phone' and 'ስልክ', got %s", tsQuery)
+	}
+
+	// 4. Entity localization
+	if loc := GetLocalizedEntityTerm("phone", "am"); loc != "ስልክ" {
+		t.Errorf("expected localized term 'ስልክ' for am, got %s", loc)
+	}
+	if loc := GetLocalizedEntityTerm("phone", "om"); loc != "bilbila" {
+		t.Errorf("expected localized term 'bilbila' for om, got %s", loc)
+	}
+	if loc := GetLocalizedEntityTerm("phone", "ti"); loc != "ሞባይል" {
+		t.Errorf("expected localized term 'ሞባይል' for ti, got %s", loc)
+	}
+	if loc := GetLocalizedEntityTerm("phone", "en"); loc != "phone" {
+		t.Errorf("expected localized term 'phone' for en, got %s", loc)
+	}
+}
+
 

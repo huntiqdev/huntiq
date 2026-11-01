@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0.0",
+  "taxonomy_version": "2.0.0",
+  "export_timestamp": "2026-11-01T16:56:10.528724336Z",
+  "source_language": "en",
+  "supported_languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domain_slug": "arts-crafts-collectibles-antiques",
+  "root_family": {
+    "id": 7743,
+    "parent_id": null,
+    "slug": "arts-crafts-collectibles-antiques",
+    "level": 0,
+    "path": "/7743/",
+    "canonical_name": "Arts, Crafts, Collectibles \u0026 Antiques",
+    "name_en": "Arts, Crafts, Collectibles \u0026 Antiques",
+    "name_am": "የጥበብ ስራዎች፣ የእጅ ጥበብ እና ቅርሶች (መስቀሎች)",
+    "name_om": "Hojii Aartii, Aadaa fi Qabeenya Seenaa",
+    "name_ti": "ስነ ጥበብ፣ ናይ ኢድ ጥበባትን ቅርስታትን (መስቀላት)",
+    "definition": "Handmade processional brass and wooden crosses (Lalibela, Gondar, Axum), traditional parchment paintings, and historical numismatics.",
+    "display_order": 0,
+    "icon": "Palette",
+    "is_active": true,
+    "is_leaf": false,
+    "created_at": "2026-11-01T11:27:00.664938Z",
+    "updated_at": "2026-11-01T11:27:00.664938Z",
+    "translations": {
+      "am": "የጥበብ ስራዎች፣ የእጅ ጥበብ እና ቅርሶች (መስቀሎች)",
+      "en": "Arts, Crafts, Collectibles \u0026 Antiques",
+      "or": "Hojii Aartii, Aadaa fi Qabeenya Seenaa",
+      "ti": "ስነ ጥበብ፣ ናይ ኢድ ጥበባትን ቅርስታትን (መስቀላት)"
+    },
+    "aliases": {},
+    "children": [
+      {
+        "id": 7744,
+        "parent_id": 7743,
+        "slug": "traditional-crosses-historical-artifacts",
+        "level": 1,
+        "path": "/7743/7744/",
+        "canonical_name": "Handmade Processional Crosses \u0026 Cultural Artifacts (መስቀሎች)",
+        "name_en": "Handmade Processional Crosses \u0026 Cultural Artifacts (መስቀሎች)",
+        "name_am": "የእጅ እና የብር መስቀሎች (የላሊበላ፣ የአክሱም መስቀል)",
+        "name_om": "Fannoo Aadaa fi Qabeenya Seenaa",
+        "name_ti": "ናይ ኢድን ብሩርን መስቀላት",
+        "definition": "Lost-wax cast brass, silver, and carved olive-wood hand, neck, and processional crosses.",
+        "display_order": 0,
+        "is_active": true,
+        "is_leaf": true,
+        "created_at": "2026-11-01T11:27:00.668804Z",
+        "updated_at": "2026-11-01T11:27:00.668804Z",
+        "translations": {
+          "am": "የእጅ እና የብር መስቀሎች (የላሊበላ፣ የአክሱም መስቀል)",
+          "en": "Handmade Processional Crosses \u0026 Cultural Artifacts (መስቀሎች)",
+          "or": "Fannoo Aadaa fi Qabeenya Seenaa",
+          "ti": "ናይ ኢድን ብሩርን መስቀላት"
+        },
+        "aliases": {}
+      }
+    ]
+  }
+}

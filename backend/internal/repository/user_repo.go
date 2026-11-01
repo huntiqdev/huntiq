@@ -325,6 +325,9 @@ func (r *UserRepo) GetTier(ctx context.Context, id int) (string, float64, error)
 }
 
 func (r *UserRepo) UpdateTotalValueSold(ctx context.Context, id int, addAmount float64) error {
+	if addAmount <= 0 {
+		return nil
+	}
 	// Read tier thresholds from platform_settings — fall back to defaults
 	// if the keys are missing (e.g. fresh install before admin configures them).
 	goldThreshold := constants.DefaultGoldThreshold
@@ -480,68 +483,23 @@ func (r *UserRepo) generateOTP(ctx context.Context, phone, email, purpose, userT
 // VerifyOTP checks phone-based OTP. Increments attempts on failure (max 5).
 // Returns the user_type stored on the OTP row so callers can log it correctly.
 func (r *UserRepo) VerifyOTP(ctx context.Context, phone, code, purpose string) error {
-	return r.verifyOTP(ctx, phone, "", code, purpose)
+	return r.verifyOTP(ctx, phone, "", code, purpose, "")
 }
 
 // VerifyOTPForRole checks phone-based OTP and validates it was issued for the
 // given role (user_type). Prevents cross-role OTP reuse — e.g. a seller reset
 // OTP cannot be used to reset a buyer password on the same phone.
+// Uses an atomic database transaction with SELECT ... FOR UPDATE to prevent race conditions.
 func (r *UserRepo) VerifyOTPForRole(ctx context.Context, phone, code, purpose, role string) error {
-	// Fetch the latest active OTP row for this phone+purpose+role
-	var rowID int
-	var encryptedCode string
-	var rowAttempts int
-	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	rowErr := r.db.QueryRow(ctx, `
-		SELECT id, code, attempts FROM otp_codes
-		WHERE phone=$1 AND purpose=$2 AND user_type=$3
-		  AND used=FALSE AND expires_at > NOW()
-		  AND (locked_until IS NULL OR locked_until <= NOW())
-		ORDER BY created_at DESC LIMIT 1`,
-		phone, purpose, role).Scan(&rowID, &encryptedCode, &rowAttempts)
-	if rowErr != nil {
-		var lockedUntil *string
-		_ = r.db.QueryRow(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-			`SELECT locked_until::text FROM otp_codes
-			WHERE phone=$1 AND purpose=$2 AND user_type=$3
-			  AND used=FALSE AND locked_until > NOW()
-			ORDER BY created_at DESC LIMIT 1`,
-			phone, purpose, role).Scan(&lockedUntil)
-		if lockedUntil != nil {
-			return fmt.Errorf("too many failed attempts — locked for 30 minutes")
-		}
-		return fmt.Errorf("invalid or expired OTP")
-	}
-	if r.otpCrypto == nil {
-		return fmt.Errorf("OTP crypto not configured")
-	}
-	plainStored, err := r.otpCrypto.DecryptOTP(encryptedCode)
-	if err != nil {
-		return fmt.Errorf("invalid or expired OTP")
-	}
-
-	// Use constant-time comparison to prevent timing-based OTP enumeration (CWE-208).
-	if subtle.ConstantTimeCompare([]byte(plainStored), []byte(code)) != 1 {
-		newAttempts := rowAttempts + 1
-		if newAttempts >= 5 {
-			_, _ = r.db.Exec(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-				`UPDATE otp_codes SET attempts=$1, locked_until=NOW()+INTERVAL '30 minutes' WHERE id=$2`,
-				newAttempts, rowID)
-			return fmt.Errorf("too many failed attempts — locked for 30 minutes")
-		}
-		_, _ = r.db.Exec(ctx, `UPDATE otp_codes SET attempts=$1 WHERE id=$2`, newAttempts, rowID) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		return fmt.Errorf("invalid OTP — %d attempt(s) remaining", 5-newAttempts)
-	}
-	_, err = r.db.Exec(ctx, `UPDATE otp_codes SET used=TRUE WHERE id=$1`, rowID) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	return err
+	return r.verifyOTP(ctx, phone, "", code, purpose, role)
 }
 
 // VerifyEmailOTP checks email-based OTP. Increments attempts on failure (max 5).
 func (r *UserRepo) VerifyEmailOTP(ctx context.Context, email, code, purpose string) error {
-	return r.verifyOTP(ctx, "", email, code, purpose)
+	return r.verifyOTP(ctx, "", email, code, purpose, "")
 }
 
-func (r *UserRepo) verifyOTP(ctx context.Context, phone, email, code, purpose string) error {
+func (r *UserRepo) verifyOTP(ctx context.Context, phone, email, code, purpose, role string) error {
 	// Run the full verify inside a transaction with SELECT FOR UPDATE to prevent
 	// concurrent requests from both reading the same OTP row as valid (race condition).
 	tx, err := r.db.Begin(ctx)
@@ -556,7 +514,16 @@ func (r *UserRepo) verifyOTP(ctx context.Context, phone, email, code, purpose st
 	var expiresAt time.Time
 	var lockedUntil *time.Time
 	var rowErr error
-	if phone != "" {
+	if phone != "" && role != "" {
+		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+		rowErr = tx.QueryRow(ctx, `
+			SELECT id, code, attempts, expires_at, locked_until
+			FROM otp_codes
+			WHERE phone=$1 AND purpose=$2 AND user_type=$3 AND used=FALSE
+			ORDER BY created_at DESC LIMIT 1
+			FOR UPDATE`,
+			phone, purpose, role).Scan(&rowID, &encryptedCode, &rowAttempts, &expiresAt, &lockedUntil)
+	} else if phone != "" {
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		rowErr = tx.QueryRow(ctx, `
 			SELECT id, code, attempts, expires_at, locked_until

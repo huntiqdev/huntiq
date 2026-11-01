@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/internal/models"
@@ -293,9 +294,15 @@ func (r *AttributeRepo) AssignAttributeToCategory(ctx context.Context, ca *model
 
 // RemoveAttributeFromCategory removes an attribute from a category
 func (r *AttributeRepo) RemoveAttributeFromCategory(ctx context.Context, categoryID, attributeID int) error {
-	_, err := r.db.Exec(ctx,
+	tag, err := r.db.Exec(ctx,
 		`DELETE FROM category_attributes WHERE category_id = $1 AND attribute_id = $2`,
 		categoryID, attributeID,
 	)
-	return err
+	if err != nil {
+		return err
+	}
+	if tag.RowsAffected() == 0 {
+		return fmt.Errorf("attribute mapping not found for category")
+	}
+	return nil
 }
