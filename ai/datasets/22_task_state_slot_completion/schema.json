@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_22_task_state_slot_completion_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 22_task_state_slot_completion (Task State and Slot Completion)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "required_slots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "filled_slots": {
+      "type": "object"
+    },
+    "is_complete": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "task_id",
+    "goal",
+    "required_slots",
+    "filled_slots",
+    "is_complete"
+  ],
+  "additionalProperties": false
+}

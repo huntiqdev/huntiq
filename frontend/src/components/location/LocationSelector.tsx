@@ -78,12 +78,16 @@ export function LocationSelector({
   useEffect(() => {
     // If region changed manually and no zone/subcity matches, reset children
     if (!region) {
-      setZone(''); setSubcity(''); setWoreda('');
-      setZones([]); setSubcities([]); setWoredas([]);
-      return;
+      const timer = setTimeout(() => {
+        setZone(''); setSubcity(''); setWoreda('');
+        setZones([]); setSubcities([]); setWoredas([]);
+      }, 0);
+      return () => clearTimeout(timer);
     }
-    api.getZones(region).then(z => setZones((z ?? []) as I18nLocation[])).catch(() => {});
-    api.getSubcities(region).then(s => setSubcities((s ?? []) as I18nLocation[])).catch(() => {});
+    let active = true;
+    api.getZones(region).then(z => { if (active) setZones((z ?? []) as I18nLocation[]); }).catch(() => {});
+    api.getSubcities(region).then(s => { if (active) setSubcities((s ?? []) as I18nLocation[]); }).catch(() => {});
+    return () => { active = false; };
   }, [region]);
 
   useEffect(() => {
@@ -133,6 +137,7 @@ export function LocationSelector({
 
   useEffect(() => {
     emit(region, zone, subcity, woreda, kebele, specificArea, lat, lng, hierarchyId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [region, zone, subcity, woreda, hierarchyId, emit]);
 
   // Debounced emit for free-text fields
@@ -145,7 +150,13 @@ export function LocationSelector({
 
   // Debounced search
   useEffect(() => {
-    if (!search.trim()) { setSearchResults([]); setSearchOpen(false); return; }
+    if (!search.trim()) {
+      const timer = setTimeout(() => {
+        setSearchResults([]);
+        setSearchOpen(false);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
     const timer = setTimeout(() => {
       api.searchLocations(search)
         .then(r => { setSearchResults(r ?? []); setSearchOpen(true); })

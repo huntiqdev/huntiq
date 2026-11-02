@@ -1,0 +1,49 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_Normalized_Record_Schema",
+  "description": "Schema defining a standardized, cleaned, and linguistically normalized record.",
+  "type": "object",
+  "required": [
+    "record_id",
+    "source_id",
+    "locale",
+    "normalized_text",
+    "homophones_standardized",
+    "tokens"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "original_text": {
+      "type": "string"
+    },
+    "normalized_text": {
+      "type": "string"
+    },
+    "homophones_standardized": {
+      "type": "boolean"
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "normalization_pipeline_version": {
+      "type": "string"
+    }
+  }
+}

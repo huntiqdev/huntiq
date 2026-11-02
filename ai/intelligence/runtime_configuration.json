@@ -1,0 +1,7 @@
+{
+  "service_name": "huntiq-ai-intelligence",
+  "version": "2.0.0",
+  "max_context_turns": 6,
+  "session_ttl_seconds": 1200,
+  "go_tool_timeout_seconds": 3.0
+}

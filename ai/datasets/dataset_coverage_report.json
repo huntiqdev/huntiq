@@ -1,0 +1,42 @@
+{
+  "status": "filesystem_initialized",
+  "total_modules": 30,
+  "languages": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "domains_covered": [
+    "taxonomy_classification",
+    "conversation_flow",
+    "nlu_intent",
+    "geographical_nlu",
+    "progressive_refinement",
+    "complex_dialogue_nlu",
+    "dialogue_disambiguation",
+    "dialogue_repair",
+    "query_parsing",
+    "contextual_dialogue",
+    "nlg_quality",
+    "conversational_social",
+    "contextual_personalization",
+    "deterministic_math",
+    "logic_constraint_satisfaction",
+    "named_entity_recognition",
+    "task_oriented_dialogue",
+    "search_relevance",
+    "ai_safety_governance",
+    "assistant_persona",
+    "grounding_factuality",
+    "domain_policy_routing",
+    "resilience_error_handling",
+    "numeric_currency_nlu",
+    "calibrated_uncertainty",
+    "robustness_normalization",
+    "platform_faq_knowledge",
+    "agentic_tool_execution",
+    "multilingual_semantic_parity",
+    "context_hygiene"
+  ]
+}

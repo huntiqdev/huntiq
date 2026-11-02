@@ -1,0 +1,3 @@
+# Configuration for global_training
+version: '2.0'
+enabled: false # Training execution scheduled for future phases

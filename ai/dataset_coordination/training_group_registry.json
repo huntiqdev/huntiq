@@ -1,0 +1,9 @@
+{
+  "groups": {
+    "intent_and_dialogue": [
+      "01_general_greetings",
+      "02_identity_assistant_behavior",
+      "05_intent_classification"
+    ]
+  }
+}

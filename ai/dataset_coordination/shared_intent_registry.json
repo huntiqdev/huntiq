@@ -1,0 +1,8 @@
+{
+  "intents": [
+    "marketplace_search",
+    "inspect_reputation",
+    "clarify_housing",
+    "faq"
+  ]
+}

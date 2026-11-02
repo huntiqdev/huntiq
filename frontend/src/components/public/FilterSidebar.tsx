@@ -37,26 +37,37 @@ export function FilterSidebar({ categories, onFilter }: Props) {
   }, []);
 
   const selectedCat = categories.find(c => String(c.id) === categoryId);
+  const effectiveChildren = (selectedCat?.children && selectedCat.children.length > 0)
+    ? selectedCat.children
+    : loadedChildren;
 
   // If selectedCat already has children in the tree, use them. Otherwise fetch via API.
   useEffect(() => {
+    let active = true;
     if (!categoryId) {
-      setLoadedChildren([]);
-      setSubcategory('');
-      setItem('');
-      return;
+      const timer = setTimeout(() => {
+        if (active) {
+          setLoadedChildren([]);
+          setSubcategory('');
+          setItem('');
+        }
+      }, 0);
+      return () => { active = false; clearTimeout(timer); };
     }
 
-    if (selectedCat?.children && selectedCat.children.length > 0) {
-      setLoadedChildren(selectedCat.children);
-    } else {
+    if (!selectedCat?.children || selectedCat.children.length === 0) {
       api.getCategoryChildren(Number(categoryId), locale)
-        .then(children => setLoadedChildren(Array.isArray(children) ? children : []))
-        .catch(() => setLoadedChildren([]));
+        .then(children => {
+          if (active) setLoadedChildren(Array.isArray(children) ? children : []);
+        })
+        .catch(() => {
+          if (active) setLoadedChildren([]);
+        });
     }
+    return () => { active = false; };
   }, [categoryId, selectedCat, locale]);
 
-  const selectedSub = loadedChildren.find(sc => sc.slug === subcategory || String(sc.id) === subcategory);
+  const selectedSub = effectiveChildren.find(sc => sc.slug === subcategory || String(sc.id) === subcategory);
   const itemOptions = selectedSub?.children ?? [];
 
   const apply = () => {
@@ -176,7 +187,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
       </div>
 
       {/* Level 2 — Subcategory */}
-      {loadedChildren.length > 0 && (
+      {effectiveChildren.length > 0 && (
         <div className="space-y-1.5">
           <p className={lbl}>{t.ui.subCategoryLabel}</p>
           <select
@@ -188,7 +199,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
             }}
           >
             <option value="">— {t.ui.subCategoryLabel} —</option>
-            {loadedChildren.map(sub => (
+            {effectiveChildren.map(sub => (
               <option key={sub.id} value={sub.slug}>
                 {sub.name || sub.name_en || sub.slug}
               </option>

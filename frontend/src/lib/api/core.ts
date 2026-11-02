@@ -64,10 +64,10 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
       lastRedirect = Date.now();
       await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
       const path = window.location.pathname;
-      if (path.startsWith('/admin')) window.location.href = '/admin/login';
-      else if (path.startsWith('/seller')) window.location.href = '/auth?as=seller';
-      else if (path.startsWith('/buyer')) window.location.href = '/auth?as=buyer';
-      else window.location.href = '/auth';
+      if (path.startsWith('/admin')) window.location.replace('/admin/login');
+      else if (path.startsWith('/seller')) window.location.replace('/auth?as=seller');
+      else if (path.startsWith('/buyer')) window.location.replace('/auth?as=buyer');
+      else window.location.replace('/auth');
       throw new ApiError('Session expired — please log in again', 'AUTH_SESSION_EXPIRED', 401);
     }
   }
@@ -88,15 +88,15 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
           lastRedirect = Date.now();
           await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
           const path = window.location.pathname;
-          if (path.startsWith('/admin')) window.location.href = '/admin/login';
-          else if (path.startsWith('/seller')) window.location.href = '/auth?as=seller';
-          else if (path.startsWith('/buyer')) window.location.href = '/auth?as=buyer';
-          else window.location.href = '/auth';
+          if (path.startsWith('/admin')) window.location.replace('/admin/login');
+          else if (path.startsWith('/seller')) window.location.replace('/auth?as=seller');
+          else if (path.startsWith('/buyer')) window.location.replace('/auth?as=buyer');
+          else window.location.replace('/auth');
         }
         
         // Handle 503 - maintenance mode
         if (res.status === 503 && typeof window !== 'undefined' && window.location.pathname !== '/maintenance') {
-          window.location.href = '/maintenance';
+          window.location.replace('/maintenance');
           throw new ApiError('Maintenance mode', 'MAINTENANCE', 503);
         }
         

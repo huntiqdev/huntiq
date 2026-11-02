@@ -1,0 +1,4 @@
+{"id": "prc_001", "expression": "under 35,000 birr", "locale": "en", "extracted_max": 35000, "currency": "ETB", "is_negotiable": false}
+{"id": "prc_002", "expression": "ከ 20 ሺህ እስከ 30 ሺህ ብር", "locale": "am", "extracted_min": 20000, "extracted_max": 30000, "currency": "ETB", "is_negotiable": true}
+{"id": "prc_003", "expression": "qarshii 500,000 gadi", "locale": "or", "extracted_max": 500000, "currency": "ETB", "is_negotiable": false}
+{"id": "prc_004", "expression": "ትሕቲ 15,000 ቅርሺ", "locale": "ti", "extracted_max": 15000, "currency": "ETB", "is_negotiable": false}

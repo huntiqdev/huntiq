@@ -1,95 +1,85 @@
-# HUNTIQ AI — Local Qwen3 4B System
+# HUNTIQ AI — Sovereign Intelligence Platform
 
-This directory contains the local model configuration, offline model storage, evaluation suite, and Python tools for the HUNTIQ Local AI Assistant running on Ollama with `qwen3:4b`.
+HUNTIQ AI is the dedicated Python intelligence authority for Ethiopia's universal marketplace. It provides natural language understanding, multilingual intent classification, slot extraction, context tracking, and response composition.
 
-## Architecture Overview
+---
 
-1. **Local Model Storage:** Stored directly inside the project at `ai/models/ollama` (configured via `OLLAMA_MODELS` and container bind mounts).
-2. **Local Model Runtime:** Ollama running locally at `http://127.0.0.1:11434` with zero external cloud dependencies.
-3. **Base Pretrained Model:** `qwen3:4b` (4.0B parameters, Q4_K_M quantization).
-4. **Derived Model:** `huntiq-assistant:latest` built from [`Modelfile`](./Modelfile) with customized multilingual directives (English, Amharic, Afaan Oromoo, Tigrinya) and live marketplace tool definitions.
-5. **Trusted Sovereign Authority:** Go Backend (`backend/`) manages all authentication, authorization, session persistence, and parameter-safe database queries.
-6. **Database Source of Truth:** PostgreSQL 16. Listings and prices are retrieved dynamically via authorized Go tool executions; never hallucinated.
-7. **Frontend:** Next.js 15 + TypeScript conversational interface (`/ai`) and query-understanding search bar (`SearchBar.tsx`).
+## 1. System Responsibilities
 
-## Directory Structure
+- **Sole Authority for AI Reasoning:** Intent classification, multi-intent extraction, entity slot filling, ambiguity clarification, and zero-fabrication response composition.
+- **Languages Supported:** English (`en`), Amharic (`am`), Afaan Oromoo (`om`/`or`), and Tigrinya (`ti`).
+- **Zero Direct Database Access:** Python holds no PostgreSQL credentials or connection pools. Marketplace data is retrieved strictly via authorized HTTP tool calls to the Go backend (`POST /api/internal/ai/tools/execute`) authenticated via `X-HUNTIQ-AI-SECRET`.
+- **Zero Persistent Guest Storage:** Visitor conversations are kept in bounded, thread-safe in-memory sliding sessions (20-minute TTL, max 6 turns).
+
+---
+
+## 2. Architecture & Directory Layout
 
 ```
 ai/
-├── Modelfile                  # Ollama Modelfile deriving huntiq-assistant from qwen3:4b
-├── README.md                  # System documentation
-├── .env.example               # Environment variables template
-├── requirements.txt           # Minimal Python dependencies
-├── pytest.ini                 # Pytest configuration
-├── scripts/
-│   ├── setup_local.sh         # Idempotent environment and model setup script
-│   └── verify_local.sh        # Diagnostic verification script
-├── models/
-│   ├── .gitkeep               # Preserves models directory in Git
-│   └── ollama/                # Local model weights, blobs, and manifests
-├── .venv/                     # Project-local Python virtual environment
 ├── app/
-│   ├── __init__.py
-│   ├── config.py              # Ollama and assistant configuration
-│   ├── model_client.py        # Python client for Ollama API interaction
-│   ├── prompts.py             # Multilingual system prompts and tool schemas
-│   └── evaluation.py          # Multilingual and functional evaluation runner
-├── data/
-│   ├── README.md              # Offline training and evaluation data instructions
-│   └── .gitkeep
-└── tests/
-    ├── __init__.py
-    ├── test_model_client.py   # Ollama connection and chat contract tests
-    ├── test_prompts.py        # Prompt construction and multilingual integrity tests
-    └── test_offline_mode.py   # Verification that zero cloud/external calls occur
+│   ├── main.py                  # FastAPI server entry point
+│   ├── config.py                # Service configuration (ports, timeouts, secrets)
+│   ├── api/
+│   │   ├── routes/
+│   │   │   └── chat.py          # POST /api/v1/chat endpoint
+│   │   └── schemas.py           # Pydantic request/response & tool schemas
+│   ├── core/
+│   │   ├── orchestrator.py      # Conversation pipeline runner
+│   │   ├── intent.py            # Multilingual intent classification
+│   │   ├── entity_extractor.py  # Slot & entity extraction (prices, locations, condition)
+│   │   ├── policy.py            # Platform FAQ check & out-of-domain guard
+│   │   ├── clarification.py     # Disambiguation & clarification questions
+│   │   ├── context_manager.py   # Bounded sliding-TTL in-memory sessions
+│   │   └── response_grounding.py# Zero-fabrication response synthesis
+│   ├── languages/
+│   │   ├── normalizer.py        # Ge'ez homophone & Oromo orthography normalization
+│   │   └── terminology.py       # Multilingual category taxonomy
+│   ├── integrations/
+│   │   └── go_marketplace_client.py # Restricted client to Go backend (:8080)
+│   ├── evaluation/
+│   │   ├── benchmark.py         # Evaluation benchmark runner
+│   │   └── metrics.py           # Precision, Recall, and F1 metrics
+│   ├── model_client.py          # Local model client abstraction
+│   └── prompts.py               # Multilingual prompt templates
+├── datasets/
+│   ├── evaluation/              # Domain, conversational, and entity benchmarks
+│   └── schemas/                 # JSON schema for marketplace tool calling
+├── tests/                       # Complete Pytest test suite (34 passing tests)
+├── requirements.txt             # Pinned production dependencies
+└── pytest.ini                   # Pytest test discovery settings
 ```
 
-## Quick Start & Setup
+---
 
-### 1. Automated Idempotent Setup
-Run the setup script from the project root:
+## 3. Running the Service
+
+### Startup Command
+From the `ai/` directory:
 ```bash
-./ai/scripts/setup_local.sh
+uv run uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
-This automatically:
-- Ensures `ai/models/ollama` and `ai/.venv` exist.
-- Installs minimal dependencies from `ai/requirements.txt` into `ai/.venv`.
-- Verifies the local Ollama runtime mounted to `ai/models/ollama`.
-- Verifies `qwen3:4b` and builds `huntiq-assistant:latest` if missing.
 
-### 2. Verify Local Health & Offline Readiness
-Run the verification script:
+### Running Tests
 ```bash
-./ai/scripts/verify_local.sh
-```
-This validates:
-- Daemon reachability (`127.0.0.1:11434`).
-- Storage presence in `ai/models/ollama/blobs`.
-- Registration of `qwen3:4b` and `huntiq-assistant:latest`.
-- Python unit tests in `ai/.venv`.
-- Live test inference from `huntiq-assistant:latest`.
-- Strict local loopback enforcement (no cloud LLM API calls).
-
-### 3. Interactive CLI Usage
-```bash
-ollama run huntiq-assistant
+uv run pytest -v
 ```
 
-## Python Virtual Environment
+---
 
-Activate the local project virtualenv:
-```bash
-source ai/.venv/bin/activate
-pytest ai/tests/ -v
-```
+## 4. Endpoints
 
-## Configuration Reference
+- `GET /health` — Health check probe returning `{ "status": "ok", "service": "huntiq-ai", "version": "2.0.0" }`.
+- `GET /ready` — Readiness probe verifying configuration and target Go backend.
+- `POST /api/v1/chat` — Conversational chat endpoint accepting `GuestChatRequest` and returning `GuestChatResponse`.
 
-| Variable | Default Value | Description |
+---
+
+## 5. Environment Variables
+
+| Variable | Default | Purpose |
 |---|---|---|
-| `OLLAMA_BASE_URL` | `http://127.0.0.1:11434` | Local Ollama daemon endpoint |
-| `OLLAMA_MODELS` | `$PROJECT_ROOT/ai/models/ollama` | Directory storing model blobs & manifests |
-| `OLLAMA_BASE_MODEL` | `qwen3:4b` | Base pretrained model |
-| `OLLAMA_HUNTIQ_MODEL` | `huntiq-assistant:latest` | Derived customized assistant |
-| `AI_REQUEST_TIMEOUT` | `90.0` | Timeout in seconds for CPU generation |
-| `AI_CONTEXT_LENGTH` | `4096` | Context window size in tokens |
+| `HOST` | `127.0.0.1` | Loopback bind address |
+| `PORT` | `8000` | Port for Python AI service |
+| `HUNTIQ_AI_SECRET` | `huntiq-local-ai-secret-key-2026` | Service-to-service authentication secret |
+| `GO_BACKEND_URL` | `http://127.0.0.1:8080` | URL of Go backend API |

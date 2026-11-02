@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_16_recommendation_ranking_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 16_recommendation_ranking (Recommendation and Ranking)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "user_constraints": {
+      "type": "object"
+    },
+    "candidate_item_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "ranking_order": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "tradeoff_explanation": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "user_constraints",
+    "candidate_item_ids",
+    "ranking_order"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_07_entity_attribute_extraction_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 07_entity_attribute_extraction (Entity and Attribute Extraction)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "start_char": {
+            "type": "integer"
+          },
+          "end_char": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "entity_type",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "text",
+    "locale",
+    "entities"
+  ],
+  "additionalProperties": false
+}

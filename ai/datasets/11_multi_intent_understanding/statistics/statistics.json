@@ -1,0 +1,23 @@
+{
+  "module_id": "11_multi_intent_understanding",
+  "total_records": 0,
+  "split_counts": {
+    "train": 0,
+    "validation": 0,
+    "test": 0
+  },
+  "language_distribution": {
+    "en": 0,
+    "am": 0,
+    "or": 0,
+    "ti": 0
+  },
+  "vocabulary_size": {
+    "en": 0,
+    "am": 0,
+    "or": 0,
+    "ti": 0
+  },
+  "avg_token_length": 0.0,
+  "last_computed": "2026-11-02T12:00:00Z"
+}

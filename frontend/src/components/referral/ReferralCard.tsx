@@ -18,15 +18,15 @@ const TX_TYPE_LABELS: Record<string, string> = {
   seller_registration: 'Seller Registration', seller_renewal: 'Seller Renewal',
 };
 const STATUS_COLOR: Record<string, string> = {
-  pending:  'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30',
+  pending: 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30',
   approved: 'text-blue-600 bg-blue-100 dark:bg-blue-900/30',
   rejected: 'text-red-600 bg-red-100 dark:bg-red-900/30',
-  paid:     'text-green-600 bg-green-100 dark:bg-green-900/30',
+  paid: 'text-green-600 bg-green-100 dark:bg-green-900/30',
 };
 const COMMISSION_STATUS_COLOR: Record<string, string> = {
-  pending:   'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30',
+  pending: 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30',
   confirmed: 'text-green-600 bg-green-100 dark:bg-green-900/30',
-  reversed:  'text-red-600 bg-red-100 dark:bg-red-900/30',
+  reversed: 'text-red-600 bg-red-100 dark:bg-red-900/30',
 };
 const PM_LABEL: Record<string, string> = {
   telebirr: 'Telebirr', safaricom: 'Safaricom', cbe: 'CBE', bank: 'Bank',
@@ -65,7 +65,10 @@ export function ReferralCard({ role = 'seller' }: Props) {
   const [commissionRate, setCommissionRate] = useState(1.2);
 
   const fetchStats = useCallback(async () => {
-    if (!user) return;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
     try {
       const [statsData, balData, settings] = await Promise.all([
         role === 'buyer' ? api.getBuyerReferralStats(user.token) : api.getReferralStats(user.token),
@@ -83,11 +86,25 @@ export function ReferralCard({ role = 'seller' }: Props) {
       if (settings?.referral_commission_rate) {
         setCommissionRate(Number(settings.referral_commission_rate) || 1.2);
       }
-    } catch { /* non-critical */ }
-    finally { setLoading(false); }
+    } catch {
+      /* non-critical */
+    } finally {
+      setLoading(false);
+    }
   }, [user, role]);
 
-  useEffect(() => { fetchStats(); }, [fetchStats]);
+  useEffect(() => {
+    let active = true;
+    const timer = setTimeout(() => {
+      if (active) {
+        void fetchStats();
+      }
+    }, 0);
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
+  }, [fetchStats]);
 
   const loadCommissions = async () => {
     if (!user || commissionsLoaded) return;
@@ -253,19 +270,19 @@ export function ReferralCard({ role = 'seller' }: Props) {
               </div>
             )}
             {/* Withdraw button / form */}
-            {!isSuspended && balance.available_balance >= minWithdrawal && balance.pending_amount === 0 && !showWithdrawForm && (
+            {!isSuspended && balance.available_balance >= minWithdrawal && !showWithdrawForm && (
               <button onClick={() => { setShowWithdrawForm(true); setWError(''); setWSuccess(''); }}
                 className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-green-600 hover:bg-green-700 text-white text-xs font-bold transition-colors">
                 <DollarSign size={12} /> Request Withdrawal
               </button>
             )}
-            {isSuspended && balance.available_balance >= 500 && (
+            {isSuspended && balance.available_balance >= minWithdrawal && (
               <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-3 py-2">
                 <AlertCircle size={12} className="text-red-500 shrink-0" />
                 <p className="text-[10px] text-red-600 dark:text-red-400">Withdrawals blocked — referral code is suspended</p>
               </div>
             )}
-            {!isSuspended && balance.available_balance < minWithdrawal && balance.pending_amount === 0 && (
+            {!isSuspended && balance.available_balance < minWithdrawal && (
               <p className="text-[10px] text-zinc-400 text-center">
                 Minimum withdrawal is ETB {minWithdrawal} — earn ETB {Math.max(0, Math.ceil(minWithdrawal - balance.available_balance)).toLocaleString()} more to withdraw
               </p>
@@ -389,12 +406,12 @@ export function ReferralCard({ role = 'seller' }: Props) {
                 className="flex items-center gap-2 w-full border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-xs text-zinc-500 dark:text-zinc-400 hover:border-orange-400 hover:text-orange-500 transition-colors"
               >
                 <UserPlus size={13} />
-                Accept an Invitation — enter someone's referral code
+                Accept an Invitation — enter someone&apos;s referral code
               </button>
             ) : (
               <form onSubmit={handleAccept} className="space-y-2">
                 <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
-                  Enter inviter's referral code
+                  Enter inviter&apos;s referral code
                 </p>
                 <div className="flex gap-2">
                   <input

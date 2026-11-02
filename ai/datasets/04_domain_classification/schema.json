@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_04_domain_classification_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 04_domain_classification (Domain Classification)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "domain_label": {
+      "type": "string",
+      "enum": [
+        "marketplace",
+        "platform_support",
+        "relevant_calculation",
+        "out_of_domain",
+        "unsafe"
+      ]
+    },
+    "confidence_threshold": {
+      "type": "number"
+    },
+    "redirection_needed": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "text",
+    "locale",
+    "domain_label"
+  ],
+  "additionalProperties": false
+}

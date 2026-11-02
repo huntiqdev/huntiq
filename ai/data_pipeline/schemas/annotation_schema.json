@@ -1,0 +1,51 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_Annotation_Schema",
+  "description": "Schema defining human and model annotations on normalized marketplace records.",
+  "type": "object",
+  "required": [
+    "annotation_id",
+    "record_id",
+    "annotator_id",
+    "annotation_type",
+    "labels",
+    "verified_by_human",
+    "created_at"
+  ],
+  "properties": {
+    "annotation_id": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "annotator_id": {
+      "type": "string"
+    },
+    "annotation_type": {
+      "type": "string",
+      "enum": [
+        "intent",
+        "entity_span",
+        "dialogue_act",
+        "grounding",
+        "safety"
+      ]
+    },
+    "labels": {
+      "type": "object"
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "verified_by_human": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

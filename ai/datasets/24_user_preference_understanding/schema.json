@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_24_user_preference_understanding_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 24_user_preference_understanding (User Preference Understanding)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "session_context": {
+      "type": "object"
+    },
+    "revealed_preference": {
+      "type": "string"
+    },
+    "preference_scope": {
+      "type": "string",
+      "enum": [
+        "temporary_session",
+        "ephemeral_turn"
+      ]
+    },
+    "adapted_response": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "revealed_preference",
+    "preference_scope"
+  ],
+  "additionalProperties": false
+}

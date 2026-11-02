@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_26_topic_switching_context_reset_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 26_topic_switching_context_reset (Topic Switching and Context Reset)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "previous_topic": {
+      "type": "string"
+    },
+    "new_topic_message": {
+      "type": "string"
+    },
+    "stale_slots_cleared": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "retained_slots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "transition_response": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "previous_topic",
+    "new_topic_message",
+    "transition_response"
+  ],
+  "additionalProperties": false
+}

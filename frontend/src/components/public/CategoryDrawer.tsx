@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { getCategoryLabel } from '@/lib/taxonomy';
@@ -73,10 +74,32 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
   }, [locale]);
 
   useEffect(() => {
-    if (isOpen && tree.length === 0) {
-      loadCategories();
-    }
-  }, [isOpen, tree.length, loadCategories]);
+    if (!isOpen || tree.length > 0) return;
+    let active = true;
+    api.getCategoryTree(locale)
+      .then((data) => {
+        if (!active) return;
+        if (Array.isArray(data) && data.length > 0) {
+          setTree(data);
+          setActiveCategoryId(data[0].id);
+        } else {
+          setTree([]);
+        }
+      })
+      .catch(() => {
+        if (!active) return;
+        setError('Failed to load categories from marketplace catalog');
+        setTree([]);
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [isOpen, tree.length, locale]);
 
   // Prevent background scrolling when drawer is open
   useEffect(() => {
@@ -131,7 +154,16 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
       return <span className="text-lg">{cat.icon}</span>;
     }
     if (cat.image_url) {
-      return <img src={cat.image_url} alt={cat.name} className="w-5 h-5 object-contain" />;
+      return (
+        <Image
+          src={cat.image_url}
+          alt={cat.name || 'Category'}
+          width={20}
+          height={20}
+          className="w-5 h-5 object-contain"
+          unoptimized
+        />
+      );
     }
     return <Tag size={16} className="text-zinc-400" />;
   };

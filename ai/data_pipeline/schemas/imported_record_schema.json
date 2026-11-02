@@ -1,0 +1,35 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_Imported_Record_Schema",
+  "description": "Schema defining an unnormalized ingested record wrapper.",
+  "type": "object",
+  "required": [
+    "import_id",
+    "source_id",
+    "batch_id",
+    "raw_payload",
+    "imported_at"
+  ],
+  "properties": {
+    "import_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "batch_id": {
+      "type": "string"
+    },
+    "raw_payload": {
+      "type": "object"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "quarantine_flag": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "task_name": "marketplace_sentiment_review_dispute_classification",
+  "accuracy": 1.0,
+  "macro_f1": 1.0,
+  "training_duration_seconds": 1.4564917087554932,
+  "inference_latency_ms": 0.46897914311657213,
+  "train_samples": 290,
+  "test_samples": 73,
+  "classes": [
+    "negative_dissatisfied",
+    "neutral_inquiry",
+    "positive_review",
+    "transaction_dispute"
+  ],
+  "detailed_report": {
+    "negative_dissatisfied": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "neutral_inquiry": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "positive_review": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 19.0
+    },
+    "transaction_dispute": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 73.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 73.0
+    }
+  }
+}

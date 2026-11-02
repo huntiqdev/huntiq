@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_13_conversation_followups_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 13_conversation_followups (Conversation Follow-ups)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "content"
+        ]
+      }
+    },
+    "followup_message": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "inferred_action": {
+      "type": "string"
+    },
+    "resolved_parameters": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "history",
+    "followup_message",
+    "locale",
+    "inferred_action"
+  ],
+  "additionalProperties": false
+}

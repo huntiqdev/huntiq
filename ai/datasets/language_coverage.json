@@ -1,0 +1,14 @@
+{
+  "supported_locales": [
+    "en",
+    "am",
+    "or",
+    "ti"
+  ],
+  "coverage_percentage": {
+    "en": 100.0,
+    "am": 100.0,
+    "or": 100.0,
+    "ti": 100.0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "module_id": "07_entity_attribute_extraction",
+  "primary_sources": [
+    {
+      "source_id": "huntiq_internal_07_entity_attribute_extraction",
+      "type": "internal_dialogue_seeds",
+      "description": "Curated seed patterns and real marketplace dialogues for Entity and Attribute Extraction",
+      "license": "Proprietary / HUNTIQ Platform License",
+      "provenance": "HUNTIQ Marketplace Engineering",
+      "pii_scrubbed": true,
+      "verified_by_humans": true
+    }
+  ],
+  "external_allowed_sources": [
+    {
+      "source_id": "ethiopian_nlp_multilingual_corpus",
+      "type": "public_academic_dataset",
+      "license": "CC-BY-4.0",
+      "commercial_usable": true,
+      "domain_restriction": "Strictly Ethiopian marketplace terminology"
+    }
+  ]
+}

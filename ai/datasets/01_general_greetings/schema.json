@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_01_general_greetings_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 01_general_greetings (General Greetings and Social Conversation)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "utterance": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "greeting_type": {
+      "type": "string",
+      "enum": [
+        "hello",
+        "farewell",
+        "gratitude",
+        "apology",
+        "casual"
+      ]
+    },
+    "has_commercial_intent": {
+      "type": "boolean"
+    },
+    "response": {
+      "type": "string"
+    },
+    "mixed_languages": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "utterance",
+    "locale",
+    "greeting_type",
+    "has_commercial_intent"
+  ],
+  "additionalProperties": false
+}

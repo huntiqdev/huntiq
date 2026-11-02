@@ -1,0 +1,10 @@
+{"id": "gen_001", "utterance": "Hello there!", "locale": "en", "greeting_type": "hello", "has_commercial_intent": false}
+{"id": "gen_002", "utterance": "ሰላም እንደምን ነህ?", "locale": "am", "greeting_type": "hello", "has_commercial_intent": false}
+{"id": "gen_003", "utterance": "Akkam jirtu?", "locale": "or", "greeting_type": "hello", "has_commercial_intent": false}
+{"id": "gen_004", "utterance": "ሰላም ከመይ ኣለኻ?", "locale": "ti", "greeting_type": "hello", "has_commercial_intent": false}
+{"id": "gen_005", "utterance": "Good morning, I need to find a car in Addis", "locale": "en", "greeting_type": "hello", "has_commercial_intent": true}
+{"id": "gen_006", "utterance": "እንደምን አደርክ ቦሌ ውስጥ ቤት ፈልግልኝ", "locale": "am", "greeting_type": "hello", "has_commercial_intent": true}
+{"id": "gen_007", "utterance": "Akkam bulte konkolaataa barbaada", "locale": "or", "greeting_type": "hello", "has_commercial_intent": true}
+{"id": "gen_008", "utterance": "ከመይ ሓዲርኩም ገዛ ክካረ ይደሊ ኣለኹ", "locale": "ti", "greeting_type": "hello", "has_commercial_intent": true}
+{"id": "gen_009", "utterance": "Thank you for your help!", "locale": "en", "greeting_type": "gratitude", "has_commercial_intent": false}
+{"id": "gen_010", "utterance": "አመሰግናለሁ!", "locale": "am", "greeting_type": "gratitude", "has_commercial_intent": false}

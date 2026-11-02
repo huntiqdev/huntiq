@@ -1,0 +1,11 @@
+{
+  "entities": [
+    "brand",
+    "model",
+    "price",
+    "currency",
+    "location",
+    "condition",
+    "listing_type"
+  ]
+}

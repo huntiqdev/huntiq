@@ -3,14 +3,18 @@ package aiclient
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"regexp"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/your-org/used-tools-marketplace/internal/cache"
 )
 
 // ExtractedPriceRange holds extracted monetary bounds and currency.
@@ -76,13 +80,15 @@ type UnderstandQueryParams struct {
 
 // Client defines the AI client communicating with local Ollama, Python worker, or deterministic fallback.
 type Client struct {
-	baseURL      string
-	secretKey    string
-	providerType string // "ollama", "python", "mock"
-	ollama       *OllamaProvider
-	httpClient   *http.Client
-	chatClient   *http.Client
-	enabled      bool
+	baseURL        string
+	secretKey      string
+	providerType   string // "ollama", "python", "mock"
+	ollama         *OllamaProvider
+	httpClient     *http.Client
+	chatClient     *http.Client
+	cache          cache.Cache
+	circuitBreaker *CircuitBreaker
+	enabled        bool
 }
 
 // NewClient creates a new thread-safe AI service client.
@@ -95,10 +101,11 @@ func NewClient(baseURL, secretKey string) *Client {
 		DisableCompression: false,
 	}
 	return &Client{
-		baseURL:      baseURL,
-		secretKey:    secretKey,
-		providerType: "ollama",
-		enabled:      enabled,
+		baseURL:        baseURL,
+		secretKey:      secretKey,
+		providerType:   "ollama",
+		enabled:        enabled,
+		circuitBreaker: NewCircuitBreaker(5, 30*time.Second),
 		httpClient: &http.Client{
 			Timeout:   500 * time.Millisecond,
 			Transport: transport,
@@ -108,6 +115,22 @@ func NewClient(baseURL, secretKey string) *Client {
 			Transport: transport,
 		},
 	}
+}
+
+// WithCache attaches an application cache (Redis or in-memory) for sub-millisecond query responses.
+func (c *Client) WithCache(appCache cache.Cache) *Client {
+	if c != nil {
+		c.cache = appCache
+	}
+	return c
+}
+
+// WithCircuitBreaker sets or customizes the circuit breaker.
+func (c *Client) WithCircuitBreaker(cb *CircuitBreaker) *Client {
+	if c != nil {
+		c.circuitBreaker = cb
+	}
+	return c
 }
 
 // WithOllama attaches an Ollama provider pointing to the local daemon.
@@ -290,6 +313,22 @@ func (c *Client) UnderstandQueryWithParams(ctx context.Context, params Understan
 		params.PreferredLanguage = "om"
 	}
 
+	// 1. High-speed cache lookup (sub-millisecond instant return, works even when remote server is down)
+	cacheKey := fmt.Sprintf("ai:understand:%x", sha256.Sum256([]byte(params.Locale+":"+params.Query)))
+	if c.cache != nil {
+		if cached, ok := c.cache.Get(ctx, cacheKey); ok && len(cached) > 0 {
+			var cachedRes QueryUnderstandingResponse
+			if err := json.Unmarshal(cached, &cachedRes); err == nil {
+				return &cachedRes, nil
+			}
+		}
+	}
+
+	// 2. Circuit breaker guard: if open, return immediate deterministic response without waiting
+	if c.circuitBreaker != nil && !c.circuitBreaker.Allow() {
+		return c.FallbackUnderstandQuery(params), nil
+	}
+
 	reqCtx, cancel := context.WithTimeout(ctx, 400*time.Millisecond)
 	defer cancel()
 
@@ -310,17 +349,34 @@ func (c *Client) UnderstandQueryWithParams(ctx context.Context, params Understan
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
+		if c.circuitBreaker != nil {
+			c.circuitBreaker.RecordFailure()
+		}
 		return nil, fmt.Errorf("ai service unreachable or timed out: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
+		if c.circuitBreaker != nil {
+			c.circuitBreaker.RecordFailure()
+		}
 		return nil, fmt.Errorf("ai service returned non-200 status: %d", resp.StatusCode)
 	}
 
 	var result QueryUnderstandingResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("failed to decode ai response: %w", err)
+	}
+
+	if c.circuitBreaker != nil {
+		c.circuitBreaker.RecordSuccess()
+	}
+
+	// Store in cache with 15-minute TTL
+	if c.cache != nil {
+		if data, err := json.Marshal(result); err == nil {
+			_ = c.cache.Set(ctx, cacheKey, data, 15*time.Minute)
+		}
 	}
 
 	return &result, nil
@@ -718,6 +774,10 @@ func (c *Client) SendChatMessage(ctx context.Context, req ChatMessageRequest) (*
 }
 
 func (c *Client) sendPythonChat(ctx context.Context, req ChatMessageRequest) (*ChatMessageResponse, error) {
+	if c.circuitBreaker != nil && !c.circuitBreaker.Allow() {
+		return nil, fmt.Errorf("ai circuit breaker open")
+	}
+
 	payload, err := json.Marshal(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal chat request: %w", err)
@@ -740,11 +800,17 @@ func (c *Client) sendPythonChat(ctx context.Context, req ChatMessageRequest) (*C
 
 	resp, err := client.Do(httpReq)
 	if err != nil {
+		if c.circuitBreaker != nil {
+			c.circuitBreaker.RecordFailure()
+		}
 		return nil, fmt.Errorf("ai service chat request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
+		if c.circuitBreaker != nil {
+			c.circuitBreaker.RecordFailure()
+		}
 		return nil, fmt.Errorf("ai service chat returned status: %d", resp.StatusCode)
 	}
 
@@ -752,6 +818,11 @@ func (c *Client) sendPythonChat(ctx context.Context, req ChatMessageRequest) (*C
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("failed to decode chat response: %w", err)
 	}
+
+	if c.circuitBreaker != nil {
+		c.circuitBreaker.RecordSuccess()
+	}
+
 	return &result, nil
 }
 
@@ -1860,6 +1931,116 @@ func GetLocalizedEntityTerm(term string, locale string) string {
 	default:
 		return term
 	}
+}
+
+// GuestChatTurn represents a single conversational exchange.
+type GuestChatTurn struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
+}
+
+// GuestChatPayload represents the payload sent to Python AI service POST /api/v1/chat.
+type GuestChatPayload struct {
+	Message   string          `json:"message"`
+	Locale    string          `json:"locale"`
+	SessionID string          `json:"session_id,omitempty"`
+	History   []GuestChatTurn `json:"history,omitempty"`
+}
+
+// GuestChatResult represents the structured response returned by Python AI service.
+type GuestChatResult struct {
+	SessionID      string                   `json:"session_id,omitempty"`
+	GreetingPrefix string                   `json:"greeting_prefix,omitempty"`
+	Answer         string                   `json:"answer"`
+	DetectedLocale string                   `json:"detected_locale,omitempty"`
+	Intents        []string                 `json:"intents,omitempty"`
+	CategoryGroups []map[string]interface{} `json:"category_groups,omitempty"`
+	Listings       []map[string]interface{} `json:"listings,omitempty"`
+	Clarification  *string                  `json:"clarification,omitempty"`
+	LatencyMS      float64                  `json:"latency_ms"`
+	Model          string                   `json:"model"`
+	RawJSON        []byte                   `json:"-"`
+}
+
+// SendGuestChat communicates with the Python AI intelligence service.
+func (c *Client) SendGuestChat(ctx context.Context, payload GuestChatPayload) (*GuestChatResult, error) {
+	if c == nil || c.baseURL == "" {
+		return nil, fmt.Errorf("ai service base URL is not configured")
+	}
+
+	chatCacheKey := fmt.Sprintf("ai:guestchat:%x", sha256.Sum256([]byte(payload.Locale+":"+payload.Message)))
+	if c.cache != nil && len(payload.History) == 0 {
+		if cached, ok := c.cache.Get(ctx, chatCacheKey); ok && len(cached) > 0 {
+			var cachedRes GuestChatResult
+			if err := json.Unmarshal(cached, &cachedRes); err == nil {
+				cachedRes.RawJSON = cached
+				return &cachedRes, nil
+			}
+		}
+	}
+
+	if c.circuitBreaker != nil && !c.circuitBreaker.Allow() {
+		return nil, fmt.Errorf("ai circuit breaker open")
+	}
+
+	data, err := json.Marshal(payload)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal guest chat payload: %w", err)
+	}
+
+	endpoint := fmt.Sprintf("%s/api/v1/chat", strings.TrimRight(c.baseURL, "/"))
+	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, endpoint, bytes.NewReader(data))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create guest chat request: %w", err)
+	}
+
+	if c.secretKey != "" {
+		httpReq.Header.Set("X-HUNTIQ-AI-SECRET", c.secretKey)
+	}
+	httpReq.Header.Set("Content-Type", "application/json")
+	httpReq.Header.Set("Accept", "application/json")
+
+	client := c.chatClient
+	if client == nil {
+		client = c.httpClient
+	}
+
+	resp, err := client.Do(httpReq)
+	if err != nil {
+		if c.circuitBreaker != nil {
+			c.circuitBreaker.RecordFailure()
+		}
+		return nil, fmt.Errorf("python ai service request failed: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		if c.circuitBreaker != nil {
+			c.circuitBreaker.RecordFailure()
+		}
+		return nil, fmt.Errorf("python ai service returned status: %d", resp.StatusCode)
+	}
+
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read python ai response: %w", err)
+	}
+
+	var result GuestChatResult
+	if err := json.Unmarshal(bodyBytes, &result); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal python ai response: %w", err)
+	}
+	result.RawJSON = bodyBytes
+
+	if c.circuitBreaker != nil {
+		c.circuitBreaker.RecordSuccess()
+	}
+
+	if c.cache != nil && len(payload.History) == 0 {
+		_ = c.cache.Set(ctx, chatCacheKey, bodyBytes, 15*time.Minute)
+	}
+
+	return &result, nil
 }
 
 

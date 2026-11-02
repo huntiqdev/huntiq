@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_15_spelling_noisy_input_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 15_spelling_noisy_input (Spelling and Noisy Input)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "noisy_input": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "normalized_output": {
+      "type": "string"
+    },
+    "noise_type": {
+      "type": "string",
+      "enum": [
+        "typo",
+        "phonetic",
+        "script_mix",
+        "abbreviation",
+        "keyboard_slip"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "noisy_input",
+    "locale",
+    "normalized_output"
+  ],
+  "additionalProperties": false
+}

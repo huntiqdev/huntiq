@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_23_constraint_reasoning_conflict_resolution_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 23_constraint_reasoning_conflict_resolution (Constraint Reasoning and Conflict Resolution)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "conflicting_constraints": {
+      "type": "object"
+    },
+    "conflict_type": {
+      "type": "string"
+    },
+    "resolution_strategy": {
+      "type": "string",
+      "enum": [
+        "relax_price",
+        "widen_location",
+        "ask_user_priority"
+      ]
+    },
+    "suggested_compromise": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "conflicting_constraints",
+    "conflict_type",
+    "suggested_compromise"
+  ],
+  "additionalProperties": false
+}

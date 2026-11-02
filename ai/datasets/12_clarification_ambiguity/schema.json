@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_12_clarification_ambiguity_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 12_clarification_ambiguity (Clarification and Ambiguity)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "ambiguous_input": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "missing_slot": {
+      "type": "string",
+      "enum": [
+        "listing_type",
+        "location",
+        "category",
+        "budget"
+      ]
+    },
+    "clarification_question": {
+      "type": "string"
+    },
+    "can_proceed_with_default": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "ambiguous_input",
+    "locale",
+    "missing_slot",
+    "clarification_question"
+  ],
+  "additionalProperties": false
+}

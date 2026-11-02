@@ -1,0 +1,6 @@
+{"id": "int_001", "query": "Find 2 bedroom apartments for rent in Bole", "locale": "en", "primary_intent": "marketplace_search"}
+{"id": "int_002", "query": "ቦሌ ውስጥ የሚከራይ ባለ ሁለት መኝታ ቤት ፈልግ", "locale": "am", "primary_intent": "marketplace_search"}
+{"id": "int_003", "query": "Finfinnee keessatti konkolaataa Toyota Vitz barbaada", "locale": "or", "primary_intent": "marketplace_search"}
+{"id": "int_004", "query": "ኣብ መቐለ ዝሽየጥ ገዛ ይደሊ ኣለኹ", "locale": "ti", "primary_intent": "marketplace_search"}
+{"id": "int_005", "query": "How do I upgrade to Gold merchant?", "locale": "en", "primary_intent": "platform_support"}
+{"id": "int_006", "query": "በቴሌብር እንዴት መክፈል እችላለሁ?", "locale": "am", "primary_intent": "platform_support"}

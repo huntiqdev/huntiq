@@ -1,0 +1,46 @@
+{
+  "pipeline_stages": [
+    {
+      "stage": 1,
+      "name": "normalization",
+      "input": "raw_user_message",
+      "output": "normalized_text"
+    },
+    {
+      "stage": 2,
+      "name": "language_detection",
+      "input": "normalized_text",
+      "output": "locale_code"
+    },
+    {
+      "stage": 3,
+      "name": "context_resolution",
+      "input": "session_id",
+      "output": "session_context"
+    },
+    {
+      "stage": 4,
+      "name": "intent_and_entity_classification",
+      "input": "normalized_text",
+      "output": "execution_plan"
+    },
+    {
+      "stage": 5,
+      "name": "policy_guard",
+      "input": "execution_plan",
+      "output": "allowed_or_redirect"
+    },
+    {
+      "stage": 6,
+      "name": "tool_execution",
+      "input": "typed_tool_arguments",
+      "output": "verified_db_listings"
+    },
+    {
+      "stage": 7,
+      "name": "grounded_synthesis",
+      "input": "verified_db_listings",
+      "output": "final_grounded_response"
+    }
+  ]
+}

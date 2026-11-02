@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_17_comparison_calculations_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 17_comparison_calculations (Marketplace Comparison and Calculations)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "items_compared": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "calculation_formula": {
+      "type": "string"
+    },
+    "deterministic_result": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "query",
+    "items_compared",
+    "deterministic_result"
+  ],
+  "additionalProperties": false
+}

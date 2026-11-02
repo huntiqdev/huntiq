@@ -1,0 +1,68 @@
+{
+  "task_name": "marketplace_intent_classification",
+  "accuracy": 0.6333333333333333,
+  "macro_f1": 0.5885964912280702,
+  "training_duration_seconds": 0.7687997817993164,
+  "inference_latency_ms": 1.8392086029052734,
+  "train_samples": 116,
+  "test_samples": 30,
+  "classes": [
+    "clarification_needed",
+    "identity_inquiry",
+    "marketplace_search",
+    "out_of_domain",
+    "platform_faq",
+    "social_greeting"
+  ],
+  "detailed_report": {
+    "clarification_needed": {
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1-score": 0.5,
+      "support": 2.0
+    },
+    "identity_inquiry": {
+      "precision": 0.6666666666666666,
+      "recall": 0.4,
+      "f1-score": 0.5,
+      "support": 5.0
+    },
+    "marketplace_search": {
+      "precision": 0.5,
+      "recall": 0.8571428571428571,
+      "f1-score": 0.631578947368421,
+      "support": 7.0
+    },
+    "out_of_domain": {
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1-score": 0.4,
+      "support": 4.0
+    },
+    "platform_faq": {
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1-score": 0.5,
+      "support": 6.0
+    },
+    "social_greeting": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 6.0
+    },
+    "accuracy": 0.6333333333333333,
+    "macro avg": {
+      "precision": 0.6944444444444443,
+      "recall": 0.5845238095238096,
+      "f1-score": 0.5885964912280702,
+      "support": 30.0
+    },
+    "weighted avg": {
+      "precision": 0.6944444444444444,
+      "recall": 0.6333333333333333,
+      "f1-score": 0.6173684210526316,
+      "support": 30.0
+    }
+  }
+}

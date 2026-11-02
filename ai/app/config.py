@@ -29,11 +29,25 @@ class AIConfig(BaseModel):
         default_factory=lambda: [
             "search_marketplace_listings",
             "inspect_seller_reputation",
+            "get_listing_details",
+            "compare_listings",
+            "get_marketplace_stats",
         ]
     )
     supported_languages: list[str] = Field(
         default_factory=lambda: ["en", "am", "om", "ti"]
     )
+    api_secret_key: str = Field(
+        default_factory=lambda: os.getenv(
+            "HUNTIQ_AI_SECRET",
+            os.getenv("AI_SECRET_KEY", "huntiq-local-ai-secret-key-2026"),
+        )
+    )
+    go_backend_url: str = Field(
+        default_factory=lambda: os.getenv("GO_BACKEND_URL", "http://127.0.0.1:8080")
+    )
+    host: str = Field(default_factory=lambda: os.getenv("HOST", "127.0.0.1"))
+    port: int = Field(default_factory=lambda: int(os.getenv("PORT", "8000")))
 
 
 # Singleton instance for import

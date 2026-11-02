@@ -1,0 +1,3 @@
+thresholds:
+  min_quality_score: 0.85
+  max_duplicate_ratio: 0.02

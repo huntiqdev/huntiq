@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_21_dialogue_acts_turn_management_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 21_dialogue_acts_turn_management (Dialogue Acts and Turn Management)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "speaker": {
+      "type": "string",
+      "enum": [
+        "user",
+        "assistant"
+      ]
+    },
+    "utterance": {
+      "type": "string"
+    },
+    "dialogue_act": {
+      "type": "string",
+      "enum": [
+        "inform",
+        "request",
+        "confirm",
+        "reject",
+        "greet",
+        "thank",
+        "clarify",
+        "farewell"
+      ]
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "speaker",
+    "utterance",
+    "dialogue_act",
+    "locale"
+  ],
+  "additionalProperties": false
+}

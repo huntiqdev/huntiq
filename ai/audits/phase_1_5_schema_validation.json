@@ -1,0 +1,553 @@
+{
+  "audit_timestamp": "2026-11-02T12:40:00Z",
+  "total_schemas": 37,
+  "valid_syntax_count": 37,
+  "invalid_syntax_count": 0,
+  "schemas_with_errors": 0,
+  "schemas": {
+    "ai/data_pipeline/schemas/annotation_schema.json": {
+      "path": "ai/data_pipeline/schemas/annotation_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_Annotation_Schema",
+      "type": "object",
+      "properties_count": 8,
+      "required_fields": [
+        "annotation_id",
+        "record_id",
+        "annotator_id",
+        "annotation_type",
+        "labels",
+        "verified_by_human",
+        "created_at"
+      ]
+    },
+    "ai/data_pipeline/schemas/imported_record_schema.json": {
+      "path": "ai/data_pipeline/schemas/imported_record_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_Imported_Record_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "import_id",
+        "source_id",
+        "batch_id",
+        "raw_payload",
+        "imported_at"
+      ]
+    },
+    "ai/data_pipeline/schemas/normalized_record_schema.json": {
+      "path": "ai/data_pipeline/schemas/normalized_record_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_Normalized_Record_Schema",
+      "type": "object",
+      "properties_count": 8,
+      "required_fields": [
+        "record_id",
+        "source_id",
+        "locale",
+        "normalized_text",
+        "homophones_standardized",
+        "tokens"
+      ]
+    },
+    "ai/data_pipeline/schemas/provenance_schema.json": {
+      "path": "ai/data_pipeline/schemas/provenance_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_Provenance_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "provenance_id",
+        "dataset_module",
+        "batch_id",
+        "origin_source_ids",
+        "transformation_steps",
+        "hash_sha256"
+      ]
+    },
+    "ai/data_pipeline/schemas/rejection_schema.json": {
+      "path": "ai/data_pipeline/schemas/rejection_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_Rejection_Schema",
+      "type": "object",
+      "properties_count": 8,
+      "required_fields": [
+        "rejection_id",
+        "record_id",
+        "source_id",
+        "rejection_reason",
+        "rejection_code",
+        "rejected_at"
+      ]
+    },
+    "ai/data_pipeline/schemas/source_schema.json": {
+      "path": "ai/data_pipeline/schemas/source_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_Source_Schema",
+      "type": "object",
+      "properties_count": 9,
+      "required_fields": [
+        "source_id",
+        "source_name",
+        "provider",
+        "license_type",
+        "ingestion_date",
+        "data_format",
+        "languages"
+      ]
+    },
+    "ai/datasets/01_general_greetings/schema.json": {
+      "path": "ai/datasets/01_general_greetings/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_01_general_greetings_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "id",
+        "utterance",
+        "locale",
+        "greeting_type",
+        "has_commercial_intent"
+      ]
+    },
+    "ai/datasets/02_identity_assistant_behavior/schema.json": {
+      "path": "ai/datasets/02_identity_assistant_behavior/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_02_identity_assistant_behavior_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "query",
+        "locale",
+        "inquiry_type",
+        "authorized_response"
+      ]
+    },
+    "ai/datasets/03_huntiq_platform_knowledge/schema.json": {
+      "path": "ai/datasets/03_huntiq_platform_knowledge/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_03_huntiq_platform_knowledge_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "id",
+        "topic",
+        "query",
+        "locale",
+        "authoritative_answer",
+        "source_doc"
+      ]
+    },
+    "ai/datasets/04_domain_classification/schema.json": {
+      "path": "ai/datasets/04_domain_classification/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_04_domain_classification_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "text",
+        "locale",
+        "domain_label"
+      ]
+    },
+    "ai/datasets/05_intent_classification/schema.json": {
+      "path": "ai/datasets/05_intent_classification/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_05_intent_classification_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "query",
+        "locale",
+        "primary_intent"
+      ]
+    },
+    "ai/datasets/06_category_understanding/schema.json": {
+      "path": "ai/datasets/06_category_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_06_category_understanding_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "id",
+        "raw_term",
+        "locale",
+        "canonical_slug"
+      ]
+    },
+    "ai/datasets/07_entity_attribute_extraction/schema.json": {
+      "path": "ai/datasets/07_entity_attribute_extraction/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_07_entity_attribute_extraction_Schema",
+      "type": "object",
+      "properties_count": 4,
+      "required_fields": [
+        "id",
+        "text",
+        "locale",
+        "entities"
+      ]
+    },
+    "ai/datasets/08_search_query_understanding/schema.json": {
+      "path": "ai/datasets/08_search_query_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_08_search_query_understanding_Schema",
+      "type": "object",
+      "properties_count": 10,
+      "required_fields": [
+        "id",
+        "raw_query",
+        "locale",
+        "search_term"
+      ]
+    },
+    "ai/datasets/09_price_budget_understanding/schema.json": {
+      "path": "ai/datasets/09_price_budget_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_09_price_budget_understanding_Schema",
+      "type": "object",
+      "properties_count": 8,
+      "required_fields": [
+        "id",
+        "expression",
+        "locale",
+        "currency"
+      ]
+    },
+    "ai/datasets/10_location_understanding/schema.json": {
+      "path": "ai/datasets/10_location_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_10_location_understanding_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "id",
+        "raw_location",
+        "locale",
+        "canonical_city"
+      ]
+    },
+    "ai/datasets/11_multi_intent_understanding/schema.json": {
+      "path": "ai/datasets/11_multi_intent_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_11_multi_intent_understanding_Schema",
+      "type": "object",
+      "properties_count": 4,
+      "required_fields": [
+        "id",
+        "compound_query",
+        "locale",
+        "sub_intents"
+      ]
+    },
+    "ai/datasets/12_clarification_ambiguity/schema.json": {
+      "path": "ai/datasets/12_clarification_ambiguity/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_12_clarification_ambiguity_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "ambiguous_input",
+        "locale",
+        "missing_slot",
+        "clarification_question"
+      ]
+    },
+    "ai/datasets/13_conversation_followups/schema.json": {
+      "path": "ai/datasets/13_conversation_followups/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_13_conversation_followups_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "history",
+        "followup_message",
+        "locale",
+        "inferred_action"
+      ]
+    },
+    "ai/datasets/14_multilingual_understanding/schema.json": {
+      "path": "ai/datasets/14_multilingual_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_14_multilingual_understanding_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "semantic_id",
+        "english",
+        "amharic",
+        "oromo",
+        "tigrinya",
+        "canonical_intent"
+      ]
+    },
+    "ai/datasets/15_spelling_noisy_input/schema.json": {
+      "path": "ai/datasets/15_spelling_noisy_input/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_15_spelling_noisy_input_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "noisy_input",
+        "locale",
+        "normalized_output"
+      ]
+    },
+    "ai/datasets/16_recommendation_ranking/schema.json": {
+      "path": "ai/datasets/16_recommendation_ranking/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_16_recommendation_ranking_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "user_constraints",
+        "candidate_item_ids",
+        "ranking_order"
+      ]
+    },
+    "ai/datasets/17_comparison_calculations/schema.json": {
+      "path": "ai/datasets/17_comparison_calculations/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_17_comparison_calculations_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "query",
+        "items_compared",
+        "deterministic_result"
+      ]
+    },
+    "ai/datasets/18_safety_policy/schema.json": {
+      "path": "ai/datasets/18_safety_policy/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_18_safety_policy_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "adversarial_prompt",
+        "threat_category",
+        "safe_refusal_response"
+      ]
+    },
+    "ai/datasets/19_tool_calling_structured_outputs/schema.json": {
+      "path": "ai/datasets/19_tool_calling_structured_outputs/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_19_tool_calling_structured_outputs_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "user_intent",
+        "tool_name",
+        "arguments",
+        "schema_valid"
+      ]
+    },
+    "ai/datasets/20_grounding_response_quality/schema.json": {
+      "path": "ai/datasets/20_grounding_response_quality/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_20_grounding_response_quality_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "query",
+        "db_results_count",
+        "grounded_response",
+        "zero_hallucination_verified"
+      ]
+    },
+    "ai/datasets/21_dialogue_acts_turn_management/schema.json": {
+      "path": "ai/datasets/21_dialogue_acts_turn_management/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_21_dialogue_acts_turn_management_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "speaker",
+        "utterance",
+        "dialogue_act",
+        "locale"
+      ]
+    },
+    "ai/datasets/22_task_state_slot_completion/schema.json": {
+      "path": "ai/datasets/22_task_state_slot_completion/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_22_task_state_slot_completion_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "task_id",
+        "goal",
+        "required_slots",
+        "filled_slots",
+        "is_complete"
+      ]
+    },
+    "ai/datasets/23_constraint_reasoning_conflict_resolution/schema.json": {
+      "path": "ai/datasets/23_constraint_reasoning_conflict_resolution/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_23_constraint_reasoning_conflict_resolution_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "conflicting_constraints",
+        "conflict_type",
+        "suggested_compromise"
+      ]
+    },
+    "ai/datasets/24_user_preference_understanding/schema.json": {
+      "path": "ai/datasets/24_user_preference_understanding/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_24_user_preference_understanding_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "revealed_preference",
+        "preference_scope"
+      ]
+    },
+    "ai/datasets/25_negative_feedback_recovery/schema.json": {
+      "path": "ai/datasets/25_negative_feedback_recovery/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_25_negative_feedback_recovery_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "user_rejection",
+        "failure_diagnosis",
+        "recovery_turn"
+      ]
+    },
+    "ai/datasets/26_topic_switching_context_reset/schema.json": {
+      "path": "ai/datasets/26_topic_switching_context_reset/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_26_topic_switching_context_reset_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "previous_topic",
+        "new_topic_message",
+        "transition_response"
+      ]
+    },
+    "ai/datasets/27_search_refinement_progressive_filtering/schema.json": {
+      "path": "ai/datasets/27_search_refinement_progressive_filtering/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_27_search_refinement_progressive_filtering_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "base_filter",
+        "refinement_input",
+        "filter_mutation",
+        "resulting_filter"
+      ]
+    },
+    "ai/datasets/28_confidence_uncertainty/schema.json": {
+      "path": "ai/datasets/28_confidence_uncertainty/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_28_confidence_uncertainty_Schema",
+      "type": "object",
+      "properties_count": 6,
+      "required_fields": [
+        "id",
+        "ambiguous_input",
+        "confidence_score",
+        "should_abstain",
+        "uncertainty_response"
+      ]
+    },
+    "ai/datasets/29_service_failure_error_conversations/schema.json": {
+      "path": "ai/datasets/29_service_failure_error_conversations/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_29_service_failure_error_conversations_Schema",
+      "type": "object",
+      "properties_count": 5,
+      "required_fields": [
+        "id",
+        "error_condition",
+        "user_query",
+        "graceful_response",
+        "allow_retry"
+      ]
+    },
+    "ai/datasets/30_conversation_quality_response_generation/schema.json": {
+      "path": "ai/datasets/30_conversation_quality_response_generation/schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQ_30_conversation_quality_response_generation_Schema",
+      "type": "object",
+      "properties_count": 7,
+      "required_fields": [
+        "id",
+        "input_context",
+        "generated_response",
+        "locale"
+      ]
+    },
+    "ai/datasets/schemas/marketplace_tool_schema.json": {
+      "path": "ai/datasets/schemas/marketplace_tool_schema.json",
+      "valid": true,
+      "errors": [],
+      "title": "HUNTIQMarketplaceToolCall",
+      "type": "object",
+      "properties_count": 2,
+      "required_fields": [
+        "name",
+        "arguments"
+      ]
+    }
+  }
+}

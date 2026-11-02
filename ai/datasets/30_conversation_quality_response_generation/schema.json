@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_30_conversation_quality_response_generation_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 30_conversation_quality_response_generation (Conversation Quality and Natural Response Generation)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "input_context": {
+      "type": "string"
+    },
+    "generated_response": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "naturalness_score": {
+      "type": "number"
+    },
+    "conciseness_score": {
+      "type": "number"
+    },
+    "cultural_fit_score": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "id",
+    "input_context",
+    "generated_response",
+    "locale"
+  ],
+  "additionalProperties": false
+}

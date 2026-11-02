@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_02_identity_assistant_behavior_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 02_identity_assistant_behavior (Assistant Identity and Behavior)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "inquiry_type": {
+      "type": "string",
+      "enum": [
+        "name",
+        "purpose",
+        "capabilities",
+        "limitations",
+        "guest_access",
+        "pricing"
+      ]
+    },
+    "authorized_response": {
+      "type": "string"
+    },
+    "is_honest_limitation": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "query",
+    "locale",
+    "inquiry_type",
+    "authorized_response"
+  ],
+  "additionalProperties": false
+}

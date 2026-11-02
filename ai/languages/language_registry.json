@@ -1,0 +1,28 @@
+{
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "script": "Latin",
+      "status": "primary_tier_1"
+    },
+    {
+      "code": "am",
+      "name": "Amharic",
+      "script": "Ge'ez",
+      "status": "primary_tier_1"
+    },
+    {
+      "code": "or",
+      "name": "Afaan Oromoo",
+      "script": "Latin (Qubee)",
+      "status": "primary_tier_1"
+    },
+    {
+      "code": "ti",
+      "name": "Tigrinya",
+      "script": "Ge'ez",
+      "status": "primary_tier_1"
+    }
+  ]
+}

@@ -9,18 +9,48 @@ import unicodedata
 # Ge'ez Homophone Normalization Mapping (Amharic standard phonetic canonicalization)
 GEEZ_HOMOPHONE_MAP = {
     # Ha variants -> 1st order ሀ
-    "ሐ": "ሀ", "ኀ": "ሀ", "ሃ": "ሀ",
-    "ሁ": "ሁ", "ሑ": "ሁ", "ኁ": "ሁ",
-    "ሂ": "ሂ", "ሒ": "ሂ", "ኺ": "ሂ",
-    "ሄ": "ሄ", "ሔ": "ሄ", "ኼ": "ሄ",
-    "ህ": "ህ", "ሕ": "ህ", "ኽ": "ህ",
-    "ሆ": "ሆ", "ሖ": "ሆ", "ኆ": "ሆ",
+    "ሐ": "ሀ",
+    "ኀ": "ሀ",
+    "ሃ": "ሀ",
+    "ሁ": "ሁ",
+    "ሑ": "ሁ",
+    "ኁ": "ሁ",
+    "ሂ": "ሂ",
+    "ሒ": "ሂ",
+    "ኺ": "ሂ",
+    "ሄ": "ሄ",
+    "ሔ": "ሄ",
+    "ኼ": "ሄ",
+    "ህ": "ህ",
+    "ሕ": "ህ",
+    "ኽ": "ህ",
+    "ሆ": "ሆ",
+    "ሖ": "ሆ",
+    "ኆ": "ሆ",
     # Se variants -> ሰ
-    "ሠ": "ሰ", "ሡ": "ሱ", "ሢ": "ሲ", "ሣ": "ሳ", "ሤ": "ሴ", "ሥ": "ስ", "ሦ": "ሶ",
+    "ሠ": "ሰ",
+    "ሡ": "ሱ",
+    "ሢ": "ሲ",
+    "ሣ": "ሳ",
+    "ሤ": "ሴ",
+    "ሥ": "ስ",
+    "ሦ": "ሶ",
     # Tse variants -> ጸ
-    "ፀ": "ጸ", "ፁ": "ጹ", "ፂ": "ጺ", "ፃ": "ጻ", "ፄ": "ጼ", "ፅ": "ጽ", "ፆ": "ጾ",
+    "ፀ": "ጸ",
+    "ፁ": "ጹ",
+    "ፂ": "ጺ",
+    "ፃ": "ጻ",
+    "ፄ": "ጼ",
+    "ፅ": "ጽ",
+    "ፆ": "ጾ",
     # A variants -> አ
-    "ዐ": "አ", "ዑ": "ኡ", "ዒ": "ኢ", "ዓ": "ኣ", "ዔ": "ኤ", "ዕ": "እ", "ዖ": "ኦ",
+    "ዐ": "አ",
+    "ዑ": "ኡ",
+    "ዒ": "ኢ",
+    "ዓ": "ኣ",
+    "ዔ": "ኤ",
+    "ዕ": "እ",
+    "ዖ": "ኦ",
 }
 
 # Ge'ez Punctuation to ASCII Mapping
@@ -91,11 +121,38 @@ def detect_language(text: str, hint_locale: str = "en") -> str:
     lower = clean.lower()
     # Oromo specific vocabulary heuristics
     oromo_markers = [
-        "akkam", "maal", "meeqa", "eessatti", "barbaada", "jira",
-        "biyya", "mana", "konkolaataa", "bilbila", "qarshii"
+        "akkam",
+        "maal",
+        "meeqa",
+        "eessatti",
+        "barbaada",
+        "jira",
+        "biyya",
+        "mana",
+        "konkolaataa",
+        "bilbila",
+        "qarshii",
     ]
     words = set(re.findall(r"\b\w+\b", lower))
     if any(marker in words for marker in oromo_markers):
         return "om"
 
     return "en"
+
+
+def normalize_text(text: str) -> str:
+    """Universal text normalizer for Ge'ez, Oromo, and English."""
+    if not text:
+        return ""
+    if contains_geez(text):
+        return normalize_geez_text(text)
+    return normalize_oromo_text(text)
+
+
+class TextNormalizer:
+    @staticmethod
+    def normalize(text: str) -> str:
+        return normalize_text(text)
+
+
+normalizer = TextNormalizer()

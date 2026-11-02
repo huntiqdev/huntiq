@@ -128,7 +128,7 @@ export function BuyModal({ product, onClose }: Props) {
               </p>
             </div>
             <p className="text-xs text-yellow-600 dark:text-yellow-500">
-              This {isRental ? 'landlord' : 'seller'}'s listings require a{' '}
+              This {isRental ? 'landlord' : 'seller'}&apos;s listings require a{' '}
               {requiredTier === 'gold'
                 ? <><Star size={10} className="inline" /> Gold</>
                 : <><Crown size={10} className="inline" /> Premium</>}{' '}

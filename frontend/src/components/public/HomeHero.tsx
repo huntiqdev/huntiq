@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ShoppingBag, Store, Tag, Shield, Zap, Globe,
   HelpCircle, X, ChevronRight,
@@ -398,20 +399,25 @@ export function HomeHero() {
   const [conditionFilter, setConditionFilter] = useState<'all' | 'new' | 'used'>('all');
 
   useEffect(() => {
-    setLoadingCategories(true);
-    setCategoriesError(null);
-    api.getRootCategories(locale)
-      .then(cats => {
+    let active = true;
+    const fetchCats = async () => {
+      try {
+        const cats = await api.getRootCategories(locale);
+        if (!active) return;
         if (Array.isArray(cats) && cats.length > 0) {
           setRootCategories(cats);
         } else {
-          return api.getCategories().then(c => setRootCategories(Array.isArray(c) ? c : []));
+          const fallback = await api.getCategories();
+          if (active) setRootCategories(Array.isArray(fallback) ? fallback : []);
         }
-      })
-      .catch(() => {
-        setCategoriesError('Unable to load categories');
-      })
-      .finally(() => setLoadingCategories(false));
+      } catch {
+        if (active) setCategoriesError('Unable to load categories');
+      } finally {
+        if (active) setLoadingCategories(false);
+      }
+    };
+    fetchCats();
+    return () => { active = false; };
   }, [locale]);
 
   useEffect(() => {
@@ -527,7 +533,14 @@ export function HomeHero() {
                     cat.name_en ||
                     cat.slug?.replace(/_/g, ' ');
                   const icon = cat.icon || (cat.image_url ? (
-                    <img src={cat.image_url} alt={label} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
+                    <Image
+                      src={cat.image_url}
+                      alt={label || 'Category'}
+                      width={32}
+                      height={32}
+                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
+                      unoptimized
+                    />
                   ) : '📦');
                   return (
                     <Link

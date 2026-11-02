@@ -26,22 +26,24 @@ export default function CategoryBreadcrumbs({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchBreadcrumbs();
+    let active = true;
+    fetch(`/api/categories/${categoryId}/ancestors?lang=${language}`)
+      .then(res => res.json())
+      .then(data => {
+        if (active && data.success) {
+          setBreadcrumbs(data.data || []);
+        }
+      })
+      .catch(error => {
+        console.error('Failed to fetch breadcrumbs:', error);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
   }, [categoryId, language]);
-
-  const fetchBreadcrumbs = async () => {
-    try {
-      const res = await fetch(`/api/categories/${categoryId}/ancestors?lang=${language}`);
-      const data = await res.json();
-      if (data.success) {
-        setBreadcrumbs(data.data || []);
-      }
-    } catch (error) {
-      console.error('Failed to fetch breadcrumbs:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (

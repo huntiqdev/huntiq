@@ -1,0 +1,20 @@
+{
+  "benchmarks": [
+    {
+      "id": "domain_benchmark",
+      "target_accuracy": 0.95
+    },
+    {
+      "id": "entity_extraction",
+      "target_f1": 0.92
+    },
+    {
+      "id": "conversational_benchmark",
+      "target_accuracy": 0.94
+    },
+    {
+      "id": "zero_hallucination_check",
+      "target_pass_rate": 1.0
+    }
+  ]
+}

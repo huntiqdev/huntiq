@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { api } from '@/lib/api';
@@ -162,7 +162,17 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
   const faqs = FAQ_SUGGESTIONS_BY_LOCALE[activeLocale] || FAQ_SUGGESTIONS_BY_LOCALE.en;
   const welcomeText = WELCOME_MESSAGES[activeLocale] || WELCOME_MESSAGES.en;
 
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    if (initialQuery.trim()) return [];
+    return [
+      {
+        id: 'welcome',
+        sender: 'ai',
+        text: welcomeText,
+        timestamp: '',
+      },
+    ];
+  });
   const [inputVal, setInputVal] = useState('');
   const [loading, setLoading] = useState(false);
   const [openReasoningMap, setOpenReasoningMap] = useState<Record<string, boolean>>({});
@@ -171,6 +181,11 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
   const inputRef = useRef<HTMLInputElement>(null);
   const contextRef = useRef<ConversationContext>({});
   const sessionIdRef = useRef<string | undefined>(undefined);
+  const messagesRef = useRef<ChatMessage[]>(messages);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   // Auto-scroll chat to bottom
   const scrollToBottom = () => {
@@ -178,22 +193,6 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
       chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
-
-  // Initial welcome message or run initial query
-  useEffect(() => {
-    if (initialQuery.trim()) {
-      handleSend(initialQuery.trim());
-    } else {
-      setMessages([
-        {
-          id: 'welcome',
-          sender: 'ai',
-          text: welcomeText,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        },
-      ]);
-    }
-  }, []);
 
   const resolveEffectiveQuery = (rawQuery: string): string => {
     const q = rawQuery.trim();
@@ -226,15 +225,16 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
     return q;
   };
 
-  const handleSend = async (questionText: string) => {
-    const query = questionText.trim();
-    if (!query || loading) return;
+  const handleSend = useCallback(async (questionText: string) => {
+    const rawQuery = questionText.trim();
+    if (!rawQuery || loading) return;
 
+    const effectiveQuery = resolveEffectiveQuery(rawQuery);
     const userMsgId = `user-${Date.now()}`;
     const userMsg: ChatMessage = {
       id: userMsgId,
       sender: 'user',
-      text: query,
+      text: rawQuery,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
@@ -243,16 +243,17 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
     setLoading(true);
     scrollToBottom();
 
-    const history = messages
+    const history = messagesRef.current
       .filter(m => m.sender === 'user' || m.sender === 'ai')
       .slice(-4)
       .map(m => ({ role: m.sender === 'user' ? 'user' : 'assistant', content: m.text }));
 
     try {
-      const res = await aiApi.guestChat(query, history, locale, sessionIdRef.current);
+      const res = await aiApi.guestChat(effectiveQuery, history, locale, sessionIdRef.current);
       if (res.session_id) {
         sessionIdRef.current = res.session_id;
       }
+      contextRef.current.lastItem = rawQuery;
 
       const aiMsgId = `ai-${Date.now()}`;
       const aiMsg: ChatMessage = {
@@ -288,7 +289,14 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
       scrollToBottom();
       inputRef.current?.focus();
     }
-  };
+  }, [loading, locale, activeLocale]);
+
+  const initialQueryHandledRef = useRef(false);
+  useEffect(() => {
+    if (!initialQuery.trim() || initialQueryHandledRef.current) return;
+    initialQueryHandledRef.current = true;
+    handleSend(initialQuery.trim());
+  }, [initialQuery, handleSend]);
 
   const toggleReasoning = (msgId: string) => {
     setOpenReasoningMap(prev => ({ ...prev, [msgId]: !prev[msgId] }));
@@ -694,10 +702,13 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
                                 >
                                   <div className="relative w-14 h-14 rounded-md overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400">
                                     {l.image_url ? (
-                                      <img
+                                      <Image
                                         src={l.image_url}
                                         alt={l.title}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                        fill
+                                        sizes="56px"
+                                        className="object-cover group-hover:scale-105 transition-transform"
+                                        unoptimized
                                       />
                                     ) : (
                                       <Tag size={16} />
@@ -751,10 +762,13 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
                           >
                             <div className="relative w-14 h-14 rounded-md overflow-hidden shrink-0 bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-zinc-400">
                               {l.image_url ? (
-                                <img
+                                <Image
                                   src={l.image_url}
                                   alt={l.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                  fill
+                                  sizes="56px"
+                                  className="object-cover group-hover:scale-105 transition-transform"
+                                  unoptimized
                                 />
                               ) : (
                                 <Tag size={16} />

@@ -70,9 +70,10 @@ export function ListingFeeSlider({ price, tier = 'normal', selectedDays, onChang
     return '1 year';
   };
 
+  const [baseTime] = useState(() => Date.now());
   const expiryDateStr = useMemo(() => {
-    return new Date(Date.now() + selectedDays * 86_400_000).toLocaleDateString();
-  }, [selectedDays]);
+    return new Date(baseTime + selectedDays * 86_400_000).toLocaleDateString();
+  }, [baseTime, selectedDays]);
 
   return (
     <div className="flex flex-col gap-3 bg-zinc-50 dark:bg-zinc-800/60 rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700">

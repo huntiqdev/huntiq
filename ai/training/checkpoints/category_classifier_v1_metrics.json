@@ -1,0 +1,82 @@
+{
+  "task_name": "marketplace_category_classification",
+  "accuracy": 1.0,
+  "macro_f1": 1.0,
+  "training_duration_seconds": 2.4148387908935547,
+  "inference_latency_ms": 0.44676353191507273,
+  "train_samples": 579,
+  "test_samples": 145,
+  "classes": [
+    "agriculture",
+    "hotels",
+    "jobs",
+    "products",
+    "real_estate",
+    "services",
+    "tickets",
+    "vehicles"
+  ],
+  "detailed_report": {
+    "agriculture": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 17.0
+    },
+    "hotels": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 17.0
+    },
+    "jobs": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "products": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 21.0
+    },
+    "real_estate": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "services": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "tickets": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "vehicles": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 145.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 145.0
+    }
+  }
+}

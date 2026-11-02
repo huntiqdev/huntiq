@@ -2,12 +2,16 @@ package aiclient
 
 import (
 	"context"
+	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/your-org/used-tools-marketplace/internal/cache"
 )
 
 func TestAIClient_DisabledWhenEmpty(t *testing.T) {
@@ -537,6 +541,63 @@ func TestSearchSynonymsAndLocalization(t *testing.T) {
 	}
 	if loc := GetLocalizedEntityTerm("phone", "en"); loc != "phone" {
 		t.Errorf("expected localized term 'phone' for en, got %s", loc)
+	}
+}
+
+func TestUnderstandQuery_CacheAndCircuitBreaker(t *testing.T) {
+	memCache := cache.NewMemoryCache(1 * time.Minute)
+	defer memCache.Close()
+
+	// Client with non-existent server
+	client := NewClient("http://127.0.0.1:9999", "test-secret").
+		WithCache(memCache).
+		WithCircuitBreaker(NewCircuitBreaker(2, 50*time.Millisecond))
+
+	// 1. Initial call fails (server down) -> error
+	_, err := client.UnderstandQuery(context.Background(), "Toyota Corolla", "en")
+	if err == nil {
+		t.Fatalf("expected error on offline server")
+	}
+
+	// 2. Second failure should trip circuit breaker to OPEN
+	_, _ = client.UnderstandQuery(context.Background(), "Toyota Corolla", "en")
+	if client.circuitBreaker.State() != StateOpen {
+		t.Fatalf("expected circuit breaker state OPEN after 2 failures, got %s", client.circuitBreaker.State())
+	}
+
+	// 3. When circuit breaker is OPEN, client immediately returns fallback without waiting
+	t0 := time.Now()
+	res, err := client.UnderstandQuery(context.Background(), "Toyota Corolla Bole", "en")
+	if err != nil {
+		t.Fatalf("expected immediate fallback, got error: %v", err)
+	}
+	if time.Since(t0) > 50*time.Millisecond {
+		t.Fatalf("expected sub-millisecond fallback when circuit open, took %v", time.Since(t0))
+	}
+	if !strings.Contains(res.PrimaryIntent, "buy") {
+		t.Errorf("expected buy intent, got %s", res.PrimaryIntent)
+	}
+
+	// 4. Test Cache Hit
+	cachedQuery := QueryUnderstandingResponse{
+		NormalizedQuery: "cached-query",
+		PrimaryIntent:   "cached_intent",
+		Confidence:      0.99,
+	}
+	cacheData, _ := json.Marshal(cachedQuery)
+	cacheKey := fmt.Sprintf("ai:understand:%x", sha256.Sum256([]byte("en:test-cache-hit")))
+	_ = memCache.Set(context.Background(), cacheKey, cacheData, 10*time.Minute)
+
+	tHit := time.Now()
+	hitRes, err := client.UnderstandQuery(context.Background(), "test-cache-hit", "en")
+	if err != nil {
+		t.Fatalf("expected cache hit, got error: %v", err)
+	}
+	if time.Since(tHit) > 20*time.Millisecond {
+		t.Fatalf("expected instant cache hit, took %v", time.Since(tHit))
+	}
+	if hitRes.PrimaryIntent != "cached_intent" {
+		t.Errorf("expected cached_intent, got %s", hitRes.PrimaryIntent)
 	}
 }
 

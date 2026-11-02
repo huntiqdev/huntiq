@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { api } from '@/lib/api';
 import {
   ChevronDown,
@@ -59,18 +59,32 @@ export default function CategoryTreeSelector({
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
   const [selected, setSelected] = useState<number | undefined>(value);
+  const [prevValue, setPrevValue] = useState<number | undefined>(value);
+  if (prevValue !== value) {
+    setPrevValue(value);
+    setSelected(value);
+  }
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'leaves' | 'tree'>('leaves');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetchCategories();
+  const fetchCategories = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await api.getCategoryTree(language);
+      setCategories(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error('Failed to fetch categories:', error);
+      setCategories([]);
+    } finally {
+      setLoading(false);
+    }
   }, [language]);
 
   useEffect(() => {
-    setSelected(value);
-  }, [value]);
+    fetchCategories();
+  }, [fetchCategories]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -87,21 +101,8 @@ export default function CategoryTreeSelector({
     };
   }, [isOpen]);
 
-  const fetchCategories = async () => {
-    setLoading(true);
-    try {
-      const data = await api.getCategoryTree(language);
-      setCategories(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error('Failed to fetch categories:', error);
-      setCategories([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // Helper to extract localized name
-  const getNodeName = (node: CategoryNode): string => {
+  const getNodeName = useCallback((node: CategoryNode): string => {
     switch (language) {
       case 'am':
         return node.name_am || node.name || node.name_en || node.slug;
@@ -113,7 +114,7 @@ export default function CategoryTreeSelector({
       default:
         return node.name_en || node.name || node.slug;
     }
-  };
+  }, [language]);
 
   // Extract all flattened leaf branches with their complete hierarchy path
   const allLeafBranches = useMemo<FlattenedLeafBranch[]>(() => {
@@ -160,7 +161,7 @@ export default function CategoryTreeSelector({
     });
 
     return leaves;
-  }, [categories, language]);
+  }, [categories, getNodeName]);
 
   // Filter leaf branches by live search query across all 4 languages & slugs
   const filteredLeafBranches = useMemo(() => {

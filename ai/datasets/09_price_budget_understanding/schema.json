@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_09_price_budget_understanding_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 09_price_budget_understanding (Price and Budget Understanding)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "expression": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "extracted_min": {
+      "type": "number"
+    },
+    "extracted_max": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "ETB"
+    },
+    "is_negotiable": {
+      "type": "boolean"
+    },
+    "period": {
+      "type": "string",
+      "enum": [
+        "one_time",
+        "daily",
+        "monthly",
+        "yearly"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "expression",
+    "locale",
+    "currency"
+  ],
+  "additionalProperties": false
+}

@@ -48,16 +48,21 @@ export function ProductAttributes({
   const isTierRestricted = effectiveRequiredTier === 'gold' || effectiveRequiredTier === 'premium';
 
   useEffect(() => {
-    // If explicitly marked as locked from server, keep locked
+    let active = true;
     if (specificationsLocked) {
-      setIsLocked(true);
-      setLoading(false);
-      return;
+      const timer = setTimeout(() => {
+        if (active) {
+          setIsLocked(true);
+          setLoading(false);
+        }
+      }, 0);
+      return () => { active = false; clearTimeout(timer); };
     }
 
     // Call API with token if authenticated
     api.getProductAttributes(productId)
       .then((data: any) => {
+        if (!active) return;
         if (data && typeof data === 'object' && data.locked) {
           setIsLocked(true);
           setAttributes([]);
@@ -68,8 +73,13 @@ export function ProductAttributes({
           setAttributes([]);
         }
       })
-      .catch(() => setAttributes([]))
-      .finally(() => setLoading(false));
+      .catch(() => {
+        if (active) setAttributes([]);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => { active = false; };
   }, [productId, specificationsLocked, user]);
 
   if (loading) {

@@ -166,8 +166,10 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   useEffect(() => {
     let active = true;
     if (!form.category_hierarchy_id) {
-      setApplicableAttributes(prev => (prev.length === 0 ? prev : []));
-      return;
+      const timer = setTimeout(() => {
+        if (active) setApplicableAttributes(prev => (prev.length === 0 ? prev : []));
+      }, 0);
+      return () => { active = false; clearTimeout(timer); };
     }
     api.getCategoryAttributes(form.category_hierarchy_id)
       .then(data => {

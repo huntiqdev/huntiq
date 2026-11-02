@@ -1,0 +1,19 @@
+{
+  "risks": [
+    {
+      "id": "RISK-01",
+      "description": "Data poisoning or malicious prompts in raw imports",
+      "mitigation": "Regex and AST policy scanners in normalization pipeline"
+    },
+    {
+      "id": "RISK-02",
+      "description": "Accidental PII inclusion",
+      "mitigation": "Automated phone/email/national ID anonymization scrubbing"
+    },
+    {
+      "id": "RISK-03",
+      "description": "Train/Evaluation dataset leakage",
+      "mitigation": "Deterministic hash-based splits with zero overlap verification"
+    }
+  ]
+}

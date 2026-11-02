@@ -1,0 +1,52 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_Rejection_Schema",
+  "description": "Schema defining records rejected during quality control, licensing checks, or validation.",
+  "type": "object",
+  "required": [
+    "rejection_id",
+    "record_id",
+    "source_id",
+    "rejection_reason",
+    "rejection_code",
+    "rejected_at"
+  ],
+  "properties": {
+    "rejection_id": {
+      "type": "string"
+    },
+    "record_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "rejection_reason": {
+      "type": "string"
+    },
+    "rejection_code": {
+      "type": "string",
+      "enum": [
+        "PII_DETECTED",
+        "LICENSE_VIOLATION",
+        "OUT_OF_DOMAIN",
+        "PROMPT_INJECTION",
+        "CORRUPT_GEEZ_ENCODING",
+        "DUPLICATE"
+      ]
+    },
+    "raw_content_preview": {
+      "type": "string"
+    },
+    "rejected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewed_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

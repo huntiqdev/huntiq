@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_25_negative_feedback_recovery_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 25_negative_feedback_recovery (Negative Feedback and Recovery)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "prior_assistant_response": {
+      "type": "string"
+    },
+    "user_rejection": {
+      "type": "string"
+    },
+    "failure_diagnosis": {
+      "type": "string"
+    },
+    "recovery_turn": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "user_rejection",
+    "failure_diagnosis",
+    "recovery_turn"
+  ],
+  "additionalProperties": false
+}

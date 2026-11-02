@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_20_grounding_response_quality_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 20_grounding_response_quality (Response Grounding and Quality)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "db_results_count": {
+      "type": "integer"
+    },
+    "grounded_response": {
+      "type": "string"
+    },
+    "zero_hallucination_verified": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "query",
+    "db_results_count",
+    "grounded_response",
+    "zero_hallucination_verified"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,216 @@
+{
+  "audit_timestamp": "2026-11-02T12:36:00Z",
+  "standard_languages": {
+    "en": "English",
+    "am": "Amharic (\u12a0\u121b\u122d\u129b)",
+    "or": "Afaan Oromoo",
+    "ti": "Tigrinya (\u1275\u130d\u122d\u129b)"
+  },
+  "total_modules_audited": 30,
+  "modules_language_status": {
+    "01_general_greetings": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "02_identity_assistant_behavior": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "03_huntiq_platform_knowledge": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "04_domain_classification": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "05_intent_classification": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "06_category_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "07_entity_attribute_extraction": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "08_search_query_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "09_price_budget_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "10_location_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "11_multi_intent_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "12_clarification_ambiguity": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "13_conversation_followups": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "14_multilingual_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "15_spelling_noisy_input": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "16_recommendation_ranking": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "17_comparison_calculations": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "18_safety_policy": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "19_tool_calling_structured_outputs": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "20_grounding_response_quality": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "21_dialogue_acts_turn_management": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "22_task_state_slot_completion": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "23_constraint_reasoning_conflict_resolution": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "24_user_preference_understanding": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "25_negative_feedback_recovery": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "26_topic_switching_context_reset": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "27_search_refinement_progressive_filtering": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "28_confidence_uncertainty": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "29_service_failure_error_conversations": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    },
+    "30_conversation_quality_response_generation": {
+      "has_languages_dir": true,
+      "missing_expected_files": [],
+      "unexpected_files": [],
+      "is_complete": true
+    }
+  },
+  "glossary_status": {
+    "en": {
+      "path": "ai/languages/marketplace_glossary/en.json",
+      "exists": true,
+      "terms_count": 0
+    },
+    "am": {
+      "path": "ai/languages/marketplace_glossary/am.json",
+      "exists": true,
+      "terms_count": 0
+    },
+    "or": {
+      "path": "ai/languages/marketplace_glossary/or.json",
+      "exists": true,
+      "terms_count": 0
+    },
+    "ti": {
+      "path": "ai/languages/marketplace_glossary/ti.json",
+      "exists": true,
+      "terms_count": 0
+    }
+  },
+  "overall_language_compliance": true,
+  "non_standard_files_found": []
+}

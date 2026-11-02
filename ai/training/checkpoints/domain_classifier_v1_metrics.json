@@ -1,0 +1,40 @@
+{
+  "task_name": "ethiopian_marketplace_domain_classification",
+  "accuracy": 0.9923076923076923,
+  "macro_f1": 0.9907742530693351,
+  "training_duration_seconds": 0.8619885444641113,
+  "inference_latency_ms": 0.30770118419940656,
+  "train_samples": 519,
+  "test_samples": 130,
+  "classes": [
+    "ethiopian_marketplace",
+    "general_out_of_domain"
+  ],
+  "detailed_report": {
+    "ethiopian_marketplace": {
+      "precision": 1.0,
+      "recall": 0.9891304347826086,
+      "f1-score": 0.994535519125683,
+      "support": 92.0
+    },
+    "general_out_of_domain": {
+      "precision": 0.9743589743589743,
+      "recall": 1.0,
+      "f1-score": 0.987012987012987,
+      "support": 38.0
+    },
+    "accuracy": 0.9923076923076923,
+    "macro avg": {
+      "precision": 0.9871794871794872,
+      "recall": 0.9945652173913043,
+      "f1-score": 0.9907742530693351,
+      "support": 130.0
+    },
+    "weighted avg": {
+      "precision": 0.9925049309664694,
+      "recall": 0.9923076923076923,
+      "f1-score": 0.9923366251235104,
+      "support": 130.0
+    }
+  }
+}

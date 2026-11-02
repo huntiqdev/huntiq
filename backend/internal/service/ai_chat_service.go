@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"crypto/rand"
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -303,6 +304,35 @@ func (s *AIChatService) ProcessGuestChat(ctx context.Context, req GuestChatReque
 		sessionID = generateSessionID()
 	}
 
+	// 2. Delegate to authoritative Python AI service if configured
+	if s.aiClient != nil && s.aiClient.IsEnabled() {
+		historyTurns := make([]aiclient.GuestChatTurn, len(req.History))
+		for i, h := range req.History {
+			historyTurns[i] = aiclient.GuestChatTurn{Role: h.Role, Content: h.Content}
+		}
+		pythonRes, err := s.aiClient.SendGuestChat(ctx, aiclient.GuestChatPayload{
+			Message:   cleanMsg,
+			Locale:    locale,
+			SessionID: sessionID,
+			History:   historyTurns,
+		})
+		if err == nil && pythonRes != nil && pythonRes.Answer != "" {
+			var fullDTO GuestChatResponseDTO
+			if err := json.Unmarshal(pythonRes.RawJSON, &fullDTO); err == nil && fullDTO.Answer != "" {
+				return &fullDTO, nil
+			}
+			return &GuestChatResponseDTO{
+				SessionID:      pythonRes.SessionID,
+				GreetingPrefix: pythonRes.GreetingPrefix,
+				Answer:         pythonRes.Answer,
+				Clarification:  pythonRes.Clarification,
+				LatencyMS:      pythonRes.LatencyMS,
+				Model:          pythonRes.Model,
+			}, nil
+		}
+	}
+
+	// 3. Fallback: Short-term bounded session context and sovereign fallback
 	var sessionCtx *ConversationContext
 	if s.sessionManager != nil {
 		sessionCtx = s.sessionManager.GetOrCreate(sessionID, locale)
@@ -318,7 +348,7 @@ func (s *AIChatService) ProcessGuestChat(ctx context.Context, req GuestChatReque
 		}
 	}
 
-	// 2. Multidimensional intent classification and conversational planning
+	// 4. Multidimensional intent classification and conversational planning (Deterministic Fallback)
 	plan := ClassifyMessage(cleanMsg, locale, sessionCtx)
 	effectiveLocale := plan.DetectedLanguage
 	if effectiveLocale == "" {

@@ -1,0 +1,4 @@
+version: '2.0'
+pipeline:
+  batch_size: 1000
+  max_workers: 4

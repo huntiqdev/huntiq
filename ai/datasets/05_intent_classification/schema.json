@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_05_intent_classification_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 05_intent_classification (Intent Classification)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "primary_intent": {
+      "type": "string"
+    },
+    "secondary_intents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "is_multi_intent": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "query",
+    "locale",
+    "primary_intent"
+  ],
+  "additionalProperties": false
+}

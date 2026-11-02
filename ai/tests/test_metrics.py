@@ -36,7 +36,9 @@ def test_validate_tool_call_schema_valid():
 
 
 def test_validate_tool_call_schema_invalid():
-    invalid_call = {"function": {"name": "search_marketplace_listings", "arguments": {}}}
+    invalid_call = {
+        "function": {"name": "search_marketplace_listings", "arguments": {}}
+    }
     valid, reason = validate_tool_call_schema(invalid_call)
     assert valid is False
     assert "requires 'searches'" in reason

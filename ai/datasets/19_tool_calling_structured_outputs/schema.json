@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_19_tool_calling_structured_outputs_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 19_tool_calling_structured_outputs (Tool Calling and Structured Outputs)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "user_intent": {
+      "type": "string"
+    },
+    "tool_name": {
+      "type": "string",
+      "enum": [
+        "search_marketplace_listings",
+        "get_listing_details",
+        "compare_listings",
+        "get_marketplace_stats"
+      ]
+    },
+    "arguments": {
+      "type": "object"
+    },
+    "schema_valid": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "user_intent",
+    "tool_name",
+    "arguments",
+    "schema_valid"
+  ],
+  "additionalProperties": false
+}

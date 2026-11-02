@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "core_domains": [
+    "real_estate",
+    "vehicles",
+    "electronics",
+    "agriculture",
+    "jobs",
+    "services"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_06_category_understanding_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 06_category_understanding (Marketplace Category Understanding)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "raw_term": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "canonical_slug": {
+      "type": "string"
+    },
+    "category_level": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "parent_slug": {
+      "type": "string"
+    },
+    "is_ambiguous": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "raw_term",
+    "locale",
+    "canonical_slug"
+  ],
+  "additionalProperties": false
+}

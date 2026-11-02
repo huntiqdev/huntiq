@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_14_multilingual_understanding_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 14_multilingual_understanding (Multilingual Understanding)",
+  "type": "object",
+  "properties": {
+    "semantic_id": {
+      "type": "string"
+    },
+    "english": {
+      "type": "string"
+    },
+    "amharic": {
+      "type": "string"
+    },
+    "oromo": {
+      "type": "string"
+    },
+    "tigrinya": {
+      "type": "string"
+    },
+    "canonical_intent": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "human_verified",
+        "pending_review"
+      ]
+    }
+  },
+  "required": [
+    "semantic_id",
+    "english",
+    "amharic",
+    "oromo",
+    "tigrinya",
+    "canonical_intent"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,44 @@
+{
+  "": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_Provenance_Schema",
+  "description": "Schema defining end-to-end data lineage and transformation history.",
+  "type": "object",
+  "required": [
+    "provenance_id",
+    "dataset_module",
+    "batch_id",
+    "origin_source_ids",
+    "transformation_steps",
+    "hash_sha256"
+  ],
+  "properties": {
+    "provenance_id": {
+      "type": "string"
+    },
+    "dataset_module": {
+      "type": "string"
+    },
+    "batch_id": {
+      "type": "string"
+    },
+    "origin_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "transformation_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hash_sha256": {
+      "type": "string"
+    },
+    "committed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -152,6 +152,15 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
   );
 }
 
+function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => void }) {
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const t = searchParams.get('type') || searchParams.get('listing_type');
+    onTypeChange(t);
+  }, [searchParams, onTypeChange]);
+  return null;
+}
+
 // ── Header ───────────────────────────────────────────────────────────────────
 export function Header() {
   const { t, locale, setLocale, locales, localeLabels } = useLocale();
@@ -162,8 +171,12 @@ export function Header() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    setDark(document.documentElement.classList.contains('dark'));
-    setMounted(true);
+    const isDark = document.documentElement.classList.contains('dark');
+    const timer = setTimeout(() => {
+      setDark(isDark);
+      setMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleDark = () => {
@@ -186,15 +199,6 @@ export function Header() {
     }, 0);
     return () => clearTimeout(id);
   }, [langOpen]);
-
-function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => void }) {
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    const t = searchParams.get('type') || searchParams.get('listing_type');
-    onTypeChange(t);
-  }, [searchParams, onTypeChange]);
-  return null;
-}
 
   const [currentType, setCurrentType] = useState<string | null>(null);
 

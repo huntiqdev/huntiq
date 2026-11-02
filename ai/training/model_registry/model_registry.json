@@ -1,0 +1,69 @@
+{
+  "registered_models": [
+    {
+      "model_id": "domain_classifier_v1",
+      "version": "2.0.0",
+      "task": "ethiopian_marketplace_domain_classification",
+      "artifact_path": "training/checkpoints/domain_classifier_v1.joblib",
+      "metrics_path": "training/checkpoints/domain_classifier_v1_metrics.json",
+      "accuracy": 0.9923076923076923,
+      "macro_f1": 0.9907742530693351,
+      "latency_ms": 0.30770118419940656,
+      "status": "APPROVED_PRODUCTION",
+      "approved_by": "HUNTIQ Modern Super AI Architectural Pipeline",
+      "approval_date": "2026-11-02"
+    },
+    {
+      "model_id": "safety_moderation_v1",
+      "version": "2.0.0",
+      "task": "marketplace_safety_scam_moderation",
+      "artifact_path": "training/checkpoints/safety_moderation_v1.joblib",
+      "metrics_path": "training/checkpoints/safety_moderation_v1_metrics.json",
+      "accuracy": 0.9924242424242424,
+      "macro_f1": 0.9862990810359232,
+      "latency_ms": 0.31680229938391485,
+      "status": "APPROVED_PRODUCTION",
+      "approved_by": "HUNTIQ Modern Super AI Architectural Pipeline",
+      "approval_date": "2026-11-02"
+    },
+    {
+      "model_id": "sentiment_dispute_v1",
+      "version": "2.0.0",
+      "task": "marketplace_sentiment_review_dispute_classification",
+      "artifact_path": "training/checkpoints/sentiment_dispute_v1.joblib",
+      "metrics_path": "training/checkpoints/sentiment_dispute_v1_metrics.json",
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "latency_ms": 0.46897914311657213,
+      "status": "APPROVED_PRODUCTION",
+      "approved_by": "HUNTIQ Modern Super AI Architectural Pipeline",
+      "approval_date": "2026-11-02"
+    },
+    {
+      "model_id": "category_classifier_v1",
+      "version": "2.0.0",
+      "task": "marketplace_category_classification",
+      "artifact_path": "training/checkpoints/category_classifier_v1.joblib",
+      "metrics_path": "training/checkpoints/category_classifier_v1_metrics.json",
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "latency_ms": 0.44676353191507273,
+      "total_samples": 724,
+      "status": "APPROVED_PRODUCTION",
+      "approval_date": "2026-11-02"
+    },
+    {
+      "model_id": "intent_classifier_v1",
+      "version": "2.0.0",
+      "task": "marketplace_intent_classification",
+      "artifact_path": "training/checkpoints/intent_classifier_v1.joblib",
+      "metrics_path": "training/checkpoints/intent_classifier_v1_metrics.json",
+      "accuracy": 0.6333333333333333,
+      "macro_f1": 0.5885964912280702,
+      "latency_ms": 1.8392086029052734,
+      "total_samples": 146,
+      "status": "APPROVED_PRODUCTION",
+      "approval_date": "2026-11-02"
+    }
+  ]
+}

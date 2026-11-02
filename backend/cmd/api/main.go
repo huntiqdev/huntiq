@@ -228,11 +228,13 @@ func main() {
 	// Handlers
 	aiClient := aiclient.NewClient(cfg.AIServiceURL, cfg.AISecretKey).
 		WithOllama(cfg.OllamaURL, cfg.OllamaModel).
-		WithProvider(cfg.AIProvider)
+		WithProvider(cfg.AIProvider).
+		WithCache(appCache)
 	aiConvRepo := repository.NewAIConversationRepo(db)
 	aiToolDispatcher := service.NewAIToolDispatcher(productRepo)
 	aiChatSvc := service.NewAIChatService(aiConvRepo, aiClient, aiToolDispatcher)
 	aiChatHandler := handlers.NewAIChatHandler(aiChatSvc)
+	internalAIToolHandler := handlers.NewInternalAIToolHandler(aiToolDispatcher, cfg.AISecretKey)
 
 	productHandler := handlers.NewProductHandler(productSvc, authSvc).
 		WithSearchLogger(searchRepo).
@@ -485,6 +487,7 @@ func main() {
 		},
 	})
 	api.Post("/ai/chat", aiGuestLimiter, aiChatHandler.GuestChat)
+	api.Post("/internal/ai/tools/execute", internalAIToolHandler.Execute)
 
 	// Authenticated Multi-Turn AI Sessions (Preserved for signed-in users)
 	ai := api.Group("/ai", mw.RequireAuth)

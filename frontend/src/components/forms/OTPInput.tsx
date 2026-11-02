@@ -19,9 +19,14 @@ export function OTPInput({ recipient, onVerified, onResend, error, loading }: Pr
   const submittedRef = useRef(false); // prevents double-submit on fast input
 
   // Reset digits + timer whenever recipient changes (component re-use)
-  useEffect(() => {
+  const [prevRecipient, setPrevRecipient] = useState(recipient);
+  if (prevRecipient !== recipient) {
+    setPrevRecipient(recipient);
     setDigits(['', '', '', '', '', '']);
     setCountdown(300);
+  }
+
+  useEffect(() => {
     submittedRef.current = false;
     refs.current[0]?.focus();
     const t = setInterval(() => setCountdown(c => Math.max(0, c - 1)), 1000);

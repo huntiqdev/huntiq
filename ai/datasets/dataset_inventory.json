@@ -1,0 +1,155 @@
+{
+  "total_datasets": 30,
+  "inventory": [
+    {
+      "id": "01_general_greetings",
+      "name": "General Greetings and Social Conversation",
+      "domain": "conversational_social"
+    },
+    {
+      "id": "02_identity_assistant_behavior",
+      "name": "Assistant Identity and Behavior",
+      "domain": "assistant_persona"
+    },
+    {
+      "id": "03_huntiq_platform_knowledge",
+      "name": "HUNTIQ Platform Knowledge",
+      "domain": "platform_faq_knowledge"
+    },
+    {
+      "id": "04_domain_classification",
+      "name": "Domain Classification",
+      "domain": "domain_policy_routing"
+    },
+    {
+      "id": "05_intent_classification",
+      "name": "Intent Classification",
+      "domain": "nlu_intent"
+    },
+    {
+      "id": "06_category_understanding",
+      "name": "Marketplace Category Understanding",
+      "domain": "taxonomy_classification"
+    },
+    {
+      "id": "07_entity_attribute_extraction",
+      "name": "Entity and Attribute Extraction",
+      "domain": "named_entity_recognition"
+    },
+    {
+      "id": "08_search_query_understanding",
+      "name": "Search Query Understanding",
+      "domain": "query_parsing"
+    },
+    {
+      "id": "09_price_budget_understanding",
+      "name": "Price and Budget Understanding",
+      "domain": "numeric_currency_nlu"
+    },
+    {
+      "id": "10_location_understanding",
+      "name": "Ethiopian Location Understanding",
+      "domain": "geographical_nlu"
+    },
+    {
+      "id": "11_multi_intent_understanding",
+      "name": "Multi-Intent Understanding",
+      "domain": "complex_dialogue_nlu"
+    },
+    {
+      "id": "12_clarification_ambiguity",
+      "name": "Clarification and Ambiguity",
+      "domain": "dialogue_disambiguation"
+    },
+    {
+      "id": "13_conversation_followups",
+      "name": "Conversation Follow-ups",
+      "domain": "contextual_dialogue"
+    },
+    {
+      "id": "14_multilingual_understanding",
+      "name": "Multilingual Understanding",
+      "domain": "multilingual_semantic_parity"
+    },
+    {
+      "id": "15_spelling_noisy_input",
+      "name": "Spelling and Noisy Input",
+      "domain": "robustness_normalization"
+    },
+    {
+      "id": "16_recommendation_ranking",
+      "name": "Recommendation and Ranking",
+      "domain": "search_relevance"
+    },
+    {
+      "id": "17_comparison_calculations",
+      "name": "Marketplace Comparison and Calculations",
+      "domain": "deterministic_math"
+    },
+    {
+      "id": "18_safety_policy",
+      "name": "Safety, Security and Platform Policy",
+      "domain": "ai_safety_governance"
+    },
+    {
+      "id": "19_tool_calling_structured_outputs",
+      "name": "Tool Calling and Structured Outputs",
+      "domain": "agentic_tool_execution"
+    },
+    {
+      "id": "20_grounding_response_quality",
+      "name": "Response Grounding and Quality",
+      "domain": "grounding_factuality"
+    },
+    {
+      "id": "21_dialogue_acts_turn_management",
+      "name": "Dialogue Acts and Turn Management",
+      "domain": "conversation_flow"
+    },
+    {
+      "id": "22_task_state_slot_completion",
+      "name": "Task State and Slot Completion",
+      "domain": "task_oriented_dialogue"
+    },
+    {
+      "id": "23_constraint_reasoning_conflict_resolution",
+      "name": "Constraint Reasoning and Conflict Resolution",
+      "domain": "logic_constraint_satisfaction"
+    },
+    {
+      "id": "24_user_preference_understanding",
+      "name": "User Preference Understanding",
+      "domain": "contextual_personalization"
+    },
+    {
+      "id": "25_negative_feedback_recovery",
+      "name": "Negative Feedback and Recovery",
+      "domain": "dialogue_repair"
+    },
+    {
+      "id": "26_topic_switching_context_reset",
+      "name": "Topic Switching and Context Reset",
+      "domain": "context_hygiene"
+    },
+    {
+      "id": "27_search_refinement_progressive_filtering",
+      "name": "Search Refinement and Progressive Filtering",
+      "domain": "progressive_refinement"
+    },
+    {
+      "id": "28_confidence_uncertainty",
+      "name": "Confidence and Uncertainty",
+      "domain": "calibrated_uncertainty"
+    },
+    {
+      "id": "29_service_failure_error_conversations",
+      "name": "Service Failure and Error Conversations",
+      "domain": "resilience_error_handling"
+    },
+    {
+      "id": "30_conversation_quality_response_generation",
+      "name": "Conversation Quality and Natural Response Generation",
+      "domain": "nlg_quality"
+    }
+  ]
+}

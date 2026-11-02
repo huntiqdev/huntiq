@@ -1,0 +1,586 @@
+[
+  {
+    "text": "Hello!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Hi there, how are you?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Good morning!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Good evening assistant",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Hey!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Thank you very much",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Thanks for your help",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Goodbye, see you later",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Bye bye",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ሰላም!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ሰላም እንደምን ነህ?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ሰላም እንደምን ዋላችሁ?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "እንደምን አደራችሁ?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "እንደምን አመሻችሁ?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "አመሰግናለሁ!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "በጣም አመሰግናለሁ",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ደህና ሁን",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ቻው",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Akkam jirtu?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Akkam nagaa?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Akkam bultan?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Akkam ooltan?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Galatoomi!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Baay'ee galatoomi",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Nagaatti",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ሰላም ከመይ ኣለኻ?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ሰላም ከመይ ሓዲርኩም?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ሰላም ከመይ ውዒልኩም?",
+    "label": "social_greeting"
+  },
+  {
+    "text": "የቐንየለይ!",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ብጣዕሚ የቐንየለይ",
+    "label": "social_greeting"
+  },
+  {
+    "text": "ደሓን ኩኑ",
+    "label": "social_greeting"
+  },
+  {
+    "text": "Who are you?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "What is your name?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "What can you do?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "What are your capabilities?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Are you an AI?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "How does HUNTIQ help me?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Is this service free to use?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Can I use this without an account?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ማን ነህ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ስምህ ማን ነው?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ምን ምን ትሰራለህ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ምን ማገዝ ትችላለህ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "አንተ ምንድን ነህ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "በHUNTIQ ምን ማድረግ እችላለሁ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ይህ አገልግሎት ነጻ ነው?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Eenyu ati?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Maqaan kee eenyu?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Maal hojjechuu dandeessa?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Akkamitti na gargaarta?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Tajaajilli kun bilisaa?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "መን ኢኻ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ስምካ መን ይበሃል?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "እንታይ ክትሕግዝ ትኽእል?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "ናይ HUNTIQ ረዳት ዲኻ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "እዚ ኣገልግሎት ብነጻ ድዩ?",
+    "label": "identity_inquiry"
+  },
+  {
+    "text": "Looking for iPhone 13 Pro 256GB in Addis Ababa",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Find Samsung Galaxy phone under 25000 birr",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Show me used laptops with 16GB RAM in Bole",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "2 bedroom apartment for rent in Bole under 35000 birr",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "3 bed villa for sale in CMC Addis Ababa",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Studio condominium for rent in Kazanchis",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Toyota Vitz automatic car for sale in Addis",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Used Toyota Corolla 2018 duty paid",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Dump truck for rent in Hawassa",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Agricultural teff 100 quintal in Bahir Dar",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Yirgacheffe coffee beans wholesale price",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Driver job vacancy in Addis Ababa",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Plumber service in Sarbet",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Guest house room in Bole for daily rent",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ቦሌ ውስጥ የሚከራይ ባለ ሁለት መኝታ ቤት ፈልግ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "አዲስ አበባ ውስጥ ቶዮታ ቪትዝ መኪና መግዛት እፈልጋለሁ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ከ20 ሺህ ብር በታች ስልክ አሳየኝ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ሲኤምሲ አካባቢ የሚሸጥ ቪላ ቤት",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ካዛንቺስ ውስጥ የተሟላ ፈርኒቸር ያለው ስቱዲዮ ክራይ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "የላፕቶፕ ኮምፒውተር በቦሌ 16 ጂቢ ራም",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ማኛ ጤፍ በኩንታል ዋጋው ስንት ነው?",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "የመኪና ሹፌር ክፍት የስራ ቦታ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "የቧንቧ ባለሙያ በአስቸኳይ እፈልጋለሁ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Finfinnee keessatti konkolaataa Toyota Vitz gurguraa barbaada",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Magaalaa Adaamaa keessatti mana kireeffamu qabaa?",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Bilbila Samsung qarshii 20000 gadi",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Mana jireenyaa kutaa 2 Boolee keessatti",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Buna Yirgaacaffee gurgurtaa",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "Konkolaachisaa barbaadama",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ኣብ መቐለ ዝሽየጥ ገዛ ይደሊ ኣለኹ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ኣብ ቦሌ ዝካረ ክልተ ክፍሊ ኣፓርታማ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "መኪና ቶዮታ ኮሮላ ዝሽየጥ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ስልኪ ኣይፎን ትሕቲ 30 ሺሕ ቅርሺ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ናይ ጤፍ መሸጣ ዋጋ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "ናይ መኪና መዘወሪ ስራሕ",
+    "label": "marketplace_search"
+  },
+  {
+    "text": "How do I publish a listing on HUNTIQ?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "How much does Gold membership cost?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "How do I pay with Telebirr?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Can I pay using CBE Birr?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "How long does listing approval take?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Why was my listing rejected?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "How do I reset my account password?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "How do I contact customer support?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Does HUNTIQ take a commission on sales?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "How can I download a tax invoice for my payment?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "በHUNTIQ ላይ ማስታወቂያ እንዴት መለጠፍ እችላለሁ?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "የጎልድ አባልነት ዋጋው ስንት ነው?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "በቴሌብር እንዴት መክፈል እችላለሁ?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "በCBE Birr ክፍያ ይፈጸማል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "የተለጠፈ ማስታወቂያ ለመጽደቅ ስንት ሰዓት ይወስዳል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "የይለፍ ቃሌን እንዴት መቀየር እችላለሁ?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "የHUNTIQ የደንበኞች ድጋፍ አገልግሎትን እንዴት ማግኘት እችላለሁ?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "HUNTIQ በሽያጭ ላይ ኮሚሽን ይቆርጣል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "የክፍያ ደረሰኝ እንዴት ማግኘት እችላለሁ?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "HUNTIQ irratti beeksisa akkamitti maxxansuu danda'a?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Miseensummaan Gold waggaatti qarshii meeqa?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Kafaltii Telebirr akkamitti raawwadhura?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Deeggarsa maamiltootaa akkamitti arganna?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "ኣብ HUNTIQ ሓድሽ መወዓውዒ ብኸመይ ክልጥፍ ይኽእል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "ናይ ጎልድ ኣባልነት ክንደይ የኽፍል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "ብቴሌብር ከመይ ገይረ ክኸፍል ይኽእል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "ፓስዎርድ ምስ ዝጠፍኣኒ ብኸመይ ክመልሶ ይኽእል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "ናይ ዓማዊል ደገፍ ከመይ ገይረ ክረክብ ይኽእል?",
+    "label": "platform_faq"
+  },
+  {
+    "text": "Write a Python script to sort a binary tree",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Explain the theory of relativity by Albert Einstein",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "What is the chemical formula for photosynthesis?",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Solve the integral of x squared dx",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Write a React component with Tailwind button",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Who was Napoleon Bonaparte and when was Waterloo?",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Explain quantum physics and quantum entanglement",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "How do I make chocolate chip cookies from scratch?",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "የኳንተም ፊዚክስ ቀመር ምንድን ነው?",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "ስለ አልበርት አንስታይን አንጻራዊነት ጽንሰ ሀሳብ አብራራልኝ",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "የፓይዘን ኮድ ጻፍልኝ",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "የባዮሎጂ ጥያቄዎችን መልስልኝ",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "ሂሳብ ስሌት ስራልኝ",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Koodii Java naaf barreessi",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "Fiziksii fi keemistirii na barsiisi",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "ናይ ኳንተም ፊዚክስ ሕጊ እንታይ እዩ?",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "ናይ ፓይዘን ፕሮግራም ጸሓፈለይ",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "ናይ ኬሚስትሪ ሕቶታት ምለሰለይ",
+    "label": "out_of_domain"
+  },
+  {
+    "text": "I want to rent something in Bole",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "Find me a brand new luxury villa in Bole with min price 5,000,000 and max budget 20,000",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "I need something cheap in Addis",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "Show me options in Ethiopia",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "የሚከራይ ነገር እፈልጋለሁ",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "ዋጋው አነስተኛ የሆነ ነገር አሳየኝ",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "ቦሌ ውስጥ ርካሽ ነገር",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "Waan tokko kireeffachuu barbaada",
+    "label": "clarification_needed"
+  },
+  {
+    "text": "ዝካረ ነገር ይደሊ ኣለኹ",
+    "label": "clarification_needed"
+  }
+]

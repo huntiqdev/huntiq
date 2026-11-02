@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_03_huntiq_platform_knowledge_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 03_huntiq_platform_knowledge (HUNTIQ Platform Knowledge)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string",
+      "enum": [
+        "products",
+        "membership",
+        "listing",
+        "account",
+        "payment",
+        "privacy",
+        "security",
+        "support"
+      ]
+    },
+    "query": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "authoritative_answer": {
+      "type": "string"
+    },
+    "source_doc": {
+      "type": "string"
+    },
+    "effective_date": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "topic",
+    "query",
+    "locale",
+    "authoritative_answer",
+    "source_doc"
+  ],
+  "additionalProperties": false
+}

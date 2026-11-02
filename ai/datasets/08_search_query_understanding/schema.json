@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQ_08_search_query_understanding_Schema",
+  "description": "Formal JSON validation schema for HUNTIQ dataset module 08_search_query_understanding (Search Query Understanding)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "raw_query": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "am",
+        "or",
+        "ti"
+      ]
+    },
+    "search_term": {
+      "type": "string"
+    },
+    "category_slug": {
+      "type": "string"
+    },
+    "min_price": {
+      "type": "number"
+    },
+    "max_price": {
+      "type": "number"
+    },
+    "location": {
+      "type": "string"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "new",
+        "used",
+        "any"
+      ]
+    },
+    "listing_type": {
+      "type": "string",
+      "enum": [
+        "sale",
+        "rent",
+        "any"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "raw_query",
+    "locale",
+    "search_term"
+  ],
+  "additionalProperties": false
+}

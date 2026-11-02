@@ -1,0 +1,61 @@
+{
+  "task_name": "marketplace_safety_scam_moderation",
+  "accuracy": 0.9924242424242424,
+  "macro_f1": 0.9862990810359232,
+  "training_duration_seconds": 0.6911134719848633,
+  "inference_latency_ms": 0.31680229938391485,
+  "train_samples": 528,
+  "test_samples": 132,
+  "classes": [
+    "harassment_abuse",
+    "phishing_harvesting",
+    "prohibited_contraband",
+    "safe",
+    "scam_advance"
+  ],
+  "detailed_report": {
+    "harassment_abuse": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 31.0
+    },
+    "phishing_harvesting": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 27.0
+    },
+    "prohibited_contraband": {
+      "precision": 0.96875,
+      "recall": 1.0,
+      "f1-score": 0.9841269841269841,
+      "support": 31.0
+    },
+    "safe": {
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1-score": 0.9473684210526315,
+      "support": 10.0
+    },
+    "scam_advance": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 33.0
+    },
+    "accuracy": 0.9924242424242424,
+    "macro avg": {
+      "precision": 0.99375,
+      "recall": 0.9800000000000001,
+      "f1-score": 0.9862990810359232,
+      "support": 132.0
+    },
+    "weighted avg": {
+      "precision": 0.9926609848484849,
+      "recall": 0.9924242424242424,
+      "f1-score": 0.9922850054429001,
+      "support": 132.0
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "evaluation_suites": {
+    "core_capabilities": [
+      "04_domain_classification",
+      "08_search_query_understanding",
+      "20_grounding_response_quality"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "total_modules": 30,
+  "current_record_count": 0,
+  "target_ecosystem_records": 1000000,
+  "languages_supported": 4,
+  "total_language_split_files": 120,
+  "total_training_split_files": 90,
+  "total_evaluation_split_files": 90
+}

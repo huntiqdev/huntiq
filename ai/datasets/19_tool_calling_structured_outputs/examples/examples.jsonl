@@ -1,0 +1,3 @@
+{"id": "tool_001", "user_intent": "search for apartments to rent in Bole under 35000 birr", "tool_name": "search_marketplace_listings", "arguments": {"category_slug": "apartments", "listing_type": "rent", "location": "Bole, Addis Ababa", "max_price": 35000, "attributes": {"bedrooms": 2}}, "schema_valid": true}
+{"id": "tool_002", "user_intent": "search for Toyota Vitz in Addis Ababa", "tool_name": "search_marketplace_listings", "arguments": {"category_slug": "vehicles", "query": "Toyota Vitz", "location": "Addis Ababa"}, "schema_valid": true}
+{"id": "tool_003", "user_intent": "get details for listing uuid 456", "tool_name": "get_listing_details", "arguments": {"listing_id": "b3c21a4f-5678-4321-9876-abcdef123456"}, "schema_valid": true}
