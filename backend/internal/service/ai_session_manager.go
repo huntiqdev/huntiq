@@ -22,6 +22,11 @@ type ConversationContext struct {
 	LastMinPrice   *float64                 `json:"last_min_price,omitempty"`
 	LastLocation   string                   `json:"last_location,omitempty"`
 	LastCategory   string                   `json:"last_category,omitempty"`
+	LastBrand      string                   `json:"last_brand,omitempty"`
+	LastListingType *string                 `json:"last_listing_type,omitempty"`
+	LastCondition  string                   `json:"last_condition,omitempty"`
+	UnresolvedSlot string                   `json:"unresolved_slot,omitempty"`
+	PendingSearch  *ExtractedSearchRequest  `json:"pending_search,omitempty"`
 	Turns          []ConversationTurn       `json:"turns"`
 	LastActiveAt   time.Time                `json:"last_active_at"`
 	CreatedAt      time.Time                `json:"created_at"`
@@ -200,6 +205,25 @@ func (sm *SessionManager) RecordTurn(
 		}
 		if last.Location != "" {
 			ctx.LastLocation = last.Location
+		}
+		if last.Brand != "" {
+			ctx.LastBrand = last.Brand
+		}
+		if last.ListingType != nil {
+			ctx.LastListingType = last.ListingType
+		}
+		if last.Condition != "" {
+			ctx.LastCondition = last.Condition
+		}
+	}
+
+	if plan != nil {
+		if plan.RequiresClarification && plan.UnresolvedSlot != "" {
+			ctx.UnresolvedSlot = plan.UnresolvedSlot
+			ctx.PendingSearch = plan.PendingSearch
+		} else {
+			ctx.UnresolvedSlot = ""
+			ctx.PendingSearch = nil
 		}
 	}
 }

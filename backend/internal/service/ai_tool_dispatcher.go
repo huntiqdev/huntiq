@@ -418,6 +418,13 @@ func (d *AIToolDispatcher) ExecuteMultiSearch(ctx context.Context, searches []Ex
 			}
 
 			cleanTerm := aiclient.CleanConversationalSearchTerm(sReq.SearchTerm)
+			if sReq.Brand != "" {
+				if cleanTerm == "" || cleanTerm == "all" || cleanTerm == "products" || cleanTerm == "items" {
+					cleanTerm = sReq.Brand
+				} else if !strings.Contains(strings.ToLower(cleanTerm), strings.ToLower(sReq.Brand)) {
+					cleanTerm = sReq.Brand + " " + cleanTerm
+				}
+			}
 			if cleanTerm != "" && cleanTerm != "all" && cleanTerm != "products" && cleanTerm != "items" {
 				filter.Search = &cleanTerm
 			}

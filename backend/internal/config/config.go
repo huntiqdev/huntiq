@@ -102,7 +102,7 @@ func Load() *Config {
 		MaxUploadMB:   getEnvInt("MAX_UPLOAD_MB", 20),
 		AIServiceURL:  getEnv("AI_SERVICE_URL", "http://127.0.0.1:8000"),
 		AISecretKey:   getEnv("AI_SECRET_KEY", ""),
-		AIProvider:    getEnv("AI_PROVIDER", "ollama"),
+		AIProvider:    getEnv("AI_PROVIDER", "sovereign"),
 		OllamaURL:     getEnv("OLLAMA_URL", "http://127.0.0.1:11434"),
 		OllamaModel:   getEnv("OLLAMA_MODEL", "huntiq-assistant:latest"),
 		RedisAddr:     getEnv("REDIS_ADDR", ""),

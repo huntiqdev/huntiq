@@ -71,9 +71,11 @@ func CheckPlatformFAQ(query, locale string) (bool, string) {
 	lower := strings.ToLower(strings.TrimSpace(query))
 	loc := strings.ToLower(strings.TrimSpace(locale))
 
-	// How to post / sell / list
+	// How to post / sell / list / publish
 	if strings.Contains(lower, "how to post") || strings.Contains(lower, "how do i post") ||
 		strings.Contains(lower, "how to sell") || strings.Contains(lower, "how to list") ||
+		strings.Contains(lower, "how do i publish") || strings.Contains(lower, "how to publish") ||
+		strings.Contains(lower, "publish a listing") || strings.Contains(lower, "publish an ad") ||
 		strings.Contains(lower, "post an apartment") || strings.Contains(lower, "post a product") ||
 		strings.Contains(lower, "እንዴት መለጠፍ") || strings.Contains(lower, "እንዴት መሸጥ") ||
 		strings.Contains(lower, "akkamitti maxxansu") || strings.Contains(lower, "akkamitti gurguru") ||
@@ -112,6 +114,54 @@ func CheckPlatformFAQ(query, locale string) (bool, string) {
 	if strings.Contains(lower, "membership") || strings.Contains(lower, "subscription") ||
 		strings.Contains(lower, "tier") || strings.Contains(lower, "premium plan") || strings.Contains(lower, "gold plan") {
 		return true, "HUNTIQ offers three seller trust tiers:\n\n• **Standard / Normal (Free):** Post verified listings with basic search discovery.\n• **Gold Certified:** Enhanced search ranking, verified trust badge, and priority customer matching.\n• **Premium Verified:** Top search placement, full buyer-protection assurance, and featured hero display.\n\nBuyers and guest visitors can browse, search, and use the AI assistant completely free without any subscription."
+	}
+
+	// Seller registration / onboarding
+	if strings.Contains(lower, "register as a seller") || strings.Contains(lower, "become a seller") ||
+		strings.Contains(lower, "can i register as a seller") || strings.Contains(lower, "sell on huntiq") ||
+		strings.Contains(lower, "ሻጭ መሆን") || strings.Contains(lower, "ሻጭ ሆኜ") ||
+		strings.Contains(lower, "gurguraa ta'uu") || strings.Contains(lower, "ሻያጢ ምዃን") {
+		switch loc {
+		case "am":
+			return true, "በHUNTIQ ላይ እንደ ሻጭ ለመመዝገብ:\n\n1. በነፃ ይመዝገቡና ስልክ ቁጥርዎን በOTP ያረጋግጡ።\n2. ወደ መለያዎ (Profile) በመግባት 'ሻጭ ሁን' (Become a Seller) የሚለውን ይምረጡ።\n3. የንግድ ወይም የግል መረጃዎን ይሙሉ (የመደብር ስም፣ አካባቢ)።\n4. ወዲያውኑ ማስታወቂያዎችን በነጻ መለጠፍ እና በመላው ኢትዮጵያ ካሉ ገዢዎች ጋር መገናኘት መጀመር ይችላሉ!"
+		case "om", "or":
+			return true, "HUNTIQ irratti akka gurguraatti galmaa'uuf:\n\n1. Bilisaan galmaa'aa, lakkoofsa bilbilaa OTP tiin mirkaneessaa.\n2. Proofaayilii keessan keessatti 'Gurguraa Ta'i' (Become a Seller) kan jedhu filadhaa.\n3. Odeeffannoo suuqii ykn dhuunfaa keessanii guutaa.\n4. Battaluma sanatti oomishaalee maxxansuu fi bittaa waliin wal qunnamuu dandeessu!"
+		case "ti":
+			return true, "ኣብ HUNTIQ ከም ሻያጢ ንምምዝጋብ:\n\n1. ብናጻ ተመዝጊብኩም ቁጽሪ ስልኪ ብOTP ኣረጋግጹ።\n2. ናብ ፕሮፋይልኩም ብምእታው 'ሻያጢ ኩን' (Become a Seller) ዝብል ምረጹ።\n3. መረዳእታ ድኳንኩም ወይ ውልቀ ሰብኩም ምልኡ።\n4. ብኡንብኡ ዕዳጋታትኩም ብናጻ ምልጣፍ ክትጅምሩ ትኽእሉ ኢኹም!"
+		default:
+			return true, "Yes! Anyone in Ethiopia can register as a verified seller on HUNTIQ:\n\n1. Sign up for free using your Ethiopian phone number and verify with OTP.\n2. In your profile dashboard, switch your account to **Seller** mode.\n3. Enter your store name, city/subcity, and contact options.\n4. Standard seller registration is 100% free with no monthly subscription required!"
+		}
+	}
+
+	// Listing fees / cost to list
+	if strings.Contains(lower, "listing fee") || strings.Contains(lower, "cost to list") ||
+		strings.Contains(lower, "is it free to post") || strings.Contains(lower, "how much does it cost") ||
+		strings.Contains(lower, "የመለጠፊያ ክፍያ") || strings.Contains(lower, "ክፍያ አለው") ||
+		strings.Contains(lower, "kaffaltii qabaa") || strings.Contains(lower, "ክፍሊት ኣለዎ ድዩ") {
+		return true, "Posting standard listings on HUNTIQ is **completely free**.\n\nFor sellers who want maximum visibility, HUNTIQ offers optional **Featured Promotion** with a flexible duration slider (e.g. 7, 14, or 30 days) at affordable daily rates, payable seamlessly via Telebirr, CBE Birr, or Chapa. Free listings never expire without advance notice."
+	}
+
+	// Payment methods
+	if strings.Contains(lower, "how do i pay") || strings.Contains(lower, "payment method") ||
+		strings.Contains(lower, "telebirr") || strings.Contains(lower, "cbe birr") || strings.Contains(lower, "chapa") ||
+		strings.Contains(lower, "ክፍያ እንዴት") || strings.Contains(lower, "አከፋፈል") ||
+		strings.Contains(lower, "akkamitti kaffalu") || strings.Contains(lower, "ከመይ ጌረ ይኸፍል") {
+		return true, "HUNTIQ integrates Ethiopia's primary secure digital payment channels:\n\n• **Telebirr:** Instant checkout for listing promotions and seller subscriptions via mobile PIN.\n• **CBE Birr & Commercial Bank of Ethiopia:** Direct bank transfer and digital CBE Birr.\n• **Chapa & Awash:** Supports multiple local debit cards and mobile wallets.\n\nFor peer-to-peer marketplace purchases, buyers and sellers typically transact via Telebirr or cash upon inspecting items in person in safe public locations."
+	}
+
+	// Land and property sales
+	if strings.Contains(lower, "sell my land") || strings.Contains(lower, "sell land") ||
+		strings.Contains(lower, "መሬት መሸጥ") || strings.Contains(lower, "የመሬት ሽያጭ") ||
+		strings.Contains(lower, "lafa gurguruu") || strings.Contains(lower, "መሬት ምሻጥ") {
+		return true, "To sell land or property on HUNTIQ:\n\n1. Navigate to **'Post Listing'** and choose **Real Estate > Land & Plots**.\n2. Specify the total area (in m² / kare), zoning (residential, commercial, or agricultural), and deed status (title deed / ካርታ / libre).\n3. Enter the exact city/subcity or regional location and realistic price in ETB.\n4. Upload site photos or boundary plans.\n5. Verified listings attract thousands of active property buyers across Ethiopia daily!"
+	}
+
+	// Verification and trust
+	if strings.Contains(lower, "is this listing verified") || strings.Contains(lower, "is it verified") ||
+		strings.Contains(lower, "how to verify") || strings.Contains(lower, "safe to buy") ||
+		strings.Contains(lower, "የተረጋገጠ ነው") || strings.Contains(lower, "ደህንነት") ||
+		strings.Contains(lower, "mirkanaa'aa dhaa") || strings.Contains(lower, "ውሑስ ድዩ") {
+		return true, "HUNTIQ protects buyers through trust signals and seller verification:\n\n• **Verified Phone & Identity:** All sellers must verify their accounts with Ethiopian phone OTP.\n• **Gold & Premium Badges:** Highlight vetted commercial sellers with established transaction track records.\n• **Safe Meetup Guideline:** Never send upfront wire transfers or deposits for uninspected items. Always meet the seller in person at a public location (e.g. Bole, Megenagna, Piassa) to verify the item before payment."
 	}
 
 	return false, ""

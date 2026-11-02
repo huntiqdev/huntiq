@@ -274,3 +274,150 @@ func TestProcessGuestChat_ConversationalPurity(t *testing.T) {
 		t.Errorf("expected clarification for 'pho', got: %+v", respClarify)
 	}
 }
+
+// 9. Housing Ambiguity & Multi-Turn Slot Resolution
+func TestConversational_HousingAmbiguityAndSlotResolution(t *testing.T) {
+	// Turn 1: "I want a house" -> should ask whether user wants to buy or rent
+	plan1 := service.ClassifyMessage("I want a house", "en", nil)
+	if !plan1.RequiresClarification {
+		t.Errorf("expected 'I want a house' to require clarification (buy vs rent)")
+	}
+	if plan1.UnresolvedSlot != "listing_type" {
+		t.Errorf("expected unresolved slot 'listing_type', got '%s'", plan1.UnresolvedSlot)
+	}
+	if !strings.Contains(plan1.ClarificationQuestion, "buy or rent") {
+		t.Errorf("expected buy or rent clarification question, got: %s", plan1.ClarificationQuestion)
+	}
+
+	// Prepare session context with unresolved slot
+	sessionCtx := &service.ConversationContext{
+		UnresolvedSlot: plan1.UnresolvedSlot,
+		PendingSearch:  plan1.PendingSearch,
+	}
+
+	// Turn 2: User answers "Rent" -> slot resolved, search executes!
+	plan2 := service.ClassifyMessage("Rent", "en", sessionCtx)
+	if plan2.RequiresClarification {
+		t.Errorf("expected turn 2 'Rent' to resolve clarification, but required clarification again")
+	}
+	if len(plan2.Searches) != 1 {
+		t.Fatalf("expected 1 search in turn 2, got %d", len(plan2.Searches))
+	}
+	if plan2.Searches[0].ListingType == nil || *plan2.Searches[0].ListingType != "rent" {
+		t.Errorf("expected listing_type 'rent', got %+v", plan2.Searches[0].ListingType)
+	}
+}
+
+// 10. Relative Location Clarification
+func TestConversational_RelativeLocationClarification(t *testing.T) {
+	plan := service.ClassifyMessage("Find a house near my workplace", "en", nil)
+	if !plan.RequiresClarification {
+		t.Errorf("expected 'near my workplace' to trigger location clarification")
+	}
+	if plan.UnresolvedSlot != "location" {
+		t.Errorf("expected unresolved slot 'location', got '%s'", plan.UnresolvedSlot)
+	}
+	if !strings.Contains(plan.ClarificationQuestion, "workplace") && !strings.Contains(plan.ClarificationQuestion, "city") {
+		t.Errorf("expected workplace location question, got: %s", plan.ClarificationQuestion)
+	}
+}
+
+// 11. Conversational Intent Correction: Buy -> Rent
+func TestConversational_IntentCorrection(t *testing.T) {
+	saleType := "sale"
+	sessionCtx := &service.ConversationContext{
+		RecentSearches: []service.ExtractedSearchRequest{
+			{
+				CategoryName: "Residential Properties & Houses",
+				SearchTerm:   "house",
+				ListingType:  &saleType,
+			},
+		},
+	}
+
+	plan := service.ClassifyMessage("I don't want to buy, I want to rent", "en", sessionCtx)
+	if len(plan.Searches) != 1 {
+		t.Fatalf("expected 1 corrected search, got %d", len(plan.Searches))
+	}
+	if plan.Searches[0].ListingType == nil || *plan.Searches[0].ListingType != "rent" {
+		t.Errorf("expected corrected listing_type 'rent', got %+v", plan.Searches[0].ListingType)
+	}
+}
+
+// 12. Brand Filter Refinement: "Only Samsung"
+func TestConversational_BrandFilterRefinement(t *testing.T) {
+	sessionCtx := &service.ConversationContext{
+		RecentSearches: []service.ExtractedSearchRequest{
+			{
+				CategoryName: "Mobile Phones",
+				SearchTerm:   "phone",
+			},
+		},
+	}
+
+	plan := service.ClassifyMessage("Only Samsung", "en", sessionCtx)
+	if len(plan.Searches) != 1 {
+		t.Fatalf("expected 1 search, got %d", len(plan.Searches))
+	}
+	if plan.Searches[0].Brand != "samsung" {
+		t.Errorf("expected brand 'samsung', got '%s'", plan.Searches[0].Brand)
+	}
+}
+
+// 13. Budget and Food Extraction: "I have 4,000 birr, where can I get food?"
+func TestConversational_BudgetAndFoodExtraction(t *testing.T) {
+	plan := service.ClassifyMessage("I have 4,000 birr, where can I get food?", "en", nil)
+	if len(plan.Searches) != 1 {
+		t.Fatalf("expected 1 search for food, got %d", len(plan.Searches))
+	}
+	if plan.Searches[0].CategoryName != "Food & Groceries" {
+		t.Errorf("expected 'Food & Groceries', got '%s'", plan.Searches[0].CategoryName)
+	}
+	if plan.Searches[0].MaxPrice == nil || *plan.Searches[0].MaxPrice != 4000.0 {
+		t.Errorf("expected max_price 4000.0, got %+v", plan.Searches[0].MaxPrice)
+	}
+}
+
+// 14. Full Constraints Extraction: "I need a two-bedroom house in Bole below 20k monthly"
+func TestConversational_FullConstraintsNoUnnecessaryClarification(t *testing.T) {
+	plan := service.ClassifyMessage("I need a two-bedroom house in Bole below 20k monthly", "en", nil)
+	if plan.RequiresClarification {
+		t.Errorf("should NOT require clarification when all constraints (house, Bole, 20k) are provided")
+	}
+	if len(plan.Searches) != 1 {
+		t.Fatalf("expected 1 search, got %d", len(plan.Searches))
+	}
+	s := plan.Searches[0]
+	if s.Location != "Bole" {
+		t.Errorf("expected location 'Bole', got '%s'", s.Location)
+	}
+	if s.MaxPrice == nil || *s.MaxPrice != 20000.0 {
+		t.Errorf("expected max_price 20000.0, got %+v", s.MaxPrice)
+	}
+}
+
+// 15. Expanded Platform FAQs
+func TestConversational_ExpandedPlatformFAQs(t *testing.T) {
+	faqs := []struct {
+		query   string
+		locale  string
+		mustSub string
+	}{
+		{"Can I register as a seller?", "en", "seller"},
+		{"How do I publish a listing?", "en", "Post Listing"},
+		{"Is this listing verified?", "en", "Verified"},
+		{"I want to sell my land", "en", "Land & Plots"},
+		{"How much does it cost to list?", "en", "free"},
+		{"How do I pay with Telebirr?", "en", "Telebirr"},
+	}
+
+	for _, tc := range faqs {
+		isFAQ, ans := service.CheckPlatformFAQ(tc.query, tc.locale)
+		if !isFAQ {
+			t.Errorf("query '%s' should be recognized as platform FAQ", tc.query)
+		}
+		if !strings.Contains(ans, tc.mustSub) {
+			t.Errorf("query '%s' answer should contain '%s', got: %s", tc.query, tc.mustSub, ans)
+		}
+	}
+}

@@ -34,6 +34,7 @@ type ExtractedSearchRequest struct {
 	CategoryName string   `json:"category_name"` // "Mobile Phones", "Computers", "Houses", etc.
 	CategorySlug string   `json:"category_slug,omitempty"`
 	SearchTerm   string   `json:"search_term"`
+	Brand        string   `json:"brand,omitempty"`
 	ListingType  *string  `json:"listing_type,omitempty"` // "sale" or "rent"
 	MinPrice     *float64 `json:"min_price,omitempty"`
 	MaxPrice     *float64 `json:"max_price,omitempty"`
@@ -52,18 +53,24 @@ type ConversationPlan struct {
 	GeneralResponse        string                   `json:"general_response,omitempty"`
 	RequiresClarification  bool                     `json:"requires_clarification"`
 	ClarificationQuestion  string                   `json:"clarification_question,omitempty"`
+	UnresolvedSlot         string                   `json:"unresolved_slot,omitempty"` // "listing_type", "location", "brand"
+	PendingSearch          *ExtractedSearchRequest  `json:"pending_search,omitempty"`
 	Searches               []ExtractedSearchRequest `json:"searches,omitempty"`
 	RequiresDatabaseSearch bool                     `json:"requires_database_search"`
 }
 
 // Regex patterns for price and budget extraction
 var (
-	rxPriceUnder = regexp.MustCompile(`(?i)\b(?:under|below|less than|max|budget of|up to|maximum of)\s*([\d,]+)\s*(?:etb|birr|ብር|qarshii)?\b`)
-	rxPriceAbove = regexp.MustCompile(`(?i)\b(?:above|over|more than|min|minimum of|starting from|at least)\s*([\d,]+)\s*(?:etb|birr|ብር|qarshii)?\b`)
-	rxPriceBirr  = regexp.MustCompile(`(?i)\b([\d,]+)\s*(?:etb|birr|ብር|qarshii)\b`)
-	rxAmharicMax = regexp.MustCompile(`(?i)(?:ከ\s*)?([\d,]+)\s*(?:ብር|etb)?\s*(?:በታች|ያነሰ)`)
-	rxOromoMax   = regexp.MustCompile(`(?i)(?:gatii\s*)?([\d,]+)\s*(?:qarshii|etb)?\s*(?:gadi)`)
-	rxTigrinyaMax = regexp.MustCompile(`(?i)(?:ትሕቲ|ትሕቲ\s*)?([\d,]+)\s*(?:ቅርሺ|etb)?\s*(?:ትሕቲ)`)
+	rxPriceUnder     = regexp.MustCompile(`(?i)\b(?:under|below|less than|max|maximum of|budget of|up to)\s*([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:etb|birr|ብር|qarshii|ቅርሺ)?\b`)
+	rxPriceAbove     = regexp.MustCompile(`(?i)\b(?:above|over|more than|min|minimum of|starting from|at least)\s*([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:etb|birr|ብር|qarshii|ቅርሺ)?\b`)
+	rxPriceHave      = regexp.MustCompile(`(?i)\b(?:i have|with|budget of|my budget is|around|have)\s*([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:etb|birr|ብር|qarshii|ቅርሺ)?\b`)
+	rxPriceBirr      = regexp.MustCompile(`(?i)\b([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:etb|birr|ብር|qarshii|ቅርሺ)\b`)
+	rxAmharicMax     = regexp.MustCompile(`(?i)(?:ከ\s*)?([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:ብር|etb)?\s*(?:በታች|ያነሰ)`)
+	rxAmharicBudget  = regexp.MustCompile(`(?i)([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:ብር|etb)?\s*(?:አለኝ|ያለኝ)`)
+	rxOromoMax       = regexp.MustCompile(`(?i)(?:gatii\s*)?([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:qarshii|etb)?\s*(?:gadi)`)
+	rxOromoBudget    = regexp.MustCompile(`(?i)(?:qarshii\s*)?([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:qaba)`)
+	rxTigrinyaMax    = regexp.MustCompile(`(?i)(?:ትሕቲ|ትሕቲ\s*)?([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:ቅርሺ|etb)?\s*(?:ትሕቲ)`)
+	rxTigrinyaBudget = regexp.MustCompile(`(?i)(?:ቅርሺ\s*)?([\d,]+(?:\.\d+)?[kKmM]?)\s*(?:ኣለኒ)`)
 )
 
 // Known canonical category synonym registry for multi-category extraction.
@@ -153,6 +160,16 @@ var categoryRegistry = []CategoryKeywordSpec{
 			"ፈርኒቸር", "ሶፋ", "አልጋ", "ወንበር", "ጠረጴዛ", "ፍሪጅ", "ቲቪ", "ቴሌቪዥን", "ልብስ ማጠቢያ",
 			"mi'a manaa", "firiijii", "televiziyoinii", "siree",
 			"ፈርኒቸር", "ሶፋ", "ዓራት", "ፍሪጅ", "ተለቪዥን",
+		},
+	},
+	{
+		CanonicalName: "Food & Groceries",
+		CategorySlug:  "food-beverages-agriculture",
+		Keywords: []string{
+			"food", "groceries", "meal", "restaurant", "dining", "meat", "coffee", "buna", "teff", "oil",
+			"ምግብ", "ምግብ ቤት", "ሬስቶራንት", "ቡና", "ጤፍ", "ዘይት", "ስጋ",
+			"nyaata", "man-nyaataa", "buna", "dhadhaa",
+			"መግቢ", "ቤት መግቢ", "ቡን",
 		},
 	},
 }
@@ -410,22 +427,103 @@ func checkClarification(cleanQuery string, lower string, lang string, plan *Conv
 }
 
 func resolveContextFollowUp(cleanQuery string, lower string, lang string, ctx *ConversationContext, plan *ConversationPlan) bool {
-	if ctx == nil || len(ctx.RecentSearches) == 0 {
+	if ctx == nil {
+		return false
+	}
+
+	// 1. Resolve prior unresolved slot if user is answering a clarification
+	if ctx.UnresolvedSlot != "" && ctx.PendingSearch != nil {
+		switch ctx.UnresolvedSlot {
+		case "listing_type":
+			lt := extractListingType(lower)
+			if lt != nil {
+				resolved := *ctx.PendingSearch
+				resolved.ListingType = lt
+				maxP, minP := extractPriceConstraints(lower)
+				if maxP != nil {
+					resolved.MaxPrice = maxP
+				}
+				if minP != nil {
+					resolved.MinPrice = minP
+				}
+				loc := extractLocation(lower)
+				if loc != "" {
+					resolved.Location = loc
+				}
+				plan.Searches = append(plan.Searches, resolved)
+				plan.RequiresDatabaseSearch = true
+				plan.Intents = append(plan.Intents, IntentMarketplaceSearch)
+				return true
+			}
+		case "location":
+			loc := extractLocation(lower)
+			if loc != "" {
+				resolved := *ctx.PendingSearch
+				resolved.Location = loc
+				maxP, minP := extractPriceConstraints(lower)
+				if maxP != nil {
+					resolved.MaxPrice = maxP
+				}
+				if minP != nil {
+					resolved.MinPrice = minP
+				}
+				plan.Searches = append(plan.Searches, resolved)
+				plan.RequiresDatabaseSearch = true
+				plan.Intents = append(plan.Intents, IntentMarketplaceSearch)
+				return true
+			}
+		}
+	}
+
+	if len(ctx.RecentSearches) == 0 {
 		return false
 	}
 
 	lastSearch := ctx.RecentSearches[len(ctx.RecentSearches)-1]
 
-	// Check for price follow-ups: "cheaper ones", "something cheaper", "lower price"
-	isCheaper := strings.Contains(lower, "cheaper") || strings.Contains(lower, "cheapest") ||
-		strings.Contains(lower, "lower price") || strings.Contains(lower, "less expensive") ||
-		strings.Contains(lower, "ቅናሽ") || strings.Contains(lower, "ረከስ ያለ") || strings.Contains(lower, "ተመጣጣኝ") ||
-		strings.Contains(lower, "rakasa") || strings.Contains(lower, "gatii gadi aanaa") ||
-		strings.Contains(lower, "ሕሳር") || strings.Contains(lower, "ዝሓሰረ")
+	// 2. Correction: "I don't want to buy, I want to rent" / "I want to rent, not buy"
+	isRentCorrection := strings.Contains(lower, "want to rent") ||
+		strings.Contains(lower, "not buy") ||
+		strings.Contains(lower, "don't want to buy") ||
+		strings.Contains(lower, "መግዛት አልፈልግም") ||
+		strings.Contains(lower, "ኪራይ ነው") ||
+		strings.Contains(lower, "kireeffachuuf") ||
+		strings.Contains(lower, "ክራይ እየ")
 
-	// Check for brand follow-ups: "only samsung", "show me dell"
+	if isRentCorrection {
+		rentType := "rent"
+		newSearch := lastSearch
+		newSearch.ListingType = &rentType
+		plan.Searches = append(plan.Searches, newSearch)
+		plan.RequiresDatabaseSearch = true
+		plan.Intents = append(plan.Intents, IntentMarketplaceSearch)
+		return true
+	}
+
+	isBuyCorrection := strings.Contains(lower, "want to buy") ||
+		strings.Contains(lower, "not rent") ||
+		strings.Contains(lower, "don't want to rent") ||
+		strings.Contains(lower, "መከራየት አልፈልግም") ||
+		strings.Contains(lower, "መግዛት ነው")
+
+	if isBuyCorrection {
+		saleType := "sale"
+		newSearch := lastSearch
+		newSearch.ListingType = &saleType
+		plan.Searches = append(plan.Searches, newSearch)
+		plan.RequiresDatabaseSearch = true
+		plan.Intents = append(plan.Intents, IntentMarketplaceSearch)
+		return true
+	}
+
+	// 3. Brand refinement: "Only Samsung", "Just Apple", "Dell only", "ሳምሰንግ ብቻ"
 	var brandFound string
-	brands := []string{"samsung", "apple", "iphone", "dell", "hp", "lenovo", "toyota", "hyundai", "nissan"}
+	brands := []string{
+		"samsung", "apple", "iphone", "xiaomi", "redmi", "tecno", "infinix",
+		"dell", "hp", "lenovo", "macbook", "asus", "acer",
+		"toyota", "vitz", "corolla", "yaris", "hyundai", "suzuki", "isuzu", "nissan", "ford", "byd",
+		"ሳምሰንግ", "አይፎን", "ቶዮታ", "ቪትዝ",
+	}
 	for _, b := range brands {
 		if strings.Contains(lower, b) {
 			brandFound = b
@@ -433,9 +531,32 @@ func resolveContextFollowUp(cleanQuery string, lower string, lang string, ctx *C
 		}
 	}
 
+	isBrandConstraint := brandFound != "" && (strings.Contains(lower, "only") ||
+		strings.Contains(lower, "just") ||
+		strings.Contains(lower, "ብቻ") ||
+		strings.Contains(lower, "qofa") ||
+		strings.Contains(lower, "ጥራይ") ||
+		len(strings.Fields(lower)) <= 2)
+
+	if isBrandConstraint {
+		newSearch := lastSearch
+		newSearch.Brand = brandFound
+		newSearch.SearchTerm = brandFound
+		plan.Searches = append(plan.Searches, newSearch)
+		plan.RequiresDatabaseSearch = true
+		plan.Intents = append(plan.Intents, IntentMarketplaceSearch)
+		return true
+	}
+
+	// 4. Check for price follow-ups: "cheaper ones", "something cheaper", "lower price"
+	isCheaper := strings.Contains(lower, "cheaper") || strings.Contains(lower, "cheapest") ||
+		strings.Contains(lower, "lower price") || strings.Contains(lower, "less expensive") ||
+		strings.Contains(lower, "ቅናሽ") || strings.Contains(lower, "ረከስ ያለ") || strings.Contains(lower, "ተመጣጣኝ") ||
+		strings.Contains(lower, "rakasa") || strings.Contains(lower, "gatii gadi aanaa") ||
+		strings.Contains(lower, "ሕሳር") || strings.Contains(lower, "ዝሓሰረ")
+
 	// Check for explicit category switch: "what about computers?", "find a house too"
 	if strings.HasPrefix(lower, "what about ") || strings.HasPrefix(lower, "how about ") || strings.HasPrefix(lower, "and ") {
-		// This is a switch, let normal extraction handle it
 		return false
 	}
 
@@ -444,11 +565,14 @@ func resolveContextFollowUp(cleanQuery string, lower string, lang string, ctx *C
 
 		if brandFound != "" {
 			newSearch.SearchTerm = brandFound + " " + lastSearch.SearchTerm
+			newSearch.Brand = brandFound
 		}
 
 		if isCheaper {
-			// If last search had a max price, lower it or sort by price asc
-			if lastSearch.MaxPrice != nil && *lastSearch.MaxPrice > 0 {
+			maxP, _ := extractPriceConstraints(lower)
+			if maxP != nil {
+				newSearch.MaxPrice = maxP
+			} else if lastSearch.MaxPrice != nil && *lastSearch.MaxPrice > 0 {
 				newMax := *lastSearch.MaxPrice * 0.75
 				newSearch.MaxPrice = &newMax
 			}
@@ -504,6 +628,64 @@ func extractMarketplaceCategories(cleanQuery string, lower string, plan *Convers
 	sort.Slice(matches, func(i, j int) bool {
 		return matches[i].pos < matches[j].pos
 	})
+
+	// Check if user specified a relative location (e.g. "near my workplace") but no concrete city
+	if isRelativeLocation(lower) && location == "" {
+		req := ExtractedSearchRequest{
+			CategoryName: "Residential Properties & Houses",
+			CategorySlug: "residential-properties-living-spaces",
+			SearchTerm:   "house",
+			ListingType:  listingType,
+			MinPrice:     minPrice,
+			MaxPrice:     maxPrice,
+		}
+		if len(matches) > 0 {
+			req.CategoryName = matches[0].spec.CanonicalName
+			req.CategorySlug = matches[0].spec.CategorySlug
+			req.SearchTerm = matches[0].spec.Keywords[0]
+		}
+		plan.RequiresClarification = true
+		plan.UnresolvedSlot = "location"
+		plan.PendingSearch = &req
+		switch plan.DetectedLanguage {
+		case "am":
+			plan.ClarificationQuestion = "የስራ ቦታዎ ወይም የሚፈልጉት አካባቢ በየትኛው ከተማ ወይም ክፍለ ከተማ ነው (ለምሳሌ፡ ቦሌ፣ ሃዋሳ፣ አዳማ)?"
+		case "om":
+			plan.ClarificationQuestion = "Bakki hojii keessanii magaalaa ykn kutaa magaalaa isa kam keessatti argama (fkn Boolee, Hawaasaa, Adaamaa)?"
+		case "ti":
+			plan.ClarificationQuestion = "ስራሕኩም ኣብ ኣየናይ ከተማ ወይ ክፍለ ከተማ እዩ ዝርከብ (ንኣብነት፡ ቦሌ፣ ሃዋሳ፣ ኣዳማ)?"
+		default:
+			plan.ClarificationQuestion = "Which city or subcity is your workplace or target area located in (e.g., Bole, Hawassa, Adama)?"
+		}
+		plan.Intents = append(plan.Intents, IntentClarificationNeeded)
+		return
+	}
+
+	// Check for Housing ambiguity: User asks for a house/apartment with no price, no location, and no rent/buy specified
+	if len(matches) == 1 && matches[0].spec.CanonicalName == "Residential Properties & Houses" {
+		if listingType == nil && maxPrice == nil && minPrice == nil && location == "" {
+			req := ExtractedSearchRequest{
+				CategoryName: matches[0].spec.CanonicalName,
+				CategorySlug: matches[0].spec.CategorySlug,
+				SearchTerm:   matches[0].spec.Keywords[0],
+			}
+			plan.RequiresClarification = true
+			plan.UnresolvedSlot = "listing_type"
+			plan.PendingSearch = &req
+			switch plan.DetectedLanguage {
+			case "am":
+				plan.ClarificationQuestion = "የሚፈልጉትን ቤት ወይም አፓርታማ ለመግዛት ነው ወይስ ለመከራየት?"
+			case "om":
+				plan.ClarificationQuestion = "Mana kana bituu moo kireeffachuu barbaaddu?"
+			case "ti":
+				plan.ClarificationQuestion = "ነዚ ገዛ ወይ ኣፓርታማ ክትገዝኡ ድዩ ወይስ ክትክራዩ ደሊኹም?"
+			default:
+				plan.ClarificationQuestion = "Are you looking to buy or rent a property on HUNTIQ?"
+			}
+			plan.Intents = append(plan.Intents, IntentClarificationNeeded)
+			return
+		}
+	}
 
 	// If categories matched (e.g. phone AND pc AND house):
 	if len(matches) > 0 {
@@ -591,7 +773,22 @@ func extractPriceConstraints(lower string) (*float64, *float64) {
 		if val > 0 {
 			maxP = &val
 		}
+	} else if match := rxPriceHave.FindStringSubmatch(lower); len(match) > 1 {
+		val := parseCleanNumber(match[1])
+		if val > 0 {
+			maxP = &val
+		}
+	} else if match := rxAmharicBudget.FindStringSubmatch(lower); len(match) > 1 {
+		val := parseCleanNumber(match[1])
+		if val > 0 {
+			maxP = &val
+		}
 	} else if match := rxAmharicMax.FindStringSubmatch(lower); len(match) > 1 {
+		val := parseCleanNumber(match[1])
+		if val > 0 {
+			maxP = &val
+		}
+	} else if match := rxOromoBudget.FindStringSubmatch(lower); len(match) > 1 {
 		val := parseCleanNumber(match[1])
 		if val > 0 {
 			maxP = &val
@@ -601,7 +798,17 @@ func extractPriceConstraints(lower string) (*float64, *float64) {
 		if val > 0 {
 			maxP = &val
 		}
+	} else if match := rxTigrinyaBudget.FindStringSubmatch(lower); len(match) > 1 {
+		val := parseCleanNumber(match[1])
+		if val > 0 {
+			maxP = &val
+		}
 	} else if match := rxTigrinyaMax.FindStringSubmatch(lower); len(match) > 1 {
+		val := parseCleanNumber(match[1])
+		if val > 0 {
+			maxP = &val
+		}
+	} else if match := rxPriceBirr.FindStringSubmatch(lower); len(match) > 1 {
 		val := parseCleanNumber(match[1])
 		if val > 0 {
 			maxP = &val
@@ -656,15 +863,40 @@ func extractLocation(lower string) string {
 	return ""
 }
 
+func isRelativeLocation(lower string) bool {
+	return strings.Contains(lower, "my workplace") ||
+		strings.Contains(lower, "my work") ||
+		strings.Contains(lower, "my office") ||
+		strings.Contains(lower, "my job") ||
+		strings.Contains(lower, "my school") ||
+		strings.Contains(lower, "ስራ ቦታዬ") ||
+		strings.Contains(lower, "ስራዬ አካባቢ") ||
+		strings.Contains(lower, "ትምህርት ቤቴ") ||
+		strings.Contains(lower, "bakka hojii koo") ||
+		strings.Contains(lower, "ስራሐይ ዘለዎ")
+}
+
 func extractListingType(lower string) *string {
-	if strings.Contains(lower, "for rent") || strings.Contains(lower, "rent") || strings.Contains(lower, "rental") ||
-		strings.Contains(lower, "ኪራይ") || strings.Contains(lower, "የሚከራይ") || strings.Contains(lower, "ክራይ") ||
-		strings.Contains(lower, "kiraa") || strings.Contains(lower, "kireeffamu") {
+	clean := strings.TrimSpace(lower)
+	if clean == "rent" || clean == "to rent" || clean == "rental" || clean == "ኪራይ" || clean == "kiraa" || clean == "ክራይ" {
 		t := "rent"
 		return &t
 	}
-	if strings.Contains(lower, "for sale") || strings.Contains(lower, "to buy") || strings.Contains(lower, "ሽያጭ") ||
-		strings.Contains(lower, "የሚሸጥ") || strings.Contains(lower, "gurgurtaa") || strings.Contains(lower, "ሽያጥ") {
+	if clean == "buy" || clean == "to buy" || clean == "sale" || clean == "መግዛት" || clean == "bituu" || clean == "ሽያጭ" || clean == "መሸጢ" {
+		t := "sale"
+		return &t
+	}
+	if strings.Contains(lower, "for rent") || strings.Contains(lower, "to rent") || strings.Contains(lower, "want to rent") ||
+		strings.Contains(lower, "rental") || strings.Contains(lower, "ኪራይ") || strings.Contains(lower, "የሚከራይ") ||
+		strings.Contains(lower, "መከራየት") || strings.Contains(lower, "ክራይ") || strings.Contains(lower, "kiraa") ||
+		strings.Contains(lower, "kireeffamu") || strings.Contains(lower, "kireeffachuuf") {
+		t := "rent"
+		return &t
+	}
+	if strings.Contains(lower, "for sale") || strings.Contains(lower, "to buy") || strings.Contains(lower, "want to buy") ||
+		strings.Contains(lower, "ሽያጭ") || strings.Contains(lower, "የሚሸጥ") || strings.Contains(lower, "መግዛት") ||
+		strings.Contains(lower, "gurgurtaa") || strings.Contains(lower, "bituu") || strings.Contains(lower, "ሽያጥ") ||
+		strings.Contains(lower, "ምግዛእ") {
 		t := "sale"
 		return &t
 	}
@@ -688,11 +920,21 @@ func handleGeneralConversation(lower string, raw string, lang string, plan *Conv
 func parseCleanNumber(s string) float64 {
 	clean := strings.ReplaceAll(s, ",", "")
 	clean = strings.TrimSpace(clean)
+	cleanLower := strings.ToLower(clean)
+	multiplier := 1.0
+	if strings.HasSuffix(cleanLower, "k") {
+		multiplier = 1000.0
+		clean = strings.TrimSuffix(cleanLower, "k")
+	} else if strings.HasSuffix(cleanLower, "m") {
+		multiplier = 1000000.0
+		clean = strings.TrimSuffix(cleanLower, "m")
+	}
+	clean = strings.TrimSpace(clean)
 	val, err := strconv.ParseFloat(clean, 64)
 	if err != nil {
 		return 0
 	}
-	return val
+	return val * multiplier
 }
 
 func containsWord(s, word string) bool {
