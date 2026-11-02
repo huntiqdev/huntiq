@@ -5,12 +5,38 @@ export interface AIListingCard {
   title: string;
   price: number;
   currency: string;
+  listing_type?: string;
+  rental_price?: number;
+  rental_duration_value?: number;
+  rental_duration_unit?: string;
   condition: string;
   seller_tier: string;
   city: string;
   subcity?: string;
   detail_url: string;
   image_url?: string;
+  contact_action?: string;
+  availability_status?: string;
+}
+
+export interface AICategoryGroup {
+  category_name: string;
+  category_slug?: string;
+  search_term: string;
+  total_count: number;
+  listings: AIListingCard[];
+  error?: string;
+}
+
+export interface GuestChatResponse {
+  session_id?: string;
+  greeting_prefix?: string;
+  answer: string;
+  category_groups?: AICategoryGroup[];
+  listings?: AIListingCard[];
+  clarification?: string;
+  latency_ms?: number;
+  model?: string;
 }
 
 export interface AIMessageItem {
@@ -23,6 +49,9 @@ export interface AIMessageItem {
   metadata?: {
     model?: string;
     latency_ms?: number;
+    greeting_prefix?: string;
+    clarification?: string;
+    category_groups?: AICategoryGroup[];
     listings?: AIListingCard[];
     [key: string]: any;
   };
@@ -76,10 +105,15 @@ export const aiApi = {
       headers: authHeaders(token),
     }),
 
-  guestChat: (message: string, history: { role: string; content: string }[] = [], locale: string = 'en') =>
-    fetchAPI<{ answer: string; listings?: AIListingCard[]; latency_ms?: number; model?: string }>('/ai/chat', {
+  guestChat: (
+    message: string,
+    history: { role: string; content: string }[] = [],
+    locale: string = 'en',
+    sessionId?: string
+  ) =>
+    fetchAPI<GuestChatResponse>('/ai/chat', {
       method: 'POST',
-      body: JSON.stringify({ message, history, locale }),
+      body: JSON.stringify({ message, history, locale, session_id: sessionId }),
     }),
 };
 

@@ -183,12 +183,13 @@ func (h *AIChatHandler) SendMessage(c *fiber.Ctx) error {
 
 // GuestChatRequest represents incoming payload for unauthenticated public AI chat.
 type GuestChatRequest struct {
-	Message string                    `json:"message"`
-	Locale  string                    `json:"locale"`
-	History []service.GuestChatMessage `json:"history"`
+	Message   string                     `json:"message"`
+	Locale    string                     `json:"locale"`
+	SessionID string                     `json:"session_id,omitempty"`
+	History   []service.GuestChatMessage `json:"history"`
 }
 
-// GuestChat handles POST /api/ai/chat (Public, unauthenticated, stateless)
+// GuestChat handles POST /api/ai/chat (Public, unauthenticated, context-aware)
 func (h *AIChatHandler) GuestChat(c *fiber.Ctx) error {
 	var req GuestChatRequest
 	if err := c.BodyParser(&req); err != nil {
@@ -215,9 +216,10 @@ func (h *AIChatHandler) GuestChat(c *fiber.Ctx) error {
 	}
 
 	res, err := h.chatSvc.ProcessGuestChat(c.Context(), service.GuestChatRequestDTO{
-		Message: cleanMessage,
-		Locale:  locale,
-		History: history,
+		Message:   cleanMessage,
+		Locale:    locale,
+		SessionID: strings.TrimSpace(req.SessionID),
+		History:   history,
 	})
 	if err != nil {
 		return response.InternalError(c, err)

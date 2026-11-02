@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { api } from '@/lib/api';
+import { aiApi, AIListingCard, AICategoryGroup } from '@/lib/api/ai';
 import { SearchAIMeta } from '@/lib/api/public';
 import { Product } from '@/types';
 import {
@@ -31,6 +32,10 @@ interface ChatMessage {
   timestamp: string;
   meta?: SearchAIMeta;
   products?: Product[];
+  categoryGroups?: AICategoryGroup[];
+  listings?: AIListingCard[];
+  model?: string;
+  clarification?: string;
 }
 
 interface AIChatInterfaceProps {
@@ -165,6 +170,7 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const contextRef = useRef<ConversationContext>({});
+  const sessionIdRef = useRef<string | undefined>(undefined);
 
   // Auto-scroll chat to bottom
   const scrollToBottom = () => {
@@ -237,58 +243,30 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
     setLoading(true);
     scrollToBottom();
 
-    const effectiveQuery = resolveEffectiveQuery(query);
+    const history = messages
+      .filter(m => m.sender === 'user' || m.sender === 'ai')
+      .slice(-4)
+      .map(m => ({ role: m.sender === 'user' ? 'user' : 'assistant', content: m.text }));
 
     try {
-      const res = await api.getProductsWithMeta({
-        search: effectiveQuery,
-        mode: 'ai',
-        locale,
-        preferred_language: locale,
-      });
-
-      // Update multi-turn conversational context
-      if (res.meta?.cleaned_search_term) {
-        contextRef.current.lastItem = res.meta.cleaned_search_term;
+      const res = await aiApi.guestChat(query, history, locale, sessionIdRef.current);
+      if (res.session_id) {
+        sessionIdRef.current = res.session_id;
       }
-      if (res.meta?.deep_parameters?.extracted_entities?.brand) {
-        contextRef.current.lastBrand = res.meta.deep_parameters.extracted_entities.brand;
-      }
-      if (res.meta?.deep_parameters?.extracted_entities?.price_range?.max_price) {
-        contextRef.current.lastMaxPrice =
-          res.meta.deep_parameters.extracted_entities.price_range.max_price;
-      }
-      if (res.meta?.deep_parameters?.extracted_entities?.location) {
-        contextRef.current.lastLocation =
-          res.meta.deep_parameters.extracted_entities.location;
-      }
-
-      const aiText =
-        res.meta?.localized_answer ||
-        res.meta?.market_verdict ||
-        (activeLocale === 'am'
-          ? `የቀጥታ ዳታቤዝ ዝርዝሮችን ለ"${query}" ተንትኛለሁ።`
-          : activeLocale === 'om'
-          ? `Tarreeffamoota gabaa "${query}" tiif xiinxaleera.`
-          : activeLocale === 'ti'
-          ? `ናይ ቀጥታ ዝርዝራት ን"${query}" ተተንቲኑ ኣሎ።`
-          : `I analyzed our live database listings for "${query}". Here are the market insights and verified options.`);
 
       const aiMsgId = `ai-${Date.now()}`;
       const aiMsg: ChatMessage = {
         id: aiMsgId,
         sender: 'ai',
-        text: aiText,
-        meta: res.meta,
-        products: res.products,
+        text: res.answer,
+        categoryGroups: res.category_groups,
+        listings: res.listings,
+        model: res.model,
+        clarification: res.clarification,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
 
       setMessages(prev => [...prev, aiMsg]);
-      // Open reasoning accordion by default for fresh answers
-      if (res.meta?.reasoning_chain) {
-        setOpenReasoningMap(prev => ({ ...prev, [aiMsgId]: true }));
-      }
     } catch {
       const errorMsgText =
         activeLocale === 'am'
@@ -669,6 +647,134 @@ export function AIChatInterface({ onExit, initialQuery = '', locale }: AIChatInt
                             </div>
                           );
                         })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Ambiguous Token Clarification Suggestion */}
+                  {!isUser && msg.clarification && (
+                    <div className="pt-2">
+                      <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-2">
+                        <Sparkles size={14} className="text-amber-600 shrink-0" />
+                        <span>{msg.clarification}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Multi-Category Grounded Listings Breakdown */}
+                  {!isUser && msg.categoryGroups && msg.categoryGroups.length > 0 && (
+                    <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 space-y-4">
+                      {msg.categoryGroups.map((grp, gIdx) => (
+                        <div key={gIdx} className="space-y-2 p-2.5 rounded-xl bg-zinc-50/80 dark:bg-zinc-800/40 border border-zinc-200/80 dark:border-zinc-700/60">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-200 flex items-center gap-1.5">
+                              <ShieldCheck size={13} className="text-emerald-500" />
+                              {grp.category_name} ({grp.listings.length})
+                            </span>
+                            {grp.category_slug && (
+                              <Link
+                                href={`/products?category_slug=${grp.category_slug}`}
+                                target="_blank"
+                                className="text-[10px] text-orange-600 hover:underline flex items-center gap-0.5"
+                              >
+                                <span>Browse</span>
+                                <ExternalLink size={10} />
+                              </Link>
+                            )}
+                          </div>
+
+                          {grp.listings.length > 0 ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                              {grp.listings.map((l) => (
+                                <Link
+                                  key={l.id}
+                                  href={l.detail_url || `/products/${l.id}`}
+                                  target="_blank"
+                                  className="flex gap-2 p-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-orange-500 transition-all group"
+                                >
+                                  <div className="relative w-14 h-14 rounded-md overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400">
+                                    {l.image_url ? (
+                                      <img
+                                        src={l.image_url}
+                                        alt={l.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                      />
+                                    ) : (
+                                      <Tag size={16} />
+                                    )}
+                                  </div>
+                                  <div className="flex-1 min-w-0 flex flex-col justify-between">
+                                    <div>
+                                      <p className="text-xs font-bold text-zinc-900 dark:text-zinc-100 truncate group-hover:text-orange-600 transition-colors">
+                                        {l.title}
+                                      </p>
+                                      <p className="text-xs font-black text-orange-600 dark:text-orange-400 mt-0.5">
+                                        {Number(l.price).toLocaleString()} {l.currency || 'ETB'}
+                                      </p>
+                                    </div>
+                                    <div className="flex items-center gap-1 text-[9px] text-zinc-400">
+                                      <span>{l.city || 'Addis Ababa'}</span>
+                                      {l.seller_tier && l.seller_tier !== 'normal' && (
+                                        <span className="px-1 py-0.2 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold uppercase text-[8px]">
+                                          {l.seller_tier}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-[11px] text-zinc-400 italic py-1">
+                              No active listings currently found in this category.
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Flat AI Listings Cards */}
+                  {!isUser && (!msg.categoryGroups || msg.categoryGroups.length === 0) && msg.listings && msg.listings.length > 0 && (
+                    <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 space-y-2">
+                      <span className="text-xs font-black uppercase tracking-wider text-zinc-500 flex items-center gap-1">
+                        <Tag size={12} />
+                        Live Verified Listings ({msg.listings.length})
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {msg.listings.map((l) => (
+                          <Link
+                            key={l.id}
+                            href={l.detail_url || `/products/${l.id}`}
+                            target="_blank"
+                            className="flex gap-2 p-2 rounded-lg bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 hover:border-orange-400 transition-all group"
+                          >
+                            <div className="relative w-14 h-14 rounded-md overflow-hidden shrink-0 bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-zinc-400">
+                              {l.image_url ? (
+                                <img
+                                  src={l.image_url}
+                                  alt={l.title}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                />
+                              ) : (
+                                <Tag size={16} />
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0 flex flex-col justify-between">
+                              <div>
+                                <p className="text-xs font-bold text-zinc-900 dark:text-zinc-100 truncate group-hover:text-orange-600 transition-colors">
+                                  {l.title}
+                                </p>
+                                <span className="font-black text-xs text-orange-600 dark:text-orange-400">
+                                  {Number(l.price).toLocaleString()} {l.currency || 'ETB'}
+                                </span>
+                              </div>
+                              <div className="text-[9px] text-zinc-400">
+                                <span>{l.city || 'Addis Ababa'}</span>
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   )}

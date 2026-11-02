@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/context/LocaleContext';
-import { aiApi, AIConversationItem, AIMessageItem, AIListingCard } from '@/lib/api/ai';
+import { aiApi, AIConversationItem, AIMessageItem, AIListingCard, AICategoryGroup } from '@/lib/api/ai';
 import { publicApi } from '@/lib/api/public';
 
 const PROMPTS_BY_LOCALE: Record<string, Array<{ icon: any; title: string; prompt: string }>> = {
@@ -169,6 +169,7 @@ function AIWorkspaceContent() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const guestSessionIdRef = useRef<string | undefined>(undefined);
 
   // Auto-scroll to bottom of messages
   const scrollToBottom = () => {
@@ -299,7 +300,10 @@ function AIWorkspaceContent() {
             .slice(-4)
             .map((m) => ({ role: m.role, content: m.content }));
 
-          const res = await aiApi.guestChat(text, history, locale);
+          const res = await aiApi.guestChat(text, history, locale, guestSessionIdRef.current);
+          if (res.session_id) {
+            guestSessionIdRef.current = res.session_id;
+          }
 
           const guestResponse: AIMessageItem = {
             id: `guest_${Date.now()}`,
@@ -309,6 +313,9 @@ function AIWorkspaceContent() {
             metadata: {
               model: res.model || 'HUNTIQ Marketplace Assistant',
               latency_ms: res.latency_ms,
+              greeting_prefix: res.greeting_prefix,
+              clarification: res.clarification,
+              category_groups: res.category_groups && res.category_groups.length > 0 ? res.category_groups : undefined,
               listings: res.listings && res.listings.length > 0 ? res.listings : undefined,
             },
             created_at: new Date().toISOString(),
@@ -642,52 +649,133 @@ function AIWorkspaceContent() {
                       )}
                     </div>
 
-                    {/* Grounded Marketplace Listing Cards */}
-                    {listings && listings.length > 0 && (
-                      <div className="mt-3 w-full space-y-2">
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
-                          <ShieldCheck size={13} className="text-emerald-500" />
-                          <span>{str.authoritativeListings} ({listings.length})</span>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-                          {listings.map((item) => (
-                            <Link
-                              key={item.id}
-                              href={item.detail_url || `/products/${item.id}`}
-                              target="_blank"
-                              className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 hover:border-orange-500 transition-all flex gap-2.5 items-center group"
-                            >
-                              <div className="w-14 h-14 rounded-lg bg-zinc-100 dark:bg-zinc-800 overflow-hidden shrink-0 flex items-center justify-center text-zinc-400">
-                                {item.image_url ? (
-                                  <img
-                                    src={item.image_url}
-                                    alt={item.title || 'Product'}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                                  />
-                                ) : (
-                                  <Search size={18} />
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-xs font-bold text-zinc-900 dark:text-white truncate group-hover:text-orange-600 transition-colors">
-                                  {item.title}
-                                </p>
-                                <p className="text-xs font-black text-orange-600 mt-0.5">
-                                  {item.price != null ? item.price.toLocaleString() : '—'} {item.currency || 'ETB'}
-                                </p>
-                                <div className="flex items-center gap-1.5 mt-1 text-[10px] text-zinc-400">
-                                  <span>{item.city || 'Addis Ababa'}</span>
-                                  {item.seller_tier && item.seller_tier !== 'normal' && (
-                                    <span className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold uppercase text-[9px]">
-                                      {item.seller_tier}
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-                            </Link>
-                          ))}
+                    {/* Ambiguous Word Clarification Chip */}
+                    {msg.metadata?.clarification && (
+                      <div className="mt-2.5 p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-900 dark:text-amber-200 text-xs flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                          <Sparkles size={14} className="text-amber-500 shrink-0" />
+                          <span className="font-medium">{msg.metadata.clarification}</span>
                         </div>
                       </div>
+                    )}
+
+                    {/* Grounded Multi-Category Breakdown */}
+                    {msg.metadata?.category_groups && msg.metadata.category_groups.length > 0 ? (
+                      <div className="mt-4 w-full space-y-4">
+                        {msg.metadata.category_groups.map((group: AICategoryGroup, gIdx: number) => (
+                          <div key={gIdx} className="space-y-2 p-3 rounded-2xl bg-zinc-50/60 dark:bg-zinc-900/40 border border-zinc-200/60 dark:border-zinc-800/60">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                                <ShieldCheck size={13} className="text-emerald-500" />
+                                {group.category_name} ({group.listings.length})
+                              </span>
+                              {group.category_slug && (
+                                <Link
+                                  href={`/products?category_slug=${group.category_slug}`}
+                                  target="_blank"
+                                  className="text-[10px] text-orange-600 hover:underline flex items-center gap-0.5"
+                                >
+                                  <span>View Category</span>
+                                  <ExternalLink size={10} />
+                                </Link>
+                              )}
+                            </div>
+
+                            {group.listings.length > 0 ? (
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full pt-1">
+                                {group.listings.map((item) => (
+                                  <Link
+                                    key={item.id}
+                                    href={item.detail_url || `/products/${item.id}`}
+                                    target="_blank"
+                                    className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 hover:border-orange-500 transition-all flex gap-2.5 items-center group"
+                                  >
+                                    <div className="w-14 h-14 rounded-lg bg-zinc-100 dark:bg-zinc-800 overflow-hidden shrink-0 flex items-center justify-center text-zinc-400">
+                                      {item.image_url ? (
+                                        <img
+                                          src={item.image_url}
+                                          alt={item.title || 'Product'}
+                                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                        />
+                                      ) : (
+                                        <Search size={18} />
+                                      )}
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <p className="text-xs font-bold text-zinc-900 dark:text-white truncate group-hover:text-orange-600 transition-colors">
+                                        {item.title}
+                                      </p>
+                                      <p className="text-xs font-black text-orange-600 mt-0.5">
+                                        {item.price != null ? item.price.toLocaleString() : '—'} {item.currency || 'ETB'}
+                                      </p>
+                                      <div className="flex items-center gap-1.5 mt-1 text-[10px] text-zinc-400">
+                                        <span>{item.city || 'Addis Ababa'}</span>
+                                        {item.seller_tier && item.seller_tier !== 'normal' && (
+                                          <span className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold uppercase text-[9px]">
+                                            {item.seller_tier}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            ) : (
+                              <p className="text-[11px] text-zinc-400 italic py-1">
+                                No approved listings currently found for this category.
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      /* Fallback Flat Listings */
+                      listings && listings.length > 0 && (
+                        <div className="mt-3 w-full space-y-2">
+                          <div className="flex items-center gap-1 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
+                            <ShieldCheck size={13} className="text-emerald-500" />
+                            <span>{str.authoritativeListings} ({listings.length})</span>
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+                            {listings.map((item) => (
+                              <Link
+                                key={item.id}
+                                href={item.detail_url || `/products/${item.id}`}
+                                target="_blank"
+                                className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 hover:border-orange-500 transition-all flex gap-2.5 items-center group"
+                              >
+                                <div className="w-14 h-14 rounded-lg bg-zinc-100 dark:bg-zinc-800 overflow-hidden shrink-0 flex items-center justify-center text-zinc-400">
+                                  {item.image_url ? (
+                                    <img
+                                      src={item.image_url}
+                                      alt={item.title || 'Product'}
+                                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                    />
+                                  ) : (
+                                    <Search size={18} />
+                                  )}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-bold text-zinc-900 dark:text-white truncate group-hover:text-orange-600 transition-colors">
+                                    {item.title}
+                                  </p>
+                                  <p className="text-xs font-black text-orange-600 mt-0.5">
+                                    {item.price != null ? item.price.toLocaleString() : '—'} {item.currency || 'ETB'}
+                                  </p>
+                                  <div className="flex items-center gap-1.5 mt-1 text-[10px] text-zinc-400">
+                                    <span>{item.city || 'Addis Ababa'}</span>
+                                    {item.seller_tier && item.seller_tier !== 'normal' && (
+                                      <span className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-bold uppercase text-[9px]">
+                                        {item.seller_tier}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )
                     )}
                   </div>
 

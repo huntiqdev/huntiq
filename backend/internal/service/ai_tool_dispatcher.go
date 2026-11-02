@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
@@ -74,6 +76,16 @@ func buildListingSummary(p *models.Product, cityName, subcityName string, imgURL
 		ContactAction:       contactAction,
 		AvailabilityStatus:  avail,
 	}
+}
+
+// MultiCategorySearchResultDTO holds isolated results for one category in a multi-category search.
+type MultiCategorySearchResultDTO struct {
+	CategoryName string              `json:"category_name"`
+	CategorySlug string              `json:"category_slug,omitempty"`
+	SearchTerm   string              `json:"search_term"`
+	TotalCount   int                 `json:"total_count"`
+	Listings     []ListingSummaryDTO `json:"listings"`
+	Error        string              `json:"error,omitempty"`
 }
 
 // SearchToolResult holds the grounded search execution result.
@@ -374,3 +386,116 @@ func (d *AIToolDispatcher) executeMarketplaceStats(ctx context.Context, args map
 	resBytes, _ := json.Marshal(stats)
 	return string(resBytes), nil, nil
 }
+
+// ExecuteMultiSearch performs bounded, isolated parallel searches across multiple category requests.
+// Each search has an independent timeout and failure in one does not affect others.
+func (d *AIToolDispatcher) ExecuteMultiSearch(ctx context.Context, searches []ExtractedSearchRequest) []MultiCategorySearchResultDTO {
+	if len(searches) == 0 {
+		return nil
+	}
+
+	results := make([]MultiCategorySearchResultDTO, len(searches))
+	var wg sync.WaitGroup
+
+	for i, req := range searches {
+		wg.Add(1)
+		go func(idx int, sReq ExtractedSearchRequest) {
+			defer wg.Done()
+
+			searchCtx, cancel := context.WithTimeout(ctx, 1500*time.Millisecond)
+			defer cancel()
+
+			res := MultiCategorySearchResultDTO{
+				CategoryName: sReq.CategoryName,
+				CategorySlug: sReq.CategorySlug,
+				SearchTerm:   sReq.SearchTerm,
+				Listings:     make([]ListingSummaryDTO, 0),
+			}
+
+			filter := dto.ProductFilter{
+				Page:  1,
+				Limit: 4, // Max 4 per category to avoid clutter
+			}
+
+			cleanTerm := aiclient.CleanConversationalSearchTerm(sReq.SearchTerm)
+			if cleanTerm != "" && cleanTerm != "all" && cleanTerm != "products" && cleanTerm != "items" {
+				filter.Search = &cleanTerm
+			}
+
+			if sReq.MinPrice != nil && *sReq.MinPrice > 0 {
+				filter.MinPrice = sReq.MinPrice
+			}
+			if sReq.MaxPrice != nil && *sReq.MaxPrice > 0 {
+				filter.MaxPrice = sReq.MaxPrice
+			}
+			if sReq.ListingType != nil && (*sReq.ListingType == "sale" || *sReq.ListingType == "rent") {
+				filter.ListingType = sReq.ListingType
+			}
+			if sReq.Location != "" {
+				loc := sReq.Location
+				filter.Subcity = &loc
+			}
+			if sReq.Condition != "" {
+				cond := sReq.Condition
+				filter.Condition = &cond
+			}
+
+			total, err := d.productRepo.CountApproved(searchCtx, filter)
+			if err != nil {
+				total = 0
+			}
+			res.TotalCount = total
+
+			products, err := d.productRepo.ListApproved(searchCtx, filter)
+			if err != nil {
+				res.Error = err.Error()
+				results[idx] = res
+				return
+			}
+
+			// Relaxation if 0 results and extra filters applied
+			if len(products) == 0 && (filter.MaxPrice != nil || filter.MinPrice != nil || filter.Condition != nil || filter.Subcity != nil) {
+				relaxedFilter := dto.ProductFilter{
+					Search: filter.Search,
+					Page:   1,
+					Limit:  filter.Limit,
+				}
+				if relaxedProducts, rErr := d.productRepo.ListApproved(searchCtx, relaxedFilter); rErr == nil && len(relaxedProducts) > 0 {
+					products = relaxedProducts
+					if rCount, cErr := d.productRepo.CountApproved(searchCtx, relaxedFilter); cErr == nil {
+						res.TotalCount = rCount
+					}
+				}
+			}
+
+			summaries := make([]ListingSummaryDTO, 0, len(products))
+			for _, p := range products {
+				cityName := "Addis Ababa"
+				subcityName := ""
+				if p.Location != nil {
+					if p.Location.Region != "" {
+						cityName = p.Location.Region
+					}
+					if p.Location.Subcity != nil {
+						subcityName = *p.Location.Subcity
+					}
+				}
+
+				var imgURL *string
+				if len(p.Images) > 0 && p.Images[0].ImageURL != "" {
+					url := p.Images[0].ImageURL
+					imgURL = &url
+				}
+
+				summaries = append(summaries, buildListingSummary(&p, cityName, subcityName, imgURL))
+			}
+
+			res.Listings = summaries
+			results[idx] = res
+		}(i, req)
+	}
+
+	wg.Wait()
+	return results
+}
+
