@@ -1,0 +1,15 @@
+{"id": "ood_01", "query": "What is the quadratic formula?", "expected_domain": "out_of_domain", "locale": "en"}
+{"id": "ood_02", "query": "Write a Python script to sort an array", "expected_domain": "out_of_domain", "locale": "en"}
+{"id": "ood_03", "query": "የኳንተም ፊዚክስ ቀመር ምንድን ነው?", "expected_domain": "out_of_domain", "locale": "am"}
+{"id": "faq_01", "query": "How do I publish a listing on HUNTIQ?", "expected_domain": "platform_faq", "locale": "en"}
+{"id": "faq_02", "query": "በHUNTIQ ላይ ዕቃዎችን እንዴት መሸጥ እችላለሁ?", "expected_domain": "platform_faq", "locale": "am"}
+{"id": "faq_03", "query": "HUNTIQ irratti akkamittan meeshaa gurgura?", "expected_domain": "platform_faq", "locale": "om"}
+{"id": "market_01", "query": "I need a phone and a laptop in Bole", "expected_domain": "marketplace", "locale": "en"}
+{"id": "market_02", "query": "ስልክ እና መኪና እፈልጋለሁ", "expected_domain": "marketplace", "locale": "am"}
+{"id": "market_03", "query": "Bilbila fi konkolaataa barbaada", "expected_domain": "marketplace", "locale": "om"}
+{"id": "market_04", "query": "መኪናን ገዛን ክረክብ ይደሊ ኣለኹ", "expected_domain": "marketplace", "locale": "ti"}
+{"id": "social_01", "query": "Hello, how are you?", "expected_domain": "social_greeting", "locale": "en"}
+{"id": "social_02", "query": "ሰላም እንደምን ነህ?", "expected_domain": "social_greeting", "locale": "am"}
+{"id": "social_03", "query": "Akkam jirtu?", "expected_domain": "social_greeting", "locale": "om"}
+{"id": "identity_01", "query": "Who are you and what do you do?", "expected_domain": "identity", "locale": "en"}
+{"id": "identity_02", "query": "ማን ነህ? ምንስ ትሰራለህ?", "expected_domain": "identity", "locale": "am"}

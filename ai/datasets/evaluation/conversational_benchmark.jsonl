@@ -1,0 +1,3 @@
+{"id": "conv_01", "history": [{"role": "user", "content": "I need a phone under 20,000 birr"}, {"role": "assistant", "content": "Here are 3 phones under 20,000 birr in Addis Ababa"}], "query": "Show me cheaper ones", "expected_action": "adjust_price_down", "expected_category": "phones-telecommunications"}
+{"id": "conv_02", "history": [{"role": "user", "content": "I am looking for a house in Bole"}], "query": "I want to rent, not buy", "expected_action": "set_listing_type", "expected_value": "rent"}
+{"id": "conv_03", "history": [], "query": "I want a house", "expected_action": "ask_clarification", "expected_slot": "listing_type"}

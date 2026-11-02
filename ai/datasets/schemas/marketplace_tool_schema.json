@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HUNTIQMarketplaceToolCall",
+  "description": "Validation schema for HUNTIQ AI structured tool calling",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "enum": [
+        "search_marketplace_listings",
+        "get_listing_details",
+        "compare_listings",
+        "get_marketplace_stats"
+      ]
+    },
+    "arguments": {
+      "type": "object",
+      "properties": {
+        "searches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "search_term": { "type": "string" },
+              "category_slug": { "type": "string" },
+              "min_price": { "type": "number", "minimum": 0 },
+              "max_price": { "type": "number", "minimum": 0 },
+              "currency": { "type": "string", "default": "ETB" },
+              "location": { "type": "string" },
+              "condition": { "type": "string", "enum": ["new", "used", "any"] },
+              "listing_type": { "type": "string", "enum": ["sale", "rent", "any"] }
+            },
+            "required": ["search_term"]
+          }
+        },
+        "requires_clarification": { "type": "boolean" },
+        "clarification_question": { "type": "string" },
+        "unresolved_slot": {
+          "type": "string",
+          "enum": ["listing_type", "location", "category", "budget", "none"]
+        }
+      },
+      "required": ["searches", "requires_clarification"]
+    }
+  },
+  "required": ["name", "arguments"]
+}

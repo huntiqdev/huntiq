@@ -5,7 +5,7 @@ from typing import Any
 
 import httpx
 
-from .model_client import OllamaClient
+from ..model_client import OllamaClient
 
 TEST_CASES = [
     {
