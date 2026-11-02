@@ -158,6 +158,10 @@ func (d *AIToolDispatcher) executeSearchListings(ctx context.Context, args map[s
 		filter.Limit = int(math.Min(lim, 10))
 	}
 
+	if d.productRepo == nil {
+		return `{"total_matches": 0, "listings": []}`, nil, nil
+	}
+
 	totalMatching, err := d.productRepo.CountApproved(ctx, filter)
 	if err != nil {
 		totalMatching = 0
