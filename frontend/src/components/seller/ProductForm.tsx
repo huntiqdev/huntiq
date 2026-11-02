@@ -310,7 +310,6 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   };
 
   const condLabel = (c: string) => ({ new: t.ui.condition_new ?? 'New', used: t.ui.condition_used ?? 'Used' }[c] ?? c);
-  const label = (ns: 'categories' | 'items', key: string) => (t[ns] as any)?.[key] ?? key.replace(/_/g, ' ');
 
   const renderAttributeInput = (attr: AttributeDefinition) => {
     const val = attributeValues[attr.slug] ?? '';

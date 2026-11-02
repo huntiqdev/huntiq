@@ -22,13 +22,11 @@ export function ClientProductBadges({ categorySlug, subcategory, item, condition
   const { t } = useLocale();
 
   const subLabel = subcategory
-    ? ((t.sub_categories as any)?.[categorySlug]?.[subcategory]
-        ?? (t.items as any)?.[subcategory]
-        ?? subcategory.replace(/_/g, ' '))
+    ? subcategory.replace(/_/g, ' ')
     : null;
 
   const itemLabel = item
-    ? ((t.items as any)?.[item] ?? item.replace(/_/g, ' '))
+    ? item.replace(/_/g, ' ')
     : null;
 
   const condLabel = condition

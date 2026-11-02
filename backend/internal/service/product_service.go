@@ -156,7 +156,30 @@ func (s *ProductService) GetByID(ctx context.Context, id int) (*models.Product, 
 }
 
 func (s *ProductService) ListCategories(ctx context.Context) ([]models.Category, error) {
-	return s.catRepo.List(ctx)
+	if s.catHierarchyRepo != nil {
+		roots, err := s.catHierarchyRepo.GetRoots(ctx, "en")
+		if err == nil && len(roots) > 0 {
+			cats := make([]models.Category, len(roots))
+			for i, r := range roots {
+				cats[i] = models.Category{
+					ID:        r.ID,
+					Name:      r.NameEn,
+					Slug:      r.Slug,
+					NameEn:    r.NameEn,
+					NameAm:    r.NameAm,
+					NameOr:    r.NameOm,
+					NameTi:    r.NameTi,
+					SortOrder: r.DisplayOrder,
+					IsActive:  r.IsActive,
+				}
+			}
+			return cats, nil
+		}
+	}
+	if s.catRepo != nil {
+		return s.catRepo.List(ctx)
+	}
+	return []models.Category{}, nil
 }
 
 // PreviewListingFee returns the fee breakdown for a given seller, price, and duration.

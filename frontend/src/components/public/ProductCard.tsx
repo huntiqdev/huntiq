@@ -11,6 +11,7 @@ import { BuyModal } from '@/components/public/BuyModal';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 import { resolveImageUrl, isUnoptimized } from '@/lib/utils/imageUrl';
+import { getCategoryLabel } from '@/lib/taxonomy';
 
 interface Props { product: Product }
 
@@ -42,7 +43,7 @@ function TierSpecBadge({ tier }: { tier?: string }) {
 function DetailDrawer({ product, onClose, onBuy }: {
   product: Product; onClose: () => void; onBuy: () => void;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const images = product.images ?? [];
   const [imgIdx, setImgIdx] = useState(0);
   const total = images.length;
@@ -109,9 +110,8 @@ function DetailDrawer({ product, onClose, onBuy }: {
             )}
             {product.subcategory && (
               <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 bg-purple-600/10 px-2.5 py-1 rounded-lg">
-                {(t.sub_categories as any)?.[(product.category as any)?.slug ?? '']?.[product.subcategory]
-                  ?? (t.items as any)?.[product.subcategory]
-                  ?? product.subcategory.replace(/_/g, ' ')}
+                {((product as any).category_hierarchy_id && getCategoryLabel((product as any).category_hierarchy_id, locale))
+                  || product.subcategory.replace(/_/g, ' ')}
               </span>
             )}
             <span className="text-[10px] font-black uppercase tracking-widest bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-lg capitalize">

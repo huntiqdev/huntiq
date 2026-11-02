@@ -49,25 +49,22 @@ func main() {
 			INSERT INTO category_hierarchy (
 				slug, name_en, name_am, name_om, name_ti, description, icon, level, display_order, is_active, is_leaf, created_at, updated_at
 			) VALUES ($1, $2, $3, $4, $5, $6, $7, 0, $8, true, false, NOW(), NOW())
-			ON CONFLICT (slug) DO UPDATE SET
-				name_en = EXCLUDED.name_en,
-				name_am = EXCLUDED.name_am,
-				name_om = EXCLUDED.name_om,
-				name_ti = EXCLUDED.name_ti,
-				description = EXCLUDED.description,
-				icon = EXCLUDED.icon,
-				display_order = EXCLUDED.display_order,
-				updated_at = NOW()
+			ON CONFLICT (slug) DO NOTHING
 			RETURNING id
 		`, r.Slug, r.NameEN, r.NameAM, r.NameOM, r.NameTI, r.Description, r.Icon, r.DisplayOrder).Scan(&id)
 
 		if err != nil {
-			log.Fatalf("[FATAL] Failed to upsert root category %s: %v", r.Slug, err)
+			// Already exists; retrieve existing ID without mutating administrator data
+			err = db.QueryRow(ctx, `SELECT id FROM category_hierarchy WHERE slug = $1`, r.Slug).Scan(&id)
+			if err != nil {
+				log.Fatalf("[FATAL] Failed to resolve root category %s: %v", r.Slug, err)
+			}
+		} else {
+			// Ensure path is set to /id/ on initial creation
+			path := fmt.Sprintf("/%d/", id)
+			_, _ = db.Exec(ctx, `UPDATE category_hierarchy SET path = $1 WHERE id = $2`, path, id)
 		}
 
-		// Ensure path is set to /id/
-		path := fmt.Sprintf("/%d/", id)
-		_, _ = db.Exec(ctx, `UPDATE category_hierarchy SET path = $1 WHERE id = $2`, path, id)
 		rootIDMap[r.Slug] = id
 	}
 	fmt.Printf("  -> Successfully upserted %d root domains (Level 0)\n", len(roots))
@@ -125,30 +122,25 @@ func main() {
 				INSERT INTO category_hierarchy (
 					parent_id, slug, name_en, name_am, name_om, name_ti, level, display_order, is_active, is_leaf, created_at, updated_at
 				) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, true, $9, NOW(), NOW())
-				ON CONFLICT (slug) DO UPDATE SET
-					parent_id = EXCLUDED.parent_id,
-					name_en = EXCLUDED.name_en,
-					name_am = EXCLUDED.name_am,
-					name_om = EXCLUDED.name_om,
-					name_ti = EXCLUDED.name_ti,
-					level = EXCLUDED.level,
-					display_order = EXCLUDED.display_order,
-					is_leaf = EXCLUDED.is_leaf,
-					updated_at = NOW()
+				ON CONFLICT (slug) DO NOTHING
 				RETURNING id
 			`, parentID, item.Slug, item.NameEN, item.NameAM, item.NameOM, item.NameTI, level, item.DisplayOrder, item.IsLeaf).Scan(&childID)
 
 			if err != nil {
-				log.Printf("Warning: Failed to upsert child category %s (parent %s): %v", item.Slug, item.ParentSlug, err)
-				continue
+				// Category already exists; resolve ID without modifying existing record
+				err = db.QueryRow(ctx, `SELECT id FROM category_hierarchy WHERE slug = $1`, item.Slug).Scan(&childID)
+				if err != nil {
+					log.Printf("Warning: Failed to resolve child category %s: %v", item.Slug, err)
+					continue
+				}
+			} else {
+				// Update child materialized path only on initial insertion
+				childPath := fmt.Sprintf("%s%d/", parentPath, childID)
+				if parentPath == "" || parentPath == "/" {
+					childPath = fmt.Sprintf("/%d/%d/", parentID, childID)
+				}
+				_, _ = db.Exec(ctx, `UPDATE category_hierarchy SET path = $1 WHERE id = $2`, childPath, childID)
 			}
-
-			// Update child materialized path: parentPath + childID + "/"
-			childPath := fmt.Sprintf("%s%d/", parentPath, childID)
-			if parentPath == "" || parentPath == "/" {
-				childPath = fmt.Sprintf("/%d/%d/", parentID, childID)
-			}
-			_, _ = db.Exec(ctx, `UPDATE category_hierarchy SET path = $1 WHERE id = $2`, childPath, childID)
 
 			categoryIDMap[item.Slug] = childID
 			insertedCount++

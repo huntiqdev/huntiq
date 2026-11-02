@@ -1,0 +1,1483 @@
+{
+  "version": "1.0.0",
+  "audit_scope": "HUNTIQ Post-Migration 70 Super Family Classification Remediation",
+  "total_remediated_records": 70,
+  "breakdown_by_defect": {
+    "CONFLATES_TRADE_TIER": 36,
+    "CONFLATES_TRANSACTION_MODE": 17,
+    "SERVICE_IN_GOODS_TREE": 9,
+    "OCCUPATION_TALENT_DIMENSION": 8
+  },
+  "remediated_records": [
+    {
+      "existing_category_id": 22,
+      "existing_category_name": "Houses for Sale",
+      "existing_slug": "houses-sale",
+      "existing_parent_id": 3,
+      "existing_parent_name": "Property & Real Estate",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 23,
+      "existing_category_name": "Houses for Rent",
+      "existing_slug": "houses-rent",
+      "existing_parent_id": 3,
+      "existing_parent_name": "Property & Real Estate",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 1280,
+      "existing_category_name": "Phone Repair Tools, Heat Guns and Microscopes",
+      "existing_slug": "mobile-repair-tools",
+      "existing_parent_id": 38,
+      "existing_parent_name": "Electronics and Mobile Devices",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6356,
+      "existing_category_name": "Mobile Internal Parts and Repair Tools",
+      "existing_slug": "phone-parts-repair-tools",
+      "existing_parent_id": 38,
+      "existing_parent_name": "Electronics and Mobile Devices",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 447,
+      "existing_category_name": "Cameras, Photography and Optics - Commercial & Wholesale",
+      "existing_slug": "cameras-optics-standard-commercial",
+      "existing_parent_id": 41,
+      "existing_parent_name": "Cameras, Photography and Optics",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 453,
+      "existing_category_name": "Gaming, Consoles and Virtual Reality - Commercial & Wholesale",
+      "existing_slug": "gaming-vr-standard-commercial",
+      "existing_parent_id": 42,
+      "existing_parent_name": "Gaming, Consoles and Virtual Reality",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 459,
+      "existing_category_name": "Furniture and Interior Furnishings - Commercial & Wholesale",
+      "existing_slug": "furniture-furnishings-standard-commercial",
+      "existing_parent_id": 45,
+      "existing_parent_name": "Furniture and Interior Furnishings",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 465,
+      "existing_category_name": "Home, Kitchen and Household Goods - Commercial & Wholesale",
+      "existing_slug": "kitchen-household-standard-commercial",
+      "existing_parent_id": 46,
+      "existing_parent_name": "Home, Kitchen and Household Goods",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 191,
+      "existing_category_name": "Technology and Software Engineering Jobs",
+      "existing_slug": "tech-software-jobs",
+      "existing_parent_id": 55,
+      "existing_parent_name": "Jobs, Careers and Recruitment",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 199,
+      "existing_category_name": "Accounting, Banking and Finance Jobs",
+      "existing_slug": "accounting-finance-jobs",
+      "existing_parent_id": 55,
+      "existing_parent_name": "Jobs, Careers and Recruitment",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 202,
+      "existing_category_name": "Healthcare, Nursing and Medical Jobs",
+      "existing_slug": "healthcare-medical-jobs",
+      "existing_parent_id": 55,
+      "existing_parent_name": "Jobs, Careers and Recruitment",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 1429,
+      "existing_category_name": "Commercial Drivers, Dispatchers and Logistics",
+      "existing_slug": "transport-logistics-driver-jobs",
+      "existing_parent_id": 55,
+      "existing_parent_name": "Jobs, Careers and Recruitment",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 471,
+      "existing_category_name": "CVs, Professional Profiles and Talent - Commercial & Wholesale",
+      "existing_slug": "cvs-talent-standard-commercial",
+      "existing_parent_id": 56,
+      "existing_parent_name": "CVs, Professional Profiles and Talent",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 472,
+      "existing_category_name": "CVs, Professional Profiles and Talent - Specialty & Retail",
+      "existing_slug": "cvs-talent-specialty-retail",
+      "existing_parent_id": 56,
+      "existing_parent_name": "CVs, Professional Profiles and Talent",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6824,
+      "existing_category_name": "Software, Tech and Engineering Talent Profiles",
+      "existing_slug": "tech-engineering-talent-profiles",
+      "existing_parent_id": 56,
+      "existing_parent_name": "CVs, Professional Profiles and Talent",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6833,
+      "existing_category_name": "Finance, Accounting, Legal and HR Talent Profiles",
+      "existing_slug": "business-finance-legal-talent-profiles",
+      "existing_parent_id": 56,
+      "existing_parent_name": "CVs, Professional Profiles and Talent",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6842,
+      "existing_category_name": "Healthcare, Education, Hospitality and Operations Talent",
+      "existing_slug": "health-education-hospitality-talent-profiles",
+      "existing_parent_id": 56,
+      "existing_parent_name": "CVs, Professional Profiles and Talent",
+      "validation_status": "OCCUPATION_TALENT_DIMENSION",
+      "correct_conceptual_classification": "Occupation & Talent Dimension (System C: SYS_EMP)",
+      "proposed_canonical_destination": "System C (Employment & Occupations) under Career Verticals & Professional Specializations",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_EMP; retain aliases for resume and vacancy matching; preserve tree node for recruitment listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 477,
+      "existing_category_name": "Freelance, Remote Work and Contract Gigs - Commercial & Wholesale",
+      "existing_slug": "freelance-gigs-standard-commercial",
+      "existing_parent_id": 57,
+      "existing_parent_name": "Freelance, Remote Work and Contract Gigs",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 2251,
+      "existing_category_name": "Amharic, Oromo, Tigrinya and English Language Services",
+      "existing_slug": "translation-transcription-gigs",
+      "existing_parent_id": 57,
+      "existing_parent_name": "Freelance, Remote Work and Contract Gigs",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6851,
+      "existing_category_name": "Graphic Design, Video Editing and Creative Services",
+      "existing_slug": "digital-design-creative-gigs",
+      "existing_parent_id": 57,
+      "existing_parent_name": "Freelance, Remote Work and Contract Gigs",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 483,
+      "existing_category_name": "Business Services and Consulting - Commercial & Wholesale",
+      "existing_slug": "business-services-standard-commercial",
+      "existing_parent_id": 60,
+      "existing_parent_name": "Business Services and Consulting",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 489,
+      "existing_category_name": "Office Supplies and Commercial Equipment - Commercial & Wholesale",
+      "existing_slug": "office-supplies-standard-commercial",
+      "existing_parent_id": 61,
+      "existing_parent_name": "Office Supplies and Commercial Equipment",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 495,
+      "existing_category_name": "Retail, Wholesale and Distribution - Commercial & Wholesale",
+      "existing_slug": "retail-wholesale-standard-commercial",
+      "existing_parent_id": 62,
+      "existing_parent_name": "Retail, Wholesale and Distribution",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 496,
+      "existing_category_name": "Retail, Wholesale and Distribution - Specialty & Retail",
+      "existing_slug": "retail-wholesale-specialty-retail",
+      "existing_parent_id": 62,
+      "existing_parent_name": "Retail, Wholesale and Distribution",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 1321,
+      "existing_category_name": "Wholesale Soaps, Detergents and Sanitizers",
+      "existing_slug": "commercial-cleaning-detergents",
+      "existing_parent_id": 62,
+      "existing_parent_name": "Retail, Wholesale and Distribution",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6950,
+      "existing_category_name": "FMCG Wholesale, Edible Oils and Bulk Goods",
+      "existing_slug": "fmcg-wholesale-packaged-goods",
+      "existing_parent_id": 62,
+      "existing_parent_name": "Retail, Wholesale and Distribution",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 419,
+      "existing_category_name": "Operational Businesses & Retail Stores for Sale",
+      "existing_slug": "operational-businesses-for-sale",
+      "existing_parent_id": 63,
+      "existing_parent_name": "Business Opportunities and Franchises",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 501,
+      "existing_category_name": "Business Opportunities and Franchises - Commercial & Wholesale",
+      "existing_slug": "business-opportunities-standard-commercial",
+      "existing_parent_id": 63,
+      "existing_parent_name": "Business Opportunities and Franchises",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 6968,
+      "existing_category_name": "Operational Cafes, Boutiques and Clinics for Sale",
+      "existing_slug": "established-businesses-for-sale",
+      "existing_parent_id": 63,
+      "existing_parent_name": "Business Opportunities and Franchises",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 507,
+      "existing_category_name": "Industrial Machinery and Manufacturing - Commercial & Wholesale",
+      "existing_slug": "industrial-machinery-standard-commercial",
+      "existing_parent_id": 64,
+      "existing_parent_name": "Industrial Machinery and Manufacturing",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 513,
+      "existing_category_name": "Tools, Workshop and Repair Equipment - Commercial & Wholesale",
+      "existing_slug": "tools-workshop-standard-commercial",
+      "existing_parent_id": 65,
+      "existing_parent_name": "Tools, Workshop and Repair Equipment",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 519,
+      "existing_category_name": "Construction Materials and Building Supplies - Commercial & Wholesale",
+      "existing_slug": "construction-materials-standard-commercial",
+      "existing_parent_id": 66,
+      "existing_parent_name": "Construction Materials and Building Supplies",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 525,
+      "existing_category_name": "Construction Machinery and Heavy Equipment - Commercial & Wholesale",
+      "existing_slug": "construction-machinery-standard-commercial",
+      "existing_parent_id": 67,
+      "existing_parent_name": "Construction Machinery and Heavy Equipment",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 531,
+      "existing_category_name": "Architecture, Engineering and Surveying - Commercial & Wholesale",
+      "existing_slug": "architecture-engineering-standard-commercial",
+      "existing_parent_id": 68,
+      "existing_parent_name": "Architecture, Engineering and Surveying",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7067,
+      "existing_category_name": "Land Surveying, Soil Testing and GIS Services",
+      "existing_slug": "surveying-geotechnical-soil-testing",
+      "existing_parent_id": 68,
+      "existing_parent_name": "Architecture, Engineering and Surveying",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 537,
+      "existing_category_name": "Plumbing, Electrical and Building Systems - Commercial & Wholesale",
+      "existing_slug": "plumbing-electrical-standard-commercial",
+      "existing_parent_id": 69,
+      "existing_parent_name": "Plumbing, Electrical and Building Systems",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 206,
+      "existing_category_name": "Residential Villas and Houses for Sale",
+      "existing_slug": "residential-villas-houses-sale",
+      "existing_parent_id": 70,
+      "existing_parent_name": "Property for Sale",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 210,
+      "existing_category_name": "Apartments and Condominium Units for Sale",
+      "existing_slug": "apartments-condos-sale",
+      "existing_parent_id": 70,
+      "existing_parent_name": "Property for Sale",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7094,
+      "existing_category_name": "Apartments and Condominiums for Sale",
+      "existing_slug": "apartments-condominiums-for-sale",
+      "existing_parent_id": 70,
+      "existing_parent_name": "Property for Sale",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7103,
+      "existing_category_name": "Residential Villas, G+1, G+2 and Compounds for Sale",
+      "existing_slug": "residential-villas-houses-for-sale",
+      "existing_parent_id": 70,
+      "existing_parent_name": "Property for Sale",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=sale",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 361,
+      "existing_category_name": "Apartment Rentals (Furnished & Unfurnished)",
+      "existing_slug": "residential-apartment-rentals",
+      "existing_parent_id": 71,
+      "existing_parent_name": "Property for Rent and Lease",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 365,
+      "existing_category_name": "Standalone Residential Villas for Rent",
+      "existing_slug": "villa-compound-rentals",
+      "existing_parent_id": 71,
+      "existing_parent_name": "Property for Rent and Lease",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7112,
+      "existing_category_name": "Furnished and Unfurnished Apartments for Rent",
+      "existing_slug": "apartments-studios-for-rent",
+      "existing_parent_id": 71,
+      "existing_parent_name": "Property for Rent and Lease",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7121,
+      "existing_category_name": "Villas, Offices and Commercial Compounds for Lease",
+      "existing_slug": "villas-commercial-compounds-for-rent",
+      "existing_parent_id": 71,
+      "existing_parent_name": "Property for Rent and Lease",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=commercial_contract",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 543,
+      "existing_category_name": "Land, Farms and Development Sites - Commercial & Wholesale",
+      "existing_slug": "land-farms-standard-commercial",
+      "existing_parent_id": 72,
+      "existing_parent_name": "Land, Farms and Development Sites",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 549,
+      "existing_category_name": "Commercial and Industrial Real Estate - Commercial & Wholesale",
+      "existing_slug": "commercial-real-estate-standard-commercial",
+      "existing_parent_id": 73,
+      "existing_parent_name": "Commercial and Industrial Real Estate",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 555,
+      "existing_category_name": "Bicycles and Personal Mobility - Commercial & Wholesale",
+      "existing_slug": "bicycles-mobility-standard-commercial",
+      "existing_parent_id": 76,
+      "existing_parent_name": "Bicycles and Personal Mobility",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 561,
+      "existing_category_name": "Vehicle Rental, Logistics and Transport - Commercial & Wholesale",
+      "existing_slug": "vehicle-rental-logistics-standard-commercial",
+      "existing_parent_id": 79,
+      "existing_parent_name": "Vehicle Rental, Logistics and Transport",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 562,
+      "existing_category_name": "Vehicle Rental, Logistics and Transport - Specialty & Retail",
+      "existing_slug": "vehicle-rental-logistics-specialty-retail",
+      "existing_parent_id": 79,
+      "existing_parent_name": "Vehicle Rental, Logistics and Transport",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7256,
+      "existing_category_name": "Car Rental, Field 4WD and Chauffeur Services",
+      "existing_slug": "car-rental-chauffeur-services",
+      "existing_parent_id": 79,
+      "existing_parent_name": "Vehicle Rental, Logistics and Transport",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7265,
+      "existing_category_name": "Cargo Freight, SinoTruk and Moving Logistics",
+      "existing_slug": "freight-trucking-heavy-haulage",
+      "existing_parent_id": 79,
+      "existing_parent_name": "Vehicle Rental, Logistics and Transport",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 567,
+      "existing_category_name": "Agriculture, Farming and Agricultural Land - Commercial & Wholesale",
+      "existing_slug": "agriculture-farming-standard-commercial",
+      "existing_parent_id": 80,
+      "existing_parent_name": "Agriculture, Farming and Agricultural Land",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 573,
+      "existing_category_name": "Animal Feed, Veterinary and Farm Supplies - Commercial & Wholesale",
+      "existing_slug": "animal-feed-supplies-standard-commercial",
+      "existing_parent_id": 83,
+      "existing_parent_name": "Animal Feed, Veterinary and Farm Supplies",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 579,
+      "existing_category_name": "Restaurants, Catering and Prepared Food - Commercial & Wholesale",
+      "existing_slug": "restaurants-catering-standard-commercial",
+      "existing_parent_id": 85,
+      "existing_parent_name": "Restaurants, Catering and Prepared Food",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 585,
+      "existing_category_name": "Beverages, Coffee and Tea - Commercial & Wholesale",
+      "existing_slug": "coffee-tea-beverages-standard-commercial",
+      "existing_parent_id": 86,
+      "existing_parent_name": "Beverages, Coffee and Tea",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 591,
+      "existing_category_name": "Art, Crafts, Collectibles and Antiques - Commercial & Wholesale",
+      "existing_slug": "art-crafts-antiques-standard-commercial",
+      "existing_parent_id": 87,
+      "existing_parent_name": "Art, Crafts, Collectibles and Antiques",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 597,
+      "existing_category_name": "Music, Musical Instruments and Entertainment - Commercial & Wholesale",
+      "existing_slug": "music-instruments-standard-commercial",
+      "existing_parent_id": 88,
+      "existing_parent_name": "Music, Musical Instruments and Entertainment",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 603,
+      "existing_category_name": "Events, Photography and Creative Production - Commercial & Wholesale",
+      "existing_slug": "events-production-standard-commercial",
+      "existing_parent_id": 89,
+      "existing_parent_name": "Events, Photography and Creative Production",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7436,
+      "existing_category_name": "Tents, Wedding Decoration and Seating Rental",
+      "existing_slug": "wedding-tent-stage-decor",
+      "existing_parent_id": 89,
+      "existing_parent_name": "Events, Photography and Creative Production",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 609,
+      "existing_category_name": "Toys, Baby Products and Children's Goods - Commercial & Wholesale",
+      "existing_slug": "toys-baby-products-standard-commercial",
+      "existing_parent_id": 90,
+      "existing_parent_name": "Toys, Baby Products and Children's Goods",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 615,
+      "existing_category_name": "Pet Supplies and Companion Animals - Commercial & Wholesale",
+      "existing_slug": "pet-supplies-standard-commercial",
+      "existing_parent_id": 91,
+      "existing_parent_name": "Pet Supplies and Companion Animals",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 621,
+      "existing_category_name": "Industrial Raw Materials and Chemicals - Commercial & Wholesale",
+      "existing_slug": "raw-materials-chemicals-standard-commercial",
+      "existing_parent_id": 92,
+      "existing_parent_name": "Industrial Raw Materials and Chemicals",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 627,
+      "existing_category_name": "Energy, Solar and Electrical Power Equipment - Commercial & Wholesale",
+      "existing_slug": "energy-solar-power-standard-commercial",
+      "existing_parent_id": 93,
+      "existing_parent_name": "Energy, Solar and Electrical Power Equipment",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 633,
+      "existing_category_name": "Water, Irrigation and Environmental Equipment - Commercial & Wholesale",
+      "existing_slug": "water-irrigation-equipment-standard-commercial",
+      "existing_parent_id": 94,
+      "existing_parent_name": "Water, Irrigation and Environmental Equipment",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 639,
+      "existing_category_name": "Travel, Accommodation and Tourism Services - Commercial & Wholesale",
+      "existing_slug": "travel-tourism-standard-commercial",
+      "existing_parent_id": 95,
+      "existing_parent_name": "Travel, Accommodation and Tourism Services",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 645,
+      "existing_category_name": "Packaging, Shipping and Warehousing - Commercial & Wholesale",
+      "existing_slug": "packaging-shipping-standard-commercial",
+      "existing_parent_id": 96,
+      "existing_parent_name": "Packaging, Shipping and Warehousing",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 651,
+      "existing_category_name": "General Classifieds, Donations and Exchanges - Commercial & Wholesale",
+      "existing_slug": "general-classifieds-standard-commercial",
+      "existing_parent_id": 97,
+      "existing_parent_name": "General Classifieds, Donations and Exchanges",
+      "validation_status": "CONFLATES_TRADE_TIER",
+      "correct_conceptual_classification": "Trade & Commercial Tier Dimension (Wholesale vs Retail)",
+      "proposed_canonical_destination": "Canonical intrinsic product Super Family with commercial attribute dimension (trade_tier=wholesale)",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record with is_archived=false; populate category_redirects pointing legacy slug to primary intrinsic equipment node; preserve aliases for B2B search.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7680,
+      "existing_category_name": "Dry Cargo Warehouses & Logistics Hubs (\u1218\u130b\u12d8\u1296\u127d)",
+      "existing_slug": "dry-cargo-storage-warehouses",
+      "existing_parent_id": 7679,
+      "existing_parent_name": "Industrial Real Estate, Warehouses & Logistics Hubs",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7695,
+      "existing_category_name": "Commercial Grain Flour Mills & Teff Cleaning Plants (\u12e8\u12c8\u134d\u132e \u121b\u123d\u1296\u127d)",
+      "existing_slug": "commercial-grain-flour-mills",
+      "existing_parent_id": 7694,
+      "existing_parent_name": "Industrial Manufacturing Machinery & Production Lines",
+      "validation_status": "SERVICE_IN_GOODS_TREE",
+      "correct_conceptual_classification": "Professional & Technical Service (System B: SYS_SRV)",
+      "proposed_canonical_destination": "System B (Services & Professional Offerings) under Technical, Maintenance & Repair Services",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 13,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Set classification_system_code=SYS_SRV; retain aliases for service intent search queries; preserve tree node for professional service listings.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    },
+    {
+      "existing_category_id": 7790,
+      "existing_category_name": "Wedding Ceremony Decor, Stage Lighting & Tent Rentals",
+      "existing_slug": "wedding-ceremony-decor-tent-rentals",
+      "existing_parent_id": 7789,
+      "existing_parent_name": "Events, Wedding Staging & Audio-Visual Production",
+      "validation_status": "CONFLATES_TRANSACTION_MODE",
+      "correct_conceptual_classification": "Transaction Mode Dimension (Sale vs Rent vs Lease)",
+      "proposed_canonical_destination": "Intrinsic asset classification under System A (Property/Commercial Assets) combined with listing_type=rent",
+      "listing_impact": {
+        "active_listings_count": 0,
+        "descendant_listings_count": 0,
+        "risk_level": "ZERO_RISK"
+      },
+      "alias_impact": {
+        "existing_aliases_count": 0,
+        "search_preservation_strategy": "Retain aliases, redirect search resolution to canonical node"
+      },
+      "migration_strategy": "Retain category record in PostgreSQL to preserve historical auditability; mark classification_system_code=SYS_PROD; configure category_redirects to route search to canonical asset category with transactional filter parameter.",
+      "rollback_strategy": "Revert classification_system_code, remove entry from category_redirects, and restore previous metadata in taxonomy_audit_logs."
+    }
+  ]
+}

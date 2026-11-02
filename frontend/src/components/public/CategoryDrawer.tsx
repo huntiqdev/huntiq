@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
+import { getCategoryLabel } from '@/lib/taxonomy';
 import { api } from '@/lib/api';
 import {
   X,
@@ -136,6 +137,10 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
   };
 
   const getCatLabel = (node: CategoryNode) => {
+    if (node.id) {
+      const translated = getCategoryLabel(node.id, locale);
+      if (translated) return translated;
+    }
     if (node.slug && (t.categories as any)?.[node.slug]) {
       return (t.categories as any)[node.slug];
     }
@@ -147,11 +152,9 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
   };
 
   const getSubLabel = (sub: CategoryNode, parentSlug?: string) => {
-    if (parentSlug && (t.sub_categories as any)?.[parentSlug]?.[sub.slug]) {
-      return (t.sub_categories as any)[parentSlug][sub.slug];
-    }
-    if ((t.items as any)?.[sub.slug]) {
-      return (t.items as any)[sub.slug];
+    if (sub.id) {
+      const translated = getCategoryLabel(sub.id, locale);
+      if (translated) return translated;
     }
     if (locale === 'am' && sub.name_am) return sub.name_am;
     if ((locale === 'or' || locale === 'om') && sub.name_om) return sub.name_om;

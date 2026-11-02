@@ -727,59 +727,34 @@ func (h *AdminHandler) ListCategories(c *fiber.Ctx) error {
 	return response.OKList(c, cats)
 }
 
-// POST /api/admin/categories
+// POST /api/admin/categories — DEPRECATED: Use /api/admin/category-hierarchy
 func (h *AdminHandler) CreateCategory(c *fiber.Ctx) error {
-	if h.catRepo == nil {
-		return response.InternalError(c, fiber.NewError(500, "category repo not configured"))
-	}
-	var cat models.Category
-	if err := c.BodyParser(&cat); err != nil {
-		return response.BadRequest(c, "invalid request body")
-	}
-	if cat.Slug == "" || cat.NameEn == "" {
-		return response.BadRequest(c, "slug and name_en are required")
-	}
-	id, err := h.catRepo.Create(c.Context(), cat)
-	if err != nil {
-		return response.BadRequest(c, err.Error())
-	}
-	cat.ID = id
-	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"success": true, "data": cat})
+	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+		"success":            false,
+		"error":              "DEPRECATED_MUTATION_ENDPOINT",
+		"message":            "Direct mutations to legacy categories are prohibited. Use /api/admin/category-hierarchy for canonical category operations.",
+		"canonical_endpoint": "/api/admin/category-hierarchy",
+	})
 }
 
-// PUT /api/admin/categories/:id
+// PUT /api/admin/categories/:id — DEPRECATED: Use /api/admin/category-hierarchy/:id
 func (h *AdminHandler) UpdateCategory(c *fiber.Ctx) error {
-	if h.catRepo == nil {
-		return response.InternalError(c, fiber.NewError(500, "category repo not configured"))
-	}
-	id, err := parseIDParam(c, "id")
-	if err != nil {
-		return err
-	}
-	var cat models.Category
-	if err := c.BodyParser(&cat); err != nil {
-		return response.BadRequest(c, "invalid request body")
-	}
-	cat.ID = id
-	if err := h.catRepo.Update(c.Context(), cat); err != nil {
-		return response.BadRequest(c, err.Error())
-	}
-	return response.OK(c, fiber.Map{"message": "category updated"})
+	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+		"success":            false,
+		"error":              "DEPRECATED_MUTATION_ENDPOINT",
+		"message":            "Direct mutations to legacy categories are prohibited. Use /api/admin/category-hierarchy for canonical category operations.",
+		"canonical_endpoint": "/api/admin/category-hierarchy",
+	})
 }
 
-// DELETE /api/admin/categories/:id
+// DELETE /api/admin/categories/:id — DEPRECATED: Use /api/admin/category-hierarchy/:id
 func (h *AdminHandler) DeleteCategory(c *fiber.Ctx) error {
-	if h.catRepo == nil {
-		return response.InternalError(c, fiber.NewError(500, "category repo not configured"))
-	}
-	id, err := parseIDParam(c, "id")
-	if err != nil {
-		return err
-	}
-	if err := h.catRepo.Delete(c.Context(), id); err != nil {
-		return response.InternalError(c, err)
-	}
-	return response.OK(c, fiber.Map{"message": "category deleted"})
+	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+		"success":            false,
+		"error":              "DEPRECATED_MUTATION_ENDPOINT",
+		"message":            "Direct mutations to legacy categories are prohibited. Use /api/admin/category-hierarchy for canonical category operations.",
+		"canonical_endpoint": "/api/admin/category-hierarchy",
+	})
 }
 
 // GET /api/admin/me — returns the current admin's profile

@@ -11,6 +11,7 @@ import { RentalProductCard } from '@/components/public/RentalProductCard';
 import { FilterSidebar } from '@/components/public/FilterSidebar';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
+import { getCategoryLabel } from '@/lib/taxonomy';
 import { useAuth } from '@/context/AuthContext';
 import { SearchAIMeta } from '@/lib/api/public';
 import { AIChatInterface } from '@/components/public/AIChatInterface';
@@ -293,6 +294,10 @@ function ProductsContent() {
 
   const getCatDisplayName = (cat?: Category) => {
     if (!cat) return '';
+    if (cat.id) {
+      const translated = getCategoryLabel(cat.id, locale);
+      if (translated) return translated;
+    }
     if (cat.slug && (t.categories as any)?.[cat.slug]) {
       return (t.categories as any)[cat.slug];
     }
@@ -305,13 +310,11 @@ function ProductsContent() {
 
   const getSubDisplayName = (sub?: Category) => {
     if (!sub) return '';
+    if (sub.id) {
+      const translated = getCategoryLabel(sub.id, locale);
+      if (translated) return translated;
+    }
     const sSlug = sub.slug;
-    if (activeCatSlug && (t.sub_categories as any)?.[activeCatSlug]?.[sSlug]) {
-      return (t.sub_categories as any)[activeCatSlug][sSlug];
-    }
-    if ((t.items as any)?.[sSlug]) {
-      return (t.items as any)[sSlug];
-    }
     if (locale === 'am' && (sub as any).name_am) return (sub as any).name_am;
     if ((locale === 'or' || locale === 'om') && (sub as any).name_om) return (sub as any).name_om;
     if (locale === 'ti' && (sub as any).name_ti) return (sub as any).name_ti;
@@ -321,18 +324,18 @@ function ProductsContent() {
 
   const getItemDisplayName = (item?: Category | string) => {
     if (!item) return '';
-    const slug = typeof item === 'string' ? item : item.slug;
-    if (slug && (t.items as any)?.[slug]) {
-      return (t.items as any)[slug];
-    }
     if (typeof item === 'object') {
+      if (item.id) {
+        const translated = getCategoryLabel(item.id, locale);
+        if (translated) return translated;
+      }
       if (locale === 'am' && (item as any).name_am) return (item as any).name_am;
       if ((locale === 'or' || locale === 'om') && ((item as any).name_om || (item as any).name_or)) return (item as any).name_om || (item as any).name_or;
       if (locale === 'ti' && (item as any).name_ti) return (item as any).name_ti;
       if (locale === 'en' && (item as any).name_en) return (item as any).name_en;
-      return item.name || (item as any).name_en || slug?.replace(/_/g, ' ') || '';
+      return item.name || (item as any).name_en || item.slug?.replace(/_/g, ' ') || '';
     }
-    return slug.replace(/_/g, ' ');
+    return item.replace(/_/g, ' ');
   };
 
   return (

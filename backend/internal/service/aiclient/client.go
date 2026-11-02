@@ -1544,10 +1544,10 @@ var ethiopianKeywordMap = map[string]string{
 	"konkolaataa":      "car",
 	"otoomobil":        "car",
 	"ቤት":              "house",
-	"ቪላ":              "house",
+	"ቪላ":              "villa",
 	"ሪልስቴት":           "house",
 	"mana":             "house",
-	"viillaa":          "house",
+	"viillaa":          "villa",
 	"ገዛ":               "house",
 	"አፓርታማ":           "apartment",
 	"ኮንዶሚኒየም":        "apartment",
@@ -1595,8 +1595,10 @@ var marketplaceSynonymGroups = [][]string{
 	{"phone", "phones", "mobile", "smartphone", "smartphones", "cellphone", "iphone", "samsung", "tecno", "infinix", "redmi", "xiaomi", "ስልክ", "ሞባይል", "ስማርትፎን", "አይፎን", "ሳምሰንግ", "bilbila", "moobaayilii", "ስልኪ"},
 	// Cars & Vehicles
 	{"car", "cars", "vehicle", "vehicles", "automobile", "toyota", "vitz", "corolla", "yaris", "suzuki", "hyundai", "መኪና", "ተሽከርካሪ", "ቶዮታ", "ቪትዝ", "ኮሮላ", "konkolaataa", "otoomobil"},
-	// Houses & Real Estate
-	{"house", "houses", "home", "villa", "villas", "real estate", "property", "residence", "ቤት", "ቪላ", "ሪልስቴት", "ኮንዶሚኒየም", "mana", "viillaa", "ገዛ"},
+	// Standalone Villas & Estates
+	{"villa", "villas", "mansion", "ቪላ", "ቪላዎች", "viillaa"},
+	// Houses & Residential Real Estate
+	{"house", "houses", "home", "real estate", "property", "residence", "ቤት", "ሪልስቴት", "mana", "ገዛ"},
 	// Apartments & Condos
 	{"apartment", "apartments", "condo", "condos", "condominium", "studio", "flat", "አፓርታማ", "ኮንዶሚኒየም", "ኮንዶ", "ስቱዲዮ", "apaartaamaa", "kondoominiyeemii", "ኣፓርታማ"},
 	// Laptops & Computers
