@@ -13,6 +13,7 @@ import (
 	"github.com/your-org/used-tools-marketplace/internal/repository"
 	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 // AIToolDispatcher executes authorized, typed marketplace tools on behalf of the AI.
@@ -130,7 +131,7 @@ func (d *AIToolDispatcher) executeSearchListings(ctx context.Context, args map[s
 		Limit: 5,
 	}
 
-	cleanTerm := aiclient.CleanConversationalSearchTerm(searchTerm)
+	cleanTerm := search.CleanConversationalSearchTerm(searchTerm)
 	if cleanTerm != "" && cleanTerm != "all" && cleanTerm != "products" && cleanTerm != "product" && cleanTerm != "item" && cleanTerm != "items" {
 		filter.Search = &cleanTerm
 	}
@@ -421,7 +422,7 @@ func (d *AIToolDispatcher) ExecuteMultiSearch(ctx context.Context, searches []Ex
 				Limit: 4, // Max 4 per category to avoid clutter
 			}
 
-			cleanTerm := aiclient.CleanConversationalSearchTerm(sReq.SearchTerm)
+			cleanTerm := search.CleanConversationalSearchTerm(sReq.SearchTerm)
 			if sReq.Brand != "" {
 				if cleanTerm == "" || cleanTerm == "all" || cleanTerm == "products" || cleanTerm == "items" {
 					cleanTerm = sReq.Brand

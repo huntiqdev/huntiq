@@ -8,7 +8,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 type ProductRepo struct{ db *pgxpool.Pool }
@@ -256,12 +256,12 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 	// Enhanced search with brand detection, conversational cleaning, and multilingual synonym expansion
 	if f.Search != nil && *f.Search != "" {
 		searchTerm := *f.Search
-		cleanTerm := aiclient.CleanConversationalSearchTerm(searchTerm)
+		cleanTerm := search.CleanConversationalSearchTerm(searchTerm)
 		if cleanTerm == "" {
 			cleanTerm = strings.TrimSpace(searchTerm)
 		}
 
-		synTsQuery := aiclient.BuildSynonymTsQuery(cleanTerm)
+		synTsQuery := search.BuildSynonymTsQuery(cleanTerm)
 
 		// Check for brand mentions using clean term
 		brandQuery := `SELECT brand_name FROM extract_brands($` + fmt.Sprintf("%d", len(args)+1) + `) LIMIT 1`

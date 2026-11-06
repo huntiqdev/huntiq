@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 var (
@@ -199,6 +199,6 @@ func IsBroadProductSearch(query string) bool {
 	}
 
 	// Also check if cleaning strips all keywords leaving nothing
-	clean := aiclient.CleanConversationalSearchTerm(query)
+	clean := search.CleanConversationalSearchTerm(query)
 	return clean == "" || clean == "all" || clean == "products" || clean == "product" || clean == "items" || clean == "item"
 }

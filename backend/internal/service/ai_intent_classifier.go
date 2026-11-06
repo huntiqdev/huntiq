@@ -7,7 +7,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 // IntentType represents a distinct user intention within a message.
@@ -262,7 +262,7 @@ func detectLanguage(text string, hintLocale string) string {
 	if hint == "or" {
 		hint = "om"
 	}
-	if aiclient.ContainsGeez(text) {
+	if search.ContainsGeez(text) {
 		if hint == "ti" {
 			return "ti"
 		}
@@ -725,7 +725,7 @@ func extractMarketplaceCategories(cleanQuery string, lower string, plan *Convers
 	}
 
 	if hasCommercial {
-		cleaned := aiclient.CleanConversationalSearchTerm(cleanQuery)
+		cleaned := search.CleanConversationalSearchTerm(cleanQuery)
 		if cleaned != "" && len(cleaned) >= 2 {
 			plan.Searches = append(plan.Searches, ExtractedSearchRequest{
 				CategoryName: "Marketplace Search",
@@ -939,7 +939,7 @@ func parseCleanNumber(s string) float64 {
 
 func containsWord(s, word string) bool {
 	// For Ge'ez scripts, direct substring check with word boundary logic
-	if aiclient.ContainsGeez(word) {
+	if search.ContainsGeez(word) {
 		return strings.Contains(s, word)
 	}
 
