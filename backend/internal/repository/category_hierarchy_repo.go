@@ -254,8 +254,14 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 	return categories, rows.Err()
 }
 
-// GetCategoryTree builds a full hierarchical tree with deterministic alphabetical sibling ordering
+// GetCategoryTree builds a hierarchical tree with deterministic alphabetical sibling ordering
 func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string) ([]models.CategoryTree, error) {
+	return r.GetCategoryTreeWithDepth(ctx, lang, 2)
+}
+
+// GetCategoryTreeWithDepth builds a hierarchical tree up to maxDepth (level < maxDepth).
+// If maxDepth <= 0, builds without level restriction.
+func (r *CategoryHierarchyRepo) GetCategoryTreeWithDepth(ctx context.Context, lang string, maxDepth int) ([]models.CategoryTree, error) {
 	if lang == "" {
 		lang = "en"
 	}
@@ -272,11 +278,16 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 		       COALESCE(c.image_url, '') AS image_url,
 		       COALESCE(s.product_count, 0) AS product_count
 		FROM category_hierarchy c
-		LEFT JOIN category_stats s ON s.category_id = c.id
-		WHERE c.is_active = true
+		LEFT JOIN (
+			SELECT category_hierarchy_id, count(*) AS product_count
+			FROM products
+			WHERE status = 'approved' AND category_hierarchy_id IS NOT NULL
+			GROUP BY category_hierarchy_id
+		) s ON s.category_hierarchy_id = c.id
+		WHERE c.is_active = true AND ($1 <= 0 OR c.level < $1)
 		ORDER BY c.level ASC, c.id ASC`
 
-	rows, err := r.db.Query(ctx, query)
+	rows, err := r.db.Query(ctx, query, maxDepth)
 	if err != nil {
 		return nil, err
 	}
@@ -643,4 +654,58 @@ func (r *CategoryHierarchyRepo) GetCategoryStats(ctx context.Context, categoryID
 	)
 
 	return &cat, err
+}
+
+// ResolveCategoryByAlias queries the database stored procedure resolve_category_by_alias(term)
+func (r *CategoryHierarchyRepo) ResolveCategoryByAlias(ctx context.Context, term string) (*int, error) {
+	clean := strings.TrimSpace(term)
+	if clean == "" {
+		return nil, nil
+	}
+	var catID *int
+	err := r.db.QueryRow(ctx, `SELECT public.resolve_category_by_alias($1)`, clean).Scan(&catID)
+	if err != nil {
+		return nil, err
+	}
+	return catID, nil
+}
+
+// ResolveLegacyCategoryID resolves the legacy category ID dynamically from PostgreSQL.
+// It checks if rootID exists in the categories table, or looks up by slug in the categories table,
+// or falls back to the default/other category directly from the categories table.
+func (r *CategoryHierarchyRepo) ResolveLegacyCategoryID(ctx context.Context, rootSlug string, rootID int) int {
+	if rootID > 0 {
+		var existsID int
+		err := r.db.QueryRow(ctx, `SELECT id FROM categories WHERE id = $1 LIMIT 1`, rootID).Scan(&existsID)
+		if err == nil && existsID > 0 {
+			return existsID
+		}
+	}
+	if rootSlug != "" {
+		var legacyID int
+		// Try exact slug match in categories table
+		err := r.db.QueryRow(ctx, `SELECT id FROM categories WHERE slug = $1 LIMIT 1`, rootSlug).Scan(&legacyID)
+		if err == nil && legacyID > 0 {
+			return legacyID
+		}
+		// Try prefix match in categories table (e.g. "electronics-mobile" -> "electronics")
+		prefix := strings.Split(rootSlug, "-")[0]
+		err = r.db.QueryRow(ctx, `SELECT id FROM categories WHERE slug = $1 LIMIT 1`, prefix).Scan(&legacyID)
+		if err == nil && legacyID > 0 {
+			return legacyID
+		}
+	}
+	// Fallback to 'other' category from categories table
+	var otherID int
+	err := r.db.QueryRow(ctx, `SELECT id FROM categories WHERE slug = 'other' LIMIT 1`).Scan(&otherID)
+	if err == nil && otherID > 0 {
+		return otherID
+	}
+	// Fallback to the first available category in database
+	var firstID int
+	err = r.db.QueryRow(ctx, `SELECT id FROM categories ORDER BY id ASC LIMIT 1`).Scan(&firstID)
+	if err == nil && firstID > 0 {
+		return firstID
+	}
+	return 1
 }

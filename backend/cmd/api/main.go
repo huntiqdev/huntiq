@@ -16,17 +16,17 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/joho/godotenv"
 
+	"github.com/your-org/used-tools-marketplace/internal/cache"
+	"github.com/your-org/used-tools-marketplace/internal/config"
+	"github.com/your-org/used-tools-marketplace/internal/database"
 	handlers "github.com/your-org/used-tools-marketplace/internal/handler"
-	jobs "github.com/your-org/used-tools-marketplace/internal/worker"
 	"github.com/your-org/used-tools-marketplace/internal/middleware"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
-	"github.com/your-org/used-tools-marketplace/internal/service"
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
-	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/security"
-	"github.com/your-org/used-tools-marketplace/internal/config"
-	"github.com/your-org/used-tools-marketplace/internal/database"
+	"github.com/your-org/used-tools-marketplace/internal/service"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
+	jobs "github.com/your-org/used-tools-marketplace/internal/worker"
 )
 
 func main() {
@@ -47,9 +47,18 @@ func main() {
 	}
 	defer db.Close()
 
-	// Context for background jobs — cancelled on shutdown
-	jobCtx, jobCancel := context.WithCancel(context.Background())
-	defer jobCancel()
+	// Load search synonym config from JSON file (no hardcoded search constants in Go source)
+	searchConfigPath := "data/search_config.json"
+	if err := search.LoadSearchConfig(searchConfigPath); err != nil {
+		log.Printf("[WARN] Search config not loaded from %s: %v (search synonym expansion disabled)", searchConfigPath, err)
+	}
+
+	// Initialize lifecycle manager with database pool and bounded shutdown timeout
+	lifecycle := NewLifecycleManager(LifecycleConfig{
+		ShutdownTimeout: 10 * time.Second,
+		DB:              db,
+	})
+	jobCtx := lifecycle.WorkerContext()
 
 	jobs.StartExpiryJob(jobCtx, db)
 	jobs.StartUnverifiedUserCleanup(jobCtx, db)
@@ -70,7 +79,9 @@ func main() {
 	sellerRepo := repository.NewSellerRepo(db)
 	bannerRepo := repository.NewBannerRepo(db)
 	referralRepo := repository.NewReferralRepo(db)
-	
+	sessionRepo := repository.NewSessionRepo(db)
+	classificationRepo := repository.NewClassificationRepo(db)
+
 	// Search handler for admin analytics
 	searchHandler := handlers.NewSearchHandler(searchRepo)
 
@@ -114,10 +125,13 @@ func main() {
 		WithCategoryHierarchyRepo(categoryHierarchyRepo)
 	locationSvc := service.NewLocationService(locationRepo).WithHierarchy(locationHierarchyRepo)
 	categoryHierarchySvc := service.NewCategoryHierarchyService(categoryHierarchyRepo)
+	classificationSvc := service.NewClassificationService(classificationRepo)
 	attributeSvc := service.NewAttributeService(attributeRepo)
 	authSvc := service.NewAuthService(userRepo, cfg.JWTSecret).
 		WithDevMode(cfg.DevMode).
 		WithOTPCrypto(otpCrypto)
+	sessionSvc := service.NewSessionService(sessionRepo, userRepo, cfg.JWTSecret, cfg.DevMode)
+	authSvc.WithSessionRevoker(sessionSvc.RevokeAllUserSessions)
 	txSvc := service.NewTransactionService(txRepo, productRepo, userRepo)
 	adminSvc := service.NewAdminService(adminRepo)
 	sellerSvc := service.NewSellerService(sellerRepo)
@@ -226,19 +240,8 @@ func main() {
 	defer appCache.Close()
 
 	// Handlers
-	aiClient := aiclient.NewClient(cfg.AIServiceURL, cfg.AISecretKey).
-		WithOllama(cfg.OllamaURL, cfg.OllamaModel).
-		WithProvider(cfg.AIProvider).
-		WithCache(appCache)
-	aiConvRepo := repository.NewAIConversationRepo(db)
-	aiToolDispatcher := service.NewAIToolDispatcher(productRepo)
-	aiChatSvc := service.NewAIChatService(aiConvRepo, aiClient, aiToolDispatcher)
-	aiChatHandler := handlers.NewAIChatHandler(aiChatSvc)
-	internalAIToolHandler := handlers.NewInternalAIToolHandler(aiToolDispatcher, cfg.AISecretKey)
-
 	productHandler := handlers.NewProductHandler(productSvc, authSvc).
 		WithSearchLogger(searchRepo).
-		WithAIClient(aiClient).
 		WithCategoryHierarchy(categoryHierarchySvc).
 		WithCache(appCache)
 	locationHandler := handlers.NewLocationHandler(locationSvc)
@@ -253,15 +256,19 @@ func main() {
 			})
 		})
 	attributeHandler := handlers.NewAttributeHandler(attributeSvc).WithProductService(productSvc)
-	authHandler := handlers.NewAuthHandler(authSvc).WithAdminService(adminSvc).WithDevMode(cfg.DevMode)
+	authHandler := handlers.NewAuthHandler(authSvc).
+		WithSessionService(sessionSvc).
+		WithAdminService(adminSvc).
+		WithDevMode(cfg.DevMode)
 	txHandler := handlers.NewTransactionHandler(txSvc)
 	adminHandler := handlers.NewAdminHandler(adminSvc, authSvc).WithCategoryRepo(categoryRepo).WithProductRepo(productRepo)
 	sellerHandler := handlers.NewSellerHandler(sellerSvc).WithAdminService(adminSvc)
 	bannerHandler := handlers.NewBannerHandler(bannerRepo)
-	buyerHandler  := handlers.NewBuyerHandler(authSvc).WithAdminService(adminSvc)
-	fpaRepo       := repository.NewFPARepo(db)
-	fpaSvc        := service.NewFPAService(fpaRepo)
-	fpaHandler    := handlers.NewFPAHandler(fpaSvc)
+	buyerHandler := handlers.NewBuyerHandler(authSvc).WithAdminService(adminSvc)
+	fpaRepo := repository.NewFPARepo(db)
+	fpaSvc := service.NewFPAService(fpaRepo)
+	fpaHandler := handlers.NewFPAHandler(fpaSvc)
+	classificationHandler := handlers.NewClassificationHandler(classificationSvc)
 	referralHandler := handlers.NewReferralHandler(referralSvc, cfg.FrontendURL).
 		WithAdminNotifier(func(ctx context.Context, userID int, amount float64) {
 			notifyCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -296,7 +303,7 @@ func main() {
 	})
 
 	app := fiber.New(fiber.Config{
-		BodyLimit:   22 * 1024 * 1024, // 22 MB — allows up to 20 MB image uploads with multipart overhead //nolint:mnd
+		BodyLimit:   22 * 1024 * 1024,          // 22 MB — allows up to 20 MB image uploads with multipart overhead //nolint:mnd
 		ProxyHeader: fiber.HeaderXForwardedFor, // trust X-Forwarded-For from reverse proxy (Render/Heroku)
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			code := fiber.StatusInternalServerError
@@ -316,6 +323,7 @@ func main() {
 			return c.Status(code).JSON(fiber.Map{"success": false, "error": msg})
 		},
 	})
+	lifecycle.SetHTTPServer(app)
 
 	app.Use(middleware.CorrelationID)
 	app.Use(middleware.RequestLogger)
@@ -337,8 +345,8 @@ func main() {
 		AllowOriginsFunc: func(origin string) bool {
 			return cfg.IsAllowedOrigin(origin)
 		},
-		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
-		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization, X-CSRF-Token",
+		AllowMethods:     "GET, POST, PUT, PATCH, DELETE, OPTIONS",
 		AllowCredentials: true,
 	}))
 
@@ -360,6 +368,17 @@ func main() {
 	api := app.Group("/api")
 	api.Use(mw.OptionalAuth)
 	api.Use(mw.RequireNoMaintenance)
+	api.Use(middleware.CSRFProtect(middleware.CSRFConfig{
+		CookieName:      "huntiq_csrf",
+		HeaderName:      "X-CSRF-Token",
+		IsOriginAllowed: cfg.IsAllowedOrigin,
+		ExemptPaths: []string{
+			"/api/chapa/webhook",
+			"/api/telebirr/webhook",
+			"/api/cbe/webhook",
+			"/api/webhooks",
+		},
+	}))
 
 	// Public rate limiter — keyed by IP for unauthenticated endpoints
 	publicLimiter := limiter.New(limiter.Config{
@@ -374,7 +393,7 @@ func main() {
 		},
 	})
 
-	// Search rate limiter — 60 requests/minute per IP to protect catalog & AI worker
+	// Search rate limiter — 60 requests/minute per IP to protect catalog services
 	searchLimiter := limiter.New(limiter.Config{
 		Max:          60,
 		Expiration:   1 * time.Minute,
@@ -389,11 +408,11 @@ func main() {
 
 	// ── Public ──────────────────────────────────────────────────────────────
 	api.Get("/products", searchLimiter, mw.OptionalAuth, productHandler.List)
-	api.Post("/products/auto-categorize", searchLimiter, mw.OptionalAuth, productHandler.AutoCategorize)
 	api.Get("/products/:id", mw.OptionalAuth, productHandler.Get)
 	api.Get("/categories", productHandler.ListCategories)
 	api.Get("/categories/roots", categoryHandler.GetRoots)
 	api.Get("/categories/tree", categoryHandler.GetCategoryTree)
+	api.Get("/categories/resolve", categoryHandler.ResolveCategory)
 	api.Get("/categories/popular", productHandler.PopularCategories)
 	api.Get("/categories/check-slug", categoryHandler.CheckSlug)
 	api.Get("/categories/slug/:slug", categoryHandler.GetCategoryBySlug)
@@ -401,11 +420,25 @@ func main() {
 	api.Get("/categories/:id/children", categoryHandler.GetCategoryChildren)
 	api.Get("/categories/:id/ancestors", categoryHandler.GetCategoryBreadcrumbs)
 	api.Get("/categories/:id/attributes", attributeHandler.GetCategoryAttributes)
-	
+
+	// ── Universal Classification (Public) ──────────────────────────────────
+	api.Get("/classification/schemes", classificationHandler.ListSchemes)
+	api.Get("/classification/schemes/:code", classificationHandler.GetScheme)
+	api.Get("/classification/schemes/:code/tree", classificationHandler.GetTree)
+	api.Get("/classification/schemes/:code/roots", classificationHandler.GetRoots)
+	api.Get("/classification/placements/:id", classificationHandler.GetPlacement)
+	api.Get("/classification/placements/:id/children", classificationHandler.GetChildren)
+	api.Get("/classification/placements/:id/attributes", classificationHandler.GetPlacementAttributes)
+	api.Get("/classification/concepts", classificationHandler.SearchConcepts)
+	api.Get("/classification/concepts/:id", classificationHandler.GetConcept)
+	api.Get("/classification/concepts/:id/relationships", classificationHandler.GetRelationships)
+	api.Get("/classification/relationship-types", classificationHandler.ListRelationshipTypes)
+	api.Get("/classification/search", classificationHandler.SearchUniversal)
+
 	// Attributes (Public)
 	api.Get("/attributes", attributeHandler.ListAttributeDefinitions)
 	api.Get("/products/:id/attributes", mw.OptionalAuth, attributeHandler.GetProductAttributes)
-	
+
 	api.Post("/orders", publicLimiter, mw.OptionalAuth, sellerHandler.CreateOrder)
 	api.Get("/fee-options", productHandler.FeeOptions)
 	api.Get("/locations/regions", locationHandler.ListRegions)
@@ -469,34 +502,12 @@ func main() {
 	// ── Unified Authentication & Capabilities ────────────────────────────────
 	api.Post("/auth/register", authLimiter, authHandler.UnifiedRegister)
 	api.Post("/auth/login", authLimiter, authHandler.UnifiedLogin)
+	api.Post("/auth/refresh", authLimiter, authHandler.Refresh)
+	api.Post("/auth/logout", authHandler.Logout)
+	api.Post("/auth/logout-all", mw.RequireAuth, authHandler.LogoutAll)
 	api.Get("/auth/me", mw.RequireAuth, authHandler.GetMe)
 	api.Get("/auth/capabilities", mw.RequireAuth, authHandler.GetCapabilities)
 	api.Post("/auth/capabilities/activate", mw.RequireAuth, authHandler.ActivateCapability)
-
-	// ── Conversational AI Workspace ──────────────────────────────────────────
-	// Public Stateless AI Chat (Free guest access, zero database writes, rate-limited by IP)
-	aiGuestLimiter := limiter.New(limiter.Config{
-		Max:          30,
-		Expiration:   1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "AI assistant rate limit reached — please wait a minute and try again",
-			})
-		},
-	})
-	api.Post("/ai/chat", aiGuestLimiter, aiChatHandler.GuestChat)
-	api.Post("/internal/ai/tools/execute", internalAIToolHandler.Execute)
-
-	// Authenticated Multi-Turn AI Sessions (Preserved for signed-in users)
-	ai := api.Group("/ai", mw.RequireAuth)
-	ai.Post("/conversations", aiChatHandler.CreateConversation)
-	ai.Get("/conversations", aiChatHandler.ListConversations)
-	ai.Get("/conversations/:id", aiChatHandler.GetConversation)
-	ai.Patch("/conversations/:id", aiChatHandler.UpdateConversation)
-	ai.Delete("/conversations/:id", aiChatHandler.DeleteConversation)
-	ai.Post("/conversations/:id/messages", aiChatHandler.SendMessage)
 
 	api.Post("/auth/forgot-password", authLimiter, authHandler.UnifiedForgotPassword)
 	api.Post("/auth/reset-password", authLimiter, authHandler.UnifiedResetPassword)
@@ -589,7 +600,7 @@ func main() {
 	seller.Get("/referral/balance", referralHandler.GetBalance)
 	seller.Post("/referral/withdraw", referralHandler.RequestWithdrawal)
 	seller.Get("/referral/withdrawals", referralHandler.GetMyWithdrawals)
-	
+
 	// Product attributes (Seller)
 	seller.Post("/products/:id/attributes", attributeHandler.SetProductAttributes)
 
@@ -732,7 +743,7 @@ func main() {
 	admin.Post("/categories", middleware.RequirePlatformAdmin, adminHandler.CreateCategory)
 	admin.Put("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.UpdateCategory)
 	admin.Delete("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.DeleteCategory)
-	
+
 	// Category Hierarchy Management (Admin)
 	admin.Get("/category-hierarchy", mw.RequirePermission("categories"), categoryHandler.ListCategories)
 	admin.Get("/category-hierarchy/:id/stats", mw.RequirePermission("categories"), categoryHandler.GetCategoryStats)
@@ -741,7 +752,25 @@ func main() {
 	admin.Put("/category-hierarchy/:id/status", mw.RequirePermission("categories"), categoryHandler.SetCategoryStatus)
 	admin.Put("/category-hierarchy/:id/reorder", mw.RequirePermission("categories"), categoryHandler.ReorderCategory)
 	admin.Delete("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.DeleteCategory)
-	
+
+	// Universal Classification Management (Admin)
+	admin.Get("/classification/schemes", mw.RequirePermission("categories"), classificationHandler.ListSchemes)
+	admin.Post("/classification/schemes", middleware.RequirePlatformAdmin, classificationHandler.CreateScheme)
+	admin.Put("/classification/schemes/:id", middleware.RequirePlatformAdmin, classificationHandler.UpdateScheme)
+	admin.Post("/classification/placements", middleware.RequirePlatformAdmin, classificationHandler.CreatePlacement)
+	admin.Put("/classification/placements/:id", middleware.RequirePlatformAdmin, classificationHandler.UpdatePlacement)
+	admin.Put("/classification/placements/:id/move", middleware.RequirePlatformAdmin, classificationHandler.MovePlacement)
+	admin.Delete("/classification/placements/:id", middleware.RequirePlatformAdmin, classificationHandler.DeletePlacement)
+	admin.Post("/classification/concepts", middleware.RequirePlatformAdmin, classificationHandler.CreateConcept)
+	admin.Put("/classification/concepts/:id", middleware.RequirePlatformAdmin, classificationHandler.UpdateConcept)
+	admin.Post("/classification/concepts/check-duplicates", mw.RequirePermission("categories"), classificationHandler.CheckDuplicateCandidates)
+	admin.Post("/classification/relationships", middleware.RequirePlatformAdmin, classificationHandler.CreateRelationship)
+	admin.Delete("/classification/relationships/:id", middleware.RequirePlatformAdmin, classificationHandler.DeleteRelationship)
+	admin.Post("/classification/placements/:id/attributes", middleware.RequirePlatformAdmin, classificationHandler.SaveAttributeRule)
+	admin.Delete("/classification/attribute-rules/:id", middleware.RequirePlatformAdmin, classificationHandler.DeleteAttributeRule)
+	admin.Get("/classification/impact-analysis", mw.RequirePermission("categories"), classificationHandler.AnalyzeImpact)
+	admin.Get("/classification/audit-logs", mw.RequireAnyPermission("logs", "categories"), classificationHandler.ListAuditLogs)
+
 	// Attribute Management (Admin)
 	admin.Get("/attributes", mw.RequirePermission("categories"), attributeHandler.ListAttributeDefinitions)
 	admin.Post("/attributes", middleware.RequirePlatformAdmin, attributeHandler.CreateAttributeDefinition)
@@ -856,23 +885,16 @@ func main() {
 	case err := <-serverErr:
 		log.Fatalf("Server startup or listener failed: %v", err)
 	case sig := <-quit:
-		log.Printf("Received signal %v — initiating graceful shutdown...", sig)
+		log.Printf("Received signal %v — initiating coordinated graceful shutdown...", sig)
 	}
 
-	// 1. Cancel background worker and scheduled job contexts
-	log.Println("Stopping background workers and jobs...")
-	jobCancel()
-
-	// 2. Shut down Fiber HTTP server with a 10-second timeout
-	log.Println("Shutting down HTTP server with timeout...")
-	if err := app.ShutdownWithTimeout(10 * time.Second); err != nil {
-		log.Printf("HTTP server shutdown warning: %v", err)
+	// Coordinated graceful shutdown:
+	// 1. Drains active HTTP requests
+	// 2. Signals background workers to terminate and waits for completion
+	// 3. Closes database connection pool safely
+	if err := lifecycle.Shutdown(); err != nil {
+		log.Printf("[lifecycle] Warning: graceful shutdown completed with error: %v", err)
 	} else {
-		log.Println("HTTP server shut down gracefully.")
+		log.Println("[lifecycle] Graceful shutdown completed cleanly.")
 	}
-
-	// 3. Close database connection pool
-	log.Println("Closing database connection pool...")
-	db.Close()
-	log.Println("Graceful shutdown completed.")
 }

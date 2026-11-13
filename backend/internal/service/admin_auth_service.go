@@ -408,7 +408,6 @@ func (s *AdminAuthService) GenerateAdminJWT(userID int, adminRole string, sessio
 	return security.GenerateAdminJWT(userID, adminRole, sessionID, sessionToken, s.jwtSecret)
 }
 
-
 // ValidatePortalAccess checks whether an admin_role can access the given portal
 func ValidatePortalAccess(role, portal string) error {
 	switch portal {
@@ -543,4 +542,3 @@ func (s *AdminAuthService) RevokeSessionByID(ctx context.Context, sessionID, use
 	}
 	return s.passkeyRepo.RevokeSession(ctx, sessionID, reason)
 }
-

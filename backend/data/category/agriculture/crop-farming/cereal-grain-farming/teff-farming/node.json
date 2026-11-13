@@ -1,0 +1,23 @@
+{
+  "name": {
+    "en": "Teff Farming",
+    "am": "የጤፍ እርባታ",
+    "om": "Qonna Xaafii",
+    "ti": "ጣፍ ሕርሻ"
+  },
+  "aliases": {
+    "en": [
+      "teff",
+      "tef"
+    ],
+    "am": [
+      "ጤፍ"
+    ],
+    "om": [
+      "xaafii"
+    ],
+    "ti": [
+      "ጣፍ"
+    ]
+  }
+}

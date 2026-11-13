@@ -19,30 +19,30 @@ type Category struct {
 
 // CategoryHierarchy represents the new dynamic N-level category system
 type CategoryHierarchy struct {
-	ID              int                  `json:"id"`
-	ParentID        *int                 `json:"parent_id,omitempty"`
-	NameEn          string               `json:"name_en"`
-	NameAm          string               `json:"name_am,omitempty"`
-	NameOm          string               `json:"name_om,omitempty"` // Afaan Oromo
-	NameTi          string               `json:"name_ti,omitempty"` // Tigrinya
-	Slug            string               `json:"slug"`
-	Description     string               `json:"description,omitempty"`
-	Level           int                  `json:"level"`
-	Path            string               `json:"path"` // Materialized path: /1/5/12/
-	DisplayOrder    int                  `json:"display_order"`
-	Icon            string               `json:"icon,omitempty"`
-	ImageURL        string               `json:"image_url,omitempty"`
-	IsActive        bool                 `json:"is_active"`
-	IsLeaf          bool                 `json:"is_leaf"` // Can products be attached?
-	MetaTitle       string               `json:"meta_title,omitempty"`
-	MetaDescription string               `json:"meta_description,omitempty"`
-	CreatedAt       time.Time            `json:"created_at"`
-	UpdatedAt       time.Time            `json:"updated_at"`
-	
+	ID              int       `json:"id"`
+	ParentID        *int      `json:"parent_id,omitempty"`
+	NameEn          string    `json:"name_en"`
+	NameAm          string    `json:"name_am,omitempty"`
+	NameOm          string    `json:"name_om,omitempty"` // Afaan Oromo
+	NameTi          string    `json:"name_ti,omitempty"` // Tigrinya
+	Slug            string    `json:"slug"`
+	Description     string    `json:"description,omitempty"`
+	Level           int       `json:"level"`
+	Path            string    `json:"path"` // Materialized path: /1/5/12/
+	DisplayOrder    int       `json:"display_order"`
+	Icon            string    `json:"icon,omitempty"`
+	ImageURL        string    `json:"image_url,omitempty"`
+	IsActive        bool      `json:"is_active"`
+	IsLeaf          bool      `json:"is_leaf"` // Can products be attached?
+	MetaTitle       string    `json:"meta_title,omitempty"`
+	MetaDescription string    `json:"meta_description,omitempty"`
+	CreatedAt       time.Time `json:"created_at"`
+	UpdatedAt       time.Time `json:"updated_at"`
+
 	// Relationships (populated on demand)
-	Parent          *CategoryHierarchy   `json:"parent,omitempty"`
-	Children        []CategoryHierarchy  `json:"children,omitempty"`
-	Breadcrumbs     []CategoryBreadcrumb `json:"breadcrumbs,omitempty"`
+	Parent      *CategoryHierarchy   `json:"parent,omitempty"`
+	Children    []CategoryHierarchy  `json:"children,omitempty"`
+	Breadcrumbs []CategoryBreadcrumb `json:"breadcrumbs,omitempty"`
 }
 
 // GetName returns the localized name for the requested language with fallback to English and Slug.

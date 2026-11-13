@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
@@ -168,19 +168,19 @@ const sqlGetProductImages = `
 
 const sqlPopularCategories = `
 	WITH listing_counts AS (
-		SELECT category_id, COUNT(*) AS new_listings
+		SELECT COALESCE(category_id, category_hierarchy_id) AS cat_id, COUNT(*) AS new_listings
 		FROM products
 		WHERE created_at >= NOW() - make_interval(days => $1)
-		  AND category_id IS NOT NULL
-		GROUP BY category_id
+		  AND (category_id IS NOT NULL OR category_hierarchy_id IS NOT NULL)
+		GROUP BY 1
 	),
 	order_counts AS (
-		SELECT p.category_id, COUNT(o.id) AS order_count
+		SELECT COALESCE(p.category_id, p.category_hierarchy_id) AS cat_id, COUNT(o.id) AS order_count
 		FROM order_requests o
 		JOIN products p ON p.id = o.product_id
 		WHERE o.created_at >= NOW() - make_interval(days => $1)
-		  AND p.category_id IS NOT NULL
-		GROUP BY p.category_id
+		  AND (p.category_id IS NOT NULL OR p.category_hierarchy_id IS NOT NULL)
+		GROUP BY 1
 	)
 	SELECT
 		c.id, c.name, c.slug,
@@ -188,8 +188,8 @@ const sqlPopularCategories = `
 		COALESCE(o.order_count, 0)   AS order_count,
 		COALESCE(l.new_listings, 0) + COALESCE(o.order_count, 0) * 2 AS activity_score
 	FROM categories c
-	LEFT JOIN listing_counts l ON l.category_id = c.id
-	LEFT JOIN order_counts   o ON o.category_id = c.id
+	LEFT JOIN listing_counts l ON l.cat_id = c.id
+	LEFT JOIN order_counts   o ON o.cat_id = c.id
 	WHERE COALESCE(c.is_active, true) = true
 	  AND (COALESCE(l.new_listings, 0) + COALESCE(o.order_count, 0)) > 0
 	ORDER BY activity_score DESC
@@ -200,25 +200,21 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 	var wb strings.Builder
 	wb.WriteString("p.status = $1 AND (p.expires_at IS NULL OR p.expires_at > NOW()) AND u.is_active = true")
 
-	// Support both legacy category_id and new category_hierarchy_id
-	if f.CategoryHierarchyID != nil {
-		if f.IncludeDescendants {
-			// Filter by category and all descendants using database function, with fallback to legacy category_id
-			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id IN (SELECT id FROM get_category_descendants($%d)) OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx))
-			args = append(args, *f.CategoryHierarchyID)
-		} else {
-			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id = $%d OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx))
-			args = append(args, *f.CategoryHierarchyID)
-		}
-	} else if f.CategoryID != nil {
-		// Legacy category_id filter (flat categories), with compatibility for new category_hierarchy_id
-		idx := len(args) + 1
-		wb.WriteString(fmt.Sprintf(" AND (p.category_id = $%d OR p.category_hierarchy_id = $%d)", idx, idx))
-		args = append(args, *f.CategoryID)
+	// Unified category filter with database-driven recursive descendant matching
+	targetCatID := f.CategoryHierarchyID
+	if targetCatID == nil {
+		targetCatID = f.CategoryID
 	}
-	
+	if targetCatID != nil {
+		idx := len(args) + 1
+		if f.IncludeDescendants {
+			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id IN (SELECT id FROM get_category_descendants($%d)) OR p.category_id IN (SELECT id FROM get_category_descendants($%d)) OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx, idx))
+		} else {
+			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id = $%d OR p.category_id = $%d)", idx, idx))
+		}
+		args = append(args, *targetCatID)
+	}
+
 	if f.MinPrice != nil {
 		args, _ = addWhere(&wb, args, " AND p.price >= ", *f.MinPrice)
 	}
@@ -252,7 +248,7 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 		)`, idx, idx))
 		args = append(args, likeWrap(*f.Region))
 	}
-	
+
 	// Enhanced search with brand detection, conversational cleaning, and multilingual synonym expansion
 	if f.Search != nil && *f.Search != "" {
 		searchTerm := *f.Search
@@ -301,7 +297,7 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
 		}
 	}
-	
+
 	if f.Condition != nil && *f.Condition != "" {
 		if *f.Condition == "used" {
 			args, _ = addWhere(&wb, args, " AND p.condition != ", "new")

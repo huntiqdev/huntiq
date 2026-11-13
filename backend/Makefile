@@ -1,4 +1,4 @@
-.PHONY: help build run test codegen migrate seed clean
+.PHONY: help build run test migrate seed clean
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -14,11 +14,6 @@ run: ## Run the application
 
 test: ## Run tests
 	go test ./... -v
-
-codegen: ## Generate TypeScript from Go error codes
-	@echo "Generating TypeScript error codes..."
-	cd cmd/codegen && go run main.go
-	@echo "✓ TypeScript generated at ../frontend/src/lib/errors-generated.ts"
 
 migrate: ## Run database migrations
 	./scripts/migrate.sh

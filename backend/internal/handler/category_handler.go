@@ -43,16 +43,20 @@ func (h *CategoryHandler) logAdminAction(c *fiber.Ctx, action, notes string) {
 func (h *CategoryHandler) invalidateCategoryCaches(ctx context.Context) {
 	if h.cache != nil {
 		for _, lang := range []string{"en", "am", "or", "ti", ""} {
+			for _, d := range []int{1, 2, 3, 4, 0} {
+				_ = h.cache.Delete(ctx, fmt.Sprintf("category_tree_%s_d%d", lang, d))
+			}
 			_ = h.cache.Delete(ctx, fmt.Sprintf("category_tree_%s", lang))
 		}
 	}
 }
 
-// GetCategoryTree returns the full hierarchical category tree
-// GET /api/categories/tree?lang=en
+// GetCategoryTree returns the hierarchical category tree with configurable depth
+// GET /api/categories/tree?lang=en&depth=2
 func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 	lang := c.Query("lang", "en")
-	cacheKey := fmt.Sprintf("category_tree_%s", lang)
+	depth := c.QueryInt("depth", 2)
+	cacheKey := fmt.Sprintf("category_tree_%s_d%d", lang, depth)
 
 	if h.cache != nil {
 		if cached, ok := h.cache.Get(c.Context(), cacheKey); ok && len(cached) > 0 {
@@ -60,8 +64,8 @@ func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 			return c.Send(cached)
 		}
 	}
-	
-	tree, err := h.svc.GetCategoryTree(c.Context(), lang)
+
+	tree, err := h.svc.GetCategoryTreeWithDepth(c.Context(), lang, depth)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
@@ -81,6 +85,43 @@ func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 	return c.Send(respBytes)
 }
 
+// ResolveCategory resolves a category by term/alias using database resolution
+// GET /api/categories/resolve?q=phone&lang=en
+func (h *CategoryHandler) ResolveCategory(c *fiber.Ctx) error {
+	q := c.Query("q")
+	if q == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "query parameter 'q' is required",
+		})
+	}
+	lang := c.Query("lang", "en")
+	catID, err := h.svc.ResolveCategoryByAlias(c.Context(), q)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"error":   "failed to resolve category",
+		})
+	}
+	if catID == nil || *catID <= 0 {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"success": false,
+			"error":   "no matching category found",
+		})
+	}
+	cat, err := h.svc.GetByID(c.Context(), *catID, lang)
+	if err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"success": false,
+			"error":   "category not found",
+		})
+	}
+	return c.JSON(fiber.Map{
+		"success": true,
+		"data":    cat,
+	})
+}
+
 // GetCategory returns a single category with breadcrumbs
 // GET /api/categories/:id?lang=en
 func (h *CategoryHandler) GetCategory(c *fiber.Ctx) error {
@@ -94,7 +135,7 @@ func (h *CategoryHandler) GetCategory(c *fiber.Ctx) error {
 	}
 
 	lang := c.Query("lang", "en")
-	
+
 	cat, err := h.svc.GetByID(c.Context(), id, lang)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
@@ -114,7 +155,7 @@ func (h *CategoryHandler) GetCategory(c *fiber.Ctx) error {
 func (h *CategoryHandler) GetCategoryBySlug(c *fiber.Ctx) error {
 	slug := c.Params("slug")
 	lang := c.Query("lang", "en")
-	
+
 	cat, err := h.svc.GetBySlug(c.Context(), slug, lang)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
@@ -197,7 +238,7 @@ func (h *CategoryHandler) GetCategoryChildren(c *fiber.Ctx) error {
 		Page:     1,
 		Limit:    500,
 	}
-	
+
 	active := true
 	filter.IsActive = &active
 
@@ -228,7 +269,7 @@ func (h *CategoryHandler) GetCategoryBreadcrumbs(c *fiber.Ctx) error {
 	}
 
 	lang := c.Query("lang", "en")
-	
+
 	breadcrumbs, err := h.svc.GetBreadcrumbs(c.Context(), id, lang)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -294,7 +335,7 @@ func (h *CategoryHandler) UpdateCategory(c *fiber.Ctx) error {
 	}
 
 	req.ID = id
-	
+
 	if err := h.svc.UpdateCategory(c.Context(), &req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,

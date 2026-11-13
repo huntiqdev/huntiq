@@ -20,19 +20,19 @@ type ScenarioModel struct {
 
 // TaxRuleModel represents a database record in financial_tax_rules
 type TaxRuleModel struct {
-	ID              int        `json:"id"`
-	Jurisdiction    string     `json:"jurisdiction"`
-	RuleCode        string     `json:"rule_code"`
-	RuleName        string     `json:"rule_name"`
-	Category        string     `json:"category"`
-	StandardRate    *float64   `json:"standard_rate"`
-	ThresholdAmount *float64   `json:"threshold_amount"`
-	EffectiveDate   string     `json:"effective_date"`
-	SourceCitation  string     `json:"source_citation"`
-	SourceURL       *string    `json:"source_url"`
-	IsVerified      bool       `json:"is_verified"`
-	ReviewerNotes   *string    `json:"reviewer_notes"`
-	UpdatedAt       time.Time  `json:"updated_at"`
+	ID              int       `json:"id"`
+	Jurisdiction    string    `json:"jurisdiction"`
+	RuleCode        string    `json:"rule_code"`
+	RuleName        string    `json:"rule_name"`
+	Category        string    `json:"category"`
+	StandardRate    *float64  `json:"standard_rate"`
+	ThresholdAmount *float64  `json:"threshold_amount"`
+	EffectiveDate   string    `json:"effective_date"`
+	SourceCitation  string    `json:"source_citation"`
+	SourceURL       *string   `json:"source_url"`
+	IsVerified      bool      `json:"is_verified"`
+	ReviewerNotes   *string   `json:"reviewer_notes"`
+	UpdatedAt       time.Time `json:"updated_at"`
 }
 
 // ActualRecordModel represents historical actual accounting data

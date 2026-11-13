@@ -8,6 +8,23 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 MIGRATIONS_DIR="${BACKEND_DIR}/internal/database/migrations"
 
+# ----------------------------------------------------------------------------
+# Pre-execution migration safety and sequence validation (Target Release Gate 4)
+# Abort immediately if sequence gaps, duplicates, or invalid SQL are detected.
+# ----------------------------------------------------------------------------
+VALIDATOR_SCRIPT="${SCRIPT_DIR}/validate_migrations.sh"
+if [ -f "${VALIDATOR_SCRIPT}" ]; then
+    echo "==> Running pre-execution migration sequence and safety validation..."
+    if ! "${VALIDATOR_SCRIPT}" "${MIGRATIONS_DIR}"; then
+        echo "ERROR: Migration validation failed! Aborting database migration execution." >&2
+        exit 1
+    fi
+    echo "==> Pre-execution validation passed successfully."
+else
+    echo "ERROR: Migration validator script not found: ${VALIDATOR_SCRIPT}" >&2
+    exit 1
+fi
+
 # Load .env if present
 if [ -f "${BACKEND_DIR}/.env" ]; then
     # shellcheck disable=SC2046

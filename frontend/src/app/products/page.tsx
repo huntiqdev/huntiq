@@ -11,14 +11,12 @@ import { RentalProductCard } from '@/components/public/RentalProductCard';
 import { FilterSidebar } from '@/components/public/FilterSidebar';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
-import { getCategoryLabel } from '@/lib/taxonomy';
+import { resolveCategoryTitle } from '@/lib/taxonomy';
 import { useAuth } from '@/context/AuthContext';
-import { SearchAIMeta } from '@/lib/api/public';
-import { AIChatInterface } from '@/components/public/AIChatInterface';
 import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
   LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
-  Sparkles, ShieldCheck, Sliders, ShieldAlert, Brain,
+  ShieldCheck, Sliders, ShieldAlert,
 } from 'lucide-react';
 import { formatLocationParts } from '@/types/location';
 
@@ -60,14 +58,16 @@ function PopularCategoriesStrip({ onSelect }: {
 
   if (popular.length === 0) return null;
 
-  const catLabel = (slug: string) => (t.categories as any)[slug] ?? slug.replace(/_/g, ' ');
+  const catLabel = (slug: string) => slug.replace(/-/g, ' ');
 
   const EMOJI: Record<string, string> = {
-    electronics: '📱', vehicles: '🚗', property: '🏠', clothing: '👗',
-    agriculture: '🌾', furniture: '🛋️', food: '🍎', business: '💼',
-    industry: '🏭', construction: '🔨', health_beauty: '💄', sports: '⚽',
-    education: '📚', entertainment: '🎮', luxury: '💎', animals: '🐄',
-    services: '🔧', jobs: '💼', other: '📦',
+    agriculture: '🌾', 'food-beverage': '🍎', electronics: '📱', 'consumer-electronics': '📱',
+    'computing-it': '💻', 'transport-mobility': '🚗', 'construction-infrastructure': '🔨',
+    'property-real-estate': '🏠', 'healthcare-medicine': '🏥', 'energy-utilities': '⚡',
+    'industrial-manufacturing': '🏭', 'clothing-apparel': '👗', 'home-appliances-kitchenware': '🍳',
+    'furniture-furnishings': '🛋️', 'beauty-personal-care': '💄', 'sports-fitness': '⚽',
+    'education-training': '📚', 'finance-insurance': '💳', 'commerce-trade': '🛒',
+    'workforce-employment': '💼', 'logistics-supply-chain': '🚚', 'other': '📦',
   };
 
   return (
@@ -121,9 +121,6 @@ function ProductsContent() {
   const [activeWoreda, setActiveWoreda] = useState<string>('');
   const [activeCondition, setActiveCondition] = useState<'all' | 'new' | 'used'>('all');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
-  const [searchMode, setSearchMode] = useState<'ai' | 'manual'>('manual');
-  const [searchMeta, setSearchMeta] = useState<SearchAIMeta | null>(null);
-  const [showReasoning, setShowReasoning] = useState(false);
 
   useEffect(() => {
     api.getCategoryTree(locale)
@@ -148,13 +145,6 @@ function ProductsContent() {
     const catSlugParam = searchParams.get('cat');
     const sub = searchParams.get('subcategory');
     const item = searchParams.get('item');
-
-    const modeParam = searchParams.get('mode');
-    if (modeParam === 'ai') {
-      setSearchMode('ai');
-    } else {
-      setSearchMode('manual');
-    }
 
     const typeParam = searchParams.get('type');
     if (typeParam === 'sale' || typeParam === 'rent' || typeParam === 'all') {
@@ -215,43 +205,18 @@ function ProductsContent() {
     const apiFilters: ProductFilters = { ...filters };
     if (activeCondition !== 'all') apiFilters.condition = activeCondition;
     if (listingType !== 'all') apiFilters.listing_type = listingType;
-    apiFilters.mode = searchMode;
     apiFilters.locale = locale;
     apiFilters.preferred_language = locale;
 
-    api.getProductsWithMeta(apiFilters)
-      .then(({ products: data, meta }) => {
+    api.getProducts(apiFilters)
+      .then(data => {
         setProducts(data);
-        setSearchMeta(meta ?? null);
       })
       .catch(() => {
         setProducts([]);
-        setSearchMeta(null);
       })
       .finally(() => setLoading(false));
-  }, [filters, activeCondition, listingType, searchMode, locale]);
-
-  const toggleMode = (newMode: 'ai' | 'manual') => {
-    setSearchMode(newMode);
-    const p = new URLSearchParams(searchParams.toString());
-    if (newMode === 'ai') {
-      p.set('mode', 'ai');
-    } else {
-      p.delete('mode');
-    }
-    const qStr = p.toString();
-    router.push(qStr ? `/products?${qStr}` : '/products');
-  };
-
-  if (searchMode === 'ai') {
-    return (
-      <AIChatInterface
-        onExit={() => toggleMode('manual')}
-        initialQuery={filters.search || ''}
-        locale={locale}
-      />
-    );
-  }
+  }, [filters, activeCondition, listingType, locale]);
 
   const findNodeById = (nodes: Category[], id?: number): Category | undefined => {
     if (!id) return undefined;
@@ -294,46 +259,18 @@ function ProductsContent() {
 
   const getCatDisplayName = (cat?: Category) => {
     if (!cat) return '';
-    if (cat.id) {
-      const translated = getCategoryLabel(cat.id, locale);
-      if (translated) return translated;
-    }
-    if (cat.slug && (t.categories as any)?.[cat.slug]) {
-      return (t.categories as any)[cat.slug];
-    }
-    if (locale === 'am' && (cat as any).name_am) return (cat as any).name_am;
-    if ((locale === 'or' || locale === 'om') && (cat as any).name_om) return (cat as any).name_om;
-    if (locale === 'ti' && (cat as any).name_ti) return (cat as any).name_ti;
-    if (locale === 'en' && (cat as any).name_en) return (cat as any).name_en;
-    return cat.name || (cat as any).name_en || cat.slug?.replace(/_/g, ' ') || '';
+    return resolveCategoryTitle(cat as any, locale) || cat.name || (cat as any).name_en || cat.slug?.replace(/_/g, ' ') || '';
   };
 
   const getSubDisplayName = (sub?: Category) => {
     if (!sub) return '';
-    if (sub.id) {
-      const translated = getCategoryLabel(sub.id, locale);
-      if (translated) return translated;
-    }
-    const sSlug = sub.slug;
-    if (locale === 'am' && (sub as any).name_am) return (sub as any).name_am;
-    if ((locale === 'or' || locale === 'om') && (sub as any).name_om) return (sub as any).name_om;
-    if (locale === 'ti' && (sub as any).name_ti) return (sub as any).name_ti;
-    if (locale === 'en' && (sub as any).name_en) return (sub as any).name_en;
-    return sub.name || (sub as any).name_en || sSlug.replace(/_/g, ' ');
+    return resolveCategoryTitle(sub as any, locale) || sub.name || (sub as any).name_en || sub.slug?.replace(/_/g, ' ') || '';
   };
 
   const getItemDisplayName = (item?: Category | string) => {
     if (!item) return '';
     if (typeof item === 'object') {
-      if (item.id) {
-        const translated = getCategoryLabel(item.id, locale);
-        if (translated) return translated;
-      }
-      if (locale === 'am' && (item as any).name_am) return (item as any).name_am;
-      if ((locale === 'or' || locale === 'om') && ((item as any).name_om || (item as any).name_or)) return (item as any).name_om || (item as any).name_or;
-      if (locale === 'ti' && (item as any).name_ti) return (item as any).name_ti;
-      if (locale === 'en' && (item as any).name_en) return (item as any).name_en;
-      return item.name || (item as any).name_en || item.slug?.replace(/_/g, ' ') || '';
+      return resolveCategoryTitle(item as any, locale) || item.name || (item as any).name_en || item.slug?.replace(/_/g, ' ') || '';
     }
     return item.replace(/_/g, ' ');
   };

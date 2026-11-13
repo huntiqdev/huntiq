@@ -8,4 +8,4 @@ uploads/
 Dockerfile
 bin/
 api
-seed-taxonomy
+taxonomy-tool

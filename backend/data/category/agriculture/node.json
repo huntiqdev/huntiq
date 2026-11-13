@@ -1,0 +1,10 @@
+{
+  "name": {
+    "en": "Agriculture",
+    "am": "ግብርና",
+    "om": "Qonna",
+    "ti": "ሕርሻ"
+  },
+  "icon": "Wheat",
+  "description": "Crop farming, livestock, agricultural inputs, machinery, services, processing and trade."
+}

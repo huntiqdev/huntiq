@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/your-org/used-tools-marketplace/pkg/constants"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
+	"github.com/your-org/used-tools-marketplace/pkg/constants"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 )
 
 // isAllowedImageURL accepts /uploads/ paths from our own backend only.
@@ -31,7 +31,7 @@ func (s *ProductService) isAllowedImageURL(u string) bool {
 }
 
 type ProductService struct {
-	repo        *repository.ProductRepo
+	repo             *repository.ProductRepo
 	catRepo          *repository.CategoryRepo
 	catHierarchyRepo *repository.CategoryHierarchyRepo
 	locRepo          *repository.LocationRepo
@@ -155,15 +155,19 @@ func (s *ProductService) GetByID(ctx context.Context, id int) (*models.Product, 
 	return p, nil
 }
 
-func (s *ProductService) ListCategories(ctx context.Context) ([]models.Category, error) {
+func (s *ProductService) ListCategories(ctx context.Context, langOpt ...string) ([]models.Category, error) {
+	lang := "en"
+	if len(langOpt) > 0 && langOpt[0] != "" {
+		lang = langOpt[0]
+	}
 	if s.catHierarchyRepo != nil {
-		roots, err := s.catHierarchyRepo.GetRoots(ctx, "en")
+		roots, err := s.catHierarchyRepo.GetRoots(ctx, lang)
 		if err == nil && len(roots) > 0 {
 			cats := make([]models.Category, len(roots))
 			for i, r := range roots {
 				cats[i] = models.Category{
 					ID:        r.ID,
-					Name:      r.NameEn,
+					Name:      r.GetName(lang),
 					Slug:      r.Slug,
 					NameEn:    r.NameEn,
 					NameAm:    r.NameAm,
@@ -225,39 +229,6 @@ func checkProhibitedContent(title, description string) error {
 	return nil
 }
 
-// MapRootSlugToLegacyCategoryID maps any canonical root domain slug or ID to the authoritative
-// legacy 11-category ID (1..11) to guarantee foreign-key integrity and backward compatibility.
-func MapRootSlugToLegacyCategoryID(slug string, rootID int) int {
-	// If rootID is already within the 1..11 legacy category range, preserve it directly.
-	if rootID >= 1 && rootID <= 11 {
-		return rootID
-	}
-	switch slug {
-	case "electronics", "electronics-mobile", "computers-it", "telecom-networking", "cameras-optics", "gaming-vr", "tv-audio":
-		return 1 // Electronics
-	case "vehicles", "vehicles-cars", "motorcycles-bajaj", "bicycles-mobility", "trucks-commercial-transport", "vehicle-parts-accessories", "vehicle-rental-logistics":
-		return 2 // Vehicles
-	case "property", "property-sale", "property-rent", "land-farms", "commercial-real-estate":
-		return 3 // Property & Real Estate
-	case "home", "home-appliances", "furniture-furnishings", "kitchen-household":
-		return 4 // Home & Living
-	case "fashion", "clothing-apparel", "shoes-bags", "jewelry-luxury":
-		return 5 // Fashion & Clothing
-	case "agriculture", "agriculture-farming", "crops-grains-seeds", "livestock-poultry", "animal-feed-supplies":
-		return 6 // Agriculture & Farming
-	case "business", "business-opportunities", "retail-wholesale", "industrial-machinery", "tools-workshop", "construction-materials", "construction-machinery", "architecture-engineering", "plumbing-electrical", "raw-materials-chemicals", "energy-solar-power", "water-irrigation-equipment", "packaging-shipping", "software-it-services", "office-supplies":
-		return 7 // Business & Industry
-	case "services", "jobs-recruitment", "cvs-talent", "freelance-gigs", "professional-services", "business-services", "travel-tourism", "events-production":
-		return 8 // Services & Jobs
-	case "lifestyle", "beauty-personal-care", "health-medical", "sports-fitness", "art-crafts-antiques", "music-instruments", "toys-baby-products", "pet-supplies", "food-groceries", "restaurants-catering", "coffee-tea-beverages":
-		return 9 // Lifestyle & Wellness
-	case "education", "books-publishing", "education-training":
-		return 10 // Education & Learning
-	default:
-		return 11 // Other
-	}
-}
-
 func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req dto.CreateProductRequest) (*models.Product, error) {
 	// Load all content limits from DB — admin can change these at any time
 	minImages := s.getSettingInt(ctx, constants.SettingMinImagesPerListing, constants.DefaultMinImages)
@@ -276,7 +247,7 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 	if listingType != "sale" && listingType != "rent" {
 		return nil, errors.New("listing_type must be 'sale' or 'rent'")
 	}
-	
+
 	// ── Rental-specific validation & price synchronization ──
 	if listingType == "rent" {
 		if req.RentalPrice == nil || *req.RentalPrice <= 0 {
@@ -325,7 +296,7 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 	if len(req.Description) > maxDesc {
 		return nil, fmt.Errorf("description must be %d characters or fewer", maxDesc)
 	}
-	
+
 	// Validate image URLs — must be /uploads/ paths or trusted CDN URLs
 	for _, u := range req.ImageURLs {
 		if !s.isAllowedImageURL(u) {
@@ -425,20 +396,17 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 			return nil, errors.New("cannot create listing under an inactive or archived category")
 		}
 
-		// Resolve authoritative legacy category ID (1..11) by walking up to the root ancestor
+		// Resolve authoritative legacy category ID by walking up to the root ancestor
 		rootID, rootSlug, err := s.catHierarchyRepo.GetRootAncestor(ctx, *catHierarchyID)
 		if err == nil {
-			mappedID := MapRootSlugToLegacyCategoryID(rootSlug, rootID)
+			mappedID := s.catHierarchyRepo.ResolveLegacyCategoryID(ctx, rootSlug, rootID)
 			legacyCatID = &mappedID
-		} else if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 {
+		} else if req.CategoryID != nil && *req.CategoryID > 0 {
 			legacyCatID = req.CategoryID
-		} else {
-			defaultID := 11 // Other
-			legacyCatID = &defaultID
 		}
 
-		// If a valid legacy CategoryID (1..11) was also explicitly supplied, verify relationship
-		if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 && *req.CategoryID != *catHierarchyID {
+		// If a legacy CategoryID was also explicitly supplied, verify relationship in database
+		if req.CategoryID != nil && *req.CategoryID > 0 && *req.CategoryID != *catHierarchyID {
 			isDescendant, err := s.catHierarchyRepo.IsDescendantOf(ctx, *catHierarchyID, *req.CategoryID)
 			if err != nil {
 				return nil, fmt.Errorf("failed to validate category hierarchy relationship: %w", err)
@@ -449,13 +417,11 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 			legacyCatID = req.CategoryID
 		}
 	} else if catHierarchyID != nil && s.catRepo != nil {
-		_, err := s.catRepo.GetByID(ctx, *catHierarchyID)
+		cat, err := s.catRepo.GetByID(ctx, *catHierarchyID)
 		if err != nil {
 			return nil, errors.New("invalid category: category does not exist")
 		}
-		if *catHierarchyID >= 1 && *catHierarchyID <= 11 {
-			legacyCatID = catHierarchyID
-		}
+		legacyCatID = &cat.ID
 	}
 	p := &models.Product{
 		SellerID:               sellerID,
@@ -621,41 +587,27 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 				return errors.New("cannot assign an inactive or archived category")
 			}
 
-			// Resolve authoritative legacy category ID (1..11) by walking up to the root ancestor
+			// Resolve authoritative legacy category ID by walking up to the root ancestor
 			rootID, rootSlug, err := s.catHierarchyRepo.GetRootAncestor(ctx, *catHierarchyID)
 			if err == nil {
-				mappedID := MapRootSlugToLegacyCategoryID(rootSlug, rootID)
+				mappedID := s.catHierarchyRepo.ResolveLegacyCategoryID(ctx, rootSlug, rootID)
 				legacyCatID = &mappedID
-			} else if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 {
+			} else if req.CategoryID != nil && *req.CategoryID > 0 {
 				legacyCatID = req.CategoryID
-			} else if existing.CategoryID != nil && *existing.CategoryID >= 1 && *existing.CategoryID <= 11 {
+			} else if existing.CategoryID != nil && *existing.CategoryID > 0 {
 				legacyCatID = existing.CategoryID
-			} else {
-				defaultID := 11 // Other
-				legacyCatID = &defaultID
 			}
 
-			// If a legacy CategoryID (1..11) was also explicitly supplied, verify relationship
-			if req.CategoryID != nil && *req.CategoryID >= 1 && *req.CategoryID <= 11 && *req.CategoryID != *catHierarchyID {
-				if legacyCatID != nil && *req.CategoryID != *legacyCatID {
-					isDescendant, err := s.catHierarchyRepo.IsDescendantOf(ctx, *catHierarchyID, *req.CategoryID)
-					if err != nil {
-						return fmt.Errorf("failed to validate category hierarchy relationship: %w", err)
-					}
-					if !isDescendant {
-						return errors.New("invalid category selection: subcategory does not belong to the selected parent category")
-					}
-				}
+			// If a legacy CategoryID was also explicitly supplied, use it as fallback if not resolved
+			if req.CategoryID != nil && *req.CategoryID > 0 && legacyCatID == nil {
 				legacyCatID = req.CategoryID
 			}
 		} else if catHierarchyID != nil && s.catRepo != nil {
-			_, err := s.catRepo.GetByID(ctx, *catHierarchyID)
+			cat, err := s.catRepo.GetByID(ctx, *catHierarchyID)
 			if err != nil {
 				return errors.New("invalid category: category does not exist")
 			}
-			if *catHierarchyID >= 1 && *catHierarchyID <= 11 {
-				legacyCatID = catHierarchyID
-			}
+			legacyCatID = &cat.ID
 		}
 
 		existing.CategoryHierarchyID = catHierarchyID
@@ -736,7 +688,6 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		}
 	}
 
-
 	if priceChanged {
 		if existing.FeePaid && existing.Price > oldPrice {
 			existing.FeePaid = false // Price increased after fee payment — reset fee_paid
@@ -803,7 +754,6 @@ func (s *ProductService) GetByIDAndSeller(ctx context.Context, id, sellerID int)
 	}
 	return s.repo.GetByIDAndSeller(ctx, id, sellerID)
 }
-
 
 // getSettingInt reads an integer setting from DB, returning defaultVal if missing/invalid.
 func (s *ProductService) getSettingInt(ctx context.Context, key string, defaultVal int) int {

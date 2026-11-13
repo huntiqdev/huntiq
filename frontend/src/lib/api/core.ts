@@ -35,6 +35,47 @@ function isTokenExpired(token: string): boolean {
   return payload.exp * 1000 < Date.now() - 10_000;
 }
 
+// Extract Anti-CSRF token from cookie in browser environment
+export function getCSRFToken(): string | null {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(/(?:^|;\s*)huntiq_csrf=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+// Global refresh mutex to prevent duplicate concurrent refresh requests
+let isRefreshing = false;
+let refreshPromise: Promise<boolean> | null = null;
+
+export async function tryRefreshToken(): Promise<boolean> {
+  if (isRefreshing && refreshPromise) {
+    return refreshPromise;
+  }
+  isRefreshing = true;
+  refreshPromise = (async () => {
+    try {
+      const csrf = getCSRFToken();
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (csrf) {
+        headers['X-CSRF-Token'] = csrf;
+      }
+      const res = await fetch(`${API_URL}/auth/refresh`, {
+        method: 'POST',
+        credentials: 'include',
+        headers,
+      });
+      return res.ok;
+    } catch {
+      return false;
+    } finally {
+      isRefreshing = false;
+      refreshPromise = null;
+    }
+  })();
+  return refreshPromise;
+}
+
 // Check if online
 function isOnline(): boolean {
   if (typeof window === 'undefined') return true;
@@ -57,7 +98,23 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
     throw new ApiError('No internet connection', 'NETWORK_OFFLINE', 0);
   }
 
-  const authHeader = (options?.headers as Record<string, string>)?.['Authorization'];
+  const method = (options?.method || 'GET').toUpperCase();
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...(options?.headers as Record<string, string>),
+  };
+
+  // Automatically attach Anti-CSRF token for state-mutating browser requests
+  if (typeof window !== 'undefined' && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+    if (!headers['X-CSRF-Token']) {
+      const csrf = getCSRFToken();
+      if (csrf) {
+        headers['X-CSRF-Token'] = csrf;
+      }
+    }
+  }
+
+  const authHeader = headers['Authorization'];
   if (authHeader?.startsWith('Bearer ')) {
     const token = authHeader.slice(7);
     if (isTokenExpired(token) && typeof window !== 'undefined' && Date.now() - lastRedirect > 5000) {
@@ -72,26 +129,61 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
     }
   }
 
+  const fetchOptions: RequestInit = {
+    credentials: 'include',
+    ...options,
+    headers,
+  };
+
   let lastError: Error | null = null;
   
   // Retry loop
   for (let attempt = 0; attempt <= RETRY_CONFIG.maxRetries; attempt++) {
     try {
-      const res = await fetch(`${API_URL}${endpoint}`, {
-        ...options,
-        headers: { 'Content-Type': 'application/json', ...options?.headers },
-      });
+      const res = await fetch(`${API_URL}${endpoint}`, fetchOptions);
       
       if (!res.ok) {
-        // Handle 401 - unauthorized
-        if (res.status === 401 && typeof window !== 'undefined' && Date.now() - lastRedirect > 5000) {
-          lastRedirect = Date.now();
-          await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
-          const path = window.location.pathname;
-          if (path.startsWith('/admin')) window.location.replace('/admin/login');
-          else if (path.startsWith('/seller')) window.location.replace('/auth?as=seller');
-          else if (path.startsWith('/buyer')) window.location.replace('/auth?as=buyer');
-          else window.location.replace('/auth');
+        // Handle 401 - unauthorized (attempt session rotation once before redirecting)
+        if (res.status === 401) {
+          const isAuthRoute = endpoint.includes('/auth/login') ||
+                              endpoint.includes('/auth/refresh') ||
+                              endpoint.includes('/auth/logout') ||
+                              endpoint.includes('/seller/login') ||
+                              endpoint.includes('/buyer/login') ||
+                              endpoint.includes('/admin/login');
+
+          if (!isAuthRoute && typeof window !== 'undefined' && attempt === 0) {
+            const refreshed = await tryRefreshToken();
+            if (refreshed) {
+              // Rotation succeeded: refresh CSRF header and replay request
+              const newCsrf = getCSRFToken();
+              if (newCsrf && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+                headers['X-CSRF-Token'] = newCsrf;
+              }
+              const retryRes = await fetch(`${API_URL}${endpoint}`, {
+                ...fetchOptions,
+                headers,
+              });
+              if (retryRes.ok) {
+                const json = await retryRes.json();
+                const result = ('data' in json) ? json.data : json;
+                return {
+                  data: (result ?? null) as T,
+                  meta: json.meta as M | undefined,
+                };
+              }
+            }
+          }
+
+          if (typeof window !== 'undefined' && Date.now() - lastRedirect > 5000) {
+            lastRedirect = Date.now();
+            await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
+            const path = window.location.pathname;
+            if (path.startsWith('/admin')) window.location.replace('/admin/login');
+            else if (path.startsWith('/seller')) window.location.replace('/auth?as=seller');
+            else if (path.startsWith('/buyer')) window.location.replace('/auth?as=buyer');
+            else window.location.replace('/auth');
+          }
         }
         
         // Handle 503 - maintenance mode
@@ -175,6 +267,7 @@ export async function fetchAPI<T>(endpoint: string, options?: RequestInit): Prom
   return res.data;
 }
 
-export function authHeaders(token: string) {
+export function authHeaders(token?: string): Record<string, string> {
+  if (!token) return {};
   return { Authorization: `Bearer ${token}` };
 }

@@ -2,8 +2,6 @@ package handlers
 
 import (
 	"context"
-	"crypto/sha256"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -16,9 +14,9 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/service"
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 // timeNow is a package-level variable so tests can override it.
@@ -43,7 +41,6 @@ type ProductHandler struct {
 	svc                  *service.ProductService
 	authSvc              *service.AuthService
 	categoryHierarchySvc *service.CategoryHierarchyService
-	aiClient             *aiclient.Client
 	cache                cache.Cache
 	searchChan           chan searchLogEvent
 	logger               SearchLogger
@@ -65,13 +62,7 @@ func (h *ProductHandler) WithCategoryHierarchy(s *service.CategoryHierarchyServi
 	return h
 }
 
-// WithAIClient attaches the AI service client for intelligent query understanding.
-func (h *ProductHandler) WithAIClient(client *aiclient.Client) *ProductHandler {
-	h.aiClient = client
-	return h
-}
-
-// WithCache attaches the Cache instance for AI query and search acceleration.
+// WithCache attaches the Cache instance for query and search acceleration.
 func (h *ProductHandler) WithCache(c cache.Cache) *ProductHandler {
 	h.cache = c
 	return h
@@ -131,6 +122,12 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 			return response.BadRequest(c, "invalid category_hierarchy_id")
 		}
 		f.CategoryHierarchyID = &id
+	}
+	if f.CategoryHierarchyID == nil && f.CategoryID != nil {
+		f.CategoryHierarchyID = f.CategoryID
+	}
+	if f.CategoryID == nil && f.CategoryHierarchyID != nil {
+		f.CategoryID = f.CategoryHierarchyID
 	}
 	f.IncludeDescendants = true
 	if v := c.Query("include_descendants"); v == "false" || v == "0" {
@@ -219,187 +216,10 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 		f.Page = 1
 	}
 
-	var searchMeta fiber.Map
-	searchMode := strings.ToLower(strings.TrimSpace(c.Query("mode", "manual")))
-	locale := c.Query("locale", "")
-	lang := c.Query("lang", "")
-	if locale == "" && lang != "" {
-		locale = lang
-	}
-	prefLang := c.Query("preferred_language", "")
-	if prefLang == "" {
-		prefLang = locale
-	}
-
-	// Query understanding via internal AI worker (only if searchMode == "ai" and configured)
-	if searchMode == "ai" && f.Search != nil && strings.TrimSpace(*f.Search) != "" && h.aiClient != nil && h.aiClient.IsEnabled() {
-		var aiResp *aiclient.QueryUnderstandingResponse
-		cleanQueryRaw := strings.ToLower(strings.TrimSpace(*f.Search))
-		cacheKey := fmt.Sprintf("huntiq:ai:q:v1:%s:%s:%x", locale, prefLang, sha256.Sum256([]byte(cleanQueryRaw)))
-
-		// 1. Fast Cache Lookup (< 1ms)
-		if h.cache != nil {
-			if cachedBytes, found := h.cache.Get(c.Context(), cacheKey); found {
-				var cached aiclient.QueryUnderstandingResponse
-				if err := json.Unmarshal(cachedBytes, &cached); err == nil {
-					aiResp = &cached
-				}
-			}
-		}
-
-		// 2. Cache miss: Invocate Python AI worker and store for 24 hours
-		if aiResp == nil {
-			params := aiclient.UnderstandQueryParams{
-				Query:             *f.Search,
-				Locale:            locale,
-				Mode:              "ai",
-				PreferredLanguage: prefLang,
-			}
-			if resp, err := h.aiClient.UnderstandQueryWithParams(c.Context(), params); err == nil && resp != nil {
-				aiResp = resp
-				if h.cache != nil {
-					if marshaled, err := json.Marshal(aiResp); err == nil {
-						_ = h.cache.Set(c.Context(), cacheKey, marshaled, 24*time.Hour)
-					}
-				}
-			} else {
-				aiResp = h.aiClient.FallbackUnderstandQuery(params)
-			}
-		}
-
-		if aiResp != nil {
-			searchMeta = fiber.Map{
-				"ai_mode":             true,
-				"normalized_query":    aiResp.NormalizedQuery,
-				"cleaned_search_term": aiResp.CleanedSearchTerm,
-				"sort_by":             aiResp.SortBy,
-				"primary_intent":      aiResp.PrimaryIntent,
-				"localized_answer":    aiResp.LocalizedAnswer,
-				"detected_locale":     aiResp.DetectedLocale,
-				"deep_parameters":     aiResp.DeepParameters,
-				"pii_detected":        aiResp.PIIDetected,
-				"is_safe":             aiResp.IsSafe,
-				"safety_flags":         aiResp.SafetyFlags,
-				"reasoning_chain":      aiResp.ReasoningChain,
-			}
-
-			// Clean search term from conversational filler and noise for database tsquery
-			if aiResp.CleanedSearchTerm != "" {
-				cleanTerm := aiResp.CleanedSearchTerm
-				f.Search = &cleanTerm
-			} else if aiResp.PIIDetected && aiResp.NormalizedQuery != "" {
-				cleanQ := aiResp.NormalizedQuery
-				f.Search = &cleanQ
-			}
-
-			// Sort by extraction from AI signals
-			if f.SortBy == nil && aiResp.SortBy != nil && *aiResp.SortBy != "" {
-				f.SortBy = aiResp.SortBy
-			}
-
-			// Intent-based listing type inference (rent vs sale)
-			if f.ListingType == nil {
-				if aiResp.PrimaryIntent == "rent_property" {
-					lt := "rent"
-					f.ListingType = &lt
-				} else if aiResp.PrimaryIntent == "buy_product" || aiResp.PrimaryIntent == "vehicle_search" {
-					lt := "sale"
-					f.ListingType = &lt
-				}
-			}
-			// Extract price boundaries if not explicitly provided by client
-			if f.MaxPrice == nil && aiResp.ExtractedEntities.PriceRange.MaxPrice != nil {
-				f.MaxPrice = aiResp.ExtractedEntities.PriceRange.MaxPrice
-			}
-			if f.MinPrice == nil && aiResp.ExtractedEntities.PriceRange.MinPrice != nil {
-				f.MinPrice = aiResp.ExtractedEntities.PriceRange.MinPrice
-			}
-			// Extract condition if not explicitly provided
-			if f.Condition == nil && aiResp.ExtractedEntities.Condition != nil {
-				f.Condition = aiResp.ExtractedEntities.Condition
-			}
-			// Extract location if not explicitly provided
-			if f.LocationID == nil && f.LocationHierarchyID == nil && f.Region == nil && f.Subcity == nil && aiResp.ExtractedEntities.Location != nil {
-				locStr := strings.TrimSpace(*aiResp.ExtractedEntities.Location)
-				if locStr != "" {
-					if strings.EqualFold(locStr, "Addis Ababa") || strings.EqualFold(locStr, "Oromia") || strings.EqualFold(locStr, "Amhara") || strings.EqualFold(locStr, "Tigray") {
-						f.Region = &locStr
-					} else {
-						f.Subcity = &locStr
-					}
-				}
-			}
-			// Extract seller tier filter if detected by AI
-			if f.SellerTier == nil && aiResp.ExtractedEntities.Attributes != nil {
-				if stVal, ok := aiResp.ExtractedEntities.Attributes["seller_tier"].(string); ok && stVal != "" {
-					f.SellerTier = &stVal
-				}
-			}
-
-			// Route to suggested top category if client did not select a category
-			if f.CategoryID == nil && f.CategoryHierarchyID == nil && len(aiResp.SuggestedCategoryIDs) > 0 {
-				catID := aiResp.SuggestedCategoryIDs[0]
-				f.CategoryHierarchyID = &catID
-			}
-		} else {
-			// Deterministic Go AI Fallback
-			rawSearch := *f.Search
-			hasIntent, fallbackArgs := aiclient.ParseFallbackSearchArgs(nil, rawSearch)
-			cleanTerm := aiclient.CleanConversationalSearchTerm(rawSearch)
-			if cleanTerm != "" && cleanTerm != "all" && cleanTerm != "products" && cleanTerm != "product" && cleanTerm != "items" {
-				f.Search = &cleanTerm
-			} else {
-				f.Search = nil
-			}
-
-			if hasIntent {
-				if f.Condition == nil {
-					if cond, ok := fallbackArgs["condition"].(string); ok && cond != "" {
-						f.Condition = &cond
-					}
-				}
-				if f.ListingType == nil {
-					if lt, ok := fallbackArgs["listing_type"].(string); ok && lt != "" {
-						f.ListingType = &lt
-					}
-				}
-				if f.MaxPrice == nil {
-					if mp, ok := fallbackArgs["max_price"].(float64); ok && mp > 0 {
-						f.MaxPrice = &mp
-					}
-				}
-				if f.MinPrice == nil {
-					if minP, ok := fallbackArgs["min_price"].(float64); ok && minP > 0 {
-						f.MinPrice = &minP
-					}
-				}
-				if f.LocationID == nil && f.LocationHierarchyID == nil && f.Region == nil && f.Subcity == nil {
-					if loc, ok := fallbackArgs["location"].(string); ok && loc != "" {
-						if strings.EqualFold(loc, "Addis Ababa") || strings.EqualFold(loc, "Oromia") || strings.EqualFold(loc, "Amhara") || strings.EqualFold(loc, "Tigray") {
-							f.Region = &loc
-						} else {
-							f.Subcity = &loc
-						}
-					}
-				}
-			}
-
-			searchMeta = fiber.Map{
-				"ai_mode":             true,
-				"normalized_query":    cleanTerm,
-				"cleaned_search_term": cleanTerm,
-				"primary_intent":      "search_marketplace",
-			}
-		}
-	} else if searchMode == "manual" {
-		searchMeta = fiber.Map{
-			"ai_mode": false,
-		}
-		if f.Search != nil && *f.Search != "" {
-			cleanTerm := aiclient.CleanConversationalSearchTerm(*f.Search)
-			if cleanTerm != "" && cleanTerm != "all" && cleanTerm != "products" && cleanTerm != "product" {
-				f.Search = &cleanTerm
-			}
+	if f.Search != nil && *f.Search != "" {
+		cleanTerm := search.CleanConversationalSearchTerm(*f.Search)
+		if cleanTerm != "" && cleanTerm != "all" && cleanTerm != "products" && cleanTerm != "product" {
+			f.Search = &cleanTerm
 		}
 	}
 
@@ -416,74 +236,11 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 		return response.InternalError(c, err)
 	}
 
-	if searchMeta == nil {
-		searchMeta = fiber.Map{}
-	}
-	searchMeta["total_matching"] = totalMatching
-	searchMeta["returned_count"] = len(products)
-	searchMeta["page"] = f.Page
-	searchMeta["limit"] = f.Limit
-
-	// For count_listings intent, provide accurate grounded count
-	if intentStr, ok := searchMeta["primary_intent"].(string); ok && intentStr == "count_listings" {
-		itemLabel := ""
-		if cl, ok := searchMeta["cleaned_search_term"].(string); ok && cl != "" {
-			itemLabel = aiclient.GetLocalizedEntityTerm(cl, prefLang)
-		} else if f.Search != nil {
-			itemLabel = *f.Search
-		}
-		if itemLabel == "" {
-			itemLabel = "items"
-		}
-		switch prefLang {
-		case "am":
-			searchMeta["localized_answer"] = fmt.Sprintf("በዳታቤዝ ውስጥ በአሁኑ ሰዓት %d ንቁ የ'%s' ዝርዝር ምርቶች ይገኛሉ።", totalMatching, itemLabel)
-		case "om":
-			searchMeta["localized_answer"] = fmt.Sprintf("Kuusaa gabaa keessatti yeroo ammaa oomishaaleen '%s' %d ta'an argamaniiru.", itemLabel, totalMatching)
-		case "ti":
-			searchMeta["localized_answer"] = fmt.Sprintf("ኣብ ዳታቤዝ ዕዳጋ ኣብዚ እዋን %d ንጡፋት ናይ '%s' ዝርዝራት ኣለዉ።", totalMatching, itemLabel)
-		default:
-			searchMeta["localized_answer"] = fmt.Sprintf("Found %d active '%s' listings matching your criteria in the marketplace.", totalMatching, itemLabel)
-		}
-	} else if searchMode == "ai" && totalMatching == 0 {
-		itemLabel := ""
-		if cl, ok := searchMeta["cleaned_search_term"].(string); ok && cl != "" {
-			itemLabel = aiclient.GetLocalizedEntityTerm(cl, prefLang)
-		} else if f.Search != nil {
-			itemLabel = *f.Search
-		}
-		if itemLabel != "" {
-			switch prefLang {
-			case "am":
-				searchMeta["localized_answer"] = fmt.Sprintf("በHUNTIQ ዳታቤዝ ውስጥ ለ'%s' በአሁኑ ሰዓት የሚስማማ የተረጋገጠ ዝርዝር አልተገኘም። እባክዎ የፍለጋ ቃላትን በማስተካከል ወይም የዋጋ ገደቡን በማስፋት ይሞክሩ።", itemLabel)
-			case "om":
-				searchMeta["localized_answer"] = fmt.Sprintf("Kuusaa gabaa HUNTIQ keessatti '%s' tiif yeroo ammaa tarreeffamni walsimu hin argamne. Maaloo jechoota biroo fayyadamuun ykn daangaa gatii jijjiiruun yaalaa.", itemLabel)
-			case "ti":
-				searchMeta["localized_answer"] = fmt.Sprintf("ኣብ ዳታቤዝ HUNTIQ ን'%s' ኣብዚ እዋን ዝሰማማዕ ዝተረጋገፀ ዝርዝር ኣይተረኽበን። በጃኹም ናይ ፍለጋ ቃላት ወይ ደረት ዋጋ ብምስትኻኻል ፈትኑ።", itemLabel)
-			default:
-				searchMeta["localized_answer"] = fmt.Sprintf("I searched our live marketplace database for '%s', but found no approved listings matching those exact criteria right now. You might try searching for broader keywords, adjusting your budget, or checking a different location.", itemLabel)
-			}
-		}
-	} else if searchMode == "ai" && totalMatching > 0 {
-		if ans, ok := searchMeta["localized_answer"].(string); !ok || ans == "" {
-			itemLabel := ""
-			if cl, ok := searchMeta["cleaned_search_term"].(string); ok && cl != "" {
-				itemLabel = aiclient.GetLocalizedEntityTerm(cl, prefLang)
-			}
-			if itemLabel == "" && f.Search != nil {
-				itemLabel = *f.Search
-			}
-			switch prefLang {
-			case "am":
-				searchMeta["localized_answer"] = fmt.Sprintf("በHUNTIQ ዳታቤዝ ውስጥ ለ'%s' %d የተረጋገጡ ዝርዝሮች ተገኝተዋል:", itemLabel, totalMatching)
-			case "om":
-				searchMeta["localized_answer"] = fmt.Sprintf("Kuusaa gabaa HUNTIQ keessatti '%s' tiif tarreeffamoota mirkanaa'an %d argamaniiru:", itemLabel, totalMatching)
-			case "ti":
-				searchMeta["localized_answer"] = fmt.Sprintf("ኣብ ዳታቤዝ HUNTIQ ን'%s' %d ዝተረጋገፁ ዝርዝራት ተረኺቦም ኣለዉ:", itemLabel, totalMatching)
-			default:
-				searchMeta["localized_answer"] = fmt.Sprintf("Found %d verified listings for '%s' in the live marketplace database:", totalMatching, itemLabel)
-			}
-		}
+	searchMeta := fiber.Map{
+		"total_matching": totalMatching,
+		"returned_count": len(products),
+		"page":           f.Page,
+		"limit":          f.Limit,
 	}
 
 	// Resolve requester tier & admin status from context
@@ -538,53 +295,6 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 			atomic.AddUint64(&h.droppedCount, 1)
 		}
 	}
-	// Real-Time Deep Product Market Analysis on actual database listings
-	if searchMeta != nil && len(products) > 0 && h.aiClient != nil {
-		candidates := make([]aiclient.ProductCandidateSummary, 0, len(products))
-		for _, p := range products {
-			var locStr *string
-			if p.Location != nil {
-				l := p.Location.Region
-				if p.Location.Subcity != nil && *p.Location.Subcity != "" {
-					l = *p.Location.Subcity + ", " + l
-				}
-				locStr = &l
-			}
-			candidates = append(candidates, aiclient.ProductCandidateSummary{
-				ID:          p.ID,
-				Title:       p.Title,
-				Price:       p.Price,
-				SellerTier:  p.SellerTier,
-				Condition:   p.Condition,
-				Location:    locStr,
-				ListingType: p.ListingType,
-			})
-		}
-		qStr := ""
-		if f.Search != nil {
-			qStr = *f.Search
-		}
-		analysisReq := aiclient.ProductAnalysisRequest{
-			Query:             qStr,
-			Locale:            locale,
-			PreferredLanguage: prefLang,
-			TotalMatching:     totalMatching,
-			Products:          candidates,
-		}
-		if analysisResp, err := h.aiClient.AnalyzeProducts(c.Context(), analysisReq); err == nil && analysisResp != nil {
-			searchMeta["real_time_analysis"] = analysisResp
-			if analysisResp.MarketVerdict != "" {
-				searchMeta["market_verdict"] = analysisResp.MarketVerdict
-			}
-		} else {
-			// Instantaneous in-process deterministic analysis fallback (< 0.01ms)
-			detResp := aiclient.ComputeDeterministicAnalysis(analysisReq)
-			searchMeta["real_time_analysis"] = detResp
-			if detResp.MarketVerdict != "" {
-				searchMeta["market_verdict"] = detResp.MarketVerdict
-			}
-		}
-	}
 
 	return response.OKListWithMeta(c, products, searchMeta)
 }
@@ -629,7 +339,8 @@ func (h *ProductHandler) Get(c *fiber.Ctx) error {
 
 // GET /api/categories
 func (h *ProductHandler) ListCategories(c *fiber.Ctx) error {
-	cats, err := h.svc.ListCategories(c.Context())
+	lang := c.Query("lang", "en")
+	cats, err := h.svc.ListCategories(c.Context(), lang)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
@@ -756,50 +467,3 @@ func (h *ProductHandler) SellerList(c *fiber.Ctx) error {
 	}
 	return response.OKList(c, products)
 }
-
-// POST /api/products/auto-categorize
-func (h *ProductHandler) AutoCategorize(c *fiber.Ctx) error {
-	var req struct {
-		Title       string `json:"title"`
-		Description string `json:"description"`
-		Locale      string `json:"locale"`
-	}
-	if err := c.BodyParser(&req); err != nil {
-		return response.BadRequest(c, "invalid request body")
-	}
-	if strings.TrimSpace(req.Title) == "" && strings.TrimSpace(req.Description) == "" {
-		return response.BadRequest(c, "title or description is required")
-	}
-
-	locale := req.Locale
-	if locale == "" {
-		locale = "en"
-	}
-
-	var res *aiclient.AutoCategorizeResult
-	var err error
-	if h.aiClient != nil {
-		res, err = h.aiClient.AutoCategorizeProduct(c.Context(), aiclient.AutoCategorizeRequest{
-			Title:       req.Title,
-			Description: req.Description,
-			Locale:      locale,
-		})
-	}
-	if res == nil || err != nil {
-		res = aiclient.FallbackAutoCategorize(aiclient.AutoCategorizeRequest{
-			Title:       req.Title,
-			Description: req.Description,
-			Locale:      locale,
-		})
-	}
-
-	// Enrich with real database CategoryHierarchyID if available
-	if h.categoryHierarchySvc != nil && res.CategorySlug != "" {
-		if cat, err := h.categoryHierarchySvc.GetBySlug(c.Context(), res.CategorySlug, locale); err == nil && cat != nil {
-			res.CategoryHierarchyID = cat.ID
-		}
-	}
-
-	return response.OK(c, res)
-}
-

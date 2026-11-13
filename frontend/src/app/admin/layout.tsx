@@ -47,7 +47,8 @@ function AdminSidebar() {
       title: 'LISTINGS & CATALOG',
       links: [
         { href: '/admin/products',  label: 'Products & Rentals', icon: Package,   visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || isModerator || hasAdminPermission('pending') || hasAdminPermission('products') },
-        { href: '/admin/categories',label: 'Categories',          icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
+        { href: '/admin/classification', label: 'Universal Classification', icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
+        { href: '/admin/categories',label: 'Legacy Categories', icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
         { href: '/admin/attributes', label: 'Attributes',         icon: Tag,        visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
         { href: '/admin/locations', label: 'Locations & GPS',     icon: MapPin,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('locations') || hasAdminPermission('categories') },
         { href: '/admin/search',    label: 'Search Analytics',    icon: Search,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('analytics') },

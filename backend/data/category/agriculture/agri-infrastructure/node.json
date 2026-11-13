@@ -1,0 +1,10 @@
+{
+  "name": {
+    "en": "Agricultural Infrastructure",
+    "am": "የእርሻ መሠረተ ልማት",
+    "om": "Bu'aa Qonnaa",
+    "ti": "መሰረት ሕርሻ"
+  },
+  "icon": "Warehouse",
+  "description": "Storage, warehousing, transport, logistics, and farm physical infrastructure."
+}

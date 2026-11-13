@@ -96,6 +96,10 @@ func (m *Middleware) RequireAuth(c *fiber.Ctx) error {
 	header := c.Get("Authorization")
 	if strings.HasPrefix(header, "Bearer ") {
 		token = strings.TrimPrefix(header, "Bearer ")
+	} else if cookie := c.Cookies("huntiq_session"); cookie != "" {
+		token = cookie
+	} else if cookie := c.Cookies("hm_token"); cookie != "" {
+		token = cookie
 	} else if cookie := c.Cookies("hm_admin_session"); cookie != "" {
 		token = cookie
 	}
@@ -190,6 +194,10 @@ func (m *Middleware) OptionalAuth(c *fiber.Ctx) error {
 	header := c.Get("Authorization")
 	if strings.HasPrefix(header, "Bearer ") {
 		token = strings.TrimPrefix(header, "Bearer ")
+	} else if cookie := c.Cookies("huntiq_session"); cookie != "" {
+		token = cookie
+	} else if cookie := c.Cookies("hm_token"); cookie != "" {
+		token = cookie
 	} else if cookie := c.Cookies("hm_admin_session"); cookie != "" {
 		token = cookie
 	}

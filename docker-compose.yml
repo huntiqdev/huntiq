@@ -18,6 +18,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - internal-net
 
   # ── Redis (High-Speed Cache & Worker Queue) ─────────────────────────
   redis:
@@ -34,21 +36,6 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
-
-  # ── Ollama Local AI Runtime ─────────────────────────────────────────
-  ollama:
-    image: ollama/ollama:latest
-    container_name: huntiq-ollama
-    restart: unless-stopped
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://127.0.0.1:11434/api/tags || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
     networks:
       - internal-net
 
@@ -69,9 +56,6 @@ services:
       DB_NAME: ${DB_NAME:-hulubedej_db}
       DB_SSLMODE: disable
       REDIS_ADDR: redis:6379
-      AI_PROVIDER: ollama
-      OLLAMA_URL: http://ollama:11434
-      OLLAMA_MODEL: ${OLLAMA_MODEL:-huntiq-assistant:latest}
       JWT_SECRET: ${JWT_SECRET:-super-secure-production-jwt-secret-at-least-32-chars!}
       OTP_ENCRYPT_KEY: ${OTP_ENCRYPT_KEY:-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}
       ALLOW_ORIGIN: ${ALLOW_ORIGIN:-http://localhost:3000}
@@ -86,13 +70,11 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      ollama:
-        condition: service_healthy
     networks:
       - internal-net
       - public-net
 
-  # ── Next.js 15 Frontend ─────────────────────────────────────────────
+  # ── Next.js 16 Frontend ─────────────────────────────────────────────
   frontend:
     build:
       context: ./frontend
@@ -121,4 +103,3 @@ volumes:
   postgres_data:
   redis_data:
   uploads_data:
-  ollama_data:

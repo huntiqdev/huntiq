@@ -22,4 +22,3 @@ type Location struct {
 	WoredaTi  *string   `json:"woreda_ti,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 }
-

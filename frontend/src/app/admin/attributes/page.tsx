@@ -31,8 +31,6 @@ export default function AttributesAdminPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => { fetchAttributes(); }, []);
-
   const fetchAttributes = async () => {
     setLoading(true);
     try {
@@ -41,6 +39,8 @@ export default function AttributesAdminPage() {
       if (data.success) setAttributes(data.data || []);
     } catch { setAttributes([]); } finally { setLoading(false); }
   };
+
+  useEffect(() => { fetchAttributes(); }, []);
 
   const autoSlug = (name: string) =>
     name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();

@@ -17,7 +17,6 @@ import (
 	"github.com/your-org/used-tools-marketplace/pkg/constants"
 )
 
-
 // sanitizeLog removes newlines and carriage returns from user input before logging
 // to prevent log injection attacks (CWE-117).
 func sanitizeLog(s string) string {
@@ -268,7 +267,6 @@ func (r *UserRepo) GetByEmail(ctx context.Context, email string) (*models.User, 
 	}
 	return u, err
 }
-
 
 // GetAdminByEmail is a safe version for admin login that handles missing/null enum columns gracefully.
 func (r *UserRepo) GetAdminByEmail(ctx context.Context, email string) (*models.User, error) {
@@ -1041,7 +1039,7 @@ func (r *UserRepo) ListActivityLogs(ctx context.Context, f ActivityLogFilter) ([
 		return nil, 0, err
 	}
 	defer rows.Close()
-	
+
 	var out []ActivityLog
 	for rows.Next() {
 		var e ActivityLog

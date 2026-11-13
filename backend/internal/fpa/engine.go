@@ -257,7 +257,7 @@ func generateReportInternal(cfg FullScenarioConfig, delayMonths int, includeShoc
 
 		// Aggregate into annual summary blocks
 		if m%12 == 0 || m == horizon {
-			yearNum := (m - 1) / 12 + 1
+			yearNum := (m-1)/12 + 1
 			startIdx := (yearNum - 1) * 12
 			endIdx := m
 

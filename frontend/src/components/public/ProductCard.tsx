@@ -11,13 +11,13 @@ import { BuyModal } from '@/components/public/BuyModal';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 import { resolveImageUrl, isUnoptimized } from '@/lib/utils/imageUrl';
-import { getCategoryLabel } from '@/lib/taxonomy';
+import { resolveCategoryTitle } from '@/lib/taxonomy';
 
 interface Props { product: Product }
 
 // ── Tier badge helpers ────────────────────────────────────────────────────────
 const TIER_BADGE: Record<string, { label: string; cls: string }> = {
-  gold:    { label: 'G', cls: 'bg-yellow-500 text-white' },
+  gold: { label: 'G', cls: 'bg-yellow-500 text-white' },
   premium: { label: 'P', cls: 'bg-purple-600 text-white' },
 };
 
@@ -27,11 +27,10 @@ function TierSpecBadge({ tier }: { tier?: string }) {
   const isGold = tier === 'gold';
   return (
     <div
-      className={`absolute top-1 right-1 z-10 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider flex items-center gap-0.5 shadow-sm ${
-        isGold
-          ? 'bg-amber-500 text-white'
-          : 'bg-purple-600 text-white'
-      }`}
+      className={`absolute top-1 right-1 z-10 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider flex items-center gap-0.5 shadow-sm ${isGold
+        ? 'bg-amber-500 text-white'
+        : 'bg-purple-600 text-white'
+        }`}
     >
       <Lock size={7} />
       <span>{isGold ? 'Gold' : 'Premium'}</span>
@@ -60,7 +59,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
         {/* Image carousel */}
         <div className="relative aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 shrink-0">
           {images.length > 0 ? (
-          <Image src={resolveImageUrl(images[imgIdx]?.image_url)}
+            <Image src={resolveImageUrl(images[imgIdx]?.image_url)}
               alt={product.title} fill
               unoptimized={isUnoptimized(resolveImageUrl(images[imgIdx]?.image_url))}
               className="object-cover"
@@ -110,8 +109,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
             )}
             {product.subcategory && (
               <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 bg-purple-600/10 px-2.5 py-1 rounded-lg">
-                {((product as any).category_hierarchy_id && getCategoryLabel((product as any).category_hierarchy_id, locale))
-                  || product.subcategory.replace(/_/g, ' ')}
+                {(product as any).category ? resolveCategoryTitle((product as any).category, locale) : product.subcategory.replace(/_/g, ' ')}
               </span>
             )}
             <span className="text-[10px] font-black uppercase tracking-widest bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-lg capitalize">
@@ -139,11 +137,10 @@ function DetailDrawer({ product, onClose, onBuy }: {
         {/* Pinned Priority Action Bar */}
         <div className="shrink-0 p-4 border-t border-zinc-100 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur flex gap-3 pb-[max(16px,env(safe-area-inset-bottom,16px))]">
           <button type="button" onClick={onBuy}
-            className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md ${
-              product.listing_type === 'rent'
-                ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25'
-                : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/25'
-            }`}>
+            className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md ${product.listing_type === 'rent'
+              ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25'
+              : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/25'
+              }`}>
             <ShoppingBag size={16} />
             {product.listing_type === 'rent' ? (t.ui.rent_now ?? 'Rent / Contact Landlord') : t.ui.buy_now}
           </button>

@@ -2,7 +2,7 @@ package validations
 
 // DEPRECATED: This validation package uses hardcoded limits and is NOT used in production code.
 // The service layer (product_service.go) reads limits from platform_settings instead.
-// 
+//
 // These functions remain for backward compatibility only. Do NOT use them for new features.
 
 const (

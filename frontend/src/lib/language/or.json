@@ -34,30 +34,7 @@
     "verified_ethiopian_listings": "Gabaa Mirkanaa’aa • 100% Tarreewwan Itoophiyaa"
   },
   "categories": {
-    "all": "Hunduu",
-    "electronics": "Elektrooniksii",
-    "vehicles": "Makiinaawwan",
-    "property": "Qabeenya",
-    "home_appliances": "Meeshaalee Manaa",
-    "furniture": "Meetubelaawwan",
-    "clothing": "Uffata",
-    "fashion": "Faashinii",
-    "agriculture": "Qonnaa",
-    "industry": "Industirii",
-    "construction": "Ijaarsa",
-    "services": "Tajaajila",
-    "jobs": "Hojii",
-    "animals": "Bineeldoota",
-    "food": "Nyaata",
-    "health_beauty": "Fayyaa & Miidhagina",
-    "sports": "Isportii",
-    "education": "Barnoota",
-    "entertainment": "Ragadhaa",
-    "business": "Daldala",
-    "luxury": "Qabeenya Gatiin Ol'aanaa",
-    "tools": "Meeshaalee",
-    "misc": "Kan Biroo",
-    "other": "Other"
+    "all": "Hunduu"
   },
   "sellerHelp": {
     "title": "Gara Giddugala Gargaarsaa fi Qajeelfama Gabaa",
@@ -1045,7 +1022,7 @@
       "title": "Developeraa Quunnami",
       "name": "Zemenu",
       "email": "zemenuyes1@gmail.com",
-      "phone": "0930897652",
+      "phone": "0916238799",
       "available": "Project development fudhachuuf"
     },
     "rate": {

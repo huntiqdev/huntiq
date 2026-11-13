@@ -1,0 +1,22 @@
+{
+  "name": {
+    "en": "Potato Farming",
+    "am": "የድንች እርባታ",
+    "om": "Qonna Dinnichaa",
+    "ti": "ድንሽ ሕርሻ"
+  },
+  "aliases": {
+    "en": [
+      "potato"
+    ],
+    "am": [
+      "ድንች"
+    ],
+    "om": [
+      "dinnichaa"
+    ],
+    "ti": [
+      "ድንሽ"
+    ]
+  }
+}

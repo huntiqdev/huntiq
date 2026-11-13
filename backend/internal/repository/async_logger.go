@@ -62,12 +62,12 @@ func (al *AsyncLogger) Close() {
 // worker runs in background, batching and flushing logs to DB.
 func (al *AsyncLogger) worker() {
 	defer close(al.done)
-	
+
 	ticker := time.NewTicker(1 * time.Second)
 	defer ticker.Stop()
-	
+
 	batch := make([]AsyncActivityLog, 0, 100)
-	
+
 	for {
 		select {
 		case entry, ok := <-al.logChan:
@@ -78,13 +78,13 @@ func (al *AsyncLogger) worker() {
 				}
 				return
 			}
-			
+
 			batch = append(batch, entry)
 			if len(batch) >= 100 {
 				al.flushBatch(batch)
 				batch = batch[:0]
 			}
-			
+
 		case <-ticker.C:
 			// Periodic flush (every second)
 			if len(batch) > 0 {
@@ -143,4 +143,3 @@ func (al *AsyncLogger) flushBatch(batch []AsyncActivityLog) {
 		log.Printf("[ERROR] Failed to flush activity logs batch (size=%d)", len(batch))
 	}
 }
-

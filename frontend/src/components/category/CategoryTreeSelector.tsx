@@ -44,6 +44,7 @@ interface CategoryTreeSelectorProps {
   value?: number;
   onChange: (categoryId: number, category: CategoryNode) => void;
   language?: string;
+  schemeCode?: string;
   placeholder?: string;
   className?: string;
 }
@@ -52,6 +53,7 @@ export default function CategoryTreeSelector({
   value,
   onChange,
   language = 'en',
+  schemeCode = 'SYS_PROD',
   placeholder = 'Select a category branch...',
   className = '',
 }: CategoryTreeSelectorProps) {
@@ -72,15 +74,35 @@ export default function CategoryTreeSelector({
   const fetchCategories = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await api.getCategoryTree(language);
-      setCategories(Array.isArray(data) ? data : []);
+      let data: any[] = [];
+      try {
+        data = await api.getTree(schemeCode, language, 4);
+      } catch {
+        data = await api.getCategoryTree(language);
+      }
+
+      const normalize = (n: any): CategoryNode => ({
+        id: n.id,
+        name: n.name || n.name_en || n.canonical_name || '',
+        name_en: n.name_en || n.canonical_name || '',
+        name_am: n.name_am,
+        name_om: n.name_om,
+        name_ti: n.name_ti,
+        slug: n.slug,
+        level: n.depth ?? n.level ?? 0,
+        is_leaf: n.is_leaf ?? (!n.children || n.children.length === 0),
+        count: n.product_count ?? n.count ?? 0,
+        children: Array.isArray(n.children) ? n.children.map(normalize) : undefined,
+      });
+
+      setCategories((Array.isArray(data) ? data : []).map(normalize));
     } catch (error) {
       console.error('Failed to fetch categories:', error);
       setCategories([]);
     } finally {
       setLoading(false);
     }
-  }, [language]);
+  }, [schemeCode, language]);
 
   useEffect(() => {
     fetchCategories();

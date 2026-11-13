@@ -4,14 +4,14 @@ import "time"
 
 // ReferralStats contains referral dashboard data
 type ReferralStats struct {
-	ReferralCode          string
-	ReferralLink          string
-	ReferralSuspended     bool
-	InvitedCount          int
-	TotalCommission       float64
-	InvitationAcceptedAt  *time.Time
-	InviterCode           string
-	InviterName           string
+	ReferralCode         string
+	ReferralLink         string
+	ReferralSuspended    bool
+	InvitedCount         int
+	TotalCommission      float64
+	InvitationAcceptedAt *time.Time
+	InviterCode          string
+	InviterName          string
 }
 
 // CommissionEntry represents a single commission record
@@ -64,14 +64,14 @@ type OTPRecord struct {
 
 // ActivityLog represents a user activity log entry
 type ActivityLog struct {
-	ID         int
-	Event      string
-	Phone      string
-	Email      string
-	UserType   string
-	IPAddress  string
-	Meta       string
-	CreatedAt  time.Time
+	ID        int
+	Event     string
+	Phone     string
+	Email     string
+	UserType  string
+	IPAddress string
+	Meta      string
+	CreatedAt time.Time
 }
 
 // ActivityLogEntry is an alias for ActivityLog (used in admin panel)
@@ -102,15 +102,15 @@ type ReferralBalance struct {
 
 // InvitationRequest represents a pending invitation
 type InvitationRequest struct {
-	ID                  int
-	UserID              int
-	InviterCode         string
+	ID                   int
+	UserID               int
+	InviterCode          string
 	InviterCodeSubmitted string
-	Status              string
-	RejectReason        string
-	RequestedAt         time.Time
-	CreatedAt           time.Time
-	ProcessedAt         *time.Time
+	Status               string
+	RejectReason         string
+	RequestedAt          time.Time
+	CreatedAt            time.Time
+	ProcessedAt          *time.Time
 }
 
 // UserBalance for referral balance

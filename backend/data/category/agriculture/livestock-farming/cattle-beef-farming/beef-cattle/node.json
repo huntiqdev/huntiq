@@ -1,0 +1,23 @@
+{
+  "name": {
+    "en": "Beef Cattle",
+    "am": "የስጋ ከብት",
+    "om": "Loon Foonaa",
+    "ti": "ከብቲ ስጋ"
+  },
+  "aliases": {
+    "en": [
+      "beef cattle",
+      "cattle"
+    ],
+    "am": [
+      "የስጋ ከብት"
+    ],
+    "om": [
+      "loon foonaa"
+    ],
+    "ti": [
+      "ከብቲ ስጋ"
+    ]
+  }
+}

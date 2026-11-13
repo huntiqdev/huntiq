@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/service"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
 	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
@@ -138,16 +138,16 @@ func (h *SellerHandler) UpdatePreference(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	validPrefs := map[string]bool{"sale": true, "rent": true, "both": true}
 	if !validPrefs[body.SellerPreference] {
 		return response.BadRequest(c, "seller_preference must be 'sale', 'rent', or 'both'")
 	}
-	
+
 	if err := h.svc.UpdatePreference(c.Context(), sellerID, body.SellerPreference); err != nil {
 		return response.InternalError(c, err)
 	}
-	
+
 	return response.OK(c, fiber.Map{"message": "preference updated"})
 }
 

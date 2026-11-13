@@ -398,16 +398,16 @@ func (h *AdminHandler) GetSettings(c *fiber.Ctx) error {
 // Any key not in this map is rejected to prevent arbitrary data injection.
 var validSettingKeys = map[string]bool{
 	// Fee configuration
-	"broker_fee_rate":           true,
-	"referral_commission_rate":  true,
-	"min_referral_withdrawal":   true,
-	"normal_startup_fee":        true,
-	"gold_startup_fee":          true,
-	"premium_startup_fee":       true,
-	"normal_weekly_increment":   true,
-	"gold_weekly_increment":     true,
-	"premium_weekly_increment":  true,
-	"listing_free_weeks":        true,
+	"broker_fee_rate":          true,
+	"referral_commission_rate": true,
+	"min_referral_withdrawal":  true,
+	"normal_startup_fee":       true,
+	"gold_startup_fee":         true,
+	"premium_startup_fee":      true,
+	"normal_weekly_increment":  true,
+	"gold_weekly_increment":    true,
+	"premium_weekly_increment": true,
+	"listing_free_weeks":       true,
 	// Image limits
 	"normal_max_images":      true,
 	"gold_max_images":        true,
@@ -1499,7 +1499,7 @@ func (h *AdminHandler) RepairSystemHealth(c *fiber.Ctx) error {
 		return err
 	}
 	var req struct {
-		Action            string         `json:"action"`
+		Action             string         `json:"action"`
 		MissingAdminEmails map[int]string `json:"missing_admin_emails"`
 	}
 	if err := c.BodyParser(&req); err != nil {
@@ -1560,12 +1560,12 @@ func (h *AdminHandler) GetFailedJobs(c *fiber.Ctx) error {
 func (h *AdminHandler) ListVerificationDocuments(c *fiber.Ctx) error {
 	status := c.Query("status", "pending")
 	page, limit := parsePagination(c, 50, 100)
-	
+
 	docs, total, err := h.svc.ListVerificationDocuments(c.Context(), status, page, limit)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"data":    docs,
@@ -1583,12 +1583,12 @@ func (h *AdminHandler) ReviewVerificationDocument(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	docID, err := parseIDParam(c, "id")
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Approved bool   `json:"approved"`
 		Reason   string `json:"reason"`
@@ -1597,11 +1597,11 @@ func (h *AdminHandler) ReviewVerificationDocument(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	if err := h.svc.ReviewVerificationDocument(c.Context(), docID, adminID, body.Approved, body.Reason, body.Notes); err != nil {
 		return response.InternalError(c, err)
 	}
-	
+
 	// Log the action
 	action := "approve_verification"
 	if !body.Approved {
@@ -1613,7 +1613,7 @@ func (h *AdminHandler) ReviewVerificationDocument(c *fiber.Ctx) error {
 		Notes:     fmt.Sprintf("Document ID: %d, Reason: %s", docID, body.Reason),
 		IPAddress: c.IP(),
 	})
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "document reviewed successfully",
 	})
@@ -1630,12 +1630,12 @@ func (h *AdminHandler) ListAbuseReports(c *fiber.Ctx) error {
 		ReportedUserID: parseQueryInt(c, "reported_user_id", 0),
 	}
 	filter.Page, filter.Limit = parsePagination(c, 50, 100)
-	
+
 	reports, total, err := h.svc.ListAbuseReports(c.Context(), filter)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"data":    reports,
@@ -1653,12 +1653,12 @@ func (h *AdminHandler) ReviewAbuseReport(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	reportID, err := parseIDParam(c, "id")
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Status      string `json:"status"` // 'investigating', 'resolved', 'dismissed'
 		ActionTaken string `json:"action_taken"`
@@ -1671,15 +1671,15 @@ func (h *AdminHandler) ReviewAbuseReport(c *fiber.Ctx) error {
 	if body.ActionTaken == "" && body.Action != "" {
 		body.ActionTaken = body.Action
 	}
-	
+
 	if body.Status == "" {
 		return response.BadRequest(c, "status is required")
 	}
-	
+
 	if err := h.svc.ReviewAbuseReport(c.Context(), reportID, adminID, body.Status, body.ActionTaken, body.Notes); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
-	
+
 	// Log the action
 	h.svc.InsertAdminLog(c.Context(), models.AdminLog{
 		AdminID:   adminID,
@@ -1687,7 +1687,7 @@ func (h *AdminHandler) ReviewAbuseReport(c *fiber.Ctx) error {
 		Notes:     fmt.Sprintf("Report ID: %d, Status: %s, Action: %s", reportID, body.Status, body.ActionTaken),
 		IPAddress: c.IP(),
 	})
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "abuse report reviewed successfully",
 	})
@@ -1699,18 +1699,18 @@ func (h *AdminHandler) UpdateAbuseReportPriority(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Priority string `json:"priority"` // 'low', 'normal', 'high', 'critical'
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	if err := h.svc.UpdateAbuseReportPriority(c.Context(), reportID, body.Priority); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "priority updated successfully",
 	})
@@ -1725,12 +1725,12 @@ func (h *AdminHandler) ListRefundRequests(c *fiber.Ctx) error {
 		RequesterRole: c.Query("requester_role", "all"),
 	}
 	filter.Page, filter.Limit = parsePagination(c, 50, 100)
-	
+
 	refunds, total, err := h.svc.ListRefundRequests(c.Context(), filter)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"data":    refunds,
@@ -1748,12 +1748,12 @@ func (h *AdminHandler) ReviewRefundRequest(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	refundID, err := parseIDParam(c, "id")
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Approved bool   `json:"approved"`
 		Reason   string `json:"reason"`
@@ -1761,11 +1761,11 @@ func (h *AdminHandler) ReviewRefundRequest(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	if err := h.svc.ReviewRefundRequest(c.Context(), refundID, adminID, body.Approved, body.Reason); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
-	
+
 	// Log the action
 	action := "approve_refund"
 	if !body.Approved {
@@ -1777,7 +1777,7 @@ func (h *AdminHandler) ReviewRefundRequest(c *fiber.Ctx) error {
 		Notes:     fmt.Sprintf("Refund ID: %d, Reason: %s", refundID, body.Reason),
 		IPAddress: c.IP(),
 	})
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "refund request reviewed successfully",
 	})
@@ -1789,27 +1789,27 @@ func (h *AdminHandler) MarkRefundProcessed(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	refundID, err := parseIDParam(c, "id")
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Reference string `json:"reference"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	if body.Reference == "" {
 		return response.BadRequest(c, "refund reference is required")
 	}
-	
+
 	if err := h.svc.MarkRefundProcessed(c.Context(), refundID, body.Reference); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
-	
+
 	// Log the action
 	h.svc.InsertAdminLog(c.Context(), models.AdminLog{
 		AdminID:   adminID,
@@ -1817,7 +1817,7 @@ func (h *AdminHandler) MarkRefundProcessed(c *fiber.Ctx) error {
 		Notes:     fmt.Sprintf("Refund ID: %d, Reference: %s", refundID, body.Reference),
 		IPAddress: c.IP(),
 	})
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "refund marked as processed",
 	})
@@ -1833,12 +1833,12 @@ func (h *AdminHandler) ListAccountAppeals(c *fiber.Ctx) error {
 		UserID:     parseQueryInt(c, "user_id", 0),
 	}
 	filter.Page, filter.Limit = parsePagination(c, 50, 100)
-	
+
 	appeals, total, err := h.svc.ListAccountAppeals(c.Context(), filter)
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	
+
 	return c.JSON(fiber.Map{
 		"success": true,
 		"data":    appeals,
@@ -1856,12 +1856,12 @@ func (h *AdminHandler) ReviewAccountAppeal(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	appealID, err := parseIDParam(c, "id")
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Approved    bool   `json:"approved"`
 		Decision    string `json:"decision"`
@@ -1870,15 +1870,15 @@ func (h *AdminHandler) ReviewAccountAppeal(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	if body.Decision == "" {
 		return response.BadRequest(c, "decision is required")
 	}
-	
+
 	if err := h.svc.ReviewAccountAppeal(c.Context(), appealID, adminID, body.Approved, body.Decision, body.ActionTaken); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
-	
+
 	// Log the action
 	action := "approve_appeal"
 	if !body.Approved {
@@ -1890,7 +1890,7 @@ func (h *AdminHandler) ReviewAccountAppeal(c *fiber.Ctx) error {
 		Notes:     fmt.Sprintf("Appeal ID: %d, Decision: %s, Action: %s", appealID, body.Decision, body.ActionTaken),
 		IPAddress: c.IP(),
 	})
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "appeal reviewed successfully",
 	})
@@ -1902,18 +1902,18 @@ func (h *AdminHandler) UpdateAppealStatus(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-	
+
 	var body struct {
 		Status string `json:"status"` // 'pending', 'under_review', 'approved', 'rejected'
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	
+
 	if err := h.svc.UpdateAppealStatus(c.Context(), appealID, body.Status); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
-	
+
 	return response.OK(c, fiber.Map{
 		"message": "appeal status updated successfully",
 	})

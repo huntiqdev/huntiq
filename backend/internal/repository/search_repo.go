@@ -18,13 +18,13 @@ func NewSearchRepo(db *pgxpool.Pool) *SearchRepo {
 // LogSearch records a search query for analytics
 func (r *SearchRepo) LogSearch(ctx context.Context, query string, resultCount int, categoryID *int, filters map[string]interface{}, userID *int, sessionID, ipAddress string) error {
 	filtersJSON, _ := json.Marshal(filters)
-	
+
 	normalizedQuery := ""
 	err := r.db.QueryRow(ctx, `SELECT normalize_query($1)`, query).Scan(&normalizedQuery)
 	if err != nil {
 		normalizedQuery = query
 	}
-	
+
 	_, err = r.db.Exec(ctx, `
 		INSERT INTO search_analytics (
 			query, normalized_query, result_count, category_id,
@@ -33,7 +33,7 @@ func (r *SearchRepo) LogSearch(ctx context.Context, query string, resultCount in
 		query, normalizedQuery, resultCount, categoryID,
 		filtersJSON, userID, sessionID, ipAddress,
 	)
-	
+
 	return err
 }
 
@@ -44,7 +44,7 @@ func (r *SearchRepo) LogClick(ctx context.Context, query string, productID int, 
 	if normalizedQuery == "" {
 		normalizedQuery = query
 	}
-	
+
 	_, err := r.db.Exec(ctx, `
 		UPDATE search_analytics
 		SET clicked_product_id = $1, clicked_position = $2
@@ -59,7 +59,7 @@ func (r *SearchRepo) LogClick(ctx context.Context, query string, productID int, 
 		)`,
 		productID, position, normalizedQuery, userID, sessionID,
 	)
-	
+
 	return err
 }
 
@@ -73,17 +73,17 @@ func (r *SearchRepo) GetPopularSearches(ctx context.Context, limit int) ([]map[s
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	var results []map[string]interface{}
 	for rows.Next() {
 		var query string
 		var searchCount, clicks int
 		var avgResults, ctr float64
-		
+
 		if err := rows.Scan(&query, &searchCount, &avgResults, &clicks, &ctr); err != nil {
 			continue
 		}
-		
+
 		results = append(results, map[string]interface{}{
 			"query":        query,
 			"search_count": searchCount,
@@ -92,7 +92,7 @@ func (r *SearchRepo) GetPopularSearches(ctx context.Context, limit int) ([]map[s
 			"ctr_percent":  ctr,
 		})
 	}
-	
+
 	return results, rows.Err()
 }
 
@@ -106,22 +106,22 @@ func (r *SearchRepo) GetZeroResultQueries(ctx context.Context, limit int) ([]map
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	var results []map[string]interface{}
 	for rows.Next() {
 		var query, normalized string
 		var count int
-		
+
 		if err := rows.Scan(&query, &normalized, &count); err != nil {
 			continue
 		}
-		
+
 		results = append(results, map[string]interface{}{
 			"query":            query,
 			"normalized_query": normalized,
 			"occurrence_count": count,
 		})
 	}
-	
+
 	return results, rows.Err()
 }

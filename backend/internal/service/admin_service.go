@@ -306,7 +306,8 @@ func (s *AdminService) RejectListingFeePayment(ctx context.Context, productID, a
 
 // ── Profit (Super Admin Only) ─────────────────────────────────────────────────
 
-func (s *AdminService) ProfitSummary(ctx context.Context) (map[string]interface{}, error) {	return s.repo.ProfitSummary(ctx)
+func (s *AdminService) ProfitSummary(ctx context.Context) (map[string]interface{}, error) {
+	return s.repo.ProfitSummary(ctx)
 }
 
 func (s *AdminService) ProfitByTier(ctx context.Context) ([]map[string]interface{}, error) {

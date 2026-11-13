@@ -1,0 +1,22 @@
+{
+  "name": {
+    "en": "Wheat Farming",
+    "am": "የስንዴ እርባታ",
+    "om": "Qonna Qamadii",
+    "ti": "ስርናይ ሕርሻ"
+  },
+  "aliases": {
+    "en": [
+      "wheat"
+    ],
+    "am": [
+      "ስንዴ"
+    ],
+    "om": [
+      "qamadii"
+    ],
+    "ti": [
+      "ስርናይ"
+    ]
+  }
+}

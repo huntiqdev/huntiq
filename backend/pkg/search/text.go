@@ -1,15 +1,48 @@
 // Package search provides language-agnostic text utilities for Ethiopian marketplace
-// search query processing. It is intentionally AI-free and has no dependency on the
-// aiclient package so that repositories, services, and handlers can import it without
-// pulling in any AI-specific types or infrastructure.
+// search query processing, text normalization, and search term cleaning.
+//
+// Search synonym data is loaded from a JSON config file (search_config.json)
+// at application startup via LoadSearchConfig(). No category names, product
+// terms, or synonym groups are hardcoded in Go source code.
 package search
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 	"regexp"
 	"sort"
 	"strings"
 )
+
+// SearchConfig holds the runtime-loaded search enhancement data.
+// This is populated from data/taxonomy/search_config.json at startup.
+type SearchConfig struct {
+	EthiopianKeywordMap     map[string]string `json:"ethiopian_keyword_map"`
+	SynonymGroups           [][]string        `json:"synonym_groups"`
+	KnownEthiopianLocations []string          `json:"known_ethiopian_locations"`
+}
+
+// searchConfig is the runtime config. Functions fall back to empty/no-op
+// behavior when the config has not been loaded yet.
+var searchConfig = &SearchConfig{
+	EthiopianKeywordMap:     map[string]string{},
+	SynonymGroups:           [][]string{},
+	KnownEthiopianLocations: []string{},
+}
+
+// LoadSearchConfig reads the search config JSON file and populates the
+// runtime searchConfig. Call this once at application startup.
+func LoadSearchConfig(filePath string) error {
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return fmt.Errorf("read search config %s: %w", filePath, err)
+	}
+	if err := json.Unmarshal(data, searchConfig); err != nil {
+		return fmt.Errorf("parse search config %s: %w", filePath, err)
+	}
+	return nil
+}
 
 // ContainsGeez returns true if s contains any Ethiopic / Ge'ez Unicode code points (U+1200–U+137F).
 func ContainsGeez(s string) bool {
@@ -21,14 +54,6 @@ func ContainsGeez(s string) bool {
 	return false
 }
 
-// knownEthiopianLocations is used to strip location tokens from search queries.
-var knownEthiopianLocations = []string{
-	"bole", "piassa", "merkato", "kazanchis", "megenagna", "cmc", "sarbet", "gerji",
-	"jomo", "summit", "yeka", "kirkos", "arada", "gullele", "kolfe", "nifas silk",
-	"addis ababa", "hawassa", "adama", "bahir dar", "gondar", "mekelle", "dire dawa",
-	"jimma", "dessie", "assosa", "shashamane", "arba minch", "harar",
-}
-
 var (
 	rxPriceUnder = regexp.MustCompile(`(?i)(?:under|below|less than|max(?:imum)?|up to|ከ|በታች|hanga)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
 	rxPriceAbove = regexp.MustCompile(`(?i)(?:above|over|more than|min(?:imum)?|starting from|ከ|በላይ)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
@@ -36,56 +61,17 @@ var (
 	rxPriceETB   = regexp.MustCompile(`(?i)\b(\d+(?:,\d+)*(?:\.\d+)?)\s*(?:etb|birr)\b`)
 )
 
-// ethiopianKeywordMap maps Ethiopian-language product terms to canonical English equivalents.
-var ethiopianKeywordMap = map[string]string{
-	"ስልክ": "phone", "ሞባይል": "phone", "ስማርትፎን": "phone", "አይፎን": "phone", "ሳምሰንግ": "phone",
-	"bilbila": "phone", "moobaayilii": "phone", "ስልኪ": "phone",
-	"መኪና": "car", "ተሽከርካሪ": "car", "ቶዮታ": "car", "ቪትዝ": "car", "ኮሮላ": "car",
-	"konkolaataa": "car", "otoomobil": "car",
-	"ቤት": "house", "ቪላ": "villa", "ሪልስቴት": "house", "mana": "house", "viillaa": "villa",
-	"ገዛ": "house", "አፓርታማ": "apartment", "ኮንዶሚኒየም": "apartment", "ኮንዶ": "apartment",
-	"ስቱዲዮ": "apartment", "apaartaamaa": "apartment", "kondoominiyeemii": "apartment",
-	"ኣፓርታማ": "apartment", "condo": "apartment",
-	"ኮምፒውተር": "laptop", "ላፕቶፕ": "laptop", "ማክቡክ": "laptop",
-	"kompiitara": "laptop", "laaptooppii": "laptop",
-	"ጫማ": "shoes", "ስኒከር": "shoes", "kophee": "shoes",
-	"ልብስ": "clothes", "ቀሚስ": "clothes", "ሱሪ": "clothes", "wayyaa": "clothes",
-	"uffata": "clothes", "ክዳን": "clothes",
-	"ቲቪ": "tv", "ቴሌቪዥን": "tv", "televizhinii": "tv", "tivii": "tv",
-	"ሰዓት": "watch", "sa'aatii": "watch",
-	"ፈርኒቸር": "furniture", "ሶፋ": "furniture", "አልጋ": "furniture",
-	"ጠረጴዛ": "furniture", "ወንበር": "furniture", "farnichara": "furniture",
-	"siree": "furniture", "ዓራት": "furniture",
-	"ጀነሬተር": "generator", "መሰርሰሪያ": "drill",
-}
-
-// marketplaceSynonymGroups defines bidirectional cross-lingual synonyms for EN, AM, OM, TI.
-var marketplaceSynonymGroups = [][]string{
-	{"phone", "phones", "mobile", "smartphone", "smartphones", "cellphone", "iphone", "samsung", "tecno", "infinix", "redmi", "xiaomi", "ስልክ", "ሞባይል", "ስማርትፎን", "አይፎን", "ሳምሰንግ", "bilbila", "moobaayilii", "ስልኪ"},
-	{"car", "cars", "vehicle", "vehicles", "automobile", "toyota", "vitz", "corolla", "yaris", "suzuki", "hyundai", "መኪና", "ተሽከርካሪ", "ቶዮታ", "ቪትዝ", "ኮሮላ", "konkolaataa", "otoomobil"},
-	{"villa", "villas", "mansion", "ቪላ", "ቪላዎች", "viillaa"},
-	{"house", "houses", "home", "real estate", "property", "residence", "ቤት", "ሪልስቴት", "mana", "ገዛ"},
-	{"apartment", "apartments", "condo", "condos", "condominium", "studio", "flat", "አፓርታማ", "ኮንዶሚኒየም", "ኮንዶ", "ስቱዲዮ", "apaartaamaa", "kondoominiyeemii", "ኣፓርታማ"},
-	{"laptop", "laptops", "computer", "computers", "pc", "macbook", "dell", "hp", "lenovo", "ኮምፒውተር", "ላፕቶፕ", "ማክቡክ", "kompiitara", "laaptooppii"},
-	{"shoe", "shoes", "sneakers", "boots", "loafers", "ጫማ", "ስኒከር", "ቡትስ", "kophee"},
-	{"clothes", "clothing", "dress", "shirt", "pants", "suit", "jacket", "t-shirt", "ልብስ", "ቀሚስ", "ሱሪ", "ጃኬት", "ቲሸርት", "wayyaa", "uffata", "ክዳን"},
-	{"tv", "television", "smart tv", "screen", "ቲቪ", "ቴሌቪዥን", "televizhinii", "tivii"},
-	{"watch", "watches", "smartwatch", "ሰዓት", "smart watch", "sa'aatii"},
-	{"furniture", "sofa", "bed", "table", "chair", "desk", "ፈርኒቸር", "ሶፋ", "አልጋ", "ጠረጴዛ", "ወንበር", "farnichara", "siree", "ዓራት"},
-	{"tool", "tools", "drill", "generator", "hammer", "saw", "መሣሪያ", "እቃ", "ጀነሬተር", "መሰርሰሪያ", "meeshaa"},
-}
-
 // GetSearchSynonyms returns cross-lingual synonyms for the given term.
 func GetSearchSynonyms(term string) []string {
 	clean := strings.ToLower(strings.TrimSpace(term))
 	if clean == "" {
 		return nil
 	}
-	if mapped, ok := ethiopianKeywordMap[clean]; ok {
+	if mapped, ok := searchConfig.EthiopianKeywordMap[clean]; ok {
 		clean = mapped
 	}
 	words := strings.Fields(clean)
-	for _, group := range marketplaceSynonymGroups {
+	for _, group := range searchConfig.SynonymGroups {
 		matched := false
 		cleanRunes := len([]rune(clean))
 		for _, member := range group {
@@ -151,11 +137,11 @@ func GetCanonicalEnglishTerm(term string) string {
 	if clean == "" {
 		return ""
 	}
-	if mapped, ok := ethiopianKeywordMap[clean]; ok {
+	if mapped, ok := searchConfig.EthiopianKeywordMap[clean]; ok {
 		return mapped
 	}
 	cleanRunes := len([]rune(clean))
-	for _, group := range marketplaceSynonymGroups {
+	for _, group := range searchConfig.SynonymGroups {
 		for _, m := range group {
 			mRunes := len([]rune(m))
 			if clean == m || (mRunes >= 2 && strings.Contains(clean, m)) || (cleanRunes >= 3 && strings.Contains(m, clean)) {
@@ -233,7 +219,7 @@ func CleanConversationalSearchTerm(q string) string {
 		lower = strings.ReplaceAll(lower, phrase, " ")
 	}
 
-	for _, loc := range knownEthiopianLocations {
+	for _, loc := range searchConfig.KnownEthiopianLocations {
 		lower = strings.ReplaceAll(lower, "in "+loc, " ")
 		lower = strings.ReplaceAll(lower, "at "+loc, " ")
 		lower = strings.ReplaceAll(lower, loc, " ")
@@ -265,7 +251,7 @@ func CleanConversationalSearchTerm(q string) string {
 	for _, w := range words {
 		if strings.HasPrefix(w, "የ") && len([]rune(w)) > 2 {
 			candidate := strings.TrimPrefix(w, "የ")
-			if _, ok := ethiopianKeywordMap[candidate]; ok || ContainsGeez(candidate) {
+			if _, ok := searchConfig.EthiopianKeywordMap[candidate]; ok || ContainsGeez(candidate) {
 				w = candidate
 			}
 		}

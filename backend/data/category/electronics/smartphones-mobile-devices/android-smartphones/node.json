@@ -1,0 +1,28 @@
+{
+  "name": {
+    "en": "Android Smartphones",
+    "am": "አንድሮይድ ስማርት ስልክ",
+    "om": "Android Ismaart Bilbila",
+    "ti": "ኣንድሮይድ ስማርት ስልኪ"
+  },
+  "aliases": {
+    "en": [
+      "android",
+      "smartphone",
+      "phone",
+      "ስልክ",
+      "bilbila",
+      "ስልኪ"
+    ],
+    "am": [
+      "ስልክ",
+      "ስማርትፎን"
+    ],
+    "om": [
+      "bilbila"
+    ],
+    "ti": [
+      "ስልኪ"
+    ]
+  }
+}

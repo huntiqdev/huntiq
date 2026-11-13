@@ -52,6 +52,7 @@ type AuthService struct {
 	otpCrypto      *security.OTPCrypto
 	settingsReader func(ctx context.Context, key string) string
 	sessionCreator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)
+	sessionRevoker func(ctx context.Context, userID int, reason string) error
 	// cached otp_required setting — refreshed every 60s to avoid a DB hit on every login
 	otpRequiredCache    bool
 	otpRequiredCachedAt time.Time
@@ -113,6 +114,12 @@ func (s *AuthService) WithSettingsReader(reader func(ctx context.Context, key st
 // WithSessionCreator injects a function to create an admin session upon successful login
 func (s *AuthService) WithSessionCreator(creator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)) *AuthService {
 	s.sessionCreator = creator
+	return s
+}
+
+// WithSessionRevoker injects a function to revoke all user sessions upon password changes or security events
+func (s *AuthService) WithSessionRevoker(revoker func(ctx context.Context, userID int, reason string) error) *AuthService {
+	s.sessionRevoker = revoker
 	return s
 }
 
@@ -645,6 +652,9 @@ func (s *AuthService) ForgotPasswordReset(ctx context.Context, phone, role, code
 	if err := s.repo.UpdatePassword(ctx, u.ID, hash); err != nil {
 		return err
 	}
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, u.ID, "password_reset")
+	}
 	// Proving phone ownership via reset OTP also counts as OTP verification.
 	// This unblocks users who registered but never completed OTP.
 	_ = s.repo.SetOTPVerifiedForRole(ctx, phone, role)
@@ -720,7 +730,13 @@ func (s *AuthService) AdminForgotPasswordReset(ctx context.Context, email, code,
 	if err != nil {
 		return err
 	}
-	return s.repo.UpdatePassword(ctx, u.ID, hash)
+	if err := s.repo.UpdatePassword(ctx, u.ID, hash); err != nil {
+		return err
+	}
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, u.ID, "admin_password_reset")
+	}
+	return nil
 }
 
 func (s *AuthService) ChangePassword(ctx context.Context, userID int, currentPw, newPw string) error {
@@ -735,7 +751,13 @@ func (s *AuthService) ChangePassword(ctx context.Context, userID int, currentPw,
 	if err != nil {
 		return err
 	}
-	return s.repo.UpdatePassword(ctx, userID, hash)
+	if err := s.repo.UpdatePassword(ctx, userID, hash); err != nil {
+		return err
+	}
+	if s.sessionRevoker != nil {
+		_ = s.sessionRevoker(ctx, userID, "password_changed")
+	}
+	return nil
 }
 
 // ── Buyer tier ────────────────────────────────────────────────────────────────

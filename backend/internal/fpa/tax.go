@@ -6,20 +6,20 @@ import (
 
 // TaxCalculationResult details the Ethiopian statutory tax assessment for a month
 type TaxCalculationResult struct {
-	AccountingProfitBeforeTax float64
-	TaxableIncomeAdjustments  float64
-	TaxableIncomePreLoss      float64
-	LossReliefApplied         float64
-	EndingLossPool            float64
-	NetTaxableIncome          float64
+	AccountingProfitBeforeTax   float64
+	TaxableIncomeAdjustments    float64
+	TaxableIncomePreLoss        float64
+	LossReliefApplied           float64
+	EndingLossPool              float64
+	NetTaxableIncome            float64
 	EstimatedCorporateIncomeTax float64 // 30% standard rate
-	OutputVAT                 float64 // 15% on taxable platform revenue
-	EligibleInputVAT          float64 // Input credits on qualifying business expenses
-	NetVATPayable             float64 // Output - Input VAT
-	TotalStatutoryAccrual     float64 // CIT + VAT payable
-	NetProfitAfterTax         float64 // Accounting PBT - CIT
-	IsVATRegistered           bool
-	RequiresAccountantReview  bool
+	OutputVAT                   float64 // 15% on taxable platform revenue
+	EligibleInputVAT            float64 // Input credits on qualifying business expenses
+	NetVATPayable               float64 // Output - Input VAT
+	TotalStatutoryAccrual       float64 // CIT + VAT payable
+	NetProfitAfterTax           float64 // Accounting PBT - CIT
+	IsVATRegistered             bool
+	RequiresAccountantReview    bool
 }
 
 // CalculateEthiopiaTax calculates statutory tax liabilities according to Proclamations 979/2016 and 285/2002 & 1341/2024

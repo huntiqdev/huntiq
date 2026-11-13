@@ -4,13 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
-	"os"
 	"github.com/your-org/used-tools-marketplace/internal/config"
 	"github.com/your-org/used-tools-marketplace/internal/database"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
 	"github.com/your-org/used-tools-marketplace/internal/security"
 	"github.com/your-org/used-tools-marketplace/internal/service"
+	"log"
+	"os"
 )
 
 func main() {

@@ -41,14 +41,19 @@ func TestCategoryHierarchyRepo_GetBreadcrumbs_ValidCategoryWithAncestors(t *test
 	repo := NewCategoryHierarchyRepo(db)
 	ctx := context.Background()
 
-	// Category 14 is "Computers & Laptops", child of Category 1 "Electronics"
-	crumbs, err := repo.GetBreadcrumbs(ctx, 14, "en")
+	// Category 10 is "Computers & Laptops", child of Category 1 "Electronics"
+	targetID := 10
+	var catID int
+	if err := db.QueryRow(ctx, "SELECT id FROM category_hierarchy WHERE slug = 'computers-laptops'").Scan(&catID); err == nil && catID > 0 {
+		targetID = catID
+	}
+	crumbs, err := repo.GetBreadcrumbs(ctx, targetID, "en")
 	if err != nil {
 		t.Fatalf("GetBreadcrumbs failed for valid category with ancestors: %v", err)
 	}
 
 	if len(crumbs) < 2 {
-		t.Fatalf("expected at least 2 breadcrumbs for category 14, got %d", len(crumbs))
+		t.Fatalf("expected at least 2 breadcrumbs for category %d, got %d", targetID, len(crumbs))
 	}
 
 	// Verify root ancestor (first in list)
@@ -65,8 +70,8 @@ func TestCategoryHierarchyRepo_GetBreadcrumbs_ValidCategoryWithAncestors(t *test
 
 	// Verify target category (last in list)
 	target := crumbs[len(crumbs)-1]
-	if target.ID != 14 {
-		t.Errorf("expected target ID 14, got %d", target.ID)
+	if target.ID != targetID {
+		t.Errorf("expected target ID %d, got %d", targetID, target.ID)
 	}
 	if target.Name != "Computers & Laptops" {
 		t.Errorf("expected target name 'Computers & Laptops', got %q", target.Name)
@@ -76,7 +81,7 @@ func TestCategoryHierarchyRepo_GetBreadcrumbs_ValidCategoryWithAncestors(t *test
 	}
 
 	// Test Amharic localization fallback
-	amCrumbs, err := repo.GetBreadcrumbs(ctx, 14, "am")
+	amCrumbs, err := repo.GetBreadcrumbs(ctx, targetID, "am")
 	if err != nil {
 		t.Fatalf("GetBreadcrumbs with amharic failed: %v", err)
 	}
@@ -176,7 +181,7 @@ func TestCategoryHierarchyRepo_GetCategoryTree_RecursionAndAlphabeticalSiblingOr
 	repo := NewCategoryHierarchyRepo(db)
 	ctx := context.Background()
 
-	tree, err := repo.GetCategoryTree(ctx, "en")
+	tree, err := repo.GetCategoryTreeWithDepth(ctx, "en", 0)
 	if err != nil {
 		t.Fatalf("GetCategoryTree failed: %v", err)
 	}
@@ -314,5 +319,3 @@ func TestCategoryHierarchyRepo_GetRoots_AlphabeticalOrdering(t *testing.T) {
 		}
 	}
 }
-
-

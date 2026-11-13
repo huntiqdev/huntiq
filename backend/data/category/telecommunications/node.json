@@ -1,0 +1,10 @@
+{
+  "name": {
+    "en": "Telecommunications",
+    "am": "ቴሌኮሙኒኬሽን",
+    "om": "Telekomunikeeshini",
+    "ti": "ቴሌኮሙኒኬሽን"
+  },
+  "icon": "Radio",
+  "description": "Telecom operators, ISPs, mobile services, fiber, satellite, and telecom equipment."
+}

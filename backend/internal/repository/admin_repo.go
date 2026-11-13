@@ -24,7 +24,7 @@ func appendCond(b *strings.Builder, args []interface{}, col string, val interfac
 
 func (r *AdminRepo) ListPending(ctx context.Context) ([]models.Product, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT p.id, p.seller_id, p.location_id, p.title, p.price,
 		       COALESCE(p.description,''), p.category_id,
 		       COALESCE(p.subcategory,''), COALESCE(p.item,''), p.condition,
@@ -45,7 +45,7 @@ func (r *AdminRepo) ListPending(ctx context.Context) ([]models.Product, error) {
 
 func (r *AdminRepo) ListAllProducts(ctx context.Context) ([]models.Product, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT p.id, p.seller_id, p.location_id, p.title, p.price,
 		       COALESCE(p.description,''), p.category_id,
 		       COALESCE(p.subcategory,''), COALESCE(p.item,''), p.condition,
@@ -67,7 +67,7 @@ func (r *AdminRepo) ListAllProducts(ctx context.Context) ([]models.Product, erro
 // ListProductsByStatus returns products filtered by a specific status.
 func (r *AdminRepo) ListProductsByStatus(ctx context.Context, status string) ([]models.Product, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT p.id, p.seller_id, p.location_id, p.title, p.price,
 		       COALESCE(p.description,''), p.category_id,
 		       COALESCE(p.subcategory,''), COALESCE(p.item,''), p.condition,
@@ -97,8 +97,8 @@ func (r *AdminRepo) ListAllProductsPaged(ctx context.Context, page, limit int) (
 	offset := (page - 1) * limit
 	var total int
 	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM products`).Scan(&total) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	rows, err := //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+	rows, err :=                                                         //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
+		r.db.Query(ctx, `
 		SELECT p.id, p.seller_id, p.location_id, p.title, p.price,
 		       COALESCE(p.description,''), p.category_id,
 		       COALESCE(p.subcategory,''), COALESCE(p.item,''), p.condition,
@@ -128,8 +128,8 @@ func (r *AdminRepo) ListProductsByStatusPaged(ctx context.Context, status string
 	offset := (page - 1) * limit
 	var total int
 	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM products WHERE status=$1`, status).Scan(&total) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	rows, err := //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+	rows, err :=                                                                                 //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
+		r.db.Query(ctx, `
 		SELECT p.id, p.seller_id, p.location_id, p.title, p.price,
 		       COALESCE(p.description,''), p.category_id,
 		       COALESCE(p.subcategory,''), COALESCE(p.item,''), p.condition,
@@ -450,7 +450,7 @@ func (r *AdminRepo) GetProductSellerID(ctx context.Context, productID int) (int,
 
 func (r *AdminRepo) ListSellers(ctx context.Context) ([]models.User, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT u.id, u.name, u.phone, COALESCE(u.business_name,''), COALESCE(u.email,''),
 		       u.rating, u.role, u.is_active,
 		       COALESCE(u.tier::text,'normal') AS tier,
@@ -504,7 +504,7 @@ func (r *AdminRepo) SetSellerActive(ctx context.Context, sellerID int, active bo
 
 func (r *AdminRepo) ListAllTransactions(ctx context.Context) ([]models.Transaction, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT id, product_id, COALESCE(seller_id,0), buyer_name, buyer_phone, amount, broker_fee, seller_gets, status, COALESCE(notes,''), created_at, updated_at
 		FROM transactions
 		ORDER BY created_at DESC
@@ -528,10 +528,10 @@ func (r *AdminRepo) ListAllTransactions(ctx context.Context) ([]models.Transacti
 func (r *AdminRepo) AddLocation(ctx context.Context, l models.Location) (int, error) {
 	var id int
 	err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.QueryRow(ctx, `
+		r.db.QueryRow(ctx, `
 		INSERT INTO locations (region, zone, subcity, woreda)
 		VALUES ($1, $2, $3, $4) RETURNING id`,
-		l.Region, l.Zone, l.Subcity, l.Woreda).Scan(&id)
+			l.Region, l.Zone, l.Subcity, l.Woreda).Scan(&id)
 	return id, err
 }
 
@@ -549,7 +549,7 @@ func (r *AdminRepo) DeleteLocation(ctx context.Context, id int) error {
 
 func (r *AdminRepo) ListLocations(ctx context.Context) ([]models.Location, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT id, region, zone, subcity, woreda FROM locations ORDER BY region, zone, subcity, woreda`)
 	if err != nil {
 		return nil, err
@@ -671,7 +671,7 @@ func (r *AdminRepo) AnalyticsOverview(ctx context.Context) (map[string]interface
 // AnalyticsWoredaHeatmap returns product counts grouped by woreda.
 func (r *AdminRepo) AnalyticsWoredaHeatmap(ctx context.Context) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT l.region, COALESCE(l.zone,'') AS zone, COALESCE(l.woreda,'') AS woreda,
 		       COUNT(p.id) AS product_count,
 		       COUNT(p.id) FILTER (WHERE p.status='approved') AS active_count
@@ -703,7 +703,7 @@ func (r *AdminRepo) AnalyticsWoredaHeatmap(ctx context.Context) ([]map[string]in
 // AnalyticsMonthly returns monthly revenue and listing counts for the last N months.
 func (r *AdminRepo) AnalyticsMonthly(ctx context.Context, months int) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT
 		  TO_CHAR(DATE_TRUNC('month', gs), 'Mon YYYY') AS label,
 		  DATE_TRUNC('month', gs) AS month_start,
@@ -744,7 +744,7 @@ func (r *AdminRepo) AnalyticsMonthly(ctx context.Context, months int) ([]map[str
 // AnalyticsGantt returns product listing durations for Gantt chart.
 func (r *AdminRepo) AnalyticsGantt(ctx context.Context, limit int) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT p.id, p.title, p.status,
 		       COALESCE(tier::text,'normal') AS seller_tier,
 		       p.created_at, p.expires_at,
@@ -781,7 +781,7 @@ func (r *AdminRepo) AnalyticsGantt(ctx context.Context, limit int) ([]map[string
 // AnalyticsFeeRevenue returns fee revenue grouped by region.
 func (r *AdminRepo) AnalyticsFeeRevenue(ctx context.Context) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT COALESCE(l.region,'Unknown') AS region,
 		       COALESCE(SUM(p.total_fee_amount),0) AS total_fees,
 		       COALESCE(SUM(p.total_fee_amount) FILTER (WHERE p.fee_paid=TRUE),0) AS paid_fees,
@@ -896,7 +896,7 @@ func (r *AdminRepo) GetSettingsChangeLog(ctx context.Context, key string, limit 
 	var err error
 	if key != "" {
 		rows, err = //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+			r.db.Query(ctx, `
 			SELECT l.id, l.setting_key, l.old_value, l.new_value, COALESCE(l.reason,''),
 			       COALESCE(u.name,''), l.admin_id, l.changed_at
 			FROM settings_change_log l
@@ -905,7 +905,7 @@ func (r *AdminRepo) GetSettingsChangeLog(ctx context.Context, key string, limit 
 			ORDER BY l.changed_at DESC LIMIT $2`, key, limit)
 	} else {
 		rows, err = //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+			r.db.Query(ctx, `
 			SELECT l.id, l.setting_key, l.old_value, l.new_value, COALESCE(l.reason,''),
 			       COALESCE(u.name,''), l.admin_id, l.changed_at
 			FROM settings_change_log l
@@ -940,7 +940,7 @@ func (r *AdminRepo) GetSettingsChangeLog(ctx context.Context, key string, limit 
 
 func (r *AdminRepo) ListAdminNotifications(ctx context.Context, adminID int, adminRole string) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT id, title, message, type,
 		       COALESCE(target_role::text,'') AS target_role,
 		       ($1 = ANY(read_by)) AS is_read_by_me,
@@ -1095,7 +1095,7 @@ func (r *AdminRepo) MonthlyProfitTrend(ctx context.Context) ([]map[string]interf
 // WeeklyProfitTrend returns the last 13 weeks of profit data.
 func (r *AdminRepo) WeeklyProfitTrend(ctx context.Context) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT week, volume, broker_fees, listing_fees, total_profit, transactions, avg_fee_pct
 		FROM weekly_profit_trend ORDER BY week_start ASC`)
 	if err != nil {
@@ -1126,7 +1126,7 @@ func (r *AdminRepo) WeeklyProfitTrend(ctx context.Context) ([]map[string]interfa
 // AnnualProfitTrend returns year-over-year profit data.
 func (r *AdminRepo) AnnualProfitTrend(ctx context.Context) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT year, transactions, volume, broker_fees, listing_fees, total_profit, avg_fee_pct
 		FROM annual_profit_trend ORDER BY year ASC`)
 	if err != nil {
@@ -1156,7 +1156,7 @@ func (r *AdminRepo) AnnualProfitTrend(ctx context.Context) ([]map[string]interfa
 
 func (r *AdminRepo) ListAdmins(ctx context.Context) ([]models.User, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT id, name, phone, COALESCE(email,''), COALESCE(admin_role::text,'normal') AS admin_role,
 		       is_active, created_at, updated_at
 		FROM users WHERE role='admin'
@@ -1205,13 +1205,13 @@ func (r *AdminRepo) CreateAdmin(ctx context.Context, name, phone, email, passwor
 		emailVal = email
 	}
 	err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.QueryRow(ctx, `
+		r.db.QueryRow(ctx, `
 		INSERT INTO users (name, phone, email, password_hash, role, admin_role, is_active, referral_code)
 		VALUES ($1, $2, $3, $4, 'admin', $5::admin_role, true,
 		  'REF' || translate(upper(substring(md5(random()::text || $6::text), 1, 8)), 'IO01', 'ABCD')
 		)
 		RETURNING id`,
-		name, phone, emailVal, passwordHash, adminRole, phone).Scan(&id)
+			name, phone, emailVal, passwordHash, adminRole, phone).Scan(&id)
 	return id, err
 }
 
@@ -1254,7 +1254,7 @@ func (r *AdminRepo) IsAdminSuper(ctx context.Context, adminID int) (bool, error)
 
 func (r *AdminRepo) GetAdminPermissions(ctx context.Context, adminID int) ([]string, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT permission FROM admin_permissions
 		WHERE admin_id=$1 AND enabled=TRUE
 		ORDER BY permission`, adminID)
@@ -1298,7 +1298,7 @@ func (r *AdminRepo) SetAdminPermissions(ctx context.Context, adminID int, permis
 func (r *AdminRepo) HasPermission(ctx context.Context, adminID int, permission string) (bool, error) {
 	var enabled bool
 	err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.QueryRow(ctx, `
+		r.db.QueryRow(ctx, `
 		SELECT COALESCE(enabled, FALSE) FROM admin_permissions
 		WHERE admin_id=$1 AND permission=$2`, adminID, permission).Scan(&enabled)
 	if err != nil {
@@ -1452,7 +1452,7 @@ func (r *AdminRepo) SetBuyerTier(ctx context.Context, userID int, tier string, c
 
 func (r *AdminRepo) ListTierHistory(ctx context.Context, userID int) ([]models.TierHistory, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT h.id, h.user_id, COALESCE(u.name,'') AS user_name,
 		       h.tier_type, h.old_tier, h.new_tier,
 		       h.changed_by, COALESCE(a.name,'') AS changed_by_name,
@@ -1753,7 +1753,7 @@ func (r *AdminRepo) GetUpgradeRequestDetails(ctx context.Context, requestID int)
 // claim (fee_payment_pending=TRUE) but admin has not yet verified it (fee_paid=FALSE).
 func (r *AdminRepo) ListPendingFeePayments(ctx context.Context) ([]map[string]interface{}, error) {
 	rows, err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		SELECT p.id, p.title, p.price, p.total_fee_amount, p.status,
 		       COALESCE(p.admin_notes,'') AS payment_claim,
 		       u.id AS seller_id, u.name AS seller_name, u.phone AS seller_phone,
@@ -2010,7 +2010,7 @@ func (r *AdminRepo) CheckSystemHealth(ctx context.Context) (map[string]interface
 	// 5. Circular Referrals (A -> B -> A)
 	var circular []map[string]interface{}
 	cRows, err := //nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
-	r.db.Query(ctx, `
+		r.db.Query(ctx, `
 		WITH RECURSIVE referral_chains AS (
 			-- Base case: everyone who has an inviter
 			SELECT id, invited_by, ARRAY[id] as path, false as is_cycle
@@ -2084,7 +2084,7 @@ func (r *AdminRepo) ListJobStatusSummary(ctx context.Context) ([]models.JobStatu
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	var jobs []models.JobStatusSummary
 	for rows.Next() {
 		var j models.JobStatusSummary
@@ -2108,7 +2108,7 @@ func (r *AdminRepo) ListRecentFailedJobs(ctx context.Context, limit int) ([]mode
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	var jobs []models.JobExecutionLog
 	for rows.Next() {
 		var j models.JobExecutionLog
@@ -2132,19 +2132,19 @@ func (r *AdminRepo) ListVerificationDocuments(ctx context.Context, status string
 		page = 1
 	}
 	offset := (page - 1) * limit
-	
+
 	var wb strings.Builder
 	wb.WriteString("1=1")
 	args := []interface{}{}
-	
+
 	if status != "" && status != "all" {
 		args = appendCond(&wb, args, " AND d.status=", status)
 	}
 	whereStr := wb.String()
-	
+
 	var total int
 	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM seller_verification_documents d WHERE `+whereStr, args...).Scan(&total) //nolint:gosec
-	
+
 	i := len(args) + 1
 	args = append(args, limit, offset)
 	rows, err := r.db.Query(ctx, //nolint:gosec
@@ -2163,7 +2163,7 @@ func (r *AdminRepo) ListVerificationDocuments(ctx context.Context, status string
 		return nil, 0, err
 	}
 	defer rows.Close()
-	
+
 	var docs []models.SellerVerificationDocument
 	for rows.Next() {
 		var d models.SellerVerificationDocument
@@ -2183,7 +2183,7 @@ func (r *AdminRepo) ReviewVerificationDocument(ctx context.Context, docID, admin
 	if status != "approved" && status != "rejected" {
 		return fmt.Errorf("status must be approved or rejected")
 	}
-	
+
 	tag, err := r.db.Exec(ctx, //nolint:gosec
 		`UPDATE seller_verification_documents
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), reject_reason=$3, notes=$4, updated_at=NOW()
@@ -2209,11 +2209,11 @@ func (r *AdminRepo) ListAbuseReports(ctx context.Context, f models.AbuseReportFi
 		f.Page = 1
 	}
 	offset := (f.Page - 1) * f.Limit
-	
+
 	var wb strings.Builder
 	wb.WriteString("1=1")
 	args := []interface{}{}
-	
+
 	if f.Status != "" && f.Status != "all" {
 		args = appendCond(&wb, args, " AND a.status=", f.Status)
 	}
@@ -2227,10 +2227,10 @@ func (r *AdminRepo) ListAbuseReports(ctx context.Context, f models.AbuseReportFi
 		args = appendCond(&wb, args, " AND a.reported_user_id=", f.ReportedUserID)
 	}
 	whereStr := wb.String()
-	
+
 	var total int
 	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM abuse_reports a WHERE `+whereStr, args...).Scan(&total) //nolint:gosec
-	
+
 	i := len(args) + 1
 	args = append(args, f.Limit, offset)
 	rows, err := r.db.Query(ctx, //nolint:gosec
@@ -2255,7 +2255,7 @@ func (r *AdminRepo) ListAbuseReports(ctx context.Context, f models.AbuseReportFi
 		return nil, 0, err
 	}
 	defer rows.Close()
-	
+
 	var reports []models.AbuseReport
 	for rows.Next() {
 		var a models.AbuseReport
@@ -2283,7 +2283,7 @@ func (r *AdminRepo) ReviewAbuseReport(ctx context.Context, reportID, adminID int
 		return nil, err
 	}
 	defer tx.Rollback(ctx)
-	
+
 	var reportedUserID *int
 	var reportedProductID *int
 	err = tx.QueryRow(ctx, //nolint:gosec
@@ -2295,7 +2295,7 @@ func (r *AdminRepo) ReviewAbuseReport(ctx context.Context, reportID, adminID int
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// If action is removed or content_removed, reject the reported product to hide from marketplace
 	if (actionTaken == "removed" || actionTaken == "content_removed") && reportedProductID != nil && *reportedProductID > 0 {
 		_, _ = tx.Exec(ctx, `UPDATE products SET status='rejected', rejection_reason=$1, updated_at=NOW() WHERE id=$2`, notes, *reportedProductID)
@@ -2364,7 +2364,7 @@ func (r *AdminRepo) UpdateAbuseReportPriority(ctx context.Context, reportID int,
 	if !validPriority[priority] {
 		return fmt.Errorf("invalid priority")
 	}
-	
+
 	_, err := r.db.Exec(ctx, //nolint:gosec
 		`UPDATE abuse_reports SET priority=$1, updated_at=NOW() WHERE id=$2`,
 		priority, reportID)
@@ -2382,11 +2382,11 @@ func (r *AdminRepo) ListRefundRequests(ctx context.Context, f models.RefundReque
 		f.Page = 1
 	}
 	offset := (f.Page - 1) * f.Limit
-	
+
 	var wb strings.Builder
 	wb.WriteString("1=1")
 	args := []interface{}{}
-	
+
 	if f.Status != "" && f.Status != "all" {
 		args = appendCond(&wb, args, " AND r.status=", f.Status)
 	}
@@ -2394,10 +2394,10 @@ func (r *AdminRepo) ListRefundRequests(ctx context.Context, f models.RefundReque
 		args = appendCond(&wb, args, " AND r.requester_role=", f.RequesterRole)
 	}
 	whereStr := wb.String()
-	
+
 	var total int
 	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM refund_requests r WHERE `+whereStr, args...).Scan(&total) //nolint:gosec
-	
+
 	i := len(args) + 1
 	args = append(args, f.Limit, offset)
 	rows, err := r.db.Query(ctx, //nolint:gosec
@@ -2420,7 +2420,7 @@ func (r *AdminRepo) ListRefundRequests(ctx context.Context, f models.RefundReque
 		return nil, 0, err
 	}
 	defer rows.Close()
-	
+
 	var refunds []models.RefundRequest
 	for rows.Next() {
 		var rf models.RefundRequest
@@ -2442,7 +2442,7 @@ func (r *AdminRepo) ReviewRefundRequest(ctx context.Context, refundID, adminID i
 	if !approved {
 		status = "rejected"
 	}
-	
+
 	tag, err := r.db.Exec(ctx, //nolint:gosec
 		`UPDATE refund_requests
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), reject_reason=$3, updated_at=NOW()
@@ -2484,11 +2484,11 @@ func (r *AdminRepo) ListAccountAppeals(ctx context.Context, f models.AccountAppe
 		f.Page = 1
 	}
 	offset := (f.Page - 1) * f.Limit
-	
+
 	var wb strings.Builder
 	wb.WriteString("1=1")
 	args := []interface{}{}
-	
+
 	if f.Status != "" && f.Status != "all" {
 		args = appendCond(&wb, args, " AND a.status=", f.Status)
 	}
@@ -2499,10 +2499,10 @@ func (r *AdminRepo) ListAccountAppeals(ctx context.Context, f models.AccountAppe
 		args = appendCond(&wb, args, " AND a.user_id=", f.UserID)
 	}
 	whereStr := wb.String()
-	
+
 	var total int
 	_ = r.db.QueryRow(ctx, `SELECT COUNT(*) FROM account_appeals a WHERE `+whereStr, args...).Scan(&total) //nolint:gosec
-	
+
 	i := len(args) + 1
 	args = append(args, f.Limit, offset)
 	rows, err := r.db.Query(ctx, //nolint:gosec
@@ -2524,7 +2524,7 @@ func (r *AdminRepo) ListAccountAppeals(ctx context.Context, f models.AccountAppe
 		return nil, 0, err
 	}
 	defer rows.Close()
-	
+
 	var appeals []models.AccountAppeal
 	for rows.Next() {
 		var ap models.AccountAppeal
@@ -2545,7 +2545,7 @@ func (r *AdminRepo) ReviewAccountAppeal(ctx context.Context, appealID, adminID i
 	if !approved {
 		status = "rejected"
 	}
-	
+
 	tag, err := r.db.Exec(ctx, //nolint:gosec
 		`UPDATE account_appeals
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), decision=$3, action_taken=$4, updated_at=NOW()
@@ -2566,7 +2566,7 @@ func (r *AdminRepo) UpdateAppealStatus(ctx context.Context, appealID int, status
 	if !validStatus[status] {
 		return fmt.Errorf("invalid status")
 	}
-	
+
 	_, err := r.db.Exec(ctx, //nolint:gosec
 		`UPDATE account_appeals SET status=$1, updated_at=NOW() WHERE id=$2`,
 		status, appealID)

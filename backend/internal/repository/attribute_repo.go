@@ -33,10 +33,10 @@ func (r *AttributeRepo) GetAttributeDefinition(ctx context.Context, id int) (*mo
 		       display_order, created_at, updated_at
 		FROM attribute_definitions
 		WHERE id = $1`
-	
+
 	var attr models.AttributeDefinition
 	var validationJSON []byte
-	
+
 	err := r.db.QueryRow(ctx, query, id).Scan(
 		&attr.ID, &attr.NameEn, &attr.NameAm, &attr.NameOm, &attr.Slug,
 		&attr.Description, &attr.DataType, &validationJSON, &attr.Unit,
@@ -46,11 +46,11 @@ func (r *AttributeRepo) GetAttributeDefinition(ctx context.Context, id int) (*mo
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if len(validationJSON) > 0 {
 		json.Unmarshal(validationJSON, &attr.ValidationRules)
 	}
-	
+
 	return &attr, nil
 }
 
@@ -70,10 +70,10 @@ func (r *AttributeRepo) GetAttributeBySlug(ctx context.Context, slug string) (*m
 		       display_order, created_at, updated_at
 		FROM attribute_definitions
 		WHERE slug = $1`
-	
+
 	var attr models.AttributeDefinition
 	var validationJSON []byte
-	
+
 	err := r.db.QueryRow(ctx, query, slug).Scan(
 		&attr.ID, &attr.NameEn, &attr.NameAm, &attr.NameOm, &attr.Slug,
 		&attr.Description, &attr.DataType, &validationJSON, &attr.Unit,
@@ -83,11 +83,11 @@ func (r *AttributeRepo) GetAttributeBySlug(ctx context.Context, slug string) (*m
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if len(validationJSON) > 0 {
 		json.Unmarshal(validationJSON, &attr.ValidationRules)
 	}
-	
+
 	return &attr, nil
 }
 
@@ -107,18 +107,18 @@ func (r *AttributeRepo) ListAttributeDefinitions(ctx context.Context) ([]models.
 		       display_order, created_at, updated_at
 		FROM attribute_definitions
 		ORDER BY display_order, name_en`
-	
+
 	rows, err := r.db.Query(ctx, query)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	var attrs []models.AttributeDefinition
 	for rows.Next() {
 		var attr models.AttributeDefinition
 		var validationJSON []byte
-		
+
 		err := rows.Scan(
 			&attr.ID, &attr.NameEn, &attr.NameAm, &attr.NameOm, &attr.Slug,
 			&attr.Description, &attr.DataType, &validationJSON, &attr.Unit,
@@ -128,14 +128,14 @@ func (r *AttributeRepo) ListAttributeDefinitions(ctx context.Context) ([]models.
 		if err != nil {
 			return nil, err
 		}
-		
+
 		if len(validationJSON) > 0 {
 			json.Unmarshal(validationJSON, &attr.ValidationRules)
 		}
-		
+
 		attrs = append(attrs, attr)
 	}
-	
+
 	return attrs, rows.Err()
 }
 
@@ -146,18 +146,18 @@ func (r *AttributeRepo) GetCategoryAttributes(ctx context.Context, categoryID in
 		       validation_rules, COALESCE(unit, ''), is_required,
 		       is_filterable, display_order
 		FROM get_category_attributes($1)`
-	
+
 	rows, err := r.db.Query(ctx, query, categoryID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	attrs := []models.ApplicableAttribute{}
 	for rows.Next() {
 		var attr models.ApplicableAttribute
 		var validationJSON []byte
-		
+
 		err := rows.Scan(
 			&attr.AttributeID, &attr.NameEn, &attr.Slug, &attr.DataType,
 			&validationJSON, &attr.Unit, &attr.IsRequired,
@@ -166,14 +166,14 @@ func (r *AttributeRepo) GetCategoryAttributes(ctx context.Context, categoryID in
 		if err != nil {
 			return nil, err
 		}
-		
+
 		if len(validationJSON) > 0 {
 			json.Unmarshal(validationJSON, &attr.ValidationRules)
 		}
-		
+
 		attrs = append(attrs, attr)
 	}
-	
+
 	return attrs, rows.Err()
 }
 
@@ -189,19 +189,19 @@ func (r *AttributeRepo) GetProductAttributes(ctx context.Context, productID int)
 		JOIN attribute_definitions ad ON ad.id = pa.attribute_id
 		WHERE pa.product_id = $1
 		ORDER BY ad.display_order`
-	
+
 	rows, err := r.db.Query(ctx, query, productID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	
+
 	attrs := []models.ProductAttribute{}
 	for rows.Next() {
 		var attr models.ProductAttribute
 		var valueJSON []byte
 		attr.Attribute = &models.AttributeDefinition{}
-		
+
 		err := rows.Scan(
 			&attr.ID, &attr.ProductID, &attr.AttributeID,
 			&attr.ValueText, &attr.ValueNumber, &attr.ValueBool,
@@ -212,21 +212,21 @@ func (r *AttributeRepo) GetProductAttributes(ctx context.Context, productID int)
 		if err != nil {
 			return nil, err
 		}
-		
+
 		if len(valueJSON) > 0 {
 			json.Unmarshal(valueJSON, &attr.ValueJSON)
 		}
-		
+
 		attrs = append(attrs, attr)
 	}
-	
+
 	return attrs, rows.Err()
 }
 
 // SetProductAttribute sets or updates a product attribute value
 func (r *AttributeRepo) SetProductAttribute(ctx context.Context, attr *models.ProductAttribute) error {
 	valueJSON, _ := json.Marshal(attr.ValueJSON)
-	
+
 	query := `
 		INSERT INTO product_attributes (
 			product_id, attribute_id, value_text, value_number,
@@ -239,12 +239,12 @@ func (r *AttributeRepo) SetProductAttribute(ctx context.Context, attr *models.Pr
 		    value_date = EXCLUDED.value_date,
 		    value_json = EXCLUDED.value_json,
 		    updated_at = NOW()`
-	
+
 	_, err := r.db.Exec(ctx, query,
 		attr.ProductID, attr.AttributeID, attr.ValueText, attr.ValueNumber,
 		attr.ValueBool, attr.ValueDate, valueJSON,
 	)
-	
+
 	return err
 }
 
@@ -257,21 +257,21 @@ func (r *AttributeRepo) DeleteProductAttributes(ctx context.Context, productID i
 // CreateAttributeDefinition creates a new attribute definition (admin)
 func (r *AttributeRepo) CreateAttributeDefinition(ctx context.Context, attr *models.AttributeDefinition) (int, error) {
 	validationJSON, _ := json.Marshal(attr.ValidationRules)
-	
+
 	query := `
 		INSERT INTO attribute_definitions (
 			name_en, name_am, name_om, slug, description, data_type,
 			validation_rules, unit, is_required, is_searchable, is_filterable, display_order
 		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
 		RETURNING id`
-	
+
 	var id int
 	err := r.db.QueryRow(ctx, query,
 		attr.NameEn, attr.NameAm, attr.NameOm, attr.Slug, attr.Description,
 		attr.DataType, validationJSON, attr.Unit, attr.IsRequired,
 		attr.IsSearchable, attr.IsFilterable, attr.DisplayOrder,
 	).Scan(&id)
-	
+
 	return id, err
 }
 
@@ -284,11 +284,11 @@ func (r *AttributeRepo) AssignAttributeToCategory(ctx context.Context, ca *model
 		ON CONFLICT (category_id, attribute_id) DO UPDATE
 		SET is_required = EXCLUDED.is_required,
 		    display_order = EXCLUDED.display_order`
-	
+
 	_, err := r.db.Exec(ctx, query,
 		ca.CategoryID, ca.AttributeID, ca.IsRequired, ca.IsInherited, ca.DisplayOrder,
 	)
-	
+
 	return err
 }
 

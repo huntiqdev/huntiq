@@ -1,8 +1,8 @@
 package service
 
 import (
-	"math"
 	"github.com/your-org/used-tools-marketplace/pkg/constants"
+	"math"
 )
 
 // SellerTier represents the seller's tier level.

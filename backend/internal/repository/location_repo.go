@@ -121,10 +121,10 @@ const sqlSearchLocations = `
 	ORDER BY score DESC
 	LIMIT 15`
 
-const sqlResolveWoreda  = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 AND subcity ILIKE $3 AND woreda ILIKE $4 LIMIT 1`
+const sqlResolveWoreda = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 AND subcity ILIKE $3 AND woreda ILIKE $4 LIMIT 1`
 const sqlResolveSubcity = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 AND subcity ILIKE $3 LIMIT 1`
-const sqlResolveZone    = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 LIMIT 1`
-const sqlResolveRegion  = `SELECT id FROM locations WHERE region ILIKE $1 LIMIT 1`
+const sqlResolveZone = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 LIMIT 1`
+const sqlResolveRegion = `SELECT id FROM locations WHERE region ILIKE $1 LIMIT 1`
 
 // ListRegions returns distinct regions with all language variants.
 func (r *LocationRepo) ListRegions(ctx context.Context) ([]map[string]interface{}, error) {

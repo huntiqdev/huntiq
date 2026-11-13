@@ -28,10 +28,10 @@ type OTPRequest struct {
 // OTPVerifyRequest verifies the OTP and completes login/registration.
 type OTPVerifyRequest struct {
 	Phone   string `json:"phone"`
-	Email   string `json:"email"`   // used for admin OTP
+	Email   string `json:"email"` // used for admin OTP
 	Code    string `json:"code"`
 	Purpose string `json:"purpose"`
-	Role    string `json:"role"`    // seller | buyer (used by OTP login endpoint)
+	Role    string `json:"role"` // seller | buyer (used by OTP login endpoint)
 }
 
 // AdminOTPRequest is sent after step-1 admin login to verify the email OTP.
@@ -97,4 +97,3 @@ type AuthUserResponse struct {
 	Capabilities     []string `json:"capabilities"`
 	Token            string   `json:"token,omitempty"`
 }
-

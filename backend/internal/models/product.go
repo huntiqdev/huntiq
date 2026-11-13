@@ -8,20 +8,20 @@ type Product struct {
 	LocationID          *int       `json:"location_id"`
 	LocationHierarchyID *int       `json:"location_hierarchy_id,omitempty"`
 	Title               string     `json:"title"`
-	Price               float64            `json:"price"`
-	Description         string             `json:"description"`
-	CategoryID          *int               `json:"category_id"`
-	CategoryHierarchyID *int               `json:"category_hierarchy_id,omitempty"`
-	Subcategory         string             `json:"subcategory,omitempty"`
-	Item                string             `json:"item,omitempty"`
-	Condition           string             `json:"condition"`
-	Status              string             `json:"status"`
-	AdminNotes  string     `json:"admin_notes,omitempty"`
-	ReviewedBy  *int       `json:"reviewed_by,omitempty"`
-	ReviewedAt  *time.Time `json:"reviewed_at,omitempty"`
-	CreatedAt   time.Time  `json:"created_at"`
-	UpdatedAt   time.Time  `json:"updated_at"`
-	ExpiresAt   *time.Time `json:"expires_at,omitempty"`
+	Price               float64    `json:"price"`
+	Description         string     `json:"description"`
+	CategoryID          *int       `json:"category_id"`
+	CategoryHierarchyID *int       `json:"category_hierarchy_id,omitempty"`
+	Subcategory         string     `json:"subcategory,omitempty"`
+	Item                string     `json:"item,omitempty"`
+	Condition           string     `json:"condition"`
+	Status              string     `json:"status"`
+	AdminNotes          string     `json:"admin_notes,omitempty"`
+	ReviewedBy          *int       `json:"reviewed_by,omitempty"`
+	ReviewedAt          *time.Time `json:"reviewed_at,omitempty"`
+	CreatedAt           time.Time  `json:"created_at"`
+	UpdatedAt           time.Time  `json:"updated_at"`
+	ExpiresAt           *time.Time `json:"expires_at,omitempty"`
 
 	// Precise location (optional)
 	Kebele       string   `json:"kebele,omitempty"`

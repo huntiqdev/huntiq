@@ -45,39 +45,39 @@ func (s *AttributeService) SetProductAttributes(ctx context.Context, productID i
 	if err != nil {
 		return fmt.Errorf("failed to get category attributes: %w", err)
 	}
-	
+
 	// Build map of applicable attributes for validation
 	applicableMap := make(map[int]*models.ApplicableAttribute)
 	for i := range applicable {
 		applicableMap[applicable[i].AttributeID] = &applicable[i]
 	}
-	
+
 	// Validate each attribute
 	for _, attr := range attrs {
 		app, ok := applicableMap[attr.AttributeID]
 		if !ok {
 			return fmt.Errorf("attribute %d not applicable to this category", attr.AttributeID)
 		}
-		
+
 		// Check required
 		if app.IsRequired && isAttributeEmpty(&attr) {
 			return fmt.Errorf("attribute '%s' is required", app.NameEn)
 		}
-		
+
 		// Validate based on data type and rules
 		if err := s.validateAttributeValue(&attr, app); err != nil {
 			return fmt.Errorf("validation failed for '%s': %w", app.NameEn, err)
 		}
-		
+
 		// Set product ID
 		attr.ProductID = productID
-		
+
 		// Save to database
 		if err := s.repo.SetProductAttribute(ctx, &attr); err != nil {
 			return fmt.Errorf("failed to save attribute: %w", err)
 		}
 	}
-	
+
 	return nil
 }
 
@@ -96,7 +96,7 @@ func (s *AttributeService) CreateAttributeDefinition(ctx context.Context, attr *
 	if !s.isValidDataType(attr.DataType) {
 		return 0, fmt.Errorf("invalid data_type: must be text, number, boolean, select, multiselect, range, or date")
 	}
-	
+
 	return s.repo.CreateAttributeDefinition(ctx, attr)
 }
 
@@ -124,7 +124,7 @@ func (s *AttributeService) validateAttributeValue(attr *models.ProductAttribute,
 				return fmt.Errorf("value does not match required pattern")
 			}
 		}
-		
+
 	case "number", "range":
 		if attr.ValueNumber == nil {
 			return fmt.Errorf("number value required")
@@ -140,17 +140,17 @@ func (s *AttributeService) validateAttributeValue(attr *models.ProductAttribute,
 				return fmt.Errorf("value must be at most %.2f", max)
 			}
 		}
-		
+
 	case "boolean":
 		if attr.ValueBool == nil {
 			return fmt.Errorf("boolean value required")
 		}
-		
+
 	case "date":
 		if attr.ValueDate == nil {
 			return fmt.Errorf("date value required")
 		}
-		
+
 	case "select":
 		if attr.ValueText == nil {
 			return fmt.Errorf("selection required")
@@ -168,7 +168,7 @@ func (s *AttributeService) validateAttributeValue(attr *models.ProductAttribute,
 				return fmt.Errorf("value must be one of the predefined options")
 			}
 		}
-		
+
 	case "multiselect":
 		if attr.ValueJSON == nil {
 			return fmt.Errorf("multiselect value required")
@@ -192,7 +192,7 @@ func (s *AttributeService) validateAttributeValue(attr *models.ProductAttribute,
 			}
 		}
 	}
-	
+
 	return nil
 }
 
@@ -204,8 +204,6 @@ func isAttributeEmpty(attr *models.ProductAttribute) bool {
 		attr.ValueDate == nil &&
 		attr.ValueJSON == nil
 }
-
-
 
 // Helper: Generate slug from name
 func (s *AttributeService) generateSlug(name string) string {

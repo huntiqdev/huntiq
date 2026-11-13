@@ -1,0 +1,21 @@
+{
+  "name": {
+    "en": "Feature \u0026 Keypad Phones",
+    "am": "የቁልፍ ስልኮች",
+    "om": "Bilbila Qabduu",
+    "ti": "ናይ ቁልፊ ስልኪ"
+  },
+  "aliases": {
+    "en": [
+      "feature phone",
+      "keypad phone",
+      "nokia"
+    ],
+    "am": [
+      "ቁልፍ ስልክ"
+    ],
+    "ti": [
+      "ቁልፊ ስልኪ"
+    ]
+  }
+}

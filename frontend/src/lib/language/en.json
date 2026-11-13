@@ -34,30 +34,7 @@
     "verified_ethiopian_listings": "Verified Marketplace • 100% Ethiopian Listings"
   },
   "categories": {
-    "all": "All",
-    "electronics": "Electronics",
-    "vehicles": "Vehicles",
-    "property": "Property",
-    "home_appliances": "Home Appliances",
-    "furniture": "Furniture",
-    "clothing": "Clothing",
-    "fashion": "Fashion",
-    "agriculture": "Agriculture",
-    "industry": "Industry",
-    "construction": "Construction",
-    "services": "Services",
-    "jobs": "Jobs",
-    "animals": "Animals",
-    "food": "Food",
-    "health_beauty": "Health & Beauty",
-    "sports": "Sports",
-    "education": "Education",
-    "entertainment": "Entertainment",
-    "business": "Business",
-    "luxury": "Luxury",
-    "tools": "Tools",
-    "misc": "Miscellaneous",
-    "other": "Other"
+    "all": "All"
   },
   "sellerHelp": {
     "title": "Help Center & Marketplace Guide",
@@ -1045,7 +1022,7 @@
       "title": "Contact Developer",
       "name": "Zemenu",
       "email": "zemenuyes1@gmail.com",
-      "phone": "0930897652",
+      "phone": "0916238799",
       "available": "Available for development projects"
     },
     "rate": {

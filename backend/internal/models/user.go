@@ -58,7 +58,6 @@ func (u *User) HasCapability(cap string) bool {
 	return false
 }
 
-
 // MaxAdditionalPhones returns the maximum number of additional phones allowed for a tier
 func (u *User) MaxAdditionalPhones() int {
 	switch u.Tier {

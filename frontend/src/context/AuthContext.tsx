@@ -75,8 +75,6 @@ function parseJWT(token: string): {
   catch { return null; }
 }
 
-const STORAGE_KEY = 'huntiq_auth_user';
-
 function userFromToken(token: string, fallbackProfile?: Partial<AuthUser>): AuthUser | null {
   const p = parseJWT(token);
   if (!p) return null;
@@ -103,27 +101,10 @@ function userFromToken(token: string, fallbackProfile?: Partial<AuthUser>): Auth
   };
 }
 
-function getCachedAuthUser(): AuthUser | null {
-  if (typeof window === 'undefined') return null;
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || !parsed.token) return null;
-    const u = userFromToken(parsed.token, parsed);
-    if (!u) {
-      localStorage.removeItem(STORAGE_KEY);
-      return null;
-    }
-    return u;
-  } catch {
-    return null;
-  }
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(() => getCachedAuthUser());
-  const [loading, setLoading] = useState(() => (typeof window !== 'undefined' ? !getCachedAuthUser() : true));
+  // In-memory state only — tokens are NEVER stored in localStorage
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [loading, setLoading] = useState(true);
   const [adminPermissions, setAdminPermissions] = useState<string[]>([]);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
@@ -137,7 +118,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (parsed?.exp && parsed.exp * 1000 < Date.now()) {
       await fetch('/api/auth/session', { method: 'DELETE' });
       setUser(null);
-      try { localStorage.removeItem(STORAGE_KEY); } catch {}
       setAdminPermissions([]);
       setIsSuperAdmin(false);
       return;
@@ -150,7 +130,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (err?.status === 401 || err?.status === 403) {
         await fetch('/api/auth/session', { method: 'DELETE' });
         setUser(null);
-        try { localStorage.removeItem(STORAGE_KEY); } catch {}
         setAdminPermissions([]);
         setIsSuperAdmin(false);
       }
@@ -159,28 +138,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // Hydrate session from secure HttpOnly cookies via server session endpoint
     fetch('/api/auth/session')
       .then(r => r.json())
       .then(async ({ token }) => {
-        const cached = getCachedAuthUser();
-        const activeToken = token || cached?.token;
-        if (activeToken) {
-          const u = userFromToken(activeToken, cached || undefined);
+        if (token) {
+          const u = userFromToken(token);
           if (u) {
-            // Restore session cookie if cookie was missing but localStorage had valid credentials
-            if (!token && cached?.token) {
-              fetch('/api/auth/session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: cached.token }),
-              }).catch(() => {});
-            }
-
             // Enrich name and phone if missing
             if (!u.name || !u.phone) {
               try {
                 const res = await fetch(`${API_URL}/auth/me`, {
-                  headers: { Authorization: `Bearer ${activeToken}` },
+                  credentials: 'include',
+                  headers: { Authorization: `Bearer ${token}` },
                 });
                 if (res.ok) {
                   const me = await res.json();
@@ -190,26 +160,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               } catch {}
             }
             setUser(u);
-            try {
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
-            } catch {}
             await fetchPermissions(u);
             return;
           }
         }
-
-        // Neither cookie nor cached storage had a valid, unexpired token
         setUser(null);
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch {}
       })
       .catch(() => {
-        // In offline or intermittent network conditions, preserve valid cached user
-        const cached = getCachedAuthUser();
-        if (cached) {
-          setUser(cached);
-        }
+        setUser(null);
       })
       .finally(() => setLoading(false));
   }, [fetchPermissions]);
@@ -249,21 +207,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (profile?.name) u.name = profile.name;
       if (profile?.phone) u.phone = profile.phone;
       setUser(u);
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
-      } catch {}
       await fetchPermissions(u);
     }
   };
 
   const logout = async () => {
+    try {
+      const csrf = typeof document !== 'undefined' ? (document.cookie.match(/(?:^|;\s*)huntiq_csrf=([^;]+)/)?.[1] || '') : '';
+      await fetch(`${API_URL}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(csrf ? { 'X-CSRF-Token': decodeURIComponent(csrf) } : {}),
+        },
+      }).catch(() => {});
+    } catch {}
     await fetch('/api/auth/session', { method: 'DELETE' });
     setUser(null);
     setAdminPermissions([]);
     setIsSuperAdmin(false);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {}
   };
 
   const refreshAdminPermissions = async () => {

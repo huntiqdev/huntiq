@@ -23,13 +23,13 @@ func buildTree(flat []models.Category) []models.Category {
 	if len(flat) == 0 {
 		return []models.Category{}
 	}
-	
+
 	// Create a map of ID -> index for safe access
 	byID := make(map[int]int, len(flat))
 	for i := range flat {
 		byID[flat[i].ID] = i
 	}
-	
+
 	// Build tree by appending children to parents
 	var rootIndices []int
 	for i := range flat {
@@ -42,7 +42,7 @@ func buildTree(flat []models.Category) []models.Category {
 			}
 		}
 	}
-	
+
 	// Collect root nodes
 	result := make([]models.Category, 0, len(rootIndices))
 	for _, idx := range rootIndices {

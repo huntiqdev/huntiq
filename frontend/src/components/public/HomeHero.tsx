@@ -457,7 +457,7 @@ export function HomeHero() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
               {[
                 { v: recentProducts.length > 0 ? `${recentProducts.length}+` : '100+', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/20' },
-                { v: '23+', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
+                { v: rootCategories.length > 0 ? `${rootCategories.length}+` : '50+', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
                 { v: '4', l: t.ui.stat_languages ?? 'Languages', icon: <Globe size={18} />, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-900/20' },
                 { v: '100%', l: t.ui.stat_verified ?? 'Verified', icon: <CheckCircle2 size={18} />, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
               ].map(({ v, l, icon, color, bg }) => (
@@ -522,15 +522,15 @@ export function HomeHero() {
               </div>
             ) : (
               <div className="grid grid-cols-4 sm:grid-cols-8 gap-2.5 sm:gap-3">
-                {rootCategories.slice(0, 16).map((cat) => {
+                {rootCategories.slice(0, 24).map((cat) => {
                   const label =
-                    (cat.slug && (t.categories as any)?.[cat.slug]) ||
                     (locale === 'am' && (cat.name_am || (cat as any).NameAm)) ||
                     ((locale === 'or' || locale === 'om') && (cat.name_om || cat.name_or || (cat as any).NameOm)) ||
                     (locale === 'ti' && (cat.name_ti || (cat as any).NameTi)) ||
                     (locale === 'en' && (cat.name_en || (cat as any).NameEn)) ||
                     cat.name ||
                     cat.name_en ||
+                    (cat.slug && (t.categories as any)?.[cat.slug]) ||
                     cat.slug?.replace(/_/g, ' ');
                   const icon = cat.icon || (cat.image_url ? (
                     <Image

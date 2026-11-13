@@ -1,0 +1,10 @@
+{
+  "name": {
+    "en": "Tobacco & Regulated Substances",
+    "am": "ትምባሆና ቁጥጥር ስር ያሉ ቁሳቁስ",
+    "om": "Sigaaraa fi Qabiyyee To'atame",
+    "ti": "ትምባሆን ዝቁጸር ሃብትን"
+  },
+  "icon": "AlertTriangle",
+  "description": "Admin-controlled category. Tobacco, cigarettes, chat, alcohol regulation, firearms (licensed), and controlled goods."
+}

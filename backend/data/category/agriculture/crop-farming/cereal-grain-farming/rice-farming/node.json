@@ -1,0 +1,22 @@
+{
+  "name": {
+    "en": "Rice Farming",
+    "am": "የሩዝ እርባታ",
+    "om": "Qonna Ruuzii",
+    "ti": "ሩዝ ሕርሻ"
+  },
+  "aliases": {
+    "en": [
+      "rice"
+    ],
+    "am": [
+      "ሩዝ"
+    ],
+    "om": [
+      "ruuzii"
+    ],
+    "ti": [
+      "ሩዝ"
+    ]
+  }
+}

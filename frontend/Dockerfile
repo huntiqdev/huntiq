@@ -1,4 +1,4 @@
-# Production Dockerfile for HUNTIQ Next.js 15 Frontend
+# Production Dockerfile for HUNTIQ Next.js 16 Frontend
 FROM node:20-alpine AS deps
 
 RUN apk add --no-cache libc6-compat

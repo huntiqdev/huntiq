@@ -8,8 +8,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 )
 
 type SellerRepoExport struct{ db *pgxpool.Pool }

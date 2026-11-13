@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
-import { getCategoryLabel } from '@/lib/taxonomy';
+import { resolveCategoryTitle } from '@/lib/taxonomy';
 import { api } from '@/lib/api';
 import {
   X,
@@ -169,30 +169,11 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
   };
 
   const getCatLabel = (node: CategoryNode) => {
-    if (node.id) {
-      const translated = getCategoryLabel(node.id, locale);
-      if (translated) return translated;
-    }
-    if (node.slug && (t.categories as any)?.[node.slug]) {
-      return (t.categories as any)[node.slug];
-    }
-    if (locale === 'am' && node.name_am) return node.name_am;
-    if ((locale === 'or' || locale === 'om') && node.name_om) return node.name_om;
-    if (locale === 'ti' && node.name_ti) return node.name_ti;
-    if (locale === 'en' && node.name_en) return node.name_en;
-    return node.name || node.name_en || node.slug?.replace(/_/g, ' ') || '';
+    return resolveCategoryTitle(node as any, locale) || node.name || node.slug?.replace(/_/g, ' ') || '';
   };
 
-  const getSubLabel = (sub: CategoryNode, parentSlug?: string) => {
-    if (sub.id) {
-      const translated = getCategoryLabel(sub.id, locale);
-      if (translated) return translated;
-    }
-    if (locale === 'am' && sub.name_am) return sub.name_am;
-    if ((locale === 'or' || locale === 'om') && sub.name_om) return sub.name_om;
-    if (locale === 'ti' && sub.name_ti) return sub.name_ti;
-    if (locale === 'en' && sub.name_en) return sub.name_en;
-    return sub.name || sub.name_en || sub.slug?.replace(/_/g, ' ') || '';
+  const getSubLabel = (sub: CategoryNode, _parentSlug?: string) => {
+    return resolveCategoryTitle(sub as any, locale) || sub.name || sub.slug?.replace(/_/g, ' ') || '';
   };
 
   return (

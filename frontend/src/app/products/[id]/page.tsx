@@ -4,7 +4,7 @@ import { Product } from '@/types';
 import { ImageGallery } from '@/components/public/ImageGallery';
 import { BuyButton } from '@/components/public/BuyButton';
 import Link from 'next/link';
-import { MapPin, ShieldCheck, Navigation, ShieldAlert, Sparkles } from 'lucide-react';
+import { MapPin, ShieldCheck, Navigation, ShieldAlert } from 'lucide-react';
 import { ClientLabel } from '@/components/public/ClientLabel';
 import { ClientProductBadges } from '@/components/public/ClientProductBadges';
 import CategoryBreadcrumbs from '@/components/category/CategoryBreadcrumbs';
@@ -163,15 +163,14 @@ export default async function ProductDetailPage({ params }: Props) {
             </p>
           </div>
 
-          {/* AI Related Search Discovery */}
+          {/* Related Category Discovery */}
           {product.category && (
             <div className="mt-1 flex flex-wrap items-center gap-2">
-              <span className="text-[11px] font-semibold text-zinc-500 flex items-center gap-1">
-                <Sparkles size={11} className="text-orange-500" />
-                <ClientLabel k="ui.related_ai_search" />:
+              <span className="text-[11px] font-semibold text-zinc-500">
+                <ClientLabel k="ui.category" />:
               </span>
               <Link
-                href={`/products?q=${encodeURIComponent(product.category.name)}&mode=ai`}
+                href={`/products?category_id=${product.category.id}`}
                 className="text-[11px] font-medium bg-zinc-100 hover:bg-orange-50 dark:bg-zinc-800 dark:hover:bg-orange-950/40 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-700 transition-colors"
               >
                 <ClientLabel k="ui.more_listings_in" /> {product.category.name} →

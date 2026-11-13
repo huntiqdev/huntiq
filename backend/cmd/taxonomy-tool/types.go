@@ -1,50 +1,59 @@
 package main
 
-// TaxonomyFile represents the root structure of a canonical taxonomy JSON document.
-type TaxonomyFile struct {
-	SchemaVersion      string         `json:"schema_version"`
-	TaxonomyVersion    string         `json:"taxonomy_version"`
-	SourceLanguage     string         `json:"source_language"`
-	SupportedLanguages []string       `json:"supported_languages"`
-	DomainCode         string         `json:"domain_code"`
-	RootFamily         TaxonomyNode   `json:"root_family"`
+import "regexp"
+
+// CategoryDefinition represents a category in categories.json (compiled artifact)
+type CategoryDefinition struct {
+	Slug   string `json:"slug"`
+	Parent string `json:"parent,omitempty"`
+	Icon   string `json:"icon,omitempty"`
+	IsLeaf bool   `json:"is_leaf,omitempty"`
 }
 
-// TaxonomyNode represents a single hierarchical classification entity at any depth.
-type TaxonomyNode struct {
-	ID             string              `json:"id"`
-	Slug           string              `json:"slug"`
-	Code           string              `json:"code"`
-	Level          int                 `json:"level"`
-	CanonicalName  string              `json:"canonical_name"`
-	Definition     string              `json:"definition"`
-	InclusionRules []string            `json:"inclusion_rules,omitempty"`
-	ExclusionRules []string            `json:"exclusion_rules,omitempty"`
-	Examples       []string            `json:"examples,omitempty"`
-	Status         string              `json:"status"`
-	IsLeaf         bool                `json:"is_leaf"`
-	Icon           string              `json:"icon,omitempty"`
-	Translations   map[string]string   `json:"translations,omitempty"`
-	Aliases        map[string][]string `json:"aliases,omitempty"`
-	Identifiers    []TaxonomyIdentifier `json:"identifiers,omitempty"`
-	Attributes     []TaxonomyAttribute `json:"attributes,omitempty"`
-	Children       []TaxonomyNode      `json:"children,omitempty"`
+// LocaleEntry represents category translations and aliases in locales/<lang>.json
+type LocaleEntry struct {
+	Name        string   `json:"name"`
+	Description string   `json:"description,omitempty"`
+	Aliases     []string `json:"aliases,omitempty"`
 }
 
-// TaxonomyIdentifier represents standardized external classification identifiers.
-type TaxonomyIdentifier struct {
-	Type string `json:"type"` // UNSPSC, GS1_GPC, TAXONOMIC, CAS, ISCO_08, HS_CODE
-	Code string `json:"code"`
-	Name string `json:"name,omitempty"`
+// LocalizedNames represents multilingual translations for en, am, om, ti
+type LocalizedNames struct {
+	EN string `json:"en"`
+	AM string `json:"am"`
+	OM string `json:"om"`
+	TI string `json:"ti"`
 }
 
-// TaxonomyAttribute defines category-specific structured specification attributes.
-type TaxonomyAttribute struct {
-	Slug            string                 `json:"slug"`
-	NameEN          string                 `json:"name_en"`
-	DataType        string                 `json:"data_type"`
-	Unit            string                 `json:"unit,omitempty"`
-	IsRequired      bool                   `json:"is_required"`
-	IsFilterable    bool                   `json:"is_filterable"`
-	ValidationRules map[string]interface{} `json:"validation_rules,omitempty"`
+// LocalizedAliases represents multilingual search synonyms
+type LocalizedAliases struct {
+	EN []string `json:"en,omitempty"`
+	AM []string `json:"am,omitempty"`
+	OM []string `json:"om,omitempty"`
+	TI []string `json:"ti,omitempty"`
 }
+
+// NodeMeta is the metadata file (node.json) stored inside each taxonomy folder.
+// The folder name IS the slug. The parent is the parent folder.
+// The level is determined by folder depth. is_leaf is determined by
+// whether sub-folders exist.
+type NodeMeta struct {
+	Name        LocalizedNames    `json:"name"`
+	Icon        string            `json:"icon,omitempty"`
+	Description string            `json:"description,omitempty"`
+	Aliases     *LocalizedAliases `json:"aliases,omitempty"`
+}
+
+// TaxonomyTreeNode represents a hierarchical category node in taxonomy_tree.json
+type TaxonomyTreeNode struct {
+	Slug        string              `json:"slug"`
+	Name        map[string]string   `json:"name"`
+	Icon        string              `json:"icon,omitempty"`
+	Layer       int                 `json:"layer,omitempty"`
+	Description string              `json:"description,omitempty"`
+	Aliases     map[string][]string `json:"aliases,omitempty"`
+	IsLeaf      bool                `json:"is_leaf"`
+	Children    []TaxonomyTreeNode  `json:"children,omitempty"`
+}
+
+var slugRegex = regexp.MustCompile(`^[a-z0-9]+(-[a-z0-9]+)*$`)

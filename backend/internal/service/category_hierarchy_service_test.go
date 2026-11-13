@@ -119,4 +119,3 @@ func TestValidateCategoryForListing_Empty(t *testing.T) {
 		t.Fatalf("expected error for zero category IDs, got nil")
 	}
 }
-

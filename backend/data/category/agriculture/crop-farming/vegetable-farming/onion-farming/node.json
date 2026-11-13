@@ -1,0 +1,23 @@
+{
+  "name": {
+    "en": "Onion Farming",
+    "am": "የሽንኩርት እርባታ",
+    "om": "Qonna Qullubbii",
+    "ti": "ሽጉርቲ ሕርሻ"
+  },
+  "aliases": {
+    "en": [
+      "onion",
+      "onions"
+    ],
+    "am": [
+      "ሽንኩርት"
+    ],
+    "om": [
+      "qullubbii"
+    ],
+    "ti": [
+      "ሽጉርቲ"
+    ]
+  }
+}

@@ -68,7 +68,7 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, sellerID int, t *mo
 	if expiresAt != nil && expiresAt.Before(time.Now()) {
 		return 0, errors.New("this listing has expired")
 	}
-	
+
 	// Read currency tolerance as PERCENTAGE from settings (admin-configurable)
 	// Default 0.1% tolerance for floating-point rounding errors
 	toleranceStr := r.settingsCache.Get(ctx, constants.SettingCurrencyTolerancePercent)
@@ -78,10 +78,10 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, sellerID int, t *mo
 			tolerancePercent = v / 100.0 // Convert percentage to decimal (e.g., 0.1 → 0.001)
 		}
 	}
-	
+
 	// Calculate tolerance as percentage of product price (prevents manipulation)
 	maxAllowedDifference := productPrice * tolerancePercent
-	
+
 	// Strict price match — percentage-based tolerance prevents underpayment attacks
 	if math.Abs(t.Amount-productPrice) > maxAllowedDifference {
 		return 0, fmt.Errorf(

@@ -3,14 +3,14 @@ package dto
 // ProductFilter holds query params for the product list endpoint.
 type ProductFilter struct {
 	CategoryID          *int
-	CategoryHierarchyID *int  // New category hierarchy ID
-	IncludeDescendants  bool  // Include products from child categories
+	CategoryHierarchyID *int // New category hierarchy ID
+	IncludeDescendants  bool // Include products from child categories
 	Subcategory         *string
 	Item                *string
 	MinPrice            *float64
 	MaxPrice            *float64
 	LocationID          *int
-	LocationHierarchyID *int  // Data-driven location hierarchy node ID
+	LocationHierarchyID *int // Data-driven location hierarchy node ID
 	Region              *string
 	Zone                *string
 	Subcity             *string
@@ -48,16 +48,16 @@ type CreateProductRequest struct {
 	ListingDurationDays int                    `json:"listing_duration_days"`
 	RequiredBuyerTier   string                 `json:"required_buyer_tier,omitempty"`
 	Attributes          map[string]interface{} `json:"attributes,omitempty"`
-	
+
 	// Listing type: 'sale' (default) or 'rent'
 	ListingType string `json:"listing_type"`
-	
+
 	// Rental-specific fields (required if listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`
 	RentalDurationValue *int     `json:"rental_duration_value,omitempty"`
 	RentalDurationUnit  *string  `json:"rental_duration_unit,omitempty"` // hour, day, week, month, year
 	DepositAmount       *float64 `json:"deposit_amount,omitempty"`
-	AvailableFrom       *string  `json:"available_from,omitempty"` // DATE
+	AvailableFrom       *string  `json:"available_from,omitempty"`  // DATE
 	AvailableUntil      *string  `json:"available_until,omitempty"` // DATE
 }
 
@@ -79,7 +79,7 @@ type UpdateProductRequest struct {
 	Latitude            *float64               `json:"latitude,omitempty"`
 	Longitude           *float64               `json:"longitude,omitempty"`
 	ImageURLs           []string               `json:"image_urls"`
-	
+
 	// Rental fields (only for listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`
 	RentalDurationValue *int     `json:"rental_duration_value,omitempty"`
@@ -88,6 +88,3 @@ type UpdateProductRequest struct {
 	AvailableFrom       *string  `json:"available_from,omitempty"`
 	AvailableUntil      *string  `json:"available_until,omitempty"`
 }
-
-
-

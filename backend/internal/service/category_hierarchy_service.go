@@ -53,12 +53,20 @@ func (s *CategoryHierarchyService) ListCategories(ctx context.Context, f models.
 	return s.repo.ListCategories(ctx, f)
 }
 
-// GetCategoryTree builds the full hierarchical tree
+// GetCategoryTree builds the hierarchical tree
 func (s *CategoryHierarchyService) GetCategoryTree(ctx context.Context, lang string) ([]models.CategoryTree, error) {
 	if lang == "" {
 		lang = "en"
 	}
 	return s.repo.GetCategoryTree(ctx, lang)
+}
+
+// GetCategoryTreeWithDepth builds the hierarchical tree up to a specified depth
+func (s *CategoryHierarchyService) GetCategoryTreeWithDepth(ctx context.Context, lang string, depth int) ([]models.CategoryTree, error) {
+	if lang == "" {
+		lang = "en"
+	}
+	return s.repo.GetCategoryTreeWithDepth(ctx, lang, depth)
 }
 
 // GetBreadcrumbs returns the category path
@@ -157,7 +165,7 @@ func (s *CategoryHierarchyService) CreateCategory(ctx context.Context, cat *mode
 	} else {
 		cat.Slug = generateSlug(cat.Slug)
 	}
-	
+
 	if !isValidSlug(cat.Slug) {
 		return 0, fmt.Errorf("invalid slug format: must be lowercase alphanumeric with hyphens")
 	}
@@ -176,12 +184,12 @@ func (s *CategoryHierarchyService) CreateCategory(ctx context.Context, cat *mode
 		if *cat.ParentID == cat.ID {
 			return 0, fmt.Errorf("category cannot be its own parent")
 		}
-		
+
 		parent, err := s.repo.GetByID(ctx, *cat.ParentID, "en")
 		if err != nil {
 			return 0, fmt.Errorf("parent category not found")
 		}
-		
+
 		if parent.IsLeaf {
 			return 0, fmt.Errorf("cannot add child to leaf category")
 		}
@@ -247,6 +255,22 @@ func (s *CategoryHierarchyService) DeleteCategory(ctx context.Context, id int) e
 // GetCategoryStats retrieves category statistics
 func (s *CategoryHierarchyService) GetCategoryStats(ctx context.Context, categoryID int) (*models.CategoryWithStats, error) {
 	return s.repo.GetCategoryStats(ctx, categoryID)
+}
+
+// ResolveCategoryByAlias resolves any user search term or product title against PostgreSQL's resolve_category_by_alias stored procedure
+func (s *CategoryHierarchyService) ResolveCategoryByAlias(ctx context.Context, term string) (*int, error) {
+	if s.repo == nil {
+		return nil, nil
+	}
+	return s.repo.ResolveCategoryByAlias(ctx, term)
+}
+
+// ResolveLegacyCategoryID maps root category slug and ID to legacy category table ID dynamically from the database
+func (s *CategoryHierarchyService) ResolveLegacyCategoryID(ctx context.Context, rootSlug string, rootID int) int {
+	if s.repo == nil {
+		return rootID
+	}
+	return s.repo.ResolveLegacyCategoryID(ctx, rootSlug, rootID)
 }
 
 // Helper functions

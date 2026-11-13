@@ -1,0 +1,16 @@
+{
+  "name": {
+    "en": "Electronics",
+    "am": "ኤሌክትሮኒክስ",
+    "om": "Elektirooniksii",
+    "ti": "ኤሌክትሮኒክስ"
+  },
+  "icon": "Smartphone",
+  "description": "Smartphones, computers, audio, TVs, cameras, gaming, wearables, and accessories.",
+  "aliases": {
+    "en": ["consumer electronics", "consumer-electronics", "devices", "gadgets", "tech"],
+    "am": ["የተጠቃሚ ኤሌክትሮኒክስ", "ጋጄት", "ስልክ", "ኮምፒውተር"],
+    "om": ["meeshaalee elektirooniksii", "bilbila"],
+    "ti": ["ኤሌክትሮኒክስ ኣቑሑት", "ተንቀሳቓሲ ስልኪ"]
+  }
+}

@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { Home, Search, PlusCircle, User, Sparkles } from 'lucide-react';
+import { Home, Search, PlusCircle, User } from 'lucide-react';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 
@@ -14,10 +14,9 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const isAdmin  = pathname.startsWith('/admin');
   const isSellerArea = pathname.startsWith('/seller');
   const isBuyerArea  = pathname.startsWith('/buyer');
-  const isAI     = pathname.startsWith('/ai');
 
-  // Admin, seller, buyer, and AI workspaces have their own dedicated full-screen layouts
-  if (isAdmin || isSellerArea || isBuyerArea || isAI) {
+  // Admin, seller, and buyer workspaces have their own dedicated full-screen layouts
+  if (isAdmin || isSellerArea || isBuyerArea) {
     return <>{children}</>;
   }
 
@@ -38,17 +37,6 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="min-h-screen pb-20 md:pb-0">{children}</main>
       <Footer />
-      
-      {/* Floating AI Assistant Action Button — Dedicated single entrypoint at right bottom */}
-      <Link
-        href="/ai"
-        aria-label="Open HUNTIQ AI Assistant"
-        title="Open HUNTIQ AI Shopping Assistant"
-        className={`fixed ${isProductDetail ? 'bottom-22 md:bottom-8' : 'bottom-20 md:bottom-8'} right-4 md:right-8 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-tr from-orange-600 via-amber-600 to-orange-500 text-white shadow-xl shadow-orange-600/35 hover:scale-110 active:scale-90 transition-all flex items-center justify-center border-2 border-white/20 group tap-bounce`}
-      >
-        <Sparkles size={22} className="animate-pulse" />
-        <span className="sr-only">HUNTIQ AI</span>
-      </Link>
 
       {/* Mobile Bottom Navigation — hidden on product detail pages to prioritize the sticky Buy/Contact CTA */}
       {!isProductDetail && (

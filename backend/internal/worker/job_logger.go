@@ -11,7 +11,7 @@ import (
 func logJobStart(db *pgxpool.Pool, jobName string) int {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	
+
 	var jobID int
 	err := db.QueryRow(ctx, //nolint:gosec
 		`INSERT INTO job_execution_log (job_name, status, started_at)
@@ -30,10 +30,10 @@ func logJobSuccess(db *pgxpool.Pool, jobID int, recordsProcessed int) {
 	if jobID == 0 {
 		return
 	}
-	
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	
+
 	_, _ = db.Exec(ctx, //nolint:gosec
 		`UPDATE job_execution_log
 		 SET status = 'success',
@@ -49,10 +49,10 @@ func logJobFailed(db *pgxpool.Pool, jobID int, errorMsg string) {
 	if jobID == 0 {
 		return
 	}
-	
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	
+
 	_, _ = db.Exec(ctx, //nolint:gosec
 		`UPDATE job_execution_log
 		 SET status = 'failed',

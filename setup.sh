@@ -6,10 +6,10 @@ set -e
 
 echo "=============================="
 echo "  HUNTIQ — Project Setup"
-echo "  Architecture: Frontend + Backend + AI"
+echo "  Architecture: Frontend + Backend"
 echo "=============================="
 
-# ── 1. Frontend (Next.js 15) ──────────────────────────────
+# ── 1. Frontend (Next.js 16) ──────────────────────────────
 echo ""
 echo "📦 Installing frontend dependencies..."
 cd frontend
@@ -40,18 +40,6 @@ if [ ! -f .env ]; then
 fi
 cd ..
 
-# ── 3. AI Service (Local Qwen3 4B on Ollama) ────────────────
-echo ""
-echo "🤖 Setting up Local AI service (Ollama + Qwen3 4B)..."
-bash ai/scripts/setup_local.sh
-echo "✅ Local AI environment and models ready"
-
-# Copy env if missing
-if [ ! -f ai/.env ]; then
-  cp ai/.env.example ai/.env
-  echo "📄 Created ai/.env from .env.example"
-fi
-
 echo ""
 echo "=============================="
 echo "  Setup complete!"
@@ -62,6 +50,4 @@ echo "  🚀 Start Everything in One Command: ./run.sh"
 echo "     (or individually:)"
 echo "     • Frontend  : cd frontend && npm run dev"
 echo "     • Backend   : cd backend && go run ./cmd/api"
-echo "     • Local AI  : ollama run huntiq-assistant"
-echo "     • Verify AI : ./ai/scripts/verify_local.sh"
 echo ""
