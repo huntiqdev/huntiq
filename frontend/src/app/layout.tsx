@@ -1,13 +1,31 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { ClientShell } from '@/components/layout/ClientShell';
 import { LocaleProvider } from '@/context/LocaleContext';
 import { AuthProvider } from '@/context/AuthContext';
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
+  ],
+  viewportFit: 'cover',
+};
+
 export const metadata: Metadata = {
   title: 'HUNTIQ — Ethiopia\'s Universal Marketplace',
   description: 'Buy, sell, and rent anything across Ethiopia. Find electronics, vehicles, property, agriculture, services, and more on HUNTIQ.',
   keywords: 'buy sell Ethiopia, Ethiopian marketplace, HUNTIQ, rent property Ethiopia, online market Ethiopia, Addis Ababa market',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'HUNTIQ',
+  },
   icons: {
     icon: '/huntiq.png',
     shortcut: '/huntiq.png',

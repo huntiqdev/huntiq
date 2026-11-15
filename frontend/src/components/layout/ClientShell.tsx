@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { Home, Search, PlusCircle, User } from 'lucide-react';
+import { Home, Search, PlusCircle, User, Layers } from 'lucide-react';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 
@@ -40,7 +40,8 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Bottom Navigation — hidden on product detail pages to prioritize the sticky Buy/Contact CTA */}
       {!isProductDetail && (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 z-50 px-6 py-2.5 flex items-center justify-between pb-[max(12px,env(safe-area-inset-bottom,12px))] shadow-lg">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 z-50 px-3 py-2 flex items-center justify-around pb-[max(12px,env(safe-area-inset-bottom,12px))] shadow-xl">
+          {/* 1. Home */}
           <Link
             href="/"
             className={`flex flex-col items-center gap-1 tap-bounce active:scale-90 transition-all ${
@@ -53,30 +54,49 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
             </span>
           </Link>
 
-          <Link
-            href="/products"
-            className={`flex flex-col items-center gap-1 tap-bounce active:scale-90 transition-all ${
-              pathname === '/products' || (pathname.startsWith('/products') && !isProductDetail)
-                ? 'text-orange-600 dark:text-orange-500 font-black'
-                : 'text-zinc-500 dark:text-zinc-400'
-            }`}
+          {/* 2. Categories Drawer */}
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('open-category-drawer'));
+              }
+            }}
+            className="flex flex-col items-center gap-1 tap-bounce active:scale-90 transition-all text-zinc-500 dark:text-zinc-400 hover:text-orange-600"
+            aria-label="Open categories drawer"
           >
-            <Search size={20} className={pathname === '/products' ? 'stroke-[2.5px]' : ''} />
-            <span className="text-[10px] font-bold">{t.nav?.search ?? 'Find'}</span>
-          </Link>
+            <Layers size={20} />
+            <span className="text-[10px] font-bold">{t.nav?.categories ?? 'Categories'}</span>
+          </button>
 
+          {/* 3. Sell / Rent Out (Elevated Center CTA) */}
           <Link
-            href={user ? '/seller/product/new?type=sale' : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new?type=sale')}`}
+            href={user ? '/seller/product/new' : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new')}`}
             className={`flex flex-col items-center gap-1 tap-bounce active:scale-90 transition-all ${
               pathname === '/sell' || pathname.startsWith('/seller/product/new') ? 'text-orange-600 dark:text-orange-500 font-black' : 'text-zinc-500 dark:text-zinc-400'
             }`}
+            aria-label="Post listing"
           >
             <div className="w-11 h-11 -mt-6 bg-gradient-to-tr from-orange-600 to-amber-500 rounded-full flex items-center justify-center text-white shadow-lg shadow-orange-600/35 border-4 border-white dark:border-zinc-950 transition-transform active:scale-95">
               <PlusCircle size={22} className="fill-current text-white" />
             </div>
-            <span className="text-[10px] font-bold">{t.nav?.sell?.split('/')[0]?.trim() ?? 'Sell'}</span>
+            <span className="text-[10px] font-bold">{t.nav?.sell?.split('/')[0]?.trim() ?? 'Post'}</span>
           </Link>
 
+          {/* 4. Buy / Rent */}
+          <Link
+            href="/products"
+            className={`flex flex-col items-center gap-1 tap-bounce active:scale-90 transition-all ${
+              pathname === '/products' || pathname === '/buy' || pathname === '/rent'
+                ? 'text-orange-600 dark:text-orange-500 font-black'
+                : 'text-zinc-500 dark:text-zinc-400'
+            }`}
+          >
+            <Search size={20} className={pathname === '/products' || pathname === '/buy' || pathname === '/rent' ? 'stroke-[2.5px]' : ''} />
+            <span className="text-[10px] font-bold">{(t.nav as any)?.buy_rent ?? 'Buy / Rent'}</span>
+          </Link>
+
+          {/* 5. Account / Profile */}
           <Link
             href={profileHref}
             className={`flex flex-col items-center gap-1 tap-bounce active:scale-90 transition-all ${

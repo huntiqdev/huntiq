@@ -8,9 +8,10 @@ import { useAuth } from '@/context/AuthContext';
 import { SearchBar } from '@/components/public/SearchBar';
 import { UserAccountMenu } from '@/components/layout/UserAccountMenu';
 import { Globe, Moon, Sun, ShoppingBag, ChevronDown,
-  HelpCircle, X, ChevronRight, Shield, Zap, ImageIcon, MapPin, User, Sparkles,
+  HelpCircle, X, ChevronRight, Shield, Zap, ImageIcon, MapPin, User, Sparkles, Layers,
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
+import { CategoryDrawer } from '@/components/public/CategoryDrawer';
 
 // Language list is now driven by i18n registry — no hardcoding needed.
 // To add a new language: add its JSON + register in i18n.ts. Header auto-updates.
@@ -169,12 +170,19 @@ export function Header() {
   const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [dark, setDark] = useState(false);
 
   const sellHref = user
     ? '/seller/product/new'
     : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new')}`;
+
+  useEffect(() => {
+    const handleOpenDrawer = () => setDrawerOpen(true);
+    window.addEventListener('open-category-drawer', handleOpenDrawer);
+    return () => window.removeEventListener('open-category-drawer', handleOpenDrawer);
+  }, []);
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -215,6 +223,7 @@ export function Header() {
         <TypeSync onTypeChange={setCurrentType} />
       </Suspense>
       {helpOpen && <HelpPanel onClose={() => setHelpOpen(false)} />}
+      <CategoryDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md bg-white/95 dark:bg-zinc-950/95 border-zinc-200 dark:border-zinc-800 transition-colors">
         
@@ -343,6 +352,16 @@ export function Header() {
         <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-sm overflow-x-auto no-scrollbar">
           <div className="max-w-7xl mx-auto px-4 h-9 sm:h-10 flex items-center gap-1.5 sm:gap-2.5 text-xs font-bold whitespace-nowrap">
             
+            {/* All Categories Trigger */}
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(true)}
+              className="px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850 border border-zinc-200 dark:border-zinc-800 tap-bounce active:scale-95 cursor-pointer"
+            >
+              <Layers size={14} className="text-orange-600" />
+              <span>{t.nav?.categories ?? 'Categories'}</span>
+            </button>
+
             {/* Unified Buy / Rent Browsing Gateway */}
             <Link
               href="/products"
