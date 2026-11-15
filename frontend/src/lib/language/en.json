@@ -32,7 +32,8 @@
     "venn_legend_sell": "Sell / Landlord",
     "venn_legend_rental": "Rental",
     "verified_ethiopian_listings": "Verified Marketplace • 100% Ethiopian Listings",
-    "rent": "Rent"
+    "rent": "Rent",
+    "buy_rent": "Buy / Rent"
   },
   "categories": {
     "all": "All"

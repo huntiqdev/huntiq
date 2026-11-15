@@ -24,6 +24,7 @@ test('i18n contains essential navigation and header keys', () => {
   const en = JSON.parse(fs.readFileSync(enPath, 'utf8'));
 
   assert.ok(en.nav, 'en.json must have nav section');
+  assert.ok(en.nav.buy_rent, 'en.json must have nav.buy_rent');
   assert.ok(en.nav.buy, 'en.json must have nav.buy');
   assert.ok(en.nav.rent, 'en.json must have nav.rent');
   assert.ok(en.nav.sell, 'en.json must have nav.sell');

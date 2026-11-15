@@ -32,7 +32,8 @@
     "venn_legend_sell": "ሽጥ / አከራይ",
     "venn_legend_rental": "ኪራይ",
     "verified_ethiopian_listings": "የተረጋገጠ የገበያ ቦታ • 100% የኢትዮጵያ ዝርዝሮች",
-    "rent": "ተከራይ"
+    "rent": "ተከራይ",
+    "buy_rent": "ግዛ / ተከራይ"
   },
   "categories": {
     "all": "ሁሉም"

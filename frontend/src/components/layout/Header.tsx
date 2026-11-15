@@ -343,31 +343,17 @@ export function Header() {
         <div className="border-t border-zinc-100 dark:border-zinc-850 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-sm overflow-x-auto no-scrollbar">
           <div className="max-w-7xl mx-auto px-4 h-9 sm:h-10 flex items-center gap-1.5 sm:gap-2.5 text-xs font-bold whitespace-nowrap">
             
-            {/* Navigation links: Buy, Sell, Rent, Landlord (Fully Localized, Zero English Mixing) */}
-            {/* Buy Filter */}
+            {/* Unified Buy / Rent Browsing Gateway */}
             <Link
-              href="/products?type=sale"
+              href="/products"
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname === '/products' && currentType === 'sale'
-                  ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
+                pathname === '/products' || pathname === '/buy' || pathname === '/rent'
+                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-black shadow-md'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
               }`}
             >
               <span>🛒</span>
-              <span>{t.nav?.buy ?? 'Buy'}</span>
-            </Link>
-
-            {/* Rent Filter */}
-            <Link
-              href="/products?type=rent"
-              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname === '/products' && currentType === 'rent'
-                  ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
-                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
-              }`}
-            >
-              <span>🏠</span>
-              <span>{t.nav?.rental ?? 'Rent'}</span>
+              <span>{(t.nav as any)?.buy_rent ?? 'Buy / Rent'}</span>
             </Link>
 
             {/* Unified Sell / Rent Out Listing Action */}
