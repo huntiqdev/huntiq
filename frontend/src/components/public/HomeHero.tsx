@@ -471,14 +471,23 @@ export function HomeHero() {
           </div>
 
           {/* Trust strip */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 lg:gap-8 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
-            <span className="flex items-center gap-1.5 font-medium"><Shield size={15} className="text-green-500" /> {t.ui.secure_platform_short}</span>
-            <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700 hidden sm:block" />
-            <span className="flex items-center gap-1.5 font-medium"><Globe size={15} className="text-orange-500" /> {t.ui.four_languages}</span>
-            <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700 hidden sm:block" />
-            <span className="flex items-center gap-1.5 font-medium"><Zap size={15} className="text-blue-500" /> {t.ui.fast_and_free}</span>
-            <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700 hidden sm:block" />
-            <span className="flex items-center gap-1.5 font-medium"><Trophy size={15} className="text-yellow-500" /> {t.ui.tier_rewards ?? 'Tier Rewards'}</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 font-semibold shadow-xs">
+              <Shield size={14} className="text-green-600 shrink-0" />
+              <span>{t.ui.secure_platform_short}</span>
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 font-semibold shadow-xs">
+              <Globe size={14} className="text-orange-600 shrink-0" />
+              <span>{t.ui.four_languages}</span>
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 font-semibold shadow-xs">
+              <Zap size={14} className="text-blue-600 shrink-0" />
+              <span>{t.ui.fast_and_free}</span>
+            </span>
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 font-semibold shadow-xs">
+              <Trophy size={14} className="text-amber-500 shrink-0" />
+              <span>{t.ui.tier_rewards ?? 'Tier Rewards'}</span>
+            </span>
           </div>
 
           {/* Category quick links */}
@@ -492,7 +501,7 @@ export function HomeHero() {
                 href="/products"
                 className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1 tap-bounce"
               >
-                <span>Browse All</span> <ArrowRight size={11} />
+                <span>{(t.ui as any).browse_all ?? (t.ui as any).view_all ?? 'Browse All'}</span> <ArrowRight size={11} />
               </Link>
             </div>
             {loadingCategories ? (
@@ -573,7 +582,7 @@ export function HomeHero() {
                     {(t.ui as any).latest_listings ?? t.ui.recent_products ?? 'Featured Listings'}
                   </h3>
                   <p className="text-[11px] text-zinc-400 mt-0.5">
-                    Verified items for sale across Ethiopia
+                    {(t.ui as any).verified_items_sub ?? 'Verified items for sale across Ethiopia'}
                   </p>
                 </div>
               </div>
@@ -588,7 +597,7 @@ export function HomeHero() {
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
-                  All Items
+                  {(t.ui as any).all_items ?? 'All Items'}
                 </button>
                 <button
                   onClick={() => setConditionFilter('new')}
@@ -598,7 +607,7 @@ export function HomeHero() {
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
-                  Brand New
+                  {(t.ui as any).brand_new ?? 'Brand New'}
                 </button>
                 <button
                   onClick={() => setConditionFilter('used')}
@@ -608,7 +617,7 @@ export function HomeHero() {
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
-                  Pre-Owned
+                  {(t.ui as any).pre_owned ?? 'Pre-Owned'}
                 </button>
               </div>
             </div>
@@ -623,13 +632,13 @@ export function HomeHero() {
               <div className="text-center py-12 px-4 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30">
                 <Package size={36} className="mx-auto text-zinc-300 dark:text-zinc-600 mb-2" />
                 <p className="text-sm font-bold text-zinc-600 dark:text-zinc-400">
-                  No listings found for this condition
+                  {(t.ui as any).no_listings_condition ?? 'No listings found for this condition'}
                 </p>
                 <Link
                   href="/products"
                   className="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-orange-600 text-white hover:bg-orange-700 transition-colors"
                 >
-                  <span>Explore All Products</span>
+                  <span>{(t.ui as any).explore_all_products ?? 'Explore All Products'}</span>
                   <ArrowRight size={12} />
                 </Link>
               </div>
@@ -646,10 +655,10 @@ export function HomeHero() {
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-black tracking-tight text-zinc-900 dark:text-white leading-none">
-                      Rental & Leasing Opportunities
+                      {(t.ui as any).rental_section_title ?? 'Rental & Leasing Opportunities'}
                     </h3>
                     <p className="text-[11px] text-zinc-400 mt-0.5">
-                      Homes, apartments, commercial spaces, and vehicles for rent
+                      {(t.ui as any).rental_section_sub ?? 'Homes, apartments, commercial spaces, and vehicles for rent'}
                     </p>
                   </div>
                 </div>
@@ -657,7 +666,7 @@ export function HomeHero() {
                   href="/products?type=rent"
                   className="text-xs font-bold text-teal-600 hover:underline flex items-center gap-1"
                 >
-                  <span>Browse All Rentals</span> <ArrowRight size={11} />
+                  <span>{(t.ui as any).browse_all_rentals ?? 'Browse All Rentals'}</span> <ArrowRight size={11} />
                 </Link>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
@@ -674,20 +683,32 @@ export function HomeHero() {
             <div className="relative z-10 max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-black uppercase tracking-wider text-white">
                 <Store size={13} />
-                <span>Join HUNTIQ Marketplace</span>
+                <span>{(t.ui as any).join_marketplace ?? 'Join HUNTIQ Marketplace'}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
-                Start Selling or Renting Properties Across Ethiopia
+                {(t.ui as any).onboarding_hero_title ?? 'Start Selling or Renting Properties Across Ethiopia'}
               </h3>
               <p className="text-sm sm:text-base text-white/90 leading-relaxed">
-                Connect with thousands of buyers and tenants in Addis Ababa and all regional cities. Fast listing verification and direct buyer calls.
+                {(t.ui as any).onboarding_hero_desc ?? 'Connect with thousands of buyers and tenants in Addis Ababa and all regional cities. Fast listing verification and direct buyer calls.'}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 pb-2">
                 {[
-                  { step: '01', title: 'Free Account', desc: 'Register in seconds with your Ethiopian phone number.' },
-                  { step: '02', title: 'Post Listings', desc: 'Add 2–4 clear photos, set price, and pick your location.' },
-                  { step: '03', title: 'Connect & Earn', desc: 'Fast review within 24h — receive orders directly.' },
+                  {
+                    step: '01',
+                    title: (t.ui as any).step1_free_account_title ?? 'Free Account',
+                    desc: (t.ui as any).step1_free_account_desc ?? 'Register in seconds with your Ethiopian phone number.',
+                  },
+                  {
+                    step: '02',
+                    title: (t.ui as any).step2_post_listings_title ?? 'Post Listings',
+                    desc: (t.ui as any).step2_post_listings_desc ?? 'Add 2–4 clear photos, set price, and pick your location.',
+                  },
+                  {
+                    step: '03',
+                    title: (t.ui as any).step3_connect_earn_title ?? 'Connect & Earn',
+                    desc: (t.ui as any).step3_connect_earn_desc ?? 'Fast review within 24h — receive orders directly.',
+                  },
                 ].map(({ step, title, desc }) => (
                   <div key={step} className="bg-white/15 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
                     <span className="text-[10px] font-black text-amber-200">{step}</span>
@@ -699,18 +720,18 @@ export function HomeHero() {
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/seller/product/new?type=sale"
+                  href="/seller/product/new"
                   className="px-6 py-3 rounded-xl bg-white text-orange-600 font-black text-xs sm:text-sm shadow-lg hover:bg-orange-50 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
                 >
                   <Store size={16} />
-                  <span>List An Item Or Property</span>
+                  <span>{(t.ui as any).list_item_or_property ?? 'List An Item Or Property'}</span>
                 </Link>
                 <Link
                   href="/help"
                   className="px-5 py-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm backdrop-blur-sm transition-all flex items-center gap-1.5"
                 >
                   <HelpCircle size={15} />
-                  <span>How It Works</span>
+                  <span>{(t.ui as any).how_it_works ?? 'How It Works'}</span>
                 </Link>
               </div>
             </div>
