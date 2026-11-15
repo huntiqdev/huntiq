@@ -668,9 +668,9 @@ function ProductsContent() {
                             setPricePopoverOpen(false);
                             router.push(buildUrl({ minP: '', maxP: '' }));
                           }}
-                          className="text-[10px] font-bold text-zinc-400 hover:text-red-500"
+                          className="text-[10px] font-bold text-zinc-400 hover:text-red-500 cursor-pointer"
                         >
-                          Reset
+                          {(t.ui as any).reset ?? 'Reset'}
                         </button>
                         <button
                           type="button"
@@ -680,9 +680,9 @@ function ProductsContent() {
                             setPricePopoverOpen(false);
                             router.push(buildUrl({ minP: minPriceInput, maxP: maxPriceInput }));
                           }}
-                          className="px-3 py-1 bg-orange-600 text-white rounded-lg text-xs font-bold hover:bg-orange-700 transition-colors"
+                          className="px-3 py-1 bg-orange-600 text-white rounded-lg text-xs font-bold hover:bg-orange-700 transition-colors cursor-pointer"
                         >
-                          Apply
+                          {(t.ui as any).apply ?? t.ui?.submit ?? 'Apply'}
                         </button>
                       </div>
                     </div>
@@ -701,7 +701,13 @@ function ProductsContent() {
                   }`}
                 >
                   <Navigation size={11} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
-                  <span>{isLocating ? 'Locating…' : userCoords ? '📍 Nearest to Me' : 'Near Me'}</span>
+                  <span>
+                    {isLocating
+                      ? ((t.ui as any).locating ?? 'Locating…')
+                      : userCoords
+                      ? ((t.ui as any).nearest_to_me ?? '📍 Nearest to Me')
+                      : ((t.ui as any).near_me ?? 'Near Me')}
+                  </span>
                   {userCoords && (
                     <span
                       onClick={(e) => {
@@ -724,7 +730,7 @@ function ProductsContent() {
                 </p>
                 <button
                   onClick={() => setFilterOpen(true)}
-                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all"
+                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all cursor-pointer"
                 >
                   <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
                 </button>
@@ -739,15 +745,17 @@ function ProductsContent() {
                   <AlertTriangle size={28} />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">Unable to Load Listings</h3>
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                    {(t.ui as any).unable_to_load_listings ?? 'Unable to Load Listings'}
+                  </h3>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">{fetchError}</p>
                 </div>
                 <button
                   onClick={() => setRetryKey(k => k + 1)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition-all active:scale-95"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
                 >
                   <RotateCcw size={14} />
-                  <span>Retry</span>
+                  <span>{(t.ui as any).retry ?? 'Retry'}</span>
                 </button>
               </div>
             ) : products.length === 0 ? (
@@ -758,7 +766,7 @@ function ProductsContent() {
                 <div>
                   <h3 className="text-base font-black text-zinc-900 dark:text-zinc-100">{t.ui.no_products ?? 'No listings found'}</h3>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                    No active listings match your current search or filter criteria.
+                    {(t.ui as any).no_active_listings_match ?? 'No active listings match your current search or filter criteria.'}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center pt-1">
@@ -773,28 +781,26 @@ function ProductsContent() {
                       setListingType('all');
                       router.push('/products');
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-all shadow-md active:scale-95"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
                   >
-                    <span>Clear All Filters</span>
+                    <span>{(t as any).search?.clear_filters ?? (t.ui as any).clear_filter ?? 'Clear All Filters'}</span>
                   </button>
                 </div>
                 <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full">
                   <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
-                    Explore Categories
+                    {(t.ui as any).explore_categories ?? 'Explore Categories'}
                   </p>
                   <div className="flex flex-wrap gap-1.5 justify-center">
-                    <Link href="/products?category_hierarchy_id=1380" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
-                      📷 Camera Lenses
-                    </Link>
-                    <Link href="/products?category_hierarchy_id=1382" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
-                      📸 Mirrorless Cameras
-                    </Link>
-                    <Link href="/products?cat=electronics" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
-                      📱 Electronics
-                    </Link>
-                    <Link href="/products?cat=transport-mobility" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
-                      🚗 Vehicles
-                    </Link>
+                    {categories.slice(0, 8).map(c => (
+                      <Link
+                        key={c.id}
+                        href={`/products?category_hierarchy_id=${c.id}&cat=${c.slug}`}
+                        className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors"
+                      >
+                        {c.icon ? `${c.icon} ` : '🏷️ '}
+                        {resolveCategoryTitle(c, locale)}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>
