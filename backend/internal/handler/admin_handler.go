@@ -727,36 +727,6 @@ func (h *AdminHandler) ListCategories(c *fiber.Ctx) error {
 	return response.OKList(c, cats)
 }
 
-// POST /api/admin/categories — deprecated: use /api/admin/category-hierarchy or /api/admin/classification
-func (h *AdminHandler) CreateCategory(c *fiber.Ctx) error {
-	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-		"error":              "DEPRECATED_MUTATION_ENDPOINT",
-		"canonical_endpoint": "/api/admin/category-hierarchy",
-		"message":            "Legacy category mutations are deprecated. Use /api/admin/category-hierarchy or Universal Classification APIs.",
-		"success":            false,
-	})
-}
-
-// PUT /api/admin/categories/:id — deprecated: use /api/admin/category-hierarchy or /api/admin/classification
-func (h *AdminHandler) UpdateCategory(c *fiber.Ctx) error {
-	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-		"error":              "DEPRECATED_MUTATION_ENDPOINT",
-		"canonical_endpoint": "/api/admin/category-hierarchy",
-		"message":            "Legacy category mutations are deprecated. Use /api/admin/category-hierarchy or Universal Classification APIs.",
-		"success":            false,
-	})
-}
-
-// DELETE /api/admin/categories/:id — deprecated: use /api/admin/category-hierarchy or /api/admin/classification
-func (h *AdminHandler) DeleteCategory(c *fiber.Ctx) error {
-	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-		"error":              "DEPRECATED_MUTATION_ENDPOINT",
-		"canonical_endpoint": "/api/admin/category-hierarchy",
-		"message":            "Legacy category mutations are deprecated. Use /api/admin/category-hierarchy or Universal Classification APIs.",
-		"success":            false,
-	})
-}
-
 // GET /api/admin/me — returns the current admin's profile
 // Uses authSvc.GetProfile (single GetByID query) — avoids loading all admins.
 func (h *AdminHandler) GetMe(c *fiber.Ctx) error {

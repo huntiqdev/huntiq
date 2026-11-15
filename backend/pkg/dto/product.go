@@ -25,6 +25,7 @@ type ProductFilter struct {
 	Lat                 *float64 // User/Asker latitude for nearest recommendation
 	Lng                 *float64 // User/Asker longitude for nearest recommendation
 	MaxDistanceKM       *float64 // Maximum distance radius in kilometers
+	Attributes          map[string]string // Dynamic key-value facet filters over products.attributes JSONB
 }
 
 // CreateProductRequest is used by sellers to submit a new product.

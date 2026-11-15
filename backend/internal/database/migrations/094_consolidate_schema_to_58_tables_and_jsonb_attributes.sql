@@ -65,7 +65,14 @@ DROP VIEW IF EXISTS category_breadcrumbs CASCADE;
 DROP VIEW IF EXISTS category_stats CASCADE;
 
 -- 4. Replace legacy categories table with transparent view over category_hierarchy
-DROP TABLE IF EXISTS categories CASCADE;
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'categories') THEN
+        DROP TABLE IF EXISTS categories CASCADE;
+    ELSIF EXISTS (SELECT 1 FROM pg_views WHERE schemaname = 'public' AND viewname = 'categories') THEN
+        DROP VIEW IF EXISTS categories CASCADE;
+    END IF;
+END $$;
 
 CREATE OR REPLACE VIEW categories AS
 SELECT id, name_en AS name, name_am, slug, icon, is_active, display_order, created_at, updated_at

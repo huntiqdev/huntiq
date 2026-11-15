@@ -298,11 +298,7 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR search_vector @@ to_tsquery('simple', $%d)
 				OR p.title ILIKE '%%' || $%d || '%%'
-				OR EXISTS (
-					SELECT 1 FROM product_attributes pa
-					WHERE pa.product_id = p.id
-					  AND pa.value_text ILIKE '%%' || $%d || '%%'
-				)
+				OR p.attributes::text ILIKE '%%' || $%d || '%%'
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
 			)`, idxTerm, idxSyn, idxTerm, idxTerm, idxTerm, idxTerm))
@@ -310,14 +306,29 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 			wb.WriteString(fmt.Sprintf(` AND (
 				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR p.title ILIKE '%%' || $%d || '%%'
-				OR EXISTS (
-					SELECT 1 FROM product_attributes pa
-					WHERE pa.product_id = p.id
-					  AND pa.value_text ILIKE '%%' || $%d || '%%'
-				)
+				OR p.attributes::text ILIKE '%%' || $%d || '%%'
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
 			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
+		}
+	}
+
+	// Dynamic JSONB attribute facet filtering
+	if len(f.Attributes) > 0 {
+		for k, v := range f.Attributes {
+			if k != "" && v != "" {
+				cleanKey := strings.Map(func(r rune) rune {
+					if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') || r == '_' || r == '-' {
+						return r
+					}
+					return -1
+				}, k)
+				if cleanKey != "" {
+					idxVal := len(args) + 1
+					args = append(args, v)
+					wb.WriteString(fmt.Sprintf(" AND p.attributes ->> '%s' = $%d", cleanKey, idxVal))
+				}
+			}
 		}
 	}
 
