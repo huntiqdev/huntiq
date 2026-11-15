@@ -132,6 +132,18 @@ function DetailDrawer({ product, onClose, onBuy }: {
           {product.description && (
             <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 opacity-90">{product.description}</p>
           )}
+
+          {product.custom_url && (
+            <a
+              href={product.custom_url.startsWith('http') ? product.custom_url : `https://${product.custom_url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 dark:text-amber-200 bg-amber-50 dark:bg-amber-950/40 px-3 py-1.5 rounded-xl border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition-colors w-fit"
+            >
+              <span>Verified Merchant Website / Portfolio ↗</span>
+            </a>
+          )}
         </div>
 
         {/* Pinned Priority Action Bar */}

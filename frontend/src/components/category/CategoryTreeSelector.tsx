@@ -69,6 +69,9 @@ export default function CategoryTreeSelector({
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'leaves' | 'tree'>('leaves');
+  const [serverResults, setServerResults] = useState<FlattenedLeafBranch[]>([]);
+  const [searching, setSearching] = useState(false);
+  const [selectedNodeCache, setSelectedNodeCache] = useState<CategoryNode | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const fetchCategories = useCallback(async () => {
@@ -76,9 +79,10 @@ export default function CategoryTreeSelector({
     try {
       let data: any[] = [];
       try {
-        data = await api.getTree(schemeCode, language, 4);
+        // Fast initial tree fetch from canonical category hierarchy
+        data = await api.getCategoryTree(language, 3);
       } catch {
-        data = await api.getCategoryTree(language);
+        data = await api.getTree(schemeCode, language, 3);
       }
 
       const normalize = (n: any): CategoryNode => ({
@@ -124,21 +128,75 @@ export default function CategoryTreeSelector({
   }, [isOpen]);
 
   // Helper to extract localized name
-  const getNodeName = useCallback((node: CategoryNode): string => {
+  const getNodeName = useCallback((node: CategoryNode | { name?: string; name_en?: string; name_am?: string; name_om?: string; name_ti?: string; slug?: string }): string => {
     switch (language) {
       case 'am':
-        return node.name_am || node.name || node.name_en || node.slug;
+        return node.name_am || node.name || node.name_en || node.slug || '';
       case 'om':
       case 'or':
-        return node.name_om || node.name || node.name_en || node.slug;
+        return node.name_om || node.name || node.name_en || node.slug || '';
       case 'ti':
-        return node.name_ti || node.name || node.name_en || node.slug;
+        return node.name_ti || node.name || node.name_en || node.slug || '';
       default:
-        return node.name_en || node.name || node.slug;
+        return node.name_en || node.name || node.slug || '';
     }
   }, [language]);
 
-  // Extract all flattened leaf branches with their complete hierarchy path
+  // Debounced server-side universal classification search across all 100k+ leaves & 4 languages
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (q.length < 2) {
+      setServerResults([]);
+      setSearching(false);
+      return;
+    }
+
+    setSearching(true);
+    const timer = setTimeout(async () => {
+      try {
+        const results = await api.searchCategories(q, language, 40);
+        if (Array.isArray(results)) {
+          const mapped: FlattenedLeafBranch[] = results.map(r => {
+            const leafName = r.name || r.name_en;
+            const bcs = Array.isArray(r.breadcrumbs) ? r.breadcrumbs : [];
+            const rootName = bcs[0]?.name || 'General';
+            const subcatName = bcs[1]?.name || '';
+            const fullPath = r.hierarchy || bcs.map((b: any) => b.name).join(' › ') || leafName;
+            return {
+              id: r.id,
+              leafName,
+              rootName,
+              subcatName,
+              fullPath,
+              slug: r.slug,
+              count: 0,
+              node: {
+                id: r.id,
+                name: leafName,
+                name_en: r.name_en,
+                name_am: r.name_am,
+                name_om: r.name_om,
+                name_ti: r.name_ti,
+                slug: r.slug,
+                level: r.level,
+                is_leaf: r.is_leaf,
+                count: 0,
+              },
+            };
+          });
+          setServerResults(mapped);
+        }
+      } catch (err) {
+        console.error('Classification search error:', err);
+      } finally {
+        setSearching(false);
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, schemeCode, language, getNodeName]);
+
+  // Extract all flattened leaf branches with their complete hierarchy path from initial loaded tree
   const allLeafBranches = useMemo<FlattenedLeafBranch[]>(() => {
     const leaves: FlattenedLeafBranch[] = [];
 
@@ -147,7 +205,7 @@ export default function CategoryTreeSelector({
       const currentPath = [...breadcrumbs, currentName];
 
       const hasChildren = Array.isArray(node.children) && node.children.length > 0;
-      if (node.is_leaf || !hasChildren) {
+      if (node.is_leaf) {
         leaves.push({
           id: node.id,
           leafName: currentName,
@@ -158,7 +216,7 @@ export default function CategoryTreeSelector({
           count: node.count || 0,
           node,
         });
-      } else {
+      } else if (hasChildren) {
         const nextSubcat = breadcrumbs.length === 1 ? currentName : subcatName;
         node.children!.forEach(child => traverse(child, currentPath, rootName, nextSubcat));
       }
@@ -167,7 +225,7 @@ export default function CategoryTreeSelector({
     categories.forEach(root => {
       const rootTitle = getNodeName(root);
       const hasChildren = Array.isArray(root.children) && root.children.length > 0;
-      if (root.is_leaf || !hasChildren) {
+      if (root.is_leaf) {
         leaves.push({
           id: root.id,
           leafName: rootTitle,
@@ -177,7 +235,7 @@ export default function CategoryTreeSelector({
           count: root.count || 0,
           node: root,
         });
-      } else {
+      } else if (hasChildren) {
         root.children!.forEach(child => traverse(child, [rootTitle], rootTitle));
       }
     });
@@ -210,35 +268,90 @@ export default function CategoryTreeSelector({
     });
   }, [allLeafBranches, searchQuery]);
 
-  // Group leaf branches by Root category
+  // Group leaf branches by Root category (prefers server search results when searching)
+  const displayedBranches = useMemo(() => {
+    if (searchQuery.trim().length >= 2 && serverResults.length > 0) {
+      return serverResults;
+    }
+    return filteredLeafBranches.slice(0, 100);
+  }, [searchQuery, serverResults, filteredLeafBranches]);
+
   const groupedBranches = useMemo(() => {
     const map = new Map<string, FlattenedLeafBranch[]>();
-    filteredLeafBranches.forEach(branch => {
+    displayedBranches.forEach(branch => {
       const list = map.get(branch.rootName) || [];
       list.push(branch);
       map.set(branch.rootName, list);
     });
     return Array.from(map.entries());
-  }, [filteredLeafBranches]);
+  }, [displayedBranches]);
 
-  const toggleExpand = (id: number) => {
+  const toggleExpand = async (id: number, node?: CategoryNode) => {
     const newExpanded = new Set(expanded);
     if (newExpanded.has(id)) {
       newExpanded.delete(id);
-    } else {
-      newExpanded.add(id);
+      setExpanded(newExpanded);
+      return;
     }
+
+    newExpanded.add(id);
     setExpanded(newExpanded);
+
+    // On-demand lazy load children for deeper levels (layers 4, 5, 6)
+    if (node && !node.is_leaf && (!node.children || node.children.length === 0)) {
+      try {
+        let rawChildren: any[] = [];
+        try {
+          rawChildren = await api.getCategoryChildren(id, language);
+        } catch {
+          rawChildren = await api.getChildren(id, language);
+        }
+        const children = rawChildren;
+        if (Array.isArray(children) && children.length > 0) {
+          const normalize = (n: any): CategoryNode => ({
+            id: n.id,
+            name: n.name || n.name_en || n.canonical_name || '',
+            name_en: n.name_en || n.canonical_name || '',
+            name_am: n.name_am,
+            name_om: n.name_om,
+            name_ti: n.name_ti,
+            slug: n.slug,
+            level: n.depth ?? n.level ?? 0,
+            is_leaf: n.is_leaf ?? (!n.children || n.children.length === 0),
+            count: n.product_count ?? n.count ?? 0,
+            children: Array.isArray(n.children) ? n.children.map(normalize) : undefined,
+          });
+          const mappedChildren = children.map(normalize);
+
+          const attachChildren = (nodes: CategoryNode[]): CategoryNode[] => {
+            return nodes.map(item => {
+              if (item.id === id) {
+                return { ...item, children: mappedChildren };
+              }
+              if (item.children && item.children.length > 0) {
+                return { ...item, children: attachChildren(item.children) };
+              }
+              return item;
+            });
+          };
+          setCategories(prev => attachChildren(prev));
+        }
+      } catch (err) {
+        console.error('Failed to load children for node', id, err);
+      }
+    }
   };
 
   const handleSelect = (category: CategoryNode) => {
     setSelected(category.id);
+    setSelectedNodeCache(category);
     onChange(category.id, category);
     setIsOpen(false);
   };
 
   const handleSelectLeaf = (branch: FlattenedLeafBranch) => {
     setSelected(branch.id);
+    setSelectedNodeCache(branch.node);
     onChange(branch.id, branch.node);
     setIsOpen(false);
   };
@@ -246,12 +359,16 @@ export default function CategoryTreeSelector({
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     setSelected(undefined);
+    setSelectedNodeCache(null);
   };
 
   // Find full path of currently selected category
   const getSelectedDisplay = (): string => {
     if (!selected) return placeholder;
-    const foundBranch = allLeafBranches.find(b => b.id === selected);
+    if (selectedNodeCache && selectedNodeCache.id === selected) {
+      return getNodeName(selectedNodeCache);
+    }
+    const foundBranch = allLeafBranches.find(b => b.id === selected) || serverResults.find(b => b.id === selected);
     if (foundBranch) {
       return foundBranch.fullPath;
     }
@@ -297,19 +414,19 @@ export default function CategoryTreeSelector({
             ${!node.is_leaf && hasChildren ? 'font-semibold' : ''}
           `}
           onClick={() => {
-            if (node.is_leaf || !hasChildren) {
+            if (node.is_leaf) {
               handleSelect(node);
             } else {
-              toggleExpand(node.id);
+              toggleExpand(node.id, node);
             }
           }}
         >
-          {hasChildren ? (
+          {hasChildren || !node.is_leaf ? (
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                toggleExpand(node.id);
+                toggleExpand(node.id, node);
               }}
               className="p-1 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg text-zinc-500"
             >
@@ -325,7 +442,7 @@ export default function CategoryTreeSelector({
             </div>
           )}
 
-          {hasChildren ? (
+          {hasChildren || !node.is_leaf ? (
             isExpanded ? (
               <FolderOpen className="w-4 h-4 text-amber-500 shrink-0" />
             ) : (
@@ -428,13 +545,18 @@ export default function CategoryTreeSelector({
                 autoFocus
               />
               {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
+                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                  {searching && (
+                    <div className="w-3.5 h-3.5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               )}
             </div>
 
@@ -453,7 +575,7 @@ export default function CategoryTreeSelector({
                   <Layers className="w-3.5 h-3.5" />
                   <span>{tLabels.allBranches}</span>
                   <span className="text-[10px] bg-zinc-100 dark:bg-zinc-600 px-1.5 rounded-full font-mono">
-                    {filteredLeafBranches.length}
+                    {displayedBranches.length}
                   </span>
                 </button>
 

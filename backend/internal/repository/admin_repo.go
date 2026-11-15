@@ -190,11 +190,26 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 	}
 
 	if strategy == "sale" {
-		whereClauses = append(whereClauses, "(COALESCE(u.seller_preference, 'sale') = 'sale' OR u.seller_preference = 'both')")
+		whereClauses = append(whereClauses, `(
+			EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'sale' AND p.status = 'approved')
+			OR (
+				NOT EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'rent' AND p.status = 'approved')
+				AND COALESCE(u.seller_preference, 'sale') = 'sale'
+			)
+		)`)
 	} else if strategy == "rent" {
-		whereClauses = append(whereClauses, "u.seller_preference IN ('rent', 'both')")
+		whereClauses = append(whereClauses, `(
+			EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'rent' AND p.status = 'approved')
+			OR (
+				NOT EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'sale' AND p.status = 'approved')
+				AND u.seller_preference = 'rent'
+			)
+		)`)
 	} else if strategy == "both" {
-		whereClauses = append(whereClauses, "u.seller_preference = 'both'")
+		whereClauses = append(whereClauses, `(
+			EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'sale' AND p.status = 'approved')
+			AND EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'rent' AND p.status = 'approved')
+		)`)
 	}
 
 	whereSQL := strings.Join(whereClauses, " AND ")
@@ -214,9 +229,13 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		       COALESCE(ps.net_profit, 0) AS net_profit,
 		       COALESCE(u.deactivation_reason,'') AS deactivation_reason,
 		       COALESCE(u.seller_preference,'sale') AS seller_preference,
+		       COALESCE(spc.cnt, 0) AS sale_product_count,
+		       COALESCE(rpc.cnt, 0) AS rent_product_count,
 		       u.created_at, u.updated_at
 		FROM users u
 		LEFT JOIN seller_profit_summary ps ON ps.seller_id = u.id
+		LEFT JOIN (SELECT seller_id, COUNT(*) AS cnt FROM products WHERE listing_type = 'sale' AND status = 'approved' GROUP BY seller_id) spc ON spc.seller_id = u.id
+		LEFT JOIN (SELECT seller_id, COUNT(*) AS cnt FROM products WHERE listing_type = 'rent' AND status = 'approved' GROUP BY seller_id) rpc ON rpc.seller_id = u.id
 		WHERE %s
 		ORDER BY u.created_at DESC
 		LIMIT $%d OFFSET $%d`, whereSQL, argIdx, argIdx+1)
@@ -233,7 +252,9 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		var u models.User
 		if err := rows.Scan(&u.ID, &u.Name, &u.Phone, &u.BusinessName, &u.Email,
 			&u.Rating, &u.Role, &u.IsActive, &u.Tier, &u.TotalValueSold,
-			&u.NetProfit, &u.DeactivationReason, &u.SellerPreference, &u.CreatedAt, &u.UpdatedAt); err != nil {
+			&u.NetProfit, &u.DeactivationReason, &u.SellerPreference,
+			&u.SaleProductCount, &u.RentProductCount,
+			&u.CreatedAt, &u.UpdatedAt); err != nil {
 			return nil, 0, err
 		}
 		if len(u.Capabilities) == 0 {

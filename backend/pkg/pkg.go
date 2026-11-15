@@ -20,7 +20,6 @@ type (
 
 	// Validations
 	PhoneResult              = validations.PhoneResult
-	ProductValidationResult  = validations.ProductValidationResult
 	OrderValidationResult    = validations.OrderValidationResult
 	LocationValidationResult = validations.LocationValidationResult
 
@@ -37,7 +36,6 @@ var (
 	ValidatePhone    = validations.ValidateEthiopianPhone
 	ValidateEmail    = validations.ValidateEmail
 	ValidatePassword = validations.ValidatePassword
-	ValidateProduct  = validations.ValidateProduct
 	ValidateOrder    = validations.ValidateOrderRequest
 	ValidateLocation = validations.ValidateLocation
 	ValidateImageURL = validations.ValidateImageURL

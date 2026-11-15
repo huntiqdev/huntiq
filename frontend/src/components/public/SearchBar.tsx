@@ -16,6 +16,8 @@ interface SearchEntry {
   subSlug?: string;
   itemSlug?: string;
   breadcrumb?: string;
+  hierarchy?: string;
+  level?: number;
 }
 
 // Simple fuzzy: every char of needle must appear in order in haystack
@@ -63,18 +65,20 @@ export function SearchBar() {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
   const [highlighted, setHighlighted] = useState(-1);
-  const [searchIndex, setSearchIndex] = useState<SearchEntry[]>([]);
+  const [rootCategories, setRootCategories] = useState<SearchEntry[]>([]);
+  const [liveResults, setLiveResults] = useState<SearchEntry[]>([]);
+  const [searchLoading, setSearchLoading] = useState(false);
   const [locationSuggestions, setLocationSuggestions] = useState<any[]>([]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Build searchable index dynamically from authoritative database taxonomy
+  // Load popular root categories dynamically from authoritative database taxonomy
   useEffect(() => {
-    api.getCategoryTree(locale).then(tree => {
-      if (!Array.isArray(tree)) return;
-      const idx: SearchEntry[] = [];
-      for (const root of tree) {
+    api.getRootCategories(locale).then(roots => {
+      if (!Array.isArray(roots)) return;
+      const idx: SearchEntry[] = roots.map(root => {
         const rootLabel =
           (locale === 'am' && root.name_am) ||
           ((locale === 'or' || locale === 'om') && root.name_om) ||
@@ -84,89 +88,24 @@ export function SearchBar() {
           root.name_en ||
           root.slug;
         const rootEn = root.name_en || root.name || root.slug;
-        idx.push({
+        return {
           id: root.id,
           type: 'category',
           label: rootLabel,
           labelEn: rootEn,
           catId: root.id,
           catSlug: root.slug,
-        });
-        if (root.children) {
-          for (const sub of root.children) {
-            const subLabel =
-              (locale === 'am' && sub.name_am) ||
-              ((locale === 'or' || locale === 'om') && sub.name_om) ||
-              (locale === 'ti' && sub.name_ti) ||
-              (locale === 'en' && sub.name_en) ||
-              sub.name ||
-              sub.name_en ||
-              sub.slug;
-            const subEn = sub.name_en || sub.name || sub.slug;
-            idx.push({
-              id: sub.id,
-              type: 'subcategory',
-              label: subLabel,
-              labelEn: subEn,
-              catId: root.id,
-              catSlug: root.slug,
-              subSlug: sub.slug,
-              breadcrumb: rootLabel,
-            });
-            if (sub.children) {
-              for (const item of sub.children) {
-                const itemLabel =
-                  (locale === 'am' && item.name_am) ||
-                  ((locale === 'or' || locale === 'om') && item.name_om) ||
-                  (locale === 'ti' && item.name_ti) ||
-                  (locale === 'en' && item.name_en) ||
-                  item.name ||
-                  item.name_en ||
-                  item.slug;
-                const itemEn = item.name_en || item.name || item.slug;
-                idx.push({
-                  id: item.id,
-                  type: 'item',
-                  label: itemLabel,
-                  labelEn: itemEn,
-                  catId: root.id,
-                  catSlug: root.slug,
-                  subSlug: sub.slug,
-                  itemSlug: item.slug,
-                  breadcrumb: `${rootLabel} › ${subLabel}`,
-                });
-              }
-            }
-          }
-        }
-      }
-      setSearchIndex(idx);
+          level: 0,
+        };
+      });
+      setRootCategories(idx);
     }).catch(() => {});
   }, [locale]);
 
   const getLabel = useCallback((e: SearchEntry): string => e.label, []);
-  const getLabelEn = useCallback((e: SearchEntry): string => e.labelEn, []);
-  const getBreadcrumb = useCallback((e: SearchEntry): string => e.breadcrumb || '', []);
+  const getBreadcrumb = useCallback((e: SearchEntry): string => e.breadcrumb || e.hierarchy || '', []);
 
-  // Score against both locale label AND English label — whichever is higher wins
-  const scoreEntry = useCallback((e: SearchEntry, query: string): number => {
-    return Math.max(score(e.label, query), score(e.labelEn, query));
-  }, []);
-
-  // Compute suggestions
-  const suggestions = q.trim().length >= 1
-    ? searchIndex
-        .map(e => ({ e, s: scoreEntry(e, q.trim()) }))
-        .filter(x => x.s > 0)
-        .sort((a, b) => b.s - a.s || a.e.type.localeCompare(b.e.type))
-        .slice(0, 12)
-        .map(x => x.e)
-    : [];
-
-  // All root categories for the "browse" dropdown (shown when input is empty & focused)
-  const allCategories = searchIndex.filter(e => e.type === 'category');
-
-  const displayList = q.trim().length >= 1 ? suggestions : allCategories;
+  const displayList = q.trim().length >= 1 ? liveResults : rootCategories;
 
   // Close on outside click
   useEffect(() => {
@@ -206,27 +145,67 @@ export function SearchBar() {
   const locationDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setQ(ev.target.value);
+    const val = ev.target.value;
+    setQ(val);
     setHighlighted(-1);
     setOpen(true);
     if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
     if (locationDebounceRef.current) clearTimeout(locationDebounceRef.current);
-    const val = ev.target.value.trim();
-    if (val) {
+
+    const clean = val.trim();
+    if (clean) {
+      setSearchLoading(true);
+      // Fast, database-driven hierarchical search across all branches with full breadcrumbs
+      searchDebounceRef.current = setTimeout(async () => {
+        try {
+          const results = await api.searchCategories(clean, locale, 20);
+          if (Array.isArray(results)) {
+            const mapped: SearchEntry[] = results.map(r => {
+              const bcs = Array.isArray(r.breadcrumbs) ? r.breadcrumbs : [];
+              const rootSlug = bcs[0]?.slug || r.slug;
+              const subSlug = bcs[1]?.slug;
+              const itemSlug = bcs[2]?.slug;
+              return {
+                id: r.id,
+                type: r.level === 0 ? 'category' : r.level === 1 ? 'subcategory' : 'item',
+                label: r.name || r.name_en,
+                labelEn: r.name_en,
+                catId: bcs[0]?.id || r.id,
+                catSlug: rootSlug,
+                subSlug: subSlug,
+                itemSlug: itemSlug,
+                breadcrumb: r.hierarchy,
+                hierarchy: r.hierarchy,
+                level: r.level,
+              };
+            });
+            setLiveResults(mapped);
+          }
+        } catch {
+          setLiveResults([]);
+        } finally {
+          setSearchLoading(false);
+        }
+      }, 150);
+
       // Fetch location suggestions in parallel
       locationDebounceRef.current = setTimeout(async () => {
         try {
           const { api } = await import('@/lib/api');
-          const results = await api.searchLocations(val);
+          const results = await api.searchLocations(clean);
           setLocationSuggestions(results.slice(0, 3));
         } catch { setLocationSuggestions([]); }
       }, 300);
+
       if (pathname === '/products') {
         debounceRef.current = setTimeout(() => {
-          router.replace(`/products?search=${encodeURIComponent(val)}`);
+          router.replace(`/products?search=${encodeURIComponent(clean)}`);
         }, 500);
       }
     } else {
+      setLiveResults([]);
+      setSearchLoading(false);
       setLocationSuggestions([]);
       if (pathname === '/products') {
         debounceRef.current = setTimeout(() => {
@@ -391,7 +370,7 @@ export function SearchBar() {
 
             return (
               <button
-                key={`${entry.catSlug}-${entry.subSlug ?? ''}-${entry.itemSlug ?? ''}`}
+                key={entry.id ? `search-cat-${entry.id}-${i}` : `search-entry-${entry.catSlug}-${entry.subSlug ?? ''}-${entry.itemSlug ?? ''}-${i}`}
                 onMouseDown={() => selectEntry(entry)}
                 onMouseEnter={() => setHighlighted(i)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${
@@ -411,14 +390,24 @@ export function SearchBar() {
                     <p className="text-[10px] opacity-40 truncate">{breadcrumb}</p>
                   )}
                 </div>
-                <span className={`text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 ${
-                  entry.type === 'category'
+                <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${
+                  entry.level === 0 || entry.type === 'category'
                     ? 'bg-orange-100 dark:bg-orange-900/40 text-orange-600'
-                    : entry.type === 'subcategory'
-                    ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
-                    : 'bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400'
+                    : entry.level === 1
+                    ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600'
+                    : entry.level === 2
+                    ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600'
+                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
                 }`}>
-                  {entry.type}
+                  {entry.level === 0
+                    ? 'Sector'
+                    : entry.level === 1
+                    ? 'Superfamily'
+                    : entry.level === 2
+                    ? 'Category'
+                    : entry.level === 3
+                    ? 'Subcategory'
+                    : 'Item'}
                 </span>
               </button>
             );

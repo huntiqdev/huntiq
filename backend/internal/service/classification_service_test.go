@@ -2,8 +2,10 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/internal/config"
@@ -78,8 +80,9 @@ func TestClassificationService_ConceptValidation(t *testing.T) {
 	}
 
 	// 2. Auto-code generation from name
+	conceptName := fmt.Sprintf("Hydraulic Breaker Attachment %d", time.Now().UnixNano())
 	concept, err := svc.CreateConcept(ctx, &models.ClassificationConcept{
-		CanonicalName: "Hydraulic Breaker Attachment",
+		CanonicalName: conceptName,
 		ConceptType:   "EQUIPMENT",
 	})
 	if err != nil {

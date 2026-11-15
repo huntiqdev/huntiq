@@ -69,6 +69,14 @@ func (s *CategoryHierarchyService) GetCategoryTreeWithDepth(ctx context.Context,
 	return s.repo.GetCategoryTreeWithDepth(ctx, lang, depth)
 }
 
+// SearchCategories performs an ultra-fast hierarchical search returning full breadcrumbs
+func (s *CategoryHierarchyService) SearchCategories(ctx context.Context, term string, lang string, limit int) ([]models.CategorySearchResult, error) {
+	if lang == "" {
+		lang = "en"
+	}
+	return s.repo.SearchCategories(ctx, term, lang, limit)
+}
+
 // GetBreadcrumbs returns the category path
 func (s *CategoryHierarchyService) GetBreadcrumbs(ctx context.Context, categoryID int, lang string) ([]models.CategoryBreadcrumb, error) {
 	if lang == "" {

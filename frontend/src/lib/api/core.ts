@@ -114,15 +114,29 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
     }
   }
 
+  // Attach token from localStorage if not already provided
+  if (typeof window !== 'undefined' && !headers['Authorization']) {
+    try {
+      const savedToken = localStorage.getItem('huntiq_token');
+      if (savedToken && !isTokenExpired(savedToken)) {
+        headers['Authorization'] = `Bearer ${savedToken}`;
+      }
+    } catch {}
+  }
+
   const authHeader = headers['Authorization'];
   if (authHeader?.startsWith('Bearer ')) {
     const token = authHeader.slice(7);
     if (isTokenExpired(token) && typeof window !== 'undefined' && Date.now() - lastRedirect > 5000) {
       lastRedirect = Date.now();
+      try {
+        localStorage.removeItem('huntiq_token');
+        localStorage.removeItem('huntiq_user');
+      } catch {}
       await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
       const path = window.location.pathname;
       if (path.startsWith('/admin')) window.location.replace('/admin/login');
-      else if (path.startsWith('/seller')) window.location.replace('/auth?as=seller');
+      else if (path.startsWith('/seller')) window.location.replace('/auth?intent=sell');
       else if (path.startsWith('/buyer')) window.location.replace('/auth?as=buyer');
       else window.location.replace('/auth');
       throw new ApiError('Session expired — please log in again', 'AUTH_SESSION_EXPIRED', 401);

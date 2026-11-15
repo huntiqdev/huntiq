@@ -4,7 +4,7 @@ import { Product } from '@/types';
 import { ImageGallery } from '@/components/public/ImageGallery';
 import { BuyButton } from '@/components/public/BuyButton';
 import Link from 'next/link';
-import { MapPin, ShieldCheck, Navigation, ShieldAlert } from 'lucide-react';
+import { MapPin, ShieldCheck, Navigation, ShieldAlert, Globe, Sparkles, ExternalLink } from 'lucide-react';
 import { ClientLabel } from '@/components/public/ClientLabel';
 import { ClientProductBadges } from '@/components/public/ClientProductBadges';
 import CategoryBreadcrumbs from '@/components/category/CategoryBreadcrumbs';
@@ -16,11 +16,15 @@ interface Props { params: Promise<{ id: string }> }
 
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
+  const numId = Number(id);
+  if (!numId || isNaN(numId) || numId <= 0) {
+    notFound();
+  }
   let product: Product;
-  try { product = await api.getProduct(Number(id)); }
+  try { product = await api.getProduct(numId); }
   catch (err: any) {
     // Only treat a real 404 as not-found; let other errors surface
-    if (err?.status === 404) notFound();
+    if (err?.status === 404 || err?.message?.toLowerCase().includes('not found')) notFound();
     throw err;
   }
 
@@ -149,6 +153,68 @@ export default async function ProductDetailPage({ params }: Props) {
             requiredBuyerTier={product.required_buyer_tier}
             specificationsLocked={product.specifications_locked}
           />
+
+          {/* Gold & Premium Verified Merchant External Links & Channels */}
+          {(product.custom_url || (product.social_links && Object.keys(product.social_links).length > 0)) && (
+            <div className="p-3.5 rounded-2xl border border-amber-300 dark:border-amber-700/60 bg-gradient-to-br from-amber-50/70 to-yellow-50/30 dark:from-amber-950/20 dark:to-yellow-950/10 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-800 dark:text-amber-300">
+                  <Sparkles size={14} className="text-amber-600 dark:text-amber-400" />
+                  <span>Verified Merchant Channels</span>
+                </div>
+                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500 text-white shadow-sm">
+                  {product.seller_tier === 'premium' ? 'Premium' : 'Gold'}
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {product.custom_url && (
+                  <a
+                    href={product.custom_url.startsWith('http') ? product.custom_url : `https://${product.custom_url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-amber-900 dark:text-amber-200 bg-white/80 dark:bg-zinc-800/80 hover:bg-white dark:hover:bg-zinc-800 px-3 py-1.5 rounded-xl border border-amber-200 dark:border-amber-800/60 shadow-xs transition-colors"
+                  >
+                    <Globe size={13} className="text-amber-600 shrink-0" />
+                    <span>Official Website / Portfolio</span>
+                    <ExternalLink size={11} className="opacity-60" />
+                  </a>
+                )}
+                {product.social_links?.telegram && (
+                  <a
+                    href={product.social_links.telegram.startsWith('http') ? product.social_links.telegram : `https://t.me/${product.social_links.telegram.replace('@', '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-sky-800 dark:text-sky-200 bg-sky-50 dark:bg-sky-950/50 hover:bg-sky-100 dark:hover:bg-sky-900/60 px-3 py-1.5 rounded-xl border border-sky-200 dark:border-sky-800/60 transition-colors"
+                  >
+                    <span>Telegram: {product.social_links.telegram}</span>
+                    <ExternalLink size={11} className="opacity-60" />
+                  </a>
+                )}
+                {product.social_links?.youtube && (
+                  <a
+                    href={product.social_links.youtube.startsWith('http') ? product.social_links.youtube : `https://youtube.com/${product.social_links.youtube.startsWith('@') ? product.social_links.youtube : '@' + product.social_links.youtube}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-red-800 dark:text-red-200 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/60 px-3 py-1.5 rounded-xl border border-red-200 dark:border-red-800/60 transition-colors"
+                  >
+                    <span>YouTube: {product.social_links.youtube}</span>
+                    <ExternalLink size={11} className="opacity-60" />
+                  </a>
+                )}
+                {product.social_links?.tiktok && (
+                  <a
+                    href={product.social_links.tiktok.startsWith('http') ? product.social_links.tiktok : `https://tiktok.com/@${product.social_links.tiktok.replace('@', '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 transition-colors"
+                  >
+                    <span>TikTok: {product.social_links.tiktok}</span>
+                    <ExternalLink size={11} className="opacity-60" />
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
 
           <BuyButton product={product} />
 

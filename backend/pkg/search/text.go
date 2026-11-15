@@ -16,7 +16,7 @@ import (
 )
 
 // SearchConfig holds the runtime-loaded search enhancement data.
-// This is populated from data/taxonomy/search_config.json at startup.
+// This is populated from data/search_config.json at startup (see cmd/api/main.go).
 type SearchConfig struct {
 	EthiopianKeywordMap     map[string]string `json:"ethiopian_keyword_map"`
 	SynonymGroups           [][]string        `json:"synonym_groups"`

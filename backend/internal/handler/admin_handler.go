@@ -727,33 +727,33 @@ func (h *AdminHandler) ListCategories(c *fiber.Ctx) error {
 	return response.OKList(c, cats)
 }
 
-// POST /api/admin/categories — DEPRECATED: Use /api/admin/category-hierarchy
+// POST /api/admin/categories — deprecated: use /api/admin/category-hierarchy or /api/admin/classification
 func (h *AdminHandler) CreateCategory(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-		"success":            false,
 		"error":              "DEPRECATED_MUTATION_ENDPOINT",
-		"message":            "Direct mutations to legacy categories are prohibited. Use /api/admin/category-hierarchy for canonical category operations.",
 		"canonical_endpoint": "/api/admin/category-hierarchy",
+		"message":            "Legacy category mutations are deprecated. Use /api/admin/category-hierarchy or Universal Classification APIs.",
+		"success":            false,
 	})
 }
 
-// PUT /api/admin/categories/:id — DEPRECATED: Use /api/admin/category-hierarchy/:id
+// PUT /api/admin/categories/:id — deprecated: use /api/admin/category-hierarchy or /api/admin/classification
 func (h *AdminHandler) UpdateCategory(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-		"success":            false,
 		"error":              "DEPRECATED_MUTATION_ENDPOINT",
-		"message":            "Direct mutations to legacy categories are prohibited. Use /api/admin/category-hierarchy for canonical category operations.",
 		"canonical_endpoint": "/api/admin/category-hierarchy",
+		"message":            "Legacy category mutations are deprecated. Use /api/admin/category-hierarchy or Universal Classification APIs.",
+		"success":            false,
 	})
 }
 
-// DELETE /api/admin/categories/:id — DEPRECATED: Use /api/admin/category-hierarchy/:id
+// DELETE /api/admin/categories/:id — deprecated: use /api/admin/category-hierarchy or /api/admin/classification
 func (h *AdminHandler) DeleteCategory(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-		"success":            false,
 		"error":              "DEPRECATED_MUTATION_ENDPOINT",
-		"message":            "Direct mutations to legacy categories are prohibited. Use /api/admin/category-hierarchy for canonical category operations.",
 		"canonical_endpoint": "/api/admin/category-hierarchy",
+		"message":            "Legacy category mutations are deprecated. Use /api/admin/category-hierarchy or Universal Classification APIs.",
+		"success":            false,
 	})
 }
 

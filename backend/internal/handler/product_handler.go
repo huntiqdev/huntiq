@@ -189,21 +189,44 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 		v = truncate(v, 100)
 		f.Item = &v
 	}
-	// Listing type filter: 'sale' or 'rent'
-	if v := c.Query("listing_type"); v != "" {
-		if v == "sale" || v == "rent" {
-			f.ListingType = &v
+	// Listing type filter: 'sale' (or 'buy') vs 'rent'
+	listingTypeQuery := c.Query("listing_type")
+	if listingTypeQuery == "" {
+		listingTypeQuery = c.Query("type")
+	}
+	if listingTypeQuery != "" {
+		lt := strings.ToLower(strings.TrimSpace(listingTypeQuery))
+		if lt == "buy" {
+			lt = "sale"
+		}
+		if lt == "sale" || lt == "rent" {
+			f.ListingType = &lt
 		}
 	}
 	if v := c.Query("sort_by"); v != "" {
 		switch v {
-		case "price_asc", "price_desc", "newest":
+		case "price_asc", "price_desc", "newest", "nearest":
 			f.SortBy = &v
 		}
 	} else if v := c.Query("sort"); v != "" {
 		switch v {
-		case "price_asc", "price_desc", "newest":
+		case "price_asc", "price_desc", "newest", "nearest":
 			f.SortBy = &v
+		}
+	}
+	if v := c.Query("lat"); v != "" {
+		if lat, err := strconv.ParseFloat(v, 64); err == nil && lat >= -90 && lat <= 90 {
+			f.Lat = &lat
+		}
+	}
+	if v := c.Query("lng"); v != "" {
+		if lng, err := strconv.ParseFloat(v, 64); err == nil && lng >= -180 && lng <= 180 {
+			f.Lng = &lng
+		}
+	}
+	if v := c.Query("max_distance"); v != "" {
+		if d, err := strconv.ParseFloat(v, 64); err == nil && d > 0 {
+			f.MaxDistanceKM = &d
 		}
 	}
 	f.Page = parseQueryInt(c, "page", 1)

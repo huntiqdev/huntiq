@@ -16,7 +16,7 @@ import { useAuth } from '@/context/AuthContext';
 import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
   LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
-  ShieldCheck, Sliders, ShieldAlert,
+  ShieldCheck, Sliders, ShieldAlert, Navigation, AlertTriangle, RotateCcw,
 } from 'lucide-react';
 import { formatLocationParts } from '@/types/location';
 
@@ -109,6 +109,8 @@ function ProductsContent() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
   const [filters, setFilters] = useState<ProductFilters>({});
   const [visibleCount, setVisibleCount] = useState(24);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -121,6 +123,15 @@ function ProductsContent() {
   const [activeWoreda, setActiveWoreda] = useState<string>('');
   const [activeCondition, setActiveCondition] = useState<'all' | 'new' | 'used'>('all');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
+
+  // Master Filter State: Price & Proximity
+  const [minPriceInput, setMinPriceInput] = useState<string>('');
+  const [maxPriceInput, setMaxPriceInput] = useState<string>('');
+  const [activeMinPrice, setActiveMinPrice] = useState<number | undefined>(undefined);
+  const [activeMaxPrice, setActiveMaxPrice] = useState<number | undefined>(undefined);
+  const [pricePopoverOpen, setPricePopoverOpen] = useState(false);
+  const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [isLocating, setIsLocating] = useState(false);
 
   useEffect(() => {
     api.getCategoryTree(locale)
@@ -196,27 +207,86 @@ function ProductsContent() {
     if (zone) { f.zone = zone; setActiveZone(zone); } else { setActiveZone(''); }
     if (region) { f.region = region; setActiveRegion(region); } else { setActiveRegion(''); }
 
+    // Master Filters: Price min/max
+    const minP = searchParams.get('min_price');
+    const maxP = searchParams.get('max_price');
+    if (minP) {
+      const p = parseFloat(minP);
+      if (!isNaN(p)) {
+        f.min_price = p;
+        setActiveMinPrice(p);
+        setMinPriceInput(minP);
+      }
+    } else {
+      setActiveMinPrice(undefined);
+      setMinPriceInput('');
+    }
+    if (maxP) {
+      const p = parseFloat(maxP);
+      if (!isNaN(p)) {
+        f.max_price = p;
+        setActiveMaxPrice(p);
+        setMaxPriceInput(maxP);
+      }
+    } else {
+      setActiveMaxPrice(undefined);
+      setMaxPriceInput('');
+    }
+
+    // Master Filters: Condition
+    const condParam = searchParams.get('condition');
+    if (condParam === 'new' || condParam === 'used') {
+      setActiveCondition(condParam);
+    } else {
+      setActiveCondition('all');
+    }
+
+    // Master Filters: GPS proximity coordinates
+    const latParam = searchParams.get('lat');
+    const lngParam = searchParams.get('lng');
+    if (latParam && lngParam) {
+      const lat = parseFloat(latParam);
+      const lng = parseFloat(lngParam);
+      if (!isNaN(lat) && !isNaN(lng)) {
+        f.lat = lat;
+        f.lng = lng;
+        setUserCoords({ lat, lng });
+      }
+    } else {
+      setUserCoords(null);
+    }
+
     setFilters(f);
   }, [searchParams, categories]);
 
   useEffect(() => {
     setLoading(true);
+    setFetchError(null);
     setVisibleCount(24);
     const apiFilters: ProductFilters = { ...filters };
     if (activeCondition !== 'all') apiFilters.condition = activeCondition;
     if (listingType !== 'all') apiFilters.listing_type = listingType;
+    if (activeMinPrice !== undefined) apiFilters.min_price = activeMinPrice;
+    if (activeMaxPrice !== undefined) apiFilters.max_price = activeMaxPrice;
+    if (userCoords) {
+      apiFilters.lat = userCoords.lat;
+      apiFilters.lng = userCoords.lng;
+      apiFilters.sort_by = 'nearest';
+    }
     apiFilters.locale = locale;
     apiFilters.preferred_language = locale;
 
     api.getProducts(apiFilters)
       .then(data => {
         setProducts(data);
+        setFetchError(null);
       })
-      .catch(() => {
+      .catch((err: any) => {
         setProducts([]);
+        setFetchError(err?.message || 'Failed to load products. Please check your network connection.');
       })
       .finally(() => setLoading(false));
-  }, [filters, activeCondition, listingType, locale]);
+  }, [filters, activeCondition, listingType, activeMinPrice, activeMaxPrice, userCoords, locale, retryKey]);
 
   const findNodeById = (nodes: Category[], id?: number): Category | undefined => {
     if (!id) return undefined;
@@ -239,22 +309,111 @@ function ProductsContent() {
   const activeLocParts = formatLocationParts({ region: activeRegion, zone: activeZone, subcity: activeSubcity, woreda: activeWoreda }, locale);
   const activeLocLabel = activeLocParts.join(' › ');
 
-  const buildUrl = (catId?: number, sub?: string, item?: string, search?: string, loc?: { region?: string; zone?: string; subcity?: string; woreda?: string }, overrideType?: 'all' | 'sale' | 'rent') => {
-    const p = new URLSearchParams();
-    const typeToUse = overrideType !== undefined ? overrideType : listingType;
-    if (typeToUse && typeToUse !== 'all') p.set('type', typeToUse);
-    if (catId) {
-      p.set('category_id', String(catId));
-      p.set('category_hierarchy_id', String(catId));
+  const buildUrl = (
+    optsOrCatId?: number | {
+      catId?: number;
+      sub?: string;
+      item?: string;
+      search?: string;
+      loc?: { region?: string; zone?: string; subcity?: string; woreda?: string };
+      overrideType?: 'all' | 'sale' | 'rent';
+      overrideCond?: 'all' | 'new' | 'used';
+      minP?: string;
+      maxP?: string;
+      coords?: { lat: number; lng: number } | null;
+    },
+    subArg?: string,
+    itemArg?: string,
+    searchArg?: string,
+    locArg?: { region?: string; zone?: string; subcity?: string; woreda?: string },
+    overrideTypeArg?: 'all' | 'sale' | 'rent'
+  ) => {
+    let opts: {
+      catId?: number;
+      sub?: string;
+      item?: string;
+      search?: string;
+      loc?: { region?: string; zone?: string; subcity?: string; woreda?: string };
+      overrideType?: 'all' | 'sale' | 'rent';
+      overrideCond?: 'all' | 'new' | 'used';
+      minP?: string;
+      maxP?: string;
+      coords?: { lat: number; lng: number } | null;
+    } = {};
+
+    if (typeof optsOrCatId === 'number') {
+      opts = {
+        catId: optsOrCatId,
+        sub: subArg,
+        item: itemArg,
+        search: searchArg,
+        loc: locArg,
+        overrideType: overrideTypeArg,
+      };
+    } else if (optsOrCatId && typeof optsOrCatId === 'object') {
+      opts = optsOrCatId;
     }
-    if (sub) p.set('subcategory', sub);
-    if (item) p.set('item', item);
-    const l = loc ?? { region: activeRegion || undefined, zone: activeZone || undefined, subcity: activeSubcity || undefined, woreda: activeWoreda || undefined };
+    const p = new URLSearchParams();
+    const typeToUse = opts?.overrideType !== undefined ? opts.overrideType : listingType;
+    if (typeToUse && typeToUse !== 'all') p.set('type', typeToUse);
+
+    const condToUse = opts?.overrideCond !== undefined ? opts.overrideCond : activeCondition;
+    if (condToUse && condToUse !== 'all') p.set('condition', condToUse);
+
+    const catToUse = opts?.catId !== undefined ? opts.catId : activeCatId;
+    if (catToUse) {
+      p.set('category_id', String(catToUse));
+      p.set('category_hierarchy_id', String(catToUse));
+    }
+
+    const subToUse = opts?.sub !== undefined ? opts.sub : activeSub;
+    if (subToUse) p.set('subcategory', subToUse);
+
+    const itemToUse = opts?.item !== undefined ? opts.item : activeItem;
+    if (itemToUse) p.set('item', itemToUse);
+
+    const minPToUse = opts?.minP !== undefined ? opts.minP : (activeMinPrice !== undefined ? String(activeMinPrice) : '');
+    if (minPToUse) p.set('min_price', minPToUse);
+
+    const maxPToUse = opts?.maxP !== undefined ? opts.maxP : (activeMaxPrice !== undefined ? String(activeMaxPrice) : '');
+    if (maxPToUse) p.set('max_price', maxPToUse);
+
+    const coordsToUse = opts?.coords !== undefined ? opts.coords : userCoords;
+    if (coordsToUse) {
+      p.set('lat', coordsToUse.lat.toFixed(6));
+      p.set('lng', coordsToUse.lng.toFixed(6));
+      p.set('sort_by', 'nearest');
+    }
+
+    const l = opts?.loc ?? { region: activeRegion || undefined, zone: activeZone || undefined, subcity: activeSubcity || undefined, woreda: activeWoreda || undefined };
     if (l.woreda) p.set('woreda', l.woreda);
     else if (l.subcity) p.set('subcity', l.subcity);
     else if (l.zone) p.set('zone', l.zone);
     else if (l.region) p.set('region', l.region);
+
     return `/products${p.toString() ? '?' + p.toString() : ''}`;
+  };
+
+  const detectNearMe = () => {
+    if (typeof window === 'undefined' || !navigator?.geolocation) {
+      alert('Geolocation is not available on this device');
+      return;
+    }
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setIsLocating(false);
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setUserCoords({ lat, lng });
+        router.push(buildUrl({ coords: { lat, lng } }));
+      },
+      (err) => {
+        setIsLocating(false);
+        console.warn('Geolocation error:', err);
+      },
+      { timeout: 8000, enableHighAccuracy: true }
+    );
   };
 
   const getCatDisplayName = (cat?: Category) => {
@@ -399,41 +558,245 @@ function ProductsContent() {
           {/* Products area */}
           <div className="flex-1 min-w-0">
 
-            {/* Top bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-2">
-                <p className="text-xs font-bold text-zinc-400">
-                  {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
-                </p>
+            {/* ── MASTER FILTER BAR ── */}
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-2.5 mb-3 shadow-xs flex flex-wrap items-center justify-between gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
+                {/* 1. Transaction Master Filter: Buy / Rent / All */}
+                <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-0.5 rounded-xl border border-zinc-200/60 dark:border-zinc-700/60">
+                  <button
+                    type="button"
+                    onClick={() => { setListingType('all'); router.push(buildUrl({ overrideType: 'all' })); }}
+                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all ${
+                      listingType === 'all'
+                        ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-xs'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {(t.ui as any)?.all_modes ?? 'All'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setListingType('sale'); router.push(buildUrl({ overrideType: 'sale' })); }}
+                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all flex items-center gap-1 ${
+                      listingType === 'sale'
+                        ? 'bg-orange-600 text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-orange-600'
+                    }`}
+                  >
+                    🏷️ {t.nav?.buy ?? 'Buy'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setListingType('rent'); router.push(buildUrl({ overrideType: 'rent' })); }}
+                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all flex items-center gap-1 ${
+                      listingType === 'rent'
+                        ? 'bg-teal-600 text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-teal-600'
+                    }`}
+                  >
+                    🏠 {t.nav?.rental ?? 'Rent'}
+                  </button>
+                </div>
 
-                {/* Condition filter pills — compact inline */}
-                <div className="flex items-center gap-1 ml-2">
+                {/* 2. Condition Master Filter: New / Used / All */}
+                <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-0.5 rounded-xl border border-zinc-200/60 dark:border-zinc-700/60">
                   {(['all', 'new', 'used'] as const).map(c => (
-                    <button key={c} onClick={() => { setActiveCondition(c); setVisibleCount(24); }}
-                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide transition-all shrink-0 ${activeCondition === c
-                        ? c === 'new' ? 'bg-green-600 text-white'
-                          : c === 'used' ? 'bg-blue-600 text-white'
-                            : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
-                        }`}>
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => { setActiveCondition(c); router.push(buildUrl({ overrideCond: c })); }}
+                      className={`px-2 py-1 text-[10px] font-black uppercase rounded-lg transition-all ${
+                        activeCondition === c
+                          ? c === 'new'
+                            ? 'bg-emerald-600 text-white shadow-xs'
+                            : c === 'used'
+                            ? 'bg-blue-600 text-white shadow-xs'
+                            : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900 shadow-xs'
+                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                      }`}
+                    >
                       {c === 'all' ? (t.ui?.condition_all ?? 'All') : c === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}
                     </button>
                   ))}
                 </div>
+
+                {/* 3. Price Filter Pill (Category-scoped or Root-wide) */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setPricePopoverOpen(!pricePopoverOpen)}
+                    className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
+                      activeMinPrice !== undefined || activeMaxPrice !== undefined
+                        ? 'bg-orange-50 dark:bg-orange-950/40 border-orange-500 text-orange-600 dark:text-orange-400 font-extrabold'
+                        : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:border-zinc-300'
+                    }`}
+                  >
+                    <span>💰 {activeMinPrice !== undefined || activeMaxPrice !== undefined ? `${activeMinPrice ?? 0} - ${activeMaxPrice ?? '∞'} ETB` : (t.ui?.price ?? 'Price (ETB)')}</span>
+                    <ChevronDown size={11} className={pricePopoverOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                  </button>
+
+                  {pricePopoverOpen && (
+                    <div className="absolute left-0 top-full mt-2 z-50 w-64 p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-xl space-y-2">
+                      <p className="text-[10px] font-black uppercase text-zinc-500">
+                        {activeCatNode ? `${getCatDisplayName(activeCatNode)} Price (ETB)` : 'Marketplace Price Range (ETB)'}
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          placeholder="Min"
+                          value={minPriceInput}
+                          onChange={e => setMinPriceInput(e.target.value)}
+                          className="w-1/2 px-2.5 py-1.5 text-xs bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-1 focus:ring-orange-600"
+                        />
+                        <span className="text-zinc-400 text-xs">-</span>
+                        <input
+                          type="number"
+                          placeholder="Max"
+                          value={maxPriceInput}
+                          onChange={e => setMaxPriceInput(e.target.value)}
+                          className="w-1/2 px-2.5 py-1.5 text-xs bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-1 focus:ring-orange-600"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between pt-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMinPriceInput('');
+                            setMaxPriceInput('');
+                            setActiveMinPrice(undefined);
+                            setActiveMaxPrice(undefined);
+                            setPricePopoverOpen(false);
+                            router.push(buildUrl({ minP: '', maxP: '' }));
+                          }}
+                          className="text-[10px] font-bold text-zinc-400 hover:text-red-500"
+                        >
+                          Reset
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveMinPrice(minPriceInput ? parseFloat(minPriceInput) : undefined);
+                            setActiveMaxPrice(maxPriceInput ? parseFloat(maxPriceInput) : undefined);
+                            setPricePopoverOpen(false);
+                            router.push(buildUrl({ minP: minPriceInput, maxP: maxPriceInput }));
+                          }}
+                          className="px-3 py-1 bg-orange-600 text-white rounded-lg text-xs font-bold hover:bg-orange-700 transition-colors"
+                        >
+                          Apply
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 4. Proximity / Near Me Master Filter */}
+                <button
+                  type="button"
+                  onClick={detectNearMe}
+                  disabled={isLocating}
+                  className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
+                    userCoords
+                      ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
+                      : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:border-teal-500'
+                  }`}
+                >
+                  <Navigation size={11} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
+                  <span>{isLocating ? 'Locating…' : userCoords ? '📍 Nearest to Me' : 'Near Me'}</span>
+                  {userCoords && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setUserCoords(null);
+                        router.push(buildUrl({ coords: null }));
+                      }}
+                      className="ml-1 hover:text-red-500 font-black cursor-pointer"
+                    >
+                      ×
+                    </span>
+                  )}
+                </button>
               </div>
 
-              <button onClick={() => setFilterOpen(true)}
-                className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all">
-                <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
-              </button>
+              {/* Mobile Filter Toggle & Count */}
+              <div className="flex items-center gap-2">
+                <p className="text-xs font-bold text-zinc-400">
+                  {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
+                </p>
+                <button
+                  onClick={() => setFilterOpen(true)}
+                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all"
+                >
+                  <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
+                </button>
+              </div>
             </div>
 
             {loading ? (
               <div className="flex items-center justify-center py-20"><Spinner /></div>
+            ) : fetchError ? (
+              <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center justify-center shadow-md">
+                  <AlertTriangle size={28} />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">Unable to Load Listings</h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">{fetchError}</p>
+                </div>
+                <button
+                  onClick={() => setRetryKey(k => k + 1)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition-all active:scale-95"
+                >
+                  <RotateCcw size={14} />
+                  <span>Retry</span>
+                </button>
+              </div>
             ) : products.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-20 opacity-40">
-                <ShoppingBag size={48} className="mb-3" />
-                <p className="font-bold">{t.ui.no_products}</p>
+              <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
+                <div className="w-16 h-16 rounded-3xl bg-zinc-100 dark:bg-zinc-800 text-zinc-400 flex items-center justify-center">
+                  <ShoppingBag size={32} />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-zinc-900 dark:text-zinc-100">{t.ui.no_products ?? 'No listings found'}</h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    No active listings match your current search or filter criteria.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center pt-1">
+                  <button
+                    onClick={() => {
+                      setActiveCatId(undefined);
+                      setActiveSub(undefined);
+                      setActiveItem(undefined);
+                      setActiveMinPrice(undefined);
+                      setActiveMaxPrice(undefined);
+                      setActiveCondition('all');
+                      setListingType('all');
+                      router.push('/products');
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-all shadow-md active:scale-95"
+                  >
+                    <span>Clear All Filters</span>
+                  </button>
+                </div>
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full">
+                  <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
+                    Explore Categories
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 justify-center">
+                    <Link href="/products?category_hierarchy_id=1380" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
+                      📷 Camera Lenses
+                    </Link>
+                    <Link href="/products?category_hierarchy_id=1382" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
+                      📸 Mirrorless Cameras
+                    </Link>
+                    <Link href="/products?cat=electronics" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
+                      📱 Electronics
+                    </Link>
+                    <Link href="/products?cat=transport-mobility" className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors">
+                      🚗 Vehicles
+                    </Link>
+                  </div>
+                </div>
               </div>
             ) : (
               <>

@@ -87,6 +87,10 @@ export interface Product {
   is_currently_rented?: boolean;
   current_tenant_id?: number;
   rented_until?: string; // DATE
+
+  // Gold & Premium Merchant Features
+  custom_url?: string;
+  social_links?: Record<string, string>;
   
   category?: Category;
   location?: Location;
@@ -112,7 +116,10 @@ export interface ProductFilters {
   woreda?: string;
   search?: string;
   listing_type?: 'sale' | 'rent'; // Filter by listing type
-  sort_by?: 'price_asc' | 'price_desc' | 'newest';
+  sort_by?: 'price_asc' | 'price_desc' | 'newest' | 'nearest';
+  lat?: number;
+  lng?: number;
+  max_distance?: number;
   mode?: 'ai' | 'manual';
   locale?: string;
   preferred_language?: string;

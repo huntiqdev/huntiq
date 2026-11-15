@@ -23,6 +23,8 @@ type User struct {
 	OTPVerified        bool      `json:"otp_verified"`
 	SellerPreference   string    `json:"seller_preference,omitempty"` // 'sale', 'rent', or 'both'
 	Capabilities       []string  `json:"capabilities,omitempty"`      // additive: 'buyer', 'seller', 'landlord', 'renter'
+	SaleProductCount   int       `json:"sale_product_count"`
+	RentProductCount   int       `json:"rent_product_count"`
 	CreatedAt          time.Time `json:"created_at"`
 	UpdatedAt          time.Time `json:"updated_at"`
 }

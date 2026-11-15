@@ -140,11 +140,44 @@ END $$;
 
 -- PART 2: Map Attributes to Categories (category_attributes)
 
--- Electronics: mobile-phones
+-- Standard Attribute Definitions
+INSERT INTO attribute_definitions (name_en, slug, data_type, unit, is_required, is_searchable, is_filterable, display_order) VALUES
+('Brand', 'brand', 'text', NULL, true, true, true, 1),
+('Model', 'model', 'text', NULL, true, true, true, 2),
+('Storage', 'storage', 'text', 'GB', false, true, true, 3),
+('RAM', 'ram', 'text', 'GB', false, true, true, 4),
+('Screen Size', 'screen-size', 'number', 'inches', false, true, true, 5),
+('Processor', 'processor', 'text', NULL, false, true, true, 6),
+('Battery Capacity', 'battery', 'text', 'mAh', false, true, true, 7),
+('Color', 'color', 'text', NULL, false, true, true, 8),
+('Make', 'make', 'text', NULL, true, true, true, 1),
+('Vehicle Model', 'vehicle-model', 'text', NULL, true, true, true, 2),
+('Year', 'year', 'number', NULL, true, true, true, 3),
+('Mileage', 'mileage', 'number', 'km', false, true, true, 4),
+('Fuel Type', 'fuel-type', 'select', NULL, false, true, true, 5),
+('Transmission', 'transmission', 'select', NULL, false, true, true, 6),
+('Engine Size', 'engine-size', 'number', 'cc', false, true, true, 7),
+('Doors', 'doors', 'number', NULL, false, true, true, 8),
+('Property Type', 'property-type', 'select', NULL, true, true, true, 1),
+('Bedrooms', 'bedrooms', 'number', NULL, true, true, true, 2),
+('Bathrooms', 'bathrooms', 'number', NULL, false, true, true, 3),
+('Area Size', 'area-size', 'number', 'sqm', true, true, true, 4),
+('Furnished', 'furnished', 'boolean', NULL, false, true, true, 5),
+('Parking', 'parking', 'boolean', NULL, false, true, true, 6),
+('Floor', 'floor', 'number', NULL, false, true, true, 7),
+('Equipment Type', 'equipment-type', 'select', NULL, true, true, true, 1),
+('Horsepower', 'horsepower', 'number', 'HP', false, true, true, 2),
+('Working Hours', 'working-hours', 'number', 'hrs', false, true, true, 3)
+ON CONFLICT (slug) DO UPDATE SET
+    name_en = EXCLUDED.name_en,
+    data_type = EXCLUDED.data_type,
+    unit = EXCLUDED.unit;
+
+-- Electronics: mobile-phones and category 14 compatibility
 INSERT INTO category_attributes (category_id, attribute_id, is_required, display_order)
 SELECT ch.id, ad.id, CASE WHEN ad.slug IN ('brand', 'model') THEN true ELSE false END, ad.display_order
 FROM category_hierarchy ch CROSS JOIN attribute_definitions ad
-WHERE ch.slug = 'mobile-phones' AND ad.slug IN ('brand', 'model', 'storage', 'ram', 'screen-size', 'battery', 'color')
+WHERE (ch.slug = 'mobile-phones' OR ch.id = 14) AND ad.slug IN ('brand', 'model', 'storage', 'ram', 'screen-size', 'battery', 'color')
 ON CONFLICT (category_id, attribute_id) DO NOTHING;
 
 -- Electronics: computers-laptops

@@ -60,11 +60,16 @@ func TestProductLifecycle_HierarchicalLeaf163_DualMapping(t *testing.T) {
 		t.Fatalf("Category 163 expected to exist and be active: valid=%v, active=%v, err=%v", valid, active, err)
 	}
 
-	// Find active seller
+	// Find active seller or create one for test
 	var sellerID int
 	err = db.QueryRow(ctx, "SELECT id FROM users WHERE role = 'seller' AND is_active = true LIMIT 1").Scan(&sellerID)
 	if err != nil {
-		t.Fatalf("Failed to find active seller in test database: %v", err)
+		err = db.QueryRow(ctx, `INSERT INTO users (name, phone, password_hash, role, referral_code, is_active)
+			VALUES ('Test Seller', '+251911000001', 'hashed_test_pw', 'seller', 'REFTEST001', true)
+			ON CONFLICT (phone, role) DO UPDATE SET is_active = true RETURNING id`).Scan(&sellerID)
+		if err != nil {
+			t.Fatalf("Failed to find or create active seller in test database: %v", err)
+		}
 	}
 
 	leafCatID := 163

@@ -334,6 +334,23 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 	if len(req.ImageURLs) > maxImages {
 		return nil, errors.New("too many images for your tier")
 	}
+
+	// Gold & Premium benefit: external custom_url and verified social channels
+	var customURL *string
+	var socialLinks map[string]interface{}
+	if (req.CustomURL != nil && strings.TrimSpace(*req.CustomURL) != "") || len(req.SocialLinks) > 0 {
+		if tierStr != "gold" && tierStr != "premium" {
+			return nil, errors.New("custom URLs and verified social channels are an exclusive benefit for Gold and Premium tiers")
+		}
+		if req.CustomURL != nil && strings.TrimSpace(*req.CustomURL) != "" {
+			trimmedURL := strings.TrimSpace(*req.CustomURL)
+			if !strings.HasPrefix(trimmedURL, "http://") && !strings.HasPrefix(trimmedURL, "https://") {
+				trimmedURL = "https://" + trimmedURL
+			}
+			customURL = &trimmedURL
+		}
+		socialLinks = req.SocialLinks
+	}
 	duration := req.ListingDurationDays
 	if duration < 1 {
 		duration = 30 // default 1 month
@@ -451,6 +468,8 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 		DepositAmount:          req.DepositAmount,
 		AvailableFrom:          req.AvailableFrom,
 		AvailableUntil:         req.AvailableUntil,
+		CustomURL:              customURL,
+		SocialLinks:            socialLinks,
 	}
 	id, err := s.repo.Create(ctx, p, req.ImageURLs)
 	if err != nil {
@@ -706,6 +725,32 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		existing.WeeklyIncrementPercent = &fee.WeeklyIncrementPct
 		existing.TotalFeePercent = &fee.TotalFeePercent
 		existing.TotalFeeAmount = &fee.TotalFeeAmount
+	}
+
+	if req.CustomURL != nil || req.SocialLinks != nil {
+		tierStr, _, terr := s.userRepo.GetTier(ctx, sellerID)
+		if terr != nil {
+			tierStr = string(TierNormal)
+		}
+		if (req.CustomURL != nil && strings.TrimSpace(*req.CustomURL) != "") || len(req.SocialLinks) > 0 {
+			if tierStr != "gold" && tierStr != "premium" {
+				return errors.New("custom URLs and verified social channels are an exclusive benefit for Gold and Premium tiers")
+			}
+		}
+		if req.CustomURL != nil {
+			trimmedURL := strings.TrimSpace(*req.CustomURL)
+			if trimmedURL != "" && !strings.HasPrefix(trimmedURL, "http://") && !strings.HasPrefix(trimmedURL, "https://") {
+				trimmedURL = "https://" + trimmedURL
+			}
+			if trimmedURL == "" {
+				existing.CustomURL = nil
+			} else {
+				existing.CustomURL = &trimmedURL
+			}
+		}
+		if req.SocialLinks != nil {
+			existing.SocialLinks = req.SocialLinks
+		}
 	}
 
 	if err := s.repo.Update(ctx, existing, req.ImageURLs); err != nil {

@@ -199,8 +199,13 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
   const isAuthPage = pathname === '/seller/login' || pathname === '/seller/register';
 
   useEffect(() => {
-    if (!loading && !isAuthPage && !user) router.replace('/auth?intent=sell');
-  }, [loading, user, isAuthPage, router]);
+    if (!loading && !isAuthPage && !user) {
+      const isRent = pathname.includes('rent') || (typeof window !== 'undefined' && window.location.search.includes('type=rent'));
+      const intent = isRent ? 'rent' : 'sell';
+      const redirect = typeof window !== 'undefined' ? `${pathname}${window.location.search}` : pathname;
+      router.replace(`/auth?intent=${intent}&redirect=${encodeURIComponent(redirect)}`);
+    }
+  }, [loading, user, isAuthPage, pathname, router]);
 
   useEffect(() => {
     if (!user || !isProvider) return;
@@ -227,6 +232,9 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
 
   // If user is logged in but hasn't activated seller or landlord capability yet
   if (!isProvider) {
+    if (pathname.startsWith('/seller/product/new')) {
+      return <>{children}</>;
+    }
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center p-4">
         <div className="max-w-lg w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-2xl text-center space-y-6">

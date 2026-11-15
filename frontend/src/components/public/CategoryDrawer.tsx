@@ -48,14 +48,38 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
   const [error, setError] = useState<string | null>(null);
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [drawerSearchResults, setDrawerSearchResults] = useState<any[]>([]);
+  const [drawerSearching, setDrawerSearching] = useState(false);
   const [expandedMobileCat, setExpandedMobileCat] = useState<number | null>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
+
+  // Live hierarchical search across all branches when typing in the drawer search
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (!q) {
+      setDrawerSearchResults([]);
+      setDrawerSearching(false);
+      return;
+    }
+    setDrawerSearching(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await api.searchCategories(q, locale, 30);
+        setDrawerSearchResults(Array.isArray(res) ? res : []);
+      } catch {
+        setDrawerSearchResults([]);
+      } finally {
+        setDrawerSearching(false);
+      }
+    }, 180);
+    return () => clearTimeout(timer);
+  }, [searchQuery, locale]);
 
   // Load canonical category tree from the Go backend API
   const loadCategories = useCallback(() => {
     setLoading(true);
     setError(null);
-    api.getCategoryTree(locale)
+    api.getCategoryTree(locale, 4)
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
           setTree(data);
@@ -76,7 +100,7 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
   useEffect(() => {
     if (!isOpen || tree.length > 0) return;
     let active = true;
-    api.getCategoryTree(locale)
+    api.getCategoryTree(locale, 4)
       .then((data) => {
         if (!active) return;
         if (Array.isArray(data) && data.length > 0) {
@@ -239,8 +263,53 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
           </div>
         </div>
 
-        {/* Loading and Error States */}
-        {loading ? (
+        {/* Loading and Error States or Search Results */}
+        {searchQuery.trim() ? (
+          <div className="flex-1 overflow-y-auto p-4 space-y-2">
+            {drawerSearching ? (
+              <div className="flex items-center justify-center p-8">
+                <RefreshCw size={20} className="text-orange-600 animate-spin mr-2" />
+                <span className="text-xs text-zinc-400">Searching all taxonomy branches...</span>
+              </div>
+            ) : drawerSearchResults.length === 0 ? (
+              <div className="text-center py-12 text-zinc-400 text-xs">
+                No categories found matching &quot;{searchQuery}&quot;
+              </div>
+            ) : (
+              drawerSearchResults.map((r, i) => {
+                const bcs = Array.isArray(r.breadcrumbs) ? r.breadcrumbs : [];
+                const rootSlug = bcs[0]?.slug || r.slug;
+                const subSlug = bcs[1]?.slug;
+                const itemSlug = bcs[2]?.slug;
+                const destUrl = `/products?category_hierarchy_id=${r.id}&cat=${rootSlug}${subSlug ? `&subcategory=${subSlug}` : ''}${itemSlug ? `&item=${itemSlug}` : ''}`;
+
+                return (
+                  <button
+                    key={`drawer-res-${r.id}-${i}`}
+                    onClick={() => handleNavigate(destUrl)}
+                    className="w-full text-left p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-orange-600 dark:hover:border-orange-600 hover:bg-orange-50/50 dark:hover:bg-orange-950/20 transition-all flex items-center justify-between group bg-white dark:bg-zinc-900"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Tag size={13} className="text-orange-600 shrink-0" />
+                        <span className="text-xs font-black text-zinc-900 dark:text-white truncate">
+                          {r.name || r.name_en}
+                        </span>
+                        <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 bg-orange-100 dark:bg-orange-900/40 text-orange-600">
+                          {r.level === 0 ? 'Sector' : r.level === 1 ? 'Superfamily' : r.level === 2 ? 'Category' : r.level === 3 ? 'Subcategory' : 'Item'}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">
+                        {r.hierarchy || r.name}
+                      </p>
+                    </div>
+                    <ChevronRight size={14} className="text-zinc-400 group-hover:text-orange-600 group-hover:translate-x-1 transition-all shrink-0 ml-3" />
+                  </button>
+                );
+              })
+            )}
+          </div>
+        ) : loading ? (
           <div className="flex-1 flex items-center justify-center p-8">
             <div className="flex flex-col items-center gap-3">
               <RefreshCw size={24} className="text-orange-600 animate-spin" />
@@ -360,19 +429,50 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
                             />
                           </button>
                           {sub.children && sub.children.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 pl-3">
+                            <div className="flex flex-col gap-2.5 pl-3">
                               {sub.children.map((item) => (
-                                <button
-                                  key={item.id}
-                                  onClick={() =>
-                                    handleNavigate(
-                                      `/products?category_hierarchy_id=${item.id}&cat=${activeCategory.slug}&subcategory=${sub.slug}&item=${item.slug}`
-                                    )
-                                  }
-                                  className="text-[11px] text-zinc-500 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-white px-2 py-1 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors capitalize"
-                                >
-                                  {item.name || item.name_en || item.slug}
-                                </button>
+                                <div key={item.id} className="space-y-1">
+                                  <button
+                                    onClick={() =>
+                                      handleNavigate(
+                                        `/products?category_hierarchy_id=${item.id}&cat=${activeCategory.slug}&subcategory=${sub.slug}&item=${item.slug}`
+                                      )
+                                    }
+                                    className="text-xs font-bold text-zinc-800 dark:text-zinc-200 hover:text-orange-600 dark:hover:text-white transition-colors flex items-center gap-1.5"
+                                  >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                                    <span>{item.name || item.name_en || item.slug}</span>
+                                  </button>
+                                  {item.children && item.children.length > 0 && (
+                                    <div className="flex flex-wrap gap-1.5 pl-3">
+                                      {item.children.slice(0, 16).map((child) => (
+                                        <button
+                                          key={child.id}
+                                          onClick={() =>
+                                            handleNavigate(
+                                              `/products?category_hierarchy_id=${child.id}&cat=${activeCategory.slug}&subcategory=${sub.slug}&item=${item.slug}`
+                                            )
+                                          }
+                                          className="text-[10px] text-zinc-500 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-white px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-850 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
+                                        >
+                                          {child.name || child.name_en || child.slug}
+                                        </button>
+                                      ))}
+                                      {item.children.length > 16 && (
+                                        <button
+                                          onClick={() =>
+                                            handleNavigate(
+                                              `/products?category_hierarchy_id=${item.id}&cat=${activeCategory.slug}&subcategory=${sub.slug}&item=${item.slug}`
+                                            )
+                                          }
+                                          className="text-[10px] text-orange-600 font-bold px-1.5 py-0.5 hover:underline"
+                                        >
+                                          +{item.children.length - 16} more
+                                        </button>
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
                               ))}
                             </div>
                           )}

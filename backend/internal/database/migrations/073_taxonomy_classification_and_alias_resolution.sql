@@ -151,6 +151,7 @@ BEGIN
 END;
 $function$;
 
+DROP FUNCTION IF EXISTS public.get_location_ancestors(integer);
 CREATE OR REPLACE FUNCTION public.get_location_ancestors(loc_id integer)
  RETURNS TABLE(id integer, location_type character varying, name_en character varying, name_am character varying, name_om character varying, name_ti character varying, level integer)
  LANGUAGE plpgsql
@@ -174,6 +175,7 @@ BEGIN
 END;
 $function$;
 
+DROP FUNCTION IF EXISTS public.get_location_descendants(integer);
 CREATE OR REPLACE FUNCTION public.get_location_descendants(loc_id integer)
  RETURNS TABLE(id integer)
  LANGUAGE plpgsql

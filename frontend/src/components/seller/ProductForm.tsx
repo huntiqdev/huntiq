@@ -13,7 +13,7 @@ import { ImageUploader } from '@/components/seller/ImageUploader';
 import { type SellerTier, MAX_IMAGES_PER_TIER } from '@/lib/constants/fees';
 import { SELECT_CLS as cls, LABEL_CLS as lbl } from '@/lib/constants/styles';
 import CategoryTreeSelector from '@/components/category/CategoryTreeSelector';
-import { Check, X, RefreshCw, Layers } from 'lucide-react';
+import { Check, X, RefreshCw, Layers, Globe, Sparkles, ExternalLink } from 'lucide-react';
 
 interface AttributeDefinition {
   attribute_id: number;
@@ -79,6 +79,12 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     available_from: product?.available_from ? String(product.available_from).split('T')[0] : '',
     rental_terms: product?.rental_terms ?? '',
   });
+
+  // Gold & Premium merchant external links
+  const [customURL, setCustomURL] = useState(product?.custom_url ?? '');
+  const [socialTelegram, setSocialTelegram] = useState(product?.social_links?.telegram ?? '');
+  const [socialYoutube, setSocialYoutube] = useState(product?.social_links?.youtube ?? '');
+  const [socialTiktok, setSocialTiktok] = useState(product?.social_links?.tiktok ?? '');
   
   const [imageURLs, setImageURLs] = useState<string[]>(
     product?.images?.map((i: any) => i.image_url) ?? []
@@ -106,11 +112,18 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       }, 0);
       return () => { active = false; clearTimeout(timer); };
     }
-    // Attempt Universal Classification effective attributes with fallback
-    api.getEffectiveAttributes(form.category_hierarchy_id)
-      .then(data => {
-        if (active && Array.isArray(data) && data.length > 0) {
-          setApplicableAttributes(data.map(d => ({
+    // Prioritize direct category hierarchy attributes, fallback to universal classification
+    api.getCategoryAttributes(form.category_hierarchy_id)
+      .then(catAttrs => {
+        if (active && Array.isArray(catAttrs) && catAttrs.length > 0) {
+          setApplicableAttributes(catAttrs);
+          return null;
+        }
+        return api.getEffectiveAttributes(form.category_hierarchy_id!);
+      })
+      .then(classAttrs => {
+        if (active && classAttrs && Array.isArray(classAttrs)) {
+          setApplicableAttributes(classAttrs.map(d => ({
             attribute_id: d.attribute_id,
             name_en: d.name_en,
             slug: d.slug,
@@ -121,13 +134,6 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             is_filterable: d.is_filterable,
             display_order: d.display_order,
           })));
-          return null;
-        }
-        return api.getCategoryAttributes(form.category_hierarchy_id!);
-      })
-      .then(legacyData => {
-        if (active && legacyData) {
-          setApplicableAttributes(Array.isArray(legacyData) ? legacyData : []);
         }
       })
       .catch(() => {
@@ -159,11 +165,22 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       setError('Please select a valid marketplace category');
       return;
     }
+    if (!location.region && !location.location_hierarchy_id) {
+      setError(locale === 'am' ? 'እባክዎ አካባቢዎን (ክልል/ከተማ) ይምረጡ - አካባቢ የግዴታ ነው' : 'Location is mandatory. Please select your Region/City.');
+      return;
+    }
 
     setLoading(true); setError('');
     try {
       const legacyIdNum = form.category_id ? Number(form.category_id) : undefined;
       const validLegacyId = legacyIdNum && legacyIdNum > 0 ? legacyIdNum : undefined;
+
+      const socialLinks: Record<string, string> = {};
+      if (socialTelegram.trim()) socialLinks.telegram = socialTelegram.trim();
+      if (socialYoutube.trim()) socialLinks.youtube = socialYoutube.trim();
+      if (socialTiktok.trim()) socialLinks.tiktok = socialTiktok.trim();
+
+      const isEligibleTier = sellerTier === 'gold' || sellerTier === 'premium';
 
       const basePayload = {
         title: form.title,
@@ -174,6 +191,8 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         subcategory: form.subcategory,
         item: form.item,
         condition: form.condition,
+        custom_url: isEligibleTier && customURL.trim() ? customURL.trim() : undefined,
+        social_links: isEligibleTier && Object.keys(socialLinks).length > 0 ? socialLinks : undefined,
         image_urls: imageURLs,
         region: location.region,
         zone: location.zone,
@@ -430,6 +449,77 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             location_hierarchy_id: product.location_hierarchy_id,
           } : {}} />
       </div>
+
+      {/* Gold & Premium Merchant Features: Verified Portfolio URL & Social Channels */}
+      {sellerTier === 'gold' || sellerTier === 'premium' ? (
+        <div className="border border-amber-300 dark:border-amber-700/60 bg-gradient-to-br from-amber-50/60 to-yellow-50/30 dark:from-amber-950/20 dark:to-yellow-950/10 rounded-2xl p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} className="text-amber-600 dark:text-amber-400" />
+              <p className="text-xs font-black uppercase tracking-wider text-amber-800 dark:text-amber-300">
+                {sellerTier === 'premium' ? 'Premium Merchant Channels & Portfolio' : 'Gold Merchant Channels & Portfolio'}
+              </p>
+            </div>
+            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500 text-white shadow-sm">
+              Unlocked
+            </span>
+          </div>
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+            Link your official website, Telegram channel, YouTube showcase, or TikTok portfolio directly to your listing.
+          </p>
+          <div className="space-y-2.5">
+            <Input
+              type="url"
+              label="Official Website or Portfolio URL"
+              placeholder="https://yourwebsite.com or https://portfolio.et"
+              value={customURL}
+              onChange={e => setCustomURL(e.target.value)}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <Input
+                type="text"
+                label="Telegram (@channel or link)"
+                placeholder="@mychannel or t.me/..."
+                value={socialTelegram}
+                onChange={e => setSocialTelegram(e.target.value)}
+              />
+              <Input
+                type="text"
+                label="YouTube Channel"
+                placeholder="@youtubechannel"
+                value={socialYoutube}
+                onChange={e => setSocialYoutube(e.target.value)}
+              />
+              <Input
+                type="text"
+                label="TikTok Handle"
+                placeholder="@tiktokhandle"
+                value={socialTiktok}
+                onChange={e => setSocialTiktok(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-4 bg-zinc-50/50 dark:bg-zinc-800/20 flex items-center justify-between gap-3">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-700 dark:text-zinc-300">
+              <Sparkles size={14} className="text-amber-500" />
+              <span>Gold & Premium Exclusive: Custom URL & Social Channels</span>
+            </div>
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+              Showcase external websites, verified TikTok/YouTube links, and direct Telegram channels on your listings.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => router.push('/pricing')}
+            className="shrink-0 text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100 hover:bg-amber-200 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 px-3 py-1.5 rounded-xl transition-colors"
+          >
+            Upgrade →
+          </button>
+        </div>
+      )}
 
       <ListingFeeSlider price={Number(isRental ? rentalForm.rental_price : form.price) || 0}
         tier={sellerTier} selectedDays={listingDays} onChange={setListingDays} />

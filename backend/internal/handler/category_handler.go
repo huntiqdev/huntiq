@@ -52,10 +52,10 @@ func (h *CategoryHandler) invalidateCategoryCaches(ctx context.Context) {
 }
 
 // GetCategoryTree returns the hierarchical category tree with configurable depth
-// GET /api/categories/tree?lang=en&depth=2
+// GET /api/categories/tree?lang=en&depth=4
 func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 	lang := c.Query("lang", "en")
-	depth := c.QueryInt("depth", 2)
+	depth := c.QueryInt("depth", 4)
 	cacheKey := fmt.Sprintf("category_tree_%s_d%d", lang, depth)
 
 	if h.cache != nil {
@@ -83,6 +83,35 @@ func (h *CategoryHandler) GetCategoryTree(c *fiber.Ctx) error {
 
 	c.Set("Content-Type", "application/json")
 	return c.Send(respBytes)
+}
+
+// SearchCategories performs an ultra-fast hierarchical search across all active branches
+// returning full ancestor breadcrumbs (e.g. "Food & Beverage › Alcoholic Beverages › Beer Products")
+// GET /api/categories/search?q=beer&lang=en&limit=20
+func (h *CategoryHandler) SearchCategories(c *fiber.Ctx) error {
+	q := c.Query("q")
+	if q == "" {
+		return c.JSON(fiber.Map{
+			"success": true,
+			"data":    []models.CategorySearchResult{},
+		})
+	}
+
+	lang := c.Query("lang", "en")
+	limit := c.QueryInt("limit", 20)
+
+	results, err := h.svc.SearchCategories(c.Context(), q, lang, limit)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"error":   "failed to search categories",
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"success": true,
+		"data":    results,
+	})
 }
 
 // ResolveCategory resolves a category by term/alias using database resolution

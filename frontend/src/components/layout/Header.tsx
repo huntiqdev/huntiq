@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
+import { useAuth } from '@/context/AuthContext';
 import { SearchBar } from '@/components/public/SearchBar';
 import { UserAccountMenu } from '@/components/layout/UserAccountMenu';
 import { Globe, Moon, Sun, ShoppingBag, ChevronDown,
@@ -164,11 +165,20 @@ function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => voi
 // ── Header ───────────────────────────────────────────────────────────────────
 export function Header() {
   const { t, locale, setLocale, locales, localeLabels } = useLocale();
+  const { user } = useAuth();
   const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [dark, setDark] = useState(false);
+
+  const sellHref = user
+    ? '/seller/product/new?type=sale'
+    : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new?type=sale')}`;
+
+  const landlordHref = user
+    ? '/seller/product/new?type=rent'
+    : `/auth?as=landlord&intent=rent&redirect=${encodeURIComponent('/seller/product/new?type=rent')}`;
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -354,9 +364,9 @@ export function Header() {
             </Link>
 
             <Link
-              href="/sell"
+              href={sellHref}
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname === '/sell'
+                pathname === '/sell' || (pathname.includes('/seller/product/new') && currentType !== 'rent')
                   ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
               }`}
@@ -378,9 +388,9 @@ export function Header() {
             </Link>
 
             <Link
-              href="/seller/product/new?type=rent"
+              href={landlordHref}
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname.includes('/seller/product/new')
+                pathname.includes('/seller/product/new') && currentType === 'rent'
                   ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
                   : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
               }`}

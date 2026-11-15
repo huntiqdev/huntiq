@@ -135,6 +135,25 @@ type PopularCategory struct {
 	ActivityScore int    `json:"activity_score"`
 }
 
+// CategorySearchResult represents a rich search result with full hierarchical breadcrumbs
+type CategorySearchResult struct {
+	ID          int                  `json:"id"`
+	ParentID    *int                 `json:"parent_id,omitempty"`
+	Name        string               `json:"name"`
+	NameEn      string               `json:"name_en"`
+	NameAm      string               `json:"name_am,omitempty"`
+	NameOm      string               `json:"name_om,omitempty"`
+	NameTi      string               `json:"name_ti,omitempty"`
+	Slug        string               `json:"slug"`
+	Level       int                  `json:"level"`
+	Path        string               `json:"path"`
+	Hierarchy   string               `json:"hierarchy"`
+	Breadcrumbs []CategoryBreadcrumb `json:"breadcrumbs"`
+	IsLeaf      bool                 `json:"is_leaf"`
+	Icon        string               `json:"icon,omitempty"`
+	Score       float64              `json:"score,omitempty"`
+}
+
 // CategoryFilter for querying categories
 type CategoryFilter struct {
 	ParentID     *int

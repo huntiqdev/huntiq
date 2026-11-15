@@ -20,8 +20,11 @@ type ProductFilter struct {
 	Page                int
 	Limit               int
 	ListingType         *string // 'sale' or 'rent' filter
-	SortBy              *string // 'price_asc', 'price_desc', 'newest'
+	SortBy              *string // 'price_asc', 'price_desc', 'newest', 'nearest'
 	SellerTier          *string // 'gold', 'premium', or 'gold,premium'
+	Lat                 *float64 // User/Asker latitude for nearest recommendation
+	Lng                 *float64 // User/Asker longitude for nearest recommendation
+	MaxDistanceKM       *float64 // Maximum distance radius in kilometers
 }
 
 // CreateProductRequest is used by sellers to submit a new product.
@@ -48,6 +51,8 @@ type CreateProductRequest struct {
 	ListingDurationDays int                    `json:"listing_duration_days"`
 	RequiredBuyerTier   string                 `json:"required_buyer_tier,omitempty"`
 	Attributes          map[string]interface{} `json:"attributes,omitempty"`
+	CustomURL           *string                `json:"custom_url,omitempty"`
+	SocialLinks         map[string]interface{} `json:"social_links,omitempty"`
 
 	// Listing type: 'sale' (default) or 'rent'
 	ListingType string `json:"listing_type"`
@@ -79,6 +84,8 @@ type UpdateProductRequest struct {
 	Latitude            *float64               `json:"latitude,omitempty"`
 	Longitude           *float64               `json:"longitude,omitempty"`
 	ImageURLs           []string               `json:"image_urls"`
+	CustomURL           *string                `json:"custom_url,omitempty"`
+	SocialLinks         map[string]interface{} `json:"social_links,omitempty"`
 
 	// Rental fields (only for listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`

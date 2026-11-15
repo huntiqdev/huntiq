@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import { ShoppingBag, Home, Repeat, ArrowRight } from 'lucide-react';
 import { useLocale } from '@/hooks/useLocale';
+import { useAuth } from '@/context/AuthContext';
 
 export default function SellPage() {
   const { t } = useLocale();
+  const { user } = useAuth();
   const u = t.ui;
 
   const HOW_IT_WORKS = [
@@ -13,6 +15,22 @@ export default function SellPage() {
     { n: '03', text: u.sell_step_3 ?? 'Add your listing details & photos' },
     { n: '04', text: u.sell_step_4 ?? 'Wait for admin approval — then go live' },
   ];
+
+  const sellHref = user
+    ? '/seller/product/new?type=sale'
+    : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new?type=sale')}`;
+
+  const rentHref = user
+    ? '/seller/product/new?type=rent'
+    : `/auth?as=landlord&intent=rent&redirect=${encodeURIComponent('/seller/product/new?type=rent')}`;
+
+  const bothHref = user
+    ? '/seller/dashboard'
+    : `/auth?as=seller&redirect=${encodeURIComponent('/seller/dashboard')}`;
+
+  const ctaText = user
+    ? ((u as any)?.start_listing ?? 'Create Listing')
+    : ((u as any)?.sign_in_or_create ?? 'Sign In / Register');
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-10">
@@ -28,7 +46,7 @@ export default function SellPage() {
         <div className="grid md:grid-cols-3 gap-3.5 sm:gap-4 mb-8">
           {/* SELL PRODUCTS */}
           <Link
-            href="/auth?as=seller&preference=sale"
+            href={sellHref}
             className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-750 hover:border-orange-600 p-4 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 transition-all hover:shadow-xl tap-bounce active:scale-[0.98] bg-white dark:bg-zinc-900"
           >
             <div className="text-4xl sm:text-5xl">🛒</div>
@@ -37,13 +55,13 @@ export default function SellPage() {
               <p className="text-xs text-zinc-500 leading-relaxed">{u.sell_products_desc ?? 'List items for one-time purchase'}</p>
             </div>
             <div className="mt-auto pt-2 flex items-center gap-1 text-orange-600 text-xs font-bold group-hover:gap-2 transition-all">
-              {u.register ?? 'Register'} <ArrowRight size={12} />
+              {ctaText} <ArrowRight size={12} />
             </div>
           </Link>
 
           {/* RENT PROPERTY (LANDLORD) */}
           <Link
-            href="/auth?as=seller&preference=rent"
+            href={rentHref}
             className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-750 hover:border-teal-600 p-4 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 transition-all hover:shadow-xl tap-bounce active:scale-[0.98] bg-white dark:bg-zinc-900"
           >
             <div className="text-4xl sm:text-5xl">🏠</div>
@@ -52,13 +70,13 @@ export default function SellPage() {
               <p className="text-xs text-zinc-500 leading-relaxed">{u.rent_property_desc ?? 'List properties for rental'}</p>
             </div>
             <div className="mt-auto pt-2 flex items-center gap-1 text-teal-600 text-xs font-bold group-hover:gap-2 transition-all">
-              {u.register ?? 'Register'} <ArrowRight size={12} />
+              {ctaText} <ArrowRight size={12} />
             </div>
           </Link>
 
           {/* BOTH */}
           <Link
-            href="/auth?as=seller&preference=both"
+            href={bothHref}
             className="group relative overflow-hidden rounded-2xl border-2 border-zinc-200 dark:border-zinc-750 hover:border-purple-600 p-4 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 transition-all hover:shadow-xl tap-bounce active:scale-[0.98] bg-white dark:bg-zinc-900"
           >
             <div className="text-4xl sm:text-5xl">🔄</div>
@@ -67,7 +85,7 @@ export default function SellPage() {
               <p className="text-xs text-zinc-500 leading-relaxed">{u.both_option_desc ?? 'Sell products AND rent properties'}</p>
             </div>
             <div className="mt-auto pt-2 flex items-center gap-1 text-purple-600 text-xs font-bold group-hover:gap-2 transition-all">
-              {u.register ?? 'Register'} <ArrowRight size={12} />
+              {ctaText} <ArrowRight size={12} />
             </div>
           </Link>
         </div>
@@ -87,12 +105,20 @@ export default function SellPage() {
           </div>
         </div>
 
-        {/* Already have account */}
+        {/* Account state link */}
         <p className="text-center text-sm text-zinc-400 mt-6">
-          {u.already_have_account ?? 'Already have an account?'}{' '}
-          <Link href="/auth?as=seller" className="text-orange-600 font-bold hover:underline">
-            {u.sign_in ?? 'Sign in'} <ArrowRight size={12} className="inline" />
-          </Link>
+          {user ? (
+            <Link href="/seller/dashboard" className="text-orange-600 font-bold hover:underline">
+              Go to Provider Dashboard <ArrowRight size={12} className="inline" />
+            </Link>
+          ) : (
+            <>
+              {u.already_have_account ?? 'Already have an account?'}{' '}
+              <Link href={`/auth?as=seller&redirect=${encodeURIComponent('/seller/dashboard')}`} className="text-orange-600 font-bold hover:underline">
+                {u.sign_in ?? 'Sign in'} <ArrowRight size={12} className="inline" />
+              </Link>
+            </>
+          )}
         </p>
       </div>
     </div>

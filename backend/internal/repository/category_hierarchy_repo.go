@@ -97,16 +97,7 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		       created_at, updated_at
 		FROM category_hierarchy
 		WHERE parent_id IS NULL AND is_active = true
-		ORDER BY 
-			LOWER(TRIM(
-				CASE $1
-					WHEN 'am' THEN COALESCE(NULLIF(name_am, ''), name_en)
-					WHEN 'om' THEN COALESCE(NULLIF(name_om, ''), name_en)
-					WHEN 'or' THEN COALESCE(NULLIF(name_om, ''), name_en)
-					WHEN 'ti' THEN COALESCE(NULLIF(name_ti, ''), name_en)
-					ELSE name_en
-				END
-			)) ASC, id ASC`
+		ORDER BY display_order ASC, id ASC`
 
 	rows, err := r.db.Query(ctx, query, lang)
 	if err != nil {
@@ -256,7 +247,7 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 
 // GetCategoryTree builds a hierarchical tree with deterministic alphabetical sibling ordering
 func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string) ([]models.CategoryTree, error) {
-	return r.GetCategoryTreeWithDepth(ctx, lang, 2)
+	return r.GetCategoryTreeWithDepth(ctx, lang, 4)
 }
 
 // GetCategoryTreeWithDepth builds a hierarchical tree up to maxDepth (level < maxDepth).
@@ -346,9 +337,12 @@ func (r *CategoryHierarchyRepo) GetCategoryTreeWithDepth(ctx context.Context, la
 		return nil, err
 	}
 
-	// Sibling sorter: deterministic alphabetical by active display name, with ID tie-breaker
+	// Sibling sorter: priority by DisplayOrder first (commercial popularity), then deterministic alphabetical by active display name, with ID tie-breaker
 	sortSiblings := func(nodes []*models.CategoryTree) {
 		sort.Slice(nodes, func(i, j int) bool {
+			if nodes[i].DisplayOrder != nodes[j].DisplayOrder {
+				return nodes[i].DisplayOrder < nodes[j].DisplayOrder
+			}
 			nameI := strings.ToLower(strings.TrimSpace(nodes[i].Name))
 			nameJ := strings.ToLower(strings.TrimSpace(nodes[j].Name))
 			if nameI != nameJ {
@@ -391,15 +385,12 @@ func (r *CategoryHierarchyRepo) GetCategoryTreeWithDepth(ctx context.Context, la
 		if node == nil {
 			continue
 		}
-		if fc.ParentID == nil || *fc.ParentID == 0 {
+		if fc.Level == 0 && (fc.ParentID == nil || *fc.ParentID == 0) {
 			rootList = append(rootList, node)
-		} else {
+		} else if fc.ParentID != nil && *fc.ParentID > 0 {
 			pid := *fc.ParentID
 			if _, parentExists := allNodes[pid]; parentExists {
 				childrenByParent[pid] = append(childrenByParent[pid], node)
-			} else {
-				// Fallback orphan protection: preserve node at root so it is never dropped
-				rootList = append(rootList, node)
 			}
 		}
 	}
@@ -708,4 +699,121 @@ func (r *CategoryHierarchyRepo) ResolveLegacyCategoryID(ctx context.Context, roo
 		return firstID
 	}
 	return 1
+}
+
+// SearchCategories performs an ultra-fast, index-accelerated hierarchical search across all active branches
+// returning full ancestor breadcrumbs (e.g. "Food & Beverage › Alcoholic Beverages › Beer Products").
+func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term string, lang string, limit int) ([]models.CategorySearchResult, error) {
+	if limit <= 0 || limit > 50 {
+		limit = 20
+	}
+	cleanTerm := strings.TrimSpace(term)
+	if cleanTerm == "" {
+		return []models.CategorySearchResult{}, nil
+	}
+
+	likePattern := "%" + cleanTerm + "%"
+	query := `
+		WITH matched AS (
+			SELECT c.id, c.parent_id,
+			       COALESCE(c.name_en, '') as name_en, COALESCE(c.name_am, '') as name_am, 
+			       COALESCE(c.name_om, '') as name_om, COALESCE(c.name_ti, '') as name_ti,
+			       COALESCE(c.slug, '') as slug, c.level, COALESCE(c.path, '') as path, c.is_leaf, 
+			       COALESCE(c.icon, '') as icon, c.display_order,
+			       CASE 
+			           WHEN LOWER(c.name_en) = LOWER($1) OR LOWER(c.name_am) = LOWER($1) OR LOWER(c.name_om) = LOWER($1) OR LOWER(c.name_ti) = LOWER($1) THEN 100.0
+			           WHEN c.name_en ILIKE $1 || '%' OR c.name_am ILIKE $1 || '%' OR c.name_om ILIKE $1 || '%' OR c.name_ti ILIKE $1 || '%' THEN 80.0
+			           WHEN c.name_en ILIKE '%' || $1 || '%' OR c.name_am ILIKE '%' || $1 || '%' OR c.name_om ILIKE '%' || $1 || '%' OR c.name_ti ILIKE '%' || $1 || '%' THEN 60.0
+			           ELSE 40.0
+			       END as score
+			FROM category_hierarchy c
+			WHERE c.is_active = true
+			  AND (
+			      c.name_en ILIKE $2
+			   OR c.name_am ILIKE $2
+			   OR c.name_om ILIKE $2
+			   OR c.name_ti ILIKE $2
+			   OR c.slug ILIKE $2
+			  )
+			UNION
+			SELECT c.id, c.parent_id,
+			       COALESCE(c.name_en, '') as name_en, COALESCE(c.name_am, '') as name_am, 
+			       COALESCE(c.name_om, '') as name_om, COALESCE(c.name_ti, '') as name_ti,
+			       COALESCE(c.slug, '') as slug, c.level, COALESCE(c.path, '') as path, c.is_leaf, 
+			       COALESCE(c.icon, '') as icon, c.display_order,
+			       CASE 
+			           WHEN LOWER(a.alias) = LOWER($1) THEN 90.0
+			           WHEN a.alias ILIKE $1 || '%' THEN 75.0
+			           ELSE 55.0
+			       END as score
+			FROM category_aliases a
+			JOIN category_hierarchy c ON a.category_id = c.id
+			WHERE c.is_active = true
+			  AND a.alias ILIKE $2
+		)
+		SELECT id, parent_id, name_en, name_am, name_om, name_ti, slug, level, path, is_leaf, icon, score
+		FROM matched
+		ORDER BY score DESC, level ASC, display_order ASC, id ASC
+		LIMIT $3
+	`
+
+	rows, err := r.db.Query(ctx, query, cleanTerm, likePattern, limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []models.CategorySearchResult
+	for rows.Next() {
+		var res models.CategorySearchResult
+		var nameEn, nameAm, nameOm, nameTi string
+		if err := rows.Scan(
+			&res.ID, &res.ParentID,
+			&nameEn, &nameAm, &nameOm, &nameTi,
+			&res.Slug, &res.Level, &res.Path, &res.IsLeaf, &res.Icon,
+			&res.Score,
+		); err != nil {
+			continue
+		}
+		res.NameEn = nameEn
+		res.NameAm = nameAm
+		res.NameOm = nameOm
+		res.NameTi = nameTi
+
+		switch lang {
+		case "am":
+			res.Name = nameAm
+		case "om", "or":
+			res.Name = nameOm
+		case "ti":
+			res.Name = nameTi
+		default:
+			res.Name = nameEn
+		}
+		if res.Name == "" {
+			res.Name = nameEn
+		}
+
+		results = append(results, res)
+	}
+
+	// For all matched categories, fetch their full ancestor breadcrumbs
+	for i := range results {
+		bcs, err := r.GetBreadcrumbs(ctx, results[i].ID, lang)
+		if err == nil && len(bcs) > 0 {
+			results[i].Breadcrumbs = bcs
+			names := make([]string, len(bcs))
+			for j, b := range bcs {
+				names[j] = b.Name
+			}
+			results[i].Hierarchy = strings.Join(names, " › ")
+		} else {
+			results[i].Hierarchy = results[i].Name
+			results[i].Breadcrumbs = []models.CategoryBreadcrumb{
+				{ID: results[i].ID, Name: results[i].Name, Slug: results[i].Slug, Level: results[i].Level},
+			}
+		}
+	}
+
+	return results, nil
 }

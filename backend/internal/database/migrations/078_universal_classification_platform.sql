@@ -414,7 +414,9 @@ VALUES
 ('SYS_PROP', 'Real Estate & Property Classification', 'የሪል እስቴትና የንብረት ምደባ', 'Ramaddii Qabeenya fi Manneen', 'ምደባ ሪል እስቴትን ንብረትን', 'Residential, commercial, and land property classification', true, 'ACTIVE'),
 ('SYS_VEH', 'Automotive & Mobility Classification', 'የተሽከርካሪና የትራንስፖርት ምደባ', 'Ramaddii Konkolaattotaa', 'ምደባ ተሽከርከርትን ትራንስፖርትን', 'Vehicles, heavy machinery, and spare parts taxonomy', true, 'ACTIVE'),
 ('SYS_AGRI', 'Agriculture & Farming Classification', 'የግብርናና የእርሻ ምደባ', 'Ramaddii Qonnaa', 'ምደባ ሕርሻን ልምዓትን', 'Crops, livestock, farm machinery and agricultural commodities', true, 'ACTIVE'),
-('SYS_JOBS', 'Workforce & Employment Classification', 'የስራና የቅጥር ምደባ', 'Ramaddii Hojii', 'ምደባ ስራሕን ስራሕተኛታትን', 'Occupations, qualifications, and freelance labor taxonomy', true, 'ACTIVE')
+('SYS_JOBS', 'Workforce & Employment Classification', 'የስራና የቅጥር ምደባ', 'Ramaddii Hojii', 'ምደባ ስራሕን ስራሕተኛታትን', 'Occupations, qualifications, and freelance labor taxonomy', true, 'ACTIVE'),
+('SYS_TOOLS', 'Tools & Machinery Classification', 'የመሳሪያዎችና ማሽነሪዎች ምደባ', 'Ramaddii Meeshaalee fi Maashinootaa', 'ምደባ መሳርሒታትን ማሽነሪታትን', 'Universal tools, power equipment, and machinery taxonomy', false, 'ACTIVE'),
+('SYS_ELEC', 'Electronics Classification', 'የኤሌክትሮኒክስ ምደባ', 'Ramaddii Eleektirooniksii', 'ምደባ ኤሌክትሮኒክስ', 'Universal consumer electronics, devices, and computing hardware', false, 'ACTIVE')
 ON CONFLICT (code) DO UPDATE SET
     name_en = EXCLUDED.name_en,
     name_am = EXCLUDED.name_am,
@@ -447,6 +449,11 @@ DECLARE
     v_parent_placement_id INT;
 BEGIN
     SELECT id INTO v_scheme_id FROM classification_schemes WHERE code = 'SYS_PROD';
+
+    IF EXISTS (SELECT 1 FROM classification_placements LIMIT 1) THEN
+        RAISE NOTICE 'Classification hierarchy already populated, skipping initial loop.';
+        RETURN;
+    END IF;
 
     -- 1. Create concepts for all existing category_hierarchy nodes
     FOR rec IN SELECT * FROM category_hierarchy ORDER BY level ASC, id ASC LOOP

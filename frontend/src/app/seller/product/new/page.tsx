@@ -17,7 +17,8 @@ function NewProductContent() {
   useEffect(() => {
     if (loading) return;
     if (!user) {
-      router.push(`/auth?intent=${isRental ? 'rent' : 'sell'}`);
+      const target = `/seller/product/new?type=${isRental ? 'rent' : 'sale'}`;
+      router.replace(`/auth?as=${isRental ? 'landlord' : 'seller'}&intent=${isRental ? 'rent' : 'sell'}&redirect=${encodeURIComponent(target)}`);
       return;
     }
     // Contextual capability activation for authenticated users

@@ -412,6 +412,7 @@ func main() {
 	api.Get("/categories", productHandler.ListCategories)
 	api.Get("/categories/roots", categoryHandler.GetRoots)
 	api.Get("/categories/tree", categoryHandler.GetCategoryTree)
+	api.Get("/categories/search", categoryHandler.SearchCategories)
 	api.Get("/categories/resolve", categoryHandler.ResolveCategory)
 	api.Get("/categories/popular", productHandler.PopularCategories)
 	api.Get("/categories/check-slug", categoryHandler.CheckSlug)
@@ -738,11 +739,8 @@ func main() {
 	admin.Put("/notifications/:id/read", mw.RequirePermission("notifications"), adminHandler.MarkNotificationRead)
 	admin.Post("/notifications", middleware.RequirePlatformAdmin, adminHandler.CreateNotification)
 
-	// Categories (Legacy)
+	// Categories (Legacy read-only — mutations use /category-hierarchy)
 	admin.Get("/categories", mw.RequirePermission("categories"), adminHandler.ListCategories)
-	admin.Post("/categories", middleware.RequirePlatformAdmin, adminHandler.CreateCategory)
-	admin.Put("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.UpdateCategory)
-	admin.Delete("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.DeleteCategory)
 
 	// Category Hierarchy Management (Admin)
 	admin.Get("/category-hierarchy", mw.RequirePermission("categories"), categoryHandler.ListCategories)

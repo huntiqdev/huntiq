@@ -53,6 +53,10 @@ type Product struct {
 	// Sold tracking
 	SoldAt *time.Time `json:"sold_at,omitempty"`
 
+	// Gold & Premium Merchant Features
+	CustomURL   *string                `json:"custom_url,omitempty"`
+	SocialLinks map[string]interface{} `json:"social_links,omitempty"`
+
 	// ── Rental fields (only for listing_type='rent') ──
 	ListingType         string   `json:"listing_type"`                    // 'sale' or 'rent'
 	RentalPrice         *float64 `json:"rental_price,omitempty"`          // price per duration
