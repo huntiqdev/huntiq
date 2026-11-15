@@ -39,3 +39,4 @@ DROP TABLE IF EXISTS seller_reviews CASCADE;
 DROP TABLE IF EXISTS classification_systems CASCADE;
 
 COMMIT;
+
