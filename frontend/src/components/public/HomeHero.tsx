@@ -52,7 +52,7 @@ const SLIDE_MODES: SlideMode[] = [
     gradientTo: '#7c2d12',
     accentBg: '#ea580c',
     accentText: '#ffffff',
-    href: '/sell',
+    href: '/seller/product/new?type=sale',
   },
   {
     key: 'buy',
@@ -377,7 +377,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
               <p className="text-white font-black text-sm sm:text-base">{t.ui.ready_to_sell ?? 'Ready to start selling?'}</p>
               <p className="text-zinc-400 text-xs mt-0.5">{t.ui.join_sellers ?? 'Join thousands of sellers on HUNTIQ'}</p>
             </div>
-            <Link href="/sell" onClick={onClose} className="shrink-0 flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-black text-sm px-5 py-2.5 rounded-xl transition-colors shadow-lg shadow-orange-600/30">
+            <Link href="/seller/product/new?type=sale" onClick={onClose} className="shrink-0 flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-black text-sm px-5 py-2.5 rounded-xl transition-colors shadow-lg shadow-orange-600/30">
               <Store size={15} /> {t.ui.start_selling ?? 'Start Selling'}
             </Link>
           </div>
@@ -699,7 +699,7 @@ export function HomeHero() {
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/sell"
+                  href="/seller/product/new?type=sale"
                   className="px-6 py-3 rounded-xl bg-white text-orange-600 font-black text-xs sm:text-sm shadow-lg hover:bg-orange-50 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
                 >
                   <Store size={16} />

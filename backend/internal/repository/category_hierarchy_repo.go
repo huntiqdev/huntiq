@@ -2,13 +2,34 @@ package repository
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 )
+
+type categoryMemoryCache struct {
+	sync.RWMutex
+	roots       map[string][]models.CategoryHierarchy
+	trees       map[string][]models.CategoryTree
+	byID        map[int]*models.CategoryHierarchy
+	bySlug      map[string]*models.CategoryHierarchy
+	children    map[int][]models.CategoryHierarchy
+	lastUpdated time.Time
+}
+
+var globalCategoryCache = &categoryMemoryCache{
+	roots:    make(map[string][]models.CategoryHierarchy),
+	trees:    make(map[string][]models.CategoryTree),
+	byID:     make(map[int]*models.CategoryHierarchy),
+	bySlug:   make(map[string]*models.CategoryHierarchy),
+	children: make(map[int][]models.CategoryHierarchy),
+}
 
 type CategoryHierarchyRepo struct {
 	db *pgxpool.Pool
@@ -16,6 +37,18 @@ type CategoryHierarchyRepo struct {
 
 func NewCategoryHierarchyRepo(db *pgxpool.Pool) *CategoryHierarchyRepo {
 	return &CategoryHierarchyRepo{db: db}
+}
+
+// InvalidateCache clears the in-memory cache on write operations
+func (r *CategoryHierarchyRepo) InvalidateCache() {
+	globalCategoryCache.Lock()
+	globalCategoryCache.roots = make(map[string][]models.CategoryHierarchy)
+	globalCategoryCache.trees = make(map[string][]models.CategoryTree)
+	globalCategoryCache.byID = make(map[int]*models.CategoryHierarchy)
+	globalCategoryCache.bySlug = make(map[string]*models.CategoryHierarchy)
+	globalCategoryCache.children = make(map[int][]models.CategoryHierarchy)
+	globalCategoryCache.lastUpdated = time.Time{}
+	globalCategoryCache.Unlock()
 }
 
 // GetByID retrieves a category with its breadcrumb path
@@ -27,19 +60,23 @@ func (r *CategoryHierarchyRepo) GetByID(ctx context.Context, id int, lang string
 		       level, COALESCE(path, ''), display_order,
 		       COALESCE(icon, ''), COALESCE(image_url, ''), is_active, is_leaf,
 		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
-		       created_at, updated_at
+		       created_at, updated_at, COALESCE(i18n, '{}'::jsonb)
 		FROM category_hierarchy
 		WHERE id = $1`
 
 	var cat models.CategoryHierarchy
+	var i18nBytes []byte
 	err := r.db.QueryRow(ctx, query, id).Scan(
 		&cat.ID, &cat.ParentID, &cat.NameEn, &cat.NameAm, &cat.NameOm, &cat.NameTi,
 		&cat.Slug, &cat.Description, &cat.Level, &cat.Path, &cat.DisplayOrder,
 		&cat.Icon, &cat.ImageURL, &cat.IsActive, &cat.IsLeaf, &cat.MetaTitle,
-		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt,
+		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt, &i18nBytes,
 	)
 	if err != nil {
 		return nil, err
+	}
+	if len(i18nBytes) > 0 {
+		_ = json.Unmarshal(i18nBytes, &cat.I18N)
 	}
 
 	breadcrumbs, err := r.GetBreadcrumbs(ctx, id, lang)
@@ -59,19 +96,23 @@ func (r *CategoryHierarchyRepo) GetBySlug(ctx context.Context, slug string, lang
 		       level, COALESCE(path, ''), display_order,
 		       COALESCE(icon, ''), COALESCE(image_url, ''), is_active, is_leaf,
 		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
-		       created_at, updated_at
+		       created_at, updated_at, COALESCE(i18n, '{}'::jsonb)
 		FROM category_hierarchy
 		WHERE slug = $1`
 
 	var cat models.CategoryHierarchy
+	var i18nBytes []byte
 	err := r.db.QueryRow(ctx, query, slug).Scan(
 		&cat.ID, &cat.ParentID, &cat.NameEn, &cat.NameAm, &cat.NameOm, &cat.NameTi,
 		&cat.Slug, &cat.Description, &cat.Level, &cat.Path, &cat.DisplayOrder,
 		&cat.Icon, &cat.ImageURL, &cat.IsActive, &cat.IsLeaf, &cat.MetaTitle,
-		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt,
+		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt, &i18nBytes,
 	)
 	if err != nil {
 		return nil, err
+	}
+	if len(i18nBytes) > 0 {
+		_ = json.Unmarshal(i18nBytes, &cat.I18N)
 	}
 
 	breadcrumbs, err := r.GetBreadcrumbs(ctx, cat.ID, lang)
@@ -87,6 +128,14 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 	if lang == "" {
 		lang = "en"
 	}
+
+	globalCategoryCache.RLock()
+	if cached, ok := globalCategoryCache.roots[lang]; ok && time.Since(globalCategoryCache.lastUpdated) < 15*time.Minute {
+		globalCategoryCache.RUnlock()
+		return cached, nil
+	}
+	globalCategoryCache.RUnlock()
+
 	query := `
 		SELECT id, parent_id,
 		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
@@ -99,7 +148,7 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		WHERE parent_id IS NULL AND is_active = true
 		ORDER BY display_order ASC, id ASC`
 
-	rows, err := r.db.Query(ctx, query, lang)
+	rows, err := r.db.Query(ctx, query)
 	if err != nil {
 		return nil, err
 	}
@@ -133,6 +182,11 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		}
 		return categories[i].ID < categories[j].ID
 	})
+
+	globalCategoryCache.Lock()
+	globalCategoryCache.roots[lang] = categories
+	globalCategoryCache.lastUpdated = time.Now()
+	globalCategoryCache.Unlock()
 
 	return categories, nil
 }
@@ -256,6 +310,14 @@ func (r *CategoryHierarchyRepo) GetCategoryTreeWithDepth(ctx context.Context, la
 	if lang == "" {
 		lang = "en"
 	}
+
+	cacheKey := fmt.Sprintf("%s:%d", lang, maxDepth)
+	globalCategoryCache.RLock()
+	if cached, ok := globalCategoryCache.trees[cacheKey]; ok && time.Since(globalCategoryCache.lastUpdated) < 15*time.Minute {
+		globalCategoryCache.RUnlock()
+		return cached, nil
+	}
+	globalCategoryCache.RUnlock()
 
 	query := `
 		SELECT c.id, c.parent_id,
@@ -418,6 +480,14 @@ func (r *CategoryHierarchyRepo) GetCategoryTreeWithDepth(ctx context.Context, la
 		roots[i] = buildTreeRecursive(root)
 	}
 
+	globalCategoryCache.Lock()
+	if globalCategoryCache.trees == nil {
+		globalCategoryCache.trees = make(map[string][]models.CategoryTree)
+	}
+	globalCategoryCache.trees[cacheKey] = roots
+	globalCategoryCache.lastUpdated = time.Now()
+	globalCategoryCache.Unlock()
+
 	return roots, nil
 }
 
@@ -534,6 +604,9 @@ func (r *CategoryHierarchyRepo) CreateCategory(ctx context.Context, cat *models.
 		cat.IsActive, cat.MetaTitle, cat.MetaDescription,
 	).Scan(&id)
 
+	if err == nil {
+		r.InvalidateCache()
+	}
 	return id, err
 }
 
@@ -558,6 +631,7 @@ func (r *CategoryHierarchyRepo) UpdateCategory(ctx context.Context, cat *models.
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -571,6 +645,7 @@ func (r *CategoryHierarchyRepo) ReorderCategory(ctx context.Context, id int, dis
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -584,6 +659,7 @@ func (r *CategoryHierarchyRepo) SetCategoryStatus(ctx context.Context, id int, i
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -614,6 +690,7 @@ func (r *CategoryHierarchyRepo) DeleteCategory(ctx context.Context, id int) erro
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -720,6 +797,7 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 			       COALESCE(c.name_om, '') as name_om, COALESCE(c.name_ti, '') as name_ti,
 			       COALESCE(c.slug, '') as slug, c.level, COALESCE(c.path, '') as path, c.is_leaf, 
 			       COALESCE(c.icon, '') as icon, c.display_order,
+			       COALESCE(c.i18n, '{}'::jsonb) as i18n,
 			       CASE 
 			           WHEN LOWER(c.name_en) = LOWER($1) OR LOWER(c.name_am) = LOWER($1) OR LOWER(c.name_om) = LOWER($1) OR LOWER(c.name_ti) = LOWER($1) THEN 100.0
 			           WHEN c.name_en ILIKE $1 || '%' OR c.name_am ILIKE $1 || '%' OR c.name_om ILIKE $1 || '%' OR c.name_ti ILIKE $1 || '%' THEN 80.0
@@ -734,6 +812,7 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 			   OR c.name_om ILIKE $2
 			   OR c.name_ti ILIKE $2
 			   OR c.slug ILIKE $2
+			   OR c.i18n::text ILIKE $2
 			  )
 			UNION
 			SELECT c.id, c.parent_id,
@@ -741,6 +820,7 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 			       COALESCE(c.name_om, '') as name_om, COALESCE(c.name_ti, '') as name_ti,
 			       COALESCE(c.slug, '') as slug, c.level, COALESCE(c.path, '') as path, c.is_leaf, 
 			       COALESCE(c.icon, '') as icon, c.display_order,
+			       COALESCE(c.i18n, '{}'::jsonb) as i18n,
 			       CASE 
 			           WHEN LOWER(a.alias) = LOWER($1) THEN 90.0
 			           WHEN a.alias ILIKE $1 || '%' THEN 75.0
@@ -751,7 +831,7 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 			WHERE c.is_active = true
 			  AND a.alias ILIKE $2
 		)
-		SELECT id, parent_id, name_en, name_am, name_om, name_ti, slug, level, path, is_leaf, icon, score
+		SELECT id, parent_id, name_en, name_am, name_om, name_ti, slug, level, path, is_leaf, icon, score, i18n
 		FROM matched
 		ORDER BY score DESC, level ASC, display_order ASC, id ASC
 		LIMIT $3
@@ -767,11 +847,12 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 	for rows.Next() {
 		var res models.CategorySearchResult
 		var nameEn, nameAm, nameOm, nameTi string
+		var i18nBytes []byte
 		if err := rows.Scan(
 			&res.ID, &res.ParentID,
 			&nameEn, &nameAm, &nameOm, &nameTi,
 			&res.Slug, &res.Level, &res.Path, &res.IsLeaf, &res.Icon,
-			&res.Score,
+			&res.Score, &i18nBytes,
 		); err != nil {
 			continue
 		}
@@ -780,15 +861,27 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 		res.NameOm = nameOm
 		res.NameTi = nameTi
 
-		switch lang {
-		case "am":
-			res.Name = nameAm
-		case "om", "or":
-			res.Name = nameOm
-		case "ti":
-			res.Name = nameTi
-		default:
-			res.Name = nameEn
+		var i18nMap map[string]string
+		if len(i18nBytes) > 0 {
+			_ = json.Unmarshal(i18nBytes, &i18nMap)
+		}
+		if i18nMap != nil {
+			if val, ok := i18nMap[lang]; ok && val != "" {
+				res.Name = val
+			}
+		}
+
+		if res.Name == "" {
+			switch lang {
+			case "am":
+				res.Name = nameAm
+			case "om", "or":
+				res.Name = nameOm
+			case "ti":
+				res.Name = nameTi
+			default:
+				res.Name = nameEn
+			}
 		}
 		if res.Name == "" {
 			res.Name = nameEn

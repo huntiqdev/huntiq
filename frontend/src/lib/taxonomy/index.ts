@@ -9,15 +9,19 @@ export interface LocalizedCategoryEntity {
   name_om?: string;
   name_ti?: string;
   slug?: string;
+  i18n?: Record<string, string>;
 }
 
 /**
  * Resolves a category's localized display title dynamically from its database record.
  * Authoritative source: PostgreSQL category_hierarchy via backend API.
- * Precedence: Requested locale field -> name -> name_en -> formatted slug.
+ * Precedence: Dynamic i18n[locale] -> requested locale field -> name -> name_en -> formatted slug.
  */
 export function resolveCategoryTitle(cat?: LocalizedCategoryEntity | null, locale: string = 'en'): string {
   if (!cat) return '';
+  if (cat.i18n && cat.i18n[locale]) {
+    return cat.i18n[locale];
+  }
   switch (locale) {
     case 'am':
       if (cat.name_am) return cat.name_am;
@@ -33,7 +37,7 @@ export function resolveCategoryTitle(cat?: LocalizedCategoryEntity | null, local
       if (cat.name_en) return cat.name_en;
       break;
   }
-  return cat.name || cat.name_en || cat.slug?.replace(/_/g, ' ') || '';
+  return cat.i18n?.['en'] || cat.name || cat.name_en || cat.slug?.replace(/_/g, ' ') || '';
 }
 
 /**

@@ -19,7 +19,6 @@ RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 
 COPY --from=builder /build/huntiq-api /app/huntiq-api
-COPY data ./data
 
 # Uploads directory
 RUN mkdir -p /app/uploads

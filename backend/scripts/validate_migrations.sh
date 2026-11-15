@@ -71,7 +71,7 @@ for file_path in "${FILES[@]}"; do
     prefix="${filename:0:3}"
     prefix_int=$((10#${prefix}))
 
-    if [ "${prefix_int}" -lt 77 ]; then
+    if [ "${prefix_int}" -le 49 ]; then
         ((HISTORICAL_COUNT++)) || true
     else
         ((NEW_COUNT++)) || true
@@ -131,7 +131,7 @@ for file_path in "${FILES[@]}"; do
     if echo "${file_content}" | grep -Ei 'DROP[[:space:]]+INDEX[[:space:]]+CONCURRENTLY' > /dev/null 2>&1; then
         NON_TRANSACTIONAL_NOTICES+=("[NON-TX] '${filename}': contains DROP INDEX CONCURRENTLY (must execute outside multi-statement transaction)")
     fi
-    if echo "${file_content}" | grep -Ei '\bVACUUM\b' > /dev/null 2>&1; then
+    if echo "${file_content}" | grep -Ei '^[[:space:]]*VACUUM\b' > /dev/null 2>&1; then
         NON_TRANSACTIONAL_NOTICES+=("[NON-TX] '${filename}': contains VACUUM statement")
     fi
 

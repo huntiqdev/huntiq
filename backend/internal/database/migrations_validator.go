@@ -96,7 +96,7 @@ func ValidateMigrationFilenames(filenames []string) *MigrationValidationResult {
 			continue
 		}
 
-		if prefixInt < 77 {
+		if prefixInt <= 49 {
 			res.HistoricalCount++
 		} else {
 			res.NewCount++

@@ -110,8 +110,8 @@ export function Footer() {
             </h4>
             <nav className="flex flex-col gap-2">
               {[
-                { href: '/sell', label: t.ui.start_selling ?? 'Start Selling' },
-                { href: '/sell?type=rent', label: 'List Rental / Property' },
+                { href: '/seller/product/new?type=sale', label: t.ui.start_selling ?? 'Start Selling' },
+                { href: '/seller/product/new?type=rent', label: 'List Rental / Property' },
                 { href: '/help#seller-guidelines', label: 'Seller Requirements' },
                 { href: '/seller/login', label: 'Seller Dashboard' },
                 { href: '/#tier-system', label: 'Gold & Premium Tiers' },

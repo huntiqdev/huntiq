@@ -26,6 +26,7 @@ export interface CategoryNode {
   level: number;
   is_leaf: boolean;
   count: number;
+  i18n?: Record<string, string>;
   children?: CategoryNode[];
 }
 
@@ -127,8 +128,11 @@ export default function CategoryTreeSelector({
     };
   }, [isOpen]);
 
-  // Helper to extract localized name
-  const getNodeName = useCallback((node: CategoryNode | { name?: string; name_en?: string; name_am?: string; name_om?: string; name_ti?: string; slug?: string }): string => {
+  // Helper to extract localized name with dynamic i18n support
+  const getNodeName = useCallback((node: CategoryNode | { name?: string; name_en?: string; name_am?: string; name_om?: string; name_ti?: string; slug?: string; i18n?: Record<string, string> }): string => {
+    if (node.i18n && node.i18n[language]) {
+      return node.i18n[language];
+    }
     switch (language) {
       case 'am':
         return node.name_am || node.name || node.name_en || node.slug || '';
@@ -138,7 +142,7 @@ export default function CategoryTreeSelector({
       case 'ti':
         return node.name_ti || node.name || node.name_en || node.slug || '';
       default:
-        return node.name_en || node.name || node.slug || '';
+        return node.i18n?.['en'] || node.name_en || node.name || node.slug || '';
     }
   }, [language]);
 
@@ -686,6 +690,24 @@ export default function CategoryTreeSelector({
                 </div>
               )
             )}
+          </div>
+          {/* Quick "Other / Can't Find" Bar */}
+          <div className="p-2.5 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-850/80 flex items-center justify-between text-xs">
+            <span className="text-[11px] text-zinc-500 font-medium">
+              {language === 'am' ? 'የሚፈልጉትን ምድብ አላገኙም?' : language === 'or' ? 'Ramaddii hin argannee?' : language === 'ti' ? 'ዝደለይዎ ምድብ ኣይረኸብኩምን?' : "Can't find your category?"}
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                const otherBranch = allLeafBranches.find(b => b.slug.startsWith('other-')) || allLeafBranches[allLeafBranches.length - 1];
+                if (otherBranch) {
+                  handleSelectLeaf(otherBranch);
+                }
+              }}
+              className="px-3 py-1.5 rounded-lg bg-orange-600 text-white font-bold hover:bg-orange-500 transition-all text-xs shadow-sm shadow-orange-600/20 active:scale-95"
+            >
+              {language === 'am' ? 'ሌላ ምድብ ምረጥ (Other)' : language === 'or' ? 'Biroo Filadhu' : language === 'ti' ? 'ካልእ ምረጽ' : 'Select "Other"'}
+            </button>
           </div>
         </div>
       )}

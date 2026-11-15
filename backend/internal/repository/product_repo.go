@@ -111,7 +111,7 @@ const sqlCreateProduct = `
 		$15, $16, $17, $18,
 		$19, $20, $21, $22, $23, $24, $25,
 		$26, $27,
-		$28, $29
+		$28, COALESCE($29, '{}'::jsonb)
 	) RETURNING id`
 
 const sqlCreateProductImage = `
@@ -582,7 +582,7 @@ func (r *ProductRepo) Create(ctx context.Context, p *models.Product, imageURLs [
 	if catHierarchyID == nil {
 		catHierarchyID = p.CategoryID
 	}
-	var socialJSON interface{}
+	socialJSON := []byte("{}")
 	if len(p.SocialLinks) > 0 {
 		b, err := json.Marshal(p.SocialLinks)
 		if err == nil {

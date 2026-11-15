@@ -173,12 +173,8 @@ export function Header() {
   const [dark, setDark] = useState(false);
 
   const sellHref = user
-    ? '/seller/product/new?type=sale'
-    : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new?type=sale')}`;
-
-  const landlordHref = user
-    ? '/seller/product/new?type=rent'
-    : `/auth?as=landlord&intent=rent&redirect=${encodeURIComponent('/seller/product/new?type=rent')}`;
+    ? '/seller/product/new'
+    : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new')}`;
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -196,9 +192,6 @@ export function Header() {
     localStorage.setItem('habesha_theme', next ? 'dark' : 'light');
   };
 
-  const isSellPage = pathname === '/sell';
-  const ctaHref = isSellPage ? '/products' : '/sell';
-  const ctaLabel = isSellPage ? (t.nav.buy ?? 'Buy') : (t.nav.sell ?? 'Start Selling');
 
   // Close lang dropdown on outside click
   useEffect(() => {
@@ -351,6 +344,7 @@ export function Header() {
           <div className="max-w-7xl mx-auto px-4 h-9 sm:h-10 flex items-center gap-1.5 sm:gap-2.5 text-xs font-bold whitespace-nowrap">
             
             {/* Navigation links: Buy, Sell, Rent, Landlord (Fully Localized, Zero English Mixing) */}
+            {/* Buy Filter */}
             <Link
               href="/products?type=sale"
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
@@ -363,18 +357,7 @@ export function Header() {
               <span>{t.nav?.buy ?? 'Buy'}</span>
             </Link>
 
-            <Link
-              href={sellHref}
-              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname === '/sell' || (pathname.includes('/seller/product/new') && currentType !== 'rent')
-                  ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
-                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
-              }`}
-            >
-              <span>🏷️</span>
-              <span>{t.nav?.sell?.split('/')[0]?.trim() ?? 'Sell'}</span>
-            </Link>
-
+            {/* Rent Filter */}
             <Link
               href="/products?type=rent"
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
@@ -387,16 +370,17 @@ export function Header() {
               <span>{t.nav?.rental ?? 'Rent'}</span>
             </Link>
 
+            {/* Unified Sell / Rent Out Listing Action */}
             <Link
-              href={landlordHref}
+              href={sellHref}
               className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname.includes('/seller/product/new') && currentType === 'rent'
-                  ? 'bg-teal-600 text-white font-black shadow-md shadow-teal-600/20'
-                  : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-850'
+                pathname === '/sell' || pathname.includes('/seller/product/new')
+                  ? 'bg-orange-600 text-white font-black shadow-md shadow-orange-600/20'
+                  : 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/40 hover:bg-orange-100 dark:hover:bg-orange-900/40 border border-orange-200 dark:border-orange-800/60'
               }`}
             >
-              <span>🔑</span>
-              <span>{locale === 'am' ? 'አከራይ' : locale === 'or' ? 'Abbaa Qabeenyaa' : locale === 'ti' ? 'ኣካራዪ' : 'Landlord'}</span>
+              <span>🏷️</span>
+              <span>{t.nav?.sell ?? 'Sell / Rent Out'}</span>
             </Link>
 
             <div className="ml-auto hidden lg:flex items-center gap-2 pl-3">

@@ -54,8 +54,6 @@ export default function CategoriesAdminPage() {
   const [error, setError] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
 
-  useEffect(() => { fetchTree(); }, []);
-
   const fetchTree = async () => {
     setLoading(true);
     try {
@@ -67,6 +65,8 @@ export default function CategoriesAdminPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => { fetchTree(); }, []);
 
   const openCreate = (parentId?: number) => {
     setEditItem(null);

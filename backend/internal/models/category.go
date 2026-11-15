@@ -35,9 +35,10 @@ type CategoryHierarchy struct {
 	IsActive        bool      `json:"is_active"`
 	IsLeaf          bool      `json:"is_leaf"` // Can products be attached?
 	MetaTitle       string    `json:"meta_title,omitempty"`
-	MetaDescription string    `json:"meta_description,omitempty"`
-	CreatedAt       time.Time `json:"created_at"`
-	UpdatedAt       time.Time `json:"updated_at"`
+	MetaDescription string            `json:"meta_description,omitempty"`
+	I18N            map[string]string `json:"i18n,omitempty"` // Dynamic open i18n map (e.g. {"en": "...", "am": "...", "so": "..."})
+	CreatedAt       time.Time         `json:"created_at"`
+	UpdatedAt       time.Time         `json:"updated_at"`
 
 	// Relationships (populated on demand)
 	Parent      *CategoryHierarchy   `json:"parent,omitempty"`
@@ -47,6 +48,9 @@ type CategoryHierarchy struct {
 
 // GetName returns the localized name for the requested language with fallback to English and Slug.
 func (c CategoryHierarchy) GetName(lang string) string {
+	if c.I18N != nil && c.I18N[lang] != "" {
+		return c.I18N[lang]
+	}
 	switch lang {
 	case "am":
 		if c.NameAm != "" {
@@ -60,6 +64,9 @@ func (c CategoryHierarchy) GetName(lang string) string {
 		if c.NameTi != "" {
 			return c.NameTi
 		}
+	}
+	if c.I18N != nil && c.I18N["en"] != "" {
+		return c.I18N["en"]
 	}
 	if c.NameEn != "" {
 		return c.NameEn

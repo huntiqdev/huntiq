@@ -588,7 +588,7 @@ export function CategoryDrawer({ isOpen, onClose }: CategoryDrawerProps) {
             </Link>
           </div>
           <Link
-            href="/sell"
+            href="/seller/product/new?type=sale"
             onClick={onClose}
             className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-orange-600 text-white text-xs font-black uppercase tracking-wider hover:bg-orange-500 shadow-md shadow-orange-600/20 transition-all tap-bounce active:scale-95 min-h-[40px]"
           >

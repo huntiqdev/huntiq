@@ -32,14 +32,14 @@ func TestMigrationValidation_ProductionMigrations(t *testing.T) {
 		t.Fatalf("production migrations validation failed with errors: %v", result.Errors)
 	}
 
-	if result.TotalFiles != 98 {
-		t.Errorf("expected 98 production migration files, got %d", result.TotalFiles)
+	if result.TotalFiles != 57 {
+		t.Errorf("expected 57 production migration files, got %d", result.TotalFiles)
 	}
-	if result.HistoricalCount != 76 {
-		t.Errorf("expected 76 historical migrations, got %d", result.HistoricalCount)
+	if result.HistoricalCount != 49 {
+		t.Errorf("expected 49 canonical table migrations, got %d", result.HistoricalCount)
 	}
-	if result.NewCount != 22 {
-		t.Errorf("expected 22 active/new migrations (077 to 098), got %d", result.NewCount)
+	if result.NewCount != 8 {
+		t.Errorf("expected 8 operational/seed migrations (050 to 057), got %d", result.NewCount)
 	}
 	if len(result.AllowlistedCollisions) != 0 {
 		t.Errorf("expected 0 allowlisted collision pairs in normalized migrations, got %d", len(result.AllowlistedCollisions))
