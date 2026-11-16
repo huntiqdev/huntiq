@@ -28,9 +28,9 @@ tmp/
 dist/
 build/
 bin/
-api
+/api
 taxonomy-tool
-huntiq-api
+huntiq-/api
 *.exe
 *.dll
 *.so

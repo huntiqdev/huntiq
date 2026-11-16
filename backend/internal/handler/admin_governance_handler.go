@@ -59,11 +59,22 @@ func (h *AdminHandler) GetMyPermissions(c *fiber.Ctx) error {
 	if err != nil {
 		return response.InternalError(c, err)
 	}
-	if perms == nil {
-		perms = []string{}
+	merged := make(map[string]bool)
+	for _, p := range perms {
+		merged[p] = true
+	}
+	// Automatically grant domain baseline permissions mapped to the administrator's enterprise role
+	if domainPerms, ok := models.RoleDomainPermissions[role]; ok {
+		for p := range domainPerms {
+			merged[p] = true
+		}
+	}
+	effectivePerms := make([]string, 0, len(merged))
+	for p := range merged {
+		effectivePerms = append(effectivePerms, p)
 	}
 	return response.OK(c, fiber.Map{
-		"permissions":       perms,
+		"permissions":       effectivePerms,
 		"is_super":          false,
 		"is_platform_owner": false,
 		"admin_role":        role,

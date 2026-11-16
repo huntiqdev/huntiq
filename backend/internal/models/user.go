@@ -103,37 +103,41 @@ var RoleDomainPermissions = map[string]map[string]bool{
 		"logs": true, "otp_logs": true, "trust_safety": true, "operations": true,
 		"seller_verification": true, "refunds": true, "appeals": true, "pending": true,
 		"products": true, "seller_upgrades": true, "buyer_upgrades": true, "referrals": true, "withdrawals": true,
+		"premium_users": true,
 	},
 	RoleGovComplianceOfficer: {
 		"dashboard": true, "finance": true, "profit": true, "transactions": true,
 		"operations": true, "logs": true, "seller_verification": true,
+		"trust_safety": true, "appeals": true, "refunds": true,
 	},
 	RoleLegalCounsel: {
 		"dashboard": true, "trust_safety": true, "appeals": true, "refunds": true,
-		"seller_verification": true, "logs": true,
+		"seller_verification": true, "logs": true, "transactions": true,
 	},
 	RoleHRDirector: {
-		"dashboard": true, "logs": true, "notifications": true,
+		"dashboard": true, "logs": true, "notifications": true, "operations": true,
 	},
 
 	// ── Department 2: Cybersecurity, SOC & Trust & Safety ──
 	RoleCISO: {
 		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,
-		"operations": true, "notifications": true,
+		"operations": true, "notifications": true, "settings": true, "analytics": true,
 	},
 	RoleSecurityAdmin: {
 		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,
+		"operations": true, "analytics": true,
 	},
 	RoleSOCAnalyst: {
 		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,
+		"operations": true,
 	},
 	RoleFraudInvestigator: {
 		"dashboard": true, "trust_safety": true, "transactions": true, "logs": true,
-		"seller_verification": true, "refunds": true,
+		"seller_verification": true, "refunds": true, "appeals": true,
 	},
 	RoleComplianceAuditor: {
 		"dashboard": true, "logs": true, "otp_logs": true, "transactions": true,
-		"profit": true, "operations": true,
+		"profit": true, "operations": true, "finance": true,
 	},
 
 	// ── Department 3: Banking, Treasury, Tax & Financial Operations ──
@@ -143,12 +147,15 @@ var RoleDomainPermissions = map[string]map[string]bool{
 	},
 	RoleTransactionAuditor: {
 		"dashboard": true, "transactions": true, "profit": true, "withdrawals": true,
+		"finance": true,
 	},
 	RoleTaxController: {
 		"dashboard": true, "finance": true, "profit": true, "transactions": true,
+		"analytics": true,
 	},
 	RoleEscrowReconciler: {
 		"dashboard": true, "transactions": true, "refunds": true, "withdrawals": true,
+		"profit": true,
 	},
 	RoleFinanceSupportAgent: {
 		"dashboard": true, "transactions": true, "refunds": true, "seller_upgrades": true,
@@ -158,20 +165,22 @@ var RoleDomainPermissions = map[string]map[string]bool{
 	// ── Department 4: VIP Concierge, Premium & Growth Services ──
 	RoleVIPAccountDirector: {
 		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
-		"analytics": true, "referrals": true,
+		"premium_users": true, "analytics": true, "referrals": true,
 	},
 	RoleGoldConcierge: {
 		"dashboard": true, "sellers": true, "seller_upgrades": true, "products": true,
+		"premium_users": true,
 	},
 	RolePremiumConcierge: {
 		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
-		"products": true, "banners": true,
+		"products": true, "banners": true, "premium_users": true,
 	},
 	RoleReferralDirector: {
 		"dashboard": true, "referrals": true, "withdrawals": true, "analytics": true,
 	},
 	RoleRetentionSpecialist: {
 		"dashboard": true, "sellers": true, "analytics": true, "category_trends": true,
+		"premium_users": true,
 	},
 
 	// ── Department 5: Marketplace Operations & KYC Verification ──
@@ -182,15 +191,16 @@ var RoleDomainPermissions = map[string]map[string]bool{
 	},
 	RoleKYCVerificationOfficer: {
 		"dashboard": true, "seller_verification": true, "sellers": true,
+		"trust_safety": true,
 	},
 	RoleProductInspectionOfficer: {
 		"dashboard": true, "pending": true, "products": true,
 	},
 	RoleDisputeRefundOfficer: {
-		"dashboard": true, "refunds": true, "transactions": true,
+		"dashboard": true, "refunds": true, "transactions": true, "appeals": true,
 	},
 	RoleAppealsOfficer: {
-		"dashboard": true, "appeals": true, "trust_safety": true,
+		"dashboard": true, "appeals": true, "trust_safety": true, "sellers": true,
 	},
 
 	// ── Department 6: Catalog, Taxonomy, Logistics & Support ──
@@ -198,25 +208,29 @@ var RoleDomainPermissions = map[string]map[string]bool{
 		"dashboard": true, "settings": true, "categories": true, "category_trends": true,
 		"analytics": true, "locations": true, "banners": true, "notifications": true,
 		"profit": true, "finance": true, "sellers": true, "transactions": true,
+		"operations": true,
 	},
 	RoleTaxonomyArchitect: {
-		"dashboard": true, "categories": true, "category_trends": true,
+		"dashboard": true, "categories": true, "category_trends": true, "analytics": true,
 	},
 	RoleGISLocationSpecialist: {
 		"dashboard": true, "locations": true, "analytics": true,
 	},
 	RoleContentModerator: {
 		"dashboard": true, "pending": true, "products": true, "trust_safety": true,
+		"banners": true,
 	},
 	RoleModerator: {
 		"dashboard": true, "pending": true, "products": true, "trust_safety": true,
+		"banners": true,
 	},
 	RoleCustomerSupportLead: {
 		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
-		"refunds": true, "appeals": true,
+		"refunds": true, "appeals": true, "products": true,
 	},
 	RoleSupportAgent: {
 		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
+		"products": true,
 	},
 }
 
