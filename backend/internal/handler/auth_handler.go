@@ -186,15 +186,30 @@ func (h *AuthHandler) AdminLogin(c *fiber.Ctx) error {
 		return response.AppError(c, errors.ValPasswordMin())
 	}
 	req.Phone = ""
-	result, isSuper, err := h.svc.AdminLoginStep1(c.Context(), req)
+	ip := c.IP()
+	if ip == "" {
+		ip = "127.0.0.1"
+	}
+	result, sessionToken, isSuper, err := h.svc.AdminLoginStep1(c.Context(), req, ip, c.Get("User-Agent"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
 	}
 	if isSuper {
+		if sessionToken != "" {
+			c.Cookie(&fiber.Cookie{
+				Name:     "hm_admin_session",
+				Value:    sessionToken,
+				Path:     "/",
+				MaxAge:   12 * 3600,
+				HTTPOnly: true,
+				SameSite: "Lax",
+			})
+		}
 		return response.OK(c, dto.AdminLoginStep1Response{
-			Token:   result,
-			IsSuper: true,
-			Message: "login successful",
+			Token:        result,
+			SessionToken: sessionToken,
+			IsSuper:      true,
+			Message:      "login successful",
 		})
 	}
 	return response.OK(c, dto.AdminLoginStep1Response{

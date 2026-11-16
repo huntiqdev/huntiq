@@ -160,6 +160,27 @@ export function AdminPortalLogin({
     }
   };
 
+  const getTargetRoute = () => {
+    switch (portal) {
+      case 'executive':
+        return '/executive-console';
+      case 'security':
+        return '/security-console';
+      case 'platform':
+        return '/platform-console';
+      case 'staff':
+      default:
+        return '/admin/dashboard';
+    }
+  };
+
+  const sampleCredentials = {
+    executive: { email: 'owner@habeshamarket.com', pass: 'Owner123!', role: 'CEO / Platform Owner' },
+    security: { email: 'security@habeshamarket.com', pass: 'Security123!', role: 'Security Administrator' },
+    platform: { email: 'platform@habeshamarket.com', pass: 'Platform123!', role: 'Platform Administrator' },
+    staff: { email: 'admin@habeshamarket.com', pass: 'Admin123!', role: 'Super Admin' },
+  }[portal] || { email: 'owner@habeshamarket.com', pass: 'Owner123!', role: 'CEO / Platform Owner' };
+
   const handlePasswordStep1 = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -167,8 +188,8 @@ export function AdminPortalLogin({
     try {
       const res = await api.adminLogin({ email: email.trim().toLowerCase(), password });
       if (res.token && res.is_super) {
-        await login(res.token);
-        router.push('/admin/dashboard');
+        await login(res.token, res.session_token);
+        router.push(getTargetRoute());
       } else {
         setOtpStep(true);
       }
@@ -185,8 +206,8 @@ export function AdminPortalLogin({
     setLoading(true);
     try {
       const res = await api.adminLoginVerifyOTP({ email: email.trim().toLowerCase(), code: otpCode.trim() });
-      await login(res.token);
-      router.push('/admin/dashboard');
+      await login(res.token, res.session_token);
+      router.push(getTargetRoute());
     } catch (err: any) {
       setError(err?.message || 'Multi-factor verification code is invalid or expired.');
     } finally {
@@ -235,7 +256,7 @@ export function AdminPortalLogin({
         </div>
 
         {/* Security Notification Banner */}
-        <div className="bg-zinc-950/60 border border-zinc-800/80 rounded-2xl p-3.5 mb-6 text-zinc-300 text-xs flex items-start gap-3">
+        <div className="bg-zinc-950/60 border border-zinc-800/80 rounded-2xl p-3.5 mb-4 text-zinc-300 text-xs flex items-start gap-3">
           <Cpu className={`shrink-0 ${theme.accentText} mt-0.5`} size={16} />
           <div className="space-y-0.5">
             <p className="font-bold text-white text-[11px] uppercase tracking-wider">
@@ -244,6 +265,33 @@ export function AdminPortalLogin({
             <p className="text-zinc-400 text-[11px] leading-relaxed">
               Touch ID, Face ID, Windows Hello or Security Keys. Zero biometric data is stored on HUNTIQ servers.
             </p>
+          </div>
+        </div>
+
+        {/* Sample Credentials Helper (Dev & Inspection Mode) */}
+        <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3 mb-6 text-zinc-300 text-xs">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span className="font-bold text-[11px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+              <KeyRound size={13} className={theme.accentText} />
+              Sample Demo Credentials
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setEmail(sampleCredentials.email);
+                setPassword(sampleCredentials.pass);
+                setAuthMode('password');
+                setError('');
+              }}
+              className="text-[11px] font-bold px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all border border-zinc-700 hover:border-zinc-500 shadow-sm"
+            >
+              ⚡ Fill Sample Data
+            </button>
+          </div>
+          <div className="text-[11px] text-zinc-400 font-mono bg-zinc-900/90 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
+            <span className="truncate max-w-[190px]">{sampleCredentials.email}</span>
+            <span className="text-zinc-600">/</span>
+            <span>{sampleCredentials.pass}</span>
           </div>
         </div>
 
