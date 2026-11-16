@@ -4,14 +4,50 @@ import (
 	"time"
 )
 
-// Administrative Enterprise Role Constants
+// Administrative Enterprise Role Constants — 30 Enterprise Roles
 const (
-	RolePlatformOwner   = "platform_owner"
-	RolePlatformAdmin   = "platform_admin"
-	RoleSecurityAdmin   = "security_admin"
-	RoleOperationsAdmin = "operations_admin"
-	RoleModerator       = "moderator"
-	RoleSupportAgent    = "support_agent"
+	// Department 1: Executive & Strategic Governance
+	RolePlatformOwner        = "platform_owner"
+	RoleGovComplianceOfficer = "gov_compliance_officer"
+	RoleLegalCounsel         = "legal_counsel"
+	RoleHRDirector           = "hr_director"
+
+	// Department 2: Cybersecurity, SOC & Trust & Safety
+	RoleCISO               = "ciso"
+	RoleSecurityAdmin      = "security_admin"
+	RoleSOCAnalyst         = "soc_analyst"
+	RoleFraudInvestigator  = "fraud_investigator"
+	RoleComplianceAuditor  = "compliance_auditor"
+
+	// Department 3: Banking, Treasury, Tax & Financial Operations
+	RoleFinanceDirector     = "finance_director"
+	RoleTransactionAuditor  = "transaction_auditor"
+	RoleTaxController       = "tax_controller"
+	RoleEscrowReconciler    = "escrow_reconciler"
+	RoleFinanceSupportAgent = "finance_support_agent"
+
+	// Department 4: VIP Concierge, Premium & Growth Services
+	RoleVIPAccountDirector = "vip_account_director"
+	RoleGoldConcierge      = "gold_concierge"
+	RolePremiumConcierge   = "premium_concierge"
+	RoleReferralDirector   = "referral_director"
+	RoleRetentionSpecialist = "retention_specialist"
+
+	// Department 5: Marketplace Operations & KYC Verification
+	RoleOperationsAdmin        = "operations_admin"
+	RoleKYCVerificationOfficer = "kyc_verification_officer"
+	RoleProductInspectionOfficer = "product_inspection_officer"
+	RoleDisputeRefundOfficer   = "dispute_refund_officer"
+	RoleAppealsOfficer         = "appeals_officer"
+
+	// Department 6: Catalog, Taxonomy, Logistics & Support
+	RolePlatformAdmin        = "platform_admin"
+	RoleTaxonomyArchitect    = "taxonomy_architect"
+	RoleGISLocationSpecialist = "gis_location_specialist"
+	RoleContentModerator     = "content_moderator"
+	RoleModerator            = "moderator" // alias for content_moderator
+	RoleCustomerSupportLead  = "customer_support_lead"
+	RoleSupportAgent         = "support_agent"
 
 	// Legacy backward-compatibility constants
 	LegacyRoleSuper  = "super"

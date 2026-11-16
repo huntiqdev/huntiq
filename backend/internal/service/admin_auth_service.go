@@ -412,15 +412,40 @@ func (s *AdminAuthService) GenerateAdminJWT(userID int, adminRole string, sessio
 func ValidatePortalAccess(role, portal string) error {
 	switch portal {
 	case "executive":
-		if role != models.RolePlatformOwner && role != models.LegacyRoleSuper {
-			return errors.New("unauthorized: executive console requires Platform Owner role")
+		allowed := map[string]bool{
+			models.RolePlatformOwner:        true,
+			models.RoleGovComplianceOfficer: true,
+			models.RoleLegalCounsel:         true,
+			models.RoleHRDirector:           true,
+			models.RoleFinanceDirector:      true,
+			models.LegacyRoleSuper:          true,
+		}
+		if !allowed[role] {
+			return errors.New("unauthorized: executive console requires Executive / Platform Owner role")
 		}
 	case "platform":
-		if role != models.RolePlatformOwner && role != models.RolePlatformAdmin && role != models.LegacyRoleSuper {
+		allowed := map[string]bool{
+			models.RolePlatformOwner:         true,
+			models.RolePlatformAdmin:         true,
+			models.RoleTaxonomyArchitect:     true,
+			models.RoleGISLocationSpecialist: true,
+			models.RoleVIPAccountDirector:    true,
+			models.LegacyRoleSuper:           true,
+		}
+		if !allowed[role] {
 			return errors.New("unauthorized: platform console requires Platform Administrator role")
 		}
 	case "security":
-		if role != models.RolePlatformOwner && role != models.RoleSecurityAdmin && role != models.LegacyRoleSuper {
+		allowed := map[string]bool{
+			models.RolePlatformOwner:      true,
+			models.RoleCISO:               true,
+			models.RoleSecurityAdmin:      true,
+			models.RoleSOCAnalyst:         true,
+			models.RoleFraudInvestigator:  true,
+			models.RoleComplianceAuditor:  true,
+			models.LegacyRoleSuper:        true,
+		}
+		if !allowed[role] {
 			return errors.New("unauthorized: security console requires Security Administrator role")
 		}
 	case "staff":

@@ -115,16 +115,8 @@ func (h *AdminHandler) CreateAdmin(c *fiber.Ctx) error {
 		return response.BadRequest(c, "Platform Owner accounts cannot be provisioned via the web API")
 	}
 
-	validRoles := map[string]bool{
-		models.RolePlatformAdmin:   true,
-		models.RoleSecurityAdmin:   true,
-		models.RoleOperationsAdmin: true,
-		models.RoleModerator:       true,
-		models.RoleSupportAgent:    true,
-		models.LegacyRoleNormal:    true,
-	}
-	if !validRoles[role] {
-		return response.BadRequest(c, "invalid admin_role: must be platform_admin, security_admin, operations_admin, moderator, or support_agent")
+	if _, ok := models.RoleDomainPermissions[role]; !ok && role != models.LegacyRoleNormal {
+		return response.BadRequest(c, "invalid admin_role: must be a recognized enterprise administrative role")
 	}
 
 	id, err := h.svc.CreateAdmin(c.Context(), body.Name, body.Phone, body.Email, body.Password, role)
