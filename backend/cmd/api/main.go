@@ -74,6 +74,10 @@ func main() {
 	classificationRepo := repository.NewClassificationRepo(db)
 	adminPasskeyRepo := repository.NewAdminPasskeyRepo(db)
 	fpaRepo := repository.NewFPARepo(db)
+	smsRepo := repository.NewSMSRepo(db)
+	ledgerRepo := repository.NewLedgerRepo(db)
+	referralTokenRepo := repository.NewReferralTokenRepo(db)
+	telebirrRepo := repository.NewTelebirrRepo(db)
 
 	// In-memory active user cache
 	const isActiveCacheMax = 10_000
@@ -119,13 +123,23 @@ func main() {
 	txSvc := service.NewTransactionService(txRepo, productRepo, userRepo)
 	adminSvc := service.NewAdminService(adminRepo)
 	sellerSvc := service.NewSellerService(sellerRepo)
-	referralSvc := service.NewReferralService(referralRepo).WithSettingsReader(func(ctx context.Context, k string) string {
-		return adminSvc.GetSetting(ctx, k)
-	})
+	ledgerSvc := service.NewLedgerService(ledgerRepo)
+	smsMgr := service.NewSMSManager(smsRepo, cfg.DevMode)
+	referralTokenSvc := service.NewReferralTokenService(referralTokenRepo, ledgerSvc)
+	telebirrSvc := service.NewTelebirrService(telebirrRepo, referralTokenSvc, ledgerSvc, nil, cfg.DevMode)
+
+	referralSvc := service.NewReferralService(referralRepo).
+		WithSettingsReader(func(ctx context.Context, k string) string {
+			return adminSvc.GetSetting(ctx, k)
+		}).
+		WithLedgerService(ledgerSvc)
 	fpaSvc := service.NewFPAService(fpaRepo)
 
 	txSvc.WithReferralService(referralSvc)
-	authSvc.WithReferralService(referralSvc).WithAdminService(adminSvc)
+	authSvc.WithReferralService(referralSvc).
+		WithAdminService(adminSvc).
+		WithSMSManager(smsMgr).
+		WithReferralTokenService(referralTokenSvc)
 	adminSvc.WithReferralService(referralSvc).WithSellerService(sellerSvc)
 
 	// WebAuthn Manager
@@ -243,6 +257,9 @@ func main() {
 			adminSvc.InsertAdminLog(ctx, models.AdminLog{AdminID: adminID, TargetUserID: targetUserID, Action: action, Notes: notes})
 		})
 	searchHandler := handlers.NewSearchHandler(searchRepo)
+	telebirrHandler := handlers.NewTelebirrHandler(telebirrSvc)
+	walletHandler := handlers.NewWalletHandler(ledgerSvc, referralTokenSvc, cfg.FrontendURL)
+	adminFinancialHandler := handlers.NewAdminFinancialHandler(ledgerSvc, smsRepo)
 
 	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
@@ -310,6 +327,9 @@ func main() {
 		TransactionHandler:    txHandler,
 		BannerHandler:         bannerHandler,
 		ReferralHandler:       referralHandler,
+		TelebirrHandler:       telebirrHandler,
+		WalletHandler:         walletHandler,
+		AdminFinancialHandler: adminFinancialHandler,
 		FPAHandler:            fpaHandler,
 		SearchHandler:         searchHandler,
 	})

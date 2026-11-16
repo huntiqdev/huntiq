@@ -209,6 +209,66 @@ export interface WithdrawalRequest {
   paid_at?: string;
 }
 
+export interface WalletAccount {
+  id: number;
+  user_id: number;
+  currency: string;
+  available_balance: number;
+  pending_balance: number;
+  reserved_balance: number;
+  total_withdrawn: number;
+  lifetime_earned: number;
+  is_locked: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface LedgerTransaction {
+  id: number;
+  ledger_tx_id: string;
+  user_id: number;
+  debit_account: string;
+  credit_account: string;
+  amount: number;
+  currency: string;
+  entry_type: string;
+  reference_id?: string;
+  source_event: string;
+  status: string;
+  idempotency_key: string;
+  notes?: string;
+  created_at: string;
+}
+
+export interface TelebirrOrder {
+  id: number;
+  out_trade_no: string;
+  user_id: number;
+  amount: number;
+  currency: string;
+  title: string;
+  order_type: string;
+  status: string;
+  prepay_id?: string;
+  transaction_no?: string;
+  payer_phone?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ReferralRewardPolicy {
+  id: number;
+  policy_name: string;
+  registration_reward_amount: number;
+  transaction_reward_percent: number;
+  min_qualifying_tx_amount: number;
+  max_reward_per_tx: number;
+  reward_holding_days: number;
+  version: number;
+  is_active: boolean;
+  effective_from: string;
+}
+
 // ── Validation error shapes ───────────────────────────────────────────────────
 // All form validation interfaces live here so every part of the system
 // uses the same shape. Values are i18n keys (from t.errors / t.ui),

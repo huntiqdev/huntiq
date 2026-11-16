@@ -49,6 +49,8 @@ type AuthService struct {
 	adminSvc       firstLoginNotifier
 	emailSender    EmailSender
 	referralSvc    *ReferralService
+	smsMgr         *SMSManager
+	tokenSvc       *ReferralTokenService
 	otpCrypto      *security.OTPCrypto
 	settingsReader func(ctx context.Context, key string) string
 	sessionCreator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)
@@ -96,6 +98,18 @@ func (s *AuthService) WithAdminService(a firstLoginNotifier) *AuthService {
 // WithReferralService injects the referral service for commission recording on upgrades.
 func (s *AuthService) WithReferralService(r *ReferralService) *AuthService {
 	s.referralSvc = r
+	return s
+}
+
+// WithSMSManager injects the SMS manager for outbound SMS and delivery auditing.
+func (s *AuthService) WithSMSManager(sms *SMSManager) *AuthService {
+	s.smsMgr = sms
+	return s
+}
+
+// WithReferralTokenService injects the exact-token referral service.
+func (s *AuthService) WithReferralTokenService(tokenSvc *ReferralTokenService) *AuthService {
+	s.tokenSvc = tokenSvc
 	return s
 }
 
@@ -222,11 +236,17 @@ func (s *AuthService) Register(ctx context.Context, req dto.RegisterRequest) (*m
 			return nil, fmt.Errorf("registration succeeded but OTP delivery failed — please try again")
 		}
 	}
-	// Link referral if a code was provided
-	if req.ReferralCode != "" && s.referralSvc != nil {
-		safeGo(func() {
-			s.referralSvc.SetInvitedByOnRegister(context.Background(), id, req.ReferralCode)
-		})
+	// Link referral if a code or exact token was provided
+	if req.ReferralCode != "" {
+		if s.tokenSvc != nil {
+			safeGo(func() {
+				_ = s.tokenSvc.ProcessRegistrationReferral(context.Background(), req.ReferralCode, "", "", id)
+			})
+		} else if s.referralSvc != nil {
+			safeGo(func() {
+				s.referralSvc.SetInvitedByOnRegister(context.Background(), id, req.ReferralCode)
+			})
+		}
 	}
 	u.ID = id
 	return u, nil
@@ -363,8 +383,13 @@ func (s *AuthService) SendOTP(ctx context.Context, req dto.OTPRequest) error {
 
 	switch gateway {
 	case "sms":
-		// TODO: Implement real SMS gateway (Twilio, Infobip, etc.)
-		log.Printf("[SMS GATEWAY] Sending OTP to %s", sanitizeLog(req.Phone))
+		if s.smsMgr != nil {
+			if err := s.smsMgr.SendOTPMessage(ctx, req.Phone, code, req.Purpose); err != nil {
+				log.Printf("[SMS GATEWAY] delivery error for %s: %v", MaskPhoneNumber(req.Phone), err)
+			}
+		} else {
+			log.Printf("[SMS GATEWAY] Sending OTP to %s", MaskPhoneNumber(req.Phone))
+		}
 	case "email":
 		// If the user has an email, we can send it there too
 		u, err := s.repo.GetByPhoneAndRole(ctx, req.Phone, userType)
@@ -452,7 +477,24 @@ func (s *AuthService) VerifyOTP(ctx context.Context, req dto.OTPVerifyRequest) e
 	}
 	safeGo(func() { s.logActivity(context.Background(), "otp_verify_ok", req.Phone, "", userType, "", req.Purpose) })
 	// Mark otp_verified on the correct role row
-	return s.repo.SetOTPVerifiedForRole(ctx, req.Phone, userType)
+	if err := s.repo.SetOTPVerifiedForRole(ctx, req.Phone, userType); err != nil {
+		return err
+	}
+
+	// If phone verification completes for registration, trigger Reward A credit to inviter
+	if req.Purpose == "register" && s.tokenSvc != nil {
+		u, lookupErr := s.repo.GetByPhoneAndRole(ctx, req.Phone, userType)
+		if lookupErr == nil && u != nil {
+			safeGo(func() {
+				inviterID, iErr := s.tokenSvc.GetUserInviter(context.Background(), u.ID)
+				if iErr == nil && inviterID > 0 && s.referralSvc != nil && s.referralSvc.ledgerSvc != nil {
+					_ = s.referralSvc.ledgerSvc.CreditRegistrationReward(context.Background(), inviterID, u.ID)
+				}
+			})
+		}
+	}
+
+	return nil
 }
 
 // VerifyEmailOTP checks an email-based OTP (for admins).

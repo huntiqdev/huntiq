@@ -1,5 +1,5 @@
 import { fetchAPI, authHeaders } from './core';
-import type { ReferralStats, ReferralBalance, CommissionEntry, WithdrawalRequest } from '@/types';
+import type { ReferralStats, ReferralBalance, CommissionEntry, WithdrawalRequest, WalletAccount, LedgerTransaction, TelebirrOrder, ReferralRewardPolicy } from '@/types';
 
 type ReferralRole = 'seller' | 'buyer';
 
@@ -53,4 +53,34 @@ export const referralApi = {
     fetchAPI<any>(`/admin/referral/withdrawals/${id}/reject`, { method: 'PUT', body: JSON.stringify({ reason }), headers: authHeaders(token) }),
   adminMarkReferralWithdrawalPaid: (id: number, reference: string, token: string) =>
     fetchAPI<any>(`/admin/referral/withdrawals/${id}/paid`, { method: 'PUT', body: JSON.stringify({ reference }), headers: authHeaders(token) }),
+
+  // ── Financial Wallet & Ledger ──────────────────────────────────────────────
+  getMyWallet: (token: string) =>
+    fetchAPI<WalletAccount>('/wallet', { headers: authHeaders(token) }),
+  getMyLedger: (token: string, page = 1) =>
+    fetchAPI<{ transactions: LedgerTransaction[]; total: number }>(`/wallet/ledger?page=${page}`, { headers: authHeaders(token) }),
+  getMyReferralTokenLink: (token: string, code?: string) =>
+    fetchAPI<{ token: string; referral_url: string }>(`/referrals/token-link${code ? `?code=${encodeURIComponent(code)}` : ''}`, { headers: authHeaders(token) }),
+  trackReferralClick: (data: { token: string; landing_url?: string }) =>
+    fetchAPI<{ valid: boolean; token: string; inviter: number }>('/referrals/click', { method: 'POST', body: JSON.stringify(data) }),
+
+  // ── Telebirr Integration ──────────────────────────────────────────────────
+  createTelebirrOrder: (data: { amount: number; order_type: string; title: string }, token: string) =>
+    fetchAPI<{ order: TelebirrOrder; checkout_url: string }>('/telebirr/orders', { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
+  getTelebirrOrderStatus: (outTradeNo: string) =>
+    fetchAPI<TelebirrOrder>(`/telebirr/orders/${encodeURIComponent(outTradeNo)}`),
+  getMyTelebirrOrders: (token: string, page = 1) =>
+    fetchAPI<{ orders: TelebirrOrder[]; total: number }>(`/telebirr/my-orders?page=${page}`, { headers: authHeaders(token) }),
+
+  // ── Financial Governance & SMS Audit ──────────────────────────────────────
+  adminGetLedgerAuditTrail: (token: string, page = 1) =>
+    fetchAPI<{ transactions: LedgerTransaction[]; total: number }>(`/admin/financial/ledger?page=${page}`, { headers: authHeaders(token) }),
+  adminGetRewardPolicy: (token: string) =>
+    fetchAPI<ReferralRewardPolicy>('/admin/referral/policy', { headers: authHeaders(token) }),
+  adminUpdateRewardPolicy: (data: Partial<ReferralRewardPolicy> & { reason: string }, token: string) =>
+    fetchAPI<any>('/admin/referral/policy', { method: 'PUT', body: JSON.stringify(data), headers: authHeaders(token) }),
+  adminGetSMSLogs: (token: string, page = 1) =>
+    fetchAPI<{ logs: any[]; total: number }>(`/admin/sms/logs?page=${page}`, { headers: authHeaders(token) }),
+  adminCompensateLedger: (data: { user_id: number; amount: number; is_credit: boolean; reason: string }, token: string) =>
+    fetchAPI<any>('/admin/financial/compensate', { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
 };

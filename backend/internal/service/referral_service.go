@@ -15,11 +15,18 @@ import (
 // ReferralService handles referral code logic and commission recording.
 type ReferralService struct {
 	repo           *repository.ReferralRepo
+	ledgerSvc      *LedgerService
 	settingsReader func(ctx context.Context, key string) string
 }
 
 func NewReferralService(repo repository.ReferralRepository) *ReferralService {
 	return &ReferralService{repo: repo}
+}
+
+// WithLedgerService injects the double-entry ledger service
+func (s *ReferralService) WithLedgerService(ledger *LedgerService) *ReferralService {
+	s.ledgerSvc = ledger
+	return s
 }
 
 // WithSettingsReader injects the settings reader function
@@ -196,7 +203,14 @@ func (s *ReferralService) RequestWithdrawal(ctx context.Context, userID int, amo
 	if amount > maxAmount {
 		return 0, fmt.Errorf("maximum withdrawal amount is ETB %.0f per request", maxAmount)
 	}
-	return s.repo.RequestWithdrawal(ctx, userID, amount, paymentMethod, payerPhone)
+	id, err := s.repo.RequestWithdrawal(ctx, userID, amount, paymentMethod, payerPhone)
+	if err != nil {
+		return 0, err
+	}
+	if s.ledgerSvc != nil {
+		_ = s.ledgerSvc.ReserveWithdrawal(ctx, userID, amount, id)
+	}
+	return id, nil
 }
 
 // GetMyWithdrawals returns a user's own withdrawal history.
@@ -209,17 +223,47 @@ func (s *ReferralService) AdminListWithdrawals(ctx context.Context, status strin
 	return s.repo.AdminListWithdrawals(ctx, status, page, limit)
 }
 
-// AdminApproveWithdrawal marks a withdrawal approved.
+// AdminApproveWithdrawal marks a withdrawal approved with maker-checker separation.
 func (s *ReferralService) AdminApproveWithdrawal(ctx context.Context, withdrawalID, adminID int, note string) error {
+	req, err := s.repo.GetWithdrawalByID(ctx, withdrawalID)
+	if err != nil {
+		return err
+	}
+	if adminID == req.UserID {
+		return errors.New("maker-checker separation: approver cannot be the withdrawal recipient")
+	}
 	return s.repo.AdminApproveWithdrawal(ctx, withdrawalID, adminID, note)
 }
 
-// AdminRejectWithdrawal rejects a withdrawal with a reason.
+// AdminRejectWithdrawal rejects a withdrawal with a reason and releases reserved balance back to available.
 func (s *ReferralService) AdminRejectWithdrawal(ctx context.Context, withdrawalID, adminID int, reason string) error {
-	return s.repo.AdminRejectWithdrawal(ctx, withdrawalID, adminID, reason)
+	req, err := s.repo.GetWithdrawalByID(ctx, withdrawalID)
+	if err != nil {
+		return err
+	}
+	if err := s.repo.AdminRejectWithdrawal(ctx, withdrawalID, adminID, reason); err != nil {
+		return err
+	}
+	if s.ledgerSvc != nil && req != nil {
+		_ = s.ledgerSvc.ReleaseWithdrawalReservation(ctx, req.UserID, req.Amount, withdrawalID, adminID, reason)
+	}
+	return nil
 }
 
-// AdminMarkWithdrawalPaid marks a withdrawal as paid and records the reference.
+// AdminMarkWithdrawalPaid marks a withdrawal as paid, records the reference, and settles the reserved balance.
 func (s *ReferralService) AdminMarkWithdrawalPaid(ctx context.Context, withdrawalID, adminID int, reference string) error {
-	return s.repo.AdminMarkWithdrawalPaid(ctx, withdrawalID, adminID, reference)
+	req, err := s.repo.GetWithdrawalByID(ctx, withdrawalID)
+	if err != nil {
+		return err
+	}
+	if adminID == req.UserID {
+		return errors.New("maker-checker separation: settler cannot be the withdrawal recipient")
+	}
+	if err := s.repo.AdminMarkWithdrawalPaid(ctx, withdrawalID, adminID, reference); err != nil {
+		return err
+	}
+	if s.ledgerSvc != nil && req != nil {
+		_ = s.ledgerSvc.SettleWithdrawal(ctx, req.UserID, req.Amount, withdrawalID, adminID, reference)
+	}
+	return nil
 }

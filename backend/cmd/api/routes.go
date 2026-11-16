@@ -28,6 +28,9 @@ type AppDeps struct {
 	TransactionHandler    *handlers.TransactionHandler
 	BannerHandler         *handlers.BannerHandler
 	ReferralHandler       *handlers.ReferralHandler
+	TelebirrHandler       *handlers.TelebirrHandler
+	WalletHandler         *handlers.WalletHandler
+	AdminFinancialHandler *handlers.AdminFinancialHandler
 	FPAHandler            *handlers.FPAHandler
 	SearchHandler         *handlers.SearchHandler
 }
@@ -266,6 +269,16 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	api.Post("/upload/image", d.MW.RequireAuth, middleware.RequireRole("seller"), uploadLimiter, handlers.UploadImage)
 	api.Post("/transactions", d.MW.RequireAuth, middleware.RequireRole("seller"), authLimiter, d.TransactionHandler.Create)
 
+	// ── Financial Wallet & Telebirr Payments ──────────────────────────────────
+	api.Get("/wallet", d.MW.RequireAuth, d.WalletHandler.GetMyWallet)
+	api.Get("/wallet/ledger", d.MW.RequireAuth, d.WalletHandler.GetMyLedger)
+	api.Get("/referrals/token-link", d.MW.RequireAuth, d.WalletHandler.GetMyReferralLink)
+	api.Post("/referrals/click", d.WalletHandler.TrackReferralClick)
+	api.Post("/telebirr/webhook", d.TelebirrHandler.HandleWebhook)
+	api.Get("/telebirr/orders/:outTradeNo", d.TelebirrHandler.GetOrderStatus)
+	api.Post("/telebirr/orders", d.MW.RequireAuth, d.TelebirrHandler.CreateOrder)
+	api.Get("/telebirr/my-orders", d.MW.RequireAuth, d.TelebirrHandler.GetUserOrders)
+
 	// ── Buyer Routes ─────────────────────────────────────────────────────────
 	buyer := api.Group("/buyer", d.MW.RequireAuth, middleware.RequireRole("buyer"))
 	buyer.Post("/upgrade-tier", d.BuyerHandler.UpgradeTier)
@@ -425,6 +438,13 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	admin.Put("/referral/withdrawals/:id/approve", d.MW.RequirePermissionOrSuper("withdrawals"), d.ReferralHandler.AdminApproveWithdrawal)
 	admin.Put("/referral/withdrawals/:id/reject", d.MW.RequirePermissionOrSuper("withdrawals"), d.ReferralHandler.AdminRejectWithdrawal)
 	admin.Put("/referral/withdrawals/:id/paid", d.MW.RequirePermissionOrSuper("withdrawals"), d.ReferralHandler.AdminMarkWithdrawalPaid)
+
+	// ── Financial Ledger Governance & SMS Audit ──────────────────────────────
+	admin.Get("/financial/ledger", d.MW.RequireAnyPermission("finance", "analytics"), d.AdminFinancialHandler.GetLedgerAuditTrail)
+	admin.Get("/referral/policy", d.MW.RequireAnyPermission("finance", "referrals"), d.AdminFinancialHandler.GetRewardPolicy)
+	admin.Put("/referral/policy", d.MW.RequirePermission("finance"), d.AdminFinancialHandler.UpdateRewardPolicy)
+	admin.Get("/sms/logs", d.MW.RequireAnyPermission("logs", "operations"), d.AdminFinancialHandler.GetSMSDeliveryLogs)
+	admin.Post("/financial/compensate", d.MW.RequirePermission("finance"), d.AdminFinancialHandler.CompensateLedger)
 
 	admin.Get("/operations/health", d.MW.RequirePermission("operations"), d.AdminHandler.GetOperationsHealth)
 	admin.Get("/operations/jobs", d.MW.RequirePermission("operations"), d.AdminHandler.GetJobStatusSummary)
