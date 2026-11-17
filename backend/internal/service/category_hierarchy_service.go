@@ -285,16 +285,16 @@ func (s *CategoryHierarchyService) ResolveLegacyCategoryID(ctx context.Context, 
 
 func generateSlug(name string) string {
 	slug := strings.ToLower(strings.TrimSpace(name))
-	reg := regexp.MustCompile("[^a-z0-9\\s-]")
+	reg := regexp.MustCompile(`[^a-z0-9\s-]`)
 	slug = reg.ReplaceAllString(slug, "")
 	slug = strings.ReplaceAll(slug, " ", "-")
-	reg = regexp.MustCompile("-+")
+	reg = regexp.MustCompile(`-+`)
 	slug = reg.ReplaceAllString(slug, "-")
 	slug = strings.Trim(slug, "-")
 	return slug
 }
 
 func isValidSlug(slug string) bool {
-	match, _ := regexp.MatchString("^[a-z0-9]+(-[a-z0-9]+)*$", slug)
+	match, _ := regexp.MatchString(`^[a-z0-9]+(-[a-z0-9]+)*$`, slug)
 	return match
 }

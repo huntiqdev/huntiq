@@ -67,6 +67,13 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     condition: product?.condition ?? initialCondition ?? 'used',
   });
 
+  const [publisherRole, setPublisherRole] = useState<'owner' | 'authorized_seller' | 'broker_agent' | 'representative' | 'government_officer'>(
+    (product?.publisher_role as any) ?? 'owner'
+  );
+  const [brokerageDisclosureAgreed, setBrokerageDisclosureAgreed] = useState(
+    product?.brokerage_disclosure_agreed ?? true
+  );
+
   // Dynamic attributes per category
   const [applicableAttributes, setApplicableAttributes] = useState<AttributeDefinition[]>([]);
   const [attributeValues, setAttributeValues] = useState<Record<string, any>>({});
@@ -205,6 +212,8 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         location_hierarchy_id: location.location_hierarchy_id,
         listing_duration_days: listingDays,
         listing_type: isRental ? 'rent' : 'sale',
+        publisher_role: publisherRole,
+        brokerage_disclosure_agreed: brokerageDisclosureAgreed,
       };
 
       const todayStr = new Date().toISOString().split('T')[0];
@@ -290,7 +299,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
 
   const renderAttributeInput = (attr: AttributeDefinition) => {
     const val = attributeValues[attr.slug] ?? '';
-    const baseClass = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[42px] outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100';
+    const baseClass = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100';
     const labelText = attr.name_en + (attr.is_required ? ' *' : '') + (attr.unit ? ` (${attr.unit})` : '');
 
     switch (attr.data_type) {
@@ -312,7 +321,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={val === true || val === 'true'}
                 onChange={e => setAttrValue(attr.slug, e.target.checked)}
-                className="rounded border-zinc-300 text-orange-600 focus:ring-orange-500" />
+                className="rounded border-zinc-300 text-[#1769E0] focus:ring-[#1769E0]" />
               <span className="text-sm text-zinc-700 dark:text-zinc-300">{labelText}</span>
             </label>
           </div>
@@ -347,7 +356,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       {/* Listing type toggle */}
       <div className="flex bg-zinc-100 dark:bg-zinc-800 p-1.5 rounded-2xl mb-1 border border-zinc-200 dark:border-zinc-700 gap-1.5">
         <button type="button" onClick={() => setSelectedType('sale')}
-          className={`flex-1 py-2.5 px-4 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 ${selectedType === 'sale' ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
+          className={`flex-1 py-2.5 px-4 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 ${selectedType === 'sale' ? 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
           🏷️ {(t.ui as any).mode_sale ?? 'For Sale'}
         </button>
         <button type="button" onClick={() => setSelectedType('rent')}
@@ -393,7 +402,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           value={form.description}
           onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
           rows={3}
-          className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all resize-none text-zinc-900 dark:text-zinc-100"
+          className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all resize-none text-zinc-900 dark:text-zinc-100"
         />
       </div>
 
@@ -524,11 +533,49 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       <ListingFeeSlider price={Number(isRental ? rentalForm.rental_price : form.price) || 0}
         tier={sellerTier} selectedDays={listingDays} onChange={setListingDays} />
 
+      {/* Brokerage & Publisher Classification */}
+      <div className="space-y-3 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60">
+        <label className="block text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+          Publisher Role & Intermediary Disclosure
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {[
+            { id: 'owner', label: 'Direct Owner' },
+            { id: 'authorized_seller', label: 'Authorized Merchant' },
+            { id: 'broker_agent', label: 'Broker / Agent' },
+            { id: 'representative', label: 'Representative' },
+          ].map(r => (
+            <button
+              key={r.id}
+              type="button"
+              onClick={() => {
+                setPublisherRole(r.id as any);
+                if (r.id === 'broker_agent' || r.id === 'representative') {
+                  setBrokerageDisclosureAgreed(true);
+                }
+              }}
+              className={`p-2.5 rounded-xl text-xs font-bold border text-center transition-all ${
+                publisherRole === r.id
+                  ? 'border-[#1769E0] bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] dark:text-[#38A5FF] shadow-xs'
+                  : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300'
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+        {publisherRole === 'broker_agent' && (
+          <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-900 dark:text-blue-200 text-xs">
+            <span className="font-bold">Intermediary Transparency:</span> This listing will display a verified <span className="font-mono font-black">[BROKER]</span> badge and standard marketplace brokerage disclosure.
+          </div>
+        )}
+      </div>
+
       <ImageUploader urls={imageURLs} onChange={setImageURLs} maxImages={maxImages} />
 
       {error && <p className="text-red-500 text-xs bg-red-50 dark:bg-red-900/20 px-3 py-2 rounded-xl">{error}</p>}
 
-      <Button type="submit" size="lg" disabled={loading} className={`w-full mt-2 tap-bounce min-h-[48px] ${isRental ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'}`}>
+      <Button type="submit" size="lg" disabled={loading} className={`w-full mt-2 tap-bounce min-h-[48px] ${isRental ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/20'}`}>
         {loading ? t.ui.saving : product ? t.ui.update_product : (isRental ? 'Post for Rent' : t.ui.createProduct)}
       </Button>
     </form>

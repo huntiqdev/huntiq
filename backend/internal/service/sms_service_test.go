@@ -85,3 +85,4 @@ func TestMockDevProvider(t *testing.T) {
 		t.Errorf("Expected valid provider reference")
 	}
 }
+

@@ -29,7 +29,7 @@ export default function GlobalError({
           </div>
           <button
             onClick={() => reset()}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md transition-all active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white font-bold text-sm shadow-md shadow-[#1769E0]/20 transition-all tap-bounce active:scale-95"
           >
             <RotateCcw size={16} />
             <span>Reload Application</span>

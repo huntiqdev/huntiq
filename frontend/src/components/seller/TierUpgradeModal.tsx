@@ -295,7 +295,7 @@ export function TierUpgradeModal({ currentTier, initialTier, onClose, onSuccess 
                     <button key={m.value} type="button" onClick={() => setMethod(m.value)}
                       className={`flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border transition-all ${
                         method === m.value
-                          ? `border-orange-500/50 bg-orange-500/10 text-orange-400`
+                          ? `border-[#1769E0]/50 bg-[#1769E0]/15 text-[#38A5FF]`
                           : 'border-white/5 bg-white/[0.02] text-white/40 hover:border-white/10 hover:text-white/60'
                       }`}>
                       <span className="text-lg leading-none">{m.emoji}</span>

@@ -82,10 +82,10 @@ export default function SellerTransactionsPage() {
         </div>
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-1">
-            <Package size={14} className="text-orange-600" />
+            <Package size={14} className="text-[#1769E0]" />
             <p className="text-xs text-zinc-500">Broker Fees</p>
           </div>
-          <p className="text-xl font-black text-orange-600">ETB {totalFees.toLocaleString()}</p>
+          <p className="text-xl font-black text-[#1769E0]">ETB {totalFees.toLocaleString()}</p>
         </div>
       </div>
 

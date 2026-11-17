@@ -1,0 +1,32 @@
+{
+  "id": 125,
+  "parent_id": 15,
+  "parent_code": "ET-SW",
+  "type": "zone",
+  "slug": "southwest-ethiopia-west-omo",
+  "code": "ET-SW-WO",
+  "level": 2,
+  "path": "/1/15/125/",
+  "display_order": 92,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "West Omo",
+    "ምዕራብ ኦሞ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Omo Zone",
+    "am": "ምዕራብ ኦሞ ዞን",
+    "om": "Oomoo Dhihaa",
+    "ti": "ዞን ምዕራብ ኦሞ"
+  },
+  "coordinates": {
+    "latitude": 6.2,
+    "longitude": 35.7,
+    "bbox": null
+  }
+}

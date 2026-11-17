@@ -1,0 +1,37 @@
+{
+  "id": 11,
+  "parent_id": 1,
+  "parent_code": "ET",
+  "type": "region",
+  "slug": "gambela",
+  "code": "ET-GA",
+  "level": 1,
+  "path": "/1/11/",
+  "display_order": 10,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Gambella",
+    "Gambella Region"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Gambela",
+    "am": "ጋምቤላ",
+    "om": "Gambellaa",
+    "ti": "ጋምቤላ"
+  },
+  "coordinates": {
+    "latitude": 7.9,
+    "longitude": 34.5,
+    "bbox": {
+      "min_lat": 6.5,
+      "max_lat": 8.8,
+      "min_lng": 33.0,
+      "max_lng": 35.5
+    }
+  }
+}

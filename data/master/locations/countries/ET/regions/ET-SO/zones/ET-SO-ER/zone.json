@@ -1,0 +1,32 @@
+{
+  "id": 87,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "zone",
+  "slug": "somali-erer",
+  "code": "ET-SO-ER",
+  "level": 2,
+  "path": "/1/8/87/",
+  "display_order": 51,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Erer Somali",
+    "ኤረር"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Erer Zone (Somali)",
+    "am": "ኤረር ዞን (ሶማሌ)",
+    "om": "Erer",
+    "ti": "ዞን ኤረር (ሶማሌ)"
+  },
+  "coordinates": {
+    "latitude": 8.5,
+    "longitude": 42.5,
+    "bbox": null
+  }
+}

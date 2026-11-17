@@ -66,6 +66,16 @@ export const authApi = {
 
   forgotPassword: (phone: string) =>
     fetchAPI<{ message: string }>('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ phone }) }),
+  verifyRecoveryOTP: (phone: string, code: string) =>
+    fetchAPI<{ reset_token: string; message: string }>('/auth/verify-recovery-otp', {
+      method: 'POST',
+      body: JSON.stringify({ phone, code }),
+    }),
+  resetPasswordWithToken: (reset_token: string, new_password: string) =>
+    fetchAPI<{ message: string }>('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ reset_token, new_password }),
+    }),
   resetPassword: (phone: string, code: string, new_password: string) =>
     fetchAPI<{ message: string }>('/auth/reset-password', { method: 'POST', body: JSON.stringify({ phone, code, new_password }) }),
 

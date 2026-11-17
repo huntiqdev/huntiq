@@ -1,0 +1,39 @@
+{
+  "id": 2,
+  "parent_id": 1,
+  "parent_code": "ET",
+  "type": "city",
+  "slug": "addis-ababa",
+  "code": "ET-AA",
+  "level": 1,
+  "path": "/1/2/",
+  "display_order": 1,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Finfinne",
+    "Addis Abeba",
+    "Sheger",
+    "AA"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Addis Ababa",
+    "am": "አዲስ አበባ",
+    "om": "Finfinnee",
+    "ti": "ኣዲስ ኣበባ"
+  },
+  "coordinates": {
+    "latitude": 9.032,
+    "longitude": 38.74689,
+    "bbox": {
+      "min_lat": 8.83,
+      "max_lat": 9.1,
+      "min_lng": 38.65,
+      "max_lng": 38.9
+    }
+  }
+}

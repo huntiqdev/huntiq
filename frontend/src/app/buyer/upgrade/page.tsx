@@ -126,8 +126,8 @@ export default function BuyerUpgradePage() {
             <button key={d.days} type="button" onClick={() => setDuration(d.days)}
               className={`py-2 px-1 rounded-xl text-[10px] font-bold border transition-all ${
                 duration === d.days
-                  ? 'border-orange-500 bg-orange-500/10 text-orange-600'
-                  : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-orange-400'
+                  ? 'border-[#1769E0] bg-[#1769E0]/10 text-[#1769E0]'
+                  : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:border-[#1769E0]'
               }`}>{d.label}</button>
           ))}
         </div>
@@ -143,7 +143,7 @@ export default function BuyerUpgradePage() {
               <button key={m.value} type="button" onClick={() => setMethod(m.value)}
                 className={`py-2 rounded-xl text-xs font-bold border transition-all ${
                   method === m.value
-                    ? 'border-orange-500 bg-orange-500/10 text-orange-600'
+                    ? 'border-[#1769E0] bg-[#1769E0]/10 text-[#1769E0]'
                     : 'border-zinc-200 dark:border-zinc-700 text-zinc-500'
                 }`}>{m.label}</button>
             ))}
@@ -194,7 +194,7 @@ export default function BuyerUpgradePage() {
         )}
 
         <button type="submit" disabled={loading}
-          className="w-full flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-bold text-sm transition-colors disabled:opacity-50">
+          className="w-full flex items-center justify-center gap-2 bg-[#1769E0] hover:bg-[#1055BD] text-white py-3 min-h-[44px] rounded-xl font-bold text-sm transition-all tap-bounce active:scale-95 disabled:opacity-50 shadow-md shadow-[#1769E0]/20">
           {loading ? <Spinner /> : <><Check size={15} /> Submit Upgrade Request</>}
         </button>
 

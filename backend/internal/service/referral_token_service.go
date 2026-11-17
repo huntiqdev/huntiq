@@ -165,3 +165,4 @@ func (s *ReferralTokenService) ProcessRegistrationReferral(ctx context.Context, 
 func (s *ReferralTokenService) GetUserInviter(ctx context.Context, userID int) (int, error) {
 	return s.tokenRepo.GetUserInviter(ctx, userID)
 }
+

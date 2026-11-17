@@ -44,7 +44,7 @@ function BuyerSidebarContent({
       {/* Logo */}
       <div className="px-4 py-5 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center shadow-md">
+          <div className="w-8 h-8 bg-[#1769E0] rounded-xl flex items-center justify-center shadow-md">
             <ShoppingBag size={16} className="text-white" />
           </div>
           <div className="flex-1 min-w-0">
@@ -57,7 +57,7 @@ function BuyerSidebarContent({
       {/* Buyer info + tier badge */}
       <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 font-black text-sm">
+          <div className="w-8 h-8 rounded-xl bg-[#EAF3FF] dark:bg-[#1769E0]/20 flex items-center justify-center text-[#1769E0] dark:text-[#38A5FF] font-black text-sm">
             {buyerName?.[0]?.toUpperCase() ?? 'B'}
           </div>
           <div className="min-w-0 flex-1">
@@ -78,7 +78,7 @@ function BuyerSidebarContent({
             <Link key={href} href={href} onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all group ${
                 active
-                  ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20'
+                  ? 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/20'
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800'
               }`}>
               <Icon size={16} className={active ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300'} />
@@ -98,7 +98,7 @@ function BuyerSidebarContent({
             <Link
               href="/seller/dashboard"
               onClick={onClose}
-              className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-all"
+              className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-[#1769E0] dark:text-[#38A5FF] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-all"
             >
               <ShoppingBag size={15} />
               <span className="flex-1">Seller Studio</span>
@@ -108,11 +108,11 @@ function BuyerSidebarContent({
             <button
               type="button"
               onClick={() => { onClose(); onActivateSeller(); }}
-              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-all text-left"
+              className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-all text-left"
             >
               <ShoppingBag size={15} />
               <span className="flex-1">Start Selling</span>
-              <span className="text-[8px] bg-orange-600 text-white font-black px-1.5 py-0.5 rounded-md">Activate</span>
+              <span className="text-[8px] bg-[#1769E0] text-white font-black px-1.5 py-0.5 rounded-md">Activate</span>
             </button>
           )}
 
@@ -249,7 +249,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
             aria-label="Open menu">
             <Menu size={18} />
           </button>
-          <span className="font-black text-orange-600 text-sm">Buyer Panel</span>
+          <span className="font-black text-[#1769E0] dark:text-[#38A5FF] text-sm">Buyer Panel</span>
           <div className="ml-auto flex items-center gap-2">
             {TierIcon && <TierIcon size={14} className={TIER_COLOR[buyerTier]} />}
             <span className={`text-xs font-black capitalize ${TIER_COLOR[buyerTier]}`}>{buyerTier}</span>

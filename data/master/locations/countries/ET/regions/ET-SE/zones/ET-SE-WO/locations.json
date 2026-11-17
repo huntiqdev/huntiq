@@ -1,0 +1,68 @@
+[
+  {
+    "id": 286,
+    "parent_id": 109,
+    "type": "woreda",
+    "slug": "south-ethiopia-wolayita-sodo",
+    "code": "SE-WO-SOD",
+    "level": 3,
+    "path": "/1/13/109/286/",
+    "display_order": 160,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Sodo Town",
+      "Wolaita Sodo",
+      "ወላይታ ሶዶ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-SE-WO",
+    "names": {
+      "en": "Wolayita Sodo City & Woreda",
+      "am": "ወላይታ ሶዶ ከተማና ወረዳ",
+      "om": "Magaalaa fi Aanaa SoddOo",
+      "ti": "ወላይታ ሶዶ"
+    },
+    "coordinates": {
+      "latitude": 6.85,
+      "longitude": 37.75,
+      "bbox": null
+    }
+  },
+  {
+    "id": 287,
+    "parent_id": 109,
+    "type": "woreda",
+    "slug": "south-ethiopia-wolayita-areka",
+    "code": "SE-WO-ARE",
+    "level": 3,
+    "path": "/1/13/109/287/",
+    "display_order": 161,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Areka",
+      "Boloso Sore Ginger",
+      "አረካ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-SE-WO",
+    "names": {
+      "en": "Areka / Boloso Sore Woreda",
+      "am": "አረካ / ቦሎሶ ሶሬ ወረዳ (ዝንጅብል)",
+      "om": "Magaalaa Arekaa",
+      "ti": "ኣረካ"
+    },
+    "coordinates": {
+      "latitude": 7.07,
+      "longitude": 37.7,
+      "bbox": null
+    }
+  }
+]

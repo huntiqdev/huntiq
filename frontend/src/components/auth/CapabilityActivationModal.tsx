@@ -82,7 +82,7 @@ export function CapabilityActivationModal({
                 ? 'bg-teal-600 shadow-teal-600/30 text-white'
                 : preference === 'both'
                 ? 'bg-indigo-600 shadow-indigo-600/30 text-white'
-                : 'bg-orange-600 shadow-orange-600/30 text-white'
+                : 'bg-[#1769E0] shadow-[#1769E0]/30 text-white'
             }`}
           >
             {preference === 'rent' ? <Home size={24} /> : preference === 'both' ? <Sparkles size={24} /> : <ShoppingBag size={24} />}
@@ -114,7 +114,7 @@ export function CapabilityActivationModal({
                       ? 'border-teal-500 bg-teal-500/10 text-teal-400 font-bold'
                       : opt.id === 'both'
                       ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400 font-bold'
-                      : 'border-orange-500 bg-orange-500/10 text-orange-400 font-bold'
+                      : 'border-[#1769E0] bg-[#1769E0]/10 text-[#1769E0] dark:text-[#38A5FF] font-bold'
                     : 'border-zinc-200 dark:border-white/10 hover:border-zinc-400 text-zinc-600 dark:text-zinc-400'
                 }`}
               >
@@ -156,7 +156,7 @@ export function CapabilityActivationModal({
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
               placeholder={preference === 'rent' ? 'e.g. Addis Real Estate' : 'e.g. Bikila Hardware'}
-              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60 transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0]/30 focus:border-[#1769E0] transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
             />
           </div>
         </div>
@@ -185,7 +185,7 @@ export function CapabilityActivationModal({
             className={`flex-1 py-3 min-h-[44px] rounded-xl text-white text-xs font-black flex items-center justify-center gap-2 shadow-lg transition-all tap-bounce active:scale-95 disabled:opacity-50 ${
               isLandlord
                 ? 'bg-teal-600 hover:bg-teal-500 shadow-teal-600/30'
-                : 'bg-orange-600 hover:bg-orange-500 shadow-orange-600/30'
+                : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/30'
             }`}
           >
             {loading ? (

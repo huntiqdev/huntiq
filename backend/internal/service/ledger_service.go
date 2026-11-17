@@ -254,3 +254,4 @@ func (s *LedgerService) UpdateRewardPolicy(ctx context.Context, p *models.Referr
 	}
 	return s.repo.UpdateRewardPolicy(ctx, p, adminID, reason)
 }
+

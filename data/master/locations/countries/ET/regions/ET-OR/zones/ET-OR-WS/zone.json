@@ -1,0 +1,33 @@
+{
+  "id": 38,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-west-shewa",
+  "code": "ET-OR-WS",
+  "level": 2,
+  "path": "/1/4/38/",
+  "display_order": 2,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "West Shoa",
+    "Shawa Dhiha",
+    "ምዕራብ ሸዋ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Shewa Zone",
+    "am": "ምዕራብ ሸዋ ዞን",
+    "om": "Shawaa Dhihaa",
+    "ti": "ዞን ምዕራብ ሸዋ"
+  },
+  "coordinates": {
+    "latitude": 8.98,
+    "longitude": 37.85,
+    "bbox": null
+  }
+}

@@ -71,13 +71,13 @@ function SidebarContent({
     ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
     : isDualMode
     ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-    : 'bg-orange-600 text-white shadow-md shadow-orange-600/20';
+    : 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/25';
 
   const logoColor = isRentMode
     ? 'bg-teal-600 shadow-teal-600/20'
     : isDualMode
     ? 'bg-indigo-600 shadow-indigo-600/20'
-    : 'bg-orange-600 shadow-orange-600/20';
+    : 'bg-[#1769E0] shadow-[#1769E0]/25';
 
   const getNavLabel = (key: string) => {
     if (key === 'nav_my_products') {
@@ -105,7 +105,7 @@ function SidebarContent({
             <p className="text-[10px] text-zinc-400 mt-0.5 uppercase tracking-widest">{panelSubtitle}</p>
           </div>
           <button onClick={onHelp} title="Help"
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-zinc-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors shrink-0">
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-zinc-400 hover:text-[#1769E0] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/20 transition-colors shrink-0">
             <HelpCircle size={16} />
           </button>
         </div>
@@ -114,7 +114,7 @@ function SidebarContent({
       {/* Seller info + tier badge */}
       <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2.5">
-          <div className={`w-8 h-8 rounded-lg ${isRentMode ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600' : isDualMode ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600'} flex items-center justify-center font-black text-sm`}>
+          <div className={`w-8 h-8 rounded-lg ${isRentMode ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600' : isDualMode ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600' : 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]'} flex items-center justify-center font-black text-sm`}>
             {sellerName?.[0]?.toUpperCase() ?? (isRentMode ? 'L' : 'S')}
           </div>
           <div className="min-w-0 flex-1">
@@ -238,7 +238,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center p-4">
         <div className="max-w-lg w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-2xl text-center space-y-6">
-          <div className="w-16 h-16 bg-gradient-to-tr from-orange-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto text-white shadow-lg shadow-orange-500/20">
+          <div className="w-16 h-16 bg-gradient-to-tr from-[#1769E0] to-teal-500 rounded-2xl flex items-center justify-center mx-auto text-white shadow-lg shadow-[#1769E0]/20">
             <Layers size={30} />
           </div>
           <div>
@@ -250,9 +250,9 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
             {/* Goods Seller */}
-            <div className="border border-orange-200 dark:border-orange-900/40 bg-orange-50/50 dark:bg-orange-950/20 rounded-2xl p-4 flex flex-col justify-between">
+            <div className="border border-[#1769E0]/30 bg-[#1769E0]/5 dark:bg-[#1769E0]/20 rounded-2xl p-4 flex flex-col justify-between">
               <div>
-                <div className="w-8 h-8 rounded-lg bg-orange-600 text-white flex items-center justify-center mb-2">
+                <div className="w-8 h-8 rounded-lg bg-[#1769E0] text-white flex items-center justify-center mb-2">
                   <ShoppingBag size={16} />
                 </div>
                 <h3 className="font-bold text-sm text-zinc-900 dark:text-white">Seller Studio</h3>
@@ -264,7 +264,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
                 onClick={async () => {
                   await activateCapability('seller', undefined, 'sale');
                 }}
-                className="mt-4 w-full py-2.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-bold text-xs shadow-md shadow-orange-600/20 transition-all cursor-pointer"
+                className="mt-4 w-full py-2.5 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl font-bold text-xs shadow-md shadow-[#1769E0]/20 transition-all cursor-pointer"
               >
                 Activate Seller
               </button>
@@ -345,7 +345,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
     ? 'bg-teal-600 hover:bg-teal-500'
     : isDualMode
     ? 'bg-indigo-600 hover:bg-indigo-500'
-    : 'bg-orange-600 hover:bg-orange-500';
+    : 'bg-[#1769E0] hover:bg-[#1055BD]';
 
   const headerTitle = isRentMode
     ? 'Landlord Console'
@@ -380,20 +380,20 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
             aria-label="Open menu">
             <Menu size={18} />
           </button>
-          <span className={`font-black text-sm truncate ${isRentMode ? 'text-teal-600' : isDualMode ? 'text-indigo-600' : 'text-orange-600'}`}>
+          <span className={`font-black text-sm truncate ${isRentMode ? 'text-teal-600' : isDualMode ? 'text-indigo-600' : 'text-[#1769E0]'}`}>
             {headerTitle}
           </span>
           <div className="ml-auto flex items-center gap-2">
             {unreadCount > 0 && (
-              <Link href="/seller/dashboard" className="relative p-2 rounded-xl text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors tap-bounce active:scale-90" aria-label="Notifications">
+              <Link href="/seller/dashboard" className="relative p-2 rounded-xl text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90" aria-label="Notifications">
                 <Bell size={16} />
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-orange-500 text-white text-[9px] font-black rounded-full flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#1769E0] text-white text-[9px] font-black rounded-full flex items-center justify-center">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
               </Link>
             )}
             <button onClick={() => setHelpOpen(true)}
-              className="p-2 rounded-xl text-zinc-400 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors tap-bounce active:scale-90"
+              className="p-2 rounded-xl text-zinc-400 hover:text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90"
               aria-label="Help">
               <HelpCircle size={16} />
             </button>
@@ -411,9 +411,9 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
             </p>
           </div>
           {unreadCount > 0 && (
-            <Link href="/seller/dashboard" className="relative p-1.5 rounded-lg text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors" title={`${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}`}>
+            <Link href="/seller/dashboard" className="relative p-1.5 rounded-lg text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors" title={`${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}`}>
               <Bell size={16} />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 text-white text-[9px] font-black rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#1769E0] text-white text-[9px] font-black rounded-full flex items-center justify-center">
                 {unreadCount > 9 ? '9+' : unreadCount}
               </span>
             </Link>

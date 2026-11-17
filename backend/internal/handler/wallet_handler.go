@@ -108,3 +108,4 @@ func (h *WalletHandler) TrackReferralClick(c *fiber.Ctx) error {
 		"inviter": tokenObj.UserID,
 	})
 }
+

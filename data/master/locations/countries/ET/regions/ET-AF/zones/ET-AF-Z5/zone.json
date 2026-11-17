@@ -1,0 +1,32 @@
+{
+  "id": 94,
+  "parent_id": 9,
+  "parent_code": "ET-AF",
+  "type": "zone",
+  "slug": "afar-hari-rasu",
+  "code": "ET-AF-Z5",
+  "level": 2,
+  "path": "/1/9/94/",
+  "display_order": 58,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Zone 5 Afar",
+    "ሀሪ ረሱ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Hari Rasu (Zone 5)",
+    "am": "ሀሪ ረሱ (ዞን 5)",
+    "om": "Hari Rasu",
+    "ti": "ሓሪ ረሱ (ዞን 5)"
+  },
+  "coordinates": {
+    "latitude": 10.5,
+    "longitude": 40.0,
+    "bbox": null
+  }
+}

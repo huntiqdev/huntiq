@@ -1,0 +1,32 @@
+{
+  "id": 69,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-oromo-special-zone",
+  "code": "ET-AM-OZ",
+  "level": 2,
+  "path": "/1/5/69/",
+  "display_order": 33,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Oromia Zone Amhara",
+    "የኦሮሞ ልዩ ዞን"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Oromo Special Zone (Amhara)",
+    "am": "የኦሮሞ ብሔረሰብ አስተዳደር ዞን (አማራ)",
+    "om": "Godina Addaa Oromiyaa (Amaara)",
+    "ti": "ፍሉይ ዞን ኦሮሞ (ኣምሓራ)"
+  },
+  "coordinates": {
+    "latitude": 10.72,
+    "longitude": 39.87,
+    "bbox": null
+  }
+}

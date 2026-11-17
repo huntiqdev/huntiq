@@ -51,7 +51,7 @@ const TYPE_ICON = {
 } as const;
 
 const TYPE_COLOR = {
-  category: 'text-orange-600',
+  category: 'text-[#1769E0]',
   subcategory: 'text-zinc-500',
   item: 'text-zinc-400',
 } as const;
@@ -166,6 +166,9 @@ export function SearchBar() {
               const rootSlug = bcs[0]?.slug || r.slug;
               const subSlug = bcs[1]?.slug;
               const itemSlug = bcs[2]?.slug;
+              // Clean parent path without repeating current item's own name
+              const parentBcs = bcs.length > 1 ? bcs.slice(0, -1) : [];
+              const parentPath = parentBcs.map((b: any) => b.name).join(' › ');
               return {
                 id: r.id,
                 type: r.level === 0 ? 'category' : r.level === 1 ? 'subcategory' : 'item',
@@ -175,8 +178,8 @@ export function SearchBar() {
                 catSlug: rootSlug,
                 subSlug: subSlug,
                 itemSlug: itemSlug,
-                breadcrumb: r.hierarchy,
-                hierarchy: r.hierarchy,
+                breadcrumb: parentPath ? `in ${parentPath}` : '',
+                hierarchy: parentPath,
                 level: r.level,
               };
             });
@@ -282,7 +285,7 @@ export function SearchBar() {
           onKeyDown={handleKeyDown}
           placeholder={t.nav?.search || 'Search products, vehicles, electronics...'}
           autoComplete="off"
-          className="w-full pl-9 pr-9 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 transition-all"
+          className="w-full pl-9 pr-9 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-base sm:text-sm outline-none focus:ring-2 focus:ring-[#1769E0] transition-all"
         />
         <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
           {q && (
@@ -328,11 +331,11 @@ export function SearchBar() {
                     <button
                       key={i}
                       onMouseDown={() => { setOpen(false); router.push(buildLocationUrl(r)); }}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-orange-50 dark:hover:bg-orange-950/40 transition-colors"
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-colors"
                     >
-                      <MapPin size={14} className="text-orange-600 shrink-0" />
+                      <MapPin size={14} className="text-[#1769E0] shrink-0" />
                       <p className="text-sm font-bold truncate">{displayPath}</p>
-                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 bg-orange-100 dark:bg-orange-900/40 text-orange-600">
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]">
                         {locBadge}
                       </span>
                     </button>
@@ -355,7 +358,7 @@ export function SearchBar() {
               <p className="text-xs opacity-30 mt-1">{u.try_different_word || 'Try a different word or browse categories below'}</p>
               <button
                 onClick={() => { setQ(''); setOpen(true); }}
-                className="mt-3 text-xs font-bold text-orange-600 hover:underline"
+                className="mt-3 text-xs font-bold text-[#1769E0] hover:underline"
               >
                 {u.browse_all_categories_arrow || 'Browse all categories →'}
               </button>
@@ -375,7 +378,7 @@ export function SearchBar() {
                 onMouseEnter={() => setHighlighted(i)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${
                   isActive
-                    ? 'bg-orange-50 dark:bg-orange-950/40'
+                    ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/15'
                     : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/60'
                 }`}
               >
@@ -392,7 +395,7 @@ export function SearchBar() {
                 </div>
                 <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${
                   entry.level === 0 || entry.type === 'category'
-                    ? 'bg-orange-100 dark:bg-orange-900/40 text-orange-600'
+                    ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]'
                     : entry.level === 1
                     ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600'
                     : entry.level === 2
@@ -423,9 +426,9 @@ export function SearchBar() {
                 }}
                 className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 transition-colors"
               >
-                <Search size={14} className="text-orange-600 shrink-0" />
+                <Search size={14} className="text-[#1769E0] shrink-0" />
                 <p className="text-sm font-bold">
-                  {u.search_products_for_query || 'Search products for'} &quot;<span className="text-orange-600">{q}</span>&quot;
+                  {u.search_products_for_query || 'Search products for'} &quot;<span className="text-[#1769E0]">{q}</span>&quot;
                 </p>
               </button>
             </div>

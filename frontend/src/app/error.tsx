@@ -39,7 +39,7 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
         <div className="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
           <button
             onClick={() => reset()}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md shadow-orange-600/20 transition-all active:scale-95"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white font-bold text-sm shadow-md shadow-[#1769E0]/20 transition-all tap-bounce active:scale-95"
           >
             <RotateCcw size={16} />
             <span>Try Again</span>

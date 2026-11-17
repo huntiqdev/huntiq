@@ -1,7 +1,11 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import { api } from '@/lib/api';
+import { Spinner } from '@/components/ui/Spinner';
 import {
   ShieldAlert, ShieldCheck, Activity, AlertTriangle, Lock,
   RefreshCw, Filter, Globe2, Eye, Ban, Radio, Flame,
@@ -23,86 +27,56 @@ interface AttackEvent {
   autoMitigated: boolean;
 }
 
-const INITIAL_ATTACKS: AttackEvent[] = [
-  {
-    id: 'ATK-9812',
-    time: 'Just now',
-    ip: '185.220.101.44',
-    location: 'Tor Exit Node / Netherlands',
-    vector: 'Distributed Credential Stuffing',
-    endpoint: 'POST /api/admin/login',
-    threatScore: 98,
-    severity: 'critical',
-    actionTaken: 'Auto-Quarantine 24h & Session Drop',
-    autoMitigated: true,
-  },
-  {
-    id: 'ATK-9811',
-    time: '42s ago',
-    ip: '45.154.255.89',
-    location: 'Hosting AS202425 / Frankfurt',
-    vector: 'SQL Injection Union Probe',
-    endpoint: "GET /api/products?cat=' OR 1=1--",
-    threatScore: 94,
-    severity: 'critical',
-    actionTaken: 'WAF Rule #819 Triggered (TCP RST)',
-    autoMitigated: true,
-  },
-  {
-    id: 'ATK-9810',
-    time: '1m ago',
-    ip: '103.149.136.18',
-    location: 'Residential Proxy / Singapore',
-    vector: 'SMS / OTP Gate Flood Exhaustion',
-    endpoint: 'POST /api/auth/otp/send',
-    threatScore: 86,
-    severity: 'high',
-    actionTaken: 'Token Bucket Rate Limit Throttled',
-    autoMitigated: true,
-  },
-  {
-    id: 'ATK-9809',
-    time: '3m ago',
-    ip: '194.26.29.112',
-    location: 'Known Botnet / Russia',
-    vector: 'Admin Privilege Escalation Probe',
-    endpoint: 'PUT /api/admin/users/12/role',
-    threatScore: 99,
-    severity: 'critical',
-    actionTaken: 'Honeytoken Trap Sprung & IP Blackholed',
-    autoMitigated: true,
-  },
-  {
-    id: 'ATK-9808',
-    time: '5m ago',
-    ip: '82.102.23.41',
-    location: 'VPN Gateway / London',
-    vector: 'Cross-Site Scripting (Stored XSS)',
-    endpoint: 'POST /api/seller/product/new',
-    threatScore: 78,
-    severity: 'high',
-    actionTaken: 'Payload Stripped & Content Quarantined',
-    autoMitigated: true,
-  },
-  {
-    id: 'ATK-9807',
-    time: '9m ago',
-    ip: '196.188.12.90',
-    location: 'Cellular EthioTelecom / Addis Ababa',
-    vector: 'Excessive Failed Passkey Biometrics',
-    endpoint: 'POST /api/admin/passkey/login/verify',
-    threatScore: 62,
-    severity: 'warning',
-    actionTaken: 'Step-Up Verification Required',
-    autoMitigated: false,
-  },
-];
-
 export default function SecurityConsolePage() {
-  const [attacks, setAttacks] = useState<AttackEvent[]>(INITIAL_ATTACKS);
+  const router = useRouter();
+  const { user, isPlatformOwner, isSuperAdmin, isSecurityAdmin, adminRole, loading: authLoading } = useAuth();
+  const [attacks, setAttacks] = useState<AttackEvent[]>([]);
   const [severityFilter, setSeverityFilter] = useState<'all' | 'critical' | 'high' | 'warning'>('all');
   const [vectorFilter, setVectorFilter] = useState<'all' | 'bruteforce' | 'sqli' | 'ddos' | 'privilege'>('all');
   const [autoDefenseMode, setAutoDefenseMode] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!authLoading) {
+      const isAllowed = isPlatformOwner || isSuperAdmin || isSecurityAdmin ||
+        adminRole === 'ciso' || adminRole === 'soc_analyst' || adminRole === 'fraud_investigator' || adminRole === 'compliance_auditor';
+      if (!user || !isAllowed) {
+        router.replace('/security-console/login');
+      }
+    }
+  }, [user, authLoading, isPlatformOwner, isSuperAdmin, isSecurityAdmin, adminRole, router]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  useEffect(() => {
+    if (!user?.token) return;
+    api.adminGetLogs({ limit: 20 }, user.token)
+      .then(res => {
+        if (res?.logs && res.logs.length > 0) {
+          const mapped: AttackEvent[] = res.logs.map((l: any, i: number) => ({
+            id: `LOG-${l.id || i}`,
+            time: l.created_at ? new Date(l.created_at).toLocaleTimeString() : 'Recent',
+            ip: l.ip_address || '127.0.0.1',
+            location: 'Internal / Authenticated Session',
+            vector: l.action || 'Administrative Audit Action',
+            endpoint: l.details || l.notes || `/api/admin/action/${l.action}`,
+            threatScore: l.action?.includes('ban') || l.action?.includes('fail') ? 85 : 15,
+            severity: l.action?.includes('ban') || l.action?.includes('delete') ? 'warning' : 'info',
+            actionTaken: l.notes || 'Logged & Recorded in Immutable Audit Trail',
+            autoMitigated: true,
+          }));
+          setAttacks(mapped);
+        } else {
+          setAttacks([]);
+        }
+      })
+      .catch(() => {});
+  }, [user]);
   const [defconLevel, setDefconLevel] = useState<number>(2);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
@@ -157,7 +131,32 @@ export default function SecurityConsolePage() {
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    setTimeout(() => setIsRefreshing(false), 600);
+    if (user?.token) {
+      api.adminGetLogs({ limit: 20 }, user.token)
+        .then(res => {
+          if (res?.logs && res.logs.length > 0) {
+            const mapped: AttackEvent[] = res.logs.map((l: any, i: number) => ({
+              id: `LOG-${l.id || i}`,
+              time: l.created_at ? new Date(l.created_at).toLocaleTimeString() : 'Recent',
+              ip: l.ip_address || '127.0.0.1',
+              location: 'Internal / Authenticated Session',
+              vector: l.action || 'Administrative Audit Action',
+              endpoint: l.details || l.notes || `/api/admin/action/${l.action}`,
+              threatScore: l.action?.includes('ban') || l.action?.includes('fail') ? 85 : 15,
+              severity: l.action?.includes('ban') || l.action?.includes('delete') ? 'warning' : 'info',
+              actionTaken: l.notes || 'Logged & Recorded in Immutable Audit Trail',
+              autoMitigated: true,
+            }));
+            setAttacks(mapped);
+          } else {
+            setAttacks([]);
+          }
+        })
+        .catch(() => {})
+        .finally(() => setIsRefreshing(false));
+    } else {
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
   };
 
   return (

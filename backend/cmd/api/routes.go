@@ -33,12 +33,26 @@ type AppDeps struct {
 	AdminFinancialHandler *handlers.AdminFinancialHandler
 	FPAHandler            *handlers.FPAHandler
 	SearchHandler         *handlers.SearchHandler
+	IdentityHandler       *handlers.IdentityHandler
+	OrganizationHandler   *handlers.OrganizationHandler
+	MasterDataHandler     *handlers.MasterDataHandler
 }
 
 func registerRoutes(app *fiber.App, d *AppDeps) {
 	api := app.Group("/api")
 	api.Use(d.MW.OptionalAuth)
 	api.Use(d.MW.RequireNoMaintenance)
+	api.Use(middleware.EthiopiaGeoAccess(middleware.GeoPolicyConfig{
+		DevMode: d.Config.DevMode,
+		EnabledCheck: func() bool {
+			return d.Config.EnableEthiopiaGeoBlock
+		},
+		ExemptPaths: []string{
+			"/api/telebirr/webhook",
+			"/api/chapa/webhook",
+			"/api/cbe/webhook",
+		},
+	}))
 	api.Use(middleware.CSRFProtect(middleware.CSRFConfig{
 		CookieName:      "huntiq_csrf",
 		HeaderName:      "X-CSRF-Token",
@@ -198,7 +212,16 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	api.Get("/auth/capabilities", d.MW.RequireAuth, d.AuthHandler.GetCapabilities)
 	api.Post("/auth/capabilities/activate", d.MW.RequireAuth, d.AuthHandler.ActivateCapability)
 	api.Post("/auth/forgot-password", authLimiter, d.AuthHandler.UnifiedForgotPassword)
+	api.Post("/auth/verify-recovery-otp", authLimiter, d.AuthHandler.VerifyRecoveryOTP)
 	api.Post("/auth/reset-password", authLimiter, d.AuthHandler.UnifiedResetPassword)
+
+	// ── National Identity Verification (Fayda eKYC) ──────────────────────────
+	api.Post("/identity/verify", d.MW.RequireAuth, d.IdentityHandler.VerifyIdentity)
+	api.Get("/identity/status", d.MW.RequireAuth, d.IdentityHandler.GetMyIdentityStatus)
+
+	// ── Business & Government Organizations ─────────────────────────────────
+	api.Post("/organizations", d.MW.RequireAuth, d.OrganizationHandler.RegisterOrganization)
+	api.Get("/organizations/me", d.MW.RequireAuth, d.OrganizationHandler.GetMyOrganization)
 
 	api.Post("/seller/register", authLimiter, d.AuthHandler.Register)
 	api.Post("/seller/login", authLimiter, d.AuthHandler.Login)
@@ -400,6 +423,14 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	admin.Post("/categories/:id/attributes", d.MW.RequirePermission("categories"), d.AttributeHandler.AssignAttributeToCategory)
 	admin.Delete("/categories/:id/attributes/:attribute_id", d.MW.RequirePermission("categories"), d.AttributeHandler.RemoveAttributeFromCategory)
 
+	// Master Data Management (Locations & Categories JSON Exchange Architecture)
+	admin.Get("/masterdata/status", d.MW.RequireAnyPermission("locations", "categories"), d.MasterDataHandler.GetStatus)
+	admin.Post("/masterdata/validate", d.MW.RequireAnyPermission("locations", "categories"), d.MasterDataHandler.ValidatePayload)
+	admin.Post("/masterdata/import/locations", d.MW.RequirePermission("locations"), d.MasterDataHandler.ImportLocations)
+	admin.Post("/masterdata/import/categories", d.MW.RequirePermission("categories"), d.MasterDataHandler.ImportCategories)
+	admin.Get("/masterdata/export/locations", d.MW.RequirePermission("locations"), d.MasterDataHandler.ExportLocations)
+	admin.Get("/masterdata/export/categories", d.MW.RequirePermission("categories"), d.MasterDataHandler.ExportCategories)
+
 	admin.Get("/admins", middleware.RequirePlatformOwner, d.AdminHandler.ListAdmins)
 	admin.Post("/admins", middleware.RequirePlatformOwner, d.AdminHandler.CreateAdmin)
 	admin.Put("/admins/:id/role", middleware.RequirePlatformOwner, d.AdminHandler.UpdateAdminRole)
@@ -441,21 +472,27 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 
 	// ── Financial Ledger Governance & SMS Audit ──────────────────────────────
 	admin.Get("/financial/ledger", d.MW.RequireAnyPermission("finance", "analytics"), d.AdminFinancialHandler.GetLedgerAuditTrail)
-	admin.Get("/referral/policy", d.MW.RequireAnyPermission("finance", "referrals"), d.AdminFinancialHandler.GetRewardPolicy)
-	admin.Put("/referral/policy", d.MW.RequirePermission("finance"), d.AdminFinancialHandler.UpdateRewardPolicy)
+	admin.Get("/referral/policy", d.MW.RequireAnyPermission("finance", "finance:view", "referrals"), d.AdminFinancialHandler.GetRewardPolicy)
+	admin.Put("/referral/policy", d.MW.RequireAnyPermission("finance:manage", "platform_owner"), middleware.RequirePortal("executive"), d.AdminFinancialHandler.UpdateRewardPolicy)
 	admin.Get("/sms/logs", d.MW.RequireAnyPermission("logs", "operations"), d.AdminFinancialHandler.GetSMSDeliveryLogs)
-	admin.Post("/financial/compensate", d.MW.RequirePermission("finance"), d.AdminFinancialHandler.CompensateLedger)
+	admin.Post("/financial/compensate", d.MW.RequireAnyPermission("finance:manage", "platform_owner"), middleware.RequirePortal("executive"), d.AdminFinancialHandler.CompensateLedger)
 
-	admin.Get("/operations/health", d.MW.RequirePermission("operations"), d.AdminHandler.GetOperationsHealth)
-	admin.Get("/operations/jobs", d.MW.RequirePermission("operations"), d.AdminHandler.GetJobStatusSummary)
-	admin.Get("/operations/failed-jobs", d.MW.RequirePermission("operations"), d.AdminHandler.GetFailedJobs)
+	admin.Get("/operations/health", d.MW.RequirePermission("operations"), middleware.RequirePortal("platform"), d.AdminHandler.GetOperationsHealth)
+	admin.Get("/operations/jobs", d.MW.RequirePermission("operations"), middleware.RequirePortal("platform"), d.AdminHandler.GetJobStatusSummary)
+	admin.Get("/operations/failed-jobs", d.MW.RequirePermission("operations"), middleware.RequirePortal("platform"), d.AdminHandler.GetFailedJobs)
+
+	// ── Identity & Organization Governance ──
+	admin.Get("/identity/pending", d.MW.RequireAnyPermission("sellers", "trust_safety", "operations"), d.IdentityHandler.AdminListPending)
+	admin.Put("/identity/:id/resolve", d.MW.RequireAnyPermission("sellers", "trust_safety"), d.IdentityHandler.AdminResolveException)
+	admin.Get("/organizations", d.MW.RequireAnyPermission("sellers", "operations", "trust_safety"), d.OrganizationHandler.AdminListOrganizations)
+	admin.Put("/organizations/:id/review", d.MW.RequireAnyPermission("sellers", "trust_safety"), d.OrganizationHandler.AdminReviewOrganization)
 
 	admin.Get("/verification/documents", d.MW.RequirePermission("seller_verification"), d.AdminHandler.ListVerificationDocuments)
 	admin.Put("/verification/documents/:id/review", d.MW.RequirePermission("seller_verification"), d.AdminHandler.ReviewVerificationDocument)
 
-	admin.Get("/trust/reports", d.MW.RequirePermission("trust_safety"), d.AdminHandler.ListAbuseReports)
-	admin.Put("/trust/reports/:id/review", d.MW.RequirePermission("trust_safety"), d.AdminHandler.ReviewAbuseReport)
-	admin.Put("/trust/reports/:id/priority", d.MW.RequirePermission("trust_safety"), d.AdminHandler.UpdateAbuseReportPriority)
+	admin.Get("/trust/reports", d.MW.RequirePermission("trust_safety"), middleware.RequirePortal("security"), d.AdminHandler.ListAbuseReports)
+	admin.Put("/trust/reports/:id/review", d.MW.RequirePermission("trust_safety"), middleware.RequirePortal("security"), d.AdminHandler.ReviewAbuseReport)
+	admin.Put("/trust/reports/:id/priority", d.MW.RequirePermission("trust_safety"), middleware.RequirePortal("security"), d.AdminHandler.UpdateAbuseReportPriority)
 
 	admin.Get("/refunds", d.MW.RequirePermission("refunds"), d.AdminHandler.ListRefundRequests)
 	admin.Put("/refunds/:id/review", d.MW.RequirePermission("refunds"), d.AdminHandler.ReviewRefundRequest)

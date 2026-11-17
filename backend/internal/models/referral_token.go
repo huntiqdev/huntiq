@@ -63,3 +63,4 @@ type ReferralRewardPolicyVersion struct {
 	ChangeReason             string    `json:"change_reason"`
 	CreatedAt                time.Time `json:"created_at"`
 }
+

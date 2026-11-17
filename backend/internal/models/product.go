@@ -53,6 +53,11 @@ type Product struct {
 	// Sold tracking
 	SoldAt *time.Time `json:"sold_at,omitempty"`
 
+	// Brokerage & Publisher Transparency
+	PublisherRole               string `json:"publisher_role"` // owner, authorized_seller, broker_agent, representative, government_officer
+	OrganizationID              *int   `json:"organization_id,omitempty"`
+	BrokerageDisclosureAgreed   bool   `json:"brokerage_disclosure_agreed"`
+
 	// Gold & Premium Merchant Features
 	CustomURL   *string                `json:"custom_url,omitempty"`
 	SocialLinks map[string]interface{} `json:"social_links,omitempty"`

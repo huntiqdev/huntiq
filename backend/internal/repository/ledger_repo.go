@@ -146,10 +146,11 @@ func (r *LedgerRepo) RecordLedgerTransaction(ctx context.Context, txEntry *model
 	switch txEntry.EntryType {
 	case "referral_reward_a", "referral_commission_b":
 		// Direct credit to available balance
-		if txEntry.CreditAccount == "user_available" {
+		switch txEntry.CreditAccount {
+		case "user_available":
 			w.AvailableBalance += txEntry.Amount
 			w.LifetimeEarned += txEntry.Amount
-		} else if txEntry.CreditAccount == "user_pending" {
+		case "user_pending":
 			w.PendingBalance += txEntry.Amount
 			w.LifetimeEarned += txEntry.Amount
 		}

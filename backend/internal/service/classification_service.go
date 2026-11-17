@@ -31,7 +31,7 @@ func (s *ClassificationService) CreateScheme(ctx context.Context, scheme *models
 		return nil, errors.New("scheme code is required")
 	}
 	if strings.TrimSpace(scheme.NameEn) == "" {
-		return nil, errors.New("English name is required")
+		return nil, errors.New("english name is required")
 	}
 	if scheme.Status == "" {
 		scheme.Status = "ACTIVE"
@@ -60,7 +60,7 @@ func (s *ClassificationService) UpdateScheme(ctx context.Context, scheme *models
 		return errors.New("invalid scheme ID")
 	}
 	if strings.TrimSpace(scheme.NameEn) == "" {
-		return errors.New("English name is required")
+		return errors.New("english name is required")
 	}
 	return s.repo.UpdateScheme(ctx, scheme)
 }

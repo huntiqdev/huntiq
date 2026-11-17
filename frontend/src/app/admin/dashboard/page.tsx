@@ -45,13 +45,13 @@ export default function AdminDashboard() {
   useEffect(() => { load(); }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const s = stats ?? {};
-  const totalProducts = s.total_products ?? 894;
-  const approvedProducts = s.approved_products ?? 738;
-  const pendingProducts = s.pending_products ?? 112;
-  const rejectedProducts = Math.max(0, totalProducts - approvedProducts - pendingProducts) || 44;
-  const activeSellers = s.active_sellers ?? 142;
-  const totalRevenue = s.total_revenue != null ? Number(s.total_revenue) : 48920;
-  const totalTokens = (totalProducts * 12400 + 101206522).toLocaleString();
+  const totalProducts = s.total_products != null ? Number(s.total_products) : 0;
+  const approvedProducts = s.approved_products != null ? Number(s.approved_products) : 0;
+  const pendingProducts = s.pending_products != null ? Number(s.pending_products) : 0;
+  const rejectedProducts = Math.max(0, totalProducts - approvedProducts - pendingProducts);
+  const activeSellers = s.active_sellers != null ? Number(s.active_sellers) : 0;
+  const totalRevenue = s.total_revenue != null ? Number(s.total_revenue) : 0;
+  const totalTokens = (s.total_tokens != null ? Number(s.total_tokens) : totalProducts * 10).toLocaleString();
 
   // Donut chart calculations
   const approvedPct = Math.round((approvedProducts / (totalProducts || 1)) * 100);

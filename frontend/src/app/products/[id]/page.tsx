@@ -218,6 +218,30 @@ export default async function ProductDetailPage({ params }: Props) {
 
           <BuyButton product={product} />
 
+          {/* Brokerage & Publisher Transparency */}
+          <div className="mt-2 p-3.5 rounded-xl border border-blue-500/20 bg-blue-500/5 text-blue-900 dark:text-blue-200">
+            <div className="flex items-center justify-between gap-2 mb-1.5 font-bold text-xs">
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={15} className="text-blue-600 dark:text-blue-400 shrink-0" />
+                <span className="uppercase tracking-wider font-black text-[11px]">
+                  {product.publisher_role === 'broker_agent'
+                    ? 'Broker / Intermediary Listing'
+                    : product.publisher_role === 'representative'
+                    ? 'Authorized Representative Listing'
+                    : product.publisher_role === 'government_officer'
+                    ? 'Official Entity Listing'
+                    : 'Direct Owner Listing'}
+                </span>
+              </div>
+              <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-600 text-white shadow-xs">
+                {product.publisher_role || 'Owner'}
+              </span>
+            </div>
+            <p className="text-[11px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+              HUNTIQ operates as an independent marketplace and brokerage platform. Product specifications, descriptions, and condition disclosures are provided by the designated publisher. Verify items in person prior to transaction completion.
+            </p>
+          </div>
+
           {/* Safe Exchange Shield */}
           <div className="mt-2 p-3.5 rounded-xl border border-amber-500/20 bg-amber-500/5 text-amber-900 dark:text-amber-200">
             <div className="flex items-center gap-2 mb-1.5 font-bold text-xs">
@@ -237,7 +261,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </span>
               <Link
                 href={`/products?category_id=${product.category.id}`}
-                className="text-[11px] font-medium bg-zinc-100 hover:bg-orange-50 dark:bg-zinc-800 dark:hover:bg-orange-950/40 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-700 transition-colors"
+                className="text-[11px] font-medium bg-slate-100 hover:bg-[#EAF3FF] dark:bg-slate-800 dark:hover:bg-[#1769E0]/15 text-slate-700 dark:text-slate-300 hover:text-[#1769E0] px-2.5 py-1 rounded-full border border-slate-200 dark:border-slate-700 transition-colors"
               >
                 <ClientLabel k="ui.more_listings_in" /> {product.category.name} →
               </Link>

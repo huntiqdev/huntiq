@@ -21,8 +21,8 @@ import PasswordStrength, { validatePasswordStrength } from '@/components/forms/P
 type Tab = 'login' | 'register';
 type Step = 'form' | 'otp' | 'forgot' | 'forgot-otp' | 'forgot-reset';
 
-const ACCENT_BTN = 'bg-orange-600 shadow-orange-600/25 hover:bg-orange-500';
-const INPUT_CLS = 'w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 text-base sm:text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/30 outline-none transition-all focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60';
+const ACCENT_BTN = 'bg-[#1769E0] shadow-[#1769E0]/25 hover:bg-[#1055BD]';
+const INPUT_CLS = 'w-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl px-4 py-3 min-h-[44px] text-base sm:text-sm text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-white/30 outline-none transition-all focus:ring-2 focus:ring-[#1769E0]/30 focus:border-[#1769E0]';
 const LBL_CLS = 'text-[10px] font-black uppercase tracking-widest text-zinc-500 dark:text-white/40 block mb-1.5';
 
 function AuthContent() {
@@ -471,7 +471,7 @@ function AuthContent() {
   if (authLoading || user) {
     return (
       <div className="space-y-6 text-center animate-fade-in py-12">
-        <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto" />
+        <div className="w-12 h-12 border-4 border-[#1769E0] border-t-transparent rounded-full animate-spin mx-auto" />
         <div>
           <h2 className="text-base font-black text-zinc-900 dark:text-white">
             {user ? `${u.already_signed_in_title || 'Welcome back,'} ${user.name || user.phone}` : 'Loading...'}
@@ -492,11 +492,11 @@ function AuthContent() {
   return (
     <div className="space-y-5">
       {refCode && (
-        <div className="flex items-start gap-2 bg-orange-500/10 border border-orange-500/20 rounded-xl px-3 py-2.5">
-          <CheckCircle2 size={13} className="text-orange-400 shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2 bg-[#1769E0]/10 border border-[#1769E0]/20 rounded-xl px-3 py-2.5">
+          <CheckCircle2 size={13} className="text-[#1769E0] dark:text-[#38A5FF] shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs text-orange-400 font-bold">{u.invited_title}</p>
-            <p className="text-[11px] text-orange-300/80 mt-0.5">
+            <p className="text-xs text-[#1769E0] dark:text-[#38A5FF] font-bold">{u.invited_title}</p>
+            <p className="text-[11px] text-zinc-600 dark:text-zinc-300 mt-0.5">
               {u.invite_code_label} <span className="font-mono font-bold">{refCode}</span> {u.invite_code_desc}
             </p>
           </div>
@@ -512,7 +512,7 @@ function AuthContent() {
             onClick={() => setTab(tb)}
             className={`flex-1 py-2.5 rounded-xl text-sm font-black transition-all tap-bounce active:scale-95 ${
               tab === tb
-                ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20'
+                ? 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/20'
                 : 'text-zinc-500 dark:text-white/40 hover:text-zinc-800 dark:hover:text-white/70'
             }`}
           >
@@ -548,7 +548,7 @@ function AuthContent() {
               <button
                 type="button"
                 onClick={() => { setStep('forgot'); setForgotPhone(loginPhone); clearErr(); }}
-                className="text-[11px] text-orange-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors font-semibold"
+                className="text-[11px] text-[#1769E0] hover:text-[#1055BD] dark:text-[#38A5FF] dark:hover:text-[#60B5FF] transition-colors font-semibold"
               >
                 {u.forgot_password}
               </button>
@@ -582,7 +582,7 @@ function AuthContent() {
             <button
               type="button"
               onClick={() => setTab('register')}
-              className="text-orange-600 dark:text-orange-400 font-bold hover:underline"
+              className="text-[#1769E0] dark:text-[#38A5FF] font-bold hover:underline"
             >
               {u.create_account_link}
             </button>
@@ -597,7 +597,7 @@ function AuthContent() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className={LBL_CLS}>{u.reg_select_type || 'Select Account Type'}</label>
-              <span className="text-[10px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#1769E0] dark:text-[#38A5FF] uppercase tracking-wider">
                 {u.reg_as_badge || 'Registering as'}: {accountType === 'seller' ? (u.reg_seller_title || 'Seller') : accountType === 'landlord' ? (u.reg_landlord_title || 'Landlord') : (u.reg_buyer_title || 'Buyer')}
               </span>
             </div>
@@ -608,17 +608,17 @@ function AuthContent() {
                 onClick={() => setAccountType('buyer')}
                 className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
                   accountType === 'buyer'
-                    ? 'bg-orange-50/80 dark:bg-orange-950/40 border-orange-500 shadow-sm ring-1 ring-orange-500/30'
+                    ? 'bg-[#1769E0]/5 dark:bg-[#1769E0]/20 border-[#1769E0] shadow-sm ring-1 ring-[#1769E0]/30'
                     : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
-                    accountType === 'buyer' ? 'bg-orange-600 text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                    accountType === 'buyer' ? 'bg-[#1769E0] text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
                   }`}>
                     <User size={13} />
                   </div>
-                  {accountType === 'buyer' && <CheckCircle2 size={14} className="text-orange-600 dark:text-orange-400" />}
+                  {accountType === 'buyer' && <CheckCircle2 size={14} className="text-[#1769E0] dark:text-[#38A5FF]" />}
                 </div>
                 <div>
                   <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
@@ -636,17 +636,17 @@ function AuthContent() {
                 onClick={() => setAccountType('seller')}
                 className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
                   accountType === 'seller'
-                    ? 'bg-orange-50/80 dark:bg-orange-950/40 border-orange-500 shadow-sm ring-1 ring-orange-500/30'
+                    ? 'bg-[#1769E0]/5 dark:bg-[#1769E0]/20 border-[#1769E0] shadow-sm ring-1 ring-[#1769E0]/30'
                     : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
-                    accountType === 'seller' ? 'bg-orange-600 text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                    accountType === 'seller' ? 'bg-[#1769E0] text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
                   }`}>
                     <ShoppingBag size={13} />
                   </div>
-                  {accountType === 'seller' && <CheckCircle2 size={14} className="text-orange-600 dark:text-orange-400" />}
+                  {accountType === 'seller' && <CheckCircle2 size={14} className="text-[#1769E0] dark:text-[#38A5FF]" />}
                 </div>
                 <div>
                   <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
@@ -691,7 +691,7 @@ function AuthContent() {
               <div className="p-3 bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200 dark:border-white/10 rounded-2xl space-y-2 mt-2">
                 <div className="flex items-center justify-between">
                   <label className={LBL_CLS}>Primary Posting Focus (Can list both anytime)</label>
-                  <span className="text-[9px] font-bold text-orange-600 dark:text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded-full">
+                  <span className="text-[9px] font-bold text-[#1769E0] dark:text-[#38A5FF] bg-[#1769E0]/10 px-2 py-0.5 rounded-full">
                     Unified Account
                   </span>
                 </div>
@@ -701,8 +701,8 @@ function AuthContent() {
                     onClick={() => { setSellerPref('sale'); setAccountType('seller'); }}
                     className={`py-2 px-2 rounded-xl text-center border text-xs font-bold transition-all ${
                       sellerPref === 'sale' && accountType === 'seller'
-                        ? 'bg-orange-500 text-white border-orange-500 shadow-sm'
-                        : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:border-orange-300'
+                        ? 'bg-[#1769E0] text-white border-[#1769E0] shadow-sm'
+                        : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:border-[#1769E0]/40'
                     }`}
                   >
                     🛍️ Sell Goods
@@ -841,7 +841,7 @@ function AuthContent() {
             <button
               type="button"
               onClick={() => setTab('login')}
-              className="text-orange-600 dark:text-orange-400 font-bold hover:underline"
+              className="text-[#1769E0] dark:text-[#38A5FF] font-bold hover:underline"
             >
               {u.sign_in_link}
             </button>

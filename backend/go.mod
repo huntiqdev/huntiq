@@ -10,7 +10,6 @@ require (
 	github.com/jackc/pgx/v5 v5.12.0
 	github.com/joho/godotenv v1.5.1
 	github.com/redis/go-redis/v9 v9.23.0
-	github.com/valyala/fasthttp v1.51.0
 	golang.org/x/crypto v0.58.0
 	golang.org/x/sync v0.24.0
 )
@@ -33,6 +32,7 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/tinylib/msgp v1.6.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
+	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.uber.org/atomic v1.12.0 // indirect

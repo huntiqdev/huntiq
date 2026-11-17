@@ -1,0 +1,35 @@
+[
+  {
+    "id": 285,
+    "parent_id": 104,
+    "type": "woreda",
+    "slug": "central-ethiopia-hadiya-hosanna",
+    "code": "CE-HA-HOS",
+    "level": 3,
+    "path": "/1/14/104/285/",
+    "display_order": 159,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Hossana",
+      "Wachemo",
+      "ሆሳዕና"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-CE-HA",
+    "names": {
+      "en": "Hosanna Woreda & City",
+      "am": "ሆሳዕና ወረዳና ከተማ (ሀዲያ)",
+      "om": "Magaalaa fi Aanaa Hosaa'inaa",
+      "ti": "ሆሳዕና"
+    },
+    "coordinates": {
+      "latitude": 7.55,
+      "longitude": 37.85,
+      "bbox": null
+    }
+  }
+]

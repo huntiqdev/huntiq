@@ -6,9 +6,13 @@ import { buyerApi } from './buyer';
 import { adminApi } from './admin';
 import { referralApi } from './referral';
 import { classificationApi } from './classification';
+import { identityApi } from './identity';
+import { organizationApi } from './organization';
 export { ApiError, fetchAPI, API_URL };
 export type { PublicPaymentSettings };
 export * from './classification';
+export * from './identity';
+export * from './organization';
 
 export const api = {
   ...publicApi,
@@ -18,6 +22,8 @@ export const api = {
   ...adminApi,
   ...referralApi,
   ...classificationApi,
+  ...identityApi,
+  ...organizationApi,
   // Generic methods for direct API calls
   get: <T>(endpoint: string, options?: RequestInit) => fetchAPI<T>(endpoint, { ...options, method: 'GET' }),
   post: <T>(endpoint: string, body?: any, options?: RequestInit) => fetchAPI<T>(endpoint, { ...options, method: 'POST', body: body ? JSON.stringify(body) : undefined }),

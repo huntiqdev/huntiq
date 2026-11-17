@@ -8,9 +8,9 @@ export default function MaintenancePage() {
       <div className="max-w-md w-full text-center space-y-8">
         {/* Animated Icon */}
         <div className="relative inline-block">
-          <div className="absolute inset-0 bg-orange-500/20 blur-3xl rounded-full" />
+          <div className="absolute inset-0 bg-[#1769E0]/20 blur-3xl rounded-full" />
           <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl shadow-2xl">
-            <Hammer size={48} className="text-orange-600 mx-auto animate-bounce" />
+            <Hammer size={48} className="text-[#1769E0] mx-auto animate-bounce" />
           </div>
         </div>
 
@@ -26,11 +26,11 @@ export default function MaintenancePage() {
         {/* Status Card */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm flex flex-col gap-4">
           <div className="flex items-center gap-3 text-sm font-bold text-zinc-700 dark:text-zinc-300">
-            <Clock size={18} className="text-orange-600" />
+            <Clock size={18} className="text-[#1769E0]" />
             Estimated Downtime: ~15 minutes
           </div>
           <div className="flex items-center gap-3 text-sm font-bold text-zinc-700 dark:text-zinc-300">
-            <Phone size={18} className="text-orange-600" />
+            <Phone size={18} className="text-[#1769E0]" />
             Urgent? Call us: +251 9XX XXX XXX
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function MaintenancePage() {
         <div className="pt-4">
           <Link 
             href="/"
-            className="inline-flex items-center justify-center px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-black rounded-2xl transition-all shadow-lg shadow-orange-600/20 active:scale-95"
+            className="inline-flex items-center justify-center px-8 py-3 bg-[#1769E0] hover:bg-[#1055BD] text-white font-black rounded-2xl transition-all shadow-lg shadow-[#1769E0]/20 min-h-[44px] tap-bounce active:scale-95"
           >
             Refresh Page
           </Link>

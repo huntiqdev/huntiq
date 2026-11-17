@@ -30,8 +30,8 @@ interface Props {
   defaultValue?: LocationValue;
 }
 
-const SEL = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[42px] bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-orange-600 transition-all';
-const INP = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[42px] bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-orange-600 transition-all';
+const SEL = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[44px] bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] transition-all';
+const INP = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[44px] bg-zinc-50 dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] transition-all';
 
 export function LocationSelector({
   onChange,
@@ -274,12 +274,12 @@ export function LocationSelector({
             type="button"
             onClick={handleUseCurrentLocation}
             disabled={gpsLoading}
-            className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-orange-500/10 hover:from-orange-500/20 hover:to-amber-500/20 text-orange-600 dark:text-orange-400 border border-orange-500/30 rounded-xl text-xs font-bold transition-all shadow-sm group"
+            className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-[#1769E0]/10 via-[#38A5FF]/10 to-[#1769E0]/10 hover:from-[#1769E0]/20 hover:to-[#38A5FF]/20 text-[#1769E0] dark:text-[#38A5FF] border border-[#1769E0]/30 rounded-xl text-xs font-bold transition-all shadow-sm group min-h-[44px]"
           >
             {gpsLoading ? (
-              <Loader2 size={14} className="animate-spin text-orange-500" />
+              <Loader2 size={14} className="animate-spin text-[#1769E0]" />
             ) : (
-              <Navigation size={14} className="text-orange-500 group-hover:scale-110 transition-transform" />
+              <Navigation size={14} className="text-[#1769E0] group-hover:scale-110 transition-transform" />
             )}
             <span>
               {gpsLoading ? 'Detecting Location & Resolving Bounds…' : '📍 Use My Current Location'}
@@ -321,7 +321,7 @@ export function LocationSelector({
       {/* Selected Location Breadcrumb */}
       {breadcrumbParts.length > 0 && (
         <div className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800/80 rounded-xl text-xs text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/60">
-          <MapPin size={12} className="text-orange-500 shrink-0" />
+          <MapPin size={12} className="text-[#1769E0] shrink-0" />
           <span className="font-bold text-zinc-700 dark:text-zinc-200 truncate">
             {breadcrumbParts.join(' › ')}
           </span>
@@ -356,7 +356,7 @@ export function LocationSelector({
                   type="button"
                   key={i}
                   onClick={() => applyResult(r)}
-                  className="w-full text-left px-3 py-2.5 text-sm hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-colors border-b border-zinc-100 dark:border-zinc-800 last:border-0"
+                  className="w-full text-left px-3 py-2.5 text-sm hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors border-b border-zinc-100 dark:border-zinc-800 last:border-0"
                 >
                   {locPath(r, locale)}
                 </button>
@@ -380,7 +380,7 @@ export function LocationSelector({
                   key={hub.key}
                   type="button"
                   onClick={() => applyHub(hub)}
-                  className="text-[11px] font-bold px-2 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-orange-500/10 hover:text-orange-600 dark:hover:text-orange-400 transition-all border border-zinc-200/60 dark:border-zinc-700/60"
+                  className="text-[11px] font-bold px-2 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-[#1769E0]/10 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-all border border-zinc-200/60 dark:border-zinc-700/60 min-h-[36px] flex items-center"
                 >
                   {label}
                 </button>

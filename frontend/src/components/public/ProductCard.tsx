@@ -151,7 +151,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
           <button type="button" onClick={onBuy}
             className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md ${product.listing_type === 'rent'
               ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25'
-              : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/25'
+              : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/25'
               }`}>
             <ShoppingBag size={16} />
             {product.listing_type === 'rent' ? (t.ui.rent_now ?? 'Rent / Contact Landlord') : t.ui.buy_now}
@@ -190,11 +190,11 @@ export function ProductCard({ product }: Props) {
     <>
       {/* Card — smartphone thumb-friendly, tactile bounce */}
       <div
-        className="group relative bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800/80 overflow-hidden flex flex-col cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5 hover:border-orange-300 dark:hover:border-orange-800/60 tap-bounce active:scale-[0.97]"
+        className="group relative bg-white dark:bg-[#0E1B33] rounded-2xl border border-slate-200 dark:border-slate-800/80 overflow-hidden flex flex-col cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5 hover:border-[#1769E0] dark:hover:border-[#38A5FF]/60 tap-bounce active:scale-[0.97]"
         onClick={() => setDetailOpen(true)}
       >
         {/* Image */}
-        <div className="relative aspect-square bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+        <div className="relative aspect-square bg-slate-100 dark:bg-slate-800 overflow-hidden">
           <Image
             src={thumb}
             alt={product.title}
@@ -215,10 +215,17 @@ export function ProductCard({ product }: Props) {
           </div>
 
           {/* Sale Badge — top left */}
-          <div className="absolute top-2 left-2 bg-orange-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 leading-none shadow-sm tracking-wide">
+          <div className="absolute top-2 left-2 bg-[#1769E0] text-white text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 leading-none shadow-sm shadow-[#1769E0]/30 tracking-wide">
             <ShoppingBag size={8} />
             SALE
           </div>
+
+          {/* Publisher Intermediary / Broker Badge */}
+          {product.publisher_role && product.publisher_role !== 'owner' && (
+            <div className="absolute top-2 right-14 bg-indigo-600/90 text-white text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
+              {product.publisher_role === 'broker_agent' ? 'BROKER' : product.publisher_role === 'representative' ? 'AGENT' : product.publisher_role === 'government_officer' ? 'GOV' : 'PARTNER'}
+            </div>
+          )}
 
           {/* Tier badge — just below sale badge */}
           {tierBadge && (
@@ -253,12 +260,12 @@ export function ProductCard({ product }: Props) {
 
         {/* Body — smartphone readable typography */}
         <div className="p-2.5 flex flex-col gap-1">
-          <p className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 transition-colors">
+          <p className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 text-slate-900 dark:text-slate-100 group-hover:text-[#1769E0] dark:group-hover:text-[#38A5FF] transition-colors">
             {product.title}
           </p>
           {product.location && (
-            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1 leading-none truncate font-medium">
-              <MapPin size={10} className="shrink-0 text-orange-500" />
+            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 leading-none truncate font-medium">
+              <MapPin size={10} className="shrink-0 text-[#1769E0] dark:text-[#38A5FF]" />
               <span>{product.location.woreda ?? product.location.subcity ?? product.location.region}</span>
             </p>
           )}

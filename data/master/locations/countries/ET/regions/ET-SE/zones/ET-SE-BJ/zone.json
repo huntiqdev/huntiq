@@ -1,0 +1,32 @@
+{
+  "id": 117,
+  "parent_id": 13,
+  "parent_code": "ET-SE",
+  "type": "zone",
+  "slug": "south-ethiopia-burji",
+  "code": "ET-SE-BJ",
+  "level": 2,
+  "path": "/1/13/117/",
+  "display_order": 84,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Burji",
+    "ቡርጂ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Burji Special Woreda",
+    "am": "ቡርጂ ልዩ ወረዳ",
+    "om": "Burjii",
+    "ti": "ፍሉይ ወረዳ ቡርጂ"
+  },
+  "coordinates": {
+    "latitude": 5.45,
+    "longitude": 37.85,
+    "bbox": null
+  }
+}

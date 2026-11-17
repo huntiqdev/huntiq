@@ -41,11 +41,31 @@ in_use() {
 }
 
 start_postgres() {
+    # 1. Check primary configured host & port
     if psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
         return 0
     fi
+
+    # 2. Check alternative active daemon (5433 in /tmp vs 5432)
+    if [ "$DB_PORT" = "5432" ] && psql -h "/tmp" -p 5433 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+        DB_HOST="/tmp"
+        DB_PORT="5433"
+        return 0
+    fi
+    if [ "$DB_PORT" = "5433" ] && psql -h "127.0.0.1" -p 5432 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+        DB_HOST="127.0.0.1"
+        DB_PORT="5432"
+        return 0
+    fi
+
     echo "📦 Starting local PostgreSQL daemon ($DB_PORT)..."
-    rm -f /tmp/pgdata/postmaster.pid 2>/dev/null || true
+    if [ -f /tmp/pgdata/postmaster.pid ]; then
+        local pid
+        pid=$(head -n 1 /tmp/pgdata/postmaster.pid 2>/dev/null || echo "")
+        if [ -n "$pid" ] && ! kill -0 "$pid" 2>/dev/null; then
+            rm -f /tmp/pgdata/postmaster.pid 2>/dev/null || true
+        fi
+    fi
     if [ -x "/usr/lib/postgresql/18/bin/postgres" ] && [ -d "/tmp/pgdata" ]; then
         /usr/lib/postgresql/18/bin/postgres -D /tmp/pgdata -p "$DB_PORT" -k "$DB_HOST" >/tmp/postgres.log 2>&1 &
         PIDS+=($!)
@@ -61,6 +81,11 @@ cmd_native() {
     echo "🚀 Starting HUNTIQ Native Stack..."
     start_postgres
     echo "✓ Database online (Port: $DB_PORT)"
+
+    # Ensure database schema is migrated
+    if [ -f "$BACKEND/scripts/migrate.sh" ]; then
+        (cd "$BACKEND" && ./scripts/migrate.sh) >/dev/null 2>&1 || true
+    fi
 
     if in_use 8080; then
         echo "✓ Backend API already running on :8080"

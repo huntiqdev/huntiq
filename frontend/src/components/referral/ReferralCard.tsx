@@ -214,13 +214,13 @@ export function ReferralCard({ role = 'seller' }: Props) {
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-600 to-orange-500 px-5 py-4 flex items-center gap-3">
+      <div className="bg-gradient-to-r from-[#1769E0] to-[#38A5FF] px-5 py-4 flex items-center gap-3">
         <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
           <Gift size={18} className="text-white" />
         </div>
         <div>
           <p className="font-black text-white text-sm">Referral Program</p>
-          <p className="text-white/70 text-xs">Earn {commissionRate}% when your invitees make a paid action</p>
+          <p className="text-white/80 text-xs">Earn {commissionRate}% when your invitees make a paid action</p>
         </div>
       </div>
 
@@ -230,7 +230,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 text-center">
             <div className="flex items-center justify-center gap-1 mb-1">
-              <Users size={12} className="text-orange-500" />
+              <Users size={12} className="text-[#1769E0]" />
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide">People Invited</span>
             </div>
             <p className="text-2xl font-black text-zinc-900 dark:text-white">{stats.invited_count}</p>
@@ -381,7 +381,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
                 </div>
                 <button
                   onClick={handleCopy}
-                  className="flex items-center gap-1.5 px-3 py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold transition-colors shrink-0"
+                  className="flex items-center gap-1.5 px-3 py-2.5 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-xs font-bold transition-colors shrink-0"
                 >
                   {copied ? <CheckCircle2 size={13} /> : <Copy size={13} />}
                   {copied ? 'Copied!' : 'Copy'}
@@ -420,7 +420,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
             ) : !showAcceptForm ? (
               <button
                 onClick={() => { setShowAcceptForm(true); setAcceptError(''); }}
-                className="flex items-center gap-2 w-full border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-xs text-zinc-500 dark:text-zinc-400 hover:border-orange-400 hover:text-orange-500 transition-colors"
+                className="flex items-center gap-2 w-full border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-xs text-zinc-500 dark:text-zinc-400 hover:border-[#1769E0] hover:text-[#1769E0] transition-colors"
               >
                 <UserPlus size={13} />
                 Accept an Invitation — enter someone&apos;s referral code
@@ -437,12 +437,12 @@ export function ReferralCard({ role = 'seller' }: Props) {
                     onChange={e => { setInviteCode(e.target.value.toUpperCase()); setAcceptError(''); }}
                     placeholder="REFxxxxxxxx"
                     maxLength={11}
-                    className="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm font-mono outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60 bg-zinc-50 dark:bg-zinc-800 transition-all"
+                    className="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm font-mono outline-none focus:ring-2 focus:ring-[#1769E0]/30 focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all"
                   />
                   <button
                     type="submit"
                     disabled={acceptLoading || inviteCode.length < 11}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold transition-colors disabled:opacity-50"
+                    className="flex items-center gap-1.5 px-3 py-2 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-xs font-bold transition-colors disabled:opacity-50"
                   >
                     {acceptLoading ? <Loader2 size={12} className="animate-spin" /> : 'Accept'}
                   </button>
@@ -589,7 +589,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
               'Paid actions: product sale, tier upgrade, seller registration',
             ].map((step, i) => (
               <div key={i} className="flex items-start gap-2">
-                <span className="text-[10px] font-black text-orange-500 shrink-0 mt-0.5">{i + 1}.</span>
+                <span className="text-[10px] font-black text-[#1769E0] shrink-0 mt-0.5">{i + 1}.</span>
                 <p className="text-[10px] text-zinc-500 dark:text-zinc-400">{step}</p>
               </div>
             ))}

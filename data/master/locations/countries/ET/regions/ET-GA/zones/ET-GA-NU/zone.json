@@ -1,0 +1,32 @@
+{
+  "id": 99,
+  "parent_id": 11,
+  "parent_code": "ET-GA",
+  "type": "zone",
+  "slug": "gambela-nuer",
+  "code": "ET-GA-NU",
+  "level": 2,
+  "path": "/1/11/99/",
+  "display_order": 66,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Nuer Zone",
+    "ኑዌር"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Nuer Zone",
+    "am": "ኑዌር ዞን",
+    "om": "Nueer",
+    "ti": "ዞን ኑዌር"
+  },
+  "coordinates": {
+    "latitude": 8.3,
+    "longitude": 33.8,
+    "bbox": null
+  }
+}

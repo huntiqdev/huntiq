@@ -1,0 +1,32 @@
+{
+  "id": 79,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "zone",
+  "slug": "somali-fafan",
+  "code": "ET-SO-FA",
+  "level": 2,
+  "path": "/1/8/79/",
+  "display_order": 43,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Jijiga Zone",
+    "ፋፋን"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Fafan Zone",
+    "am": "ፋፋን ዞን",
+    "om": "Faafan",
+    "ti": "ዞን ፋፋን"
+  },
+  "coordinates": {
+    "latitude": 9.35,
+    "longitude": 43.0,
+    "bbox": null
+  }
+}

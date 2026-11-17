@@ -1,0 +1,32 @@
+{
+  "id": 123,
+  "parent_id": 15,
+  "parent_code": "ET-SW",
+  "type": "zone",
+  "slug": "southwest-ethiopia-bench-sheko",
+  "code": "ET-SW-BS",
+  "level": 2,
+  "path": "/1/15/123/",
+  "display_order": 90,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Bench Maji",
+    "ቤንች ሸኮ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Bench Sheko Zone",
+    "am": "ቤንች ሸኮ ዞን",
+    "om": "Bench Shakkoo",
+    "ti": "ዞን ቤንች ሸኮ"
+  },
+  "coordinates": {
+    "latitude": 6.9,
+    "longitude": 35.55,
+    "bbox": null
+  }
+}

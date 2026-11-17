@@ -30,3 +30,4 @@ type SMSDeliveryLog struct {
 	RetryCount    int       `json:"retry_count"`
 	CreatedAt     time.Time `json:"created_at"`
 }
+

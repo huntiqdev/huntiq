@@ -30,6 +30,15 @@ type Config struct {
 	RedisAddr     string // Redis server address (e.g. 127.0.0.1:6379)
 	RedisPassword string // Redis authentication password
 	RedisDB       int    // Redis database index (default: 0)
+	EnableEthiopiaGeoBlock bool // Restrict foreign public IP access
+
+	// Telebirr payment integration
+	TelebirrAppID       string
+	TelebirrAppKey      string
+	TelebirrShortCode   string
+	TelebirrAPIEndpoint string
+	TelebirrNotifyURL   string
+	TelebirrReturnURL   string
 }
 
 func Load() *Config {
@@ -98,6 +107,14 @@ func Load() *Config {
 		RedisAddr:     getEnv("REDIS_ADDR", ""),
 		RedisPassword: getEnv("REDIS_PASSWORD", ""),
 		RedisDB:       getEnvInt("REDIS_DB", 0),
+		EnableEthiopiaGeoBlock: getEnvBool("ENABLE_ETHIOPIA_GEOBLOCK", false),
+
+		TelebirrAppID:       getEnv("TELEBIRR_APP_ID", "HUNTIQ_TELEBIRR_APP"),
+		TelebirrAppKey:      getEnv("TELEBIRR_APP_KEY", "dev_telebirr_secret_key_2026"),
+		TelebirrShortCode:   getEnv("TELEBIRR_SHORT_CODE", "100200"),
+		TelebirrAPIEndpoint: getEnv("TELEBIRR_API_ENDPOINT", "https://app.telebirr.et/payment"),
+		TelebirrNotifyURL:   getEnv("TELEBIRR_NOTIFY_URL", appBaseURL+"/api/telebirr/webhook"),
+		TelebirrReturnURL:   getEnv("TELEBIRR_RETURN_URL", frontendURL+"/payment/callback"),
 	}
 }
 
@@ -200,5 +217,14 @@ func NewTestConfig() *Config {
 		RedisAddr:     "",
 		RedisPassword: "",
 		RedisDB:       0,
+		EnableEthiopiaGeoBlock: false,
 	}
+}
+
+func getEnvBool(key string, fallback bool) bool {
+	if v := os.Getenv(key); v != "" {
+		v = strings.ToLower(v)
+		return v == "true" || v == "1" || v == "yes"
+	}
+	return fallback
 }

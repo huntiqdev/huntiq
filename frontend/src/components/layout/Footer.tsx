@@ -12,7 +12,6 @@ import {
   ShoppingBag,
   HelpCircle,
   FileText,
-  Lock,
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
@@ -28,23 +27,23 @@ export function Footer() {
   const { t, locale, setLocale } = useLocale();
 
   return (
-    <footer className="mt-16 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 pt-12 pb-24 md:pb-8">
-        {/* 5-Column Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+    <footer className="mt-16 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#060D1A] transition-colors">
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-24 md:pb-10">
+        {/* Responsive 5-Column Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           {/* Col 1: Brand & Identity */}
-          <div className="col-span-2 md:col-span-1 space-y-4">
+          <div className="sm:col-span-2 md:col-span-1 space-y-4">
             <HuntiqLogo
               size="md"
               showText
               subtitle="Universal Marketplace"
               href="/"
             />
-            <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+            <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
               {t.footer.tagline ?? 'The premier universal marketplace for buying, selling, and renting across Ethiopia.'}
             </p>
             <div className="pt-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-600/10 text-orange-600 text-[11px] font-bold">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF3FF] dark:bg-[#1769E0]/15 text-[#1769E0] dark:text-[#38A5FF] text-[11px] font-bold">
                 <ShieldCheck size={13} />
                 <span>Verified Platform</span>
               </div>
@@ -53,8 +52,8 @@ export function Footer() {
 
           {/* Col 2: Customer Support */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
-              <HelpCircle size={13} className="text-orange-600" />
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
+              <HelpCircle size={13} className="text-[#1769E0]" />
               <span>Customer Support</span>
             </h4>
             <nav className="flex flex-col gap-2">
@@ -67,9 +66,9 @@ export function Footer() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors flex items-center gap-1 group"
+                  className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
-                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-600" />
+                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-[#1769E0]" />
                   <span>{label}</span>
                 </Link>
               ))}
@@ -78,8 +77,8 @@ export function Footer() {
 
           {/* Col 3: Buying */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
-              <ShoppingBag size={13} className="text-orange-600" />
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
+              <ShoppingBag size={13} className="text-[#1769E0]" />
               <span>Buying</span>
             </h4>
             <nav className="flex flex-col gap-2">
@@ -93,9 +92,9 @@ export function Footer() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors flex items-center gap-1 group"
+                  className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
-                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-600" />
+                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-[#1769E0]" />
                   <span>{label}</span>
                 </Link>
               ))}
@@ -104,8 +103,8 @@ export function Footer() {
 
           {/* Col 4: Selling & Renting */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
-              <Store size={13} className="text-orange-600" />
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
+              <Store size={13} className="text-[#1769E0]" />
               <span>Selling & Renting</span>
             </h4>
             <nav className="flex flex-col gap-2">
@@ -119,9 +118,9 @@ export function Footer() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors flex items-center gap-1 group"
+                  className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
-                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-600" />
+                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-[#1769E0]" />
                   <span>{label}</span>
                 </Link>
               ))}
@@ -130,8 +129,8 @@ export function Footer() {
 
           {/* Col 5: Policies, Safety & Languages */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-zinc-900 dark:text-white flex items-center gap-1.5">
-              <FileText size={13} className="text-orange-600" />
+            <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
+              <FileText size={13} className="text-[#1769E0]" />
               <span>Policies & Language</span>
             </h4>
             <nav className="flex flex-col gap-2 pb-2">
@@ -143,9 +142,9 @@ export function Footer() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors flex items-center gap-1 group"
+                  className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
-                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-600" />
+                  <ChevronRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity text-[#1769E0]" />
                   <span>{label}</span>
                 </Link>
               ))}
@@ -157,10 +156,10 @@ export function Footer() {
                 <button
                   key={l}
                   onClick={() => setLocale(l)}
-                  className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg border text-[11px] font-bold transition-all ${
+                  className={`flex items-center justify-between px-2.5 py-1.5 rounded-xl border text-[11px] font-bold transition-all min-h-[38px] ${
                     locale === l
-                      ? 'bg-orange-600 text-white border-orange-600 shadow-sm'
-                      : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-orange-400'
+                      ? 'bg-[#1769E0] text-white border-[#1769E0] shadow-sm'
+                      : 'bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-[#1769E0]'
                   }`}
                 >
                   <span>{LOCALE_NAMES[l]}</span>
@@ -172,17 +171,17 @@ export function Footer() {
         </div>
 
         {/* Bottom Strip */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-zinc-200 dark:border-zinc-800 gap-3">
-          <p className="text-xs font-medium text-zinc-500 text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-slate-200 dark:border-slate-800 gap-3">
+          <p className="text-xs font-medium text-slate-500 text-center sm:text-left">
             {t.footer.copyright ?? '© 2026 HUNTIQ. All rights reserved across Ethiopia.'}
           </p>
-          <div className="flex items-center gap-4 text-xs font-bold text-zinc-500">
-            <span className="flex items-center gap-1">
-              <Shield size={12} className="text-green-600" />
+          <div className="flex items-center gap-4 text-xs font-bold text-slate-500">
+            <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+              <Shield size={12} className="text-[#16A36A]" />
               {t.ui.secure_platform_short ?? 'Protected Transactions'}
             </span>
             <span className="flex items-center gap-1">
-              <Globe size={12} className="text-orange-600" />
+              <Globe size={12} className="text-[#1769E0]" />
               4 Ethiopian Languages
             </span>
           </div>

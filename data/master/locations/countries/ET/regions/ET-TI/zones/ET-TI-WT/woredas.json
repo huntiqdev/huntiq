@@ -1,0 +1,36 @@
+[
+  {
+    "id": 357,
+    "parent_id": 76,
+    "parent_code": "ET-TI-WT",
+    "type": "woreda",
+    "slug": "tigray-western-humera-town",
+    "code": "TI-WT-HUM",
+    "level": 3,
+    "path": "/1/6/76/357/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Humera Town Administration",
+      "am": "ሁመራ ከተማ አስተዳደር",
+      "om": "Magaalaa Humaraa",
+      "ti": "ሑመራ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 14.3,
+      "longitude": 36.62,
+      "bbox": {
+        "min_lat": 14.28,
+        "max_lat": 14.32,
+        "min_lng": 36.6,
+        "max_lng": 36.64
+      }
+    }
+  }
+]

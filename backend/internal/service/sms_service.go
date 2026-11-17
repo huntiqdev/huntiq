@@ -268,3 +268,4 @@ func (m *SMSManager) SendOTPMessage(ctx context.Context, rawPhone, otpCode, purp
 
 	return sendErr
 }
+

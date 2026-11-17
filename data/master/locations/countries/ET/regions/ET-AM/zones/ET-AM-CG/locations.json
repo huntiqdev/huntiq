@@ -1,0 +1,68 @@
+[
+  {
+    "id": 242,
+    "parent_id": 60,
+    "type": "woreda",
+    "slug": "amhara-central-gondar-city",
+    "code": "AM-CG-CIT",
+    "level": 3,
+    "path": "/1/5/60/242/",
+    "display_order": 114,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Gondar Castle",
+      "Fasil Ghebbi",
+      "ጎንደር ከተማ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-AM-CG",
+    "names": {
+      "en": "Gondar City (ፋሲል ግቢ)",
+      "am": "ጎንደር ከተማ (ፋሲል ግቢ)",
+      "om": "Magaalaa Gondar",
+      "ti": "ጎንደር ከተማ"
+    },
+    "coordinates": {
+      "latitude": 12.6,
+      "longitude": 37.47,
+      "bbox": null
+    }
+  },
+  {
+    "id": 243,
+    "parent_id": 60,
+    "type": "woreda",
+    "slug": "amhara-central-gondar-dembia",
+    "code": "AM-CG-DEM",
+    "level": 3,
+    "path": "/1/5/60/243/",
+    "display_order": 115,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kola Diba",
+      "Dembia",
+      "ኮልድባ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-AM-CG",
+    "names": {
+      "en": "Dembia Woreda (ኮልድባ)",
+      "am": "ደምቢያ ወረዳ (ኮልድባ)",
+      "om": "Aanaa Dambiyaa",
+      "ti": "ደምቢያ"
+    },
+    "coordinates": {
+      "latitude": 12.35,
+      "longitude": 37.3,
+      "bbox": null
+    }
+  }
+]

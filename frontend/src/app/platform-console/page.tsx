@@ -1,7 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import { Spinner } from '@/components/ui/Spinner';
 import {
   Server, Cpu, HardDrive, Activity, RefreshCw, Filter,
   CheckCircle2, AlertTriangle, Layers, Zap, Database,
@@ -11,14 +14,34 @@ import {
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
 export default function PlatformConsolePage() {
+  const router = useRouter();
+  const { user, isPlatformOwner, isSuperAdmin, isPlatformAdmin, adminRole, loading: authLoading } = useAuth();
   const [clusterFilter, setClusterFilter] = useState<'all' | 'addis' | 'bahrain' | 'edge'>('all');
   const [serviceFilter, setServiceFilter] = useState<'all' | 'api' | 'db' | 'redis' | 'search'>('all');
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!authLoading) {
+      const isAllowed = isPlatformOwner || isSuperAdmin || isPlatformAdmin ||
+        adminRole === 'taxonomy_architect' || adminRole === 'gis_location_specialist';
+      if (!user || !isAllowed) {
+        router.replace('/platform-console/login');
+      }
+    }
+  }, [user, authLoading, isPlatformOwner, isSuperAdmin, isPlatformAdmin, adminRole, router]);
 
   const handleRefresh = () => {
     setIsRefreshing(true);
     setTimeout(() => setIsRefreshing(false), 600);
   };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">

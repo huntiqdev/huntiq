@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { api } from '@/lib/api';
 import {
   ShieldAlert, ShieldCheck, Activity, TrendingUp, DollarSign,
   ArrowUpRight, Building2, RefreshCw, Layers, CheckCircle2,
@@ -12,10 +13,20 @@ import {
   ExternalLink, Eye, AlertCircle, FileText, Landmark
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
+import { Spinner } from '@/components/ui/Spinner';
 
 export default function ExecutiveConsolePage() {
   const router = useRouter();
-  const { user, isPlatformOwner, isSuperAdmin, logout } = useAuth();
+  const { user, isPlatformOwner, isSuperAdmin, adminRole, loading: authLoading, logout } = useAuth();
+
+  useEffect(() => {
+    if (!authLoading) {
+      const isAllowed = isPlatformOwner || isSuperAdmin || adminRole === 'gov_compliance_officer' || adminRole === 'legal_counsel' || adminRole === 'ciso';
+      if (!user || !isAllowed) {
+        router.replace('/executive-console/login');
+      }
+    }
+  }, [user, authLoading, isPlatformOwner, isSuperAdmin, adminRole, router]);
 
   // Master Filters State
   const [timeHorizon, setTimeHorizon] = useState<'24h' | '7d' | '30d' | 'q1' | 'fy2026'>('30d');
@@ -25,38 +36,45 @@ export default function ExecutiveConsolePage() {
   const [selectedVennSegment, setSelectedVennSegment] = useState<string>('all');
   const [selectedFlowNode, setSelectedFlowNode] = useState<string>('escrow');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [liveStats, setLiveStats] = useState<any>(null);
 
-  // Dynamic calculations based on filter
-  const multiplier = useMemo(() => {
-    switch (timeHorizon) {
-      case '24h': return 0.05;
-      case '7d': return 0.25;
-      case '30d': return 1.0;
-      case 'q1': return 2.85;
-      case 'fy2026': return 11.4;
-      default: return 1.0;
-    }
-  }, [timeHorizon]);
+  useEffect(() => {
+    if (!user?.token) return;
+    api.adminAnalyticsOverview(user.token)
+      .then(res => setLiveStats(res))
+      .catch(() => setLiveStats(null));
+  }, [user]);
 
-  const regionMultiplier = useMemo(() => {
-    switch (regionScope) {
-      case 'addis': return 0.62;
-      case 'bole': return 0.28;
-      case 'oromia': return 0.22;
-      case 'diredawa': return 0.14;
-      default: return 1.0;
-    }
-  }, [regionScope]);
+  // Live real data combined with active scope
+  const liveGmv = liveStats?.total_volume != null ? Number(liveStats.total_volume) : 0;
+  const liveRevenue = liveStats?.total_revenue != null ? Number(liveStats.total_revenue) : 0;
+  const liveSellers = liveStats?.active_sellers != null ? Number(liveStats.active_sellers) : 0;
+  const liveProfit = liveStats?.net_profit != null ? Number(liveStats.net_profit) : 0;
 
-  const totalEscrowFloat = Math.round(142850000 * multiplier * regionMultiplier);
-  const totalGmv = Math.round(385420000 * multiplier * regionMultiplier);
-  const netTakeRate = Math.round(9635500 * multiplier * regionMultiplier);
-  const activeSellers = Math.round(12850 * regionMultiplier);
+  const totalEscrowFloat = liveProfit > 0 ? Math.round(liveProfit) : Math.round(liveGmv * 0.15);
+  const totalGmv = liveGmv;
+  const netTakeRate = liveRevenue;
+  const activeSellers = liveSellers;
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    setTimeout(() => setIsRefreshing(false), 600);
+    if (user?.token) {
+      api.adminAnalyticsOverview(user.token)
+        .then(res => setLiveStats(res))
+        .catch(() => {})
+        .finally(() => setIsRefreshing(false));
+    } else {
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
   };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans selection:bg-red-500/30 selection:text-red-200">

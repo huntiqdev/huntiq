@@ -1,0 +1,32 @@
+{
+  "id": 95,
+  "parent_id": 10,
+  "parent_code": "ET-BE",
+  "type": "zone",
+  "slug": "benishangul-mao-komo",
+  "code": "ET-BE-MK",
+  "level": 2,
+  "path": "/1/10/95/",
+  "display_order": 62,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Mao Komo",
+    "ማኦ ኮሞ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Mao-Komo Special Woreda",
+    "am": "ማኦ-ኮሞ ልዩ ወረዳ",
+    "om": "Mao-Komo",
+    "ti": "ፍሉይ ወረዳ ማኦ-ኮሞ"
+  },
+  "coordinates": {
+    "latitude": 9.4,
+    "longitude": 34.4,
+    "bbox": null
+  }
+}

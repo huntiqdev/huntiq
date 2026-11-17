@@ -1,0 +1,33 @@
+{
+  "id": 61,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-north-gondar",
+  "code": "ET-AM-NG",
+  "level": 2,
+  "path": "/1/5/61/",
+  "display_order": 25,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "North Gonder",
+    "Semien Gondar",
+    "ሰሜን ጎንደር"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "North Gondar Zone",
+    "am": "ሰሜን ጎንደር ዞን",
+    "om": "Gondar Kaabaa",
+    "ti": "ዞን ሰሜን ጎንደር"
+  },
+  "coordinates": {
+    "latitude": 13.15,
+    "longitude": 37.9,
+    "bbox": null
+  }
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "id": 207,
+    "parent_id": 46,
+    "type": "woreda",
+    "slug": "oromia-guji-negele-borana",
+    "code": "OR-GU-NEG",
+    "level": 3,
+    "path": "/1/4/46/207/",
+    "display_order": 79,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Negele Borana",
+      "Negelle",
+      "ነገሌ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-GU",
+    "names": {
+      "en": "Negele Borana City & Woreda",
+      "am": "ነገሌ ቦረና ከተማና ወረዳ",
+      "om": "Magaalaa Nageellee Booranaa",
+      "ti": "ነገሌ ቦረና"
+    },
+    "coordinates": {
+      "latitude": 5.33,
+      "longitude": 39.58,
+      "bbox": null
+    }
+  },
+  {
+    "id": 208,
+    "parent_id": 46,
+    "type": "woreda",
+    "slug": "oromia-guji-adola-rede",
+    "code": "OR-GU-ADO",
+    "level": 3,
+    "path": "/1/4/46/208/",
+    "display_order": 80,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Adola",
+      "Kibre Mengist",
+      "ክብረ መንግሥት"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-GU",
+    "names": {
+      "en": "Adola Rede Woreda (ክብረ መንግሥት)",
+      "am": "አዶላ ሬዴ ወረዳ (ክብረ መንግሥት)",
+      "om": "Aanaa Adoolaa Reeddee",
+      "ti": "ኣዶላ ሬዴ"
+    },
+    "coordinates": {
+      "latitude": 5.88,
+      "longitude": 38.98,
+      "bbox": null
+    }
+  },
+  {
+    "id": 209,
+    "parent_id": 46,
+    "type": "woreda",
+    "slug": "oromia-guji-shakiso",
+    "code": "OR-GU-SHA",
+    "level": 3,
+    "path": "/1/4/46/209/",
+    "display_order": 81,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Shakiso",
+      "Lega Dembi Gold",
+      "ሻኪሶ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-GU",
+    "names": {
+      "en": "Shakiso Woreda & City",
+      "am": "ሻኪሶ ወረዳና ከተማ (ወርቅ ማዕድን)",
+      "om": "Magaalaa fi Aanaa Shaakkisoo",
+      "ti": "ሻኪሶ"
+    },
+    "coordinates": {
+      "latitude": 5.75,
+      "longitude": 38.9,
+      "bbox": null
+    }
+  }
+]

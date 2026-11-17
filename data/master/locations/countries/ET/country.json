@@ -1,0 +1,37 @@
+{
+  "id": 1,
+  "parent_id": null,
+  "parent_code": null,
+  "type": "country",
+  "slug": "ethiopia",
+  "code": "ET",
+  "level": 0,
+  "path": "/1/",
+  "display_order": 1,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Abyssinia",
+    "Federal Democratic Republic of Ethiopia"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Ethiopia",
+    "am": "ኢትዮጵያ",
+    "om": "Itoophiyaa",
+    "ti": "ኢትዮጵያ"
+  },
+  "coordinates": {
+    "latitude": 9.145,
+    "longitude": 40.489673,
+    "bbox": {
+      "min_lat": 3.4,
+      "max_lat": 14.9,
+      "min_lng": 32.99,
+      "max_lng": 47.98
+    }
+  }
+}

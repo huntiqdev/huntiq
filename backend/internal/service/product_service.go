@@ -433,7 +433,7 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 			}
 			legacyCatID = req.CategoryID
 		}
-	} else if catHierarchyID != nil && s.catRepo != nil {
+	} else if s.catRepo != nil {
 		cat, err := s.catRepo.GetByID(ctx, *catHierarchyID)
 		if err != nil {
 			return nil, errors.New("invalid category: category does not exist")
@@ -470,6 +470,15 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 		AvailableUntil:         req.AvailableUntil,
 		CustomURL:              customURL,
 		SocialLinks:            socialLinks,
+		PublisherRole:          req.PublisherRole,
+		OrganizationID:         req.OrganizationID,
+		BrokerageDisclosureAgreed: req.BrokerageDisclosureAgreed,
+	}
+	if p.PublisherRole == "" {
+		p.PublisherRole = "owner"
+	}
+	if p.PublisherRole == "broker_agent" || p.PublisherRole == "representative" {
+		p.BrokerageDisclosureAgreed = true
 	}
 	id, err := s.repo.Create(ctx, p, req.ImageURLs)
 	if err != nil {

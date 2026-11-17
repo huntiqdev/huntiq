@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huntiq.et/schemas/masterdata/import_request.schema.json",
+  "title": "HUNTIQ Master Data Import Request Schema",
+  "type": "object",
+  "required": ["dataset_type", "version", "records"],
+  "properties": {
+    "dataset_type": {
+      "type": "string",
+      "enum": ["locations", "categories"]
+    },
+    "version": {
+      "type": "string"
+    },
+    "dry_run": {
+      "type": "boolean",
+      "default": true
+    },
+    "scope": {
+      "type": "string",
+      "description": "Optional regional or classification scope identifier (e.g. ET-OR, SYS_PROD)"
+    },
+    "records": {
+      "type": "array",
+      "items": { "type": "object" },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}
+

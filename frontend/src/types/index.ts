@@ -91,6 +91,11 @@ export interface Product {
   // Gold & Premium Merchant Features
   custom_url?: string;
   social_links?: Record<string, string>;
+
+  // Brokerage & Publisher Transparency
+  publisher_role?: 'owner' | 'authorized_seller' | 'broker_agent' | 'representative' | 'government_officer';
+  organization_id?: number;
+  brokerage_disclosure_agreed?: boolean;
   
   category?: Category;
   location?: Location;
@@ -297,4 +302,53 @@ export interface ProductErrors {
 export interface OrderErrors {
   name?: string;
   phone?: string;
+}
+
+// ── National Identity Verification (Fayda eKYC) ──────────────────────────────
+
+export type IdentityVerificationStatus = 'unverified' | 'pending' | 'verified' | 'rejected' | 'escalated';
+export type PhoneMatchStatus = 'verified' | 'mismatch' | 'unsupported_by_provider' | 'exempted';
+
+export interface IdentityVerification {
+  id: number;
+  user_id: number;
+  provider_code: string;
+  credential_type: string;
+  id_masked: string;
+  full_legal_name: string;
+  phone_matched: boolean;
+  phone_match_status: PhoneMatchStatus;
+  auth_reference: string;
+  status: IdentityVerificationStatus;
+  verified_at?: string;
+  created_at: string;
+}
+
+// ── Account Entity Classification & Organizations ─────────────────────────────
+
+export type AccountEntityType = 'INDIVIDUAL' | 'COMPANY' | 'GOVERNMENT' | 'OTHER_LEGALLY_APPROVED_ENTITY';
+export type OrgVerificationStatus = 'pending' | 'verified' | 'rejected' | 'suspended';
+export type OrgMemberRole = 'owner' | 'admin' | 'publisher' | 'finance' | 'viewer';
+
+export interface Organization {
+  id: number;
+  name: string;
+  entity_type: AccountEntityType;
+  registration_number?: string;
+  tin_number?: string;
+  official_address?: string;
+  official_email?: string;
+  official_phone?: string;
+  verification_status: OrgVerificationStatus;
+  publishing_mandate_verified: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrganizationMember {
+  id: number;
+  organization_id: number;
+  user_id: number;
+  role: OrgMemberRole;
+  joined_at: string;
 }

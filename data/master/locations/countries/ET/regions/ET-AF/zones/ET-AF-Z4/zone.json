@@ -1,0 +1,32 @@
+{
+  "id": 93,
+  "parent_id": 9,
+  "parent_code": "ET-AF",
+  "type": "zone",
+  "slug": "afar-fanti-rasu",
+  "code": "ET-AF-Z4",
+  "level": 2,
+  "path": "/1/9/93/",
+  "display_order": 57,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Zone 4 Afar",
+    "ፈንቲ ረሱ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Fanti Rasu (Zone 4)",
+    "am": "ፈንቲ ረሱ (ዞን 4)",
+    "om": "Fanti Rasu",
+    "ti": "ፈንቲ ረሱ (ዞን 4)"
+  },
+  "coordinates": {
+    "latitude": 12.3,
+    "longitude": 40.0,
+    "bbox": null
+  }
+}

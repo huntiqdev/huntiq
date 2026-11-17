@@ -272,7 +272,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const STEP_COLORS = [
-    { bg: 'from-orange-500 to-amber-500',   ring: 'ring-orange-400/40', light: 'bg-orange-50 dark:bg-orange-900/20',  text: 'text-orange-600 dark:text-orange-400' },
+    { bg: 'from-[#1769E0] to-[#38A5FF]',   ring: 'ring-[#38A5FF]/40', light: 'bg-[#EAF3FF] dark:bg-[#1769E0]/20',  text: 'text-[#1769E0] dark:text-[#38A5FF]' },
     { bg: 'from-blue-500 to-cyan-500',      ring: 'ring-blue-400/40',   light: 'bg-blue-50 dark:bg-blue-900/20',      text: 'text-blue-600 dark:text-blue-400' },
     { bg: 'from-violet-500 to-purple-600',  ring: 'ring-violet-400/40', light: 'bg-violet-50 dark:bg-violet-900/20',  text: 'text-violet-600 dark:text-violet-400' },
     { bg: 'from-green-500 to-emerald-500',  ring: 'ring-green-400/40',  light: 'bg-green-50 dark:bg-green-900/20',    text: 'text-green-600 dark:text-green-400' },
@@ -293,7 +293,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
     <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4 lg:p-8">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div className="relative z-10 w-full sm:max-w-lg lg:max-w-2xl bg-white dark:bg-zinc-950 rounded-t-[2rem] sm:rounded-[2rem] shadow-[0_32px_80px_-12px_rgba(0,0,0,0.5)] border border-zinc-200/60 dark:border-zinc-800 max-h-[92vh] sm:max-h-[85vh] flex flex-col overflow-hidden">
-        <div className="relative shrink-0 bg-gradient-to-br from-orange-500 via-orange-600 to-red-600 px-6 py-6 sm:py-8 overflow-hidden">
+        <div className="relative shrink-0 bg-gradient-to-br from-[#1769E0] via-[#1055BD] to-[#103B78] px-6 py-6 sm:py-8 overflow-hidden">
           <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-yellow-300/20 blur-xl" />
           <div className="relative flex items-start justify-between gap-4">
@@ -343,15 +343,15 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
               })}
             </div>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-orange-200 dark:border-orange-800/50">
-            <div className="bg-gradient-to-r from-orange-500/10 to-amber-500/5 dark:from-orange-900/30 dark:to-amber-900/10 px-4 py-3 flex items-center gap-2 border-b border-orange-200 dark:border-orange-800/50">
+          <div className="rounded-2xl overflow-hidden border border-[#1769E0]/20 dark:border-[#1769E0]/30">
+            <div className="bg-gradient-to-r from-[#1769E0]/10 to-[#38A5FF]/5 dark:from-[#1769E0]/20 dark:to-[#38A5FF]/10 px-4 py-3 flex items-center gap-2 border-b border-[#1769E0]/20 dark:border-[#1769E0]/30">
               <span className="text-base">📷</span>
-              <p className="text-xs font-black uppercase tracking-widest text-orange-700 dark:text-orange-400">{h.imageRules ?? 'Image Rules'}</p>
+              <p className="text-xs font-black uppercase tracking-widest text-[#1769E0] dark:text-[#38A5FF]">{h.imageRules ?? 'Image Rules'}</p>
             </div>
             <div className="px-4 py-3 space-y-2 bg-white dark:bg-zinc-900/50">
               {[h.imageRule1 ?? '📌 Minimum 2 images, maximum 4 per listing.', h.imageRule2 ?? '💡 Use clear, well-lit photos — no blurry shots.', h.imageRule3 ?? '🚫 No watermarks, text overlays, or collages.'].map((r, i) => (
                 <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-600 dark:text-zinc-300">
-                  <CheckCircle2 size={13} className="text-orange-500 mt-0.5 shrink-0" /><span>{r}</span>
+                  <CheckCircle2 size={13} className="text-[#1769E0] mt-0.5 shrink-0" /><span>{r}</span>
                 </div>
               ))}
             </div>
@@ -364,7 +364,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
                   <div key={i} className="rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden bg-white dark:bg-zinc-900/60">
                     <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-50 dark:hover:bg-zinc-800/60 transition-colors gap-3">
                       <span className="text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 leading-snug">{faq.q}</span>
-                      <div className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all ${openFaq === i ? 'bg-orange-600 text-white rotate-90' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'}`}><ChevronRight size={12} /></div>
+                      <div className={`shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all ${openFaq === i ? 'bg-[#1769E0] text-white rotate-90' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'}`}><ChevronRight size={12} /></div>
                     </button>
                     {openFaq === i && <div className="px-4 pb-4 pt-1 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30">{faq.a}</div>}
                   </div>
@@ -377,7 +377,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
               <p className="text-white font-black text-sm sm:text-base">{t.ui.ready_to_sell ?? 'Ready to start selling?'}</p>
               <p className="text-zinc-400 text-xs mt-0.5">{t.ui.join_sellers ?? 'Join thousands of sellers on HUNTIQ'}</p>
             </div>
-            <Link href="/seller/product/new?type=sale" onClick={onClose} className="shrink-0 flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-black text-sm px-5 py-2.5 rounded-xl transition-colors shadow-lg shadow-orange-600/30">
+            <Link href="/seller/product/new?type=sale" onClick={onClose} className="shrink-0 flex items-center gap-2 bg-[#1769E0] hover:bg-[#1055BD] text-white font-black text-sm px-5 py-2.5 rounded-xl transition-colors shadow-lg shadow-[#1769E0]/30">
               <Store size={15} /> {t.ui.start_selling ?? 'Start Selling'}
             </Link>
           </div>
@@ -456,7 +456,7 @@ export function HomeHero() {
           <div className="w-full max-w-3xl">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
               {[
-                { v: recentProducts.length > 0 ? `${recentProducts.length}+` : '100+', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-orange-600', bg: 'bg-orange-50 dark:bg-orange-900/20' },
+                { v: recentProducts.length > 0 ? `${recentProducts.length}+` : '100+', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-[#1769E0]', bg: 'bg-[#EAF3FF] dark:bg-[#1769E0]/20' },
                 { v: rootCategories.length > 0 ? `${rootCategories.length}+` : '50+', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
                 { v: '4', l: t.ui.stat_languages ?? 'Languages', icon: <Globe size={18} />, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-900/20' },
                 { v: '100%', l: t.ui.stat_verified ?? 'Verified', icon: <CheckCircle2 size={18} />, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
@@ -477,7 +477,7 @@ export function HomeHero() {
               <span>{t.ui.secure_platform_short}</span>
             </span>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 font-semibold shadow-xs">
-              <Globe size={14} className="text-orange-600 shrink-0" />
+              <Globe size={14} className="text-[#1769E0] shrink-0" />
               <span>{t.ui.four_languages}</span>
             </span>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 font-semibold shadow-xs">
@@ -494,12 +494,12 @@ export function HomeHero() {
           <div className="w-full">
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-orange-600/10 flex items-center justify-center"><Tag size={13} className="text-orange-600" /></div>
+                <div className="w-6 h-6 rounded-lg bg-[#1769E0]/10 flex items-center justify-center"><Tag size={13} className="text-[#1769E0]" /></div>
                 <span className="text-xs font-black uppercase tracking-widest text-zinc-400">{t.ui.browse_by_category}</span>
               </div>
               <Link
                 href="/products"
-                className="text-xs font-bold text-orange-600 hover:underline flex items-center gap-1 tap-bounce"
+                className="text-xs font-bold text-[#1769E0] hover:underline flex items-center gap-1 tap-bounce"
               >
                 <span>{(t.ui as any).browse_all ?? (t.ui as any).view_all ?? 'Browse All'}</span> <ArrowRight size={11} />
               </Link>
@@ -524,7 +524,7 @@ export function HomeHero() {
                       .catch(() => setCategoriesError('Unable to load categories'))
                       .finally(() => setLoadingCategories(false));
                   }}
-                  className="mt-2 text-xs font-bold text-orange-600 hover:underline tap-bounce"
+                  className="mt-2 text-xs font-bold text-[#1769E0] hover:underline tap-bounce"
                 >
                   Retry
                 </button>
@@ -555,7 +555,7 @@ export function HomeHero() {
                     <Link
                       key={cat.id || cat.slug}
                       href={`/products?category_hierarchy_id=${cat.id}&cat=${cat.slug}`}
-                      className="group flex flex-col items-center gap-2 p-2.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-600/10 hover:-translate-y-1 transition-all duration-200 tap-bounce active:scale-95"
+                      className="group flex flex-col items-center gap-2 p-2.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 hover:border-[#1769E0] hover:shadow-xl hover:shadow-[#1769E0]/10 hover:-translate-y-1 transition-all duration-200 tap-bounce active:scale-95"
                     >
                       <span className="text-2xl sm:text-3xl group-hover:scale-125 transition-transform duration-200 flex items-center justify-center min-h-[36px]">
                         {typeof icon === 'string' ? icon : icon}
@@ -678,7 +678,7 @@ export function HomeHero() {
           )}
 
           {/* Seller & Landlord Onboarding Section */}
-          <div className="w-full rounded-3xl bg-gradient-to-br from-orange-600 via-orange-500 to-amber-600 text-white p-6 sm:p-10 shadow-xl overflow-hidden relative">
+          <div className="w-full rounded-3xl bg-gradient-to-br from-[#1769E0] via-[#1055BD] to-[#103B78] text-white p-6 sm:p-10 shadow-xl overflow-hidden relative">
             <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
             <div className="relative z-10 max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs font-black uppercase tracking-wider text-white">
@@ -711,7 +711,7 @@ export function HomeHero() {
                   },
                 ].map(({ step, title, desc }) => (
                   <div key={step} className="bg-white/15 backdrop-blur-sm rounded-2xl p-3 border border-white/20">
-                    <span className="text-[10px] font-black text-amber-200">{step}</span>
+                    <span className="text-[10px] font-black text-blue-200">{step}</span>
                     <p className="text-xs font-black text-white mt-0.5">{title}</p>
                     <p className="text-[11px] text-white/80 leading-relaxed mt-0.5">{desc}</p>
                   </div>
@@ -721,7 +721,7 @@ export function HomeHero() {
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
                   href="/seller/product/new"
-                  className="px-6 py-3 rounded-xl bg-white text-orange-600 font-black text-xs sm:text-sm shadow-lg hover:bg-orange-50 transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
+                  className="px-6 py-3 rounded-xl bg-white text-[#1769E0] font-black text-xs sm:text-sm shadow-lg hover:bg-[#EAF3FF] transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
                 >
                   <Store size={16} />
                   <span>{(t.ui as any).list_item_or_property ?? 'List An Item Or Property'}</span>
@@ -762,7 +762,7 @@ export function HomeHero() {
                 </div>
                 <div className="space-y-3">
                   {[
-                    { tier: t.ui.tier_normal ?? 'Normal',  icon: '🥉', req: t.ui.tier_normal_req ?? 'Any seller',            fee: settings ? `${settings.normal_startup_fee}% startup + ${settings.normal_weekly_increment}%/week` : (t.ui.tier_normal_fee ?? '2% startup + 0.25%/week'),  color: 'from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-800/50 border-zinc-200 dark:border-zinc-700',  badge: 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300',  href: '/seller/login', btnLabel: t.ui.register_as_seller ?? 'Register as Seller', btnStyle: 'bg-orange-600 hover:bg-orange-700 text-white' },
+                    { tier: t.ui.tier_normal ?? 'Normal',  icon: '🥉', req: t.ui.tier_normal_req ?? 'Any seller',            fee: settings ? `${settings.normal_startup_fee}% startup + ${settings.normal_weekly_increment}%/week` : (t.ui.tier_normal_fee ?? '2% startup + 0.25%/week'),  color: 'from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-800/50 border-zinc-200 dark:border-zinc-700',  badge: 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300',  href: '/seller/login', btnLabel: t.ui.register_as_seller ?? 'Register as Seller', btnStyle: 'bg-[#1769E0] hover:bg-[#1055BD] text-white' },
                     { tier: t.ui.tier_gold ?? 'Gold',      icon: '🥇', req: t.ui.tier_gold_req ?? '≥ ETB 100,000 sold',      fee: settings ? `${settings.gold_startup_fee}% startup + ${settings.gold_weekly_increment}%/week` : (t.ui.tier_gold_fee ?? '1.5% startup + 0.15%/week'),   color: 'from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/10 border-yellow-200 dark:border-yellow-800/50', badge: 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400', href: '/seller/login', btnLabel: t.ui.start_selling ?? 'Start Selling', btnStyle: 'bg-yellow-500 hover:bg-yellow-600 text-white' },
                     { tier: t.ui.tier_premium ?? 'Premium',icon: '👑', req: t.ui.tier_premium_req ?? '≥ ETB 5,000,000 sold', fee: settings ? `${settings.premium_startup_fee}% startup + ${settings.premium_weekly_increment}%/week` : (t.ui.tier_premium_fee ?? '1.2% startup + 0.10%/week'), color: 'from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/10 border-purple-200 dark:border-purple-800/50', badge: 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-400', href: '/seller/login', btnLabel: t.ui.start_selling ?? 'Start Selling', btnStyle: 'bg-purple-600 hover:bg-purple-700 text-white' },
                   ].map(({ tier, icon, req, fee, color, badge, href, btnLabel, btnStyle }) => (
@@ -789,7 +789,7 @@ export function HomeHero() {
                 </div>
                 <div className="space-y-3">
                   {[
-                    { tier: t.ui.tier_normal ?? 'Normal',  icon: '🥉', cost: t.ui.tier_buyer_normal_cost ?? 'Free',        access: t.ui.tier_buyer_normal_access ?? 'View Normal seller images',            color: 'from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-800/50 border-zinc-200 dark:border-zinc-700',  badge: 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300',  href: '/products',        btnLabel: t.ui.browse_products ?? 'Browse Products',      btnStyle: 'bg-orange-600 hover:bg-orange-700 text-white' },
+                    { tier: t.ui.tier_normal ?? 'Normal',  icon: '🥉', cost: t.ui.tier_buyer_normal_cost ?? 'Free',        access: t.ui.tier_buyer_normal_access ?? 'View Normal seller images',            color: 'from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-800/50 border-zinc-200 dark:border-zinc-700',  badge: 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300',  href: '/products',        btnLabel: t.ui.browse_products ?? 'Browse Products',      btnStyle: 'bg-[#1769E0] hover:bg-[#1055BD] text-white' },
                     { tier: t.ui.tier_gold ?? 'Gold',      icon: '🥇', cost: settings ? `ETB ${settings.buyer_gold_upgrade_price}` : (t.ui.tier_buyer_gold_cost ?? 'ETB 10,000'),    access: t.ui.tier_buyer_gold_access ?? 'Unlock Gold seller images + dashboard',  color: 'from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/10 border-yellow-200 dark:border-yellow-800/50', badge: 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-400', href: '/buyer/dashboard', btnLabel: t.ui.upgrade_to_gold ?? 'Upgrade to Gold',      btnStyle: 'bg-yellow-500 hover:bg-yellow-600 text-white' },
                     { tier: t.ui.tier_premium ?? 'Premium',icon: '👑', cost: settings ? `ETB ${settings.buyer_premium_upgrade_price}` : (t.ui.tier_buyer_premium_cost ?? 'ETB 50,000'), access: t.ui.tier_buyer_premium_access ?? 'Unlock ALL images + advanced filters', color: 'from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/10 border-purple-200 dark:border-purple-800/50', badge: 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-400', href: '/buyer/dashboard', btnLabel: t.ui.upgrade_to_premium ?? 'Upgrade to Premium', btnStyle: 'bg-purple-600 hover:bg-purple-700 text-white' },
                   ].map(({ tier, icon, cost, access, color, badge, href, btnLabel, btnStyle }) => (
@@ -816,22 +816,22 @@ export function HomeHero() {
 
           {/* ── Referral / Invite Promo ── */}
           <div className="w-full pt-12 border-t border-zinc-200/60 dark:border-zinc-800">
-            <div className="relative rounded-3xl overflow-hidden border border-orange-200/60 dark:border-orange-800/40 shadow-2xl shadow-orange-600/10">
+            <div className="relative rounded-3xl overflow-hidden border border-[#1769E0]/20 dark:border-[#1769E0]/30 shadow-2xl shadow-[#1769E0]/5">
               {/* Background gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-900" />
-              <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-orange-400/10 blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-yellow-400/10 blur-3xl pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#EAF3FF] via-slate-50 to-white dark:from-[#091426] dark:via-[#091426] dark:to-[#0E1B33]" />
+              <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#1769E0]/10 blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-[#38A5FF]/10 blur-3xl pointer-events-none" />
 
               <div className="relative z-10 px-6 py-10 lg:px-12 lg:py-14 flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
                 {/* Left: copy */}
                 <div className="flex-1 text-center lg:text-left space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-400 border border-orange-200 dark:border-orange-800/50">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0] dark:text-[#38A5FF] border border-[#1769E0]/30">
                     <Gift size={12} /> {t.ui.referral_promo_badge ?? 'Invite & Earn'}
                   </div>
                   <h2 className="text-3xl lg:text-4xl font-black text-zinc-900 dark:text-white leading-tight">
                     {t.ui.referral_promo_title ?? 'Invite friends.'}<br />
-                    <span className="text-orange-600">{settings ? `Earn ${settings.referral_commission_rate}% forever.` : (t.ui.referral_promo_title2 ?? 'Earn 2% forever.')}</span>
+                    <span className="text-[#1769E0]">{settings ? `Earn ${settings.referral_commission_rate}% forever.` : (t.ui.referral_promo_title2 ?? 'Earn 2% forever.')}</span>
                   </h2>
                   <p className="text-sm lg:text-base text-zinc-500 dark:text-zinc-400 max-w-md mx-auto lg:mx-0 leading-relaxed">
                     {settings ? `Share your unique invite link. Every time someone you invited makes a paid action — product sale, tier upgrade — you earn ${settings.referral_commission_rate}% commission automatically.` : (t.ui.referral_promo_desc ?? 'Share your unique invite link. Every time someone you invited makes a paid action — product sale, tier upgrade — you earn 2% commission automatically.')}
@@ -840,7 +840,7 @@ export function HomeHero() {
                   {/* How it works steps */}
                   <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     {[
-                      { icon: <Users size={14} />, label: t.ui.referral_step1 ?? 'Register as a seller', color: 'text-orange-600 bg-orange-100 dark:bg-orange-900/30' },
+                      { icon: <Users size={14} />, label: t.ui.referral_step1 ?? 'Register as a seller', color: 'text-[#1769E0] bg-[#EAF3FF] dark:bg-[#1769E0]/20' },
                       { icon: <Gift size={14} />,  label: t.ui.referral_step2 ?? 'Get your invite link', color: 'text-amber-600 bg-amber-100 dark:bg-amber-900/30' },
                       { icon: <Wallet size={14} />,label: settings ? `Earn ${settings.referral_commission_rate}% per action` : (t.ui.referral_step3 ?? 'Earn 2% per action'),  color: 'text-green-600 bg-green-100 dark:bg-green-900/30' },
                     ].map(({ icon, label, color }, i) => (
@@ -855,7 +855,7 @@ export function HomeHero() {
                   <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3 pt-2">
                     <Link
                       href="/auth?as=seller"
-                      className="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-black text-sm px-6 py-3 rounded-xl transition-all shadow-lg shadow-orange-600/30 hover:-translate-y-0.5"
+                      className="inline-flex items-center gap-2 bg-[#1769E0] hover:bg-[#1055BD] text-white font-black text-sm px-6 py-3 rounded-xl transition-all shadow-lg shadow-[#1769E0]/25 hover:-translate-y-0.5"
                     >
                       <Store size={15} /> {t.ui.referral_cta_register ?? 'Register as Seller'}
                     </Link>

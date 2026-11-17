@@ -76,7 +76,7 @@ export default function BuyerOrdersPage() {
           <button key={s} onClick={() => setFilter(s)}
             className={`px-3.5 py-2 min-h-[36px] rounded-xl text-xs font-bold capitalize transition-all tap-bounce active:scale-95 ${
               filter === s
-                ? 'bg-orange-600 text-white shadow-sm'
+                ? 'bg-[#1769E0] text-white shadow-sm'
                 : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-700 dark:hover:text-white'
             }`}>
             {statusMap[s] || s}

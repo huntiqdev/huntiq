@@ -1,0 +1,101 @@
+[
+  {
+    "id": 391,
+    "parent_id": 110,
+    "parent_code": "ET-SE-GA",
+    "type": "woreda",
+    "slug": "south-ethiopia-gamo-arba-minch-town",
+    "code": "SE-GA-AMB",
+    "level": 3,
+    "path": "/1/13/110/391/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Arba Minch Town Administration",
+      "am": "አርባ ምንጭ ከተማ አስተዳደር",
+      "om": "Magaalaa Arbaa Miinc",
+      "ti": "ኣርባ ምንጭ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 6.035,
+      "longitude": 37.55,
+      "bbox": {
+        "min_lat": 6.025,
+        "max_lat": 6.045,
+        "min_lng": 37.54,
+        "max_lng": 37.56
+      }
+    }
+  },
+  {
+    "id": 288,
+    "parent_id": 110,
+    "parent_code": "ET-SE-GA",
+    "type": "woreda",
+    "slug": "south-ethiopia-gamo-arba-minch",
+    "code": "SE-GA-AM",
+    "level": 3,
+    "path": "/1/13/110/288/",
+    "display_order": 162,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Arba Minch Forty Springs",
+      "Nechisar Park",
+      "አርባ ምንጭ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Arba Minch City & Woreda (አባያና ጫሞ)",
+      "am": "አርባ ምንጭ ከተማና ወረዳ (አባያና ጫሞ ሐይቆች)",
+      "om": "Magaalaa fi Aanaa Arbaa Minc",
+      "ti": "ኣርባ ምንጭ"
+    },
+    "coordinates": {
+      "latitude": 6.03,
+      "longitude": 37.55,
+      "bbox": null
+    }
+  },
+  {
+    "id": 289,
+    "parent_id": 110,
+    "parent_code": "ET-SE-GA",
+    "type": "woreda",
+    "slug": "south-ethiopia-gamo-chencha",
+    "code": "SE-GA-CHE",
+    "level": 3,
+    "path": "/1/13/110/289/",
+    "display_order": 163,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Chencha Dorze Weaving",
+      "ጨንቻ ዶርዜ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Chencha Woreda (ዶርዜ ሸማ)",
+      "am": "ጨንቻ ወረዳ (የዶርዜ ሸማቾች)",
+      "om": "Aanaa Cencaa",
+      "ti": "ጨንቻ (ዶርዜ)"
+    },
+    "coordinates": {
+      "latitude": 6.25,
+      "longitude": 37.57,
+      "bbox": null
+    }
+  }
+]

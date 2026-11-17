@@ -1,0 +1,32 @@
+{
+  "id": 47,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-west-guji",
+  "code": "ET-OR-WGU",
+  "level": 2,
+  "path": "/1/4/47/",
+  "display_order": 11,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "West Guji",
+    "ምዕራብ ጉጂ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Guji Zone",
+    "am": "ምዕራብ ጉጂ ዞን",
+    "om": "Gujii Dhihaa",
+    "ti": "ዞን ምዕራብ ጉጂ"
+  },
+  "coordinates": {
+    "latitude": 5.65,
+    "longitude": 38.25,
+    "bbox": null
+  }
+}

@@ -35,3 +35,4 @@ type LedgerTransaction struct {
 	ActorID         *int      `json:"actor_id,omitempty"`
 	CreatedAt       time.Time `json:"created_at"`
 }
+

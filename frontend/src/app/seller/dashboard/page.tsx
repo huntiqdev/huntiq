@@ -480,7 +480,7 @@ export default function SellerDashboardPage() {
           <Package size={28} className="opacity-30" />
           <p className="text-sm font-semibold">No listings yet</p>
           <Link href="/seller/products"
-            className="flex items-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-colors">
+            className="flex items-center gap-1.5 bg-[#1769E0] hover:bg-[#1055BD] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20">
             <Plus size={13} /> Add your first product
           </Link>
         </div>
@@ -488,7 +488,7 @@ export default function SellerDashboardPage() {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 dark:border-zinc-800">
             <h2 className="font-bold text-zinc-900 dark:text-white">Active Listings — Time Remaining</h2>
-            <Link href="/seller/products" className="text-xs text-orange-600 font-bold hover:underline">View all →</Link>
+            <Link href="/seller/products" className="text-xs text-[#1769E0] font-bold hover:underline">View all →</Link>
           </div>
           <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {products.filter(p => p.status === 'approved').slice(0, 5).map(p => {
@@ -526,7 +526,7 @@ export default function SellerDashboardPage() {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 dark:border-zinc-800">
             <h2 className="font-bold text-zinc-900 dark:text-white">Recent Order Requests</h2>
-            <Link href="/seller/orders" className="text-xs text-orange-600 font-bold hover:underline">View all →</Link>
+            <Link href="/seller/orders" className="text-xs text-[#1769E0] font-bold hover:underline">View all →</Link>
           </div>
           <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {orders.slice(0, 4).map(o => (

@@ -199,3 +199,4 @@ func (s *TelebirrService) GetOrderStatus(ctx context.Context, outTradeNo string)
 func (s *TelebirrService) GetUserOrders(ctx context.Context, userID, limit, offset int) ([]models.TelebirrOrder, int, error) {
 	return s.repo.GetOrdersByUser(ctx, userID, limit, offset)
 }
+

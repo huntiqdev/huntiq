@@ -363,7 +363,7 @@ func (s *AdminService) CreateAdmin(ctx context.Context, name, phone, email, pass
 	}
 	// Platform Owner accounts cannot be provisioned via web API; they require direct bootstrap
 	if adminRole == models.RolePlatformOwner || adminRole == models.LegacyRoleSuper {
-		return 0, errors.New("Platform Owner accounts cannot be provisioned via the web API")
+		return 0, errors.New("platform owner accounts cannot be provisioned via the web API")
 	}
 
 	if _, ok := models.RoleDomainPermissions[adminRole]; !ok && adminRole != models.LegacyRoleNormal {

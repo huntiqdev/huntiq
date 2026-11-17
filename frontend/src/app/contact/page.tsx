@@ -55,14 +55,14 @@ export default function ContactPage() {
         </div>
 
         {/* Form */}
-        <div className="bg-white/70 dark:bg-zinc-900 rounded-2xl border border-violet-100 dark:border-zinc-800 p-6 backdrop-blur-sm">
+        <div className="bg-white/70 dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 backdrop-blur-sm">
           {sent ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 py-10 text-center">
               <CheckCircle size={48} className="text-green-500" />
               <h2 className="text-xl font-black">{t.ui.message_sent}</h2>
               <p className="opacity-60 text-sm">{t.ui.message_reply}</p>
               <button onClick={() => setSent(false)}
-                className="mt-2 text-orange-600 font-bold text-sm hover:underline">
+                className="mt-2 text-[#1769E0] font-bold text-sm hover:underline">
                 {t.ui.send_another}
               </button>
             </div>
@@ -78,26 +78,26 @@ export default function ContactPage() {
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.your_name}</label>
                 <input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   disabled={loading}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50 transition-all"
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50 transition-all"
                   placeholder={t.ui.your_name} />
               </div>
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.email_address}</label>
                 <input required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                   disabled={loading}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50 transition-all"
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 disabled:opacity-50 transition-all"
                   placeholder="you@example.com" />
               </div>
               <div>
                 <label className="text-xs font-black uppercase tracking-widest opacity-40 block mb-1">{t.ui.message}</label>
                 <textarea required rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                   disabled={loading}
-                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 resize-none disabled:opacity-50 transition-all"
+                  className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 resize-none disabled:opacity-50 transition-all"
                   placeholder={t.ui.message_placeholder} />
               </div>
               <button type="submit"
                 disabled={loading}
-                className="w-full bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white rounded-xl py-3.5 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md">
+                className="w-full bg-[#1769E0] hover:bg-[#1055BD] disabled:opacity-60 text-white rounded-xl py-3.5 font-bold text-sm min-h-[44px] flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20">
                 {loading ? (
                   <>
                     <Loader2 size={16} className="animate-spin" />

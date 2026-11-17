@@ -70,12 +70,12 @@ const PORTALS: PortalCard[] = [
   {
     title: 'Enterprise Staff Access',
     badge: 'Operations & Support',
-    badgeClass: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
+    badgeClass: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
     desc: 'Routine catalog management, listing moderation, seller verification, and customer inquiries.',
     href: '/staff/login',
     icon: Users,
-    iconColor: 'text-orange-400 bg-orange-950/40 border-orange-500/20',
-    borderHover: 'hover:border-orange-500/50 hover:shadow-orange-500/10',
+    iconColor: 'text-blue-400 bg-blue-950/40 border-blue-500/20',
+    borderHover: 'hover:border-blue-500/50 hover:shadow-blue-500/10',
     roles: 'Operations Admin, Content Moderator, Support Agent',
     securityLevel: 'Passkey Recommended / Mandatory Staff MFA',
   },
@@ -92,10 +92,10 @@ export default function AdminPortalDirectoryPage() {
   }, [user, router]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8 selection:bg-orange-600 selection:text-white">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8 selection:bg-[#1769E0] selection:text-white">
       {/* Background ambient gradient glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-orange-600/5 blur-[160px] rounded-full" />
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#1769E0]/5 blur-[160px] rounded-full" />
       </div>
 
       <div className="max-w-5xl mx-auto w-full relative z-10 flex-1 flex flex-col justify-center">
@@ -103,7 +103,7 @@ export default function AdminPortalDirectoryPage() {
         <div className="text-center space-y-3 mb-12 flex flex-col items-center">
           <HuntiqLogo size="lg" className="mb-2" />
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-bold text-zinc-400">
-            <Shield size={14} className="text-orange-500" />
+            <Shield size={14} className="text-[#1769E0]" />
             <span>HUNTIQ Privileged Security Architecture</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
@@ -134,9 +134,9 @@ export default function AdminPortalDirectoryPage() {
                   </span>
                 </div>
 
-                <h2 className="text-lg font-black text-white group-hover:text-orange-400 transition-colors flex items-center gap-2">
+                <h2 className="text-lg font-black text-white group-hover:text-[#38A5FF] transition-colors flex items-center gap-2">
                   <span>{portal.title}</span>
-                  <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-orange-400" />
+                  <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-[#38A5FF]" />
                 </h2>
 
                 <p className="text-zinc-400 text-xs leading-relaxed mt-2 mb-4 font-normal">

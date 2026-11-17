@@ -5,7 +5,7 @@ export default function ProductNotFound() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full text-center space-y-6">
-        <div className="w-20 h-20 mx-auto rounded-3xl bg-orange-100 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400 flex items-center justify-center shadow-lg shadow-orange-600/10">
+        <div className="w-20 h-20 mx-auto rounded-3xl bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] dark:text-[#38A5FF] flex items-center justify-center shadow-lg shadow-[#1769E0]/10">
           <PackageX size={40} />
         </div>
 
@@ -21,14 +21,14 @@ export default function ProductNotFound() {
         <div className="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
           <Link
             href="/products"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-md shadow-orange-600/20 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white font-bold text-sm shadow-md shadow-[#1769E0]/20 transition-all tap-bounce active:scale-95"
           >
             <ArrowLeft size={16} />
             <span>Browse Products</span>
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold text-sm transition-all"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold text-sm transition-all tap-bounce active:scale-95"
           >
             <Home size={16} />
             <span>Go to Home</span>
@@ -42,23 +42,23 @@ export default function ProductNotFound() {
           <div className="flex flex-wrap gap-2 justify-center">
             <Link
               href="/products?category_hierarchy_id=1380"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 hover:bg-orange-50 hover:text-orange-600 dark:hover:bg-orange-950/30 text-xs font-semibold text-zinc-700 dark:text-zinc-300 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 hover:bg-[#1769E0]/10 hover:text-[#1769E0] dark:hover:bg-[#1769E0]/20 text-xs font-semibold text-zinc-700 dark:text-zinc-300 transition-colors"
             >
-              <Camera size={13} className="text-orange-500" />
+              <Camera size={13} className="text-[#1769E0]" />
               <span>Camera Lenses</span>
             </Link>
             <Link
               href="/products?cat=electronics"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 hover:bg-orange-50 hover:text-orange-600 dark:hover:bg-orange-950/30 text-xs font-semibold text-zinc-700 dark:text-zinc-300 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 hover:bg-[#1769E0]/10 hover:text-[#1769E0] dark:hover:bg-[#1769E0]/20 text-xs font-semibold text-zinc-700 dark:text-zinc-300 transition-colors"
             >
-              <Smartphone size={13} className="text-orange-500" />
+              <Smartphone size={13} className="text-[#1769E0]" />
               <span>Smartphones</span>
             </Link>
             <Link
               href="/products?cat=transport-mobility"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 hover:bg-orange-50 hover:text-orange-600 dark:hover:bg-orange-950/30 text-xs font-semibold text-zinc-700 dark:text-zinc-300 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 hover:bg-[#1769E0]/10 hover:text-[#1769E0] dark:hover:bg-[#1769E0]/20 text-xs font-semibold text-zinc-700 dark:text-zinc-300 transition-colors"
             >
-              <Car size={13} className="text-orange-500" />
+              <Car size={13} className="text-[#1769E0]" />
               <span>Vehicles</span>
             </Link>
           </div>

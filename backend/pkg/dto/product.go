@@ -58,6 +58,11 @@ type CreateProductRequest struct {
 	// Listing type: 'sale' (default) or 'rent'
 	ListingType string `json:"listing_type"`
 
+	// Brokerage & Publisher Transparency
+	PublisherRole             string `json:"publisher_role,omitempty"` // owner, authorized_seller, broker_agent, representative, government_officer
+	OrganizationID            *int   `json:"organization_id,omitempty"`
+	BrokerageDisclosureAgreed bool   `json:"brokerage_disclosure_agreed,omitempty"`
+
 	// Rental-specific fields (required if listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`
 	RentalDurationValue *int     `json:"rental_duration_value,omitempty"`
@@ -87,6 +92,11 @@ type UpdateProductRequest struct {
 	ImageURLs           []string               `json:"image_urls"`
 	CustomURL           *string                `json:"custom_url,omitempty"`
 	SocialLinks         map[string]interface{} `json:"social_links,omitempty"`
+
+	// Brokerage & Publisher Transparency
+	PublisherRole             *string `json:"publisher_role,omitempty"`
+	OrganizationID            *int    `json:"organization_id,omitempty"`
+	BrokerageDisclosureAgreed *bool   `json:"brokerage_disclosure_agreed,omitempty"`
 
 	// Rental fields (only for listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`

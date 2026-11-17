@@ -1,0 +1,35 @@
+[
+  {
+    "id": 276,
+    "parent_id": 82,
+    "type": "woreda",
+    "slug": "somali-shabele-gode",
+    "code": "SO-SH-GOD",
+    "level": 3,
+    "path": "/1/8/82/276/",
+    "display_order": 148,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Godey",
+      "Shabelle River",
+      "ጎዴ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-SO-SH",
+    "names": {
+      "en": "Gode Woreda & City",
+      "am": "ጎዴ ወረዳና ከተማ (ሸበሌ ወንዝ)",
+      "om": "Magaalaa fi Aanaa Godey",
+      "ti": "ከተማ ጎዴ"
+    },
+    "coordinates": {
+      "latitude": 5.95,
+      "longitude": 43.58,
+      "bbox": null
+    }
+  }
+]

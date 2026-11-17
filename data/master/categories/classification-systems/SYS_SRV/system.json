@@ -1,0 +1,13 @@
+{
+  "code": "SYS_SRV",
+  "names": {
+    "en": "Services & Trades",
+    "am": "አገልግሎቶችና ሙያዎች",
+    "om": "Tajaajiloota fi Ogummaawwan",
+    "ti": "ኣገልግሎታትን ሞያታትን"
+  },
+  "description": "Service providers, contractors, professional trades, repair and personal services",
+  "icon": "Briefcase",
+  "display_order": 1,
+  "primary_root_slug": "services"
+}

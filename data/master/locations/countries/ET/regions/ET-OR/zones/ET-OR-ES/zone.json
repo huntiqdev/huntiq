@@ -1,0 +1,33 @@
+{
+  "id": 37,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-east-shewa",
+  "code": "ET-OR-ES",
+  "level": 2,
+  "path": "/1/4/37/",
+  "display_order": 1,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "East Shoa",
+    "Shawa Baha",
+    "ምስራቅ ሸዋ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "East Shewa Zone",
+    "am": "ምስራቅ ሸዋ ዞን",
+    "om": "Shawaa Bahaa",
+    "ti": "ዞን ምብራቕ ሸዋ"
+  },
+  "coordinates": {
+    "latitude": 8.54,
+    "longitude": 39.27,
+    "bbox": null
+  }
+}

@@ -413,7 +413,7 @@ export default function CategoryTreeSelector({
           className={`
             flex items-center gap-2 px-3 py-2 cursor-pointer rounded-xl transition-all my-0.5
             ${isSelected
-              ? 'bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold border border-orange-500/20'
+              ? 'bg-[#1769E0]/10 text-[#1769E0] dark:text-[#38A5FF] font-bold border border-[#1769E0]/20'
               : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200'}
             ${!node.is_leaf && hasChildren ? 'font-semibold' : ''}
           `}
@@ -442,7 +442,7 @@ export default function CategoryTreeSelector({
             </button>
           ) : (
             <div className="w-6 flex items-center justify-center">
-              <Tag className="w-3.5 h-3.5 text-orange-500" />
+              <Tag className="w-3.5 h-3.5 text-[#1769E0]" />
             </div>
           )}
 
@@ -469,7 +469,7 @@ export default function CategoryTreeSelector({
           )}
 
           {isSelected && (
-            <Check className="w-4 h-4 text-orange-600 dark:text-orange-400 ml-1 shrink-0" />
+            <Check className="w-4 h-4 text-[#1769E0] dark:text-[#38A5FF] ml-1 shrink-0" />
           )}
         </div>
 
@@ -501,14 +501,14 @@ export default function CategoryTreeSelector({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full border rounded-2xl px-3.5 py-2.5 min-h-[44px] text-left flex items-center justify-between transition-all outline-none focus:ring-2 focus:ring-orange-500 tap-bounce active:scale-[0.99] ${
+        className={`w-full border rounded-2xl px-3.5 py-2.5 min-h-[44px] text-left flex items-center justify-between transition-all outline-none focus:ring-2 focus:ring-[#1769E0] tap-bounce active:scale-[0.99] ${
           isItemSelected
-            ? 'border-orange-500/40 bg-orange-50/30 dark:bg-orange-950/20 text-zinc-900 dark:text-zinc-100'
+            ? 'border-[#1769E0]/40 bg-[#1769E0]/5 dark:bg-[#1769E0]/20 text-zinc-900 dark:text-zinc-100'
             : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400'
         }`}
       >
         <div className="flex items-center gap-2.5 overflow-hidden flex-1 mr-2">
-          <Compass className={`w-4 h-4 shrink-0 ${isItemSelected ? 'text-orange-600 dark:text-orange-400' : 'text-zinc-400'}`} />
+          <Compass className={`w-4 h-4 shrink-0 ${isItemSelected ? 'text-[#1769E0] dark:text-[#38A5FF]' : 'text-zinc-400'}`} />
           <span className={`text-sm truncate ${isItemSelected ? 'font-semibold text-zinc-900 dark:text-zinc-100' : ''}`}>
             {getSelectedDisplay()}
           </span>
@@ -526,7 +526,7 @@ export default function CategoryTreeSelector({
           )}
           <ChevronDown
             className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${
-              isOpen ? 'transform rotate-180 text-orange-500' : ''
+              isOpen ? 'transform rotate-180 text-[#1769E0]' : ''
             }`}
           />
         </div>
@@ -545,13 +545,13 @@ export default function CategoryTreeSelector({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={tLabels.searchPlaceholder}
-                className="w-full pl-9 pr-8 py-2 text-base sm:text-xs min-h-[42px] border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-orange-500 transition-all"
+                className="w-full pl-9 pr-8 py-2 text-base sm:text-xs min-h-[44px] border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] transition-all"
                 autoFocus
               />
               {searchQuery && (
                 <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
                   {searching && (
-                    <div className="w-3.5 h-3.5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-3.5 h-3.5 border-2 border-[#1769E0] border-t-transparent rounded-full animate-spin" />
                   )}
                   <button
                     type="button"
@@ -572,7 +572,7 @@ export default function CategoryTreeSelector({
                   onClick={() => setViewMode('leaves')}
                   className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all ${
                     viewMode === 'leaves'
-                      ? 'bg-white dark:bg-zinc-700 text-orange-600 dark:text-orange-400 shadow-sm'
+                      ? 'bg-white dark:bg-zinc-700 text-[#1769E0] dark:text-[#38A5FF] shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
                   }`}
                 >
@@ -588,7 +588,7 @@ export default function CategoryTreeSelector({
                   onClick={() => setViewMode('tree')}
                   className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all ${
                     viewMode === 'tree'
-                      ? 'bg-white dark:bg-zinc-700 text-orange-600 dark:text-orange-400 shadow-sm'
+                      ? 'bg-white dark:bg-zinc-700 text-[#1769E0] dark:text-[#38A5FF] shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
                   }`}
                 >
@@ -617,7 +617,7 @@ export default function CategoryTreeSelector({
                     <div key={rootTitle} className="space-y-1">
                       {/* Root Category Domain Header */}
                       <div className="sticky top-0 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm z-10 py-1 px-2 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
-                        <span className="text-[11px] font-black uppercase tracking-wider text-orange-600 dark:text-orange-400 flex items-center gap-1.5">
+                        <span className="text-[11px] font-black uppercase tracking-wider text-[#1769E0] dark:text-[#38A5FF] flex items-center gap-1.5">
                           <Folder className="w-3.5 h-3.5" />
                           {rootTitle}
                         </span>
@@ -637,7 +637,7 @@ export default function CategoryTreeSelector({
                               className={`
                                 flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all border
                                 ${isSelected
-                                  ? 'bg-orange-500/10 border-orange-500/30 text-orange-700 dark:text-orange-300'
+                                  ? 'bg-[#1769E0]/10 border-[#1769E0]/30 text-[#1769E0] dark:text-[#38A5FF]'
                                   : 'border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 text-zinc-800 dark:text-zinc-200'}
                               `}
                             >
@@ -650,7 +650,7 @@ export default function CategoryTreeSelector({
                                 )}
                                 {/* Leaf Destination Name */}
                                 <div className="text-xs font-semibold truncate flex items-center gap-1.5">
-                                  <Tag className="w-3 h-3 text-orange-500 shrink-0" />
+                                  <Tag className="w-3 h-3 text-[#1769E0] shrink-0" />
                                   <span>{branch.leafName}</span>
                                 </div>
                               </div>
@@ -667,7 +667,7 @@ export default function CategoryTreeSelector({
                                 )}
 
                                 {isSelected && (
-                                  <Check className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                                  <Check className="w-4 h-4 text-[#1769E0] dark:text-[#38A5FF]" />
                                 )}
                               </div>
                             </div>
@@ -704,7 +704,7 @@ export default function CategoryTreeSelector({
                   handleSelectLeaf(otherBranch);
                 }
               }}
-              className="px-3 py-1.5 rounded-lg bg-orange-600 text-white font-bold hover:bg-orange-500 transition-all text-xs shadow-sm shadow-orange-600/20 active:scale-95"
+              className="px-3 py-1.5 rounded-lg bg-[#1769E0] text-white font-bold hover:bg-[#1055BD] transition-all text-xs shadow-sm shadow-[#1769E0]/20 active:scale-95"
             >
               {language === 'am' ? 'ሌላ ምድብ ምረጥ (Other)' : language === 'or' ? 'Biroo Filadhu' : language === 'ti' ? 'ካልእ ምረጽ' : 'Select "Other"'}
             </button>

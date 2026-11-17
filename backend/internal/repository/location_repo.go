@@ -196,8 +196,11 @@ func (r *LocationRepo) ListWoredas(ctx context.Context, region, zone, subcity st
 	case zone != "" && subcity != "":
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		rows, err = r.db.Query(ctx, sqlListWoredasByZoneAndSubcity, region, zone, subcity)
-	case zone != "" && subcity == "":
-		//nolint:gosec // G201/G202: all values passed as $N par
+	case zone != "":
+		//nolint:gosec // G201/G202: all values passed as $N parameters
+		rows, err = r.db.Query(ctx, sqlListWoredasByZone, region, zone)
+	case subcity != "":
+		//nolint:gosec // G201/G202: all values passed as $N parameters
 		rows, err = r.db.Query(ctx, sqlListWoredasBySubcity, region, subcity)
 	default:
 		return nil, nil

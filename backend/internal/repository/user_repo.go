@@ -280,7 +280,7 @@ func (r *UserRepo) GetAdminByEmail(ctx context.Context, email string) (*models.U
 		       COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0),
 		       COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false),
 		       created_at, updated_at
-		FROM users WHERE email = $1 AND role = 'admin'`, email,
+		FROM users WHERE LOWER(TRIM(email)) = LOWER(TRIM($1)) AND role = 'admin'`, email,
 	).Scan(
 		&u.ID, &u.Name, &u.Phone, &u.BusinessName, &u.Email, &u.PasswordHash,
 		&u.Rating, &u.Role, &u.AdminRole, &u.IsActive,
@@ -1056,12 +1056,12 @@ func (r *UserRepo) UpdateBuyerProfile(ctx context.Context, userID int, name, ema
 	if email != "" {
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		_, err := r.db.Exec(ctx,
-			`UPDATE users SET name=$1, email=$2, updated_at=NOW() WHERE id=$3 AND role='buyer'`,
+			`UPDATE users SET name=$1, email=$2, updated_at=NOW() WHERE id=$3 AND role != 'admin'`,
 			name, email, userID)
 		return err
 	}
 	_, err := r.db.Exec(ctx,
-		`UPDATE users SET name=$1, updated_at=NOW() WHERE id=$2 AND role='buyer'`,
+		`UPDATE users SET name=$1, updated_at=NOW() WHERE id=$2 AND role != 'admin'`,
 		name, userID)
 	return err
 }

@@ -44,7 +44,7 @@ func (r *AdminRepo) AnalyticsOverview(ctx context.Context) (map[string]interface
 	}
 
 	// Buyer counts by tier
-	if brows, err := r.db.Query(ctx, `SELECT COALESCE(buyer_tier::text,'normal'), COUNT(*) FROM users WHERE role='buyer' GROUP BY buyer_tier`); err == nil { //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	if brows, err := r.db.Query(ctx, `SELECT COALESCE(buyer_tier::text,'normal'), COUNT(*) FROM users WHERE role != 'admin' GROUP BY buyer_tier`); err == nil { //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		defer brows.Close()
 		btierCounts := map[string]int{}
 		for brows.Next() {
@@ -79,7 +79,7 @@ func (r *AdminRepo) AnalyticsOverview(ctx context.Context) (map[string]interface
 
 	// Buyer totals
 	var totalBuyers, premiumBuyers int
-	_ = r.db.QueryRow(ctx, `SELECT COUNT(*), COUNT(*) FILTER (WHERE buyer_tier IN ('gold','premium')) FROM users WHERE role='buyer'`).Scan(&totalBuyers, &premiumBuyers) //nolint:gosec
+	_ = r.db.QueryRow(ctx, `SELECT COUNT(*), COUNT(*) FILTER (WHERE buyer_tier IN ('gold','premium')) FROM users WHERE role != 'admin'`).Scan(&totalBuyers, &premiumBuyers) //nolint:gosec
 	out["total_buyers"] = totalBuyers
 	out["premium_buyers"] = premiumBuyers
 

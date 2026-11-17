@@ -202,6 +202,15 @@ func ValidateMigrationSQL(filename string, content string) ([]string, []string, 
 			}
 		}
 
+		// DROP INDEX
+		if dropIndexRegex.MatchString(line) && !ifExistsRegex.MatchString(line) {
+			if prefixInt >= 77 {
+				errs = append(errs, fmt.Sprintf("[IDEMPOTENCY] %q: drop index without IF EXISTS: %s", filename, line))
+			} else {
+				warns = append(warns, fmt.Sprintf("[HISTORICAL] %q: historical drop index without IF EXISTS: %s", filename, line))
+			}
+		}
+
 		// CREATE INDEX
 		if createIndexRegex.MatchString(line) && !ifNotExistsRegex.MatchString(line) {
 			// Extract index name

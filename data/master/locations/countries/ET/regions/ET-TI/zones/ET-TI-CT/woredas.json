@@ -1,0 +1,168 @@
+[
+  {
+    "id": 352,
+    "parent_id": 71,
+    "parent_code": "ET-TI-CT",
+    "type": "woreda",
+    "slug": "tigray-central-axum-town",
+    "code": "TI-CT-AX",
+    "level": 3,
+    "path": "/1/6/71/352/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Axum Town Administration",
+      "am": "አክሱም ከተማ አስተዳደር",
+      "om": "Magaalaa Aksum",
+      "ti": "ኣኽሱም ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 14.125,
+      "longitude": 38.725,
+      "bbox": {
+        "min_lat": 14.115,
+        "max_lat": 14.135,
+        "min_lng": 38.715,
+        "max_lng": 38.735
+      }
+    }
+  },
+  {
+    "id": 401,
+    "parent_id": 71,
+    "parent_code": "ET-TI-CT",
+    "type": "woreda",
+    "slug": "tigray-central-enticho",
+    "code": "TI-CT-ENT",
+    "level": 3,
+    "path": "/1/6/71/401/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Enticho Town Administration",
+      "am": "እምባስነይቲ (ዕንጭቶ) ከተማ አስተዳደር",
+      "om": "Magaalaa Incitoo",
+      "ti": "ዕንጭቶ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 14.28,
+      "longitude": 39.15,
+      "bbox": {
+        "min_lat": 14.26,
+        "max_lat": 14.3,
+        "min_lng": 39.13,
+        "max_lng": 39.17
+      }
+    }
+  },
+  {
+    "id": 260,
+    "parent_id": 71,
+    "parent_code": "ET-TI-CT",
+    "type": "woreda",
+    "slug": "tigray-central-axum",
+    "code": "TI-CT-AXU",
+    "level": 3,
+    "path": "/1/6/71/260/",
+    "display_order": 132,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Axum Obelisk",
+      "Axum Tsion",
+      "ኣክሱም"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Axum Woreda & City (ኣኽሱም ጽዮን)",
+      "am": "አክሱም ወረዳና ከተማ",
+      "om": "Magaalaa fi Aanaa Aksum",
+      "ti": "ከተማ ኣኽሱም ጽዮን"
+    },
+    "coordinates": {
+      "latitude": 14.12,
+      "longitude": 38.72,
+      "bbox": null
+    }
+  },
+  {
+    "id": 261,
+    "parent_id": 71,
+    "parent_code": "ET-TI-CT",
+    "type": "woreda",
+    "slug": "tigray-central-adwa",
+    "code": "TI-CT-ADW",
+    "level": 3,
+    "path": "/1/6/71/261/",
+    "display_order": 133,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Adwa Victory",
+      "ዓድዋ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Adwa Woreda & City (ዓድዋ ድል)",
+      "am": "ዐድዋ ወረዳና ከተማ (የዐድዋ ድል)",
+      "om": "Magaalaa fi Aanaa Adwaa",
+      "ti": "ከተማ ዓድዋ ዓወት"
+    },
+    "coordinates": {
+      "latitude": 14.17,
+      "longitude": 38.9,
+      "bbox": null
+    }
+  },
+  {
+    "id": 262,
+    "parent_id": 71,
+    "parent_code": "ET-TI-CT",
+    "type": "woreda",
+    "slug": "tigray-central-abi-adi",
+    "code": "TI-CT-AA",
+    "level": 3,
+    "path": "/1/6/71/262/",
+    "display_order": 134,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Abi Adi",
+      "Kola Tembien",
+      "ዓቢይ ዓዲ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Abi Adi / Kola Tembien (ዓቢይ ዓዲ)",
+      "am": "አቢ አዲ / ቆላ ተምቤን",
+      "om": "Magaalaa fi Aanaa Kollaa Tambeen",
+      "ti": "ዓቢይ ዓዲ / ቆላ ተምቤን"
+    },
+    "coordinates": {
+      "latitude": 13.62,
+      "longitude": 39.0,
+      "bbox": null
+    }
+  }
+]

@@ -70,6 +70,18 @@ const THEME_STYLES = {
   },
 };
 
+function getAdminRoleFromJWT(token?: string): string {
+  if (!token) return '';
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return '';
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+    return payload.admin_role || '';
+  } catch {
+    return '';
+  }
+}
+
 export function AdminPortalLogin({
   portal,
   portalTitle,
@@ -87,8 +99,8 @@ export function AdminPortalLogin({
   const [error, setError] = useState('');
   const [biometricAvailable, setBiometricAvailable] = useState<boolean | null>(null);
 
-  // Fallback password + OTP state (only active when enabled)
-  const [authMode, setAuthMode] = useState<'passkey' | 'password'>('passkey');
+  // Authentication mode: defaults to password + MFA for universal accessibility and development ease
+  const [authMode, setAuthMode] = useState<'passkey' | 'password'>('password');
   const [password, setPassword] = useState('');
   const [otpCode, setOtpCode] = useState('');
   const [otpStep, setOtpStep] = useState(false);
@@ -96,11 +108,11 @@ export function AdminPortalLogin({
   const theme = THEME_STYLES[portalTheme];
 
   useEffect(() => {
-    // If already logged in as admin, redirect to dashboard
+    // If already logged in as admin, redirect to authorized console
     if (user?.role === 'admin') {
-      router.replace('/admin/dashboard');
+      router.replace(getTargetRoute(user.token));
     }
-  }, [user, router]);
+  }, [user, router, portal]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -154,13 +166,18 @@ export function AdminPortalLogin({
       router.push(verifyRes.redirect_url || '/admin/dashboard');
     } catch (err: any) {
       console.error('Passkey authentication error:', err);
-      setError(err?.message || 'Authentication failed or access restricted. Please try again.');
+      if (err?.message?.includes('cancelled, timed out') || err?.name === 'NotAllowedError') {
+        setError('No passkey detected or authentication cancelled. Please switch to the "Password & MFA" tab above to sign in.');
+      } else {
+        setError(err?.message || 'Authentication failed or access restricted. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  const getTargetRoute = () => {
+  const getTargetRoute = (token?: string) => {
+    const adminRole = getAdminRoleFromJWT(token);
     switch (portal) {
       case 'executive':
         return '/executive-console';
@@ -170,6 +187,9 @@ export function AdminPortalLogin({
         return '/platform-console';
       case 'staff':
       default:
+        if (adminRole === 'platform_owner') return '/executive-console';
+        if (adminRole === 'security_admin') return '/security-console';
+        if (adminRole === 'platform_admin') return '/platform-console';
         return '/admin/dashboard';
     }
   };
@@ -189,7 +209,7 @@ export function AdminPortalLogin({
       const res = await api.adminLogin({ email: email.trim().toLowerCase(), password });
       if (res.token && res.is_super) {
         await login(res.token, res.session_token);
-        router.push(getTargetRoute());
+        router.push(getTargetRoute(res.token));
       } else {
         setOtpStep(true);
       }
@@ -207,7 +227,7 @@ export function AdminPortalLogin({
     try {
       const res = await api.adminLoginVerifyOTP({ email: email.trim().toLowerCase(), code: otpCode.trim() });
       await login(res.token, res.session_token);
-      router.push(getTargetRoute());
+      router.push(getTargetRoute(res.token));
     } catch (err: any) {
       setError(err?.message || 'Multi-factor verification code is invalid or expired.');
     } finally {
@@ -281,6 +301,7 @@ export function AdminPortalLogin({
                 setEmail(sampleCredentials.email);
                 setPassword(sampleCredentials.pass);
                 setAuthMode('password');
+                setOtpStep(false);
                 setError('');
               }}
               className="text-[11px] font-bold px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all border border-zinc-700 hover:border-zinc-500 shadow-sm"
@@ -294,6 +315,42 @@ export function AdminPortalLogin({
             <span>{sampleCredentials.pass}</span>
           </div>
         </div>
+
+        {/* Auth Mode Tabs */}
+        {allowPasswordMfaFallback && (
+          <div className="grid grid-cols-2 gap-1.5 p-1 bg-zinc-950 border border-zinc-800 rounded-2xl mb-6">
+            <button
+              type="button"
+              onClick={() => {
+                setAuthMode('password');
+                setError('');
+              }}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                authMode === 'password'
+                  ? 'bg-zinc-800 text-white shadow-md border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-200'
+              }`}
+            >
+              <Lock size={13} className={authMode === 'password' ? theme.accentText : ''} />
+              <span>Password & MFA</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setAuthMode('passkey');
+                setError('');
+              }}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                authMode === 'passkey'
+                  ? 'bg-zinc-800 text-white shadow-md border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-200'
+              }`}
+            >
+              <Fingerprint size={14} className={authMode === 'passkey' ? theme.accentText : ''} />
+              <span>Passkey / Biometric</span>
+            </button>
+          </div>
+        )}
 
         {/* Error Alert */}
         {error && (

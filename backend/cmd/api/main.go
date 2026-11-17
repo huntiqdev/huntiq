@@ -44,8 +44,65 @@ func main() {
 	}
 	defer db.Close()
 
+	// Ensure critical schema columns exist across any connected database instance
+	startupCtx, startupCancel := context.WithTimeout(context.Background(), 20*time.Second)
+	_, _ = db.Exec(startupCtx, `
+		DO $$ BEGIN
+			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'account_entity_type') THEN
+				CREATE TYPE account_entity_type AS ENUM ('INDIVIDUAL', 'COMPANY', 'GOVERNMENT', 'OTHER_LEGALLY_APPROVED_ENTITY');
+			END IF;
+			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'org_verification_status') THEN
+				CREATE TYPE org_verification_status AS ENUM ('DRAFT', 'SUBMITTED', 'IDENTITY_PENDING', 'DOCUMENT_REVIEW', 'VERIFIED', 'REJECTED', 'SUSPENDED', 'EXPIRED', 'REVERIFICATION_REQUIRED');
+			END IF;
+			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'identity_verification_status') THEN
+				CREATE TYPE identity_verification_status AS ENUM ('pending', 'verified', 'rejected', 'escalated', 'expired');
+			END IF;
+		END $$;
+
+		CREATE TABLE IF NOT EXISTS organizations (
+			id SERIAL PRIMARY KEY,
+			name VARCHAR(200) NOT NULL,
+			entity_type account_entity_type NOT NULL DEFAULT 'INDIVIDUAL',
+			registration_number VARCHAR(100),
+			tin_number VARCHAR(50),
+			official_address TEXT,
+			official_email VARCHAR(150),
+			official_phone VARCHAR(25),
+			publishing_authority_evidence TEXT,
+			verification_status org_verification_status NOT NULL DEFAULT 'DRAFT',
+			reviewed_by INT,
+			reviewed_at TIMESTAMPTZ,
+			review_notes TEXT,
+			created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+			updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+		);
+
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS custom_url character varying(500);
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS social_links jsonb DEFAULT '{}'::jsonb;
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS publisher_role VARCHAR(50) NOT NULL DEFAULT 'seller';
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS organization_id INT;
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS brokerage_disclosure_agreed BOOLEAN NOT NULL DEFAULT true;
+
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS custom_url character varying(500);
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS account_entity_type account_entity_type NOT NULL DEFAULT 'INDIVIDUAL';
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS identity_verified BOOLEAN NOT NULL DEFAULT false;
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS organization_id INT;
+
+		-- Clean any legacy mixed-language category names where Amharic in parentheses leaked into English
+		UPDATE category_hierarchy 
+		SET name_en = TRIM(REGEXP_REPLACE(name_en, '\s*\([^)]*[\u1200-\u137F][^)]*\)', ''))
+		WHERE name_en ~ '[\u1200-\u137F]';
+
+		UPDATE categories 
+		SET name = TRIM(REGEXP_REPLACE(name, '\s*\([^)]*[\u1200-\u137F][^)]*\)', ''))
+		WHERE name ~ '[\u1200-\u137F]';
+	`)
+	startupCancel()
+
 	if err := search.LoadSearchConfig("data/search_config.json"); err != nil {
-		log.Printf("[INFO] Search config: default settings loaded (%v)", err)
+		if err2 := search.LoadSearchConfig("../data/search_config.json"); err2 != nil {
+			log.Printf("[INFO] Search config: default settings loaded (%v)", err)
+		}
 	}
 
 	// Background worker context with graceful cancellation
@@ -78,6 +135,10 @@ func main() {
 	ledgerRepo := repository.NewLedgerRepo(db)
 	referralTokenRepo := repository.NewReferralTokenRepo(db)
 	telebirrRepo := repository.NewTelebirrRepo(db)
+	identityRepo := repository.NewIdentityRepo(db)
+	orgRepo := repository.NewOrganizationRepo(db)
+	recoveryRepo := repository.NewRecoveryRepo(db)
+	masterDataRepo := repository.NewMasterDataRepo(db)
 
 	// In-memory active user cache
 	const isActiveCacheMax = 10_000
@@ -126,7 +187,15 @@ func main() {
 	ledgerSvc := service.NewLedgerService(ledgerRepo)
 	smsMgr := service.NewSMSManager(smsRepo, cfg.DevMode)
 	referralTokenSvc := service.NewReferralTokenService(referralTokenRepo, ledgerSvc)
-	telebirrSvc := service.NewTelebirrService(telebirrRepo, referralTokenSvc, ledgerSvc, nil, cfg.DevMode)
+	telebirrCfg := &service.TelebirrConfig{
+		AppID:       cfg.TelebirrAppID,
+		AppKey:      cfg.TelebirrAppKey,
+		ShortCode:   cfg.TelebirrShortCode,
+		APIEndpoint: cfg.TelebirrAPIEndpoint,
+		NotifyURL:   cfg.TelebirrNotifyURL,
+		ReturnURL:   cfg.TelebirrReturnURL,
+	}
+	telebirrSvc := service.NewTelebirrService(telebirrRepo, referralTokenSvc, ledgerSvc, telebirrCfg, cfg.DevMode)
 
 	referralSvc := service.NewReferralService(referralRepo).
 		WithSettingsReader(func(ctx context.Context, k string) string {
@@ -134,12 +203,18 @@ func main() {
 		}).
 		WithLedgerService(ledgerSvc)
 	fpaSvc := service.NewFPAService(fpaRepo)
+	identitySvc := service.NewIdentityService(identityRepo, cfg.DevMode)
+	orgSvc := service.NewOrganizationService(orgRepo)
+	masterDataSvc := service.NewMasterDataService(masterDataRepo)
 
 	txSvc.WithReferralService(referralSvc)
 	authSvc.WithReferralService(referralSvc).
 		WithAdminService(adminSvc).
 		WithSMSManager(smsMgr).
-		WithReferralTokenService(referralTokenSvc)
+		WithReferralTokenService(referralTokenSvc).
+		WithRecoveryRepo(recoveryRepo).
+		WithIdentityService(identitySvc).
+		WithOrganizationService(orgSvc)
 	adminSvc.WithReferralService(referralSvc).WithSellerService(sellerSvc)
 
 	// WebAuthn Manager
@@ -260,6 +335,9 @@ func main() {
 	telebirrHandler := handlers.NewTelebirrHandler(telebirrSvc)
 	walletHandler := handlers.NewWalletHandler(ledgerSvc, referralTokenSvc, cfg.FrontendURL)
 	adminFinancialHandler := handlers.NewAdminFinancialHandler(ledgerSvc, smsRepo)
+	identityHandler := handlers.NewIdentityHandler(identitySvc)
+	organizationHandler := handlers.NewOrganizationHandler(orgSvc)
+	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
 
 	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
@@ -332,6 +410,9 @@ func main() {
 		AdminFinancialHandler: adminFinancialHandler,
 		FPAHandler:            fpaHandler,
 		SearchHandler:         searchHandler,
+		IdentityHandler:       identityHandler,
+		OrganizationHandler:   organizationHandler,
+		MasterDataHandler:     masterDataHandler,
 	})
 
 	// Background listener

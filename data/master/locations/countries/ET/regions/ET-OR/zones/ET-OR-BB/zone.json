@@ -1,0 +1,32 @@
+{
+  "id": 56,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-buno-bedele",
+  "code": "ET-OR-BB",
+  "level": 2,
+  "path": "/1/4/56/",
+  "display_order": 20,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Buno Bedelle",
+    "ቡኖ በደሌ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Buno Bedele Zone",
+    "am": "ቡኖ በደሌ ዞን",
+    "om": "Buunnoo Baddallee",
+    "ti": "ዞን ቡኖ በደሌ"
+  },
+  "coordinates": {
+    "latitude": 8.45,
+    "longitude": 36.35,
+    "bbox": null
+  }
+}

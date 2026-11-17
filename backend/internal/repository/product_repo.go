@@ -54,7 +54,10 @@ const sqlProductSelectCols = `
 	       p.category_hierarchy_id,
 	       p.location_hierarchy_id,
 	       p.custom_url,
-	       p.social_links
+	       p.social_links,
+	       COALESCE(p.publisher_role, 'owner') AS publisher_role,
+	       p.organization_id,
+	       COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed
 	FROM products p
 	LEFT JOIN categories c ON c.id = p.category_id
 	LEFT JOIN locations  l ON l.id = p.location_id
@@ -80,7 +83,10 @@ const sqlGetProductByID = `
 	        p.category_hierarchy_id,
 	        p.location_hierarchy_id,
 	        p.custom_url,
-	        p.social_links
+	        p.social_links,
+	        COALESCE(p.publisher_role, 'owner') AS publisher_role,
+	        p.organization_id,
+	        COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed
 	 FROM products p
 	 LEFT JOIN categories c ON c.id = p.category_id
 	 LEFT JOIN locations  l ON l.id = p.location_id
@@ -104,14 +110,16 @@ const sqlCreateProduct = `
 		kebele, specific_area, latitude, longitude,
 		listing_type, rental_price, rental_duration_value, rental_duration_unit, deposit_amount, available_from, available_until,
 		category_hierarchy_id, location_hierarchy_id,
-		custom_url, social_links
+		custom_url, social_links,
+		publisher_role, organization_id, brokerage_disclosure_agreed
 	) VALUES (
 		$1, $2, $3, $4, $5, $6, $7, $8, $9, 'pending',
 		$10, $11, $12, $13, $14,
 		$15, $16, $17, $18,
 		$19, $20, $21, $22, $23, $24, $25,
 		$26, $27,
-		$28, COALESCE($29, '{}'::jsonb)
+		$28, COALESCE($29, '{}'::jsonb),
+		COALESCE(NULLIF($30, ''), 'owner'), $31, COALESCE($32, false)
 	) RETURNING id`
 
 const sqlCreateProductImage = `
@@ -350,9 +358,10 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 	}
 	if f.SellerTier != nil && *f.SellerTier != "" {
 		st := strings.ToLower(strings.TrimSpace(*f.SellerTier))
-		if st == "gold,premium" || st == "premium,gold" {
+		switch st {
+		case "gold,premium", "premium,gold":
 			wb.WriteString(" AND u.tier IN ('gold', 'premium')")
-		} else if st == "gold" || st == "premium" || st == "normal" {
+		case "gold", "premium", "normal":
 			args, _ = addWhere(&wb, args, " AND u.tier = ", st)
 		}
 	}
@@ -438,6 +447,9 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 			&p.LocationHierarchyID,
 			&p.CustomURL,
 			&socialBytes,
+			&p.PublisherRole,
+			&p.OrganizationID,
+			&p.BrokerageDisclosureAgreed,
 		); err != nil {
 			return nil, err
 		}
@@ -523,6 +535,9 @@ func (r *ProductRepo) GetByID(ctx context.Context, id int) (*models.Product, err
 		&p.LocationHierarchyID,
 		&p.CustomURL,
 		&socialBytes,
+		&p.PublisherRole,
+		&p.OrganizationID,
+		&p.BrokerageDisclosureAgreed,
 	)
 	if err != nil {
 		return nil, err
@@ -590,6 +605,10 @@ func (r *ProductRepo) Create(ctx context.Context, p *models.Product, imageURLs [
 		}
 	}
 	var id int
+	pubRole := p.PublisherRole
+	if pubRole == "" {
+		pubRole = "owner"
+	}
 	err = tx.QueryRow(ctx, sqlCreateProduct,
 		p.SellerID, p.LocationID, p.Title, p.Price, p.Description,
 		p.CategoryID, p.Subcategory, p.Item, p.Condition,
@@ -598,6 +617,7 @@ func (r *ProductRepo) Create(ctx context.Context, p *models.Product, imageURLs [
 		p.ListingType, p.RentalPrice, p.RentalDurationValue, nullStrPtr(p.RentalDurationUnit), p.DepositAmount, nullStrPtr(p.AvailableFrom), nullStrPtr(p.AvailableUntil),
 		catHierarchyID, p.LocationHierarchyID,
 		nullStrPtr(p.CustomURL), socialJSON,
+		pubRole, p.OrganizationID, p.BrokerageDisclosureAgreed,
 	).Scan(&id)
 	if err != nil {
 		return 0, err

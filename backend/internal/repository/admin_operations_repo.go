@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"strconv"
@@ -386,6 +387,15 @@ func (r *AdminRepo) ReviewRefundRequest(ctx context.Context, refundID, adminID i
 		status = "rejected"
 	}
 
+	var requesterID int
+	err := r.db.QueryRow(ctx, `SELECT requester_id FROM refund_requests WHERE id=$1`, refundID).Scan(&requesterID)
+	if err != nil {
+		return fmt.Errorf("refund request not found")
+	}
+	if requesterID == adminID {
+		return errors.New("maker-checker separation: administrator cannot review their own refund request")
+	}
+
 	tag, err := r.db.Exec(ctx, //nolint:gosec
 		`UPDATE refund_requests
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), reject_reason=$3, updated_at=NOW()
@@ -600,11 +610,12 @@ func (r *AdminRepo) CreateRefundRequest(ctx context.Context, req *models.RefundR
 		}
 
 		// Verify authorization against transaction parties
-		if req.RequesterRole == "seller" {
+		switch req.RequesterRole {
+		case "seller":
 			if txSellerID != req.RequesterID {
 				return 0, fmt.Errorf("you are not authorized to request a refund for this transaction")
 			}
-		} else if req.RequesterRole == "buyer" {
+		case "buyer":
 			var requesterPhone string
 			_ = r.db.QueryRow(ctx, `SELECT phone FROM users WHERE id = $1`, req.RequesterID).Scan(&requesterPhone)
 			if requesterPhone == "" || requesterPhone != txBuyerPhone {

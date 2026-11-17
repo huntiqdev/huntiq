@@ -191,10 +191,6 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 	return categories, nil
 }
 
-func resolveCategoryName(cat models.CategoryHierarchy, lang string) string {
-	return cat.GetName(lang)
-}
-
 // ListCategories retrieves categories with optional filtering
 func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.CategoryFilter) ([]models.CategoryHierarchy, error) {
 	var conditions []string

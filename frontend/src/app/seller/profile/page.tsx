@@ -90,7 +90,7 @@ export default function SellerProfilePage() {
     finally { setPwSaving(false); }
   };
 
-  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all text-zinc-900 dark:text-zinc-100';
+  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all text-zinc-900 dark:text-zinc-100';
   const lbl = 'text-xs font-bold text-zinc-500 dark:text-zinc-400 block mb-1';
 
   const PW_LABELS: Record<'current' | 'next' | 'confirm', string> = {
@@ -111,7 +111,7 @@ export default function SellerProfilePage() {
 
       {/* Profile card */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-        <div className="bg-gradient-to-r from-orange-600 to-orange-500 px-5 py-6">
+        <div className="bg-gradient-to-r from-[#1769E0] to-[#1055BD] px-5 py-6">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center text-white font-black text-xl">
               {profile.name?.[0]?.toUpperCase() ?? 'S'}
@@ -183,7 +183,7 @@ export default function SellerProfilePage() {
                         setAdditionalPhones(next);
                       }}
                       placeholder="+251 9X XXX XXXX"
-                      className="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all"
+                      className="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all"
                     />
                     <button type="button" onClick={() => setAdditionalPhones(additionalPhones.filter((_, j) => j !== i))}
                       className="p-2.5 rounded-xl text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 transition-colors">
@@ -193,7 +193,7 @@ export default function SellerProfilePage() {
                 ))}
                 {canAddPhone && (
                   <button type="button" onClick={() => setAdditionalPhones([...additionalPhones, ''])}
-                    className="flex items-center gap-1.5 text-xs font-bold text-orange-600 hover:text-orange-700 transition-colors">
+                    className="flex items-center gap-1.5 text-xs font-bold text-[#1769E0] hover:text-[#1055BD] transition-colors">
                     <Plus size={13} /> Add phone number
                     {maxPhones > 0 && (
                       <span className="text-zinc-400 font-normal">({additionalPhones.length}/{maxPhones})</span>
@@ -218,7 +218,7 @@ export default function SellerProfilePage() {
           )}
 
           <button type="submit" disabled={saving}
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-bold text-sm transition-colors disabled:opacity-50">
+            className="w-full bg-[#1769E0] hover:bg-[#1055BD] text-white py-3 min-h-[44px] rounded-xl font-bold text-sm transition-all tap-bounce active:scale-95 disabled:opacity-50 shadow-md shadow-[#1769E0]/20">
             {saving ? (u.saving || 'Saving…') : (u.save_changes || 'Save Changes')}
           </button>
         </form>
@@ -227,7 +227,7 @@ export default function SellerProfilePage() {
       {/* Tier & upgrade */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5">
         <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-100 dark:border-zinc-800">
-          <TrendingUp size={15} className="text-orange-600" />
+          <TrendingUp size={15} className="text-[#1769E0]" />
           <h2 className="font-bold text-zinc-900 dark:text-white">Seller Tier</h2>
         </div>
         {(() => {
@@ -299,7 +299,7 @@ export default function SellerProfilePage() {
           {/* Buyer */}
           <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] flex items-center justify-center">
                 <User size={15} />
               </div>
               <div>
@@ -309,7 +309,7 @@ export default function SellerProfilePage() {
             </div>
             <Link
               href="/buyer/dashboard"
-              className="text-xs font-bold text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#1769E0] dark:text-[#38A5FF] hover:underline flex items-center gap-1"
             >
               <span>{u.portal || 'Portal'}</span>
               <ArrowUpRight size={12} />
@@ -319,7 +319,7 @@ export default function SellerProfilePage() {
           {/* Seller */}
           <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] flex items-center justify-center">
                 <ShoppingBag size={15} />
               </div>
               <div>

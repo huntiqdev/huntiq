@@ -259,6 +259,9 @@ func (s *ReferralService) AdminMarkWithdrawalPaid(ctx context.Context, withdrawa
 	if adminID == req.UserID {
 		return errors.New("maker-checker separation: settler cannot be the withdrawal recipient")
 	}
+	if req.ReviewedBy != nil && *req.ReviewedBy == adminID && req.Amount >= 5000 {
+		return errors.New("dual control required: payouts of ETB 5,000 or greater cannot be settled by the same administrator who approved them")
+	}
 	if err := s.repo.AdminMarkWithdrawalPaid(ctx, withdrawalID, adminID, reference); err != nil {
 		return err
 	}

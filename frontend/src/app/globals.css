@@ -4,58 +4,103 @@
 
 @layer base {
   :root {
-    --admin-bg:         #0f1117;
-    --admin-surface:    #161b27;
-    --admin-border:     rgba(255,255,255,0.05);
-    --admin-text:       rgba(255,255,255,0.9);
-    --admin-text-muted: rgba(255,255,255,0.4);
+    /* Brand Tokens */
+    --brand-primary:      #1769E0;
+    --brand-hover:        #1055BD;
+    --brand-deep:         #103B78;
+    --brand-secondary:    #38A5FF;
+    --brand-surface:      #EAF3FF;
+    --dark-navy:          #091426;
 
-    /* Light theme — hybrid purple-to-blue gradient */
-    --page-bg-from:  #f5f3ff; /* violet-50  */
-    --page-bg-mid:   #ede9fe; /* violet-100 */
-    --page-bg-to:    #dbeafe; /* blue-100   */
+    /* Semantic Tokens */
+    --color-success:      #16A36A;
+    --color-warning:      #E6A23C;
+    --color-danger:       #DC4655;
+    --color-info:         #1769E0;
+    --color-premium:      #8B5CF6;
 
-    /* Premium UI Tokens */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-    
-    --glass-bg-dark: rgba(0, 0, 0, 0.4);
-    --glass-border-dark: rgba(255, 255, 255, 0.05);
-    --glass-shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  }
+    /* Light Theme Surfaces & Text */
+    --bg-page:            #F8FAFC;
+    --bg-surface:         #FFFFFF;
+    --bg-surface-elevated:#FFFFFF;
+    --border-subtle:      #E2E8F0;
+    --border-default:     #CBD5E1;
+    --text-primary:       #0F172A;
+    --text-secondary:     #475569;
+    --text-muted:         #64748B;
 
-  html {
-    /* Fixed gradient so it covers the full viewport even on short pages */
-    background: linear-gradient(
-      135deg,
-      #f5f3ff  0%,
-      #ede9fe  30%,
-      #e0e7ff  60%,
-      #dbeafe 100%
-    );
-    background-attachment: fixed;
-    min-height: 100%;
-    -webkit-tap-highlight-color: transparent;
-    scroll-behavior: smooth;
+    /* Admin Surface Tokens */
+    --admin-bg:           #091426;
+    --admin-surface:      #101F37;
+    --admin-border:       rgba(255, 255, 255, 0.08);
+    --admin-text:         rgba(255, 255, 255, 0.95);
+    --admin-text-muted:   rgba(255, 255, 255, 0.5);
+
+    /* Glassmorphic Surfaces */
+    --glass-bg:           rgba(255, 255, 255, 0.85);
+    --glass-border:       rgba(226, 232, 240, 0.8);
+    --glass-shadow:       0 10px 30px -5px rgba(23, 105, 224, 0.08);
+
+    /* Minimum touch target */
+    --min-touch-target:   44px;
   }
 
   html.dark {
-    background: #09090b; /* zinc-950 */
-    background-attachment: fixed;
+    /* Dark Theme Surfaces & Text */
+    --bg-page:            #091426;
+    --bg-surface:         #0E1B33;
+    --bg-surface-elevated:#142442;
+    --border-subtle:      #1E3256;
+    --border-default:     #2B4372;
+    --text-primary:       #F8FAFC;
+    --text-secondary:     #CBD5E1;
+    --text-muted:         #8DA6CC;
+
+    /* Admin Surface Tokens */
+    --admin-bg:           #060D1A;
+    --admin-surface:      #0C182D;
+    --admin-border:       rgba(255, 255, 255, 0.08);
+    --admin-text:         rgba(255, 255, 255, 0.95);
+    --admin-text-muted:   rgba(255, 255, 255, 0.5);
+
+    /* Glassmorphic Surfaces */
+    --glass-bg:           rgba(14, 27, 51, 0.85);
+    --glass-border:       rgba(30, 50, 86, 0.8);
+    --glass-shadow:       0 10px 30px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  html {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100%;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
-    @apply text-zinc-900 dark:text-zinc-100 min-h-screen;
-    background: transparent;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
   }
 }
 
 @layer utilities {
+  /* Scrollbars */
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  .duration-600 { transition-duration: 600ms; }
 
+  .admin-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+  .admin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .admin-scrollbar::-webkit-scrollbar-thumb { background: rgba(56, 165, 255, 0.15); border-radius: 9999px; }
+  .admin-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(56, 165, 255, 0.35); }
+  .admin-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(56, 165, 255, 0.2) transparent; }
+
+  /* Admin Tokens Mapping */
   .admin-bg           { background-color: var(--admin-bg); }
   .admin-surface      { background-color: var(--admin-surface); }
   .admin-surface-hover{ background-color: color-mix(in srgb, var(--admin-surface) 80%, white 20%); }
@@ -63,27 +108,7 @@
   .admin-text         { color: var(--admin-text); }
   .admin-text-muted   { color: var(--admin-text-muted); }
 
-  /* Thin scrollbar for admin sidebar / panels */
-  .admin-scrollbar::-webkit-scrollbar        { width: 4px; }
-  .admin-scrollbar::-webkit-scrollbar-track  { background: transparent; }
-  .admin-scrollbar::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.08); border-radius: 9999px; }
-  .admin-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
-  .admin-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent; }
-
-  /* Reusable tier gradient text */
-  .tier-gradient-text {
-    background: linear-gradient(90deg, #eab308, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Reusable tier gradient border/bg */
-  .tier-gradient-bg {
-    background: linear-gradient(135deg, #fef08a 0%, #e9d5ff 50%, #c084fc 100%);
-  }
-
-  /* Premium Glassmorphism Utility Classes */
+  /* Glassmorphism */
   .glass-panel {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -92,31 +117,44 @@
     box-shadow: var(--glass-shadow);
   }
 
-  .dark .glass-panel {
-    background: var(--glass-bg-dark);
-    border: 1px solid var(--glass-border-dark);
-    box-shadow: var(--glass-shadow-dark);
-  }
-
-  /* Mobile Touch & Tactile Ergonomics */
+  /* Mobile Tactile Ergonomics */
   .tap-bounce {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
   }
   .tap-bounce:active {
-    transform: scale(0.96);
+    transform: scale(0.97);
   }
 
-  /* Safe Area Padding Helpers */
+  /* Safe Area Helpers */
   .pb-safe {
     padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+  }
+  .pt-safe {
+    padding-top: max(16px, env(safe-area-inset-top, 16px));
   }
   .mb-safe {
     margin-bottom: max(16px, env(safe-area-inset-bottom, 16px));
   }
 
-  /* iOS Safari Auto-Zoom Prevention: Ensure minimum 16px font-size on mobile */
+  /* Responsive Table Container */
+  .table-container-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mobile Touch Target Guarantee */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* iOS Auto-Zoom Prevention */
   input:not([type="checkbox"]):not([type="radio"]), select, textarea {
     font-size: 16px;
   }
@@ -126,18 +164,3 @@
     }
   }
 }
-
-@keyframes slideInRight {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
-}
-@keyframes slideInLeft {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(0); }
-}
-@keyframes progress {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-
-

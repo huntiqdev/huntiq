@@ -1,0 +1,70 @@
+[
+  {
+    "id": 366,
+    "parent_id": 36,
+    "parent_code": "SO-JIG",
+    "type": "woreda",
+    "slug": "jigjiga-dudahid-district",
+    "code": "SO-JIG-DUD",
+    "level": 3,
+    "path": "/1/8/36/366/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dudahid Subcity (Jigjiga)",
+      "am": "ዱዳሂድ ክፍለ ከተማ (ጅግጅጋ)",
+      "om": "Kutaa Magaalaa Dudaahid",
+      "ti": "ዱዳሂድ ክፍለ ከተማ (ጅግጅጋ)"
+    },
+    "coordinates": {
+      "latitude": 9.355,
+      "longitude": 42.805,
+      "bbox": {
+        "min_lat": 9.345,
+        "max_lat": 9.365,
+        "min_lng": 42.795,
+        "max_lng": 42.815
+      }
+    }
+  },
+  {
+    "id": 367,
+    "parent_id": 36,
+    "parent_code": "SO-JIG",
+    "type": "woreda",
+    "slug": "jigjiga-kebele-01",
+    "code": "SO-JIG-KB1",
+    "level": 3,
+    "path": "/1/8/36/367/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kebele 01 Central (Jigjiga)",
+      "am": "ቀበሌ 01 ማዕከል (ጅግጅጋ)",
+      "om": "Ganda 01 Gidduugaleessa",
+      "ti": "ቀበሌ 01 ማእከል (ጅግጅጋ)"
+    },
+    "coordinates": {
+      "latitude": 9.35,
+      "longitude": 42.795,
+      "bbox": {
+        "min_lat": 9.34,
+        "max_lat": 9.36,
+        "min_lng": 42.785,
+        "max_lng": 42.805
+      }
+    }
+  }
+]

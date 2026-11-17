@@ -1,0 +1,32 @@
+{
+  "id": 82,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "zone",
+  "slug": "somali-shabele",
+  "code": "ET-SO-SH",
+  "level": 2,
+  "path": "/1/8/82/",
+  "display_order": 46,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Gode Zone",
+    "ሸበሌ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Shabele Zone",
+    "am": "ሸበሌ ዞን",
+    "om": "Shabelle",
+    "ti": "ዞን ሸበሌ"
+  },
+  "coordinates": {
+    "latitude": 6.5,
+    "longitude": 43.7,
+    "bbox": null
+  }
+}

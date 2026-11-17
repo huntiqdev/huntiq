@@ -134,3 +134,4 @@ func (h *AdminFinancialHandler) CompensateLedger(c *fiber.Ctx) error {
 		"message": "compensating ledger entry recorded successfully",
 	})
 }
+

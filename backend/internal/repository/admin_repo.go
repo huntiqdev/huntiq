@@ -172,11 +172,12 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		argIdx++
 	}
 
-	if status == "active" {
+	switch status {
+	case "active":
 		whereClauses = append(whereClauses, fmt.Sprintf("u.is_active = $%d", argIdx))
 		args = append(args, true)
 		argIdx++
-	} else if status == "inactive" || status == "deactivated" {
+	case "inactive", "deactivated":
 		whereClauses = append(whereClauses, fmt.Sprintf("u.is_active = $%d", argIdx))
 		args = append(args, false)
 		argIdx++
@@ -188,7 +189,8 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 		argIdx++
 	}
 
-	if strategy == "sale" {
+	switch strategy {
+	case "sale":
 		whereClauses = append(whereClauses, `(
 			EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'sale' AND p.status = 'approved')
 			OR (
@@ -196,7 +198,7 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 				AND COALESCE(u.seller_preference, 'sale') = 'sale'
 			)
 		)`)
-	} else if strategy == "rent" {
+	case "rent":
 		whereClauses = append(whereClauses, `(
 			EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'rent' AND p.status = 'approved')
 			OR (
@@ -204,7 +206,7 @@ func (r *AdminRepo) ListSellersFilteredPaged(ctx context.Context, page, limit in
 				AND u.seller_preference = 'rent'
 			)
 		)`)
-	} else if strategy == "both" {
+	case "both":
 		whereClauses = append(whereClauses, `(
 			EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'sale' AND p.status = 'approved')
 			AND EXISTS (SELECT 1 FROM products p WHERE p.seller_id = u.id AND p.listing_type = 'rent' AND p.status = 'approved')

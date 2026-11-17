@@ -47,17 +47,16 @@ const LocaleContext = createContext<LocaleContextValue>({
 });
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const saved = localStorage.getItem('huntiq_locale') || localStorage.getItem('habesha_locale');
-        if (saved && ['en', 'am', 'or', 'ti'].includes(saved)) {
-          return saved as Locale;
-        }
-      } catch {}
-    }
-    return 'en';
-  });
+  const [locale, setLocaleState] = useState<Locale>('en');
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('huntiq_locale') || localStorage.getItem('habesha_locale');
+      if (saved && ['en', 'am', 'or', 'ti'].includes(saved)) {
+        setLocaleState(saved as Locale);
+      }
+    } catch {}
+  }, []);
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);

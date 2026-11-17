@@ -37,7 +37,7 @@ function TierBanner() {
           ? (u.gold_buyer_banner ?? 'Gold buyer — you can see Gold seller images. Upgrade to Premium for all images.')
           : (u.normal_buyer_banner ?? 'Normal buyer — some product images are blurred. Upgrade to Gold or Premium to unlock.')}
       </span>
-      <Link href="/buyer/dashboard" className="ml-auto shrink-0 font-black text-orange-600 hover:underline">
+      <Link href="/buyer/dashboard" className="ml-auto shrink-0 font-black text-[#1769E0] dark:text-[#38A5FF] hover:underline">
         {u.upgrade_arrow ?? 'Upgrade →'}
       </Link>
     </div>
@@ -437,17 +437,17 @@ function ProductsContent() {
   return (
     <>
       {/* ── 3rd Row: Categories list (Compact sticky bar, single row) ── */}
-      <div className="sticky top-14 z-30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
+      <div className="sticky top-14 z-30 bg-white/95 dark:bg-[#091426]/95 backdrop-blur border-b border-slate-150 dark:border-slate-800">
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-[2%] sm:px-[4%] lg:px-[6%]">
           <button onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${!activeCatId ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+            className={`flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${!activeCatId ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}>
             <LayoutGrid size={12} /> {t.categories.all}
           </button>
           {categories.map(cat => (
             <button key={cat.id}
               onClick={() => { setActiveCatId(cat.id); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(cat.id)); }}
-              className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}>
               {getCatDisplayName(cat)}
             </button>
@@ -457,26 +457,26 @@ function ProductsContent() {
 
       {/* Systematic Subcategory & Item Navigation Banner (Non-sticky, compact — never covers the mobile screen on scroll) */}
       {activeCatNode && (
-        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col gap-2 shadow-sm">
+        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-black">
-              <span className="text-orange-600 font-extrabold">{getCatDisplayName(activeCatNode)}</span>
+              <span className="text-[#1769E0] dark:text-[#38A5FF] font-extrabold">{getCatDisplayName(activeCatNode)}</span>
               {activeSubNode && (
                 <>
-                  <ChevronRight size={11} className="text-zinc-400" />
-                  <span className="text-zinc-800 dark:text-zinc-200">{getSubDisplayName(activeSubNode)}</span>
+                  <ChevronRight size={11} className="text-slate-400" />
+                  <span className="text-slate-800 dark:text-slate-200">{getSubDisplayName(activeSubNode)}</span>
                 </>
               )}
               {activeItem && (
                 <>
-                  <ChevronRight size={11} className="text-zinc-400" />
-                  <span className="text-zinc-600 dark:text-zinc-400">{getItemDisplayName(activeItem)}</span>
+                  <ChevronRight size={11} className="text-slate-400" />
+                  <span className="text-slate-600 dark:text-slate-400">{getItemDisplayName(activeItem)}</span>
                 </>
               )}
             </div>
             <button
               onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
-              className="text-[11px] font-bold text-zinc-400 hover:text-orange-600 flex items-center gap-1 transition-colors"
+              className="text-[11px] font-bold text-slate-400 hover:text-[#1769E0] flex items-center gap-1 transition-colors"
             >
               <X size={12} />
               <span>{t.ui.clear_filter ?? 'Clear'}</span>
@@ -491,8 +491,8 @@ function ProductsContent() {
                   onClick={() => { setActiveSub(activeSub === s.slug ? undefined : s.slug); setActiveItem(undefined); router.push(buildUrl(activeCatId, activeSub === s.slug ? undefined : s.slug)); }}
                   className={`px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                     activeSub === s.slug
-                      ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm'
-                      : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-orange-500'
+                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm'
+                      : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-[#1769E0]'
                   }`}
                 >
                   {getSubDisplayName(s)}
@@ -502,15 +502,15 @@ function ProductsContent() {
           )}
 
           {itemNodes.length > 0 && (
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-zinc-200/60 dark:border-zinc-800/60">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-slate-200/60 dark:border-slate-800/60">
               {itemNodes.map(i => (
                 <button
                   key={i.id || i.slug}
                   onClick={() => { setActiveItem(activeItem === i.slug ? undefined : i.slug); router.push(buildUrl(activeCatId, activeSub, activeItem === i.slug ? undefined : i.slug)); }}
                   className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold whitespace-nowrap transition-all ${
                     activeItem === i.slug
-                      ? 'bg-orange-600 text-white shadow-sm'
-                      : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600'
+                      ? 'bg-[#1769E0] text-white shadow-sm'
+                      : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-[#1769E0]'
                   }`}
                 >
                   {getItemDisplayName(i)}
@@ -526,11 +526,11 @@ function ProductsContent() {
 
       {/* Location filter indicator */}
       {activeLocLabel && (
-        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
-          <MapPin size={11} className="text-orange-500" />
-          <span>{t.ui.showing_results_in} <strong className="text-zinc-700 dark:text-zinc-300">{activeLocLabel}</strong></span>
+        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <MapPin size={11} className="text-[#1769E0] dark:text-[#38A5FF]" />
+          <span>{t.ui.showing_results_in} <strong className="text-slate-700 dark:text-slate-300">{activeLocLabel}</strong></span>
           <button onClick={() => { setActiveRegion(''); setActiveZone(''); setActiveSubcity(''); setActiveWoreda(''); router.push(buildUrl(activeCatId, activeSub, activeItem, filters.search, {})); }}
-            className="ml-1 text-orange-600 hover:underline font-bold">{t.ui.clear_filter}</button>
+            className="ml-1 text-[#1769E0] hover:underline font-bold">{t.ui.clear_filter}</button>
         </div>
       )}
 
@@ -627,8 +627,8 @@ function ProductsContent() {
                     onClick={() => setPricePopoverOpen(!pricePopoverOpen)}
                     className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
                       activeMinPrice !== undefined || activeMaxPrice !== undefined
-                        ? 'bg-orange-50 dark:bg-orange-950/40 border-orange-500 text-orange-600 dark:text-orange-400 font-extrabold'
-                        : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:border-zinc-300'
+                        ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 border-[#1769E0] text-[#1769E0] dark:text-[#38A5FF] font-extrabold'
+                        : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-300'
                     }`}
                   >
                     <span>💰 {activeMinPrice !== undefined || activeMaxPrice !== undefined ? `${activeMinPrice ?? 0} - ${activeMaxPrice ?? '∞'} ETB` : (t.ui?.price ?? 'Price (ETB)')}</span>
@@ -636,8 +636,8 @@ function ProductsContent() {
                   </button>
 
                   {pricePopoverOpen && (
-                    <div className="absolute left-0 top-full mt-2 z-50 w-64 p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-2xl shadow-xl space-y-2">
-                      <p className="text-[10px] font-black uppercase text-zinc-500">
+                    <div className="absolute left-0 top-full mt-2 z-50 w-64 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl space-y-2">
+                      <p className="text-[10px] font-black uppercase text-slate-500">
                         {activeCatNode ? `${getCatDisplayName(activeCatNode)} Price (ETB)` : 'Marketplace Price Range (ETB)'}
                       </p>
                       <div className="flex items-center gap-2">
@@ -646,15 +646,15 @@ function ProductsContent() {
                           placeholder="Min"
                           value={minPriceInput}
                           onChange={e => setMinPriceInput(e.target.value)}
-                          className="w-1/2 px-2.5 py-1.5 text-xs bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-1 focus:ring-orange-600"
+                          className="w-1/2 px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-1 focus:ring-[#1769E0]"
                         />
-                        <span className="text-zinc-400 text-xs">-</span>
+                        <span className="text-slate-400 text-xs">-</span>
                         <input
                           type="number"
                           placeholder="Max"
                           value={maxPriceInput}
                           onChange={e => setMaxPriceInput(e.target.value)}
-                          className="w-1/2 px-2.5 py-1.5 text-xs bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-1 focus:ring-orange-600"
+                          className="w-1/2 px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-1 focus:ring-[#1769E0]"
                         />
                       </div>
                       <div className="flex items-center justify-between pt-1">
@@ -668,7 +668,7 @@ function ProductsContent() {
                             setPricePopoverOpen(false);
                             router.push(buildUrl({ minP: '', maxP: '' }));
                           }}
-                          className="text-[10px] font-bold text-zinc-400 hover:text-red-500 cursor-pointer"
+                          className="text-[10px] font-bold text-slate-400 hover:text-red-500 cursor-pointer"
                         >
                           {(t.ui as any).reset ?? 'Reset'}
                         </button>
@@ -680,7 +680,7 @@ function ProductsContent() {
                             setPricePopoverOpen(false);
                             router.push(buildUrl({ minP: minPriceInput, maxP: maxPriceInput }));
                           }}
-                          className="px-3 py-1 bg-orange-600 text-white rounded-lg text-xs font-bold hover:bg-orange-700 transition-colors cursor-pointer"
+                          className="px-3 py-1 bg-[#1769E0] text-white rounded-lg text-xs font-bold hover:bg-[#1055BD] transition-colors cursor-pointer"
                         >
                           {(t.ui as any).apply ?? t.ui?.submit ?? 'Apply'}
                         </button>
@@ -730,7 +730,7 @@ function ProductsContent() {
                 </p>
                 <button
                   onClick={() => setFilterOpen(true)}
-                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all cursor-pointer"
+                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 font-bold text-xs hover:bg-[#1769E0] hover:text-white transition-all cursor-pointer"
                 >
                   <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
                 </button>
@@ -745,14 +745,14 @@ function ProductsContent() {
                   <AlertTriangle size={28} />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
                     {(t.ui as any).unable_to_load_listings ?? 'Unable to Load Listings'}
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">{fetchError}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{fetchError}</p>
                 </div>
                 <button
                   onClick={() => setRetryKey(k => k + 1)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
                 >
                   <RotateCcw size={14} />
                   <span>{(t.ui as any).retry ?? 'Retry'}</span>
@@ -760,12 +760,12 @@ function ProductsContent() {
               </div>
             ) : products.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
-                <div className="w-16 h-16 rounded-3xl bg-zinc-100 dark:bg-zinc-800 text-zinc-400 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center">
                   <ShoppingBag size={32} />
                 </div>
                 <div>
-                  <h3 className="text-base font-black text-zinc-900 dark:text-zinc-100">{t.ui.no_products ?? 'No listings found'}</h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                  <h3 className="text-base font-black text-slate-900 dark:text-slate-100">{t.ui.no_products ?? 'No listings found'}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     {(t.ui as any).no_active_listings_match ?? 'No active listings match your current search or filter criteria.'}
                   </p>
                 </div>
@@ -781,7 +781,7 @@ function ProductsContent() {
                       setListingType('all');
                       router.push('/products');
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <span>{(t as any).search?.clear_filters ?? (t.ui as any).clear_filter ?? 'Clear All Filters'}</span>
                   </button>
@@ -795,7 +795,7 @@ function ProductsContent() {
                       <Link
                         key={c.id}
                         href={`/products?category_hierarchy_id=${c.id}&cat=${c.slug}`}
-                        className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-orange-600 text-xs font-medium transition-colors"
+                        className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-[#1769E0] text-xs font-medium transition-colors"
                       >
                         {c.icon ? `${c.icon} ` : '🏷️ '}
                         {resolveCategoryTitle(c, locale)}
@@ -806,14 +806,6 @@ function ProductsContent() {
               </div>
             ) : (
               <>
-                {/*
-                  Smartphone-optimized Grid:
-                  - 2 columns on mobile (≥320px) for generous touch targets & readable photos
-                  - 3 columns on sm (≥640px)
-                  - 4 columns on md (≥768px)
-                  - 5 columns on lg (≥1024px)
-                  - 6 columns on xl (≥1280px)
-                */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-3.5">
                   {products.slice(0, visibleCount).map(p => (
                     p.listing_type === 'rent'
@@ -829,7 +821,7 @@ function ProductsContent() {
                       <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-30 group-hover:opacity-80 transition-opacity">
                         {t.ui.get_more}
                       </span>
-                      <div className="w-10 h-10 rounded-2xl bg-orange-600/10 text-orange-600 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition-all shadow-md">
+                      <div className="w-10 h-10 rounded-2xl bg-[#1769E0]/15 text-[#1769E0] dark:text-[#38A5FF] flex items-center justify-center group-hover:bg-[#1769E0] group-hover:text-white transition-all shadow-md">
                         <ChevronDown size={20} />
                       </div>
                     </button>
@@ -845,10 +837,10 @@ function ProductsContent() {
       {filterOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setFilterOpen(false)} />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-zinc-50 dark:bg-zinc-950 p-4 pb-[max(24px,env(safe-area-inset-bottom,24px))] shadow-2xl animate-in slide-in-from-bottom duration-200">
+          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white dark:bg-[#0E1B33] p-4 pb-[max(24px,env(safe-area-inset-bottom,24px))] shadow-2xl animate-in slide-in-from-bottom duration-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2 font-black text-sm">
-                <SlidersHorizontal size={15} className="text-orange-600" />
+                <SlidersHorizontal size={15} className="text-[#1769E0]" />
                 {t.ui.filters}
               </div>
               <button onClick={() => setFilterOpen(false)}

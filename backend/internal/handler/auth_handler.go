@@ -432,18 +432,26 @@ func (h *AuthHandler) resetPassword(c *fiber.Ctx, role string) error {
 	var body struct {
 		Phone       string `json:"phone"`
 		Code        string `json:"code"`
+		ResetToken  string `json:"reset_token"`
 		NewPassword string `json:"new_password"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	// Use centralized validations
+	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
+		return response.AppError(c, errors.ValPasswordMin())
+	}
+
+	if body.ResetToken != "" {
+		if err := h.svc.ForgotPasswordResetWithToken(c.Context(), body.ResetToken, body.NewPassword); err != nil {
+			return response.BadRequest(c, err.Error())
+		}
+		return response.OK(c, fiber.Map{"message": "password reset successfully"})
+	}
+
 	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
 	if !phoneResult.Valid {
 		return response.AppError(c, errors.ValPhoneInvalid())
-	}
-	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
-		return response.AppError(c, errors.ValPasswordMin())
 	}
 	if err := h.svc.ForgotPasswordReset(c.Context(), phoneResult.Normalized, role, body.Code, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())
@@ -455,6 +463,29 @@ func (h *AuthHandler) SellerForgotPassword(c *fiber.Ctx) error { return h.forgot
 func (h *AuthHandler) SellerResetPassword(c *fiber.Ctx) error  { return h.resetPassword(c, "seller") }
 func (h *AuthHandler) BuyerForgotPassword(c *fiber.Ctx) error  { return h.forgotPassword(c, "buyer") }
 func (h *AuthHandler) BuyerResetPassword(c *fiber.Ctx) error   { return h.resetPassword(c, "buyer") }
+
+// POST /api/auth/verify-recovery-otp — validates recovery OTP and returns a single-use reset authorization token
+func (h *AuthHandler) VerifyRecoveryOTP(c *fiber.Ctx) error {
+	var body struct {
+		Phone string `json:"phone"`
+		Code  string `json:"code"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
+	if !phoneResult.Valid {
+		return response.AppError(c, errors.ValPhoneInvalid())
+	}
+	token, err := h.svc.ForgotPasswordVerifyOTP(c.Context(), phoneResult.Normalized, body.Code)
+	if err != nil {
+		return response.BadRequest(c, err.Error())
+	}
+	return response.OK(c, fiber.Map{
+		"reset_token": token,
+		"message":     "recovery OTP verified successfully",
+	})
+}
 
 // POST /api/auth/forgot-password — Unified password reset request
 func (h *AuthHandler) UnifiedForgotPassword(c *fiber.Ctx) error {
@@ -477,17 +508,26 @@ func (h *AuthHandler) UnifiedResetPassword(c *fiber.Ctx) error {
 	var body struct {
 		Phone       string `json:"phone"`
 		Code        string `json:"code"`
+		ResetToken  string `json:"reset_token"`
 		NewPassword string `json:"new_password"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
+	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
+		return response.AppError(c, errors.ValPasswordMin())
+	}
+
+	if body.ResetToken != "" {
+		if err := h.svc.ForgotPasswordResetWithToken(c.Context(), body.ResetToken, body.NewPassword); err != nil {
+			return response.BadRequest(c, err.Error())
+		}
+		return response.OK(c, fiber.Map{"message": "password reset successfully"})
+	}
+
 	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
 	if !phoneResult.Valid {
 		return response.AppError(c, errors.ValPhoneInvalid())
-	}
-	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
-		return response.AppError(c, errors.ValPasswordMin())
 	}
 	if err := h.svc.UnifiedForgotPasswordReset(c.Context(), phoneResult.Normalized, body.Code, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())

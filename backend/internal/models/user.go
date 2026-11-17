@@ -21,6 +21,9 @@ type User struct {
 	NetProfit          float64   `json:"net_profit,omitempty"`
 	BuyerTier          string    `json:"buyer_tier"`
 	OTPVerified        bool      `json:"otp_verified"`
+	IdentityVerified   bool      `json:"identity_verified"`
+	AccountEntityType  string    `json:"account_entity_type"` // INDIVIDUAL, COMPANY, GOVERNMENT, OTHER_LEGALLY_APPROVED_ENTITY
+	OrganizationID     *int      `json:"organization_id,omitempty"`
 	SellerPreference   string    `json:"seller_preference,omitempty"` // 'sale', 'rent', or 'both'
 	Capabilities       []string  `json:"capabilities,omitempty"`      // additive: 'buyer', 'seller', 'landlord', 'renter'
 	SaleProductCount   int       `json:"sale_product_count"`

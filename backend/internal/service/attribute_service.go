@@ -208,17 +208,17 @@ func isAttributeEmpty(attr *models.ProductAttribute) bool {
 // Helper: Generate slug from name
 func (s *AttributeService) generateSlug(name string) string {
 	slug := strings.ToLower(name)
-	reg := regexp.MustCompile("[^a-z0-9\\s-]")
+	reg := regexp.MustCompile(`[^a-z0-9\s-]`)
 	slug = reg.ReplaceAllString(slug, "")
 	slug = strings.ReplaceAll(slug, " ", "-")
-	reg = regexp.MustCompile("-+")
+	reg = regexp.MustCompile(`-+`)
 	slug = reg.ReplaceAllString(slug, "-")
 	return strings.Trim(slug, "-")
 }
 
 // Helper: Validate slug format
 func (s *AttributeService) isValidSlug(slug string) bool {
-	match, _ := regexp.MatchString("^[a-z0-9]+(-[a-z0-9]+)*$", slug)
+	match, _ := regexp.MatchString(`^[a-z0-9]+(-[a-z0-9]+)*$`, slug)
 	return match
 }
 

@@ -115,13 +115,13 @@ export function FilterSidebar({ categories, onFilter }: Props) {
     onFilter({});
   };
 
-  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all';
+  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all';
   const lbl = 'text-xs font-black text-zinc-500 uppercase tracking-wider';
 
   return (
     <aside className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-4 flex flex-col gap-4 h-fit">
       <div className="flex items-center gap-2">
-        <SlidersHorizontal size={16} className="text-orange-600" />
+        <SlidersHorizontal size={16} className="text-[#1769E0]" />
         <h2 className="font-bold">{t.ui.filters}</h2>
       </div>
 
@@ -145,8 +145,8 @@ export function FilterSidebar({ categories, onFilter }: Props) {
             onClick={() => setListingType('sale')}
             className={`py-1.5 text-[11px] font-black uppercase tracking-wider rounded-lg transition-all ${
               listingType === 'sale'
-                ? 'bg-orange-600 text-white shadow-sm'
-                : 'text-zinc-500 hover:text-orange-600'
+                ? 'bg-[#1769E0] text-white shadow-sm'
+                : 'text-zinc-500 hover:text-[#1769E0]'
             }`}
           >
             🛒 {t.nav?.buy ?? 'Buy'}
@@ -268,7 +268,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
       <div className="flex flex-col gap-2 pt-2">
         <button
           onClick={apply}
-          className="bg-orange-600 text-white rounded-xl py-2.5 text-sm font-bold hover:bg-orange-700 transition-colors"
+          className="bg-[#1769E0] text-white rounded-xl py-2.5 text-sm font-bold hover:bg-[#1055BD] transition-colors"
         >
           {t.ui.submit}
         </button>

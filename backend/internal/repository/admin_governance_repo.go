@@ -2,11 +2,14 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"fmt"
-	"github.com/your-org/used-tools-marketplace/internal/models"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/your-org/used-tools-marketplace/internal/models"
 )
 
 func (r *AdminRepo) ListAdmins(ctx context.Context) ([]models.User, error) {
@@ -151,16 +154,34 @@ func (r *AdminRepo) SetAdminPermissions(ctx context.Context, adminID int, permis
 }
 
 func (r *AdminRepo) HasPermission(ctx context.Context, adminID int, permission string) (bool, error) {
+	// 1. Explicit database override in admin_permissions is authoritative (enabled or explicitly revoked)
 	var enabled bool
-	err := //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		r.db.QueryRow(ctx, `
-		SELECT COALESCE(enabled, FALSE) FROM admin_permissions
+	err := r.db.QueryRow(ctx, `
+		SELECT enabled FROM admin_permissions
 		WHERE admin_id=$1 AND permission=$2`, adminID, permission).Scan(&enabled)
-	if err != nil {
-		// No row = no permission
+	if err == nil {
+		return enabled, nil
+	}
+	if !errors.Is(err, pgx.ErrNoRows) {
+		return false, err
+	}
+
+	// 2. If no explicit row exists, check user's role from database
+	var adminRole *string
+	err = r.db.QueryRow(ctx, `SELECT admin_role FROM users WHERE id=$1 AND role='admin'`, adminID).Scan(&adminRole)
+	if err != nil || adminRole == nil {
 		return false, nil
 	}
-	return enabled, nil
+	if *adminRole == models.RolePlatformOwner || *adminRole == models.LegacyRoleSuper {
+		return true, nil
+	}
+
+	// 3. Fall back to role domain baseline
+	if domainPerms, ok := models.RoleDomainPermissions[*adminRole]; ok && domainPerms[permission] {
+		return true, nil
+	}
+
+	return false, nil
 }
 
 // ── Admin Activity Logs ───────────────────────────────────────────────────────
@@ -347,7 +368,7 @@ func (r *AdminRepo) ListPremiumUsers(ctx context.Context, role string, tierType 
 			SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), rating, role,
 			       COALESCE(admin_role::text,''), is_active, tier, total_value_sold, buyer_tier, otp_verified, created_at, updated_at
 			FROM users
-			WHERE role='buyer'`
+			WHERE role != 'admin'`
 		args := []interface{}{}
 		if tier != "" && tier != "all" {
 			q += ` AND buyer_tier=$1`
@@ -538,6 +559,9 @@ func (r *AdminRepo) approveUpgradeRequest(ctx context.Context, requestID, adminI
 	if status != "pending" {
 		return fmt.Errorf("request is already %s", status)
 	}
+	if userID == adminID {
+		return errors.New("maker-checker separation: administrator cannot approve their own upgrade request")
+	}
 
 	// Apply tier to the correct column based on role
 	if role == "seller" {
@@ -574,6 +598,15 @@ func (r *AdminRepo) RejectBuyerUpgradeRequest(ctx context.Context, requestID, ad
 }
 
 func (r *AdminRepo) rejectUpgradeRequest(ctx context.Context, requestID, adminID int, reason string) error {
+	var userID int
+	err := r.db.QueryRow(ctx, `SELECT user_id FROM upgrade_requests WHERE id=$1`, requestID).Scan(&userID)
+	if err != nil {
+		return fmt.Errorf("upgrade request not found")
+	}
+	if userID == adminID {
+		return errors.New("maker-checker separation: administrator cannot reject their own upgrade request")
+	}
+
 	tag, err := r.db.Exec(ctx, `
 		UPDATE upgrade_requests
 		SET status='rejected', reviewed_by=$1, reviewed_at=NOW(),
