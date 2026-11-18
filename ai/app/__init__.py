@@ -1,1 +1,0 @@
-"""HUNTIQ AI App Package."""
