@@ -1,5 +1,0 @@
-splits:
-  train: 0.80
-  validation: 0.10
-  test: 0.10
-  random_seed: 42
