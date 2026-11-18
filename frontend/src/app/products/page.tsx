@@ -366,10 +366,10 @@ function ProductsContent() {
       p.set('category_hierarchy_id', String(catToUse));
     }
 
-    const subToUse = opts?.sub !== undefined ? opts.sub : activeSub;
+    const subToUse = ('sub' in opts) ? opts.sub : activeSub;
     if (subToUse) p.set('subcategory', subToUse);
 
-    const itemToUse = opts?.item !== undefined ? opts.item : activeItem;
+    const itemToUse = ('item' in opts) ? opts.item : activeItem;
     if (itemToUse) p.set('item', itemToUse);
 
     const minPToUse = opts?.minP !== undefined ? opts.minP : (activeMinPrice !== undefined ? String(activeMinPrice) : '');
@@ -446,7 +446,13 @@ function ProductsContent() {
           </button>
           {categories.map(cat => (
             <button key={cat.id}
-              onClick={() => { setActiveCatId(cat.id); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(cat.id)); }}
+              onClick={() => { 
+                setActiveCatId(cat.id); 
+                setActiveSub(undefined); 
+                setActiveItem(undefined); 
+                const url = buildUrl({ catId: cat.id, sub: undefined, item: undefined });
+                router.push(url);
+              }}
               className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}>
               {getCatDisplayName(cat)}
@@ -460,6 +466,28 @@ function ProductsContent() {
         <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-black">
+              {/* Back button to parent category */}
+              {(activeSub || activeItem) && (
+                <button
+                  onClick={() => {
+                    if (activeItem) {
+                      // Go back to subcategory
+                      setActiveItem(undefined);
+                      router.push(buildUrl({ catId: activeCatId, sub: activeSub, item: undefined }));
+                    } else if (activeSub) {
+                      // Go back to main category
+                      setActiveSub(undefined);
+                      router.push(buildUrl({ catId: activeCatId, sub: undefined, item: undefined }));
+                    }
+                  }}
+                  className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-[#1769E0] hover:text-[#1769E0] transition-all"
+                  title={activeItem ? "Back to " + getSubDisplayName(activeSubNode) : "Back to " + getCatDisplayName(activeCatNode)}
+                >
+                  <ChevronRight size={11} className="rotate-180" />
+                  <span className="text-[10px]">Back</span>
+                </button>
+              )}
+              
               <span className="text-[#1769E0] dark:text-[#38A5FF] font-extrabold">{getCatDisplayName(activeCatNode)}</span>
               {activeSubNode && (
                 <>
@@ -488,7 +516,13 @@ function ProductsContent() {
               {subcategoryNodes.map(s => (
                 <button
                   key={s.id || s.slug}
-                  onClick={() => { setActiveSub(activeSub === s.slug ? undefined : s.slug); setActiveItem(undefined); router.push(buildUrl(activeCatId, activeSub === s.slug ? undefined : s.slug)); }}
+                  onClick={() => { 
+                    const newSub = activeSub === s.slug ? undefined : s.slug;
+                    setActiveSub(newSub);
+                    setActiveItem(undefined); 
+                    const url = buildUrl({ catId: activeCatId, sub: newSub, item: undefined });
+                    router.push(url);
+                  }}
                   className={`px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                     activeSub === s.slug
                       ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm'

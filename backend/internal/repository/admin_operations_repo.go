@@ -4,9 +4,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/your-org/used-tools-marketplace/internal/models"
 	"strconv"
 	"strings"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/your-org/used-tools-marketplace/internal/models"
 )
 
 func (r *AdminRepo) GetOperationsHealth(ctx context.Context) (*models.OperationsHealth, error) {
@@ -128,17 +130,24 @@ func (r *AdminRepo) ReviewVerificationDocument(ctx context.Context, docID, admin
 		return fmt.Errorf("status must be approved or rejected")
 	}
 
-	tag, err := r.db.Exec(ctx, //nolint:gosec
+	var sellerID int
+	err := r.db.QueryRow(ctx, //nolint:gosec
 		`UPDATE seller_verification_documents
 		 SET status=$1, reviewed_by=$2, reviewed_at=NOW(), reject_reason=$3, notes=$4, updated_at=NOW()
-		 WHERE id=$5`,
-		status, adminID, reason, notes, docID)
+		 WHERE id=$5
+		 RETURNING seller_id`,
+		status, adminID, reason, notes, docID).Scan(&sellerID)
 	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return fmt.Errorf("document not found")
+		}
 		return err
 	}
-	if tag.RowsAffected() == 0 {
-		return fmt.Errorf("document not found")
+
+	if status == "approved" && sellerID > 0 {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET identity_verified=true, updated_at=NOW() WHERE id=$1`, sellerID)
 	}
+
 	return nil
 }
 
@@ -510,6 +519,23 @@ func (r *AdminRepo) ReviewAccountAppeal(ctx context.Context, appealID, adminID i
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("appeal not found or already reviewed")
 	}
+
+	if approved {
+		var userID int
+		var appealType string
+		var relatedProductID *int
+		err := r.db.QueryRow(ctx, `SELECT user_id, appeal_type, related_product_id FROM account_appeals WHERE id=$1`, appealID).Scan(&userID, &appealType, &relatedProductID)
+		if err == nil {
+			if appealType == "ban" || appealType == "deactivation" || actionTaken == "unban" || actionTaken == "reinstated" {
+				_, _ = r.db.Exec(ctx, `UPDATE users SET is_banned=false, is_active=true, deactivation_reason=NULL, updated_at=NOW() WHERE id=$1`, userID)
+				_, _ = r.db.Exec(ctx, `UPDATE user_capabilities SET status='active' WHERE user_id=$1 AND status IN ('suspended', 'revoked')`, userID)
+			}
+			if appealType == "listing_rejection" && relatedProductID != nil && *relatedProductID > 0 {
+				_, _ = r.db.Exec(ctx, `UPDATE products SET status='approved', rejection_reason=NULL, updated_at=NOW() WHERE id=$1`, *relatedProductID)
+			}
+		}
+	}
+
 	return nil
 }
 

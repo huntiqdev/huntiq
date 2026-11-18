@@ -118,6 +118,7 @@ func (r *LedgerRepo) RecordLedgerTransaction(ctx context.Context, txEntry *model
 			err = tx.QueryRow(ctx, `
 				INSERT INTO wallet_accounts (user_id, currency, available_balance, pending_balance, reserved_balance, total_withdrawn, lifetime_earned, is_locked)
 				VALUES ($1, 'ETB', 0.00, 0.00, 0.00, 0.00, 0.00, false)
+				ON CONFLICT (user_id) DO UPDATE SET updated_at = NOW()
 				RETURNING id, user_id, currency, available_balance, pending_balance, reserved_balance, total_withdrawn, lifetime_earned, is_locked
 			`, txEntry.UserID).Scan(
 				&w.ID,

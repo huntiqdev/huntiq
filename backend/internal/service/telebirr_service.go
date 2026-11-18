@@ -15,6 +15,7 @@ import (
 
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
+	"github.com/your-org/used-tools-marketplace/pkg/fees"
 )
 
 type TelebirrConfig struct {
@@ -152,6 +153,11 @@ func (s *TelebirrService) HandleWebhook(ctx context.Context, rawBody []byte, sig
 	isSuccess := strings.EqualFold(payload.TradeStatus, "COMPLETED") ||
 		strings.EqualFold(payload.TradeStatus, "SUCCESS") ||
 		strings.EqualFold(payload.TradeStatus, "PAID")
+
+	// Verify that the amount paid matches the registered order amount
+	if isSuccess && !fees.AmountsMatch(payload.TotalAmount, order.Amount) {
+		return nil, fmt.Errorf("telebirr amount mismatch: payload %.2f != order %.2f", payload.TotalAmount, order.Amount)
+	}
 
 	newStatus := "failed"
 	if isSuccess {

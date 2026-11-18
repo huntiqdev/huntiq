@@ -364,7 +364,9 @@ func (r *AdminRepo) ListAdminNotifications(ctx context.Context, adminID int, adm
 		       ($1 = ANY(read_by)) AS is_read_by_me,
 		       created_at
 		FROM admin_notifications
-		WHERE target_role IS NULL OR target_role::text = $2
+		WHERE target_role IS NULL 
+		   OR target_role::text = $2 
+		   OR $2 IN ('platform_owner', 'super')
 		ORDER BY created_at DESC
 		LIMIT 50`, adminID, adminRole)
 	if err != nil {

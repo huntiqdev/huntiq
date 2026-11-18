@@ -325,15 +325,14 @@ func RequirePlatformAdmin(c *fiber.Ctx) error {
 	return c.Next()
 }
 
-// RequireSecurityAdmin ensures the administrator has Security Administrator or Platform Owner access.
-// Strictly forbids platform administrators, operations admins, moderators, and support agents.
+// RequireSecurityAdmin ensures the administrator has Security Administrator, CISO, or Platform Owner access.
 func RequireSecurityAdmin(c *fiber.Ctx) error {
 	role, _ := c.Locals("role").(string)
 	if role != "admin" {
 		return fiber.NewError(fiber.StatusForbidden, "admin access required")
 	}
 	adminRole, _ := c.Locals("adminRole").(string)
-	if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.LegacyRoleSuper {
+	if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.RoleCISO && adminRole != models.LegacyRoleSuper {
 		return fiber.NewError(fiber.StatusForbidden, "security administrator access required")
 	}
 	return c.Next()
@@ -396,16 +395,21 @@ func RequirePortal(portal string) fiber.Handler {
 
 		switch portal {
 		case "executive":
-			if adminRole != models.RolePlatformOwner && adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "executive portal requires Platform Owner role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.LegacyRoleSuper &&
+				adminRole != models.RoleGovComplianceOfficer && adminRole != models.RoleLegalCounsel && adminRole != models.RoleHRDirector && adminRole != models.RoleFinanceDirector {
+				return fiber.NewError(fiber.StatusForbidden, "executive portal requires Executive Governance or Platform Owner role")
 			}
 		case "platform":
-			if adminRole != models.RolePlatformOwner && adminRole != models.RolePlatformAdmin && adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "platform console requires Platform Administrator role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.RolePlatformAdmin && adminRole != models.RoleOperationsAdmin &&
+				adminRole != models.LegacyRoleSuper && adminRole != models.RoleTaxonomyArchitect && adminRole != models.RoleGISLocationSpecialist {
+				return fiber.NewError(fiber.StatusForbidden, "platform console requires Platform or Operations Administrator role")
 			}
 		case "security":
-			if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "security console requires Security Administrator role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.RoleCISO &&
+				adminRole != models.RoleSOCAnalyst && adminRole != models.RoleFraudInvestigator && adminRole != models.RoleComplianceAuditor &&
+				adminRole != models.RoleOperationsAdmin && adminRole != models.RoleModerator && adminRole != models.RoleContentModerator &&
+				adminRole != models.LegacyRoleSuper {
+				return fiber.NewError(fiber.StatusForbidden, "security domain requires Security or Trust & Safety role")
 			}
 		}
 		return c.Next()

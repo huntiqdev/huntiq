@@ -335,19 +335,23 @@ func (h *ProductHandler) Get(c *fiber.Ctx) error {
 		}
 		return response.InternalError(c, err)
 	}
-	if product.Status != "approved" || !product.SellerActive {
-		return response.NotFound(c, "product not found")
-	}
-	// Also hide products whose listing has expired but the sweep job hasn't run yet
-	if product.ExpiresAt != nil && product.ExpiresAt.Before(timeNow()) {
-		return response.NotFound(c, "product not found")
-	}
-
-	// Resolve requester tier & admin status from context
+	// Resolve requester identity & admin status from context
+	callerID, _ := c.Locals("userID").(int)
 	userTier, _ := c.Locals("buyerTier").(string)
 	role, _ := c.Locals("role").(string)
 	adminRole, _ := c.Locals("adminRole").(string)
 	isAdmin := role == "admin" || adminRole != ""
+	isOwner := callerID > 0 && product.SellerID == callerID
+
+	// Non-admin and non-owner callers can only view approved, active, unexpired listings
+	if !isAdmin && !isOwner {
+		if product.Status != "approved" || !product.SellerActive {
+			return response.NotFound(c, "product not found")
+		}
+		if product.ExpiresAt != nil && product.ExpiresAt.Before(timeNow()) {
+			return response.NotFound(c, "product not found")
+		}
+	}
 
 	// Server-enforced specification locking: unauthorized users receive clean public data without restricted specs
 	if !isTierAuthorized(userTier, product.RequiredBuyerTier, isAdmin) {

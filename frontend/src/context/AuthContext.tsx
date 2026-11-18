@@ -392,11 +392,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const adminRole = user?.adminRole ?? '';
 
   const isPlatformOwner = adminRole === 'platform_owner' || adminRole === 'super';
-  const isPlatformAdmin = adminRole === 'platform_admin';
-  const isSecurityAdmin = adminRole === 'security_admin';
-  const isOperationsAdmin = adminRole === 'operations_admin';
-  const isModerator = adminRole === 'moderator';
-  const isSupportAgent = adminRole === 'support_agent';
+  const isPlatformAdmin = adminRole === 'platform_admin' || isPlatformOwner;
+  const isSecurityAdmin = adminRole === 'security_admin' || adminRole === 'ciso' || adminRole === 'soc_analyst' || adminRole === 'fraud_investigator' || adminRole === 'compliance_auditor' || isPlatformOwner;
+  const isOperationsAdmin = adminRole === 'operations_admin' || adminRole === 'kyc_verification_officer' || adminRole === 'product_inspection_officer' || adminRole === 'dispute_refund_officer' || adminRole === 'appeals_officer' || isPlatformOwner;
+  const isModerator = adminRole === 'moderator' || adminRole === 'content_moderator' || isPlatformOwner;
+  const isSupportAgent = adminRole === 'support_agent' || adminRole === 'customer_support_lead' || isPlatformOwner;
 
   const hasCapability = useCallback((cap: string): boolean => {
     if (!user) return false;
