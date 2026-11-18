@@ -1,0 +1,267 @@
+[
+  {
+    "id": 363,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-yirgalem-town",
+    "code": "SI-ZN-YIR",
+    "level": 3,
+    "path": "/1/7/78/363/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Yirgalem Town Administration",
+      "am": "ይርጋለም ከተማ አስተዳደር",
+      "om": "Magaalaa Yirgaalam",
+      "ti": "ይርጋለም ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 6.75,
+      "longitude": 38.415,
+      "bbox": {
+        "min_lat": 6.74,
+        "max_lat": 6.76,
+        "min_lng": 38.405,
+        "max_lng": 38.425
+      }
+    }
+  },
+  {
+    "id": 364,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-aleta-wondo-town",
+    "code": "SI-ZN-ALE",
+    "level": 3,
+    "path": "/1/7/78/364/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Aleta Wondo Town Administration",
+      "am": "አለታ ወንዶ ከተማ አስተዳደር",
+      "om": "Magaalaa Alattaa Wandoo",
+      "ti": "ኣለታ ወንዶ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 6.6,
+      "longitude": 38.415,
+      "bbox": {
+        "min_lat": 6.59,
+        "max_lat": 6.61,
+        "min_lng": 38.405,
+        "max_lng": 38.425
+      }
+    }
+  },
+  {
+    "id": 365,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-leku-town",
+    "code": "SI-ZN-LEK",
+    "level": 3,
+    "path": "/1/7/78/365/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Leku Town Administration",
+      "am": "ለኩ ከተማ አስተዳደር",
+      "om": "Magaalaa Lakkuu",
+      "ti": "ለኩ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 6.875,
+      "longitude": 38.45,
+      "bbox": {
+        "min_lat": 6.865,
+        "max_lat": 6.885,
+        "min_lng": 38.44,
+        "max_lng": 38.46
+      }
+    }
+  },
+  {
+    "id": 409,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-bensa-daye-town",
+    "code": "SI-ZN-DAY",
+    "level": 3,
+    "path": "/1/7/78/409/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Daye (Bensa) Town Administration",
+      "am": "ዳዬ (ቤንሳ) ከተማ አስተዳደር",
+      "om": "Magaalaa Daayee",
+      "ti": "ዳዬ (ቤንሳ) ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 6.51,
+      "longitude": 38.78,
+      "bbox": {
+        "min_lat": 6.49,
+        "max_lat": 6.53,
+        "min_lng": 38.76,
+        "max_lng": 38.8
+      }
+    }
+  },
+  {
+    "id": 268,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-aleta-wondo",
+    "code": "SI-ZN-AW",
+    "level": 3,
+    "path": "/1/7/78/268/",
+    "display_order": 140,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Aleta Wondo Coffee",
+      "ዓለታ ወንዶ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Aleta Wondo Woreda & Town",
+      "am": "አለታ ወንዶ ወረዳና ከተማ",
+      "om": "Alatta Wandoo",
+      "ti": "ዓለታ ወንዶ"
+    },
+    "coordinates": {
+      "latitude": 6.6,
+      "longitude": 38.42,
+      "bbox": null
+    }
+  },
+  {
+    "id": 269,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-dale",
+    "code": "SI-ZN-DAL",
+    "level": 3,
+    "path": "/1/7/78/269/",
+    "display_order": 141,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Dale",
+      "Yirgalem Agro-Industry",
+      "ዳሌ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dale Woreda (ይርጋለም)",
+      "am": "ዳሌ ወረዳ (ይርጋለም)",
+      "om": "Daale (Yirgaalam)",
+      "ti": "ዳሌ (ይርጋለም)"
+    },
+    "coordinates": {
+      "latitude": 6.75,
+      "longitude": 38.4,
+      "bbox": null
+    }
+  },
+  {
+    "id": 270,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-wondo-genet",
+    "code": "SI-ZN-WG",
+    "level": 3,
+    "path": "/1/7/78/270/",
+    "display_order": 142,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Wondo Genet Hot Springs",
+      "ወንዶ ገነት"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Wondo Genet Woreda (ፍልውሃ)",
+      "am": "ወንዶ ገነት ወረዳ (ፍልውሃ)",
+      "om": "Wando Gannat",
+      "ti": "ወንዶ ገነት"
+    },
+    "coordinates": {
+      "latitude": 7.02,
+      "longitude": 38.62,
+      "bbox": null
+    }
+  },
+  {
+    "id": 271,
+    "parent_id": 78,
+    "parent_code": "ET-SI-ZN",
+    "type": "woreda",
+    "slug": "sidama-bensa",
+    "code": "SI-ZN-BEN",
+    "level": 3,
+    "path": "/1/7/78/271/",
+    "display_order": 143,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bensa Daye Coffee",
+      "ቤንሳ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bensa Woreda (ዳዬ)",
+      "am": "ቤንሳ ወረዳ (ዳዬ ቡና)",
+      "om": "Bansa (Daye)",
+      "ti": "ቤንሳ (ዳዬ)"
+    },
+    "coordinates": {
+      "latitude": 6.55,
+      "longitude": 38.8,
+      "bbox": null
+    }
+  }
+]

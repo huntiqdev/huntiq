@@ -114,7 +114,7 @@ export default function BuyerDashboardPage() {
             </div>
             {buyerTier !== 'premium' && (
               <Link href="/buyer/upgrade"
-                className="flex items-center gap-1.5 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-bounce active:scale-95 shadow-md">
+                className="flex items-center gap-1.5 bg-[#1769E0] hover:bg-[#1055BD] text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20">
                 Upgrade <ArrowUpRight size={11} />
               </Link>
             )}
@@ -166,7 +166,7 @@ export default function BuyerDashboardPage() {
         <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 dark:border-zinc-800">
           <h2 className="font-bold text-zinc-900 dark:text-white text-sm">Recent Requests</h2>
           {orders.length > 0 && (
-            <Link href="/buyer/orders" className="text-xs text-orange-600 font-bold hover:underline">View all →</Link>
+            <Link href="/buyer/orders" className="text-xs text-[#1769E0] font-bold hover:underline">View all →</Link>
           )}
         </div>
 
@@ -175,7 +175,7 @@ export default function BuyerDashboardPage() {
             <ShoppingBag size={28} className="opacity-30" />
             <p className="text-sm font-semibold">No order requests yet</p>
             <Link href="/products"
-              className="text-xs text-orange-600 font-bold hover:underline flex items-center gap-1">
+              className="text-xs text-[#1769E0] font-bold hover:underline flex items-center gap-1">
               Browse products <ArrowUpRight size={11} />
             </Link>
           </div>

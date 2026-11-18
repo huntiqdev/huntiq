@@ -109,7 +109,7 @@ func GenerateJWTWithProfile(userID int, name, phone, role, adminRole, buyerTier,
 		SellerPreference: sellerPreference,
 		Capabilities:     capabilities,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(now.Add(24 * time.Hour)), // 24h
+			ExpiresAt: jwt.NewNumericDate(now.Add(15 * time.Minute)), // 15m enterprise access token
 			IssuedAt:  jwt.NewNumericDate(now),
 			NotBefore: jwt.NewNumericDate(now),
 		},
@@ -135,7 +135,6 @@ func GenerateAdminJWT(userID int, adminRole string, sessionID int, sessionToken,
 	}
 	return jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(secret))
 }
-
 
 func ParseJWT(tokenStr, secret string) (*Claims, error) {
 	token, err := jwt.ParseWithClaims(tokenStr, &Claims{}, func(t *jwt.Token) (interface{}, error) {

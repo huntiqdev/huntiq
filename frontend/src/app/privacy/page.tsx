@@ -18,7 +18,7 @@ export default function PrivacyPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12 pb-safe">
       <div className="flex items-center gap-3 mb-6 sm:mb-8">
-        <div className="w-10 h-10 rounded-xl bg-orange-600/10 text-orange-600 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-xl bg-[#1769E0]/10 text-[#1769E0] flex items-center justify-center">
           <Shield size={20} />
         </div>
         <div>

@@ -1,0 +1,32 @@
+{
+  "id": 80,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "zone",
+  "slug": "somali-sitti",
+  "code": "ET-SO-SI",
+  "level": 2,
+  "path": "/1/8/80/",
+  "display_order": 44,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Shinile Zone",
+    "ሲቲ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Sitti Zone",
+    "am": "ሲቲ ዞን",
+    "om": "Siti",
+    "ti": "ዞን ሲቲ"
+  },
+  "coordinates": {
+    "latitude": 10.2,
+    "longitude": 42.0,
+    "bbox": null
+  }
+}

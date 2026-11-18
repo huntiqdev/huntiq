@@ -5,36 +5,36 @@ import "time"
 // LocationHierarchy represents an administrative location node in the data-driven hierarchy.
 // Supports Country -> Region -> Zone/City -> Subcity/Woreda -> Kebele.
 type LocationHierarchy struct {
-	ID                 int                  `json:"id"`
-	ParentID           *int                 `json:"parent_id,omitempty"`
-	LocationType       string               `json:"location_type"` // country, region, zone, city, subcity, woreda, kebele
-	NameEn             string               `json:"name_en"`
-	NameAm             string               `json:"name_am,omitempty"`
-	NameOm             string               `json:"name_om,omitempty"`
-	NameTi             string               `json:"name_ti,omitempty"`
-	Slug               string               `json:"slug"`
-	AdminCode          string               `json:"admin_code,omitempty"`
-	Level              int                  `json:"level"`
-	Path               string               `json:"path"` // Materialized path: /1/5/12/
-	DisplayOrder       int                  `json:"display_order"`
-	IsActive           bool                 `json:"is_active"`
-	IsLeaf             bool                 `json:"is_leaf"`
-	IsDeprecated       bool                 `json:"is_deprecated"`
-	ReplacedByID       *int                 `json:"replaced_by_id,omitempty"`
-	Latitude           *float64             `json:"latitude,omitempty"`
-	Longitude          *float64             `json:"longitude,omitempty"`
-	MinLat             *float64             `json:"min_lat,omitempty"`
-	MaxLat             *float64             `json:"max_lat,omitempty"`
-	MinLng             *float64             `json:"min_lng,omitempty"`
-	MaxLng             *float64             `json:"max_lng,omitempty"`
-	Aliases            []string             `json:"aliases,omitempty"`
-	Source             string               `json:"source,omitempty"`
-	VerificationStatus string               `json:"verification_status,omitempty"`
-	CreatedAt          time.Time            `json:"created_at"`
-	UpdatedAt          time.Time            `json:"updated_at"`
+	ID                 int       `json:"id"`
+	ParentID           *int      `json:"parent_id,omitempty"`
+	LocationType       string    `json:"location_type"` // country, region, zone, city, subcity, woreda, kebele
+	NameEn             string    `json:"name_en"`
+	NameAm             string    `json:"name_am,omitempty"`
+	NameOm             string    `json:"name_om,omitempty"`
+	NameTi             string    `json:"name_ti,omitempty"`
+	Slug               string    `json:"slug"`
+	AdminCode          string    `json:"admin_code,omitempty"`
+	Level              int       `json:"level"`
+	Path               string    `json:"path"` // Materialized path: /1/5/12/
+	DisplayOrder       int       `json:"display_order"`
+	IsActive           bool      `json:"is_active"`
+	IsLeaf             bool      `json:"is_leaf"`
+	IsDeprecated       bool      `json:"is_deprecated"`
+	ReplacedByID       *int      `json:"replaced_by_id,omitempty"`
+	Latitude           *float64  `json:"latitude,omitempty"`
+	Longitude          *float64  `json:"longitude,omitempty"`
+	MinLat             *float64  `json:"min_lat,omitempty"`
+	MaxLat             *float64  `json:"max_lat,omitempty"`
+	MinLng             *float64  `json:"min_lng,omitempty"`
+	MaxLng             *float64  `json:"max_lng,omitempty"`
+	Aliases            []string  `json:"aliases,omitempty"`
+	Source             string    `json:"source,omitempty"`
+	VerificationStatus string    `json:"verification_status,omitempty"`
+	CreatedAt          time.Time `json:"created_at"`
+	UpdatedAt          time.Time `json:"updated_at"`
 
 	// Relationships & Breadcrumbs (populated on demand)
-	Children    []LocationHierarchy `json:"children,omitempty"`
+	Children    []LocationHierarchy  `json:"children,omitempty"`
 	Breadcrumbs []LocationBreadcrumb `json:"breadcrumbs,omitempty"`
 }
 

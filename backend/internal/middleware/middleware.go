@@ -96,6 +96,10 @@ func (m *Middleware) RequireAuth(c *fiber.Ctx) error {
 	header := c.Get("Authorization")
 	if strings.HasPrefix(header, "Bearer ") {
 		token = strings.TrimPrefix(header, "Bearer ")
+	} else if cookie := c.Cookies("huntiq_session"); cookie != "" {
+		token = cookie
+	} else if cookie := c.Cookies("hm_token"); cookie != "" {
+		token = cookie
 	} else if cookie := c.Cookies("hm_admin_session"); cookie != "" {
 		token = cookie
 	}
@@ -190,6 +194,10 @@ func (m *Middleware) OptionalAuth(c *fiber.Ctx) error {
 	header := c.Get("Authorization")
 	if strings.HasPrefix(header, "Bearer ") {
 		token = strings.TrimPrefix(header, "Bearer ")
+	} else if cookie := c.Cookies("huntiq_session"); cookie != "" {
+		token = cookie
+	} else if cookie := c.Cookies("hm_token"); cookie != "" {
+		token = cookie
 	} else if cookie := c.Cookies("hm_admin_session"); cookie != "" {
 		token = cookie
 	}
@@ -317,15 +325,14 @@ func RequirePlatformAdmin(c *fiber.Ctx) error {
 	return c.Next()
 }
 
-// RequireSecurityAdmin ensures the administrator has Security Administrator or Platform Owner access.
-// Strictly forbids platform administrators, operations admins, moderators, and support agents.
+// RequireSecurityAdmin ensures the administrator has Security Administrator, CISO, or Platform Owner access.
 func RequireSecurityAdmin(c *fiber.Ctx) error {
 	role, _ := c.Locals("role").(string)
 	if role != "admin" {
 		return fiber.NewError(fiber.StatusForbidden, "admin access required")
 	}
 	adminRole, _ := c.Locals("adminRole").(string)
-	if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.LegacyRoleSuper {
+	if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.RoleCISO && adminRole != models.LegacyRoleSuper {
 		return fiber.NewError(fiber.StatusForbidden, "security administrator access required")
 	}
 	return c.Next()
@@ -374,18 +381,35 @@ func RequirePortal(portal string) fiber.Handler {
 			return fiber.NewError(fiber.StatusForbidden, "admin access required")
 		}
 		adminRole, _ := c.Locals("adminRole").(string)
+		sessionPortal, _ := c.Locals("portal").(string)
+
+		// Platform Owner and Legacy Super always pass
+		if adminRole == models.RolePlatformOwner || adminRole == models.LegacyRoleSuper {
+			return c.Next()
+		}
+
+		// Enforce session portal scope if session portal was specified
+		if sessionPortal != "" && sessionPortal != "staff" && sessionPortal != portal {
+			return fiber.NewError(fiber.StatusForbidden, "session portal mismatch: action restricted to "+portal+" console")
+		}
+
 		switch portal {
 		case "executive":
-			if adminRole != models.RolePlatformOwner && adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "executive portal requires Platform Owner role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.LegacyRoleSuper &&
+				adminRole != models.RoleGovComplianceOfficer && adminRole != models.RoleLegalCounsel && adminRole != models.RoleHRDirector && adminRole != models.RoleFinanceDirector {
+				return fiber.NewError(fiber.StatusForbidden, "executive portal requires Executive Governance or Platform Owner role")
 			}
 		case "platform":
-			if adminRole != models.RolePlatformOwner && adminRole != models.RolePlatformAdmin && adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "platform console requires Platform Administrator role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.RolePlatformAdmin && adminRole != models.RoleOperationsAdmin &&
+				adminRole != models.LegacyRoleSuper && adminRole != models.RoleTaxonomyArchitect && adminRole != models.RoleGISLocationSpecialist {
+				return fiber.NewError(fiber.StatusForbidden, "platform console requires Platform or Operations Administrator role")
 			}
 		case "security":
-			if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "security console requires Security Administrator role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.RoleCISO &&
+				adminRole != models.RoleSOCAnalyst && adminRole != models.RoleFraudInvestigator && adminRole != models.RoleComplianceAuditor &&
+				adminRole != models.RoleOperationsAdmin && adminRole != models.RoleModerator && adminRole != models.RoleContentModerator &&
+				adminRole != models.LegacyRoleSuper {
+				return fiber.NewError(fiber.StatusForbidden, "security domain requires Security or Trust & Safety role")
 			}
 		}
 		return c.Next()
@@ -420,7 +444,7 @@ func (m *Middleware) RequireReauth(scope string) fiber.Handler {
 
 // RequirePermission checks that an admin has the given page permission.
 // Platform Owner and legacy super admins always pass.
-// Enterprise roles automatically receive their designated domain baseline permissions.
+// Database permissions are authoritative (allowing explicit revocations), falling back to enterprise role baselines.
 func (m *Middleware) RequirePermission(permission string) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		role, _ := c.Locals("role").(string)
@@ -431,20 +455,22 @@ func (m *Middleware) RequirePermission(permission string) fiber.Handler {
 		if adminRole == models.RolePlatformOwner || adminRole == models.LegacyRoleSuper {
 			return c.Next()
 		}
-		// Check enterprise role domain baseline permissions
+		adminID, _ := c.Locals("userID").(int)
+		if m.permissionChecker != nil {
+			ok, err := m.permissionChecker(adminID, permission)
+			if err != nil {
+				return fiber.NewError(fiber.StatusInternalServerError, "permission check failed")
+			}
+			if ok {
+				return c.Next()
+			}
+			return fiber.NewError(fiber.StatusForbidden, "you do not have permission to access: "+permission)
+		}
+		// Fallback when permission checker is unconfigured
 		if domainPerms, ok := models.RoleDomainPermissions[adminRole]; ok && domainPerms[permission] {
 			return c.Next()
 		}
-		// Otherwise verify explicitly granted permission via database checker
-		adminID, _ := c.Locals("userID").(int)
-		if m.permissionChecker == nil {
-			return fiber.NewError(fiber.StatusInternalServerError, "permission checker not configured")
-		}
-		ok, err := m.permissionChecker(adminID, permission)
-		if err != nil || !ok {
-			return fiber.NewError(fiber.StatusForbidden, "you do not have permission to access: "+permission)
-		}
-		return c.Next()
+		return fiber.NewError(fiber.StatusForbidden, "you do not have permission to access: "+permission)
 	}
 }
 
@@ -455,7 +481,7 @@ func (m *Middleware) RequirePermissionOrSuper(permission string) fiber.Handler {
 
 // RequireAnyPermission checks that an admin has at least one of the given permissions.
 // Platform Owner and Legacy Super always pass.
-// Enterprise roles automatically check designated domain baseline permissions.
+// Database permissions are authoritative (allowing explicit revocations), falling back to enterprise role baselines.
 func (m *Middleware) RequireAnyPermission(permissions ...string) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		role, _ := c.Locals("role").(string)
@@ -466,15 +492,19 @@ func (m *Middleware) RequireAnyPermission(permissions ...string) fiber.Handler {
 		if adminRole == models.RolePlatformOwner || adminRole == models.LegacyRoleSuper {
 			return c.Next()
 		}
-		for _, perm := range permissions {
-			if domainPerms, ok := models.RoleDomainPermissions[adminRole]; ok && domainPerms[perm] {
-				return c.Next()
-			}
-			adminID, _ := c.Locals("userID").(int)
-			if m.permissionChecker != nil {
+		adminID, _ := c.Locals("userID").(int)
+		if m.permissionChecker != nil {
+			for _, perm := range permissions {
 				if ok, err := m.permissionChecker(adminID, perm); err == nil && ok {
 					return c.Next()
 				}
+			}
+			return fiber.NewError(fiber.StatusForbidden, "insufficient permissions: required permission not granted")
+		}
+		// Fallback when permission checker is unconfigured
+		for _, perm := range permissions {
+			if domainPerms, ok := models.RoleDomainPermissions[adminRole]; ok && domainPerms[perm] {
+				return c.Next()
 			}
 		}
 		return fiber.NewError(fiber.StatusForbidden, "insufficient permissions: required permission not granted")

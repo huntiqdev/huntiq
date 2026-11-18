@@ -1,0 +1,70 @@
+[
+  {
+    "id": 313,
+    "parent_id": 28,
+    "parent_code": "OR-JIM",
+    "type": "woreda",
+    "slug": "jimma-aba-jifar-district",
+    "code": "OR-JIM-ABA",
+    "level": 3,
+    "path": "/1/4/28/313/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Aba Jifar Subcity (Jimma)",
+      "am": "አባ ጅፋር ክፍለ ከተማ (ጅማ)",
+      "om": "Kutaa Magaalaa Abbaa Jifaar",
+      "ti": "ኣባ ጅፋር ክፍለ ከተማ (ጅማ)"
+    },
+    "coordinates": {
+      "latitude": 7.675,
+      "longitude": 36.835,
+      "bbox": {
+        "min_lat": 7.665,
+        "max_lat": 7.685,
+        "min_lng": 36.825,
+        "max_lng": 36.845
+      }
+    }
+  },
+  {
+    "id": 314,
+    "parent_id": 28,
+    "parent_code": "OR-JIM",
+    "type": "woreda",
+    "slug": "jimma-mendera-district",
+    "code": "OR-JIM-MEN",
+    "level": 3,
+    "path": "/1/4/28/314/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Mendera Kochi Subcity (Jimma)",
+      "am": "መንደራ ኮቺ ክፍለ ከተማ (ጅማ)",
+      "om": "Kutaa Magaalaa Mandaraa Qoochii",
+      "ti": "መንደራ ኮቺ ክፍለ ከተማ (ጅማ)"
+    },
+    "coordinates": {
+      "latitude": 7.665,
+      "longitude": 36.845,
+      "bbox": {
+        "min_lat": 7.655,
+        "max_lat": 7.675,
+        "min_lng": 36.835,
+        "max_lng": 36.855
+      }
+    }
+  }
+]

@@ -75,19 +75,22 @@ function parseJWT(token: string): {
   catch { return null; }
 }
 
-const STORAGE_KEY = 'huntiq_auth_user';
-
 function userFromToken(token: string, fallbackProfile?: Partial<AuthUser>): AuthUser | null {
   const p = parseJWT(token);
   if (!p) return null;
   if (p.exp && p.exp * 1000 < Date.now() - 10_000) return null;
 
-  // Derive additive capabilities
-  let caps: string[] = Array.isArray(p.capabilities) && p.capabilities.length > 0 ? p.capabilities : [];
+  // Derive additive capabilities: Seller and Landlord are unified on the same merchant account
+  let caps: string[] = Array.isArray(p.capabilities) && p.capabilities.length > 0 ? [...p.capabilities] : [];
   if (caps.length === 0) {
-    caps = ['buyer'];
-    if (p.role === 'seller') caps.push('seller');
-    if (p.seller_preference === 'rent' || p.seller_preference === 'both') caps.push('landlord');
+    caps = ['buyer', 'renter'];
+    if (p.role === 'seller') {
+      caps.push('seller', 'landlord');
+    }
+  } else {
+    if (!caps.includes('renter')) caps.push('renter');
+    if (caps.includes('seller') && !caps.includes('landlord')) caps.push('landlord');
+    if (caps.includes('landlord') && !caps.includes('seller')) caps.push('seller');
   }
 
   return {
@@ -103,27 +106,49 @@ function userFromToken(token: string, fallbackProfile?: Partial<AuthUser>): Auth
   };
 }
 
-function getCachedAuthUser(): AuthUser | null {
+const TOKEN_STORAGE_KEY = 'huntiq_token';
+const USER_STORAGE_KEY = 'huntiq_user';
+const LOGGED_OUT_KEY = 'huntiq_logged_out';
+
+function getSavedToken(): string | null {
   if (typeof window === 'undefined') return null;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || !parsed.token) return null;
-    const u = userFromToken(parsed.token, parsed);
-    if (!u) {
-      localStorage.removeItem(STORAGE_KEY);
-      return null;
-    }
-    return u;
+    if (localStorage.getItem(LOGGED_OUT_KEY) === 'true') return null;
+    return localStorage.getItem(TOKEN_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function getSavedUser(): Partial<AuthUser> | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    if (localStorage.getItem(LOGGED_OUT_KEY) === 'true') return null;
+    const str = localStorage.getItem(USER_STORAGE_KEY);
+    return str ? JSON.parse(str) : null;
   } catch {
     return null;
   }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(() => getCachedAuthUser());
-  const [loading, setLoading] = useState(() => (typeof window !== 'undefined' ? !getCachedAuthUser() : true));
+  // Synchronous initial state from safe browser storage to avoid flicker & unwanted redirects
+  const [user, setUser] = useState<AuthUser | null>(() => {
+    const token = getSavedToken();
+    if (!token) return null;
+    const parsed = parseJWT(token);
+    if (!parsed?.exp || parsed.exp * 1000 <= Date.now()) return null;
+    const cachedProfile = getSavedUser();
+    return userFromToken(token, cachedProfile || undefined);
+  });
+
+  const [loading, setLoading] = useState<boolean>(() => {
+    const token = getSavedToken();
+    if (!token) return true;
+    const parsed = parseJWT(token);
+    return !(parsed?.exp && parsed.exp * 1000 > Date.now());
+  });
+
   const [adminPermissions, setAdminPermissions] = useState<string[]>([]);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
@@ -135,9 +160,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     const parsed = parseJWT(u.token);
     if (parsed?.exp && parsed.exp * 1000 < Date.now()) {
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.removeItem(TOKEN_STORAGE_KEY);
+          localStorage.removeItem(USER_STORAGE_KEY);
+        } catch {}
+      }
       await fetch('/api/auth/session', { method: 'DELETE' });
       setUser(null);
-      try { localStorage.removeItem(STORAGE_KEY); } catch {}
       setAdminPermissions([]);
       setIsSuperAdmin(false);
       return;
@@ -148,9 +178,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsSuperAdmin(!!res?.is_super);
     } catch (err: any) {
       if (err?.status === 401 || err?.status === 403) {
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.removeItem(TOKEN_STORAGE_KEY);
+            localStorage.removeItem(USER_STORAGE_KEY);
+          } catch {}
+        }
         await fetch('/api/auth/session', { method: 'DELETE' });
         setUser(null);
-        try { localStorage.removeItem(STORAGE_KEY); } catch {}
         setAdminPermissions([]);
         setIsSuperAdmin(false);
       }
@@ -159,59 +194,103 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    fetch('/api/auth/session')
-      .then(r => r.json())
-      .then(async ({ token }) => {
-        const cached = getCachedAuthUser();
-        const activeToken = token || cached?.token;
-        if (activeToken) {
-          const u = userFromToken(activeToken, cached || undefined);
-          if (u) {
-            // Restore session cookie if cookie was missing but localStorage had valid credentials
-            if (!token && cached?.token) {
-              fetch('/api/auth/session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: cached.token }),
-              }).catch(() => {});
-            }
+    let isCancelled = false;
 
-            // Enrich name and phone if missing
-            if (!u.name || !u.phone) {
-              try {
-                const res = await fetch(`${API_URL}/auth/me`, {
-                  headers: { Authorization: `Bearer ${activeToken}` },
-                });
-                if (res.ok) {
-                  const me = await res.json();
-                  if (me?.name) u.name = me.name;
-                  if (me?.phone) u.phone = me.phone;
-                }
-              } catch {}
-            }
-            setUser(u);
+    const initAuth = async () => {
+      // 1. If explicitly logged out, keep logged out
+      const explicitlyLoggedOut = typeof window !== 'undefined' && localStorage.getItem(LOGGED_OUT_KEY) === 'true';
+      if (explicitlyLoggedOut) {
+        setUser(null);
+        setLoading(false);
+        return;
+      }
+
+      // 2. Read cached browser token
+      const cachedToken = getSavedToken();
+      const cachedProfile = getSavedUser();
+      let activeUser: AuthUser | null = null;
+      if (cachedToken) {
+        activeUser = userFromToken(cachedToken, cachedProfile || undefined);
+        if (activeUser && !isCancelled) {
+          setUser(activeUser);
+          setLoading(false); // Unblock immediately for smooth navigation
+        }
+      }
+
+      // 3. Hydrate & verify with server session endpoint (/api/auth/session)
+      try {
+        const sessionRes = await fetch('/api/auth/session').catch(() => null);
+        const sessionData = sessionRes && sessionRes.ok ? await sessionRes.json().catch(() => null) : null;
+        if (isCancelled) return;
+
+        const serverToken = sessionData?.token;
+        const effectiveToken = serverToken || cachedToken;
+
+        if (effectiveToken) {
+          const u = userFromToken(effectiveToken, cachedProfile || undefined);
+          if (u) {
+            // Enrich with /auth/me to verify token validity and get freshest profile
             try {
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
-            } catch {}
-            await fetchPermissions(u);
-            return;
+              const res = await fetch(`${API_URL}/auth/me`, {
+                credentials: 'include',
+                headers: { Authorization: `Bearer ${effectiveToken}` },
+              });
+              if (res.ok) {
+                const me = await res.json();
+                if (me?.name) u.name = me.name;
+                if (me?.phone) u.phone = me.phone;
+                if (typeof window !== 'undefined') {
+                  try {
+                    localStorage.removeItem(LOGGED_OUT_KEY);
+                    localStorage.setItem(TOKEN_STORAGE_KEY, effectiveToken);
+                    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(u));
+                  } catch {}
+                }
+                if (!isCancelled) {
+                  setUser(u);
+                  await fetchPermissions(u);
+                }
+                return;
+              } else if (res.status === 401 || res.status === 403) {
+                // Token revoked on server
+                if (typeof window !== 'undefined') {
+                  try {
+                    localStorage.removeItem(TOKEN_STORAGE_KEY);
+                    localStorage.removeItem(USER_STORAGE_KEY);
+                  } catch {}
+                }
+                await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
+                if (!isCancelled) setUser(null);
+                return;
+              }
+            } catch {
+              // Network offline: retain activeUser from browser cache
+              if (activeUser && !isCancelled) {
+                setUser(activeUser);
+                return;
+              }
+            }
           }
         }
 
-        // Neither cookie nor cached storage had a valid, unexpired token
-        setUser(null);
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch {}
-      })
-      .catch(() => {
-        // In offline or intermittent network conditions, preserve valid cached user
-        const cached = getCachedAuthUser();
-        if (cached) {
-          setUser(cached);
+        // If no server token and no cached token
+        if (!activeUser && !isCancelled) {
+          setUser(null);
         }
-      })
-      .finally(() => setLoading(false));
+      } catch {
+        if (!activeUser && !isCancelled) {
+          setUser(null);
+        }
+      } finally {
+        if (!isCancelled) setLoading(false);
+      }
+    };
+
+    initAuth();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [fetchPermissions]);
 
   const userRef = useRef<AuthUser | null>(null);
@@ -239,31 +318,68 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user, fetchPermissions]);
 
   const login = async (token: string, sessionToken?: string, profile?: { name?: string; phone?: string; [key: string]: any }) => {
+    // 1. Persist to browser storage (cache setup)
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem(LOGGED_OUT_KEY);
+        localStorage.setItem(TOKEN_STORAGE_KEY, token);
+      } catch {}
+    }
+
+    // 2. Persist to HttpOnly cookie session endpoint
     await fetch('/api/auth/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, session_token: sessionToken }),
     }).catch(() => {});
+
+    // 3. Construct user model
     const u = userFromToken(token, profile);
     if (u) {
       if (profile?.name) u.name = profile.name;
       if (profile?.phone) u.phone = profile.phone;
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(u));
+        } catch {}
+      }
       setUser(u);
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
-      } catch {}
+      setLoading(false);
       await fetchPermissions(u);
     }
   };
 
   const logout = async () => {
-    await fetch('/api/auth/session', { method: 'DELETE' });
+    // 1. Mark explicit logout & purge browser cache
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(LOGGED_OUT_KEY, 'true');
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+        localStorage.removeItem(USER_STORAGE_KEY);
+        sessionStorage.clear();
+      } catch {}
+    }
+
+    // 2. Invalidate backend session
+    try {
+      const csrf = typeof document !== 'undefined' ? (document.cookie.match(/(?:^|;\s*)huntiq_csrf=([^;]+)/)?.[1] || '') : '';
+      await fetch(`${API_URL}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(csrf ? { 'X-CSRF-Token': decodeURIComponent(csrf) } : {}),
+        },
+      }).catch(() => {});
+    } catch {}
+
+    // 3. Clear cookie session
+    await fetch('/api/auth/session', { method: 'DELETE' }).catch(() => {});
+
+    // 4. Reset React state
     setUser(null);
     setAdminPermissions([]);
     setIsSuperAdmin(false);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch {}
   };
 
   const refreshAdminPermissions = async () => {
@@ -276,20 +392,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const adminRole = user?.adminRole ?? '';
 
   const isPlatformOwner = adminRole === 'platform_owner' || adminRole === 'super';
-  const isPlatformAdmin = adminRole === 'platform_admin';
-  const isSecurityAdmin = adminRole === 'security_admin';
-  const isOperationsAdmin = adminRole === 'operations_admin';
-  const isModerator = adminRole === 'moderator';
-  const isSupportAgent = adminRole === 'support_agent';
+  const isPlatformAdmin = adminRole === 'platform_admin' || isPlatformOwner;
+  const isSecurityAdmin = adminRole === 'security_admin' || adminRole === 'ciso' || adminRole === 'soc_analyst' || adminRole === 'fraud_investigator' || adminRole === 'compliance_auditor' || isPlatformOwner;
+  const isOperationsAdmin = adminRole === 'operations_admin' || adminRole === 'kyc_verification_officer' || adminRole === 'product_inspection_officer' || adminRole === 'dispute_refund_officer' || adminRole === 'appeals_officer' || isPlatformOwner;
+  const isModerator = adminRole === 'moderator' || adminRole === 'content_moderator' || isPlatformOwner;
+  const isSupportAgent = adminRole === 'support_agent' || adminRole === 'customer_support_lead' || isPlatformOwner;
 
   const hasCapability = useCallback((cap: string): boolean => {
     if (!user) return false;
     if (capabilities.includes(cap)) return true;
-    if (cap === 'buyer') return true; // all authenticated marketplace users have buyer capabilities
-    if (cap === 'seller' && user.role === 'seller') return true;
-    if (cap === 'landlord' && (sellerPreference === 'rent' || sellerPreference === 'both')) return true;
+    if (cap === 'buyer' || cap === 'renter') return true; // all authenticated marketplace users can buy and rent
+    if ((cap === 'seller' || cap === 'landlord') && (user.role === 'seller' || user.role === 'admin')) return true;
     return false;
-  }, [user, capabilities, sellerPreference]);
+  }, [user, capabilities]);
 
   const isSeller = hasCapability('seller');
   const isBuyer = hasCapability('buyer');

@@ -13,29 +13,26 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/joho/godotenv"
 
+	"github.com/your-org/used-tools-marketplace/internal/cache"
+	"github.com/your-org/used-tools-marketplace/internal/config"
+	"github.com/your-org/used-tools-marketplace/internal/database"
 	handlers "github.com/your-org/used-tools-marketplace/internal/handler"
-	jobs "github.com/your-org/used-tools-marketplace/internal/worker"
 	"github.com/your-org/used-tools-marketplace/internal/middleware"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
-	"github.com/your-org/used-tools-marketplace/internal/service"
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
-	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/security"
-	"github.com/your-org/used-tools-marketplace/internal/config"
-	"github.com/your-org/used-tools-marketplace/internal/database"
+	"github.com/your-org/used-tools-marketplace/internal/service"
+	jobs "github.com/your-org/used-tools-marketplace/internal/worker"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 func main() {
 	_ = godotenv.Load()
-
 	cfg := config.Load()
 	handlers.AppBaseURL = cfg.AppBaseURL
 
-	// Initialize OTP crypto (no global state)
 	otpCrypto, err := security.NewOTPCrypto(cfg.OTPEncryptKey)
 	if err != nil {
 		log.Fatalf("OTP crypto initialization failed: %v", err)
@@ -47,16 +44,76 @@ func main() {
 	}
 	defer db.Close()
 
-	// Context for background jobs — cancelled on shutdown
-	jobCtx, jobCancel := context.WithCancel(context.Background())
-	defer jobCancel()
+	// Ensure critical schema columns exist across any connected database instance
+	startupCtx, startupCancel := context.WithTimeout(context.Background(), 20*time.Second)
+	_, _ = db.Exec(startupCtx, `
+		DO $$ BEGIN
+			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'account_entity_type') THEN
+				CREATE TYPE account_entity_type AS ENUM ('INDIVIDUAL', 'COMPANY', 'GOVERNMENT', 'OTHER_LEGALLY_APPROVED_ENTITY');
+			END IF;
+			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'org_verification_status') THEN
+				CREATE TYPE org_verification_status AS ENUM ('DRAFT', 'SUBMITTED', 'IDENTITY_PENDING', 'DOCUMENT_REVIEW', 'VERIFIED', 'REJECTED', 'SUSPENDED', 'EXPIRED', 'REVERIFICATION_REQUIRED');
+			END IF;
+			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'identity_verification_status') THEN
+				CREATE TYPE identity_verification_status AS ENUM ('pending', 'verified', 'rejected', 'escalated', 'expired');
+			END IF;
+		END $$;
 
+		CREATE TABLE IF NOT EXISTS organizations (
+			id SERIAL PRIMARY KEY,
+			name VARCHAR(200) NOT NULL,
+			entity_type account_entity_type NOT NULL DEFAULT 'INDIVIDUAL',
+			registration_number VARCHAR(100),
+			tin_number VARCHAR(50),
+			official_address TEXT,
+			official_email VARCHAR(150),
+			official_phone VARCHAR(25),
+			publishing_authority_evidence TEXT,
+			verification_status org_verification_status NOT NULL DEFAULT 'DRAFT',
+			reviewed_by INT,
+			reviewed_at TIMESTAMPTZ,
+			review_notes TEXT,
+			created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+			updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+		);
+
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS custom_url character varying(500);
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS social_links jsonb DEFAULT '{}'::jsonb;
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS publisher_role VARCHAR(50) NOT NULL DEFAULT 'seller';
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS organization_id INT;
+		ALTER TABLE products ADD COLUMN IF NOT EXISTS brokerage_disclosure_agreed BOOLEAN NOT NULL DEFAULT true;
+
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS custom_url character varying(500);
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS account_entity_type account_entity_type NOT NULL DEFAULT 'INDIVIDUAL';
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS identity_verified BOOLEAN NOT NULL DEFAULT false;
+		ALTER TABLE users ADD COLUMN IF NOT EXISTS organization_id INT;
+
+		-- Clean any legacy mixed-language category names where Amharic in parentheses leaked into English
+		UPDATE category_hierarchy 
+		SET name_en = TRIM(REGEXP_REPLACE(name_en, '\s*\([^)]*[\u1200-\u137F][^)]*\)', ''))
+		WHERE name_en ~ '[\u1200-\u137F]';
+
+		UPDATE categories 
+		SET name = TRIM(REGEXP_REPLACE(name, '\s*\([^)]*[\u1200-\u137F][^)]*\)', ''))
+		WHERE name ~ '[\u1200-\u137F]';
+	`)
+	startupCancel()
+
+	if err := search.LoadSearchConfig("data/search_config.json"); err != nil {
+		if err2 := search.LoadSearchConfig("../data/search_config.json"); err2 != nil {
+			log.Printf("[INFO] Search config: default settings loaded (%v)", err)
+		}
+	}
+
+	// Background worker context with graceful cancellation
+	jobCtx, cancelJobs := context.WithCancel(context.Background())
+	defer cancelJobs()
 	jobs.StartExpiryJob(jobCtx, db)
 	jobs.StartUnverifiedUserCleanup(jobCtx, db)
 	jobs.StartOTPCleanup(jobCtx, db)
 	jobs.StartCommissionConfirmJob(jobCtx, db)
 
-	// Repositories with OTP crypto injected
+	// Repositories
 	productRepo := repository.NewProductRepo(db)
 	categoryRepo := repository.NewCategoryRepo(db)
 	categoryHierarchyRepo := repository.NewCategoryHierarchyRepo(db)
@@ -70,14 +127,20 @@ func main() {
 	sellerRepo := repository.NewSellerRepo(db)
 	bannerRepo := repository.NewBannerRepo(db)
 	referralRepo := repository.NewReferralRepo(db)
-	
-	// Search handler for admin analytics
-	searchHandler := handlers.NewSearchHandler(searchRepo)
+	sessionRepo := repository.NewSessionRepo(db)
+	classificationRepo := repository.NewClassificationRepo(db)
+	adminPasskeyRepo := repository.NewAdminPasskeyRepo(db)
+	fpaRepo := repository.NewFPARepo(db)
+	smsRepo := repository.NewSMSRepo(db)
+	ledgerRepo := repository.NewLedgerRepo(db)
+	referralTokenRepo := repository.NewReferralTokenRepo(db)
+	telebirrRepo := repository.NewTelebirrRepo(db)
+	identityRepo := repository.NewIdentityRepo(db)
+	orgRepo := repository.NewOrganizationRepo(db)
+	recoveryRepo := repository.NewRecoveryRepo(db)
+	masterDataRepo := repository.NewMasterDataRepo(db)
 
-	// Wire is_active check so deactivated users can't use stale JWTs.
-	// Results are cached for 30 s to avoid a DB query on every authenticated request.
-	// Cache is bounded to 10,000 entries — oldest entries are evicted when full.
-	// A background goroutine evicts expired entries every 5 minutes.
+	// In-memory active user cache
 	const isActiveCacheMax = 10_000
 	var (
 		isActiveMu    sync.Mutex
@@ -105,43 +168,60 @@ func main() {
 			}
 		}
 	}()
-	// IsActiveChecker is wired after services are initialized (see below) so authSvc is in scope.
 
-	// Services with OTP crypto injected
+	// Services
 	productSvc := service.NewProductService(productRepo, categoryRepo, locationRepo, userRepo).
 		WithBackendBase(cfg.AppBaseURL).
 		WithAttributeRepo(attributeRepo).
 		WithCategoryHierarchyRepo(categoryHierarchyRepo)
 	locationSvc := service.NewLocationService(locationRepo).WithHierarchy(locationHierarchyRepo)
 	categoryHierarchySvc := service.NewCategoryHierarchyService(categoryHierarchyRepo)
+	classificationSvc := service.NewClassificationService(classificationRepo)
 	attributeSvc := service.NewAttributeService(attributeRepo)
-	authSvc := service.NewAuthService(userRepo, cfg.JWTSecret).
-		WithDevMode(cfg.DevMode).
-		WithOTPCrypto(otpCrypto)
+	authSvc := service.NewAuthService(userRepo, cfg.JWTSecret).WithDevMode(cfg.DevMode).WithOTPCrypto(otpCrypto)
+	sessionSvc := service.NewSessionService(sessionRepo, userRepo, cfg.JWTSecret, cfg.DevMode)
+	authSvc.WithSessionRevoker(sessionSvc.RevokeAllUserSessions)
 	txSvc := service.NewTransactionService(txRepo, productRepo, userRepo)
 	adminSvc := service.NewAdminService(adminRepo)
 	sellerSvc := service.NewSellerService(sellerRepo)
+	ledgerSvc := service.NewLedgerService(ledgerRepo)
+	smsMgr := service.NewSMSManager(smsRepo, cfg.DevMode)
+	referralTokenSvc := service.NewReferralTokenService(referralTokenRepo, ledgerSvc)
+	telebirrCfg := &service.TelebirrConfig{
+		AppID:       cfg.TelebirrAppID,
+		AppKey:      cfg.TelebirrAppKey,
+		ShortCode:   cfg.TelebirrShortCode,
+		APIEndpoint: cfg.TelebirrAPIEndpoint,
+		NotifyURL:   cfg.TelebirrNotifyURL,
+		ReturnURL:   cfg.TelebirrReturnURL,
+	}
+	telebirrSvc := service.NewTelebirrService(telebirrRepo, referralTokenSvc, ledgerSvc, telebirrCfg, cfg.DevMode)
+
 	referralSvc := service.NewReferralService(referralRepo).
-		WithSettingsReader(func(ctx context.Context, key string) string {
-			return adminSvc.GetSetting(ctx, key)
-		})
+		WithSettingsReader(func(ctx context.Context, k string) string {
+			return adminSvc.GetSetting(ctx, k)
+		}).
+		WithLedgerService(ledgerSvc)
+	fpaSvc := service.NewFPAService(fpaRepo)
+	identitySvc := service.NewIdentityService(identityRepo, cfg.DevMode)
+	orgSvc := service.NewOrganizationService(orgRepo)
+	masterDataSvc := service.NewMasterDataService(masterDataRepo)
 
-	// Inject referral service into dependent services
 	txSvc.WithReferralService(referralSvc)
-	authSvc.WithReferralService(referralSvc)
-	adminSvc.WithReferralService(referralSvc)
-	adminSvc.WithSellerService(sellerSvc)
+	authSvc.WithReferralService(referralSvc).
+		WithAdminService(adminSvc).
+		WithSMSManager(smsMgr).
+		WithReferralTokenService(referralTokenSvc).
+		WithRecoveryRepo(recoveryRepo).
+		WithIdentityService(identitySvc).
+		WithOrganizationService(orgSvc)
+	adminSvc.WithReferralService(referralSvc).WithSellerService(sellerSvc)
 
-	// Inject admin service into auth so first-login notifications work
-	authSvc.WithAdminService(adminSvc)
-
-	// ── WebAuthn & Enterprise Admin Authentication Setup ─────────────────────
-	adminPasskeyRepo := repository.NewAdminPasskeyRepo(db)
+	// WebAuthn Manager
 	rpID := security.DeriveRPID(cfg.FrontendURL)
-	rpOrigins := []string{cfg.FrontendURL, cfg.AppBaseURL, "http://localhost:3000", "http://localhost:8080"}
-	waManager, err := security.NewWebAuthnManager(rpID, rpOrigins)
+	waManager, err := security.NewWebAuthnManager(rpID, []string{cfg.FrontendURL, cfg.AppBaseURL, "http://localhost:3000", "http://localhost:8080"})
 	if err != nil {
-		log.Fatalf("failed to initialize WebAuthn manager: %v", err)
+		log.Fatalf("WebAuthn initialization failed: %v", err)
 	}
 	adminAuthSvc := service.NewAdminAuthService(adminPasskeyRepo, userRepo, adminRepo, waManager, cfg.JWTSecret)
 	adminSvc.WithSessionRevoker(func(ctx context.Context, userID int, reason string) error {
@@ -150,9 +230,6 @@ func main() {
 		isActiveMu.Unlock()
 		return adminAuthSvc.RevokeAllSessions(ctx, userID, reason)
 	})
-	adminAuthHandler := handlers.NewAdminAuthHandler(adminAuthSvc, authSvc, adminSvc, !cfg.DevMode)
-
-	// Wire session creator into auth service for password+MFA admin logins
 	authSvc.WithSessionCreator(func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error) {
 		rawToken, sess, err := adminAuthSvc.CreateAdminSession(ctx, userID, portal, ip, ua)
 		if err != nil {
@@ -161,7 +238,7 @@ func main() {
 		return rawToken, sess.ID, nil
 	})
 
-	// Initialize middleware with dependencies (no global state!)
+	// Middleware
 	mw := middleware.New(cfg.JWTSecret).
 		WithSessionValidator(adminAuthSvc.ValidateSession).
 		WithAdminSessionValidator(adminAuthSvc.ValidateSessionByID).
@@ -172,8 +249,6 @@ func main() {
 				isActiveMu.Unlock()
 				return e.active, nil
 			}
-			// Evict ~50% of entries randomly to prevent wiping the entire cache (thundering herd)
-			// under a burst of unique user IDs (e.g. scraper traffic).
 			if len(isActiveCache) >= isActiveCacheMax {
 				i := 0
 				for id := range isActiveCache {
@@ -191,11 +266,7 @@ func main() {
 			if err != nil {
 				return false, err
 			}
-
 			active := u.IsActive
-			// Strictly enforce OTP verification for all authenticated routes.
-			// If the user is not OTP-verified, return a specific error code so the
-			// frontend can redirect to the OTP step instead of the login page.
 			if u.Role != "admin" && !u.OTPVerified && authSvc.IsOTPRequired(ctx) {
 				active = false
 			}
@@ -204,7 +275,7 @@ func main() {
 			isActiveCache[userID] = struct {
 				active  bool
 				expires time.Time
-			}{active, time.Now().Add(10 * time.Second)} // 10s matches frontend JWT grace period in core.ts
+			}{active, time.Now().Add(10 * time.Second)}
 			isActiveMu.Unlock()
 			return active, nil
 		}).
@@ -219,85 +290,59 @@ func main() {
 				return "normal", nil
 			}
 			return u.Tier, nil
+		}).
+		WithPermissionChecker(func(adminID int, permission string) (bool, error) {
+			ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+			defer cancel()
+			return adminSvc.HasPermission(ctx, adminID, permission)
+		}).
+		WithMaintenanceChecker(func() (bool, error) {
+			ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+			defer cancel()
+			return adminSvc.GetSetting(ctx, "maintenance_mode") == "true", nil
 		})
 
-	// High-speed caching (Redis if reachable, resilient in-memory fallback)
 	appCache := cache.New(cfg.RedisAddr, cfg.RedisPassword, cfg.RedisDB)
 	defer appCache.Close()
 
 	// Handlers
-	aiClient := aiclient.NewClient(cfg.AIServiceURL, cfg.AISecretKey).
-		WithOllama(cfg.OllamaURL, cfg.OllamaModel).
-		WithProvider(cfg.AIProvider).
-		WithCache(appCache)
-	aiConvRepo := repository.NewAIConversationRepo(db)
-	aiToolDispatcher := service.NewAIToolDispatcher(productRepo)
-	aiChatSvc := service.NewAIChatService(aiConvRepo, aiClient, aiToolDispatcher)
-	aiChatHandler := handlers.NewAIChatHandler(aiChatSvc)
-	internalAIToolHandler := handlers.NewInternalAIToolHandler(aiToolDispatcher, cfg.AISecretKey)
-
-	productHandler := handlers.NewProductHandler(productSvc, authSvc).
-		WithSearchLogger(searchRepo).
-		WithAIClient(aiClient).
-		WithCategoryHierarchy(categoryHierarchySvc).
-		WithCache(appCache)
+	productHandler := handlers.NewProductHandler(productSvc, authSvc).WithSearchLogger(searchRepo).WithCategoryHierarchy(categoryHierarchySvc).WithCache(appCache)
 	locationHandler := handlers.NewLocationHandler(locationSvc)
-	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc).
-		WithCache(appCache).
-		WithAdminLogger(func(ctx context.Context, adminID int, action, notes string) {
-			adminSvc.InsertAdminLog(ctx, models.AdminLog{
-				AdminID:   adminID,
-				Action:    action,
-				Notes:     notes,
-				IPAddress: "",
-			})
-		})
+	categoryHandler := handlers.NewCategoryHandler(categoryHierarchySvc).WithCache(appCache).WithAdminLogger(func(ctx context.Context, adminID int, action, notes string) {
+		adminSvc.InsertAdminLog(ctx, models.AdminLog{AdminID: adminID, Action: action, Notes: notes})
+	})
 	attributeHandler := handlers.NewAttributeHandler(attributeSvc).WithProductService(productSvc)
-	authHandler := handlers.NewAuthHandler(authSvc).WithAdminService(adminSvc).WithDevMode(cfg.DevMode)
+	authHandler := handlers.NewAuthHandler(authSvc).WithSessionService(sessionSvc).WithAdminService(adminSvc).WithDevMode(cfg.DevMode)
+	adminAuthHandler := handlers.NewAdminAuthHandler(adminAuthSvc, authSvc, adminSvc, !cfg.DevMode)
 	txHandler := handlers.NewTransactionHandler(txSvc)
 	adminHandler := handlers.NewAdminHandler(adminSvc, authSvc).WithCategoryRepo(categoryRepo).WithProductRepo(productRepo)
 	sellerHandler := handlers.NewSellerHandler(sellerSvc).WithAdminService(adminSvc)
 	bannerHandler := handlers.NewBannerHandler(bannerRepo)
-	buyerHandler  := handlers.NewBuyerHandler(authSvc).WithAdminService(adminSvc)
-	fpaRepo       := repository.NewFPARepo(db)
-	fpaSvc        := service.NewFPAService(fpaRepo)
-	fpaHandler    := handlers.NewFPAHandler(fpaSvc)
+	buyerHandler := handlers.NewBuyerHandler(authSvc).WithAdminService(adminSvc)
+	fpaHandler := handlers.NewFPAHandler(fpaSvc)
+	classificationHandler := handlers.NewClassificationHandler(classificationSvc)
 	referralHandler := handlers.NewReferralHandler(referralSvc, cfg.FrontendURL).
 		WithAdminNotifier(func(ctx context.Context, userID int, amount float64) {
 			notifyCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
-			msg := fmt.Sprintf("User #%d has requested a referral commission withdrawal of ETB %.2f. Review in the Referrals panel.", userID, amount) //nolint:gosec // G117/G201: internal values only, no user-controlled input reaches this format string
-			// target_role="" means all admins see it; withdrawals-permission admins can act on it.
+			msg := fmt.Sprintf("User #%d requested withdrawal of ETB %.2f", userID, amount)
 			_ = adminSvc.CreateNotification(notifyCtx, "Withdrawal Request", msg, "warning", "")
 		}).
 		WithAdminLogger(func(ctx context.Context, adminID int, targetUserID *int, action, notes string) {
-			adminSvc.InsertAdminLog(ctx, models.AdminLog{
-				AdminID:      adminID,
-				TargetUserID: targetUserID,
-				Action:       action,
-				Notes:        notes,
-				IPAddress:    "", // IP not available in this context without extra plumbing
-			})
+			adminSvc.InsertAdminLog(ctx, models.AdminLog{AdminID: adminID, TargetUserID: targetUserID, Action: action, Notes: notes})
 		})
+	searchHandler := handlers.NewSearchHandler(searchRepo)
+	telebirrHandler := handlers.NewTelebirrHandler(telebirrSvc)
+	walletHandler := handlers.NewWalletHandler(ledgerSvc, referralTokenSvc, cfg.FrontendURL)
+	adminFinancialHandler := handlers.NewAdminFinancialHandler(ledgerSvc, smsRepo)
+	identityHandler := handlers.NewIdentityHandler(identitySvc)
+	organizationHandler := handlers.NewOrganizationHandler(orgSvc)
+	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
 
-	// Wire withdrawal settings reader so ReferralService reads limits from DB
-	// (already injected above via WithSettingsReader — no global state needed)
-
-	// Inject permission and maintenance checkers into middleware
-	mw.WithPermissionChecker(func(adminID int, permission string) (bool, error) {
-		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-		defer cancel()
-		return adminSvc.HasPermission(ctx, adminID, permission)
-	}).WithMaintenanceChecker(func() (bool, error) {
-		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-		defer cancel()
-		v := adminSvc.GetSetting(ctx, "maintenance_mode")
-		return v == "true", nil
-	})
-
+	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
-		BodyLimit:   22 * 1024 * 1024, // 22 MB — allows up to 20 MB image uploads with multipart overhead //nolint:mnd
-		ProxyHeader: fiber.HeaderXForwardedFor, // trust X-Forwarded-For from reverse proxy (Render/Heroku)
+		BodyLimit:   22 * 1024 * 1024,
+		ProxyHeader: fiber.HeaderXForwardedFor,
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			code := fiber.StatusInternalServerError
 			msg := "an internal error occurred"
@@ -310,8 +355,7 @@ func main() {
 					msg = "image is too large — maximum size is 20 MB"
 				}
 			} else {
-				// Unknown error — log it but never expose to client
-				log.Printf("[ERROR] unhandled (IP: %s): %s %s: %v", c.IP(), c.Method(), c.Path(), err) //nolint:gosec // G117: error/value from internal source, not user-controlled input
+				log.Printf("[ERROR] unhandled (IP: %s): %s %s: %v", c.IP(), c.Method(), c.Path(), err)
 			}
 			return c.Status(code).JSON(fiber.Map{"success": false, "error": msg})
 		},
@@ -319,7 +363,6 @@ func main() {
 
 	app.Use(middleware.CorrelationID)
 	app.Use(middleware.RequestLogger)
-	// Security headers — applied to every response
 	app.Use(func(c *fiber.Ctx) error {
 		c.Set("X-Content-Type-Options", "nosniff")
 		c.Set("X-Frame-Options", "DENY")
@@ -331,548 +374,69 @@ func main() {
 		return c.Next()
 	})
 	app.Use(cors.New(cors.Config{
-		// AllowOriginsFunc allows the primary domain plus all Vercel preview deployments.
-		// Preview URLs follow the pattern: <project>-<hash>-<team>.vercel.app
-		// This lets you test any Vercel preview build without updating ALLOW_ORIGIN.
-		AllowOriginsFunc: func(origin string) bool {
-			return cfg.IsAllowedOrigin(origin)
-		},
-		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
-		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
+		AllowOriginsFunc: cfg.IsAllowedOrigin,
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization, X-CSRF-Token",
+		AllowMethods:     "GET, POST, PUT, PATCH, DELETE, OPTIONS",
 		AllowCredentials: true,
 	}))
 
-	// Serve uploaded images as static files
-	// UPLOAD_DIR env var overrides default ./uploads (use persistent disk on Render)
-	uploadDir := handlers.UploadDir
-	app.Static("/uploads", uploadDir)
-
-	// Root endpoint
+	app.Static("/uploads", handlers.UploadDir)
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{"success": true, "message": "HUNTIQ API is running"})
 	})
-
-	// Health check endpoint
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{"status": "ok"})
 	})
 
-	api := app.Group("/api")
-	api.Use(mw.OptionalAuth)
-	api.Use(mw.RequireNoMaintenance)
-
-	// Public rate limiter — keyed by IP for unauthenticated endpoints
-	publicLimiter := limiter.New(limiter.Config{
-		Max:          10,
-		Expiration:   1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "too many requests — please wait a minute and try again",
-			})
-		},
+	// Register all application routes
+	registerRoutes(app, &AppDeps{
+		Config:                cfg,
+		MW:                    mw,
+		ProductHandler:        productHandler,
+		LocationHandler:       locationHandler,
+		CategoryHandler:       categoryHandler,
+		AttributeHandler:      attributeHandler,
+		ClassificationHandler: classificationHandler,
+		AuthHandler:           authHandler,
+		AdminAuthHandler:      adminAuthHandler,
+		AdminHandler:          adminHandler,
+		SellerHandler:         sellerHandler,
+		BuyerHandler:          buyerHandler,
+		TransactionHandler:    txHandler,
+		BannerHandler:         bannerHandler,
+		ReferralHandler:       referralHandler,
+		TelebirrHandler:       telebirrHandler,
+		WalletHandler:         walletHandler,
+		AdminFinancialHandler: adminFinancialHandler,
+		FPAHandler:            fpaHandler,
+		SearchHandler:         searchHandler,
+		IdentityHandler:       identityHandler,
+		OrganizationHandler:   organizationHandler,
+		MasterDataHandler:     masterDataHandler,
 	})
 
-	// Search rate limiter — 60 requests/minute per IP to protect catalog & AI worker
-	searchLimiter := limiter.New(limiter.Config{
-		Max:          60,
-		Expiration:   1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "search rate limit reached — please slow down",
-			})
-		},
-	})
-
-	// ── Public ──────────────────────────────────────────────────────────────
-	api.Get("/products", searchLimiter, mw.OptionalAuth, productHandler.List)
-	api.Post("/products/auto-categorize", searchLimiter, mw.OptionalAuth, productHandler.AutoCategorize)
-	api.Get("/products/:id", mw.OptionalAuth, productHandler.Get)
-	api.Get("/categories", productHandler.ListCategories)
-	api.Get("/categories/roots", categoryHandler.GetRoots)
-	api.Get("/categories/tree", categoryHandler.GetCategoryTree)
-	api.Get("/categories/popular", productHandler.PopularCategories)
-	api.Get("/categories/check-slug", categoryHandler.CheckSlug)
-	api.Get("/categories/slug/:slug", categoryHandler.GetCategoryBySlug)
-	api.Get("/categories/:id", categoryHandler.GetCategory)
-	api.Get("/categories/:id/children", categoryHandler.GetCategoryChildren)
-	api.Get("/categories/:id/ancestors", categoryHandler.GetCategoryBreadcrumbs)
-	api.Get("/categories/:id/attributes", attributeHandler.GetCategoryAttributes)
-	
-	// Attributes (Public)
-	api.Get("/attributes", attributeHandler.ListAttributeDefinitions)
-	api.Get("/products/:id/attributes", mw.OptionalAuth, attributeHandler.GetProductAttributes)
-	
-	api.Post("/orders", publicLimiter, mw.OptionalAuth, sellerHandler.CreateOrder)
-	api.Get("/fee-options", productHandler.FeeOptions)
-	api.Get("/locations/regions", locationHandler.ListRegions)
-	api.Get("/locations/zones", locationHandler.ListZones)
-	api.Get("/locations/subcities", locationHandler.ListSubcities)
-	api.Get("/locations/woredas", locationHandler.ListWoredas)
-	api.Get("/locations/search", locationHandler.SearchLocations)
-
-	// Location Hierarchy & GPS Reverse Geocoding (Public)
-	api.Post("/locations/reverse-geocode", locationHandler.ReverseGeocode)
-	api.Get("/locations/tree", locationHandler.GetLocationTree)
-	api.Get("/locations/children", locationHandler.ListChildren)
-	api.Get("/locations/search-hierarchy", locationHandler.SearchHierarchy)
-
-	// Public banners (buyer/seller hero)
-	api.Get("/banners", bannerHandler.ListPublic)
-
-	// Public payment settings (merchant phones — safe to expose, no auth)
-	api.Get("/public/payment-settings", adminHandler.GetPublicPaymentSettings)
-
-	// Public platform settings (company info, limits, public configurations)
-	api.Get("/public/settings", adminHandler.GetPublicSettings)
-
-	// Trust & Safety / Appeals (Public / User submission)
-	api.Post("/reports", buyerHandler.CreateAbuseReport)
-	api.Post("/appeals", buyerHandler.CreateAccountAppeal)
-	api.Post("/contact", publicLimiter, buyerHandler.SubmitContactMessage)
-
-	// Public promotion banner (admin-controlled announcement box)
-	api.Get("/public/promotion", adminHandler.GetPublicPromotion)
-
-	// ── Auth ─────────────────────────────────────────────────────────────────
-	// Rate limiters — keyed by IP to prevent brute-force and mass registration
-	authLimiter := limiter.New(limiter.Config{
-		Max:          10,
-		Expiration:   1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "too many requests — please wait a minute and try again",
-			})
-		},
-	})
-	otpLimiter := limiter.New(limiter.Config{
-		Max:          5,
-		Expiration:   1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "too many OTP requests — please wait a minute",
-			})
-		},
-	})
-	api.Post("/auth/otp/send", otpLimiter, authHandler.SendOTP)
-	api.Post("/auth/otp/verify", otpLimiter, authHandler.VerifyOTP)
-	api.Post("/auth/otp/login", authLimiter, authHandler.OTPLogin)
-	api.Post("/auth/demand", mw.RequireAuth, authHandler.SetDemand)
-
-	// ── Unified Authentication & Capabilities ────────────────────────────────
-	api.Post("/auth/register", authLimiter, authHandler.UnifiedRegister)
-	api.Post("/auth/login", authLimiter, authHandler.UnifiedLogin)
-	api.Get("/auth/me", mw.RequireAuth, authHandler.GetMe)
-	api.Get("/auth/capabilities", mw.RequireAuth, authHandler.GetCapabilities)
-	api.Post("/auth/capabilities/activate", mw.RequireAuth, authHandler.ActivateCapability)
-
-	// ── Conversational AI Workspace ──────────────────────────────────────────
-	// Public Stateless AI Chat (Free guest access, zero database writes, rate-limited by IP)
-	aiGuestLimiter := limiter.New(limiter.Config{
-		Max:          30,
-		Expiration:   1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "AI assistant rate limit reached — please wait a minute and try again",
-			})
-		},
-	})
-	api.Post("/ai/chat", aiGuestLimiter, aiChatHandler.GuestChat)
-	api.Post("/internal/ai/tools/execute", internalAIToolHandler.Execute)
-
-	// Authenticated Multi-Turn AI Sessions (Preserved for signed-in users)
-	ai := api.Group("/ai", mw.RequireAuth)
-	ai.Post("/conversations", aiChatHandler.CreateConversation)
-	ai.Get("/conversations", aiChatHandler.ListConversations)
-	ai.Get("/conversations/:id", aiChatHandler.GetConversation)
-	ai.Patch("/conversations/:id", aiChatHandler.UpdateConversation)
-	ai.Delete("/conversations/:id", aiChatHandler.DeleteConversation)
-	ai.Post("/conversations/:id/messages", aiChatHandler.SendMessage)
-
-	api.Post("/auth/forgot-password", authLimiter, authHandler.UnifiedForgotPassword)
-	api.Post("/auth/reset-password", authLimiter, authHandler.UnifiedResetPassword)
-	api.Post("/seller/register", authLimiter, authHandler.Register)
-	api.Post("/seller/login", authLimiter, authHandler.Login)
-	api.Post("/seller/check", authLimiter, authHandler.CheckSellerExists)
-	api.Post("/seller/forgot-password", authLimiter, authHandler.SellerForgotPassword)
-	api.Post("/seller/reset-password", authLimiter, authHandler.SellerResetPassword)
-	api.Post("/buyer/register", authLimiter, authHandler.BuyerRegister)
-	api.Post("/buyer/login", authLimiter, authHandler.BuyerLogin)
-	api.Post("/buyer/check", authLimiter, authHandler.CheckBuyerExists)
-	api.Post("/buyer/forgot-password", authLimiter, authHandler.BuyerForgotPassword)
-	api.Post("/buyer/reset-password", authLimiter, authHandler.BuyerResetPassword)
-	api.Post("/admin/login", authLimiter, authHandler.AdminLogin)
-	api.Post("/admin/login/verify", otpLimiter, authHandler.AdminLoginVerifyOTP)
-	api.Post("/admin/forgot-password", authLimiter, authHandler.AdminForgotPassword)
-	api.Post("/admin/reset-password", authLimiter, authHandler.AdminResetPassword)
-
-	// ── Enterprise Administrative Authentication & Passkeys ─────────────────
-	// Login begin / finish (supports both /admin/passkeys/* and /admin/auth/passkey/*)
-	api.Post("/admin/passkeys/login/begin", adminAuthHandler.BeginLogin)
-	api.Post("/admin/auth/passkey/login/begin", adminAuthHandler.BeginLogin)
-	api.Post("/admin/passkeys/login/finish", adminAuthHandler.FinishLogin)
-	api.Post("/admin/auth/passkey/login/verify", adminAuthHandler.FinishLogin)
-
-	// Registration begin / finish (requires admin authentication and active admin session)
-	api.Post("/admin/passkeys/register/begin", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.BeginRegistration)
-	api.Post("/admin/auth/passkey/register/begin", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.BeginRegistration)
-	api.Post("/admin/passkeys/register/finish", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.FinishRegistration)
-	api.Post("/admin/auth/passkey/register/verify", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.FinishRegistration)
-
-	// Passkey credential management
-	api.Get("/admin/passkeys", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.ListPasskeys)
-	api.Get("/admin/auth/passkey/list", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.ListPasskeys)
-	api.Delete("/admin/passkeys/:id", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.RevokePasskey)
-	api.Delete("/admin/auth/passkey/:id", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.RevokePasskey)
-
-	// Re-authentication
-	api.Post("/admin/reauth/begin", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.BeginReauth)
-	api.Post("/admin/reauth/finish", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.FinishReauth)
-	api.Post("/admin/auth/reauth", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.ReauthPassword)
-
-	// Session Revocation & Logout
-	api.Post("/admin/logout", adminAuthHandler.Logout)
-	api.Post("/admin/auth/session/revoke", mw.RequireAuth, middleware.RequireRole("admin"), adminAuthHandler.RevokeSessionEndpoint)
-
-	// ── Seller (JWT + role=seller) ───────────────────────────────────────────
-	seller := api.Group("/seller", mw.RequireAuth, middleware.RequireRole("seller"))
-	seller.Get("/stats", sellerHandler.GetStats)
-	seller.Get("/fee-preview", productHandler.FeePreview)
-	seller.Get("/products", productHandler.SellerList)
-	seller.Get("/products/detailed", sellerHandler.ListProductsDetailed)
-	seller.Post("/products", productHandler.SellerCreate)
-	seller.Put("/products/:id", productHandler.SellerUpdate)
-	seller.Delete("/products/:id", sellerHandler.DeleteProduct)
-	seller.Get("/transactions", mw.RequireSellerTier("gold"), sellerHandler.ListTransactions)
-	seller.Get("/orders", mw.RequireSellerTier("gold"), sellerHandler.ListOrders)
-	seller.Put("/orders/:id", mw.RequireSellerTier("gold"), sellerHandler.UpdateOrder)
-	seller.Get("/profile", sellerHandler.GetProfile)
-	seller.Put("/profile", sellerHandler.UpdateProfile)
-	seller.Put("/preference", sellerHandler.UpdatePreference)
-	seller.Put("/password", authHandler.SellerChangePassword)
-	seller.Post("/listing-fee", sellerHandler.PayListingFee)
-	seller.Post("/upgrade-tier", sellerHandler.RequestUpgrade)
-	seller.Get("/upgrade-tier", sellerHandler.GetUpgradeRequests)
-	seller.Get("/notifications", sellerHandler.ListNotifications)
-	seller.Put("/notifications/:id/read", sellerHandler.MarkNotificationRead)
-
-	// Referral — seller
-	// Rate limiter for referral code validation — prevents brute-force attacks on 34^8 keyspace
-	referralLimiter := limiter.New(limiter.Config{
-		Max:        3,
-		Expiration: 1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string {
-			if id, ok := c.Locals("userID").(int); ok {
-				return fmt.Sprintf("referral:%d", id) //nolint:gosec // G117/G201: internal values only, no user-controlled input reaches this format string
-			}
-			return "referral:" + c.IP()
-		},
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "too many referral code attempts — please wait a minute",
-			})
-		},
-	})
-	seller.Get("/referral", referralHandler.GetSellerStats)
-	seller.Get("/referral/commissions", referralHandler.GetCommissions)
-	seller.Post("/referral/accept", referralLimiter, referralHandler.AcceptInvitation)
-	seller.Get("/referral/balance", referralHandler.GetBalance)
-	seller.Post("/referral/withdraw", referralHandler.RequestWithdrawal)
-	seller.Get("/referral/withdrawals", referralHandler.GetMyWithdrawals)
-	
-	// Product attributes (Seller)
-	seller.Post("/products/:id/attributes", attributeHandler.SetProductAttributes)
-
-	// Verification documents (Seller)
-	seller.Get("/verification/documents", sellerHandler.ListVerificationDocuments)
-	seller.Post("/verification/documents", sellerHandler.UploadVerificationDocument)
-	seller.Post("/refunds", sellerHandler.CreateRefundRequest)
-
-	// Image upload — sellers only, rate-limited to 20 uploads/hour per seller
-	uploadLimiter := limiter.New(limiter.Config{
-		Max:        20,
-		Expiration: 1 * time.Hour,
-		KeyGenerator: func(c *fiber.Ctx) string {
-			if id, ok := c.Locals("userID").(int); ok {
-				return fmt.Sprintf("upload:%d", id) //nolint:gosec // G117/G201: internal values only, no user-controlled input reaches this format string
-			}
-			return "upload:" + c.IP()
-		},
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "upload limit reached — max 20 images per hour",
-			})
-		},
-	})
-	api.Post("/upload/image", mw.RequireAuth, middleware.RequireRole("seller"), uploadLimiter, handlers.UploadImage)
-
-	// ── Buyer (JWT + role=buyer) ─────────────────────────────────────────────
-	buyer := api.Group("/buyer", mw.RequireAuth, middleware.RequireRole("buyer"))
-	buyer.Post("/upgrade-tier", buyerHandler.UpgradeTier)
-	buyer.Get("/upgrade-tier", buyerHandler.GetUpgradeRequests)
-	buyer.Get("/profile", buyerHandler.GetProfile)
-	buyer.Put("/profile", buyerHandler.UpdateProfile)
-	buyer.Get("/orders", buyerHandler.GetOrders)
-	buyer.Put("/password", buyerHandler.ChangePassword)
-	buyer.Get("/notifications", buyerHandler.ListNotifications)
-	buyer.Put("/notifications/:id/read", buyerHandler.MarkNotificationRead)
-
-	// Referral — buyer
-	buyer.Get("/referral", referralHandler.GetBuyerStats)
-	buyer.Get("/referral/commissions", referralHandler.GetCommissions)
-	buyer.Post("/referral/accept", referralLimiter, referralHandler.AcceptInvitation)
-	buyer.Get("/referral/balance", referralHandler.GetBalance)
-	buyer.Post("/referral/withdraw", referralHandler.RequestWithdrawal)
-	buyer.Get("/referral/withdrawals", referralHandler.GetMyWithdrawals)
-	buyer.Post("/refunds", buyerHandler.CreateRefundRequest)
-
-	api.Post("/transactions", mw.RequireAuth, middleware.RequireRole("seller"), authLimiter, txHandler.Create)
-
-	// ── Admin (JWT + role=admin) ─────────────────────────────────────────────
-	admin := api.Group("/admin", mw.RequireAuth, middleware.RequireRole("admin"))
-
-	// Profile — any admin, no permission gate
-	admin.Get("/me", adminHandler.GetMe)
-	admin.Get("/me/permissions", adminHandler.GetMyPermissions) // normal admin fetches own permissions
-	admin.Put("/password", adminHandler.ChangePassword)
-
-	// Products
-	admin.Get("/products/pending", mw.RequirePermission("pending"), adminHandler.ListPending)
-	admin.Get("/products", mw.RequirePermission("products"), adminHandler.ListAllProducts)
-	admin.Put("/products/:id/review", mw.RequirePermission("pending"), adminHandler.ReviewProduct)
-	admin.Delete("/products/:id", mw.RequirePermission("products"), adminHandler.DeleteProduct)
-
-	// Sellers
-	admin.Get("/sellers", mw.RequirePermission("sellers"), adminHandler.ListSellers)
-	admin.Put("/sellers/:id/active", mw.RequirePermission("sellers"), adminHandler.SetSellerActive)
-
-	// Locations (Legacy)
-	admin.Get("/locations", mw.RequirePermission("locations"), adminHandler.ListLocations)
-	admin.Post("/locations", mw.RequirePermission("locations"), adminHandler.AddLocation)
-	admin.Put("/locations/:id", mw.RequirePermission("locations"), adminHandler.UpdateLocation)
-	admin.Delete("/locations/:id", mw.RequirePermission("locations"), adminHandler.DeleteLocation)
-
-	// Location Hierarchy & Geocoding Admin Management
-	admin.Get("/location-hierarchy", mw.RequirePermission("locations"), locationHandler.AdminListLocations)
-	admin.Get("/location-hierarchy/:id", mw.RequirePermission("locations"), locationHandler.AdminGetLocation)
-	admin.Post("/location-hierarchy", mw.RequirePermission("locations"), locationHandler.AdminCreateLocation)
-	admin.Put("/location-hierarchy/:id", mw.RequirePermission("locations"), locationHandler.AdminUpdateLocation)
-	admin.Delete("/location-hierarchy/:id", mw.RequirePermission("locations"), locationHandler.AdminDeleteLocation)
-	admin.Post("/location-hierarchy/import", mw.RequirePermission("locations"), locationHandler.AdminImportLocations)
-	admin.Post("/location-hierarchy/test-geocode", mw.RequirePermission("locations"), locationHandler.ReverseGeocode)
-
-	// Analytics
-	admin.Get("/analytics/overview", mw.RequirePermission("analytics"), adminHandler.AnalyticsOverview)
-	admin.Get("/analytics/heatmap", mw.RequirePermission("analytics"), adminHandler.AnalyticsHeatmap)
-	admin.Get("/analytics/monthly", mw.RequirePermission("analytics"), adminHandler.AnalyticsMonthly)
-	admin.Get("/analytics/gantt", mw.RequirePermission("analytics"), adminHandler.AnalyticsGantt)
-	admin.Get("/analytics/fee-revenue", middleware.RequirePlatformAdmin, adminHandler.AnalyticsFeeRevenue)
-
-	// Transactions — permission-gated (sensitive, off by default for new admins)
-	admin.Get("/transactions", mw.RequirePermission("transactions"), adminHandler.ListTransactions)
-	admin.Put("/transactions/:id/status", mw.RequirePermission("transactions"), txHandler.UpdateStatus)
-
-	// Profit — permission-gated (sensitive, off by default)
-	admin.Get("/profit/summary", mw.RequirePermission("profit"), adminHandler.ProfitSummary)
-	admin.Get("/profit/by-tier", mw.RequirePermission("profit"), adminHandler.ProfitByTier)
-	admin.Get("/profit/monthly", mw.RequirePermission("profit"), adminHandler.ProfitMonthly)
-	admin.Get("/profit/weekly", mw.RequirePermission("profit"), adminHandler.ProfitWeekly)
-	admin.Get("/profit/annual", mw.RequirePermission("profit"), adminHandler.ProfitAnnual)
-
-	// Financial Planning & Analysis (FP&A) — permission-gated (sensitive: platform owners, platform admins, or profit/finance permission)
-	financeViewAuth := mw.RequireAnyPermission("profit", "finance", "finance:view")
-	financeManageAuth := mw.RequireAnyPermission("finance:manage", "finance_manage")
-	admin.Get("/finance/forecast", financeViewAuth, fpaHandler.GetForecast)
-	admin.Get("/finance/scenarios", financeViewAuth, fpaHandler.GetScenarios)
-	admin.Get("/finance/capacity-20m", financeViewAuth, fpaHandler.GetCapacityPlanning20M)
-	admin.Get("/finance/tax-rules", financeViewAuth, fpaHandler.GetTaxRules)
-	admin.Get("/finance/actuals", financeViewAuth, fpaHandler.GetActuals)
-	admin.Get("/finance/audit-logs", financeViewAuth, fpaHandler.GetAuditLogs)
-	admin.Put("/finance/assumptions", financeManageAuth, fpaHandler.UpdateAssumptions)
-	admin.Post("/finance/assumptions/reset", financeManageAuth, fpaHandler.ResetAssumptions)
-	admin.Get("/finance/export", financeViewAuth, fpaHandler.ExportForecast)
-
-	// Listing fee payment verification — admin must verify before revenue is counted
-	admin.Get("/fee-payments/pending", mw.RequirePermission("products"), adminHandler.ListPendingFeePayments)
-	admin.Put("/fee-payments/:id/verify", mw.RequirePermission("products"), adminHandler.VerifyListingFeePayment)
-	admin.Put("/fee-payments/:id/reject", mw.RequirePermission("products"), adminHandler.RejectListingFeePayment)
-
-	// Settings
-	admin.Get("/settings", mw.RequirePermission("settings"), adminHandler.GetSettings)
-	admin.Put("/settings", mw.RequirePermission("settings"), adminHandler.UpdateSettings)
-	admin.Put("/settings/with-reason", middleware.RequirePlatformAdmin, adminHandler.UpdateSettingsWithReason)
-	admin.Get("/settings/log", middleware.RequirePlatformAdmin, adminHandler.SettingsChangeLog)
-
-	// User Governance
-	admin.Post("/users/:id/warn", mw.RequirePermission("sellers"), adminHandler.IssueWarning)
-	admin.Put("/users/:id/ban", middleware.RequirePlatformOwner, adminHandler.BanUser)
-
-	// System Health
-	admin.Get("/system/health", middleware.RequirePlatformAdmin, adminHandler.SystemHealth)
-	admin.Post("/system/health/repair", middleware.RequirePlatformAdmin, adminHandler.RepairSystemHealth)
-
-	// Notifications
-	admin.Get("/notifications", mw.RequirePermission("notifications"), adminHandler.ListNotifications)
-	admin.Put("/notifications/:id/read", mw.RequirePermission("notifications"), adminHandler.MarkNotificationRead)
-	admin.Post("/notifications", middleware.RequirePlatformAdmin, adminHandler.CreateNotification)
-
-	// Categories (Legacy)
-	admin.Get("/categories", mw.RequirePermission("categories"), adminHandler.ListCategories)
-	admin.Post("/categories", middleware.RequirePlatformAdmin, adminHandler.CreateCategory)
-	admin.Put("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.UpdateCategory)
-	admin.Delete("/categories/:id", middleware.RequirePlatformAdmin, adminHandler.DeleteCategory)
-	
-	// Category Hierarchy Management (Admin)
-	admin.Get("/category-hierarchy", mw.RequirePermission("categories"), categoryHandler.ListCategories)
-	admin.Get("/category-hierarchy/:id/stats", mw.RequirePermission("categories"), categoryHandler.GetCategoryStats)
-	admin.Post("/category-hierarchy", middleware.RequirePlatformAdmin, categoryHandler.CreateCategory)
-	admin.Put("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.UpdateCategory)
-	admin.Put("/category-hierarchy/:id/status", mw.RequirePermission("categories"), categoryHandler.SetCategoryStatus)
-	admin.Put("/category-hierarchy/:id/reorder", mw.RequirePermission("categories"), categoryHandler.ReorderCategory)
-	admin.Delete("/category-hierarchy/:id", middleware.RequirePlatformAdmin, categoryHandler.DeleteCategory)
-	
-	// Attribute Management (Admin)
-	admin.Get("/attributes", mw.RequirePermission("categories"), attributeHandler.ListAttributeDefinitions)
-	admin.Post("/attributes", middleware.RequirePlatformAdmin, attributeHandler.CreateAttributeDefinition)
-	admin.Post("/categories/:id/attributes", middleware.RequirePlatformAdmin, attributeHandler.AssignAttributeToCategory)
-	admin.Delete("/categories/:id/attributes/:attribute_id", middleware.RequirePlatformAdmin, attributeHandler.RemoveAttributeFromCategory)
-
-	// Sub-admin management — platform owner only
-	admin.Get("/admins", middleware.RequirePlatformOwner, adminHandler.ListAdmins)
-	admin.Post("/admins", middleware.RequirePlatformOwner, adminHandler.CreateAdmin)
-	admin.Put("/admins/:id/role", middleware.RequirePlatformOwner, adminHandler.UpdateAdminRole)
-	admin.Delete("/admins/:id", middleware.RequirePlatformOwner, adminHandler.DeleteAdmin)
-	admin.Get("/admins/:id/permissions", middleware.RequirePlatformOwner, adminHandler.GetAdminPermissions)
-	admin.Put("/admins/:id/permissions", middleware.RequirePlatformOwner, adminHandler.SetAdminPermissions)
-
-	// Hero banners — permission-gated
-	admin.Get("/banners", mw.RequirePermission("banners"), bannerHandler.ListAll)
-	admin.Post("/banners", mw.RequirePermission("banners"), bannerHandler.Create)
-	admin.Put("/banners/:id", mw.RequirePermission("banners"), bannerHandler.Update)
-	admin.Delete("/banners/:id", mw.RequirePermission("banners"), bannerHandler.Delete)
-
-	// Admin activity logs — security admin, platform owner, or explicit logs permission (immutable audit trail)
-	admin.Get("/logs", mw.RequireAnyPermission("logs"), adminHandler.ListAdminLogs)
-
-	// OTP logs — security admin, platform owner, or explicit otp_logs permission
-	admin.Get("/otp-logs", mw.RequireAnyPermission("otp_logs"), authHandler.ListOTPLogs)
-
-	// User activity logs — security admin, platform owner, or explicit audit permission
-	admin.Get("/activity-logs", mw.RequireAnyPermission("logs", "otp_logs"), authHandler.ListActivityLogs)
-
-	// Tier management — platform owner only (structural change)
-	admin.Put("/users/:id/seller-tier", middleware.RequirePlatformOwner, adminHandler.SetSellerTier)
-	admin.Put("/users/:id/buyer-tier", middleware.RequirePlatformOwner, adminHandler.SetBuyerTier)
-	admin.Get("/users/:id/tier-history", mw.RequirePermission("premium_users"), adminHandler.GetTierHistory)
-	admin.Get("/premium-users", mw.RequirePermission("premium_users"), adminHandler.ListPremiumUsers)
-
-	// Seller upgrade requests — seller_upgrades permission
-	admin.Get("/upgrade-requests", mw.RequirePermission("seller_upgrades"), adminHandler.ListUpgradeRequests)
-	admin.Put("/upgrade-requests/:id/approve", mw.RequirePermission("seller_upgrades"), adminHandler.ApproveUpgradeRequest)
-	admin.Put("/upgrade-requests/:id/reject", mw.RequirePermission("seller_upgrades"), adminHandler.RejectUpgradeRequest)
-
-	// Buyer upgrade requests — buyer_upgrades permission
-	admin.Get("/buyer-upgrade-requests", mw.RequirePermission("buyer_upgrades"), adminHandler.ListBuyerUpgradeRequests)
-	admin.Put("/buyer-upgrade-requests/:id/approve", mw.RequirePermission("buyer_upgrades"), adminHandler.ApproveBuyerUpgradeRequest)
-	admin.Put("/buyer-upgrade-requests/:id/reject", mw.RequirePermission("buyer_upgrades"), adminHandler.RejectBuyerUpgradeRequest)
-
-	// Category popularity (admin view with full stats)
-	admin.Get("/categories/popularity", mw.RequirePermission("category_trends"), adminHandler.CategoryPopularity)
-
-	// Referral overview (platform admin or platform owner)
-	admin.Get("/referral/overview", middleware.RequirePlatformAdmin, referralHandler.AdminOverview)
-	admin.Get("/referral/list", middleware.RequirePlatformAdmin, referralHandler.AdminList)
-	admin.Put("/referral/users/:id/suspend", middleware.RequirePlatformOwner, referralHandler.AdminSetSuspended)
-	admin.Put("/referral/users/:id/block", middleware.RequirePlatformOwner, referralHandler.AdminSetBlocked)
-	// Withdrawal management — super admin OR admin with 'withdrawals' permission
-	admin.Get("/referral/withdrawals", mw.RequirePermissionOrSuper("withdrawals"), referralHandler.AdminListWithdrawals)
-	admin.Put("/referral/withdrawals/:id/approve", mw.RequirePermissionOrSuper("withdrawals"), referralHandler.AdminApproveWithdrawal)
-	admin.Put("/referral/withdrawals/:id/reject", mw.RequirePermissionOrSuper("withdrawals"), referralHandler.AdminRejectWithdrawal)
-	admin.Put("/referral/withdrawals/:id/paid", mw.RequirePermissionOrSuper("withdrawals"), referralHandler.AdminMarkWithdrawalPaid)
-
-	// System Health & Repair routes are registered above under /system/health
-
-	// ── Priority 1 Enhancements: New Admin Features ───────────────────────────────
-	// Operations Monitoring (Role 02: Platform Operations Admin)
-	admin.Get("/operations/health", mw.RequirePermission("operations"), adminHandler.GetOperationsHealth)
-	admin.Get("/operations/jobs", mw.RequirePermission("operations"), adminHandler.GetJobStatusSummary)
-	admin.Get("/operations/failed-jobs", mw.RequirePermission("operations"), adminHandler.GetFailedJobs)
-
-	// Seller Verification (Role 08: Seller Verification Admin)
-	admin.Get("/verification/documents", mw.RequirePermission("seller_verification"), adminHandler.ListVerificationDocuments)
-	admin.Put("/verification/documents/:id/review", mw.RequirePermission("seller_verification"), adminHandler.ReviewVerificationDocument)
-
-	// Trust & Safety (Role 21: Fraud & Trust & Safety Admin)
-	admin.Get("/trust/reports", mw.RequirePermission("trust_safety"), adminHandler.ListAbuseReports)
-	admin.Put("/trust/reports/:id/review", mw.RequirePermission("trust_safety"), adminHandler.ReviewAbuseReport)
-	admin.Put("/trust/reports/:id/priority", mw.RequirePermission("trust_safety"), adminHandler.UpdateAbuseReportPriority)
-
-	// Refund Management (Role 20: Refund & Dispute Admin)
-	admin.Get("/refunds", mw.RequirePermission("refunds"), adminHandler.ListRefundRequests)
-	admin.Put("/refunds/:id/review", mw.RequirePermission("refunds"), adminHandler.ReviewRefundRequest)
-	admin.Put("/refunds/:id/processed", mw.RequirePermission("refunds"), adminHandler.MarkRefundProcessed)
-
-	// Account Appeals (Role 30: Appeals & Account Recovery Admin)
-	admin.Get("/appeals", mw.RequirePermission("appeals"), adminHandler.ListAccountAppeals)
-	admin.Put("/appeals/:id/review", mw.RequirePermission("appeals"), adminHandler.ReviewAccountAppeal)
-	admin.Put("/appeals/:id/status", mw.RequirePermission("appeals"), adminHandler.UpdateAppealStatus)
-
-	// Search Analytics (admin — analytics permission)
-	admin.Get("/search/popular", mw.RequirePermission("analytics"), searchHandler.PopularSearches)
-	admin.Get("/search/zero-results", mw.RequirePermission("analytics"), searchHandler.ZeroResultQueries)
-
-	// ── Dev helpers (only in development mode) ──────────────────────────────
-	if cfg.DevMode {
-		api.Get("/dev/otp", authHandler.DevPeekOTP)
-		api.Get("/dev/otp/decrypt", authHandler.DevDecryptOTP)
-		log.Println("⚠️  DEV MODE: /api/dev/otp and /api/dev/otp/decrypt endpoints enabled — disable in production (set APP_ENV=production)") //nolint:gosec // G117: error/value from internal source, not user-controlled input
-	}
-
-	// Start server in background listener goroutine
+	// Background listener
 	serverErr := make(chan error, 1)
 	go func() {
-		log.Printf("Server starting on port %s", cfg.AppPort) //nolint:gosec // G117: error/value from internal source, not user-controlled input
+		log.Printf("Server starting on port %s", cfg.AppPort)
 		if err := app.Listen(":" + cfg.AppPort); err != nil {
 			serverErr <- err
 		}
 	}()
 
-	// Wait for OS termination signal or startup failure
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
 	select {
 	case err := <-serverErr:
-		log.Fatalf("Server startup or listener failed: %v", err)
+		log.Fatalf("Server startup failed: %v", err)
 	case sig := <-quit:
 		log.Printf("Received signal %v — initiating graceful shutdown...", sig)
 	}
 
-	// 1. Cancel background worker and scheduled job contexts
-	log.Println("Stopping background workers and jobs...")
-	jobCancel()
-
-	// 2. Shut down Fiber HTTP server with a 10-second timeout
-	log.Println("Shutting down HTTP server with timeout...")
+	cancelJobs()
 	if err := app.ShutdownWithTimeout(10 * time.Second); err != nil {
-		log.Printf("HTTP server shutdown warning: %v", err)
-	} else {
-		log.Println("HTTP server shut down gracefully.")
+		log.Printf("Server shutdown warning: %v", err)
 	}
-
-	// 3. Close database connection pool
-	log.Println("Closing database connection pool...")
-	db.Close()
-	log.Println("Graceful shutdown completed.")
+	log.Println("Graceful shutdown completed cleanly.")
 }

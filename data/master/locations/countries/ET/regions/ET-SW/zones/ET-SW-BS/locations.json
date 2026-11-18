@@ -1,0 +1,35 @@
+[
+  {
+    "id": 294,
+    "parent_id": 123,
+    "type": "woreda",
+    "slug": "southwest-ethiopia-bench-mizan",
+    "code": "SW-BS-MIZ",
+    "level": 3,
+    "path": "/1/15/123/294/",
+    "display_order": 168,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Mizan Teferi",
+      "Aman",
+      "ሚዛን አማን"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-SW-BS",
+    "names": {
+      "en": "Mizan Aman Woreda & City",
+      "am": "ሚዛን አማን ወረዳና ከተማ",
+      "om": "Magaalaa Miizaan Amaan",
+      "ti": "ሚዛን ኣማን"
+    },
+    "coordinates": {
+      "latitude": 6.98,
+      "longitude": 35.58,
+      "bbox": null
+    }
+  }
+]

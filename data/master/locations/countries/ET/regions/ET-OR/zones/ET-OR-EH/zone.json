@@ -1,0 +1,32 @@
+{
+  "id": 48,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-east-hararghe",
+  "code": "ET-OR-EH",
+  "level": 2,
+  "path": "/1/4/48/",
+  "display_order": 12,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "East Harerge",
+    "ምስራቅ ሐረርጌ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "East Hararghe Zone",
+    "am": "ምስራቅ ሐረርጌ ዞን",
+    "om": "Harargee Bahaa",
+    "ti": "ዞን ምስራቕ ሓረርጌ"
+  },
+  "coordinates": {
+    "latitude": 9.25,
+    "longitude": 42.0,
+    "bbox": null
+  }
+}

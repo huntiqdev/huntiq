@@ -66,7 +66,7 @@ export default function BuyerProfilePage() {
   const cfg = TIER_CONFIG[tier];
   const TierIcon = cfg.icon;
 
-  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all text-zinc-900 dark:text-zinc-100';
+  const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all text-zinc-900 dark:text-zinc-100';
 
   return (
     <div className="space-y-5 max-w-md">
@@ -76,7 +76,7 @@ export default function BuyerProfilePage() {
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-4">
         {/* Avatar + tier */}
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 font-black text-xl">
+          <div className="w-14 h-14 rounded-2xl bg-[#1769E0]/10 dark:bg-[#1769E0]/20 flex items-center justify-center text-[#1769E0] font-black text-xl">
             {profile?.name?.[0]?.toUpperCase() ?? 'B'}
           </div>
           <div>
@@ -160,7 +160,7 @@ export default function BuyerProfilePage() {
           {/* Buyer */}
           <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] flex items-center justify-center">
                 <User size={15} />
               </div>
               <div>
@@ -176,7 +176,7 @@ export default function BuyerProfilePage() {
           {/* Seller */}
           <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-950/40 text-orange-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] flex items-center justify-center">
                 <ShoppingBag size={15} />
               </div>
               <div>
@@ -187,7 +187,7 @@ export default function BuyerProfilePage() {
             {isSeller ? (
               <Link
                 href="/seller/dashboard"
-                className="text-xs font-bold text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#1769E0] dark:text-[#38A5FF] hover:underline flex items-center gap-1"
               >
                 <span>{u.dashboard || 'Dashboard'}</span>
                 <ArrowUpRight size={12} />
@@ -196,7 +196,7 @@ export default function BuyerProfilePage() {
               <button
                 type="button"
                 onClick={() => setActivationCap('seller')}
-                className="text-[11px] font-bold bg-orange-600 hover:bg-orange-500 text-white px-2.5 py-1 rounded-lg transition-all"
+                className="text-[11px] font-bold bg-[#1769E0] hover:bg-[#1055BD] text-white px-2.5 py-1 rounded-lg transition-all"
               >
                 {u.activate_label || 'Activate'}
               </button>
@@ -268,7 +268,7 @@ export default function BuyerProfilePage() {
               </p>
             </div>
           </div>
-          <ArrowUpRight size={15} className="text-zinc-400 group-hover:text-orange-600 transition-colors" />
+          <ArrowUpRight size={15} className="text-zinc-400 group-hover:text-[#1769E0] transition-colors" />
         </Link>
       )}
 

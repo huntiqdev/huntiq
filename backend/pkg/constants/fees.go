@@ -9,13 +9,13 @@ const (
 	SettingBrokerFeeRate = "broker_fee_rate" // Default: 2.0%
 
 	// Listing fees by tier
-	SettingNormalStartupFee       = "normal_startup_fee"        // Default: 1.0%
-	SettingGoldStartupFee         = "gold_startup_fee"          // Default: 0.5%
-	SettingPremiumStartupFee      = "premium_startup_fee"       // Default: 0.25%
-	SettingNormalWeeklyIncrement  = "normal_weekly_increment"   // Default: 0.5%
-	SettingGoldWeeklyIncrement    = "gold_weekly_increment"     // Default: 0.25%
-	SettingPremiumWeeklyIncrement = "premium_weekly_increment"  // Default: 0.1%
-	SettingListingFreeWeeks       = "listing_free_weeks"        // Default: 1
+	SettingNormalStartupFee       = "normal_startup_fee"       // Default: 1.0%
+	SettingGoldStartupFee         = "gold_startup_fee"         // Default: 0.5%
+	SettingPremiumStartupFee      = "premium_startup_fee"      // Default: 0.25%
+	SettingNormalWeeklyIncrement  = "normal_weekly_increment"  // Default: 0.5%
+	SettingGoldWeeklyIncrement    = "gold_weekly_increment"    // Default: 0.25%
+	SettingPremiumWeeklyIncrement = "premium_weekly_increment" // Default: 0.1%
+	SettingListingFreeWeeks       = "listing_free_weeks"       // Default: 1
 
 	// Tier upgrade costs
 	SettingGoldThreshold    = "gold_threshold"     // Default: 5900 ETB
@@ -24,9 +24,9 @@ const (
 	SettingBuyerPremiumCost = "buyer_premium_cost" // Default: 15900 ETB
 
 	// Image limits
-	SettingNormalMaxImages  = "normal_max_images"  // Default: 2
-	SettingGoldMaxImages    = "gold_max_images"    // Default: 7
-	SettingPremiumMaxImages = "premium_max_images" // Default: 20
+	SettingNormalMaxImages     = "normal_max_images"      // Default: 2
+	SettingGoldMaxImages       = "gold_max_images"        // Default: 7
+	SettingPremiumMaxImages    = "premium_max_images"     // Default: 20
 	SettingMinImagesPerListing = "min_images_per_listing" // Default: 2
 
 	// Content limits
@@ -56,38 +56,38 @@ const (
 	SettingMaxReferralWithdrawal = "max_referral_withdrawal" // Default: 1000000
 
 	// Promotion banner
-	SettingPromotionMessage    = "promotion_message"
-	SettingPromotionActive     = "promotion_active"
-	SettingPromotionBgColor    = "promotion_bg_color"
-	SettingPromotionTextColor  = "promotion_text_color"
-	SettingPromotionLinkURL    = "promotion_link_url"
-	SettingPromotionLinkLabel  = "promotion_link_label"
+	SettingPromotionMessage   = "promotion_message"
+	SettingPromotionActive    = "promotion_active"
+	SettingPromotionBgColor   = "promotion_bg_color"
+	SettingPromotionTextColor = "promotion_text_color"
+	SettingPromotionLinkURL   = "promotion_link_url"
+	SettingPromotionLinkLabel = "promotion_link_label"
 )
 
 // Default fee parameters (fallback if DB not configured — admin can override all via platform_settings)
 const (
-	DefaultBrokerFeeRate          = 2.0  // 2%
-	DefaultListingFreeWeeks       = 1
-	DefaultNormalStartupFee       = 1.0  // 1%
-	DefaultGoldStartupFee         = 0.5  // 0.5%
-	DefaultPremiumStartupFee      = 0.25 // 0.25%
-	DefaultNormalWeeklyIncrement  = 0.5  // 0.5%
-	DefaultGoldWeeklyIncrement    = 0.25 // 0.25%
-	DefaultPremiumWeeklyIncrement = 0.1  // 0.1%
-	DefaultGoldThreshold          = 5900.0
-	DefaultPremiumThreshold       = 15900.0
-	DefaultBuyerGoldCost          = 5900.0
-	DefaultBuyerPremiumCost       = 15900.0
-	DefaultReferralCommissionRate = 1.2  // 1.2%
-	DefaultMaxTitleLength         = 200
-	DefaultMaxDescriptionLength   = 5000
-	DefaultMinImages              = 2
-	DefaultNormalMaxLocations     = 1
-	DefaultGoldMaxLocations       = 3
-	DefaultPremiumMaxLocations    = 10
-	DefaultMaxBanners             = 5
-	DefaultMaxImageSizeMB         = 20
+	DefaultBrokerFeeRate            = 2.0 // 2%
+	DefaultListingFreeWeeks         = 1
+	DefaultNormalStartupFee         = 1.0  // 1%
+	DefaultGoldStartupFee           = 0.5  // 0.5%
+	DefaultPremiumStartupFee        = 0.25 // 0.25%
+	DefaultNormalWeeklyIncrement    = 0.5  // 0.5%
+	DefaultGoldWeeklyIncrement      = 0.25 // 0.25%
+	DefaultPremiumWeeklyIncrement   = 0.1  // 0.1%
+	DefaultGoldThreshold            = 5900.0
+	DefaultPremiumThreshold         = 15900.0
+	DefaultBuyerGoldCost            = 5900.0
+	DefaultBuyerPremiumCost         = 15900.0
+	DefaultReferralCommissionRate   = 1.2 // 1.2%
+	DefaultMaxTitleLength           = 200
+	DefaultMaxDescriptionLength     = 5000
+	DefaultMinImages                = 2
+	DefaultNormalMaxLocations       = 1
+	DefaultGoldMaxLocations         = 3
+	DefaultPremiumMaxLocations      = 10
+	DefaultMaxBanners               = 5
+	DefaultMaxImageSizeMB           = 20
 	DefaultCurrencyTolerancePercent = 0.1 // 0.1% (NOT 10%!)
-	DefaultMinReferralWithdrawal  = 500.0
-	DefaultMaxReferralWithdrawal  = 1000000.0
+	DefaultMinReferralWithdrawal    = 500.0
+	DefaultMaxReferralWithdrawal    = 1000000.0
 )

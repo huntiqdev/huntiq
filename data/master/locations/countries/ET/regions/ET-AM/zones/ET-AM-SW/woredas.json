@@ -1,0 +1,135 @@
+[
+  {
+    "id": 399,
+    "parent_id": 66,
+    "parent_code": "ET-AM-SW",
+    "type": "woreda",
+    "slug": "amhara-south-wollo-kalu",
+    "code": "AM-SW-KAL",
+    "level": 3,
+    "path": "/1/5/66/399/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kalu (Gerba) District",
+      "am": "ቃሉ (ገርባ) ወረዳ",
+      "om": "Aanaa Qaalluu",
+      "ti": "ቃሉ (ገርባ) ወረዳ"
+    },
+    "coordinates": {
+      "latitude": 11.12,
+      "longitude": 39.78,
+      "bbox": {
+        "min_lat": 11.1,
+        "max_lat": 11.14,
+        "min_lng": 39.76,
+        "max_lng": 39.8
+      }
+    }
+  },
+  {
+    "id": 254,
+    "parent_id": 66,
+    "parent_code": "ET-AM-SW",
+    "type": "woreda",
+    "slug": "amhara-south-wollo-dessie-city",
+    "code": "AM-SW-DSC",
+    "level": 3,
+    "path": "/1/5/66/254/",
+    "display_order": 126,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Dessie Town",
+      "Tosa",
+      "ደሴ ከተማ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dessie City (ቶሳ)",
+      "am": "ደሴ ከተማ (ቶሳ)",
+      "om": "Magaalaa Dasee",
+      "ti": "ደሴ ከተማ"
+    },
+    "coordinates": {
+      "latitude": 11.13,
+      "longitude": 39.63,
+      "bbox": null
+    }
+  },
+  {
+    "id": 255,
+    "parent_id": 66,
+    "parent_code": "ET-AM-SW",
+    "type": "woreda",
+    "slug": "amhara-south-wollo-kombolcha",
+    "code": "AM-SW-KOM",
+    "level": 3,
+    "path": "/1/5/66/255/",
+    "display_order": 127,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kombolcha Industrial Park",
+      "Kombolcha Dry Port",
+      "ኮምቦልቻ ደቡብ ወሎ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kombolcha City (ኢንዱስትሪ)",
+      "am": "ኮምቦልቻ ከተማ (ደቡብ ወሎ)",
+      "om": "Magaalaa Qombolchaa",
+      "ti": "ኮምቦልቻ (ደቡብ ወሎ)"
+    },
+    "coordinates": {
+      "latitude": 11.08,
+      "longitude": 39.73,
+      "bbox": null
+    }
+  },
+  {
+    "id": 256,
+    "parent_id": 66,
+    "parent_code": "ET-AM-SW",
+    "type": "woreda",
+    "slug": "amhara-south-wollo-tehuledere",
+    "code": "AM-SW-TEH",
+    "level": 3,
+    "path": "/1/5/66/256/",
+    "display_order": 128,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Haiq",
+      "Lake Haiq",
+      "ሐይቅ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Tehuledere Woreda (ሐይቅ እስጢፋኖስ)",
+      "am": "ተሁለደሬ ወረዳ (ሐይቅ እስጢፋኖስ)",
+      "om": "Aanaa Tahuuladaree",
+      "ti": "ተሁለደሬ (ሓይቅ)"
+    },
+    "coordinates": {
+      "latitude": 11.3,
+      "longitude": 39.68,
+      "bbox": null
+    }
+  }
+]

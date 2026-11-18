@@ -1,0 +1,32 @@
+{
+  "id": 98,
+  "parent_id": 11,
+  "parent_code": "ET-GA",
+  "type": "zone",
+  "slug": "gambela-anuak",
+  "code": "ET-GA-AN",
+  "level": 2,
+  "path": "/1/11/98/",
+  "display_order": 65,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Anywaa Zone",
+    "አኝዋክ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Anuak Zone",
+    "am": "አኝዋክ ዞን",
+    "om": "Anywaa",
+    "ti": "ዞን ኣኝዋክ"
+  },
+  "coordinates": {
+    "latitude": 7.8,
+    "longitude": 34.2,
+    "bbox": null
+  }
+}

@@ -1,0 +1,69 @@
+[
+  {
+    "id": 394,
+    "parent_id": 104,
+    "parent_code": "ET-CE-HA",
+    "type": "woreda",
+    "slug": "central-ethiopia-hadiya-shone-town",
+    "code": "CE-HA-SHO",
+    "level": 3,
+    "path": "/1/14/104/394/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Shone Town Administration",
+      "am": "ሾኔ ከተማ አስተዳደር",
+      "om": "Magaalaa Shoonee",
+      "ti": "ሾኔ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 7.14,
+      "longitude": 37.96,
+      "bbox": {
+        "min_lat": 7.13,
+        "max_lat": 7.15,
+        "min_lng": 37.95,
+        "max_lng": 37.97
+      }
+    }
+  },
+  {
+    "id": 285,
+    "parent_id": 104,
+    "parent_code": "ET-CE-HA",
+    "type": "woreda",
+    "slug": "central-ethiopia-hadiya-hosanna",
+    "code": "CE-HA-HOS",
+    "level": 3,
+    "path": "/1/14/104/285/",
+    "display_order": 159,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Hossana",
+      "Wachemo",
+      "ሆሳዕና"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Hosanna Woreda & City",
+      "am": "ሆሳዕና ወረዳና ከተማ (ሀዲያ)",
+      "om": "Magaalaa fi Aanaa Hosaa'inaa",
+      "ti": "ሆሳዕና"
+    },
+    "coordinates": {
+      "latitude": 7.55,
+      "longitude": 37.85,
+      "bbox": null
+    }
+  }
+]

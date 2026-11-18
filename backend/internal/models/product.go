@@ -8,20 +8,20 @@ type Product struct {
 	LocationID          *int       `json:"location_id"`
 	LocationHierarchyID *int       `json:"location_hierarchy_id,omitempty"`
 	Title               string     `json:"title"`
-	Price               float64            `json:"price"`
-	Description         string             `json:"description"`
-	CategoryID          *int               `json:"category_id"`
-	CategoryHierarchyID *int               `json:"category_hierarchy_id,omitempty"`
-	Subcategory         string             `json:"subcategory,omitempty"`
-	Item                string             `json:"item,omitempty"`
-	Condition           string             `json:"condition"`
-	Status              string             `json:"status"`
-	AdminNotes  string     `json:"admin_notes,omitempty"`
-	ReviewedBy  *int       `json:"reviewed_by,omitempty"`
-	ReviewedAt  *time.Time `json:"reviewed_at,omitempty"`
-	CreatedAt   time.Time  `json:"created_at"`
-	UpdatedAt   time.Time  `json:"updated_at"`
-	ExpiresAt   *time.Time `json:"expires_at,omitempty"`
+	Price               float64    `json:"price"`
+	Description         string     `json:"description"`
+	CategoryID          *int       `json:"category_id"`
+	CategoryHierarchyID *int       `json:"category_hierarchy_id,omitempty"`
+	Subcategory         string     `json:"subcategory,omitempty"`
+	Item                string     `json:"item,omitempty"`
+	Condition           string     `json:"condition"`
+	Status              string     `json:"status"`
+	AdminNotes          string     `json:"admin_notes,omitempty"`
+	ReviewedBy          *int       `json:"reviewed_by,omitempty"`
+	ReviewedAt          *time.Time `json:"reviewed_at,omitempty"`
+	CreatedAt           time.Time  `json:"created_at"`
+	UpdatedAt           time.Time  `json:"updated_at"`
+	ExpiresAt           *time.Time `json:"expires_at,omitempty"`
 
 	// Precise location (optional)
 	Kebele       string   `json:"kebele,omitempty"`
@@ -52,6 +52,15 @@ type Product struct {
 
 	// Sold tracking
 	SoldAt *time.Time `json:"sold_at,omitempty"`
+
+	// Brokerage & Publisher Transparency
+	PublisherRole               string `json:"publisher_role"` // owner, authorized_seller, broker_agent, representative, government_officer
+	OrganizationID              *int   `json:"organization_id,omitempty"`
+	BrokerageDisclosureAgreed   bool   `json:"brokerage_disclosure_agreed"`
+
+	// Gold & Premium Merchant Features
+	CustomURL   *string                `json:"custom_url,omitempty"`
+	SocialLinks map[string]interface{} `json:"social_links,omitempty"`
 
 	// ── Rental fields (only for listing_type='rent') ──
 	ListingType         string   `json:"listing_type"`                    // 'sale' or 'rent'

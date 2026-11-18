@@ -62,6 +62,9 @@ jobs:
           cache: true
           cache-dependency-path: backend/go.sum
 
+      - name: Validate database migrations
+        run: ./backend/scripts/validate_migrations.sh
+
       - name: Run Go tests
         working-directory: backend
         run: go test -v ./...
@@ -70,34 +73,3 @@ jobs:
         working-directory: backend
         run: go build -v -o bin/api ./cmd/api
 
-  ai:
-    name: AI Service & Data Platform
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-          cache-dependency-path: ai/uv.lock
-
-      - name: Set up Python
-        run: uv python install 3.14
-
-      - name: Verify AI Service
-        working-directory: ai
-        run: |
-          uv sync --locked
-          uv run ruff check .
-          uv run ruff format --check .
-          uv run pytest -v
-
-      - name: Verify AI Data Platform
-        working-directory: ai/data-platform
-        run: |
-          uv sync --locked
-          uv run ruff check .
-          uv run ruff format --check .
-          uv run pytest tests/ -v

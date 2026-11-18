@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "title": "HUNTIQ Master Data Exchange",
+  "total_locations": 417,
+  "total_categories": 20500,
+  "classification_systems_count": 7,
+  "supported_languages": [
+    "en",
+    "am",
+    "om",
+    "ti"
+  ],
+  "authoritative_source": "PostgreSQL",
+  "sync_status": "synchronized"
+}

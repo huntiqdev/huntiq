@@ -1,0 +1,32 @@
+{
+  "id": 49,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-west-hararghe",
+  "code": "ET-OR-WH",
+  "level": 2,
+  "path": "/1/4/49/",
+  "display_order": 13,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "West Harerge",
+    "ምዕራብ ሐረርጌ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Hararghe Zone",
+    "am": "ምዕራብ ሐረርጌ ዞን",
+    "om": "Harargee Dhihaa",
+    "ti": "ዞን ምዕራብ ሓረርጌ"
+  },
+  "coordinates": {
+    "latitude": 8.9,
+    "longitude": 40.75,
+    "bbox": null
+  }
+}

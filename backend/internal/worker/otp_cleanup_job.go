@@ -64,6 +64,6 @@ func runOTPCleanup(db *pgxpool.Pool) {
 	if activityCount > 0 {
 		log.Printf("[otp-cleanup] deleted %d old activity log rows", activityCount) //nolint:gosec
 	}
-	
+
 	logJobSuccess(db, jobID, otpCount+activityCount)
 }

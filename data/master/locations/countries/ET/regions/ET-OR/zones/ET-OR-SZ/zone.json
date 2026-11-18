@@ -1,0 +1,32 @@
+{
+  "id": 57,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-special-zone-finfinne",
+  "code": "ET-OR-SZ",
+  "level": 2,
+  "path": "/1/4/57/",
+  "display_order": 21,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Finfinne Special Zone",
+    "የአዲስ አበባ ዙሪያ ልዩ ዞን"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Oromia Special Zone Surrounding Finfinne",
+    "am": "የፊንፊኔ ዙሪያ ልዩ ዞን",
+    "om": "Naannawa Finfinnee",
+    "ti": "ፍሉይ ዞን ዙርያ ፊንፊነ"
+  },
+  "coordinates": {
+    "latitude": 9.05,
+    "longitude": 38.7,
+    "bbox": null
+  }
+}

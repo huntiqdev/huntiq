@@ -1,0 +1,36 @@
+[
+  {
+    "id": 317,
+    "parent_id": 27,
+    "parent_code": "OR-SHA",
+    "type": "woreda",
+    "slug": "shashemene-arada-district",
+    "code": "OR-SHA-ARA",
+    "level": 3,
+    "path": "/1/4/27/317/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Arada Subcity (Shashemene)",
+      "am": "አራዳ ክፍለ ከተማ (ሻሸመኔ)",
+      "om": "Kutaa Magaalaa Araadaa",
+      "ti": "ኣራዳ ክፍለ ከተማ (ሻሸመኔ)"
+    },
+    "coordinates": {
+      "latitude": 7.205,
+      "longitude": 38.595,
+      "bbox": {
+        "min_lat": 7.195,
+        "max_lat": 7.215,
+        "min_lng": 38.585,
+        "max_lng": 38.605
+      }
+    }
+  }
+]

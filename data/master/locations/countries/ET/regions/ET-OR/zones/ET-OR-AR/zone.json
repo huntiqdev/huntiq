@@ -1,0 +1,32 @@
+{
+  "id": 41,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-arsi",
+  "code": "ET-OR-AR",
+  "level": 2,
+  "path": "/1/4/41/",
+  "display_order": 5,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Arssi",
+    "አርሲ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Arsi Zone",
+    "am": "አርሲ ዞን",
+    "om": "Arsii",
+    "ti": "ዞን አርሲ"
+  },
+  "coordinates": {
+    "latitude": 7.75,
+    "longitude": 39.25,
+    "bbox": null
+  }
+}

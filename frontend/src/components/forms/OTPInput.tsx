@@ -77,8 +77,8 @@ export function OTPInput({ recipient, onVerified, onResend, error, loading }: Pr
   return (
     <div className="flex flex-col gap-4">
       <div className="text-center">
-        <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
-          <ShieldCheck size={22} className="text-orange-600" />
+        <div className="w-12 h-12 bg-[#1769E0]/10 dark:bg-[#1769E0]/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
+          <ShieldCheck size={22} className="text-[#1769E0]" />
         </div>
         <p className="font-black text-lg">{t.ui.enter_otp}</p>
         <p className="text-xs text-zinc-500 mt-1">
@@ -100,8 +100,8 @@ export function OTPInput({ recipient, onVerified, onResend, error, loading }: Pr
             onKeyDown={e => handleKeyDown(i, e)}
             disabled={loading}
             className={`w-11 h-12 text-center text-xl font-black border-2 rounded-xl outline-none transition-all
-              ${d ? 'border-orange-600 bg-orange-50 dark:bg-orange-900/20' : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800'}
-              focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 disabled:opacity-50`}
+              ${d ? 'border-[#1769E0] bg-[#1769E0]/5 dark:bg-[#1769E0]/20' : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800'}
+              focus:border-[#1769E0] focus:ring-2 focus:ring-[#1769E0]/20 disabled:opacity-50`}
           />
         ))}
       </div>
@@ -123,7 +123,7 @@ export function OTPInput({ recipient, onVerified, onResend, error, loading }: Pr
               refs.current[0]?.focus();
               onResend();
             }}
-            className="flex items-center gap-1 text-orange-600 font-bold hover:underline">
+            className="flex items-center gap-1 text-[#1769E0] hover:text-[#1055BD] font-bold hover:underline">
             <RefreshCw size={11} /> {t.ui.resend_otp}
           </button>
         )}

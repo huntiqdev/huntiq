@@ -1,0 +1,66 @@
+{
+  "ethiopian_keyword_map": {
+    "ስልክ": "phone",
+    "መኪና": "car",
+    "ቤት": "house",
+    "ኮምፒውተር": "laptop",
+    "ቴሌቪዥን": "tv"
+  },
+  "synonym_groups": [
+    [
+      "phone",
+      "mobile",
+      "cellphone",
+      "ስልክ",
+      "bilbila"
+    ],
+    [
+      "car",
+      "vehicle",
+      "automobile",
+      "መኪና",
+      "konkolaataa"
+    ],
+    [
+      "house",
+      "home",
+      "apartment",
+      "villa",
+      "ቤት",
+      "mana"
+    ],
+    [
+      "laptop",
+      "computer",
+      "pc",
+      "ኮምፒውተር",
+      "kompiitara"
+    ],
+    [
+      "tv",
+      "television",
+      "ቴሌቪዥን"
+    ]
+  ],
+  "known_ethiopian_locations": [
+    "Addis Ababa",
+    "Dire Dawa",
+    "Hawassa",
+    "Bahir Dar",
+    "Mekelle",
+    "Adama",
+    "Gondar",
+    "Jimma",
+    "Bishoftu",
+    "Dessie",
+    "Jijiga",
+    "Shashamane",
+    "Arba Minch",
+    "Hosaena",
+    "Dilla",
+    "Nekemte",
+    "Debre Birhan",
+    "Asella",
+    "Harar"
+  ]
+}

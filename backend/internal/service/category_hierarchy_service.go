@@ -53,12 +53,28 @@ func (s *CategoryHierarchyService) ListCategories(ctx context.Context, f models.
 	return s.repo.ListCategories(ctx, f)
 }
 
-// GetCategoryTree builds the full hierarchical tree
+// GetCategoryTree builds the hierarchical tree
 func (s *CategoryHierarchyService) GetCategoryTree(ctx context.Context, lang string) ([]models.CategoryTree, error) {
 	if lang == "" {
 		lang = "en"
 	}
 	return s.repo.GetCategoryTree(ctx, lang)
+}
+
+// GetCategoryTreeWithDepth builds the hierarchical tree up to a specified depth
+func (s *CategoryHierarchyService) GetCategoryTreeWithDepth(ctx context.Context, lang string, depth int) ([]models.CategoryTree, error) {
+	if lang == "" {
+		lang = "en"
+	}
+	return s.repo.GetCategoryTreeWithDepth(ctx, lang, depth)
+}
+
+// SearchCategories performs an ultra-fast hierarchical search returning full breadcrumbs
+func (s *CategoryHierarchyService) SearchCategories(ctx context.Context, term string, lang string, limit int) ([]models.CategorySearchResult, error) {
+	if lang == "" {
+		lang = "en"
+	}
+	return s.repo.SearchCategories(ctx, term, lang, limit)
 }
 
 // GetBreadcrumbs returns the category path
@@ -157,7 +173,7 @@ func (s *CategoryHierarchyService) CreateCategory(ctx context.Context, cat *mode
 	} else {
 		cat.Slug = generateSlug(cat.Slug)
 	}
-	
+
 	if !isValidSlug(cat.Slug) {
 		return 0, fmt.Errorf("invalid slug format: must be lowercase alphanumeric with hyphens")
 	}
@@ -176,12 +192,12 @@ func (s *CategoryHierarchyService) CreateCategory(ctx context.Context, cat *mode
 		if *cat.ParentID == cat.ID {
 			return 0, fmt.Errorf("category cannot be its own parent")
 		}
-		
+
 		parent, err := s.repo.GetByID(ctx, *cat.ParentID, "en")
 		if err != nil {
 			return 0, fmt.Errorf("parent category not found")
 		}
-		
+
 		if parent.IsLeaf {
 			return 0, fmt.Errorf("cannot add child to leaf category")
 		}
@@ -249,20 +265,36 @@ func (s *CategoryHierarchyService) GetCategoryStats(ctx context.Context, categor
 	return s.repo.GetCategoryStats(ctx, categoryID)
 }
 
+// ResolveCategoryByAlias resolves any user search term or product title against PostgreSQL's resolve_category_by_alias stored procedure
+func (s *CategoryHierarchyService) ResolveCategoryByAlias(ctx context.Context, term string) (*int, error) {
+	if s.repo == nil {
+		return nil, nil
+	}
+	return s.repo.ResolveCategoryByAlias(ctx, term)
+}
+
+// ResolveLegacyCategoryID maps root category slug and ID to legacy category table ID dynamically from the database
+func (s *CategoryHierarchyService) ResolveLegacyCategoryID(ctx context.Context, rootSlug string, rootID int) int {
+	if s.repo == nil {
+		return rootID
+	}
+	return s.repo.ResolveLegacyCategoryID(ctx, rootSlug, rootID)
+}
+
 // Helper functions
 
 func generateSlug(name string) string {
 	slug := strings.ToLower(strings.TrimSpace(name))
-	reg := regexp.MustCompile("[^a-z0-9\\s-]")
+	reg := regexp.MustCompile(`[^a-z0-9\s-]`)
 	slug = reg.ReplaceAllString(slug, "")
 	slug = strings.ReplaceAll(slug, " ", "-")
-	reg = regexp.MustCompile("-+")
+	reg = regexp.MustCompile(`-+`)
 	slug = reg.ReplaceAllString(slug, "-")
 	slug = strings.Trim(slug, "-")
 	return slug
 }
 
 func isValidSlug(slug string) bool {
-	match, _ := regexp.MatchString("^[a-z0-9]+(-[a-z0-9]+)*$", slug)
+	match, _ := regexp.MatchString(`^[a-z0-9]+(-[a-z0-9]+)*$`, slug)
 	return match
 }

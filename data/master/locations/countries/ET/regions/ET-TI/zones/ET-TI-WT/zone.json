@@ -1,0 +1,32 @@
+{
+  "id": 76,
+  "parent_id": 6,
+  "parent_code": "ET-TI",
+  "type": "zone",
+  "slug": "tigray-west",
+  "code": "ET-TI-WT",
+  "level": 2,
+  "path": "/1/6/76/",
+  "display_order": 40,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Mirabawi Tigray",
+    "ምዕራብ ትግራይ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Tigray Zone",
+    "am": "ምዕራባዊ ዞን ትግራይ",
+    "om": "Tigraay Dhihaa",
+    "ti": "ዞን ምዕራብ ትግራይ"
+  },
+  "coordinates": {
+    "latitude": 13.9,
+    "longitude": 36.9,
+    "bbox": null
+  }
+}

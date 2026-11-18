@@ -28,10 +28,10 @@ type OTPRequest struct {
 // OTPVerifyRequest verifies the OTP and completes login/registration.
 type OTPVerifyRequest struct {
 	Phone   string `json:"phone"`
-	Email   string `json:"email"`   // used for admin OTP
+	Email   string `json:"email"` // used for admin OTP
 	Code    string `json:"code"`
 	Purpose string `json:"purpose"`
-	Role    string `json:"role"`    // seller | buyer (used by OTP login endpoint)
+	Role    string `json:"role"` // seller | buyer (used by OTP login endpoint)
 }
 
 // AdminOTPRequest is sent after step-1 admin login to verify the email OTP.
@@ -48,10 +48,11 @@ type LoginResponse struct {
 // If is_super=true, token is set and no OTP step is needed.
 // If is_super=false, email is set and the client must proceed to step 2 with OTP.
 type AdminLoginStep1Response struct {
-	Email   string `json:"email,omitempty"` // set when OTP required (sub-admin)
-	Token   string `json:"token,omitempty"` // set when no OTP needed (super admin)
-	IsSuper bool   `json:"is_super"`
-	Message string `json:"message"`
+	Email        string `json:"email,omitempty"`        // set when OTP required (sub-admin)
+	Token        string `json:"token,omitempty"`        // set when no OTP needed (super admin or dev fallback)
+	SessionToken string `json:"session_token,omitempty"` // set when direct session issued
+	IsSuper      bool   `json:"is_super"`
+	Message      string `json:"message"`
 }
 
 // BuyerUpgradeRequest requests a buyer tier upgrade.
@@ -97,4 +98,3 @@ type AuthUserResponse struct {
 	Capabilities     []string `json:"capabilities"`
 	Token            string   `json:"token,omitempty"`
 }
-

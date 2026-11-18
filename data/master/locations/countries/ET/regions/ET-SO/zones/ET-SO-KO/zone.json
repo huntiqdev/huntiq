@@ -1,0 +1,32 @@
+{
+  "id": 85,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "zone",
+  "slug": "somali-korahe",
+  "code": "ET-SO-KO",
+  "level": 2,
+  "path": "/1/8/85/",
+  "display_order": 49,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Korahey",
+    "ቆራሄ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Korahe Zone",
+    "am": "ቆራሄ ዞን",
+    "om": "Qorahay",
+    "ti": "ዞን ቆራሄ"
+  },
+  "coordinates": {
+    "latitude": 6.5,
+    "longitude": 44.5,
+    "bbox": null
+  }
+}

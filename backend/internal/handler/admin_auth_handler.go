@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gofiber/fiber/v2"
 	"github.com/go-webauthn/webauthn/protocol"
+	"github.com/gofiber/fiber/v2"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/service"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
@@ -49,6 +49,20 @@ func (h *AdminAuthHandler) setSessionCookie(c *fiber.Ctx, sessionToken string, m
 		Secure:   h.secureCookie,
 		SameSite: "Lax",
 	})
+
+	// Also issue huntiq_csrf cookie so admin portal mutation requests pass CSRF protection
+	csrfToken, err := service.GenerateCSRFToken()
+	if err == nil {
+		c.Cookie(&fiber.Cookie{
+			Name:     "huntiq_csrf",
+			Value:    csrfToken,
+			Path:     "/",
+			MaxAge:   maxAgeSec,
+			HTTPOnly: false,
+			Secure:   h.secureCookie,
+			SameSite: "Lax",
+		})
+	}
 }
 
 // Helper to clear the session cookie
@@ -59,6 +73,15 @@ func (h *AdminAuthHandler) clearSessionCookie(c *fiber.Ctx) {
 		Path:     "/",
 		MaxAge:   -1,
 		HTTPOnly: true,
+		Secure:   h.secureCookie,
+		SameSite: "Lax",
+	})
+	c.Cookie(&fiber.Cookie{
+		Name:     "huntiq_csrf",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HTTPOnly: false,
 		Secure:   h.secureCookie,
 		SameSite: "Lax",
 	})
@@ -496,4 +519,3 @@ func (h *AdminAuthHandler) RevokeSessionEndpoint(c *fiber.Ctx) error {
 	// Default fallback: revoke current session
 	return h.Logout(c)
 }
-

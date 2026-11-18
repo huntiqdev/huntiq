@@ -2,13 +2,34 @@ package repository
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 )
+
+type categoryMemoryCache struct {
+	sync.RWMutex
+	roots       map[string][]models.CategoryHierarchy
+	trees       map[string][]models.CategoryTree
+	byID        map[int]*models.CategoryHierarchy
+	bySlug      map[string]*models.CategoryHierarchy
+	children    map[int][]models.CategoryHierarchy
+	lastUpdated time.Time
+}
+
+var globalCategoryCache = &categoryMemoryCache{
+	roots:    make(map[string][]models.CategoryHierarchy),
+	trees:    make(map[string][]models.CategoryTree),
+	byID:     make(map[int]*models.CategoryHierarchy),
+	bySlug:   make(map[string]*models.CategoryHierarchy),
+	children: make(map[int][]models.CategoryHierarchy),
+}
 
 type CategoryHierarchyRepo struct {
 	db *pgxpool.Pool
@@ -16,6 +37,18 @@ type CategoryHierarchyRepo struct {
 
 func NewCategoryHierarchyRepo(db *pgxpool.Pool) *CategoryHierarchyRepo {
 	return &CategoryHierarchyRepo{db: db}
+}
+
+// InvalidateCache clears the in-memory cache on write operations
+func (r *CategoryHierarchyRepo) InvalidateCache() {
+	globalCategoryCache.Lock()
+	globalCategoryCache.roots = make(map[string][]models.CategoryHierarchy)
+	globalCategoryCache.trees = make(map[string][]models.CategoryTree)
+	globalCategoryCache.byID = make(map[int]*models.CategoryHierarchy)
+	globalCategoryCache.bySlug = make(map[string]*models.CategoryHierarchy)
+	globalCategoryCache.children = make(map[int][]models.CategoryHierarchy)
+	globalCategoryCache.lastUpdated = time.Time{}
+	globalCategoryCache.Unlock()
 }
 
 // GetByID retrieves a category with its breadcrumb path
@@ -27,19 +60,23 @@ func (r *CategoryHierarchyRepo) GetByID(ctx context.Context, id int, lang string
 		       level, COALESCE(path, ''), display_order,
 		       COALESCE(icon, ''), COALESCE(image_url, ''), is_active, is_leaf,
 		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
-		       created_at, updated_at
+		       created_at, updated_at, COALESCE(i18n, '{}'::jsonb)
 		FROM category_hierarchy
 		WHERE id = $1`
 
 	var cat models.CategoryHierarchy
+	var i18nBytes []byte
 	err := r.db.QueryRow(ctx, query, id).Scan(
 		&cat.ID, &cat.ParentID, &cat.NameEn, &cat.NameAm, &cat.NameOm, &cat.NameTi,
 		&cat.Slug, &cat.Description, &cat.Level, &cat.Path, &cat.DisplayOrder,
 		&cat.Icon, &cat.ImageURL, &cat.IsActive, &cat.IsLeaf, &cat.MetaTitle,
-		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt,
+		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt, &i18nBytes,
 	)
 	if err != nil {
 		return nil, err
+	}
+	if len(i18nBytes) > 0 {
+		_ = json.Unmarshal(i18nBytes, &cat.I18N)
 	}
 
 	breadcrumbs, err := r.GetBreadcrumbs(ctx, id, lang)
@@ -59,19 +96,23 @@ func (r *CategoryHierarchyRepo) GetBySlug(ctx context.Context, slug string, lang
 		       level, COALESCE(path, ''), display_order,
 		       COALESCE(icon, ''), COALESCE(image_url, ''), is_active, is_leaf,
 		       COALESCE(meta_title, ''), COALESCE(meta_description, ''),
-		       created_at, updated_at
+		       created_at, updated_at, COALESCE(i18n, '{}'::jsonb)
 		FROM category_hierarchy
 		WHERE slug = $1`
 
 	var cat models.CategoryHierarchy
+	var i18nBytes []byte
 	err := r.db.QueryRow(ctx, query, slug).Scan(
 		&cat.ID, &cat.ParentID, &cat.NameEn, &cat.NameAm, &cat.NameOm, &cat.NameTi,
 		&cat.Slug, &cat.Description, &cat.Level, &cat.Path, &cat.DisplayOrder,
 		&cat.Icon, &cat.ImageURL, &cat.IsActive, &cat.IsLeaf, &cat.MetaTitle,
-		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt,
+		&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt, &i18nBytes,
 	)
 	if err != nil {
 		return nil, err
+	}
+	if len(i18nBytes) > 0 {
+		_ = json.Unmarshal(i18nBytes, &cat.I18N)
 	}
 
 	breadcrumbs, err := r.GetBreadcrumbs(ctx, cat.ID, lang)
@@ -87,6 +128,14 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 	if lang == "" {
 		lang = "en"
 	}
+
+	globalCategoryCache.RLock()
+	if cached, ok := globalCategoryCache.roots[lang]; ok && time.Since(globalCategoryCache.lastUpdated) < 15*time.Minute {
+		globalCategoryCache.RUnlock()
+		return cached, nil
+	}
+	globalCategoryCache.RUnlock()
+
 	query := `
 		SELECT id, parent_id,
 		       COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
@@ -97,18 +146,9 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		       created_at, updated_at
 		FROM category_hierarchy
 		WHERE parent_id IS NULL AND is_active = true
-		ORDER BY 
-			LOWER(TRIM(
-				CASE $1
-					WHEN 'am' THEN COALESCE(NULLIF(name_am, ''), name_en)
-					WHEN 'om' THEN COALESCE(NULLIF(name_om, ''), name_en)
-					WHEN 'or' THEN COALESCE(NULLIF(name_om, ''), name_en)
-					WHEN 'ti' THEN COALESCE(NULLIF(name_ti, ''), name_en)
-					ELSE name_en
-				END
-			)) ASC, id ASC`
+		ORDER BY display_order ASC, id ASC`
 
-	rows, err := r.db.Query(ctx, query, lang)
+	rows, err := r.db.Query(ctx, query)
 	if err != nil {
 		return nil, err
 	}
@@ -143,11 +183,12 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		return categories[i].ID < categories[j].ID
 	})
 
-	return categories, nil
-}
+	globalCategoryCache.Lock()
+	globalCategoryCache.roots[lang] = categories
+	globalCategoryCache.lastUpdated = time.Now()
+	globalCategoryCache.Unlock()
 
-func resolveCategoryName(cat models.CategoryHierarchy, lang string) string {
-	return cat.GetName(lang)
+	return categories, nil
 }
 
 // ListCategories retrieves categories with optional filtering
@@ -254,11 +295,25 @@ func (r *CategoryHierarchyRepo) ListCategories(ctx context.Context, f models.Cat
 	return categories, rows.Err()
 }
 
-// GetCategoryTree builds a full hierarchical tree with deterministic alphabetical sibling ordering
+// GetCategoryTree builds a hierarchical tree with deterministic alphabetical sibling ordering
 func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string) ([]models.CategoryTree, error) {
+	return r.GetCategoryTreeWithDepth(ctx, lang, 4)
+}
+
+// GetCategoryTreeWithDepth builds a hierarchical tree up to maxDepth (level < maxDepth).
+// If maxDepth <= 0, builds without level restriction.
+func (r *CategoryHierarchyRepo) GetCategoryTreeWithDepth(ctx context.Context, lang string, maxDepth int) ([]models.CategoryTree, error) {
 	if lang == "" {
 		lang = "en"
 	}
+
+	cacheKey := fmt.Sprintf("%s:%d", lang, maxDepth)
+	globalCategoryCache.RLock()
+	if cached, ok := globalCategoryCache.trees[cacheKey]; ok && time.Since(globalCategoryCache.lastUpdated) < 15*time.Minute {
+		globalCategoryCache.RUnlock()
+		return cached, nil
+	}
+	globalCategoryCache.RUnlock()
 
 	query := `
 		SELECT c.id, c.parent_id,
@@ -272,11 +327,16 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 		       COALESCE(c.image_url, '') AS image_url,
 		       COALESCE(s.product_count, 0) AS product_count
 		FROM category_hierarchy c
-		LEFT JOIN category_stats s ON s.category_id = c.id
-		WHERE c.is_active = true
+		LEFT JOIN (
+			SELECT category_hierarchy_id, count(*) AS product_count
+			FROM products
+			WHERE status = 'approved' AND category_hierarchy_id IS NOT NULL
+			GROUP BY category_hierarchy_id
+		) s ON s.category_hierarchy_id = c.id
+		WHERE c.is_active = true AND ($1 <= 0 OR c.level < $1)
 		ORDER BY c.level ASC, c.id ASC`
 
-	rows, err := r.db.Query(ctx, query)
+	rows, err := r.db.Query(ctx, query, maxDepth)
 	if err != nil {
 		return nil, err
 	}
@@ -335,9 +395,12 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 		return nil, err
 	}
 
-	// Sibling sorter: deterministic alphabetical by active display name, with ID tie-breaker
+	// Sibling sorter: priority by DisplayOrder first (commercial popularity), then deterministic alphabetical by active display name, with ID tie-breaker
 	sortSiblings := func(nodes []*models.CategoryTree) {
 		sort.Slice(nodes, func(i, j int) bool {
+			if nodes[i].DisplayOrder != nodes[j].DisplayOrder {
+				return nodes[i].DisplayOrder < nodes[j].DisplayOrder
+			}
 			nameI := strings.ToLower(strings.TrimSpace(nodes[i].Name))
 			nameJ := strings.ToLower(strings.TrimSpace(nodes[j].Name))
 			if nameI != nameJ {
@@ -380,15 +443,12 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 		if node == nil {
 			continue
 		}
-		if fc.ParentID == nil || *fc.ParentID == 0 {
+		if fc.Level == 0 && (fc.ParentID == nil || *fc.ParentID == 0) {
 			rootList = append(rootList, node)
-		} else {
+		} else if fc.ParentID != nil && *fc.ParentID > 0 {
 			pid := *fc.ParentID
 			if _, parentExists := allNodes[pid]; parentExists {
 				childrenByParent[pid] = append(childrenByParent[pid], node)
-			} else {
-				// Fallback orphan protection: preserve node at root so it is never dropped
-				rootList = append(rootList, node)
 			}
 		}
 	}
@@ -415,6 +475,14 @@ func (r *CategoryHierarchyRepo) GetCategoryTree(ctx context.Context, lang string
 	for i, root := range rootList {
 		roots[i] = buildTreeRecursive(root)
 	}
+
+	globalCategoryCache.Lock()
+	if globalCategoryCache.trees == nil {
+		globalCategoryCache.trees = make(map[string][]models.CategoryTree)
+	}
+	globalCategoryCache.trees[cacheKey] = roots
+	globalCategoryCache.lastUpdated = time.Now()
+	globalCategoryCache.Unlock()
 
 	return roots, nil
 }
@@ -532,6 +600,9 @@ func (r *CategoryHierarchyRepo) CreateCategory(ctx context.Context, cat *models.
 		cat.IsActive, cat.MetaTitle, cat.MetaDescription,
 	).Scan(&id)
 
+	if err == nil {
+		r.InvalidateCache()
+	}
 	return id, err
 }
 
@@ -556,6 +627,7 @@ func (r *CategoryHierarchyRepo) UpdateCategory(ctx context.Context, cat *models.
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -569,6 +641,7 @@ func (r *CategoryHierarchyRepo) ReorderCategory(ctx context.Context, id int, dis
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -582,6 +655,7 @@ func (r *CategoryHierarchyRepo) SetCategoryStatus(ctx context.Context, id int, i
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -612,6 +686,7 @@ func (r *CategoryHierarchyRepo) DeleteCategory(ctx context.Context, id int) erro
 	if tag.RowsAffected() == 0 {
 		return fmt.Errorf("category not found")
 	}
+	r.InvalidateCache()
 	return nil
 }
 
@@ -643,4 +718,191 @@ func (r *CategoryHierarchyRepo) GetCategoryStats(ctx context.Context, categoryID
 	)
 
 	return &cat, err
+}
+
+// ResolveCategoryByAlias queries the database stored procedure resolve_category_by_alias(term)
+func (r *CategoryHierarchyRepo) ResolveCategoryByAlias(ctx context.Context, term string) (*int, error) {
+	clean := strings.TrimSpace(term)
+	if clean == "" {
+		return nil, nil
+	}
+	var catID *int
+	err := r.db.QueryRow(ctx, `SELECT public.resolve_category_by_alias($1)`, clean).Scan(&catID)
+	if err != nil {
+		return nil, err
+	}
+	return catID, nil
+}
+
+// ResolveLegacyCategoryID resolves the legacy category ID dynamically from PostgreSQL.
+// It checks if rootID exists in the categories table, or looks up by slug in the categories table,
+// or falls back to the default/other category directly from the categories table.
+func (r *CategoryHierarchyRepo) ResolveLegacyCategoryID(ctx context.Context, rootSlug string, rootID int) int {
+	if rootID > 0 {
+		var existsID int
+		err := r.db.QueryRow(ctx, `SELECT id FROM categories WHERE id = $1 LIMIT 1`, rootID).Scan(&existsID)
+		if err == nil && existsID > 0 {
+			return existsID
+		}
+	}
+	if rootSlug != "" {
+		var legacyID int
+		// Try exact slug match in categories table
+		err := r.db.QueryRow(ctx, `SELECT id FROM categories WHERE slug = $1 LIMIT 1`, rootSlug).Scan(&legacyID)
+		if err == nil && legacyID > 0 {
+			return legacyID
+		}
+		// Try prefix match in categories table (e.g. "electronics-mobile" -> "electronics")
+		prefix := strings.Split(rootSlug, "-")[0]
+		err = r.db.QueryRow(ctx, `SELECT id FROM categories WHERE slug = $1 LIMIT 1`, prefix).Scan(&legacyID)
+		if err == nil && legacyID > 0 {
+			return legacyID
+		}
+	}
+	// Fallback to 'other' category from categories table
+	var otherID int
+	err := r.db.QueryRow(ctx, `SELECT id FROM categories WHERE slug = 'other' LIMIT 1`).Scan(&otherID)
+	if err == nil && otherID > 0 {
+		return otherID
+	}
+	// Fallback to the first available category in database
+	var firstID int
+	err = r.db.QueryRow(ctx, `SELECT id FROM categories ORDER BY id ASC LIMIT 1`).Scan(&firstID)
+	if err == nil && firstID > 0 {
+		return firstID
+	}
+	return 1
+}
+
+// SearchCategories performs an ultra-fast, index-accelerated hierarchical search across all active branches
+// returning full ancestor breadcrumbs (e.g. "Food & Beverage › Alcoholic Beverages › Beer Products").
+func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term string, lang string, limit int) ([]models.CategorySearchResult, error) {
+	if limit <= 0 || limit > 50 {
+		limit = 20
+	}
+	cleanTerm := strings.TrimSpace(term)
+	if cleanTerm == "" {
+		return []models.CategorySearchResult{}, nil
+	}
+
+	likePattern := "%" + cleanTerm + "%"
+	query := `
+		WITH matched AS (
+			SELECT c.id, c.parent_id,
+			       COALESCE(c.name_en, '') as name_en, COALESCE(c.name_am, '') as name_am, 
+			       COALESCE(c.name_om, '') as name_om, COALESCE(c.name_ti, '') as name_ti,
+			       COALESCE(c.slug, '') as slug, c.level, COALESCE(c.path, '') as path, c.is_leaf, 
+			       COALESCE(c.icon, '') as icon, c.display_order,
+			       COALESCE(c.i18n, '{}'::jsonb) as i18n,
+			       CASE 
+			           WHEN LOWER(c.name_en) = LOWER($1) OR LOWER(c.name_am) = LOWER($1) OR LOWER(c.name_om) = LOWER($1) OR LOWER(c.name_ti) = LOWER($1) THEN 100.0
+			           WHEN c.name_en ILIKE $1 || '%' OR c.name_am ILIKE $1 || '%' OR c.name_om ILIKE $1 || '%' OR c.name_ti ILIKE $1 || '%' THEN 80.0
+			           WHEN c.name_en ILIKE '%' || $1 || '%' OR c.name_am ILIKE '%' || $1 || '%' OR c.name_om ILIKE '%' || $1 || '%' OR c.name_ti ILIKE '%' || $1 || '%' THEN 60.0
+			           ELSE 40.0
+			       END as score
+			FROM category_hierarchy c
+			WHERE c.is_active = true
+			  AND (
+			      c.name_en ILIKE $2
+			   OR c.name_am ILIKE $2
+			   OR c.name_om ILIKE $2
+			   OR c.name_ti ILIKE $2
+			   OR c.slug ILIKE $2
+			   OR c.i18n::text ILIKE $2
+			  )
+			UNION
+			SELECT c.id, c.parent_id,
+			       COALESCE(c.name_en, '') as name_en, COALESCE(c.name_am, '') as name_am, 
+			       COALESCE(c.name_om, '') as name_om, COALESCE(c.name_ti, '') as name_ti,
+			       COALESCE(c.slug, '') as slug, c.level, COALESCE(c.path, '') as path, c.is_leaf, 
+			       COALESCE(c.icon, '') as icon, c.display_order,
+			       COALESCE(c.i18n, '{}'::jsonb) as i18n,
+			       CASE 
+			           WHEN LOWER(a.alias) = LOWER($1) THEN 90.0
+			           WHEN a.alias ILIKE $1 || '%' THEN 75.0
+			           ELSE 55.0
+			       END as score
+			FROM category_aliases a
+			JOIN category_hierarchy c ON a.category_id = c.id
+			WHERE c.is_active = true
+			  AND a.alias ILIKE $2
+		)
+		SELECT id, parent_id, name_en, name_am, name_om, name_ti, slug, level, path, is_leaf, icon, score, i18n
+		FROM matched
+		ORDER BY score DESC, level ASC, display_order ASC, id ASC
+		LIMIT $3
+	`
+
+	rows, err := r.db.Query(ctx, query, cleanTerm, likePattern, limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var results []models.CategorySearchResult
+	for rows.Next() {
+		var res models.CategorySearchResult
+		var nameEn, nameAm, nameOm, nameTi string
+		var i18nBytes []byte
+		if err := rows.Scan(
+			&res.ID, &res.ParentID,
+			&nameEn, &nameAm, &nameOm, &nameTi,
+			&res.Slug, &res.Level, &res.Path, &res.IsLeaf, &res.Icon,
+			&res.Score, &i18nBytes,
+		); err != nil {
+			continue
+		}
+		res.NameEn = nameEn
+		res.NameAm = nameAm
+		res.NameOm = nameOm
+		res.NameTi = nameTi
+
+		var i18nMap map[string]string
+		if len(i18nBytes) > 0 {
+			_ = json.Unmarshal(i18nBytes, &i18nMap)
+		}
+		if i18nMap != nil {
+			if val, ok := i18nMap[lang]; ok && val != "" {
+				res.Name = val
+			}
+		}
+
+		if res.Name == "" {
+			switch lang {
+			case "am":
+				res.Name = nameAm
+			case "om", "or":
+				res.Name = nameOm
+			case "ti":
+				res.Name = nameTi
+			default:
+				res.Name = nameEn
+			}
+		}
+		if res.Name == "" {
+			res.Name = nameEn
+		}
+
+		results = append(results, res)
+	}
+
+	// For all matched categories, fetch their full ancestor breadcrumbs
+	for i := range results {
+		bcs, err := r.GetBreadcrumbs(ctx, results[i].ID, lang)
+		if err == nil && len(bcs) > 0 {
+			results[i].Breadcrumbs = bcs
+			names := make([]string, len(bcs))
+			for j, b := range bcs {
+				names[j] = b.Name
+			}
+			results[i].Hierarchy = strings.Join(names, " › ")
+		} else {
+			results[i].Hierarchy = results[i].Name
+			results[i].Breadcrumbs = []models.CategoryBreadcrumb{
+				{ID: results[i].ID, Name: results[i].Name, Slug: results[i].Slug, Level: results[i].Level},
+			}
+		}
+	}
+
+	return results, nil
 }

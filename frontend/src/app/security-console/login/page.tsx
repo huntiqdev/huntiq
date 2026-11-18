@@ -15,7 +15,7 @@ export default function SecurityConsoleLoginPage() {
       portalTheme="emerald"
       portalSubtitle="Privileged access for security investigation, audit logs, and incident response"
       portalDescription="Mandatory cryptographic user verification via hardware authenticators."
-      allowPasswordMfaFallback={false}
+      allowPasswordMfaFallback={true}
     />
   );
 }

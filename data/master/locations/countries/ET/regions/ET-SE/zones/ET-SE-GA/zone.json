@@ -1,0 +1,32 @@
+{
+  "id": 110,
+  "parent_id": 13,
+  "parent_code": "ET-SE",
+  "type": "zone",
+  "slug": "south-ethiopia-gamo",
+  "code": "ET-SE-GA",
+  "level": 2,
+  "path": "/1/13/110/",
+  "display_order": 77,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Gamo Zone",
+    "ጋሞ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Gamo Zone",
+    "am": "ጋሞ ዞን",
+    "om": "Gaamoo",
+    "ti": "ዞን ጋሞ"
+  },
+  "coordinates": {
+    "latitude": 6.15,
+    "longitude": 37.45,
+    "bbox": null
+  }
+}

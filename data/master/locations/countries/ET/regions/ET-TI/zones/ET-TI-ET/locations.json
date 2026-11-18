@@ -1,0 +1,67 @@
+[
+  {
+    "id": 263,
+    "parent_id": 72,
+    "type": "woreda",
+    "slug": "tigray-east-adigrat",
+    "code": "TI-ET-ADI",
+    "level": 3,
+    "path": "/1/6/72/263/",
+    "display_order": 135,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Adigrat",
+      "ዓዲግራት"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-TI-ET",
+    "names": {
+      "en": "Adigrat Woreda & City",
+      "am": "ዓዲግራት ወረዳና ከተማ",
+      "om": "Magaalaa fi Aanaa Adigraat",
+      "ti": "ከተማ ዓዲግራት"
+    },
+    "coordinates": {
+      "latitude": 14.28,
+      "longitude": 39.46,
+      "bbox": null
+    }
+  },
+  {
+    "id": 264,
+    "parent_id": 72,
+    "type": "woreda",
+    "slug": "tigray-east-wukro",
+    "code": "TI-ET-WUK",
+    "level": 3,
+    "path": "/1/6/72/264/",
+    "display_order": 136,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Wukro",
+      "Kilte Awlaelo",
+      "ውቅሮ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-TI-ET",
+    "names": {
+      "en": "Kilte Awlaelo Woreda (ውቅሮ)",
+      "am": "ውቅሮ / ክልተ ኣውላዕሎ",
+      "om": "Aanaa Qilxee Awlaaloo",
+      "ti": "ውቅሮ / ክልተ ኣውላዕሎ"
+    },
+    "coordinates": {
+      "latitude": 13.78,
+      "longitude": 39.6,
+      "bbox": null
+    }
+  }
+]

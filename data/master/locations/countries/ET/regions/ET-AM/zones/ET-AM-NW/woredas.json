@@ -1,0 +1,100 @@
+[
+  {
+    "id": 257,
+    "parent_id": 67,
+    "parent_code": "ET-AM-NW",
+    "type": "woreda",
+    "slug": "amhara-north-wollo-woldiya",
+    "code": "AM-NW-WOL",
+    "level": 3,
+    "path": "/1/5/67/257/",
+    "display_order": 129,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Woldia",
+      "ወልዲያ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Woldiya Woreda & City",
+      "am": "ወልዲያ ወረዳና ከተማ (ሰሜን ወሎ)",
+      "om": "Magaalaa fi Aanaa Waldiyyaa",
+      "ti": "ወልዲያ"
+    },
+    "coordinates": {
+      "latitude": 11.83,
+      "longitude": 39.6,
+      "bbox": null
+    }
+  },
+  {
+    "id": 258,
+    "parent_id": 67,
+    "parent_code": "ET-AM-NW",
+    "type": "woreda",
+    "slug": "amhara-north-wollo-lalibela",
+    "code": "AM-NW-LAL",
+    "level": 3,
+    "path": "/1/5/67/258/",
+    "display_order": 130,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Lalibela Rock Hewn Churches",
+      "ላሊበላ",
+      "Roha"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Lalibela Woreda & City (ውቅር አብያተ ክርስቲያናት)",
+      "am": "ላሊበላ ወረዳና ከተማ (ውቅር አብያተ ክርስቲያናት)",
+      "om": "Magaalaa Laallibalaa",
+      "ti": "ላሊበላ"
+    },
+    "coordinates": {
+      "latitude": 12.03,
+      "longitude": 39.05,
+      "bbox": null
+    }
+  },
+  {
+    "id": 259,
+    "parent_id": 67,
+    "parent_code": "ET-AM-NW",
+    "type": "woreda",
+    "slug": "amhara-north-wollo-kobo",
+    "code": "AM-NW-KOB",
+    "level": 3,
+    "path": "/1/5/67/259/",
+    "display_order": 131,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Raya Kobo",
+      "Kobo Valley",
+      "ቆቦ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kobo Woreda (ራያ ቆቦ)",
+      "am": "ቆቦ ወረዳ (ራያ ቆቦ)",
+      "om": "Aanaa Qobboo",
+      "ti": "ራያ ቆቦ"
+    },
+    "coordinates": {
+      "latitude": 12.15,
+      "longitude": 39.63,
+      "bbox": null
+    }
+  }
+]

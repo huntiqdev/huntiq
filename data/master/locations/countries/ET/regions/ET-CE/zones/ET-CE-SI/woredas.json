@@ -1,0 +1,68 @@
+[
+  {
+    "id": 416,
+    "parent_id": 103,
+    "parent_code": "ET-CE-SI",
+    "type": "woreda",
+    "slug": "central-ethiopia-silte-dalocha",
+    "code": "CE-SI-DAL",
+    "level": 3,
+    "path": "/1/14/103/416/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dalocha Town Administration",
+      "am": "ዳሎቻ ከተማ አስተዳደር",
+      "om": "Magaalaa Dalocaa",
+      "ti": "ዳሎቻ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 7.92,
+      "longitude": 38.25,
+      "bbox": {
+        "min_lat": 7.9,
+        "max_lat": 7.94,
+        "min_lng": 38.23,
+        "max_lng": 38.27
+      }
+    }
+  },
+  {
+    "id": 284,
+    "parent_id": 103,
+    "parent_code": "ET-CE-SI",
+    "type": "woreda",
+    "slug": "central-ethiopia-silte-worabe",
+    "code": "CE-SI-WOR",
+    "level": 3,
+    "path": "/1/14/103/284/",
+    "display_order": 158,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Worabe Capital",
+      "ወራቤ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Worabe Woreda & City",
+      "am": "ወራቤ ወረዳና ከተማ (ስልጤ)",
+      "om": "Magaalaa fi Aanaa Waraabee",
+      "ti": "ወራቤ"
+    },
+    "coordinates": {
+      "latitude": 7.85,
+      "longitude": 38.33,
+      "bbox": null
+    }
+  }
+]

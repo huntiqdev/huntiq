@@ -1,0 +1,32 @@
+{
+  "id": 109,
+  "parent_id": 13,
+  "parent_code": "ET-SE",
+  "type": "zone",
+  "slug": "south-ethiopia-wolayita",
+  "code": "ET-SE-WO",
+  "level": 2,
+  "path": "/1/13/109/",
+  "display_order": 76,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Wolaita Zone",
+    "ወላይታ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Wolayita Zone",
+    "am": "ወላይታ ዞን",
+    "om": "Walaayittaa",
+    "ti": "ዞን ወላይታ"
+  },
+  "coordinates": {
+    "latitude": 6.85,
+    "longitude": 37.75,
+    "bbox": null
+  }
+}

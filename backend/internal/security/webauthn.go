@@ -37,9 +37,9 @@ func NewWebAuthnManager(rpID string, rpOrigins []string) (*WebAuthnManager, erro
 	}
 
 	wa, err := webauthn.New(&webauthn.Config{
-		RPDisplayName: "HUNTIQ Platform Governance",
-		RPID:          rpID,
-		RPOrigins:     cleanOrigins,
+		RPDisplayName:         "HUNTIQ Platform Governance",
+		RPID:                  rpID,
+		RPOrigins:             cleanOrigins,
 		AttestationPreference: protocol.PreferNoAttestation,
 		AuthenticatorSelection: protocol.AuthenticatorSelection{
 			RequireResidentKey: protocol.ResidentKeyNotRequired(),

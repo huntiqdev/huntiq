@@ -1,0 +1,36 @@
+{
+  "id": 32,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "city",
+  "slug": "amhara-gondar",
+  "code": "AM-GD",
+  "level": 2,
+  "path": "/1/5/32/",
+  "display_order": 2,
+  "is_active": true,
+  "is_leaf": true,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Gonder"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Gondar",
+    "am": "ጎንደር",
+    "om": "Gondar",
+    "ti": "ጎንደር"
+  },
+  "coordinates": {
+    "latitude": 12.6,
+    "longitude": 37.46,
+    "bbox": {
+      "min_lat": 12.55,
+      "max_lat": 12.66,
+      "min_lng": 37.4,
+      "max_lng": 37.52
+    }
+  }
+}

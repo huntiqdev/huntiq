@@ -1,0 +1,36 @@
+[
+  {
+    "id": 372,
+    "parent_id": 94,
+    "parent_code": "ET-AF-Z5",
+    "type": "woreda",
+    "slug": "afar-hari-rasu-mille-town",
+    "code": "AF-Z5-MIL",
+    "level": 3,
+    "path": "/1/9/94/372/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Mille Town Administration",
+      "am": "ሚሌ ከተማ አስተዳደር",
+      "om": "Magaalaa Millee",
+      "ti": "ሚሌ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 11.415,
+      "longitude": 40.76,
+      "bbox": {
+        "min_lat": 11.405,
+        "max_lat": 11.425,
+        "min_lng": 40.75,
+        "max_lng": 40.77
+      }
+    }
+  }
+]

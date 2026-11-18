@@ -15,7 +15,7 @@ export default function PlatformConsoleLoginPage() {
       portalTheme="indigo"
       portalSubtitle="Authorized platform configuration, system management, and catalog governance"
       portalDescription="Mandatory WebAuthn passkey authentication with user verification."
-      allowPasswordMfaFallback={false}
+      allowPasswordMfaFallback={true}
     />
   );
 }

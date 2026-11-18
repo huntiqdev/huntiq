@@ -13,8 +13,7 @@ import { ImageUploader } from '@/components/seller/ImageUploader';
 import { type SellerTier, MAX_IMAGES_PER_TIER } from '@/lib/constants/fees';
 import { SELECT_CLS as cls, LABEL_CLS as lbl } from '@/lib/constants/styles';
 import CategoryTreeSelector from '@/components/category/CategoryTreeSelector';
-import { Sparkles, Check, Wand2, Lightbulb, X, RefreshCw, Layers } from 'lucide-react';
-import type { AutoCategorizeResult } from '@/lib/api/public';
+import { Check, X, RefreshCw, Layers, Globe, Sparkles, ExternalLink } from 'lucide-react';
 
 interface AttributeDefinition {
   attribute_id: number;
@@ -68,6 +67,13 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     condition: product?.condition ?? initialCondition ?? 'used',
   });
 
+  const [publisherRole, setPublisherRole] = useState<'owner' | 'authorized_seller' | 'broker_agent' | 'representative' | 'government_officer'>(
+    (product?.publisher_role as any) ?? 'owner'
+  );
+  const [brokerageDisclosureAgreed, setBrokerageDisclosureAgreed] = useState(
+    product?.brokerage_disclosure_agreed ?? true
+  );
+
   // Dynamic attributes per category
   const [applicableAttributes, setApplicableAttributes] = useState<AttributeDefinition[]>([]);
   const [attributeValues, setAttributeValues] = useState<Record<string, any>>({});
@@ -80,6 +86,12 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     available_from: product?.available_from ? String(product.available_from).split('T')[0] : '',
     rental_terms: product?.rental_terms ?? '',
   });
+
+  // Gold & Premium merchant external links
+  const [customURL, setCustomURL] = useState(product?.custom_url ?? '');
+  const [socialTelegram, setSocialTelegram] = useState(product?.social_links?.telegram ?? '');
+  const [socialYoutube, setSocialYoutube] = useState(product?.social_links?.youtube ?? '');
+  const [socialTiktok, setSocialTiktok] = useState(product?.social_links?.tiktok ?? '');
   
   const [imageURLs, setImageURLs] = useState<string[]>(
     product?.images?.map((i: any) => i.image_url) ?? []
@@ -87,70 +99,6 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [tierLoaded, setTierLoaded] = useState(false);
-
-  // AI Auto-Categorize & Reasoning States
-  const [aiResult, setAiResult] = useState<AutoCategorizeResult | null>(null);
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiApplied, setAiApplied] = useState(false);
-  const [aiDismissed, setAiDismissed] = useState(false);
-
-  // Trigger AI Auto-Categorize with human error tolerance
-  const triggerAutoCategorize = useCallback(async (textToAnalyze?: string) => {
-    const query = (textToAnalyze ?? form.title).trim();
-    if (!query || query.length < 3) return;
-
-    setAiLoading(true);
-    try {
-      const res = await api.autoCategorize({
-        title: query,
-        description: form.description,
-        locale,
-      });
-      if (res) {
-        setAiResult(res);
-        setAiDismissed(false);
-      }
-    } catch (err) {
-      console.warn('Auto-categorize suggestion error:', err);
-    } finally {
-      setAiLoading(false);
-    }
-  }, [form.title, form.description, locale]);
-
-  // Debounced auto-categorize as seller types title
-  useEffect(() => {
-    if (product || !form.title.trim() || form.title.trim().length < 3) return;
-    const timer = setTimeout(() => {
-      triggerAutoCategorize(form.title);
-    }, 700);
-    return () => clearTimeout(timer);
-  }, [form.title, product, triggerAutoCategorize]);
-
-  // Apply AI Suggestions (category, condition, suggested price, description, listing type)
-  const applyAiSuggestions = (resToApply?: AutoCategorizeResult) => {
-    const res = resToApply || aiResult;
-    if (!res) return;
-
-    setForm(f => ({
-      ...f,
-      category_hierarchy_id: res.category_hierarchy_id || f.category_hierarchy_id,
-      category_id: res.legacy_category_id ? String(res.legacy_category_id) : f.category_id,
-      condition: res.condition || f.condition,
-      price: !f.price && res.suggested_price_etb ? String(res.suggested_price_etb) : f.price,
-      description: !f.description && res.suggested_description ? res.suggested_description : f.description,
-    }));
-
-    if (res.primary_intent === 'rent' && selectedType !== 'rent') {
-      setSelectedType('rent');
-      if (!rentalForm.rental_price && res.suggested_price_etb) {
-        setRentalForm(rf => ({ ...rf, rental_price: String(res.suggested_price_etb) }));
-      }
-    } else if (res.primary_intent === 'sale' && selectedType !== 'sale') {
-      setSelectedType('sale');
-    }
-
-    setAiApplied(true);
-  };
 
   useEffect(() => {
     if (!user) return;
@@ -171,9 +119,29 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       }, 0);
       return () => { active = false; clearTimeout(timer); };
     }
+    // Prioritize direct category hierarchy attributes, fallback to universal classification
     api.getCategoryAttributes(form.category_hierarchy_id)
-      .then(data => {
-        if (active) setApplicableAttributes(Array.isArray(data) ? data : []);
+      .then(catAttrs => {
+        if (active && Array.isArray(catAttrs) && catAttrs.length > 0) {
+          setApplicableAttributes(catAttrs);
+          return null;
+        }
+        return api.getEffectiveAttributes(form.category_hierarchy_id!);
+      })
+      .then(classAttrs => {
+        if (active && classAttrs && Array.isArray(classAttrs)) {
+          setApplicableAttributes(classAttrs.map(d => ({
+            attribute_id: d.attribute_id,
+            name_en: d.name_en,
+            slug: d.slug,
+            data_type: d.data_type,
+            validation_rules: d.validation_rules,
+            unit: d.unit,
+            is_required: d.is_required,
+            is_filterable: d.is_filterable,
+            display_order: d.display_order,
+          })));
+        }
       })
       .catch(() => {
         if (active) setApplicableAttributes([]);
@@ -204,20 +172,34 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       setError('Please select a valid marketplace category');
       return;
     }
+    if (!location.region && !location.location_hierarchy_id) {
+      setError(locale === 'am' ? 'እባክዎ አካባቢዎን (ክልል/ከተማ) ይምረጡ - አካባቢ የግዴታ ነው' : 'Location is mandatory. Please select your Region/City.');
+      return;
+    }
 
     setLoading(true); setError('');
     try {
       const legacyIdNum = form.category_id ? Number(form.category_id) : undefined;
-      const validLegacyId = legacyIdNum && legacyIdNum >= 1 && legacyIdNum <= 11 ? legacyIdNum : undefined;
+      const validLegacyId = legacyIdNum && legacyIdNum > 0 ? legacyIdNum : undefined;
+
+      const socialLinks: Record<string, string> = {};
+      if (socialTelegram.trim()) socialLinks.telegram = socialTelegram.trim();
+      if (socialYoutube.trim()) socialLinks.youtube = socialYoutube.trim();
+      if (socialTiktok.trim()) socialLinks.tiktok = socialTiktok.trim();
+
+      const isEligibleTier = sellerTier === 'gold' || sellerTier === 'premium';
 
       const basePayload = {
         title: form.title,
         description: form.description,
         category_id: validLegacyId,
         category_hierarchy_id: form.category_hierarchy_id ? Number(form.category_hierarchy_id) : (validLegacyId ?? undefined),
+        placement_id: form.category_hierarchy_id ? Number(form.category_hierarchy_id) : undefined,
         subcategory: form.subcategory,
         item: form.item,
         condition: form.condition,
+        custom_url: isEligibleTier && customURL.trim() ? customURL.trim() : undefined,
+        social_links: isEligibleTier && Object.keys(socialLinks).length > 0 ? socialLinks : undefined,
         image_urls: imageURLs,
         region: location.region,
         zone: location.zone,
@@ -230,6 +212,8 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         location_hierarchy_id: location.location_hierarchy_id,
         listing_duration_days: listingDays,
         listing_type: isRental ? 'rent' : 'sale',
+        publisher_role: publisherRole,
+        brokerage_disclosure_agreed: brokerageDisclosureAgreed,
       };
 
       const todayStr = new Date().toISOString().split('T')[0];
@@ -315,7 +299,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
 
   const renderAttributeInput = (attr: AttributeDefinition) => {
     const val = attributeValues[attr.slug] ?? '';
-    const baseClass = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[42px] outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100';
+    const baseClass = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-base sm:text-sm min-h-[44px] outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100';
     const labelText = attr.name_en + (attr.is_required ? ' *' : '') + (attr.unit ? ` (${attr.unit})` : '');
 
     switch (attr.data_type) {
@@ -337,7 +321,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={val === true || val === 'true'}
                 onChange={e => setAttrValue(attr.slug, e.target.checked)}
-                className="rounded border-zinc-300 text-orange-600 focus:ring-orange-500" />
+                className="rounded border-zinc-300 text-[#1769E0] focus:ring-[#1769E0]" />
               <span className="text-sm text-zinc-700 dark:text-zinc-300">{labelText}</span>
             </label>
           </div>
@@ -372,7 +356,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       {/* Listing type toggle */}
       <div className="flex bg-zinc-100 dark:bg-zinc-800 p-1.5 rounded-2xl mb-1 border border-zinc-200 dark:border-zinc-700 gap-1.5">
         <button type="button" onClick={() => setSelectedType('sale')}
-          className={`flex-1 py-2.5 px-4 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 ${selectedType === 'sale' ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
+          className={`flex-1 py-2.5 px-4 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 ${selectedType === 'sale' ? 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
           🏷️ {(t.ui as any).mode_sale ?? 'For Sale'}
         </button>
         <button type="button" onClick={() => setSelectedType('rent')}
@@ -382,133 +366,13 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       </div>
 
       <div className="space-y-2">
-        <div className="flex items-end gap-2">
-          <div className="flex-1">
-            <Input
-              required
-              label={t.ui.title}
-              placeholder={isRental ? 'Property title (e.g. 2 Bedroom Condominium)' : (t.ui.product_title || 'Product title (e.g. iPhone 13, Toyota Vitz, Sofa)')}
-              value={form.title}
-              onChange={e => {
-                setForm(f => ({ ...f, title: e.target.value }));
-                setAiApplied(false);
-              }}
-            />
-          </div>
-          <button
-            type="button"
-            onClick={() => triggerAutoCategorize()}
-            disabled={aiLoading || !form.title.trim()}
-            className="mb-0.5 px-3 py-2.5 min-h-[44px] rounded-xl border border-orange-500/30 bg-orange-50 dark:bg-orange-950/30 hover:bg-orange-100 dark:hover:bg-orange-900/40 text-orange-600 dark:text-orange-400 text-xs font-bold transition-all tap-bounce active:scale-95 flex items-center gap-1.5 shrink-0 shadow-sm disabled:opacity-50"
-            title="Auto-detect category, price, and condition with AI"
-          >
-            {aiLoading ? (
-              <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-            ) : (
-              <Sparkles className="w-3.5 h-3.5" />
-            )}
-            <span className="hidden sm:inline">AI Auto-Detect</span>
-          </button>
-        </div>
-
-        {/* AI Auto-Categorize Suggestion Banner */}
-        {aiResult && !aiDismissed && (
-          <div className="p-3.5 rounded-2xl border border-orange-500/30 bg-gradient-to-r from-orange-50/70 via-amber-50/50 to-orange-50/40 dark:from-orange-950/30 dark:via-zinc-900 dark:to-orange-950/20 shadow-sm animate-in fade-in-50 duration-200 space-y-2.5">
-            <div className="flex items-start justify-between gap-2">
-              <div className="space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-orange-600 dark:text-orange-400">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>AI Auto-Detected Branch Destination</span>
-                  {aiApplied && (
-                    <span className="text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold ml-1">
-                      ✓ Applied
-                    </span>
-                  )}
-                </div>
-                <div className="text-xs font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5 flex-wrap">
-                  <span className="text-zinc-600 dark:text-zinc-300 font-normal">Path:</span>
-                  <span>{aiResult.branch_path_localized || aiResult.full_branch_path}</span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setAiDismissed(true)}
-                className="p-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 rounded-lg"
-                title="Dismiss suggestion"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* Smart tags: Leaf destination, condition, intent, suggested price */}
-            <div className="flex items-center gap-2 flex-wrap text-xs">
-              <span className="px-2 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-300 dark:border-emerald-800">
-                🎯 {aiResult.leaf_destination_name}
-              </span>
-
-              <span className="px-2 py-0.5 rounded-lg bg-blue-100 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 font-semibold">
-                🏷️ {aiResult.primary_intent === 'rent' ? 'For Rent' : 'For Sale'}
-              </span>
-
-              <span className="px-2 py-0.5 rounded-lg bg-purple-100 dark:bg-purple-950/40 text-purple-800 dark:text-purple-300 font-semibold">
-                📦 {aiResult.condition === 'new' ? 'New / አዲስ' : 'Used / ያገለገለ'}
-              </span>
-
-              {aiResult.suggested_price_etb > 0 && (
-                <span className="px-2 py-0.5 rounded-lg bg-amber-100 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 font-semibold font-mono">
-                  💰 ~{aiResult.suggested_price_etb.toLocaleString()} ETB
-                </span>
-              )}
-            </div>
-
-            {/* Human error correction highlight */}
-            {aiResult.human_error_corrected && aiResult.original_term && (
-              <div className="flex items-center gap-1.5 text-[11px] text-amber-700 dark:text-amber-300 bg-amber-500/10 px-2.5 py-1 rounded-xl">
-                <Lightbulb className="w-3 h-3 text-amber-500 shrink-0" />
-                <span>
-                  Understood colloquial typo: <strong className="line-through">{aiResult.original_term}</strong> → <strong className="text-orange-600 dark:text-orange-400">{aiResult.corrected_term}</strong>
-                </span>
-              </div>
-            )}
-
-            {/* Action buttons */}
-            <div className="flex items-center gap-2 pt-0.5 flex-wrap">
-              {!aiApplied ? (
-                <button
-                  type="button"
-                  onClick={() => applyAiSuggestions()}
-                  className="px-3 py-2 min-h-[38px] rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold transition-all tap-bounce active:scale-95 shadow-sm flex items-center gap-1.5"
-                >
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Apply AI Suggestions</span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => applyAiSuggestions()}
-                  className="px-3 py-2 min-h-[38px] rounded-xl bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-bold transition-all tap-bounce active:scale-95 flex items-center gap-1.5"
-                >
-                  <RefreshCw className="w-3 h-3" />
-                  <span>Re-apply Suggestions</span>
-                </button>
-              )}
-
-              {aiResult.suggested_description && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setForm(f => ({ ...f, description: aiResult.suggested_description }));
-                  }}
-                  className="px-3 py-2 min-h-[38px] rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-medium transition-all tap-bounce active:scale-95 flex items-center gap-1.5"
-                >
-                  <Wand2 className="w-3.5 h-3.5 text-orange-500" />
-                  <span>Draft Description</span>
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+        <Input
+          required
+          label={t.ui.title}
+          placeholder={isRental ? 'Property title (e.g. 2 Bedroom Condominium)' : (t.ui.product_title || 'Product title (e.g. iPhone 13, Toyota Vitz, Sofa)')}
+          value={form.title}
+          onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+        />
       </div>
 
       {isRental ? (
@@ -532,25 +396,13 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       )}
 
       <div className="flex flex-col gap-1">
-        <div className="flex items-center justify-between">
-          <label className={lbl}>{t.ui.description}</label>
-          {aiResult?.suggested_description && (
-            <button
-              type="button"
-              onClick={() => setForm(f => ({ ...f, description: aiResult.suggested_description }))}
-              className="text-xs text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1"
-            >
-              <Wand2 className="w-3 h-3" />
-              <span>AI Auto-Draft</span>
-            </button>
-          )}
-        </div>
+        <label className={lbl}>{t.ui.description}</label>
         <textarea
           placeholder={t.ui.description || 'Describe the item or property...'}
           value={form.description}
           onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
           rows={3}
-          className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-orange-600 bg-zinc-50 dark:bg-zinc-800 transition-all resize-none text-zinc-900 dark:text-zinc-100"
+          className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all resize-none text-zinc-900 dark:text-zinc-100"
         />
       </div>
 
@@ -564,7 +416,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             setForm(f => ({
               ...f,
               category_hierarchy_id: id,
-              category_id: id && id <= 11 ? String(id) : '',
+              category_id: id ? String(id) : '',
             }));
             setAttributeValues({});
           }}
@@ -607,14 +459,123 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           } : {}} />
       </div>
 
+      {/* Gold & Premium Merchant Features: Verified Portfolio URL & Social Channels */}
+      {sellerTier === 'gold' || sellerTier === 'premium' ? (
+        <div className="border border-amber-300 dark:border-amber-700/60 bg-gradient-to-br from-amber-50/60 to-yellow-50/30 dark:from-amber-950/20 dark:to-yellow-950/10 rounded-2xl p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sparkles size={16} className="text-amber-600 dark:text-amber-400" />
+              <p className="text-xs font-black uppercase tracking-wider text-amber-800 dark:text-amber-300">
+                {sellerTier === 'premium' ? 'Premium Merchant Channels & Portfolio' : 'Gold Merchant Channels & Portfolio'}
+              </p>
+            </div>
+            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500 text-white shadow-sm">
+              Unlocked
+            </span>
+          </div>
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+            Link your official website, Telegram channel, YouTube showcase, or TikTok portfolio directly to your listing.
+          </p>
+          <div className="space-y-2.5">
+            <Input
+              type="url"
+              label="Official Website or Portfolio URL"
+              placeholder="https://yourwebsite.com or https://portfolio.et"
+              value={customURL}
+              onChange={e => setCustomURL(e.target.value)}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <Input
+                type="text"
+                label="Telegram (@channel or link)"
+                placeholder="@mychannel or t.me/..."
+                value={socialTelegram}
+                onChange={e => setSocialTelegram(e.target.value)}
+              />
+              <Input
+                type="text"
+                label="YouTube Channel"
+                placeholder="@youtubechannel"
+                value={socialYoutube}
+                onChange={e => setSocialYoutube(e.target.value)}
+              />
+              <Input
+                type="text"
+                label="TikTok Handle"
+                placeholder="@tiktokhandle"
+                value={socialTiktok}
+                onChange={e => setSocialTiktok(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-4 bg-zinc-50/50 dark:bg-zinc-800/20 flex items-center justify-between gap-3">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-700 dark:text-zinc-300">
+              <Sparkles size={14} className="text-amber-500" />
+              <span>Gold & Premium Exclusive: Custom URL & Social Channels</span>
+            </div>
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+              Showcase external websites, verified TikTok/YouTube links, and direct Telegram channels on your listings.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => router.push('/pricing')}
+            className="shrink-0 text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100 hover:bg-amber-200 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 px-3 py-1.5 rounded-xl transition-colors"
+          >
+            Upgrade →
+          </button>
+        </div>
+      )}
+
       <ListingFeeSlider price={Number(isRental ? rentalForm.rental_price : form.price) || 0}
         tier={sellerTier} selectedDays={listingDays} onChange={setListingDays} />
+
+      {/* Brokerage & Publisher Classification */}
+      <div className="space-y-3 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60">
+        <label className="block text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+          Publisher Role & Intermediary Disclosure
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {[
+            { id: 'owner', label: 'Direct Owner' },
+            { id: 'authorized_seller', label: 'Authorized Merchant' },
+            { id: 'broker_agent', label: 'Broker / Agent' },
+            { id: 'representative', label: 'Representative' },
+          ].map(r => (
+            <button
+              key={r.id}
+              type="button"
+              onClick={() => {
+                setPublisherRole(r.id as any);
+                if (r.id === 'broker_agent' || r.id === 'representative') {
+                  setBrokerageDisclosureAgreed(true);
+                }
+              }}
+              className={`p-2.5 rounded-xl text-xs font-bold border text-center transition-all ${
+                publisherRole === r.id
+                  ? 'border-[#1769E0] bg-[#1769E0]/10 dark:bg-[#1769E0]/20 text-[#1769E0] dark:text-[#38A5FF] shadow-xs'
+                  : 'border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300'
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
+        {publisherRole === 'broker_agent' && (
+          <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-900 dark:text-blue-200 text-xs">
+            <span className="font-bold">Intermediary Transparency:</span> This listing will display a verified <span className="font-mono font-black">[BROKER]</span> badge and standard marketplace brokerage disclosure.
+          </div>
+        )}
+      </div>
 
       <ImageUploader urls={imageURLs} onChange={setImageURLs} maxImages={maxImages} />
 
       {error && <p className="text-red-500 text-xs bg-red-50 dark:bg-red-900/20 px-3 py-2 rounded-xl">{error}</p>}
 
-      <Button type="submit" size="lg" disabled={loading} className={`w-full mt-2 tap-bounce min-h-[48px] ${isRental ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'}`}>
+      <Button type="submit" size="lg" disabled={loading} className={`w-full mt-2 tap-bounce min-h-[48px] ${isRental ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/20'}`}>
         {loading ? t.ui.saving : product ? t.ui.update_product : (isRental ? 'Post for Rent' : t.ui.createProduct)}
       </Button>
     </form>

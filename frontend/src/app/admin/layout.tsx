@@ -4,15 +4,25 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { Spinner } from '@/components/ui/Spinner';
 import Link from 'next/link';
-import { LayoutDashboard, Settings, Users, Package, LogOut, ShieldCheck, FileText, Activity, BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin, DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2, Store, Receipt } from 'lucide-react';
+import {
+  LayoutDashboard, Settings, Users, Package, LogOut, FileText, Activity,
+  BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin,
+  DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2, Store, Receipt, X,
+  ShieldAlert, ShieldCheck, Server
+} from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
-function AdminSidebar() {
+interface AdminSidebarProps {
+  onClose?: () => void;
+  className?: string;
+}
+
+function AdminSidebar({ onClose, className = '' }: AdminSidebarProps) {
   const {
     isSuperAdmin, isPlatformOwner, isPlatformAdmin, isSecurityAdmin,
-    isOperationsAdmin, isModerator, isSupportAgent, adminRole,
+    isOperationsAdmin, isModerator, isSupportAgent,
     hasAdminPermission, logout
   } = useAuth();
   const pathname = usePathname();
@@ -27,14 +37,22 @@ function AdminSidebar() {
     : 'Enterprise Staff';
 
   const roleBadgeStyle = isPlatformOwner
-    ? 'text-red-400 border-red-500/30 bg-red-950/30'
+    ? 'text-rose-400 border-rose-500/30 bg-rose-950/30'
     : isPlatformAdmin
-    ? 'text-indigo-400 border-indigo-500/30 bg-indigo-950/30'
+    ? 'text-blue-400 border-blue-500/30 bg-blue-950/30'
     : isSecurityAdmin
     ? 'text-emerald-400 border-emerald-500/30 bg-emerald-950/30'
-    : 'text-orange-400 border-orange-500/30 bg-orange-950/30';
+    : 'text-[#38A5FF] border-[#1769E0]/30 bg-[#1769E0]/15';
 
   const navigationGroups = [
+    {
+      title: 'ENTERPRISE CONSOLES',
+      links: [
+        { href: '/executive-console', label: 'Executive Cockpit', icon: ShieldAlert, visible: isPlatformOwner || isSuperAdmin },
+        { href: '/security-console', label: 'Security SOC Defense', icon: ShieldCheck, visible: isSecurityAdmin || isPlatformOwner || isSuperAdmin },
+        { href: '/platform-console', label: 'Platform Infrastructure', icon: Server, visible: isPlatformAdmin || isPlatformOwner || isSuperAdmin },
+      ],
+    },
     {
       title: 'OPERATIONS & CONTROL',
       links: [
@@ -47,7 +65,8 @@ function AdminSidebar() {
       title: 'LISTINGS & CATALOG',
       links: [
         { href: '/admin/products',  label: 'Products & Rentals', icon: Package,   visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || isModerator || hasAdminPermission('pending') || hasAdminPermission('products') },
-        { href: '/admin/categories',label: 'Categories',          icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
+        { href: '/admin/classification', label: 'Universal Classification', icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
+        { href: '/admin/categories',label: 'Legacy Categories', icon: FolderTree, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
         { href: '/admin/attributes', label: 'Attributes',         icon: Tag,        visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('categories') },
         { href: '/admin/locations', label: 'Locations & GPS',     icon: MapPin,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('locations') || hasAdminPermission('categories') },
         { href: '/admin/search',    label: 'Search Analytics',    icon: Search,     visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('analytics') },
@@ -89,42 +108,54 @@ function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-zinc-950 text-zinc-300 min-h-screen flex flex-col shrink-0 border-r border-zinc-900/80 hidden lg:flex">
-      <div className="p-5 flex items-center gap-3 border-b border-zinc-900">
-        <HuntiqLogo size="sm" href="/admin/dashboard" />
-        <div>
-          <h2 className="text-base font-black text-white leading-none">HUNTIQ Admin</h2>
-          <span className={`inline-block text-[10px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md border ${roleBadgeStyle}`}>
-            {roleLabel}
-          </span>
+    <aside className={`w-72 bg-[#060D1A] text-slate-300 min-h-screen flex flex-col shrink-0 border-r border-slate-800/80 ${className}`}>
+      <div className="p-4 sm:p-5 flex items-center justify-between border-b border-slate-800/80">
+        <div className="flex items-center gap-3">
+          <HuntiqLogo size="sm" href="/admin/dashboard" />
+          <div>
+            <h2 className="text-sm font-black text-white leading-none">HUNTIQ Admin</h2>
+            <span className={`inline-block text-[9px] font-black uppercase tracking-wider mt-1 px-2 py-0.5 rounded-md border ${roleBadgeStyle}`}>
+              {roleLabel}
+            </span>
+          </div>
         </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="lg:hidden p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            aria-label="Close menu"
+          >
+            <X size={18} />
+          </button>
+        )}
       </div>
       
-      <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+      <nav className="flex-1 p-3.5 space-y-5 overflow-y-auto admin-scrollbar">
         {navigationGroups.map((group, idx) => {
           const visibleLinks = group.links.filter((l) => l.visible);
           if (visibleLinks.length === 0) return null;
 
           return (
-            <div key={idx} className="space-y-2">
-              <div className="px-3 text-[10px] font-extrabold text-zinc-500 uppercase tracking-wider">
+            <div key={idx} className="space-y-1.5">
+              <div className="px-3 text-[9px] font-extrabold text-slate-500 uppercase tracking-widest">
                 {group.title}
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 {visibleLinks.map((link) => {
                   const active = pathname === link.href || (link.href !== '/admin/dashboard' && pathname.startsWith(link.href));
                   return (
                     <Link
                       key={link.href}
                       href={link.href}
+                      onClick={onClose}
                       className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
                         active
-                          ? 'bg-orange-600/15 text-orange-400 border border-orange-500/20'
-                          : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+                          ? 'bg-[#1769E0]/20 text-[#38A5FF] border border-[#1769E0]/30 shadow-sm'
+                          : 'text-slate-400 hover:bg-slate-900/90 hover:text-white'
                       }`}
                     >
-                      <link.icon size={16} />
-                      {link.label}
+                      <link.icon size={15} />
+                      <span className="truncate">{link.label}</span>
                     </Link>
                   );
                 })}
@@ -134,12 +165,12 @@ function AdminSidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-zinc-900">
+      <div className="p-3.5 border-t border-slate-800/80">
         <button
           onClick={logout}
-          className="flex items-center gap-3 px-4 py-2.5 w-full rounded-xl text-xs font-bold text-red-400 hover:bg-red-500/10 transition-all border border-red-500/10"
+          className="flex items-center gap-3 px-3.5 py-2.5 w-full rounded-xl text-xs font-bold text-rose-400 hover:bg-rose-500/10 transition-all border border-rose-500/20"
         >
-          <LogOut size={16} /> Sign Out Enterprise
+          <LogOut size={15} /> Sign Out Enterprise
         </button>
       </div>
     </aside>
@@ -152,6 +183,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [selectedBranch, setSelectedBranch] = useState('all');
   const [isWizardOpen, setIsWizardOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin) && pathname !== '/admin/login') {
@@ -159,26 +191,43 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     }
   }, [user, loading, isAdmin, pathname, router]);
 
-  if (loading) return <div className="h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950"><Spinner /></div>;
+  if (loading) return <div className="h-screen flex items-center justify-center bg-slate-900"><Spinner /></div>;
 
   // Login page doesn't have the sidebar
   if (pathname === '/admin/login') {
-    return <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">{children}</div>;
+    return <div className="min-h-screen bg-[#091426] text-white">{children}</div>;
   }
 
   // Must be logged in as admin for all other routes
   if (!user || !isAdmin) return null;
 
   return (
-    <div className="flex min-h-screen bg-zinc-950 font-sans text-zinc-900 dark:text-zinc-100 selection:bg-orange-600 selection:text-white">
-      <AdminSidebar />
-      <main className="flex-1 min-w-0 flex flex-col h-screen overflow-y-auto">
+    <div className="flex min-h-screen bg-[#091426] font-sans text-slate-100 selection:bg-[#1769E0] selection:text-white">
+      {/* Desktop Persistent Sidebar */}
+      <AdminSidebar className="hidden lg:flex" />
+
+      {/* Mobile Drawer Sidebar */}
+      {isMobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden flex animate-fade-in">
+          <div
+            className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm"
+            onClick={() => setIsMobileSidebarOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="relative z-10 w-72 h-full shadow-2xl animate-slide-in-left">
+            <AdminSidebar onClose={() => setIsMobileSidebarOpen(false)} />
+          </div>
+        </div>
+      )}
+
+      <main className="flex-1 min-w-0 flex flex-col h-screen overflow-y-auto admin-scrollbar">
         <AdminHeaderTopBar
           onOpenWizard={() => setIsWizardOpen(true)}
           selectedBranch={selectedBranch}
           onBranchChange={setSelectedBranch}
+          onToggleMobileSidebar={() => setIsMobileSidebarOpen((prev) => !prev)}
         />
-        <div className="flex-1 p-4 lg:p-8 space-y-6">
+        <div className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6">
           {children}
         </div>
       </main>
@@ -192,4 +241,3 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-

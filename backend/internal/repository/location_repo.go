@@ -121,10 +121,10 @@ const sqlSearchLocations = `
 	ORDER BY score DESC
 	LIMIT 15`
 
-const sqlResolveWoreda  = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 AND subcity ILIKE $3 AND woreda ILIKE $4 LIMIT 1`
+const sqlResolveWoreda = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 AND subcity ILIKE $3 AND woreda ILIKE $4 LIMIT 1`
 const sqlResolveSubcity = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 AND subcity ILIKE $3 LIMIT 1`
-const sqlResolveZone    = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 LIMIT 1`
-const sqlResolveRegion  = `SELECT id FROM locations WHERE region ILIKE $1 LIMIT 1`
+const sqlResolveZone = `SELECT id FROM locations WHERE region ILIKE $1 AND zone ILIKE $2 LIMIT 1`
+const sqlResolveRegion = `SELECT id FROM locations WHERE region ILIKE $1 LIMIT 1`
 
 // ListRegions returns distinct regions with all language variants.
 func (r *LocationRepo) ListRegions(ctx context.Context) ([]map[string]interface{}, error) {
@@ -196,8 +196,11 @@ func (r *LocationRepo) ListWoredas(ctx context.Context, region, zone, subcity st
 	case zone != "" && subcity != "":
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		rows, err = r.db.Query(ctx, sqlListWoredasByZoneAndSubcity, region, zone, subcity)
-	case zone != "" && subcity == "":
-		//nolint:gosec // G201/G202: all values passed as $N par
+	case zone != "":
+		//nolint:gosec // G201/G202: all values passed as $N parameters
+		rows, err = r.db.Query(ctx, sqlListWoredasByZone, region, zone)
+	case subcity != "":
+		//nolint:gosec // G201/G202: all values passed as $N parameters
 		rows, err = r.db.Query(ctx, sqlListWoredasBySubcity, region, subcity)
 	default:
 		return nil, nil

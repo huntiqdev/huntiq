@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
 
@@ -118,8 +118,6 @@ func (s *SellerService) CreateOrderRequest(ctx context.Context, req dto.CreateOr
 	o.Status = "pending"
 	return o, nil
 }
-
-
 
 func (s *SellerService) ListOrders(ctx context.Context, sellerID int) ([]models.OrderRequest, error) {
 	return s.repo.ListOrdersBySeller(ctx, sellerID)

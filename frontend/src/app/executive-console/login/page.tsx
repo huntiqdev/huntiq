@@ -15,7 +15,7 @@ export default function ExecutiveConsoleLoginPage() {
       portalTheme="crimson"
       portalSubtitle="Phishing-resistant WebAuthn hardware authentication for Platform Owners"
       portalDescription="Mandatory user verification and hardware-backed biometric security."
-      allowPasswordMfaFallback={false}
+      allowPasswordMfaFallback={true}
     />
   );
 }

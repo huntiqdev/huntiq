@@ -11,14 +11,12 @@ import { RentalProductCard } from '@/components/public/RentalProductCard';
 import { FilterSidebar } from '@/components/public/FilterSidebar';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
-import { getCategoryLabel } from '@/lib/taxonomy';
+import { resolveCategoryTitle } from '@/lib/taxonomy';
 import { useAuth } from '@/context/AuthContext';
-import { SearchAIMeta } from '@/lib/api/public';
-import { AIChatInterface } from '@/components/public/AIChatInterface';
 import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
   LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
-  Sparkles, ShieldCheck, Sliders, ShieldAlert, Brain,
+  ShieldCheck, Sliders, ShieldAlert, Navigation, AlertTriangle, RotateCcw,
 } from 'lucide-react';
 import { formatLocationParts } from '@/types/location';
 
@@ -39,7 +37,7 @@ function TierBanner() {
           ? (u.gold_buyer_banner ?? 'Gold buyer — you can see Gold seller images. Upgrade to Premium for all images.')
           : (u.normal_buyer_banner ?? 'Normal buyer — some product images are blurred. Upgrade to Gold or Premium to unlock.')}
       </span>
-      <Link href="/buyer/dashboard" className="ml-auto shrink-0 font-black text-orange-600 hover:underline">
+      <Link href="/buyer/dashboard" className="ml-auto shrink-0 font-black text-[#1769E0] dark:text-[#38A5FF] hover:underline">
         {u.upgrade_arrow ?? 'Upgrade →'}
       </Link>
     </div>
@@ -60,14 +58,16 @@ function PopularCategoriesStrip({ onSelect }: {
 
   if (popular.length === 0) return null;
 
-  const catLabel = (slug: string) => (t.categories as any)[slug] ?? slug.replace(/_/g, ' ');
+  const catLabel = (slug: string) => slug.replace(/-/g, ' ');
 
   const EMOJI: Record<string, string> = {
-    electronics: '📱', vehicles: '🚗', property: '🏠', clothing: '👗',
-    agriculture: '🌾', furniture: '🛋️', food: '🍎', business: '💼',
-    industry: '🏭', construction: '🔨', health_beauty: '💄', sports: '⚽',
-    education: '📚', entertainment: '🎮', luxury: '💎', animals: '🐄',
-    services: '🔧', jobs: '💼', other: '📦',
+    agriculture: '🌾', 'food-beverage': '🍎', electronics: '📱', 'consumer-electronics': '📱',
+    'computing-it': '💻', 'transport-mobility': '🚗', 'construction-infrastructure': '🔨',
+    'property-real-estate': '🏠', 'healthcare-medicine': '🏥', 'energy-utilities': '⚡',
+    'industrial-manufacturing': '🏭', 'clothing-apparel': '👗', 'home-appliances-kitchenware': '🍳',
+    'furniture-furnishings': '🛋️', 'beauty-personal-care': '💄', 'sports-fitness': '⚽',
+    'education-training': '📚', 'finance-insurance': '💳', 'commerce-trade': '🛒',
+    'workforce-employment': '💼', 'logistics-supply-chain': '🚚', 'other': '📦',
   };
 
   return (
@@ -109,6 +109,8 @@ function ProductsContent() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
   const [filters, setFilters] = useState<ProductFilters>({});
   const [visibleCount, setVisibleCount] = useState(24);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -121,9 +123,15 @@ function ProductsContent() {
   const [activeWoreda, setActiveWoreda] = useState<string>('');
   const [activeCondition, setActiveCondition] = useState<'all' | 'new' | 'used'>('all');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
-  const [searchMode, setSearchMode] = useState<'ai' | 'manual'>('manual');
-  const [searchMeta, setSearchMeta] = useState<SearchAIMeta | null>(null);
-  const [showReasoning, setShowReasoning] = useState(false);
+
+  // Master Filter State: Price & Proximity
+  const [minPriceInput, setMinPriceInput] = useState<string>('');
+  const [maxPriceInput, setMaxPriceInput] = useState<string>('');
+  const [activeMinPrice, setActiveMinPrice] = useState<number | undefined>(undefined);
+  const [activeMaxPrice, setActiveMaxPrice] = useState<number | undefined>(undefined);
+  const [pricePopoverOpen, setPricePopoverOpen] = useState(false);
+  const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [isLocating, setIsLocating] = useState(false);
 
   useEffect(() => {
     api.getCategoryTree(locale)
@@ -148,13 +156,6 @@ function ProductsContent() {
     const catSlugParam = searchParams.get('cat');
     const sub = searchParams.get('subcategory');
     const item = searchParams.get('item');
-
-    const modeParam = searchParams.get('mode');
-    if (modeParam === 'ai') {
-      setSearchMode('ai');
-    } else {
-      setSearchMode('manual');
-    }
 
     const typeParam = searchParams.get('type');
     if (typeParam === 'sale' || typeParam === 'rent' || typeParam === 'all') {
@@ -206,52 +207,86 @@ function ProductsContent() {
     if (zone) { f.zone = zone; setActiveZone(zone); } else { setActiveZone(''); }
     if (region) { f.region = region; setActiveRegion(region); } else { setActiveRegion(''); }
 
+    // Master Filters: Price min/max
+    const minP = searchParams.get('min_price');
+    const maxP = searchParams.get('max_price');
+    if (minP) {
+      const p = parseFloat(minP);
+      if (!isNaN(p)) {
+        f.min_price = p;
+        setActiveMinPrice(p);
+        setMinPriceInput(minP);
+      }
+    } else {
+      setActiveMinPrice(undefined);
+      setMinPriceInput('');
+    }
+    if (maxP) {
+      const p = parseFloat(maxP);
+      if (!isNaN(p)) {
+        f.max_price = p;
+        setActiveMaxPrice(p);
+        setMaxPriceInput(maxP);
+      }
+    } else {
+      setActiveMaxPrice(undefined);
+      setMaxPriceInput('');
+    }
+
+    // Master Filters: Condition
+    const condParam = searchParams.get('condition');
+    if (condParam === 'new' || condParam === 'used') {
+      setActiveCondition(condParam);
+    } else {
+      setActiveCondition('all');
+    }
+
+    // Master Filters: GPS proximity coordinates
+    const latParam = searchParams.get('lat');
+    const lngParam = searchParams.get('lng');
+    if (latParam && lngParam) {
+      const lat = parseFloat(latParam);
+      const lng = parseFloat(lngParam);
+      if (!isNaN(lat) && !isNaN(lng)) {
+        f.lat = lat;
+        f.lng = lng;
+        setUserCoords({ lat, lng });
+      }
+    } else {
+      setUserCoords(null);
+    }
+
     setFilters(f);
   }, [searchParams, categories]);
 
   useEffect(() => {
     setLoading(true);
+    setFetchError(null);
     setVisibleCount(24);
     const apiFilters: ProductFilters = { ...filters };
     if (activeCondition !== 'all') apiFilters.condition = activeCondition;
     if (listingType !== 'all') apiFilters.listing_type = listingType;
-    apiFilters.mode = searchMode;
+    if (activeMinPrice !== undefined) apiFilters.min_price = activeMinPrice;
+    if (activeMaxPrice !== undefined) apiFilters.max_price = activeMaxPrice;
+    if (userCoords) {
+      apiFilters.lat = userCoords.lat;
+      apiFilters.lng = userCoords.lng;
+      apiFilters.sort_by = 'nearest';
+    }
     apiFilters.locale = locale;
     apiFilters.preferred_language = locale;
 
-    api.getProductsWithMeta(apiFilters)
-      .then(({ products: data, meta }) => {
+    api.getProducts(apiFilters)
+      .then(data => {
         setProducts(data);
-        setSearchMeta(meta ?? null);
+        setFetchError(null);
       })
-      .catch(() => {
+      .catch((err: any) => {
         setProducts([]);
-        setSearchMeta(null);
+        setFetchError(err?.message || 'Failed to load products. Please check your network connection.');
       })
       .finally(() => setLoading(false));
-  }, [filters, activeCondition, listingType, searchMode, locale]);
-
-  const toggleMode = (newMode: 'ai' | 'manual') => {
-    setSearchMode(newMode);
-    const p = new URLSearchParams(searchParams.toString());
-    if (newMode === 'ai') {
-      p.set('mode', 'ai');
-    } else {
-      p.delete('mode');
-    }
-    const qStr = p.toString();
-    router.push(qStr ? `/products?${qStr}` : '/products');
-  };
-
-  if (searchMode === 'ai') {
-    return (
-      <AIChatInterface
-        onExit={() => toggleMode('manual')}
-        initialQuery={filters.search || ''}
-        locale={locale}
-      />
-    );
-  }
+  }, [filters, activeCondition, listingType, activeMinPrice, activeMaxPrice, userCoords, locale, retryKey]);
 
   const findNodeById = (nodes: Category[], id?: number): Category | undefined => {
     if (!id) return undefined;
@@ -274,66 +309,127 @@ function ProductsContent() {
   const activeLocParts = formatLocationParts({ region: activeRegion, zone: activeZone, subcity: activeSubcity, woreda: activeWoreda }, locale);
   const activeLocLabel = activeLocParts.join(' › ');
 
-  const buildUrl = (catId?: number, sub?: string, item?: string, search?: string, loc?: { region?: string; zone?: string; subcity?: string; woreda?: string }, overrideType?: 'all' | 'sale' | 'rent') => {
-    const p = new URLSearchParams();
-    const typeToUse = overrideType !== undefined ? overrideType : listingType;
-    if (typeToUse && typeToUse !== 'all') p.set('type', typeToUse);
-    if (catId) {
-      p.set('category_id', String(catId));
-      p.set('category_hierarchy_id', String(catId));
+  const buildUrl = (
+    optsOrCatId?: number | {
+      catId?: number;
+      sub?: string;
+      item?: string;
+      search?: string;
+      loc?: { region?: string; zone?: string; subcity?: string; woreda?: string };
+      overrideType?: 'all' | 'sale' | 'rent';
+      overrideCond?: 'all' | 'new' | 'used';
+      minP?: string;
+      maxP?: string;
+      coords?: { lat: number; lng: number } | null;
+    },
+    subArg?: string,
+    itemArg?: string,
+    searchArg?: string,
+    locArg?: { region?: string; zone?: string; subcity?: string; woreda?: string },
+    overrideTypeArg?: 'all' | 'sale' | 'rent'
+  ) => {
+    let opts: {
+      catId?: number;
+      sub?: string;
+      item?: string;
+      search?: string;
+      loc?: { region?: string; zone?: string; subcity?: string; woreda?: string };
+      overrideType?: 'all' | 'sale' | 'rent';
+      overrideCond?: 'all' | 'new' | 'used';
+      minP?: string;
+      maxP?: string;
+      coords?: { lat: number; lng: number } | null;
+    } = {};
+
+    if (typeof optsOrCatId === 'number') {
+      opts = {
+        catId: optsOrCatId,
+        sub: subArg,
+        item: itemArg,
+        search: searchArg,
+        loc: locArg,
+        overrideType: overrideTypeArg,
+      };
+    } else if (optsOrCatId && typeof optsOrCatId === 'object') {
+      opts = optsOrCatId;
     }
-    if (sub) p.set('subcategory', sub);
-    if (item) p.set('item', item);
-    const l = loc ?? { region: activeRegion || undefined, zone: activeZone || undefined, subcity: activeSubcity || undefined, woreda: activeWoreda || undefined };
+    const p = new URLSearchParams();
+    const typeToUse = opts?.overrideType !== undefined ? opts.overrideType : listingType;
+    if (typeToUse && typeToUse !== 'all') p.set('type', typeToUse);
+
+    const condToUse = opts?.overrideCond !== undefined ? opts.overrideCond : activeCondition;
+    if (condToUse && condToUse !== 'all') p.set('condition', condToUse);
+
+    const catToUse = opts?.catId !== undefined ? opts.catId : activeCatId;
+    if (catToUse) {
+      p.set('category_id', String(catToUse));
+      p.set('category_hierarchy_id', String(catToUse));
+    }
+
+    const subToUse = ('sub' in opts) ? opts.sub : activeSub;
+    if (subToUse) p.set('subcategory', subToUse);
+
+    const itemToUse = ('item' in opts) ? opts.item : activeItem;
+    if (itemToUse) p.set('item', itemToUse);
+
+    const minPToUse = opts?.minP !== undefined ? opts.minP : (activeMinPrice !== undefined ? String(activeMinPrice) : '');
+    if (minPToUse) p.set('min_price', minPToUse);
+
+    const maxPToUse = opts?.maxP !== undefined ? opts.maxP : (activeMaxPrice !== undefined ? String(activeMaxPrice) : '');
+    if (maxPToUse) p.set('max_price', maxPToUse);
+
+    const coordsToUse = opts?.coords !== undefined ? opts.coords : userCoords;
+    if (coordsToUse) {
+      p.set('lat', coordsToUse.lat.toFixed(6));
+      p.set('lng', coordsToUse.lng.toFixed(6));
+      p.set('sort_by', 'nearest');
+    }
+
+    const l = opts?.loc ?? { region: activeRegion || undefined, zone: activeZone || undefined, subcity: activeSubcity || undefined, woreda: activeWoreda || undefined };
     if (l.woreda) p.set('woreda', l.woreda);
     else if (l.subcity) p.set('subcity', l.subcity);
     else if (l.zone) p.set('zone', l.zone);
     else if (l.region) p.set('region', l.region);
+
     return `/products${p.toString() ? '?' + p.toString() : ''}`;
+  };
+
+  const detectNearMe = () => {
+    if (typeof window === 'undefined' || !navigator?.geolocation) {
+      alert('Geolocation is not available on this device');
+      return;
+    }
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setIsLocating(false);
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setUserCoords({ lat, lng });
+        router.push(buildUrl({ coords: { lat, lng } }));
+      },
+      (err) => {
+        setIsLocating(false);
+        console.warn('Geolocation error:', err);
+      },
+      { timeout: 8000, enableHighAccuracy: true }
+    );
   };
 
   const getCatDisplayName = (cat?: Category) => {
     if (!cat) return '';
-    if (cat.id) {
-      const translated = getCategoryLabel(cat.id, locale);
-      if (translated) return translated;
-    }
-    if (cat.slug && (t.categories as any)?.[cat.slug]) {
-      return (t.categories as any)[cat.slug];
-    }
-    if (locale === 'am' && (cat as any).name_am) return (cat as any).name_am;
-    if ((locale === 'or' || locale === 'om') && (cat as any).name_om) return (cat as any).name_om;
-    if (locale === 'ti' && (cat as any).name_ti) return (cat as any).name_ti;
-    if (locale === 'en' && (cat as any).name_en) return (cat as any).name_en;
-    return cat.name || (cat as any).name_en || cat.slug?.replace(/_/g, ' ') || '';
+    return resolveCategoryTitle(cat as any, locale) || cat.name || (cat as any).name_en || cat.slug?.replace(/_/g, ' ') || '';
   };
 
   const getSubDisplayName = (sub?: Category) => {
     if (!sub) return '';
-    if (sub.id) {
-      const translated = getCategoryLabel(sub.id, locale);
-      if (translated) return translated;
-    }
-    const sSlug = sub.slug;
-    if (locale === 'am' && (sub as any).name_am) return (sub as any).name_am;
-    if ((locale === 'or' || locale === 'om') && (sub as any).name_om) return (sub as any).name_om;
-    if (locale === 'ti' && (sub as any).name_ti) return (sub as any).name_ti;
-    if (locale === 'en' && (sub as any).name_en) return (sub as any).name_en;
-    return sub.name || (sub as any).name_en || sSlug.replace(/_/g, ' ');
+    return resolveCategoryTitle(sub as any, locale) || sub.name || (sub as any).name_en || sub.slug?.replace(/_/g, ' ') || '';
   };
 
   const getItemDisplayName = (item?: Category | string) => {
     if (!item) return '';
     if (typeof item === 'object') {
-      if (item.id) {
-        const translated = getCategoryLabel(item.id, locale);
-        if (translated) return translated;
-      }
-      if (locale === 'am' && (item as any).name_am) return (item as any).name_am;
-      if ((locale === 'or' || locale === 'om') && ((item as any).name_om || (item as any).name_or)) return (item as any).name_om || (item as any).name_or;
-      if (locale === 'ti' && (item as any).name_ti) return (item as any).name_ti;
-      if (locale === 'en' && (item as any).name_en) return (item as any).name_en;
-      return item.name || (item as any).name_en || item.slug?.replace(/_/g, ' ') || '';
+      return resolveCategoryTitle(item as any, locale) || item.name || (item as any).name_en || item.slug?.replace(/_/g, ' ') || '';
     }
     return item.replace(/_/g, ' ');
   };
@@ -341,17 +437,23 @@ function ProductsContent() {
   return (
     <>
       {/* ── 3rd Row: Categories list (Compact sticky bar, single row) ── */}
-      <div className="sticky top-14 z-30 bg-white/95 dark:bg-zinc-950/95 backdrop-blur border-b border-zinc-100 dark:border-zinc-800">
+      <div className="sticky top-14 z-30 bg-white/95 dark:bg-[#091426]/95 backdrop-blur border-b border-slate-150 dark:border-slate-800">
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-[2%] sm:px-[4%] lg:px-[6%]">
           <button onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${!activeCatId ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+            className={`flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${!activeCatId ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
               }`}>
             <LayoutGrid size={12} /> {t.categories.all}
           </button>
           {categories.map(cat => (
             <button key={cat.id}
-              onClick={() => { setActiveCatId(cat.id); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(cat.id)); }}
-              className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-orange-600 text-white shadow-md shadow-orange-600/20' : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              onClick={() => { 
+                setActiveCatId(cat.id); 
+                setActiveSub(undefined); 
+                setActiveItem(undefined); 
+                const url = buildUrl({ catId: cat.id, sub: undefined, item: undefined });
+                router.push(url);
+              }}
+              className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}>
               {getCatDisplayName(cat)}
             </button>
@@ -361,26 +463,48 @@ function ProductsContent() {
 
       {/* Systematic Subcategory & Item Navigation Banner (Non-sticky, compact — never covers the mobile screen on scroll) */}
       {activeCatNode && (
-        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800/80 flex flex-col gap-2 shadow-sm">
+        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 flex flex-col gap-2 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-black">
-              <span className="text-orange-600 font-extrabold">{getCatDisplayName(activeCatNode)}</span>
+              {/* Back button to parent category */}
+              {(activeSub || activeItem) && (
+                <button
+                  onClick={() => {
+                    if (activeItem) {
+                      // Go back to subcategory
+                      setActiveItem(undefined);
+                      router.push(buildUrl({ catId: activeCatId, sub: activeSub, item: undefined }));
+                    } else if (activeSub) {
+                      // Go back to main category
+                      setActiveSub(undefined);
+                      router.push(buildUrl({ catId: activeCatId, sub: undefined, item: undefined }));
+                    }
+                  }}
+                  className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-[#1769E0] hover:text-[#1769E0] transition-all"
+                  title={activeItem ? "Back to " + getSubDisplayName(activeSubNode) : "Back to " + getCatDisplayName(activeCatNode)}
+                >
+                  <ChevronRight size={11} className="rotate-180" />
+                  <span className="text-[10px]">Back</span>
+                </button>
+              )}
+              
+              <span className="text-[#1769E0] dark:text-[#38A5FF] font-extrabold">{getCatDisplayName(activeCatNode)}</span>
               {activeSubNode && (
                 <>
-                  <ChevronRight size={11} className="text-zinc-400" />
-                  <span className="text-zinc-800 dark:text-zinc-200">{getSubDisplayName(activeSubNode)}</span>
+                  <ChevronRight size={11} className="text-slate-400" />
+                  <span className="text-slate-800 dark:text-slate-200">{getSubDisplayName(activeSubNode)}</span>
                 </>
               )}
               {activeItem && (
                 <>
-                  <ChevronRight size={11} className="text-zinc-400" />
-                  <span className="text-zinc-600 dark:text-zinc-400">{getItemDisplayName(activeItem)}</span>
+                  <ChevronRight size={11} className="text-slate-400" />
+                  <span className="text-slate-600 dark:text-slate-400">{getItemDisplayName(activeItem)}</span>
                 </>
               )}
             </div>
             <button
               onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
-              className="text-[11px] font-bold text-zinc-400 hover:text-orange-600 flex items-center gap-1 transition-colors"
+              className="text-[11px] font-bold text-slate-400 hover:text-[#1769E0] flex items-center gap-1 transition-colors"
             >
               <X size={12} />
               <span>{t.ui.clear_filter ?? 'Clear'}</span>
@@ -392,11 +516,17 @@ function ProductsContent() {
               {subcategoryNodes.map(s => (
                 <button
                   key={s.id || s.slug}
-                  onClick={() => { setActiveSub(activeSub === s.slug ? undefined : s.slug); setActiveItem(undefined); router.push(buildUrl(activeCatId, activeSub === s.slug ? undefined : s.slug)); }}
+                  onClick={() => { 
+                    const newSub = activeSub === s.slug ? undefined : s.slug;
+                    setActiveSub(newSub);
+                    setActiveItem(undefined); 
+                    const url = buildUrl({ catId: activeCatId, sub: newSub, item: undefined });
+                    router.push(url);
+                  }}
                   className={`px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                     activeSub === s.slug
-                      ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm'
-                      : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-orange-500'
+                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm'
+                      : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-[#1769E0]'
                   }`}
                 >
                   {getSubDisplayName(s)}
@@ -406,15 +536,15 @@ function ProductsContent() {
           )}
 
           {itemNodes.length > 0 && (
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-zinc-200/60 dark:border-zinc-800/60">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-slate-200/60 dark:border-slate-800/60">
               {itemNodes.map(i => (
                 <button
                   key={i.id || i.slug}
                   onClick={() => { setActiveItem(activeItem === i.slug ? undefined : i.slug); router.push(buildUrl(activeCatId, activeSub, activeItem === i.slug ? undefined : i.slug)); }}
                   className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold whitespace-nowrap transition-all ${
                     activeItem === i.slug
-                      ? 'bg-orange-600 text-white shadow-sm'
-                      : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600'
+                      ? 'bg-[#1769E0] text-white shadow-sm'
+                      : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-[#1769E0]'
                   }`}
                 >
                   {getItemDisplayName(i)}
@@ -430,11 +560,11 @@ function ProductsContent() {
 
       {/* Location filter indicator */}
       {activeLocLabel && (
-        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
-          <MapPin size={11} className="text-orange-500" />
-          <span>{t.ui.showing_results_in} <strong className="text-zinc-700 dark:text-zinc-300">{activeLocLabel}</strong></span>
+        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <MapPin size={11} className="text-[#1769E0] dark:text-[#38A5FF]" />
+          <span>{t.ui.showing_results_in} <strong className="text-slate-700 dark:text-slate-300">{activeLocLabel}</strong></span>
           <button onClick={() => { setActiveRegion(''); setActiveZone(''); setActiveSubcity(''); setActiveWoreda(''); router.push(buildUrl(activeCatId, activeSub, activeItem, filters.search, {})); }}
-            className="ml-1 text-orange-600 hover:underline font-bold">{t.ui.clear_filter}</button>
+            className="ml-1 text-[#1769E0] hover:underline font-bold">{t.ui.clear_filter}</button>
         </div>
       )}
 
@@ -462,52 +592,254 @@ function ProductsContent() {
           {/* Products area */}
           <div className="flex-1 min-w-0">
 
-            {/* Top bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-2">
-                <p className="text-xs font-bold text-zinc-400">
-                  {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
-                </p>
+            {/* ── MASTER FILTER BAR ── */}
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-2.5 mb-3 shadow-xs flex flex-wrap items-center justify-between gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
+                {/* 1. Transaction Master Filter: Buy / Rent / All */}
+                <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-0.5 rounded-xl border border-zinc-200/60 dark:border-zinc-700/60">
+                  <button
+                    type="button"
+                    onClick={() => { setListingType('all'); router.push(buildUrl({ overrideType: 'all' })); }}
+                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all ${
+                      listingType === 'all'
+                        ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-xs'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {(t.ui as any)?.all_modes ?? 'All'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setListingType('sale'); router.push(buildUrl({ overrideType: 'sale' })); }}
+                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all flex items-center gap-1 ${
+                      listingType === 'sale'
+                        ? 'bg-orange-600 text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-orange-600'
+                    }`}
+                  >
+                    🏷️ {t.nav?.buy ?? 'Buy'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setListingType('rent'); router.push(buildUrl({ overrideType: 'rent' })); }}
+                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all flex items-center gap-1 ${
+                      listingType === 'rent'
+                        ? 'bg-teal-600 text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-teal-600'
+                    }`}
+                  >
+                    🏠 {t.nav?.rental ?? 'Rent'}
+                  </button>
+                </div>
 
-                {/* Condition filter pills — compact inline */}
-                <div className="flex items-center gap-1 ml-2">
+                {/* 2. Condition Master Filter: New / Used / All */}
+                <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-0.5 rounded-xl border border-zinc-200/60 dark:border-zinc-700/60">
                   {(['all', 'new', 'used'] as const).map(c => (
-                    <button key={c} onClick={() => { setActiveCondition(c); setVisibleCount(24); }}
-                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide transition-all shrink-0 ${activeCondition === c
-                        ? c === 'new' ? 'bg-green-600 text-white'
-                          : c === 'used' ? 'bg-blue-600 text-white'
-                            : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
-                        }`}>
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => { setActiveCondition(c); router.push(buildUrl({ overrideCond: c })); }}
+                      className={`px-2 py-1 text-[10px] font-black uppercase rounded-lg transition-all ${
+                        activeCondition === c
+                          ? c === 'new'
+                            ? 'bg-emerald-600 text-white shadow-xs'
+                            : c === 'used'
+                            ? 'bg-blue-600 text-white shadow-xs'
+                            : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900 shadow-xs'
+                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                      }`}
+                    >
                       {c === 'all' ? (t.ui?.condition_all ?? 'All') : c === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}
                     </button>
                   ))}
                 </div>
+
+                {/* 3. Price Filter Pill (Category-scoped or Root-wide) */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setPricePopoverOpen(!pricePopoverOpen)}
+                    className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
+                      activeMinPrice !== undefined || activeMaxPrice !== undefined
+                        ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 border-[#1769E0] text-[#1769E0] dark:text-[#38A5FF] font-extrabold'
+                        : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-300'
+                    }`}
+                  >
+                    <span>💰 {activeMinPrice !== undefined || activeMaxPrice !== undefined ? `${activeMinPrice ?? 0} - ${activeMaxPrice ?? '∞'} ETB` : (t.ui?.price ?? 'Price (ETB)')}</span>
+                    <ChevronDown size={11} className={pricePopoverOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                  </button>
+
+                  {pricePopoverOpen && (
+                    <div className="absolute left-0 top-full mt-2 z-50 w-64 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl space-y-2">
+                      <p className="text-[10px] font-black uppercase text-slate-500">
+                        {activeCatNode ? `${getCatDisplayName(activeCatNode)} Price (ETB)` : 'Marketplace Price Range (ETB)'}
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="number"
+                          placeholder="Min"
+                          value={minPriceInput}
+                          onChange={e => setMinPriceInput(e.target.value)}
+                          className="w-1/2 px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-1 focus:ring-[#1769E0]"
+                        />
+                        <span className="text-slate-400 text-xs">-</span>
+                        <input
+                          type="number"
+                          placeholder="Max"
+                          value={maxPriceInput}
+                          onChange={e => setMaxPriceInput(e.target.value)}
+                          className="w-1/2 px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-1 focus:ring-[#1769E0]"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between pt-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMinPriceInput('');
+                            setMaxPriceInput('');
+                            setActiveMinPrice(undefined);
+                            setActiveMaxPrice(undefined);
+                            setPricePopoverOpen(false);
+                            router.push(buildUrl({ minP: '', maxP: '' }));
+                          }}
+                          className="text-[10px] font-bold text-slate-400 hover:text-red-500 cursor-pointer"
+                        >
+                          {(t.ui as any).reset ?? 'Reset'}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveMinPrice(minPriceInput ? parseFloat(minPriceInput) : undefined);
+                            setActiveMaxPrice(maxPriceInput ? parseFloat(maxPriceInput) : undefined);
+                            setPricePopoverOpen(false);
+                            router.push(buildUrl({ minP: minPriceInput, maxP: maxPriceInput }));
+                          }}
+                          className="px-3 py-1 bg-[#1769E0] text-white rounded-lg text-xs font-bold hover:bg-[#1055BD] transition-colors cursor-pointer"
+                        >
+                          {(t.ui as any).apply ?? t.ui?.submit ?? 'Apply'}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 4. Proximity / Near Me Master Filter */}
+                <button
+                  type="button"
+                  onClick={detectNearMe}
+                  disabled={isLocating}
+                  className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
+                    userCoords
+                      ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
+                      : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:border-teal-500'
+                  }`}
+                >
+                  <Navigation size={11} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
+                  <span>
+                    {isLocating
+                      ? ((t.ui as any).locating ?? 'Locating…')
+                      : userCoords
+                      ? ((t.ui as any).nearest_to_me ?? '📍 Nearest to Me')
+                      : ((t.ui as any).near_me ?? 'Near Me')}
+                  </span>
+                  {userCoords && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setUserCoords(null);
+                        router.push(buildUrl({ coords: null }));
+                      }}
+                      className="ml-1 hover:text-red-500 font-black cursor-pointer"
+                    >
+                      ×
+                    </span>
+                  )}
+                </button>
               </div>
 
-              <button onClick={() => setFilterOpen(true)}
-                className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 font-bold text-xs hover:bg-orange-600 hover:text-white transition-all">
-                <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
-              </button>
+              {/* Mobile Filter Toggle & Count */}
+              <div className="flex items-center gap-2">
+                <p className="text-xs font-bold text-zinc-400">
+                  {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
+                </p>
+                <button
+                  onClick={() => setFilterOpen(true)}
+                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 font-bold text-xs hover:bg-[#1769E0] hover:text-white transition-all cursor-pointer"
+                >
+                  <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
+                </button>
+              </div>
             </div>
 
             {loading ? (
               <div className="flex items-center justify-center py-20"><Spinner /></div>
+            ) : fetchError ? (
+              <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center justify-center shadow-md">
+                  <AlertTriangle size={28} />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
+                    {(t.ui as any).unable_to_load_listings ?? 'Unable to Load Listings'}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{fetchError}</p>
+                </div>
+                <button
+                  onClick={() => setRetryKey(k => k + 1)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
+                >
+                  <RotateCcw size={14} />
+                  <span>{(t.ui as any).retry ?? 'Retry'}</span>
+                </button>
+              </div>
             ) : products.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-20 opacity-40">
-                <ShoppingBag size={48} className="mb-3" />
-                <p className="font-bold">{t.ui.no_products}</p>
+              <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
+                <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center">
+                  <ShoppingBag size={32} />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-slate-900 dark:text-slate-100">{t.ui.no_products ?? 'No listings found'}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    {(t.ui as any).no_active_listings_match ?? 'No active listings match your current search or filter criteria.'}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center pt-1">
+                  <button
+                    onClick={() => {
+                      setActiveCatId(undefined);
+                      setActiveSub(undefined);
+                      setActiveItem(undefined);
+                      setActiveMinPrice(undefined);
+                      setActiveMaxPrice(undefined);
+                      setActiveCondition('all');
+                      setListingType('all');
+                      router.push('/products');
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
+                  >
+                    <span>{(t as any).search?.clear_filters ?? (t.ui as any).clear_filter ?? 'Clear All Filters'}</span>
+                  </button>
+                </div>
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full">
+                  <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
+                    {(t.ui as any).explore_categories ?? 'Explore Categories'}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 justify-center">
+                    {categories.slice(0, 8).map(c => (
+                      <Link
+                        key={c.id}
+                        href={`/products?category_hierarchy_id=${c.id}&cat=${c.slug}`}
+                        className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-[#1769E0] text-xs font-medium transition-colors"
+                      >
+                        {c.icon ? `${c.icon} ` : '🏷️ '}
+                        {resolveCategoryTitle(c, locale)}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             ) : (
               <>
-                {/*
-                  Smartphone-optimized Grid:
-                  - 2 columns on mobile (≥320px) for generous touch targets & readable photos
-                  - 3 columns on sm (≥640px)
-                  - 4 columns on md (≥768px)
-                  - 5 columns on lg (≥1024px)
-                  - 6 columns on xl (≥1280px)
-                */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-3.5">
                   {products.slice(0, visibleCount).map(p => (
                     p.listing_type === 'rent'
@@ -523,7 +855,7 @@ function ProductsContent() {
                       <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-30 group-hover:opacity-80 transition-opacity">
                         {t.ui.get_more}
                       </span>
-                      <div className="w-10 h-10 rounded-2xl bg-orange-600/10 text-orange-600 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white transition-all shadow-md">
+                      <div className="w-10 h-10 rounded-2xl bg-[#1769E0]/15 text-[#1769E0] dark:text-[#38A5FF] flex items-center justify-center group-hover:bg-[#1769E0] group-hover:text-white transition-all shadow-md">
                         <ChevronDown size={20} />
                       </div>
                     </button>
@@ -539,10 +871,10 @@ function ProductsContent() {
       {filterOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setFilterOpen(false)} />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-zinc-50 dark:bg-zinc-950 p-4 pb-[max(24px,env(safe-area-inset-bottom,24px))] shadow-2xl animate-in slide-in-from-bottom duration-200">
+          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white dark:bg-[#0E1B33] p-4 pb-[max(24px,env(safe-area-inset-bottom,24px))] shadow-2xl animate-in slide-in-from-bottom duration-200">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2 font-black text-sm">
-                <SlidersHorizontal size={15} className="text-orange-600" />
+                <SlidersHorizontal size={15} className="text-[#1769E0]" />
                 {t.ui.filters}
               </div>
               <button onClick={() => setFilterOpen(false)}

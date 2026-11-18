@@ -1,0 +1,104 @@
+[
+  {
+    "id": 336,
+    "parent_id": 32,
+    "parent_code": "AM-GD",
+    "type": "woreda",
+    "slug": "gondar-arada-subcity",
+    "code": "AM-GD-AR",
+    "level": 3,
+    "path": "/1/5/32/336/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Arada Subcity (Gondar)",
+      "am": "አራዳ ክፍለ ከተማ (ጎንደር)",
+      "om": "Kutaa Magaalaa Araadaa",
+      "ti": "ኣራዳ ክፍለ ከተማ (ጎንደር)"
+    },
+    "coordinates": {
+      "latitude": 12.605,
+      "longitude": 37.465,
+      "bbox": {
+        "min_lat": 12.595,
+        "max_lat": 12.615,
+        "min_lng": 37.455,
+        "max_lng": 37.475
+      }
+    }
+  },
+  {
+    "id": 337,
+    "parent_id": 32,
+    "parent_code": "AM-GD",
+    "type": "woreda",
+    "slug": "gondar-azezo-subcity",
+    "code": "AM-GD-AZ",
+    "level": 3,
+    "path": "/1/5/32/337/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Azezo Subcity (Gondar)",
+      "am": "አዘዞ ክፍለ ከተማ (ጎንደር)",
+      "om": "Kutaa Magaalaa Azozoo",
+      "ti": "ኣዘዞ ክፍለ ከተማ (ጎንደር)"
+    },
+    "coordinates": {
+      "latitude": 12.555,
+      "longitude": 37.435,
+      "bbox": {
+        "min_lat": 12.545,
+        "max_lat": 12.565,
+        "min_lng": 37.425,
+        "max_lng": 37.445
+      }
+    }
+  },
+  {
+    "id": 338,
+    "parent_id": 32,
+    "parent_code": "AM-GD",
+    "type": "woreda",
+    "slug": "gondar-maraki-subcity",
+    "code": "AM-GD-MA",
+    "level": 3,
+    "path": "/1/5/32/338/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Maraki Subcity (Gondar)",
+      "am": "ማራኪ ክፍለ ከተማ (ጎንደር)",
+      "om": "Kutaa Magaalaa Maraakii",
+      "ti": "ማራኪ ክፍለ ከተማ (ጎንደር)"
+    },
+    "coordinates": {
+      "latitude": 12.615,
+      "longitude": 37.475,
+      "bbox": {
+        "min_lat": 12.605,
+        "max_lat": 12.625,
+        "min_lng": 37.465,
+        "max_lng": 37.485
+      }
+    }
+  }
+]

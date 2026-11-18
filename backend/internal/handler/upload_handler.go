@@ -87,7 +87,7 @@ func (h *UploadHandler) UploadImage(c *fiber.Ctx) error {
 	if err != nil {
 		return response.BadRequest(c, "image file is required")
 	}
-	
+
 	// Validate file size
 	if file.Size <= 0 {
 		return response.BadRequest(c, "image file is empty or invalid")

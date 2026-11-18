@@ -1,0 +1,13 @@
+{
+  "code": "SYS_GIG",
+  "names": {
+    "en": "Gig & Freelance",
+    "am": "ጊግና የጊዚያዊ ስራዎች",
+    "om": "Hojiiwwan Yeroo fi Freelance",
+    "ti": "ጊግን ግዝያዊ ስራሕን"
+  },
+  "description": "On-demand task marketplace, micro-jobs, freelance digital projects and piecework",
+  "icon": "Clock",
+  "display_order": 3,
+  "primary_root_slug": "services"
+}

@@ -26,6 +26,7 @@ export interface CategoryNode {
   level: number;
   is_leaf: boolean;
   count: number;
+  i18n?: Record<string, string>;
   children?: CategoryNode[];
 }
 
@@ -44,6 +45,7 @@ interface CategoryTreeSelectorProps {
   value?: number;
   onChange: (categoryId: number, category: CategoryNode) => void;
   language?: string;
+  schemeCode?: string;
   placeholder?: string;
   className?: string;
 }
@@ -52,6 +54,7 @@ export default function CategoryTreeSelector({
   value,
   onChange,
   language = 'en',
+  schemeCode = 'SYS_PROD',
   placeholder = 'Select a category branch...',
   className = '',
 }: CategoryTreeSelectorProps) {
@@ -67,20 +70,44 @@ export default function CategoryTreeSelector({
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'leaves' | 'tree'>('leaves');
+  const [serverResults, setServerResults] = useState<FlattenedLeafBranch[]>([]);
+  const [searching, setSearching] = useState(false);
+  const [selectedNodeCache, setSelectedNodeCache] = useState<CategoryNode | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const fetchCategories = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await api.getCategoryTree(language);
-      setCategories(Array.isArray(data) ? data : []);
+      let data: any[] = [];
+      try {
+        // Fast initial tree fetch from canonical category hierarchy
+        data = await api.getCategoryTree(language, 3);
+      } catch {
+        data = await api.getTree(schemeCode, language, 3);
+      }
+
+      const normalize = (n: any): CategoryNode => ({
+        id: n.id,
+        name: n.name || n.name_en || n.canonical_name || '',
+        name_en: n.name_en || n.canonical_name || '',
+        name_am: n.name_am,
+        name_om: n.name_om,
+        name_ti: n.name_ti,
+        slug: n.slug,
+        level: n.depth ?? n.level ?? 0,
+        is_leaf: n.is_leaf ?? (!n.children || n.children.length === 0),
+        count: n.product_count ?? n.count ?? 0,
+        children: Array.isArray(n.children) ? n.children.map(normalize) : undefined,
+      });
+
+      setCategories((Array.isArray(data) ? data : []).map(normalize));
     } catch (error) {
       console.error('Failed to fetch categories:', error);
       setCategories([]);
     } finally {
       setLoading(false);
     }
-  }, [language]);
+  }, [schemeCode, language]);
 
   useEffect(() => {
     fetchCategories();
@@ -101,22 +128,79 @@ export default function CategoryTreeSelector({
     };
   }, [isOpen]);
 
-  // Helper to extract localized name
-  const getNodeName = useCallback((node: CategoryNode): string => {
+  // Helper to extract localized name with dynamic i18n support
+  const getNodeName = useCallback((node: CategoryNode | { name?: string; name_en?: string; name_am?: string; name_om?: string; name_ti?: string; slug?: string; i18n?: Record<string, string> }): string => {
+    if (node.i18n && node.i18n[language]) {
+      return node.i18n[language];
+    }
     switch (language) {
       case 'am':
-        return node.name_am || node.name || node.name_en || node.slug;
+        return node.name_am || node.name || node.name_en || node.slug || '';
       case 'om':
       case 'or':
-        return node.name_om || node.name || node.name_en || node.slug;
+        return node.name_om || node.name || node.name_en || node.slug || '';
       case 'ti':
-        return node.name_ti || node.name || node.name_en || node.slug;
+        return node.name_ti || node.name || node.name_en || node.slug || '';
       default:
-        return node.name_en || node.name || node.slug;
+        return node.i18n?.['en'] || node.name_en || node.name || node.slug || '';
     }
   }, [language]);
 
-  // Extract all flattened leaf branches with their complete hierarchy path
+  // Debounced server-side universal classification search across all 100k+ leaves & 4 languages
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (q.length < 2) {
+      setServerResults([]);
+      setSearching(false);
+      return;
+    }
+
+    setSearching(true);
+    const timer = setTimeout(async () => {
+      try {
+        const results = await api.searchCategories(q, language, 40);
+        if (Array.isArray(results)) {
+          const mapped: FlattenedLeafBranch[] = results.map(r => {
+            const leafName = r.name || r.name_en;
+            const bcs = Array.isArray(r.breadcrumbs) ? r.breadcrumbs : [];
+            const rootName = bcs[0]?.name || 'General';
+            const subcatName = bcs[1]?.name || '';
+            const fullPath = r.hierarchy || bcs.map((b: any) => b.name).join(' › ') || leafName;
+            return {
+              id: r.id,
+              leafName,
+              rootName,
+              subcatName,
+              fullPath,
+              slug: r.slug,
+              count: 0,
+              node: {
+                id: r.id,
+                name: leafName,
+                name_en: r.name_en,
+                name_am: r.name_am,
+                name_om: r.name_om,
+                name_ti: r.name_ti,
+                slug: r.slug,
+                level: r.level,
+                is_leaf: r.is_leaf,
+                count: 0,
+              },
+            };
+          });
+          setServerResults(mapped);
+        }
+      } catch (err) {
+        console.error('Classification search error:', err);
+      } finally {
+        setSearching(false);
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, schemeCode, language, getNodeName]);
+
+  // Extract all flattened leaf branches with their complete hierarchy path from initial loaded tree
   const allLeafBranches = useMemo<FlattenedLeafBranch[]>(() => {
     const leaves: FlattenedLeafBranch[] = [];
 
@@ -125,7 +209,7 @@ export default function CategoryTreeSelector({
       const currentPath = [...breadcrumbs, currentName];
 
       const hasChildren = Array.isArray(node.children) && node.children.length > 0;
-      if (node.is_leaf || !hasChildren) {
+      if (node.is_leaf) {
         leaves.push({
           id: node.id,
           leafName: currentName,
@@ -136,7 +220,7 @@ export default function CategoryTreeSelector({
           count: node.count || 0,
           node,
         });
-      } else {
+      } else if (hasChildren) {
         const nextSubcat = breadcrumbs.length === 1 ? currentName : subcatName;
         node.children!.forEach(child => traverse(child, currentPath, rootName, nextSubcat));
       }
@@ -145,7 +229,7 @@ export default function CategoryTreeSelector({
     categories.forEach(root => {
       const rootTitle = getNodeName(root);
       const hasChildren = Array.isArray(root.children) && root.children.length > 0;
-      if (root.is_leaf || !hasChildren) {
+      if (root.is_leaf) {
         leaves.push({
           id: root.id,
           leafName: rootTitle,
@@ -155,7 +239,7 @@ export default function CategoryTreeSelector({
           count: root.count || 0,
           node: root,
         });
-      } else {
+      } else if (hasChildren) {
         root.children!.forEach(child => traverse(child, [rootTitle], rootTitle));
       }
     });
@@ -188,35 +272,90 @@ export default function CategoryTreeSelector({
     });
   }, [allLeafBranches, searchQuery]);
 
-  // Group leaf branches by Root category
+  // Group leaf branches by Root category (prefers server search results when searching)
+  const displayedBranches = useMemo(() => {
+    if (searchQuery.trim().length >= 2 && serverResults.length > 0) {
+      return serverResults;
+    }
+    return filteredLeafBranches.slice(0, 100);
+  }, [searchQuery, serverResults, filteredLeafBranches]);
+
   const groupedBranches = useMemo(() => {
     const map = new Map<string, FlattenedLeafBranch[]>();
-    filteredLeafBranches.forEach(branch => {
+    displayedBranches.forEach(branch => {
       const list = map.get(branch.rootName) || [];
       list.push(branch);
       map.set(branch.rootName, list);
     });
     return Array.from(map.entries());
-  }, [filteredLeafBranches]);
+  }, [displayedBranches]);
 
-  const toggleExpand = (id: number) => {
+  const toggleExpand = async (id: number, node?: CategoryNode) => {
     const newExpanded = new Set(expanded);
     if (newExpanded.has(id)) {
       newExpanded.delete(id);
-    } else {
-      newExpanded.add(id);
+      setExpanded(newExpanded);
+      return;
     }
+
+    newExpanded.add(id);
     setExpanded(newExpanded);
+
+    // On-demand lazy load children for deeper levels (layers 4, 5, 6)
+    if (node && !node.is_leaf && (!node.children || node.children.length === 0)) {
+      try {
+        let rawChildren: any[] = [];
+        try {
+          rawChildren = await api.getCategoryChildren(id, language);
+        } catch {
+          rawChildren = await api.getChildren(id, language);
+        }
+        const children = rawChildren;
+        if (Array.isArray(children) && children.length > 0) {
+          const normalize = (n: any): CategoryNode => ({
+            id: n.id,
+            name: n.name || n.name_en || n.canonical_name || '',
+            name_en: n.name_en || n.canonical_name || '',
+            name_am: n.name_am,
+            name_om: n.name_om,
+            name_ti: n.name_ti,
+            slug: n.slug,
+            level: n.depth ?? n.level ?? 0,
+            is_leaf: n.is_leaf ?? (!n.children || n.children.length === 0),
+            count: n.product_count ?? n.count ?? 0,
+            children: Array.isArray(n.children) ? n.children.map(normalize) : undefined,
+          });
+          const mappedChildren = children.map(normalize);
+
+          const attachChildren = (nodes: CategoryNode[]): CategoryNode[] => {
+            return nodes.map(item => {
+              if (item.id === id) {
+                return { ...item, children: mappedChildren };
+              }
+              if (item.children && item.children.length > 0) {
+                return { ...item, children: attachChildren(item.children) };
+              }
+              return item;
+            });
+          };
+          setCategories(prev => attachChildren(prev));
+        }
+      } catch (err) {
+        console.error('Failed to load children for node', id, err);
+      }
+    }
   };
 
   const handleSelect = (category: CategoryNode) => {
     setSelected(category.id);
+    setSelectedNodeCache(category);
     onChange(category.id, category);
     setIsOpen(false);
   };
 
   const handleSelectLeaf = (branch: FlattenedLeafBranch) => {
     setSelected(branch.id);
+    setSelectedNodeCache(branch.node);
     onChange(branch.id, branch.node);
     setIsOpen(false);
   };
@@ -224,12 +363,16 @@ export default function CategoryTreeSelector({
   const handleClear = (e: React.MouseEvent) => {
     e.stopPropagation();
     setSelected(undefined);
+    setSelectedNodeCache(null);
   };
 
   // Find full path of currently selected category
   const getSelectedDisplay = (): string => {
     if (!selected) return placeholder;
-    const foundBranch = allLeafBranches.find(b => b.id === selected);
+    if (selectedNodeCache && selectedNodeCache.id === selected) {
+      return getNodeName(selectedNodeCache);
+    }
+    const foundBranch = allLeafBranches.find(b => b.id === selected) || serverResults.find(b => b.id === selected);
     if (foundBranch) {
       return foundBranch.fullPath;
     }
@@ -270,24 +413,24 @@ export default function CategoryTreeSelector({
           className={`
             flex items-center gap-2 px-3 py-2 cursor-pointer rounded-xl transition-all my-0.5
             ${isSelected
-              ? 'bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold border border-orange-500/20'
+              ? 'bg-[#1769E0]/10 text-[#1769E0] dark:text-[#38A5FF] font-bold border border-[#1769E0]/20'
               : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200'}
             ${!node.is_leaf && hasChildren ? 'font-semibold' : ''}
           `}
           onClick={() => {
-            if (node.is_leaf || !hasChildren) {
+            if (node.is_leaf) {
               handleSelect(node);
             } else {
-              toggleExpand(node.id);
+              toggleExpand(node.id, node);
             }
           }}
         >
-          {hasChildren ? (
+          {hasChildren || !node.is_leaf ? (
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                toggleExpand(node.id);
+                toggleExpand(node.id, node);
               }}
               className="p-1 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg text-zinc-500"
             >
@@ -299,11 +442,11 @@ export default function CategoryTreeSelector({
             </button>
           ) : (
             <div className="w-6 flex items-center justify-center">
-              <Tag className="w-3.5 h-3.5 text-orange-500" />
+              <Tag className="w-3.5 h-3.5 text-[#1769E0]" />
             </div>
           )}
 
-          {hasChildren ? (
+          {hasChildren || !node.is_leaf ? (
             isExpanded ? (
               <FolderOpen className="w-4 h-4 text-amber-500 shrink-0" />
             ) : (
@@ -326,7 +469,7 @@ export default function CategoryTreeSelector({
           )}
 
           {isSelected && (
-            <Check className="w-4 h-4 text-orange-600 dark:text-orange-400 ml-1 shrink-0" />
+            <Check className="w-4 h-4 text-[#1769E0] dark:text-[#38A5FF] ml-1 shrink-0" />
           )}
         </div>
 
@@ -358,14 +501,14 @@ export default function CategoryTreeSelector({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full border rounded-2xl px-3.5 py-2.5 min-h-[44px] text-left flex items-center justify-between transition-all outline-none focus:ring-2 focus:ring-orange-500 tap-bounce active:scale-[0.99] ${
+        className={`w-full border rounded-2xl px-3.5 py-2.5 min-h-[44px] text-left flex items-center justify-between transition-all outline-none focus:ring-2 focus:ring-[#1769E0] tap-bounce active:scale-[0.99] ${
           isItemSelected
-            ? 'border-orange-500/40 bg-orange-50/30 dark:bg-orange-950/20 text-zinc-900 dark:text-zinc-100'
+            ? 'border-[#1769E0]/40 bg-[#1769E0]/5 dark:bg-[#1769E0]/20 text-zinc-900 dark:text-zinc-100'
             : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400'
         }`}
       >
         <div className="flex items-center gap-2.5 overflow-hidden flex-1 mr-2">
-          <Compass className={`w-4 h-4 shrink-0 ${isItemSelected ? 'text-orange-600 dark:text-orange-400' : 'text-zinc-400'}`} />
+          <Compass className={`w-4 h-4 shrink-0 ${isItemSelected ? 'text-[#1769E0] dark:text-[#38A5FF]' : 'text-zinc-400'}`} />
           <span className={`text-sm truncate ${isItemSelected ? 'font-semibold text-zinc-900 dark:text-zinc-100' : ''}`}>
             {getSelectedDisplay()}
           </span>
@@ -383,7 +526,7 @@ export default function CategoryTreeSelector({
           )}
           <ChevronDown
             className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${
-              isOpen ? 'transform rotate-180 text-orange-500' : ''
+              isOpen ? 'transform rotate-180 text-[#1769E0]' : ''
             }`}
           />
         </div>
@@ -402,17 +545,22 @@ export default function CategoryTreeSelector({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={tLabels.searchPlaceholder}
-                className="w-full pl-9 pr-8 py-2 text-base sm:text-xs min-h-[42px] border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-orange-500 transition-all"
+                className="w-full pl-9 pr-8 py-2 text-base sm:text-xs min-h-[44px] border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] transition-all"
                 autoFocus
               />
               {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
+                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                  {searching && (
+                    <div className="w-3.5 h-3.5 border-2 border-[#1769E0] border-t-transparent rounded-full animate-spin" />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               )}
             </div>
 
@@ -424,14 +572,14 @@ export default function CategoryTreeSelector({
                   onClick={() => setViewMode('leaves')}
                   className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all ${
                     viewMode === 'leaves'
-                      ? 'bg-white dark:bg-zinc-700 text-orange-600 dark:text-orange-400 shadow-sm'
+                      ? 'bg-white dark:bg-zinc-700 text-[#1769E0] dark:text-[#38A5FF] shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
                   }`}
                 >
                   <Layers className="w-3.5 h-3.5" />
                   <span>{tLabels.allBranches}</span>
                   <span className="text-[10px] bg-zinc-100 dark:bg-zinc-600 px-1.5 rounded-full font-mono">
-                    {filteredLeafBranches.length}
+                    {displayedBranches.length}
                   </span>
                 </button>
 
@@ -440,7 +588,7 @@ export default function CategoryTreeSelector({
                   onClick={() => setViewMode('tree')}
                   className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-all ${
                     viewMode === 'tree'
-                      ? 'bg-white dark:bg-zinc-700 text-orange-600 dark:text-orange-400 shadow-sm'
+                      ? 'bg-white dark:bg-zinc-700 text-[#1769E0] dark:text-[#38A5FF] shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200'
                   }`}
                 >
@@ -469,7 +617,7 @@ export default function CategoryTreeSelector({
                     <div key={rootTitle} className="space-y-1">
                       {/* Root Category Domain Header */}
                       <div className="sticky top-0 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm z-10 py-1 px-2 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
-                        <span className="text-[11px] font-black uppercase tracking-wider text-orange-600 dark:text-orange-400 flex items-center gap-1.5">
+                        <span className="text-[11px] font-black uppercase tracking-wider text-[#1769E0] dark:text-[#38A5FF] flex items-center gap-1.5">
                           <Folder className="w-3.5 h-3.5" />
                           {rootTitle}
                         </span>
@@ -489,7 +637,7 @@ export default function CategoryTreeSelector({
                               className={`
                                 flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all border
                                 ${isSelected
-                                  ? 'bg-orange-500/10 border-orange-500/30 text-orange-700 dark:text-orange-300'
+                                  ? 'bg-[#1769E0]/10 border-[#1769E0]/30 text-[#1769E0] dark:text-[#38A5FF]'
                                   : 'border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800/60 text-zinc-800 dark:text-zinc-200'}
                               `}
                             >
@@ -502,7 +650,7 @@ export default function CategoryTreeSelector({
                                 )}
                                 {/* Leaf Destination Name */}
                                 <div className="text-xs font-semibold truncate flex items-center gap-1.5">
-                                  <Tag className="w-3 h-3 text-orange-500 shrink-0" />
+                                  <Tag className="w-3 h-3 text-[#1769E0] shrink-0" />
                                   <span>{branch.leafName}</span>
                                 </div>
                               </div>
@@ -519,7 +667,7 @@ export default function CategoryTreeSelector({
                                 )}
 
                                 {isSelected && (
-                                  <Check className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                                  <Check className="w-4 h-4 text-[#1769E0] dark:text-[#38A5FF]" />
                                 )}
                               </div>
                             </div>
@@ -542,6 +690,24 @@ export default function CategoryTreeSelector({
                 </div>
               )
             )}
+          </div>
+          {/* Quick "Other / Can't Find" Bar */}
+          <div className="p-2.5 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-850/80 flex items-center justify-between text-xs">
+            <span className="text-[11px] text-zinc-500 font-medium">
+              {language === 'am' ? 'የሚፈልጉትን ምድብ አላገኙም?' : language === 'or' ? 'Ramaddii hin argannee?' : language === 'ti' ? 'ዝደለይዎ ምድብ ኣይረኸብኩምን?' : "Can't find your category?"}
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                const otherBranch = allLeafBranches.find(b => b.slug.startsWith('other-')) || allLeafBranches[allLeafBranches.length - 1];
+                if (otherBranch) {
+                  handleSelectLeaf(otherBranch);
+                }
+              }}
+              className="px-3 py-1.5 rounded-lg bg-[#1769E0] text-white font-bold hover:bg-[#1055BD] transition-all text-xs shadow-sm shadow-[#1769E0]/20 active:scale-95"
+            >
+              {language === 'am' ? 'ሌላ ምድብ ምረጥ (Other)' : language === 'or' ? 'Biroo Filadhu' : language === 'ti' ? 'ካልእ ምረጽ' : 'Select "Other"'}
+            </button>
           </div>
         </div>
       )}

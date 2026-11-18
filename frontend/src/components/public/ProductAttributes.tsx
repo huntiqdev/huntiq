@@ -137,14 +137,14 @@ export function ProductAttributes({
         {!user ? (
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <Link
-              href={`/auth?redirect=/products/${productId}`}
+              href={`/auth?redirect=${encodeURIComponent(`/products/${productId}`)}`}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black text-white bg-orange-600 hover:bg-orange-700 shadow-md shadow-orange-600/20 transition-all active:scale-95"
             >
               <User size={13} />
               <span>{(t.ui as any).sign_in_to_view_specs ?? 'Sign In to View'}</span>
             </Link>
             <Link
-              href={`/auth?as=buyer&redirect=/products/${productId}`}
+              href={`/auth?as=buyer&redirect=${encodeURIComponent(`/products/${productId}`)}`}
               className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
               <span>{(t as any).auth?.register_now ?? 'Create Account'}</span>

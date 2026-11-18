@@ -11,13 +11,13 @@ import { BuyModal } from '@/components/public/BuyModal';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 import { resolveImageUrl, isUnoptimized } from '@/lib/utils/imageUrl';
-import { getCategoryLabel } from '@/lib/taxonomy';
+import { resolveCategoryTitle } from '@/lib/taxonomy';
 
 interface Props { product: Product }
 
 // ── Tier badge helpers ────────────────────────────────────────────────────────
 const TIER_BADGE: Record<string, { label: string; cls: string }> = {
-  gold:    { label: 'G', cls: 'bg-yellow-500 text-white' },
+  gold: { label: 'G', cls: 'bg-yellow-500 text-white' },
   premium: { label: 'P', cls: 'bg-purple-600 text-white' },
 };
 
@@ -27,11 +27,10 @@ function TierSpecBadge({ tier }: { tier?: string }) {
   const isGold = tier === 'gold';
   return (
     <div
-      className={`absolute top-1 right-1 z-10 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider flex items-center gap-0.5 shadow-sm ${
-        isGold
-          ? 'bg-amber-500 text-white'
-          : 'bg-purple-600 text-white'
-      }`}
+      className={`absolute top-1 right-1 z-10 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-wider flex items-center gap-0.5 shadow-sm ${isGold
+        ? 'bg-amber-500 text-white'
+        : 'bg-purple-600 text-white'
+        }`}
     >
       <Lock size={7} />
       <span>{isGold ? 'Gold' : 'Premium'}</span>
@@ -60,7 +59,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
         {/* Image carousel */}
         <div className="relative aspect-[4/3] bg-zinc-100 dark:bg-zinc-800 shrink-0">
           {images.length > 0 ? (
-          <Image src={resolveImageUrl(images[imgIdx]?.image_url)}
+            <Image src={resolveImageUrl(images[imgIdx]?.image_url)}
               alt={product.title} fill
               unoptimized={isUnoptimized(resolveImageUrl(images[imgIdx]?.image_url))}
               className="object-cover"
@@ -110,8 +109,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
             )}
             {product.subcategory && (
               <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 bg-purple-600/10 px-2.5 py-1 rounded-lg">
-                {((product as any).category_hierarchy_id && getCategoryLabel((product as any).category_hierarchy_id, locale))
-                  || product.subcategory.replace(/_/g, ' ')}
+                {(product as any).category ? resolveCategoryTitle((product as any).category, locale) : product.subcategory.replace(/_/g, ' ')}
               </span>
             )}
             <span className="text-[10px] font-black uppercase tracking-widest bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-lg capitalize">
@@ -134,16 +132,27 @@ function DetailDrawer({ product, onClose, onBuy }: {
           {product.description && (
             <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 opacity-90">{product.description}</p>
           )}
+
+          {product.custom_url && (
+            <a
+              href={product.custom_url.startsWith('http') ? product.custom_url : `https://${product.custom_url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 dark:text-amber-200 bg-amber-50 dark:bg-amber-950/40 px-3 py-1.5 rounded-xl border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition-colors w-fit"
+            >
+              <span>Verified Merchant Website / Portfolio ↗</span>
+            </a>
+          )}
         </div>
 
         {/* Pinned Priority Action Bar */}
         <div className="shrink-0 p-4 border-t border-zinc-100 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur flex gap-3 pb-[max(16px,env(safe-area-inset-bottom,16px))]">
           <button type="button" onClick={onBuy}
-            className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md ${
-              product.listing_type === 'rent'
-                ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25'
-                : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/25'
-            }`}>
+            className={`flex-1 text-white rounded-2xl py-3 font-bold text-sm flex items-center justify-center gap-2 transition-all tap-bounce active:scale-95 shadow-md ${product.listing_type === 'rent'
+              ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25'
+              : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/25'
+              }`}>
             <ShoppingBag size={16} />
             {product.listing_type === 'rent' ? (t.ui.rent_now ?? 'Rent / Contact Landlord') : t.ui.buy_now}
           </button>
@@ -181,11 +190,11 @@ export function ProductCard({ product }: Props) {
     <>
       {/* Card — smartphone thumb-friendly, tactile bounce */}
       <div
-        className="group relative bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800/80 overflow-hidden flex flex-col cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5 hover:border-orange-300 dark:hover:border-orange-800/60 tap-bounce active:scale-[0.97]"
+        className="group relative bg-white dark:bg-[#0E1B33] rounded-2xl border border-slate-200 dark:border-slate-800/80 overflow-hidden flex flex-col cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-black/10 hover:-translate-y-0.5 hover:border-[#1769E0] dark:hover:border-[#38A5FF]/60 tap-bounce active:scale-[0.97]"
         onClick={() => setDetailOpen(true)}
       >
         {/* Image */}
-        <div className="relative aspect-square bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+        <div className="relative aspect-square bg-slate-100 dark:bg-slate-800 overflow-hidden">
           <Image
             src={thumb}
             alt={product.title}
@@ -206,10 +215,17 @@ export function ProductCard({ product }: Props) {
           </div>
 
           {/* Sale Badge — top left */}
-          <div className="absolute top-2 left-2 bg-orange-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 leading-none shadow-sm tracking-wide">
+          <div className="absolute top-2 left-2 bg-[#1769E0] text-white text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 leading-none shadow-sm shadow-[#1769E0]/30 tracking-wide">
             <ShoppingBag size={8} />
             SALE
           </div>
+
+          {/* Publisher Intermediary / Broker Badge */}
+          {product.publisher_role && product.publisher_role !== 'owner' && (
+            <div className="absolute top-2 right-14 bg-indigo-600/90 text-white text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
+              {product.publisher_role === 'broker_agent' ? 'BROKER' : product.publisher_role === 'representative' ? 'AGENT' : product.publisher_role === 'government_officer' ? 'GOV' : 'PARTNER'}
+            </div>
+          )}
 
           {/* Tier badge — just below sale badge */}
           {tierBadge && (
@@ -244,12 +260,12 @@ export function ProductCard({ product }: Props) {
 
         {/* Body — smartphone readable typography */}
         <div className="p-2.5 flex flex-col gap-1">
-          <p className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 transition-colors">
+          <p className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 text-slate-900 dark:text-slate-100 group-hover:text-[#1769E0] dark:group-hover:text-[#38A5FF] transition-colors">
             {product.title}
           </p>
           {product.location && (
-            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1 leading-none truncate font-medium">
-              <MapPin size={10} className="shrink-0 text-orange-500" />
+            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 leading-none truncate font-medium">
+              <MapPin size={10} className="shrink-0 text-[#1769E0] dark:text-[#38A5FF]" />
               <span>{product.location.woreda ?? product.location.subcity ?? product.location.region}</span>
             </p>
           )}

@@ -18,7 +18,7 @@ export function BuyButton({ product }: { product: Product }) {
         className={`mt-2 w-full text-white rounded-2xl py-4 font-bold text-lg transition-all shadow-lg tap-bounce active:scale-[0.98] flex items-center justify-center gap-2 min-h-[48px] ${
           isRental 
             ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' 
-            : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
+            : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/25'
         }`}
       >
         {isRental ? <Key size={20} /> : <ShoppingBag size={20} />}
@@ -26,12 +26,12 @@ export function BuyButton({ product }: { product: Product }) {
       </button>
 
       {/* Mobile Sticky Priority Bottom Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 px-4 py-2.5 pb-[calc(env(safe-area-inset-bottom,12px)+6px)] shadow-2xl flex items-center justify-between gap-3">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#091426]/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-4 py-2.5 pb-[calc(env(safe-area-inset-bottom,12px)+6px)] shadow-2xl flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0 pr-1">
-          <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider leading-none">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none">
             {isRental ? (t.ui.rental_rate ?? 'Rental Rate') : (t.ui.total_price ?? 'Total Price')}
           </span>
-          <span className={`text-base font-black truncate leading-tight mt-0.5 ${isRental ? 'text-teal-600' : 'text-orange-600'}`}>
+          <span className={`text-base font-black truncate leading-tight mt-0.5 ${isRental ? 'text-teal-600' : 'text-[#1769E0] dark:text-[#38A5FF]'}`}>
             ETB {isRental && product.rental_price != null ? product.rental_price.toLocaleString() : (product.price != null ? product.price.toLocaleString() : '—')}
           </span>
         </div>
@@ -41,7 +41,7 @@ export function BuyButton({ product }: { product: Product }) {
           className={`flex-1 text-white rounded-xl py-3 px-4 font-black text-sm shadow-md transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 min-h-[44px] ${
             isRental 
               ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/25' 
-              : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/25'
+              : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/25'
           }`}
         >
           {isRental ? <Key size={16} /> : <ShoppingBag size={16} />}

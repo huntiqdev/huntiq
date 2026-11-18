@@ -1,0 +1,36 @@
+[
+  {
+    "id": 384,
+    "parent_id": 100,
+    "parent_code": "ET-GA-MA",
+    "type": "woreda",
+    "slug": "gambela-majang-mengeshi",
+    "code": "GA-MA-MEN",
+    "level": 3,
+    "path": "/1/11/100/384/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Mengeshi (Majang) Woreda",
+      "am": "መንገሺ (ማጃንግ) ወረዳ",
+      "om": "Mangeeshii Woreda",
+      "ti": "መንገሺ ወረዳ"
+    },
+    "coordinates": {
+      "latitude": 7.335,
+      "longitude": 35.25,
+      "bbox": {
+        "min_lat": 7.325,
+        "max_lat": 7.345,
+        "min_lng": 35.24,
+        "max_lng": 35.26
+      }
+    }
+  }
+]

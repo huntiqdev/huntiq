@@ -19,7 +19,7 @@ export const MAX_PRODUCT_TITLE_LENGTH = 200;  // Matches backend max_title_lengt
 export const MIN_PRODUCT_DESCRIPTION_LENGTH = 10;
 export const MAX_PRODUCT_DESCRIPTION_LENGTH = 5000;  // Matches backend max_description_length setting
 export const MIN_PRODUCT_PRICE = 0.01;
-export const MAX_PRODUCT_PRICE = 1_000_000;
+export const MAX_PRODUCT_PRICE = 999_999_999.99;
 
 /** 
  * Image validation - These are loaded from backend at runtime

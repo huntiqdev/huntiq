@@ -1,0 +1,33 @@
+{
+  "id": 67,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-north-wollo",
+  "code": "ET-AM-NW",
+  "level": 2,
+  "path": "/1/5/67/",
+  "display_order": 31,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "North Wello",
+    "Semien Wollo",
+    "ሰሜን ወሎ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "North Wollo Zone",
+    "am": "ሰሜን ወሎ ዞን",
+    "om": "Walloo Kaabaa",
+    "ti": "ዞን ሰሜን ወሎ"
+  },
+  "coordinates": {
+    "latitude": 11.9,
+    "longitude": 39.3,
+    "bbox": null
+  }
+}

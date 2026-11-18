@@ -21,8 +21,13 @@ type User struct {
 	NetProfit          float64   `json:"net_profit,omitempty"`
 	BuyerTier          string    `json:"buyer_tier"`
 	OTPVerified        bool      `json:"otp_verified"`
+	IdentityVerified   bool      `json:"identity_verified"`
+	AccountEntityType  string    `json:"account_entity_type"` // INDIVIDUAL, COMPANY, GOVERNMENT, OTHER_LEGALLY_APPROVED_ENTITY
+	OrganizationID     *int      `json:"organization_id,omitempty"`
 	SellerPreference   string    `json:"seller_preference,omitempty"` // 'sale', 'rent', or 'both'
 	Capabilities       []string  `json:"capabilities,omitempty"`      // additive: 'buyer', 'seller', 'landlord', 'renter'
+	SaleProductCount   int       `json:"sale_product_count"`
+	RentProductCount   int       `json:"rent_product_count"`
 	CreatedAt          time.Time `json:"created_at"`
 	UpdatedAt          time.Time `json:"updated_at"`
 }
@@ -57,7 +62,6 @@ func (u *User) HasCapability(cap string) bool {
 	}
 	return false
 }
-
 
 // MaxAdditionalPhones returns the maximum number of additional phones allowed for a tier
 func (u *User) MaxAdditionalPhones() int {
@@ -94,24 +98,142 @@ func (u *User) IsOperationsAdmin() bool {
 // RoleDomainPermissions defines the baseline domain permissions granted to enterprise administrative roles.
 // Platform Owner and Legacy Super have all permissions by default.
 var RoleDomainPermissions = map[string]map[string]bool{
-	RolePlatformAdmin: {
+	// ── Department 1: Executive & Strategic Governance ──
+	RolePlatformOwner: {
 		"dashboard": true, "settings": true, "categories": true, "category_trends": true,
 		"analytics": true, "locations": true, "banners": true, "notifications": true,
-		"profit": true, "finance": true, "sellers": true, "transactions": true,
+		"profit": true, "finance": true, "finance:manage": true, "sellers": true, "transactions": true,
+		"logs": true, "otp_logs": true, "trust_safety": true, "operations": true,
+		"seller_verification": true, "refunds": true, "appeals": true, "pending": true,
+		"products": true, "seller_upgrades": true, "buyer_upgrades": true, "referrals": true, "withdrawals": true,
+		"premium_users": true,
+	},
+	RoleGovComplianceOfficer: {
+		"dashboard": true, "finance": true, "profit": true, "transactions": true,
+		"operations": true, "logs": true, "seller_verification": true,
+		"trust_safety": true, "appeals": true, "refunds": true,
+	},
+	RoleLegalCounsel: {
+		"dashboard": true, "trust_safety": true, "appeals": true, "refunds": true,
+		"seller_verification": true, "logs": true, "transactions": true,
+	},
+	RoleHRDirector: {
+		"dashboard": true, "logs": true, "notifications": true, "operations": true,
+	},
+
+	// ── Department 2: Cybersecurity, SOC & Trust & Safety ──
+	RoleCISO: {
+		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,
+		"operations": true, "notifications": true, "settings": true, "analytics": true,
 	},
 	RoleSecurityAdmin: {
 		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,
+		"operations": true, "analytics": true,
 	},
+	RoleSOCAnalyst: {
+		"dashboard": true, "logs": true, "otp_logs": true, "trust_safety": true,
+		"operations": true,
+	},
+	RoleFraudInvestigator: {
+		"dashboard": true, "trust_safety": true, "transactions": true, "logs": true,
+		"seller_verification": true, "refunds": true, "appeals": true,
+	},
+	RoleComplianceAuditor: {
+		"dashboard": true, "logs": true, "otp_logs": true, "transactions": true,
+		"profit": true, "operations": true, "finance": true,
+	},
+
+	// ── Department 3: Banking, Treasury, Tax & Financial Operations ──
+	RoleFinanceDirector: {
+		"dashboard": true, "finance": true, "finance:manage": true, "profit": true,
+		"transactions": true, "withdrawals": true, "referrals": true, "analytics": true,
+	},
+	RoleTransactionAuditor: {
+		"dashboard": true, "transactions": true, "profit": true, "withdrawals": true,
+		"finance": true,
+	},
+	RoleTaxController: {
+		"dashboard": true, "finance": true, "profit": true, "transactions": true,
+		"analytics": true,
+	},
+	RoleEscrowReconciler: {
+		"dashboard": true, "transactions": true, "refunds": true, "withdrawals": true,
+		"profit": true,
+	},
+	RoleFinanceSupportAgent: {
+		"dashboard": true, "transactions": true, "refunds": true, "seller_upgrades": true,
+		"buyer_upgrades": true,
+	},
+
+	// ── Department 4: VIP Concierge, Premium & Growth Services ──
+	RoleVIPAccountDirector: {
+		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
+		"premium_users": true, "analytics": true, "referrals": true,
+	},
+	RoleGoldConcierge: {
+		"dashboard": true, "sellers": true, "seller_upgrades": true, "products": true,
+		"premium_users": true,
+	},
+	RolePremiumConcierge: {
+		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
+		"products": true, "banners": true, "premium_users": true,
+	},
+	RoleReferralDirector: {
+		"dashboard": true, "referrals": true, "withdrawals": true, "analytics": true,
+	},
+	RoleRetentionSpecialist: {
+		"dashboard": true, "sellers": true, "analytics": true, "category_trends": true,
+		"premium_users": true,
+	},
+
+	// ── Department 5: Marketplace Operations & KYC Verification ──
 	RoleOperationsAdmin: {
 		"dashboard": true, "operations": true, "seller_verification": true, "refunds": true,
 		"appeals": true, "pending": true, "products": true, "sellers": true,
 		"seller_upgrades": true, "buyer_upgrades": true, "transactions": true,
 	},
+	RoleKYCVerificationOfficer: {
+		"dashboard": true, "seller_verification": true, "sellers": true,
+		"trust_safety": true,
+	},
+	RoleProductInspectionOfficer: {
+		"dashboard": true, "pending": true, "products": true,
+	},
+	RoleDisputeRefundOfficer: {
+		"dashboard": true, "refunds": true, "transactions": true, "appeals": true,
+	},
+	RoleAppealsOfficer: {
+		"dashboard": true, "appeals": true, "trust_safety": true, "sellers": true,
+	},
+
+	// ── Department 6: Catalog, Taxonomy, Logistics & Support ──
+	RolePlatformAdmin: {
+		"dashboard": true, "settings": true, "categories": true, "category_trends": true,
+		"analytics": true, "locations": true, "banners": true, "notifications": true,
+		"profit": true, "finance": true, "sellers": true, "transactions": true,
+		"operations": true,
+	},
+	RoleTaxonomyArchitect: {
+		"dashboard": true, "categories": true, "category_trends": true, "analytics": true,
+	},
+	RoleGISLocationSpecialist: {
+		"dashboard": true, "locations": true, "analytics": true,
+	},
+	RoleContentModerator: {
+		"dashboard": true, "pending": true, "products": true, "trust_safety": true,
+		"banners": true,
+	},
 	RoleModerator: {
 		"dashboard": true, "pending": true, "products": true, "trust_safety": true,
+		"banners": true,
+	},
+	RoleCustomerSupportLead: {
+		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
+		"refunds": true, "appeals": true, "products": true,
 	},
 	RoleSupportAgent: {
 		"dashboard": true, "sellers": true, "seller_upgrades": true, "buyer_upgrades": true,
+		"products": true,
 	},
 }
 

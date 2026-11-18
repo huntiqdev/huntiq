@@ -1,69 +1,6 @@
 import { fetchAPI, fetchAPIWithMeta, authHeaders, API_URL, ApiError } from './core';
 
-export interface RealTimePriceStats {
-  min_price: number;
-  avg_price: number;
-  max_price: number;
-  currency: string;
-}
-
-export interface RealTimeTopPick {
-  id: number;
-  title: string;
-  price: number;
-  seller_tier: string;
-  badge: string;
-  reason: string;
-}
-
-export interface RealTimeProductAnalysis {
-  total_analyzed: number;
-  total_matching?: number;
-  premium_count: number;
-  gold_count: number;
-  normal_count: number;
-  price_stats: RealTimePriceStats;
-  top_premium_pick?: RealTimeTopPick;
-  top_gold_pick?: RealTimeTopPick;
-  market_verdict: string;
-  deal_ratings?: Array<{
-    product_id: number;
-    deal_score: number;
-    badge: string;
-    value_verdict: string;
-  }>;
-  execution_time_ms?: number;
-}
-
-export interface ReasoningStep {
-  step: number;
-  title: string;
-  detail: string;
-}
-
-export interface MarketplaceReasoningChain {
-  intent_breakdown: string;
-  market_feasibility: string;
-  trade_off_analysis: string;
-  inspection_protocol: string;
-  steps: ReasoningStep[];
-}
-
-export interface SearchAIMeta {
-  ai_mode: boolean;
-  normalized_query?: string;
-  cleaned_search_term?: string;
-  sort_by?: string;
-  primary_intent?: string;
-  localized_answer?: string;
-  detected_locale?: string;
-  deep_parameters?: Record<string, any>;
-  pii_detected?: boolean;
-  is_safe?: boolean;
-  safety_flags?: string[];
-  real_time_analysis?: RealTimeProductAnalysis;
-  market_verdict?: string;
-  reasoning_chain?: MarketplaceReasoningChain;
+export interface SearchMeta {
   total_matching?: number;
   returned_count?: number;
   page?: number;
@@ -96,31 +33,6 @@ export interface PublicPaymentSettings {
   otp_gateway: string;
 }
 
-export interface AutoCategorizeResult {
-  detected_title: string;
-  primary_intent: 'sale' | 'rent';
-  category_hierarchy_id: number;
-  category_slug: string;
-  root_category_name: string;
-  subcategory_name: string;
-  leaf_destination_name: string;
-  full_branch_path: string;
-  branch_path_localized: string;
-  legacy_category_id: number;
-  condition: 'new' | 'used';
-  suggested_price_etb: number;
-  price_range_min: number;
-  price_range_max: number;
-  suggested_description: string;
-  detected_locale: string;
-  brand?: string;
-  model?: string;
-  confidence: number;
-  human_error_corrected: boolean;
-  original_term?: string;
-  corrected_term?: string;
-}
-
 export const publicApi = {
   getProductsWithMeta: (params?: Record<string, any>) => {
     // Clean undefined values and map filter keys to backend format
@@ -133,7 +45,7 @@ export const publicApi = {
       });
     }
     const query = Object.keys(cleanParams).length > 0 ? '?' + new URLSearchParams(cleanParams).toString() : '';
-    return fetchAPIWithMeta<any[], SearchAIMeta>(`/products${query}`).then(r => ({
+    return fetchAPIWithMeta<any[], SearchMeta>(`/products${query}`).then(r => ({
       products: r.data ?? [],
       meta: r.meta,
     }));
@@ -144,7 +56,8 @@ export const publicApi = {
   getProduct: (id: number) => fetchAPI<any>(`/products/${id}`),
   getProductAttributes: (id: number) => fetchAPI<any[]>(`/products/${id}/attributes`).then(r => r ?? []),
   getRootCategories: (lang = 'en') => fetchAPI<any[]>(`/categories/roots?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
-  getCategoryTree: (lang = 'en') => fetchAPI<any[]>(`/categories/tree?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  getCategoryTree: (lang = 'en', depth = 4) => fetchAPI<any[]>(`/categories/tree?lang=${encodeURIComponent(lang)}&depth=${depth}`).then(r => r ?? []),
+  searchCategories: (q: string, lang = 'en', limit = 20) => fetchAPI<any[]>(`/categories/search?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}&limit=${limit}`).then(r => r ?? []),
   getCategoryChildren: (id: number, lang = 'en') => fetchAPI<any[]>(`/categories/${id}/children?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
   getCategoryBySlug: (slug: string, lang = 'en') => fetchAPI<any>(`/categories/slug/${encodeURIComponent(slug)}?lang=${encodeURIComponent(lang)}`),
   getCategoryById: (id: number, lang = 'en') => fetchAPI<any>(`/categories/${id}?lang=${encodeURIComponent(lang)}`),
@@ -198,10 +111,5 @@ export const publicApi = {
   },
   searchLocationHierarchy: (query: string, lang = 'en') =>
     fetchAPI<any[]>(`/locations/search-hierarchy?q=${encodeURIComponent(query)}&lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
-  autoCategorize: (data: { title?: string; description?: string; locale?: string }) =>
-    fetchAPI<AutoCategorizeResult>('/products/auto-categorize', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
 };
 

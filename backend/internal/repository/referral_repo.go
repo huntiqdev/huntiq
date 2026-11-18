@@ -752,6 +752,25 @@ func (r *ReferralRepo) AdminMarkWithdrawalPaid(ctx context.Context, withdrawalID
 	return nil
 }
 
+// GetWithdrawalByID retrieves a single withdrawal request by ID.
+func (r *ReferralRepo) GetWithdrawalByID(ctx context.Context, id int) (*WithdrawalRequest, error) {
+	var w WithdrawalRequest
+	query := `
+		SELECT id, user_id, amount, status, payment_method, payer_phone,
+		       reference, admin_note, created_at, reviewed_at, reviewed_by, paid_at
+		FROM referral_withdrawals
+		WHERE id = $1
+	`
+	err := r.db.QueryRow(ctx, query, id).Scan(
+		&w.ID, &w.UserID, &w.Amount, &w.Status, &w.PaymentMethod, &w.PayerPhone,
+		&w.Reference, &w.AdminNote, &w.RequestedAt, &w.ReviewedAt, &w.ReviewedBy, &w.PaidAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &w, nil
+}
+
 // scanWithdrawals scans rows from referral_withdrawals (user-facing, no name/phone columns).
 func scanWithdrawals(rows interface {
 	Next() bool

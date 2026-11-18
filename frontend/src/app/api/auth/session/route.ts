@@ -33,6 +33,13 @@ export async function POST(req: NextRequest) {
         path: '/',
         maxAge: maxAge,
       });
+      res.cookies.set('huntiq_session', token, {
+        httpOnly: true,
+        secure: SECURE,
+        sameSite: 'lax',
+        path: '/',
+        maxAge: maxAge,
+      });
     }
 
     // Set Admin Session cookie if present (WebAuthn / Passkey enterprise session)
@@ -52,17 +59,25 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// DELETE /api/auth/session — clear both cookies on logout
+// DELETE /api/auth/session — clear all session cookies on logout
 export async function DELETE() {
   const res = NextResponse.json({ ok: true });
-  res.cookies.set(JWT_COOKIE, '', { httpOnly: true, maxAge: 0, path: '/' });
-  res.cookies.set(ADMIN_SESSION_COOKIE, '', { httpOnly: true, maxAge: 0, path: '/' });
+  const cookieNames = [JWT_COOKIE, 'huntiq_session', 'huntiq_refresh', 'huntiq_csrf', ADMIN_SESSION_COOKIE];
+  for (const name of cookieNames) {
+    res.cookies.set(name, '', {
+      httpOnly: name !== 'huntiq_csrf',
+      secure: SECURE,
+      sameSite: 'lax',
+      maxAge: 0,
+      path: '/',
+    });
+  }
   return res;
 }
 
 // GET /api/auth/session — read tokens from cookies (server→client handoff on mount)
 export async function GET(req: NextRequest) {
-  const token = req.cookies.get(JWT_COOKIE)?.value ?? null;
+  const token = req.cookies.get(JWT_COOKIE)?.value ?? req.cookies.get('huntiq_session')?.value ?? null;
   const sessionToken = req.cookies.get(ADMIN_SESSION_COOKIE)?.value ?? null;
 
   const res = NextResponse.json({ token, session_token: sessionToken });

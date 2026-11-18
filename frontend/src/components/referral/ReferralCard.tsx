@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback, FormEvent } from 'react';
 import { api } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
-import type { ReferralStats, ReferralBalance, CommissionEntry, WithdrawalRequest } from '@/types';
+import type { ReferralStats, ReferralBalance, CommissionEntry, WithdrawalRequest, WalletAccount } from '@/types';
 import {
   Link2, Copy, CheckCircle2, Users, TrendingUp, UserPlus,
   AlertCircle, ChevronDown, ChevronUp, Gift, Loader2,
@@ -36,6 +36,8 @@ export function ReferralCard({ role = 'seller' }: Props) {
   const { user } = useAuth();
   const [stats, setStats] = useState<ReferralStats | null>(null);
   const [balance, setBalance] = useState<ReferralBalance | null>(null);
+  const [wallet, setWallet] = useState<WalletAccount | null>(null);
+  const [tokenLink, setTokenLink] = useState('');
   const [commissions, setCommissions] = useState<CommissionEntry[]>([]);
   const [commissionsLoaded, setCommissionsLoaded] = useState(false);
   const [withdrawals, setWithdrawals] = useState<WithdrawalRequest[]>([]);
@@ -70,13 +72,21 @@ export function ReferralCard({ role = 'seller' }: Props) {
       return;
     }
     try {
-      const [statsData, balData, settings] = await Promise.all([
+      const [statsData, balData, settings, tokenData, walletData] = await Promise.all([
         role === 'buyer' ? api.getBuyerReferralStats(user.token) : api.getReferralStats(user.token),
         role === 'buyer' ? api.getBuyerReferralBalance(user.token) : api.getReferralBalance(user.token),
         api.getPublicPaymentSettings(),
+        api.getMyReferralTokenLink(user.token).catch(() => null),
+        api.getMyWallet(user.token).catch(() => null),
       ]);
       setStats(statsData);
       setBalance(balData);
+      if (tokenData?.referral_url) {
+        setTokenLink(tokenData.referral_url);
+      }
+      if (walletData) {
+        setWallet(walletData);
+      }
       if (settings?.min_referral_withdrawal) {
         setMinWithdrawal(Number(settings.min_referral_withdrawal) || 500);
       }
@@ -129,8 +139,9 @@ export function ReferralCard({ role = 'seller' }: Props) {
   };
 
   const handleCopy = async () => {
-    if (!stats?.referral_link) return;
-    try { await navigator.clipboard.writeText(stats.referral_link); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* ignore */ }
+    const linkToCopy = tokenLink || stats?.referral_link;
+    if (!linkToCopy) return;
+    try { await navigator.clipboard.writeText(linkToCopy); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* ignore */ }
   };
 
   const handleAccept = async (e: FormEvent<HTMLFormElement>) => {
@@ -154,8 +165,9 @@ export function ReferralCard({ role = 'seller' }: Props) {
     const amount = Math.floor(parseFloat(wAmount)); // integer ETB only
     if (isNaN(amount) || amount < minWithdrawal) { setWError(`Minimum withdrawal is ETB ${minWithdrawal}`); return; }
     if (amount > maxWithdrawal) { setWError(`Maximum withdrawal per request is ETB ${maxWithdrawal.toLocaleString()}`); return; }
-    if (balance && amount > Math.floor(balance.available_balance)) {
-      setWError(`Amount exceeds available balance (ETB ${Math.floor(balance.available_balance).toLocaleString()})`);
+    const available = wallet ? wallet.available_balance : (balance?.available_balance ?? 0);
+    if (amount > Math.floor(available)) {
+      setWError(`Amount exceeds available balance (ETB ${Math.floor(available).toLocaleString()})`);
       return;
     }
     if (wPhone.trim().length < 7) { setWError('Account/phone number is required (min 7 characters)'); return; }
@@ -202,13 +214,13 @@ export function ReferralCard({ role = 'seller' }: Props) {
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-600 to-orange-500 px-5 py-4 flex items-center gap-3">
+      <div className="bg-gradient-to-r from-[#1769E0] to-[#38A5FF] px-5 py-4 flex items-center gap-3">
         <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
           <Gift size={18} className="text-white" />
         </div>
         <div>
           <p className="font-black text-white text-sm">Referral Program</p>
-          <p className="text-white/70 text-xs">Earn {commissionRate}% when your invitees make a paid action</p>
+          <p className="text-white/80 text-xs">Earn {commissionRate}% when your invitees make a paid action</p>
         </div>
       </div>
 
@@ -218,7 +230,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 text-center">
             <div className="flex items-center justify-center gap-1 mb-1">
-              <Users size={12} className="text-orange-500" />
+              <Users size={12} className="text-[#1769E0]" />
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide">People Invited</span>
             </div>
             <p className="text-2xl font-black text-zinc-900 dark:text-white">{stats.invited_count}</p>
@@ -234,57 +246,62 @@ export function ReferralCard({ role = 'seller' }: Props) {
           </div>
         </div>
 
-        {/* Balance card — only shown when user has earnings */}
-        {balance && (balance.total_earned > 0 || balance.available_balance > 0) && (
+        {/* Balance card — only shown when user has earnings or wallet */}
+        {((balance && (balance.total_earned > 0 || balance.available_balance > 0)) || (wallet && (wallet.lifetime_earned > 0 || wallet.available_balance > 0))) && (
           <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-200 dark:border-green-800/40 rounded-xl p-4 space-y-3">
-            <p className="text-[10px] font-black uppercase tracking-widest text-green-700 dark:text-green-400 flex items-center gap-1.5">
-              <Wallet size={10} /> Referral Balance
+            <p className="text-[10px] font-black uppercase tracking-widest text-green-700 dark:text-green-400 flex items-center justify-between">
+              <span className="flex items-center gap-1.5"><Wallet size={10} /> Double-Entry Wallet & Ledger</span>
+              <span className="text-[9px] px-2 py-0.5 rounded-full bg-green-200 dark:bg-green-800/50 text-green-800 dark:text-green-200 font-bold">ETB</span>
             </p>
-            <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="grid grid-cols-4 gap-2 text-center">
               <div>
-                <p className="text-xs font-black text-zinc-900 dark:text-white">ETB {Number(balance.total_earned).toLocaleString()}</p>
-                <p className="text-[10px] text-zinc-500">Total Earned</p>
+                <p className="text-xs font-black text-zinc-900 dark:text-white">ETB {Number(wallet ? wallet.lifetime_earned : balance?.total_earned ?? 0).toLocaleString()}</p>
+                <p className="text-[9px] text-zinc-500">Lifetime</p>
               </div>
               <div>
-                <p className="text-xs font-black text-zinc-900 dark:text-white">ETB {Number(balance.total_withdrawn).toLocaleString()}</p>
-                <p className="text-[10px] text-zinc-500">Withdrawn</p>
-              </div>
-              <div>
-                <p className={`text-xs font-black ${balance.available_balance >= minWithdrawal ? 'text-green-600' : 'text-zinc-500'}`}>
-                  ETB {Number(balance.available_balance).toLocaleString()}
+                <p className={`text-xs font-black ${(wallet ? wallet.available_balance : balance?.available_balance ?? 0) >= minWithdrawal ? 'text-green-600' : 'text-zinc-500'}`}>
+                  ETB {Number(wallet ? wallet.available_balance : balance?.available_balance ?? 0).toLocaleString()}
                 </p>
-                <p className="text-[10px] text-zinc-500">Available</p>
+                <p className="text-[9px] text-zinc-500">Available</p>
+              </div>
+              <div>
+                <p className="text-xs font-black text-amber-600">ETB {Number(wallet ? wallet.reserved_balance : 0).toLocaleString()}</p>
+                <p className="text-[9px] text-zinc-500">Reserved</p>
+              </div>
+              <div>
+                <p className="text-xs font-black text-zinc-900 dark:text-white">ETB {Number(wallet ? wallet.total_withdrawn : balance?.total_withdrawn ?? 0).toLocaleString()}</p>
+                <p className="text-[9px] text-zinc-500">Withdrawn</p>
               </div>
             </div>
-            {balance.pending_amount > 0 && (
+            {((wallet ? wallet.pending_balance : balance?.pending_amount ?? 0) > 0) && (
               <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/40 rounded-xl px-3 py-2 space-y-1">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-yellow-700 dark:text-yellow-400">
                   <Clock size={11} /> Pending Commission
                 </div>
                 <p className="text-xs text-yellow-700 dark:text-yellow-300">
-                  ETB {Number(balance.pending_amount).toLocaleString()}
+                  ETB {Number(wallet ? wallet.pending_balance : balance?.pending_amount ?? 0).toLocaleString()}
                 </p>
                 <p className="text-[10px] text-yellow-600/70 dark:text-yellow-400/70">
-                  New commissions stay pending for 30 days before becoming withdrawable. This protects against payment disputes and chargebacks.
+                  New commissions stay pending for holding period before becoming withdrawable. This protects against payment disputes and chargebacks.
                 </p>
               </div>
             )}
             {/* Withdraw button / form */}
-            {!isSuspended && balance.available_balance >= minWithdrawal && !showWithdrawForm && (
+            {!isSuspended && (wallet ? wallet.available_balance : balance?.available_balance ?? 0) >= minWithdrawal && !showWithdrawForm && (
               <button onClick={() => { setShowWithdrawForm(true); setWError(''); setWSuccess(''); }}
                 className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-green-600 hover:bg-green-700 text-white text-xs font-bold transition-colors">
                 <DollarSign size={12} /> Request Withdrawal
               </button>
             )}
-            {isSuspended && balance.available_balance >= minWithdrawal && (
+            {isSuspended && (wallet ? wallet.available_balance : balance?.available_balance ?? 0) >= minWithdrawal && (
               <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-3 py-2">
                 <AlertCircle size={12} className="text-red-500 shrink-0" />
                 <p className="text-[10px] text-red-600 dark:text-red-400">Withdrawals blocked — referral code is suspended</p>
               </div>
             )}
-            {!isSuspended && balance.available_balance < minWithdrawal && (
+            {!isSuspended && (wallet ? wallet.available_balance : balance?.available_balance ?? 0) < minWithdrawal && (
               <p className="text-[10px] text-zinc-400 text-center">
-                Minimum withdrawal is ETB {minWithdrawal} — earn ETB {Math.max(0, Math.ceil(minWithdrawal - balance.available_balance)).toLocaleString()} more to withdraw
+                Minimum withdrawal is ETB {minWithdrawal} — earn ETB {Math.max(0, Math.ceil(minWithdrawal - (wallet ? wallet.available_balance : balance?.available_balance ?? 0))).toLocaleString()} more to withdraw
               </p>
             )}
             {wSuccess && (
@@ -299,9 +316,9 @@ export function ReferralCard({ role = 'seller' }: Props) {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="text-[10px] font-bold text-zinc-500 block mb-1">
-                      Amount (ETB) * <span className="font-normal text-zinc-400">min {minWithdrawal}, max {balance ? Math.min(maxWithdrawal, Math.floor(balance.available_balance)).toLocaleString() : maxWithdrawal.toLocaleString()}</span>
+                      Amount (ETB) * <span className="font-normal text-zinc-400">min {minWithdrawal}, max {Math.min(maxWithdrawal, Math.floor(wallet ? wallet.available_balance : balance?.available_balance ?? 0)).toLocaleString()}</span>
                     </label>
-                    <input type="number" min={minWithdrawal} max={balance ? Math.min(maxWithdrawal, Math.floor(balance.available_balance)) : maxWithdrawal} step="1"
+                    <input type="number" min={minWithdrawal} max={Math.min(maxWithdrawal, Math.floor(wallet ? wallet.available_balance : balance?.available_balance ?? 0))} step="1"
                       value={wAmount} onChange={e => setWAmount(e.target.value)}
                       placeholder={minWithdrawal.toString()}
                       className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm bg-white dark:bg-zinc-800 outline-none focus:ring-2 focus:ring-green-500/30" />
@@ -360,11 +377,11 @@ export function ReferralCard({ role = 'seller' }: Props) {
             <>
               <div className="flex gap-2">
                 <div className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-xs text-zinc-600 dark:text-zinc-300 truncate font-mono select-all">
-                  {stats.referral_link}
+                  {tokenLink || stats.referral_link}
                 </div>
                 <button
                   onClick={handleCopy}
-                  className="flex items-center gap-1.5 px-3 py-2.5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold transition-colors shrink-0"
+                  className="flex items-center gap-1.5 px-3 py-2.5 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-xs font-bold transition-colors shrink-0"
                 >
                   {copied ? <CheckCircle2 size={13} /> : <Copy size={13} />}
                   {copied ? 'Copied!' : 'Copy'}
@@ -372,7 +389,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
               </div>
               <p className="text-[10px] text-zinc-400 mt-1">
                 Code: <span className="font-mono font-bold text-zinc-600 dark:text-zinc-300">{stats.referral_code}</span>
-                <span className="ml-2 text-zinc-300 dark:text-zinc-600">· Share this link to invite people</span>
+                <span className="ml-2 text-zinc-300 dark:text-zinc-600">· Exact-token attribution link (Reward A: 1.00 ETB verified reg + Reward B: 5% tx)</span>
               </p>
             </>
           )}
@@ -403,7 +420,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
             ) : !showAcceptForm ? (
               <button
                 onClick={() => { setShowAcceptForm(true); setAcceptError(''); }}
-                className="flex items-center gap-2 w-full border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-xs text-zinc-500 dark:text-zinc-400 hover:border-orange-400 hover:text-orange-500 transition-colors"
+                className="flex items-center gap-2 w-full border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-xs text-zinc-500 dark:text-zinc-400 hover:border-[#1769E0] hover:text-[#1769E0] transition-colors"
               >
                 <UserPlus size={13} />
                 Accept an Invitation — enter someone&apos;s referral code
@@ -420,12 +437,12 @@ export function ReferralCard({ role = 'seller' }: Props) {
                     onChange={e => { setInviteCode(e.target.value.toUpperCase()); setAcceptError(''); }}
                     placeholder="REFxxxxxxxx"
                     maxLength={11}
-                    className="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm font-mono outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/60 bg-zinc-50 dark:bg-zinc-800 transition-all"
+                    className="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm font-mono outline-none focus:ring-2 focus:ring-[#1769E0]/30 focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all"
                   />
                   <button
                     type="submit"
                     disabled={acceptLoading || inviteCode.length < 11}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold transition-colors disabled:opacity-50"
+                    className="flex items-center gap-1.5 px-3 py-2 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-xs font-bold transition-colors disabled:opacity-50"
                   >
                     {acceptLoading ? <Loader2 size={12} className="animate-spin" /> : 'Accept'}
                   </button>
@@ -451,7 +468,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
         )}
 
         {/* ── Withdrawal history ───────────────────────────────────────────── */}
-        {balance && balance.total_withdrawn > 0 && (
+        {((balance && balance.total_withdrawn > 0) || (wallet && wallet.total_withdrawn > 0)) && (
           <div className="border-t border-zinc-100 dark:border-zinc-800 pt-3">
             <button
               onClick={() => { const next = !showWithdrawals; setShowWithdrawals(next); if (next) loadWithdrawals(); }}
@@ -572,7 +589,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
               'Paid actions: product sale, tier upgrade, seller registration',
             ].map((step, i) => (
               <div key={i} className="flex items-start gap-2">
-                <span className="text-[10px] font-black text-orange-500 shrink-0 mt-0.5">{i + 1}.</span>
+                <span className="text-[10px] font-black text-[#1769E0] shrink-0 mt-0.5">{i + 1}.</span>
                 <p className="text-[10px] text-zinc-500 dark:text-zinc-400">{step}</p>
               </div>
             ))}

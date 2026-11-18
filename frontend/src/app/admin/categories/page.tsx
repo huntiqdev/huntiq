@@ -54,8 +54,6 @@ export default function CategoriesAdminPage() {
   const [error, setError] = useState('');
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
 
-  useEffect(() => { fetchTree(); }, []);
-
   const fetchTree = async () => {
     setLoading(true);
     try {
@@ -67,6 +65,8 @@ export default function CategoriesAdminPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => { fetchTree(); }, []);
 
   const openCreate = (parentId?: number) => {
     setEditItem(null);
@@ -264,7 +264,7 @@ export default function CategoriesAdminPage() {
           {canManage && (
             <button
               onClick={() => openCreate()}
-              className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-bold transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-sm font-bold transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20 min-h-[44px]"
             >
               <Plus className="w-4 h-4" /> Add Root Category
             </button>
@@ -275,7 +275,7 @@ export default function CategoriesAdminPage() {
       <div className="bg-zinc-900 rounded-2xl border border-zinc-800 p-4">
         {loading ? (
           <div className="p-8 text-center text-zinc-500">
-            <div className="animate-spin w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full mx-auto mb-3" />
+            <div className="animate-spin w-8 h-8 border-2 border-[#1769E0] border-t-transparent rounded-full mx-auto mb-3" />
             Loading categories from canonical database...
           </div>
         ) : tree.length === 0 ? (
@@ -283,7 +283,7 @@ export default function CategoriesAdminPage() {
             <FolderTree className="w-12 h-12 mx-auto mb-3 opacity-20" />
             <p>No categories found in taxonomy.</p>
             {canManage && (
-              <button onClick={() => openCreate()} className="mt-4 px-4 py-2 bg-orange-600 text-white rounded-lg text-sm font-bold">
+              <button onClick={() => openCreate()} className="mt-4 px-4 py-2 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-lg text-sm font-bold min-h-[44px]">
                 Create First Category
               </button>
             )}
@@ -312,7 +312,7 @@ export default function CategoriesAdminPage() {
                       setForm(f => ({ ...f, name_en: val, slug: editItem ? f.slug : autoSlug(val) }));
                     }}
                     onBlur={handleSlugBlur}
-                    className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50"
+                    className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1769E0]"
                     placeholder="Electronics"
                   />
                 </div>
@@ -320,19 +320,19 @@ export default function CategoriesAdminPage() {
                   <div>
                     <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Amharic (አማርኛ)</label>
                     <input value={form.name_am} onChange={e => setForm(f => ({ ...f, name_am: e.target.value }))}
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#1769E0]"
                       placeholder="ኤሌክትሮኒክስ" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Oromo (Oromoo)</label>
                     <input value={form.name_om} onChange={e => setForm(f => ({ ...f, name_om: e.target.value }))}
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#1769E0]"
                       placeholder="Elektirooniksii" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Tigrinya (ትግርኛ)</label>
                     <input value={form.name_ti} onChange={e => setForm(f => ({ ...f, name_ti: e.target.value }))}
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#1769E0]"
                       placeholder="ኤለክትሮኒክስ" />
                   </div>
                 </div>
@@ -351,7 +351,7 @@ export default function CategoriesAdminPage() {
                       setSlugAvailable(null);
                     }}
                     onBlur={handleSlugBlur}
-                    className={`w-full bg-zinc-800 border rounded-xl px-4 py-2.5 text-sm text-white font-mono placeholder-zinc-500 focus:outline-none ${slugAvailable === false ? 'border-red-500' : 'border-zinc-700 focus:border-orange-500/50'}`}
+                    className={`w-full bg-zinc-800 border rounded-xl px-4 py-2.5 text-sm text-white font-mono placeholder-zinc-500 focus:outline-none ${slugAvailable === false ? 'border-red-500' : 'border-zinc-700 focus:border-[#1769E0]'}`}
                     placeholder="electronics"
                   />
                 </div>
@@ -360,13 +360,13 @@ export default function CategoriesAdminPage() {
                   <div>
                     <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Icon (Emoji / Glyph)</label>
                     <input value={form.icon} onChange={e => setForm(f => ({ ...f, icon: e.target.value }))}
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1769E0]"
                       placeholder="📱 or 🚗" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Image URL</label>
                     <input value={form.image_url} onChange={e => setForm(f => ({ ...f, image_url: e.target.value }))}
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-orange-500/50"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#1769E0]"
                       placeholder="https://... or /uploads/..." />
                   </div>
                 </div>
@@ -375,17 +375,17 @@ export default function CategoriesAdminPage() {
                   <div>
                     <label className="block text-xs font-bold text-zinc-400 uppercase mb-1.5">Display Order</label>
                     <input type="number" value={form.display_order} onChange={e => setForm(f => ({ ...f, display_order: parseInt(e.target.value) || 0 }))}
-                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-orange-500/50" />
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#1769E0]" />
                   </div>
                   <div className="flex flex-col gap-3 pt-5">
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={form.is_leaf} onChange={e => setForm(f => ({ ...f, is_leaf: e.target.checked }))}
-                        className="rounded border-zinc-600 bg-zinc-800 text-orange-600 focus:ring-orange-500" />
+                        className="rounded border-zinc-600 bg-zinc-800 text-[#1769E0] focus:ring-[#1769E0]" />
                       <span className="text-xs text-zinc-300">Is Leaf (products attach here)</span>
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" checked={form.is_active} onChange={e => setForm(f => ({ ...f, is_active: e.target.checked }))}
-                        className="rounded border-zinc-600 bg-zinc-800 text-orange-600 focus:ring-orange-500" />
+                        className="rounded border-zinc-600 bg-zinc-800 text-[#1769E0] focus:ring-[#1769E0]" />
                       <span className="text-xs text-zinc-300">Active Status</span>
                     </label>
                   </div>
@@ -399,7 +399,7 @@ export default function CategoriesAdminPage() {
                   Cancel
                 </button>
                 <button onClick={handleSubmit} disabled={submitting}
-                  className="flex-1 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-sm font-bold disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
+                  className="flex-1 py-3 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-sm font-bold disabled:opacity-50 transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20 min-h-[44px] flex items-center justify-center gap-2">
                   <Save className="w-4 h-4" /> {submitting ? 'Saving...' : editItem ? 'Update Category' : 'Create Category'}
                 </button>
               </div>

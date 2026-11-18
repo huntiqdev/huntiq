@@ -92,7 +92,7 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
     <div className="space-y-3">
       <p className="text-xs font-black uppercase tracking-wider text-zinc-500 dark:text-white/40">
         {t.ui.upload_image ?? 'Images'}{' '}
-        <span className="text-orange-600 normal-case font-normal">
+        <span className="text-[#1769E0] normal-case font-normal">
           ({urls.length}/{maxImages} · {MIN_IMAGES} min)
         </span>
       </p>
@@ -136,10 +136,10 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
       {canAdd && (
         <div onDrop={handleDrop} onDragOver={e => e.preventDefault()}
           onClick={() => inputRef.current?.click()}
-          className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-6 cursor-pointer hover:border-orange-500/60 hover:bg-orange-500/5 transition-all">
+          className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-6 cursor-pointer hover:border-[#1769E0]/60 hover:bg-[#1769E0]/5 transition-all">
           {uploading ? (
             <>
-              <Loader2 size={20} className="text-orange-500 animate-spin" />
+              <Loader2 size={20} className="text-[#1769E0] animate-spin" />
               <p className="text-xs text-zinc-500 dark:text-white/40">Uploading…</p>
             </>
           ) : (

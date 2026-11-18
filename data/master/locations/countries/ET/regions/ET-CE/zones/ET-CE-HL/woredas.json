@@ -1,0 +1,36 @@
+[
+  {
+    "id": 395,
+    "parent_id": 105,
+    "parent_code": "ET-CE-HL",
+    "type": "woreda",
+    "slug": "central-ethiopia-halaba-kulito-town",
+    "code": "CE-HL-KUL",
+    "level": 3,
+    "path": "/1/14/105/395/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Halaba Kulito Town Administration",
+      "am": "ሀላባ ቁሊቶ ከተማ አስተዳደር",
+      "om": "Magaalaa Quliitoo",
+      "ti": "ሃላባ ቁሊቶ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 7.31,
+      "longitude": 38.09,
+      "bbox": {
+        "min_lat": 7.3,
+        "max_lat": 7.32,
+        "min_lng": 38.08,
+        "max_lng": 38.1
+      }
+    }
+  }
+]

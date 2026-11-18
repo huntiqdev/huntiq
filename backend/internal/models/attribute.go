@@ -30,7 +30,7 @@ type CategoryAttribute struct {
 	IsInherited  bool      `json:"is_inherited"`
 	DisplayOrder int       `json:"display_order"`
 	CreatedAt    time.Time `json:"created_at"`
-	
+
 	// Populated on demand
 	Attribute *AttributeDefinition `json:"attribute,omitempty"`
 }
@@ -47,7 +47,7 @@ type ProductAttribute struct {
 	ValueJSON   map[string]interface{} `json:"value_json,omitempty"`
 	CreatedAt   time.Time              `json:"created_at"`
 	UpdatedAt   time.Time              `json:"updated_at"`
-	
+
 	// Populated on demand
 	Attribute *AttributeDefinition `json:"attribute,omitempty"`
 }

@@ -1,0 +1,32 @@
+{
+  "id": 102,
+  "parent_id": 14,
+  "parent_code": "ET-CE",
+  "type": "zone",
+  "slug": "central-ethiopia-gurage",
+  "code": "ET-CE-GU",
+  "level": 2,
+  "path": "/1/14/102/",
+  "display_order": 69,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Gurage Zone",
+    "ጉራጌ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Gurage Zone",
+    "am": "ጉራጌ ዞን",
+    "om": "Guraagee",
+    "ti": "ዞን ጉራጌ"
+  },
+  "coordinates": {
+    "latitude": 8.2,
+    "longitude": 38.0,
+    "bbox": null
+  }
+}

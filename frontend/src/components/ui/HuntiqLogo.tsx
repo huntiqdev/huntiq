@@ -33,7 +33,7 @@ export function HuntiqLogo({
   const content = (
     <div className={`flex items-center gap-2.5 shrink-0 group ${className}`}>
       <div
-        className={`relative ${config.px} rounded-xl overflow-hidden flex items-center justify-center bg-zinc-950 border border-zinc-800 shadow-sm group-hover:scale-105 transition-transform duration-200 shrink-0`}
+        className={`relative ${config.px} rounded-xl overflow-hidden flex items-center justify-center bg-[#091426] border border-slate-700/60 shadow-sm group-hover:scale-105 transition-transform duration-200 shrink-0`}
       >
         <Image
           src="/huntiq.png"
@@ -48,13 +48,13 @@ export function HuntiqLogo({
       {showText && (
         <div className="flex flex-col select-none">
           <span
-            className={`${config.text} font-black tracking-tight leading-none text-zinc-900 dark:text-white group-hover:text-orange-600 transition-colors`}
+            className={`${config.text} font-black tracking-tight leading-none text-slate-900 dark:text-white group-hover:text-[#1769E0] transition-colors`}
           >
             HUNTIQ
           </span>
           {subtitle && (
             <span
-              className={`${config.sub} font-bold text-orange-600 uppercase tracking-widest leading-tight mt-0.5`}
+              className={`${config.sub} font-bold text-[#1769E0] dark:text-[#38A5FF] uppercase tracking-widest leading-tight mt-0.5`}
             >
               {subtitle}
             </span>
@@ -66,7 +66,7 @@ export function HuntiqLogo({
 
   if (href) {
     return (
-      <Link href={href} className="inline-flex shrink-0">
+      <Link href={href} className="inline-flex items-center outline-none focus-visible:ring-2 focus-visible:ring-[#1769E0] rounded-xl">
         {content}
       </Link>
     );

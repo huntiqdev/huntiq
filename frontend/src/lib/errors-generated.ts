@@ -1,5 +1,5 @@
 // AUTO-GENERATED - DO NOT EDIT
-// Generated at 2026-08-01T08:55:49-04:00
+// Generated at 2026-11-09T06:36:37-05:00
 // Source: backend/pkg/errors/errors.go
 
 /**

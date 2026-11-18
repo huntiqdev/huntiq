@@ -15,7 +15,7 @@ export function Spinner({ size, className = '' }: SpinnerProps) {
 
   return (
     <div className="flex justify-center items-center py-12">
-      <div className={`w-8 h-8 border-4 border-orange-600 border-t-transparent rounded-full animate-spin ${className}`} />
+      <div className={`w-8 h-8 border-4 border-[#1769E0] border-t-transparent rounded-full animate-spin ${className}`} />
     </div>
   );
 }

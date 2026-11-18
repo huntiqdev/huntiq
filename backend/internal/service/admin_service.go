@@ -306,7 +306,8 @@ func (s *AdminService) RejectListingFeePayment(ctx context.Context, productID, a
 
 // ── Profit (Super Admin Only) ─────────────────────────────────────────────────
 
-func (s *AdminService) ProfitSummary(ctx context.Context) (map[string]interface{}, error) {	return s.repo.ProfitSummary(ctx)
+func (s *AdminService) ProfitSummary(ctx context.Context) (map[string]interface{}, error) {
+	return s.repo.ProfitSummary(ctx)
 }
 
 func (s *AdminService) ProfitByTier(ctx context.Context) ([]map[string]interface{}, error) {
@@ -362,19 +363,11 @@ func (s *AdminService) CreateAdmin(ctx context.Context, name, phone, email, pass
 	}
 	// Platform Owner accounts cannot be provisioned via web API; they require direct bootstrap
 	if adminRole == models.RolePlatformOwner || adminRole == models.LegacyRoleSuper {
-		return 0, errors.New("Platform Owner accounts cannot be provisioned via the web API")
+		return 0, errors.New("platform owner accounts cannot be provisioned via the web API")
 	}
 
-	validRoles := map[string]bool{
-		models.RolePlatformAdmin:   true,
-		models.RoleSecurityAdmin:   true,
-		models.RoleOperationsAdmin: true,
-		models.RoleModerator:       true,
-		models.RoleSupportAgent:    true,
-		models.LegacyRoleNormal:    true,
-	}
-	if !validRoles[adminRole] {
-		return 0, errors.New("invalid admin_role: must be platform_admin, security_admin, operations_admin, moderator, or support_agent")
+	if _, ok := models.RoleDomainPermissions[adminRole]; !ok && adminRole != models.LegacyRoleNormal {
+		return 0, errors.New("invalid admin_role: must be a recognized enterprise administrative role")
 	}
 
 	hash, err := security.HashPassword(password)
@@ -399,18 +392,8 @@ func (s *AdminService) CreateAdmin(ctx context.Context, name, phone, email, pass
 }
 
 func (s *AdminService) UpdateAdminRole(ctx context.Context, adminID int, adminRole string) error {
-	validRoles := map[string]bool{
-		models.RolePlatformOwner:   true,
-		models.RolePlatformAdmin:   true,
-		models.RoleSecurityAdmin:   true,
-		models.RoleOperationsAdmin: true,
-		models.RoleModerator:       true,
-		models.RoleSupportAgent:    true,
-		models.LegacyRoleSuper:     true,
-		models.LegacyRoleNormal:    true,
-	}
-	if !validRoles[adminRole] {
-		return errors.New("admin_role must be a valid enterprise role: platform_owner, platform_admin, security_admin, operations_admin, moderator, or support_agent")
+	if _, ok := models.RoleDomainPermissions[adminRole]; !ok && adminRole != models.LegacyRoleSuper && adminRole != models.LegacyRoleNormal {
+		return errors.New("admin_role must be a valid enterprise role")
 	}
 	// Prevent demoting the last platform owner / super admin — always keep at least one.
 	if adminRole != models.RolePlatformOwner && adminRole != models.LegacyRoleSuper {

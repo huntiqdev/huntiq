@@ -19,34 +19,38 @@ type Category struct {
 
 // CategoryHierarchy represents the new dynamic N-level category system
 type CategoryHierarchy struct {
-	ID              int                  `json:"id"`
-	ParentID        *int                 `json:"parent_id,omitempty"`
-	NameEn          string               `json:"name_en"`
-	NameAm          string               `json:"name_am,omitempty"`
-	NameOm          string               `json:"name_om,omitempty"` // Afaan Oromo
-	NameTi          string               `json:"name_ti,omitempty"` // Tigrinya
-	Slug            string               `json:"slug"`
-	Description     string               `json:"description,omitempty"`
-	Level           int                  `json:"level"`
-	Path            string               `json:"path"` // Materialized path: /1/5/12/
-	DisplayOrder    int                  `json:"display_order"`
-	Icon            string               `json:"icon,omitempty"`
-	ImageURL        string               `json:"image_url,omitempty"`
-	IsActive        bool                 `json:"is_active"`
-	IsLeaf          bool                 `json:"is_leaf"` // Can products be attached?
-	MetaTitle       string               `json:"meta_title,omitempty"`
-	MetaDescription string               `json:"meta_description,omitempty"`
-	CreatedAt       time.Time            `json:"created_at"`
-	UpdatedAt       time.Time            `json:"updated_at"`
-	
+	ID              int       `json:"id"`
+	ParentID        *int      `json:"parent_id,omitempty"`
+	NameEn          string    `json:"name_en"`
+	NameAm          string    `json:"name_am,omitempty"`
+	NameOm          string    `json:"name_om,omitempty"` // Afaan Oromo
+	NameTi          string    `json:"name_ti,omitempty"` // Tigrinya
+	Slug            string    `json:"slug"`
+	Description     string    `json:"description,omitempty"`
+	Level           int       `json:"level"`
+	Path            string    `json:"path"` // Materialized path: /1/5/12/
+	DisplayOrder    int       `json:"display_order"`
+	Icon            string    `json:"icon,omitempty"`
+	ImageURL        string    `json:"image_url,omitempty"`
+	IsActive        bool      `json:"is_active"`
+	IsLeaf          bool      `json:"is_leaf"` // Can products be attached?
+	MetaTitle       string    `json:"meta_title,omitempty"`
+	MetaDescription string            `json:"meta_description,omitempty"`
+	I18N            map[string]string `json:"i18n,omitempty"` // Dynamic open i18n map (e.g. {"en": "...", "am": "...", "so": "..."})
+	CreatedAt       time.Time         `json:"created_at"`
+	UpdatedAt       time.Time         `json:"updated_at"`
+
 	// Relationships (populated on demand)
-	Parent          *CategoryHierarchy   `json:"parent,omitempty"`
-	Children        []CategoryHierarchy  `json:"children,omitempty"`
-	Breadcrumbs     []CategoryBreadcrumb `json:"breadcrumbs,omitempty"`
+	Parent      *CategoryHierarchy   `json:"parent,omitempty"`
+	Children    []CategoryHierarchy  `json:"children,omitempty"`
+	Breadcrumbs []CategoryBreadcrumb `json:"breadcrumbs,omitempty"`
 }
 
 // GetName returns the localized name for the requested language with fallback to English and Slug.
 func (c CategoryHierarchy) GetName(lang string) string {
+	if c.I18N != nil && c.I18N[lang] != "" {
+		return c.I18N[lang]
+	}
 	switch lang {
 	case "am":
 		if c.NameAm != "" {
@@ -60,6 +64,9 @@ func (c CategoryHierarchy) GetName(lang string) string {
 		if c.NameTi != "" {
 			return c.NameTi
 		}
+	}
+	if c.I18N != nil && c.I18N["en"] != "" {
+		return c.I18N["en"]
 	}
 	if c.NameEn != "" {
 		return c.NameEn
@@ -133,6 +140,25 @@ type PopularCategory struct {
 	NewListings   int    `json:"new_listings"`
 	OrderCount    int    `json:"order_count"`
 	ActivityScore int    `json:"activity_score"`
+}
+
+// CategorySearchResult represents a rich search result with full hierarchical breadcrumbs
+type CategorySearchResult struct {
+	ID          int                  `json:"id"`
+	ParentID    *int                 `json:"parent_id,omitempty"`
+	Name        string               `json:"name"`
+	NameEn      string               `json:"name_en"`
+	NameAm      string               `json:"name_am,omitempty"`
+	NameOm      string               `json:"name_om,omitempty"`
+	NameTi      string               `json:"name_ti,omitempty"`
+	Slug        string               `json:"slug"`
+	Level       int                  `json:"level"`
+	Path        string               `json:"path"`
+	Hierarchy   string               `json:"hierarchy"`
+	Breadcrumbs []CategoryBreadcrumb `json:"breadcrumbs"`
+	IsLeaf      bool                 `json:"is_leaf"`
+	Icon        string               `json:"icon,omitempty"`
+	Score       float64              `json:"score,omitempty"`
 }
 
 // CategoryFilter for querying categories

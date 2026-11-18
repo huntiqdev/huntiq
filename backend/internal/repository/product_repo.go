@@ -2,13 +2,14 @@ package repository
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/internal/models"
-	"github.com/your-org/used-tools-marketplace/internal/service/aiclient"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
+	"github.com/your-org/used-tools-marketplace/pkg/search"
 )
 
 type ProductRepo struct{ db *pgxpool.Pool }
@@ -51,7 +52,12 @@ const sqlProductSelectCols = `
 	       p.deposit_amount, p.available_from, p.available_until,
 	       COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
 	       p.category_hierarchy_id,
-	       p.location_hierarchy_id
+	       p.location_hierarchy_id,
+	       p.custom_url,
+	       p.social_links,
+	       COALESCE(p.publisher_role, 'owner') AS publisher_role,
+	       p.organization_id,
+	       COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed
 	FROM products p
 	LEFT JOIN categories c ON c.id = p.category_id
 	LEFT JOIN locations  l ON l.id = p.location_id
@@ -75,7 +81,12 @@ const sqlGetProductByID = `
 	        COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
 	        p.current_tenant_id, p.rented_until,
 	        p.category_hierarchy_id,
-	        p.location_hierarchy_id
+	        p.location_hierarchy_id,
+	        p.custom_url,
+	        p.social_links,
+	        COALESCE(p.publisher_role, 'owner') AS publisher_role,
+	        p.organization_id,
+	        COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed
 	 FROM products p
 	 LEFT JOIN categories c ON c.id = p.category_id
 	 LEFT JOIN locations  l ON l.id = p.location_id
@@ -98,13 +109,17 @@ const sqlCreateProduct = `
 		listing_duration_days, startup_fee_percent, weekly_increment_percent, total_fee_percent, total_fee_amount,
 		kebele, specific_area, latitude, longitude,
 		listing_type, rental_price, rental_duration_value, rental_duration_unit, deposit_amount, available_from, available_until,
-		category_hierarchy_id, location_hierarchy_id
+		category_hierarchy_id, location_hierarchy_id,
+		custom_url, social_links,
+		publisher_role, organization_id, brokerage_disclosure_agreed
 	) VALUES (
 		$1, $2, $3, $4, $5, $6, $7, $8, $9, 'pending',
 		$10, $11, $12, $13, $14,
 		$15, $16, $17, $18,
 		$19, $20, $21, $22, $23, $24, $25,
-		$26, $27
+		$26, $27,
+		$28, COALESCE($29, '{}'::jsonb),
+		COALESCE(NULLIF($30, ''), 'owner'), $31, COALESCE($32, false)
 	) RETURNING id`
 
 const sqlCreateProductImage = `
@@ -124,8 +139,10 @@ const sqlUpdateProduct = `
 	     total_fee_percent=COALESCE($23, total_fee_percent),
 	     total_fee_amount=COALESCE($24, total_fee_amount),
 	     fee_paid=$25,
+	     custom_url=COALESCE($26, custom_url),
+	     social_links=COALESCE($27, social_links),
 	     status='pending', admin_notes='', updated_at=NOW()
-	 WHERE id=$26 AND seller_id=$27 AND status IN ('pending','rejected')`
+	 WHERE id=$28 AND seller_id=$29 AND status IN ('pending','rejected')`
 
 const sqlDeleteProductImages = `DELETE FROM product_images WHERE product_id=$1`
 
@@ -159,7 +176,8 @@ const sqlGetProductByIDAndSeller = `
 	        deposit_amount, available_from, available_until,
 	        COALESCE(is_currently_rented,FALSE) AS is_currently_rented,
 	        listing_duration_days, total_fee_percent, total_fee_amount,
-	        COALESCE(fee_paid,FALSE), COALESCE(fee_payment_pending,FALSE)
+	        COALESCE(fee_paid,FALSE), COALESCE(fee_payment_pending,FALSE),
+	        custom_url, social_links
 	 FROM products WHERE id=$1 AND seller_id=$2`
 
 const sqlGetProductImages = `
@@ -168,19 +186,19 @@ const sqlGetProductImages = `
 
 const sqlPopularCategories = `
 	WITH listing_counts AS (
-		SELECT category_id, COUNT(*) AS new_listings
+		SELECT COALESCE(category_id, category_hierarchy_id) AS cat_id, COUNT(*) AS new_listings
 		FROM products
 		WHERE created_at >= NOW() - make_interval(days => $1)
-		  AND category_id IS NOT NULL
-		GROUP BY category_id
+		  AND (category_id IS NOT NULL OR category_hierarchy_id IS NOT NULL)
+		GROUP BY 1
 	),
 	order_counts AS (
-		SELECT p.category_id, COUNT(o.id) AS order_count
+		SELECT COALESCE(p.category_id, p.category_hierarchy_id) AS cat_id, COUNT(o.id) AS order_count
 		FROM order_requests o
 		JOIN products p ON p.id = o.product_id
 		WHERE o.created_at >= NOW() - make_interval(days => $1)
-		  AND p.category_id IS NOT NULL
-		GROUP BY p.category_id
+		  AND (p.category_id IS NOT NULL OR p.category_hierarchy_id IS NOT NULL)
+		GROUP BY 1
 	)
 	SELECT
 		c.id, c.name, c.slug,
@@ -188,8 +206,8 @@ const sqlPopularCategories = `
 		COALESCE(o.order_count, 0)   AS order_count,
 		COALESCE(l.new_listings, 0) + COALESCE(o.order_count, 0) * 2 AS activity_score
 	FROM categories c
-	LEFT JOIN listing_counts l ON l.category_id = c.id
-	LEFT JOIN order_counts   o ON o.category_id = c.id
+	LEFT JOIN listing_counts l ON l.cat_id = c.id
+	LEFT JOIN order_counts   o ON o.cat_id = c.id
 	WHERE COALESCE(c.is_active, true) = true
 	  AND (COALESCE(l.new_listings, 0) + COALESCE(o.order_count, 0)) > 0
 	ORDER BY activity_score DESC
@@ -200,30 +218,39 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 	var wb strings.Builder
 	wb.WriteString("p.status = $1 AND (p.expires_at IS NULL OR p.expires_at > NOW()) AND u.is_active = true")
 
-	// Support both legacy category_id and new category_hierarchy_id
-	if f.CategoryHierarchyID != nil {
-		if f.IncludeDescendants {
-			// Filter by category and all descendants using database function, with fallback to legacy category_id
-			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id IN (SELECT id FROM get_category_descendants($%d)) OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx))
-			args = append(args, *f.CategoryHierarchyID)
-		} else {
-			idx := len(args) + 1
-			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id = $%d OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx))
-			args = append(args, *f.CategoryHierarchyID)
-		}
-	} else if f.CategoryID != nil {
-		// Legacy category_id filter (flat categories), with compatibility for new category_hierarchy_id
-		idx := len(args) + 1
-		wb.WriteString(fmt.Sprintf(" AND (p.category_id = $%d OR p.category_hierarchy_id = $%d)", idx, idx))
-		args = append(args, *f.CategoryID)
+	// Unified category filter with database-driven recursive descendant matching
+	targetCatID := f.CategoryHierarchyID
+	if targetCatID == nil {
+		targetCatID = f.CategoryID
 	}
-	
+	if targetCatID != nil {
+		idx := len(args) + 1
+		if f.IncludeDescendants {
+			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id IN (SELECT id FROM get_category_descendants($%d)) OR p.category_id IN (SELECT id FROM get_category_descendants($%d)) OR (p.category_hierarchy_id IS NULL AND p.category_id = $%d))", idx, idx, idx))
+		} else {
+			wb.WriteString(fmt.Sprintf(" AND (p.category_hierarchy_id = $%d OR p.category_id = $%d)", idx, idx))
+		}
+		args = append(args, *targetCatID)
+	}
+
 	if f.MinPrice != nil {
-		args, _ = addWhere(&wb, args, " AND p.price >= ", *f.MinPrice)
+		idx := len(args) + 1
+		wb.WriteString(fmt.Sprintf(" AND (CASE WHEN p.listing_type = 'rent' THEN COALESCE(p.rental_price, p.price) ELSE p.price END) >= $%d", idx))
+		args = append(args, *f.MinPrice)
 	}
 	if f.MaxPrice != nil {
-		args, _ = addWhere(&wb, args, " AND p.price <= ", *f.MaxPrice)
+		idx := len(args) + 1
+		wb.WriteString(fmt.Sprintf(" AND (CASE WHEN p.listing_type = 'rent' THEN COALESCE(p.rental_price, p.price) ELSE p.price END) <= $%d", idx))
+		args = append(args, *f.MaxPrice)
+	}
+	if f.Lat != nil && f.Lng != nil && f.MaxDistanceKM != nil && *f.MaxDistanceKM > 0 {
+		idxLat := len(args) + 1
+		idxLng := len(args) + 2
+		idxDist := len(args) + 3
+		wb.WriteString(fmt.Sprintf(` AND p.latitude IS NOT NULL AND p.longitude IS NOT NULL AND (
+			6371 * acos(least(1.0, greatest(-1.0, cos(radians($%d)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians($%d)) + sin(radians($%d)) * sin(radians(p.latitude)))))
+		) <= $%d`, idxLat, idxLng, idxLat, idxDist))
+		args = append(args, *f.Lat, *f.Lng, *f.MaxDistanceKM)
 	}
 	if f.LocationHierarchyID != nil {
 		idx := len(args) + 1
@@ -252,16 +279,16 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 		)`, idx, idx))
 		args = append(args, likeWrap(*f.Region))
 	}
-	
+
 	// Enhanced search with brand detection, conversational cleaning, and multilingual synonym expansion
 	if f.Search != nil && *f.Search != "" {
 		searchTerm := *f.Search
-		cleanTerm := aiclient.CleanConversationalSearchTerm(searchTerm)
+		cleanTerm := search.CleanConversationalSearchTerm(searchTerm)
 		if cleanTerm == "" {
 			cleanTerm = strings.TrimSpace(searchTerm)
 		}
 
-		synTsQuery := aiclient.BuildSynonymTsQuery(cleanTerm)
+		synTsQuery := search.BuildSynonymTsQuery(cleanTerm)
 
 		// Check for brand mentions using clean term
 		brandQuery := `SELECT brand_name FROM extract_brands($` + fmt.Sprintf("%d", len(args)+1) + `) LIMIT 1`
@@ -279,11 +306,7 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR search_vector @@ to_tsquery('simple', $%d)
 				OR p.title ILIKE '%%' || $%d || '%%'
-				OR EXISTS (
-					SELECT 1 FROM product_attributes pa
-					WHERE pa.product_id = p.id
-					  AND pa.value_text ILIKE '%%' || $%d || '%%'
-				)
+				OR p.attributes::text ILIKE '%%' || $%d || '%%'
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
 			)`, idxTerm, idxSyn, idxTerm, idxTerm, idxTerm, idxTerm))
@@ -291,17 +314,32 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 			wb.WriteString(fmt.Sprintf(` AND (
 				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR p.title ILIKE '%%' || $%d || '%%'
-				OR EXISTS (
-					SELECT 1 FROM product_attributes pa
-					WHERE pa.product_id = p.id
-					  AND pa.value_text ILIKE '%%' || $%d || '%%'
-				)
+				OR p.attributes::text ILIKE '%%' || $%d || '%%'
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
 			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
 		}
 	}
-	
+
+	// Dynamic JSONB attribute facet filtering
+	if len(f.Attributes) > 0 {
+		for k, v := range f.Attributes {
+			if k != "" && v != "" {
+				cleanKey := strings.Map(func(r rune) rune {
+					if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') || r == '_' || r == '-' {
+						return r
+					}
+					return -1
+				}, k)
+				if cleanKey != "" {
+					idxVal := len(args) + 1
+					args = append(args, v)
+					wb.WriteString(fmt.Sprintf(" AND p.attributes ->> '%s' = $%d", cleanKey, idxVal))
+				}
+			}
+		}
+	}
+
 	if f.Condition != nil && *f.Condition != "" {
 		if *f.Condition == "used" {
 			args, _ = addWhere(&wb, args, " AND p.condition != ", "new")
@@ -320,9 +358,10 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 	}
 	if f.SellerTier != nil && *f.SellerTier != "" {
 		st := strings.ToLower(strings.TrimSpace(*f.SellerTier))
-		if st == "gold,premium" || st == "premium,gold" {
+		switch st {
+		case "gold,premium", "premium,gold":
 			wb.WriteString(" AND u.tier IN ('gold', 'premium')")
-		} else if st == "gold" || st == "premium" || st == "normal" {
+		case "gold", "premium", "normal":
 			args, _ = addWhere(&wb, args, " AND u.tier = ", st)
 		}
 	}
@@ -356,12 +395,19 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 	if f.SortBy != nil {
 		switch *f.SortBy {
 		case "price_asc":
-			orderClause = "ORDER BY p.price ASC, p.created_at DESC"
+			orderClause = "ORDER BY (CASE WHEN p.listing_type = 'rent' THEN COALESCE(p.rental_price, p.price) ELSE p.price END) ASC, p.created_at DESC"
 		case "price_desc":
-			orderClause = "ORDER BY p.price DESC, p.created_at DESC"
+			orderClause = "ORDER BY (CASE WHEN p.listing_type = 'rent' THEN COALESCE(p.rental_price, p.price) ELSE p.price END) DESC, p.created_at DESC"
 		case "newest":
 			orderClause = "ORDER BY p.created_at DESC"
+		case "nearest":
+			if f.Lat != nil && f.Lng != nil {
+				orderClause = fmt.Sprintf("ORDER BY (CASE WHEN p.latitude IS NOT NULL AND p.longitude IS NOT NULL THEN (6371 * acos(least(1.0, greatest(-1.0, cos(radians(%f)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians(%f)) + sin(radians(%f)) * sin(radians(p.latitude)))))) ELSE 999999 END) ASC, p.created_at DESC", *f.Lat, *f.Lng, *f.Lat)
+			}
 		}
+	} else if f.Lat != nil && f.Lng != nil {
+		// Default proximity recommendation: prioritize products nearest to asker's coordinates
+		orderClause = fmt.Sprintf("ORDER BY (CASE WHEN p.latitude IS NOT NULL AND p.longitude IS NOT NULL THEN (6371 * acos(least(1.0, greatest(-1.0, cos(radians(%f)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians(%f)) + sin(radians(%f)) * sin(radians(p.latitude)))))) ELSE 999999 END) ASC, p.created_at DESC", *f.Lat, *f.Lng, *f.Lat)
 	}
 
 	query := sqlProductSelectCols + "\n\tWHERE " + whereClause +
@@ -385,6 +431,7 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 		var sellerTier, requiredBuyerTier, listingType string
 		var rentalDurationUnit *string
 		var availableFrom, availableUntil *string
+		var socialBytes []byte
 
 		if err := rows.Scan(
 			&p.ID, &p.SellerID, &p.LocationID, &p.Title, &p.Price,
@@ -398,8 +445,16 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 			&p.DepositAmount, &availableFrom, &availableUntil, &p.IsCurrentlyRented,
 			&p.CategoryHierarchyID,
 			&p.LocationHierarchyID,
+			&p.CustomURL,
+			&socialBytes,
+			&p.PublisherRole,
+			&p.OrganizationID,
+			&p.BrokerageDisclosureAgreed,
 		); err != nil {
 			return nil, err
+		}
+		if len(socialBytes) > 0 {
+			_ = json.Unmarshal(socialBytes, &p.SocialLinks)
 		}
 		p.SellerTier = sellerTier
 		p.RequiredBuyerTier = requiredBuyerTier
@@ -462,6 +517,7 @@ func (r *ProductRepo) GetByID(ctx context.Context, id int) (*models.Product, err
 	var sellerTier, requiredBuyerTier, listingType string
 	var rentalDurationUnit *string
 	var availableFrom, availableUntil *string
+	var socialBytes []byte
 
 	err := r.db.QueryRow(ctx, sqlGetProductByID, id).Scan(
 		&p.ID, &p.SellerID, &p.LocationID, &p.Title, &p.Price,
@@ -477,9 +533,17 @@ func (r *ProductRepo) GetByID(ctx context.Context, id int) (*models.Product, err
 		&p.CurrentTenantID, &p.RentedUntil,
 		&p.CategoryHierarchyID,
 		&p.LocationHierarchyID,
+		&p.CustomURL,
+		&socialBytes,
+		&p.PublisherRole,
+		&p.OrganizationID,
+		&p.BrokerageDisclosureAgreed,
 	)
 	if err != nil {
 		return nil, err
+	}
+	if len(socialBytes) > 0 {
+		_ = json.Unmarshal(socialBytes, &p.SocialLinks)
 	}
 	p.SellerTier = sellerTier
 	p.RequiredBuyerTier = requiredBuyerTier
@@ -533,7 +597,18 @@ func (r *ProductRepo) Create(ctx context.Context, p *models.Product, imageURLs [
 	if catHierarchyID == nil {
 		catHierarchyID = p.CategoryID
 	}
+	socialJSON := []byte("{}")
+	if len(p.SocialLinks) > 0 {
+		b, err := json.Marshal(p.SocialLinks)
+		if err == nil {
+			socialJSON = b
+		}
+	}
 	var id int
+	pubRole := p.PublisherRole
+	if pubRole == "" {
+		pubRole = "owner"
+	}
 	err = tx.QueryRow(ctx, sqlCreateProduct,
 		p.SellerID, p.LocationID, p.Title, p.Price, p.Description,
 		p.CategoryID, p.Subcategory, p.Item, p.Condition,
@@ -541,6 +616,8 @@ func (r *ProductRepo) Create(ctx context.Context, p *models.Product, imageURLs [
 		nullStr(p.Kebele), nullStr(p.SpecificArea), p.Latitude, p.Longitude,
 		p.ListingType, p.RentalPrice, p.RentalDurationValue, nullStrPtr(p.RentalDurationUnit), p.DepositAmount, nullStrPtr(p.AvailableFrom), nullStrPtr(p.AvailableUntil),
 		catHierarchyID, p.LocationHierarchyID,
+		nullStrPtr(p.CustomURL), socialJSON,
+		pubRole, p.OrganizationID, p.BrokerageDisclosureAgreed,
 	).Scan(&id)
 	if err != nil {
 		return 0, err
@@ -560,6 +637,14 @@ func (r *ProductRepo) Update(ctx context.Context, p *models.Product, imageURLs [
 	}
 	defer tx.Rollback(ctx)
 
+	var socialJSON interface{}
+	if len(p.SocialLinks) > 0 {
+		b, err := json.Marshal(p.SocialLinks)
+		if err == nil {
+			socialJSON = b
+		}
+	}
+
 	tag, err := tx.Exec(ctx, sqlUpdateProduct,
 		p.Title, p.Price, p.Description, p.CategoryID, p.Subcategory, p.Item,
 		p.Condition, p.LocationID, nullStr(p.Kebele), nullStr(p.SpecificArea),
@@ -569,6 +654,7 @@ func (r *ProductRepo) Update(ctx context.Context, p *models.Product, imageURLs [
 		p.CategoryHierarchyID,
 		p.LocationHierarchyID,
 		p.StartupFeePercent, p.WeeklyIncrementPercent, p.TotalFeePercent, p.TotalFeeAmount, p.FeePaid,
+		nullStrPtr(p.CustomURL), socialJSON,
 		p.ID, p.SellerID,
 	)
 	if err != nil {
@@ -651,6 +737,7 @@ func (r *ProductRepo) GetByIDAndSeller(ctx context.Context, id, sellerID int) (*
 	var listingType string
 	var rentalDurationUnit *string
 	var availableFrom, availableUntil *string
+	var socialBytes []byte
 	err := r.db.QueryRow(ctx, sqlGetProductByIDAndSeller, id, sellerID).Scan(
 		&p.ID, &p.SellerID, &p.LocationID, &p.Title, &p.Price,
 		&p.Description, &p.CategoryID, &p.Subcategory, &p.Item, &p.Condition,
@@ -659,9 +746,13 @@ func (r *ProductRepo) GetByIDAndSeller(ctx context.Context, id, sellerID int) (*
 		&p.DepositAmount, &availableFrom, &availableUntil, &p.IsCurrentlyRented,
 		&p.ListingDurationDays, &p.TotalFeePercent, &p.TotalFeeAmount,
 		&p.FeePaid, &p.FeePaymentPending,
+		&p.CustomURL, &socialBytes,
 	)
 	if err != nil {
 		return nil, err
+	}
+	if len(socialBytes) > 0 {
+		_ = json.Unmarshal(socialBytes, &p.SocialLinks)
 	}
 	p.ListingType = listingType
 	p.RentalDurationUnit = rentalDurationUnit

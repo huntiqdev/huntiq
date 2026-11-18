@@ -1,0 +1,36 @@
+[
+  {
+    "id": 320,
+    "parent_id": 51,
+    "parent_code": "ET-OR-EW",
+    "type": "woreda",
+    "slug": "oromia-east-welega-nekemte-town",
+    "code": "OR-EW-NEK",
+    "level": 3,
+    "path": "/1/4/51/320/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Nekemte Town Administration",
+      "am": "ነቀምቴ ከተማ አስተዳደር",
+      "om": "Magaalaa Naqamtee",
+      "ti": "ነቀምቴ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 9.085,
+      "longitude": 36.545,
+      "bbox": {
+        "min_lat": 9.075,
+        "max_lat": 9.095,
+        "min_lng": 36.535,
+        "max_lng": 36.555
+      }
+    }
+  }
+]

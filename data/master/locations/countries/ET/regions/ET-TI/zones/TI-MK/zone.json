@@ -1,0 +1,37 @@
+{
+  "id": 34,
+  "parent_id": 6,
+  "parent_code": "ET-TI",
+  "type": "city",
+  "slug": "tigray-mekelle",
+  "code": "TI-MK",
+  "level": 2,
+  "path": "/1/6/34/",
+  "display_order": 1,
+  "is_active": true,
+  "is_leaf": true,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Makale",
+    "Meqele"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Mekelle",
+    "am": "መቀሌ",
+    "om": "Maqalee",
+    "ti": "መቐለ"
+  },
+  "coordinates": {
+    "latitude": 13.496,
+    "longitude": 39.475,
+    "bbox": {
+      "min_lat": 13.44,
+      "max_lat": 13.56,
+      "min_lng": 39.42,
+      "max_lng": 39.54
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": 65,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-awi",
+  "code": "ET-AM-AW",
+  "level": 2,
+  "path": "/1/5/65/",
+  "display_order": 29,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Awi Administrative Zone",
+    "Agew Awi",
+    "አዊ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Awi Zone",
+    "am": "አዊ ዞን",
+    "om": "Awi",
+    "ti": "ዞን ኣዊ"
+  },
+  "coordinates": {
+    "latitude": 10.98,
+    "longitude": 36.85,
+    "bbox": null
+  }
+}

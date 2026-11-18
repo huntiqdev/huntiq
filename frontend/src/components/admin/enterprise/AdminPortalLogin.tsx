@@ -70,6 +70,18 @@ const THEME_STYLES = {
   },
 };
 
+function getAdminRoleFromJWT(token?: string): string {
+  if (!token) return '';
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return '';
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+    return payload.admin_role || '';
+  } catch {
+    return '';
+  }
+}
+
 export function AdminPortalLogin({
   portal,
   portalTitle,
@@ -87,8 +99,8 @@ export function AdminPortalLogin({
   const [error, setError] = useState('');
   const [biometricAvailable, setBiometricAvailable] = useState<boolean | null>(null);
 
-  // Fallback password + OTP state (only active when enabled)
-  const [authMode, setAuthMode] = useState<'passkey' | 'password'>('passkey');
+  // Authentication mode: defaults to password + MFA for universal accessibility and development ease
+  const [authMode, setAuthMode] = useState<'passkey' | 'password'>('password');
   const [password, setPassword] = useState('');
   const [otpCode, setOtpCode] = useState('');
   const [otpStep, setOtpStep] = useState(false);
@@ -96,11 +108,11 @@ export function AdminPortalLogin({
   const theme = THEME_STYLES[portalTheme];
 
   useEffect(() => {
-    // If already logged in as admin, redirect to dashboard
+    // If already logged in as admin, redirect to authorized console
     if (user?.role === 'admin') {
-      router.replace('/admin/dashboard');
+      router.replace(getTargetRoute(user.token));
     }
-  }, [user, router]);
+  }, [user, router, portal]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -154,11 +166,40 @@ export function AdminPortalLogin({
       router.push(verifyRes.redirect_url || '/admin/dashboard');
     } catch (err: any) {
       console.error('Passkey authentication error:', err);
-      setError(err?.message || 'Authentication failed or access restricted. Please try again.');
+      if (err?.message?.includes('cancelled, timed out') || err?.name === 'NotAllowedError') {
+        setError('No passkey detected or authentication cancelled. Please switch to the "Password & MFA" tab above to sign in.');
+      } else {
+        setError(err?.message || 'Authentication failed or access restricted. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  const getTargetRoute = (token?: string) => {
+    const adminRole = getAdminRoleFromJWT(token);
+    switch (portal) {
+      case 'executive':
+        return '/executive-console';
+      case 'security':
+        return '/security-console';
+      case 'platform':
+        return '/platform-console';
+      case 'staff':
+      default:
+        if (adminRole === 'platform_owner') return '/executive-console';
+        if (adminRole === 'security_admin') return '/security-console';
+        if (adminRole === 'platform_admin') return '/platform-console';
+        return '/admin/dashboard';
+    }
+  };
+
+  const sampleCredentials = {
+    executive: { email: 'owner@habeshamarket.com', pass: 'Owner123!', role: 'CEO / Platform Owner' },
+    security: { email: 'security@habeshamarket.com', pass: 'Security123!', role: 'Security Administrator' },
+    platform: { email: 'platform@habeshamarket.com', pass: 'Platform123!', role: 'Platform Administrator' },
+    staff: { email: 'admin@habeshamarket.com', pass: 'Admin123!', role: 'Super Admin' },
+  }[portal] || { email: 'owner@habeshamarket.com', pass: 'Owner123!', role: 'CEO / Platform Owner' };
 
   const handlePasswordStep1 = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -167,8 +208,8 @@ export function AdminPortalLogin({
     try {
       const res = await api.adminLogin({ email: email.trim().toLowerCase(), password });
       if (res.token && res.is_super) {
-        await login(res.token);
-        router.push('/admin/dashboard');
+        await login(res.token, res.session_token);
+        router.push(getTargetRoute(res.token));
       } else {
         setOtpStep(true);
       }
@@ -185,8 +226,8 @@ export function AdminPortalLogin({
     setLoading(true);
     try {
       const res = await api.adminLoginVerifyOTP({ email: email.trim().toLowerCase(), code: otpCode.trim() });
-      await login(res.token);
-      router.push('/admin/dashboard');
+      await login(res.token, res.session_token);
+      router.push(getTargetRoute(res.token));
     } catch (err: any) {
       setError(err?.message || 'Multi-factor verification code is invalid or expired.');
     } finally {
@@ -235,7 +276,7 @@ export function AdminPortalLogin({
         </div>
 
         {/* Security Notification Banner */}
-        <div className="bg-zinc-950/60 border border-zinc-800/80 rounded-2xl p-3.5 mb-6 text-zinc-300 text-xs flex items-start gap-3">
+        <div className="bg-zinc-950/60 border border-zinc-800/80 rounded-2xl p-3.5 mb-4 text-zinc-300 text-xs flex items-start gap-3">
           <Cpu className={`shrink-0 ${theme.accentText} mt-0.5`} size={16} />
           <div className="space-y-0.5">
             <p className="font-bold text-white text-[11px] uppercase tracking-wider">
@@ -246,6 +287,70 @@ export function AdminPortalLogin({
             </p>
           </div>
         </div>
+
+        {/* Sample Credentials Helper (Dev & Inspection Mode) */}
+        <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3 mb-6 text-zinc-300 text-xs">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span className="font-bold text-[11px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
+              <KeyRound size={13} className={theme.accentText} />
+              Sample Demo Credentials
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                setEmail(sampleCredentials.email);
+                setPassword(sampleCredentials.pass);
+                setAuthMode('password');
+                setOtpStep(false);
+                setError('');
+              }}
+              className="text-[11px] font-bold px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all border border-zinc-700 hover:border-zinc-500 shadow-sm"
+            >
+              ⚡ Fill Sample Data
+            </button>
+          </div>
+          <div className="text-[11px] text-zinc-400 font-mono bg-zinc-900/90 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
+            <span className="truncate max-w-[190px]">{sampleCredentials.email}</span>
+            <span className="text-zinc-600">/</span>
+            <span>{sampleCredentials.pass}</span>
+          </div>
+        </div>
+
+        {/* Auth Mode Tabs */}
+        {allowPasswordMfaFallback && (
+          <div className="grid grid-cols-2 gap-1.5 p-1 bg-zinc-950 border border-zinc-800 rounded-2xl mb-6">
+            <button
+              type="button"
+              onClick={() => {
+                setAuthMode('password');
+                setError('');
+              }}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                authMode === 'password'
+                  ? 'bg-zinc-800 text-white shadow-md border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-200'
+              }`}
+            >
+              <Lock size={13} className={authMode === 'password' ? theme.accentText : ''} />
+              <span>Password & MFA</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setAuthMode('passkey');
+                setError('');
+              }}
+              className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
+                authMode === 'passkey'
+                  ? 'bg-zinc-800 text-white shadow-md border border-zinc-700'
+                  : 'text-zinc-400 hover:text-zinc-200'
+              }`}
+            >
+              <Fingerprint size={14} className={authMode === 'passkey' ? theme.accentText : ''} />
+              <span>Passkey / Biometric</span>
+            </button>
+          </div>
+        )}
 
         {/* Error Alert */}
         {error && (

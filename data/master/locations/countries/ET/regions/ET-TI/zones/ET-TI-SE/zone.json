@@ -1,0 +1,32 @@
+{
+  "id": 75,
+  "parent_id": 6,
+  "parent_code": "ET-TI",
+  "type": "zone",
+  "slug": "tigray-south-east",
+  "code": "ET-TI-SE",
+  "level": 2,
+  "path": "/1/6/75/",
+  "display_order": 39,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Debub Misraq Tigray",
+    "ደቡብ ምስራቅ ትግራይ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "South East Tigray Zone",
+    "am": "ደቡብ ምብራቕ ዞን ትግራይ",
+    "om": "Tigraay Kibba-Bahaa",
+    "ti": "ዞን ደቡብ ምብራቕ ትግራይ"
+  },
+  "coordinates": {
+    "latitude": 13.3,
+    "longitude": 39.6,
+    "bbox": null
+  }
+}

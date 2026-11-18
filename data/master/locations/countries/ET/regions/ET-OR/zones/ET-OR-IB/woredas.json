@@ -1,0 +1,36 @@
+[
+  {
+    "id": 327,
+    "parent_id": 55,
+    "parent_code": "ET-OR-IB",
+    "type": "woreda",
+    "slug": "oromia-ilu-aba-bor-metu-town",
+    "code": "OR-IB-MET",
+    "level": 3,
+    "path": "/1/4/55/327/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Metu Town Administration",
+      "am": "መቱ ከተማ አስተዳደር",
+      "om": "Magaalaa Mattuu",
+      "ti": "መቱ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 8.3,
+      "longitude": 35.58,
+      "bbox": {
+        "min_lat": 8.28,
+        "max_lat": 8.32,
+        "min_lng": 35.56,
+        "max_lng": 35.6
+      }
+    }
+  }
+]

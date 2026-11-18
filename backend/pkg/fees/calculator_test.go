@@ -8,10 +8,10 @@ import (
 
 func TestCalculateListingFee(t *testing.T) {
 	cfg := fees.FeeConfig{
-		BrokerFeeRate:    5.0,  // 5% broker fee
-		StartupFee:       2.0,  // 2% startup fee
-		WeeklyIncrement:  1.0,  // 1% per billable week
-		ListingFreeWeeks: 2,    // 2 weeks free
+		BrokerFeeRate:    5.0, // 5% broker fee
+		StartupFee:       2.0, // 2% startup fee
+		WeeklyIncrement:  1.0, // 1% per billable week
+		ListingFreeWeeks: 2,   // 2 weeks free
 	}
 
 	tests := []struct {

@@ -1,0 +1,32 @@
+{
+  "id": 101,
+  "parent_id": 12,
+  "parent_code": "ET-HA",
+  "type": "zone",
+  "slug": "harari-districts",
+  "code": "ET-HA-DI",
+  "level": 2,
+  "path": "/1/12/101/",
+  "display_order": 68,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Harar Districts",
+    "ሐረሪ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Harari Urban & Rural Woredas",
+    "am": "ሐረሪ ከተማና ገጠር ወረዳዎች",
+    "om": "Hararii Magaalaa fi Baadiyyaa",
+    "ti": "ወረዳታት ሓረሪ"
+  },
+  "coordinates": {
+    "latitude": 9.31,
+    "longitude": 42.13,
+    "bbox": null
+  }
+}

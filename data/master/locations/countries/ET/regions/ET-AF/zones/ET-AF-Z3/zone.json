@@ -1,0 +1,33 @@
+{
+  "id": 92,
+  "parent_id": 9,
+  "parent_code": "ET-AF",
+  "type": "zone",
+  "slug": "afar-gabi-rasu",
+  "code": "ET-AF-Z3",
+  "level": 2,
+  "path": "/1/9/92/",
+  "display_order": 56,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Zone 3 Afar",
+    "Awash Zone",
+    "ጋቢ ረሱ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Gabi Rasu (Zone 3)",
+    "am": "ጋቢ ረሱ (ዞን 3)",
+    "om": "Gabi Rasu",
+    "ti": "ጋቢ ረሱ (ዞን 3)"
+  },
+  "coordinates": {
+    "latitude": 9.8,
+    "longitude": 40.3,
+    "bbox": null
+  }
+}

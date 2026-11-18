@@ -1,0 +1,67 @@
+[
+  {
+    "id": 244,
+    "parent_id": 61,
+    "parent_code": "ET-AM-NG",
+    "type": "woreda",
+    "slug": "amhara-north-gondar-debark",
+    "code": "AM-NG-DEB",
+    "level": 3,
+    "path": "/1/5/61/244/",
+    "display_order": 116,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Debark",
+      "Simien Mountains National Park",
+      "ደባርቅ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Debark Woreda & City (ስሜን ተራሮች)",
+      "am": "ደባርቅ ወረዳና ከተማ (ስሜን ተራሮች)",
+      "om": "Magaalaa fi Aanaa Dabaariq",
+      "ti": "ደባርቅ"
+    },
+    "coordinates": {
+      "latitude": 13.15,
+      "longitude": 37.9,
+      "bbox": null
+    }
+  },
+  {
+    "id": 245,
+    "parent_id": 61,
+    "parent_code": "ET-AM-NG",
+    "type": "woreda",
+    "slug": "amhara-north-gondar-dabat",
+    "code": "AM-NG-DAB",
+    "level": 3,
+    "path": "/1/5/61/245/",
+    "display_order": 117,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Dabat",
+      "ዳባት"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dabat Woreda",
+      "am": "ዳባት ወረዳ",
+      "om": "Aanaa Daabaat",
+      "ti": "ዳባት"
+    },
+    "coordinates": {
+      "latitude": 12.98,
+      "longitude": 37.77,
+      "bbox": null
+    }
+  }
+]

@@ -102,7 +102,7 @@ function PayContent() {
           <p className="text-xs text-zinc-400 mt-1">{t.ui.payment_submitted_note}</p>
         </div>
         <button onClick={() => router.push('/seller/products')}
-          className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-2xl font-bold transition-colors">
+          className="bg-[#1769E0] hover:bg-[#1055BD] text-white px-8 py-3 rounded-2xl font-bold min-h-[44px] transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20">
           {t.ui.view_my_products}
         </button>
       </div>
@@ -117,9 +117,9 @@ function PayContent() {
       </div>
 
       {/* Fee summary */}
-      <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-2xl p-4">
-        <p className="text-xs text-orange-600 font-black uppercase tracking-widest mb-1">{t.ui.amount_due}</p>
-        <p className="text-3xl font-black text-orange-600">ETB {feeAmount.toLocaleString()}</p>
+      <div className="bg-[#1769E0]/5 dark:bg-[#1769E0]/20 border border-[#1769E0]/20 rounded-2xl p-4">
+        <p className="text-xs text-[#1769E0] dark:text-[#38A5FF] font-black uppercase tracking-widest mb-1">{t.ui.amount_due}</p>
+        <p className="text-3xl font-black text-[#1769E0] dark:text-[#38A5FF]">ETB {feeAmount.toLocaleString()}</p>
         <p className="text-xs text-zinc-500 mt-1">{t.ui.amount_due_desc}</p>
       </div>
 
@@ -130,14 +130,14 @@ function PayContent() {
           {PAYMENT_METHODS.map(m => (
             <button key={m.value}
               onClick={() => { setMethodId(m.value); setStep('confirm'); }}
-              className="w-full flex items-center gap-4 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 hover:border-orange-400 rounded-2xl p-4 transition-all text-left tap-bounce active:scale-[0.98]">
+              className="w-full flex items-center gap-4 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 hover:border-[#1769E0] rounded-2xl p-4 transition-all text-left tap-bounce active:scale-[0.98]">
               <span className="text-3xl">{m.emoji}</span>
               <div className="flex-1 min-w-0">
                 <p className="font-black text-zinc-900 dark:text-white">{m.label}</p>
               </div>
               <a href={m.appLink} target="_blank" rel="noopener noreferrer"
                 onClick={e => e.stopPropagation()}
-                className="text-xs text-zinc-400 hover:text-orange-600 flex items-center gap-1 shrink-0">
+                className="text-xs text-zinc-400 hover:text-[#1769E0] flex items-center gap-1 shrink-0">
                 <ExternalLink size={12} /> {t.ui.download_app}
               </a>
             </button>
@@ -160,7 +160,7 @@ function PayContent() {
                 {method.emoji} {method.label} {t.ui.instructions_label}
               </p>
               <a href={method.appLink} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1 text-xs font-bold text-orange-600 hover:text-orange-700">
+                className="flex items-center gap-1 text-xs font-bold text-[#1769E0] hover:text-[#1055BD]">
                 <ExternalLink size={11} /> {method.appName}
               </a>
             </div>
@@ -170,11 +170,11 @@ function PayContent() {
               <div className="bg-white dark:bg-zinc-900 rounded-xl p-3 space-y-1.5">
                 <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400">{t.ui.ussd_dial_label}</p>
                 <div className="flex items-center gap-2">
-                  <code className={`text-sm font-black ${method.accentColor} bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded-lg`}>
+                  <code className={`text-sm font-black ${method.accentColor} bg-[#1769E0]/10 dark:bg-[#1769E0]/20 px-2 py-1 rounded-lg`}>
                     {method.ussd}
                   </code>
                   <button type="button" onClick={() => copy(method.ussd!, 'ussd')}
-                    className="text-zinc-400 hover:text-orange-600 transition-colors">
+                    className="text-zinc-400 hover:text-[#1769E0] transition-colors">
                     <Copy size={13} />
                   </button>
                   {copied === 'ussd' && <span className="text-xs text-green-600">{t.ui.copied_label}</span>}
@@ -199,7 +199,7 @@ function PayContent() {
                     <span className="inline-flex items-center gap-1 ml-1">
                       <strong>{merchantTarget}</strong>
                       <button type="button" onClick={() => copy(merchantTarget, 'phone')}
-                        className="text-zinc-400 hover:text-orange-600"><Copy size={11} /></button>
+                        className="text-zinc-400 hover:text-[#1769E0]"><Copy size={11} /></button>
                       {copied === 'phone' && <span className="text-green-600">{t.ui.copied_label}</span>}
                     </span>
                   </span>
@@ -316,7 +316,7 @@ function PayContent() {
               ← {t.ui.back}
             </button>
             <button type="submit" disabled={submitting}
-              className="flex-1 py-3 min-h-[44px] rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm transition-all tap-bounce active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 shadow-md shadow-orange-600/20">
+              className="flex-1 py-3 min-h-[44px] rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white font-bold text-sm transition-all tap-bounce active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 shadow-md shadow-[#1769E0]/20">
               {submitting ? <><Spinner /> {t.ui.confirming}</> : t.ui.confirm_payment}
             </button>
           </div>

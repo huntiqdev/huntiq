@@ -246,7 +246,7 @@ func (h *AttributeHandler) AssignAttributeToCategory(c *fiber.Ctx) error {
 	}
 
 	req.CategoryID = categoryID
-	
+
 	if err := h.svc.AssignAttributeToCategory(c.Context(), &req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,

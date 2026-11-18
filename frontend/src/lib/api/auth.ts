@@ -66,6 +66,16 @@ export const authApi = {
 
   forgotPassword: (phone: string) =>
     fetchAPI<{ message: string }>('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ phone }) }),
+  verifyRecoveryOTP: (phone: string, code: string) =>
+    fetchAPI<{ reset_token: string; message: string }>('/auth/verify-recovery-otp', {
+      method: 'POST',
+      body: JSON.stringify({ phone, code }),
+    }),
+  resetPasswordWithToken: (reset_token: string, new_password: string) =>
+    fetchAPI<{ message: string }>('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ reset_token, new_password }),
+    }),
   resetPassword: (phone: string, code: string, new_password: string) =>
     fetchAPI<{ message: string }>('/auth/reset-password', { method: 'POST', body: JSON.stringify({ phone, code, new_password }) }),
 
@@ -96,9 +106,9 @@ export const authApi = {
     fetchAPI<{ message: string }>('/buyer/reset-password', { method: 'POST', body: JSON.stringify({ phone, code, new_password }) }),
 
   adminLogin: (data: { email: string; password: string }) =>
-    fetchAPI<{ email?: string; token?: string; is_super: boolean; message: string }>('/admin/login', { method: 'POST', body: JSON.stringify(data) }),
+    fetchAPI<{ email?: string; token?: string; session_token?: string; is_super: boolean; message: string }>('/admin/login', { method: 'POST', body: JSON.stringify(data) }),
   adminLoginVerifyOTP: (data: { email: string; code: string }) =>
-    fetchAPI<{ token: string }>('/admin/login/verify', { method: 'POST', body: JSON.stringify(data) }),
+    fetchAPI<{ token: string; session_token?: string }>('/admin/login/verify', { method: 'POST', body: JSON.stringify(data) }),
   adminForgotPassword: (email: string) =>
     fetchAPI<{ message: string }>('/admin/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
   adminResetPassword: (email: string, code: string, new_password: string) =>

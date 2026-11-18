@@ -1,0 +1,172 @@
+[
+  {
+    "id": 358,
+    "parent_id": 35,
+    "parent_code": "SI-HAW",
+    "type": "woreda",
+    "slug": "hawassa-menaharia-subcity",
+    "code": "SI-HAW-MN",
+    "level": 3,
+    "path": "/1/7/35/358/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Menaharia Subcity (Hawassa)",
+      "am": "መናኸሪያ ክፍለ ከተማ (ሀዋሳ)",
+      "om": "Kutaa Magaalaa Manaahariiyaa",
+      "ti": "መናኸሪያ ክፍለ ከተማ (ሃዋሳ)"
+    },
+    "coordinates": {
+      "latitude": 7.055,
+      "longitude": 38.485,
+      "bbox": {
+        "min_lat": 7.045,
+        "max_lat": 7.065,
+        "min_lng": 38.475,
+        "max_lng": 38.495
+      }
+    }
+  },
+  {
+    "id": 359,
+    "parent_id": 35,
+    "parent_code": "SI-HAW",
+    "type": "woreda",
+    "slug": "hawassa-tabor-subcity",
+    "code": "SI-HAW-TB",
+    "level": 3,
+    "path": "/1/7/35/359/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Tabor Subcity (Hawassa)",
+      "am": "ታቦር ክፍለ ከተማ (ሀዋሳ)",
+      "om": "Kutaa Magaalaa Taabor",
+      "ti": "ታቦር ክፍለ ከተማ (ሃዋሳ)"
+    },
+    "coordinates": {
+      "latitude": 7.045,
+      "longitude": 38.465,
+      "bbox": {
+        "min_lat": 7.035,
+        "max_lat": 7.055,
+        "min_lng": 38.455,
+        "max_lng": 38.475
+      }
+    }
+  },
+  {
+    "id": 360,
+    "parent_id": 35,
+    "parent_code": "SI-HAW",
+    "type": "woreda",
+    "slug": "hawassa-hayek-dare-subcity",
+    "code": "SI-HAW-HD",
+    "level": 3,
+    "path": "/1/7/35/360/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Hayek Dare Subcity (Hawassa)",
+      "am": "ሐይቅ ዳር ክፍለ ከተማ (ሀዋሳ)",
+      "om": "Kutaa Magaalaa Daarii Haroo",
+      "ti": "ሓይቂ ዳር ክፍለ ከተማ (ሃዋሳ)"
+    },
+    "coordinates": {
+      "latitude": 7.065,
+      "longitude": 38.475,
+      "bbox": {
+        "min_lat": 7.055,
+        "max_lat": 7.075,
+        "min_lng": 38.465,
+        "max_lng": 38.485
+      }
+    }
+  },
+  {
+    "id": 361,
+    "parent_id": 35,
+    "parent_code": "SI-HAW",
+    "type": "woreda",
+    "slug": "hawassa-misrak-subcity",
+    "code": "SI-HAW-MS",
+    "level": 3,
+    "path": "/1/7/35/361/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Misrak Subcity (Hawassa)",
+      "am": "ምስራቅ ክፍለ ከተማ (ሀዋሳ)",
+      "om": "Kutaa Magaalaa Bahaa",
+      "ti": "ምስራቕ ክፍለ ከተማ (ሃዋሳ)"
+    },
+    "coordinates": {
+      "latitude": 7.06,
+      "longitude": 38.5,
+      "bbox": {
+        "min_lat": 7.05,
+        "max_lat": 7.07,
+        "min_lng": 38.49,
+        "max_lng": 38.51
+      }
+    }
+  },
+  {
+    "id": 362,
+    "parent_id": 35,
+    "parent_code": "SI-HAW",
+    "type": "woreda",
+    "slug": "hawassa-mehal-ketema-subcity",
+    "code": "SI-HAW-MK",
+    "level": 3,
+    "path": "/1/7/35/362/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Mehal Ketema Subcity (Hawassa)",
+      "am": "መሀል ከተማ ክፍለ ከተማ (ሀዋሳ)",
+      "om": "Kutaa Magaalaa Gidduugaleessaa",
+      "ti": "ማእከል ከተማ ክፍለ ከተማ (ሃዋሳ)"
+    },
+    "coordinates": {
+      "latitude": 7.05,
+      "longitude": 38.475,
+      "bbox": {
+        "min_lat": 7.04,
+        "max_lat": 7.06,
+        "min_lng": 38.465,
+        "max_lng": 38.485
+      }
+    }
+  }
+]

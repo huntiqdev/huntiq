@@ -1,0 +1,32 @@
+{
+  "id": 54,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-kelem-welega",
+  "code": "ET-OR-KW",
+  "level": 2,
+  "path": "/1/4/54/",
+  "display_order": 18,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Qellem Wollega",
+    "ቄለም ወለጋ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Kelem Welega Zone",
+    "am": "ቄለም ወለጋ ዞን",
+    "om": "Qeellam Wallaggaa",
+    "ti": "ዞን ቄለም ወለጋ"
+  },
+  "coordinates": {
+    "latitude": 8.8,
+    "longitude": 34.8,
+    "bbox": null
+  }
+}

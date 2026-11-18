@@ -1,16 +1,16 @@
 package fees
 
 import (
-	"math"
 	"github.com/your-org/used-tools-marketplace/pkg/constants"
+	"math"
 )
 
 // FeeConfig holds fee calculation parameters
 type FeeConfig struct {
-	BrokerFeeRate     float64
-	StartupFee        float64
-	WeeklyIncrement   float64
-	ListingFreeWeeks  int
+	BrokerFeeRate    float64
+	StartupFee       float64
+	WeeklyIncrement  float64
+	ListingFreeWeeks int
 }
 
 // FeeResult contains calculated fee breakdown
@@ -27,7 +27,7 @@ type FeeResult struct {
 func CalculateListingFee(price float64, durationDays int, config FeeConfig) FeeResult {
 	// Convert days to weeks (round up)
 	totalWeeks := int(math.Ceil(float64(durationDays) / 7.0))
-	
+
 	// Calculate billable weeks (subtract free weeks)
 	billableWeeks := totalWeeks - config.ListingFreeWeeks
 	if billableWeeks < 0 {

@@ -1,0 +1,32 @@
+{
+  "id": 86,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "zone",
+  "slug": "somali-doolo",
+  "code": "ET-SO-DO",
+  "level": 2,
+  "path": "/1/8/86/",
+  "display_order": 50,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Warder Zone",
+    "ዶሎ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Doolo Zone",
+    "am": "ዶሎ ዞን",
+    "om": "Doollo",
+    "ti": "ዞን ዶሎ"
+  },
+  "coordinates": {
+    "latitude": 7.0,
+    "longitude": 46.5,
+    "bbox": null
+  }
+}

@@ -19,10 +19,9 @@ type (
 	AppError  = errors.AppError
 
 	// Validations
-	PhoneResult                = validations.PhoneResult
-	ProductValidationResult    = validations.ProductValidationResult
-	OrderValidationResult      = validations.OrderValidationResult
-	LocationValidationResult   = validations.LocationValidationResult
+	PhoneResult              = validations.PhoneResult
+	OrderValidationResult    = validations.OrderValidationResult
+	LocationValidationResult = validations.LocationValidationResult
 
 	// Fees
 	FeeConfig = fees.FeeConfig
@@ -37,7 +36,6 @@ var (
 	ValidatePhone    = validations.ValidateEthiopianPhone
 	ValidateEmail    = validations.ValidateEmail
 	ValidatePassword = validations.ValidatePassword
-	ValidateProduct  = validations.ValidateProduct
 	ValidateOrder    = validations.ValidateOrderRequest
 	ValidateLocation = validations.ValidateLocation
 	ValidateImageURL = validations.ValidateImageURL
@@ -46,15 +44,15 @@ var (
 
 // Constants
 var (
-	TierRank            = constants.TierRank
-	TierNormal          = constants.TierNormal
-	TierGold            = constants.TierGold
-	TierPremium         = constants.TierPremium
-	MeetsRequiredTier   = constants.MeetsRequiredTier
-	CanUpgradeTo        = constants.CanUpgradeTo
-	PaymentMethods      = constants.PaymentMethods
+	TierRank             = constants.TierRank
+	TierNormal           = constants.TierNormal
+	TierGold             = constants.TierGold
+	TierPremium          = constants.TierPremium
+	MeetsRequiredTier    = constants.MeetsRequiredTier
+	CanUpgradeTo         = constants.CanUpgradeTo
+	PaymentMethods       = constants.PaymentMethods
 	IsValidPaymentMethod = constants.IsValidPaymentMethod
-	ListingDurations    = constants.ListingDurations
+	ListingDurations     = constants.ListingDurations
 	// MinImages and GetMaxImages removed - use platform_settings instead
 )
 
@@ -71,34 +69,34 @@ var (
 
 // Error constructors
 var (
-	NewAppError              = errors.New
-	AuthInvalidCredentials   = errors.AuthInvalidCredentials
-	AuthWrongPassword        = errors.AuthWrongPassword
-	AuthPhoneNotVerified     = errors.AuthPhoneNotVerified
-	AuthSessionExpired       = errors.AuthSessionExpired
-	AuthTokenInvalid         = errors.AuthTokenInvalid
-	AuthRegistrationClosed   = errors.AuthRegistrationClosed
+	NewAppError                = errors.New
+	AuthInvalidCredentials     = errors.AuthInvalidCredentials
+	AuthWrongPassword          = errors.AuthWrongPassword
+	AuthPhoneNotVerified       = errors.AuthPhoneNotVerified
+	AuthSessionExpired         = errors.AuthSessionExpired
+	AuthTokenInvalid           = errors.AuthTokenInvalid
+	AuthRegistrationClosed     = errors.AuthRegistrationClosed
 	AuthPhoneAlreadyRegistered = errors.AuthPhoneAlreadyRegistered
-	OTPLocked                = errors.OTPLocked
-	OTPExpired               = errors.OTPExpired
-	OTPInvalid               = errors.OTPInvalid
-	OTPRequired              = errors.OTPRequired
-	OTPSendFailed            = errors.OTPSendFailed
-	PermDenied               = errors.PermDenied
-	PermSuperAdminRequired   = errors.PermSuperAdminRequired
-	PermSellerTierRequired   = errors.PermSellerTierRequired
-	UploadFileTooLarge       = errors.UploadFileTooLarge
-	UploadWrongType          = errors.UploadWrongType
-	PayInsufficientBalance   = errors.PayInsufficientBalance
-	ProdNotFound             = errors.ProdNotFound
-	ProdPriceMismatch        = errors.ProdPriceMismatch
-	ValPhoneRequired         = errors.ValPhoneRequired
-	ValPhoneInvalid          = errors.ValPhoneInvalid
-	ValPasswordMin           = errors.ValPasswordMin
-	ValRequired              = errors.ValRequired
-	NotFound                 = errors.NotFound
-	InternalError            = errors.InternalError
-	DatabaseError            = errors.DatabaseError
+	OTPLocked                  = errors.OTPLocked
+	OTPExpired                 = errors.OTPExpired
+	OTPInvalid                 = errors.OTPInvalid
+	OTPRequired                = errors.OTPRequired
+	OTPSendFailed              = errors.OTPSendFailed
+	PermDenied                 = errors.PermDenied
+	PermSuperAdminRequired     = errors.PermSuperAdminRequired
+	PermSellerTierRequired     = errors.PermSellerTierRequired
+	UploadFileTooLarge         = errors.UploadFileTooLarge
+	UploadWrongType            = errors.UploadWrongType
+	PayInsufficientBalance     = errors.PayInsufficientBalance
+	ProdNotFound               = errors.ProdNotFound
+	ProdPriceMismatch          = errors.ProdPriceMismatch
+	ValPhoneRequired           = errors.ValPhoneRequired
+	ValPhoneInvalid            = errors.ValPhoneInvalid
+	ValPasswordMin             = errors.ValPasswordMin
+	ValRequired                = errors.ValRequired
+	NotFound                   = errors.NotFound
+	InternalError              = errors.InternalError
+	DatabaseError              = errors.DatabaseError
 )
 
 // Response helpers

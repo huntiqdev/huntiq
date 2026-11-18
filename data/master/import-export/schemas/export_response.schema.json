@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huntiq.et/schemas/masterdata/export_response.schema.json",
+  "title": "HUNTIQ Master Data Export Response Schema",
+  "type": "object",
+  "required": ["dataset_type", "version", "generated_at", "total_records", "records"],
+  "properties": {
+    "dataset_type": {
+      "type": "string",
+      "enum": ["locations", "categories"]
+    },
+    "version": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scope": {
+      "type": ["string", "null"]
+    },
+    "total_records": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "records": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  },
+  "additionalProperties": false
+}
+

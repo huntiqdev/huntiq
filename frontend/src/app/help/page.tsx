@@ -161,12 +161,12 @@ export default function HelpPage() {
 
         {/* ── 1. Hero & Live Search ── */}
         <section className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-wide">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1769E0]/10 border border-[#1769E0]/20 text-[#1769E0] dark:text-[#38A5FF] text-xs font-bold tracking-wide">
             <HelpCircle size={14} />
             <span>HUNTIQ Ethiopia Support Hub</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-zinc-900 via-orange-600 to-amber-600 dark:from-white dark:via-orange-400 dark:to-amber-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-r from-zinc-900 via-[#1769E0] to-[#38A5FF] dark:from-white dark:via-[#38A5FF] dark:to-[#60B5FF] bg-clip-text text-transparent">
             {h.title || 'Help Center'}
           </h1>
           <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto leading-relaxed">
@@ -182,7 +182,7 @@ export default function HelpPage() {
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder={h.search_placeholder || 'Search questions, topics, or keywords...'}
-                className="w-full pl-11 pr-10 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm hover:border-orange-500/40 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 text-sm outline-none transition-all"
+                className="w-full pl-11 pr-10 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm hover:border-[#1769E0]/40 focus:border-[#1769E0] focus:ring-4 focus:ring-[#1769E0]/10 text-sm outline-none transition-all"
               />
               {searchQuery && (
                 <button
@@ -196,7 +196,7 @@ export default function HelpPage() {
             </div>
             {searchQuery && (
               <p className="text-xs text-left text-zinc-500 mt-2 px-1">
-                Showing {filteredFaqs.length} results for &quot;<span className="text-orange-600 dark:text-orange-400 font-bold">{searchQuery}</span>&quot;
+                Showing {filteredFaqs.length} results for &quot;<span className="text-[#1769E0] dark:text-[#38A5FF] font-bold">{searchQuery}</span>&quot;
               </p>
             )}
           </div>
@@ -232,7 +232,7 @@ export default function HelpPage() {
               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">
                 {h.how_it_works || 'How It Works'}
               </h2>
-              <span className="text-xs font-bold text-orange-600">3 Simple Steps</span>
+              <span className="text-xs font-bold text-[#1769E0]">3 Simple Steps</span>
             </div>
             <div className="grid sm:grid-cols-3 gap-4">
               {steps.map(({ icon: Icon, title, desc }, i) => (
@@ -241,10 +241,10 @@ export default function HelpPage() {
                   className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded-xl bg-[#1769E0]/10 text-[#1769E0] flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon size={18} />
                     </div>
-                    <span className="text-sm font-black text-orange-600/60 dark:text-orange-400/60">
+                    <span className="text-sm font-black text-[#1769E0]/60 dark:text-[#38A5FF]/60">
                       0{i + 1}
                     </span>
                   </div>
@@ -285,11 +285,11 @@ export default function HelpPage() {
                   onClick={() => setSelectedCat(cat.id)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 border ${
                     isActive
-                      ? 'bg-orange-600 text-white border-orange-600 shadow-sm shadow-orange-600/30'
-                      : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-orange-500/40 hover:text-orange-600'
+                      ? 'bg-[#1769E0] text-white border-[#1769E0] shadow-sm shadow-[#1769E0]/30'
+                      : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-[#1769E0]/40 hover:text-[#1769E0]'
                   }`}
                 >
-                  <Icon size={13} className={isActive ? 'text-white' : 'text-orange-600 dark:text-orange-400'} />
+                  <Icon size={13} className={isActive ? 'text-white' : 'text-[#1769E0] dark:text-[#38A5FF]'} />
                   <span>{cat.label}</span>
                   <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
                     isActive ? 'bg-white/20 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
@@ -312,7 +312,7 @@ export default function HelpPage() {
                 <button
                   type="button"
                   onClick={() => { setSearchQuery(''); setSelectedCat('all'); }}
-                  className="text-xs font-bold text-orange-600 hover:underline"
+                  className="text-xs font-bold text-[#1769E0] hover:underline"
                 >
                   View all questions →
                 </button>
@@ -323,7 +323,7 @@ export default function HelpPage() {
                 return (
                   <div
                     key={faq.id}
-                    className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-xs hover:border-orange-500/40 transition-colors"
+                    className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-xs hover:border-[#1769E0]/40 transition-colors"
                   >
                     <button
                       type="button"
@@ -331,7 +331,7 @@ export default function HelpPage() {
                       className="w-full flex items-center justify-between px-5 py-4 text-left transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800/40"
                     >
                       <div className="flex items-center gap-3 pr-4">
-                        <span className="w-2 h-2 rounded-full bg-orange-600 shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-[#1769E0] shrink-0" />
                         <span className="font-bold text-sm text-zinc-900 dark:text-white leading-snug">
                           {faq.q}
                         </span>
@@ -356,7 +356,7 @@ export default function HelpPage() {
         {tips.length > 0 && (
           <section className="space-y-4">
             <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400 flex items-center gap-1.5">
-              <Shield size={13} className="text-orange-600" />
+              <Shield size={13} className="text-[#1769E0]" />
               <span>{h.safety_tips ?? h.safety}</span>
             </h2>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -365,7 +365,7 @@ export default function HelpPage() {
                   key={i}
                   className="flex items-start gap-3 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-3.5 shadow-xs"
                 >
-                  <span className="w-5 h-5 rounded-full bg-orange-500/10 text-orange-600 text-xs font-black flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="w-5 h-5 rounded-full bg-[#1769E0]/10 text-[#1769E0] text-xs font-black flex items-center justify-center shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">
@@ -378,7 +378,7 @@ export default function HelpPage() {
         )}
 
         {/* ── 6. Still Have Questions? Direct Contact ── */}
-        <section className="bg-gradient-to-r from-orange-600 to-amber-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-orange-600/20">
+        <section className="bg-gradient-to-r from-[#1769E0] to-[#1055BD] rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-[#1769E0]/20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center md:text-left">
               <h2 className="text-2xl sm:text-3xl font-black">
@@ -392,7 +392,7 @@ export default function HelpPage() {
             <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
               <a
                 href="tel:+251911000000"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-orange-600 font-bold text-xs sm:text-sm shadow-md hover:bg-zinc-100 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-[#1769E0] font-bold text-xs sm:text-sm shadow-md hover:bg-zinc-100 transition-colors"
               >
                 <Phone size={15} />
                 <span>{h.call_support || 'Call Helpline'}</span>

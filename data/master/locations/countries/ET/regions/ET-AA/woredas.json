@@ -1,0 +1,900 @@
+[
+  {
+    "id": 129,
+    "parent_id": 16,
+    "parent_code": "AA-BO",
+    "type": "woreda",
+    "slug": "addis-ababa-bole-w01",
+    "code": "AA-BO-01",
+    "level": 3,
+    "path": "/1/2/16/129/",
+    "display_order": 1,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bole Atlas",
+      "Edna Mall",
+      "ቦሌ አትላስ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bole Woreda 01 (Atlas / Edna Mall)",
+      "am": "ቦሌ ወረዳ 01 (አትላስ / ኤድና ሞል)",
+      "om": "Boolee Woreda 01",
+      "ti": "ቦሌ ወረዳ 01"
+    },
+    "coordinates": {
+      "latitude": 9.0,
+      "longitude": 38.78,
+      "bbox": null
+    }
+  },
+  {
+    "id": 130,
+    "parent_id": 16,
+    "parent_code": "AA-BO",
+    "type": "woreda",
+    "slug": "addis-ababa-bole-w03",
+    "code": "AA-BO-03",
+    "level": 3,
+    "path": "/1/2/16/130/",
+    "display_order": 2,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bole Medhanealem",
+      "Bole Brass",
+      "ቦሌ መድኃኔዓለም"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bole Woreda 03 (Medhanealem)",
+      "am": "ቦሌ ወረዳ 03 (መድኃኔዓለም)",
+      "om": "Boolee Woreda 03",
+      "ti": "ቦሌ ወረዳ 03"
+    },
+    "coordinates": {
+      "latitude": 8.99,
+      "longitude": 38.79,
+      "bbox": null
+    }
+  },
+  {
+    "id": 131,
+    "parent_id": 16,
+    "parent_code": "AA-BO",
+    "type": "woreda",
+    "slug": "addis-ababa-bole-w06",
+    "code": "AA-BO-06",
+    "level": 3,
+    "path": "/1/2/16/131/",
+    "display_order": 3,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Gerji",
+      "Imperial",
+      "ገርጂ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bole Woreda 06 (Gerji / Imperial)",
+      "am": "ቦሌ ወረዳ 06 (ገርጂ / ኢምፔሪያል)",
+      "om": "Boolee Woreda 06",
+      "ti": "ቦሌ ወረዳ 06"
+    },
+    "coordinates": {
+      "latitude": 8.98,
+      "longitude": 38.81,
+      "bbox": null
+    }
+  },
+  {
+    "id": 132,
+    "parent_id": 16,
+    "parent_code": "AA-BO",
+    "type": "woreda",
+    "slug": "addis-ababa-bole-w11",
+    "code": "AA-BO-11",
+    "level": 3,
+    "path": "/1/2/16/132/",
+    "display_order": 4,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bole Arabsa",
+      "ቦሌ አራብሳ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bole Woreda 11 (Bole Arabsa / Ayat 2)",
+      "am": "ቦሌ ወረዳ 11 (ቦሌ አራብሳ)",
+      "om": "Boolee Woreda 11",
+      "ti": "ቦሌ ወረዳ 11"
+    },
+    "coordinates": {
+      "latitude": 8.97,
+      "longitude": 38.85,
+      "bbox": null
+    }
+  },
+  {
+    "id": 133,
+    "parent_id": 17,
+    "parent_code": "AA-KI",
+    "type": "woreda",
+    "slug": "addis-ababa-kirkos-kazanchis",
+    "code": "AA-KI-01",
+    "level": 3,
+    "path": "/1/2/17/133/",
+    "display_order": 5,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kazanchis",
+      "ካዛንቺስ",
+      "ECA"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kazanchis (Kirkos Woreda 01)",
+      "am": "ካዛንቺስ (ቂርቆስ ወረዳ 01)",
+      "om": "Kaazaanchis",
+      "ti": "ካዛንቺስ"
+    },
+    "coordinates": {
+      "latitude": 9.02,
+      "longitude": 38.77,
+      "bbox": null
+    }
+  },
+  {
+    "id": 134,
+    "parent_id": 17,
+    "parent_code": "AA-KI",
+    "type": "woreda",
+    "slug": "addis-ababa-kirkos-meskel-sq",
+    "code": "AA-KI-02",
+    "level": 3,
+    "path": "/1/2/17/134/",
+    "display_order": 6,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Meskel Square",
+      "Stadium",
+      "መስቀል አደባባይ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Meskel Square / Stadium (Kirkos Woreda 02)",
+      "am": "መስቀል አደባባይ / ስታዲየም",
+      "om": "Addababaa Masqalaa",
+      "ti": "መስቀል ኣደባባይ"
+    },
+    "coordinates": {
+      "latitude": 9.01,
+      "longitude": 38.76,
+      "bbox": null
+    }
+  },
+  {
+    "id": 296,
+    "parent_id": 17,
+    "parent_code": "AA-KI",
+    "type": "woreda",
+    "slug": "addis-ababa-kirkos-gotera",
+    "code": "AA-KI-08",
+    "level": 3,
+    "path": "/1/2/17/296/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Gotera / Beklobet (Kirkos Woreda 08)",
+      "am": "ጎተራ / በቀሎቤት (ቂርቆስ ወረዳ 08)",
+      "om": "Gootaraa (Qirqoos Woreda 08)",
+      "ti": "ጎተራ (ቂርቆስ ወረዳ 08)"
+    },
+    "coordinates": {
+      "latitude": 8.995,
+      "longitude": 38.755,
+      "bbox": {
+        "min_lat": 8.99,
+        "max_lat": 9.002,
+        "min_lng": 38.749,
+        "max_lng": 38.762
+      }
+    }
+  },
+  {
+    "id": 135,
+    "parent_id": 18,
+    "parent_code": "AA-YE",
+    "type": "woreda",
+    "slug": "addis-ababa-yeka-cmc-ayat",
+    "code": "AA-YE-08",
+    "level": 3,
+    "path": "/1/2/18/135/",
+    "display_order": 7,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "CMC",
+      "Ayat Real Estate",
+      "ሲኤምሲ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "CMC / Ayat (Yeka Woreda 08)",
+      "am": "ሲኤምሲ / አያት (የካ ወረዳ 08)",
+      "om": "CMC / Ayaat",
+      "ti": "ሲኤምሲ / ኣያት"
+    },
+    "coordinates": {
+      "latitude": 9.03,
+      "longitude": 38.86,
+      "bbox": null
+    }
+  },
+  {
+    "id": 136,
+    "parent_id": 18,
+    "parent_code": "AA-YE",
+    "type": "woreda",
+    "slug": "addis-ababa-yeka-kotebe",
+    "code": "AA-YE-03",
+    "level": 3,
+    "path": "/1/2/18/136/",
+    "display_order": 8,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kotebe College",
+      "ኮተቤ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kotebe (Yeka Woreda 03)",
+      "am": "ኮተቤ (የካ ወረዳ 03)",
+      "om": "Kotobee",
+      "ti": "ኮተቤ"
+    },
+    "coordinates": {
+      "latitude": 9.04,
+      "longitude": 38.83,
+      "bbox": null
+    }
+  },
+  {
+    "id": 297,
+    "parent_id": 18,
+    "parent_code": "AA-YE",
+    "type": "woreda",
+    "slug": "addis-ababa-yeka-megenagna",
+    "code": "AA-YE-05",
+    "level": 3,
+    "path": "/1/2/18/297/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Megenagna (Yeka Woreda 05)",
+      "am": "መገናኛ (የካ ወረዳ 05)",
+      "om": "Maganaanyaa (Yakka Woreda 05)",
+      "ti": "መገናኛ (የካ ወረዳ 05)"
+    },
+    "coordinates": {
+      "latitude": 9.022,
+      "longitude": 38.799,
+      "bbox": {
+        "min_lat": 9.016,
+        "max_lat": 9.028,
+        "min_lng": 38.792,
+        "max_lng": 38.806
+      }
+    }
+  },
+  {
+    "id": 298,
+    "parent_id": 18,
+    "parent_code": "AA-YE",
+    "type": "woreda",
+    "slug": "addis-ababa-yeka-ayat",
+    "code": "AA-YE-12",
+    "level": 3,
+    "path": "/1/2/18/298/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Ayat Zone (Yeka Woreda 12)",
+      "am": "አያት ዞን (የካ ወረዳ 12)",
+      "om": "Aayaat (Yakka Woreda 12)",
+      "ti": "ኣያት ዞን (የካ ወረዳ 12)"
+    },
+    "coordinates": {
+      "latitude": 9.03,
+      "longitude": 38.865,
+      "bbox": {
+        "min_lat": 9.023,
+        "max_lat": 9.038,
+        "min_lng": 38.857,
+        "max_lng": 38.873
+      }
+    }
+  },
+  {
+    "id": 137,
+    "parent_id": 19,
+    "parent_code": "AA-AR",
+    "type": "woreda",
+    "slug": "addis-ababa-arada-piazza",
+    "code": "AA-AR-01",
+    "level": 3,
+    "path": "/1/2/19/137/",
+    "display_order": 9,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Piazza",
+      "Arada Giorgis",
+      "ፒያሳ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Piazza (Arada Woreda 01)",
+      "am": "ፒያሳ (አራዳ ወረዳ 01)",
+      "om": "Piyaasaa",
+      "ti": "ፒያሳ"
+    },
+    "coordinates": {
+      "latitude": 9.03,
+      "longitude": 38.75,
+      "bbox": null
+    }
+  },
+  {
+    "id": 138,
+    "parent_id": 19,
+    "parent_code": "AA-AR",
+    "type": "woreda",
+    "slug": "addis-ababa-arada-4kilo",
+    "code": "AA-AR-02",
+    "level": 3,
+    "path": "/1/2/19/138/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Arat Kilo",
+      "Sidist Kilo",
+      "አራት ኪሎ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "4 Kilo / 6 Kilo (Arada Woreda 02)",
+      "am": "4 ኪሎ / 6 ኪሎ",
+      "om": "Arbaat Kilo / Ja'at Kilo",
+      "ti": "4 ኪሎ / 6 ኪሎ"
+    },
+    "coordinates": {
+      "latitude": 9.04,
+      "longitude": 38.76,
+      "bbox": null
+    }
+  },
+  {
+    "id": 299,
+    "parent_id": 20,
+    "parent_code": "AA-LI",
+    "type": "woreda",
+    "slug": "addis-ababa-lideta-tor-hailoch",
+    "code": "AA-LI-04",
+    "level": 3,
+    "path": "/1/2/20/299/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Tor Hailoch (Lideta Woreda 04)",
+      "am": "ጦር ኃይሎች (ልደታ ወረዳ 04)",
+      "om": "Toor Haayilooch (Lidadaa Woreda 04)",
+      "ti": "ጦር ኃይሎች (ልደታ ወረዳ 04)"
+    },
+    "coordinates": {
+      "latitude": 9.008,
+      "longitude": 38.728,
+      "bbox": {
+        "min_lat": 9.001,
+        "max_lat": 9.015,
+        "min_lng": 38.721,
+        "max_lng": 38.735
+      }
+    }
+  },
+  {
+    "id": 139,
+    "parent_id": 20,
+    "parent_code": "AA-LI",
+    "type": "woreda",
+    "slug": "addis-ababa-lideta-mexico",
+    "code": "AA-LI-01",
+    "level": 3,
+    "path": "/1/2/20/139/",
+    "display_order": 11,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Mexico Square",
+      "Sengatera",
+      "ሜክሲኮ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Mexico / Sengatera (Lideta Woreda 01)",
+      "am": "ሜክሲኮ / ሰንጋተራ",
+      "om": "Meeksikoo",
+      "ti": "ሜክሲኮ"
+    },
+    "coordinates": {
+      "latitude": 9.01,
+      "longitude": 38.74,
+      "bbox": null
+    }
+  },
+  {
+    "id": 300,
+    "parent_id": 21,
+    "parent_code": "AA-AK",
+    "type": "woreda",
+    "slug": "addis-ababa-addis-ketema-autobus-tera",
+    "code": "AA-AK-05",
+    "level": 3,
+    "path": "/1/2/21/300/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Autobus Tera (Addis Ketema Woreda 05)",
+      "am": "አውቶቡስ ተራ (አዲስ ከተማ ወረዳ 05)",
+      "om": "Otobis Tara (Addis Katamaa Woreda 05)",
+      "ti": "ኣውቶቡስ ተራ (ኣዲስ ከተማ ወረዳ 05)"
+    },
+    "coordinates": {
+      "latitude": 9.032,
+      "longitude": 38.733,
+      "bbox": {
+        "min_lat": 9.026,
+        "max_lat": 9.038,
+        "min_lng": 38.726,
+        "max_lng": 38.74
+      }
+    }
+  },
+  {
+    "id": 140,
+    "parent_id": 21,
+    "parent_code": "AA-AK",
+    "type": "woreda",
+    "slug": "addis-ababa-addis-ketema-merkato",
+    "code": "AA-AK-01",
+    "level": 3,
+    "path": "/1/2/21/140/",
+    "display_order": 12,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Merkato",
+      "Autobus Tera",
+      "መርካቶ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Merkato (Addis Ketema Woreda 01)",
+      "am": "መርካቶ (አዲስ ከተማ ወረዳ 01)",
+      "om": "MorkaaToo",
+      "ti": "መርካቶ"
+    },
+    "coordinates": {
+      "latitude": 9.03,
+      "longitude": 38.73,
+      "bbox": null
+    }
+  },
+  {
+    "id": 301,
+    "parent_id": 22,
+    "parent_code": "AA-GU",
+    "type": "woreda",
+    "slug": "addis-ababa-gullele-shromeda",
+    "code": "AA-GU-02",
+    "level": 3,
+    "path": "/1/2/22/301/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Shiro Meda (Gullele Woreda 02)",
+      "am": "ሽሮ ሜዳ (ጉለሌ ወረዳ 02)",
+      "om": "Shiroo Meedaa (Gullallee Woreda 02)",
+      "ti": "ሽሮ ሜዳ (ጉለለ ወረዳ 02)"
+    },
+    "coordinates": {
+      "latitude": 9.055,
+      "longitude": 38.758,
+      "bbox": {
+        "min_lat": 9.048,
+        "max_lat": 9.062,
+        "min_lng": 38.751,
+        "max_lng": 38.765
+      }
+    }
+  },
+  {
+    "id": 302,
+    "parent_id": 22,
+    "parent_code": "AA-GU",
+    "type": "woreda",
+    "slug": "addis-ababa-gullele-rufael",
+    "code": "AA-GU-07",
+    "level": 3,
+    "path": "/1/2/22/302/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kefitegna / Rufael (Gullele Woreda 07)",
+      "am": "ሩፋኤል (ጉለሌ ወረዳ 07)",
+      "om": "Rufaa'eel (Gullallee Woreda 07)",
+      "ti": "ሩፋኤል (ጉለለ ወረዳ 07)"
+    },
+    "coordinates": {
+      "latitude": 9.048,
+      "longitude": 38.735,
+      "bbox": {
+        "min_lat": 9.041,
+        "max_lat": 9.055,
+        "min_lng": 38.728,
+        "max_lng": 38.742
+      }
+    }
+  },
+  {
+    "id": 303,
+    "parent_id": 23,
+    "parent_code": "AA-KK",
+    "type": "woreda",
+    "slug": "addis-ababa-kolfe-ashenda",
+    "code": "AA-KK-09",
+    "level": 3,
+    "path": "/1/2/23/303/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Asko / Wingate (Kolfe Keranio Woreda 09)",
+      "am": "አስኮ / ዊንጌት (ኮልፌ ቀራኒዮ ወረዳ 09)",
+      "om": "Askodoota (Qolfee Qaraaniyoo Woreda 09)",
+      "ti": "ኣስኮ (ኮልፌ ቀራንዮ ወረዳ 09)"
+    },
+    "coordinates": {
+      "latitude": 9.052,
+      "longitude": 38.708,
+      "bbox": {
+        "min_lat": 9.045,
+        "max_lat": 9.059,
+        "min_lng": 38.701,
+        "max_lng": 38.716
+      }
+    }
+  },
+  {
+    "id": 143,
+    "parent_id": 23,
+    "parent_code": "AA-KK",
+    "type": "woreda",
+    "slug": "addis-ababa-kolfe-ayer-tena",
+    "code": "AA-KK-01",
+    "level": 3,
+    "path": "/1/2/23/143/",
+    "display_order": 15,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Ayer Tena",
+      "Tor Hailoch",
+      "አየር ጤና"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Ayer Tena / Tor Hailoch (Kolfe Woreda 01)",
+      "am": "አየር ጤና / ጦር ኃይሎች",
+      "om": "Qilleensa Fayyaa",
+      "ti": "ኣየር ጤና"
+    },
+    "coordinates": {
+      "latitude": 9.0,
+      "longitude": 38.7,
+      "bbox": null
+    }
+  },
+  {
+    "id": 304,
+    "parent_id": 24,
+    "parent_code": "AA-AQ",
+    "type": "woreda",
+    "slug": "addis-ababa-akaki-kality-gelan-condo",
+    "code": "AA-AQ-07",
+    "level": 3,
+    "path": "/1/2/24/304/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Gelan Condominium (Akaki Kality Woreda 07)",
+      "am": "ገላን ኮንዶሚኒየም (አቃቂ ቃሊቲ ወረዳ 07)",
+      "om": "Galaan (Aqaaqii Qaallittii Woreda 07)",
+      "ti": "ገላን ኮንዶሚኒየም (ኣቃቂ ቃሊቲ ወረዳ 07)"
+    },
+    "coordinates": {
+      "latitude": 8.882,
+      "longitude": 38.785,
+      "bbox": {
+        "min_lat": 8.875,
+        "max_lat": 8.89,
+        "min_lng": 38.777,
+        "max_lng": 38.793
+      }
+    }
+  },
+  {
+    "id": 144,
+    "parent_id": 24,
+    "parent_code": "AA-AQ",
+    "type": "woreda",
+    "slug": "addis-ababa-akaki-kality-w01",
+    "code": "AA-AQ-01",
+    "level": 3,
+    "path": "/1/2/24/144/",
+    "display_order": 16,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kality Industrial",
+      "Tulu Dimtu",
+      "ቃሊቲ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kality / Tulu Dimtu (Akaki Woreda 01)",
+      "am": "ቃሊቲ / ቱሉ ዲምቱ",
+      "om": "Qaallittii",
+      "ti": "ቃሊቲ"
+    },
+    "coordinates": {
+      "latitude": 8.89,
+      "longitude": 38.76,
+      "bbox": null
+    }
+  },
+  {
+    "id": 141,
+    "parent_id": 25,
+    "parent_code": "AA-NL",
+    "type": "woreda",
+    "slug": "addis-ababa-nifas-silk-jemo",
+    "code": "AA-NL-01",
+    "level": 3,
+    "path": "/1/2/25/141/",
+    "display_order": 13,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Jemo Condominium",
+      "ጀሞ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Jemo 1-3 (Nifas Silk Woreda 01)",
+      "am": "ጀሞ 1-3 (ንፋስ ስልክ)",
+      "om": "Jemoo",
+      "ti": "ጀሞ"
+    },
+    "coordinates": {
+      "latitude": 8.95,
+      "longitude": 38.71,
+      "bbox": null
+    }
+  },
+  {
+    "id": 142,
+    "parent_id": 25,
+    "parent_code": "AA-NL",
+    "type": "woreda",
+    "slug": "addis-ababa-nifas-silk-lebu",
+    "code": "AA-NL-02",
+    "level": 3,
+    "path": "/1/2/25/142/",
+    "display_order": 14,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Lebu Varnero",
+      "Mekanisa",
+      "ለቡ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Lebu / Mekanisa (Nifas Silk Woreda 02)",
+      "am": "ለቡ / መካኒሳ",
+      "om": "Labuu",
+      "ti": "ለቡ"
+    },
+    "coordinates": {
+      "latitude": 8.97,
+      "longitude": 38.73,
+      "bbox": null
+    }
+  },
+  {
+    "id": 305,
+    "parent_id": 26,
+    "parent_code": "AA-LK",
+    "type": "woreda",
+    "slug": "addis-ababa-lemi-kura-cmc",
+    "code": "AA-LK-02",
+    "level": 3,
+    "path": "/1/2/26/305/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "CMC / Michael (Lemi Kura Woreda 02)",
+      "am": "ሲኤምሲ / ሚካኤል (ለሚ ኩራ ወረዳ 02)",
+      "om": "CMC Mikaa'el (Lammata Kura Woreda 02)",
+      "ti": "ሲኤምሲ / ሚካኤል (ለሚ ኩራ ወረዳ 02)"
+    },
+    "coordinates": {
+      "latitude": 9.025,
+      "longitude": 38.835,
+      "bbox": {
+        "min_lat": 9.018,
+        "max_lat": 9.032,
+        "min_lng": 38.827,
+        "max_lng": 38.843
+      }
+    }
+  },
+  {
+    "id": 145,
+    "parent_id": 26,
+    "parent_code": "AA-LK",
+    "type": "woreda",
+    "slug": "addis-ababa-lemi-kura-summit",
+    "code": "AA-LK-01",
+    "level": 3,
+    "path": "/1/2/26/145/",
+    "display_order": 17,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Summit Condominium",
+      "Goro",
+      "ሰሚት"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Summit / Goro (Lemi Kura Woreda 01)",
+      "am": "ሰሚት / ጎሮ (ለሚ ኩራ)",
+      "om": "Saamiti / Goroo",
+      "ti": "ሰሚት / ጎሮ"
+    },
+    "coordinates": {
+      "latitude": 9.01,
+      "longitude": 38.86,
+      "bbox": null
+    }
+  }
+]

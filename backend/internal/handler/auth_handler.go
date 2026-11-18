@@ -7,12 +7,14 @@ package handlers
 
 import (
 	"context"
+	stderrors "errors"
 	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
+	"github.com/your-org/used-tools-marketplace/internal/security"
 	"github.com/your-org/used-tools-marketplace/internal/service"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/errors"
@@ -22,22 +24,28 @@ import (
 
 // Type aliases for repository types
 type (
-	OTPLogFilter     = repository.OTPLogFilter
-	OTPLogEntry      = repository.OTPLogEntry
+	OTPLogFilter      = repository.OTPLogFilter
+	OTPLogEntry       = repository.OTPLogEntry
 	ActivityLogFilter = repository.ActivityLogFilter
-	ActivityLogEntry = repository.ActivityLogEntry
+	ActivityLogEntry  = repository.ActivityLogEntry
 )
 
 // AuthHandler handles authentication endpoints.
 // Rate limiting is applied at the route level in main.go — not in the handler itself.
 type AuthHandler struct {
-	svc      *service.AuthService
-	adminSvc *service.AdminService
-	devMode  bool
+	svc        *service.AuthService
+	sessionSvc *service.SessionService
+	adminSvc   *service.AdminService
+	devMode    bool
 }
 
 func NewAuthHandler(svc *service.AuthService) *AuthHandler {
 	return &AuthHandler{svc: svc}
+}
+
+func (h *AuthHandler) WithSessionService(s *service.SessionService) *AuthHandler {
+	h.sessionSvc = s
+	return h
 }
 
 func (h *AuthHandler) WithAdminService(a *service.AdminService) *AuthHandler {
@@ -57,7 +65,7 @@ func (h *AuthHandler) registerUser(c *fiber.Ctx, role string) error {
 		return response.BadRequest(c, "invalid request body")
 	}
 	req.Role = role
-	
+
 	// Validate seller_preference for sellers
 	if role == "seller" {
 		if req.SellerPreference == "" {
@@ -68,7 +76,7 @@ func (h *AuthHandler) registerUser(c *fiber.Ctx, role string) error {
 			return response.BadRequest(c, "seller_preference must be 'sale', 'rent', or 'both'")
 		}
 	}
-	
+
 	if !h.svc.IsRegistrationAllowed(c.Context(), role) {
 		return response.BadRequest(c, role+" registration is currently closed — contact admin")
 	}
@@ -110,6 +118,16 @@ func (h *AuthHandler) loginAsRole(c *fiber.Ctx, role string) error {
 			return response.OK(c, fiber.Map{"otp_pending": true, "otp_required": true})
 		}
 		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
+	}
+	if h.sessionSvc != nil {
+		claims, pErr := security.ParseJWT(token, h.sessionSvc.JWTSecret())
+		if pErr == nil {
+			access, refresh, csrf, sErr := h.sessionSvc.CreateSessionForUserID(c.Context(), claims.UserID, c.IP(), c.Get("User-Agent"))
+			if sErr == nil {
+				token = access
+				h.sessionSvc.SetAuthCookies(c, access, refresh, csrf)
+			}
+		}
 	}
 	return response.OK(c, dto.LoginResponse{Token: token})
 }
@@ -168,15 +186,30 @@ func (h *AuthHandler) AdminLogin(c *fiber.Ctx) error {
 		return response.AppError(c, errors.ValPasswordMin())
 	}
 	req.Phone = ""
-	result, isSuper, err := h.svc.AdminLoginStep1(c.Context(), req)
+	ip := c.IP()
+	if ip == "" {
+		ip = "127.0.0.1"
+	}
+	result, sessionToken, isSuper, err := h.svc.AdminLoginStep1(c.Context(), req, ip, c.Get("User-Agent"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
 	}
 	if isSuper {
+		if sessionToken != "" {
+			c.Cookie(&fiber.Cookie{
+				Name:     "hm_admin_session",
+				Value:    sessionToken,
+				Path:     "/",
+				MaxAge:   12 * 3600,
+				HTTPOnly: true,
+				SameSite: "Lax",
+			})
+		}
 		return response.OK(c, dto.AdminLoginStep1Response{
-			Token:   result,
-			IsSuper: true,
-			Message: "login successful",
+			Token:        result,
+			SessionToken: sessionToken,
+			IsSuper:      true,
+			Message:      "login successful",
 		})
 	}
 	return response.OK(c, dto.AdminLoginStep1Response{
@@ -302,7 +335,7 @@ func (h *AuthHandler) ListOTPLogs(c *fiber.Ctx) error {
 	f := OTPLogFilter{
 		Phone: truncate(c.Query("phone"), 20), Email: truncate(c.Query("email"), 100),
 		UserType: userTypeFilter,
-		Status: statusFilter, ShowPlainOTP: c.Locals("adminRole") == models.RolePlatformOwner || c.Locals("adminRole") == models.LegacyRoleSuper,
+		Status:   statusFilter, ShowPlainOTP: c.Locals("adminRole") == models.RolePlatformOwner || c.Locals("adminRole") == models.LegacyRoleSuper,
 		Page: page, Limit: limit,
 	}
 	logs, total, err := h.svc.GetOTPLogs(c.Context(), f)
@@ -364,6 +397,16 @@ func (h *AuthHandler) OTPLogin(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
 	}
+	if h.sessionSvc != nil {
+		claims, pErr := security.ParseJWT(token, h.sessionSvc.JWTSecret())
+		if pErr == nil {
+			access, refresh, csrf, sErr := h.sessionSvc.CreateSessionForUserID(c.Context(), claims.UserID, c.IP(), c.Get("User-Agent"))
+			if sErr == nil {
+				token = access
+				h.sessionSvc.SetAuthCookies(c, access, refresh, csrf)
+			}
+		}
+	}
 	return response.OK(c, dto.LoginResponse{Token: token})
 }
 
@@ -389,18 +432,26 @@ func (h *AuthHandler) resetPassword(c *fiber.Ctx, role string) error {
 	var body struct {
 		Phone       string `json:"phone"`
 		Code        string `json:"code"`
+		ResetToken  string `json:"reset_token"`
 		NewPassword string `json:"new_password"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	// Use centralized validations
+	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
+		return response.AppError(c, errors.ValPasswordMin())
+	}
+
+	if body.ResetToken != "" {
+		if err := h.svc.ForgotPasswordResetWithToken(c.Context(), body.ResetToken, body.NewPassword); err != nil {
+			return response.BadRequest(c, err.Error())
+		}
+		return response.OK(c, fiber.Map{"message": "password reset successfully"})
+	}
+
 	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
 	if !phoneResult.Valid {
 		return response.AppError(c, errors.ValPhoneInvalid())
-	}
-	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
-		return response.AppError(c, errors.ValPasswordMin())
 	}
 	if err := h.svc.ForgotPasswordReset(c.Context(), phoneResult.Normalized, role, body.Code, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())
@@ -412,6 +463,29 @@ func (h *AuthHandler) SellerForgotPassword(c *fiber.Ctx) error { return h.forgot
 func (h *AuthHandler) SellerResetPassword(c *fiber.Ctx) error  { return h.resetPassword(c, "seller") }
 func (h *AuthHandler) BuyerForgotPassword(c *fiber.Ctx) error  { return h.forgotPassword(c, "buyer") }
 func (h *AuthHandler) BuyerResetPassword(c *fiber.Ctx) error   { return h.resetPassword(c, "buyer") }
+
+// POST /api/auth/verify-recovery-otp — validates recovery OTP and returns a single-use reset authorization token
+func (h *AuthHandler) VerifyRecoveryOTP(c *fiber.Ctx) error {
+	var body struct {
+		Phone string `json:"phone"`
+		Code  string `json:"code"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
+	if !phoneResult.Valid {
+		return response.AppError(c, errors.ValPhoneInvalid())
+	}
+	token, err := h.svc.ForgotPasswordVerifyOTP(c.Context(), phoneResult.Normalized, body.Code)
+	if err != nil {
+		return response.BadRequest(c, err.Error())
+	}
+	return response.OK(c, fiber.Map{
+		"reset_token": token,
+		"message":     "recovery OTP verified successfully",
+	})
+}
 
 // POST /api/auth/forgot-password — Unified password reset request
 func (h *AuthHandler) UnifiedForgotPassword(c *fiber.Ctx) error {
@@ -434,17 +508,26 @@ func (h *AuthHandler) UnifiedResetPassword(c *fiber.Ctx) error {
 	var body struct {
 		Phone       string `json:"phone"`
 		Code        string `json:"code"`
+		ResetToken  string `json:"reset_token"`
 		NewPassword string `json:"new_password"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
+	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
+		return response.AppError(c, errors.ValPasswordMin())
+	}
+
+	if body.ResetToken != "" {
+		if err := h.svc.ForgotPasswordResetWithToken(c.Context(), body.ResetToken, body.NewPassword); err != nil {
+			return response.BadRequest(c, err.Error())
+		}
+		return response.OK(c, fiber.Map{"message": "password reset successfully"})
+	}
+
 	phoneResult := validations.ValidateEthiopianPhone(body.Phone)
 	if !phoneResult.Valid {
 		return response.AppError(c, errors.ValPhoneInvalid())
-	}
-	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
-		return response.AppError(c, errors.ValPasswordMin())
 	}
 	if err := h.svc.UnifiedForgotPasswordReset(c.Context(), phoneResult.Normalized, body.Code, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())
@@ -513,6 +596,10 @@ func (h *AuthHandler) SellerChangePassword(c *fiber.Ctx) error {
 	}
 	if err := h.svc.ChangePassword(c.Context(), userID, body.CurrentPassword, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())
+	}
+	if h.sessionSvc != nil {
+		_ = h.sessionSvc.RevokeAllUserSessions(c.Context(), userID, "password_changed")
+		h.sessionSvc.ClearAuthCookies(c)
 	}
 	return response.OK(c, fiber.Map{"message": "password updated"})
 }
@@ -607,6 +694,14 @@ func (h *AuthHandler) UnifiedRegister(c *fiber.Ctx) error {
 		})
 	}
 
+	if h.sessionSvc != nil {
+		access, refresh, csrf, sErr := h.sessionSvc.CreateSession(c.Context(), user, c.IP(), c.Get("User-Agent"))
+		if sErr == nil {
+			token = access
+			h.sessionSvc.SetAuthCookies(c, access, refresh, csrf)
+		}
+	}
+
 	return response.OK(c, fiber.Map{
 		"user":         user,
 		"token":        token,
@@ -628,6 +723,14 @@ func (h *AuthHandler) UnifiedLogin(c *fiber.Ctx) error {
 			return response.OK(c, fiber.Map{"otp_pending": true, "otp_required": true, "phone": req.Phone})
 		}
 		return fiber.NewError(fiber.StatusUnauthorized, err.Error())
+	}
+
+	if h.sessionSvc != nil {
+		access, refresh, csrf, sErr := h.sessionSvc.CreateSession(c.Context(), user, c.IP(), c.Get("User-Agent"))
+		if sErr == nil {
+			token = access
+			h.sessionSvc.SetAuthCookies(c, access, refresh, csrf)
+		}
 	}
 
 	return response.OK(c, fiber.Map{
@@ -666,6 +769,14 @@ func (h *AuthHandler) ActivateCapability(c *fiber.Ctx) error {
 		return response.BadRequest(c, err.Error())
 	}
 
+	if h.sessionSvc != nil {
+		access, refresh, csrf, sErr := h.sessionSvc.CreateSession(c.Context(), user, c.IP(), c.Get("User-Agent"))
+		if sErr == nil {
+			token = access
+			h.sessionSvc.SetAuthCookies(c, access, refresh, csrf)
+		}
+	}
+
 	return response.OK(c, fiber.Map{
 		"user":         user,
 		"token":        token,
@@ -685,4 +796,98 @@ func (h *AuthHandler) GetCapabilities(c *fiber.Ctx) error {
 		return response.InternalError(c, err)
 	}
 	return response.OK(c, fiber.Map{"capabilities": caps})
+}
+
+// POST /api/auth/refresh — rotate refresh token and issue fresh access + csrf tokens
+func (h *AuthHandler) Refresh(c *fiber.Ctx) error {
+	if h.sessionSvc == nil {
+		return response.InternalError(c, stderrors.New("session service not configured"))
+	}
+
+	refreshToken := c.Cookies("huntiq_refresh")
+	if refreshToken == "" {
+		var body struct {
+			RefreshToken string `json:"refresh_token"`
+		}
+		_ = c.BodyParser(&body)
+		refreshToken = body.RefreshToken
+	}
+
+	if refreshToken == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"success": false,
+			"error":   "refresh token missing",
+		})
+	}
+
+	newAccess, newRefresh, newCSRF, err := h.sessionSvc.RotateSession(
+		c.Context(),
+		refreshToken,
+		c.IP(),
+		c.Get("User-Agent"),
+	)
+	if err != nil {
+		if stderrors.Is(err, service.ErrRefreshTokenReused) {
+			h.sessionSvc.ClearAuthCookies(c)
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"success": false,
+				"error":   "refresh token reuse detected; all sessions revoked",
+				"revoked": true,
+			})
+		}
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"success": false,
+			"error":   "invalid or expired refresh token",
+		})
+	}
+
+	h.sessionSvc.SetAuthCookies(c, newAccess, newRefresh, newCSRF)
+
+	return response.OK(c, fiber.Map{
+		"token":         newAccess,
+		"refresh_token": newRefresh,
+		"csrf_token":    newCSRF,
+	})
+}
+
+// POST /api/auth/logout — revoke current session and clear auth cookies
+func (h *AuthHandler) Logout(c *fiber.Ctx) error {
+	refreshToken := c.Cookies("huntiq_refresh")
+	if refreshToken == "" {
+		var body struct {
+			RefreshToken string `json:"refresh_token"`
+		}
+		_ = c.BodyParser(&body)
+		refreshToken = body.RefreshToken
+	}
+
+	if h.sessionSvc != nil {
+		if refreshToken != "" {
+			_ = h.sessionSvc.RevokeSession(c.Context(), refreshToken)
+		}
+		h.sessionSvc.ClearAuthCookies(c)
+	}
+
+	return response.OK(c, fiber.Map{
+		"success": true,
+		"message": "logged out successfully",
+	})
+}
+
+// POST /api/auth/logout-all — revoke all user sessions and clear auth cookies
+func (h *AuthHandler) LogoutAll(c *fiber.Ctx) error {
+	userID, err := mustUserID(c)
+	if err != nil {
+		return err
+	}
+
+	if h.sessionSvc != nil {
+		_ = h.sessionSvc.RevokeAllUserSessions(c.Context(), userID, "global_logout")
+		h.sessionSvc.ClearAuthCookies(c)
+	}
+
+	return response.OK(c, fiber.Map{
+		"success": true,
+		"message": "all sessions revoked successfully",
+	})
 }

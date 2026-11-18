@@ -1,0 +1,36 @@
+[
+  {
+    "id": 330,
+    "parent_id": 52,
+    "parent_code": "ET-OR-WW",
+    "type": "woreda",
+    "slug": "oromia-west-welega-gimbi-town",
+    "code": "OR-WW-GIM",
+    "level": 3,
+    "path": "/1/4/52/330/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Gimbi Town Administration",
+      "am": "ጊምቢ ከተማ አስተዳደር",
+      "om": "Magaalaa Gimbi",
+      "ti": "ጊምቢ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 9.17,
+      "longitude": 35.83,
+      "bbox": {
+        "min_lat": 9.15,
+        "max_lat": 9.19,
+        "min_lng": 35.81,
+        "max_lng": 35.85
+      }
+    }
+  }
+]

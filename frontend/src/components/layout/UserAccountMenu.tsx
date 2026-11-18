@@ -57,7 +57,7 @@ export function UserAccountMenu() {
     return (
       <Link
         href="/auth"
-        className="flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full text-xs font-black uppercase tracking-wider text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/30 transition-all border border-orange-600/30 tap-bounce active:scale-95"
+        className="flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full text-xs font-black uppercase tracking-wider text-[#1769E0] dark:text-[#38A5FF] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-all border border-[#1769E0]/30 tap-bounce active:scale-95"
       >
         <User size={14} />
         <span>{u.tab_sign_in || 'Sign In'}</span>
@@ -83,7 +83,7 @@ export function UserAccountMenu() {
           className="flex items-center gap-2 p-1 pl-2 pr-2.5 min-h-[36px] rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 text-xs font-bold tap-bounce active:scale-95"
           aria-label="User account menu"
         >
-          <div className="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center font-black text-xs">
+          <div className="w-6 h-6 rounded-full bg-[#1769E0] text-white flex items-center justify-center font-black text-xs shadow-sm shadow-[#1769E0]/30">
             {displayInitial}
           </div>
           <span className="max-w-[90px] sm:max-w-[140px] truncate text-zinc-800 dark:text-zinc-200">
@@ -120,7 +120,7 @@ export function UserAccountMenu() {
                 {capabilities.map((cap) => (
                   <span
                     key={cap}
-                    className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20"
+                    className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-lg bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0] dark:text-[#38A5FF] border border-[#1769E0]/30"
                   >
                     {cap}
                   </span>
@@ -162,7 +162,7 @@ export function UserAccountMenu() {
                     className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                   >
                     <div className="flex items-center gap-2.5">
-                      <ShoppingBag size={15} className="text-orange-500" />
+                      <ShoppingBag size={15} className="text-[#1769E0] dark:text-[#38A5FF]" />
                       <span>{u.seller_studio || 'Seller Studio (Goods Sales)'}</span>
                     </div>
                     <span className="text-[10px] text-green-500 font-bold">{u.status_enabled || 'Enabled'}</span>
@@ -174,13 +174,13 @@ export function UserAccountMenu() {
                       setIsOpen(false);
                       setActivationCap('seller');
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors text-left"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-[#1769E0] dark:text-[#38A5FF] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-colors text-left"
                   >
                     <div className="flex items-center gap-2.5">
                       <Sparkles size={15} />
                       <span>{u.activate_seller_studio || 'Activate Seller Studio'}</span>
                     </div>
-                    <span className="text-[9px] uppercase tracking-wider font-bold bg-orange-600 text-white px-1.5 py-0.5 rounded">
+                    <span className="text-[9px] uppercase tracking-wider font-bold bg-[#1769E0] text-white px-1.5 py-0.5 rounded">
                       Sale
                     </span>
                   </button>
@@ -247,7 +247,7 @@ export function UserAccountMenu() {
               <Link
                 href="/seller/product/new"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-orange-600 dark:text-orange-400 hover:bg-orange-50 dark:hover:bg-orange-950/20 transition-colors"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-[#1769E0] dark:text-[#38A5FF] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-colors"
               >
                 <PlusCircle size={15} />
                 <span>{u.create_new_listing || 'Create New Listing'}</span>

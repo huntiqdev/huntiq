@@ -1,0 +1,23 @@
+{
+  "name": "HUNTIQ Marketplace",
+  "short_name": "HUNTIQ",
+  "description": "Ethiopia's Universal Marketplace — Buy, Sell, and Rent across Ethiopia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/huntiq.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/huntiq.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+

@@ -17,7 +17,8 @@ function NewProductContent() {
   useEffect(() => {
     if (loading) return;
     if (!user) {
-      router.push(`/auth?intent=${isRental ? 'rent' : 'sell'}`);
+      const target = `/seller/product/new?type=${isRental ? 'rent' : 'sale'}`;
+      router.replace(`/auth?as=${isRental ? 'landlord' : 'seller'}&intent=${isRental ? 'rent' : 'sell'}&redirect=${encodeURIComponent(target)}`);
       return;
     }
     // Contextual capability activation for authenticated users
@@ -77,7 +78,7 @@ export default function NewProductPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1769E0]"></div>
       </div>
     }>
       <NewProductContent />

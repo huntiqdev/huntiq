@@ -87,6 +87,15 @@ export interface Product {
   is_currently_rented?: boolean;
   current_tenant_id?: number;
   rented_until?: string; // DATE
+
+  // Gold & Premium Merchant Features
+  custom_url?: string;
+  social_links?: Record<string, string>;
+
+  // Brokerage & Publisher Transparency
+  publisher_role?: 'owner' | 'authorized_seller' | 'broker_agent' | 'representative' | 'government_officer';
+  organization_id?: number;
+  brokerage_disclosure_agreed?: boolean;
   
   category?: Category;
   location?: Location;
@@ -112,7 +121,10 @@ export interface ProductFilters {
   woreda?: string;
   search?: string;
   listing_type?: 'sale' | 'rent'; // Filter by listing type
-  sort_by?: 'price_asc' | 'price_desc' | 'newest';
+  sort_by?: 'price_asc' | 'price_desc' | 'newest' | 'nearest';
+  lat?: number;
+  lng?: number;
+  max_distance?: number;
   mode?: 'ai' | 'manual';
   locale?: string;
   preferred_language?: string;
@@ -202,6 +214,66 @@ export interface WithdrawalRequest {
   paid_at?: string;
 }
 
+export interface WalletAccount {
+  id: number;
+  user_id: number;
+  currency: string;
+  available_balance: number;
+  pending_balance: number;
+  reserved_balance: number;
+  total_withdrawn: number;
+  lifetime_earned: number;
+  is_locked: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface LedgerTransaction {
+  id: number;
+  ledger_tx_id: string;
+  user_id: number;
+  debit_account: string;
+  credit_account: string;
+  amount: number;
+  currency: string;
+  entry_type: string;
+  reference_id?: string;
+  source_event: string;
+  status: string;
+  idempotency_key: string;
+  notes?: string;
+  created_at: string;
+}
+
+export interface TelebirrOrder {
+  id: number;
+  out_trade_no: string;
+  user_id: number;
+  amount: number;
+  currency: string;
+  title: string;
+  order_type: string;
+  status: string;
+  prepay_id?: string;
+  transaction_no?: string;
+  payer_phone?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ReferralRewardPolicy {
+  id: number;
+  policy_name: string;
+  registration_reward_amount: number;
+  transaction_reward_percent: number;
+  min_qualifying_tx_amount: number;
+  max_reward_per_tx: number;
+  reward_holding_days: number;
+  version: number;
+  is_active: boolean;
+  effective_from: string;
+}
+
 // ── Validation error shapes ───────────────────────────────────────────────────
 // All form validation interfaces live here so every part of the system
 // uses the same shape. Values are i18n keys (from t.errors / t.ui),
@@ -230,4 +302,53 @@ export interface ProductErrors {
 export interface OrderErrors {
   name?: string;
   phone?: string;
+}
+
+// ── National Identity Verification (Fayda eKYC) ──────────────────────────────
+
+export type IdentityVerificationStatus = 'unverified' | 'pending' | 'verified' | 'rejected' | 'escalated';
+export type PhoneMatchStatus = 'verified' | 'mismatch' | 'unsupported_by_provider' | 'exempted';
+
+export interface IdentityVerification {
+  id: number;
+  user_id: number;
+  provider_code: string;
+  credential_type: string;
+  id_masked: string;
+  full_legal_name: string;
+  phone_matched: boolean;
+  phone_match_status: PhoneMatchStatus;
+  auth_reference: string;
+  status: IdentityVerificationStatus;
+  verified_at?: string;
+  created_at: string;
+}
+
+// ── Account Entity Classification & Organizations ─────────────────────────────
+
+export type AccountEntityType = 'INDIVIDUAL' | 'COMPANY' | 'GOVERNMENT' | 'OTHER_LEGALLY_APPROVED_ENTITY';
+export type OrgVerificationStatus = 'pending' | 'verified' | 'rejected' | 'suspended';
+export type OrgMemberRole = 'owner' | 'admin' | 'publisher' | 'finance' | 'viewer';
+
+export interface Organization {
+  id: number;
+  name: string;
+  entity_type: AccountEntityType;
+  registration_number?: string;
+  tin_number?: string;
+  official_address?: string;
+  official_email?: string;
+  official_phone?: string;
+  verification_status: OrgVerificationStatus;
+  publishing_mandate_verified: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrganizationMember {
+  id: number;
+  organization_id: number;
+  user_id: number;
+  role: OrgMemberRole;
+  joined_at: string;
 }

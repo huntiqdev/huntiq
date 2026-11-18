@@ -1,0 +1,36 @@
+[
+  {
+    "id": 393,
+    "parent_id": 115,
+    "parent_code": "ET-SE-KO",
+    "type": "woreda",
+    "slug": "south-ethiopia-konso-karat-town",
+    "code": "SE-KO-KAR",
+    "level": 3,
+    "path": "/1/13/115/393/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Karat (Konso) Town Administration",
+      "am": "ካራት (ኮንሶ) ከተማ አስተዳደር",
+      "om": "Magaalaa Kaarat",
+      "ti": "ካራት (ኮንሶ) ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 5.34,
+      "longitude": 37.435,
+      "bbox": {
+        "min_lat": 5.33,
+        "max_lat": 5.35,
+        "min_lng": 37.425,
+        "max_lng": 37.445
+      }
+    }
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "id": 64,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-east-gojjam",
+  "code": "ET-AM-EJ",
+  "level": 2,
+  "path": "/1/5/64/",
+  "display_order": 28,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "East Gojam",
+    "Misraq Gojjam",
+    "ምስራቅ ጎጃም"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "East Gojjam Zone",
+    "am": "ምስራቅ ጎጃም ዞን",
+    "om": "Gojjaam Bahaa",
+    "ti": "ዞን ምስራቕ ጎጃም"
+  },
+  "coordinates": {
+    "latitude": 10.33,
+    "longitude": 37.72,
+    "bbox": null
+  }
+}

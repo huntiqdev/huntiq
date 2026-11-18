@@ -1,0 +1,32 @@
+{
+  "id": 55,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-ilu-aba-bor",
+  "code": "ET-OR-IB",
+  "level": 2,
+  "path": "/1/4/55/",
+  "display_order": 19,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Illubabor",
+    "ኢሉ አባቦራ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Ilu Aba Bor Zone",
+    "am": "ኢሉ አባ ቦራ ዞን",
+    "om": "Illuu Abbaa Booraa",
+    "ti": "ዞን ኢሉ ኣባ ቦራ"
+  },
+  "coordinates": {
+    "latitude": 8.3,
+    "longitude": 35.75,
+    "bbox": null
+  }
+}

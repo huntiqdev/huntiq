@@ -104,8 +104,8 @@ export function BuyModal({ product, onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${isRental ? 'bg-teal-100 dark:bg-teal-900/30' : 'bg-orange-100 dark:bg-orange-900/30'}`}>
-              <Phone size={16} className={isRental ? 'text-teal-600' : 'text-orange-600'} />
+            <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${isRental ? 'bg-teal-100 dark:bg-teal-900/30' : 'bg-[#1769E0]/10 dark:bg-[#1769E0]/20'}`}>
+              <Phone size={16} className={isRental ? 'text-teal-600' : 'text-[#1769E0]'} />
             </div>
             <h2 className="font-black text-base text-zinc-900 dark:text-white">
               {step === 'form' 
@@ -148,7 +148,7 @@ export function BuyModal({ product, onClose }: Props) {
             <div className="bg-zinc-50 dark:bg-zinc-800 rounded-2xl px-4 py-3 mb-4 flex items-center gap-3">
               <div className="flex-1 min-w-0">
                 <p className="font-bold text-sm truncate">{product.title}</p>
-                <p className={`font-black text-sm ${isRental ? 'text-teal-600' : 'text-orange-600'}`}>
+                <p className={`font-black text-sm ${isRental ? 'text-teal-600' : 'text-[#1769E0]'}`}>
                   {isRental 
                     ? `ETB ${product.rental_price != null ? product.rental_price.toLocaleString() : (product.price != null ? product.price.toLocaleString() : '—')} / month`
                     : `ETB ${product.price != null ? product.price.toLocaleString() : '—'}`}
@@ -255,7 +255,7 @@ export function BuyModal({ product, onClose }: Props) {
                 className={`w-full text-white rounded-xl py-3 text-sm font-bold shadow-lg transition-all tap-bounce active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 min-h-[44px] ${
                   isRental 
                     ? 'bg-teal-600 hover:bg-teal-700 shadow-teal-600/20' 
-                    : 'bg-orange-600 hover:bg-orange-700 shadow-orange-600/20'
+                    : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/20'
                 }`}>
                 {loading ? <Loader2 size={16} className="animate-spin" /> : <Phone size={16} />}
                 {loading ? (u.buy_modal_sending ?? 'Sending…') : (u.send_contact_request ?? 'Send Request')}
@@ -265,7 +265,7 @@ export function BuyModal({ product, onClose }: Props) {
               {!isBuyer && (
                 <p className="text-center text-[11px] text-zinc-400">
                   Have a user account?{' '}
-                  <Link href="/auth?as=buyer" onClick={onClose} className="text-orange-600 font-bold hover:underline">
+                  <Link href="/auth?as=buyer" onClick={onClose} className="text-[#1769E0] font-bold hover:underline">
                     Sign in
                   </Link>{' '}
                   for auto-fill
@@ -291,7 +291,7 @@ export function BuyModal({ product, onClose }: Props) {
               </p>
             </div>
             <button type="button" onClick={onClose}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white rounded-xl py-3 font-bold text-sm transition-colors">
+              className="w-full bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl py-3 font-bold text-sm transition-colors">
               {u.done ?? 'Done'}
             </button>
           </div>

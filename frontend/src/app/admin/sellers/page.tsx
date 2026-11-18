@@ -49,6 +49,8 @@ interface Seller {
   net_profit?: number;
   seller_preference?: string;
   capabilities?: string[];
+  sale_product_count?: number;
+  rent_product_count?: number;
   created_at: string;
   updated_at: string;
 }
@@ -186,12 +188,14 @@ export default function AdminSellersPage() {
   const activeCount = sellers.filter((s) => s.is_active).length;
   const deactivatedCount = sellers.filter((s) => !s.is_active).length;
   const goodsSellersCount = sellers.filter(
-    (s) => (s.seller_preference || 'sale') === 'sale' || s.seller_preference === 'both'
+    (s) => (s.sale_product_count ?? 0) > 0 || ((s.rent_product_count ?? 0) === 0 && (s.seller_preference || 'sale') === 'sale')
   ).length;
   const landlordsCount = sellers.filter(
-    (s) => s.seller_preference === 'rent' || s.seller_preference === 'both'
+    (s) => (s.rent_product_count ?? 0) > 0 || ((s.sale_product_count ?? 0) === 0 && s.seller_preference === 'rent')
   ).length;
-  const dualCount = sellers.filter((s) => s.seller_preference === 'both').length;
+  const dualCount = sellers.filter(
+    (s) => (s.sale_product_count ?? 0) > 0 && (s.rent_product_count ?? 0) > 0
+  ).length;
 
   // With server-side strategy filtering, sellers is already filtered by personaFilter
   const displayedSellers = sellers;
@@ -630,21 +634,30 @@ export default function AdminSellersPage() {
                         </div>
                       </td>
 
-                      {/* Strategy & Role Badge */}
+                      {/* Strategy & Role Badge with real product counts */}
                       <td className="py-3.5 px-4">
-                        {pref === 'rent' ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-950/60 border border-teal-500/30 text-teal-300 text-[11px] font-bold">
-                            <Home size={12} className="text-teal-400" /> Landlord (Rent)
-                          </span>
-                        ) : pref === 'both' ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold">
-                            <Layers size={12} className="text-indigo-400" /> Dual (Sale & Rent)
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-950/60 border border-orange-500/30 text-orange-300 text-[11px] font-bold">
-                            <Store size={12} className="text-orange-400" /> Seller (Sale)
-                          </span>
-                        )}
+                        <div className="space-y-1">
+                          {pref === 'rent' || ((seller.rent_product_count ?? 0) > 0 && (seller.sale_product_count ?? 0) === 0) ? (
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-950/60 border border-teal-500/30 text-teal-300 text-[11px] font-bold">
+                              <Home size={12} className="text-teal-400" /> Landlord (Rent)
+                            </span>
+                          ) : pref === 'both' || ((seller.sale_product_count ?? 0) > 0 && (seller.rent_product_count ?? 0) > 0) ? (
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 text-[11px] font-bold">
+                              <Layers size={12} className="text-indigo-400" /> Dual (Sale & Rent)
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-950/60 border border-orange-500/30 text-orange-300 text-[11px] font-bold">
+                              <Store size={12} className="text-orange-400" /> Seller (Sale)
+                            </span>
+                          )}
+                          {((seller.sale_product_count ?? 0) > 0 || (seller.rent_product_count ?? 0) > 0) && (
+                            <div className="text-[10px] text-zinc-400 font-mono">
+                              {(seller.sale_product_count ?? 0) > 0 ? `${seller.sale_product_count} for sale` : ''}
+                              {(seller.sale_product_count ?? 0) > 0 && (seller.rent_product_count ?? 0) > 0 ? ' • ' : ''}
+                              {(seller.rent_product_count ?? 0) > 0 ? `${seller.rent_product_count} for rent` : ''}
+                            </div>
+                          )}
+                        </div>
                       </td>
 
                       {/* Business Details */}

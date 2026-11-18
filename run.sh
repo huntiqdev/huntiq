@@ -1,135 +1,150 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# HUNTIQ — Single Command Unified Development Runner
-# Runs AI (Ollama Qwen3 4B) + Go Backend (:8080) + Next.js Frontend (:3000)
+# HUNTIQ — Fast Unified Orchestrator (Native & Docker)
 # ==============================================================================
-
 set -euo pipefail
 
-# Project Directories
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_DIR="$PROJECT_ROOT/backend"
-FRONTEND_DIR="$PROJECT_ROOT/frontend"
-AI_DIR="$PROJECT_ROOT/ai"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND="$ROOT/backend"
+FRONTEND="$ROOT/frontend"
 
-# Terminal Colors
-C_RESET='\033[0m'
-C_CYAN='\033[1;36m'
-C_GREEN='\033[1;32m'
-C_YELLOW='\033[1;33m'
-C_BLUE='\033[1;34m'
-C_RED='\033[1;31m'
-C_BOLD='\033[1m'
-
-echo -e "${C_CYAN}╔══════════════════════════════════════════════════════════════╗${C_RESET}"
-echo -e "${C_CYAN}║             HUNTIQ Universal Marketplace Platform            ║${C_RESET}"
-echo -e "${C_CYAN}║     Single Command Runner: AI + Go Backend + Frontend UI     ║${C_RESET}"
-echo -e "${C_CYAN}╚══════════════════════════════════════════════════════════════╝${C_RESET}"
-echo ""
-
-# ── 1. Check & Ensure Local AI Runtime (Ollama) ───────────────
-echo -e "${C_BLUE}[1/3] 🤖 Checking Local AI Runtime (Ollama)...${C_RESET}"
-OLLAMA_URL="http://127.0.0.1:11434"
-
-if ! curl -s --connect-timeout 2 "$OLLAMA_URL/api/tags" >/dev/null 2>&1; then
-    echo -e "      Starting Ollama Docker container..."
-    if command -v docker >/dev/null 2>&1; then
-        if docker ps -a --format '{{.Names}}' | grep -Eq '^ollama$'; then
-            docker start ollama >/dev/null
-        else
-            bash "$AI_DIR/scripts/setup_local.sh"
-        fi
-    else
-        echo -e "${C_RED}[ERROR] Ollama daemon is not running and docker is unavailable.${C_RESET}"
-        exit 1
-    fi
-    # Wait for daemon
-    for i in {1..10}; do
-        if curl -s --connect-timeout 1 "$OLLAMA_URL/api/tags" >/dev/null 2>&1; then
-            break
-        fi
-        sleep 1
-    done
+# Read DB config from .env if present
+DB_HOST="/tmp"
+DB_PORT="5433"
+if [ -f "$BACKEND/.env" ]; then
+    DB_HOST=$(grep -E '^[[:space:]]*DB_HOST=' "$BACKEND/.env" | head -n 1 | cut -d '=' -f2- | tr -d ' "\r' || echo "/tmp")
+    DB_PORT=$(grep -E '^[[:space:]]*DB_PORT=' "$BACKEND/.env" | head -n 1 | cut -d '=' -f2- | tr -d ' "\r' || echo "5433")
 fi
+[ -z "$DB_HOST" ] && DB_HOST="/tmp"
+[ -z "$DB_PORT" ] && DB_PORT="5433"
 
-if curl -s --connect-timeout 2 "$OLLAMA_URL/api/tags" >/dev/null 2>&1; then
-    echo -e "      ${C_GREEN}✓ Ollama running locally at $OLLAMA_URL${C_RESET}"
-    echo -e "      ${C_GREEN}✓ Active model: huntiq-assistant:latest (Qwen3 4B)${C_RESET}"
-else
-    echo -e "${C_RED}[ERROR] Could not connect to local Ollama on $OLLAMA_URL${C_RESET}"
-    exit 1
-fi
-
-# ── 2. Process Cleanup Trap (Graceful Shutdown on Ctrl+C) ──────
 PIDS=()
+
 cleanup() {
-    echo ""
-    echo -e "${C_YELLOW}Shutting down HUNTIQ services gracefully...${C_RESET}"
-    for pid in "${PIDS[@]}"; do
-        if kill -0 "$pid" 2>/dev/null; then
-            kill "$pid" 2>/dev/null || true
-        fi
+    echo -e "\n🛑 Stopping all services..."
+    for pid in "${PIDS[@]:-}"; do
+        kill "$pid" 2>/dev/null || true
     done
     wait 2>/dev/null || true
-    echo -e "${C_GREEN}All services stopped cleanly.${C_RESET}"
     exit 0
 }
-trap cleanup SIGINT SIGTERM EXIT
+trap cleanup SIGINT SIGTERM
 
-# ── 3. Start Go Backend (:8080) ───────────────────────────────
-echo ""
-echo -e "${C_BLUE}[2/3] 🔧 Starting Go Backend API (:8080)...${C_RESET}"
+in_use() {
+    if command -v lsof >/dev/null 2>&1; then
+        lsof -i ":$1" -sTCP:LISTEN >/dev/null 2>&1 && return 0
+    fi
+    if command -v ss >/dev/null 2>&1; then
+        ss -tulpn 2>/dev/null | grep -q ":$1 " && return 0
+    fi
+    return 1
+}
 
-# Check if port 8080 is already occupied
-if ss -tulpn 2>/dev/null | grep -q ':8080 '; then
-    echo -e "      ${C_YELLOW}Port 8080 is already active (using running backend).${C_RESET}"
-else
-    (
-        cd "$BACKEND_DIR"
-        go run ./cmd/api
-    ) 2>&1 | sed -e "s/^/[BACKEND] /" &
-    PIDS+=($!)
-    
-    # Wait for backend healthcheck
-    echo -n "      Waiting for backend to become ready..."
-    for i in {1..20}; do
-        if curl -s http://127.0.0.1:8080/health >/dev/null 2>&1 || curl -s http://127.0.0.1:8080/api/health >/dev/null 2>&1; then
-            echo -e " ${C_GREEN}Ready!${C_RESET}"
-            break
+start_postgres() {
+    # 1. Check primary configured host & port
+    if psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+        return 0
+    fi
+
+    # 2. Check alternative active daemon (5433 in /tmp vs 5432)
+    if [ "$DB_PORT" = "5432" ] && psql -h "/tmp" -p 5433 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+        DB_HOST="/tmp"
+        DB_PORT="5433"
+        return 0
+    fi
+    if [ "$DB_PORT" = "5433" ] && psql -h "127.0.0.1" -p 5432 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+        DB_HOST="127.0.0.1"
+        DB_PORT="5432"
+        return 0
+    fi
+
+    echo "📦 Starting local PostgreSQL daemon ($DB_PORT)..."
+    if [ -f /tmp/pgdata/postmaster.pid ]; then
+        local pid
+        pid=$(head -n 1 /tmp/pgdata/postmaster.pid 2>/dev/null || echo "")
+        if [ -n "$pid" ] && ! kill -0 "$pid" 2>/dev/null; then
+            rm -f /tmp/pgdata/postmaster.pid 2>/dev/null || true
         fi
-        sleep 0.5
-    done
-fi
+    fi
+    if [ -x "/usr/lib/postgresql/18/bin/postgres" ] && [ -d "/tmp/pgdata" ]; then
+        /usr/lib/postgresql/18/bin/postgres -D /tmp/pgdata -p "$DB_PORT" -k "$DB_HOST" >/tmp/postgres.log 2>&1 &
+        PIDS+=($!)
+        for _ in {1..20}; do
+            psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1 && return 0
+            sleep 0.3
+        done
+    fi
+    echo "❌ PostgreSQL failed to start on $DB_HOST:$DB_PORT" && exit 1
+}
 
-# ── 4. Start Next.js Frontend (:3000) ─────────────────────────
-echo ""
-echo -e "${C_BLUE}[3/3] 🌐 Starting Next.js Frontend (:3000)...${C_RESET}"
+cmd_native() {
+    echo "🚀 Starting HUNTIQ Native Stack..."
+    start_postgres
+    echo "✓ Database online (Port: $DB_PORT)"
 
-# Check if port 3000 is already occupied
-if ss -tulpn 2>/dev/null | grep -q ':3000 '; then
-    echo -e "      ${C_YELLOW}Port 3000 is already active (using running frontend).${C_RESET}"
-else
-    (
-        cd "$FRONTEND_DIR"
-        npm run dev
-    ) 2>&1 | sed -e "s/^/[FRONTEND] /" &
-    PIDS+=($!)
-    
-    # Wait briefly for Next.js initialization
-    sleep 2
-fi
+    # Ensure database schema is migrated
+    if [ -f "$BACKEND/scripts/migrate.sh" ]; then
+        (cd "$BACKEND" && ./scripts/migrate.sh) >/dev/null 2>&1 || true
+    fi
 
-echo ""
-echo -e "${C_GREEN}════════════════════════════════════════════════════════════════${C_RESET}"
-echo -e "${C_GREEN}${C_BOLD}✓ HUNTIQ is now running locally!${C_RESET}"
-echo ""
-echo -e "  🌐 ${C_BOLD}Frontend Application :${C_RESET} ${C_CYAN}http://localhost:3000${C_RESET}"
-echo -e "  💬 ${C_BOLD}AI Conversational UI :${C_RESET} ${C_CYAN}http://localhost:3000/ai${C_RESET}"
-echo -e "  🔧 ${C_BOLD}Go Backend API       :${C_RESET} ${C_CYAN}http://localhost:8080${C_RESET}"
-echo -e "  🤖 ${C_BOLD}Ollama Local Model   :${C_RESET} ${C_CYAN}http://127.0.0.1:11434${C_RESET}"
-echo -e "${C_GREEN}════════════════════════════════════════════════════════════════${C_RESET}"
-echo -e "${C_YELLOW}Press Ctrl+C to stop all services.${C_RESET}"
-echo ""
+    if in_use 8080; then
+        echo "✓ Backend API already running on :8080"
+    else
+        echo "🔧 Starting Go Backend (:8080)..."
+        (cd "$BACKEND" && go run ./cmd/api) 2>&1 | sed -e 's/^/[BACKEND] /' &
+        local backend_pid=$!
+        PIDS+=($backend_pid)
+        for _ in {1..30}; do
+            curl -s http://127.0.0.1:8080/health >/dev/null 2>&1 && break
+            sleep 0.3
+        done
+    fi
 
-# Keep running until Ctrl+C
-wait
+    if in_use 3000; then
+        echo "✓ Frontend already running on :3000"
+    else
+        echo "🌐 Starting Next.js Frontend (:3000)..."
+        (cd "$FRONTEND" && npm run dev) 2>&1 | sed -e 's/^/[FRONTEND] /' &
+        PIDS+=($!)
+    fi
+
+    echo -e "\n══════════════════════════════════════════════════"
+    echo "✓ HUNTIQ is ready:"
+    echo "  • Web App : http://localhost:3000"
+    echo "  • API     : http://localhost:8080"
+    echo "  • Health  : http://localhost:8080/health"
+    echo -e "══════════════════════════════════════════════════\n"
+    [ ${#PIDS[@]} -gt 0 ] && wait
+}
+
+cmd_docker() {
+    echo "🐳 Starting HUNTIQ in Docker Compose..."
+    local compose="docker compose"
+    docker compose version >/dev/null 2>&1 || compose="docker-compose"
+    trap '$compose down; exit 0' SIGINT SIGTERM
+    $compose up --build
+}
+
+cmd_status() {
+    echo "📊 HUNTIQ Status Check:"
+    if psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+        local cat_count
+        cat_count=$(psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -t -A -c "SELECT count(*) FROM category_hierarchy;" 2>/dev/null || echo "0")
+        echo "  • Database : ONLINE (Port $DB_PORT, $cat_count categories)"
+    else
+        echo "  • Database : OFFLINE"
+    fi
+    curl -s http://127.0.0.1:8080/health >/dev/null 2>&1 \
+        && echo "  • Backend  : ONLINE (:8080)" || echo "  • Backend  : OFFLINE"
+    curl -sI http://127.0.0.1:3000 >/dev/null 2>&1 \
+        && echo "  • Frontend : ONLINE (:3000)" || echo "  • Frontend : OFFLINE"
+}
+
+case "${1:-}" in
+    --docker|-d)  cmd_docker ;;
+    --status|-s)  cmd_status ;;
+    --migrate)    bash "$BACKEND/scripts/migrate.sh" ;;
+    --help|-h)    echo "Usage: ./run.sh [--docker|-d | --status|-s | --migrate | --help|-h]" ;;
+    "")           cmd_native ;;
+    *)            echo "Unknown option: $1" && exit 1 ;;
+esac

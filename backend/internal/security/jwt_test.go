@@ -1,8 +1,8 @@
 package security_test
 
 import (
-	"testing"
 	"github.com/your-org/used-tools-marketplace/internal/security"
+	"testing"
 )
 
 func TestTierHierarchyAndJWTClaims(t *testing.T) {

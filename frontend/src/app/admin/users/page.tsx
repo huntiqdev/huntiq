@@ -8,6 +8,59 @@ import { Users, ShieldAlert, Check, X, Shield, RefreshCw, UserPlus } from 'lucid
 import { useRouter } from 'next/navigation';
 import { AdminRoleManagerModal } from '@/components/admin/enterprise/AdminRoleManagerModal';
 
+interface RoleMeta {
+  name: string;
+  dept: string;
+  badgeColor: string;
+}
+
+const ROLE_DICTIONARY: Record<string, RoleMeta> = {
+  // Department 1: Executive Governance
+  super: { name: 'Super Administrator', dept: 'Executive Governance', badgeColor: 'bg-red-500/15 text-red-400 border-red-500/30' },
+  platform_owner: { name: 'Platform Owner (CEO)', dept: 'Executive Governance', badgeColor: 'bg-red-500/15 text-red-400 border-red-500/30' },
+  gov_compliance_officer: { name: 'Gov Compliance Officer', dept: 'Executive Governance', badgeColor: 'bg-rose-500/15 text-rose-400 border-rose-500/30' },
+  legal_counsel: { name: 'Legal Counsel', dept: 'Executive Governance', badgeColor: 'bg-rose-500/15 text-rose-400 border-rose-500/30' },
+  hr_director: { name: 'HR & Staff Director', dept: 'Executive Governance', badgeColor: 'bg-rose-500/15 text-rose-400 border-rose-500/30' },
+
+  // Department 2: Cybersecurity & SOC Defense
+  ciso: { name: 'Chief Info Security Officer (CISO)', dept: 'Cybersecurity & SOC', badgeColor: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' },
+  security_admin: { name: 'Security Administrator', dept: 'Cybersecurity & SOC', badgeColor: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' },
+  soc_analyst: { name: 'SOC Threat Analyst', dept: 'Cybersecurity & SOC', badgeColor: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' },
+  fraud_investigator: { name: 'Fraud & AML Investigator', dept: 'Cybersecurity & SOC', badgeColor: 'bg-teal-500/15 text-teal-400 border-teal-500/30' },
+  compliance_auditor: { name: 'Compliance Auditor', dept: 'Cybersecurity & SOC', badgeColor: 'bg-teal-500/15 text-teal-400 border-teal-500/30' },
+
+  // Department 3: Banking, Treasury & Financial Operations
+  finance_director: { name: 'Finance & Treasury Director', dept: 'Finance & Treasury', badgeColor: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30' },
+  transaction_auditor: { name: 'Transaction & Ledger Auditor', dept: 'Finance & Treasury', badgeColor: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30' },
+  tax_controller: { name: 'Tax & NBE Controller', dept: 'Finance & Treasury', badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30' },
+  escrow_reconciler: { name: 'Escrow Reconciler', dept: 'Finance & Treasury', badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30' },
+  finance_support_agent: { name: 'Finance Support Agent', dept: 'Finance & Treasury', badgeColor: 'bg-sky-500/15 text-sky-400 border-sky-500/30' },
+
+  // Department 4: VIP Concierge & Growth Services
+  vip_account_director: { name: 'VIP Account Director', dept: 'VIP & Growth', badgeColor: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
+  gold_concierge: { name: 'Gold Concierge', dept: 'VIP & Growth', badgeColor: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
+  premium_concierge: { name: 'Premium Concierge', dept: 'VIP & Growth', badgeColor: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
+  referral_director: { name: 'Referral Director', dept: 'VIP & Growth', badgeColor: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30' },
+  retention_specialist: { name: 'Retention Specialist', dept: 'VIP & Growth', badgeColor: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30' },
+
+  // Department 5: Marketplace Operations & KYC Verification
+  operations_admin: { name: 'Operations Administrator', dept: 'Marketplace Operations', badgeColor: 'bg-orange-500/15 text-orange-400 border-orange-500/30' },
+  kyc_verification_officer: { name: 'KYC Verification Officer', dept: 'Marketplace Operations', badgeColor: 'bg-orange-500/15 text-orange-400 border-orange-500/30' },
+  product_inspection_officer: { name: 'Product Inspection Officer', dept: 'Marketplace Operations', badgeColor: 'bg-orange-500/15 text-orange-400 border-orange-500/30' },
+  dispute_refund_officer: { name: 'Dispute & Refund Officer', dept: 'Marketplace Operations', badgeColor: 'bg-orange-500/15 text-orange-400 border-orange-500/30' },
+  appeals_officer: { name: 'Appeals Hearing Officer', dept: 'Marketplace Operations', badgeColor: 'bg-orange-500/15 text-orange-400 border-orange-500/30' },
+
+  // Department 6: Catalog, Taxonomy, Logistics & Support
+  platform_admin: { name: 'Platform Administrator', dept: 'Catalog & Infrastructure', badgeColor: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30' },
+  taxonomy_architect: { name: 'Taxonomy Architect', dept: 'Catalog & Taxonomy', badgeColor: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30' },
+  gis_location_specialist: { name: 'GIS Location Specialist', dept: 'Logistics & GIS', badgeColor: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30' },
+  content_moderator: { name: 'Content & Media Moderator', dept: 'Moderation & Safety', badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30' },
+  moderator: { name: 'Content Moderator', dept: 'Moderation & Safety', badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30' },
+  customer_support_lead: { name: 'Customer Support Lead', dept: 'Support & Helpdesk', badgeColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30' },
+  support_agent: { name: 'Support Agent', dept: 'Support & Helpdesk', badgeColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30' },
+  normal: { name: 'Standard Verified Staff', dept: 'General Staff', badgeColor: 'bg-zinc-800 text-zinc-400 border-zinc-700' },
+};
+
 export default function AdminUsersPage() {
   const { user, isSuperAdmin, isPlatformOwner, loading: authLoading } = useAuth();
   const canManageAdmins = isPlatformOwner || isSuperAdmin;
@@ -119,35 +172,23 @@ export default function AdminUsersPage() {
                     </td>
                     <td className="px-6 py-4">
                       {(() => {
-                        const role = a.admin_role || 'operations_admin';
-                        let badgeColor = 'bg-zinc-800 text-zinc-300 border-zinc-700';
-                        let roleName = 'Staff Admin';
-
-                        if (role === 'platform_owner' || role === 'super') {
-                          badgeColor = 'bg-red-500/15 text-red-400 border-red-500/30';
-                          roleName = 'Platform Owner';
-                        } else if (role === 'platform_admin') {
-                          badgeColor = 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30';
-                          roleName = 'Platform Admin';
-                        } else if (role === 'security_admin') {
-                          badgeColor = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
-                          roleName = 'Security Admin';
-                        } else if (role === 'operations_admin' || role === 'normal') {
-                          badgeColor = 'bg-amber-500/15 text-amber-400 border-amber-500/30';
-                          roleName = 'Operations Admin';
-                        } else if (role === 'moderator') {
-                          badgeColor = 'bg-blue-500/15 text-blue-400 border-blue-500/30';
-                          roleName = 'Content Moderator';
-                        } else if (role === 'support_agent') {
-                          badgeColor = 'bg-purple-500/15 text-purple-400 border-purple-500/30';
-                          roleName = 'Support Agent';
-                        }
+                        const roleKey = a.admin_role || 'operations_admin';
+                        const meta = ROLE_DICTIONARY[roleKey] || {
+                          name: roleKey.replace(/_/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+                          dept: 'General Operations',
+                          badgeColor: 'bg-zinc-800 text-zinc-300 border-zinc-700',
+                        };
 
                         return (
-                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${badgeColor}`}>
-                            <Shield size={12} />
-                            {roleName}
-                          </span>
+                          <div className="space-y-1">
+                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${meta.badgeColor}`}>
+                              <Shield size={11} />
+                              {meta.name}
+                            </span>
+                            <div className="text-[10px] font-medium text-zinc-500">
+                              {meta.dept}
+                            </div>
+                          </div>
                         );
                       })()}
                     </td>

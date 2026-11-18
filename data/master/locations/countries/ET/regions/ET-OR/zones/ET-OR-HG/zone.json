@@ -1,0 +1,32 @@
+{
+  "id": 53,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-horo-guduru",
+  "code": "ET-OR-HG",
+  "level": 2,
+  "path": "/1/4/53/",
+  "display_order": 17,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Horo Gudru",
+    "ሆሮ ጉዱሩ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Horo Guduru Welega Zone",
+    "am": "ሆሮ ጉዱሩ ወለጋ ዞን",
+    "om": "Horo Guduruu Wallaggaa",
+    "ti": "ዞን ሆሮ ጉዱሩ ወለጋ"
+  },
+  "coordinates": {
+    "latitude": 9.5,
+    "longitude": 37.05,
+    "bbox": null
+  }
+}

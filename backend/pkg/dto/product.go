@@ -3,14 +3,14 @@ package dto
 // ProductFilter holds query params for the product list endpoint.
 type ProductFilter struct {
 	CategoryID          *int
-	CategoryHierarchyID *int  // New category hierarchy ID
-	IncludeDescendants  bool  // Include products from child categories
+	CategoryHierarchyID *int // New category hierarchy ID
+	IncludeDescendants  bool // Include products from child categories
 	Subcategory         *string
 	Item                *string
 	MinPrice            *float64
 	MaxPrice            *float64
 	LocationID          *int
-	LocationHierarchyID *int  // Data-driven location hierarchy node ID
+	LocationHierarchyID *int // Data-driven location hierarchy node ID
 	Region              *string
 	Zone                *string
 	Subcity             *string
@@ -20,8 +20,12 @@ type ProductFilter struct {
 	Page                int
 	Limit               int
 	ListingType         *string // 'sale' or 'rent' filter
-	SortBy              *string // 'price_asc', 'price_desc', 'newest'
+	SortBy              *string // 'price_asc', 'price_desc', 'newest', 'nearest'
 	SellerTier          *string // 'gold', 'premium', or 'gold,premium'
+	Lat                 *float64 // User/Asker latitude for nearest recommendation
+	Lng                 *float64 // User/Asker longitude for nearest recommendation
+	MaxDistanceKM       *float64 // Maximum distance radius in kilometers
+	Attributes          map[string]string // Dynamic key-value facet filters over products.attributes JSONB
 }
 
 // CreateProductRequest is used by sellers to submit a new product.
@@ -48,16 +52,23 @@ type CreateProductRequest struct {
 	ListingDurationDays int                    `json:"listing_duration_days"`
 	RequiredBuyerTier   string                 `json:"required_buyer_tier,omitempty"`
 	Attributes          map[string]interface{} `json:"attributes,omitempty"`
-	
+	CustomURL           *string                `json:"custom_url,omitempty"`
+	SocialLinks         map[string]interface{} `json:"social_links,omitempty"`
+
 	// Listing type: 'sale' (default) or 'rent'
 	ListingType string `json:"listing_type"`
-	
+
+	// Brokerage & Publisher Transparency
+	PublisherRole             string `json:"publisher_role,omitempty"` // owner, authorized_seller, broker_agent, representative, government_officer
+	OrganizationID            *int   `json:"organization_id,omitempty"`
+	BrokerageDisclosureAgreed bool   `json:"brokerage_disclosure_agreed,omitempty"`
+
 	// Rental-specific fields (required if listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`
 	RentalDurationValue *int     `json:"rental_duration_value,omitempty"`
 	RentalDurationUnit  *string  `json:"rental_duration_unit,omitempty"` // hour, day, week, month, year
 	DepositAmount       *float64 `json:"deposit_amount,omitempty"`
-	AvailableFrom       *string  `json:"available_from,omitempty"` // DATE
+	AvailableFrom       *string  `json:"available_from,omitempty"`  // DATE
 	AvailableUntil      *string  `json:"available_until,omitempty"` // DATE
 }
 
@@ -79,7 +90,14 @@ type UpdateProductRequest struct {
 	Latitude            *float64               `json:"latitude,omitempty"`
 	Longitude           *float64               `json:"longitude,omitempty"`
 	ImageURLs           []string               `json:"image_urls"`
-	
+	CustomURL           *string                `json:"custom_url,omitempty"`
+	SocialLinks         map[string]interface{} `json:"social_links,omitempty"`
+
+	// Brokerage & Publisher Transparency
+	PublisherRole             *string `json:"publisher_role,omitempty"`
+	OrganizationID            *int    `json:"organization_id,omitempty"`
+	BrokerageDisclosureAgreed *bool   `json:"brokerage_disclosure_agreed,omitempty"`
+
 	// Rental fields (only for listing_type='rent')
 	RentalPrice         *float64 `json:"rental_price,omitempty"`
 	RentalDurationValue *int     `json:"rental_duration_value,omitempty"`
@@ -88,6 +106,3 @@ type UpdateProductRequest struct {
 	AvailableFrom       *string  `json:"available_from,omitempty"`
 	AvailableUntil      *string  `json:"available_until,omitempty"`
 }
-
-
-
