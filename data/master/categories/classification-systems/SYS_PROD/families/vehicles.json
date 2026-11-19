@@ -9,7 +9,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "vehicles",
       "names": {
-        "en": "Vehicles & Automotive",
+        "en": "Vehicles",
         "am": "ተሽከርካሪዎች",
         "om": "Konkolaattota",
         "ti": "ተሽከርከርቲ"
@@ -25,7 +25,14 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Auto",
+        "Automobiles",
+        "Automotive",
+        "Cars",
+        "Motor Vehicles",
+        "Vehicles & Automotive"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +42,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "cars",
       "names": {
-        "en": "Cars & Automobiles",
+        "en": "Cars",
         "am": "መኪኖች",
         "om": "Konkolaattota",
-        "ti": "መካይንን ኣውቶሞቢላትን"
+        "ti": "መካይን"
       },
       "description": null,
       "level": 1,
@@ -51,7 +58,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Automobiles",
+        "Cars & Automobiles",
+        "መካይንን ኣውቶሞቢላትን"
+      ],
       "redirects": []
     },
     {
@@ -61,7 +72,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "trucks",
       "names": {
-        "en": "Trucks & Heavy Vehicles",
+        "en": "Trucks",
         "am": "የጭነት መኪኖች",
         "om": "Gaanfa Konkolaataa",
         "ti": "ናይ ጽዕነት መካይን"
@@ -77,7 +88,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Heavy Vehicles",
+        "Trucks & Heavy Vehicles"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +101,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "motorcycles",
       "names": {
-        "en": "Motorcycles & Bajaj",
-        "am": "ሞተርሳይክልና ባጃጅ",
-        "om": "Mootoraa fi Baajaajii",
-        "ti": "ሞተርሳይክልን ባጃጅን"
+        "en": "Motorcycles",
+        "am": "ሞተርሳይክል",
+        "om": "Mootoraa",
+        "ti": "ሞተርሳይክል"
       },
       "description": null,
       "level": 1,
@@ -103,7 +117,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bajaj",
+        "Mootoraa fi Baajaajii",
+        "Motorcycles & Bajaj",
+        "ሞተርሳይክልና ባጃጅ",
+        "ሞተርሳይክልን ባጃጅን"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +159,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "three-wheelers-bajaj",
       "names": {
-        "en": "Three-Wheelers & Bajaj Auto Rickshaws",
-        "am": "ባለ ሶስት እግር ባጃጅና አውቶ ሪክሾዎች",
-        "om": "Baajaajii fi Rikkishoo Miila Sadii",
-        "ti": "ባዓል ሰለስተ እግሪ ባጃጅን ሪክሾን"
+        "en": "Three-Wheelers",
+        "am": "ባለ ሶስት እግር ባጃጅ",
+        "om": "Baajaajii",
+        "ti": "ባዓል ሰለስተ እግሪ ባጃጅ"
       },
       "description": "Three-wheeled motorized passenger and cargo auto-rickshaws (Bajaj, TVS, Piaggio)",
       "level": 2,
@@ -155,7 +175,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Baajaajii fi Rikkishoo Miila Sadii",
+        "Bajaj Auto Rickshaws",
+        "Three-Wheelers & Bajaj Auto Rickshaws",
+        "ባለ ሶስት እግር ባጃጅና አውቶ ሪክሾዎች",
+        "ባዓል ሰለስተ እግሪ ባጃጅን ሪክሾን"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +191,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "passenger-sedans-compacts",
       "names": {
-        "en": "Passenger Sedans & Compact Automobiles",
-        "am": "የቤት አውቶሞቢሎችና ኮምፓክት መኪኖች",
-        "om": "Konkolaattota Maatii fi Sedaanota",
-        "ti": "ናይ ገዛ መኻይንን ኮምፓክት ሴዳናትን"
+        "en": "Passenger Sedans",
+        "am": "የቤት አውቶሞቢሎች",
+        "om": "Konkolaattota Maatii",
+        "ti": "ናይ ገዛ መኻይን"
       },
       "description": "Four-door passenger sedans and compact hatchback automobiles",
       "level": 2,
@@ -181,7 +207,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Automobiles",
+        "Konkolaattota Maatii fi Sedaanota",
+        "Passenger Sedans & Compact Automobiles",
+        "ናይ ገዛ መኻይንን ኮምፓክት ሴዳናትን",
+        "የቤት አውቶሞቢሎችና ኮምፓክት መኪኖች"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +275,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "special-purpose-hybrid-modified-road-vehicles",
       "names": {
-        "en": "Special Purpose, Hybrid & Modified Road Vehicles",
-        "am": "ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Special Purpose",
+        "am": "ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Konkolaattota Addaa",
+        "ti": "ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 2,
@@ -259,7 +291,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles",
+        "Special Purpose, Hybrid & Modified Road Vehicles",
+        "ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
+        "ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +308,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "electric-three-wheelers-cargo-bajaj-touring-motorbikes",
       "names": {
-        "en": "Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
-        "am": "የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Electric Three-Wheelers",
+        "am": "የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Bajaajii Elektiriikii",
+        "ti": "ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 2,
@@ -285,7 +324,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Cargo Bajaj",
+        "Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
+        "Touring Motorbikes",
+        "ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +341,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-construction-dumpers-concrete-mixers-mobile-cranes",
       "names": {
-        "en": "Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
-        "am": "የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Heavy Construction Dumpers",
+        "am": "የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 2,
@@ -311,7 +357,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
+        "Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes",
+        "ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +426,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "economy-city-sedans",
       "names": {
-        "en": "Economy City Sedans & Hatchbacks",
-        "am": "ተመጣጣኝ የከተማ አውቶሞቢሎችና ሀችባኮች",
-        "om": "Sedaanota Magaalaa fi Haachibaakii Qusataa",
-        "ti": "ተመጣጣኒ ዋጋ ናይ ከተማ መኻይንን ሃችባክን"
+        "en": "Economy City Sedans",
+        "am": "ተመጣጣኝ የከተማ አውቶሞቢሎች",
+        "om": "Sedaanota Magaalaa",
+        "ti": "ተመጣጣኒ ዋጋ ናይ ከተማ መኻይን"
       },
       "description": "Fuel-efficient compact sedans widely used for private family commute and ride-hailing",
       "level": 3,
@@ -389,7 +442,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Economy City Sedans & Hatchbacks",
+        "Hatchbacks",
+        "Sedaanota Magaalaa fi Haachibaakii Qusataa",
+        "ተመጣጣኒ ዋጋ ናይ ከተማ መኻይንን ሃችባክን",
+        "ተመጣጣኝ የከተማ አውቶሞቢሎችና ሀችባኮች"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +510,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-special-purpose-hybrid-modified-road-vehicles-unit",
       "names": {
-        "en": "Premium Grade Certified Special Purpose, Hybrid & Modified Road Vehicles Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Kan Qulqullina Olaanaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Premium Grade Certified Special Purpose",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Kan Qulqullina Olaanaa Konkolaattota Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -467,7 +526,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Kan Qulqullina Olaanaa Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Unit",
+        "Premium Grade Certified Special Purpose, Hybrid & Modified Road Vehicles Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +543,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-special-purpose-hybrid-modified-road-vehicles-component",
       "names": {
-        "en": "Heavy-Duty Commercial Special Purpose, Hybrid & Modified Road Vehicles Component",
-        "am": "ጠንካራ የንግድ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Heavy-Duty Commercial Special Purpose",
+        "am": "ጠንካራ የንግድ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Meeshaa Hojii Cimaa Konkolaattota Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -493,7 +559,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Heavy-Duty Commercial Special Purpose, Hybrid & Modified Road Vehicles Component",
+        "Hybrid",
+        "Meeshaa Hojii Cimaa Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Component",
+        "ከቢድ ናይ ንግዲ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን",
+        "ጠንካራ የንግድ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -503,10 +576,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-special-purpose-hybrid-modified-road-vehicles-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Special Purpose, Hybrid & Modified Road Vehicles Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Qusataa Humnaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Eco-Friendly Energy-Saving Special Purpose",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Konkolaattota Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -519,7 +592,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Eco-Friendly Energy-Saving Special Purpose, Hybrid & Modified Road Vehicles Model",
+        "Hybrid",
+        "Modified Road Vehicles Model",
+        "Qusataa Humnaa Konkolaattota Addaa fi Haayibiriidii",
+        "ሓይሊ ዝቑጥብ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +609,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-special-purpose-hybrid-modified-road-vehicles-assembly",
       "names": {
-        "en": "Standard Industrial Special Purpose, Hybrid & Modified Road Vehicles Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ስብስብ",
-        "om": "Asambilii Indaastirii Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Standard Industrial Special Purpose",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Asambilii Indaastirii Konkolaattota Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -545,7 +625,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Konkolaattota Addaa fi Haayibiriidii",
+        "Hybrid",
+        "Modified Road Vehicles Assembly",
+        "Standard Industrial Special Purpose, Hybrid & Modified Road Vehicles Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +642,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-special-purpose-hybrid-modified-road-vehicles-system",
       "names": {
-        "en": "Compact Portable Special Purpose, Hybrid & Modified Road Vehicles System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ተንቀሳቓሲ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Compact Portable Special Purpose",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -571,7 +658,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Special Purpose, Hybrid & Modified Road Vehicles System",
+        "Hybrid",
+        "Modified Road Vehicles System",
+        "Sirna Salphaa fi Socho'aa Konkolaattota Addaa fi Haayibiriidii",
+        "ቀላልና ተንቀሳቃሽ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ስርዓት",
+        "ተንቀሳቓሲ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -581,10 +675,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-special-purpose-hybrid-modified-road-vehicles-module",
       "names": {
-        "en": "Digital Automated Special Purpose, Hybrid & Modified Road Vehicles Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Digital Automated Special Purpose",
+        "am": "ዲጂታል አውቶሜትድ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Moojiyulii Dijitaalaa Konkolaattota Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -597,7 +691,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Automated Special Purpose, Hybrid & Modified Road Vehicles Module",
+        "Hybrid",
+        "Modified Road Vehicles Module",
+        "Moojiyulii Dijitaalaa Konkolaattota Addaa fi Haayibiriidii",
+        "ዲጂታል አውቶሜትድ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -607,10 +708,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-special-purpose-hybrid-modified-road-vehicles-device",
       "names": {
-        "en": "High-Capacity Multi-Function Special Purpose, Hybrid & Modified Road Vehicles Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Meeshaa Dandeettii Guddaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "High-Capacity Multi-Function Special Purpose",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Meeshaa Dandeettii Guddaa Konkolaattota Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -623,7 +724,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "High-Capacity Multi-Function Special Purpose, Hybrid & Modified Road Vehicles Device",
+        "Hybrid",
+        "Meeshaa Dandeettii Guddaa Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -633,10 +741,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-special-purpose-hybrid-modified-road-vehicles-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Special Purpose, Hybrid & Modified Road Vehicles Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Kan Qilleensa Dandamatu Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Reinforced Weatherproof Special Purpose",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Kan Qilleensa Dandamatu Konkolaattota Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -649,7 +757,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Kan Qilleensa Dandamatu Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Fixture",
+        "Reinforced Weatherproof Special Purpose, Hybrid & Modified Road Vehicles Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን",
+        "አየር የማይበግረው የተጠናከረ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -659,10 +774,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-special-purpose-hybrid-modified-road-vehicles-hardware",
       "names": {
-        "en": "Precision Engineered Special Purpose, Hybrid & Modified Road Vehicles Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Precision Engineered Special Purpose",
+        "am": "በትክክለኛነት የተሰራ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Haardiweerii Qulqullinaa Konkolaattota Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -675,7 +790,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Haardiweerii Qulqullinaa Konkolaattota Addaa fi Haayibiriidii",
+        "Hybrid",
+        "Modified Road Vehicles Hardware",
+        "Precision Engineered Special Purpose, Hybrid & Modified Road Vehicles Hardware",
+        "በትክክለኛነት የተሰራ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -685,10 +807,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-special-purpose-hybrid-modified-road-vehicles-pack",
       "names": {
-        "en": "Custom Fabricated Special Purpose, Hybrid & Modified Road Vehicles Pack",
-        "am": "ብጁ የተዘጋጀ የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ጥቅል",
-        "om": "Paakii Addaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Custom Fabricated Special Purpose",
+        "am": "ብጁ የተዘጋጀ የልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Paakii Addaa Konkolaattota Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -701,7 +823,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Special Purpose, Hybrid & Modified Road Vehicles Pack",
+        "Hybrid",
+        "Modified Road Vehicles Pack",
+        "Paakii Addaa Konkolaattota Addaa fi Haayibiriidii",
+        "ብጁ የተዘጋጀ የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -711,10 +840,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-special-purpose-hybrid-modified-road-vehicles-kit",
       "names": {
-        "en": "Universal Compatible Special Purpose, Hybrid & Modified Road Vehicles Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ኪት",
-        "om": "Kiitii Waliigalaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Universal Compatible Special Purpose",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Kiitii Waliigalaa Konkolaattota Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -727,7 +856,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Kiitii Waliigalaa Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Kit",
+        "Universal Compatible Special Purpose, Hybrid & Modified Road Vehicles Kit",
+        "ሁለንተናዊ የሚስማማ የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -737,10 +873,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-special-purpose-hybrid-modified-road-vehicles-tooling",
       "names": {
-        "en": "Professional Grade Special Purpose, Hybrid & Modified Road Vehicles Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች መሣሪያ",
-        "om": "Meeshaa Ogummaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Professional Grade Special Purpose",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Meeshaa Ogummaa Konkolaattota Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -753,7 +889,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Meeshaa Ogummaa Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Tooling",
+        "Professional Grade Special Purpose, Hybrid & Modified Road Vehicles Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -763,10 +906,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-special-purpose-hybrid-modified-road-vehicles-tester",
       "names": {
-        "en": "Specialized Laboratory Special Purpose, Hybrid & Modified Road Vehicles Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች መመርመሪያ",
-        "om": "Meeshaa Qorannoo Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Specialized Laboratory Special Purpose",
+        "am": "ልዩ የላቦራቶሪ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Meeshaa Qorannoo Konkolaattota Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -779,7 +922,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Meeshaa Qorannoo Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Tester",
+        "Specialized Laboratory Special Purpose, Hybrid & Modified Road Vehicles Tester",
+        "ልዩ የላቦራቶሪ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -789,10 +939,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-special-purpose-hybrid-modified-road-vehicles-unit",
       "names": {
-        "en": "High-Speed Synchronized Special Purpose, Hybrid & Modified Road Vehicles Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "High-Speed Synchronized Special Purpose",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Yuunitii Saffisa Ol'aanaa Konkolaattota Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -805,7 +955,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "High-Speed Synchronized Special Purpose, Hybrid & Modified Road Vehicles Unit",
+        "Hybrid",
+        "Modified Road Vehicles Unit",
+        "Yuunitii Saffisa Ol'aanaa Konkolaattota Addaa fi Haayibiriidii",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን",
+        "ከፍተኛ ፍጥነት ያለው ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -815,10 +972,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-special-purpose-hybrid-modified-road-vehicles",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Special Purpose, Hybrid & Modified Road Vehicles",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Sibila Hin Xuraofne Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Stainless Steel Corrosion-Resistant Special Purpose",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Sibila Hin Xuraofne Konkolaattota Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -831,7 +988,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Modified Road Vehicles",
+        "Sibila Hin Xuraofne Konkolaattota Addaa fi Haayibiriidii",
+        "Stainless Steel Corrosion-Resistant Special Purpose, Hybrid & Modified Road Vehicles",
+        "ከማይዝግ ብረት የተሰራ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
+        "ዘይመጽእ ሓጺን ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -841,10 +1005,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-special-purpose-hybrid-modified-road-vehicles-panel",
       "names": {
-        "en": "Thermal Insulated Special Purpose, Hybrid & Modified Road Vehicles Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ሙቐት መከላኸሊ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Thermal Insulated Special Purpose",
+        "am": "ሙቀት መከላከያ ያለው የልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Paanaalii Ho'a Ittisu Konkolaattota Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -857,7 +1021,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Modified Road Vehicles Panel",
+        "Paanaalii Ho'a Ittisu Konkolaattota Addaa fi Haayibiriidii",
+        "Thermal Insulated Special Purpose, Hybrid & Modified Road Vehicles Panel",
+        "ሙቀት መከላከያ ያለው የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -867,10 +1038,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-special-purpose-hybrid-modified-road-vehicles",
       "names": {
-        "en": "Wireless Smart Integrated Special Purpose, Hybrid & Modified Road Vehicles",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Wireless Smart Integrated Special Purpose",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Konkolaattota Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -883,7 +1054,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid",
+        "Kan Qunnamtii Shiboo Hin Qabne Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles",
+        "Wireless Smart Integrated Special Purpose, Hybrid & Modified Road Vehicles",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -893,10 +1071,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-special-purpose-hybrid-modified-road-vehicles",
       "names": {
-        "en": "Heavy Mechanical Calibration Special Purpose, Hybrid & Modified Road Vehicles",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Sirreeffama Mekaaniikaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Heavy Mechanical Calibration Special Purpose",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ ዓላማ፣ ሃይብሪድ",
+        "om": "Sirreeffama Mekaaniikaa Konkolaattota Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -909,7 +1087,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Heavy Mechanical Calibration Special Purpose, Hybrid & Modified Road Vehicles",
+        "Hybrid",
+        "Modified Road Vehicles",
+        "Sirreeffama Mekaaniikaa Konkolaattota Addaa fi Haayibiriidii",
+        "ናይ መካኒካል ምዕራይ ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን",
+        "ከባድ መካኒካል ማስተካከያ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -919,10 +1104,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-special-purpose-hybrid-modified-road-vehicles-gear",
       "names": {
-        "en": "Ergonomic Safety Special Purpose, Hybrid & Modified Road Vehicles Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
-        "om": "Meeshaa Eegumsaa Mijaawaa Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Ergonomic Safety Special Purpose Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Konkolaattota Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -935,7 +1120,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ergonomic Safety Special Purpose, Hybrid & Modified Road Vehicles Gear",
+        "Hybrid",
+        "Meeshaa Eegumsaa Mijaawaa Konkolaattota Addaa fi Haayibiriidii",
+        "Modified Road Vehicles Gear",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች",
+        "ምቹእ ናይ ድሕንነት ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -945,10 +1137,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-special-purpose-hybrid-modified-road-vehicles-station",
       "names": {
-        "en": "Modular Expandable Special Purpose, Hybrid & Modified Road Vehicles Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ጣቢያ",
-        "om": "Buufata Babal'ifamu Konkolaattota Addaa fi Haayibiriidii",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+        "en": "Modular Expandable Special Purpose",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Konkolaattota Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ ዕላማ ዘለዎም"
       },
       "description": null,
       "level": 3,
@@ -961,7 +1153,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Konkolaattota Addaa fi Haayibiriidii",
+        "Hybrid",
+        "Modified Road Vehicles Station",
+        "Modular Expandable Special Purpose, Hybrid & Modified Road Vehicles Station",
+        "ተገጣጣሚና የሚሰፋ የልዩ ዓላማ፣ ሃይብሪድና የተሻሻሉ የመንገድ ተሽከርካሪዎች ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይ ዕላማ ዘለዎምን ሃይብሪድ ተሽከርከርትን"
+      ],
       "redirects": []
     },
     {
@@ -971,10 +1170,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-electric-three-wheelers-cargo-bajaj-touring-motorbikes-unit",
       "names": {
-        "en": "Premium Grade Certified Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Kan Qulqullina Olaanaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ብሉጽ ዝተረጋገጸ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Premium Grade Certified Electric Three-Wheelers",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Kan Qulqullina Olaanaa Bajaajii Elektiriikii",
+        "ti": "ብሉጽ ዝተረጋገጸ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -987,7 +1186,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Kan Qulqullina Olaanaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Premium Grade Certified Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Unit",
+        "Touring Motorbikes Unit",
+        "ብሉጽ ዝተረጋገጸ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1203,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-electric-three-wheelers-cargo-bajaj-touring-motorbikes-component",
       "names": {
-        "en": "Heavy-Duty Commercial Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Component",
-        "am": "ጠንካራ የንግድ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ከቢድ ናይ ንግዲ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Heavy-Duty Commercial Electric Three-Wheelers",
+        "am": "ጠንካራ የንግድ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Meeshaa Hojii Cimaa Bajaajii Elektiriikii",
+        "ti": "ከቢድ ናይ ንግዲ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1013,7 +1219,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Heavy-Duty Commercial Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Component",
+        "Meeshaa Hojii Cimaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Component",
+        "ከቢድ ናይ ንግዲ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "ጠንካራ የንግድ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1236,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-electric-three-wheelers-cargo-bajaj-touring-motorbikes-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Qusataa Humnaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ሓይሊ ዝቑጥብ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Eco-Friendly Energy-Saving Electric Three-Wheelers",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Bajaajii Elektiriikii",
+        "ti": "ሓይሊ ዝቑጥብ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1039,7 +1252,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Eco-Friendly Energy-Saving Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Model",
+        "Qusataa Humnaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Model",
+        "ሓይሊ ዝቑጥብ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1269,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-electric-three-wheelers-cargo-bajaj-touring-motorbikes-assembly",
       "names": {
-        "en": "Standard Industrial Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Assembly",
-        "am": "መደበኛ የኢንዱስትሪ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ስብስብ",
-        "om": "Asambilii Indaastirii Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Standard Industrial Electric Three-Wheelers",
+        "am": "መደበኛ የኢንዱስትሪ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Asambilii Indaastirii Bajaajii Elektiriikii",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1065,7 +1285,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Cargo Bajaj",
+        "Standard Industrial Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Assembly",
+        "Touring Motorbikes Assembly",
+        "መደበኛ የኢንዱስትሪ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1302,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-electric-three-wheelers-cargo-bajaj-touring-motorbikes-system",
       "names": {
-        "en": "Compact Portable Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes System",
-        "am": "ቀላልና ተንቀሳቃሽ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ተንቀሳቓሲ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Compact Portable Electric Three-Wheelers",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1091,7 +1318,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Compact Portable Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes System",
+        "Sirna Salphaa fi Socho'aa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes System",
+        "ቀላልና ተንቀሳቃሽ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ስርዓት",
+        "ተንቀሳቓሲ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1335,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-electric-three-wheelers-cargo-bajaj-touring-motorbikes-module",
       "names": {
-        "en": "Digital Automated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Module",
-        "am": "ዲጂታል አውቶሜትድ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ዲጂታል ኣውቶሜትድ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Digital Automated Electric Three-Wheelers",
+        "am": "ዲጂታል አውቶሜትድ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Moojiyulii Dijitaalaa Bajaajii Elektiriikii",
+        "ti": "ዲጂታል ኣውቶሜትድ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1117,7 +1351,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Digital Automated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Module",
+        "Moojiyulii Dijitaalaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Module",
+        "ዲጂታል አውቶሜትድ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1368,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-electric-three-wheelers-cargo-bajaj-touring-motorbikes-device",
       "names": {
-        "en": "High-Capacity Multi-Function Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Meeshaa Dandeettii Guddaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "High-Capacity Multi-Function Electric Three-Wheelers",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Meeshaa Dandeettii Guddaa Bajaajii Elektiriikii",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1143,7 +1384,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "High-Capacity Multi-Function Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Device",
+        "Meeshaa Dandeettii Guddaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
+        "ዓብዪ ዓቕሚ ዘለዎ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1153,10 +1401,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-electric-three-wheelers-cargo-bajaj-touring-motorbikes-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Kan Qilleensa Dandamatu Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ንኵነታት ኣየር ዝጻወር ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Reinforced Weatherproof Electric Three-Wheelers",
+        "am": "አየር የማይበግረው የተጠናከረ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Kan Qilleensa Dandamatu Bajaajii Elektiriikii",
+        "ti": "ንኵነታት ኣየር ዝጻወር ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1169,7 +1417,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Kan Qilleensa Dandamatu Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Reinforced Weatherproof Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Fixture",
+        "Touring Motorbikes Fixture",
+        "ንኵነታት ኣየር ዝጻወር ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "አየር የማይበግረው የተጠናከረ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች"
+      ],
       "redirects": []
     },
     {
@@ -1179,10 +1434,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-electric-three-wheelers-cargo-bajaj-touring-motorbikes-hardware",
       "names": {
-        "en": "Precision Engineered Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Hardware",
-        "am": "በትክክለኛነት የተሰራ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ብልክዕ ዝተሰርሐ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Precision Engineered Electric Three-Wheelers",
+        "am": "በትክክለኛነት የተሰራ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Haardiweerii Qulqullinaa Bajaajii Elektiriikii",
+        "ti": "ብልክዕ ዝተሰርሐ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1195,7 +1450,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Haardiweerii Qulqullinaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Precision Engineered Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Hardware",
+        "Touring Motorbikes Hardware",
+        "በትክክለኛነት የተሰራ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1205,10 +1467,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-electric-three-wheelers-cargo-bajaj-touring-motorbikes-pack",
       "names": {
-        "en": "Custom Fabricated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Pack",
-        "am": "ብጁ የተዘጋጀ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ጥቅል",
-        "om": "Paakii Addaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ብፍሉይ ዝተዳለወ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Custom Fabricated Electric Three-Wheelers",
+        "am": "ብጁ የተዘጋጀ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Paakii Addaa Bajaajii Elektiriikii",
+        "ti": "ብፍሉይ ዝተዳለወ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1221,7 +1483,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Custom Fabricated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Pack",
+        "Paakii Addaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Pack",
+        "ብጁ የተዘጋጀ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ጥቅል",
+        "ብፍሉይ ዝተዳለወ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1500,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-electric-three-wheelers-cargo-bajaj-touring-motorbikes-kit",
       "names": {
-        "en": "Universal Compatible Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Kit",
-        "am": "ሁለንተናዊ የሚስማማ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ኪት",
-        "om": "Kiitii Waliigalaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ንኹሉ ዝሰማማዕ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Universal Compatible Electric Three-Wheelers",
+        "am": "ሁለንተናዊ የሚስማማ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Kiitii Waliigalaa Bajaajii Elektiriikii",
+        "ti": "ንኹሉ ዝሰማማዕ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1247,7 +1516,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Kiitii Waliigalaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Kit",
+        "Universal Compatible Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Kit",
+        "ሁለንተናዊ የሚስማማ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ኪት",
+        "ንኹሉ ዝሰማማዕ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1533,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-electric-three-wheelers-cargo-bajaj-touring-motorbikes-tooling",
       "names": {
-        "en": "Professional Grade Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች መሣሪያ",
-        "om": "Meeshaa Ogummaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Professional Grade Electric Three-Wheelers",
+        "am": "ሙያዊ ደረጃ ያለው የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Meeshaa Ogummaa Bajaajii Elektiriikii",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1273,7 +1549,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Meeshaa Ogummaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Professional Grade Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Tooling",
+        "Touring Motorbikes Tooling",
+        "ሙያዊ ደረጃ ያለው የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1566,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-electric-three-wheelers-cargo-bajaj-touring-motorbikes-tester",
       "names": {
-        "en": "Specialized Laboratory Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Tester",
-        "am": "ልዩ የላቦራቶሪ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች መመርመሪያ",
-        "om": "Meeshaa Qorannoo Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Specialized Laboratory Electric Three-Wheelers",
+        "am": "ልዩ የላቦራቶሪ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Meeshaa Qorannoo Bajaajii Elektiriikii",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1299,7 +1582,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Meeshaa Qorannoo Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Specialized Laboratory Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Tester",
+        "Touring Motorbikes Tester",
+        "ልዩ የላቦራቶሪ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1599,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-electric-three-wheelers-cargo-bajaj-touring-motorbikes-unit",
       "names": {
-        "en": "High-Speed Synchronized Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "High-Speed Synchronized Electric Three-Wheelers",
+        "am": "ከፍተኛ ፍጥነት ያለው የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Yuunitii Saffisa Ol'aanaa Bajaajii Elektiriikii",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1325,7 +1615,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "High-Speed Synchronized Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Unit",
+        "Touring Motorbikes Unit",
+        "Yuunitii Saffisa Ol'aanaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "ልዑል ቅልጣፈ ዘለዎ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "ከፍተኛ ፍጥነት ያለው የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1632,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-electric-three-wheelers-cargo-bajaj-touring-motorbikes",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
-        "am": "ከማይዝግ ብረት የተሰራ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Sibila Hin Xuraofne Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ዘይመጽእ ሓጺን ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Stainless Steel Corrosion-Resistant Electric Three-Wheelers",
+        "am": "ከማይዝግ ብረት የተሰራ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Sibila Hin Xuraofne Bajaajii Elektiriikii",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -1351,7 +1648,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Sibila Hin Xuraofne Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Stainless Steel Corrosion-Resistant Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
+        "Touring Motorbikes",
+        "ከማይዝግ ብረት የተሰራ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
+        "ዘይመጽእ ሓጺን ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1665,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-electric-three-wheelers-cargo-bajaj-touring-motorbikes-panel",
       "names": {
-        "en": "Thermal Insulated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Panel",
-        "am": "ሙቀት መከላከያ ያለው የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ሙቐት መከላኸሊ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Thermal Insulated Electric Three-Wheelers",
+        "am": "ሙቀት መከላከያ ያለው የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Paanaalii Ho'a Ittisu Bajaajii Elektiriikii",
+        "ti": "ሙቐት መከላኸሊ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1377,7 +1681,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Paanaalii Ho'a Ittisu Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Thermal Insulated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Panel",
+        "Touring Motorbikes Panel",
+        "ሙቀት መከላከያ ያለው የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ፓነል",
+        "ሙቐት መከላኸሊ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1698,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-electric-three-wheelers-cargo-bajaj-touring-motorbikes",
       "names": {
-        "en": "Wireless Smart Integrated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Wireless Smart Integrated Electric Three-Wheelers",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Bajaajii Elektiriikii",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1403,7 +1714,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Kan Qunnamtii Shiboo Hin Qabne Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes",
+        "Wireless Smart Integrated Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
+        "ዘይብሉ ሽቦ ዘመናዊ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1731,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-electric-three-wheelers-cargo-bajaj-touring-motorbikes",
       "names": {
-        "en": "Heavy Mechanical Calibration Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
-        "am": "ከባድ መካኒካል ማስተካከያ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Sirreeffama Mekaaniikaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ናይ መካኒካል ምዕራይ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Heavy Mechanical Calibration Electric Three-Wheelers",
+        "am": "ከባድ መካኒካል ማስተካከያ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮች",
+        "om": "Sirreeffama Mekaaniikaa Bajaajii Elektiriikii",
+        "ti": "ናይ መካኒካል ምዕራይ ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1429,7 +1747,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Heavy Mechanical Calibration Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes",
+        "Sirreeffama Mekaaniikaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes",
+        "ናይ መካኒካል ምዕራይ ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን",
+        "ከባድ መካኒካል ማስተካከያ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1764,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-electric-three-wheelers-cargo-bajaj-touring-motorbikes-gear",
       "names": {
-        "en": "Ergonomic Safety Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
-        "om": "Meeshaa Eegumsaa Mijaawaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ምቹእ ናይ ድሕንነት ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Ergonomic Safety Electric Three-Wheelers Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Bajaajii Elektiriikii",
+        "ti": "ምቹእ ናይ ድሕንነት ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1455,7 +1780,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Bajaj",
+        "Ergonomic Safety Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Gear",
+        "Meeshaa Eegumsaa Mijaawaa Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Touring Motorbikes Gear",
+        "ምቹና ደህንነቱ የተጠበቀ የኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች",
+        "ምቹእ ናይ ድሕንነት ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1465,10 +1797,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-electric-three-wheelers-cargo-bajaj-touring-motorbikes-station",
       "names": {
-        "en": "Modular Expandable Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Station",
-        "am": "ተገጣጣሚና የሚሰፋ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ጣቢያ",
-        "om": "Buufata Babal'ifamu Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
-        "ti": "ክሰፍሕ ዝኽእል ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+        "en": "Modular Expandable Electric Three-Wheelers",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Bajaajii Elektiriikii",
+        "ti": "ክሰፍሕ ዝኽእል ኤሌክትሪክ ባጃጃት"
       },
       "description": null,
       "level": 3,
@@ -1481,7 +1813,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Bajaajii Elektiriikii fi Baajaajii Fe'umsaa",
+        "Cargo Bajaj",
+        "Modular Expandable Electric Three-Wheelers, Cargo Bajaj & Touring Motorbikes Station",
+        "Touring Motorbikes Station",
+        "ተገጣጣሚና የሚሰፋ የየኤሌክትሪክ ባጃጆች፣ የጭነት ባለሶስት እግሮችና የጉዞ ሞተር ብስክሌቶች ጣቢያ",
+        "ክሰፍሕ ዝኽእል ኤሌክትሪክ ባጃጃትን ናይ ጽዕነት ባጃጃትን"
+      ],
       "redirects": []
     },
     {
@@ -1491,10 +1830,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-heavy-construction-dumpers-concrete-mixers-mobile-cranes-unit",
       "names": {
-        "en": "Premium Grade Certified Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Kan Qulqullina Olaanaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ብሉጽ ዝተረጋገጸ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Premium Grade Certified Heavy Construction Dumpers",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Kan Qulqullina Olaanaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1507,7 +1846,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Kan Qulqullina Olaanaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Unit",
+        "Premium Grade Certified Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Unit",
+        "ብሉጽ ዝተረጋገጸ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች"
+      ],
       "redirects": []
     },
     {
@@ -1517,10 +1863,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-heavy-construction-dumpers-concrete-mixers-mobile-cranes-component",
       "names": {
-        "en": "Heavy-Duty Commercial Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Component",
-        "am": "ጠንካራ የንግድ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ከቢድ ናይ ንግዲ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Heavy-Duty Commercial Heavy Construction Dumpers",
+        "am": "ጠንካራ የንግድ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Meeshaa Hojii Cimaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ከቢድ ናይ ንግዲ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1533,7 +1879,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Heavy-Duty Commercial Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Component",
+        "Meeshaa Hojii Cimaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Component",
+        "ከቢድ ናይ ንግዲ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "ጠንካራ የንግድ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -1543,10 +1896,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-heavy-construction-dumpers-concrete-mixers-mobile-cranes-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Qusataa Humnaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ሓይሊ ዝቑጥብ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Eco-Friendly Energy-Saving Heavy Construction Dumpers",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ሓይሊ ዝቑጥብ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1559,7 +1912,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Eco-Friendly Energy-Saving Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Model",
+        "Mobile Cranes Model",
+        "Qusataa Humnaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "ሓይሊ ዝቑጥብ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች"
+      ],
       "redirects": []
     },
     {
@@ -1569,10 +1929,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-heavy-construction-dumpers-concrete-mixers-mobile-cranes-assembly",
       "names": {
-        "en": "Standard Industrial Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Assembly",
-        "am": "መደበኛ የኢንዱስትሪ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ስብስብ",
-        "om": "Asambilii Indaastirii Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Standard Industrial Heavy Construction Dumpers",
+        "am": "መደበኛ የኢንዱስትሪ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Asambilii Indaastirii Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1585,7 +1945,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Concrete Mixers",
+        "Mobile Cranes Assembly",
+        "Standard Industrial Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Assembly",
+        "መደበኛ የኢንዱስትሪ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1595,10 +1962,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-heavy-construction-dumpers-concrete-mixers-mobile-cranes-system",
       "names": {
-        "en": "Compact Portable Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes System",
-        "am": "ቀላልና ተንቀሳቃሽ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ተንቀሳቓሲ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Compact Portable Heavy Construction Dumpers",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1611,7 +1978,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes System",
+        "Concrete Mixers",
+        "Mobile Cranes System",
+        "Sirna Salphaa fi Socho'aa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "ቀላልና ተንቀሳቃሽ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ስርዓት",
+        "ተንቀሳቓሲ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1621,10 +1995,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-heavy-construction-dumpers-concrete-mixers-mobile-cranes-module",
       "names": {
-        "en": "Digital Automated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Module",
-        "am": "ዲጂታል አውቶሜትድ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ዲጂታል ኣውቶሜትድ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Digital Automated Heavy Construction Dumpers",
+        "am": "ዲጂታል አውቶሜትድ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Moojiyulii Dijitaalaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1637,7 +2011,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Digital Automated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Module",
+        "Mobile Cranes Module",
+        "Moojiyulii Dijitaalaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "ዲጂታል አውቶሜትድ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1647,10 +2028,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-heavy-construction-dumpers-concrete-mixers-mobile-cranes-device",
       "names": {
-        "en": "High-Capacity Multi-Function Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Meeshaa Dandeettii Guddaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "High-Capacity Multi-Function Heavy Construction Dumpers",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Meeshaa Dandeettii Guddaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1663,7 +2044,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "High-Capacity Multi-Function Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Device",
+        "Meeshaa Dandeettii Guddaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
+        "ዓብዪ ዓቕሚ ዘለዎ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1673,10 +2061,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-heavy-construction-dumpers-concrete-mixers-mobile-cranes-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Kan Qilleensa Dandamatu Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ንኵነታት ኣየር ዝጻወር ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Reinforced Weatherproof Heavy Construction Dumpers",
+        "am": "አየር የማይበግረው የተጠናከረ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Kan Qilleensa Dandamatu Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1689,7 +2077,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Kan Qilleensa Dandamatu Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Fixture",
+        "Reinforced Weatherproof Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Fixture",
+        "ንኵነታት ኣየር ዝጻወር ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "አየር የማይበግረው የተጠናከረ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች"
+      ],
       "redirects": []
     },
     {
@@ -1699,10 +2094,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-heavy-construction-dumpers-concrete-mixers-mobile-cranes-hardware",
       "names": {
-        "en": "Precision Engineered Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Hardware",
-        "am": "በትክክለኛነት የተሰራ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ብልክዕ ዝተሰርሐ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Precision Engineered Heavy Construction Dumpers",
+        "am": "በትክክለኛነት የተሰራ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Haardiweerii Qulqullinaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ብልክዕ ዝተሰርሐ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1715,7 +2110,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Haardiweerii Qulqullinaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Hardware",
+        "Precision Engineered Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Hardware",
+        "በትክክለኛነት የተሰራ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1725,10 +2127,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-heavy-construction-dumpers-concrete-mixers-mobile-cranes-pack",
       "names": {
-        "en": "Custom Fabricated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Pack",
-        "am": "ብጁ የተዘጋጀ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ጥቅል",
-        "om": "Paakii Addaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ብፍሉይ ዝተዳለወ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Custom Fabricated Heavy Construction Dumpers",
+        "am": "ብጁ የተዘጋጀ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Paakii Addaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ብፍሉይ ዝተዳለወ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1741,7 +2143,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Custom Fabricated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Pack",
+        "Mobile Cranes Pack",
+        "Paakii Addaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "ብጁ የተዘጋጀ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ጥቅል",
+        "ብፍሉይ ዝተዳለወ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1751,10 +2160,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-heavy-construction-dumpers-concrete-mixers-mobile-cranes-kit",
       "names": {
-        "en": "Universal Compatible Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Kit",
-        "am": "ሁለንተናዊ የሚስማማ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ኪት",
-        "om": "Kiitii Waliigalaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ንኹሉ ዝሰማማዕ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Universal Compatible Heavy Construction Dumpers",
+        "am": "ሁለንተናዊ የሚስማማ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Kiitii Waliigalaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ንኹሉ ዝሰማማዕ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1767,7 +2176,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Kiitii Waliigalaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Kit",
+        "Universal Compatible Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Kit",
+        "ሁለንተናዊ የሚስማማ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ኪት",
+        "ንኹሉ ዝሰማማዕ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1777,10 +2193,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-heavy-construction-dumpers-concrete-mixers-mobile-cranes-tooling",
       "names": {
-        "en": "Professional Grade Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች መሣሪያ",
-        "om": "Meeshaa Ogummaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Professional Grade Heavy Construction Dumpers",
+        "am": "ሙያዊ ደረጃ ያለው የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Meeshaa Ogummaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1793,7 +2209,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Meeshaa Ogummaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Tooling",
+        "Professional Grade Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Tooling",
+        "ሙያዊ ደረጃ ያለው የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1803,10 +2226,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-heavy-construction-dumpers-concrete-mixers-mobile-cranes-tester",
       "names": {
-        "en": "Specialized Laboratory Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Tester",
-        "am": "ልዩ የላቦራቶሪ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች መመርመሪያ",
-        "om": "Meeshaa Qorannoo Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Specialized Laboratory Heavy Construction Dumpers",
+        "am": "ልዩ የላቦራቶሪ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Meeshaa Qorannoo Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1819,7 +2242,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Meeshaa Qorannoo Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Tester",
+        "Specialized Laboratory Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Tester",
+        "ልዩ የላቦራቶሪ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1829,10 +2259,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-heavy-construction-dumpers-concrete-mixers-mobile-cranes-unit",
       "names": {
-        "en": "High-Speed Synchronized Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "High-Speed Synchronized Heavy Construction Dumpers",
+        "am": "ከፍተኛ ፍጥነት ያለው የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Yuunitii Saffisa Ol'aanaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1845,7 +2275,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "High-Speed Synchronized Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Unit",
+        "Mobile Cranes Unit",
+        "Yuunitii Saffisa Ol'aanaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "ልዑል ቅልጣፈ ዘለዎ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "ከፍተኛ ፍጥነት ያለው የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -1855,10 +2292,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-heavy-construction-dumpers-concrete-mixers-mobile-cranes",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
-        "am": "ከማይዝግ ብረት የተሰራ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Sibila Hin Xuraofne Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ዘይመጽእ ሓጺን ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Stainless Steel Corrosion-Resistant Heavy Construction Dumpers",
+        "am": "ከማይዝግ ብረት የተሰራ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Sibila Hin Xuraofne Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -1871,7 +2308,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Mobile Cranes",
+        "Sibila Hin Xuraofne Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Stainless Steel Corrosion-Resistant Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
+        "ከማይዝግ ብረት የተሰራ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
+        "ዘይመጽእ ሓጺን ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1881,10 +2325,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-heavy-construction-dumpers-concrete-mixers-mobile-cranes-panel",
       "names": {
-        "en": "Thermal Insulated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Panel",
-        "am": "ሙቀት መከላከያ ያለው የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ሙቐት መከላኸሊ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Thermal Insulated Heavy Construction Dumpers",
+        "am": "ሙቀት መከላከያ ያለው የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Paanaalii Ho'a Ittisu Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ሙቐት መከላኸሊ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1897,7 +2341,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Mobile Cranes Panel",
+        "Paanaalii Ho'a Ittisu Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Thermal Insulated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Panel",
+        "ሙቀት መከላከያ ያለው የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ፓነል",
+        "ሙቐት መከላኸሊ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1907,10 +2358,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-heavy-construction-dumpers-concrete-mixers-mobile-cranes",
       "names": {
-        "en": "Wireless Smart Integrated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Wireless Smart Integrated Heavy Construction Dumpers",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1923,7 +2374,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Kan Qunnamtii Shiboo Hin Qabne Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes",
+        "Wireless Smart Integrated Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
+        "ዘይብሉ ሽቦ ዘመናዊ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1933,10 +2391,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-heavy-construction-dumpers-concrete-mixers-mobile-cranes",
       "names": {
-        "en": "Heavy Mechanical Calibration Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
-        "am": "ከባድ መካኒካል ማስተካከያ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Sirreeffama Mekaaniikaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ናይ መካኒካል ምዕራይ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Heavy Mechanical Calibration Heavy Construction Dumpers",
+        "am": "ከባድ መካኒካል ማስተካከያ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎች",
+        "om": "Sirreeffama Mekaaniikaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ናይ መካኒካል ምዕራይ ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1949,7 +2407,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Heavy Mechanical Calibration Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes",
+        "Mobile Cranes",
+        "Sirreeffama Mekaaniikaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "ናይ መካኒካል ምዕራይ ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን",
+        "ከባድ መካኒካል ማስተካከያ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች"
+      ],
       "redirects": []
     },
     {
@@ -1959,10 +2424,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-heavy-construction-dumpers-concrete-mixers-mobile-cranes-gear",
       "names": {
-        "en": "Ergonomic Safety Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
-        "om": "Meeshaa Eegumsaa Mijaawaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ምቹእ ናይ ድሕንነት ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Ergonomic Safety Heavy Construction Dumpers Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ምቹእ ናይ ድሕንነት ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -1975,7 +2440,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Concrete Mixers",
+        "Ergonomic Safety Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Gear",
+        "Meeshaa Eegumsaa Mijaawaa Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Mobile Cranes Gear",
+        "ምቹና ደህንነቱ የተጠበቀ የከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች",
+        "ምቹእ ናይ ድሕንነት ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -1985,10 +2457,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-heavy-construction-dumpers-concrete-mixers-mobile-cranes-station",
       "names": {
-        "en": "Modular Expandable Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Station",
-        "am": "ተገጣጣሚና የሚሰፋ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ጣቢያ",
-        "om": "Buufata Babal'ifamu Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
-        "ti": "ክሰፍሕ ዝኽእል ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+        "en": "Modular Expandable Heavy Construction Dumpers",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Konkolaattota Gurguddaa Ijaarsaa",
+        "ti": "ክሰፍሕ ዝኽእል ከበድቲ ናይ ኮንስትራክሽ"
       },
       "description": null,
       "level": 3,
@@ -2001,7 +2473,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Konkolaattota Gurguddaa Ijaarsaa fi Kireenii",
+        "Concrete Mixers",
+        "Mobile Cranes Station",
+        "Modular Expandable Heavy Construction Dumpers, Concrete Mixers & Mobile Cranes Station",
+        "ተገጣጣሚና የሚሰፋ የየከባድ ኮንስትራክሽን ዳምፐሮች፣ የኮንክሪት ማደባለቂያዎችና ክሬኖች ጣቢያ",
+        "ክሰፍሕ ዝኽእል ከበድቲ ናይ ኮንስትራክሽን ዳምፐራትን ክሬናትን"
+      ],
       "redirects": []
     },
     {
@@ -2037,10 +2516,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "three-wheelers-bajaj-heavy-duty-cargo-delivery-thr-s12_1",
       "names": {
-        "en": "Heavy-Duty Cargo & Delivery Three-Wheelers",
+        "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
-        "om": "Baajaajii Fe’umsaa fi Daldalaa",
-        "ti": "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "om": "Baajaajii Fe’umsaa",
+        "ti": "ናይ ጽዕነት"
       },
       "description": null,
       "level": 3,
@@ -2053,7 +2532,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Baajaajii Fe’umsaa fi Daldalaa",
+        "Delivery Three-Wheelers",
+        "Heavy-Duty Cargo & Delivery Three-Wheelers",
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+      ],
       "redirects": []
     },
     {
@@ -2115,10 +2599,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-passenger-sedans-compact-automobiles",
       "names": {
-        "en": "Specialized & Custom Passenger Sedans & Compact Automobiles",
-        "am": "ልዩና ብጁ Passenger Sedans & Compact Automobiles",
-        "om": "Kan Addaa fi Filatamaa Passenger Sedans & Compact Automobiles",
-        "ti": "ፍሉይን ዝተዳለወን Passenger Sedans & Compact Automobiles"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2131,7 +2615,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Automobiles",
+        "Custom Passenger Sedans",
+        "Kan Addaa fi Filatamaa Passenger Sedans & Compact Automobiles",
+        "Specialized & Custom Passenger Sedans & Compact Automobiles",
+        "ልዩና ብጁ Passenger Sedans & Compact Automobiles",
+        "ፍሉይን ዝተዳለወን Passenger Sedans & Compact Automobiles"
+      ],
       "redirects": []
     },
     {
@@ -2141,10 +2632,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-three-wheelers-bajaj-auto-rickshaws",
       "names": {
-        "en": "Specialized & Custom Three-Wheelers & Bajaj Auto Rickshaws",
-        "am": "ልዩና ብጁ Three-Wheelers & Bajaj Auto Rickshaws",
-        "om": "Kan Addaa fi Filatamaa Three-Wheelers & Bajaj Auto Rickshaws",
-        "ti": "ፍሉይን ዝተዳለወን Three-Wheelers & Bajaj Auto Rickshaws"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2157,7 +2648,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bajaj Auto Rickshaws",
+        "Custom Three-Wheelers",
+        "Kan Addaa fi Filatamaa Three-Wheelers & Bajaj Auto Rickshaws",
+        "Specialized & Custom Three-Wheelers & Bajaj Auto Rickshaws",
+        "ልዩና ብጁ Three-Wheelers & Bajaj Auto Rickshaws",
+        "ፍሉይን ዝተዳለወን Three-Wheelers & Bajaj Auto Rickshaws"
+      ],
       "redirects": []
     },
     {
@@ -2167,10 +2665,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-medium-commercial-cargo-trucks",
       "names": {
-        "en": "Specialized & Custom Medium Commercial Cargo Trucks",
-        "am": "ልዩና ብጁ Medium Commercial Cargo Trucks",
-        "om": "Kan Addaa fi Filatamaa Medium Commercial Cargo Trucks",
-        "ti": "ፍሉይን ዝተዳለወን Medium Commercial Cargo Trucks"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2183,7 +2681,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Medium Commercial Cargo Trucks",
+        "Kan Addaa fi Filatamaa Medium Commercial Cargo Trucks",
+        "Specialized & Custom Medium Commercial Cargo Trucks",
+        "ልዩና ብጁ Medium Commercial Cargo Trucks",
+        "ፍሉይን ዝተዳለወን Medium Commercial Cargo Trucks"
+      ],
       "redirects": []
     }
   ]

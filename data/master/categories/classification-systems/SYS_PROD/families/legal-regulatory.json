@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Legal & Regulatory Services",
-        "am": "ህጋዊና ደንብ አገልግሎት",
-        "om": "Qabxii Seeraa fi Qajeelfama",
-        "ti": "ህጋዊን ናይ ደንብ ኣገልግሎትን"
+        "en": "Legal Services",
+        "am": "ህጋዊ",
+        "om": "Qabxii Seeraa",
+        "ti": "ህጋዊ"
       },
       "slug": "legal-regulatory",
       "description": "Legal services, regulatory compliance, notary, documentation, and legal advisory.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Legal & Regulatory Services",
+        "Qabxii Seeraa fi Qajeelfama",
+        "Regulatory Services",
+        "ህጋዊና ደንብ አገልግሎት",
+        "ህጋዊን ናይ ደንብ ኣገልግሎትን"
+      ],
       "redirects": []
     },
     {
@@ -59,10 +65,10 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Contract Drafting & Review",
-        "am": "የውል አዘጋጀትና ግምገማ",
+        "en": "Contract Drafting",
+        "am": "የውል አዘጋጀት",
         "om": "Qopheessituu Kontrataa",
-        "ti": "ምዕጻንን ግምገማን ውል"
+        "ti": "ምዕጻን"
       },
       "slug": "contract-drafting-services",
       "description": "",
@@ -76,7 +82,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Contract Drafting & Review",
+        "Review",
+        "ምዕጻንን ግምገማን ውል",
+        "የውል አዘጋጀትና ግምገማ"
+      ],
       "redirects": []
     },
     {
@@ -189,10 +200,10 @@
       "parent_code": "contract-drafting-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Contract Drafting & Review",
-        "am": "ሌሎች የውል አዘጋጀትና ግምገማ",
+        "en": "Other Contract Drafting",
+        "am": "ሌሎች የውል አዘጋጀት",
         "om": "Qopheessituu Kontrataa Biroo",
-        "ti": "ካልኦት ምዕጻንን ግምገማን ውል"
+        "ti": "ካልኦት ምዕጻን"
       },
       "slug": "other-contract-drafting-services",
       "description": null,
@@ -206,7 +217,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Contract Drafting & Review",
+        "Review",
+        "ሌሎች የውል አዘጋጀትና ግምገማ",
+        "ካልኦት ምዕጻንን ግምገማን ውል"
+      ],
       "redirects": []
     },
     {
@@ -215,7 +231,7 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Court & Litigation Services",
+        "en": "Court Services",
         "am": "የፍርድ ቤት አገልግሎቶች",
         "om": "Tajaajila Mana Murtii",
         "ti": "ኣገልግሎት ቤት ፍርዲ"
@@ -232,7 +248,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Court & Litigation Services",
+        "Litigation Services"
+      ],
       "redirects": []
     },
     {
@@ -345,7 +364,7 @@
       "parent_code": "court-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Court & Litigation Services",
+        "en": "Other Court Services",
         "am": "ሌሎች የፍርድ ቤት አገልግሎቶች",
         "om": "Tajaajila Mana Murtii Biroo",
         "ti": "ካልኦት ኣገልግሎት ቤት ፍርዲ"
@@ -362,7 +381,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Litigation Services",
+        "Other Court & Litigation Services"
+      ],
       "redirects": []
     },
     {
@@ -371,10 +393,10 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Immigration & Visa Services",
-        "am": "የመግቢያና የቪዛ አገልግሎት",
+        "en": "Immigration Services",
+        "am": "የመግቢያ",
         "om": "Tajaajila Immigration",
-        "ti": "ኣገልግሎት መእተዊን ቪዛን"
+        "ti": "ኣገልግሎት መእተዊ"
       },
       "slug": "immigration-services",
       "description": "",
@@ -388,7 +410,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Immigration & Visa Services",
+        "Visa Services",
+        "ኣገልግሎት መእተዊን ቪዛን",
+        "የመግቢያና የቪዛ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -501,10 +528,10 @@
       "parent_code": "immigration-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Immigration & Visa Services",
-        "am": "ሌሎች የመግቢያና የቪዛ አገልግሎት",
+        "en": "Other Immigration Services",
+        "am": "ሌሎች የመግቢያ",
         "om": "Tajaajila Immigration Biroo",
-        "ti": "ካልኦት ኣገልግሎት መእተዊን ቪዛን"
+        "ti": "ካልኦት ኣገልግሎት መእተዊ"
       },
       "slug": "other-immigration-services",
       "description": null,
@@ -518,7 +545,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Immigration & Visa Services",
+        "Visa Services",
+        "ሌሎች የመግቢያና የቪዛ አገልግሎት",
+        "ካልኦት ኣገልግሎት መእተዊን ቪዛን"
+      ],
       "redirects": []
     },
     {
@@ -839,10 +871,10 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Legal Advisory & Consulting",
-        "am": "የህግ ምክርና ምክረሃሴ",
+        "en": "Legal Advisory",
+        "am": "የህግ ምክር",
         "om": "Gorsa Seeraa",
-        "ti": "ምክሪ ህግን ምክረሃሴን"
+        "ti": "ምክሪ ህግ"
       },
       "slug": "legal-advisory-consulting",
       "description": "",
@@ -856,7 +888,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Consulting",
+        "Legal Advisory & Consulting",
+        "ምክሪ ህግን ምክረሃሴን",
+        "የህግ ምክርና ምክረሃሴ"
+      ],
       "redirects": []
     },
     {
@@ -969,10 +1006,10 @@
       "parent_code": "legal-advisory-consulting",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Legal Advisory & Consulting",
-        "am": "ሌሎች የህግ ምክርና ምክረሃሴ",
+        "en": "Other Legal Advisory",
+        "am": "ሌሎች የህግ ምክር",
         "om": "Gorsa Seeraa Biroo",
-        "ti": "ካልኦት ምክሪ ህግን ምክረሃሴን"
+        "ti": "ካልኦት ምክሪ ህግ"
       },
       "slug": "other-legal-advisory-consulting",
       "description": null,
@@ -986,7 +1023,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Consulting",
+        "Other Legal Advisory & Consulting",
+        "ሌሎች የህግ ምክርና ምክረሃሴ",
+        "ካልኦት ምክሪ ህግን ምክረሃሴን"
+      ],
       "redirects": []
     },
     {
@@ -995,10 +1037,10 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Legal Services & Advocacy",
-        "am": "የህግ አገልግሎትና ተከላኪነት",
+        "en": "Legal Services",
+        "am": "የህግ አገልግሎት",
         "om": "Tajaajila Seeraa",
-        "ti": "ኣገልግሎት ህግን ተከላኺነትን"
+        "ti": "ኣገልግሎት ህግ"
       },
       "slug": "legal-services",
       "description": "",
@@ -1012,7 +1054,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Advocacy",
+        "Legal Services & Advocacy",
+        "ኣገልግሎት ህግን ተከላኺነትን",
+        "የህግ አገልግሎትና ተከላኪነት"
+      ],
       "redirects": []
     },
     {
@@ -1125,10 +1172,10 @@
       "parent_code": "legal-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Legal Services & Advocacy",
-        "am": "ሌሎች የህግ አገልግሎትና ተከላኪነት",
+        "en": "Other Legal Services",
+        "am": "ሌሎች የህግ አገልግሎት",
         "om": "Tajaajila Seeraa Biroo",
-        "ti": "ካልኦት ኣገልግሎት ህግን ተከላኺነትን"
+        "ti": "ካልኦት ኣገልግሎት ህግ"
       },
       "slug": "other-legal-services",
       "description": null,
@@ -1142,7 +1189,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Advocacy",
+        "Other Legal Services & Advocacy",
+        "ሌሎች የህግ አገልግሎትና ተከላኪነት",
+        "ካልኦት ኣገልግሎት ህግን ተከላኺነትን"
+      ],
       "redirects": []
     },
     {
@@ -1151,10 +1203,10 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Notary & Documentation Services",
-        "am": "የማረጋገጫና የሰነድ አገልግሎት",
+        "en": "Notary Services",
+        "am": "የማረጋገጫ",
         "om": "Tajaajila Galmeessaa",
-        "ti": "ኣገልግሎት ማረጋገጺን ሰነድን"
+        "ti": "ኣገልግሎት ማረጋገጺ"
       },
       "slug": "notary-documentation-services",
       "description": "",
@@ -1168,7 +1220,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Documentation Services",
+        "Notary & Documentation Services",
+        "ኣገልግሎት ማረጋገጺን ሰነድን",
+        "የማረጋገጫና የሰነድ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -1281,10 +1338,10 @@
       "parent_code": "notary-documentation-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Notary & Documentation Services",
-        "am": "ሌሎች የማረጋገጫና የሰነድ አገልግሎት",
+        "en": "Other Notary Services",
+        "am": "ሌሎች የማረጋገጫ",
         "om": "Tajaajila Galmeessaa Biroo",
-        "ti": "ካልኦት ኣገልግሎት ማረጋገጺን ሰነድን"
+        "ti": "ካልኦት ኣገልግሎት ማረጋገጺ"
       },
       "slug": "other-notary-documentation-services",
       "description": null,
@@ -1298,7 +1355,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Documentation Services",
+        "Other Notary & Documentation Services",
+        "ሌሎች የማረጋገጫና የሰነድ አገልግሎት",
+        "ካልኦት ኣገልግሎት ማረጋገጺን ሰነድን"
+      ],
       "redirects": []
     },
     {
@@ -1463,10 +1525,10 @@
       "parent_code": "legal-regulatory",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Legal & Regulatory Services",
-        "am": "ሌሎች ህጋዊና ደንብ አገልግሎት",
-        "om": "Qabxii Seeraa fi Qajeelfama Biroo",
-        "ti": "ካልኦት ህጋዊን ናይ ደንብ ኣገልግሎትን"
+        "en": "Other Legal Services",
+        "am": "ሌሎች ህጋዊ",
+        "om": "Qabxii Seeraa",
+        "ti": "ካልኦት ህጋዊ"
       },
       "slug": "other-legal-regulatory",
       "description": null,
@@ -1480,7 +1542,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Legal & Regulatory Services",
+        "Qabxii Seeraa fi Qajeelfama Biroo",
+        "Regulatory Services",
+        "ሌሎች ህጋዊና ደንብ አገልግሎት",
+        "ካልኦት ህጋዊን ናይ ደንብ ኣገልግሎትን"
+      ],
       "redirects": []
     }
   ]

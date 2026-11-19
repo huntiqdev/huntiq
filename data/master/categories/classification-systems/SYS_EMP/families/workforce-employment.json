@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "workforce-employment",
       "names": {
-        "en": "Workforce & Employment",
-        "am": "የሰው ኃይልና ቅጥር",
-        "om": "Hojii fi Qacarraa",
-        "ti": "ስራሕን ምቑጻርን"
+        "en": "Workforce",
+        "am": "የሰው ኃይል",
+        "om": "Hojii",
+        "ti": "ስራሕ"
       },
       "description": "Jobs, recruitment, freelance/gigs, professional roles, career services, and employment.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Employment",
+        "Hojii fi Qacarraa",
+        "Workforce & Employment",
+        "ስራሕን ምቑጻርን",
+        "የሰው ኃይልና ቅጥር"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +41,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "administrative-clerical-jobs",
       "names": {
-        "en": "Administrative & Clerical Jobs",
-        "am": "የአስተዳደርና የቢሮ ስራዎች",
+        "en": "Administrative Jobs",
+        "am": "የአስተዳደር",
         "om": "Hojii Waajjiraa",
-        "ti": "ስራሕ ኣመሓዳሪኣን ቢሮን"
+        "ti": "ስራሕ ኣመሓዳሪኣ"
       },
       "description": "",
       "level": 1,
@@ -51,7 +57,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Admin Work",
+        "Administrative & Clerical Jobs",
+        "Clerical Jobs",
+        "Office Jobs",
+        "ስራሕ ኣመሓዳሪኣን ቢሮን",
+        "የአስተዳደርና የቢሮ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -61,8 +74,8 @@
       "classification_system_code": "SYS_EMP",
       "slug": "agriculture-farming-jobs",
       "names": {
-        "en": "Agriculture & Farming Jobs",
-        "am": "የግብርና ስራዎች",
+        "en": "Agriculture Jobs",
+        "am": "የግብር",
         "om": "Hojii Qonnaa",
         "ti": "ስራሕ ሕርሻን"
       },
@@ -77,7 +90,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agricultural Work",
+        "Agriculture & Farming Jobs",
+        "Farm Labor",
+        "Farming Jobs",
+        "የግብርና ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +106,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "creative-design-jobs",
       "names": {
-        "en": "Creative & Design Jobs",
+        "en": "Creative Jobs",
         "am": "የፈጠራ ስራዎች",
         "om": "Hojii Diisaayinii",
-        "ti": "ስራሕ ፈጠራን ዲዛይንን"
+        "ti": "ስራሕ ፈጠራ"
       },
       "description": "",
       "level": 1,
@@ -103,7 +122,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Creative & Design Jobs",
+        "Design Jobs",
+        "Designers",
+        "Graphic Design",
+        "ስራሕ ፈጠራን ዲዛይንን"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +164,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "engineering-construction-jobs",
       "names": {
-        "en": "Engineering & Construction Jobs",
-        "am": "የምህንገርና ግንባታ ስራዎች",
+        "en": "Engineering Jobs",
+        "am": "የምህንገር",
         "om": "Hojii Ijaarsaa",
-        "ti": "ስራሕ ምህንገርን ህንጣን"
+        "ti": "ስራሕ ምህንገር"
       },
       "description": "",
       "level": 1,
@@ -155,7 +180,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Civil Engineering",
+        "Construction Jobs",
+        "Engineering & Construction Jobs",
+        "Site Workers",
+        "ስራሕ ምህንገርን ህንጣን",
+        "የምህንገርና ግንባታ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +197,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "finance-accounting-jobs",
       "names": {
-        "en": "Finance & Accounting Jobs",
-        "am": "የፋይናንስና ስሌት ስራዎች",
+        "en": "Finance Jobs",
+        "am": "የፋይናንስ",
         "om": "Hojii Maallaqaa",
-        "ti": "ስራሕ ፋይናንስን ስሌትን"
+        "ti": "ስራሕ ፋይናንስ"
       },
       "description": "",
       "level": 1,
@@ -181,7 +213,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accountants",
+        "Accounting Jobs",
+        "Bookkeeping",
+        "Finance & Accounting Jobs",
+        "ስራሕ ፋይናንስን ስሌትን",
+        "የፋይናንስና ስሌት ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +230,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "freelance-gigs-digital",
       "names": {
-        "en": "Freelance & Digital Gigs",
-        "am": "ፍሪላንስና ዲጂታል ስራዎች",
-        "om": "Freelance fi Gig",
-        "ti": "ፍሪላንስን ዲጂታልን ጊግን"
+        "en": "Freelance",
+        "am": "ፍሪላንስ",
+        "om": "Freelance",
+        "ti": "ፍሪላንስ"
       },
       "description": "",
       "level": 1,
@@ -207,7 +246,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Gigs",
+        "Freelance & Digital Gigs",
+        "Freelance fi Gig",
+        "ፍሪላንስና ዲጂታል ስራዎች",
+        "ፍሪላንስን ዲጂታልን ጊግን"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +288,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "healthcare-medical-jobs",
       "names": {
-        "en": "Healthcare & Medical Jobs",
-        "am": "የጤናና ህክምና ስራዎች",
+        "en": "Healthcare Jobs",
+        "am": "የጤና",
         "om": "Hojii Fayyaa",
-        "ti": "ስራሕ ጥዕናን ሕክምናን"
+        "ti": "ስራሕ ጥዕና"
       },
       "description": "",
       "level": 1,
@@ -259,7 +304,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Healthcare & Medical Jobs",
+        "Medical Jobs",
+        "ስራሕ ጥዕናን ሕክምናን",
+        "የጤናና ህክምና ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +319,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "hospitality-culinary-jobs",
       "names": {
-        "en": "Hospitality & Culinary Jobs",
-        "am": "የእንግዳ ተቀባይነትና የምግብ ስራ ሰራተኞች",
+        "en": "Hospitality Jobs",
+        "am": "የእንግዳ ተቀባይነት",
         "om": "Hojii Mana Nyaataa",
-        "ti": "ስራሕ መስተንን ምግቢን"
+        "ti": "ስራሕ መስተን"
       },
       "description": "",
       "level": 1,
@@ -285,7 +335,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Culinary Jobs",
+        "Hospitality & Culinary Jobs",
+        "ስራሕ መስተንን ምግቢን",
+        "የእንግዳ ተቀባይነትና የምግብ ስራ ሰራተኞች"
+      ],
       "redirects": []
     },
     {
@@ -295,7 +350,7 @@
       "classification_system_code": "SYS_EMP",
       "slug": "internship-apprenticeship",
       "names": {
-        "en": "Internship & Apprenticeship",
+        "en": "Internship",
         "am": "የመማር ልምምድ",
         "om": "Leenjii Hojii",
         "ti": "ልምምዲ ስራሕ"
@@ -311,7 +366,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Apprenticeship",
+        "Internship & Apprenticeship"
+      ],
       "redirects": []
     },
     {
@@ -321,10 +379,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "recruitment-staffing-services",
       "names": {
-        "en": "Recruitment & Staffing Services",
-        "am": "የቅጥርና ሰራተኛ አቅርቦት አገልግሎት",
-        "om": "Qacarraa fi Hojii",
-        "ti": "ኣገልግሎት ምቑጻርን ሰራተኛን ምእታን"
+        "en": "Recruitment Services",
+        "am": "የቅጥር",
+        "om": "Qacarraa",
+        "ti": "ኣገልግሎት ምቑጻር"
       },
       "description": "",
       "level": 1,
@@ -337,7 +395,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Qacarraa fi Hojii",
+        "Recruitment & Staffing Services",
+        "Staffing Services",
+        "ኣገልግሎት ምቑጻርን ሰራተኛን ምእታን",
+        "የቅጥርና ሰራተኛ አቅርቦት አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -347,10 +411,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "sales-marketing-jobs",
       "names": {
-        "en": "Sales & Marketing Jobs",
-        "am": "የሽያጭና የግብይት ስራዎች",
+        "en": "Sales Jobs",
+        "am": "የሽያጭ",
         "om": "Hojii Gurgurtaa",
-        "ti": "ስራሕ ሽያጭን ግብይትን"
+        "ti": "ስራሕ ሽያጭ"
       },
       "description": "",
       "level": 1,
@@ -363,7 +427,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Development",
+        "Marketing Jobs",
+        "Promotions",
+        "Sales & Marketing Jobs",
+        "ስራሕ ሽያጭን ግብይትን",
+        "የሽያጭና የግብይት ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -373,7 +444,7 @@
       "classification_system_code": "SYS_EMP",
       "slug": "security-guard-jobs",
       "names": {
-        "en": "Security & Guard Jobs",
+        "en": "Security Jobs",
         "am": "የጥበቃ ስራዎች",
         "om": "Hojii Eegumsa",
         "ti": "ስራሕ ጥበቃ"
@@ -389,7 +460,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guard Jobs",
+        "Security & Guard Jobs"
+      ],
       "redirects": []
     },
     {
@@ -425,7 +499,7 @@
       "classification_system_code": "SYS_EMP",
       "slug": "teaching-education-jobs",
       "names": {
-        "en": "Teaching & Education Jobs",
+        "en": "Teaching Jobs",
         "am": "የትምህርት ስራዎች",
         "om": "Hojii Barnootaa",
         "ti": "ስራሕ ትምህርቲ"
@@ -441,7 +515,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Education Jobs",
+        "Teaching & Education Jobs"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +528,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "technology-it-jobs",
       "names": {
-        "en": "Technology & IT Jobs",
-        "am": "የቴክኖሎጂና አይቲ ስራዎች",
+        "en": "Technology Jobs",
+        "am": "የቴክኖሎጂ",
         "om": "Hojii Teknoolojii",
-        "ti": "ስራሕ ቴክኖሎጂን ITን"
+        "ti": "ስራሕ ቴክኖሎጂ"
       },
       "description": "",
       "level": 1,
@@ -467,7 +544,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "IT Jobs",
+        "Technology & IT Jobs",
+        "ስራሕ ቴክኖሎጂን ITን",
+        "የቴክኖሎጂና አይቲ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +559,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "transport-logistics-jobs",
       "names": {
-        "en": "Transport & Logistics Jobs",
-        "am": "የትራንስፖርትና አቅርቦት ስራዎች",
+        "en": "Transport Jobs",
+        "am": "የትራንስፖርት",
         "om": "Hojii Geejjibaa",
-        "ti": "ስራሕ መጓዓዝያን ሎጂስቲክስን"
+        "ti": "ስራሕ መጓዓዝያ"
       },
       "description": "",
       "level": 1,
@@ -493,7 +575,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Logistics Jobs",
+        "Transport & Logistics Jobs",
+        "ስራሕ መጓዓዝያን ሎጂስቲክስን",
+        "የትራንስፖርትና አቅርቦት ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -503,10 +590,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "digital-creators-influencers",
       "names": {
-        "en": "Digital Content Creators & Social Influencers",
-        "am": "የዲጂታል ይዘት አዘጋጆችና የማህበራዊ ሚዲያ ተፅዕኖ ፈጣሪዎች",
-        "om": "Uumtoota Qabiyyee Dijitaalaa fi Dhiibbaa Hawaasaa",
-        "ti": "ዲጂታል ትሕዝቶ ኣዳለውትን ናይ ማሕበራዊ ሚድያ ጽልዋ ፈጠርትን"
+        "en": "Digital Content Creators",
+        "am": "የዲጂታል ይዘት አዘጋጆች",
+        "om": "Uumtoota Qabiyyee Dijitaalaa",
+        "ti": "ዲጂታል ትሕዝቶ ኣዳለውት"
       },
       "description": "Professional video content creators, comedy influencers, digital brand ambassadors, and podcasters",
       "level": 1,
@@ -519,7 +606,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Content Creators & Social Influencers",
+        "Social Influencers",
+        "Uumtoota Qabiyyee Dijitaalaa fi Dhiibbaa Hawaasaa",
+        "የዲጂታል ይዘት አዘጋጆችና የማህበራዊ ሚዲያ ተፅዕኖ ፈጣሪዎች",
+        "ዲጂታል ትሕዝቶ ኣዳለውትን ናይ ማሕበራዊ ሚድያ ጽልዋ ፈጠርትን"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +622,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "sports-athletes-fitness-talents",
       "names": {
-        "en": "Sports Athletes, Coaches & Fitness Talents",
-        "am": "ስፖርተኞች፣ አሰልጣኞችና የአካል ብቃት ባለሙያዎች",
-        "om": "Atileetota Ispoortii, Leenjistoota fi Fayyummaa",
-        "ti": "ስፖርተኛታት፣ ኣሰልጠንትን ናይ ኣካል ብቕዓት ሞያተኛታትን"
+        "en": "Sports Athletes",
+        "am": "ስፖርተኞች፣ አሰልጣኞች",
+        "om": "Atileetota Ispoortii, Leenjistoota",
+        "ti": "ስፖርተኛታት፣ ኣሰልጠንት"
       },
       "description": "Athletic competitors, football talents, personal fitness coaches, and distance runners for hire and scouting",
       "level": 1,
@@ -545,7 +638,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Atileetota Ispoortii, Leenjistoota fi Fayyummaa",
+        "Coaches",
+        "Fitness Talents",
+        "Sports Athletes, Coaches & Fitness Talents",
+        "ስፖርተኛታት፣ ኣሰልጠንትን ናይ ኣካል ብቕዓት ሞያተኛታትን",
+        "ስፖርተኞች፣ አሰልጣኞችና የአካል ብቃት ባለሙያዎች"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +655,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "software-engineering-it-freelance",
       "names": {
-        "en": "Software Development & Tech Freelancers",
-        "am": "የሶፍትዌር አልሚዎችና የቴክኖሎጂ ፍሪላንሰሮች",
-        "om": "Misoonsa Sooftiweerii fi Hojjattoota Teeknooloojii",
-        "ti": "ናይ ሶፍትዌር ምዕባለን ናይ ቴክኖሎጂ ፍሪላንሰራትን"
+        "en": "Software Development",
+        "am": "የሶፍትዌር አልሚዎች",
+        "om": "Misoonsa Sooftiweerii",
+        "ti": "ናይ ሶፍትዌር ምዕባለ"
       },
       "description": "Full-stack web developers, mobile app engineers, and cloud architects for contract and full-time hiring",
       "level": 1,
@@ -571,7 +671,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Misoonsa Sooftiweerii fi Hojjattoota Teeknooloojii",
+        "Software Development & Tech Freelancers",
+        "Tech Freelancers",
+        "ናይ ሶፍትዌር ምዕባለን ናይ ቴክኖሎጂ ፍሪላንሰራትን",
+        "የሶፍትዌር አልሚዎችና የቴክኖሎጂ ፍሪላንሰሮች"
+      ],
       "redirects": []
     },
     {
@@ -581,10 +687,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "banking-insurance-microfinance-careers",
       "names": {
-        "en": "Banking, Insurance & Microfinance Careers",
-        "am": "የባንክ፣ ኢንሹራንስና ማይክሮፋይናንስ የስራ ዘርፎች",
-        "om": "Ogummaawwan Baankii, Inshuraansii fi Faayinaansii",
-        "ti": "ናይ ባንክ፣ መድሕንን ፋይናንስን ሞያታት"
+        "en": "Banking",
+        "am": "የባንክ፣ ኢንሹራንስ",
+        "om": "Ogummaawwan Baankii, Inshuraansii",
+        "ti": "ናይ ባንክ፣ መድሕን"
       },
       "description": null,
       "level": 1,
@@ -597,7 +703,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Banking, Insurance & Microfinance Careers",
+        "Insurance",
+        "Microfinance Careers",
+        "Ogummaawwan Baankii, Inshuraansii fi Faayinaansii",
+        "ናይ ባንክ፣ መድሕንን ፋይናንስን ሞያታት",
+        "የባንክ፣ ኢንሹራንስና ማይክሮፋይናንስ የስራ ዘርፎች"
+      ],
       "redirects": []
     },
     {
@@ -607,10 +720,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "technology-software-it-occupations",
       "names": {
-        "en": "Technology, Software & IT Occupations",
-        "am": "የቴክኖሎጂ፣ ሶፍትዌርና አይቲ ስራዎች",
-        "om": "Ogummaawwan Teeknoolojii fi Sooftiweerii",
-        "ti": "ናይ ቴክኖሎጂ፣ ሶፍትዌርን ITን ሞያታት"
+        "en": "Technology",
+        "am": "የቴክኖሎጂ፣ ሶፍትዌር",
+        "om": "Ogummaawwan Teeknoolojii",
+        "ti": "ናይ ቴክኖሎጂ፣ ሶፍትዌር"
       },
       "description": null,
       "level": 1,
@@ -623,7 +736,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "IT Occupations",
+        "Ogummaawwan Teeknoolojii fi Sooftiweerii",
+        "Software",
+        "Technology, Software & IT Occupations",
+        "ናይ ቴክኖሎጂ፣ ሶፍትዌርን ITን ሞያታት",
+        "የቴክኖሎጂ፣ ሶፍትዌርና አይቲ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -633,10 +753,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "engineering-construction-mining",
       "names": {
-        "en": "Engineering, Construction & Mining",
-        "am": "የኢንጂነሪንግ፣ ኮንስትራክሽንና ማዕድን ስራዎች",
-        "om": "Injinariingii, Ijaarsa fi Albuudaa",
-        "ti": "ናይ ምህንድስና፣ ህንጸትን ማዕድንን ሞያታት"
+        "en": "Engineering",
+        "am": "የኢንጂነሪንግ፣ ኮንስትራክሽን",
+        "om": "Injinariingii, Ijaarsa",
+        "ti": "ናይ ምህንድስና፣ ህንጸት"
       },
       "description": null,
       "level": 1,
@@ -649,7 +769,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Construction",
+        "Engineering, Construction & Mining",
+        "Injinariingii, Ijaarsa fi Albuudaa",
+        "Mining",
+        "ናይ ምህንድስና፣ ህንጸትን ማዕድንን ሞያታት",
+        "የኢንጂነሪንግ፣ ኮንስትራክሽንና ማዕድን ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -659,10 +786,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-workforce-employment",
       "names": {
-        "en": "Specialized & Custom Workforce & Employment",
-        "am": "ልዩና ብጁ Workforce & Employment",
-        "om": "Kan Addaa fi Filatamaa Workforce & Employment",
-        "ti": "ፍሉይን ዝተዳለወን Workforce & Employment"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -675,7 +802,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Workforce",
+        "Employment",
+        "Kan Addaa fi Filatamaa Workforce & Employment",
+        "Specialized & Custom Workforce & Employment",
+        "ልዩና ብጁ Workforce & Employment",
+        "ፍሉይን ዝተዳለወን Workforce & Employment"
+      ],
       "redirects": []
     },
     {
@@ -997,7 +1131,7 @@
       "classification_system_code": "SYS_EMP",
       "slug": "cooks-housekeepers",
       "names": {
-        "en": "Cooks & Housekeepers",
+        "en": "Cooks",
         "am": "ምግብ አብሳዮ",
         "om": "Qopheessota Nyaataa",
         "ti": "ሓጣቢ ምግቢ"
@@ -1013,7 +1147,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chefs",
+        "Cooks & Housekeepers",
+        "Housekeepers",
+        "Kitchen Staff"
+      ],
       "redirects": []
     },
     {
@@ -1075,7 +1214,7 @@
       "classification_system_code": "SYS_EMP",
       "slug": "nannies-babysitters",
       "names": {
-        "en": "Nannies & Babysitters",
+        "en": "Nannies",
         "am": "የህፃን ጠባቂዎ",
         "om": "Kunuunsota Daa'immanii",
         "ti": "ሓቓጠቲ ህጻናት"
@@ -1091,7 +1230,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Au Pairs",
+        "Babysitters",
+        "Childcare",
+        "Nannies & Babysitters"
+      ],
       "redirects": []
     },
     {
@@ -1621,8 +1765,8 @@
       "classification_system_code": "SYS_EMP",
       "slug": "doctors-physicians",
       "names": {
-        "en": "Doctors & Physicians",
-        "am": "ሐኪሞችና ሐኪሞች",
+        "en": "Doctors",
+        "am": "ሐኪሞች",
         "om": "Doktarota",
         "ti": "ሐኪማት"
       },
@@ -1637,7 +1781,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Doctors & Physicians",
+        "Medical Doctors",
+        "Physicians",
+        "Specialists",
+        "ሐኪሞችና ሐኪሞች"
+      ],
       "redirects": []
     },
     {
@@ -1725,10 +1875,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "chefs-cooks",
       "names": {
-        "en": "Chefs & Cooks",
-        "am": "ሼፎችና ምግብ አብሳዮ",
+        "en": "Chefs",
+        "am": "ሼፎች",
         "om": "Qopheessota Nyaataa",
-        "ti": "ሼፎታትን ሓጣቢ ምግቢን"
+        "ti": "ሼፎታት"
       },
       "description": "",
       "level": 2,
@@ -1741,7 +1891,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chefs & Cooks",
+        "Cooks",
+        "Head Chefs",
+        "Line Cooks",
+        "ሼፎታትን ሓጣቢ ምግቢን",
+        "ሼፎችና ምግብ አብሳዮ"
+      ],
       "redirects": []
     },
     {
@@ -1803,7 +1960,7 @@
       "classification_system_code": "SYS_EMP",
       "slug": "waiters-waitresses",
       "names": {
-        "en": "Waiters & Waitresses",
+        "en": "Waitstaff",
         "am": "ዌተሮ",
         "om": "Waayitarota",
         "ti": "ዌተራት"
@@ -1819,7 +1976,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Servers",
+        "Waiters",
+        "Waiters & Waitresses",
+        "Waitresses"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +2823,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "social-video-content-creators",
       "names": {
-        "en": "Short-Form Video & Comedy Content Creators",
-        "am": "የአጭር ቪዲዮና አስቂኝ ይዘት ፈጣሪዎች",
-        "om": "Uumtoota Viidiyoo Gabaabaa fi Qoosaa",
-        "ti": "ናይ ሓጺር ቪድዮን ቀልድን ትሕዝቶ ፈጠርቲ"
+        "en": "Short-Form Video",
+        "am": "የአጭር ቪዲዮ",
+        "om": "Uumtoota Viidiyoo Gabaabaa",
+        "ti": "ናይ ሓጺር ቪድዮ"
       },
       "description": "TikTok, YouTube Shorts, and Instagram Reels creative producers specializing in comedy and viral storytelling",
       "level": 2,
@@ -2677,7 +2839,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Comedy Content Creators",
+        "Short-Form Video & Comedy Content Creators",
+        "Uumtoota Viidiyoo Gabaabaa fi Qoosaa",
+        "ናይ ሓጺር ቪድዮን ቀልድን ትሕዝቶ ፈጠርቲ",
+        "የአጭር ቪዲዮና አስቂኝ ይዘት ፈጣሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -2687,10 +2855,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "football-soccer-players-scouting",
       "names": {
-        "en": "Football / Soccer Talents & Player Scouting CVs",
-        "am": "የእግር ኳስ ተጫዋቾች ተሰጥኦና የክለብ ምልመላ ሲቪ",
-        "om": "Dandeettii Kubbaa Miilaa fi CV Taphattootaa",
-        "ti": "ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦን ናይ ክለብ ምልመላ ሲቪን"
+        "en": "Football / Soccer Talents",
+        "am": "የእግር ኳስ ተጫዋቾች ተሰጥኦ",
+        "om": "Dandeettii Kubbaa Miilaa",
+        "ti": "ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦ"
       },
       "description": "Amateur and semi-professional football players seeking club trials, academy scouting, and seasonal contracts",
       "level": 2,
@@ -2703,7 +2871,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dandeettii Kubbaa Miilaa fi CV Taphattootaa",
+        "Football / Soccer Talents & Player Scouting CVs",
+        "Player Scouting CVs",
+        "ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦን ናይ ክለብ ምልመላ ሲቪን",
+        "የእግር ኳስ ተጫዋቾች ተሰጥኦና የክለብ ምልመላ ሲቪ"
+      ],
       "redirects": []
     },
     {
@@ -2713,10 +2887,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "fullstack-web-mobile-developers",
       "names": {
-        "en": "Full-Stack Web & Mobile App Engineers",
-        "am": "የሙሉ መስመር ድረ-ገፅና የሞባይል አፕሊኬሽን መሃንዲሶች",
-        "om": "Injinariiwwan Weebsaayitii fi Mobaayilaa Guutuu",
-        "ti": "ናይ ድረ-ገጽን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "en": "Full-Stack Web",
+        "am": "የሙሉ መስመር ድረ-ገፅ",
+        "om": "Injinariiwwan Weebsaayitii",
+        "ti": "ናይ ድረ-ገጽ"
       },
       "description": "Engineers skilled in React, Next.js, Node.js, Go, Python, Flutter, and PostgreSQL databases",
       "level": 2,
@@ -2729,7 +2903,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Full-Stack Web & Mobile App Engineers",
+        "Injinariiwwan Weebsaayitii fi Mobaayilaa Guutuu",
+        "Mobile App Engineers",
+        "ናይ ድረ-ገጽን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "የሙሉ መስመር ድረ-ገፅና የሞባይል አፕሊኬሽን መሃንዲሶች"
+      ],
       "redirects": []
     },
     {
@@ -2765,10 +2945,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "insurance-underwriting-claims",
       "names": {
-        "en": "Insurance Underwriting & Claims",
-        "am": "የኢንሹራንስ ምዘናና የካሳ አከፋፈል ስራዎች",
-        "om": "Hojiiwwan Inshuraansii fi Kaffaltii Kasaaraa",
-        "ti": "ናይ ኢንሹራንስ ምዘናን ካሕሳን ስራሕቲ"
+        "en": "Insurance Underwriting",
+        "am": "የኢንሹራንስ ምዘና",
+        "om": "Hojiiwwan Inshuraansii",
+        "ti": "ናይ ኢንሹራንስ ምዘና"
       },
       "description": null,
       "level": 2,
@@ -2781,7 +2961,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Claims",
+        "Hojiiwwan Inshuraansii fi Kaffaltii Kasaaraa",
+        "Insurance Underwriting & Claims",
+        "ናይ ኢንሹራንስ ምዘናን ካሕሳን ስራሕቲ",
+        "የኢንሹራንስ ምዘናና የካሳ አከፋፈል ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2791,8 +2977,8 @@
       "classification_system_code": "SYS_EMP",
       "slug": "software-architecture-engineering",
       "names": {
-        "en": "Software Architecture & Engineering",
-        "am": "የሶፍትዌር አርክቴክቸርና ኢንጂነሪንግ",
+        "en": "Software Architecture",
+        "am": "የሶፍትዌር አርክቴክቸር",
         "om": "Injinariingii Sooftiweerii",
         "ti": "ናይ ሶፍትዌር ምህንድስና"
       },
@@ -2807,7 +2993,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Engineering",
+        "Software Architecture & Engineering",
+        "የሶፍትዌር አርክቴክቸርና ኢንጂነሪንግ"
+      ],
       "redirects": []
     },
     {
@@ -2817,10 +3007,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "it-support-systems-administration",
       "names": {
-        "en": "IT Support & Systems Administration",
-        "am": "የአይቲ ድጋፍና የስርዓት አስተዳደር ስራዎች",
-        "om": "Bulchiinsa Sirna IT fi Tajaajila Deeggarsaa",
-        "ti": "ናይ IT ሓገዝን ስርዓት ምሕደራን"
+        "en": "IT Support",
+        "am": "የአይቲ ድጋፍ",
+        "om": "Bulchiinsa Sirna IT",
+        "ti": "ናይ IT ሓገዝ"
       },
       "description": null,
       "level": 2,
@@ -2833,7 +3023,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bulchiinsa Sirna IT fi Tajaajila Deeggarsaa",
+        "IT Support & Systems Administration",
+        "Systems Administration",
+        "ናይ IT ሓገዝን ስርዓት ምሕደራን",
+        "የአይቲ ድጋፍና የስርዓት አስተዳደር ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2843,10 +3039,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "civil-structural-engineering",
       "names": {
-        "en": "Civil & Structural Engineering",
-        "am": "የሲቪልና መዋቅራዊ ኢንጂነሪንግ ስራዎች",
-        "om": "Injinariingii Siivilii fi Caasaa",
-        "ti": "ናይ ሲቪልን ህንጸትን ምህንድስና"
+        "en": "Civil",
+        "am": "የሲቪል",
+        "om": "Injinariingii Siivilii",
+        "ti": "ናይ ሲቪል"
       },
       "description": null,
       "level": 2,
@@ -2859,7 +3055,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Civil & Structural Engineering",
+        "Injinariingii Siivilii fi Caasaa",
+        "Structural Engineering",
+        "ናይ ሲቪልን ህንጸትን ምህንድስና",
+        "የሲቪልና መዋቅራዊ ኢንጂነሪንግ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2869,10 +3071,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "electrical-mechanical-engineering",
       "names": {
-        "en": "Electrical & Mechanical Engineering",
-        "am": "የኤሌክትሪካልና መካኒካል ኢንጂነሪንግ",
-        "om": "Injinariingii Elektiriikaa fi Mekaaniikaa",
-        "ti": "ናይ ኤሌክትሪክን መካኒክን ምህንድስና"
+        "en": "Electrical",
+        "am": "የኤሌክትሪካል",
+        "om": "Injinariingii Elektiriikaa",
+        "ti": "ናይ ኤሌክትሪክ"
       },
       "description": null,
       "level": 2,
@@ -2885,7 +3087,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Electrical & Mechanical Engineering",
+        "Injinariingii Elektiriikaa fi Mekaaniikaa",
+        "Mechanical Engineering",
+        "ናይ ኤሌክትሪክን መካኒክን ምህንድስና",
+        "የኤሌክትሪካልና መካኒካል ኢንጂነሪንግ"
+      ],
       "redirects": []
     },
     {
@@ -2895,10 +3103,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-finance-accounting-jobs",
       "names": {
-        "en": "Specialized & Custom Finance & Accounting Jobs",
-        "am": "ልዩና ብጁ Finance & Accounting Jobs",
-        "om": "Kan Addaa fi Filatamaa Finance & Accounting Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Finance & Accounting Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2911,7 +3119,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accounting Jobs",
+        "Custom Finance",
+        "Kan Addaa fi Filatamaa Finance & Accounting Jobs",
+        "Specialized & Custom Finance & Accounting Jobs",
+        "ልዩና ብጁ Finance & Accounting Jobs",
+        "ፍሉይን ዝተዳለወን Finance & Accounting Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2921,10 +3136,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-healthcare-medical-jobs",
       "names": {
-        "en": "Specialized & Custom Healthcare & Medical Jobs",
-        "am": "ልዩና ብጁ Healthcare & Medical Jobs",
-        "om": "Kan Addaa fi Filatamaa Healthcare & Medical Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Healthcare & Medical Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2937,7 +3152,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Healthcare",
+        "Kan Addaa fi Filatamaa Healthcare & Medical Jobs",
+        "Medical Jobs",
+        "Specialized & Custom Healthcare & Medical Jobs",
+        "ልዩና ብጁ Healthcare & Medical Jobs",
+        "ፍሉይን ዝተዳለወን Healthcare & Medical Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2947,10 +3169,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-skilled-trades-jobs",
       "names": {
-        "en": "Specialized & Custom Skilled Trades Jobs",
-        "am": "ልዩና ብጁ Skilled Trades Jobs",
-        "om": "Kan Addaa fi Filatamaa Skilled Trades Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Skilled Trades Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2963,7 +3185,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Skilled Trades Jobs",
+        "Kan Addaa fi Filatamaa Skilled Trades Jobs",
+        "Specialized & Custom Skilled Trades Jobs",
+        "ልዩና ብጁ Skilled Trades Jobs",
+        "ፍሉይን ዝተዳለወን Skilled Trades Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2973,10 +3201,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-transport-logistics-jobs",
       "names": {
-        "en": "Specialized & Custom Transport & Logistics Jobs",
-        "am": "ልዩና ብጁ Transport & Logistics Jobs",
-        "om": "Kan Addaa fi Filatamaa Transport & Logistics Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Transport & Logistics Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2989,7 +3217,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Transport",
+        "Kan Addaa fi Filatamaa Transport & Logistics Jobs",
+        "Logistics Jobs",
+        "Specialized & Custom Transport & Logistics Jobs",
+        "ልዩና ብጁ Transport & Logistics Jobs",
+        "ፍሉይን ዝተዳለወን Transport & Logistics Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2999,10 +3234,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-freelance-digital-gigs",
       "names": {
-        "en": "Specialized & Custom Freelance & Digital Gigs",
-        "am": "ልዩና ብጁ Freelance & Digital Gigs",
-        "om": "Kan Addaa fi Filatamaa Freelance & Digital Gigs",
-        "ti": "ፍሉይን ዝተዳለወን Freelance & Digital Gigs"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3015,7 +3250,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Freelance",
+        "Digital Gigs",
+        "Kan Addaa fi Filatamaa Freelance & Digital Gigs",
+        "Specialized & Custom Freelance & Digital Gigs",
+        "ልዩና ብጁ Freelance & Digital Gigs",
+        "ፍሉይን ዝተዳለወን Freelance & Digital Gigs"
+      ],
       "redirects": []
     },
     {
@@ -3025,10 +3267,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-general-labor-jobs",
       "names": {
-        "en": "Specialized & Custom General Labor Jobs",
-        "am": "ልዩና ብጁ General Labor Jobs",
-        "om": "Kan Addaa fi Filatamaa General Labor Jobs",
-        "ti": "ፍሉይን ዝተዳለወን General Labor Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3041,7 +3283,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom General Labor Jobs",
+        "Kan Addaa fi Filatamaa General Labor Jobs",
+        "Specialized & Custom General Labor Jobs",
+        "ልዩና ብጁ General Labor Jobs",
+        "ፍሉይን ዝተዳለወን General Labor Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3051,10 +3299,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-creative-design-jobs",
       "names": {
-        "en": "Specialized & Custom Creative & Design Jobs",
-        "am": "ልዩና ብጁ Creative & Design Jobs",
-        "om": "Kan Addaa fi Filatamaa Creative & Design Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Creative & Design Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3067,7 +3315,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Creative",
+        "Design Jobs",
+        "Kan Addaa fi Filatamaa Creative & Design Jobs",
+        "Specialized & Custom Creative & Design Jobs",
+        "ልዩና ብጁ Creative & Design Jobs",
+        "ፍሉይን ዝተዳለወን Creative & Design Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3077,10 +3332,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-domestic-worker-jobs",
       "names": {
-        "en": "Specialized & Custom Domestic Worker Jobs",
-        "am": "ልዩና ብጁ Domestic Worker Jobs",
-        "om": "Kan Addaa fi Filatamaa Domestic Worker Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Domestic Worker Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3093,7 +3348,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Domestic Worker Jobs",
+        "Kan Addaa fi Filatamaa Domestic Worker Jobs",
+        "Specialized & Custom Domestic Worker Jobs",
+        "ልዩና ብጁ Domestic Worker Jobs",
+        "ፍሉይን ዝተዳለወን Domestic Worker Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3103,10 +3364,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-engineering-construction-jobs",
       "names": {
-        "en": "Specialized & Custom Engineering & Construction Jobs",
-        "am": "ልዩና ብጁ Engineering & Construction Jobs",
-        "om": "Kan Addaa fi Filatamaa Engineering & Construction Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Engineering & Construction Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3119,7 +3380,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Construction Jobs",
+        "Custom Engineering",
+        "Kan Addaa fi Filatamaa Engineering & Construction Jobs",
+        "Specialized & Custom Engineering & Construction Jobs",
+        "ልዩና ብጁ Engineering & Construction Jobs",
+        "ፍሉይን ዝተዳለወን Engineering & Construction Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3129,10 +3397,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-recruitment-staffing-services",
       "names": {
-        "en": "Specialized & Custom Recruitment & Staffing Services",
-        "am": "ልዩና ብጁ Recruitment & Staffing Services",
-        "om": "Kan Addaa fi Filatamaa Recruitment & Staffing Services",
-        "ti": "ፍሉይን ዝተዳለወን Recruitment & Staffing Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3145,7 +3413,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Recruitment",
+        "Kan Addaa fi Filatamaa Recruitment & Staffing Services",
+        "Specialized & Custom Recruitment & Staffing Services",
+        "Staffing Services",
+        "ልዩና ብጁ Recruitment & Staffing Services",
+        "ፍሉይን ዝተዳለወን Recruitment & Staffing Services"
+      ],
       "redirects": []
     },
     {
@@ -3155,10 +3430,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-sales-marketing-jobs",
       "names": {
-        "en": "Specialized & Custom Sales & Marketing Jobs",
-        "am": "ልዩና ብጁ Sales & Marketing Jobs",
-        "om": "Kan Addaa fi Filatamaa Sales & Marketing Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Sales & Marketing Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3171,7 +3446,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sales",
+        "Kan Addaa fi Filatamaa Sales & Marketing Jobs",
+        "Marketing Jobs",
+        "Specialized & Custom Sales & Marketing Jobs",
+        "ልዩና ብጁ Sales & Marketing Jobs",
+        "ፍሉይን ዝተዳለወን Sales & Marketing Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3181,10 +3463,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-security-guard-jobs",
       "names": {
-        "en": "Specialized & Custom Security & Guard Jobs",
-        "am": "ልዩና ብጁ Security & Guard Jobs",
-        "om": "Kan Addaa fi Filatamaa Security & Guard Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Security & Guard Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3197,7 +3479,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Security",
+        "Guard Jobs",
+        "Kan Addaa fi Filatamaa Security & Guard Jobs",
+        "Specialized & Custom Security & Guard Jobs",
+        "ልዩና ብጁ Security & Guard Jobs",
+        "ፍሉይን ዝተዳለወን Security & Guard Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3207,10 +3496,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-teaching-education-jobs",
       "names": {
-        "en": "Specialized & Custom Teaching & Education Jobs",
-        "am": "ልዩና ብጁ Teaching & Education Jobs",
-        "om": "Kan Addaa fi Filatamaa Teaching & Education Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Teaching & Education Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3223,7 +3512,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Teaching",
+        "Education Jobs",
+        "Kan Addaa fi Filatamaa Teaching & Education Jobs",
+        "Specialized & Custom Teaching & Education Jobs",
+        "ልዩና ብጁ Teaching & Education Jobs",
+        "ፍሉይን ዝተዳለወን Teaching & Education Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3233,10 +3529,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-technology-it-jobs",
       "names": {
-        "en": "Specialized & Custom Technology & IT Jobs",
-        "am": "ልዩና ብጁ Technology & IT Jobs",
-        "om": "Kan Addaa fi Filatamaa Technology & IT Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Technology & IT Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3249,7 +3545,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Technology",
+        "IT Jobs",
+        "Kan Addaa fi Filatamaa Technology & IT Jobs",
+        "Specialized & Custom Technology & IT Jobs",
+        "ልዩና ብጁ Technology & IT Jobs",
+        "ፍሉይን ዝተዳለወን Technology & IT Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3259,10 +3562,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-internship-apprenticeship",
       "names": {
-        "en": "Specialized & Custom Internship & Apprenticeship",
-        "am": "ልዩና ብጁ Internship & Apprenticeship",
-        "om": "Kan Addaa fi Filatamaa Internship & Apprenticeship",
-        "ti": "ፍሉይን ዝተዳለወን Internship & Apprenticeship"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3275,7 +3578,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Apprenticeship",
+        "Custom Internship",
+        "Kan Addaa fi Filatamaa Internship & Apprenticeship",
+        "Specialized & Custom Internship & Apprenticeship",
+        "ልዩና ብጁ Internship & Apprenticeship",
+        "ፍሉይን ዝተዳለወን Internship & Apprenticeship"
+      ],
       "redirects": []
     },
     {
@@ -3285,10 +3595,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-administrative-clerical-jobs",
       "names": {
-        "en": "Specialized & Custom Administrative & Clerical Jobs",
-        "am": "ልዩና ብጁ Administrative & Clerical Jobs",
-        "om": "Kan Addaa fi Filatamaa Administrative & Clerical Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Administrative & Clerical Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3301,7 +3611,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Clerical Jobs",
+        "Custom Administrative",
+        "Kan Addaa fi Filatamaa Administrative & Clerical Jobs",
+        "Specialized & Custom Administrative & Clerical Jobs",
+        "ልዩና ብጁ Administrative & Clerical Jobs",
+        "ፍሉይን ዝተዳለወን Administrative & Clerical Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3311,10 +3628,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-agriculture-farming-jobs",
       "names": {
-        "en": "Specialized & Custom Agriculture & Farming Jobs",
-        "am": "ልዩና ብጁ Agriculture & Farming Jobs",
-        "om": "Kan Addaa fi Filatamaa Agriculture & Farming Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Agriculture & Farming Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3327,7 +3644,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Agriculture",
+        "Farming Jobs",
+        "Kan Addaa fi Filatamaa Agriculture & Farming Jobs",
+        "Specialized & Custom Agriculture & Farming Jobs",
+        "ልዩና ብጁ Agriculture & Farming Jobs",
+        "ፍሉይን ዝተዳለወን Agriculture & Farming Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3337,10 +3661,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-hospitality-culinary-jobs",
       "names": {
-        "en": "Specialized & Custom Hospitality & Culinary Jobs",
-        "am": "ልዩና ብጁ Hospitality & Culinary Jobs",
-        "om": "Kan Addaa fi Filatamaa Hospitality & Culinary Jobs",
-        "ti": "ፍሉይን ዝተዳለወን Hospitality & Culinary Jobs"
+        "en": "Specialized Jobs",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3353,7 +3677,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Culinary Jobs",
+        "Custom Hospitality",
+        "Kan Addaa fi Filatamaa Hospitality & Culinary Jobs",
+        "Specialized & Custom Hospitality & Culinary Jobs",
+        "ልዩና ብጁ Hospitality & Culinary Jobs",
+        "ፍሉይን ዝተዳለወን Hospitality & Culinary Jobs"
+      ],
       "redirects": []
     },
     {
@@ -3363,10 +3694,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-digital-content-creators-social-influencers",
       "names": {
-        "en": "Specialized & Custom Digital Content Creators & Social Influencers",
-        "am": "ልዩና ብጁ Digital Content Creators & Social Influencers",
-        "om": "Kan Addaa fi Filatamaa Digital Content Creators & Social Influencers",
-        "ti": "ፍሉይን ዝተዳለወን Digital Content Creators & Social Influencers"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3379,7 +3710,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Digital Content Creators",
+        "Kan Addaa fi Filatamaa Digital Content Creators & Social Influencers",
+        "Social Influencers",
+        "Specialized & Custom Digital Content Creators & Social Influencers",
+        "ልዩና ብጁ Digital Content Creators & Social Influencers",
+        "ፍሉይን ዝተዳለወን Digital Content Creators & Social Influencers"
+      ],
       "redirects": []
     },
     {
@@ -3389,10 +3727,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-sports-athletes-coaches-fitness-talents",
       "names": {
-        "en": "Specialized & Custom Sports Athletes, Coaches & Fitness Talents",
-        "am": "ልዩና ብጁ Sports Athletes, Coaches & Fitness Talents",
-        "om": "Kan Addaa fi Filatamaa Sports Athletes, Coaches & Fitness Talents",
-        "ti": "ፍሉይን ዝተዳለወን Sports Athletes, Coaches & Fitness Talents"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3405,7 +3743,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Coaches",
+        "Custom Sports Athletes",
+        "Fitness Talents",
+        "Kan Addaa fi Filatamaa Sports Athletes, Coaches & Fitness Talents",
+        "Specialized & Custom Sports Athletes, Coaches & Fitness Talents",
+        "ልዩና ብጁ Sports Athletes, Coaches & Fitness Talents",
+        "ፍሉይን ዝተዳለወን Sports Athletes, Coaches & Fitness Talents"
+      ],
       "redirects": []
     },
     {
@@ -3415,10 +3761,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-software-development-tech-freelancers",
       "names": {
-        "en": "Specialized & Custom Software Development & Tech Freelancers",
-        "am": "ልዩና ብጁ Software Development & Tech Freelancers",
-        "om": "Kan Addaa fi Filatamaa Software Development & Tech Freelancers",
-        "ti": "ፍሉይን ዝተዳለወን Software Development & Tech Freelancers"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3431,7 +3777,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Software Development",
+        "Kan Addaa fi Filatamaa Software Development & Tech Freelancers",
+        "Specialized & Custom Software Development & Tech Freelancers",
+        "Tech Freelancers",
+        "ልዩና ብጁ Software Development & Tech Freelancers",
+        "ፍሉይን ዝተዳለወን Software Development & Tech Freelancers"
+      ],
       "redirects": []
     },
     {
@@ -3441,10 +3794,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "tiktok-comedy-skit-creators",
       "names": {
-        "en": "TikTok & Instagram Comedy Skit Creators",
-        "am": "የቲክቶክና ኢንስታግራም አስቂኝ ድራማ ፈጣሪዎች",
-        "om": "Uumtoota Diraamaa Qoosaa TikTok fi Instagram",
-        "ti": "ናይ ቲክቶክን ኢንስታግራምን ናይ ቀልዲ ድራማ ፈጠርቲ"
+        "en": "TikTok",
+        "am": "የቲክቶክ",
+        "om": "Uumtoota Diraamaa Qoosaa TikTok",
+        "ti": "ናይ ቲክቶክ"
       },
       "description": "Short-form comedic entertainers and sketch artists available for digital brand sponsorships and ads",
       "level": 3,
@@ -3457,7 +3810,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Instagram Comedy Skit Creators",
+        "TikTok & Instagram Comedy Skit Creators",
+        "Uumtoota Diraamaa Qoosaa TikTok fi Instagram",
+        "ናይ ቲክቶክን ኢንስታግራምን ናይ ቀልዲ ድራማ ፈጠርቲ",
+        "የቲክቶክና ኢንስታግራም አስቂኝ ድራማ ፈጣሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -3467,10 +3826,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "attacking-strikers-and-wingers",
       "names": {
-        "en": "Attacking Center Forwards & Wingers",
-        "am": "አጥቂ አጥቂዎችና የመስመር ተጫዋቾች",
-        "om": "Taphata Fuulduraa fi Sarara Cinaa",
-        "ti": "ኣጥቃዕቲ ተጻወትትን ናይ መስመር ተጻወትትን"
+        "en": "Attacking Center Forwards",
+        "am": "አጥቂ አጥቂዎች",
+        "om": "Taphata Fuulduraa",
+        "ti": "ኣጥቃዕቲ ተጻወትት"
       },
       "description": "Fast agile forwards, target strikers, and pace wingers with match statistics and highlight reels",
       "level": 3,
@@ -3483,7 +3842,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Attacking Center Forwards & Wingers",
+        "Taphata Fuulduraa fi Sarara Cinaa",
+        "Wingers",
+        "አጥቂ አጥቂዎችና የመስመር ተጫዋቾች",
+        "ኣጥቃዕቲ ተጻወትትን ናይ መስመር ተጻወትትን"
+      ],
       "redirects": []
     },
     {
@@ -3493,10 +3858,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "senior-react-golang-architects",
       "names": {
-        "en": "Senior Next.js & Golang Cloud Architecture Specialists",
-        "am": "ከፍተኛ የኔክስት.ጄኤስ እና የጎላንግ ክላውድ ሲስተም ባለሙያዎች",
-        "om": "Ogeeyyii Sadarkaa Olaanaa Next.js fi Golang",
-        "ti": "ላዕለዎት ናይ Next.jsን Golangን ክላውድ ሞያተኛታት"
+        "en": "Senior Next.js",
+        "am": "ከፍተኛ የኔክስት.ጄኤስ",
+        "om": "Ogeeyyii Sadarkaa Olaanaa Next.js",
+        "ti": "ላዕለዎት ናይ Next.js"
       },
       "description": "5+ years experienced engineers capable of delivering high-concurrency microservices, fintech integrations, and portals",
       "level": 3,
@@ -3509,7 +3874,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Golang Cloud Architecture Specialists",
+        "Ogeeyyii Sadarkaa Olaanaa Next.js fi Golang",
+        "Senior Next.js & Golang Cloud Architecture Specialists",
+        "ላዕለዎት ናይ Next.jsን Golangን ክላውድ ሞያተኛታት",
+        "ከፍተኛ የኔክስት.ጄኤስ እና የጎላንግ ክላውድ ሲስተም ባለሙያዎች"
+      ],
       "redirects": []
     },
     {
@@ -3545,9 +3916,9 @@
       "classification_system_code": "SYS_EMP",
       "slug": "senior-loan-credit-appraisal-officer",
       "names": {
-        "en": "Senior Loan & Credit Appraisal Officer",
-        "am": "ከፍተኛ የብድርና ክሬዲት ገምጋሚ ባለሙያ",
-        "om": "Ogeessa Olaanaa Liqii fi Kireeditii",
+        "en": "Senior Loan",
+        "am": "ከፍተኛ የብድር",
+        "om": "Ogeessa Olaanaa Liqii",
         "ti": "ላዕለዋይ ናይ ልቓሕ መርማሪ በዓል ሞያ"
       },
       "description": null,
@@ -3561,7 +3932,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Credit Appraisal Officer",
+        "Ogeessa Olaanaa Liqii fi Kireeditii",
+        "Senior Loan & Credit Appraisal Officer",
+        "ከፍተኛ የብድርና ክሬዲት ገምጋሚ ባለሙያ"
+      ],
       "redirects": []
     },
     {
@@ -3597,10 +3973,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "head-cashier-vault-custodian",
       "names": {
-        "en": "Head Cashier & Vault Custodian",
-        "am": "ዋና ገንዘብ ያዥና የካዝና ኃላፊ",
-        "om": "Qondaala Maallaqaa fi Kaazinaa",
-        "ti": "ዋና ተሓዝ ገንዘብን ካዝናን"
+        "en": "Head Cashier",
+        "am": "ዋ",
+        "om": "Qondaala Maallaqaa",
+        "ti": "ዋና ተሓዝ ገንዘብ"
       },
       "description": null,
       "level": 3,
@@ -3613,7 +3989,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Head Cashier & Vault Custodian",
+        "Qondaala Maallaqaa fi Kaazinaa",
+        "Vault Custodian",
+        "ዋና ተሓዝ ገንዘብን ካዝናን",
+        "ዋና ገንዘብ ያዥና የካዝና ኃላፊ"
+      ],
       "redirects": []
     },
     {
@@ -3649,10 +4031,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "trade-finance-letter-of-credit-lc-officer",
       "names": {
-        "en": "Trade Finance & Letter of Credit (LC) Officer",
-        "am": "የንግድ ፋይናንስና የኤልሲ (LC) ባለሙያ",
-        "om": "Ogeessa Faayinaansii Daldalaa fi LC",
-        "ti": "ናይ ንግዲ ፋይናንስን LCን በዓል ሞያ"
+        "en": "Trade Finance",
+        "am": "የንግድ ፋይናንስ",
+        "om": "Ogeessa Faayinaansii Daldalaa",
+        "ti": "ናይ ንግዲ ፋይናንስ"
       },
       "description": null,
       "level": 3,
@@ -3665,7 +4047,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Letter of Credit (LC) Officer",
+        "Ogeessa Faayinaansii Daldalaa fi LC",
+        "Trade Finance & Letter of Credit (LC) Officer",
+        "ናይ ንግዲ ፋይናንስን LCን በዓል ሞያ",
+        "የንግድ ፋይናንስና የኤልሲ (LC) ባለሙያ"
+      ],
       "redirects": []
     },
     {
@@ -3831,10 +4219,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "marine-cargo-insurance-specialist",
       "names": {
-        "en": "Marine & Cargo Insurance Specialist",
-        "am": "የባህርና የጭነት ኢንሹራንስ ባለሙያ",
-        "om": "Ogeessa Inshuraansii Galaanaa fi Fe'umsaa",
-        "ti": "ናይ ባሕርን ጽዕነትን ኢንሹራንስ በዓል ሞያ"
+        "en": "Marine",
+        "am": "የባህር",
+        "om": "Ogeessa Inshuraansii Galaanaa",
+        "ti": "ናይ ባሕር"
       },
       "description": null,
       "level": 3,
@@ -3847,7 +4235,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cargo Insurance Specialist",
+        "Marine & Cargo Insurance Specialist",
+        "Ogeessa Inshuraansii Galaanaa fi Fe'umsaa",
+        "ናይ ባሕርን ጽዕነትን ኢንሹራንስ በዓል ሞያ",
+        "የባህርና የጭነት ኢንሹራንስ ባለሙያ"
+      ],
       "redirects": []
     },
     {
@@ -3935,10 +4329,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "devops-cloud-site-reliability-engineer-sre",
       "names": {
-        "en": "DevOps & Cloud Site Reliability Engineer (SRE)",
-        "am": "የዴቭኦፕስና ክላውድ አስተማማኝነት መሃንዲስ",
+        "en": "DevOps",
+        "am": "የዴቭኦፕስ",
         "om": "Injinara Saayitii Kilaawudii (SRE)",
-        "ti": "ናይ DevOpsን ክላውድን መሃندس"
+        "ti": "ናይ DevOps"
       },
       "description": null,
       "level": 3,
@@ -3951,7 +4345,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cloud Site Reliability Engineer (SRE)",
+        "DevOps & Cloud Site Reliability Engineer (SRE)",
+        "ናይ DevOpsን ክላውድን መሃندس",
+        "የዴቭኦፕስና ክላውድ አስተማማኝነት መሃንዲስ"
+      ],
       "redirects": []
     },
     {
@@ -3961,8 +4360,8 @@
       "classification_system_code": "SYS_EMP",
       "slug": "cybersecurity-penetration-tester-auditor",
       "names": {
-        "en": "Cybersecurity Penetration Tester & Auditor",
-        "am": "የሳይበር ደህንነት መርማሪና ኦዲተር",
+        "en": "Cybersecurity Penetration Tester",
+        "am": "የሳይበር ደህንነት መርማሪ",
         "om": "Sakatta'aa Eegumsa Saayibarii",
         "ti": "ናይ ሳይበር ድሕንነት መርማሪ"
       },
@@ -3977,7 +4376,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Auditor",
+        "Cybersecurity Penetration Tester & Auditor",
+        "የሳይበር ደህንነት መርማሪና ኦዲተር"
+      ],
       "redirects": []
     },
     {
@@ -4013,9 +4416,9 @@
       "classification_system_code": "SYS_EMP",
       "slug": "data-engineer-pipeline-architect",
       "names": {
-        "en": "Data Engineer & Pipeline Architect",
-        "am": "የዳታ መሃንዲስና የዳታ ፓይፕላይን አርክቴክት",
-        "om": "Injinara Deetaa fi Paayipilaayinii",
+        "en": "Data Engineer",
+        "am": "የዳታ መሃንዲስ",
+        "om": "Injinara Deetaa",
         "ti": "ናይ ዳታ መሃندس"
       },
       "description": null,
@@ -4029,7 +4432,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Data Engineer & Pipeline Architect",
+        "Injinara Deetaa fi Paayipilaayinii",
+        "Pipeline Architect",
+        "የዳታ መሃንዲስና የዳታ ፓይፕላይን አርክቴክት"
+      ],
       "redirects": []
     },
     {
@@ -4117,10 +4525,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "cctv-physical-security-systems-technician",
       "names": {
-        "en": "CCTV & Physical Security Systems Technician",
-        "am": "የሲሲቲቪና የደህንነት ስርዓቶች ቴክኒሻን",
-        "om": "Teeknisheena CCTV fi Nageenyaa",
-        "ti": "ናይ CCTVን ድሕንነትን ቴክኒሽያን"
+        "en": "CCTV",
+        "am": "የሲሲቲቪ",
+        "om": "Teeknisheena CCTV",
+        "ti": "ናይ CCTV"
       },
       "description": null,
       "level": 3,
@@ -4133,7 +4541,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "CCTV & Physical Security Systems Technician",
+        "Physical Security Systems Technician",
+        "Teeknisheena CCTV fi Nageenyaa",
+        "ናይ CCTVን ድሕንነትን ቴክኒሽያን",
+        "የሲሲቲቪና የደህንነት ስርዓቶች ቴክኒሻን"
+      ],
       "redirects": []
     },
     {
@@ -4221,9 +4635,9 @@
       "classification_system_code": "SYS_EMP",
       "slug": "highway-geometric-road-engineer",
       "names": {
-        "en": "Highway & Geometric Road Engineer",
-        "am": "የአውራ ጎዳናዎችና መንገዶች መሃንዲስ",
-        "om": "Injinara Daandii fi Asfaaltii",
+        "en": "Highway",
+        "am": "የአውራ ጎዳናዎች",
+        "om": "Injinara Daandii",
         "ti": "ናይ ጽርግያታት መሃندس"
       },
       "description": null,
@@ -4237,7 +4651,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Geometric Road Engineer",
+        "Highway & Geometric Road Engineer",
+        "Injinara Daandii fi Asfaaltii",
+        "የአውራ ጎዳናዎችና መንገዶች መሃንዲስ"
+      ],
       "redirects": []
     },
     {
@@ -4247,10 +4666,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "geotechnical-soil-testing-engineer",
       "names": {
-        "en": "Geotechnical & Soil Testing Engineer",
-        "am": "የጂኦቴክኒክና የአፈር ምርመራ መሃንዲስ",
+        "en": "Geotechnical",
+        "am": "የጂኦቴክኒክ",
         "om": "Injinara Qorannoo Biyyee",
-        "ti": "ናይ መሬትን ሓመድን መርማሪ መሃندس"
+        "ti": "ናይ መሬት"
       },
       "description": null,
       "level": 3,
@@ -4263,7 +4682,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Geotechnical & Soil Testing Engineer",
+        "Soil Testing Engineer",
+        "ናይ መሬትን ሓመድን መርማሪ መሃندس",
+        "የጂኦቴክኒክና የአፈር ምርመራ መሃንዲስ"
+      ],
       "redirects": []
     },
     {
@@ -4273,8 +4697,8 @@
       "classification_system_code": "SYS_EMP",
       "slug": "quantity-surveyor-cost-estimator",
       "names": {
-        "en": "Quantity Surveyor & Cost Estimator",
-        "am": "የቁሳቁስና የግንባታ ወጪ ገምጋሚ (QS)",
+        "en": "Quantity Surveyor",
+        "am": "የቁሳቁስ",
         "om": "Ogeessa Shallaggii Baasii Ijaarsaa",
         "ti": "ናይ ህንጸት ወጻኢታት መደቢ (QS)"
       },
@@ -4289,7 +4713,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cost Estimator",
+        "Quantity Surveyor & Cost Estimator",
+        "የቁሳቁስና የግንባታ ወጪ ገምጋሚ (QS)"
+      ],
       "redirects": []
     },
     {
@@ -4377,8 +4805,8 @@
       "classification_system_code": "SYS_EMP",
       "slug": "hvac-commercial-refrigeration-engineer",
       "names": {
-        "en": "HVAC & Commercial Refrigeration Engineer",
-        "am": "የማቀዝቀዣና የአየር ማቀዝቀዣ መሃንዲስ",
+        "en": "HVAC",
+        "am": "የማቀዝቀዣ",
         "om": "Injinara Qabbaneessituu HVAC",
         "ti": "ናይ መዝሓሊ ስርዓታት መሃندس"
       },
@@ -4393,7 +4821,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial Refrigeration Engineer",
+        "HVAC & Commercial Refrigeration Engineer",
+        "የማቀዝቀዣና የአየር ማቀዝቀዣ መሃንዲስ"
+      ],
       "redirects": []
     },
     {
@@ -4403,9 +4835,9 @@
       "classification_system_code": "SYS_EMP",
       "slug": "elevator-escalator-field-engineer",
       "names": {
-        "en": "Elevator & Escalator Field Engineer",
-        "am": "የአሳንሰርና ደረጃ ማሽኖች የመስክ መሃንዲስ",
-        "om": "Injinara Wiinchii fi Asansarii",
+        "en": "Elevator",
+        "am": "የአሳንሰር",
+        "om": "Injinara Wiinchii",
         "ti": "ናይ ሊፍት (Elevator) መሃندس"
       },
       "description": null,
@@ -4419,7 +4851,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Elevator & Escalator Field Engineer",
+        "Escalator Field Engineer",
+        "Injinara Wiinchii fi Asansarii",
+        "የአሳንሰርና ደረጃ ማሽኖች የመስክ መሃንዲስ"
+      ],
       "redirects": []
     },
     {
@@ -4429,10 +4866,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "industrial-automation-plc-programmer",
       "names": {
-        "en": "Industrial Automation & PLC Programmer",
-        "am": "የኢንዱስትሪ አውቶሜሽንና የPLC ፕሮግራመር",
-        "om": "Piroogiraamara PLC fi Ootomeeshinii",
-        "ti": "ናይ PLCን ኢንዱስትሪ አውቶሜሽንን በዓል ሞያ"
+        "en": "Industrial Automation",
+        "am": "የኢንዱስትሪ አውቶሜሽን",
+        "om": "Piroogiraamara PLC",
+        "ti": "ናይ PLC"
       },
       "description": null,
       "level": 3,
@@ -4445,7 +4882,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Automation & PLC Programmer",
+        "PLC Programmer",
+        "Piroogiraamara PLC fi Ootomeeshinii",
+        "ናይ PLCን ኢንዱስትሪ አውቶሜሽንን በዓል ሞያ",
+        "የኢንዱስትሪ አውቶሜሽንና የPLC ፕሮግራመር"
+      ],
       "redirects": []
     },
     {
@@ -4455,10 +4898,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-short-form-video-comedy-content-creators",
       "names": {
-        "en": "Specialized & Custom Short-Form Video & Comedy Content Creators",
-        "am": "ልዩና ብጁ Short-Form Video & Comedy Content Creators",
-        "om": "Kan Addaa fi Filatamaa Short-Form Video & Comedy Content Creators",
-        "ti": "ፍሉይን ዝተዳለወን Short-Form Video & Comedy Content Creators"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4471,7 +4914,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Comedy Content Creators",
+        "Custom Short-Form Video",
+        "Kan Addaa fi Filatamaa Short-Form Video & Comedy Content Creators",
+        "Specialized & Custom Short-Form Video & Comedy Content Creators",
+        "ልዩና ብጁ Short-Form Video & Comedy Content Creators",
+        "ፍሉይን ዝተዳለወን Short-Form Video & Comedy Content Creators"
+      ],
       "redirects": []
     },
     {
@@ -4481,10 +4931,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-football-soccer-talents-player-scouting-cvs",
       "names": {
-        "en": "Specialized & Custom Football / Soccer Talents & Player Scouting CVs",
-        "am": "ልዩና ብጁ Football / Soccer Talents & Player Scouting CVs",
-        "om": "Kan Addaa fi Filatamaa Football / Soccer Talents & Player Scouting CVs",
-        "ti": "ፍሉይን ዝተዳለወን Football / Soccer Talents & Player Scouting CVs"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4497,7 +4947,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Football / Soccer Talents",
+        "Kan Addaa fi Filatamaa Football / Soccer Talents & Player Scouting CVs",
+        "Player Scouting CVs",
+        "Specialized & Custom Football / Soccer Talents & Player Scouting CVs",
+        "ልዩና ብጁ Football / Soccer Talents & Player Scouting CVs",
+        "ፍሉይን ዝተዳለወን Football / Soccer Talents & Player Scouting CVs"
+      ],
       "redirects": []
     },
     {
@@ -4507,10 +4964,10 @@
       "classification_system_code": "SYS_EMP",
       "slug": "specialized-custom-full-stack-web-mobile-app-engineers",
       "names": {
-        "en": "Specialized & Custom Full-Stack Web & Mobile App Engineers",
-        "am": "ልዩና ብጁ Full-Stack Web & Mobile App Engineers",
-        "om": "Kan Addaa fi Filatamaa Full-Stack Web & Mobile App Engineers",
-        "ti": "ፍሉይን ዝተዳለወን Full-Stack Web & Mobile App Engineers"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4523,7 +4980,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Full-Stack Web",
+        "Kan Addaa fi Filatamaa Full-Stack Web & Mobile App Engineers",
+        "Mobile App Engineers",
+        "Specialized & Custom Full-Stack Web & Mobile App Engineers",
+        "ልዩና ብጁ Full-Stack Web & Mobile App Engineers",
+        "ፍሉይን ዝተዳለወን Full-Stack Web & Mobile App Engineers"
+      ],
       "redirects": []
     }
   ]

@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-real-estate",
       "names": {
-        "en": "Property & Real Estate",
-        "am": "ንብረትና ዘርፍ",
-        "om": "Qabeenya fi Manneen",
-        "ti": "ንብረትን ገዛውንትን"
+        "en": "Property",
+        "am": "ንብረት",
+        "om": "Qabeenya",
+        "ti": "ንብረት"
       },
       "description": "Residential, commercial, industrial, agricultural property; land; development; brokerage; management.",
       "level": 0,
@@ -25,7 +25,18 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Estates",
+        "Homes",
+        "Housing",
+        "Property & Real Estate",
+        "Qabeenya fi Manneen",
+        "Real Estate",
+        "Real Estate & Property",
+        "Realty",
+        "ንብረትና ዘርፍ",
+        "ንብረትን ገዛውንትን"
+      ],
       "redirects": []
     },
     {
@@ -35,8 +46,8 @@
       "classification_system_code": "SYS_PRM",
       "slug": "agricultural-land-farmland",
       "names": {
-        "en": "Agricultural Land & Farmland",
-        "am": "የግብርና መሬት",
+        "en": "Agricultural Land",
+        "am": "የግብር",
         "om": "Lafa Qonnaa",
         "ti": "ናይ ሕርሻ መሬት"
       },
@@ -51,7 +62,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agricultural Land & Farmland",
+        "Farmland",
+        "የግብርና መሬት"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +154,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "industrial-property-warehouses",
       "names": {
-        "en": "Industrial Property & Warehouses",
-        "am": "የኢንዱስትሪ ንብረትና መጋዘኖች",
-        "om": "Industirii fi Kuusaa",
-        "ti": "ኢንዱስትሪ ንብረትን መጋዘናትን"
+        "en": "Industrial Property",
+        "am": "የኢንዱስትሪ ንብረት",
+        "om": "Industirii",
+        "ti": "ኢንዱስትሪ ንብረት"
       },
       "description": "",
       "level": 1,
@@ -155,7 +170,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industirii fi Kuusaa",
+        "Industrial Property & Warehouses",
+        "Warehouses",
+        "ኢንዱስትሪ ንብረትን መጋዘናትን",
+        "የኢንዱስትሪ ንብረትና መጋዘኖች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +186,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "land-plots-development",
       "names": {
-        "en": "Land, Plots & Development",
-        "am": "መሬትና ልማት",
-        "om": "Lafa fi Misoomuu",
-        "ti": "መሬትን ምሕራድን"
+        "en": "Land",
+        "am": "መሬት",
+        "om": "Lafa",
+        "ti": "መሬት"
       },
       "description": "",
       "level": 1,
@@ -181,7 +202,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Development",
+        "Lafa fi Misoomuu",
+        "Land, Plots & Development",
+        "Plots",
+        "መሬትና ልማት",
+        "መሬትን ምሕራድን"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +219,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "mortgage-financing-services",
       "names": {
-        "en": "Mortgage & Financing Services",
-        "am": "የቤት ብድርና ፋይናንስ",
+        "en": "Mortgage Services",
+        "am": "የቤት ብድር",
         "om": "Baazii Mana",
-        "ti": "ምውያድን ፋይናንስን"
+        "ti": "ምውያድ"
       },
       "description": "",
       "level": 1,
@@ -207,7 +235,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Financing Services",
+        "Mortgage & Financing Services",
+        "ምውያድን ፋይናንስን",
+        "የቤት ብድርና ፋይናንስ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +250,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-brokerage-agency",
       "names": {
-        "en": "Brokerage & Agency Services",
-        "am": "የደላላና ወኪል አገልግሎቶች",
-        "om": "Tajaajila Dilaalaa fi Bakka Bu'iinsaa",
-        "ti": "ኣገልግሎት ደላሎን ወከልትን"
+        "en": "Brokerage Services",
+        "am": "የደላላ",
+        "om": "Tajaajila Dilaalaa",
+        "ti": "ኣገልግሎት ደላሎ"
       },
       "description": "",
       "level": 1,
@@ -233,7 +266,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agency Services",
+        "Brokerage & Agency Services",
+        "Tajaajila Dilaalaa fi Bakka Bu'iinsaa",
+        "ኣገልግሎት ደላሎን ወከልትን",
+        "የደላላና ወኪል አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +282,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-development",
       "names": {
-        "en": "Real Estate & Land Development",
-        "am": "የሪል እስቴትና መሬት ልማት",
-        "om": "Misooma Qabeenya fi Lafaa",
-        "ti": "ልምዓት ሪል እስቴትን መሬትን"
+        "en": "Real Estate",
+        "am": "የሪል እስቴት",
+        "om": "Misooma Qabeenya",
+        "ti": "ልምዓት ሪል እስቴት"
       },
       "description": "",
       "level": 1,
@@ -259,7 +298,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Land Development",
+        "Misooma Qabeenya fi Lafaa",
+        "Real Estate & Land Development",
+        "ልምዓት ሪል እስቴትን መሬትን",
+        "የሪል እስቴትና መሬት ልማት"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +314,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-insurance-services",
       "names": {
-        "en": "Title & Property Insurance",
-        "am": "የካርታና የንብረት ኢንሹራንስ",
-        "om": "Inshuraansii Kaartaa fi Qabeenyaa",
-        "ti": "ኢንሹራንስ ካርታን ንብረትን"
+        "en": "Title",
+        "am": "የካርታ",
+        "om": "Inshuraansii Kaartaa",
+        "ti": "ኢንሹራንስ ካርታ"
       },
       "description": "",
       "level": 1,
@@ -285,7 +330,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Inshuraansii Kaartaa fi Qabeenyaa",
+        "Property Insurance",
+        "Title & Property Insurance",
+        "ኢንሹራንስ ካርታን ንብረትን",
+        "የካርታና የንብረት ኢንሹራንስ"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +346,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-legal-documentation",
       "names": {
-        "en": "Legal, Title Deed & Notary",
-        "am": "ህጋዊ፣ የባለቤትነት ካርታና ኖተሪ",
+        "en": "Legal",
+        "am": "ህጋዊ፣ የባለቤትነት ካርታ",
         "om": "Heera, Kaartaa Abbaa Qabeenyummaa",
-        "ti": "ሕጋዊ ሰነዳትን ካርታን"
+        "ti": "ሕጋዊ ሰነዳት"
       },
       "description": "",
       "level": 1,
@@ -311,7 +362,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Legal, Title Deed & Notary",
+        "Notary",
+        "Title Deed",
+        "ህጋዊ፣ የባለቤትነት ካርታና ኖተሪ",
+        "ሕጋዊ ሰነዳትን ካርታን"
+      ],
       "redirects": []
     },
     {
@@ -321,10 +378,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-maintenance-services",
       "names": {
-        "en": "Building Maintenance & Renovation",
-        "am": "የህንፃ ጥገናና እድሳት",
-        "om": "Suphaa fi Haaromsa Gamoo",
-        "ti": "ጽገናን ሓድሽ ምግባርን ህንጻታት"
+        "en": "Building Maintenance",
+        "am": "የህንፃ ጥገና",
+        "om": "Suphaa",
+        "ti": "ጽገና"
       },
       "description": "",
       "level": 1,
@@ -337,7 +394,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Building Maintenance & Renovation",
+        "Renovation",
+        "Suphaa fi Haaromsa Gamoo",
+        "የህንፃ ጥገናና እድሳት",
+        "ጽገናን ሓድሽ ምግባርን ህንጻታት"
+      ],
       "redirects": []
     },
     {
@@ -347,10 +410,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-management-services",
       "names": {
-        "en": "Facility & Estate Management",
-        "am": "የተቋማትና ግቢ አስተዳደር",
-        "om": "Bulchiinsa Dhaabbilee fi Mooraa",
-        "ti": "ምሕደራ ትካላትን ህንጻታትን"
+        "en": "Facility",
+        "am": "የተቋማት",
+        "om": "Bulchiinsa Dhaabbilee",
+        "ti": "ምሕደራ ትካላት"
       },
       "description": "",
       "level": 1,
@@ -363,7 +426,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bulchiinsa Dhaabbilee fi Mooraa",
+        "Estate Management",
+        "Facility & Estate Management",
+        "ምሕደራ ትካላትን ህንጻታትን",
+        "የተቋማትና ግቢ አስተዳደር"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +442,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property-valuation-surveying",
       "names": {
-        "en": "Valuation, Survey & Appraisal",
-        "am": "የንብረት ግመታና ሰርቬይ",
-        "om": "Tilmaama fi Sakatta'a Qabeenyaa",
-        "ti": "ግምገማን መጽናዕትን ንብረት"
+        "en": "Valuation",
+        "am": "የንብረት ግመታ",
+        "om": "Tilmaama",
+        "ti": "ግምገማ"
       },
       "description": "",
       "level": 1,
@@ -389,7 +458,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appraisal",
+        "Survey",
+        "Tilmaama fi Sakatta'a Qabeenyaa",
+        "Valuation, Survey & Appraisal",
+        "የንብረት ግመታና ሰርቬይ",
+        "ግምገማን መጽናዕትን ንብረት"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +475,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "residential-apartments-condos",
       "names": {
-        "en": "Residential Apartments & Condominiums",
-        "am": "የመኖሪያ አፓርታማና ኮንዶ",
-        "om": "Appaartaamaa fi Kondoominiyeemii",
-        "ti": "ኣፓርታማን ኮንዶሚኒየምን"
+        "en": "Residential Apartments",
+        "am": "የመኖሪያ አፓርታማ",
+        "om": "Appaartaamaa",
+        "ti": "ኣፓርታማ"
       },
       "description": "",
       "level": 1,
@@ -415,7 +491,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appaartaamaa fi Kondoominiyeemii",
+        "Condominiums",
+        "Residential Apartments & Condominiums",
+        "ኣፓርታማን ኮንዶሚኒየምን",
+        "የመኖሪያ አፓርታማና ኮንዶ"
+      ],
       "redirects": []
     },
     {
@@ -425,10 +507,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "residential-houses-villas",
       "names": {
-        "en": "Residential Houses & Villas",
-        "am": "የመኖሪያ ቤቶችና ቪላዎች",
-        "om": "Manneen fi Viillaa",
-        "ti": "ናይ መንበሪ ገዛታትን ቪላታትን"
+        "en": "Houses",
+        "am": "የመኖሪያ ቤቶች",
+        "om": "Manneen",
+        "ti": "ናይ መንበሪ ገዛታት"
       },
       "description": "",
       "level": 1,
@@ -441,7 +523,17 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compound Houses",
+        "Homes",
+        "Houses & Villas",
+        "Manneen fi Viillaa",
+        "Residential Houses",
+        "Residential Houses & Villas",
+        "Villas",
+        "ናይ መንበሪ ገዛታትን ቪላታትን",
+        "የመኖሪያ ቤቶችና ቪላዎች"
+      ],
       "redirects": []
     },
     {
@@ -451,7 +543,7 @@
       "classification_system_code": "SYS_PRM",
       "slug": "shared-housing-coliving",
       "names": {
-        "en": "Shared Housing & Co-Living",
+        "en": "Shared Housing",
         "am": "የጋራ መኖሪያ",
         "om": "Mana Walitti Qixa",
         "ti": "ማሕበራዊ መንበሪ"
@@ -467,7 +559,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Co-Living",
+        "Shared Housing & Co-Living"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +572,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "short-term-rental-vacation",
       "names": {
-        "en": "Short-Term Rental & Vacation",
-        "am": "አጭር ጊዜ ኪራይና ዕረፍት",
+        "en": "Short-Term Rental",
+        "am": "አጭር ጊዜ ኪራይ",
         "om": "Kireeyyi Gabaabaa",
-        "ti": "ንእሽቱ ኪራይን ዕረፍትን"
+        "ti": "ንእሽቱ ኪራይ"
       },
       "description": "",
       "level": 1,
@@ -493,7 +588,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Short-Term Rental & Vacation",
+        "Vacation",
+        "ንእሽቱ ኪራይን ዕረፍትን",
+        "አጭር ጊዜ ኪራይና ዕረፍት"
+      ],
       "redirects": []
     },
     {
@@ -503,10 +603,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "residential-property-sales-investments",
       "names": {
-        "en": "Residential Property Sales & Investments",
-        "am": "የመኖሪያ ቤቶች ሽያጭና ኢንቨስትመንት",
+        "en": "Residential Property Sales",
+        "am": "የመኖሪያ ቤቶች ሽያጭ",
         "om": "Gurgurtaa Manneen Jireenyaa",
-        "ti": "ናይ መንበሪ ኣባይቲ መሸጣን ወፍርን"
+        "ti": "ናይ መንበሪ ኣባይቲ መሸጣ"
       },
       "description": null,
       "level": 1,
@@ -519,7 +619,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Investments",
+        "Residential Property Sales & Investments",
+        "ናይ መንበሪ ኣባይቲ መሸጣን ወፍርን",
+        "የመኖሪያ ቤቶች ሽያጭና ኢንቨስትመንት"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +634,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "commercial-property-leasing-retail",
       "names": {
-        "en": "Commercial Property Leasing & Retail",
-        "am": "የንግድ ቤቶች ኪራይና የችርቻሮ ቦታዎች",
+        "en": "Commercial Property Leasing",
+        "am": "የንግድ ቤቶች ኪራይ",
         "om": "Kireeffama Gamoo Daldalaa",
-        "ti": "ናይ ንግዲ ህንጻታትን ድኳናትን ክራይ"
+        "ti": "ናይ ንግዲ ህንጻታት"
       },
       "description": null,
       "level": 1,
@@ -545,7 +650,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial Property Leasing & Retail",
+        "Retail",
+        "ናይ ንግዲ ህንጻታትን ድኳናትን ክራይ",
+        "የንግድ ቤቶች ኪራይና የችርቻሮ ቦታዎች"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +665,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-property-real-estate",
       "names": {
-        "en": "Specialized & Custom Property & Real Estate",
-        "am": "ልዩና ብጁ Property & Real Estate",
-        "om": "Kan Addaa fi Filatamaa Property & Real Estate",
-        "ti": "ፍሉይን ዝተዳለወን Property & Real Estate"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -571,7 +681,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Property",
+        "Kan Addaa fi Filatamaa Property & Real Estate",
+        "Real Estate",
+        "Specialized & Custom Property & Real Estate",
+        "ልዩና ብጁ Property & Real Estate",
+        "ፍሉይን ዝተዳለወን Property & Real Estate"
+      ],
       "redirects": []
     },
     {
@@ -815,10 +932,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "shops-boutiques",
       "names": {
-        "en": "Shops & Boutiques",
-        "am": "ሱቆችና ቡቲኮች",
-        "om": "Suuqii fi Boutique",
-        "ti": "ሱቅን ቡቲክን"
+        "en": "Shops",
+        "am": "ሱቆች",
+        "om": "Suuqii",
+        "ti": "ሱቅ"
       },
       "description": "",
       "level": 2,
@@ -831,7 +948,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boutiques",
+        "Shops & Boutiques",
+        "Suuqii fi Boutique",
+        "ሱቅን ቡቲክን",
+        "ሱቆችና ቡቲኮች"
+      ],
       "redirects": []
     },
     {
@@ -2115,10 +2238,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "villas-compound",
       "names": {
-        "en": "Villas & Compounds",
-        "am": "ቪላዎችና ውስን ድርቅ",
-        "om": "Viillaa fi Kompaawundii",
-        "ti": "ቪላታትን ኮምፓውንድን"
+        "en": "Villas",
+        "am": "ቪላዎች",
+        "om": "Viillaa",
+        "ti": "ቪላታት"
       },
       "description": "",
       "level": 2,
@@ -2131,7 +2254,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compounds",
+        "Viillaa fi Kompaawundii",
+        "Villas & Compounds",
+        "ቪላታትን ኮምፓውንድን",
+        "ቪላዎችና ውስን ድርቅ"
+      ],
       "redirects": []
     },
     {
@@ -2297,10 +2426,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "stand-alone-villas-luxury-compounds",
       "names": {
-        "en": "Stand-Alone Villas & Luxury Compounds",
-        "am": "ቪላዎችና የቅንጦት መኖሪያ ግቢዎች",
-        "om": "Viilaa fi Manneen Qananii",
-        "ti": "ቪላታትን ናይ ቅንጦት መንበሪ ገዛውትን"
+        "en": "Stand-Alone Villas",
+        "am": "ቪላዎች",
+        "om": "Viilaa",
+        "ti": "ቪላታት"
       },
       "description": null,
       "level": 2,
@@ -2313,7 +2442,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Luxury Compounds",
+        "Stand-Alone Villas & Luxury Compounds",
+        "Viilaa fi Manneen Qananii",
+        "ቪላታትን ናይ ቅንጦት መንበሪ ገዛውትን",
+        "ቪላዎችና የቅንጦት መኖሪያ ግቢዎች"
+      ],
       "redirects": []
     },
     {
@@ -2323,10 +2458,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "condominiums-modern-apartments",
       "names": {
-        "en": "Condominiums & Modern Apartments",
-        "am": "ኮንዶሚኒየሞችና ዘመናዊ አፓርታማዎች",
-        "om": "Kondomiiniyemii fi Apaartaamaa",
-        "ti": "ኮንዶሚኒየማትን ዘመናዊ ኣፓርታማታትን"
+        "en": "Condominiums",
+        "am": "ኮንዶሚኒየሞች",
+        "om": "Kondomiiniyemii",
+        "ti": "ኮንዶሚኒየማት"
       },
       "description": null,
       "level": 2,
@@ -2339,7 +2474,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Condominiums & Modern Apartments",
+        "Kondomiiniyemii fi Apaartaamaa",
+        "Modern Apartments",
+        "ኮንዶሚኒየማትን ዘመናዊ ኣፓርታማታትን",
+        "ኮንዶሚኒየሞችና ዘመናዊ አፓርታማዎች"
+      ],
       "redirects": []
     },
     {
@@ -2349,10 +2490,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "corporate-office-spaces-headquarters",
       "names": {
-        "en": "Corporate Office Spaces & Headquarters",
-        "am": "የኮርፖሬት ቢሮዎችና ዋና መስሪያ ቤቶች",
-        "om": "Biroo Dhaabbilee fi Hojii",
-        "ti": "ናይ ትካላት ቢሮታትን ማእከላይ ቤት ጽሕፈትን"
+        "en": "Corporate Office Spaces",
+        "am": "የኮርፖሬት ቢሮዎች",
+        "om": "Biroo Dhaabbilee",
+        "ti": "ናይ ትካላት ቢሮታት"
       },
       "description": null,
       "level": 2,
@@ -2365,7 +2506,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Biroo Dhaabbilee fi Hojii",
+        "Corporate Office Spaces & Headquarters",
+        "Headquarters",
+        "ናይ ትካላት ቢሮታትን ማእከላይ ቤት ጽሕፈትን",
+        "የኮርፖሬት ቢሮዎችና ዋና መስሪያ ቤቶች"
+      ],
       "redirects": []
     },
     {
@@ -2375,10 +2522,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "retail-shops-banking-spaces",
       "names": {
-        "en": "Retail Shops & Banking Spaces",
-        "am": "የችርቻሮ ሱቆችና የባንክ ማዕከላት",
-        "om": "Suuqota Daldalaa fi Baankii",
-        "ti": "ናይ ንግዲ ድኳናትን ባንክታትን ቦታታት"
+        "en": "Retail Shops",
+        "am": "የችርቻሮ ሱቆች",
+        "om": "Suuqota Daldalaa",
+        "ti": "ናይ ንግዲ ድኳናት"
       },
       "description": null,
       "level": 2,
@@ -2391,7 +2538,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Banking Spaces",
+        "Retail Shops & Banking Spaces",
+        "Suuqota Daldalaa fi Baankii",
+        "ናይ ንግዲ ድኳናትን ባንክታትን ቦታታት",
+        "የችርቻሮ ሱቆችና የባንክ ማዕከላት"
+      ],
       "redirects": []
     },
     {
@@ -2401,10 +2554,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-industrial-property-warehouses",
       "names": {
-        "en": "Specialized & Custom Industrial Property & Warehouses",
-        "am": "ልዩና ብጁ Industrial Property & Warehouses",
-        "om": "Kan Addaa fi Filatamaa Industrial Property & Warehouses",
-        "ti": "ፍሉይን ዝተዳለወን Industrial Property & Warehouses"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2417,7 +2570,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial Property",
+        "Kan Addaa fi Filatamaa Industrial Property & Warehouses",
+        "Specialized & Custom Industrial Property & Warehouses",
+        "Warehouses",
+        "ልዩና ብጁ Industrial Property & Warehouses",
+        "ፍሉይን ዝተዳለወን Industrial Property & Warehouses"
+      ],
       "redirects": []
     },
     {
@@ -2427,10 +2587,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-brokerage-agency-services",
       "names": {
-        "en": "Specialized & Custom Brokerage & Agency Services",
-        "am": "ልዩና ብጁ Brokerage & Agency Services",
-        "om": "Kan Addaa fi Filatamaa Brokerage & Agency Services",
-        "ti": "ፍሉይን ዝተዳለወን Brokerage & Agency Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2443,7 +2603,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agency Services",
+        "Custom Brokerage",
+        "Kan Addaa fi Filatamaa Brokerage & Agency Services",
+        "Specialized & Custom Brokerage & Agency Services",
+        "ልዩና ብጁ Brokerage & Agency Services",
+        "ፍሉይን ዝተዳለወን Brokerage & Agency Services"
+      ],
       "redirects": []
     },
     {
@@ -2453,10 +2620,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-real-estate-land-development",
       "names": {
-        "en": "Specialized & Custom Real Estate & Land Development",
-        "am": "ልዩና ብጁ Real Estate & Land Development",
-        "om": "Kan Addaa fi Filatamaa Real Estate & Land Development",
-        "ti": "ፍሉይን ዝተዳለወን Real Estate & Land Development"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2469,7 +2636,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Real Estate",
+        "Kan Addaa fi Filatamaa Real Estate & Land Development",
+        "Land Development",
+        "Specialized & Custom Real Estate & Land Development",
+        "ልዩና ብጁ Real Estate & Land Development",
+        "ፍሉይን ዝተዳለወን Real Estate & Land Development"
+      ],
       "redirects": []
     },
     {
@@ -2479,10 +2653,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-title-property-insurance",
       "names": {
-        "en": "Specialized & Custom Title & Property Insurance",
-        "am": "ልዩና ብጁ Title & Property Insurance",
-        "om": "Kan Addaa fi Filatamaa Title & Property Insurance",
-        "ti": "ፍሉይን ዝተዳለወን Title & Property Insurance"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2495,7 +2669,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Title",
+        "Kan Addaa fi Filatamaa Title & Property Insurance",
+        "Property Insurance",
+        "Specialized & Custom Title & Property Insurance",
+        "ልዩና ብጁ Title & Property Insurance",
+        "ፍሉይን ዝተዳለወን Title & Property Insurance"
+      ],
       "redirects": []
     },
     {
@@ -2505,10 +2686,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-legal-title-deed-notary",
       "names": {
-        "en": "Specialized & Custom Legal, Title Deed & Notary",
-        "am": "ልዩና ብጁ Legal, Title Deed & Notary",
-        "om": "Kan Addaa fi Filatamaa Legal, Title Deed & Notary",
-        "ti": "ፍሉይን ዝተዳለወን Legal, Title Deed & Notary"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2521,7 +2702,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Legal",
+        "Kan Addaa fi Filatamaa Legal, Title Deed & Notary",
+        "Notary",
+        "Specialized & Custom Legal, Title Deed & Notary",
+        "Title Deed",
+        "ልዩና ብጁ Legal, Title Deed & Notary",
+        "ፍሉይን ዝተዳለወን Legal, Title Deed & Notary"
+      ],
       "redirects": []
     },
     {
@@ -2531,10 +2720,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-building-maintenance-renovation",
       "names": {
-        "en": "Specialized & Custom Building Maintenance & Renovation",
-        "am": "ልዩና ብጁ Building Maintenance & Renovation",
-        "om": "Kan Addaa fi Filatamaa Building Maintenance & Renovation",
-        "ti": "ፍሉይን ዝተዳለወን Building Maintenance & Renovation"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2547,7 +2736,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Building Maintenance",
+        "Kan Addaa fi Filatamaa Building Maintenance & Renovation",
+        "Renovation",
+        "Specialized & Custom Building Maintenance & Renovation",
+        "ልዩና ብጁ Building Maintenance & Renovation",
+        "ፍሉይን ዝተዳለወን Building Maintenance & Renovation"
+      ],
       "redirects": []
     },
     {
@@ -2557,10 +2753,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-facility-estate-management",
       "names": {
-        "en": "Specialized & Custom Facility & Estate Management",
-        "am": "ልዩና ብጁ Facility & Estate Management",
-        "om": "Kan Addaa fi Filatamaa Facility & Estate Management",
-        "ti": "ፍሉይን ዝተዳለወን Facility & Estate Management"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2573,7 +2769,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Facility",
+        "Estate Management",
+        "Kan Addaa fi Filatamaa Facility & Estate Management",
+        "Specialized & Custom Facility & Estate Management",
+        "ልዩና ብጁ Facility & Estate Management",
+        "ፍሉይን ዝተዳለወን Facility & Estate Management"
+      ],
       "redirects": []
     },
     {
@@ -2583,10 +2786,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-valuation-survey-appraisal",
       "names": {
-        "en": "Specialized & Custom Valuation, Survey & Appraisal",
-        "am": "ልዩና ብጁ Valuation, Survey & Appraisal",
-        "om": "Kan Addaa fi Filatamaa Valuation, Survey & Appraisal",
-        "ti": "ፍሉይን ዝተዳለወን Valuation, Survey & Appraisal"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2599,7 +2802,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appraisal",
+        "Custom Valuation",
+        "Kan Addaa fi Filatamaa Valuation, Survey & Appraisal",
+        "Specialized & Custom Valuation, Survey & Appraisal",
+        "Survey",
+        "ልዩና ብጁ Valuation, Survey & Appraisal",
+        "ፍሉይን ዝተዳለወን Valuation, Survey & Appraisal"
+      ],
       "redirects": []
     },
     {
@@ -2609,10 +2820,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-residential-apartments-condominiums",
       "names": {
-        "en": "Specialized & Custom Residential Apartments & Condominiums",
-        "am": "ልዩና ብጁ Residential Apartments & Condominiums",
-        "om": "Kan Addaa fi Filatamaa Residential Apartments & Condominiums",
-        "ti": "ፍሉይን ዝተዳለወን Residential Apartments & Condominiums"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2625,7 +2836,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Condominiums",
+        "Custom Residential Apartments",
+        "Kan Addaa fi Filatamaa Residential Apartments & Condominiums",
+        "Specialized & Custom Residential Apartments & Condominiums",
+        "ልዩና ብጁ Residential Apartments & Condominiums",
+        "ፍሉይን ዝተዳለወን Residential Apartments & Condominiums"
+      ],
       "redirects": []
     },
     {
@@ -2635,10 +2853,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-residential-houses-villas",
       "names": {
-        "en": "Specialized & Custom Residential Houses & Villas",
-        "am": "ልዩና ብጁ Residential Houses & Villas",
-        "om": "Kan Addaa fi Filatamaa Residential Houses & Villas",
-        "ti": "ፍሉይን ዝተዳለወን Residential Houses & Villas"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2651,7 +2869,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Residential Houses",
+        "Kan Addaa fi Filatamaa Residential Houses & Villas",
+        "Specialized & Custom Residential Houses & Villas",
+        "Villas",
+        "ልዩና ብጁ Residential Houses & Villas",
+        "ፍሉይን ዝተዳለወን Residential Houses & Villas"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +2886,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-shared-housing-co-living",
       "names": {
-        "en": "Specialized & Custom Shared Housing & Co-Living",
-        "am": "ልዩና ብጁ Shared Housing & Co-Living",
-        "om": "Kan Addaa fi Filatamaa Shared Housing & Co-Living",
-        "ti": "ፍሉይን ዝተዳለወን Shared Housing & Co-Living"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2677,7 +2902,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Co-Living",
+        "Custom Shared Housing",
+        "Kan Addaa fi Filatamaa Shared Housing & Co-Living",
+        "Specialized & Custom Shared Housing & Co-Living",
+        "ልዩና ብጁ Shared Housing & Co-Living",
+        "ፍሉይን ዝተዳለወን Shared Housing & Co-Living"
+      ],
       "redirects": []
     },
     {
@@ -2687,10 +2919,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-short-term-rental-vacation",
       "names": {
-        "en": "Specialized & Custom Short-Term Rental & Vacation",
-        "am": "ልዩና ብጁ Short-Term Rental & Vacation",
-        "om": "Kan Addaa fi Filatamaa Short-Term Rental & Vacation",
-        "ti": "ፍሉይን ዝተዳለወን Short-Term Rental & Vacation"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2703,7 +2935,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Short-Term Rental",
+        "Kan Addaa fi Filatamaa Short-Term Rental & Vacation",
+        "Specialized & Custom Short-Term Rental & Vacation",
+        "Vacation",
+        "ልዩና ብጁ Short-Term Rental & Vacation",
+        "ፍሉይን ዝተዳለወን Short-Term Rental & Vacation"
+      ],
       "redirects": []
     },
     {
@@ -2713,10 +2952,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-agricultural-land-farmland",
       "names": {
-        "en": "Specialized & Custom Agricultural Land & Farmland",
-        "am": "ልዩና ብጁ Agricultural Land & Farmland",
-        "om": "Kan Addaa fi Filatamaa Agricultural Land & Farmland",
-        "ti": "ፍሉይን ዝተዳለወን Agricultural Land & Farmland"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2729,7 +2968,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Agricultural Land",
+        "Farmland",
+        "Kan Addaa fi Filatamaa Agricultural Land & Farmland",
+        "Specialized & Custom Agricultural Land & Farmland",
+        "ልዩና ብጁ Agricultural Land & Farmland",
+        "ፍሉይን ዝተዳለወን Agricultural Land & Farmland"
+      ],
       "redirects": []
     },
     {
@@ -2739,10 +2985,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-commercial-office-space",
       "names": {
-        "en": "Specialized & Custom Commercial Office Space",
-        "am": "ልዩና ብጁ Commercial Office Space",
-        "om": "Kan Addaa fi Filatamaa Commercial Office Space",
-        "ti": "ፍሉይን ዝተዳለወን Commercial Office Space"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2755,7 +3001,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Office Space",
+        "Kan Addaa fi Filatamaa Commercial Office Space",
+        "Specialized & Custom Commercial Office Space",
+        "ልዩና ብጁ Commercial Office Space",
+        "ፍሉይን ዝተዳለወን Commercial Office Space"
+      ],
       "redirects": []
     },
     {
@@ -2765,10 +3017,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-commercial-retail-space",
       "names": {
-        "en": "Specialized & Custom Commercial Retail Space",
-        "am": "ልዩና ብጁ Commercial Retail Space",
-        "om": "Kan Addaa fi Filatamaa Commercial Retail Space",
-        "ti": "ፍሉይን ዝተዳለወን Commercial Retail Space"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2781,7 +3033,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Retail Space",
+        "Kan Addaa fi Filatamaa Commercial Retail Space",
+        "Specialized & Custom Commercial Retail Space",
+        "ልዩና ብጁ Commercial Retail Space",
+        "ፍሉይን ዝተዳለወን Commercial Retail Space"
+      ],
       "redirects": []
     },
     {
@@ -2791,10 +3049,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-hospitality-property",
       "names": {
-        "en": "Specialized & Custom Hospitality Property",
-        "am": "ልዩና ብጁ Hospitality Property",
-        "om": "Kan Addaa fi Filatamaa Hospitality Property",
-        "ti": "ፍሉይን ዝተዳለወን Hospitality Property"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2807,7 +3065,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Hospitality Property",
+        "Kan Addaa fi Filatamaa Hospitality Property",
+        "Specialized & Custom Hospitality Property",
+        "ልዩና ብጁ Hospitality Property",
+        "ፍሉይን ዝተዳለወን Hospitality Property"
+      ],
       "redirects": []
     },
     {
@@ -2817,10 +3081,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-land-plots-development",
       "names": {
-        "en": "Specialized & Custom Land, Plots & Development",
-        "am": "ልዩና ብጁ Land, Plots & Development",
-        "om": "Kan Addaa fi Filatamaa Land, Plots & Development",
-        "ti": "ፍሉይን ዝተዳለወን Land, Plots & Development"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2833,7 +3097,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Land",
+        "Development",
+        "Kan Addaa fi Filatamaa Land, Plots & Development",
+        "Plots",
+        "Specialized & Custom Land, Plots & Development",
+        "ልዩና ብጁ Land, Plots & Development",
+        "ፍሉይን ዝተዳለወን Land, Plots & Development"
+      ],
       "redirects": []
     },
     {
@@ -2843,10 +3115,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-mortgage-financing-services",
       "names": {
-        "en": "Specialized & Custom Mortgage & Financing Services",
-        "am": "ልዩና ብጁ Mortgage & Financing Services",
-        "om": "Kan Addaa fi Filatamaa Mortgage & Financing Services",
-        "ti": "ፍሉይን ዝተዳለወን Mortgage & Financing Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2859,7 +3131,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Mortgage",
+        "Financing Services",
+        "Kan Addaa fi Filatamaa Mortgage & Financing Services",
+        "Specialized & Custom Mortgage & Financing Services",
+        "ልዩና ብጁ Mortgage & Financing Services",
+        "ፍሉይን ዝተዳለወን Mortgage & Financing Services"
+      ],
       "redirects": []
     },
     {
@@ -3233,10 +3512,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "executive-boardroom-conference-facility",
       "names": {
-        "en": "Executive Boardroom & Conference Facility",
-        "am": "የስራ አመራር ቦርድ አዳራሽና የስብሰባ ቦታ",
-        "om": "Galma Walga'ii fi Gumii Hoggana",
-        "ti": "ናይ ኣኼባ ኣዳራሽን መአከብን"
+        "en": "Executive Boardroom",
+        "am": "የስራ አመራር ቦርድ አዳራሽ",
+        "om": "Galma Walga'ii",
+        "ti": "ናይ ኣኼባ ኣዳራሽ"
       },
       "description": null,
       "level": 3,
@@ -3249,7 +3528,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Conference Facility",
+        "Executive Boardroom & Conference Facility",
+        "Galma Walga'ii fi Gumii Hoggana",
+        "ናይ ኣኼባ ኣዳራሽን መአከብን",
+        "የስራ አመራር ቦርድ አዳራሽና የስብሰባ ቦታ"
+      ],
       "redirects": []
     },
     {
@@ -3337,10 +3622,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "supermarket-pharmacy-commercial-hall",
       "names": {
-        "en": "Supermarket & Pharmacy Commercial Hall",
-        "am": "የሱፐርማርኬትና የመድኃኒት መደብር አዳራሽ",
-        "om": "Galma Suupparmaarkeetii fi Qorichaa",
-        "ti": "ናይ ሱፐርማርኬትን ፋርማሲን ኣዳራሽ"
+        "en": "Supermarket",
+        "am": "የሱፐርማርኬት",
+        "om": "Galma Suupparmaarkeetii",
+        "ti": "ናይ ሱፐርማርኬት"
       },
       "description": null,
       "level": 3,
@@ -3353,7 +3638,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Galma Suupparmaarkeetii fi Qorichaa",
+        "Pharmacy Commercial Hall",
+        "Supermarket & Pharmacy Commercial Hall",
+        "ናይ ሱፐርማርኬትን ፋርማሲን ኣዳራሽ",
+        "የሱፐርማርኬትና የመድኃኒት መደብር አዳራሽ"
+      ],
       "redirects": []
     },
     {
@@ -3363,10 +3654,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "cafeteria-restaurant-ready-space",
       "names": {
-        "en": "Cafeteria & Restaurant Ready Space",
-        "am": "የካፌና የምግብ ቤት ዝግጁ ቦታ",
-        "om": "Iddoo Qophii Kaaffee fi Nyaataa",
-        "ti": "ንካፈን ቤት መግብን ድሉው ቦታ"
+        "en": "Cafeteria",
+        "am": "የካፌ",
+        "om": "Iddoo Qophii Kaaffee",
+        "ti": "ንካፈ"
       },
       "description": null,
       "level": 3,
@@ -3379,7 +3670,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cafeteria & Restaurant Ready Space",
+        "Iddoo Qophii Kaaffee fi Nyaataa",
+        "Restaurant Ready Space",
+        "ንካፈን ቤት መግብን ድሉው ቦታ",
+        "የካፌና የምግብ ቤት ዝግጁ ቦታ"
+      ],
       "redirects": []
     }
   ]

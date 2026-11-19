@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"encoding/json"
 	"strconv"
 	"time"
 
@@ -25,6 +26,12 @@ func (h *MasterDataHandler) ImportLocations(c *fiber.Ctx) error {
 		return response.BadRequest(c, "invalid JSON payload for location import")
 	}
 	req.DatasetType = "locations"
+	if len(req.LocationRecords) == 0 && len(req.Records) > 0 {
+		var locs []models.MasterLocationNode
+		if err := json.Unmarshal(req.Records, &locs); err == nil {
+			req.LocationRecords = locs
+		}
+	}
 	if len(req.LocationRecords) == 0 {
 		return response.BadRequest(c, "location_records array cannot be empty")
 	}
@@ -45,6 +52,12 @@ func (h *MasterDataHandler) ImportCategories(c *fiber.Ctx) error {
 		return response.BadRequest(c, "invalid JSON payload for category import")
 	}
 	req.DatasetType = "categories"
+	if len(req.CategoryRecords) == 0 && len(req.Records) > 0 {
+		var cats []models.MasterCategoryNode
+		if err := json.Unmarshal(req.Records, &cats); err == nil {
+			req.CategoryRecords = cats
+		}
+	}
 	if len(req.CategoryRecords) == 0 {
 		return response.BadRequest(c, "category_records array cannot be empty")
 	}

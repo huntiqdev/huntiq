@@ -24,7 +24,6 @@ import {
   Layers,
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
-import { CategoryDrawer } from '@/components/public/CategoryDrawer';
 
 // ── Help panel modal ─────────────────────────────────────────────────────────
 function HelpPanel({ onClose }: { onClose: () => void }) {
@@ -167,38 +166,16 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
   );
 }
 
-function TypeSync({ onTypeChange }: { onTypeChange: (type: string | null) => void }) {
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    const t = searchParams.get('type') || searchParams.get('listing_type');
-    onTypeChange(t);
-  }, [searchParams, onTypeChange]);
-  return null;
-}
-
 // ── Header ───────────────────────────────────────────────────────────────────
 export function Header() {
   const { t, locale, setLocale, locales, localeLabels } = useLocale();
-  const { user } = useAuth();
   const { resolvedTheme, toggleTheme } = useTheme();
-  const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  const sellHref = user
-    ? '/seller/product/new'
-    : `/auth?as=seller&intent=sell&redirect=${encodeURIComponent('/seller/product/new')}`;
-
-  useEffect(() => {
-    const handleOpenDrawer = () => setDrawerOpen(true);
-    window.addEventListener('open-category-drawer', handleOpenDrawer);
-    return () => window.removeEventListener('open-category-drawer', handleOpenDrawer);
   }, []);
 
   // Close lang dropdown on outside click
@@ -211,34 +188,22 @@ export function Header() {
     return () => clearTimeout(id);
   }, [langOpen]);
 
-  const [currentType, setCurrentType] = useState<string | null>(null);
   const isDark = mounted && resolvedTheme === 'dark';
 
   return (
     <>
-      <Suspense fallback={null}>
-        <TypeSync onTypeChange={setCurrentType} />
-      </Suspense>
       {helpOpen && <HelpPanel onClose={() => setHelpOpen(false)} />}
-      <CategoryDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       <header className="sticky top-0 z-50 w-full border-b backdrop-blur-xl bg-white/95 dark:bg-[#091426]/95 border-slate-200 dark:border-slate-800 transition-colors">
         
         {/* ── Top Utility Row ──────────────────────────────────────────────── */}
         <div className="hidden sm:block border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/80 dark:bg-[#070F1E]/80 text-[11px] text-slate-500 dark:text-slate-400">
-          <div className="max-w-7xl mx-auto px-4 h-7 flex items-center justify-between">
-            <div className="flex items-center gap-4">
+          <div className="max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8 h-7 flex items-center justify-between">
+            <div className="flex items-center gap-2">
               <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
                 <Shield size={12} className="text-[#16A36A]" />
-                <span>{(t.nav as any)?.verified_ethiopian_listings ?? 'Verified Ethiopian Marketplace • Direct Connection'}</span>
+                <span>{(t.nav as any)?.verified_ethiopian_listings ?? 'Verified Marketplace • 100% Ethiopian Listings'}</span>
               </span>
-              <span className="text-slate-300 dark:text-slate-700">|</span>
-              <Link href="/contact" className="hover:text-[#1769E0] transition-colors">
-                {t.footer.contact ?? 'Contact Us'}
-              </Link>
-              <button onClick={() => setHelpOpen(true)} className="hover:text-[#1769E0] transition-colors">
-                {t.footer.help ?? 'Help Center'}
-              </button>
             </div>
 
             <div className="flex items-center gap-3">
@@ -283,7 +248,7 @@ export function Header() {
         </div>
 
         {/* ── Main Header Row ──────────────────────────────────────────────── */}
-        <div className="max-w-7xl mx-auto px-4 h-15 py-2 flex items-center gap-2 sm:gap-4">
+        <div className="max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8 h-15 py-2 flex items-center gap-2 sm:gap-4">
 
           {/* Logo */}
           <HuntiqLogo
@@ -294,8 +259,8 @@ export function Header() {
             priority
           />
 
-          {/* Global Search Bar (Prominent, Always Visible) */}
-          <div className="flex-1 min-w-0 mx-1 sm:mx-2">
+          {/* Global Search Bar (Balanced Width on Large Screens) */}
+          <div className="flex-1 min-w-0 max-w-lg lg:max-w-xl mx-2 sm:mx-6">
             <SearchBar />
           </div>
 
@@ -342,57 +307,6 @@ export function Header() {
 
             {/* User Account / Role Menu */}
             <UserAccountMenu />
-          </div>
-        </div>
-
-        {/* ── Secondary Navigation Row: All Categories + Buy, Sell, Rent, Landlord ── */}
-        <div className="border-t border-slate-100 dark:border-slate-800/80 bg-white/80 dark:bg-[#091426]/80 backdrop-blur-md overflow-x-auto no-scrollbar">
-          <div className="max-w-7xl mx-auto px-4 h-9 sm:h-10 flex items-center gap-1.5 sm:gap-2.5 text-xs font-bold whitespace-nowrap">
-            
-            {/* All Categories Trigger */}
-            <button
-              type="button"
-              onClick={() => setDrawerOpen(true)}
-              className="px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 tap-bounce active:scale-95 cursor-pointer"
-            >
-              <Layers size={14} className="text-[#1769E0]" />
-              <span>{t.nav?.categories ?? 'Categories'}</span>
-            </button>
-
-            {/* Unified Buy / Rent Browsing Gateway */}
-            <Link
-              href="/products"
-              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname === '/products' || pathname === '/buy' || pathname === '/rent'
-                  ? 'bg-[#1769E0] text-white font-black shadow-sm shadow-[#1769E0]/20'
-                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
-              }`}
-            >
-              <span>🛒</span>
-              <span>{(t.nav as any)?.buy_rent ?? 'Buy / Rent'}</span>
-            </Link>
-
-            {/* Unified Sell / Rent Out Listing Action */}
-            <Link
-              href={sellHref}
-              className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 tap-bounce active:scale-95 ${
-                pathname === '/sell' || pathname.includes('/seller/product/new')
-                  ? 'bg-[#103B78] text-white font-black shadow-sm'
-                  : 'text-[#1769E0] dark:text-[#38A5FF] bg-[#EAF3FF] dark:bg-[#1769E0]/15 hover:bg-[#D5E7FF] dark:hover:bg-[#1769E0]/25 border border-[#1769E0]/30'
-              }`}
-            >
-              <span>🏷️</span>
-              <span>{t.nav?.sell ?? 'Sell / Rent Out'}</span>
-            </Link>
-
-            <div className="ml-auto hidden lg:flex items-center gap-2 pl-3">
-              <Link
-                href="/contact"
-                className="text-slate-500 hover:text-[#1769E0] text-[11px] font-semibold transition-colors"
-              >
-                {t.footer?.contact ?? 'Contact Us'}
-              </Link>
-            </div>
           </div>
         </div>
       </header>

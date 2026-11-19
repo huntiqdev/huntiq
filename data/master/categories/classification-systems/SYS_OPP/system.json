@@ -9,5 +9,10 @@
   "description": "Public/private tenders, procurement RFPs, commercial contracts, franchises and auctions",
   "icon": "FileText",
   "display_order": 5,
-  "primary_root_slug": "commerce-trade"
+  "primary_root_slug": "commerce-trade",
+  "total_families": 1,
+  "total_categories": 46,
+  "families": [
+    "tenders-business-opportunities"
+  ]
 }

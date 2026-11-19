@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "pharmaceuticals-drug-industry",
       "names": {
-        "en": "Pharmaceuticals & Drug Industry",
-        "am": "ፋርማሲዩቲካልስና የመድኃኒት ኢንዱስትሪ",
-        "om": "Industirii Qoricha fi Farmaasiitii",
-        "ti": "ፋርማሲዩቲካልስን ኢንዱስትሪ መድኃኒትን"
+        "en": "Pharmaceuticals",
+        "am": "ፋርማሲዩቲካልስ",
+        "om": "Industirii Qoricha",
+        "ti": "ፋርማሲዩቲካልስ"
       },
       "description": "Drug manufacturing, pharmaceutical distribution, medical supplies production, and regulatory services.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drug Industry",
+        "Industirii Qoricha fi Farmaasiitii",
+        "Pharmaceuticals & Drug Industry",
+        "ፋርማሲዩቲካልስና የመድኃኒት ኢንዱስትሪ",
+        "ፋርማሲዩቲካልስን ኢንዱስትሪ መድኃኒትን"
+      ],
       "redirects": []
     },
     {
@@ -165,9 +171,9 @@
       "classification_system_code": "SYS_MED",
       "slug": "herbal-traditional-medicines",
       "names": {
-        "en": "Herbal & Traditional Medicines",
+        "en": "Herbal",
         "am": "ባህላዊ ቅጠላ መድኃኒቶች",
-        "om": "Qoricha Aadaa fi Biqiltootaa",
+        "om": "Qoricha Aadaa",
         "ti": "ሓምሊ ባህላዊ መድኃኒት"
       },
       "description": "",
@@ -181,7 +187,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Herbal & Traditional Medicines",
+        "Qoricha Aadaa fi Biqiltootaa",
+        "Traditional Medicines"
+      ],
       "redirects": []
     },
     {
@@ -1205,10 +1215,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-clinical-trials-services",
       "names": {
-        "en": "Specialized & Custom Clinical Trials Services",
-        "am": "ልዩና ብጁ Clinical Trials Services",
-        "om": "Kan Addaa fi Filatamaa Clinical Trials Services",
-        "ti": "ፍሉይን ዝተዳለወን Clinical Trials Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1221,7 +1231,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Clinical Trials Services",
+        "Kan Addaa fi Filatamaa Clinical Trials Services",
+        "Specialized & Custom Clinical Trials Services",
+        "ልዩና ብጁ Clinical Trials Services",
+        "ፍሉይን ዝተዳለወን Clinical Trials Services"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1247,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-herbal-traditional-medicines",
       "names": {
-        "en": "Specialized & Custom Herbal & Traditional Medicines",
-        "am": "ልዩና ብጁ Herbal & Traditional Medicines",
-        "om": "Kan Addaa fi Filatamaa Herbal & Traditional Medicines",
-        "ti": "ፍሉይን ዝተዳለወን Herbal & Traditional Medicines"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1263,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Herbal",
+        "Kan Addaa fi Filatamaa Herbal & Traditional Medicines",
+        "Specialized & Custom Herbal & Traditional Medicines",
+        "Traditional Medicines",
+        "ልዩና ብጁ Herbal & Traditional Medicines",
+        "ፍሉይን ዝተዳለወን Herbal & Traditional Medicines"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1280,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-medical-supplies-manufacturing",
       "names": {
-        "en": "Specialized & Custom Medical Supplies Manufacturing",
-        "am": "ልዩና ብጁ Medical Supplies Manufacturing",
-        "om": "Kan Addaa fi Filatamaa Medical Supplies Manufacturing",
-        "ti": "ፍሉይን ዝተዳለወን Medical Supplies Manufacturing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1296,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Medical Supplies Manufacturing",
+        "Kan Addaa fi Filatamaa Medical Supplies Manufacturing",
+        "Specialized & Custom Medical Supplies Manufacturing",
+        "ልዩና ብጁ Medical Supplies Manufacturing",
+        "ፍሉይን ዝተዳለወን Medical Supplies Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1312,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-pharmacy-retail",
       "names": {
-        "en": "Specialized & Custom Pharmacy Retail",
-        "am": "ልዩና ብጁ Pharmacy Retail",
-        "om": "Kan Addaa fi Filatamaa Pharmacy Retail",
-        "ti": "ፍሉይን ዝተዳለወን Pharmacy Retail"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1299,7 +1328,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Pharmacy Retail",
+        "Kan Addaa fi Filatamaa Pharmacy Retail",
+        "Specialized & Custom Pharmacy Retail",
+        "ልዩና ብጁ Pharmacy Retail",
+        "ፍሉይን ዝተዳለወን Pharmacy Retail"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1344,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-branded-pharmaceuticals",
       "names": {
-        "en": "Specialized & Custom Branded Pharmaceuticals",
-        "am": "ልዩና ብጁ Branded Pharmaceuticals",
-        "om": "Kan Addaa fi Filatamaa Branded Pharmaceuticals",
-        "ti": "ፍሉይን ዝተዳለወን Branded Pharmaceuticals"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1325,7 +1360,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Branded Pharmaceuticals",
+        "Kan Addaa fi Filatamaa Branded Pharmaceuticals",
+        "Specialized & Custom Branded Pharmaceuticals",
+        "ልዩና ብጁ Branded Pharmaceuticals",
+        "ፍሉይን ዝተዳለወን Branded Pharmaceuticals"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1376,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-drug-manufacturing",
       "names": {
-        "en": "Specialized & Custom Drug Manufacturing",
-        "am": "ልዩና ብጁ Drug Manufacturing",
-        "om": "Kan Addaa fi Filatamaa Drug Manufacturing",
-        "ti": "ፍሉይን ዝተዳለወን Drug Manufacturing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1351,7 +1392,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drug Manufacturing",
+        "Kan Addaa fi Filatamaa Drug Manufacturing",
+        "Specialized & Custom Drug Manufacturing",
+        "ልዩና ብጁ Drug Manufacturing",
+        "ፍሉይን ዝተዳለወን Drug Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1408,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-drug-regulatory-services",
       "names": {
-        "en": "Specialized & Custom Drug Regulatory Services",
-        "am": "ልዩና ብጁ Drug Regulatory Services",
-        "om": "Kan Addaa fi Filatamaa Drug Regulatory Services",
-        "ti": "ፍሉይን ዝተዳለወን Drug Regulatory Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1424,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drug Regulatory Services",
+        "Kan Addaa fi Filatamaa Drug Regulatory Services",
+        "Specialized & Custom Drug Regulatory Services",
+        "ልዩና ብጁ Drug Regulatory Services",
+        "ፍሉይን ዝተዳለወን Drug Regulatory Services"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1440,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-generic-drugs",
       "names": {
-        "en": "Specialized & Custom Generic Drugs",
-        "am": "ልዩና ብጁ Generic Drugs",
-        "om": "Kan Addaa fi Filatamaa Generic Drugs",
-        "ti": "ፍሉይን ዝተዳለወን Generic Drugs"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1456,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Generic Drugs",
+        "Kan Addaa fi Filatamaa Generic Drugs",
+        "Specialized & Custom Generic Drugs",
+        "ልዩና ብጁ Generic Drugs",
+        "ፍሉይን ዝተዳለወን Generic Drugs"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1472,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-pharmaceutical-distribution",
       "names": {
-        "en": "Specialized & Custom Pharmaceutical Distribution",
-        "am": "ልዩና ብጁ Pharmaceutical Distribution",
-        "om": "Kan Addaa fi Filatamaa Pharmaceutical Distribution",
-        "ti": "ፍሉይን ዝተዳለወን Pharmaceutical Distribution"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1488,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Pharmaceutical Distribution",
+        "Kan Addaa fi Filatamaa Pharmaceutical Distribution",
+        "Specialized & Custom Pharmaceutical Distribution",
+        "ልዩና ብጁ Pharmaceutical Distribution",
+        "ፍሉይን ዝተዳለወን Pharmaceutical Distribution"
+      ],
       "redirects": []
     }
   ]

@@ -9,8 +9,8 @@
       "classification_system_code": "SYS_SRV",
       "slug": "business-professional-services",
       "names": {
-        "en": "Business & Professional Services",
-        "am": "የንግድና ሙያ አገልግሎቶች",
+        "en": "Business Services",
+        "am": "የንግድ",
         "om": "Tajaajila Ogeessummaa",
         "ti": "ናይ ንግዲ ሞያ ኣገልግሎት"
       },
@@ -25,7 +25,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business & Professional Services",
+        "Professional Services",
+        "የንግድና ሙያ አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +39,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "business-coaching-mentoring",
       "names": {
-        "en": "Business Coaching & Mentoring",
-        "am": "የንግድ ማሰልጠናና መምህርነት",
+        "en": "Business Coaching",
+        "am": "የንግድ ማሰልጠና",
         "om": "Coaching Daldalaa",
-        "ti": "ኣሰልጣኝን መምህርነትን ንግዲ"
+        "ti": "ኣሰልጣኝ"
       },
       "description": "",
       "level": 1,
@@ -51,7 +55,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Coaching & Mentoring",
+        "Mentoring",
+        "ኣሰልጣኝን መምህርነትን ንግዲ",
+        "የንግድ ማሰልጠናና መምህርነት"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +70,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "business-registration-services",
       "names": {
-        "en": "Business Registration & Licensing",
-        "am": "የንግድ ምዝገባና ፍቃድ",
+        "en": "Business Registration",
+        "am": "የንግድ ምዝገባ",
         "om": "Galmeessuu Daldalaa",
-        "ti": "ምዝገባን ፍቓድን ንግዲ"
+        "ti": "ምዝገባ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +86,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Registration & Licensing",
+        "Licensing",
+        "ምዝገባን ፍቓድን ንግዲ",
+        "የንግድ ምዝገባና ፍቃድ"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +179,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "market-research-services",
       "names": {
-        "en": "Market Research & Analysis",
-        "am": "የገበያ ምርምርና ትንተና",
+        "en": "Market Research",
+        "am": "የገበያ ምርምር",
         "om": "Qorannoo Gabaataa",
-        "ti": "ምርምርን ትንተናን ገበያ"
+        "ti": "ምርምር"
       },
       "description": "",
       "level": 1,
@@ -181,7 +195,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Analysis",
+        "Market Research & Analysis",
+        "ምርምርን ትንተናን ገበያ",
+        "የገበያ ምርምርና ትንተና"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +210,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "marketing-advertising-services",
       "names": {
-        "en": "Marketing & Advertising Services",
-        "am": "የግብይትና ማስታወቂያ አገልግሎት",
+        "en": "Marketing Services",
+        "am": "የግብይት",
         "om": "Tajaajila Galii",
-        "ti": "ኣገልግሎት ግብይትን ምልጋሕን"
+        "ti": "ኣገልግሎት ግብይት"
       },
       "description": "",
       "level": 1,
@@ -207,7 +226,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Advertising Services",
+        "Marketing & Advertising Services",
+        "ኣገልግሎት ግብይትን ምልጋሕን",
+        "የግብይትና ማስታወቂያ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -217,7 +241,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "outsourcing-services",
       "names": {
-        "en": "Outsourcing & BPO Services",
+        "en": "Outsourcing Services",
         "am": "የተወገረ አገልግሎት",
         "om": "Tajaajila Bitsaa",
         "ti": "ኣገልግሎት ምውጣእ"
@@ -233,7 +257,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "BPO Services",
+        "Outsourcing & BPO Services"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +296,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-business-professional-services",
       "names": {
-        "en": "Specialized & Custom Business & Professional Services",
-        "am": "ልዩና ብጁ Business & Professional Services",
-        "om": "Kan Addaa fi Filatamaa Business & Professional Services",
-        "ti": "ፍሉይን ዝተዳለወን Business & Professional Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -285,7 +312,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Business",
+        "Kan Addaa fi Filatamaa Business & Professional Services",
+        "Professional Services",
+        "Specialized & Custom Business & Professional Services",
+        "ልዩና ብጁ Business & Professional Services",
+        "ፍሉይን ዝተዳለወን Business & Professional Services"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1265,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-business-coaching-mentoring",
       "names": {
-        "en": "Specialized & Custom Business Coaching & Mentoring",
-        "am": "ልዩና ብጁ Business Coaching & Mentoring",
-        "om": "Kan Addaa fi Filatamaa Business Coaching & Mentoring",
-        "ti": "ፍሉይን ዝተዳለወን Business Coaching & Mentoring"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1281,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Business Coaching",
+        "Kan Addaa fi Filatamaa Business Coaching & Mentoring",
+        "Mentoring",
+        "Specialized & Custom Business Coaching & Mentoring",
+        "ልዩና ብጁ Business Coaching & Mentoring",
+        "ፍሉይን ዝተዳለወን Business Coaching & Mentoring"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1298,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-business-registration-licensing",
       "names": {
-        "en": "Specialized & Custom Business Registration & Licensing",
-        "am": "ልዩና ብጁ Business Registration & Licensing",
-        "om": "Kan Addaa fi Filatamaa Business Registration & Licensing",
-        "ti": "ፍሉይን ዝተዳለወን Business Registration & Licensing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1314,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Business Registration",
+        "Kan Addaa fi Filatamaa Business Registration & Licensing",
+        "Licensing",
+        "Specialized & Custom Business Registration & Licensing",
+        "ልዩና ብጁ Business Registration & Licensing",
+        "ፍሉይን ዝተዳለወን Business Registration & Licensing"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1331,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-corporate-support-services",
       "names": {
-        "en": "Specialized & Custom Corporate Support Services",
-        "am": "ልዩና ብጁ Corporate Support Services",
-        "om": "Kan Addaa fi Filatamaa Corporate Support Services",
-        "ti": "ፍሉይን ዝተዳለወን Corporate Support Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1299,7 +1347,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Corporate Support Services",
+        "Kan Addaa fi Filatamaa Corporate Support Services",
+        "Specialized & Custom Corporate Support Services",
+        "ልዩና ብጁ Corporate Support Services",
+        "ፍሉይን ዝተዳለወን Corporate Support Services"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1363,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-human-resources-services",
       "names": {
-        "en": "Specialized & Custom Human Resources Services",
-        "am": "ልዩና ብጁ Human Resources Services",
-        "om": "Kan Addaa fi Filatamaa Human Resources Services",
-        "ti": "ፍሉይን ዝተዳለወን Human Resources Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1325,7 +1379,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Human Resources Services",
+        "Kan Addaa fi Filatamaa Human Resources Services",
+        "Specialized & Custom Human Resources Services",
+        "ልዩና ብጁ Human Resources Services",
+        "ፍሉይን ዝተዳለወን Human Resources Services"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1395,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-management-consulting",
       "names": {
-        "en": "Specialized & Custom Management Consulting",
-        "am": "ልዩና ብጁ Management Consulting",
-        "om": "Kan Addaa fi Filatamaa Management Consulting",
-        "ti": "ፍሉይን ዝተዳለወን Management Consulting"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1351,7 +1411,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Management Consulting",
+        "Kan Addaa fi Filatamaa Management Consulting",
+        "Specialized & Custom Management Consulting",
+        "ልዩና ብጁ Management Consulting",
+        "ፍሉይን ዝተዳለወን Management Consulting"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1427,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-market-research-analysis",
       "names": {
-        "en": "Specialized & Custom Market Research & Analysis",
-        "am": "ልዩና ብጁ Market Research & Analysis",
-        "om": "Kan Addaa fi Filatamaa Market Research & Analysis",
-        "ti": "ፍሉይን ዝተዳለወን Market Research & Analysis"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1443,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Analysis",
+        "Custom Market Research",
+        "Kan Addaa fi Filatamaa Market Research & Analysis",
+        "Specialized & Custom Market Research & Analysis",
+        "ልዩና ብጁ Market Research & Analysis",
+        "ፍሉይን ዝተዳለወን Market Research & Analysis"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1460,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-marketing-advertising-services",
       "names": {
-        "en": "Specialized & Custom Marketing & Advertising Services",
-        "am": "ልዩና ብጁ Marketing & Advertising Services",
-        "om": "Kan Addaa fi Filatamaa Marketing & Advertising Services",
-        "ti": "ፍሉይን ዝተዳለወን Marketing & Advertising Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1476,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Advertising Services",
+        "Custom Marketing",
+        "Kan Addaa fi Filatamaa Marketing & Advertising Services",
+        "Specialized & Custom Marketing & Advertising Services",
+        "ልዩና ብጁ Marketing & Advertising Services",
+        "ፍሉይን ዝተዳለወን Marketing & Advertising Services"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1493,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-outsourcing-bpo-services",
       "names": {
-        "en": "Specialized & Custom Outsourcing & BPO Services",
-        "am": "ልዩና ብጁ Outsourcing & BPO Services",
-        "om": "Kan Addaa fi Filatamaa Outsourcing & BPO Services",
-        "ti": "ፍሉይን ዝተዳለወን Outsourcing & BPO Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1509,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "BPO Services",
+        "Custom Outsourcing",
+        "Kan Addaa fi Filatamaa Outsourcing & BPO Services",
+        "Specialized & Custom Outsourcing & BPO Services",
+        "ልዩና ብጁ Outsourcing & BPO Services",
+        "ፍሉይን ዝተዳለወን Outsourcing & BPO Services"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1526,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-project-management-services",
       "names": {
-        "en": "Specialized & Custom Project Management Services",
-        "am": "ልዩና ብጁ Project Management Services",
-        "om": "Kan Addaa fi Filatamaa Project Management Services",
-        "ti": "ፍሉይን ዝተዳለወን Project Management Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1542,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Project Management Services",
+        "Kan Addaa fi Filatamaa Project Management Services",
+        "Specialized & Custom Project Management Services",
+        "ልዩና ብጁ Project Management Services",
+        "ፍሉይን ዝተዳለወን Project Management Services"
+      ],
       "redirects": []
     },
     {
@@ -10643,10 +10736,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "construction-pm-condominium-housing-units-20-80-40-s37_3",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "description": null,
       "level": 3,
@@ -10659,7 +10752,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+      ],
       "redirects": []
     },
     {
@@ -10669,10 +10768,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-construction-pm",
       "names": {
-        "en": "Specialized & Custom Construction PM",
-        "am": "ልዩና ብጁ Construction PM",
-        "om": "Kan Addaa fi Filatamaa Construction PM",
-        "ti": "ፍሉይን ዝተዳለወን Construction PM"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10685,7 +10784,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Construction PM",
+        "Kan Addaa fi Filatamaa Construction PM",
+        "Specialized & Custom Construction PM",
+        "ልዩና ብጁ Construction PM",
+        "ፍሉይን ዝተዳለወን Construction PM"
+      ],
       "redirects": []
     }
   ]

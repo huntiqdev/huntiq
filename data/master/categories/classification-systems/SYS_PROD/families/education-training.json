@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Education & Training",
-        "am": "ትምህርትና ስልጠና",
-        "om": "Barnoota fi Leenjii",
-        "ti": "ትምህርትን ስልጠናን"
+        "en": "Education",
+        "am": "ትምህርት",
+        "om": "Barnoota",
+        "ti": "ትምህርት"
       },
       "slug": "education-training",
       "description": "Early childhood, primary, secondary, higher education, vocational training, certification, tutoring.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barnoota fi Leenjii",
+        "Education & Training",
+        "Training",
+        "ትምህርትና ስልጠና",
+        "ትምህርትን ስልጠናን"
+      ],
       "redirects": []
     },
     {
@@ -501,10 +507,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Academic Advisory & Admissions",
-        "am": "የትምህርት ምደባና የማማከር አገልግሎት",
-        "om": "Gorsa Barnootaa fi Seensaa",
-        "ti": "ናይ ትምህርቲ ምኽርን ምዝገባን"
+        "en": "Academic Advisory",
+        "am": "የትምህርት ምደባ",
+        "om": "Gorsa Barnootaa",
+        "ti": "ናይ ትምህርቲ ምኽር"
       },
       "slug": "educational-consulting",
       "description": "",
@@ -518,7 +524,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Academic Advisory & Admissions",
+        "Admissions",
+        "Gorsa Barnootaa fi Seensaa",
+        "ናይ ትምህርቲ ምኽርን ምዝገባን",
+        "የትምህርት ምደባና የማማከር አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -605,10 +617,10 @@
       "parent_code": "educational-consulting",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Academic Advisory & Admissions",
-        "am": "ሌሎች የትምህርት ምደባና የማማከር አገልግሎት",
-        "om": "Gorsa Barnootaa fi Seensaa Biroo",
-        "ti": "ካልኦት ናይ ትምህርቲ ምኽርን ምዝገባን"
+        "en": "Other Academic Advisory",
+        "am": "ሌሎች የትምህርት ምደባ",
+        "om": "Gorsa Barnootaa",
+        "ti": "ካልኦት ናይ ትምህርቲ ምኽር"
       },
       "slug": "other-educational-consulting",
       "description": null,
@@ -622,7 +634,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Admissions",
+        "Gorsa Barnootaa fi Seensaa Biroo",
+        "Other Academic Advisory & Admissions",
+        "ሌሎች የትምህርት ምደባና የማማከር አገልግሎት",
+        "ካልኦት ናይ ትምህርቲ ምኽርን ምዝገባን"
+      ],
       "redirects": []
     },
     {
@@ -631,10 +649,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Classroom, Lab & Learning Materials",
-        "am": "የክፍል፣ የላብና የመማሪያ ቁሳቁሶች",
-        "om": "Meeshaalee Kutaa fi Qorannoo",
-        "ti": "ናይ ክፍሊ፣ ላቦራቶሪን መምሃሪ ናውትን"
+        "en": "Classroom Materials",
+        "am": "የክፍል፣ የላብ",
+        "om": "Meeshaalee Kutaa",
+        "ti": "ናይ ክፍሊ፣ ላቦራቶሪ"
       },
       "slug": "educational-materials-equipment",
       "description": "",
@@ -648,7 +666,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Classroom, Lab & Learning Materials",
+        "Lab",
+        "Learning Materials",
+        "Meeshaalee Kutaa fi Qorannoo",
+        "ናይ ክፍሊ፣ ላቦራቶሪን መምሃሪ ናውትን",
+        "የክፍል፣ የላብና የመማሪያ ቁሳቁሶች"
+      ],
       "redirects": []
     },
     {
@@ -761,10 +786,10 @@
       "parent_code": "educational-materials-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Classroom, Lab & Learning Materials",
-        "am": "ሌሎች የክፍል፣ የላብና የመማሪያ ቁሳቁሶች",
-        "om": "Meeshaalee Kutaa fi Qorannoo Biroo",
-        "ti": "ካልኦት ናይ ክፍሊ፣ ላቦራቶሪን መምሃሪ ናውትን"
+        "en": "Other Classroom Materials",
+        "am": "ሌሎች የክፍል፣ የላብ",
+        "om": "Meeshaalee Kutaa",
+        "ti": "ካልኦት ናይ ክፍሊ፣ ላቦራቶሪ"
       },
       "slug": "other-educational-materials-equipment",
       "description": null,
@@ -778,7 +803,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Lab",
+        "Learning Materials",
+        "Meeshaalee Kutaa fi Qorannoo Biroo",
+        "Other Classroom, Lab & Learning Materials",
+        "ሌሎች የክፍል፣ የላብና የመማሪያ ቁሳቁሶች",
+        "ካልኦት ናይ ክፍሊ፣ ላቦራቶሪን መምሃሪ ናውትን"
+      ],
       "redirects": []
     },
     {
@@ -787,10 +819,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Higher Education & Universities",
-        "am": "ከፍተኛ ትምህርትና ዩኒቨርሲቲ",
+        "en": "Higher Education",
+        "am": "ከፍተኛ ትምህርት",
         "om": "Barnoota Ol'anaa",
-        "ti": "ከፍተኛ ትምህርቲን ዩኒቨርሲቲን"
+        "ti": "ከፍተኛ ትምህርቲ"
       },
       "slug": "higher-education-universities",
       "description": "",
@@ -804,7 +836,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Higher Education & Universities",
+        "Universities",
+        "ከፍተኛ ትምህርቲን ዩኒቨርሲቲን",
+        "ከፍተኛ ትምህርትና ዩኒቨርሲቲ"
+      ],
       "redirects": []
     },
     {
@@ -917,10 +954,10 @@
       "parent_code": "higher-education-universities",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Higher Education & Universities",
-        "am": "ሌሎች ከፍተኛ ትምህርትና ዩኒቨርሲቲ",
+        "en": "Other Higher Education",
+        "am": "ሌሎች ከፍተኛ ትምህርት",
         "om": "Barnoota Ol'anaa Biroo",
-        "ti": "ካልኦት ከፍተኛ ትምህርቲን ዩኒቨርሲቲን"
+        "ti": "ካልኦት ከፍተኛ ትምህርቲ"
       },
       "slug": "other-higher-education-universities",
       "description": null,
@@ -934,7 +971,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Higher Education & Universities",
+        "Universities",
+        "ሌሎች ከፍተኛ ትምህርትና ዩኒቨርሲቲ",
+        "ካልኦት ከፍተኛ ትምህርቲን ዩኒቨርሲቲን"
+      ],
       "redirects": []
     },
     {
@@ -1099,10 +1141,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Online & Distance Education",
-        "am": "የመስመር ላይና የሩቅ ትምህርት",
+        "en": "Online",
+        "am": "የመስመር ላይ",
         "om": "Barnoota Sararaa",
-        "ti": "ናይ መስመር ላይን ናይ ሩሕን ትምህርቲ"
+        "ti": "ናይ መስመር ላይ"
       },
       "slug": "online-distance-education",
       "description": "",
@@ -1116,7 +1158,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Distance Education",
+        "Online & Distance Education",
+        "ናይ መስመር ላይን ናይ ሩሕን ትምህርቲ",
+        "የመስመር ላይና የሩቅ ትምህርት"
+      ],
       "redirects": []
     },
     {
@@ -1229,10 +1276,10 @@
       "parent_code": "online-distance-education",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Online & Distance Education",
-        "am": "ሌሎች የመስመር ላይና የሩቅ ትምህርት",
+        "en": "Other Online",
+        "am": "ሌሎች የመስመር ላይ",
         "om": "Barnoota Sararaa Biroo",
-        "ti": "ካልኦት ናይ መስመር ላይን ናይ ሩሕን ትምህርቲ"
+        "ti": "ካልኦት ናይ መስመር ላይ"
       },
       "slug": "other-online-distance-education",
       "description": null,
@@ -1246,7 +1293,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Distance Education",
+        "Other Online & Distance Education",
+        "ሌሎች የመስመር ላይና የሩቅ ትምህርት",
+        "ካልኦት ናይ መስመር ላይን ናይ ሩሕን ትምህርቲ"
+      ],
       "redirects": []
     },
     {
@@ -1255,10 +1307,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Primary & Secondary Education",
-        "am": "የአንደኛና ሁለተኛ ደረጃ ትምህርት",
-        "om": "Barnoota Gabaabaa fi Gadi fageenyaa",
-        "ti": "ናይ ቀዳማይን ካልኣይን ደረጃ ትምህርት"
+        "en": "Primary",
+        "am": "የአንደኛ",
+        "om": "Barnoota Gabaabaa",
+        "ti": "ናይ ቀዳማይ"
       },
       "slug": "primary-secondary-education",
       "description": "",
@@ -1272,7 +1324,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barnoota Gabaabaa fi Gadi fageenyaa",
+        "Primary & Secondary Education",
+        "Secondary Education",
+        "ናይ ቀዳማይን ካልኣይን ደረጃ ትምህርት",
+        "የአንደኛና ሁለተኛ ደረጃ ትምህርት"
+      ],
       "redirects": []
     },
     {
@@ -1385,10 +1443,10 @@
       "parent_code": "primary-secondary-education",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Primary & Secondary Education",
-        "am": "ሌሎች የአንደኛና ሁለተኛ ደረጃ ትምህርት",
-        "om": "Barnoota Gabaabaa fi Gadi fageenyaa Biroo",
-        "ti": "ካልኦት ናይ ቀዳማይን ካልኣይን ደረጃ ትምህርት"
+        "en": "Other Primary",
+        "am": "ሌሎች የአንደኛ",
+        "om": "Barnoota Gabaabaa",
+        "ti": "ካልኦት ናይ ቀዳማይ"
       },
       "slug": "other-primary-secondary-education",
       "description": null,
@@ -1402,7 +1460,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barnoota Gabaabaa fi Gadi fageenyaa Biroo",
+        "Other Primary & Secondary Education",
+        "Secondary Education",
+        "ሌሎች የአንደኛና ሁለተኛ ደረጃ ትምህርት",
+        "ካልኦት ናይ ቀዳማይን ካልኣይን ደረጃ ትምህርት"
+      ],
       "redirects": []
     },
     {
@@ -1573,10 +1637,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Professional Certification & Licensing",
-        "am": "የሙያ ምስክርነትና ፍቃድ",
+        "en": "Professional Certification",
+        "am": "የሙያ ምስክርነት",
         "om": "Hangaqabsa Ogeessummaa",
-        "ti": "ምስክርነትን ፍቓድን ሞያ"
+        "ti": "ምስክርነት"
       },
       "slug": "professional-certification",
       "description": "",
@@ -1590,7 +1654,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Licensing",
+        "Professional Certification & Licensing",
+        "ምስክርነትን ፍቓድን ሞያ",
+        "የሙያ ምስክርነትና ፍቃድ"
+      ],
       "redirects": []
     },
     {
@@ -1703,10 +1772,10 @@
       "parent_code": "professional-certification",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Professional Certification & Licensing",
-        "am": "ሌሎች የሙያ ምስክርነትና ፍቃድ",
+        "en": "Other Professional Certification",
+        "am": "ሌሎች የሙያ ምስክርነት",
         "om": "Hangaqabsa Ogeessummaa Biroo",
-        "ti": "ካልኦት ምስክርነትን ፍቓድን ሞያ"
+        "ti": "ካልኦት ምስክርነት"
       },
       "slug": "other-professional-certification",
       "description": null,
@@ -1720,7 +1789,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Licensing",
+        "Other Professional Certification & Licensing",
+        "ሌሎች የሙያ ምስክርነትና ፍቃድ",
+        "ካልኦት ምስክርነትን ፍቓድን ሞያ"
+      ],
       "redirects": []
     },
     {
@@ -2015,10 +2089,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Vocational & Technical Training",
-        "am": "የሙያና የቴክኒክ ስልጠና",
+        "en": "Vocational",
+        "am": "የሙያ",
         "om": "Leenjii Teknikalaa",
-        "ti": "ሞያን ቴክኒካልን ስልጠና"
+        "ti": "ሞያ"
       },
       "slug": "vocational-technical-training",
       "description": "",
@@ -2032,7 +2106,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Technical Training",
+        "Vocational & Technical Training",
+        "ሞያን ቴክኒካልን ስልጠና",
+        "የሙያና የቴክኒክ ስልጠና"
+      ],
       "redirects": []
     },
     {
@@ -2145,10 +2224,10 @@
       "parent_code": "vocational-technical-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Vocational & Technical Training",
-        "am": "ሌሎች የሙያና የቴክኒክ ስልጠና",
+        "en": "Other Vocational",
+        "am": "ሌሎች የሙያ",
         "om": "Leenjii Teknikalaa Biroo",
-        "ti": "ካልኦት ሞያን ቴክኒካልን ስልጠና"
+        "ti": "ካልኦት ሞያ"
       },
       "slug": "other-vocational-technical-training",
       "description": null,
@@ -2162,7 +2241,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Vocational & Technical Training",
+        "Technical Training",
+        "ሌሎች የሙያና የቴክኒክ ስልጠና",
+        "ካልኦት ሞያን ቴክኒካልን ስልጠና"
+      ],
       "redirects": []
     },
     {
@@ -2171,10 +2255,10 @@
       "parent_code": "education-training",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Education & Training",
-        "am": "ሌሎች ትምህርትና ስልጠና",
-        "om": "Barnoota fi Leenjii Biroo",
-        "ti": "ካልኦት ትምህርትን ስልጠናን"
+        "en": "Other Education",
+        "am": "ሌሎች ትምህርት",
+        "om": "Barnoota",
+        "ti": "ካልኦት ትምህርት"
       },
       "slug": "other-education-training",
       "description": null,
@@ -2188,7 +2272,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barnoota fi Leenjii Biroo",
+        "Other Education & Training",
+        "Training",
+        "ሌሎች ትምህርትና ስልጠና",
+        "ካልኦት ትምህርትን ስልጠናን"
+      ],
       "redirects": []
     }
   ]

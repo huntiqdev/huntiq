@@ -3,7 +3,7 @@
   "$id": "https://huntiq.et/schemas/masterdata/import_request.schema.json",
   "title": "HUNTIQ Master Data Import Request Schema",
   "type": "object",
-  "required": ["dataset_type", "version", "records"],
+  "required": ["dataset_type", "version"],
   "properties": {
     "dataset_type": {
       "type": "string",
@@ -21,6 +21,16 @@
       "description": "Optional regional or classification scope identifier (e.g. ET-OR, SYS_PROD)"
     },
     "records": {
+      "type": "array",
+      "items": { "type": "object" },
+      "minItems": 1
+    },
+    "location_records": {
+      "type": "array",
+      "items": { "type": "object" },
+      "minItems": 1
+    },
+    "category_records": {
       "type": "array",
       "items": { "type": "object" },
       "minItems": 1

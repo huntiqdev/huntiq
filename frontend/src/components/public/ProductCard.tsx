@@ -95,7 +95,7 @@ function DetailDrawer({ product, onClose, onBuy }: {
             <X size={16} />
           </button>
           <div className="absolute top-3 left-3 bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-black shadow-lg">
-            ETB {product.price.toLocaleString()}
+            {product.price === 1 ? 'Contact / Apply' : `ETB ${product.price.toLocaleString()}`}
           </div>
         </div>
 
@@ -208,9 +208,11 @@ export function ProductCard({ product }: Props) {
           {/* Price — bottom left with high contrast shadow */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-2.5 pb-2 pt-6">
             <p className="text-white text-xs sm:text-sm font-black leading-tight drop-shadow-md">
-              ETB {product.price >= 1000
-                ? `${(product.price / 1000).toFixed(product.price % 1000 === 0 ? 0 : 1)}k`
-                : product.price.toLocaleString()}
+              {product.price === 1
+                ? 'Contact / Apply'
+                : `ETB ${product.price >= 1000
+                    ? `${(product.price / 1000).toFixed(product.price % 1000 === 0 ? 0 : 1)}k`
+                    : product.price.toLocaleString()}`}
             </p>
           </div>
 

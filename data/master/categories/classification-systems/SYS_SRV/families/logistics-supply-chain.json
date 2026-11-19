@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "logistics-supply-chain",
       "names": {
-        "en": "Logistics & Supply Chain",
+        "en": "Logistics",
         "am": "ጎደኛ አቅርቦት ሰንሰለት",
-        "om": "Geejjiba fi Sanyiibsa",
-        "ti": "ሎጂስቲክስን ሰንሰለት ኣቅርቦትን"
+        "om": "Geejjiba",
+        "ti": "ሎጂስቲክስ"
       },
       "description": "Freight, warehousing, courier, moving, storage, and supply chain management.",
       "level": 0,
@@ -25,7 +25,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Geejjiba fi Sanyiibsa",
+        "Logistics & Supply Chain",
+        "Supply Chain",
+        "ሎጂስቲክስን ሰንሰለት ኣቅርቦትን"
+      ],
       "redirects": []
     },
     {
@@ -35,7 +40,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "cold-chain-logistics",
       "names": {
-        "en": "Cold Chain & Refrigerated Logistics",
+        "en": "Cold Chain",
         "am": "የቀዘቀዘ ሰንሰለት አቅርቦት",
         "om": "Sanyiin Qabbanaa'aa",
         "ti": "ሎጂስቲክስ ሰንሰለት ቀዝቃዛ"
@@ -51,7 +56,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cold Chain & Refrigerated Logistics",
+        "Refrigerated Logistics"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +69,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "courier-delivery-services",
       "names": {
-        "en": "Courier & Delivery Services",
-        "am": "የኮሪየርና የመላኪያ አገልግሎት",
+        "en": "Courier Services",
+        "am": "የኮሪየር",
         "om": "Tajaajila Geejjibaa",
-        "ti": "ኣገልግሎት ኮሪየርን ምልካዕን"
+        "ti": "ኣገልግሎት ኮሪየር"
       },
       "description": "",
       "level": 1,
@@ -77,7 +85,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Courier & Delivery Services",
+        "Delivery Services",
+        "ኣገልግሎት ኮሪየርን ምልካዕን",
+        "የኮሪየርና የመላኪያ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +100,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "equipment-rental-leasing",
       "names": {
-        "en": "Equipment Rental & Leasing",
-        "am": "የመሳሪያ ኪራይና ኪራይ",
+        "en": "Equipment Rental",
+        "am": "የመሳሪያ ኪራይ",
         "om": "Kireeyyi Meeshaa",
-        "ti": "ኪራይ ኣቑሑን ምክራይን"
+        "ti": "ኪራይ ኣቑሑ"
       },
       "description": "",
       "level": 1,
@@ -103,7 +116,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Equipment Rental & Leasing",
+        "Leasing",
+        "ኪራይ ኣቑሑን ምክራይን",
+        "የመሳሪያ ኪራይና ኪራይ"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +209,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "moving-relocation-services",
       "names": {
-        "en": "Moving & Relocation Services",
-        "am": "የመንቀሳቀስና የምድቅጻት አገልግሎት",
+        "en": "Moving Services",
+        "am": "የመንቀሳቀስ",
         "om": "Tajaajila Sochii",
-        "ti": "ኣገልግሎት ምንቃስን ምዕራይን"
+        "ti": "ኣገልግሎት ምንቃስ"
       },
       "description": "",
       "level": 1,
@@ -207,7 +225,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Moving & Relocation Services",
+        "Relocation Services",
+        "ኣገልግሎት ምንቃስን ምዕራይን",
+        "የመንቀሳቀስና የምድቅጻት አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +266,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "warehousing-storage-services",
       "names": {
-        "en": "Warehousing & Storage Services",
-        "am": "የመጋዘንና ማከማቻ አገልግሎት",
+        "en": "Warehousing Services",
+        "am": "የመጋዘን",
         "om": "Tajaajila Kuusaa",
-        "ti": "ኣገልግሎት መጋዘንን መኽዘንን"
+        "ti": "ኣገልግሎት መጋዘን"
       },
       "description": "",
       "level": 1,
@@ -259,7 +282,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Storage Services",
+        "Warehousing & Storage Services",
+        "ኣገልግሎት መጋዘንን መኽዘንን",
+        "የመጋዘንና ማከማቻ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +297,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-logistics-supply-chain",
       "names": {
-        "en": "Specialized & Custom Logistics & Supply Chain",
-        "am": "ልዩና ብጁ Logistics & Supply Chain",
-        "om": "Kan Addaa fi Filatamaa Logistics & Supply Chain",
-        "ti": "ፍሉይን ዝተዳለወን Logistics & Supply Chain"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -285,7 +313,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Logistics",
+        "Kan Addaa fi Filatamaa Logistics & Supply Chain",
+        "Specialized & Custom Logistics & Supply Chain",
+        "Supply Chain",
+        "ልዩና ብጁ Logistics & Supply Chain",
+        "ፍሉይን ዝተዳለወን Logistics & Supply Chain"
+      ],
       "redirects": []
     },
     {
@@ -711,9 +746,9 @@
       "classification_system_code": "SYS_SRV",
       "slug": "barcode-rfid",
       "names": {
-        "en": "Barcode & RFID",
+        "en": "Barcode",
         "am": "ሰ ምዳ26",
-        "om": "Barcode fi RFID",
+        "om": "Barcode",
         "ti": "ምዳ26 ሰ"
       },
       "description": "",
@@ -727,7 +762,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barcode & RFID",
+        "Barcode fi RFID",
+        "RFID"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1270,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-cold-chain-refrigerated-logistics",
       "names": {
-        "en": "Specialized & Custom Cold Chain & Refrigerated Logistics",
-        "am": "ልዩና ብጁ Cold Chain & Refrigerated Logistics",
-        "om": "Kan Addaa fi Filatamaa Cold Chain & Refrigerated Logistics",
-        "ti": "ፍሉይን ዝተዳለወን Cold Chain & Refrigerated Logistics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1286,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cold Chain",
+        "Kan Addaa fi Filatamaa Cold Chain & Refrigerated Logistics",
+        "Refrigerated Logistics",
+        "Specialized & Custom Cold Chain & Refrigerated Logistics",
+        "ልዩና ብጁ Cold Chain & Refrigerated Logistics",
+        "ፍሉይን ዝተዳለወን Cold Chain & Refrigerated Logistics"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1303,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-courier-delivery-services",
       "names": {
-        "en": "Specialized & Custom Courier & Delivery Services",
-        "am": "ልዩና ብጁ Courier & Delivery Services",
-        "om": "Kan Addaa fi Filatamaa Courier & Delivery Services",
-        "ti": "ፍሉይን ዝተዳለወን Courier & Delivery Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1319,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Courier",
+        "Delivery Services",
+        "Kan Addaa fi Filatamaa Courier & Delivery Services",
+        "Specialized & Custom Courier & Delivery Services",
+        "ልዩና ብጁ Courier & Delivery Services",
+        "ፍሉይን ዝተዳለወን Courier & Delivery Services"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1336,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-equipment-rental-leasing",
       "names": {
-        "en": "Specialized & Custom Equipment Rental & Leasing",
-        "am": "ልዩና ብጁ Equipment Rental & Leasing",
-        "om": "Kan Addaa fi Filatamaa Equipment Rental & Leasing",
-        "ti": "ፍሉይን ዝተዳለወን Equipment Rental & Leasing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1299,7 +1352,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Equipment Rental",
+        "Kan Addaa fi Filatamaa Equipment Rental & Leasing",
+        "Leasing",
+        "Specialized & Custom Equipment Rental & Leasing",
+        "ልዩና ብጁ Equipment Rental & Leasing",
+        "ፍሉይን ዝተዳለወን Equipment Rental & Leasing"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1369,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-freight-transport-services",
       "names": {
-        "en": "Specialized & Custom Freight Transport Services",
-        "am": "ልዩና ብጁ Freight Transport Services",
-        "om": "Kan Addaa fi Filatamaa Freight Transport Services",
-        "ti": "ፍሉይን ዝተዳለወን Freight Transport Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1325,7 +1385,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Freight Transport Services",
+        "Kan Addaa fi Filatamaa Freight Transport Services",
+        "Specialized & Custom Freight Transport Services",
+        "ልዩና ብጁ Freight Transport Services",
+        "ፍሉይን ዝተዳለወን Freight Transport Services"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1401,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-inventory-management-services",
       "names": {
-        "en": "Specialized & Custom Inventory Management Services",
-        "am": "ልዩና ብጁ Inventory Management Services",
-        "om": "Kan Addaa fi Filatamaa Inventory Management Services",
-        "ti": "ፍሉይን ዝተዳለወን Inventory Management Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1351,7 +1417,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Inventory Management Services",
+        "Kan Addaa fi Filatamaa Inventory Management Services",
+        "Specialized & Custom Inventory Management Services",
+        "ልዩና ብጁ Inventory Management Services",
+        "ፍሉይን ዝተዳለወን Inventory Management Services"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1433,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-last-mile-delivery-services",
       "names": {
-        "en": "Specialized & Custom Last-Mile Delivery Services",
-        "am": "ልዩና ብጁ Last-Mile Delivery Services",
-        "om": "Kan Addaa fi Filatamaa Last-Mile Delivery Services",
-        "ti": "ፍሉይን ዝተዳለወን Last-Mile Delivery Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1449,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Last-Mile Delivery Services",
+        "Kan Addaa fi Filatamaa Last-Mile Delivery Services",
+        "Specialized & Custom Last-Mile Delivery Services",
+        "ልዩና ብጁ Last-Mile Delivery Services",
+        "ፍሉይን ዝተዳለወን Last-Mile Delivery Services"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1465,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-moving-relocation-services",
       "names": {
-        "en": "Specialized & Custom Moving & Relocation Services",
-        "am": "ልዩና ብጁ Moving & Relocation Services",
-        "om": "Kan Addaa fi Filatamaa Moving & Relocation Services",
-        "ti": "ፍሉይን ዝተዳለወን Moving & Relocation Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1481,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Moving",
+        "Kan Addaa fi Filatamaa Moving & Relocation Services",
+        "Relocation Services",
+        "Specialized & Custom Moving & Relocation Services",
+        "ልዩና ብጁ Moving & Relocation Services",
+        "ፍሉይን ዝተዳለወን Moving & Relocation Services"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1498,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-supply-chain-consulting",
       "names": {
-        "en": "Specialized & Custom Supply Chain Consulting",
-        "am": "ልዩና ብጁ Supply Chain Consulting",
-        "om": "Kan Addaa fi Filatamaa Supply Chain Consulting",
-        "ti": "ፍሉይን ዝተዳለወን Supply Chain Consulting"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1514,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Supply Chain Consulting",
+        "Kan Addaa fi Filatamaa Supply Chain Consulting",
+        "Specialized & Custom Supply Chain Consulting",
+        "ልዩና ብጁ Supply Chain Consulting",
+        "ፍሉይን ዝተዳለወን Supply Chain Consulting"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1530,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-warehousing-storage-services",
       "names": {
-        "en": "Specialized & Custom Warehousing & Storage Services",
-        "am": "ልዩና ብጁ Warehousing & Storage Services",
-        "om": "Kan Addaa fi Filatamaa Warehousing & Storage Services",
-        "ti": "ፍሉይን ዝተዳለወን Warehousing & Storage Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1546,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Warehousing",
+        "Kan Addaa fi Filatamaa Warehousing & Storage Services",
+        "Specialized & Custom Warehousing & Storage Services",
+        "Storage Services",
+        "ልዩና ብጁ Warehousing & Storage Services",
+        "ፍሉይን ዝተዳለወን Warehousing & Storage Services"
+      ],
       "redirects": []
     }
   ]

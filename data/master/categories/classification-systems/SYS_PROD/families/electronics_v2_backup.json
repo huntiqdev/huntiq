@@ -733,7 +733,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "point-and-shoot",
       "names": {
-        "en": "Point and Shoot",
+        "en": "Point",
         "am": "Point and Shoot",
         "om": "Point and Shoot",
         "ti": "Point and Shoot"
@@ -751,7 +751,9 @@
       "meta_description": null,
       "aliases": [
         "Compact Cameras",
-        "Digital Cameras"
+        "Digital Cameras",
+        "Point and Shoot",
+        "Shoot"
       ],
       "redirects": []
     },

@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Water & Sanitation",
-        "am": "ውሃና ጽንፈት",
-        "om": "Bishaan fi Qulqullina",
-        "ti": "ማይን ጽናሕን"
+        "en": "Water",
+        "am": "ውሃ",
+        "om": "Bishaan",
+        "ti": "ማይ"
       },
       "slug": "water-sanitation",
       "description": "Water treatment, purification, sanitation, wastewater management, and water supply.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bishaan fi Qulqullina",
+        "Sanitation",
+        "Water & Sanitation",
+        "ማይን ጽናሕን",
+        "ውሃና ጽንፈት"
+      ],
       "redirects": []
     },
     {
@@ -59,8 +65,8 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Borehole & Well Drilling Services",
-        "am": "የጉድጓድና ቦርሆል መቅደድ",
+        "en": "Borehole Services",
+        "am": "የጉድጓድ",
         "om": "Qoduu Bishaanii",
         "ti": "ኣገልግሎት መቕደድ ቦርሆል"
       },
@@ -76,7 +82,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Borehole & Well Drilling Services",
+        "Well Drilling Services",
+        "የጉድጓድና ቦርሆል መቅደድ"
+      ],
       "redirects": []
     },
     {
@@ -189,8 +199,8 @@
       "parent_code": "borehole-drilling-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Borehole & Well Drilling Services",
-        "am": "ሌሎች የጉድጓድና ቦርሆል መቅደድ",
+        "en": "Other Borehole Services",
+        "am": "ሌሎች የጉድጓድ",
         "om": "Qoduu Bishaanii Biroo",
         "ti": "ካልኦት ኣገልግሎት መቕደድ ቦርሆል"
       },
@@ -206,7 +216,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Borehole & Well Drilling Services",
+        "Well Drilling Services",
+        "ሌሎች የጉድጓድና ቦርሆል መቅደድ"
+      ],
       "redirects": []
     },
     {
@@ -371,10 +385,10 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Sanitation Supplies & Equipment",
-        "am": "የጽንፈት እቃዎችና መሳሪያዎች",
+        "en": "Sanitation Supplies",
+        "am": "የጽንፈት እቃዎች",
         "om": "Meeshaalee Qulqullinaa",
-        "ti": "ናይ ጽናሕ ኣቑሑን መሳርሒታትን"
+        "ti": "ናይ ጽናሕ ኣቑሑ"
       },
       "slug": "sanitation-supplies-equipment",
       "description": "",
@@ -388,7 +402,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Equipment",
+        "Sanitation Supplies & Equipment",
+        "ናይ ጽናሕ ኣቑሑን መሳርሒታትን",
+        "የጽንፈት እቃዎችና መሳሪያዎች"
+      ],
       "redirects": []
     },
     {
@@ -501,10 +520,10 @@
       "parent_code": "sanitation-supplies-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Sanitation Supplies & Equipment",
-        "am": "ሌሎች የጽንፈት እቃዎችና መሳሪያዎች",
+        "en": "Other Sanitation Supplies",
+        "am": "ሌሎች የጽንፈት እቃዎች",
         "om": "Meeshaalee Qulqullinaa Biroo",
-        "ti": "ካልኦት ናይ ጽናሕ ኣቑሑን መሳርሒታትን"
+        "ti": "ካልኦት ናይ ጽናሕ ኣቑሑ"
       },
       "slug": "other-sanitation-supplies-equipment",
       "description": null,
@@ -518,7 +537,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Equipment",
+        "Other Sanitation Supplies & Equipment",
+        "ሌሎች የጽንፈት እቃዎችና መሳሪያዎች",
+        "ካልኦት ናይ ጽናሕ ኣቑሑን መሳርሒታትን"
+      ],
       "redirects": []
     },
     {
@@ -839,10 +863,10 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Piping, Bowsers & Distribution",
-        "am": "የቦቴ ውሃና የቧንቧ ስርጭት",
-        "om": "Raabsa Bishaan Boozarii fi Ujummoo",
-        "ti": "ስርጭት ቦቴ ማይን ሻምብቆታትን"
+        "en": "Piping",
+        "am": "የቦቴ ውሃ",
+        "om": "Raabsa Bishaan Boozarii",
+        "ti": "ስርጭት ቦቴ ማይ"
       },
       "slug": "water-distribution-services",
       "description": "",
@@ -856,7 +880,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bowsers",
+        "Distribution",
+        "Piping, Bowsers & Distribution",
+        "Raabsa Bishaan Boozarii fi Ujummoo",
+        "ስርጭት ቦቴ ማይን ሻምብቆታትን",
+        "የቦቴ ውሃና የቧንቧ ስርጭት"
+      ],
       "redirects": []
     },
     {
@@ -969,10 +1000,10 @@
       "parent_code": "water-distribution-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Piping, Bowsers & Distribution",
-        "am": "ሌሎች የቦቴ ውሃና የቧንቧ ስርጭት",
-        "om": "Raabsa Bishaan Boozarii fi Ujummoo Biroo",
-        "ti": "ካልኦት ስርጭት ቦቴ ማይን ሻምብቆታትን"
+        "en": "Other Piping",
+        "am": "ሌሎች የቦቴ ውሃ",
+        "om": "Raabsa Bishaan Boozarii",
+        "ti": "ካልኦት ስርጭት ቦቴ ማይ"
       },
       "slug": "other-water-distribution-services",
       "description": null,
@@ -986,7 +1017,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bowsers",
+        "Distribution",
+        "Other Piping, Bowsers & Distribution",
+        "Raabsa Bishaan Boozarii fi Ujummoo Biroo",
+        "ሌሎች የቦቴ ውሃና የቧንቧ ስርጭት",
+        "ካልኦት ስርጭት ቦቴ ማይን ሻምብቆታትን"
+      ],
       "redirects": []
     },
     {
@@ -995,10 +1033,10 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Microbiological & Purity Testing",
-        "am": "የውሃ ንፅህናና የላቦራቶሪ ምርመራ",
+        "en": "Microbiological",
+        "am": "የውሃ ንፅህና",
         "om": "Qorannoo Qulqullina Bishaanii",
-        "ti": "መርመራ ጽሬት ማይን ላቦራቶሪን"
+        "ti": "መርመራ ጽሬት ማይ"
       },
       "slug": "water-quality-testing",
       "description": "",
@@ -1012,7 +1050,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Microbiological & Purity Testing",
+        "Purity Testing",
+        "መርመራ ጽሬት ማይን ላቦራቶሪን",
+        "የውሃ ንፅህናና የላቦራቶሪ ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -1125,10 +1168,10 @@
       "parent_code": "water-quality-testing",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Microbiological & Purity Testing",
-        "am": "ሌሎች የውሃ ንፅህናና የላቦራቶሪ ምርመራ",
+        "en": "Other Microbiological",
+        "am": "ሌሎች የውሃ ንፅህና",
         "om": "Qorannoo Qulqullina Bishaanii Biroo",
-        "ti": "ካልኦት መርመራ ጽሬት ማይን ላቦራቶሪን"
+        "ti": "ካልኦት መርመራ ጽሬት ማይ"
       },
       "slug": "other-water-quality-testing",
       "description": null,
@@ -1142,7 +1185,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Microbiological & Purity Testing",
+        "Purity Testing",
+        "ሌሎች የውሃ ንፅህናና የላቦራቶሪ ምርመራ",
+        "ካልኦት መርመራ ጽሬት ማይን ላቦራቶሪን"
+      ],
       "redirects": []
     },
     {
@@ -1151,10 +1199,10 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Boreholes, Tanks & Treatment Plants",
-        "am": "ቦረሆል፣ ታንከሮችና የማጣሪያ ተቋማት",
-        "om": "Boorii, Taankii fi Dhaabbata Qulqulleessaa",
-        "ti": "ዒላታት፣ ታንክታትን መጻረዪ ማይን"
+        "en": "Boreholes",
+        "am": "ቦረሆል፣ ታንከሮች",
+        "om": "Boorii, Taankii",
+        "ti": "ዒላታት፣ ታንክታት"
       },
       "slug": "water-supply-infrastructure",
       "description": "",
@@ -1168,7 +1216,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boorii, Taankii fi Dhaabbata Qulqulleessaa",
+        "Boreholes, Tanks & Treatment Plants",
+        "Tanks",
+        "Treatment Plants",
+        "ቦረሆል፣ ታንከሮችና የማጣሪያ ተቋማት",
+        "ዒላታት፣ ታንክታትን መጻረዪ ማይን"
+      ],
       "redirects": []
     },
     {
@@ -1281,10 +1336,10 @@
       "parent_code": "water-supply-infrastructure",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Boreholes, Tanks & Treatment Plants",
-        "am": "ሌሎች ቦረሆል፣ ታንከሮችና የማጣሪያ ተቋማት",
-        "om": "Boorii, Taankii fi Dhaabbata Qulqulleessaa Biroo",
-        "ti": "ካልኦት ዒላታት፣ ታንክታትን መጻረዪ ማይን"
+        "en": "Other Boreholes",
+        "am": "ሌሎች ቦረሆል፣ ታንከሮች",
+        "om": "Boorii, Taankii",
+        "ti": "ካልኦት ዒላታት፣ ታንክታት"
       },
       "slug": "other-water-supply-infrastructure",
       "description": null,
@@ -1298,7 +1353,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boorii, Taankii fi Dhaabbata Qulqulleessaa Biroo",
+        "Other Boreholes, Tanks & Treatment Plants",
+        "Tanks",
+        "Treatment Plants",
+        "ሌሎች ቦረሆል፣ ታንከሮችና የማጣሪያ ተቋማት",
+        "ካልኦት ዒላታት፣ ታንክታትን መጻረዪ ማይን"
+      ],
       "redirects": []
     },
     {
@@ -1307,10 +1369,10 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Filters, Reverse Osmosis & Chemicals",
-        "am": "ማጣሪያዎችና የውሃ ኬሚካሎች",
-        "om": "Fiiltara fi Keemikaala Bishaan Qulqulleessu",
-        "ti": "መጻረዪታትን ከሚካላትን"
+        "en": "Filters",
+        "am": "ማጣሪያዎች",
+        "om": "Fiiltara",
+        "ti": "መጻረዪታት"
       },
       "slug": "water-treatment-purification",
       "description": "",
@@ -1324,7 +1386,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chemicals",
+        "Fiiltara fi Keemikaala Bishaan Qulqulleessu",
+        "Filters, Reverse Osmosis & Chemicals",
+        "Reverse Osmosis",
+        "መጻረዪታትን ከሚካላትን",
+        "ማጣሪያዎችና የውሃ ኬሚካሎች"
+      ],
       "redirects": []
     },
     {
@@ -1437,10 +1506,10 @@
       "parent_code": "water-treatment-purification",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Filters, Reverse Osmosis & Chemicals",
-        "am": "ሌሎች ማጣሪያዎችና የውሃ ኬሚካሎች",
-        "om": "Fiiltara fi Keemikaala Bishaan Qulqulleessu Biroo",
-        "ti": "ካልኦት መጻረዪታትን ከሚካላትን"
+        "en": "Other Filters",
+        "am": "ሌሎች ማጣሪያዎች",
+        "om": "Fiiltara",
+        "ti": "ካልኦት መጻረዪታት"
       },
       "slug": "other-water-treatment-purification",
       "description": null,
@@ -1454,7 +1523,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chemicals",
+        "Fiiltara fi Keemikaala Bishaan Qulqulleessu Biroo",
+        "Other Filters, Reverse Osmosis & Chemicals",
+        "Reverse Osmosis",
+        "ሌሎች ማጣሪያዎችና የውሃ ኬሚካሎች",
+        "ካልኦት መጻረዪታትን ከሚካላትን"
+      ],
       "redirects": []
     },
     {
@@ -1463,10 +1539,10 @@
       "parent_code": "water-sanitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Water & Sanitation",
-        "am": "ሌሎች ውሃና ጽንፈት",
-        "om": "Bishaan fi Qulqullina Biroo",
-        "ti": "ካልኦት ማይን ጽናሕን"
+        "en": "Other Water",
+        "am": "ሌሎች ውሃ",
+        "om": "Bishaan",
+        "ti": "ካልኦት ማይ"
       },
       "slug": "other-water-sanitation",
       "description": null,
@@ -1480,7 +1556,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bishaan fi Qulqullina Biroo",
+        "Other Water & Sanitation",
+        "Sanitation",
+        "ሌሎች ውሃና ጽንፈት",
+        "ካልኦት ማይን ጽናሕን"
+      ],
       "redirects": []
     }
   ]

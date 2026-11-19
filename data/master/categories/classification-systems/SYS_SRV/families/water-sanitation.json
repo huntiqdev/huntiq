@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "water-sanitation",
       "names": {
-        "en": "Water & Sanitation",
-        "am": "ውሃና ጽንፈት",
-        "om": "Bishaan fi Qulqullina",
-        "ti": "ማይን ጽናሕን"
+        "en": "Water",
+        "am": "ውሃ",
+        "om": "Bishaan",
+        "ti": "ማይ"
       },
       "description": "Water treatment, purification, sanitation, wastewater management, and water supply.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bishaan fi Qulqullina",
+        "Sanitation",
+        "Water & Sanitation",
+        "ማይን ጽናሕን",
+        "ውሃና ጽንፈት"
+      ],
       "redirects": []
     },
     {
@@ -35,8 +41,8 @@
       "classification_system_code": "SYS_SRV",
       "slug": "borehole-drilling-services",
       "names": {
-        "en": "Borehole & Well Drilling Services",
-        "am": "የጉድጓድና ቦርሆል መቅደድ",
+        "en": "Borehole Services",
+        "am": "የጉድጓድ",
         "om": "Qoduu Bishaanii",
         "ti": "ኣገልግሎት መቕደድ ቦርሆል"
       },
@@ -51,7 +57,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Borehole & Well Drilling Services",
+        "Well Drilling Services",
+        "የጉድጓድና ቦርሆል መቅደድ"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +97,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "sanitation-supplies-equipment",
       "names": {
-        "en": "Sanitation Supplies & Equipment",
-        "am": "የጽንፈት እቃዎችና መሳሪያዎች",
+        "en": "Sanitation Supplies",
+        "am": "የጽንፈት እቃዎች",
         "om": "Meeshaalee Qulqullinaa",
-        "ti": "ናይ ጽናሕ ኣቑሑን መሳርሒታትን"
+        "ti": "ናይ ጽናሕ ኣቑሑ"
       },
       "description": "",
       "level": 1,
@@ -103,7 +113,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Equipment",
+        "Sanitation Supplies & Equipment",
+        "ናይ ጽናሕ ኣቑሑን መሳርሒታትን",
+        "የጽንፈት እቃዎችና መሳሪያዎች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +180,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "water-distribution-services",
       "names": {
-        "en": "Piping, Bowsers & Distribution",
-        "am": "የቦቴ ውሃና የቧንቧ ስርጭት",
-        "om": "Raabsa Bishaan Boozarii fi Ujummoo",
-        "ti": "ስርጭት ቦቴ ማይን ሻምብቆታትን"
+        "en": "Piping",
+        "am": "የቦቴ ውሃ",
+        "om": "Raabsa Bishaan Boozarii",
+        "ti": "ስርጭት ቦቴ ማይ"
       },
       "description": "",
       "level": 1,
@@ -181,7 +196,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bowsers",
+        "Distribution",
+        "Piping, Bowsers & Distribution",
+        "Raabsa Bishaan Boozarii fi Ujummoo",
+        "ስርጭት ቦቴ ማይን ሻምብቆታትን",
+        "የቦቴ ውሃና የቧንቧ ስርጭት"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +213,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "water-quality-testing",
       "names": {
-        "en": "Microbiological & Purity Testing",
-        "am": "የውሃ ንፅህናና የላቦራቶሪ ምርመራ",
+        "en": "Microbiological",
+        "am": "የውሃ ንፅህና",
         "om": "Qorannoo Qulqullina Bishaanii",
-        "ti": "መርመራ ጽሬት ማይን ላቦራቶሪን"
+        "ti": "መርመራ ጽሬት ማይ"
       },
       "description": "",
       "level": 1,
@@ -207,7 +229,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Microbiological & Purity Testing",
+        "Purity Testing",
+        "መርመራ ጽሬት ማይን ላቦራቶሪን",
+        "የውሃ ንፅህናና የላቦራቶሪ ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +244,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "water-supply-infrastructure",
       "names": {
-        "en": "Boreholes, Tanks & Treatment Plants",
-        "am": "ቦረሆል፣ ታንከሮችና የማጣሪያ ተቋማት",
-        "om": "Boorii, Taankii fi Dhaabbata Qulqulleessaa",
-        "ti": "ዒላታት፣ ታንክታትን መጻረዪ ማይን"
+        "en": "Boreholes",
+        "am": "ቦረሆል፣ ታንከሮች",
+        "om": "Boorii, Taankii",
+        "ti": "ዒላታት፣ ታንክታት"
       },
       "description": "",
       "level": 1,
@@ -233,7 +260,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boorii, Taankii fi Dhaabbata Qulqulleessaa",
+        "Boreholes, Tanks & Treatment Plants",
+        "Tanks",
+        "Treatment Plants",
+        "ቦረሆል፣ ታንከሮችና የማጣሪያ ተቋማት",
+        "ዒላታት፣ ታንክታትን መጻረዪ ማይን"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +277,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "water-treatment-purification",
       "names": {
-        "en": "Filters, Reverse Osmosis & Chemicals",
-        "am": "ማጣሪያዎችና የውሃ ኬሚካሎች",
-        "om": "Fiiltara fi Keemikaala Bishaan Qulqulleessu",
-        "ti": "መጻረዪታትን ከሚካላትን"
+        "en": "Filters",
+        "am": "ማጣሪያዎች",
+        "om": "Fiiltara",
+        "ti": "መጻረዪታት"
       },
       "description": "",
       "level": 1,
@@ -259,7 +293,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chemicals",
+        "Fiiltara fi Keemikaala Bishaan Qulqulleessu",
+        "Filters, Reverse Osmosis & Chemicals",
+        "Reverse Osmosis",
+        "መጻረዪታትን ከሚካላትን",
+        "ማጣሪያዎችና የውሃ ኬሚካሎች"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +310,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-water-sanitation",
       "names": {
-        "en": "Specialized & Custom Water & Sanitation",
-        "am": "ልዩና ብጁ Water & Sanitation",
-        "om": "Kan Addaa fi Filatamaa Water & Sanitation",
-        "ti": "ፍሉይን ዝተዳለወን Water & Sanitation"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -285,7 +326,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Water",
+        "Kan Addaa fi Filatamaa Water & Sanitation",
+        "Sanitation",
+        "Specialized & Custom Water & Sanitation",
+        "ልዩና ብጁ Water & Sanitation",
+        "ፍሉይን ዝተዳለወን Water & Sanitation"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1279,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-rainwater-harvesting-services",
       "names": {
-        "en": "Specialized & Custom Rainwater Harvesting Services",
-        "am": "ልዩና ብጁ Rainwater Harvesting Services",
-        "om": "Kan Addaa fi Filatamaa Rainwater Harvesting Services",
-        "ti": "ፍሉይን ዝተዳለወን Rainwater Harvesting Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1295,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Rainwater Harvesting Services",
+        "Kan Addaa fi Filatamaa Rainwater Harvesting Services",
+        "Specialized & Custom Rainwater Harvesting Services",
+        "ልዩና ብጁ Rainwater Harvesting Services",
+        "ፍሉይን ዝተዳለወን Rainwater Harvesting Services"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1311,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-borehole-well-drilling-services",
       "names": {
-        "en": "Specialized & Custom Borehole & Well Drilling Services",
-        "am": "ልዩና ብጁ Borehole & Well Drilling Services",
-        "om": "Kan Addaa fi Filatamaa Borehole & Well Drilling Services",
-        "ti": "ፍሉይን ዝተዳለወን Borehole & Well Drilling Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1327,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Borehole",
+        "Kan Addaa fi Filatamaa Borehole & Well Drilling Services",
+        "Specialized & Custom Borehole & Well Drilling Services",
+        "Well Drilling Services",
+        "ልዩና ብጁ Borehole & Well Drilling Services",
+        "ፍሉይን ዝተዳለወን Borehole & Well Drilling Services"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1344,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-sanitation-supplies-equipment",
       "names": {
-        "en": "Specialized & Custom Sanitation Supplies & Equipment",
-        "am": "ልዩና ብጁ Sanitation Supplies & Equipment",
-        "om": "Kan Addaa fi Filatamaa Sanitation Supplies & Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Sanitation Supplies & Equipment"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1299,7 +1360,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sanitation Supplies",
+        "Equipment",
+        "Kan Addaa fi Filatamaa Sanitation Supplies & Equipment",
+        "Specialized & Custom Sanitation Supplies & Equipment",
+        "ልዩና ብጁ Sanitation Supplies & Equipment",
+        "ፍሉይን ዝተዳለወን Sanitation Supplies & Equipment"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1377,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-smart-water-meters",
       "names": {
-        "en": "Specialized & Custom Smart Water Meters",
-        "am": "ልዩና ብጁ Smart Water Meters",
-        "om": "Kan Addaa fi Filatamaa Smart Water Meters",
-        "ti": "ፍሉይን ዝተዳለወን Smart Water Meters"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1325,7 +1393,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Smart Water Meters",
+        "Kan Addaa fi Filatamaa Smart Water Meters",
+        "Specialized & Custom Smart Water Meters",
+        "ልዩና ብጁ Smart Water Meters",
+        "ፍሉይን ዝተዳለወን Smart Water Meters"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1409,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-wastewater-treatment",
       "names": {
-        "en": "Specialized & Custom Wastewater Treatment",
-        "am": "ልዩና ብጁ Wastewater Treatment",
-        "om": "Kan Addaa fi Filatamaa Wastewater Treatment",
-        "ti": "ፍሉይን ዝተዳለወን Wastewater Treatment"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1351,7 +1425,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Wastewater Treatment",
+        "Kan Addaa fi Filatamaa Wastewater Treatment",
+        "Specialized & Custom Wastewater Treatment",
+        "ልዩና ብጁ Wastewater Treatment",
+        "ፍሉይን ዝተዳለወን Wastewater Treatment"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1441,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-piping-bowsers-distribution",
       "names": {
-        "en": "Specialized & Custom Piping, Bowsers & Distribution",
-        "am": "ልዩና ብጁ Piping, Bowsers & Distribution",
-        "om": "Kan Addaa fi Filatamaa Piping, Bowsers & Distribution",
-        "ti": "ፍሉይን ዝተዳለወን Piping, Bowsers & Distribution"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1457,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bowsers",
+        "Custom Piping",
+        "Distribution",
+        "Kan Addaa fi Filatamaa Piping, Bowsers & Distribution",
+        "Specialized & Custom Piping, Bowsers & Distribution",
+        "ልዩና ብጁ Piping, Bowsers & Distribution",
+        "ፍሉይን ዝተዳለወን Piping, Bowsers & Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1475,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-microbiological-purity-testing",
       "names": {
-        "en": "Specialized & Custom Microbiological & Purity Testing",
-        "am": "ልዩና ብጁ Microbiological & Purity Testing",
-        "om": "Kan Addaa fi Filatamaa Microbiological & Purity Testing",
-        "ti": "ፍሉይን ዝተዳለወን Microbiological & Purity Testing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1491,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Microbiological",
+        "Kan Addaa fi Filatamaa Microbiological & Purity Testing",
+        "Purity Testing",
+        "Specialized & Custom Microbiological & Purity Testing",
+        "ልዩና ብጁ Microbiological & Purity Testing",
+        "ፍሉይን ዝተዳለወን Microbiological & Purity Testing"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1508,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-boreholes-tanks-treatment-plants",
       "names": {
-        "en": "Specialized & Custom Boreholes, Tanks & Treatment Plants",
-        "am": "ልዩና ብጁ Boreholes, Tanks & Treatment Plants",
-        "om": "Kan Addaa fi Filatamaa Boreholes, Tanks & Treatment Plants",
-        "ti": "ፍሉይን ዝተዳለወን Boreholes, Tanks & Treatment Plants"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1524,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Boreholes",
+        "Kan Addaa fi Filatamaa Boreholes, Tanks & Treatment Plants",
+        "Specialized & Custom Boreholes, Tanks & Treatment Plants",
+        "Tanks",
+        "Treatment Plants",
+        "ልዩና ብጁ Boreholes, Tanks & Treatment Plants",
+        "ፍሉይን ዝተዳለወን Boreholes, Tanks & Treatment Plants"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1542,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-filters-reverse-osmosis-chemicals",
       "names": {
-        "en": "Specialized & Custom Filters, Reverse Osmosis & Chemicals",
-        "am": "ልዩና ብጁ Filters, Reverse Osmosis & Chemicals",
-        "om": "Kan Addaa fi Filatamaa Filters, Reverse Osmosis & Chemicals",
-        "ti": "ፍሉይን ዝተዳለወን Filters, Reverse Osmosis & Chemicals"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1558,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chemicals",
+        "Custom Filters",
+        "Kan Addaa fi Filatamaa Filters, Reverse Osmosis & Chemicals",
+        "Reverse Osmosis",
+        "Specialized & Custom Filters, Reverse Osmosis & Chemicals",
+        "ልዩና ብጁ Filters, Reverse Osmosis & Chemicals",
+        "ፍሉይን ዝተዳለወን Filters, Reverse Osmosis & Chemicals"
+      ],
       "redirects": []
     }
   ]

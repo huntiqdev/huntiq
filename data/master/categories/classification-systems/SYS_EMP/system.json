@@ -9,5 +9,10 @@
   "description": "Formal corporate employment, careers, recruitment and professional vacancies",
   "icon": "Users",
   "display_order": 2,
-  "primary_root_slug": "workforce-employment"
+  "primary_root_slug": "workforce-employment",
+  "total_families": 1,
+  "total_categories": 174,
+  "families": [
+    "workforce-employment"
+  ]
 }

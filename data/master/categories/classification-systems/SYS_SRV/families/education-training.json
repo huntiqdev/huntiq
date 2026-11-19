@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "education-training",
       "names": {
-        "en": "Education & Training",
-        "am": "ትምህርትና ስልጠና",
-        "om": "Barnoota fi Leenjii",
-        "ti": "ትምህርትን ስልጠናን"
+        "en": "Education",
+        "am": "ትምህርት",
+        "om": "Barnoota",
+        "ti": "ትምህርት"
       },
       "description": "Early childhood, primary, secondary, higher education, vocational training, certification, tutoring.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barnoota fi Leenjii",
+        "Education & Training",
+        "Training",
+        "ትምህርትና ስልጠና",
+        "ትምህርትን ስልጠናን"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +119,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "educational-consulting",
       "names": {
-        "en": "Academic Advisory & Admissions",
-        "am": "የትምህርት ምደባና የማማከር አገልግሎት",
-        "om": "Gorsa Barnootaa fi Seensaa",
-        "ti": "ናይ ትምህርቲ ምኽርን ምዝገባን"
+        "en": "Academic Advisory",
+        "am": "የትምህርት ምደባ",
+        "om": "Gorsa Barnootaa",
+        "ti": "ናይ ትምህርቲ ምኽር"
       },
       "description": "",
       "level": 1,
@@ -129,7 +135,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Academic Advisory & Admissions",
+        "Admissions",
+        "Gorsa Barnootaa fi Seensaa",
+        "ናይ ትምህርቲ ምኽርን ምዝገባን",
+        "የትምህርት ምደባና የማማከር አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +151,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "educational-materials-equipment",
       "names": {
-        "en": "Classroom, Lab & Learning Materials",
-        "am": "የክፍል፣ የላብና የመማሪያ ቁሳቁሶች",
-        "om": "Meeshaalee Kutaa fi Qorannoo",
-        "ti": "ናይ ክፍሊ፣ ላቦራቶሪን መምሃሪ ናውትን"
+        "en": "Classroom Materials",
+        "am": "የክፍል፣ የላብ",
+        "om": "Meeshaalee Kutaa",
+        "ti": "ናይ ክፍሊ፣ ላቦራቶሪ"
       },
       "description": "",
       "level": 1,
@@ -155,7 +167,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Classroom, Lab & Learning Materials",
+        "Lab",
+        "Learning Materials",
+        "Meeshaalee Kutaa fi Qorannoo",
+        "ናይ ክፍሊ፣ ላቦራቶሪን መምሃሪ ናውትን",
+        "የክፍል፣ የላብና የመማሪያ ቁሳቁሶች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +184,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "higher-education-universities",
       "names": {
-        "en": "Higher Education & Universities",
-        "am": "ከፍተኛ ትምህርትና ዩኒቨርሲቲ",
+        "en": "Higher Education",
+        "am": "ከፍተኛ ትምህርት",
         "om": "Barnoota Ol'anaa",
-        "ti": "ከፍተኛ ትምህርቲን ዩኒቨርሲቲን"
+        "ti": "ከፍተኛ ትምህርቲ"
       },
       "description": "",
       "level": 1,
@@ -181,7 +200,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Higher Education & Universities",
+        "Universities",
+        "ከፍተኛ ትምህርቲን ዩኒቨርሲቲን",
+        "ከፍተኛ ትምህርትና ዩኒቨርሲቲ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +241,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "online-distance-education",
       "names": {
-        "en": "Online & Distance Education",
-        "am": "የመስመር ላይና የሩቅ ትምህርት",
+        "en": "Online",
+        "am": "የመስመር ላይ",
         "om": "Barnoota Sararaa",
-        "ti": "ናይ መስመር ላይን ናይ ሩሕን ትምህርቲ"
+        "ti": "ናይ መስመር ላይ"
       },
       "description": "",
       "level": 1,
@@ -233,7 +257,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Distance Education",
+        "Online & Distance Education",
+        "ናይ መስመር ላይን ናይ ሩሕን ትምህርቲ",
+        "የመስመር ላይና የሩቅ ትምህርት"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +272,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "primary-secondary-education",
       "names": {
-        "en": "Primary & Secondary Education",
-        "am": "የአንደኛና ሁለተኛ ደረጃ ትምህርት",
-        "om": "Barnoota Gabaabaa fi Gadi fageenyaa",
-        "ti": "ናይ ቀዳማይን ካልኣይን ደረጃ ትምህርት"
+        "en": "Primary",
+        "am": "የአንደኛ",
+        "om": "Barnoota Gabaabaa",
+        "ti": "ናይ ቀዳማይ"
       },
       "description": "",
       "level": 1,
@@ -259,7 +288,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barnoota Gabaabaa fi Gadi fageenyaa",
+        "Primary & Secondary Education",
+        "Secondary Education",
+        "ናይ ቀዳማይን ካልኣይን ደረጃ ትምህርት",
+        "የአንደኛና ሁለተኛ ደረጃ ትምህርት"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +330,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "professional-certification",
       "names": {
-        "en": "Professional Certification & Licensing",
-        "am": "የሙያ ምስክርነትና ፍቃድ",
+        "en": "Professional Certification",
+        "am": "የሙያ ምስክርነት",
         "om": "Hangaqabsa Ogeessummaa",
-        "ti": "ምስክርነትን ፍቓድን ሞያ"
+        "ti": "ምስክርነት"
       },
       "description": "",
       "level": 1,
@@ -311,7 +346,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Licensing",
+        "Professional Certification & Licensing",
+        "ምስክርነትን ፍቓድን ሞያ",
+        "የሙያ ምስክርነትና ፍቃድ"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +413,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "vocational-technical-training",
       "names": {
-        "en": "Vocational & Technical Training",
-        "am": "የሙያና የቴክኒክ ስልጠና",
+        "en": "Vocational",
+        "am": "የሙያ",
         "om": "Leenjii Teknikalaa",
-        "ti": "ሞያን ቴክኒካልን ስልጠና"
+        "ti": "ሞያ"
       },
       "description": "",
       "level": 1,
@@ -389,7 +429,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Technical Training",
+        "Vocational & Technical Training",
+        "ሞያን ቴክኒካልን ስልጠና",
+        "የሙያና የቴክኒክ ስልጠና"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +444,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-education-training",
       "names": {
-        "en": "Specialized & Custom Education & Training",
-        "am": "ልዩና ብጁ Education & Training",
-        "om": "Kan Addaa fi Filatamaa Education & Training",
-        "ti": "ፍሉይን ዝተዳለወን Education & Training"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -415,7 +460,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Education",
+        "Kan Addaa fi Filatamaa Education & Training",
+        "Specialized & Custom Education & Training",
+        "Training",
+        "ልዩና ብጁ Education & Training",
+        "ፍሉይን ዝተዳለወን Education & Training"
+      ],
       "redirects": []
     },
     {
@@ -1803,10 +1855,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-boarding-schools",
       "names": {
-        "en": "Specialized & Custom Boarding Schools",
-        "am": "ልዩና ብጁ Boarding Schools",
-        "om": "Kan Addaa fi Filatamaa Boarding Schools",
-        "ti": "ፍሉይን ዝተዳለወን Boarding Schools"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1819,7 +1871,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Boarding Schools",
+        "Kan Addaa fi Filatamaa Boarding Schools",
+        "Specialized & Custom Boarding Schools",
+        "ልዩና ብጁ Boarding Schools",
+        "ፍሉይን ዝተዳለወን Boarding Schools"
+      ],
       "redirects": []
     },
     {
@@ -1829,10 +1887,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-classroom-lab-learning-materials",
       "names": {
-        "en": "Specialized & Custom Classroom, Lab & Learning Materials",
-        "am": "ልዩና ብጁ Classroom, Lab & Learning Materials",
-        "om": "Kan Addaa fi Filatamaa Classroom, Lab & Learning Materials",
-        "ti": "ፍሉይን ዝተዳለወን Classroom, Lab & Learning Materials"
+        "en": "Specialized Materials",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1845,7 +1903,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Classroom",
+        "Kan Addaa fi Filatamaa Classroom, Lab & Learning Materials",
+        "Lab",
+        "Learning Materials",
+        "Specialized & Custom Classroom, Lab & Learning Materials",
+        "ልዩና ብጁ Classroom, Lab & Learning Materials",
+        "ፍሉይን ዝተዳለወን Classroom, Lab & Learning Materials"
+      ],
       "redirects": []
     },
     {
@@ -1855,10 +1921,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-higher-education-universities",
       "names": {
-        "en": "Specialized & Custom Higher Education & Universities",
-        "am": "ልዩና ብጁ Higher Education & Universities",
-        "om": "Kan Addaa fi Filatamaa Higher Education & Universities",
-        "ti": "ፍሉይን ዝተዳለወን Higher Education & Universities"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1871,7 +1937,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Higher Education",
+        "Kan Addaa fi Filatamaa Higher Education & Universities",
+        "Specialized & Custom Higher Education & Universities",
+        "Universities",
+        "ልዩና ብጁ Higher Education & Universities",
+        "ፍሉይን ዝተዳለወን Higher Education & Universities"
+      ],
       "redirects": []
     },
     {
@@ -1881,10 +1954,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-early-childhood-education",
       "names": {
-        "en": "Specialized & Custom Early Childhood Education",
-        "am": "ልዩና ብጁ Early Childhood Education",
-        "om": "Kan Addaa fi Filatamaa Early Childhood Education",
-        "ti": "ፍሉይን ዝተዳለወን Early Childhood Education"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1897,7 +1970,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Early Childhood Education",
+        "Kan Addaa fi Filatamaa Early Childhood Education",
+        "Specialized & Custom Early Childhood Education",
+        "ልዩና ብጁ Early Childhood Education",
+        "ፍሉይን ዝተዳለወን Early Childhood Education"
+      ],
       "redirects": []
     },
     {
@@ -1907,10 +1986,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-driving-training-schools",
       "names": {
-        "en": "Specialized & Custom Driving Training Schools",
-        "am": "ልዩና ብጁ Driving Training Schools",
-        "om": "Kan Addaa fi Filatamaa Driving Training Schools",
-        "ti": "ፍሉይን ዝተዳለወን Driving Training Schools"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1923,7 +2002,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Driving Training Schools",
+        "Kan Addaa fi Filatamaa Driving Training Schools",
+        "Specialized & Custom Driving Training Schools",
+        "ልዩና ብጁ Driving Training Schools",
+        "ፍሉይን ዝተዳለወን Driving Training Schools"
+      ],
       "redirects": []
     },
     {
@@ -1933,10 +2018,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-academic-advisory-admissions",
       "names": {
-        "en": "Specialized & Custom Academic Advisory & Admissions",
-        "am": "ልዩና ብጁ Academic Advisory & Admissions",
-        "om": "Kan Addaa fi Filatamaa Academic Advisory & Admissions",
-        "ti": "ፍሉይን ዝተዳለወን Academic Advisory & Admissions"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1949,7 +2034,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Admissions",
+        "Custom Academic Advisory",
+        "Kan Addaa fi Filatamaa Academic Advisory & Admissions",
+        "Specialized & Custom Academic Advisory & Admissions",
+        "ልዩና ብጁ Academic Advisory & Admissions",
+        "ፍሉይን ዝተዳለወን Academic Advisory & Admissions"
+      ],
       "redirects": []
     },
     {
@@ -1959,10 +2051,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-primary-secondary-education",
       "names": {
-        "en": "Specialized & Custom Primary & Secondary Education",
-        "am": "ልዩና ብጁ Primary & Secondary Education",
-        "om": "Kan Addaa fi Filatamaa Primary & Secondary Education",
-        "ti": "ፍሉይን ዝተዳለወን Primary & Secondary Education"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1975,7 +2067,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Primary",
+        "Kan Addaa fi Filatamaa Primary & Secondary Education",
+        "Secondary Education",
+        "Specialized & Custom Primary & Secondary Education",
+        "ልዩና ብጁ Primary & Secondary Education",
+        "ፍሉይን ዝተዳለወን Primary & Secondary Education"
+      ],
       "redirects": []
     },
     {
@@ -1985,10 +2084,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-language-training-courses",
       "names": {
-        "en": "Specialized & Custom Language Training Courses",
-        "am": "ልዩና ብጁ Language Training Courses",
-        "om": "Kan Addaa fi Filatamaa Language Training Courses",
-        "ti": "ፍሉይን ዝተዳለወን Language Training Courses"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2001,7 +2100,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Language Training Courses",
+        "Kan Addaa fi Filatamaa Language Training Courses",
+        "Specialized & Custom Language Training Courses",
+        "ልዩና ብጁ Language Training Courses",
+        "ፍሉይን ዝተዳለወን Language Training Courses"
+      ],
       "redirects": []
     },
     {
@@ -2011,10 +2116,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-online-distance-education",
       "names": {
-        "en": "Specialized & Custom Online & Distance Education",
-        "am": "ልዩና ብጁ Online & Distance Education",
-        "om": "Kan Addaa fi Filatamaa Online & Distance Education",
-        "ti": "ፍሉይን ዝተዳለወን Online & Distance Education"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2027,7 +2132,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Online",
+        "Distance Education",
+        "Kan Addaa fi Filatamaa Online & Distance Education",
+        "Specialized & Custom Online & Distance Education",
+        "ልዩና ብጁ Online & Distance Education",
+        "ፍሉይን ዝተዳለወን Online & Distance Education"
+      ],
       "redirects": []
     },
     {
@@ -2037,10 +2149,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-private-tutoring-services",
       "names": {
-        "en": "Specialized & Custom Private Tutoring Services",
-        "am": "ልዩና ብጁ Private Tutoring Services",
-        "om": "Kan Addaa fi Filatamaa Private Tutoring Services",
-        "ti": "ፍሉይን ዝተዳለወን Private Tutoring Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2053,7 +2165,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Private Tutoring Services",
+        "Kan Addaa fi Filatamaa Private Tutoring Services",
+        "Specialized & Custom Private Tutoring Services",
+        "ልዩና ብጁ Private Tutoring Services",
+        "ፍሉይን ዝተዳለወን Private Tutoring Services"
+      ],
       "redirects": []
     },
     {
@@ -2063,10 +2181,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-professional-certification-licensing",
       "names": {
-        "en": "Specialized & Custom Professional Certification & Licensing",
-        "am": "ልዩና ብጁ Professional Certification & Licensing",
-        "om": "Kan Addaa fi Filatamaa Professional Certification & Licensing",
-        "ti": "ፍሉይን ዝተዳለወን Professional Certification & Licensing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2079,7 +2197,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Professional Certification",
+        "Kan Addaa fi Filatamaa Professional Certification & Licensing",
+        "Licensing",
+        "Specialized & Custom Professional Certification & Licensing",
+        "ልዩና ብጁ Professional Certification & Licensing",
+        "ፍሉይን ዝተዳለወን Professional Certification & Licensing"
+      ],
       "redirects": []
     },
     {
@@ -2089,10 +2214,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-school-transport-services",
       "names": {
-        "en": "Specialized & Custom School Transport Services",
-        "am": "ልዩና ብጁ School Transport Services",
-        "om": "Kan Addaa fi Filatamaa School Transport Services",
-        "ti": "ፍሉይን ዝተዳለወን School Transport Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2105,7 +2230,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom School Transport Services",
+        "Kan Addaa fi Filatamaa School Transport Services",
+        "Specialized & Custom School Transport Services",
+        "ልዩና ብጁ School Transport Services",
+        "ፍሉይን ዝተዳለወን School Transport Services"
+      ],
       "redirects": []
     },
     {
@@ -2115,10 +2246,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-special-needs-education",
       "names": {
-        "en": "Specialized & Custom Special Needs Education",
-        "am": "ልዩና ብጁ Special Needs Education",
-        "om": "Kan Addaa fi Filatamaa Special Needs Education",
-        "ti": "ፍሉይን ዝተዳለወን Special Needs Education"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2131,7 +2262,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Special Needs Education",
+        "Kan Addaa fi Filatamaa Special Needs Education",
+        "Specialized & Custom Special Needs Education",
+        "ልዩና ብጁ Special Needs Education",
+        "ፍሉይን ዝተዳለወን Special Needs Education"
+      ],
       "redirects": []
     },
     {
@@ -2141,10 +2278,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-vocational-technical-training",
       "names": {
-        "en": "Specialized & Custom Vocational & Technical Training",
-        "am": "ልዩና ብጁ Vocational & Technical Training",
-        "om": "Kan Addaa fi Filatamaa Vocational & Technical Training",
-        "ti": "ፍሉይን ዝተዳለወን Vocational & Technical Training"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2157,7 +2294,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Vocational",
+        "Kan Addaa fi Filatamaa Vocational & Technical Training",
+        "Specialized & Custom Vocational & Technical Training",
+        "Technical Training",
+        "ልዩና ብጁ Vocational & Technical Training",
+        "ፍሉይን ዝተዳለወን Vocational & Technical Training"
+      ],
       "redirects": []
     },
     {

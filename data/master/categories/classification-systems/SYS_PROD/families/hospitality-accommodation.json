@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Hospitality & Accommodation",
-        "am": "እንግዳ ተቀባይነትና መስመር",
-        "om": "Kan Dhaabbatee fi Tajaajila",
-        "ti": "መስተንን እንግዳ ተቀባይነትን"
+        "en": "Hospitality",
+        "am": "እንግዳ ተቀባይነት",
+        "om": "Kan Dhaabbatee",
+        "ti": "መስተን"
       },
       "slug": "hospitality-accommodation",
       "description": "Hotels, lodges, guest houses, restaurants, catering, and hospitality services.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accommodation",
+        "Hospitality & Accommodation",
+        "Kan Dhaabbatee fi Tajaajila",
+        "መስተንን እንግዳ ተቀባይነትን",
+        "እንግዳ ተቀባይነትና መስመር"
+      ],
       "redirects": []
     },
     {
@@ -59,10 +65,10 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Conference & Meeting Venues",
-        "am": "የስብሰባና ጉባኤ ቦታዎች",
+        "en": "Conference",
+        "am": "የስብሰባ",
         "om": "Bakka Waliigaltee",
-        "ti": "ቦታታት ስብሓን ጉባኤን"
+        "ti": "ቦታታት ስብሓ"
       },
       "slug": "conference-venues",
       "description": "",
@@ -76,7 +82,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Conference & Meeting Venues",
+        "Meeting Venues",
+        "ቦታታት ስብሓን ጉባኤን",
+        "የስብሰባና ጉባኤ ቦታዎች"
+      ],
       "redirects": []
     },
     {
@@ -189,10 +200,10 @@
       "parent_code": "conference-venues",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Conference & Meeting Venues",
-        "am": "ሌሎች የስብሰባና ጉባኤ ቦታዎች",
+        "en": "Other Conference",
+        "am": "ሌሎች የስብሰባ",
         "om": "Bakka Waliigaltee Biroo",
-        "ti": "ካልኦት ቦታታት ስብሓን ጉባኤን"
+        "ti": "ካልኦት ቦታታት ስብሓ"
       },
       "slug": "other-conference-venues",
       "description": null,
@@ -206,7 +217,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Meeting Venues",
+        "Other Conference & Meeting Venues",
+        "ሌሎች የስብሰባና ጉባኤ ቦታዎች",
+        "ካልኦት ቦታታት ስብሓን ጉባኤን"
+      ],
       "redirects": []
     },
     {
@@ -215,10 +231,10 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Eco-Lodges & Resorts",
-        "am": "ኢኮ-ሎጅና ሪሰርቶች",
-        "om": "Loojii fi Resorts",
-        "ti": "ኢኮ-ሎጅን ሪሰርትን"
+        "en": "Eco-Lodges",
+        "am": "ኢኮ-ሎጅ",
+        "om": "Loojii",
+        "ti": "ኢኮ-ሎጅ"
       },
       "slug": "eco-lodges-resorts",
       "description": "",
@@ -232,7 +248,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Eco-Lodges & Resorts",
+        "Loojii fi Resorts",
+        "Resorts",
+        "ኢኮ-ሎጅና ሪሰርቶች",
+        "ኢኮ-ሎጅን ሪሰርትን"
+      ],
       "redirects": []
     },
     {
@@ -345,10 +367,10 @@
       "parent_code": "eco-lodges-resorts",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Eco-Lodges & Resorts",
-        "am": "ሌሎች ኢኮ-ሎጅና ሪሰርቶች",
-        "om": "Loojii fi Resorts Biroo",
-        "ti": "ካልኦት ኢኮ-ሎጅን ሪሰርትን"
+        "en": "Other Eco-Lodges",
+        "am": "ሌሎች ኢኮ-ሎጅ",
+        "om": "Loojii",
+        "ti": "ካልኦት ኢኮ-ሎጅ"
       },
       "slug": "other-eco-lodges-resorts",
       "description": null,
@@ -362,7 +384,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Loojii fi Resorts Biroo",
+        "Other Eco-Lodges & Resorts",
+        "Resorts",
+        "ሌሎች ኢኮ-ሎጅና ሪሰርቶች",
+        "ካልኦት ኢኮ-ሎጅን ሪሰርትን"
+      ],
       "redirects": []
     },
     {
@@ -527,10 +555,10 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Food & Beverage Services",
-        "am": "የምግብና መጠጥ አገልግሎት",
+        "en": "Food Services",
+        "am": "የምግብ",
         "om": "Tajaajila Nyaataa",
-        "ti": "ኣገልግሎት ምግቢን መስተን"
+        "ti": "ኣገልግሎት ምግቢ"
       },
       "slug": "food-beverage-services",
       "description": "",
@@ -544,7 +572,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Beverage Services",
+        "Food & Beverage Services",
+        "ኣገልግሎት ምግቢን መስተን",
+        "የምግብና መጠጥ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -657,10 +690,10 @@
       "parent_code": "food-beverage-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Food & Beverage Services",
-        "am": "ሌሎች የምግብና መጠጥ አገልግሎት",
+        "en": "Other Food Services",
+        "am": "ሌሎች የምግብ",
         "om": "Tajaajila Nyaataa Biroo",
-        "ti": "ካልኦት ኣገልግሎት ምግቢን መስተን"
+        "ti": "ካልኦት ኣገልግሎት ምግቢ"
       },
       "slug": "other-food-beverage-services",
       "description": null,
@@ -674,7 +707,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Beverage Services",
+        "Other Food & Beverage Services",
+        "ሌሎች የምግብና መጠጥ አገልግሎት",
+        "ካልኦት ኣገልግሎት ምግቢን መስተን"
+      ],
       "redirects": []
     },
     {
@@ -995,10 +1033,10 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Hotels & Guest Houses",
-        "am": "ሆቴሎችና የእንግዳ ቤቶች",
-        "om": "Hoteela fi Mana Yaabbii",
-        "ti": "ሆቴላትን ቤታት እንግዳን"
+        "en": "Hotels",
+        "am": "ሆቴሎች",
+        "om": "Hoteela",
+        "ti": "ሆቴላት"
       },
       "slug": "hotels-guest-houses",
       "description": "",
@@ -1012,7 +1050,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guest Houses",
+        "Hoteela fi Mana Yaabbii",
+        "Hotels & Guest Houses",
+        "ሆቴላትን ቤታት እንግዳን",
+        "ሆቴሎችና የእንግዳ ቤቶች"
+      ],
       "redirects": []
     },
     {
@@ -1125,10 +1169,10 @@
       "parent_code": "hotels-guest-houses",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Hotels & Guest Houses",
-        "am": "ሌሎች ሆቴሎችና የእንግዳ ቤቶች",
-        "om": "Hoteela fi Mana Yaabbii Biroo",
-        "ti": "ካልኦት ሆቴላትን ቤታት እንግዳን"
+        "en": "Other Hotels",
+        "am": "ሌሎች ሆቴሎች",
+        "om": "Hoteela",
+        "ti": "ካልኦት ሆቴላት"
       },
       "slug": "other-hotels-guest-houses",
       "description": null,
@@ -1142,7 +1186,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guest Houses",
+        "Hoteela fi Mana Yaabbii Biroo",
+        "Other Hotels & Guest Houses",
+        "ሌሎች ሆቴሎችና የእንግዳ ቤቶች",
+        "ካልኦት ሆቴላትን ቤታት እንግዳን"
+      ],
       "redirects": []
     },
     {
@@ -1151,10 +1201,10 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Restaurant & Catering Services",
-        "am": "የሬስቶራንትና የካቲሪንግ አገልግሎት",
+        "en": "Restaurant Services",
+        "am": "የሬስቶራንት",
         "om": "Tajaajila Mana Nyaataa",
-        "ti": "ኣገልግሎት ሬስቶራንትን ካቲሪንግን"
+        "ti": "ኣገልግሎት ሬስቶራንት"
       },
       "slug": "restaurant-services",
       "description": "",
@@ -1168,7 +1218,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Catering Services",
+        "Restaurant & Catering Services",
+        "ኣገልግሎት ሬስቶራንትን ካቲሪንግን",
+        "የሬስቶራንትና የካቲሪንግ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -1281,10 +1336,10 @@
       "parent_code": "restaurant-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Restaurant & Catering Services",
-        "am": "ሌሎች የሬስቶራንትና የካቲሪንግ አገልግሎት",
+        "en": "Other Restaurant Services",
+        "am": "ሌሎች የሬስቶራንት",
         "om": "Tajaajila Mana Nyaataa Biroo",
-        "ti": "ካልኦት ኣገልግሎት ሬስቶራንትን ካቲሪንግን"
+        "ti": "ካልኦት ኣገልግሎት ሬስቶራንት"
       },
       "slug": "other-restaurant-services",
       "description": null,
@@ -1298,7 +1353,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Catering Services",
+        "Other Restaurant & Catering Services",
+        "ሌሎች የሬስቶራንትና የካቲሪንግ አገልግሎት",
+        "ካልኦት ኣገልግሎት ሬስቶራንትን ካቲሪንግን"
+      ],
       "redirects": []
     },
     {
@@ -1307,7 +1367,7 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Hotel Spa & Wellness",
+        "en": "Hotel Spa",
         "am": "ሆቴል ስፓ",
         "om": "Spa Hoteelaa",
         "ti": "ስፓ ሆቴል"
@@ -1324,7 +1384,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hotel Spa & Wellness",
+        "Wellness"
+      ],
       "redirects": []
     },
     {
@@ -1437,7 +1500,7 @@
       "parent_code": "spa-wellness-hotel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Hotel Spa & Wellness",
+        "en": "Other Hotel Spa",
         "am": "ሌሎች ሆቴል ስፓ",
         "om": "Spa Hoteelaa Biroo",
         "ti": "ካልኦት ስፓ ሆቴል"
@@ -1454,7 +1517,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Hotel Spa & Wellness",
+        "Wellness"
+      ],
       "redirects": []
     },
     {
@@ -1463,10 +1529,10 @@
       "parent_code": "hospitality-accommodation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Hospitality & Accommodation",
-        "am": "ሌሎች እንግዳ ተቀባይነትና መስመር",
-        "om": "Kan Dhaabbatee fi Tajaajila Biroo",
-        "ti": "ካልኦት መስተንን እንግዳ ተቀባይነትን"
+        "en": "Other Hospitality",
+        "am": "ሌሎች እንግዳ ተቀባይነት",
+        "om": "Kan Dhaabbatee",
+        "ti": "ካልኦት መስተን"
       },
       "slug": "other-hospitality-accommodation",
       "description": null,
@@ -1480,7 +1546,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accommodation",
+        "Kan Dhaabbatee fi Tajaajila Biroo",
+        "Other Hospitality & Accommodation",
+        "ሌሎች እንግዳ ተቀባይነትና መስመር",
+        "ካልኦት መስተንን እንግዳ ተቀባይነትን"
+      ],
       "redirects": []
     }
   ]

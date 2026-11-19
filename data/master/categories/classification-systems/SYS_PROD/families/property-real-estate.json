@@ -52,10 +52,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Property & Real Estate",
-        "am": "ንብረትና ዘርፍ",
-        "om": "Qabeenya fi Manneen",
-        "ti": "ንብረትን ገዛውንትን"
+        "en": "Property",
+        "am": "ንብረት",
+        "om": "Qabeenya",
+        "ti": "ንብረት"
       },
       "slug": "property-real-estate",
       "description": "Residential, commercial, industrial, agricultural property; land; development; brokerage; management.",
@@ -70,24 +70,33 @@
       "meta_title": null,
       "meta_description": null,
       "aliases": [
-        "house",
-        "home",
+        "Estates",
+        "Homes",
+        "Housing",
+        "Property & Real Estate",
+        "Qabeenya fi Manneen",
+        "Real Estate",
+        "Real Estate & Property",
+        "Realty",
         "apartment",
         "condominium",
-        "villa",
-        "rent",
-        "ቤት",
-        "አፓርታማ",
-        "ኮንዶሚኒየም",
-        "ቪላ",
-        "ኪራይ",
-        "ሽያጭ",
-        "mana",
-        "kondoominiyeemii",
+        "home",
+        "house",
         "kireeffannaa",
-        "ገዛ",
+        "kondoominiyeemii",
+        "mana",
+        "rent",
+        "villa",
+        "ሽያጭ",
+        "ቤት",
+        "ቪላ",
+        "ንብረትና ዘርፍ",
+        "ንብረትን ገዛውንትን",
+        "አፓርታማ",
+        "ኪራይ",
+        "ክራይ",
         "ኮንዶሚኒየም",
-        "ክራይ"
+        "ገዛ"
       ],
       "redirects": []
     },
@@ -97,8 +106,8 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Agricultural Land & Farmland",
-        "am": "የግብርና መሬት",
+        "en": "Agricultural Land",
+        "am": "የግብር",
         "om": "Lafa Qonnaa",
         "ti": "ናይ ሕርሻ መሬት"
       },
@@ -114,7 +123,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agricultural Land & Farmland",
+        "Farmland",
+        "የግብርና መሬት"
+      ],
       "redirects": []
     },
     {
@@ -227,8 +240,8 @@
       "parent_code": "agricultural-land-farmland",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Agricultural Land & Farmland",
-        "am": "ሌሎች የግብርና መሬት",
+        "en": "Other Agricultural Land",
+        "am": "ሌሎች የግብር",
         "om": "Lafa Qonnaa Biroo",
         "ti": "ካልኦት ናይ ሕርሻ መሬት"
       },
@@ -244,7 +257,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Farmland",
+        "Other Agricultural Land & Farmland",
+        "ሌሎች የግብርና መሬት"
+      ],
       "redirects": []
     },
     {
@@ -461,10 +478,10 @@
       "parent_code": "commercial-retail-space",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Shops & Boutiques",
-        "am": "ሱቆችና ቡቲኮች",
-        "om": "Suuqii fi Boutique",
-        "ti": "ሱቅን ቡቲክን"
+        "en": "Shops",
+        "am": "ሱቆች",
+        "om": "Suuqii",
+        "ti": "ሱቅ"
       },
       "slug": "shops-boutiques",
       "description": "",
@@ -478,7 +495,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boutiques",
+        "Shops & Boutiques",
+        "Suuqii fi Boutique",
+        "ሱቅን ቡቲክን",
+        "ሱቆችና ቡቲኮች"
+      ],
       "redirects": []
     },
     {
@@ -695,10 +718,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Industrial Property & Warehouses",
-        "am": "የኢንዱስትሪ ንብረትና መጋዘኖች",
-        "om": "Industirii fi Kuusaa",
-        "ti": "ኢንዱስትሪ ንብረትን መጋዘናትን"
+        "en": "Industrial Property",
+        "am": "የኢንዱስትሪ ንብረት",
+        "om": "Industirii",
+        "ti": "ኢንዱስትሪ ንብረት"
       },
       "slug": "industrial-property-warehouses",
       "description": "",
@@ -712,7 +735,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industirii fi Kuusaa",
+        "Industrial Property & Warehouses",
+        "Warehouses",
+        "ኢንዱስትሪ ንብረትን መጋዘናትን",
+        "የኢንዱስትሪ ንብረትና መጋዘኖች"
+      ],
       "redirects": []
     },
     {
@@ -825,10 +854,10 @@
       "parent_code": "industrial-property-warehouses",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Industrial Property & Warehouses",
-        "am": "ሌሎች የኢንዱስትሪ ንብረትና መጋዘኖች",
-        "om": "Industirii fi Kuusaa Biroo",
-        "ti": "ካልኦት ኢንዱስትሪ ንብረትን መጋዘናትን"
+        "en": "Other Industrial Property",
+        "am": "ሌሎች የኢንዱስትሪ ንብረት",
+        "om": "Industirii",
+        "ti": "ካልኦት ኢንዱስትሪ ንብረት"
       },
       "slug": "other-industrial-property-warehouses",
       "description": null,
@@ -842,7 +871,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industirii fi Kuusaa Biroo",
+        "Other Industrial Property & Warehouses",
+        "Warehouses",
+        "ሌሎች የኢንዱስትሪ ንብረትና መጋዘኖች",
+        "ካልኦት ኢንዱስትሪ ንብረትን መጋዘናትን"
+      ],
       "redirects": []
     },
     {
@@ -851,10 +886,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Land, Plots & Development",
-        "am": "መሬትና ልማት",
-        "om": "Lafa fi Misoomuu",
-        "ti": "መሬትን ምሕራድን"
+        "en": "Land",
+        "am": "መሬት",
+        "om": "Lafa",
+        "ti": "መሬት"
       },
       "slug": "land-plots-development",
       "description": "",
@@ -868,7 +903,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Development",
+        "Lafa fi Misoomuu",
+        "Land, Plots & Development",
+        "Plots",
+        "መሬትና ልማት",
+        "መሬትን ምሕራድን"
+      ],
       "redirects": []
     },
     {
@@ -981,10 +1023,10 @@
       "parent_code": "land-plots-development",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Land, Plots & Development",
-        "am": "ሌሎች መሬትና ልማት",
-        "om": "Lafa fi Misoomuu Biroo",
-        "ti": "ካልኦት መሬትን ምሕራድን"
+        "en": "Other Land",
+        "am": "ሌሎች መሬት",
+        "om": "Lafa",
+        "ti": "ካልኦት መሬት"
       },
       "slug": "other-land-plots-development",
       "description": null,
@@ -998,7 +1040,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Development",
+        "Lafa fi Misoomuu Biroo",
+        "Other Land, Plots & Development",
+        "Plots",
+        "ሌሎች መሬትና ልማት",
+        "ካልኦት መሬትን ምሕራድን"
+      ],
       "redirects": []
     },
     {
@@ -1007,10 +1056,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Mortgage & Financing Services",
-        "am": "የቤት ብድርና ፋይናንስ",
+        "en": "Mortgage Services",
+        "am": "የቤት ብድር",
         "om": "Baazii Mana",
-        "ti": "ምውያድን ፋይናንስን"
+        "ti": "ምውያድ"
       },
       "slug": "mortgage-financing-services",
       "description": "",
@@ -1024,7 +1073,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Financing Services",
+        "Mortgage & Financing Services",
+        "ምውያድን ፋይናንስን",
+        "የቤት ብድርና ፋይናንስ"
+      ],
       "redirects": []
     },
     {
@@ -1111,10 +1165,10 @@
       "parent_code": "mortgage-financing-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Mortgage & Financing Services",
-        "am": "ሌሎች የቤት ብድርና ፋይናንስ",
+        "en": "Other Mortgage Services",
+        "am": "ሌሎች የቤት ብድር",
         "om": "Baazii Mana Biroo",
-        "ti": "ካልኦት ምውያድን ፋይናንስን"
+        "ti": "ካልኦት ምውያድ"
       },
       "slug": "other-mortgage-financing-services",
       "description": null,
@@ -1128,7 +1182,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Financing Services",
+        "Other Mortgage & Financing Services",
+        "ሌሎች የቤት ብድርና ፋይናንስ",
+        "ካልኦት ምውያድን ፋይናንስን"
+      ],
       "redirects": []
     },
     {
@@ -1137,10 +1196,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Brokerage & Agency Services",
-        "am": "የደላላና ወኪል አገልግሎቶች",
-        "om": "Tajaajila Dilaalaa fi Bakka Bu'iinsaa",
-        "ti": "ኣገልግሎት ደላሎን ወከልትን"
+        "en": "Brokerage Services",
+        "am": "የደላላ",
+        "om": "Tajaajila Dilaalaa",
+        "ti": "ኣገልግሎት ደላሎ"
       },
       "slug": "property-brokerage-agency",
       "description": "",
@@ -1154,7 +1213,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agency Services",
+        "Brokerage & Agency Services",
+        "Tajaajila Dilaalaa fi Bakka Bu'iinsaa",
+        "ኣገልግሎት ደላሎን ወከልትን",
+        "የደላላና ወኪል አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -1267,10 +1332,10 @@
       "parent_code": "property-brokerage-agency",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Brokerage & Agency Services",
-        "am": "ሌሎች የደላላና ወኪል አገልግሎቶች",
-        "om": "Tajaajila Dilaalaa fi Bakka Bu'iinsaa Biroo",
-        "ti": "ካልኦት ኣገልግሎት ደላሎን ወከልትን"
+        "en": "Other Brokerage Services",
+        "am": "ሌሎች የደላላ",
+        "om": "Tajaajila Dilaalaa",
+        "ti": "ካልኦት ኣገልግሎት ደላሎ"
       },
       "slug": "other-property-brokerage-agency",
       "description": null,
@@ -1284,7 +1349,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agency Services",
+        "Other Brokerage & Agency Services",
+        "Tajaajila Dilaalaa fi Bakka Bu'iinsaa Biroo",
+        "ሌሎች የደላላና ወኪል አገልግሎቶች",
+        "ካልኦት ኣገልግሎት ደላሎን ወከልትን"
+      ],
       "redirects": []
     },
     {
@@ -1293,10 +1364,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Real Estate & Land Development",
-        "am": "የሪል እስቴትና መሬት ልማት",
-        "om": "Misooma Qabeenya fi Lafaa",
-        "ti": "ልምዓት ሪል እስቴትን መሬትን"
+        "en": "Real Estate",
+        "am": "የሪል እስቴት",
+        "om": "Misooma Qabeenya",
+        "ti": "ልምዓት ሪል እስቴት"
       },
       "slug": "property-development",
       "description": "",
@@ -1310,7 +1381,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Land Development",
+        "Misooma Qabeenya fi Lafaa",
+        "Real Estate & Land Development",
+        "ልምዓት ሪል እስቴትን መሬትን",
+        "የሪል እስቴትና መሬት ልማት"
+      ],
       "redirects": []
     },
     {
@@ -1423,10 +1500,10 @@
       "parent_code": "property-development",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Real Estate & Land Development",
-        "am": "ሌሎች የሪል እስቴትና መሬት ልማት",
-        "om": "Misooma Qabeenya fi Lafaa Biroo",
-        "ti": "ካልኦት ልምዓት ሪል እስቴትን መሬትን"
+        "en": "Other Real Estate",
+        "am": "ሌሎች የሪል እስቴት",
+        "om": "Misooma Qabeenya",
+        "ti": "ካልኦት ልምዓት ሪል እስቴት"
       },
       "slug": "other-property-development",
       "description": null,
@@ -1440,7 +1517,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Land Development",
+        "Misooma Qabeenya fi Lafaa Biroo",
+        "Other Real Estate & Land Development",
+        "ሌሎች የሪል እስቴትና መሬት ልማት",
+        "ካልኦት ልምዓት ሪል እስቴትን መሬትን"
+      ],
       "redirects": []
     },
     {
@@ -1449,10 +1532,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Title & Property Insurance",
-        "am": "የካርታና የንብረት ኢንሹራንስ",
-        "om": "Inshuraansii Kaartaa fi Qabeenyaa",
-        "ti": "ኢንሹራንስ ካርታን ንብረትን"
+        "en": "Title",
+        "am": "የካርታ",
+        "om": "Inshuraansii Kaartaa",
+        "ti": "ኢንሹራንስ ካርታ"
       },
       "slug": "property-insurance-services",
       "description": "",
@@ -1466,7 +1549,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Inshuraansii Kaartaa fi Qabeenyaa",
+        "Property Insurance",
+        "Title & Property Insurance",
+        "ኢንሹራንስ ካርታን ንብረትን",
+        "የካርታና የንብረት ኢንሹራንስ"
+      ],
       "redirects": []
     },
     {
@@ -1553,10 +1642,10 @@
       "parent_code": "property-insurance-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Title & Property Insurance",
-        "am": "ሌሎች የካርታና የንብረት ኢንሹራንስ",
-        "om": "Inshuraansii Kaartaa fi Qabeenyaa Biroo",
-        "ti": "ካልኦት ኢንሹራንስ ካርታን ንብረትን"
+        "en": "Other Title",
+        "am": "ሌሎች የካርታ",
+        "om": "Inshuraansii Kaartaa",
+        "ti": "ካልኦት ኢንሹራንስ ካርታ"
       },
       "slug": "other-property-insurance-services",
       "description": null,
@@ -1570,7 +1659,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Inshuraansii Kaartaa fi Qabeenyaa Biroo",
+        "Other Title & Property Insurance",
+        "Property Insurance",
+        "ሌሎች የካርታና የንብረት ኢንሹራንስ",
+        "ካልኦት ኢንሹራንስ ካርታን ንብረትን"
+      ],
       "redirects": []
     },
     {
@@ -1579,10 +1674,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Legal, Title Deed & Notary",
-        "am": "ህጋዊ፣ የባለቤትነት ካርታና ኖተሪ",
+        "en": "Legal",
+        "am": "ህጋዊ፣ የባለቤትነት ካርታ",
         "om": "Heera, Kaartaa Abbaa Qabeenyummaa",
-        "ti": "ሕጋዊ ሰነዳትን ካርታን"
+        "ti": "ሕጋዊ ሰነዳት"
       },
       "slug": "property-legal-documentation",
       "description": "",
@@ -1596,7 +1691,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Legal, Title Deed & Notary",
+        "Notary",
+        "Title Deed",
+        "ህጋዊ፣ የባለቤትነት ካርታና ኖተሪ",
+        "ሕጋዊ ሰነዳትን ካርታን"
+      ],
       "redirects": []
     },
     {
@@ -1683,10 +1784,10 @@
       "parent_code": "property-legal-documentation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Legal, Title Deed & Notary",
-        "am": "ሌሎች ህጋዊ፣ የባለቤትነት ካርታና ኖተሪ",
+        "en": "Other Legal",
+        "am": "ሌሎች ህጋዊ፣ የባለቤትነት ካርታ",
         "om": "Heera, Kaartaa Abbaa Qabeenyummaa Biroo",
-        "ti": "ካልኦት ሕጋዊ ሰነዳትን ካርታን"
+        "ti": "ካልኦት ሕጋዊ ሰነዳት"
       },
       "slug": "other-property-legal-documentation",
       "description": null,
@@ -1700,7 +1801,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Notary",
+        "Other Legal, Title Deed & Notary",
+        "Title Deed",
+        "ሌሎች ህጋዊ፣ የባለቤትነት ካርታና ኖተሪ",
+        "ካልኦት ሕጋዊ ሰነዳትን ካርታን"
+      ],
       "redirects": []
     },
     {
@@ -1709,10 +1816,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Building Maintenance & Renovation",
-        "am": "የህንፃ ጥገናና እድሳት",
-        "om": "Suphaa fi Haaromsa Gamoo",
-        "ti": "ጽገናን ሓድሽ ምግባርን ህንጻታት"
+        "en": "Building Maintenance",
+        "am": "የህንፃ ጥገና",
+        "om": "Suphaa",
+        "ti": "ጽገና"
       },
       "slug": "property-maintenance-services",
       "description": "",
@@ -1726,7 +1833,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Building Maintenance & Renovation",
+        "Renovation",
+        "Suphaa fi Haaromsa Gamoo",
+        "የህንፃ ጥገናና እድሳት",
+        "ጽገናን ሓድሽ ምግባርን ህንጻታት"
+      ],
       "redirects": []
     },
     {
@@ -1813,10 +1926,10 @@
       "parent_code": "property-maintenance-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Building Maintenance & Renovation",
-        "am": "ሌሎች የህንፃ ጥገናና እድሳት",
-        "om": "Suphaa fi Haaromsa Gamoo Biroo",
-        "ti": "ካልኦት ጽገናን ሓድሽ ምግባርን ህንጻታት"
+        "en": "Other Building Maintenance",
+        "am": "ሌሎች የህንፃ ጥገና",
+        "om": "Suphaa",
+        "ti": "ካልኦት ጽገና"
       },
       "slug": "other-property-maintenance-services",
       "description": null,
@@ -1830,7 +1943,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Building Maintenance & Renovation",
+        "Renovation",
+        "Suphaa fi Haaromsa Gamoo Biroo",
+        "ሌሎች የህንፃ ጥገናና እድሳት",
+        "ካልኦት ጽገናን ሓድሽ ምግባርን ህንጻታት"
+      ],
       "redirects": []
     },
     {
@@ -1839,10 +1958,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Facility & Estate Management",
-        "am": "የተቋማትና ግቢ አስተዳደር",
-        "om": "Bulchiinsa Dhaabbilee fi Mooraa",
-        "ti": "ምሕደራ ትካላትን ህንጻታትን"
+        "en": "Facility",
+        "am": "የተቋማት",
+        "om": "Bulchiinsa Dhaabbilee",
+        "ti": "ምሕደራ ትካላት"
       },
       "slug": "property-management-services",
       "description": "",
@@ -1856,7 +1975,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bulchiinsa Dhaabbilee fi Mooraa",
+        "Estate Management",
+        "Facility & Estate Management",
+        "ምሕደራ ትካላትን ህንጻታትን",
+        "የተቋማትና ግቢ አስተዳደር"
+      ],
       "redirects": []
     },
     {
@@ -1969,10 +2094,10 @@
       "parent_code": "property-management-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Facility & Estate Management",
-        "am": "ሌሎች የተቋማትና ግቢ አስተዳደር",
-        "om": "Bulchiinsa Dhaabbilee fi Mooraa Biroo",
-        "ti": "ካልኦት ምሕደራ ትካላትን ህንጻታትን"
+        "en": "Other Facility",
+        "am": "ሌሎች የተቋማት",
+        "om": "Bulchiinsa Dhaabbilee",
+        "ti": "ካልኦት ምሕደራ ትካላት"
       },
       "slug": "other-property-management-services",
       "description": null,
@@ -1986,7 +2111,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bulchiinsa Dhaabbilee fi Mooraa Biroo",
+        "Estate Management",
+        "Other Facility & Estate Management",
+        "ሌሎች የተቋማትና ግቢ አስተዳደር",
+        "ካልኦት ምሕደራ ትካላትን ህንጻታትን"
+      ],
       "redirects": []
     },
     {
@@ -1995,10 +2126,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Valuation, Survey & Appraisal",
-        "am": "የንብረት ግመታና ሰርቬይ",
-        "om": "Tilmaama fi Sakatta'a Qabeenyaa",
-        "ti": "ግምገማን መጽናዕትን ንብረት"
+        "en": "Valuation",
+        "am": "የንብረት ግመታ",
+        "om": "Tilmaama",
+        "ti": "ግምገማ"
       },
       "slug": "property-valuation-surveying",
       "description": "",
@@ -2012,7 +2143,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appraisal",
+        "Survey",
+        "Tilmaama fi Sakatta'a Qabeenyaa",
+        "Valuation, Survey & Appraisal",
+        "የንብረት ግመታና ሰርቬይ",
+        "ግምገማን መጽናዕትን ንብረት"
+      ],
       "redirects": []
     },
     {
@@ -2125,10 +2263,10 @@
       "parent_code": "property-valuation-surveying",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Valuation, Survey & Appraisal",
-        "am": "ሌሎች የንብረት ግመታና ሰርቬይ",
-        "om": "Tilmaama fi Sakatta'a Qabeenyaa Biroo",
-        "ti": "ካልኦት ግምገማን መጽናዕትን ንብረት"
+        "en": "Other Valuation",
+        "am": "ሌሎች የንብረት ግመታ",
+        "om": "Tilmaama",
+        "ti": "ካልኦት ግምገማ"
       },
       "slug": "other-property-valuation-surveying",
       "description": null,
@@ -2142,7 +2280,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appraisal",
+        "Other Valuation, Survey & Appraisal",
+        "Survey",
+        "Tilmaama fi Sakatta'a Qabeenyaa Biroo",
+        "ሌሎች የንብረት ግመታና ሰርቬይ",
+        "ካልኦት ግምገማን መጽናዕትን ንብረት"
+      ],
       "redirects": []
     },
     {
@@ -2151,10 +2296,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Residential Apartments & Condominiums",
-        "am": "የመኖሪያ አፓርታማና ኮንዶ",
-        "om": "Appaartaamaa fi Kondoominiyeemii",
-        "ti": "ኣፓርታማን ኮንዶሚኒየምን"
+        "en": "Residential Apartments",
+        "am": "የመኖሪያ አፓርታማ",
+        "om": "Appaartaamaa",
+        "ti": "ኣፓርታማ"
       },
       "slug": "residential-apartments-condos",
       "description": "",
@@ -2168,7 +2313,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appaartaamaa fi Kondoominiyeemii",
+        "Condominiums",
+        "Residential Apartments & Condominiums",
+        "ኣፓርታማን ኮንዶሚኒየምን",
+        "የመኖሪያ አፓርታማና ኮንዶ"
+      ],
       "redirects": []
     },
     {
@@ -2307,10 +2458,10 @@
       "parent_code": "residential-apartments-condos",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Residential Apartments & Condominiums",
-        "am": "ሌሎች የመኖሪያ አፓርታማና ኮንዶ",
-        "om": "Appaartaamaa fi Kondoominiyeemii Biroo",
-        "ti": "ካልኦት ኣፓርታማን ኮንዶሚኒየምን"
+        "en": "Other Residential Apartments",
+        "am": "ሌሎች የመኖሪያ አፓርታማ",
+        "om": "Appaartaamaa",
+        "ti": "ካልኦት ኣፓርታማ"
       },
       "slug": "other-residential-apartments-condos",
       "description": null,
@@ -2324,7 +2475,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Appaartaamaa fi Kondoominiyeemii Biroo",
+        "Condominiums",
+        "Other Residential Apartments & Condominiums",
+        "ሌሎች የመኖሪያ አፓርታማና ኮንዶ",
+        "ካልኦት ኣፓርታማን ኮንዶሚኒየምን"
+      ],
       "redirects": []
     },
     {
@@ -2333,10 +2490,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Residential Houses & Villas",
-        "am": "የመኖሪያ ቤቶችና ቪላዎች",
-        "om": "Manneen fi Viillaa",
-        "ti": "ናይ መንበሪ ገዛታትን ቪላታትን"
+        "en": "Houses",
+        "am": "የመኖሪያ ቤቶች",
+        "om": "Manneen",
+        "ti": "ናይ መንበሪ ገዛታት"
       },
       "slug": "residential-houses-villas",
       "description": "",
@@ -2350,7 +2507,17 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compound Houses",
+        "Homes",
+        "Houses & Villas",
+        "Manneen fi Viillaa",
+        "Residential Houses",
+        "Residential Houses & Villas",
+        "Villas",
+        "ናይ መንበሪ ገዛታትን ቪላታትን",
+        "የመኖሪያ ቤቶችና ቪላዎች"
+      ],
       "redirects": []
     },
     {
@@ -2437,10 +2604,10 @@
       "parent_code": "residential-houses-villas",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Villas & Compounds",
-        "am": "ቪላዎችና ውስን ድርቅ",
-        "om": "Viillaa fi Kompaawundii",
-        "ti": "ቪላታትን ኮምፓውንድን"
+        "en": "Villas",
+        "am": "ቪላዎች",
+        "om": "Viillaa",
+        "ti": "ቪላታት"
       },
       "slug": "villas-compound",
       "description": "",
@@ -2454,7 +2621,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compounds",
+        "Viillaa fi Kompaawundii",
+        "Villas & Compounds",
+        "ቪላታትን ኮምፓውንድን",
+        "ቪላዎችና ውስን ድርቅ"
+      ],
       "redirects": []
     },
     {
@@ -2463,10 +2636,10 @@
       "parent_code": "residential-houses-villas",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Residential Houses & Villas",
-        "am": "ሌሎች የመኖሪያ ቤቶችና ቪላዎች",
-        "om": "Manneen fi Viillaa Biroo",
-        "ti": "ካልኦት ናይ መንበሪ ገዛታትን ቪላታትን"
+        "en": "Other Residential Houses",
+        "am": "ሌሎች የመኖሪያ ቤቶች",
+        "om": "Manneen",
+        "ti": "ካልኦት ናይ መንበሪ ገዛታት"
       },
       "slug": "other-residential-houses-villas",
       "description": null,
@@ -2480,7 +2653,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Manneen fi Viillaa Biroo",
+        "Other Residential Houses & Villas",
+        "Villas",
+        "ሌሎች የመኖሪያ ቤቶችና ቪላዎች",
+        "ካልኦት ናይ መንበሪ ገዛታትን ቪላታትን"
+      ],
       "redirects": []
     },
     {
@@ -2489,7 +2668,7 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Shared Housing & Co-Living",
+        "en": "Shared Housing",
         "am": "የጋራ መኖሪያ",
         "om": "Mana Walitti Qixa",
         "ti": "ማሕበራዊ መንበሪ"
@@ -2506,7 +2685,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Co-Living",
+        "Shared Housing & Co-Living"
+      ],
       "redirects": []
     },
     {
@@ -2593,7 +2775,7 @@
       "parent_code": "shared-housing-coliving",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Shared Housing & Co-Living",
+        "en": "Other Shared Housing",
         "am": "ሌሎች የጋራ መኖሪያ",
         "om": "Mana Walitti Qixa Biroo",
         "ti": "ካልኦት ማሕበራዊ መንበሪ"
@@ -2610,7 +2792,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Co-Living",
+        "Other Shared Housing & Co-Living"
+      ],
       "redirects": []
     },
     {
@@ -2619,10 +2804,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Short-Term Rental & Vacation",
-        "am": "አጭር ጊዜ ኪራይና ዕረፍት",
+        "en": "Short-Term Rental",
+        "am": "አጭር ጊዜ ኪራይ",
         "om": "Kireeyyi Gabaabaa",
-        "ti": "ንእሽቱ ኪራይን ዕረፍትን"
+        "ti": "ንእሽቱ ኪራይ"
       },
       "slug": "short-term-rental-vacation",
       "description": "",
@@ -2636,7 +2821,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Short-Term Rental & Vacation",
+        "Vacation",
+        "ንእሽቱ ኪራይን ዕረፍትን",
+        "አጭር ጊዜ ኪራይና ዕረፍት"
+      ],
       "redirects": []
     },
     {
@@ -2723,10 +2913,10 @@
       "parent_code": "short-term-rental-vacation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Short-Term Rental & Vacation",
-        "am": "ሌሎች አጭር ጊዜ ኪራይና ዕረፍት",
+        "en": "Other Short-Term Rental",
+        "am": "ሌሎች አጭር ጊዜ ኪራይ",
         "om": "Kireeyyi Gabaabaa Biroo",
-        "ti": "ካልኦት ንእሽቱ ኪራይን ዕረፍትን"
+        "ti": "ካልኦት ንእሽቱ ኪራይ"
       },
       "slug": "other-short-term-rental-vacation",
       "description": null,
@@ -2740,7 +2930,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Short-Term Rental & Vacation",
+        "Vacation",
+        "ሌሎች አጭር ጊዜ ኪራይና ዕረፍት",
+        "ካልኦት ንእሽቱ ኪራይን ዕረፍትን"
+      ],
       "redirects": []
     },
     {
@@ -2749,10 +2944,10 @@
       "parent_code": "property-real-estate",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Property & Real Estate",
-        "am": "ሌሎች ንብረትና ዘርፍ",
-        "om": "Qabeenya fi Manneen Biroo",
-        "ti": "ካልኦት ንብረትን ገዛውንትን"
+        "en": "Other Property",
+        "am": "ሌሎች ንብረት",
+        "om": "Qabeenya",
+        "ti": "ካልኦት ንብረት"
       },
       "slug": "other-property-real-estate",
       "description": null,
@@ -2766,7 +2961,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Property & Real Estate",
+        "Qabeenya fi Manneen Biroo",
+        "Real Estate",
+        "ሌሎች ንብረትና ዘርፍ",
+        "ካልኦት ንብረትን ገዛውንትን"
+      ],
       "redirects": []
     }
   ]

@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "personal-household-services",
       "names": {
-        "en": "Personal & Household Services",
-        "am": "የግልና የቤት አገልግሎቶች",
-        "om": "Tajaajila Dhuunfaa fi Mana",
-        "ti": "ናይ ግልን ናይ ገዛን ኣገልግሎትን"
+        "en": "Personal Services",
+        "am": "የግል",
+        "om": "Tajaajila Dhuunfaa",
+        "ti": "ናይ ግል"
       },
       "description": "Domestic services, personal services, household maintenance, and lifestyle services.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Household Services",
+        "Personal & Household Services",
+        "Tajaajila Dhuunfaa fi Mana",
+        "ናይ ግልን ናይ ገዛን ኣገልግሎትን",
+        "የግልና የቤት አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +41,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "childcare-services",
       "names": {
-        "en": "Childcare & Daycare Services",
+        "en": "Childcare Services",
         "am": "የህጻናት እንክብካቤ",
         "om": "Tajaajila Da'immanii",
-        "ti": "ኣገልግሎት ክንክን ህጻናት"
+        "ti": "ኣገልግሎት ክንክ"
       },
       "description": "",
       "level": 1,
@@ -51,7 +57,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Childcare & Daycare Services",
+        "Daycare Services",
+        "ኣገልግሎት ክንክን ህጻናት"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +149,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "home-maintenance-repair",
       "names": {
-        "en": "Home Maintenance & Repair",
-        "am": "የቤት ጥገናና እንክብካቤ",
-        "om": "Suphaa fi Eegumsa Mana",
-        "ti": "ጥገናን ክንክንን ገዛ"
+        "en": "Home Maintenance",
+        "am": "የቤት ጥገና",
+        "om": "Suphaa",
+        "ti": "ጥገና"
       },
       "description": "",
       "level": 1,
@@ -155,7 +165,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Home Maintenance & Repair",
+        "Repair",
+        "Suphaa fi Eegumsa Mana",
+        "የቤት ጥገናና እንክብካቤ",
+        "ጥገናን ክንክንን ገዛ"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +311,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-personal-household-services",
       "names": {
-        "en": "Specialized & Custom Personal & Household Services",
-        "am": "ልዩና ብጁ Personal & Household Services",
-        "om": "Kan Addaa fi Filatamaa Personal & Household Services",
-        "ti": "ፍሉይን ዝተዳለወን Personal & Household Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -311,7 +327,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Personal",
+        "Household Services",
+        "Kan Addaa fi Filatamaa Personal & Household Services",
+        "Specialized & Custom Personal & Household Services",
+        "ልዩና ብጁ Personal & Household Services",
+        "ፍሉይን ዝተዳለወን Personal & Household Services"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1384,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-childcare-daycare-services",
       "names": {
-        "en": "Specialized & Custom Childcare & Daycare Services",
-        "am": "ልዩና ብጁ Childcare & Daycare Services",
-        "om": "Kan Addaa fi Filatamaa Childcare & Daycare Services",
-        "ti": "ፍሉይን ዝተዳለወን Childcare & Daycare Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1400,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Childcare",
+        "Daycare Services",
+        "Kan Addaa fi Filatamaa Childcare & Daycare Services",
+        "Specialized & Custom Childcare & Daycare Services",
+        "ልዩና ብጁ Childcare & Daycare Services",
+        "ፍሉይን ዝተዳለወን Childcare & Daycare Services"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1417,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-domestic-services",
       "names": {
-        "en": "Specialized & Custom Domestic Services",
-        "am": "ልዩና ብጁ Domestic Services",
-        "om": "Kan Addaa fi Filatamaa Domestic Services",
-        "ti": "ፍሉይን ዝተዳለወን Domestic Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1433,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Domestic Services",
+        "Kan Addaa fi Filatamaa Domestic Services",
+        "Specialized & Custom Domestic Services",
+        "ልዩና ብጁ Domestic Services",
+        "ፍሉይን ዝተዳለወን Domestic Services"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1449,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-eldercare-services",
       "names": {
-        "en": "Specialized & Custom Eldercare Services",
-        "am": "ልዩና ብጁ Eldercare Services",
-        "om": "Kan Addaa fi Filatamaa Eldercare Services",
-        "ti": "ፍሉይን ዝተዳለወን Eldercare Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1465,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Eldercare Services",
+        "Kan Addaa fi Filatamaa Eldercare Services",
+        "Specialized & Custom Eldercare Services",
+        "ልዩና ብጁ Eldercare Services",
+        "ፍሉይን ዝተዳለወን Eldercare Services"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1481,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-gardening-services",
       "names": {
-        "en": "Specialized & Custom Gardening Services",
-        "am": "ልዩና ብጁ Gardening Services",
-        "om": "Kan Addaa fi Filatamaa Gardening Services",
-        "ti": "ፍሉይን ዝተዳለወን Gardening Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1497,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Gardening Services",
+        "Kan Addaa fi Filatamaa Gardening Services",
+        "Specialized & Custom Gardening Services",
+        "ልዩና ብጁ Gardening Services",
+        "ፍሉይን ዝተዳለወን Gardening Services"
+      ],
       "redirects": []
     },
     {
@@ -1465,10 +1513,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-home-maintenance-repair",
       "names": {
-        "en": "Specialized & Custom Home Maintenance & Repair",
-        "am": "ልዩና ብጁ Home Maintenance & Repair",
-        "om": "Kan Addaa fi Filatamaa Home Maintenance & Repair",
-        "ti": "ፍሉይን ዝተዳለወን Home Maintenance & Repair"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1481,7 +1529,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Home Maintenance",
+        "Kan Addaa fi Filatamaa Home Maintenance & Repair",
+        "Repair",
+        "Specialized & Custom Home Maintenance & Repair",
+        "ልዩና ብጁ Home Maintenance & Repair",
+        "ፍሉይን ዝተዳለወን Home Maintenance & Repair"
+      ],
       "redirects": []
     },
     {
@@ -1491,10 +1546,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-home-renovation",
       "names": {
-        "en": "Specialized & Custom Home Renovation",
-        "am": "ልዩና ብጁ Home Renovation",
-        "om": "Kan Addaa fi Filatamaa Home Renovation",
-        "ti": "ፍሉይን ዝተዳለወን Home Renovation"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1507,7 +1562,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Home Renovation",
+        "Kan Addaa fi Filatamaa Home Renovation",
+        "Specialized & Custom Home Renovation",
+        "ልዩና ብጁ Home Renovation",
+        "ፍሉይን ዝተዳለወን Home Renovation"
+      ],
       "redirects": []
     },
     {
@@ -1517,10 +1578,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-lifestyle-services",
       "names": {
-        "en": "Specialized & Custom Lifestyle Services",
-        "am": "ልዩና ብጁ Lifestyle Services",
-        "om": "Kan Addaa fi Filatamaa Lifestyle Services",
-        "ti": "ፍሉይን ዝተዳለወን Lifestyle Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1533,7 +1594,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Lifestyle Services",
+        "Kan Addaa fi Filatamaa Lifestyle Services",
+        "Specialized & Custom Lifestyle Services",
+        "ልዩና ብጁ Lifestyle Services",
+        "ፍሉይን ዝተዳለወን Lifestyle Services"
+      ],
       "redirects": []
     },
     {
@@ -1543,10 +1610,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-personal-care-services",
       "names": {
-        "en": "Specialized & Custom Personal Care Services",
-        "am": "ልዩና ብጁ Personal Care Services",
-        "om": "Kan Addaa fi Filatamaa Personal Care Services",
-        "ti": "ፍሉይን ዝተዳለወን Personal Care Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1559,7 +1626,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Personal Care Services",
+        "Kan Addaa fi Filatamaa Personal Care Services",
+        "Specialized & Custom Personal Care Services",
+        "ልዩና ብጁ Personal Care Services",
+        "ፍሉይን ዝተዳለወን Personal Care Services"
+      ],
       "redirects": []
     },
     {
@@ -1569,10 +1642,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-home-security-installation",
       "names": {
-        "en": "Specialized & Custom Home Security Installation",
-        "am": "ልዩና ብጁ Home Security Installation",
-        "om": "Kan Addaa fi Filatamaa Home Security Installation",
-        "ti": "ፍሉይን ዝተዳለወን Home Security Installation"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1585,7 +1658,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Home Security Installation",
+        "Kan Addaa fi Filatamaa Home Security Installation",
+        "Specialized & Custom Home Security Installation",
+        "ልዩና ብጁ Home Security Installation",
+        "ፍሉይን ዝተዳለወን Home Security Installation"
+      ],
       "redirects": []
     },
     {
@@ -1595,10 +1674,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-pest-control",
       "names": {
-        "en": "Specialized & Custom Pest Control",
-        "am": "ልዩና ብጁ Pest Control",
-        "om": "Kan Addaa fi Filatamaa Pest Control",
-        "ti": "ፍሉይን ዝተዳለወን Pest Control"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1611,7 +1690,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Pest Control",
+        "Kan Addaa fi Filatamaa Pest Control",
+        "Specialized & Custom Pest Control",
+        "ልዩና ብጁ Pest Control",
+        "ፍሉይን ዝተዳለወን Pest Control"
+      ],
       "redirects": []
     }
   ]

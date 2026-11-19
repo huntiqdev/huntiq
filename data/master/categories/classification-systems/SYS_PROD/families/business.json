@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "business",
       "names": {
-        "en": "Tools, Machinery & Business",
-        "am": "ንግድና ኢንዱስትሪ",
-        "om": "Daldala fi Industirii",
-        "ti": "ንግድን ኢንዱስትሪን"
+        "en": "Tools",
+        "am": "ንግድ",
+        "om": "Daldala",
+        "ti": "ንግድ"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,14 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business",
+        "Daldala fi Industirii",
+        "Machinery",
+        "Tools, Machinery & Business",
+        "ንግድና ኢንዱስትሪ",
+        "ንግድን ኢንዱስትሪን"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +68,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "tools-hardware",
       "names": {
-        "en": "Tools & Hardware",
-        "am": "መሳሪያዎችና ሃርድዌር",
-        "om": "Meeshaalee fi Qorqorroo",
-        "ti": "መሳሪያታትን ሃርድዌርን"
+        "en": "Tools",
+        "am": "መሳሪያዎች",
+        "om": "Meeshaalee",
+        "ti": "መሳሪያታት"
       },
       "description": null,
       "level": 1,
@@ -77,7 +84,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hardware",
+        "Meeshaalee fi Qorqorroo",
+        "Tools & Hardware",
+        "መሳሪያታትን ሃርድዌርን",
+        "መሳሪያዎችና ሃርድዌር"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +126,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "power-tools-machinery",
       "names": {
-        "en": "Power Tools & Electric Machinery",
-        "am": "የኤሌክትሪክ ሃይል መሳሪያዎችና ማሽነሪዎች",
-        "om": "Meeshaalee Humna Elektiriikii fi Maashinoota",
-        "ti": "ናይ ኤሌክትሪክ ሓይሊ መሳርሕታትን ማሽነሪታትን"
+        "en": "Power Tools",
+        "am": "የኤሌክትሪክ ሃይል መሳሪያዎች",
+        "om": "Meeshaalee Humna Elektiriikii",
+        "ti": "ናይ ኤሌክትሪክ ሓይሊ መሳርሕታት"
       },
       "description": "Heavy-duty electric rotary hammers, angle grinders, circular saws, and workshop power equipment",
       "level": 2,
@@ -129,7 +142,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Electric Machinery",
+        "Meeshaalee Humna Elektiriikii fi Maashinoota",
+        "Power Tools & Electric Machinery",
+        "ናይ ኤሌክትሪክ ሓይሊ መሳርሕታትን ማሽነሪታትን",
+        "የኤሌክትሪክ ሃይል መሳሪያዎችና ማሽነሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +158,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "hydraulic-structural-cement",
       "names": {
-        "en": "Hydraulic & Structural Building Cement",
-        "am": "የህንፃ ግንባታና መዋቅራዊ ሲሚንቶ",
-        "om": "Siminto Qulqullinaa fi Ijaarsaa",
-        "ti": "ናይ ህንጻ ህንጸትን መዋቕራዊን ሲሚንቶ"
+        "en": "Hydraulic",
+        "am": "የህንፃ ግንባታ",
+        "om": "Siminto Qulqullinaa",
+        "ti": "ናይ ህንጻ ህንጸት"
       },
       "description": "Portland Pozzolana Cement (PPC) and Ordinary Portland Cement (OPC) for structural casting and masonry",
       "level": 2,
@@ -155,7 +174,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hydraulic & Structural Building Cement",
+        "Siminto Qulqullinaa fi Ijaarsaa",
+        "Structural Building Cement",
+        "ናይ ህንጻ ህንጸትን መዋቕራዊን ሲሚንቶ",
+        "የህንፃ ግንባታና መዋቅራዊ ሲሚንቶ"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +190,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "solar-renewable-energy-systems",
       "names": {
-        "en": "Solar & Renewable Energy Systems",
-        "am": "የፀሐይ ብርሃንና ታዳሽ ሃይል ስርዓቶች",
-        "om": "Sirna Humna Aduu fi Madaalawaa",
-        "ti": "ናይ ፀሓይ ብርሃንን ተሓዳሲ ሓይልን ስርዓታት"
+        "en": "Solar Systems",
+        "am": "የፀሐይ ብርሃን",
+        "om": "Sirna Humna Aduu",
+        "ti": "ናይ ፀሓይ ብርሃን"
       },
       "description": "Solar PV panels, hybrid inverters, solar charge controllers, and deep-cycle lithium storage batteries",
       "level": 2,
@@ -181,7 +206,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Renewable Energy Systems",
+        "Sirna Humna Aduu fi Madaalawaa",
+        "Solar & Renewable Energy Systems",
+        "ናይ ፀሓይ ብርሃንን ተሓዳሲ ሓይልን ስርዓታት",
+        "የፀሐይ ብርሃንና ታዳሽ ሃይል ስርዓቶች"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +222,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "drills-and-drivers-hardware",
       "names": {
-        "en": "Drills, Impact Drivers & Rotary Hammers",
-        "am": "ድሪሎች፣ ኢምፓክት ድራይቨሮችና ሮታሪ ሀመሮች",
-        "om": "Boraasuu, Naannessituu fi Dhagaa Waraantoo",
-        "ti": "ድሪላት፣ ኢምፓክት ድራይቨራትን ሮታሪ ሃመራትን"
+        "en": "Drills",
+        "am": "ድሪሎች፣ ኢምፓክት ድራይቨሮች",
+        "om": "Boraasuu, Naannessituu",
+        "ti": "ድሪላት፣ ኢምፓክት ድራይቨራት"
       },
       "description": "Cordless and corded electric rotary drills, hammer drivers, and demolition hammers",
       "level": 2,
@@ -207,7 +238,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boraasuu, Naannessituu fi Dhagaa Waraantoo",
+        "Drills, Impact Drivers & Rotary Hammers",
+        "Impact Drivers",
+        "Rotary Hammers",
+        "ድሪላት፣ ኢምፓክት ድራይቨራትን ሮታሪ ሃመራትን",
+        "ድሪሎች፣ ኢምፓክት ድራይቨሮችና ሮታሪ ሀመሮች"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +255,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-commercial-equipment",
       "names": {
-        "en": "Specialized & Custom Commercial Equipment",
-        "am": "ልዩና ብጁ Commercial Equipment",
-        "om": "Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -233,7 +271,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment",
+        "Kan Addaa fi Filatamaa Commercial Equipment",
+        "Specialized & Custom Commercial Equipment",
+        "ልዩና ብጁ Commercial Equipment",
+        "ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +287,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-measurement-gauges-torque-tools-industrial-vices",
       "names": {
-        "en": "Precision Measurement Gauges, Torque Tools & Industrial Vices",
-        "am": "የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Precision Measurement Gauges",
+        "am": "የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 2,
@@ -259,7 +303,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices",
+        "Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Precision Measurement Gauges, Torque Tools & Industrial Vices",
+        "Torque Tools",
+        "ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +320,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "rotary-hammer-demolition-drills",
       "names": {
-        "en": "Rotary Hammer & Demolition Drills",
-        "am": "ሮታሪ ሀመር እና ሰባሪ ድሪሎች",
-        "om": "Boraasuu fi Waraantoo Dhagaa Cimaa",
-        "ti": "ሮታሪ ሃመርን ሰባሪ ድሪላትን"
+        "en": "Rotary Hammer",
+        "am": "ሮታሪ ሀመር",
+        "om": "Boraasuu",
+        "ti": "ሮታሪ ሃመር"
       },
       "description": "Electropneumatic rotary hammer drills for drilling reinforced concrete, granite, and masonry",
       "level": 3,
@@ -285,7 +336,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boraasuu fi Waraantoo Dhagaa Cimaa",
+        "Demolition Drills",
+        "Rotary Hammer & Demolition Drills",
+        "ሮታሪ ሀመር እና ሰባሪ ድሪሎች",
+        "ሮታሪ ሃመርን ሰባሪ ድሪላትን"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +352,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "portland-pozzolana-ordinary-cement",
       "names": {
-        "en": "Portland Pozzolana & Ordinary Portland Cement",
-        "am": "ፖርትላንድ ፖዞላና እና ኦርዲናሪ ፖርትላንድ ሲሚንቶ",
-        "om": "Simintoo Poortilaandii fi Pozoolaanaa",
-        "ti": "ፖርትላንድ ፖዞላናን ኦርዲናሪ ፖርትላንድን ሲሚንቶ"
+        "en": "Portland Pozzolana",
+        "am": "ፖርትላንድ ፖዞላና",
+        "om": "Simintoo Poortilaandii",
+        "ti": "ፖርትላንድ ፖዞላና"
       },
       "description": "General purpose and high-strength construction cements complying with Ethiopian Standard ES EN 197-1",
       "level": 3,
@@ -311,7 +368,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ordinary Portland Cement",
+        "Portland Pozzolana & Ordinary Portland Cement",
+        "Simintoo Poortilaandii fi Pozoolaanaa",
+        "ፖርትላንድ ፖዞላና እና ኦርዲናሪ ፖርትላንድ ሲሚንቶ",
+        "ፖርትላንድ ፖዞላናን ኦርዲናሪ ፖርትላንድን ሲሚንቶ"
+      ],
       "redirects": []
     },
     {
@@ -321,10 +384,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "off-grid-hybrid-solar-inverters",
       "names": {
-        "en": "Off-Grid & Hybrid Solar Inverters",
-        "am": "የፀሐይ ሃይል ኦፍ-ግሪድ እና ሃይብሪድ ኢንቨርተሮች",
+        "en": "Off-Grid",
+        "am": "የፀሐይ ሃይል ኦፍ-ግሪድ",
         "om": "Inveertara Humna Aduu Haayibriidii",
-        "ti": "ናይ ፀሓይ ሓይሊ ኦፍ-ግሪድን ሃይብሪድን ኢንቨርተራት"
+        "ti": "ናይ ፀሓይ ሓይሊ ኦፍ-ግሪድ"
       },
       "description": "Smart solar inverters integrating MPPT solar charge controllers, AC battery chargers, and grid bypass",
       "level": 3,
@@ -337,7 +400,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hybrid Solar Inverters",
+        "Off-Grid & Hybrid Solar Inverters",
+        "ናይ ፀሓይ ሓይሊ ኦፍ-ግሪድን ሃይብሪድን ኢንቨርተራት",
+        "የፀሐይ ሃይል ኦፍ-ግሪድ እና ሃይብሪድ ኢንቨርተሮች"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +441,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-commercial-equipment-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Commercial Equipment Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Commercial Equipment",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -389,7 +457,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "Premium Grade Certified Specialized & Custom Commercial Equipment Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Commercial Equipment",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +473,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-commercial-equipment-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Commercial Equipment Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Commercial Equipment መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -415,7 +489,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Component",
+        "Heavy-Duty Commercial Specialized & Custom Commercial Equipment Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Commercial Equipment",
+        "ጠንካራ የንግድ ልዩና ብጁ Commercial Equipment መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -425,10 +505,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-commercial-equipment-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Commercial Equipment Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Commercial Equipment",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -441,7 +521,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Commercial Equipment Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Commercial Equipment",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +537,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-commercial-equipment-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Commercial Equipment Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Commercial Equipment ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -467,7 +553,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Commercial Equipment",
+        "Custom Commercial Equipment Assembly",
+        "Standard Industrial Specialized & Custom Commercial Equipment Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Commercial Equipment ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +569,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-commercial-equipment-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Commercial Equipment System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Commercial Equipment ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -493,7 +585,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Commercial Equipment System",
+        "Custom Commercial Equipment System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Commercial Equipment ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -503,10 +601,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-commercial-equipment-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Commercial Equipment Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Commercial Equipment ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -519,7 +617,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Module",
+        "Digital Automated Specialized & Custom Commercial Equipment Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Commercial Equipment ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +633,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-commercial-equipment-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Commercial Equipment Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Commercial Equipment",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -545,7 +649,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Device",
+        "High-Capacity Multi-Function Specialized & Custom Commercial Equipment Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Commercial Equipment",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +665,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-commercial-equipment-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Commercial Equipment Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Commercial Equipment",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -571,7 +681,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Commercial Equipment",
+        "Reinforced Weatherproof Specialized & Custom Commercial Equipment Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Commercial Equipment",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -581,10 +697,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-commercial-equipment-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Commercial Equipment Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Commercial Equipment ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -597,7 +713,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "Precision Engineered Specialized & Custom Commercial Equipment Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Commercial Equipment ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -607,10 +729,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-commercial-equipment-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Commercial Equipment Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Commercial Equipment ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -623,7 +745,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Pack",
+        "Custom Fabricated Specialized & Custom Commercial Equipment Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Commercial Equipment ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -633,10 +761,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-commercial-equipment-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Commercial Equipment Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Commercial Equipment ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -649,7 +777,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "Universal Compatible Specialized & Custom Commercial Equipment Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Commercial Equipment ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -659,10 +793,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-commercial-equipment-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Commercial Equipment Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Commercial Equipment መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -675,7 +809,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "Professional Grade Specialized & Custom Commercial Equipment Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Commercial Equipment መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -685,10 +825,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-commercial-equipment-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Commercial Equipment Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Commercial Equipment መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -701,7 +841,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Commercial Equipment",
+        "Specialized Laboratory Specialized & Custom Commercial Equipment Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Commercial Equipment መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -711,10 +857,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-commercial-equipment-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Commercial Equipment Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Commercial Equipment ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -727,7 +873,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Unit",
+        "High-Speed Synchronized Specialized & Custom Commercial Equipment Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Commercial Equipment",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Commercial Equipment ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -737,10 +889,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-commercial-equipment",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Commercial Equipment",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Commercial Equipment",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Stainless Steel Corrosion-Resistant Specialized Equipment",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -753,7 +905,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Commercial Equipment",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Commercial Equipment",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Commercial Equipment",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -763,10 +921,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-commercial-equipment-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Commercial Equipment Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Commercial Equipment ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -779,7 +937,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Commercial Equipment",
+        "Thermal Insulated Specialized & Custom Commercial Equipment Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Commercial Equipment ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -789,10 +953,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-commercial-equipment",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Commercial Equipment",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Commercial Equipment",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Wireless Smart Integrated Specialized Equipment",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -805,7 +969,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Commercial Equipment",
+        "Wireless Smart Integrated Specialized & Custom Commercial Equipment",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Commercial Equipment",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -815,10 +985,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-commercial-equipment",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Commercial Equipment",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Commercial Equipment",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Heavy Mechanical Calibration Specialized Equipment",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -831,7 +1001,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment",
+        "Heavy Mechanical Calibration Specialized & Custom Commercial Equipment",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Commercial Equipment",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -841,10 +1017,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-commercial-equipment-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Commercial Equipment Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Commercial Equipment",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -857,7 +1033,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Equipment Gear",
+        "Ergonomic Safety Specialized & Custom Commercial Equipment Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Commercial Equipment",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Commercial Equipment",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -867,10 +1049,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-commercial-equipment-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Commercial Equipment Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Commercial Equipment ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Commercial Equipment",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Commercial Equipment"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -883,7 +1065,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Commercial Equipment",
+        "Custom Commercial Equipment Station",
+        "Modular Expandable Specialized & Custom Commercial Equipment Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Commercial Equipment ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Commercial Equipment"
+      ],
       "redirects": []
     },
     {
@@ -893,10 +1081,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-precision-measurement-gauges-torque-tools-industrial-vices-unit",
       "names": {
-        "en": "Premium Grade Certified Precision Measurement Gauges, Torque Tools & Industrial Vices Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Kan Qulqullina Olaanaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ብሉጽ ዝተረጋገጸ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Premium Grade Certified Precision Measurement Gauges",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Kan Qulqullina Olaanaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -909,7 +1097,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices Unit",
+        "Kan Qulqullina Olaanaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Premium Grade Certified Precision Measurement Gauges, Torque Tools & Industrial Vices Unit",
+        "Torque Tools",
+        "ብሉጽ ዝተረጋገጸ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች"
+      ],
       "redirects": []
     },
     {
@@ -919,10 +1114,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-precision-measurement-gauges-torque-tools-industrial-vices-component",
       "names": {
-        "en": "Heavy-Duty Commercial Precision Measurement Gauges, Torque Tools & Industrial Vices Component",
-        "am": "ጠንካራ የንግድ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ከቢድ ናይ ንግዲ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Heavy-Duty Commercial Precision Measurement Gauges",
+        "am": "ጠንካራ የንግድ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Meeshaa Hojii Cimaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ከቢድ ናይ ንግዲ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -935,7 +1130,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Heavy-Duty Commercial Precision Measurement Gauges, Torque Tools & Industrial Vices Component",
+        "Industrial Vices Component",
+        "Meeshaa Hojii Cimaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ከቢድ ናይ ንግዲ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "ጠንካራ የንግድ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -945,10 +1147,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-precision-measurement-gauges-torque-tools-industrial-vices-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Precision Measurement Gauges, Torque Tools & Industrial Vices Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Qusataa Humnaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ሓይሊ ዝቑጥብ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Eco-Friendly Energy-Saving Precision Measurement Gauges",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ሓይሊ ዝቑጥብ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -961,7 +1163,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Eco-Friendly Energy-Saving Precision Measurement Gauges, Torque Tools & Industrial Vices Model",
+        "Industrial Vices Model",
+        "Qusataa Humnaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ሓይሊ ዝቑጥብ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች"
+      ],
       "redirects": []
     },
     {
@@ -971,10 +1180,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-precision-measurement-gauges-torque-tools-industrial-vices-assembly",
       "names": {
-        "en": "Standard Industrial Precision Measurement Gauges, Torque Tools & Industrial Vices Assembly",
-        "am": "መደበኛ የኢንዱስትሪ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ስብስብ",
-        "om": "Asambilii Indaastirii Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Standard Industrial Precision Measurement Gauges",
+        "am": "መደበኛ የኢንዱስትሪ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Asambilii Indaastirii Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -987,7 +1196,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Industrial Vices Assembly",
+        "Standard Industrial Precision Measurement Gauges, Torque Tools & Industrial Vices Assembly",
+        "Torque Tools",
+        "መደበኛ የኢንዱስትሪ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1213,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-precision-measurement-gauges-torque-tools-industrial-vices-system",
       "names": {
-        "en": "Compact Portable Precision Measurement Gauges, Torque Tools & Industrial Vices System",
-        "am": "ቀላልና ተንቀሳቃሽ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ተንቀሳቓሲ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Compact Portable Precision Measurement Gauges",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1013,7 +1229,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Precision Measurement Gauges, Torque Tools & Industrial Vices System",
+        "Industrial Vices System",
+        "Sirna Salphaa fi Socho'aa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ቀላልና ተንቀሳቃሽ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ስርዓት",
+        "ተንቀሳቓሲ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1246,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-precision-measurement-gauges-torque-tools-industrial-vices-module",
       "names": {
-        "en": "Digital Automated Precision Measurement Gauges, Torque Tools & Industrial Vices Module",
-        "am": "ዲጂታል አውቶሜትድ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ዲጂታል ኣውቶሜትድ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Digital Automated Precision Measurement Gauges",
+        "am": "ዲጂታል አውቶሜትድ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Moojiyulii Dijitaalaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1039,7 +1262,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Automated Precision Measurement Gauges, Torque Tools & Industrial Vices Module",
+        "Industrial Vices Module",
+        "Moojiyulii Dijitaalaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ዲጂታል አውቶሜትድ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1279,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-precision-measurement-gauges-torque-tools-industrial-vices-device",
       "names": {
-        "en": "High-Capacity Multi-Function Precision Measurement Gauges, Torque Tools & Industrial Vices Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Meeshaa Dandeettii Guddaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "High-Capacity Multi-Function Precision Measurement Gauges",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Meeshaa Dandeettii Guddaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1065,7 +1295,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "High-Capacity Multi-Function Precision Measurement Gauges, Torque Tools & Industrial Vices Device",
+        "Industrial Vices Device",
+        "Meeshaa Dandeettii Guddaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ከፍተኛ አቅም ያለው ሁለገብ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
+        "ዓብዪ ዓቕሚ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1312,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-precision-measurement-gauges-torque-tools-industrial-vices-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Precision Measurement Gauges, Torque Tools & Industrial Vices Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Kan Qilleensa Dandamatu Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ንኵነታት ኣየር ዝጻወር ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Reinforced Weatherproof Precision Measurement Gauges",
+        "am": "አየር የማይበግረው የተጠናከረ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Kan Qilleensa Dandamatu Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1091,7 +1328,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices Fixture",
+        "Kan Qilleensa Dandamatu Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Reinforced Weatherproof Precision Measurement Gauges, Torque Tools & Industrial Vices Fixture",
+        "Torque Tools",
+        "ንኵነታት ኣየር ዝጻወር ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "አየር የማይበግረው የተጠናከረ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1345,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-precision-measurement-gauges-torque-tools-industrial-vices-hardware",
       "names": {
-        "en": "Precision Engineered Precision Measurement Gauges, Torque Tools & Industrial Vices Hardware",
-        "am": "በትክክለኛነት የተሰራ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ብልክዕ ዝተሰርሐ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Precision Engineered Precision Measurement Gauges",
+        "am": "በትክክለኛነት የተሰራ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Haardiweerii Qulqullinaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ብልክዕ ዝተሰርሐ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1117,7 +1361,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Haardiweerii Qulqullinaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Industrial Vices Hardware",
+        "Precision Engineered Precision Measurement Gauges, Torque Tools & Industrial Vices Hardware",
+        "Torque Tools",
+        "በትክክለኛነት የተሰራ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1378,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-precision-measurement-gauges-torque-tools-industrial-vices-pack",
       "names": {
-        "en": "Custom Fabricated Precision Measurement Gauges, Torque Tools & Industrial Vices Pack",
-        "am": "ብጁ የተዘጋጀ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ጥቅል",
-        "om": "Paakii Addaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ብፍሉይ ዝተዳለወ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Custom Fabricated Precision Measurement Gauges",
+        "am": "ብጁ የተዘጋጀ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Paakii Addaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ብፍሉይ ዝተዳለወ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1143,7 +1394,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Precision Measurement Gauges, Torque Tools & Industrial Vices Pack",
+        "Industrial Vices Pack",
+        "Paakii Addaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ብጁ የተዘጋጀ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ጥቅል",
+        "ብፍሉይ ዝተዳለወ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1153,10 +1411,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-precision-measurement-gauges-torque-tools-industrial-vices-kit",
       "names": {
-        "en": "Universal Compatible Precision Measurement Gauges, Torque Tools & Industrial Vices Kit",
-        "am": "ሁለንተናዊ የሚስማማ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ኪት",
-        "om": "Kiitii Waliigalaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ንኹሉ ዝሰማማዕ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Universal Compatible Precision Measurement Gauges",
+        "am": "ሁለንተናዊ የሚስማማ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Kiitii Waliigalaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ንኹሉ ዝሰማማዕ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1169,7 +1427,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices Kit",
+        "Kiitii Waliigalaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "Universal Compatible Precision Measurement Gauges, Torque Tools & Industrial Vices Kit",
+        "ሁለንተናዊ የሚስማማ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ኪት",
+        "ንኹሉ ዝሰማማዕ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1179,10 +1444,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-precision-measurement-gauges-torque-tools-industrial-vices-tooling",
       "names": {
-        "en": "Professional Grade Precision Measurement Gauges, Torque Tools & Industrial Vices Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች መሣሪያ",
-        "om": "Meeshaa Ogummaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Professional Grade Precision Measurement Gauges",
+        "am": "ሙያዊ ደረጃ ያለው የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Meeshaa Ogummaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1195,7 +1460,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices Tooling",
+        "Meeshaa Ogummaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Professional Grade Precision Measurement Gauges, Torque Tools & Industrial Vices Tooling",
+        "Torque Tools",
+        "ሙያዊ ደረጃ ያለው የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1205,10 +1477,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-precision-measurement-gauges-torque-tools-industrial-vices-tester",
       "names": {
-        "en": "Specialized Laboratory Precision Measurement Gauges, Torque Tools & Industrial Vices Tester",
-        "am": "ልዩ የላቦራቶሪ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች መመርመሪያ",
-        "om": "Meeshaa Qorannoo Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Specialized Laboratory Precision Measurement Gauges",
+        "am": "ልዩ የላቦራቶሪ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Meeshaa Qorannoo Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1221,7 +1493,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices Tester",
+        "Meeshaa Qorannoo Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Specialized Laboratory Precision Measurement Gauges, Torque Tools & Industrial Vices Tester",
+        "Torque Tools",
+        "ልዩ የላቦራቶሪ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1510,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-precision-measurement-gauges-torque-tools-industrial-vices-unit",
       "names": {
-        "en": "High-Speed Synchronized Precision Measurement Gauges, Torque Tools & Industrial Vices Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "High-Speed Synchronized Precision Measurement Gauges",
+        "am": "ከፍተኛ ፍጥነት ያለው የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Yuunitii Saffisa Ol'aanaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1247,7 +1526,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "High-Speed Synchronized Precision Measurement Gauges, Torque Tools & Industrial Vices Unit",
+        "Industrial Vices Unit",
+        "Torque Tools",
+        "Yuunitii Saffisa Ol'aanaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "ልዑል ቅልጣፈ ዘለዎ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "ከፍተኛ ፍጥነት ያለው የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1543,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-precision-measurement-gauges-torque-tools-industrial-vices",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Precision Measurement Gauges, Torque Tools & Industrial Vices",
-        "am": "ከማይዝግ ብረት የተሰራ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Sibila Hin Xuraofne Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ዘይመጽእ ሓጺን ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Stainless Steel Corrosion-Resistant Precision Measurement Gauges",
+        "am": "ከማይዝግ ብረት የተሰራ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Sibila Hin Xuraofne Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -1273,7 +1559,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices",
+        "Sibila Hin Xuraofne Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Stainless Steel Corrosion-Resistant Precision Measurement Gauges, Torque Tools & Industrial Vices",
+        "Torque Tools",
+        "ከማይዝግ ብረት የተሰራ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
+        "ዘይመጽእ ሓጺን ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1576,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-precision-measurement-gauges-torque-tools-industrial-vices-panel",
       "names": {
-        "en": "Thermal Insulated Precision Measurement Gauges, Torque Tools & Industrial Vices Panel",
-        "am": "ሙቀት መከላከያ ያለው የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ሙቐት መከላኸሊ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Thermal Insulated Precision Measurement Gauges",
+        "am": "ሙቀት መከላከያ ያለው የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Paanaalii Ho'a Ittisu Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ሙቐት መከላኸሊ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1299,7 +1592,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices Panel",
+        "Paanaalii Ho'a Ittisu Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Thermal Insulated Precision Measurement Gauges, Torque Tools & Industrial Vices Panel",
+        "Torque Tools",
+        "ሙቀት መከላከያ ያለው የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ፓነል",
+        "ሙቐት መከላኸሊ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1609,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-precision-measurement-gauges-torque-tools-industrial-vices",
       "names": {
-        "en": "Wireless Smart Integrated Precision Measurement Gauges, Torque Tools & Industrial Vices",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Wireless Smart Integrated Precision Measurement Gauges",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1325,7 +1625,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial Vices",
+        "Kan Qunnamtii Shiboo Hin Qabne Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "Wireless Smart Integrated Precision Measurement Gauges, Torque Tools & Industrial Vices",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
+        "ዘይብሉ ሽቦ ዘመናዊ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1642,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-precision-measurement-gauges-torque-tools-industrial-vices",
       "names": {
-        "en": "Heavy Mechanical Calibration Precision Measurement Gauges, Torque Tools & Industrial Vices",
-        "am": "ከባድ መካኒካል ማስተካከያ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Sirreeffama Mekaaniikaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ናይ መካኒካል ምዕራይ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Heavy Mechanical Calibration Precision Measurement Gauges",
+        "am": "ከባድ መካኒካል ማስተካከያ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎች",
+        "om": "Sirreeffama Mekaaniikaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ናይ መካኒካል ምዕራይ ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1351,7 +1658,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Heavy Mechanical Calibration Precision Measurement Gauges, Torque Tools & Industrial Vices",
+        "Industrial Vices",
+        "Sirreeffama Mekaaniikaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ናይ መካኒካል ምዕራይ ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን",
+        "ከባድ መካኒካል ማስተካከያ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1675,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-precision-measurement-gauges-torque-tools-industrial-vices-gear",
       "names": {
-        "en": "Ergonomic Safety Precision Measurement Gauges, Torque Tools & Industrial Vices Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
-        "om": "Meeshaa Eegumsaa Mijaawaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ምቹእ ናይ ድሕንነት ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Ergonomic Safety Precision Measurement Gauges Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ምቹእ ናይ ድሕንነት ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1377,7 +1691,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ergonomic Safety Precision Measurement Gauges, Torque Tools & Industrial Vices Gear",
+        "Industrial Vices Gear",
+        "Meeshaa Eegumsaa Mijaawaa Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Torque Tools",
+        "ምቹና ደህንነቱ የተጠበቀ የትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች",
+        "ምቹእ ናይ ድሕንነት ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1708,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-precision-measurement-gauges-torque-tools-industrial-vices-station",
       "names": {
-        "en": "Modular Expandable Precision Measurement Gauges, Torque Tools & Industrial Vices Station",
-        "am": "ተገጣጣሚና የሚሰፋ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ጣቢያ",
-        "om": "Buufata Babal'ifamu Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
-        "ti": "ክሰፍሕ ዝኽእል ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+        "en": "Modular Expandable Precision Measurement Gauges",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Meeshaalee Safartuu Qulqullinaa",
+        "ti": "ክሰፍሕ ዝኽእል ትክክለኛ መዐቀኒ መሳርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1403,7 +1724,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Meeshaalee Safartuu Qulqullinaa fi Qabduuwwan",
+        "Industrial Vices Station",
+        "Modular Expandable Precision Measurement Gauges, Torque Tools & Industrial Vices Station",
+        "Torque Tools",
+        "ተገጣጣሚና የሚሰፋ የየትክክለኛነት መለኪያ መሣሪያዎች፣ የቶርክ ዕቃዎችና መቆንጠጫዎች ጣቢያ",
+        "ክሰፍሕ ዝኽእል ትክክለኛ መዐቀኒ መሳርሒታትን ቶርክን"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1741,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-hydraulic-structural-building-cement",
       "names": {
-        "en": "Specialized & Custom Hydraulic & Structural Building Cement",
-        "am": "ልዩና ብጁ Hydraulic & Structural Building Cement",
-        "om": "Kan Addaa fi Filatamaa Hydraulic & Structural Building Cement",
-        "ti": "ፍሉይን ዝተዳለወን Hydraulic & Structural Building Cement"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1429,7 +1757,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Hydraulic",
+        "Kan Addaa fi Filatamaa Hydraulic & Structural Building Cement",
+        "Specialized & Custom Hydraulic & Structural Building Cement",
+        "Structural Building Cement",
+        "ልዩና ብጁ Hydraulic & Structural Building Cement",
+        "ፍሉይን ዝተዳለወን Hydraulic & Structural Building Cement"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1774,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-solar-renewable-energy-systems",
       "names": {
-        "en": "Specialized & Custom Solar & Renewable Energy Systems",
-        "am": "ልዩና ብጁ Solar & Renewable Energy Systems",
-        "om": "Kan Addaa fi Filatamaa Solar & Renewable Energy Systems",
-        "ti": "ፍሉይን ዝተዳለወን Solar & Renewable Energy Systems"
+        "en": "Specialized Systems",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1455,7 +1790,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Solar",
+        "Kan Addaa fi Filatamaa Solar & Renewable Energy Systems",
+        "Renewable Energy Systems",
+        "Specialized & Custom Solar & Renewable Energy Systems",
+        "ልዩና ብጁ Solar & Renewable Energy Systems",
+        "ፍሉይን ዝተዳለወን Solar & Renewable Energy Systems"
+      ],
       "redirects": []
     },
     {
@@ -1465,10 +1807,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-drills-impact-drivers-rotary-hammers",
       "names": {
-        "en": "Specialized & Custom Drills, Impact Drivers & Rotary Hammers",
-        "am": "ልዩና ብጁ Drills, Impact Drivers & Rotary Hammers",
-        "om": "Kan Addaa fi Filatamaa Drills, Impact Drivers & Rotary Hammers",
-        "ti": "ፍሉይን ዝተዳለወን Drills, Impact Drivers & Rotary Hammers"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1481,7 +1823,15 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drills",
+        "Impact Drivers",
+        "Kan Addaa fi Filatamaa Drills, Impact Drivers & Rotary Hammers",
+        "Rotary Hammers",
+        "Specialized & Custom Drills, Impact Drivers & Rotary Hammers",
+        "ልዩና ብጁ Drills, Impact Drivers & Rotary Hammers",
+        "ፍሉይን ዝተዳለወን Drills, Impact Drivers & Rotary Hammers"
+      ],
       "redirects": []
     },
     {
@@ -1491,10 +1841,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-power-tools-electric-machinery",
       "names": {
-        "en": "Specialized & Custom Power Tools & Electric Machinery",
-        "am": "ልዩና ብጁ Power Tools & Electric Machinery",
-        "om": "Kan Addaa fi Filatamaa Power Tools & Electric Machinery",
-        "ti": "ፍሉይን ዝተዳለወን Power Tools & Electric Machinery"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1507,7 +1857,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Power Tools",
+        "Electric Machinery",
+        "Kan Addaa fi Filatamaa Power Tools & Electric Machinery",
+        "Specialized & Custom Power Tools & Electric Machinery",
+        "ልዩና ብጁ Power Tools & Electric Machinery",
+        "ፍሉይን ዝተዳለወን Power Tools & Electric Machinery"
+      ],
       "redirects": []
     }
   ]

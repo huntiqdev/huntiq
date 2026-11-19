@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Property & Real Estate (Legacy)",
-        "am": "ቤቶችና ይዞታዎች",
-        "om": "Qabeenya fi Manneen",
-        "ti": "ገዛውን ንብረትን"
+        "en": "Property",
+        "am": "ቤቶች",
+        "om": "Qabeenya",
+        "ti": "ገዛው"
       },
       "slug": "property",
       "description": null,
@@ -50,7 +50,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Property & Real Estate (Legacy)",
+        "Qabeenya fi Manneen",
+        "Real Estate (Legacy)",
+        "ቤቶችና ይዞታዎች",
+        "ገዛውን ንብረትን"
+      ],
       "redirects": []
     },
     {
@@ -111,10 +117,10 @@
       "parent_code": "property",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Apartments & Condos",
+        "en": "Apartments",
         "am": "ኮንዶሚኒየም",
         "om": "Appaartaamaa",
-        "ti": "ኮንዶሚኒየምን ኣፓርትማን"
+        "ti": "ኮንዶሚኒየም"
       },
       "slug": "apartments",
       "description": null,
@@ -128,7 +134,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Apartments & Condos",
+        "Condos",
+        "ኮንዶሚኒየምን ኣፓርትማን"
+      ],
       "redirects": []
     },
     {
@@ -215,10 +225,10 @@
       "parent_code": "apartments",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Apartments & Condos",
+        "en": "Other Apartments",
         "am": "ሌሎች ኮንዶሚኒየም",
         "om": "Appaartaamaa Biroo",
-        "ti": "ካልኦት ኮንዶሚኒየምን ኣፓርትማን"
+        "ti": "ካልኦት ኮንዶሚኒየም"
       },
       "slug": "other-apartments",
       "description": null,
@@ -232,7 +242,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Condos",
+        "Other Apartments & Condos",
+        "ካልኦት ኮንዶሚኒየምን ኣፓርትማን"
+      ],
       "redirects": []
     },
     {
@@ -267,10 +281,10 @@
       "parent_code": "property",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Land & Plots",
+        "en": "Land",
         "am": "ቦታዎች",
         "om": "Lafa",
-        "ti": "መሬትን ቦታታትን"
+        "ti": "መሬት"
       },
       "slug": "land-plots",
       "description": null,
@@ -284,7 +298,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Land & Plots",
+        "Plots",
+        "መሬትን ቦታታትን"
+      ],
       "redirects": []
     }
   ]

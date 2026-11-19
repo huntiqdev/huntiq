@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other & Miscellaneous",
-        "am": "ሌሎችና ልዩ ልዩ",
+        "en": "Other",
+        "am": "ሌሎች",
         "om": "Kanneen Biroofi Addaa",
-        "ti": "ካልኦትን ፍሉያትን"
+        "ti": "ካልኦት"
       },
       "slug": "other-miscellaneous",
       "description": null,
@@ -50,7 +50,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Miscellaneous",
+        "Other & Miscellaneous",
+        "ሌሎችና ልዩ ልዩ",
+        "ካልኦትን ፍሉያትን"
+      ],
       "redirects": []
     },
     {

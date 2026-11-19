@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Logistics & Supply Chain",
+        "en": "Logistics",
         "am": "ጎደኛ አቅርቦት ሰንሰለት",
-        "om": "Geejjiba fi Sanyiibsa",
-        "ti": "ሎጂስቲክስን ሰንሰለት ኣቅርቦትን"
+        "om": "Geejjiba",
+        "ti": "ሎጂስቲክስ"
       },
       "slug": "logistics-supply-chain",
       "description": "Freight, warehousing, courier, moving, storage, and supply chain management.",
@@ -50,7 +50,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Geejjiba fi Sanyiibsa",
+        "Logistics & Supply Chain",
+        "Supply Chain",
+        "ሎጂስቲክስን ሰንሰለት ኣቅርቦትን"
+      ],
       "redirects": []
     },
     {
@@ -59,7 +64,7 @@
       "parent_code": "logistics-supply-chain",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Cold Chain & Refrigerated Logistics",
+        "en": "Cold Chain",
         "am": "የቀዘቀዘ ሰንሰለት አቅርቦት",
         "om": "Sanyiin Qabbanaa'aa",
         "ti": "ሎጂስቲክስ ሰንሰለት ቀዝቃዛ"
@@ -76,7 +81,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cold Chain & Refrigerated Logistics",
+        "Refrigerated Logistics"
+      ],
       "redirects": []
     },
     {
@@ -189,7 +197,7 @@
       "parent_code": "cold-chain-logistics",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Cold Chain & Refrigerated Logistics",
+        "en": "Other Cold Chain",
         "am": "ሌሎች የቀዘቀዘ ሰንሰለት አቅርቦት",
         "om": "Sanyiin Qabbanaa'aa Biroo",
         "ti": "ካልኦት ሎጂስቲክስ ሰንሰለት ቀዝቃዛ"
@@ -206,7 +214,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Cold Chain & Refrigerated Logistics",
+        "Refrigerated Logistics"
+      ],
       "redirects": []
     },
     {
@@ -215,10 +226,10 @@
       "parent_code": "logistics-supply-chain",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Courier & Delivery Services",
-        "am": "የኮሪየርና የመላኪያ አገልግሎት",
+        "en": "Courier Services",
+        "am": "የኮሪየር",
         "om": "Tajaajila Geejjibaa",
-        "ti": "ኣገልግሎት ኮሪየርን ምልካዕን"
+        "ti": "ኣገልግሎት ኮሪየር"
       },
       "slug": "courier-delivery-services",
       "description": "",
@@ -232,7 +243,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Courier & Delivery Services",
+        "Delivery Services",
+        "ኣገልግሎት ኮሪየርን ምልካዕን",
+        "የኮሪየርና የመላኪያ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -345,10 +361,10 @@
       "parent_code": "courier-delivery-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Courier & Delivery Services",
-        "am": "ሌሎች የኮሪየርና የመላኪያ አገልግሎት",
+        "en": "Other Courier Services",
+        "am": "ሌሎች የኮሪየር",
         "om": "Tajaajila Geejjibaa Biroo",
-        "ti": "ካልኦት ኣገልግሎት ኮሪየርን ምልካዕን"
+        "ti": "ካልኦት ኣገልግሎት ኮሪየር"
       },
       "slug": "other-courier-delivery-services",
       "description": null,
@@ -362,7 +378,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Delivery Services",
+        "Other Courier & Delivery Services",
+        "ሌሎች የኮሪየርና የመላኪያ አገልግሎት",
+        "ካልኦት ኣገልግሎት ኮሪየርን ምልካዕን"
+      ],
       "redirects": []
     },
     {
@@ -371,10 +392,10 @@
       "parent_code": "logistics-supply-chain",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Equipment Rental & Leasing",
-        "am": "የመሳሪያ ኪራይና ኪራይ",
+        "en": "Equipment Rental",
+        "am": "የመሳሪያ ኪራይ",
         "om": "Kireeyyi Meeshaa",
-        "ti": "ኪራይ ኣቑሑን ምክራይን"
+        "ti": "ኪራይ ኣቑሑ"
       },
       "slug": "equipment-rental-leasing",
       "description": "",
@@ -388,7 +409,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Equipment Rental & Leasing",
+        "Leasing",
+        "ኪራይ ኣቑሑን ምክራይን",
+        "የመሳሪያ ኪራይና ኪራይ"
+      ],
       "redirects": []
     },
     {
@@ -501,10 +527,10 @@
       "parent_code": "equipment-rental-leasing",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Equipment Rental & Leasing",
-        "am": "ሌሎች የመሳሪያ ኪራይና ኪራይ",
+        "en": "Other Equipment Rental",
+        "am": "ሌሎች የመሳሪያ ኪራይ",
         "om": "Kireeyyi Meeshaa Biroo",
-        "ti": "ካልኦት ኪራይ ኣቑሑን ምክራይን"
+        "ti": "ካልኦት ኪራይ ኣቑሑ"
       },
       "slug": "other-equipment-rental-leasing",
       "description": null,
@@ -518,7 +544,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Leasing",
+        "Other Equipment Rental & Leasing",
+        "ሌሎች የመሳሪያ ኪራይና ኪራይ",
+        "ካልኦት ኪራይ ኣቑሑን ምክራይን"
+      ],
       "redirects": []
     },
     {
@@ -709,9 +740,9 @@
       "parent_code": "inventory-management-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Barcode & RFID",
+        "en": "Barcode",
         "am": "ሰ ምዳ26",
-        "om": "Barcode fi RFID",
+        "om": "Barcode",
         "ti": "ምዳ26 ሰ"
       },
       "slug": "barcode-rfid",
@@ -726,7 +757,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barcode & RFID",
+        "Barcode fi RFID",
+        "RFID"
+      ],
       "redirects": []
     },
     {
@@ -995,10 +1030,10 @@
       "parent_code": "logistics-supply-chain",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Moving & Relocation Services",
-        "am": "የመንቀሳቀስና የምድቅጻት አገልግሎት",
+        "en": "Moving Services",
+        "am": "የመንቀሳቀስ",
         "om": "Tajaajila Sochii",
-        "ti": "ኣገልግሎት ምንቃስን ምዕራይን"
+        "ti": "ኣገልግሎት ምንቃስ"
       },
       "slug": "moving-relocation-services",
       "description": "",
@@ -1012,7 +1047,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Moving & Relocation Services",
+        "Relocation Services",
+        "ኣገልግሎት ምንቃስን ምዕራይን",
+        "የመንቀሳቀስና የምድቅጻት አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -1125,10 +1165,10 @@
       "parent_code": "moving-relocation-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Moving & Relocation Services",
-        "am": "ሌሎች የመንቀሳቀስና የምድቅጻት አገልግሎት",
+        "en": "Other Moving Services",
+        "am": "ሌሎች የመንቀሳቀስ",
         "om": "Tajaajila Sochii Biroo",
-        "ti": "ካልኦት ኣገልግሎት ምንቃስን ምዕራይን"
+        "ti": "ካልኦት ኣገልግሎት ምንቃስ"
       },
       "slug": "other-moving-relocation-services",
       "description": null,
@@ -1142,7 +1182,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Moving & Relocation Services",
+        "Relocation Services",
+        "ሌሎች የመንቀሳቀስና የምድቅጻት አገልግሎት",
+        "ካልኦት ኣገልግሎት ምንቃስን ምዕራይን"
+      ],
       "redirects": []
     },
     {
@@ -1307,10 +1352,10 @@
       "parent_code": "logistics-supply-chain",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Warehousing & Storage Services",
-        "am": "የመጋዘንና ማከማቻ አገልግሎት",
+        "en": "Warehousing Services",
+        "am": "የመጋዘን",
         "om": "Tajaajila Kuusaa",
-        "ti": "ኣገልግሎት መጋዘንን መኽዘንን"
+        "ti": "ኣገልግሎት መጋዘን"
       },
       "slug": "warehousing-storage-services",
       "description": "",
@@ -1324,7 +1369,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Storage Services",
+        "Warehousing & Storage Services",
+        "ኣገልግሎት መጋዘንን መኽዘንን",
+        "የመጋዘንና ማከማቻ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -1437,10 +1487,10 @@
       "parent_code": "warehousing-storage-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Warehousing & Storage Services",
-        "am": "ሌሎች የመጋዘንና ማከማቻ አገልግሎት",
+        "en": "Other Warehousing Services",
+        "am": "ሌሎች የመጋዘን",
         "om": "Tajaajila Kuusaa Biroo",
-        "ti": "ካልኦት ኣገልግሎት መጋዘንን መኽዘንን"
+        "ti": "ካልኦት ኣገልግሎት መጋዘን"
       },
       "slug": "other-warehousing-storage-services",
       "description": null,
@@ -1454,7 +1504,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Warehousing & Storage Services",
+        "Storage Services",
+        "ሌሎች የመጋዘንና ማከማቻ አገልግሎት",
+        "ካልኦት ኣገልግሎት መጋዘንን መኽዘንን"
+      ],
       "redirects": []
     },
     {
@@ -1463,10 +1518,10 @@
       "parent_code": "logistics-supply-chain",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Logistics & Supply Chain",
+        "en": "Other Logistics",
         "am": "ሌሎች ጎደኛ አቅርቦት ሰንሰለት",
-        "om": "Geejjiba fi Sanyiibsa Biroo",
-        "ti": "ካልኦት ሎጂስቲክስን ሰንሰለት ኣቅርቦትን"
+        "om": "Geejjiba",
+        "ti": "ካልኦት ሎጂስቲክስ"
       },
       "slug": "other-logistics-supply-chain",
       "description": null,
@@ -1480,7 +1535,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Geejjiba fi Sanyiibsa Biroo",
+        "Other Logistics & Supply Chain",
+        "Supply Chain",
+        "ካልኦት ሎጂስቲክስን ሰንሰለት ኣቅርቦትን"
+      ],
       "redirects": []
     }
   ]

@@ -39,10 +39,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Waste Management & Recycling",
-        "am": "የቆሻሻ አስተዳደርና እንደገና ጥቅም ላይ ማዋል",
-        "om": "Qulqullina fi Dhiyeessituu",
-        "ti": "ኣስተዳደር ቆሻሻን እንዳግም ምጥቃምን"
+        "en": "Waste Management",
+        "am": "የቆሻሻ አስተዳደር",
+        "om": "Qulqullina",
+        "ti": "ኣስተዳደር ቆሻሻ"
       },
       "slug": "waste-management-recycling",
       "description": "Waste collection, recycling equipment, waste processing, and resource recovery services.",
@@ -57,11 +57,15 @@
       "meta_title": null,
       "meta_description": null,
       "aliases": [
-        "tractor",
-        "tiraaktara",
+        "Qulqullina fi Dhiyeessituu",
+        "Recycling",
+        "Waste Management & Recycling",
         "farm machine",
+        "tiraaktara",
+        "tractor",
         "ትራክተር",
-        "ትራክተር"
+        "ኣስተዳደር ቆሻሻን እንዳግም ምጥቃምን",
+        "የቆሻሻ አስተዳደርና እንደገና ጥቅም ላይ ማዋል"
       ],
       "redirects": []
     },
@@ -71,10 +75,10 @@
       "parent_code": "waste-management-recycling",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Compost & Organic Waste Processing",
-        "am": "የኮምፖስትና ኦርጋኒክ ቆሻሻ አያያዥ",
-        "om": "Compost fi Qulqullina",
-        "ti": "ምስራዕ ኮምፖስትን ኦርጋኒክን"
+        "en": "Compost",
+        "am": "የኮምፖስት",
+        "om": "Compost",
+        "ti": "ምስራዕ ኮምፖስት"
       },
       "slug": "compost-organic-waste",
       "description": "",
@@ -88,7 +92,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compost & Organic Waste Processing",
+        "Compost fi Qulqullina",
+        "Organic Waste Processing",
+        "ምስራዕ ኮምፖስትን ኦርጋኒክን",
+        "የኮምፖስትና ኦርጋኒክ ቆሻሻ አያያዥ"
+      ],
       "redirects": []
     },
     {
@@ -201,10 +211,10 @@
       "parent_code": "compost-organic-waste",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Compost & Organic Waste Processing",
-        "am": "ሌሎች የኮምፖስትና ኦርጋኒክ ቆሻሻ አያያዥ",
-        "om": "Compost fi Qulqullina Biroo",
-        "ti": "ካልኦት ምስራዕ ኮምፖስትን ኦርጋኒክን"
+        "en": "Other Compost",
+        "am": "ሌሎች የኮምፖስት",
+        "om": "Compost",
+        "ti": "ካልኦት ምስራዕ ኮምፖስት"
       },
       "slug": "other-compost-organic-waste",
       "description": null,
@@ -218,7 +228,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compost fi Qulqullina Biroo",
+        "Organic Waste Processing",
+        "Other Compost & Organic Waste Processing",
+        "ሌሎች የኮምፖስትና ኦርጋኒክ ቆሻሻ አያያዥ",
+        "ካልኦት ምስራዕ ኮምፖስትን ኦርጋኒክን"
+      ],
       "redirects": []
     },
     {
@@ -695,10 +711,10 @@
       "parent_code": "waste-management-recycling",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Recycling Equipment & Services",
-        "am": "የእንደገና ጥቅም ማዋል መሳሪያዎችና አገልግሎት",
-        "om": "Meeshaalee fi Tajaajila Dhiyeessituu",
-        "ti": "ናይ እንዳግም ምጥቃም ኣቑሑን ኣገልግሎትን"
+        "en": "Recycling Equipment",
+        "am": "የእንደገ",
+        "om": "Meeshaalee",
+        "ti": "ናይ እንዳግም ምጥቃም ኣቑሑ"
       },
       "slug": "recycling-equipment-services",
       "description": "",
@@ -712,7 +728,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Meeshaalee fi Tajaajila Dhiyeessituu",
+        "Recycling Equipment & Services",
+        "Services",
+        "ናይ እንዳግም ምጥቃም ኣቑሑን ኣገልግሎትን",
+        "የእንደገና ጥቅም ማዋል መሳሪያዎችና አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -825,10 +847,10 @@
       "parent_code": "recycling-equipment-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Recycling Equipment & Services",
-        "am": "ሌሎች የእንደገና ጥቅም ማዋል መሳሪያዎችና አገልግሎት",
-        "om": "Meeshaalee fi Tajaajila Dhiyeessituu Biroo",
-        "ti": "ካልኦት ናይ እንዳግም ምጥቃም ኣቑሑን ኣገልግሎትን"
+        "en": "Other Recycling Equipment",
+        "am": "ሌሎች የእንደገ",
+        "om": "Meeshaalee",
+        "ti": "ካልኦት ናይ እንዳግም ምጥቃም ኣቑሑ"
       },
       "slug": "other-recycling-equipment-services",
       "description": null,
@@ -842,7 +864,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Meeshaalee fi Tajaajila Dhiyeessituu Biroo",
+        "Other Recycling Equipment & Services",
+        "Services",
+        "ሌሎች የእንደገና ጥቅም ማዋል መሳሪያዎችና አገልግሎት",
+        "ካልኦት ናይ እንዳግም ምጥቃም ኣቑሑን ኣገልግሎትን"
+      ],
       "redirects": []
     },
     {
@@ -1163,10 +1191,10 @@
       "parent_code": "waste-management-recycling",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Waste Processing & Treatment",
-        "am": "የቆሻሻ አያያዝና አያያዝ",
+        "en": "Waste Processing",
+        "am": "የቆሻሻ አያያዝ",
         "om": "Qopheessituu Qulqullinaa",
-        "ti": "ምስራዕን ምክልኻስን ቆሻሻ"
+        "ti": "ምስራዕ"
       },
       "slug": "waste-processing-treatment",
       "description": "",
@@ -1180,7 +1208,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Treatment",
+        "Waste Processing & Treatment",
+        "ምስራዕን ምክልኻስን ቆሻሻ",
+        "የቆሻሻ አያያዝና አያያዝ"
+      ],
       "redirects": []
     },
     {
@@ -1241,9 +1274,9 @@
       "parent_code": "waste-processing-treatment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Sorting & Treatment",
+        "en": "Sorting",
         "am": "ሰ ምር",
-        "om": "Saruu fi Yaalii",
+        "om": "Saruu",
         "ti": "ምር ሰ"
       },
       "slug": "sorting-treatment",
@@ -1258,7 +1291,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Saruu fi Yaalii",
+        "Sorting & Treatment",
+        "Treatment"
+      ],
       "redirects": []
     },
     {
@@ -1293,10 +1330,10 @@
       "parent_code": "waste-processing-treatment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Waste Processing & Treatment",
-        "am": "ሌሎች የቆሻሻ አያያዝና አያያዝ",
+        "en": "Other Waste Processing",
+        "am": "ሌሎች የቆሻሻ አያያዝ",
         "om": "Qopheessituu Qulqullinaa Biroo",
-        "ti": "ካልኦት ምስራዕን ምክልኻስን ቆሻሻ"
+        "ti": "ካልኦት ምስራዕ"
       },
       "slug": "other-waste-processing-treatment",
       "description": null,
@@ -1310,7 +1347,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Waste Processing & Treatment",
+        "Treatment",
+        "ሌሎች የቆሻሻ አያያዝና አያያዝ",
+        "ካልኦት ምስራዕን ምክልኻስን ቆሻሻ"
+      ],
       "redirects": []
     },
     {
@@ -1319,10 +1361,10 @@
       "parent_code": "waste-management-recycling",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Waste Management & Recycling",
-        "am": "ሌሎች የቆሻሻ አስተዳደርና እንደገና ጥቅም ላይ ማዋል",
-        "om": "Qulqullina fi Dhiyeessituu Biroo",
-        "ti": "ካልኦት ኣስተዳደር ቆሻሻን እንዳግም ምጥቃምን"
+        "en": "Other Waste Management",
+        "am": "ሌሎች የቆሻሻ አስተዳደር",
+        "om": "Qulqullina",
+        "ti": "ካልኦት ኣስተዳደር ቆሻሻ"
       },
       "slug": "other-waste-management-recycling",
       "description": null,
@@ -1336,7 +1378,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Waste Management & Recycling",
+        "Qulqullina fi Dhiyeessituu Biroo",
+        "Recycling",
+        "ሌሎች የቆሻሻ አስተዳደርና እንደገና ጥቅም ላይ ማዋል",
+        "ካልኦት ኣስተዳደር ቆሻሻን እንዳግም ምጥቃምን"
+      ],
       "redirects": []
     }
   ]

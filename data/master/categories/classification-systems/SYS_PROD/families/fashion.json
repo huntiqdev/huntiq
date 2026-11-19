@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "fashion",
       "names": {
-        "en": "Fashion & Beauty",
-        "am": "ፋሽንና አልባሳት",
-        "om": "Faashinii fi Uffata",
-        "ti": "ፋሽንን ክዳውንትን"
+        "en": "Fashion",
+        "am": "ፋሽን",
+        "om": "Faashinii",
+        "ti": "ፋሽን"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Beauty",
+        "Faashinii fi Uffata",
+        "Fashion & Beauty",
+        "ፋሽንና አልባሳት",
+        "ፋሽንን ክዳውንትን"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +67,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "shoes",
       "names": {
-        "en": "Shoes & Footwear",
+        "en": "Shoes",
         "am": "ጫማዎች",
         "om": "Kophee",
-        "ti": "ሳእኒታትን ጫማታትን"
+        "ti": "ሳእኒታት"
       },
       "description": null,
       "level": 1,
@@ -77,7 +83,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Boots",
+        "Footwear",
+        "Sandals",
+        "Shoes & Footwear",
+        "Sneakers",
+        "ሳእኒታትን ጫማታትን"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +100,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "women-traditional-habesha-kemis",
       "names": {
-        "en": "Women's Traditional Habesha Kemis & Dresses",
-        "am": "የሴቶች ባህላዊ የሀበሻ ቀሚሶችና አልባሳት",
+        "en": "Women's Traditional Habesha Kemis",
+        "am": "የሴቶች ባህላዊ የሀበሻ ቀሚሶች",
         "om": "Uffata Aadaa Dubartootaa Qamisii Habashaa",
-        "ti": "ናይ ደቂ ኣንስትዮ ባህላዊ ናይ ሓበሻ ቀሚሳትን ክዳውንትን"
+        "ti": "ናይ ደቂ ኣንስትዮ ባህላዊ ናይ ሓበሻ ቀሚሳት"
       },
       "description": "Handcrafted women's traditional Ethiopian dresses made from handspun cotton (Shema) with intricate Tilfi embroidery",
       "level": 2,
@@ -103,7 +116,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dresses",
+        "Women's Traditional Habesha Kemis & Dresses",
+        "ናይ ደቂ ኣንስትዮ ባህላዊ ናይ ሓበሻ ቀሚሳትን ክዳውንትን",
+        "የሴቶች ባህላዊ የሀበሻ ቀሚሶችና አልባሳት"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +131,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-traditional-habesha-attire",
       "names": {
-        "en": "Specialized & Custom Traditional Habesha Attire",
-        "am": "ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -129,7 +147,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire",
+        "Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Specialized & Custom Traditional Habesha Attire",
+        "ልዩና ብጁ Traditional Habesha Attire",
+        "ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +163,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "handwoven-tilfi-habesha-kemis",
       "names": {
-        "en": "Handwoven Tilfi & Tibeb Embroidered Habesha Kemis",
-        "am": "በእጅ የተሸመነ የጥልፍና የጥበብ የሀበሻ ቀሚስ",
+        "en": "Handwoven Tilfi",
+        "am": "በእጅ የተሸመነ የጥልፍ",
         "om": "Qamisii Habashaa Harka-Dhaawame Tilibii Qabu",
-        "ti": "ብኢድ ዝተሸለመ ናይ ጥልፍን ጥበብን ናይ ሓበሻ ቀሚስ"
+        "ti": "ብኢድ ዝተሸለመ ናይ ጥልፍ"
       },
       "description": "Exquisite handspun cotton gowns decorated with colorful geometric Tibeb borders and necklines",
       "level": 3,
@@ -155,7 +179,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Handwoven Tilfi & Tibeb Embroidered Habesha Kemis",
+        "Tibeb Embroidered Habesha Kemis",
+        "በእጅ የተሸመነ የጥልፍና የጥበብ የሀበሻ ቀሚስ",
+        "ብኢድ ዝተሸለመ ናይ ጥልፍን ጥበብን ናይ ሓበሻ ቀሚስ"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +194,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-traditional-habesha-attire-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Traditional Habesha Attire Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -181,7 +210,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Premium Grade Certified Specialized & Custom Traditional Habesha Attire Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Traditional Habesha Attire",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +226,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-traditional-habesha-attire-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Traditional Habesha Attire Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Traditional Habesha Attire መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -207,7 +242,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Component",
+        "Heavy-Duty Commercial Specialized & Custom Traditional Habesha Attire Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Traditional Habesha Attire",
+        "ጠንካራ የንግድ ልዩና ብጁ Traditional Habesha Attire መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +258,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-traditional-habesha-attire-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Traditional Habesha Attire Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -233,7 +274,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Traditional Habesha Attire Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Traditional Habesha Attire",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +290,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-traditional-habesha-attire-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Traditional Habesha Attire Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Traditional Habesha Attire ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -259,7 +306,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Custom Traditional Habesha Attire Assembly",
+        "Standard Industrial Specialized & Custom Traditional Habesha Attire Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Traditional Habesha Attire ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +322,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-traditional-habesha-attire-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Traditional Habesha Attire System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Traditional Habesha Attire ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -285,7 +338,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Traditional Habesha Attire System",
+        "Custom Traditional Habesha Attire System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Traditional Habesha Attire ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +354,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-traditional-habesha-attire-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Traditional Habesha Attire Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Traditional Habesha Attire ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -311,7 +370,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Module",
+        "Digital Automated Specialized & Custom Traditional Habesha Attire Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Traditional Habesha Attire ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -321,10 +386,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-traditional-habesha-attire-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Traditional Habesha Attire Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -337,7 +402,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Device",
+        "High-Capacity Multi-Function Specialized & Custom Traditional Habesha Attire Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Traditional Habesha Attire",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -347,10 +418,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-traditional-habesha-attire-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Traditional Habesha Attire Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -363,7 +434,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Reinforced Weatherproof Specialized & Custom Traditional Habesha Attire Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Traditional Habesha Attire",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +450,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-traditional-habesha-attire-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Traditional Habesha Attire Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Traditional Habesha Attire ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -389,7 +466,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Precision Engineered Specialized & Custom Traditional Habesha Attire Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Traditional Habesha Attire ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +482,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-traditional-habesha-attire-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Traditional Habesha Attire Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Traditional Habesha Attire ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -415,7 +498,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Traditional Habesha Attire Pack",
+        "Custom Traditional Habesha Attire Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Traditional Habesha Attire ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -425,10 +514,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-traditional-habesha-attire-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Traditional Habesha Attire Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Traditional Habesha Attire ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -441,7 +530,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Universal Compatible Specialized & Custom Traditional Habesha Attire Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Traditional Habesha Attire ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +546,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-traditional-habesha-attire-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Traditional Habesha Attire Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Traditional Habesha Attire መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -467,7 +562,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Professional Grade Specialized & Custom Traditional Habesha Attire Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Traditional Habesha Attire መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +578,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-traditional-habesha-attire-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Traditional Habesha Attire Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Traditional Habesha Attire መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -493,7 +594,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Specialized Laboratory Specialized & Custom Traditional Habesha Attire Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Traditional Habesha Attire መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -503,10 +610,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-traditional-habesha-attire-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Traditional Habesha Attire Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Traditional Habesha Attire ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -519,7 +626,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Unit",
+        "High-Speed Synchronized Specialized & Custom Traditional Habesha Attire Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Traditional Habesha Attire",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Traditional Habesha Attire ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +642,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-traditional-habesha-attire",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Traditional Habesha Attire",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -545,7 +658,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Traditional Habesha Attire",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Traditional Habesha Attire",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +674,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-traditional-habesha-attire-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Traditional Habesha Attire Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Traditional Habesha Attire ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -571,7 +690,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Thermal Insulated Specialized & Custom Traditional Habesha Attire Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Traditional Habesha Attire ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -581,10 +706,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-traditional-habesha-attire",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Traditional Habesha Attire",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -597,7 +722,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Wireless Smart Integrated Specialized & Custom Traditional Habesha Attire",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Traditional Habesha Attire",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -607,10 +738,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-traditional-habesha-attire",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Traditional Habesha Attire",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -623,7 +754,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire",
+        "Heavy Mechanical Calibration Specialized & Custom Traditional Habesha Attire",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Traditional Habesha Attire",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -633,10 +770,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-traditional-habesha-attire-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Traditional Habesha Attire Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Traditional Habesha Attire",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -649,7 +786,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional Habesha Attire Gear",
+        "Ergonomic Safety Specialized & Custom Traditional Habesha Attire Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Traditional Habesha Attire",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -659,10 +802,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-traditional-habesha-attire-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Traditional Habesha Attire Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Traditional Habesha Attire ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Traditional Habesha Attire",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -675,7 +818,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Traditional Habesha Attire",
+        "Custom Traditional Habesha Attire Station",
+        "Modular Expandable Specialized & Custom Traditional Habesha Attire Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Traditional Habesha Attire ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Traditional Habesha Attire"
+      ],
       "redirects": []
     },
     {
@@ -685,10 +834,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-women-s-traditional-habesha-kemis-dresses",
       "names": {
-        "en": "Specialized & Custom Women's Traditional Habesha Kemis & Dresses",
-        "am": "ልዩና ብጁ Women's Traditional Habesha Kemis & Dresses",
-        "om": "Kan Addaa fi Filatamaa Women's Traditional Habesha Kemis & Dresses",
-        "ti": "ፍሉይን ዝተዳለወን Women's Traditional Habesha Kemis & Dresses"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -701,7 +850,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Women's Traditional Habesha Kemis",
+        "Dresses",
+        "Kan Addaa fi Filatamaa Women's Traditional Habesha Kemis & Dresses",
+        "Specialized & Custom Women's Traditional Habesha Kemis & Dresses",
+        "ልዩና ብጁ Women's Traditional Habesha Kemis & Dresses",
+        "ፍሉይን ዝተዳለወን Women's Traditional Habesha Kemis & Dresses"
+      ],
       "redirects": []
     }
   ]

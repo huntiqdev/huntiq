@@ -9,9 +9,9 @@
       "classification_system_code": "SYS_PROD",
       "slug": "textiles-fabrics",
       "names": {
-        "en": "Textiles & Fabrics",
+        "en": "Textiles",
         "am": "ጨርቃጨርቆች",
-        "om": "Huccuu fi Qorqorroo",
+        "om": "Huccuu",
         "ti": "ጨርቃጭርቅ"
       },
       "description": "Raw textiles, fabrics, sewing supplies, threads, and garment manufacturing materials.",
@@ -25,7 +25,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Fabrics",
+        "Huccuu fi Qorqorroo",
+        "Textiles & Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -35,7 +39,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "cotton-fabrics-textiles",
       "names": {
-        "en": "Cotton Fabrics & Textiles",
+        "en": "Cotton Fabrics",
         "am": "የጥጥ ጨርቆች",
         "om": "Qorqorroo Qorqorroo",
         "ti": "ጨርቅ ጥጥ"
@@ -51,7 +55,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cotton Fabrics & Textiles",
+        "Textiles"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +68,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "embroidery-lace",
       "names": {
-        "en": "Embroidery & Lace",
-        "am": "የስፌት ዘዬና ሌስ",
-        "om": "Embroidery fi Leesii",
-        "ti": "ስፌት ዘዬን ሌስን"
+        "en": "Embroidery",
+        "am": "የስፌት ዘዬ",
+        "om": "Embroidery",
+        "ti": "ስፌት ዘዬ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +84,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Embroidery & Lace",
+        "Embroidery fi Leesii",
+        "Lace",
+        "ስፌት ዘዬን ሌስን",
+        "የስፌት ዘዬና ሌስ"
+      ],
       "redirects": []
     },
     {
@@ -87,8 +100,8 @@
       "classification_system_code": "SYS_PROD",
       "slug": "industrial-textiles",
       "names": {
-        "en": "Industrial & Technical Textiles",
-        "am": "የኢንዱስትሪና የቴክኒክ ጨርቆች",
+        "en": "Industrial",
+        "am": "የኢንዱስትሪ",
         "om": "Huccuu Industirii",
         "ti": "ጨርቃጭርቅ ኢንዱስትሪ"
       },
@@ -103,7 +116,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Industrial & Technical Textiles",
+        "Technical Textiles",
+        "የኢንዱስትሪና የቴክኒክ ጨርቆች"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +130,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "sewing-supplies-notions",
       "names": {
-        "en": "Sewing Supplies & Notions",
-        "am": "የስፌት እቃዎችና ቁሶች",
+        "en": "Sewing Supplies",
+        "am": "የስፌት እቃዎች",
         "om": "Meeshaalee Riituu",
-        "ti": "ናይ ስፌት ኣቑሑን ቁሶችን"
+        "ti": "ናይ ስፌት ኣቑሑ"
       },
       "description": "",
       "level": 1,
@@ -129,7 +146,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Notions",
+        "Sewing Supplies & Notions",
+        "ናይ ስፌት ኣቑሑን ቁሶችን",
+        "የስፌት እቃዎችና ቁሶች"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +161,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "synthetic-fabrics",
       "names": {
-        "en": "Synthetic & Blended Fabrics",
-        "am": "ሰናይቲክና ድብልቅ ጨርቆች",
+        "en": "Synthetic",
+        "am": "ሰናይቲክ",
         "om": "Qorqorroo Makaa",
-        "ti": "ሲንቴቲክን ድብልቅን ጨርቅ"
+        "ti": "ሲንቴቲክ"
       },
       "description": "",
       "level": 1,
@@ -155,7 +177,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics",
+        "Synthetic & Blended Fabrics",
+        "ሰናይቲክና ድብልቅ ጨርቆች",
+        "ሲንቴቲክን ድብልቅን ጨርቅ"
+      ],
       "redirects": []
     },
     {
@@ -165,7 +192,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "traditional-woven-fabrics",
       "names": {
-        "en": "Traditional & Woven Fabrics",
+        "en": "Traditional",
         "am": "ባህላዊ የተደበዱ ጨርቆች",
         "om": "Qorqorroo Aadaa",
         "ti": "ባህላዊ ዝተጠቕለ ጨርቅ"
@@ -181,7 +208,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Traditional & Woven Fabrics",
+        "Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +221,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "upholstery-furnishing-fabrics",
       "names": {
-        "en": "Upholstery & Furnishing Fabrics",
-        "am": "የመክሰሻና የማስዋቢያ ጨርቆች",
+        "en": "Upholstery",
+        "am": "የመክሰሻ",
         "om": "Qorqorroo Meeshaa",
-        "ti": "ጨርቅ ምዕላይን ማስዋቢያን"
+        "ti": "ጨርቅ ምዕላይ"
       },
       "description": "",
       "level": 1,
@@ -207,7 +237,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Furnishing Fabrics",
+        "Upholstery & Furnishing Fabrics",
+        "የመክሰሻና የማስዋቢያ ጨርቆች",
+        "ጨርቅ ምዕላይን ማስዋቢያን"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +252,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-textiles-fabrics",
       "names": {
-        "en": "Specialized & Custom Textiles & Fabrics",
-        "am": "ልዩና ብጁ Textiles & Fabrics",
-        "om": "Kan Addaa fi Filatamaa Textiles & Fabrics",
-        "ti": "ፍሉይን ዝተዳለወን Textiles & Fabrics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -233,7 +268,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Textiles",
+        "Fabrics",
+        "Kan Addaa fi Filatamaa Textiles & Fabrics",
+        "Specialized & Custom Textiles & Fabrics",
+        "ልዩና ብጁ Textiles & Fabrics",
+        "ፍሉይን ዝተዳለወን Textiles & Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -633,9 +675,9 @@
       "classification_system_code": "SYS_PROD",
       "slug": "zippers-buttons",
       "names": {
-        "en": "Zippers & Buttons",
+        "en": "Zippers",
         "am": "ዚ ስ",
-        "om": "Zipper fi Buttona",
+        "om": "Zipper",
         "ti": "ስ ዚ"
       },
       "description": "",
@@ -649,7 +691,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buttons",
+        "Zipper fi Buttona",
+        "Zippers & Buttons"
+      ],
       "redirects": []
     },
     {
@@ -971,10 +1017,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-cotton-fabrics-textiles",
       "names": {
-        "en": "Specialized & Custom Cotton Fabrics & Textiles",
-        "am": "ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -987,7 +1033,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Specialized & Custom Cotton Fabrics & Textiles",
+        "Textiles",
+        "ልዩና ብጁ Cotton Fabrics & Textiles",
+        "ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1050,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-embroidery-lace",
       "names": {
-        "en": "Specialized & Custom Embroidery & Lace",
-        "am": "ልዩና ብጁ Embroidery & Lace",
-        "om": "Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1013,7 +1066,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Lace",
+        "Specialized & Custom Embroidery & Lace",
+        "ልዩና ብጁ Embroidery & Lace",
+        "ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1083,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-industrial-technical-textiles",
       "names": {
-        "en": "Specialized & Custom Industrial & Technical Textiles",
-        "am": "ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1039,7 +1099,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Specialized & Custom Industrial & Technical Textiles",
+        "Technical Textiles",
+        "ልዩና ብጁ Industrial & Technical Textiles",
+        "ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1116,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-sewing-supplies-notions",
       "names": {
-        "en": "Specialized & Custom Sewing Supplies & Notions",
-        "am": "ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1065,7 +1132,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions",
+        "Specialized & Custom Sewing Supplies & Notions",
+        "ልዩና ብጁ Sewing Supplies & Notions",
+        "ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1149,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-synthetic-blended-fabrics",
       "names": {
-        "en": "Specialized & Custom Synthetic & Blended Fabrics",
-        "am": "ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1091,7 +1165,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics",
+        "Custom Synthetic",
+        "Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Specialized & Custom Synthetic & Blended Fabrics",
+        "ልዩና ብጁ Synthetic & Blended Fabrics",
+        "ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1182,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-traditional-woven-fabrics",
       "names": {
-        "en": "Specialized & Custom Traditional & Woven Fabrics",
-        "am": "ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1117,7 +1198,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Specialized & Custom Traditional & Woven Fabrics",
+        "Woven Fabrics",
+        "ልዩና ብጁ Traditional & Woven Fabrics",
+        "ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1215,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-upholstery-furnishing-fabrics",
       "names": {
-        "en": "Specialized & Custom Upholstery & Furnishing Fabrics",
-        "am": "ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1143,7 +1231,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics",
+        "Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Specialized & Custom Upholstery & Furnishing Fabrics",
+        "ልዩና ብጁ Upholstery & Furnishing Fabrics",
+        "ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -1673,10 +1768,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-cotton-fabrics-textiles-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Cotton Fabrics & Textiles Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1689,7 +1784,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Premium Grade Certified Specialized & Custom Cotton Fabrics & Textiles Unit",
+        "Textiles Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1699,10 +1801,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-cotton-fabrics-textiles-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Cotton Fabrics & Textiles Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Cotton Fabrics & Textiles መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1715,7 +1817,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Heavy-Duty Commercial Specialized & Custom Cotton Fabrics & Textiles Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Component",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles",
+        "ጠንካራ የንግድ ልዩና ብጁ Cotton Fabrics & Textiles መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -1725,10 +1834,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-cotton-fabrics-textiles-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Cotton Fabrics & Textiles Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1741,7 +1850,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Eco-Friendly Energy-Saving Specialized & Custom Cotton Fabrics & Textiles Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Model",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1751,10 +1867,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-cotton-fabrics-textiles-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Cotton Fabrics & Textiles Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Cotton Fabrics & Textiles ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1767,7 +1883,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Custom Cotton Fabrics",
+        "Standard Industrial Specialized & Custom Cotton Fabrics & Textiles Assembly",
+        "Textiles Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Cotton Fabrics & Textiles ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1777,10 +1900,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-cotton-fabrics-textiles-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Cotton Fabrics & Textiles System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Cotton Fabrics & Textiles ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1793,7 +1916,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Cotton Fabrics & Textiles System",
+        "Custom Cotton Fabrics",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles System",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Cotton Fabrics & Textiles ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1803,10 +1933,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-cotton-fabrics-textiles-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Cotton Fabrics & Textiles Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Cotton Fabrics & Textiles ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1819,7 +1949,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Digital Automated Specialized & Custom Cotton Fabrics & Textiles Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Module",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Cotton Fabrics & Textiles ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1829,10 +1966,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-cotton-fabrics-textiles-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Cotton Fabrics & Textiles Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1845,7 +1982,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "High-Capacity Multi-Function Specialized & Custom Cotton Fabrics & Textiles Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Cotton Fabrics & Textiles",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1855,10 +1999,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-cotton-fabrics-textiles-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Cotton Fabrics & Textiles Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1871,7 +2015,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Reinforced Weatherproof Specialized & Custom Cotton Fabrics & Textiles Fixture",
+        "Textiles Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1881,10 +2032,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-cotton-fabrics-textiles-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Cotton Fabrics & Textiles Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Cotton Fabrics & Textiles ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1897,7 +2048,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Precision Engineered Specialized & Custom Cotton Fabrics & Textiles Hardware",
+        "Textiles Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Cotton Fabrics & Textiles ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1907,10 +2065,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-cotton-fabrics-textiles-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Cotton Fabrics & Textiles Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Cotton Fabrics & Textiles ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1923,7 +2081,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Custom Fabricated Specialized & Custom Cotton Fabrics & Textiles Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Pack",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Cotton Fabrics & Textiles ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1933,10 +2098,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-cotton-fabrics-textiles-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Cotton Fabrics & Textiles Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Cotton Fabrics & Textiles ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1949,7 +2114,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Kit",
+        "Universal Compatible Specialized & Custom Cotton Fabrics & Textiles Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Cotton Fabrics & Textiles ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1959,10 +2131,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-cotton-fabrics-textiles-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Cotton Fabrics & Textiles Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Cotton Fabrics & Textiles መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1975,7 +2147,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Professional Grade Specialized & Custom Cotton Fabrics & Textiles Tooling",
+        "Textiles Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Cotton Fabrics & Textiles መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -1985,10 +2164,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-cotton-fabrics-textiles-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Cotton Fabrics & Textiles Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Cotton Fabrics & Textiles መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2001,7 +2180,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Specialized Laboratory Specialized & Custom Cotton Fabrics & Textiles Tester",
+        "Textiles Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Cotton Fabrics & Textiles መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2011,10 +2197,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-cotton-fabrics-textiles-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Cotton Fabrics & Textiles Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Cotton Fabrics & Textiles ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2027,7 +2213,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "High-Speed Synchronized Specialized & Custom Cotton Fabrics & Textiles Unit",
+        "Textiles Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Cotton Fabrics & Textiles ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -2037,10 +2230,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-cotton-fabrics-textiles",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Cotton Fabrics & Textiles",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -2053,7 +2246,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Cotton Fabrics & Textiles",
+        "Textiles",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Cotton Fabrics & Textiles",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2063,10 +2263,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-cotton-fabrics-textiles-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Cotton Fabrics & Textiles Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Cotton Fabrics & Textiles ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2079,7 +2279,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Panel",
+        "Thermal Insulated Specialized & Custom Cotton Fabrics & Textiles Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Cotton Fabrics & Textiles ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2089,10 +2296,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-cotton-fabrics-textiles",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Cotton Fabrics & Textiles",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2105,7 +2312,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles",
+        "Wireless Smart Integrated Specialized & Custom Cotton Fabrics & Textiles",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Cotton Fabrics & Textiles",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2115,10 +2329,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-cotton-fabrics-textiles",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Cotton Fabrics & Textiles",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2131,7 +2345,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Heavy Mechanical Calibration Specialized & Custom Cotton Fabrics & Textiles",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2141,10 +2362,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-cotton-fabrics-textiles-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Cotton Fabrics & Textiles Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Cotton Fabrics & Textiles",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2157,7 +2378,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cotton Fabrics",
+        "Ergonomic Safety Specialized & Custom Cotton Fabrics & Textiles Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Textiles Gear",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Cotton Fabrics & Textiles",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2167,10 +2395,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-cotton-fabrics-textiles-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Cotton Fabrics & Textiles Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Cotton Fabrics & Textiles ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2183,7 +2411,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Cotton Fabrics & Textiles",
+        "Custom Cotton Fabrics",
+        "Modular Expandable Specialized & Custom Cotton Fabrics & Textiles Station",
+        "Textiles Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Cotton Fabrics & Textiles ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Cotton Fabrics & Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2193,10 +2428,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-embroidery-lace-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Embroidery & Lace Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Embroidery & Lace",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2209,7 +2444,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Lace Unit",
+        "Premium Grade Certified Specialized & Custom Embroidery & Lace Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Embroidery & Lace",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2219,10 +2461,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-embroidery-lace-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Embroidery & Lace Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Embroidery & Lace መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2235,7 +2477,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Heavy-Duty Commercial Specialized & Custom Embroidery & Lace Component",
+        "Lace Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Embroidery & Lace",
+        "ጠንካራ የንግድ ልዩና ብጁ Embroidery & Lace መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -2245,10 +2494,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-embroidery-lace-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Embroidery & Lace Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Embroidery & Lace",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2261,7 +2510,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Eco-Friendly Energy-Saving Specialized & Custom Embroidery & Lace Model",
+        "Lace Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Embroidery & Lace",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2271,10 +2527,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-embroidery-lace-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Embroidery & Lace Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Embroidery & Lace ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2287,7 +2543,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Custom Embroidery",
+        "Lace Assembly",
+        "Standard Industrial Specialized & Custom Embroidery & Lace Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Embroidery & Lace ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2297,10 +2560,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-embroidery-lace-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Embroidery & Lace System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Embroidery & Lace ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2313,7 +2576,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Embroidery & Lace System",
+        "Custom Embroidery",
+        "Lace System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Embroidery & Lace ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2323,10 +2593,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-embroidery-lace-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Embroidery & Lace Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Embroidery & Lace ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2339,7 +2609,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Digital Automated Specialized & Custom Embroidery & Lace Module",
+        "Lace Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Embroidery & Lace ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2349,10 +2626,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-embroidery-lace-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Embroidery & Lace Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Embroidery & Lace",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2365,7 +2642,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "High-Capacity Multi-Function Specialized & Custom Embroidery & Lace Device",
+        "Lace Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Embroidery & Lace",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2375,10 +2659,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-embroidery-lace-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Embroidery & Lace Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Embroidery & Lace",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2391,7 +2675,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Lace Fixture",
+        "Reinforced Weatherproof Specialized & Custom Embroidery & Lace Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Embroidery & Lace",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2401,10 +2692,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-embroidery-lace-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Embroidery & Lace Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Embroidery & Lace ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2417,7 +2708,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Lace Hardware",
+        "Precision Engineered Specialized & Custom Embroidery & Lace Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Embroidery & Lace ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2427,10 +2725,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-embroidery-lace-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Embroidery & Lace Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Embroidery & Lace ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2443,7 +2741,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Custom Fabricated Specialized & Custom Embroidery & Lace Pack",
+        "Lace Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Embroidery & Lace ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2453,10 +2758,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-embroidery-lace-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Embroidery & Lace Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Embroidery & Lace ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2469,7 +2774,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Lace Kit",
+        "Universal Compatible Specialized & Custom Embroidery & Lace Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Embroidery & Lace ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2479,10 +2791,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-embroidery-lace-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Embroidery & Lace Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Embroidery & Lace መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2495,7 +2807,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Lace Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Professional Grade Specialized & Custom Embroidery & Lace Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Embroidery & Lace መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2505,10 +2824,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-embroidery-lace-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Embroidery & Lace Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Embroidery & Lace መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2521,7 +2840,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Lace Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Specialized Laboratory Specialized & Custom Embroidery & Lace Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Embroidery & Lace መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2531,10 +2857,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-embroidery-lace-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Embroidery & Lace Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Embroidery & Lace ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2547,7 +2873,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "High-Speed Synchronized Specialized & Custom Embroidery & Lace Unit",
+        "Lace Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Embroidery & Lace",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Embroidery & Lace ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -2557,10 +2890,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-embroidery-lace",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Embroidery & Lace",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Embroidery & Lace",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -2573,7 +2906,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Lace",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Embroidery & Lace",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Embroidery & Lace",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2583,10 +2923,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-embroidery-lace-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Embroidery & Lace Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Embroidery & Lace ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2599,7 +2939,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Lace Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Thermal Insulated Specialized & Custom Embroidery & Lace Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Embroidery & Lace ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2609,10 +2956,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-embroidery-lace",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Embroidery & Lace",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Embroidery & Lace",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2625,7 +2972,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Lace",
+        "Wireless Smart Integrated Specialized & Custom Embroidery & Lace",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Embroidery & Lace",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2635,10 +2989,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-embroidery-lace",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Embroidery & Lace",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Embroidery & Lace",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2651,7 +3005,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Heavy Mechanical Calibration Specialized & Custom Embroidery & Lace",
+        "Lace",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Embroidery & Lace",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +3022,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-embroidery-lace-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Embroidery & Lace Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Embroidery & Lace",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2677,7 +3038,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Embroidery",
+        "Ergonomic Safety Specialized & Custom Embroidery & Lace Gear",
+        "Lace Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Embroidery & Lace",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Embroidery & Lace",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2687,10 +3055,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-embroidery-lace-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Embroidery & Lace Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Embroidery & Lace ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Embroidery & Lace",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Embroidery & Lace"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2703,7 +3071,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Embroidery & Lace",
+        "Custom Embroidery",
+        "Lace Station",
+        "Modular Expandable Specialized & Custom Embroidery & Lace Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Embroidery & Lace ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Embroidery & Lace"
+      ],
       "redirects": []
     },
     {
@@ -2713,10 +3088,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-industrial-technical-textiles-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Industrial & Technical Textiles Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2729,7 +3104,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Premium Grade Certified Specialized & Custom Industrial & Technical Textiles Unit",
+        "Technical Textiles Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Industrial & Technical Textiles",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2739,10 +3121,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-industrial-technical-textiles-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Industrial & Technical Textiles Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Industrial & Technical Textiles መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2755,7 +3137,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Heavy-Duty Commercial Specialized & Custom Industrial & Technical Textiles Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Component",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Industrial & Technical Textiles",
+        "ጠንካራ የንግድ ልዩና ብጁ Industrial & Technical Textiles መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -2765,10 +3154,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-industrial-technical-textiles-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Industrial & Technical Textiles Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2781,7 +3170,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Eco-Friendly Energy-Saving Specialized & Custom Industrial & Technical Textiles Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Model",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Industrial & Technical Textiles",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2791,10 +3187,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-industrial-technical-textiles-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Industrial & Technical Textiles Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Industrial & Technical Textiles ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2807,7 +3203,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Custom Industrial",
+        "Standard Industrial Specialized & Custom Industrial & Technical Textiles Assembly",
+        "Technical Textiles Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Industrial & Technical Textiles ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2817,10 +3220,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-industrial-technical-textiles-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Industrial & Technical Textiles System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Industrial & Technical Textiles ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2833,7 +3236,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Industrial & Technical Textiles System",
+        "Custom Industrial",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles System",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Industrial & Technical Textiles ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2843,10 +3253,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-industrial-technical-textiles-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Industrial & Technical Textiles Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Industrial & Technical Textiles ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2859,7 +3269,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Digital Automated Specialized & Custom Industrial & Technical Textiles Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Module",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Industrial & Technical Textiles ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2869,10 +3286,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-industrial-technical-textiles-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Industrial & Technical Textiles Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2885,7 +3302,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "High-Capacity Multi-Function Specialized & Custom Industrial & Technical Textiles Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Industrial & Technical Textiles",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2895,10 +3319,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-industrial-technical-textiles-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Industrial & Technical Textiles Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2911,7 +3335,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Reinforced Weatherproof Specialized & Custom Industrial & Technical Textiles Fixture",
+        "Technical Textiles Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Industrial & Technical Textiles",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2921,10 +3352,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-industrial-technical-textiles-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Industrial & Technical Textiles Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Industrial & Technical Textiles ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2937,7 +3368,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Precision Engineered Specialized & Custom Industrial & Technical Textiles Hardware",
+        "Technical Textiles Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Industrial & Technical Textiles ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2947,10 +3385,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-industrial-technical-textiles-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Industrial & Technical Textiles Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Industrial & Technical Textiles ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2963,7 +3401,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Industrial & Technical Textiles Pack",
+        "Custom Industrial",
+        "Paakii Addaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Pack",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Industrial & Technical Textiles ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2973,10 +3418,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-industrial-technical-textiles-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Industrial & Technical Textiles Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Industrial & Technical Textiles ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2989,7 +3434,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Kit",
+        "Universal Compatible Specialized & Custom Industrial & Technical Textiles Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Industrial & Technical Textiles ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -2999,10 +3451,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-industrial-technical-textiles-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Industrial & Technical Textiles Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Industrial & Technical Textiles መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3015,7 +3467,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Professional Grade Specialized & Custom Industrial & Technical Textiles Tooling",
+        "Technical Textiles Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Industrial & Technical Textiles መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3025,10 +3484,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-industrial-technical-textiles-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Industrial & Technical Textiles Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Industrial & Technical Textiles መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3041,7 +3500,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Specialized Laboratory Specialized & Custom Industrial & Technical Textiles Tester",
+        "Technical Textiles Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Industrial & Technical Textiles መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3051,10 +3517,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-industrial-technical-textiles-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Industrial & Technical Textiles Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Industrial & Technical Textiles ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3067,7 +3533,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "High-Speed Synchronized Specialized & Custom Industrial & Technical Textiles Unit",
+        "Technical Textiles Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Industrial & Technical Textiles",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Industrial & Technical Textiles ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -3077,10 +3550,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-industrial-technical-textiles",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Industrial & Technical Textiles",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -3093,7 +3566,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Industrial & Technical Textiles",
+        "Technical Textiles",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Industrial & Technical Textiles",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3103,10 +3583,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-industrial-technical-textiles-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Industrial & Technical Textiles Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Industrial & Technical Textiles ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3119,7 +3599,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Panel",
+        "Thermal Insulated Specialized & Custom Industrial & Technical Textiles Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Industrial & Technical Textiles ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3129,10 +3616,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-industrial-technical-textiles",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Industrial & Technical Textiles",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3145,7 +3632,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles",
+        "Wireless Smart Integrated Specialized & Custom Industrial & Technical Textiles",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Industrial & Technical Textiles",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3155,10 +3649,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-industrial-technical-textiles",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Industrial & Technical Textiles",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3171,7 +3665,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Heavy Mechanical Calibration Specialized & Custom Industrial & Technical Textiles",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Industrial & Technical Textiles",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3181,10 +3682,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-industrial-technical-textiles-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Industrial & Technical Textiles Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Industrial & Technical Textiles",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3197,7 +3698,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Industrial",
+        "Ergonomic Safety Specialized & Custom Industrial & Technical Textiles Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Technical Textiles Gear",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Industrial & Technical Textiles",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3207,10 +3715,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-industrial-technical-textiles-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Industrial & Technical Textiles Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Industrial & Technical Textiles ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Industrial & Technical Textiles",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3223,7 +3731,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Industrial & Technical Textiles",
+        "Custom Industrial",
+        "Modular Expandable Specialized & Custom Industrial & Technical Textiles Station",
+        "Technical Textiles Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Industrial & Technical Textiles ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Industrial & Technical Textiles"
+      ],
       "redirects": []
     },
     {
@@ -3233,10 +3748,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-sewing-supplies-notions-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Sewing Supplies & Notions Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3249,7 +3764,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Unit",
+        "Premium Grade Certified Specialized & Custom Sewing Supplies & Notions Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Sewing Supplies & Notions",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3259,10 +3781,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-sewing-supplies-notions-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Sewing Supplies & Notions Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Sewing Supplies & Notions መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3275,7 +3797,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Heavy-Duty Commercial Specialized & Custom Sewing Supplies & Notions Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Component",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Sewing Supplies & Notions",
+        "ጠንካራ የንግድ ልዩና ብጁ Sewing Supplies & Notions መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -3285,10 +3814,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-sewing-supplies-notions-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Sewing Supplies & Notions Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3301,7 +3830,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Eco-Friendly Energy-Saving Specialized & Custom Sewing Supplies & Notions Model",
+        "Notions Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Sewing Supplies & Notions",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3311,10 +3847,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-sewing-supplies-notions-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Sewing Supplies & Notions Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Sewing Supplies & Notions ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3327,7 +3863,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Custom Sewing Supplies",
+        "Notions Assembly",
+        "Standard Industrial Specialized & Custom Sewing Supplies & Notions Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Sewing Supplies & Notions ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3337,10 +3880,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-sewing-supplies-notions-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Sewing Supplies & Notions System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Sewing Supplies & Notions ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3353,7 +3896,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Sewing Supplies & Notions System",
+        "Custom Sewing Supplies",
+        "Notions System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Sewing Supplies & Notions ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3363,10 +3913,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-sewing-supplies-notions-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Sewing Supplies & Notions Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Sewing Supplies & Notions ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3379,7 +3929,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Digital Automated Specialized & Custom Sewing Supplies & Notions Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Module",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Sewing Supplies & Notions ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3389,10 +3946,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-sewing-supplies-notions-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Sewing Supplies & Notions Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3405,7 +3962,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "High-Capacity Multi-Function Specialized & Custom Sewing Supplies & Notions Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Sewing Supplies & Notions",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3415,10 +3979,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-sewing-supplies-notions-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Sewing Supplies & Notions Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3431,7 +3995,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Fixture",
+        "Reinforced Weatherproof Specialized & Custom Sewing Supplies & Notions Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Sewing Supplies & Notions",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3441,10 +4012,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-sewing-supplies-notions-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Sewing Supplies & Notions Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Sewing Supplies & Notions ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3457,7 +4028,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Hardware",
+        "Precision Engineered Specialized & Custom Sewing Supplies & Notions Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Sewing Supplies & Notions ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3467,10 +4045,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-sewing-supplies-notions-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Sewing Supplies & Notions Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Sewing Supplies & Notions ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3483,7 +4061,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Sewing Supplies & Notions Pack",
+        "Custom Sewing Supplies",
+        "Notions Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Sewing Supplies & Notions ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3493,10 +4078,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-sewing-supplies-notions-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Sewing Supplies & Notions Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Sewing Supplies & Notions ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3509,7 +4094,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Kit",
+        "Universal Compatible Specialized & Custom Sewing Supplies & Notions Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Sewing Supplies & Notions ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3519,10 +4111,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-sewing-supplies-notions-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Sewing Supplies & Notions Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Sewing Supplies & Notions መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3535,7 +4127,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Tooling",
+        "Professional Grade Specialized & Custom Sewing Supplies & Notions Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Sewing Supplies & Notions መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3545,10 +4144,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-sewing-supplies-notions-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Sewing Supplies & Notions Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Sewing Supplies & Notions መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3561,7 +4160,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Tester",
+        "Specialized Laboratory Specialized & Custom Sewing Supplies & Notions Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Sewing Supplies & Notions መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3571,10 +4177,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-sewing-supplies-notions-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Sewing Supplies & Notions Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Sewing Supplies & Notions ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3587,7 +4193,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "High-Speed Synchronized Specialized & Custom Sewing Supplies & Notions Unit",
+        "Notions Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Sewing Supplies & Notions",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Sewing Supplies & Notions ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -3597,10 +4210,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-sewing-supplies-notions",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Sewing Supplies & Notions",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -3613,7 +4226,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Notions",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Sewing Supplies & Notions",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Sewing Supplies & Notions",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3623,10 +4243,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-sewing-supplies-notions-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Sewing Supplies & Notions Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Sewing Supplies & Notions ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3639,7 +4259,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Notions Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Thermal Insulated Specialized & Custom Sewing Supplies & Notions Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Sewing Supplies & Notions ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3649,10 +4276,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-sewing-supplies-notions",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Sewing Supplies & Notions",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3665,7 +4292,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions",
+        "Wireless Smart Integrated Specialized & Custom Sewing Supplies & Notions",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Sewing Supplies & Notions",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3675,10 +4309,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-sewing-supplies-notions",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Sewing Supplies & Notions",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3691,7 +4325,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Heavy Mechanical Calibration Specialized & Custom Sewing Supplies & Notions",
+        "Notions",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Sewing Supplies & Notions",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3701,10 +4342,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-sewing-supplies-notions-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Sewing Supplies & Notions Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Sewing Supplies & Notions",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3717,7 +4358,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sewing Supplies",
+        "Ergonomic Safety Specialized & Custom Sewing Supplies & Notions Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Notions Gear",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Sewing Supplies & Notions",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3727,10 +4375,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-sewing-supplies-notions-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Sewing Supplies & Notions Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Sewing Supplies & Notions ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Sewing Supplies & Notions",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3743,7 +4391,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Sewing Supplies & Notions",
+        "Custom Sewing Supplies",
+        "Modular Expandable Specialized & Custom Sewing Supplies & Notions Station",
+        "Notions Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Sewing Supplies & Notions ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Sewing Supplies & Notions"
+      ],
       "redirects": []
     },
     {
@@ -3753,10 +4408,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-synthetic-blended-fabrics-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Synthetic & Blended Fabrics Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3769,7 +4424,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Unit",
+        "Custom Synthetic",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Premium Grade Certified Specialized & Custom Synthetic & Blended Fabrics Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3779,10 +4441,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-synthetic-blended-fabrics-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Synthetic & Blended Fabrics Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Synthetic & Blended Fabrics መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3795,7 +4457,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Component",
+        "Custom Synthetic",
+        "Heavy-Duty Commercial Specialized & Custom Synthetic & Blended Fabrics Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics",
+        "ጠንካራ የንግድ ልዩና ብጁ Synthetic & Blended Fabrics መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -3805,10 +4474,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-synthetic-blended-fabrics-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Synthetic & Blended Fabrics Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3821,7 +4490,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Model",
+        "Custom Synthetic",
+        "Eco-Friendly Energy-Saving Specialized & Custom Synthetic & Blended Fabrics Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3831,10 +4507,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-synthetic-blended-fabrics-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Synthetic & Blended Fabrics Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Synthetic & Blended Fabrics ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3847,7 +4523,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Blended Fabrics Assembly",
+        "Custom Synthetic",
+        "Standard Industrial Specialized & Custom Synthetic & Blended Fabrics Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Synthetic & Blended Fabrics ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3857,10 +4540,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-synthetic-blended-fabrics-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Synthetic & Blended Fabrics System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Synthetic & Blended Fabrics ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3873,7 +4556,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics System",
+        "Compact Portable Specialized & Custom Synthetic & Blended Fabrics System",
+        "Custom Synthetic",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Synthetic & Blended Fabrics ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3883,10 +4573,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-synthetic-blended-fabrics-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Synthetic & Blended Fabrics Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Synthetic & Blended Fabrics ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3899,7 +4589,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Module",
+        "Custom Synthetic",
+        "Digital Automated Specialized & Custom Synthetic & Blended Fabrics Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Synthetic & Blended Fabrics ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3909,10 +4606,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-synthetic-blended-fabrics-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Synthetic & Blended Fabrics Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3925,7 +4622,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Device",
+        "Custom Synthetic",
+        "High-Capacity Multi-Function Specialized & Custom Synthetic & Blended Fabrics Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Synthetic & Blended Fabrics",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3935,10 +4639,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-synthetic-blended-fabrics-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Synthetic & Blended Fabrics Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3951,7 +4655,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Fixture",
+        "Custom Synthetic",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Reinforced Weatherproof Specialized & Custom Synthetic & Blended Fabrics Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3961,10 +4672,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-synthetic-blended-fabrics-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Synthetic & Blended Fabrics Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Synthetic & Blended Fabrics ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3977,7 +4688,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Hardware",
+        "Custom Synthetic",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Precision Engineered Specialized & Custom Synthetic & Blended Fabrics Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Synthetic & Blended Fabrics ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -3987,10 +4705,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-synthetic-blended-fabrics-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Synthetic & Blended Fabrics Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Synthetic & Blended Fabrics ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4003,7 +4721,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Pack",
+        "Custom Fabricated Specialized & Custom Synthetic & Blended Fabrics Pack",
+        "Custom Synthetic",
+        "Paakii Addaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Synthetic & Blended Fabrics ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4013,10 +4738,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-synthetic-blended-fabrics-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Synthetic & Blended Fabrics Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Synthetic & Blended Fabrics ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4029,7 +4754,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Kit",
+        "Custom Synthetic",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Universal Compatible Specialized & Custom Synthetic & Blended Fabrics Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Synthetic & Blended Fabrics ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4039,10 +4771,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-synthetic-blended-fabrics-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Synthetic & Blended Fabrics Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Synthetic & Blended Fabrics መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4055,7 +4787,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Tooling",
+        "Custom Synthetic",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Professional Grade Specialized & Custom Synthetic & Blended Fabrics Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Synthetic & Blended Fabrics መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4065,10 +4804,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-synthetic-blended-fabrics-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Synthetic & Blended Fabrics Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Synthetic & Blended Fabrics መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4081,7 +4820,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Tester",
+        "Custom Synthetic",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Specialized Laboratory Specialized & Custom Synthetic & Blended Fabrics Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Synthetic & Blended Fabrics መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4091,10 +4837,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-synthetic-blended-fabrics-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Synthetic & Blended Fabrics Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Synthetic & Blended Fabrics ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4107,7 +4853,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Unit",
+        "Custom Synthetic",
+        "High-Speed Synchronized Specialized & Custom Synthetic & Blended Fabrics Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Synthetic & Blended Fabrics ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -4117,10 +4870,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-synthetic-blended-fabrics",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Synthetic & Blended Fabrics",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -4133,7 +4886,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics",
+        "Custom Synthetic",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Synthetic & Blended Fabrics",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Synthetic & Blended Fabrics",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4143,10 +4903,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-synthetic-blended-fabrics-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Synthetic & Blended Fabrics Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Synthetic & Blended Fabrics ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4159,7 +4919,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Panel",
+        "Custom Synthetic",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Thermal Insulated Specialized & Custom Synthetic & Blended Fabrics Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Synthetic & Blended Fabrics ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4169,10 +4936,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-synthetic-blended-fabrics",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Synthetic & Blended Fabrics",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4185,7 +4952,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics",
+        "Custom Synthetic",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Wireless Smart Integrated Specialized & Custom Synthetic & Blended Fabrics",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Synthetic & Blended Fabrics",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4195,10 +4969,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-synthetic-blended-fabrics",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Synthetic & Blended Fabrics",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4211,7 +4985,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics",
+        "Custom Synthetic",
+        "Heavy Mechanical Calibration Specialized & Custom Synthetic & Blended Fabrics",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4221,10 +5002,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-synthetic-blended-fabrics-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Synthetic & Blended Fabrics Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Synthetic & Blended Fabrics",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4237,7 +5018,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Gear",
+        "Custom Synthetic",
+        "Ergonomic Safety Specialized & Custom Synthetic & Blended Fabrics Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Synthetic & Blended Fabrics",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4247,10 +5035,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-synthetic-blended-fabrics-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Synthetic & Blended Fabrics Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Synthetic & Blended Fabrics ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4263,7 +5051,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blended Fabrics Station",
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Synthetic & Blended Fabrics",
+        "Custom Synthetic",
+        "Modular Expandable Specialized & Custom Synthetic & Blended Fabrics Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Synthetic & Blended Fabrics ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Synthetic & Blended Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4273,10 +5068,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-traditional-woven-fabrics-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Traditional & Woven Fabrics Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4289,7 +5084,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Premium Grade Certified Specialized & Custom Traditional & Woven Fabrics Unit",
+        "Woven Fabrics Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4299,10 +5101,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-traditional-woven-fabrics-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Traditional & Woven Fabrics Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Traditional & Woven Fabrics መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4315,7 +5117,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Heavy-Duty Commercial Specialized & Custom Traditional & Woven Fabrics Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics Component",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics",
+        "ጠንካራ የንግድ ልዩና ብጁ Traditional & Woven Fabrics መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -4325,10 +5134,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-traditional-woven-fabrics-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Traditional & Woven Fabrics Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4341,7 +5150,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Eco-Friendly Energy-Saving Specialized & Custom Traditional & Woven Fabrics Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics Model",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4351,10 +5167,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-traditional-woven-fabrics-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Traditional & Woven Fabrics Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Traditional & Woven Fabrics ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4367,7 +5183,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Custom Traditional",
+        "Standard Industrial Specialized & Custom Traditional & Woven Fabrics Assembly",
+        "Woven Fabrics Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Traditional & Woven Fabrics ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4377,10 +5200,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-traditional-woven-fabrics-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Traditional & Woven Fabrics System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Traditional & Woven Fabrics ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4393,7 +5216,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Traditional & Woven Fabrics System",
+        "Custom Traditional",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics System",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Traditional & Woven Fabrics ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4403,10 +5233,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-traditional-woven-fabrics-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Traditional & Woven Fabrics Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Traditional & Woven Fabrics ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4419,7 +5249,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Digital Automated Specialized & Custom Traditional & Woven Fabrics Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics Module",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Traditional & Woven Fabrics ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4429,10 +5266,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-traditional-woven-fabrics-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Traditional & Woven Fabrics Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4445,7 +5282,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "High-Capacity Multi-Function Specialized & Custom Traditional & Woven Fabrics Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Traditional & Woven Fabrics",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4455,10 +5299,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-traditional-woven-fabrics-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Traditional & Woven Fabrics Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4471,7 +5315,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Reinforced Weatherproof Specialized & Custom Traditional & Woven Fabrics Fixture",
+        "Woven Fabrics Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Traditional & Woven Fabrics",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4481,10 +5332,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-traditional-woven-fabrics-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Traditional & Woven Fabrics Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Traditional & Woven Fabrics ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4497,7 +5348,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Precision Engineered Specialized & Custom Traditional & Woven Fabrics Hardware",
+        "Woven Fabrics Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Traditional & Woven Fabrics ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4507,10 +5365,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-traditional-woven-fabrics-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Traditional & Woven Fabrics Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Traditional & Woven Fabrics ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4523,7 +5381,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Traditional & Woven Fabrics Pack",
+        "Custom Traditional",
+        "Paakii Addaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics Pack",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Traditional & Woven Fabrics ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4533,10 +5398,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-traditional-woven-fabrics-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Traditional & Woven Fabrics Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Traditional & Woven Fabrics ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4549,7 +5414,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Universal Compatible Specialized & Custom Traditional & Woven Fabrics Kit",
+        "Woven Fabrics Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Traditional & Woven Fabrics ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4559,10 +5431,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-traditional-woven-fabrics-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Traditional & Woven Fabrics Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Traditional & Woven Fabrics መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4575,7 +5447,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Professional Grade Specialized & Custom Traditional & Woven Fabrics Tooling",
+        "Woven Fabrics Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Traditional & Woven Fabrics መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4585,10 +5464,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-traditional-woven-fabrics-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Traditional & Woven Fabrics Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Traditional & Woven Fabrics መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4601,7 +5480,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Specialized Laboratory Specialized & Custom Traditional & Woven Fabrics Tester",
+        "Woven Fabrics Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Traditional & Woven Fabrics መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4611,10 +5497,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-traditional-woven-fabrics-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Traditional & Woven Fabrics Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Traditional & Woven Fabrics ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4627,7 +5513,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "High-Speed Synchronized Specialized & Custom Traditional & Woven Fabrics Unit",
+        "Woven Fabrics Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Traditional & Woven Fabrics ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -4637,10 +5530,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-traditional-woven-fabrics",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Traditional & Woven Fabrics",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -4653,7 +5546,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Traditional & Woven Fabrics",
+        "Woven Fabrics",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Traditional & Woven Fabrics",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4663,10 +5563,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-traditional-woven-fabrics-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Traditional & Woven Fabrics Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Traditional & Woven Fabrics ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4679,7 +5579,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Thermal Insulated Specialized & Custom Traditional & Woven Fabrics Panel",
+        "Woven Fabrics Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Traditional & Woven Fabrics ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4689,10 +5596,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-traditional-woven-fabrics",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Traditional & Woven Fabrics",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4705,7 +5612,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Wireless Smart Integrated Specialized & Custom Traditional & Woven Fabrics",
+        "Woven Fabrics",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Traditional & Woven Fabrics",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4715,10 +5629,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-traditional-woven-fabrics",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Traditional & Woven Fabrics",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4731,7 +5645,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Heavy Mechanical Calibration Specialized & Custom Traditional & Woven Fabrics",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Traditional & Woven Fabrics",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4741,10 +5662,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-traditional-woven-fabrics-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Traditional & Woven Fabrics Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Traditional & Woven Fabrics",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4757,7 +5678,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Ergonomic Safety Specialized & Custom Traditional & Woven Fabrics Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Woven Fabrics Gear",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Traditional & Woven Fabrics",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4767,10 +5695,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-traditional-woven-fabrics-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Traditional & Woven Fabrics Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Traditional & Woven Fabrics ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4783,7 +5711,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Traditional & Woven Fabrics",
+        "Custom Traditional",
+        "Modular Expandable Specialized & Custom Traditional & Woven Fabrics Station",
+        "Woven Fabrics Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Traditional & Woven Fabrics ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Traditional & Woven Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4793,10 +5728,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-upholstery-furnishing-fabrics-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Upholstery & Furnishing Fabrics Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4809,7 +5744,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Premium Grade Certified Specialized & Custom Upholstery & Furnishing Fabrics Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4819,10 +5761,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-upholstery-furnishing-fabrics-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Upholstery & Furnishing Fabrics Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Upholstery & Furnishing Fabrics መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4835,7 +5777,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Component",
+        "Heavy-Duty Commercial Specialized & Custom Upholstery & Furnishing Fabrics Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics",
+        "ጠንካራ የንግድ ልዩና ብጁ Upholstery & Furnishing Fabrics መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -4845,10 +5794,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-upholstery-furnishing-fabrics-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Upholstery & Furnishing Fabrics Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4861,7 +5810,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Eco-Friendly Energy-Saving Specialized & Custom Upholstery & Furnishing Fabrics Model",
+        "Furnishing Fabrics Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4871,10 +5827,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-upholstery-furnishing-fabrics-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Upholstery & Furnishing Fabrics Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Upholstery & Furnishing Fabrics ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4887,7 +5843,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Custom Upholstery",
+        "Furnishing Fabrics Assembly",
+        "Standard Industrial Specialized & Custom Upholstery & Furnishing Fabrics Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Upholstery & Furnishing Fabrics ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4897,10 +5860,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-upholstery-furnishing-fabrics-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Upholstery & Furnishing Fabrics System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Upholstery & Furnishing Fabrics ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4913,7 +5876,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Upholstery & Furnishing Fabrics System",
+        "Custom Upholstery",
+        "Furnishing Fabrics System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Upholstery & Furnishing Fabrics ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4923,10 +5893,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-upholstery-furnishing-fabrics-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Upholstery & Furnishing Fabrics Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Upholstery & Furnishing Fabrics ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4939,7 +5909,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Digital Automated Specialized & Custom Upholstery & Furnishing Fabrics Module",
+        "Furnishing Fabrics Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Upholstery & Furnishing Fabrics ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4949,10 +5926,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-upholstery-furnishing-fabrics-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Upholstery & Furnishing Fabrics Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4965,7 +5942,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Device",
+        "High-Capacity Multi-Function Specialized & Custom Upholstery & Furnishing Fabrics Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Upholstery & Furnishing Fabrics",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -4975,10 +5959,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-upholstery-furnishing-fabrics-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Upholstery & Furnishing Fabrics Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4991,7 +5975,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Reinforced Weatherproof Specialized & Custom Upholstery & Furnishing Fabrics Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5001,10 +5992,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-upholstery-furnishing-fabrics-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Upholstery & Furnishing Fabrics Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Upholstery & Furnishing Fabrics ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5017,7 +6008,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Precision Engineered Specialized & Custom Upholstery & Furnishing Fabrics Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Upholstery & Furnishing Fabrics ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5027,10 +6025,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-upholstery-furnishing-fabrics-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Upholstery & Furnishing Fabrics Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Upholstery & Furnishing Fabrics ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5043,7 +6041,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Upholstery & Furnishing Fabrics Pack",
+        "Custom Upholstery",
+        "Furnishing Fabrics Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Upholstery & Furnishing Fabrics ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5053,10 +6058,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-upholstery-furnishing-fabrics-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Upholstery & Furnishing Fabrics Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Upholstery & Furnishing Fabrics ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5069,7 +6074,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Universal Compatible Specialized & Custom Upholstery & Furnishing Fabrics Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Upholstery & Furnishing Fabrics ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5079,10 +6091,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-upholstery-furnishing-fabrics-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Upholstery & Furnishing Fabrics Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Upholstery & Furnishing Fabrics መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5095,7 +6107,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Professional Grade Specialized & Custom Upholstery & Furnishing Fabrics Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Upholstery & Furnishing Fabrics መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5105,10 +6124,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-upholstery-furnishing-fabrics-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Upholstery & Furnishing Fabrics Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Upholstery & Furnishing Fabrics መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5121,7 +6140,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Specialized Laboratory Specialized & Custom Upholstery & Furnishing Fabrics Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Upholstery & Furnishing Fabrics መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5131,10 +6157,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-upholstery-furnishing-fabrics-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Upholstery & Furnishing Fabrics Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Upholstery & Furnishing Fabrics ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5147,7 +6173,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Unit",
+        "High-Speed Synchronized Specialized & Custom Upholstery & Furnishing Fabrics Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Upholstery & Furnishing Fabrics ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -5157,10 +6190,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-upholstery-furnishing-fabrics",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Upholstery & Furnishing Fabrics",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -5173,7 +6206,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Upholstery & Furnishing Fabrics",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Upholstery & Furnishing Fabrics",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5183,10 +6223,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-upholstery-furnishing-fabrics-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Upholstery & Furnishing Fabrics Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Upholstery & Furnishing Fabrics ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5199,7 +6239,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Thermal Insulated Specialized & Custom Upholstery & Furnishing Fabrics Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Upholstery & Furnishing Fabrics ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5209,10 +6256,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-upholstery-furnishing-fabrics",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Upholstery & Furnishing Fabrics",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5225,7 +6272,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Wireless Smart Integrated Specialized & Custom Upholstery & Furnishing Fabrics",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Upholstery & Furnishing Fabrics",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5235,10 +6289,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-upholstery-furnishing-fabrics",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Upholstery & Furnishing Fabrics",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5251,7 +6305,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Furnishing Fabrics",
+        "Heavy Mechanical Calibration Specialized & Custom Upholstery & Furnishing Fabrics",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5261,10 +6322,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-upholstery-furnishing-fabrics-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Upholstery & Furnishing Fabrics Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Upholstery & Furnishing Fabrics",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5277,7 +6338,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Upholstery",
+        "Ergonomic Safety Specialized & Custom Upholstery & Furnishing Fabrics Gear",
+        "Furnishing Fabrics Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Upholstery & Furnishing Fabrics",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     },
     {
@@ -5287,10 +6355,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-upholstery-furnishing-fabrics-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Upholstery & Furnishing Fabrics Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Upholstery & Furnishing Fabrics ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -5303,7 +6371,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Upholstery & Furnishing Fabrics",
+        "Custom Upholstery",
+        "Furnishing Fabrics Station",
+        "Modular Expandable Specialized & Custom Upholstery & Furnishing Fabrics Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Upholstery & Furnishing Fabrics ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Upholstery & Furnishing Fabrics"
+      ],
       "redirects": []
     }
   ]

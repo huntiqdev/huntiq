@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "home",
       "names": {
-        "en": "Home & Furniture",
-        "am": "የቤት እቃዎችና ፈርኒቸር",
+        "en": "Furniture",
+        "am": "የቤት እቃዎች",
         "om": "Meeshaa Manoo",
-        "ti": "ናይ ገዛ ኣቑሑትን ፈርኒቸርን"
+        "ti": "ናይ ገዛ ኣቑሑት"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,14 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Furnishings",
+        "Home",
+        "Home & Furniture",
+        "Home Decor",
+        "ናይ ገዛ ኣቑሑትን ፈርኒቸርን",
+        "የቤት እቃዎችና ፈርኒቸር"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +42,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "furniture",
       "names": {
-        "en": "Furniture & Living",
-        "am": "የቤት እቃዎችና ፈርኒቸር",
+        "en": "Furniture",
+        "am": "የቤት እቃዎች",
         "om": "Meeshaa Manoo",
-        "ti": "ኣቑሑት ገዛን ፈርኒቸርን"
+        "ti": "ኣቑሑት ገዛ"
       },
       "description": null,
       "level": 1,
@@ -51,7 +58,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Furniture & Living",
+        "Living",
+        "ኣቑሑት ገዛን ፈርኒቸርን",
+        "የቤት እቃዎችና ፈርኒቸር"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +99,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "electric-injera-mitad-baking",
       "names": {
-        "en": "Electric Injera Mitad & Traditional Baking Equipment",
-        "am": "የእንጀራ ኤሌክትሪክ ምጣድና መጋገሪያ መሳሪያዎች",
-        "om": "Eelee Buddeenaa Elektiriikii fi Meeshaalee Tolchuu",
-        "ti": "ናይ እንጀራ ኤሌክትሪክ ምጣድን መጋገያ መሳርሕታትን"
+        "en": "Electric Injera Mitad Equipment",
+        "am": "የእንጀራ ኤሌክትሪክ ምጣድ",
+        "om": "Eelee Buddeenaa Elektiriikii",
+        "ti": "ናይ እንጀራ ኤሌክትሪክ ምጣድ"
       },
       "description": "Electric clay and Teflon-coated griddles (Mitad) engineered for baking authentic Ethiopian Injera and flatbreads",
       "level": 2,
@@ -103,7 +115,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Eelee Buddeenaa Elektiriikii fi Meeshaalee Tolchuu",
+        "Electric Injera Mitad & Traditional Baking Equipment",
+        "Traditional Baking Equipment",
+        "ናይ እንጀራ ኤሌክትሪክ ምጣድን መጋገያ መሳርሕታትን",
+        "የእንጀራ ኤሌክትሪክ ምጣድና መጋገሪያ መሳሪያዎች"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +131,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-kitchen-appliances",
       "names": {
-        "en": "Specialized & Custom Kitchen Appliances",
-        "am": "ልዩና ብጁ Kitchen Appliances",
-        "om": "Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -129,7 +147,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances",
+        "Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Specialized & Custom Kitchen Appliances",
+        "ልዩና ብጁ Kitchen Appliances",
+        "ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +163,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "energy-saving-electric-injera-mitad",
       "names": {
-        "en": "Energy Saving & Thermostat Electric Injera Mitad",
-        "am": "ሀይል ቆጣቢና ቴርሞስታት ያለው የኤሌክትሪክ እንጀራ ምጣድ",
-        "om": "Eelee Elektiriikii Qusataa fi To'annaa Hoo'aa Qabu",
-        "ti": "ሓይሊ ቆጣብን ቴርሞስታትን ዘለዎ ናይ ኤሌክትሪክ ምጣድ"
+        "en": "Energy Saving",
+        "am": "ሀይል ቆጣቢ",
+        "om": "Eelee Elektiriikii Qusataa",
+        "ti": "ሓይሊ ቆጣብ"
       },
       "description": "Advanced thermal insulated electric baking plates designed for fast heat-up and reduced electricity consumption",
       "level": 3,
@@ -155,7 +179,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Eelee Elektiriikii Qusataa fi To'annaa Hoo'aa Qabu",
+        "Energy Saving & Thermostat Electric Injera Mitad",
+        "Thermostat Electric Injera Mitad",
+        "ሀይል ቆጣቢና ቴርሞስታት ያለው የኤሌክትሪክ እንጀራ ምጣድ",
+        "ሓይሊ ቆጣብን ቴርሞስታትን ዘለዎ ናይ ኤሌክትሪክ ምጣድ"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +195,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-kitchen-appliances-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Kitchen Appliances Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Kitchen Appliances",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -181,7 +211,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Premium Grade Certified Specialized & Custom Kitchen Appliances Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Kitchen Appliances",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +227,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-kitchen-appliances-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Kitchen Appliances Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Kitchen Appliances መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -207,7 +243,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Component",
+        "Heavy-Duty Commercial Specialized & Custom Kitchen Appliances Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Kitchen Appliances",
+        "ጠንካራ የንግድ ልዩና ብጁ Kitchen Appliances መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +259,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-kitchen-appliances-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Kitchen Appliances Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Kitchen Appliances",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -233,7 +275,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Kitchen Appliances Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Kitchen Appliances",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +291,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-kitchen-appliances-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Kitchen Appliances Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Kitchen Appliances ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -259,7 +307,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Custom Kitchen Appliances Assembly",
+        "Standard Industrial Specialized & Custom Kitchen Appliances Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Kitchen Appliances ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +323,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-kitchen-appliances-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Kitchen Appliances System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Kitchen Appliances ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -285,7 +339,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Kitchen Appliances System",
+        "Custom Kitchen Appliances System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Kitchen Appliances ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +355,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-kitchen-appliances-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Kitchen Appliances Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Kitchen Appliances ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -311,7 +371,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Module",
+        "Digital Automated Specialized & Custom Kitchen Appliances Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Kitchen Appliances ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -321,10 +387,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-kitchen-appliances-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Kitchen Appliances Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Kitchen Appliances",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -337,7 +403,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Device",
+        "High-Capacity Multi-Function Specialized & Custom Kitchen Appliances Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Kitchen Appliances",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -347,10 +419,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-kitchen-appliances-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Kitchen Appliances Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Kitchen Appliances",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -363,7 +435,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Reinforced Weatherproof Specialized & Custom Kitchen Appliances Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Kitchen Appliances",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +451,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-kitchen-appliances-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Kitchen Appliances Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Kitchen Appliances ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -389,7 +467,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Precision Engineered Specialized & Custom Kitchen Appliances Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Kitchen Appliances ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +483,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-kitchen-appliances-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Kitchen Appliances Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Kitchen Appliances ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -415,7 +499,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Kitchen Appliances Pack",
+        "Custom Kitchen Appliances Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Kitchen Appliances ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -425,10 +515,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-kitchen-appliances-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Kitchen Appliances Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Kitchen Appliances ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -441,7 +531,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Universal Compatible Specialized & Custom Kitchen Appliances Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Kitchen Appliances ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +547,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-kitchen-appliances-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Kitchen Appliances Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Kitchen Appliances መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -467,7 +563,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Professional Grade Specialized & Custom Kitchen Appliances Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Kitchen Appliances መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +579,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-kitchen-appliances-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Kitchen Appliances Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Kitchen Appliances መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -493,7 +595,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Specialized Laboratory Specialized & Custom Kitchen Appliances Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Kitchen Appliances መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -503,10 +611,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-kitchen-appliances-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Kitchen Appliances Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Kitchen Appliances ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -519,7 +627,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Unit",
+        "High-Speed Synchronized Specialized & Custom Kitchen Appliances Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Kitchen Appliances",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Kitchen Appliances ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +643,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-kitchen-appliances",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Kitchen Appliances",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Kitchen Appliances",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -545,7 +659,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Kitchen Appliances",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Kitchen Appliances",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +675,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-kitchen-appliances-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Kitchen Appliances Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Kitchen Appliances ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -571,7 +691,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Thermal Insulated Specialized & Custom Kitchen Appliances Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Kitchen Appliances ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -581,10 +707,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-kitchen-appliances",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Kitchen Appliances",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Kitchen Appliances",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -597,7 +723,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Wireless Smart Integrated Specialized & Custom Kitchen Appliances",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Kitchen Appliances",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -607,10 +739,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-kitchen-appliances",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Kitchen Appliances",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Kitchen Appliances",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -623,7 +755,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances",
+        "Heavy Mechanical Calibration Specialized & Custom Kitchen Appliances",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Kitchen Appliances",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -633,10 +771,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-kitchen-appliances-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Kitchen Appliances Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Kitchen Appliances",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -649,7 +787,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Kitchen Appliances Gear",
+        "Ergonomic Safety Specialized & Custom Kitchen Appliances Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Kitchen Appliances",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Kitchen Appliances",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -659,10 +803,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-kitchen-appliances-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Kitchen Appliances Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Kitchen Appliances ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Kitchen Appliances",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Kitchen Appliances"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -675,7 +819,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Kitchen Appliances",
+        "Custom Kitchen Appliances Station",
+        "Modular Expandable Specialized & Custom Kitchen Appliances Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Kitchen Appliances ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Kitchen Appliances"
+      ],
       "redirects": []
     },
     {
@@ -685,10 +835,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-electric-injera-mitad-traditional-baking-equipment",
       "names": {
-        "en": "Specialized & Custom Electric Injera Mitad & Traditional Baking Equipment",
-        "am": "ልዩና ብጁ Electric Injera Mitad & Traditional Baking Equipment",
-        "om": "Kan Addaa fi Filatamaa Electric Injera Mitad & Traditional Baking Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Electric Injera Mitad & Traditional Baking Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -701,7 +851,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Electric Injera Mitad",
+        "Kan Addaa fi Filatamaa Electric Injera Mitad & Traditional Baking Equipment",
+        "Specialized & Custom Electric Injera Mitad & Traditional Baking Equipment",
+        "Traditional Baking Equipment",
+        "ልዩና ብጁ Electric Injera Mitad & Traditional Baking Equipment",
+        "ፍሉይን ዝተዳለወን Electric Injera Mitad & Traditional Baking Equipment"
+      ],
       "redirects": []
     }
   ]

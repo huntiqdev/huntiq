@@ -40,8 +40,12 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   const { user } = useAuth();
   const { t, locale } = useLocale();
   const router = useRouter();
-  const [selectedType, setSelectedType] = useState<'sale' | 'rent'>(product?.listing_type ?? listingType);
+  const [selectedType, setSelectedType] = useState<'sale' | 'rent' | 'announcement'>(
+    product?.listing_type === 'rent' ? 'rent' : (product?.price === 1 ? 'announcement' : (listingType ?? 'sale'))
+  );
   const isRental = selectedType === 'rent';
+  const isAnnouncement = selectedType === 'announcement';
+  const [isFreeOrInquiry, setIsFreeOrInquiry] = useState(product?.price === 1 && selectedType === 'announcement');
   
   const [sellerTier, setSellerTier] = useState<SellerTier>('normal');
   const [location, setLocation] = useState<LocationValue>(product ? {
@@ -162,6 +166,11 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     if (isRental) {
       const rp = parseFloat(String(rentalForm.rental_price));
       if (!rentalForm.rental_price || isNaN(rp) || rp <= 0) { setError('A valid rental price is required'); return; }
+    } else if (isAnnouncement) {
+      if (!isFreeOrInquiry && form.price) {
+        const p = parseFloat(String(form.price));
+        if (isNaN(p) || p <= 0) { setError('Please enter a valid rate/salary or select Contact for Quote / Apply'); return; }
+      }
     } else {
       const p = parseFloat(String(form.price));
       if (!form.price || isNaN(p) || p <= 0) { setError('A valid positive price is required'); return; }
@@ -218,6 +227,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
 
       const todayStr = new Date().toISOString().split('T')[0];
       const rentalPriceNum = parseFloat(String(rentalForm.rental_price)) || 0;
+      const announcementPrice = isFreeOrInquiry || !form.price ? 1 : (parseFloat(String(form.price)) || 1);
       const payload = isRental ? {
         ...basePayload,
         price: rentalPriceNum,
@@ -226,7 +236,10 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         rental_duration_unit: 'month',
         deposit_amount: rentalForm.deposit ? parseFloat(String(rentalForm.deposit)) : undefined,
         available_from: rentalForm.available_from || todayStr,
-      } : { ...basePayload, price: parseFloat(String(form.price)) };
+      } : {
+        ...basePayload,
+        price: isAnnouncement ? announcementPrice : parseFloat(String(form.price)),
+      };
 
       let productId: number;
       if (product) {
@@ -353,29 +366,67 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      {/* Listing type toggle */}
-      <div className="flex bg-zinc-100 dark:bg-zinc-800 p-1.5 rounded-2xl mb-1 border border-zinc-200 dark:border-zinc-700 gap-1.5">
-        <button type="button" onClick={() => setSelectedType('sale')}
-          className={`flex-1 py-2.5 px-4 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 ${selectedType === 'sale' ? 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
-          🏷️ {(t.ui as any).mode_sale ?? 'For Sale'}
-        </button>
-        <button type="button" onClick={() => setSelectedType('rent')}
-          className={`flex-1 py-2.5 px-4 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-2 ${selectedType === 'rent' ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
-          🏠 {(t.ui as any).mode_rent ?? 'For Rent'}
-        </button>
+      {/* Business Posting Mode Toggle */}
+      <div className="space-y-1.5">
+        <label className={lbl}>Business Posting Mode</label>
+        <div className="grid grid-cols-3 bg-zinc-100 dark:bg-zinc-800 p-1.5 rounded-2xl mb-1 border border-zinc-200 dark:border-zinc-700 gap-1.5">
+          <button type="button" onClick={() => setSelectedType('sale')}
+            className={`py-2.5 px-3 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-1.5 ${selectedType === 'sale' ? 'bg-[#1769E0] text-white shadow-md shadow-[#1769E0]/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
+            🛍️ {(t.ui as any).mode_sale ?? 'For Sale'}
+          </button>
+          <button type="button" onClick={() => setSelectedType('rent')}
+            className={`py-2.5 px-3 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-1.5 ${selectedType === 'rent' ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
+            🏠 {(t.ui as any).mode_rent ?? 'For Rent'}
+          </button>
+          <button type="button" onClick={() => setSelectedType('announcement')}
+            className={`py-2.5 px-3 min-h-[44px] rounded-xl text-xs font-black uppercase tracking-wider transition-all tap-bounce active:scale-95 flex items-center justify-center gap-1.5 ${selectedType === 'announcement' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}>
+            📢 Announce / Info
+          </button>
+        </div>
       </div>
 
       <div className="space-y-2">
         <Input
           required
           label={t.ui.title}
-          placeholder={isRental ? 'Property title (e.g. 2 Bedroom Condominium)' : (t.ui.product_title || 'Product title (e.g. iPhone 13, Toyota Vitz, Sofa)')}
+          placeholder={isAnnouncement ? 'Announcement / Vacancy / Service Title (e.g. Senior Accountant Vacancy, Professional Plumbing Service)' : isRental ? 'Property or Item title (e.g. 2 Bedroom Condominium, Excavator Rental)' : (t.ui.product_title || 'Product title (e.g. iPhone 13, Toyota Vitz, Sofa)')}
           value={form.title}
           onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
         />
       </div>
 
-      {isRental ? (
+      {isAnnouncement ? (
+        <div className="space-y-3 p-3.5 bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/80 dark:border-indigo-800/60 rounded-2xl">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-indigo-900 dark:text-indigo-300">
+              📢 Informational / Vacancy / Service Post
+            </span>
+            <label className="flex items-center gap-1.5 text-xs font-bold text-zinc-700 dark:text-zinc-200 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={isFreeOrInquiry}
+                onChange={e => setIsFreeOrInquiry(e.target.checked)}
+                className="w-4 h-4 rounded text-[#1769E0] focus:ring-[#1769E0]"
+              />
+              <span>Contact for Quote / Apply</span>
+            </label>
+          </div>
+          {!isFreeOrInquiry ? (
+            <Input
+              type="number"
+              label="Salary / Budget / Rate (ETB) (Optional)"
+              placeholder="e.g. 20000 (or check 'Contact for Quote / Apply' above)"
+              value={form.price}
+              onChange={e => setForm(f => ({ ...f, price: e.target.value }))}
+              min={1}
+            />
+          ) : (
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+              Listing will be published as <strong>Contact / Free Quote / Apply</strong> without a mandatory purchase price.
+            </p>
+          )}
+        </div>
+      ) : isRental ? (
         <>
           <Input required type="number" label="Monthly Rent (ETB)" placeholder="Rental price per month"
             value={rentalForm.rental_price} onChange={e => setRentalForm(f => ({ ...f, rental_price: e.target.value }))} min={1} />
@@ -441,10 +492,12 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
         </div>
       )}
 
-      <Select label={t.ui.condition} value={form.condition}
-        onChange={e => setForm(f => ({ ...f, condition: e.target.value }))}>
-        {CONDITIONS.map(c => <option key={c} value={c}>{condLabel(c)}</option>)}
-      </Select>
+      {!isAnnouncement && (
+        <Select label={t.ui.condition} value={form.condition}
+          onChange={e => setForm(f => ({ ...f, condition: e.target.value }))}>
+          {CONDITIONS.map(c => <option key={c} value={c}>{condLabel(c)}</option>)}
+        </Select>
+      )}
 
       <div className="flex flex-col gap-1">
         <label className={lbl}>{t.ui.location_label}</label>

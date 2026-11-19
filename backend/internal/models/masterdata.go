@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"encoding/json"
+	"time"
+)
 
 // FourLanguageNames represents the mandatory 4-language localized names (en, am, om, ti)
 type FourLanguageNames struct {
@@ -87,6 +90,7 @@ type MasterDataImportRequest struct {
 	Version         string               `json:"version"`
 	DryRun          bool                 `json:"dry_run"`
 	Scope           string               `json:"scope,omitempty"` // e.g. ET-OR, SYS_PROD
+	Records         json.RawMessage      `json:"records,omitempty"`
 	LocationRecords []MasterLocationNode `json:"location_records,omitempty"`
 	CategoryRecords []MasterCategoryNode `json:"category_records,omitempty"`
 }

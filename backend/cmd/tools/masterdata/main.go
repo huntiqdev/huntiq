@@ -8,9 +8,11 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/joho/godotenv"
 	"github.com/your-org/used-tools-marketplace/internal/config"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
@@ -18,6 +20,7 @@ import (
 )
 
 func main() {
+	_ = godotenv.Load()
 	action := flag.String("action", "status", "Action to perform: status, validate, import, export")
 	dataset := flag.String("dataset", "all", "Dataset scope: all, locations, categories")
 	dryRun := flag.Bool("dry-run", true, "Execute as dry-run without database mutations")
@@ -25,7 +28,7 @@ func main() {
 	flag.Parse()
 
 	cfg := config.Load()
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 	defer cancel()
 
 	pool, err := pgxpool.New(ctx, cfg.DSN())
@@ -75,21 +78,57 @@ func main() {
 	}
 }
 
+func loadAllLocations(baseDir string) ([]models.MasterLocationNode, error) {
+	locDir := filepath.Join(baseDir, "locations", "countries", "ET")
+	var allNodes []models.MasterLocationNode
+	seenIDs := make(map[int]bool)
+
+	err := filepath.Walk(locDir, func(path string, info os.FileInfo, err error) error {
+		if err != nil || info.IsDir() || filepath.Ext(path) != ".json" {
+			return nil
+		}
+		fname := filepath.Base(path)
+		if fname == "manifest.json" || fname == "schema.json" || strings.HasSuffix(fname, "_backup.json") || strings.HasSuffix(fname, ".bak") {
+			return nil
+		}
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+		// Try array first
+		var list []models.MasterLocationNode
+		if err := json.Unmarshal(data, &list); err == nil && len(list) > 0 {
+			for _, item := range list {
+				if item.ID > 0 && !seenIDs[item.ID] {
+					seenIDs[item.ID] = true
+					allNodes = append(allNodes, item)
+				}
+			}
+			return nil
+		}
+		// Try single node
+		var single models.MasterLocationNode
+		if err := json.Unmarshal(data, &single); err == nil && single.ID > 0 {
+			if !seenIDs[single.ID] {
+				seenIDs[single.ID] = true
+				allNodes = append(allNodes, single)
+			}
+		}
+		return nil
+	})
+	return allNodes, err
+}
+
 func validateLocations(svc *service.MasterDataService, baseDir string) int {
-	countryFile := filepath.Join(baseDir, "locations", "countries", "ET", "country.json")
-	data, err := os.ReadFile(countryFile)
+	nodes, err := loadAllLocations(baseDir)
 	if err != nil {
-		log.Fatalf("Failed to read %s: %v", countryFile, err)
+		log.Fatalf("Failed to load locations: %v", err)
 	}
-	var country models.MasterLocationNode
-	if err := json.Unmarshal(data, &country); err != nil {
-		log.Fatalf("Invalid JSON in %s: %v", countryFile, err)
-	}
-	diffs := svc.ValidateLocations([]models.MasterLocationNode{country}, nil)
+	diffs := svc.ValidateLocations(nodes, nil)
 	if len(diffs) > 0 {
-		log.Fatalf("Location validation failed on root: %v", diffs)
+		log.Fatalf("Location validation failed: %v", diffs)
 	}
-	return 1
+	return len(nodes)
 }
 
 func getClassificationSystemDirs(baseDir string) ([]string, error) {
@@ -110,6 +149,35 @@ func getClassificationSystemDirs(baseDir string) ([]string, error) {
 	return systems, nil
 }
 
+func getSystemFamilyFiles(baseDir, sys string) ([]string, error) {
+	sysFile := filepath.Join(baseDir, "categories", "classification-systems", sys, "system.json")
+	famDir := filepath.Join(baseDir, "categories", "classification-systems", sys, "families")
+	if data, err := os.ReadFile(sysFile); err == nil {
+		var doc struct {
+			Families []string `json:"families"`
+		}
+		if err := json.Unmarshal(data, &doc); err == nil && len(doc.Families) > 0 {
+			var files []string
+			for _, f := range doc.Families {
+				files = append(files, filepath.Join(famDir, f+".json"))
+			}
+			return files, nil
+		}
+	}
+
+	entries, err := os.ReadDir(famDir)
+	if err != nil {
+		return nil, err
+	}
+	var files []string
+	for _, e := range entries {
+		if filepath.Ext(e.Name()) == ".json" && !strings.HasSuffix(e.Name(), "_backup.json") && !strings.HasSuffix(e.Name(), ".bak") {
+			files = append(files, filepath.Join(famDir, e.Name()))
+		}
+	}
+	return files, nil
+}
+
 func validateCategories(svc *service.MasterDataService, baseDir string) int {
 	systems, err := getClassificationSystemDirs(baseDir)
 	if err != nil {
@@ -117,16 +185,11 @@ func validateCategories(svc *service.MasterDataService, baseDir string) int {
 	}
 	total := 0
 	for _, sys := range systems {
-		famDir := filepath.Join(baseDir, "categories", "classification-systems", sys, "families")
-		entries, err := os.ReadDir(famDir)
+		files, err := getSystemFamilyFiles(baseDir, sys)
 		if err != nil {
 			continue
 		}
-		for _, e := range entries {
-			if filepath.Ext(e.Name()) != ".json" {
-				continue
-			}
-			fPath := filepath.Join(famDir, e.Name())
+		for _, fPath := range files {
 			data, err := os.ReadFile(fPath)
 			if err != nil {
 				log.Fatalf("Failed to read %s: %v", fPath, err)
@@ -139,7 +202,7 @@ func validateCategories(svc *service.MasterDataService, baseDir string) int {
 			}
 			diffs := svc.ValidateCategories(doc.Categories, nil)
 			if len(diffs) > 0 {
-				log.Fatalf("Validation error in %s/%s: %v", sys, e.Name(), diffs)
+				log.Fatalf("Validation error in %s/%s: %v", sys, filepath.Base(fPath), diffs)
 			}
 			total += len(doc.Categories)
 		}
@@ -148,20 +211,16 @@ func validateCategories(svc *service.MasterDataService, baseDir string) int {
 }
 
 func importLocations(ctx context.Context, svc *service.MasterDataService, baseDir string, dryRun bool) {
-	// Read country
-	countryFile := filepath.Join(baseDir, "locations", "countries", "ET", "country.json")
-	data, err := os.ReadFile(countryFile)
+	nodes, err := loadAllLocations(baseDir)
 	if err != nil {
-		log.Fatalf("Failed to read country file: %v", err)
+		log.Fatalf("Failed to load locations: %v", err)
 	}
-	var country models.MasterLocationNode
-	_ = json.Unmarshal(data, &country)
 
 	req := models.MasterDataImportRequest{
 		DatasetType:     "locations",
 		Version:         "1.0.0",
 		DryRun:          dryRun,
-		LocationRecords: []models.MasterLocationNode{country},
+		LocationRecords: nodes,
 	}
 
 	res, err := svc.ImportLocations(ctx, req, 1, "127.0.0.1")
@@ -179,16 +238,12 @@ func importCategories(ctx context.Context, svc *service.MasterDataService, baseD
 	}
 	var allCats []models.MasterCategoryNode
 	for _, sys := range systems {
-		famDir := filepath.Join(baseDir, "categories", "classification-systems", sys, "families")
-		entries, err := os.ReadDir(famDir)
+		files, err := getSystemFamilyFiles(baseDir, sys)
 		if err != nil {
 			continue
 		}
-		for _, e := range entries {
-			if filepath.Ext(e.Name()) != ".json" {
-				continue
-			}
-			data, err := os.ReadFile(filepath.Join(famDir, e.Name()))
+		for _, fPath := range files {
+			data, err := os.ReadFile(fPath)
 			if err != nil {
 				continue
 			}

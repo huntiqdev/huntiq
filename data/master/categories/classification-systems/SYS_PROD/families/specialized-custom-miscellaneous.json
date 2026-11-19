@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-miscellaneous",
       "names": {
-        "en": "Specialized & Custom & Miscellaneous",
-        "am": "ልዩና ብጁ & Miscellaneous",
-        "om": "Kan Addaa fi Filatamaa & Miscellaneous",
-        "ti": "ፍሉይን ዝተዳለወን & Miscellaneous"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom",
+        "Kan Addaa fi Filatamaa & Miscellaneous",
+        "Miscellaneous",
+        "Specialized & Custom & Miscellaneous",
+        "ልዩና ብጁ & Miscellaneous",
+        "ፍሉይን ዝተዳለወን & Miscellaneous"
+      ],
       "redirects": []
     },
     {

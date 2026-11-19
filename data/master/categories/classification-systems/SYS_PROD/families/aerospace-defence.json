@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "aerospace-defence",
       "names": {
-        "en": "Aerospace & Defence",
-        "am": "አቪዬሽንና ምርሻ ኢንዱስትሪ",
-        "om": "Aerospace fi Ittisaa",
-        "ti": "ኤሮስፔስን ምርሻን"
+        "en": "Aerospace",
+        "am": "አቪዬሽን",
+        "om": "Aerospace",
+        "ti": "ኤሮስፔስ"
       },
       "description": "Aircraft manufacturing, defence equipment, aerospace technology, military logistics, and security procurement.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Aerospace & Defence",
+        "Aerospace fi Ittisaa",
+        "Defence",
+        "አቪዬሽንና ምርሻ ኢንዱስትሪ",
+        "ኤሮስፔስን ምርሻን"
+      ],
       "redirects": []
     },
     {
@@ -87,8 +93,8 @@
       "classification_system_code": "SYS_PROD",
       "slug": "aircraft-parts-avionics",
       "names": {
-        "en": "Aircraft Parts & Avionics",
-        "am": "የአይሮፕላን ክፍሎችና አቪዮኒክስ",
+        "en": "Aircraft Parts",
+        "am": "የአይሮፕላን ክፍሎች",
         "om": "Qaama Xiyyaaraa",
         "ti": "ኣካላት ኤሮፕላን"
       },
@@ -103,7 +109,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Aircraft Parts & Avionics",
+        "Avionics",
+        "የአይሮፕላን ክፍሎችና አቪዮኒክስ"
+      ],
       "redirects": []
     },
     {
@@ -425,7 +435,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "uav-drones",
       "names": {
-        "en": "UAV & Drone Manufacturing",
+        "en": "UAV",
         "am": "UAV ምርት",
         "om": "Oomisha UAV",
         "ti": "ምፍራይ UAV"
@@ -441,7 +451,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing",
+        "UAV & Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1088,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-aerospace-engineering-services",
       "names": {
-        "en": "Specialized & Custom Aerospace Engineering Services",
-        "am": "ልዩና ብጁ Aerospace Engineering Services",
-        "om": "Kan Addaa fi Filatamaa Aerospace Engineering Services",
-        "ti": "ፍሉይን ዝተዳለወን Aerospace Engineering Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1091,7 +1104,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aerospace Engineering Services",
+        "Kan Addaa fi Filatamaa Aerospace Engineering Services",
+        "Specialized & Custom Aerospace Engineering Services",
+        "ልዩና ብጁ Aerospace Engineering Services",
+        "ፍሉይን ዝተዳለወን Aerospace Engineering Services"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1120,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-aircraft-manufacturing",
       "names": {
-        "en": "Specialized & Custom Aircraft Manufacturing",
-        "am": "ልዩና ብጁ Aircraft Manufacturing",
-        "om": "Kan Addaa fi Filatamaa Aircraft Manufacturing",
-        "ti": "ፍሉይን ዝተዳለወን Aircraft Manufacturing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1117,7 +1136,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aircraft Manufacturing",
+        "Kan Addaa fi Filatamaa Aircraft Manufacturing",
+        "Specialized & Custom Aircraft Manufacturing",
+        "ልዩና ብጁ Aircraft Manufacturing",
+        "ፍሉይን ዝተዳለወን Aircraft Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1152,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-aircraft-parts-avionics",
       "names": {
-        "en": "Specialized & Custom Aircraft Parts & Avionics",
-        "am": "ልዩና ብጁ Aircraft Parts & Avionics",
-        "om": "Kan Addaa fi Filatamaa Aircraft Parts & Avionics",
-        "ti": "ፍሉይን ዝተዳለወን Aircraft Parts & Avionics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1143,7 +1168,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Avionics",
+        "Custom Aircraft Parts",
+        "Kan Addaa fi Filatamaa Aircraft Parts & Avionics",
+        "Specialized & Custom Aircraft Parts & Avionics",
+        "ልዩና ብጁ Aircraft Parts & Avionics",
+        "ፍሉይን ዝተዳለወን Aircraft Parts & Avionics"
+      ],
       "redirects": []
     },
     {
@@ -1153,10 +1185,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-defence-equipment",
       "names": {
-        "en": "Specialized & Custom Defence Equipment",
-        "am": "ልዩና ብጁ Defence Equipment",
-        "om": "Kan Addaa fi Filatamaa Defence Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Defence Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1169,7 +1201,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Defence Equipment",
+        "Kan Addaa fi Filatamaa Defence Equipment",
+        "Specialized & Custom Defence Equipment",
+        "ልዩና ብጁ Defence Equipment",
+        "ፍሉይን ዝተዳለወን Defence Equipment"
+      ],
       "redirects": []
     },
     {
@@ -1179,10 +1217,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-airport-ground-services",
       "names": {
-        "en": "Specialized & Custom Airport Ground Services",
-        "am": "ልዩና ብጁ Airport Ground Services",
-        "om": "Kan Addaa fi Filatamaa Airport Ground Services",
-        "ti": "ፍሉይን ዝተዳለወን Airport Ground Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1195,7 +1233,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Airport Ground Services",
+        "Kan Addaa fi Filatamaa Airport Ground Services",
+        "Specialized & Custom Airport Ground Services",
+        "ልዩና ብጁ Airport Ground Services",
+        "ፍሉይን ዝተዳለወን Airport Ground Services"
+      ],
       "redirects": []
     },
     {
@@ -1205,10 +1249,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-aviation-training",
       "names": {
-        "en": "Specialized & Custom Aviation Training",
-        "am": "ልዩና ብጁ Aviation Training",
-        "om": "Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1221,7 +1265,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training",
+        "Kan Addaa fi Filatamaa Aviation Training",
+        "Specialized & Custom Aviation Training",
+        "ልዩና ብጁ Aviation Training",
+        "ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1281,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-military-logistics",
       "names": {
-        "en": "Specialized & Custom Military Logistics",
-        "am": "ልዩና ብጁ Military Logistics",
-        "om": "Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1297,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics",
+        "Kan Addaa fi Filatamaa Military Logistics",
+        "Specialized & Custom Military Logistics",
+        "ልዩና ብጁ Military Logistics",
+        "ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1313,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-drone-manufacturing",
       "names": {
-        "en": "Specialized & Custom Drone Manufacturing",
-        "am": "ልዩና ብጁ Drone Manufacturing",
-        "om": "Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1329,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing",
+        "Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Specialized & Custom Drone Manufacturing",
+        "ልዩና ብጁ Drone Manufacturing",
+        "ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -3363,7 +3425,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-uav-drone-manufacturing-unit",
       "names": {
-        "en": "Premium Grade Certified UAV & Drone Manufacturing Unit",
+        "en": "Premium Grade Certified UAV",
         "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት UAV ምርት",
         "om": "Kan Qulqullina Olaanaa Oomisha UAV",
         "ti": "ብሉጽ ዝተረጋገጸ ምፍራይ UAV"
@@ -3379,7 +3441,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Unit",
+        "Premium Grade Certified UAV & Drone Manufacturing Unit"
+      ],
       "redirects": []
     },
     {
@@ -3389,7 +3454,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-uav-drone-manufacturing-component",
       "names": {
-        "en": "Heavy-Duty Commercial UAV & Drone Manufacturing Component",
+        "en": "Heavy-Duty Commercial UAV",
         "am": "ጠንካራ የንግድ UAV ምርት መለዋወጫ",
         "om": "Meeshaa Hojii Cimaa Oomisha UAV",
         "ti": "ከቢድ ናይ ንግዲ ምፍራይ UAV"
@@ -3405,7 +3470,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Component",
+        "Heavy-Duty Commercial UAV & Drone Manufacturing Component"
+      ],
       "redirects": []
     },
     {
@@ -3415,8 +3483,8 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-uav-drone-manufacturing-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving UAV & Drone Manufacturing Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ UAV ምርት",
+        "en": "Eco-Friendly Energy-Saving UAV",
+        "am": "ኃይል ቆጣቢ",
         "om": "Qusataa Humnaa Oomisha UAV",
         "ti": "ሓይሊ ዝቑጥብ ምፍራይ UAV"
       },
@@ -3431,7 +3499,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Model",
+        "Eco-Friendly Energy-Saving UAV & Drone Manufacturing Model",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ UAV ምርት"
+      ],
       "redirects": []
     },
     {
@@ -3441,7 +3513,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-uav-drone-manufacturing-assembly",
       "names": {
-        "en": "Standard Industrial UAV & Drone Manufacturing Assembly",
+        "en": "Standard Industrial UAV",
         "am": "መደበኛ የኢንዱስትሪ UAV ምርት ስብስብ",
         "om": "Asambilii Indaastirii Oomisha UAV",
         "ti": "ስሩዕ ናይ ኢንዱስትሪ ምፍራይ UAV"
@@ -3457,7 +3529,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Assembly",
+        "Standard Industrial UAV & Drone Manufacturing Assembly"
+      ],
       "redirects": []
     },
     {
@@ -3467,9 +3542,9 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-uav-drone-manufacturing-system",
       "names": {
-        "en": "Compact Portable UAV & Drone Manufacturing System",
-        "am": "ቀላልና ተንቀሳቃሽ UAV ምርት ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Oomisha UAV",
+        "en": "Compact Portable UAV",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
         "ti": "ተንቀሳቓሲ ምፍራይ UAV"
       },
       "description": null,
@@ -3483,7 +3558,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable UAV & Drone Manufacturing System",
+        "Drone Manufacturing System",
+        "Sirna Salphaa fi Socho'aa Oomisha UAV",
+        "ቀላልና ተንቀሳቃሽ UAV ምርት ስርዓት"
+      ],
       "redirects": []
     },
     {
@@ -3493,7 +3573,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-uav-drone-manufacturing-module",
       "names": {
-        "en": "Digital Automated UAV & Drone Manufacturing Module",
+        "en": "Digital Automated UAV",
         "am": "ዲጂታል አውቶሜትድ UAV ምርት ሞጁል",
         "om": "Moojiyulii Dijitaalaa Oomisha UAV",
         "ti": "ዲጂታል ኣውቶሜትድ ምፍራይ UAV"
@@ -3509,7 +3589,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Automated UAV & Drone Manufacturing Module",
+        "Drone Manufacturing Module"
+      ],
       "redirects": []
     },
     {
@@ -3519,7 +3602,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-uav-drone-manufacturing-device",
       "names": {
-        "en": "High-Capacity Multi-Function UAV & Drone Manufacturing Device",
+        "en": "High-Capacity Multi-Function UAV",
         "am": "ከፍተኛ አቅም ያለው ሁለገብ UAV ምርት",
         "om": "Meeshaa Dandeettii Guddaa Oomisha UAV",
         "ti": "ዓብዪ ዓቕሚ ዘለዎ ምፍራይ UAV"
@@ -3535,7 +3618,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Device",
+        "High-Capacity Multi-Function UAV & Drone Manufacturing Device"
+      ],
       "redirects": []
     },
     {
@@ -3545,7 +3631,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-uav-drone-manufacturing-fixture",
       "names": {
-        "en": "Reinforced Weatherproof UAV & Drone Manufacturing Fixture",
+        "en": "Reinforced Weatherproof UAV",
         "am": "አየር የማይበግረው የተጠናከረ UAV ምርት",
         "om": "Kan Qilleensa Dandamatu Oomisha UAV",
         "ti": "ንኵነታት ኣየር ዝጻወር ምፍራይ UAV"
@@ -3561,7 +3647,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Fixture",
+        "Reinforced Weatherproof UAV & Drone Manufacturing Fixture"
+      ],
       "redirects": []
     },
     {
@@ -3571,7 +3660,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-uav-drone-manufacturing-hardware",
       "names": {
-        "en": "Precision Engineered UAV & Drone Manufacturing Hardware",
+        "en": "Precision Engineered UAV",
         "am": "በትክክለኛነት የተሰራ UAV ምርት ሃርድዌር",
         "om": "Haardiweerii Qulqullinaa Oomisha UAV",
         "ti": "ብልክዕ ዝተሰርሐ ምፍራይ UAV"
@@ -3587,7 +3676,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Hardware",
+        "Precision Engineered UAV & Drone Manufacturing Hardware"
+      ],
       "redirects": []
     },
     {
@@ -3597,7 +3689,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-uav-drone-manufacturing-pack",
       "names": {
-        "en": "Custom Fabricated UAV & Drone Manufacturing Pack",
+        "en": "Custom Fabricated UAV",
         "am": "ብጁ የተዘጋጀ የUAV ምርት ጥቅል",
         "om": "Paakii Addaa Oomisha UAV",
         "ti": "ብፍሉይ ዝተዳለወ ምፍራይ UAV"
@@ -3613,7 +3705,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated UAV & Drone Manufacturing Pack",
+        "Drone Manufacturing Pack"
+      ],
       "redirects": []
     },
     {
@@ -3623,7 +3718,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-uav-drone-manufacturing-kit",
       "names": {
-        "en": "Universal Compatible UAV & Drone Manufacturing Kit",
+        "en": "Universal Compatible UAV",
         "am": "ሁለንተናዊ የሚስማማ የUAV ምርት ኪት",
         "om": "Kiitii Waliigalaa Oomisha UAV",
         "ti": "ንኹሉ ዝሰማማዕ ምፍራይ UAV"
@@ -3639,7 +3734,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Kit",
+        "Universal Compatible UAV & Drone Manufacturing Kit"
+      ],
       "redirects": []
     },
     {
@@ -3649,7 +3747,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-uav-drone-manufacturing-tooling",
       "names": {
-        "en": "Professional Grade UAV & Drone Manufacturing Tooling",
+        "en": "Professional Grade UAV",
         "am": "ሙያዊ ደረጃ ያለው የUAV ምርት መሣሪያ",
         "om": "Meeshaa Ogummaa Oomisha UAV",
         "ti": "ሞያዊ ደረጃ ዘለዎ ምፍራይ UAV"
@@ -3665,7 +3763,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Tooling",
+        "Professional Grade UAV & Drone Manufacturing Tooling"
+      ],
       "redirects": []
     },
     {
@@ -3675,7 +3776,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-uav-drone-manufacturing-tester",
       "names": {
-        "en": "Specialized Laboratory UAV & Drone Manufacturing Tester",
+        "en": "Specialized Laboratory UAV",
         "am": "ልዩ የላቦራቶሪ UAV ምርት መመርመሪያ",
         "om": "Meeshaa Qorannoo Oomisha UAV",
         "ti": "ናይ ላቦራቶሪ መመርመሪ ምፍራይ UAV"
@@ -3691,7 +3792,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Tester",
+        "Specialized Laboratory UAV & Drone Manufacturing Tester"
+      ],
       "redirects": []
     },
     {
@@ -3701,7 +3805,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-uav-drone-manufacturing-unit",
       "names": {
-        "en": "High-Speed Synchronized UAV & Drone Manufacturing Unit",
+        "en": "High-Speed Synchronized UAV",
         "am": "ከፍተኛ ፍጥነት ያለው UAV ምርት ክፍል",
         "om": "Yuunitii Saffisa Ol'aanaa Oomisha UAV",
         "ti": "ልዑል ቅልጣፈ ዘለዎ ምፍራይ UAV"
@@ -3717,7 +3821,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Unit",
+        "High-Speed Synchronized UAV & Drone Manufacturing Unit"
+      ],
       "redirects": []
     },
     {
@@ -3727,10 +3834,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-uav-drone-manufacturing",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant UAV & Drone Manufacturing",
+        "en": "Stainless Steel Corrosion-Resistant UAV",
         "am": "ከማይዝግ ብረት የተሰራ UAV ምርት",
         "om": "Sibila Hin Xuraofne Oomisha UAV",
-        "ti": "ዘይመጽእ ሓጺን ምፍራይ UAV"
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -3743,7 +3850,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing",
+        "Stainless Steel Corrosion-Resistant UAV & Drone Manufacturing",
+        "ዘይመጽእ ሓጺን ምፍራይ UAV"
+      ],
       "redirects": []
     },
     {
@@ -3753,7 +3864,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-uav-drone-manufacturing-panel",
       "names": {
-        "en": "Thermal Insulated UAV & Drone Manufacturing Panel",
+        "en": "Thermal Insulated UAV",
         "am": "ሙቀት መከላከያ ያለው የUAV ምርት ፓነል",
         "om": "Paanaalii Ho'a Ittisu Oomisha UAV",
         "ti": "ሙቐት መከላኸሊ ምፍራይ UAV"
@@ -3769,7 +3880,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Panel",
+        "Thermal Insulated UAV & Drone Manufacturing Panel"
+      ],
       "redirects": []
     },
     {
@@ -3779,7 +3893,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-uav-drone-manufacturing",
       "names": {
-        "en": "Wireless Smart Integrated UAV & Drone Manufacturing",
+        "en": "Wireless Smart Integrated UAV",
         "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ UAV ምርት",
         "om": "Kan Qunnamtii Shiboo Hin Qabne Oomisha UAV",
         "ti": "ዘይብሉ ሽቦ ዘመናዊ ምፍራይ UAV"
@@ -3795,7 +3909,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing",
+        "Wireless Smart Integrated UAV & Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -3805,7 +3922,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-uav-drone-manufacturing",
       "names": {
-        "en": "Heavy Mechanical Calibration UAV & Drone Manufacturing",
+        "en": "Heavy Mechanical Calibration UAV",
         "am": "ከባድ መካኒካል ማስተካከያ UAV ምርት",
         "om": "Sirreeffama Mekaaniikaa Oomisha UAV",
         "ti": "ናይ መካኒካል ምዕራይ ምፍራይ UAV"
@@ -3821,7 +3938,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing",
+        "Heavy Mechanical Calibration UAV & Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -3831,8 +3951,8 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-uav-drone-manufacturing-gear",
       "names": {
-        "en": "Ergonomic Safety UAV & Drone Manufacturing Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ UAV ምርት",
+        "en": "Ergonomic Safety UAV Gear",
+        "am": "ምቹ",
         "om": "Meeshaa Eegumsaa Mijaawaa Oomisha UAV",
         "ti": "ምቹእ ናይ ድሕንነት ምፍራይ UAV"
       },
@@ -3847,7 +3967,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Gear",
+        "Ergonomic Safety UAV & Drone Manufacturing Gear",
+        "ምቹና ደህንነቱ የተጠበቀ UAV ምርት"
+      ],
       "redirects": []
     },
     {
@@ -3857,8 +3981,8 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-uav-drone-manufacturing-station",
       "names": {
-        "en": "Modular Expandable UAV & Drone Manufacturing Station",
-        "am": "ተገጣጣሚና የሚሰፋ የUAV ምርት ጣቢያ",
+        "en": "Modular Expandable UAV",
+        "am": "ተገጣጣሚ",
         "om": "Buufata Babal'ifamu Oomisha UAV",
         "ti": "ክሰፍሕ ዝኽእል ምፍራይ UAV"
       },
@@ -3873,7 +3997,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drone Manufacturing Station",
+        "Modular Expandable UAV & Drone Manufacturing Station",
+        "ተገጣጣሚና የሚሰፋ የUAV ምርት ጣቢያ"
+      ],
       "redirects": []
     },
     {
@@ -9083,10 +9211,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-aviation-training-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Aviation Training Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Aviation Training",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9099,7 +9227,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Aviation Training",
+        "Premium Grade Certified Specialized & Custom Aviation Training Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Aviation Training",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9109,10 +9243,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-aviation-training-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Aviation Training Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Aviation Training መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9125,7 +9259,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Component",
+        "Heavy-Duty Commercial Specialized & Custom Aviation Training Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Aviation Training",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Aviation Training",
+        "ጠንካራ የንግድ ልዩና ብጁ Aviation Training መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -9135,10 +9275,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-aviation-training-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Aviation Training Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Aviation Training",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9151,7 +9291,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Aviation Training Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Aviation Training",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Aviation Training",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9161,10 +9307,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-aviation-training-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Aviation Training Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Aviation Training ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9177,7 +9323,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Aviation Training",
+        "Custom Aviation Training Assembly",
+        "Standard Industrial Specialized & Custom Aviation Training Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Aviation Training ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9187,10 +9339,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-aviation-training-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Aviation Training System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Aviation Training ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9203,7 +9355,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Aviation Training System",
+        "Custom Aviation Training System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Aviation Training",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Aviation Training ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9213,10 +9371,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-aviation-training-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Aviation Training Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Aviation Training ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9229,7 +9387,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Module",
+        "Digital Automated Specialized & Custom Aviation Training Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Aviation Training",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Aviation Training ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9239,10 +9403,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-aviation-training-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Aviation Training Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Aviation Training",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9255,7 +9419,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Device",
+        "High-Capacity Multi-Function Specialized & Custom Aviation Training Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Aviation Training",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Aviation Training",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9265,10 +9435,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-aviation-training-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Aviation Training Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Aviation Training",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9281,7 +9451,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Aviation Training",
+        "Reinforced Weatherproof Specialized & Custom Aviation Training Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Aviation Training",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9291,10 +9467,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-aviation-training-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Aviation Training Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Aviation Training ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9307,7 +9483,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Aviation Training",
+        "Precision Engineered Specialized & Custom Aviation Training Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Aviation Training ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9317,10 +9499,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-aviation-training-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Aviation Training Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Aviation Training ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9333,7 +9515,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Pack",
+        "Custom Fabricated Specialized & Custom Aviation Training Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Aviation Training",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Aviation Training ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9343,10 +9531,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-aviation-training-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Aviation Training Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Aviation Training ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9359,7 +9547,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Aviation Training",
+        "Universal Compatible Specialized & Custom Aviation Training Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Aviation Training ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9369,10 +9563,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-aviation-training-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Aviation Training Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Aviation Training መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9385,7 +9579,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Aviation Training",
+        "Professional Grade Specialized & Custom Aviation Training Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Aviation Training መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9395,10 +9595,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-aviation-training-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Aviation Training Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Aviation Training መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9411,7 +9611,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Aviation Training",
+        "Specialized Laboratory Specialized & Custom Aviation Training Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Aviation Training መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9421,10 +9627,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-aviation-training-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Aviation Training Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Aviation Training ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9437,7 +9643,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Unit",
+        "High-Speed Synchronized Specialized & Custom Aviation Training Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Aviation Training",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Aviation Training",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Aviation Training ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -9447,10 +9659,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-aviation-training",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Aviation Training",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Aviation Training",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -9463,7 +9675,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Aviation Training",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Aviation Training",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Aviation Training",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9473,10 +9691,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-aviation-training-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Aviation Training Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Aviation Training ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9489,7 +9707,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Aviation Training",
+        "Thermal Insulated Specialized & Custom Aviation Training Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Aviation Training ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9499,10 +9723,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-aviation-training",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Aviation Training",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Aviation Training",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9515,7 +9739,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Aviation Training",
+        "Wireless Smart Integrated Specialized & Custom Aviation Training",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Aviation Training",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9525,10 +9755,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-aviation-training",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Aviation Training",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Aviation Training",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9541,7 +9771,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training",
+        "Heavy Mechanical Calibration Specialized & Custom Aviation Training",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Aviation Training",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Aviation Training",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9551,10 +9787,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-aviation-training-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Aviation Training Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Aviation Training",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9567,7 +9803,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Aviation Training Gear",
+        "Ergonomic Safety Specialized & Custom Aviation Training Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Aviation Training",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Aviation Training",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9577,10 +9819,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-aviation-training-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Aviation Training Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Aviation Training ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Aviation Training",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Aviation Training"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9593,7 +9835,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Aviation Training",
+        "Custom Aviation Training Station",
+        "Modular Expandable Specialized & Custom Aviation Training Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Aviation Training ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Aviation Training"
+      ],
       "redirects": []
     },
     {
@@ -9603,10 +9851,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-military-logistics-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Military Logistics Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Military Logistics",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9619,7 +9867,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Military Logistics",
+        "Premium Grade Certified Specialized & Custom Military Logistics Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Military Logistics",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9629,10 +9883,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-military-logistics-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Military Logistics Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Military Logistics መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9645,7 +9899,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Component",
+        "Heavy-Duty Commercial Specialized & Custom Military Logistics Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Military Logistics",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Military Logistics",
+        "ጠንካራ የንግድ ልዩና ብጁ Military Logistics መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -9655,10 +9915,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-military-logistics-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Military Logistics Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Military Logistics",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9671,7 +9931,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Military Logistics Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Military Logistics",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Military Logistics",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9681,10 +9947,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-military-logistics-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Military Logistics Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Military Logistics ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9697,7 +9963,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Military Logistics",
+        "Custom Military Logistics Assembly",
+        "Standard Industrial Specialized & Custom Military Logistics Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Military Logistics ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9707,10 +9979,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-military-logistics-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Military Logistics System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Military Logistics ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9723,7 +9995,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Military Logistics System",
+        "Custom Military Logistics System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Military Logistics",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Military Logistics ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9733,10 +10011,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-military-logistics-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Military Logistics Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Military Logistics ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9749,7 +10027,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Module",
+        "Digital Automated Specialized & Custom Military Logistics Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Military Logistics",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Military Logistics ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9759,10 +10043,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-military-logistics-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Military Logistics Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Military Logistics",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9775,7 +10059,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Device",
+        "High-Capacity Multi-Function Specialized & Custom Military Logistics Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Military Logistics",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Military Logistics",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9785,10 +10075,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-military-logistics-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Military Logistics Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Military Logistics",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9801,7 +10091,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Military Logistics",
+        "Reinforced Weatherproof Specialized & Custom Military Logistics Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Military Logistics",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9811,10 +10107,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-military-logistics-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Military Logistics Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Military Logistics ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9827,7 +10123,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Military Logistics",
+        "Precision Engineered Specialized & Custom Military Logistics Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Military Logistics ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9837,10 +10139,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-military-logistics-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Military Logistics Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Military Logistics ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9853,7 +10155,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Military Logistics Pack",
+        "Custom Military Logistics Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Military Logistics",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Military Logistics ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9863,10 +10171,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-military-logistics-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Military Logistics Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Military Logistics ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9879,7 +10187,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Military Logistics",
+        "Universal Compatible Specialized & Custom Military Logistics Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Military Logistics ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9889,10 +10203,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-military-logistics-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Military Logistics Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Military Logistics መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9905,7 +10219,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Military Logistics",
+        "Professional Grade Specialized & Custom Military Logistics Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Military Logistics መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9915,10 +10235,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-military-logistics-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Military Logistics Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Military Logistics መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9931,7 +10251,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Military Logistics",
+        "Specialized Laboratory Specialized & Custom Military Logistics Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Military Logistics መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9941,10 +10267,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-military-logistics-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Military Logistics Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Military Logistics ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -9957,7 +10283,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Unit",
+        "High-Speed Synchronized Specialized & Custom Military Logistics Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Military Logistics",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Military Logistics",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Military Logistics ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -9967,10 +10299,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-military-logistics",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Military Logistics",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Military Logistics",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -9983,7 +10315,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Military Logistics",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Military Logistics",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Military Logistics",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -9993,10 +10331,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-military-logistics-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Military Logistics Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Military Logistics ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10009,7 +10347,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Military Logistics",
+        "Thermal Insulated Specialized & Custom Military Logistics Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Military Logistics ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -10019,10 +10363,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-military-logistics",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Military Logistics",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Military Logistics",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10035,7 +10379,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Military Logistics",
+        "Wireless Smart Integrated Specialized & Custom Military Logistics",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Military Logistics",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -10045,10 +10395,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-military-logistics",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Military Logistics",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Military Logistics",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10061,7 +10411,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics",
+        "Heavy Mechanical Calibration Specialized & Custom Military Logistics",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Military Logistics",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Military Logistics",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -10071,10 +10427,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-military-logistics-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Military Logistics Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Military Logistics",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10087,7 +10443,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Military Logistics Gear",
+        "Ergonomic Safety Specialized & Custom Military Logistics Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Military Logistics",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Military Logistics",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -10097,10 +10459,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-military-logistics-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Military Logistics Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Military Logistics ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Military Logistics",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Military Logistics"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10113,7 +10475,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Military Logistics",
+        "Custom Military Logistics Station",
+        "Modular Expandable Specialized & Custom Military Logistics Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Military Logistics ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Military Logistics"
+      ],
       "redirects": []
     },
     {
@@ -10123,10 +10491,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-drone-manufacturing-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Drone Manufacturing Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Drone Manufacturing",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10139,7 +10507,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Premium Grade Certified Specialized & Custom Drone Manufacturing Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Drone Manufacturing",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10149,10 +10523,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-drone-manufacturing-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Drone Manufacturing Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Drone Manufacturing መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10165,7 +10539,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Component",
+        "Heavy-Duty Commercial Specialized & Custom Drone Manufacturing Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Drone Manufacturing",
+        "ጠንካራ የንግድ ልዩና ብጁ Drone Manufacturing መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -10175,10 +10555,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-drone-manufacturing-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Drone Manufacturing Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Drone Manufacturing",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10191,7 +10571,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Drone Manufacturing Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Drone Manufacturing",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10201,10 +10587,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-drone-manufacturing-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Drone Manufacturing Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Drone Manufacturing ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10217,7 +10603,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Custom Drone Manufacturing Assembly",
+        "Standard Industrial Specialized & Custom Drone Manufacturing Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Drone Manufacturing ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10227,10 +10619,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-drone-manufacturing-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Drone Manufacturing System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Drone Manufacturing ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10243,7 +10635,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Drone Manufacturing System",
+        "Custom Drone Manufacturing System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Drone Manufacturing ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10253,10 +10651,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-drone-manufacturing-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Drone Manufacturing Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Drone Manufacturing ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10269,7 +10667,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Module",
+        "Digital Automated Specialized & Custom Drone Manufacturing Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Drone Manufacturing ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10279,10 +10683,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-drone-manufacturing-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Drone Manufacturing Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Drone Manufacturing",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10295,7 +10699,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Device",
+        "High-Capacity Multi-Function Specialized & Custom Drone Manufacturing Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Drone Manufacturing",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10305,10 +10715,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-drone-manufacturing-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Drone Manufacturing Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Drone Manufacturing",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10321,7 +10731,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Reinforced Weatherproof Specialized & Custom Drone Manufacturing Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Drone Manufacturing",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10331,10 +10747,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-drone-manufacturing-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Drone Manufacturing Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Drone Manufacturing ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10347,7 +10763,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Precision Engineered Specialized & Custom Drone Manufacturing Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Drone Manufacturing ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10357,10 +10779,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-drone-manufacturing-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Drone Manufacturing Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Drone Manufacturing ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10373,7 +10795,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Pack",
+        "Custom Fabricated Specialized & Custom Drone Manufacturing Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Drone Manufacturing ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10383,10 +10811,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-drone-manufacturing-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Drone Manufacturing Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Drone Manufacturing ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10399,7 +10827,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Universal Compatible Specialized & Custom Drone Manufacturing Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Drone Manufacturing ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10409,10 +10843,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-drone-manufacturing-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Drone Manufacturing Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Drone Manufacturing መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10425,7 +10859,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Professional Grade Specialized & Custom Drone Manufacturing Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Drone Manufacturing መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10435,10 +10875,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-drone-manufacturing-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Drone Manufacturing Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Drone Manufacturing መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10451,7 +10891,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Specialized Laboratory Specialized & Custom Drone Manufacturing Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Drone Manufacturing መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10461,10 +10907,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-drone-manufacturing-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Drone Manufacturing Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Drone Manufacturing ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10477,7 +10923,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Unit",
+        "High-Speed Synchronized Specialized & Custom Drone Manufacturing Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Drone Manufacturing",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Drone Manufacturing ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -10487,10 +10939,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-drone-manufacturing",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Drone Manufacturing",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Drone Manufacturing",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -10503,7 +10955,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Drone Manufacturing",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Drone Manufacturing",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10513,10 +10971,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-drone-manufacturing-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Drone Manufacturing Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Drone Manufacturing ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10529,7 +10987,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Thermal Insulated Specialized & Custom Drone Manufacturing Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Drone Manufacturing ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10539,10 +11003,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-drone-manufacturing",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Drone Manufacturing",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Drone Manufacturing",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10555,7 +11019,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Wireless Smart Integrated Specialized & Custom Drone Manufacturing",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Drone Manufacturing",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10565,10 +11035,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-drone-manufacturing",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Drone Manufacturing",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Drone Manufacturing",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10581,7 +11051,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing",
+        "Heavy Mechanical Calibration Specialized & Custom Drone Manufacturing",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Drone Manufacturing",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10591,10 +11067,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-drone-manufacturing-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Drone Manufacturing Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Drone Manufacturing",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10607,7 +11083,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Drone Manufacturing Gear",
+        "Ergonomic Safety Specialized & Custom Drone Manufacturing Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Drone Manufacturing",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Drone Manufacturing",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {
@@ -10617,10 +11099,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-drone-manufacturing-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Drone Manufacturing Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Drone Manufacturing ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Drone Manufacturing",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Drone Manufacturing"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -10633,7 +11115,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Drone Manufacturing",
+        "Custom Drone Manufacturing Station",
+        "Modular Expandable Specialized & Custom Drone Manufacturing Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Drone Manufacturing ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Drone Manufacturing"
+      ],
       "redirects": []
     },
     {

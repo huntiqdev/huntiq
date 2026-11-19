@@ -18,8 +18,8 @@ test: ## Run tests
 migrate: ## Run database migrations
 	./scripts/migrate.sh
 
-seed: ## Seed database with sample data
-	go run ./cmd/seed/main.go
+seed: ## Import master data
+	go run ./cmd/tools/masterdata -action=import -dry-run=false -dir=../data/master
 
 clean: ## Clean build artifacts
 	rm -rf bin/

@@ -47,22 +47,12 @@ function AuthContent() {
   const isRental = asParam === 'landlord' || intent === 'rent' || typeParam === 'rent' || rawRedirect.includes('type=rent');
   const isSeller = asParam === 'seller' || intent === 'sell' || typeParam === 'sale' || rawRedirect.includes('type=sale');
 
-  const initialAccountType: AccountType = isSeller
-    ? 'seller'
-    : isRental
-    ? 'landlord'
-    : 'buyer';
-
   // Defensive reconstruction of target redirect URL ensuring type=sale / type=rent is preserved
   let redirectUrl = rawRedirect;
   if (redirectUrl && !redirectUrl.includes('type=') && typeParam) {
     redirectUrl += (redirectUrl.includes('?') ? '&' : '?') + `type=${typeParam}`;
   }
 
-  const [accountType, setAccountType] = useState<AccountType>(initialAccountType);
-  const [sellerPref, setSellerPref] = useState<'sale' | 'rent' | 'both'>(
-    isRental ? 'rent' : 'sale'
-  );
   // Default to 'login' so returning users are never asked signup questions
   const [tab, setTab] = useState<Tab>(
     tabParam === 'register' || Boolean(refCode) ? 'register' : 'login'
@@ -276,11 +266,8 @@ function AuthContent() {
 
     setLoading(true);
     try {
-      const selectedRole = accountType === 'buyer' ? 'buyer' : 'seller';
-      // Unified merchant identity: Single account serves both selling goods and renting properties
-      const selectedSellerPref = accountType === 'buyer' 
-        ? undefined 
-        : (accountType === 'landlord' ? 'rent' : sellerPref);
+      const selectedRole = isSeller || isRental ? 'seller' : 'buyer';
+      const selectedSellerPref = isRental ? 'rent' : (isSeller ? 'sale' : 'both');
 
       const regRes: any = await api.unifiedRegister({
         name: regForm.name.trim(),
@@ -593,145 +580,19 @@ function AuthContent() {
       {/* ── Unified Register Form ────────────────────────────────────────── */}
       {tab === 'register' && (
         <form onSubmit={handleRegister} className="space-y-3.5">
-          {/* Account Type Selector (Disambiguating Buyer vs Seller vs Landlord) */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label className={LBL_CLS}>{u.reg_select_type || 'Select Account Type'}</label>
-              <span className="text-[10px] font-bold text-[#1769E0] dark:text-[#38A5FF] uppercase tracking-wider">
-                {u.reg_as_badge || 'Registering as'}: {accountType === 'seller' ? (u.reg_seller_title || 'Seller') : accountType === 'landlord' ? (u.reg_landlord_title || 'Landlord') : (u.reg_buyer_title || 'Buyer')}
-              </span>
+          {/* Master Universal Account Banner */}
+          <div className="flex items-center gap-3 p-3 bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200/80 dark:border-white/10 rounded-2xl text-xs">
+            <div className="w-9 h-9 rounded-xl bg-[#1769E0]/10 flex items-center justify-center shrink-0 text-[#1769E0]">
+              <Sparkles size={18} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {/* Buyer / Consumer Card */}
-              <button
-                type="button"
-                onClick={() => setAccountType('buyer')}
-                className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
-                  accountType === 'buyer'
-                    ? 'bg-[#1769E0]/5 dark:bg-[#1769E0]/20 border-[#1769E0] shadow-sm ring-1 ring-[#1769E0]/30'
-                    : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
-                    accountType === 'buyer' ? 'bg-[#1769E0] text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
-                  }`}>
-                    <User size={13} />
-                  </div>
-                  {accountType === 'buyer' && <CheckCircle2 size={14} className="text-[#1769E0] dark:text-[#38A5FF]" />}
-                </div>
-                <div>
-                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
-                    {u.reg_buyer_title || 'Buyer / Consumer'}
-                  </p>
-                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
-                    {u.reg_buyer_desc || 'Shop, rent items, place orders, chat with sellers'}
-                  </p>
-                </div>
-              </button>
-
-              {/* Seller / Merchant Card */}
-              <button
-                type="button"
-                onClick={() => setAccountType('seller')}
-                className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
-                  accountType === 'seller'
-                    ? 'bg-[#1769E0]/5 dark:bg-[#1769E0]/20 border-[#1769E0] shadow-sm ring-1 ring-[#1769E0]/30'
-                    : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
-                    accountType === 'seller' ? 'bg-[#1769E0] text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
-                  }`}>
-                    <ShoppingBag size={13} />
-                  </div>
-                  {accountType === 'seller' && <CheckCircle2 size={14} className="text-[#1769E0] dark:text-[#38A5FF]" />}
-                </div>
-                <div>
-                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
-                    {u.reg_seller_title || 'Seller / Merchant'}
-                  </p>
-                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
-                    {u.reg_seller_desc || 'Post items for sale and reach thousands across Ethiopia'}
-                  </p>
-                </div>
-              </button>
-
-              {/* Landlord / Rental Host Card */}
-              <button
-                type="button"
-                onClick={() => setAccountType('landlord')}
-                className={`p-2.5 rounded-2xl border text-left transition-all flex flex-col justify-between ${
-                  accountType === 'landlord'
-                    ? 'bg-teal-50/80 dark:bg-teal-950/40 border-teal-500 shadow-sm ring-1 ring-teal-500/30'
-                    : 'bg-zinc-50 dark:bg-white/[0.02] border-zinc-200 dark:border-white/10 hover:border-zinc-300 dark:hover:border-white/20'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${
-                    accountType === 'landlord' ? 'bg-teal-600 text-white' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
-                  }`}>
-                    <Home size={13} />
-                  </div>
-                  {accountType === 'landlord' && <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />}
-                </div>
-                <div>
-                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
-                    {u.reg_landlord_title || 'Landlord / Host'}
-                  </p>
-                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
-                    {u.reg_landlord_desc || 'Rent out tools, vehicles, equipment, or properties'}
-                  </p>
-                </div>
-              </button>
+            <div>
+              <p className="font-black text-zinc-900 dark:text-white leading-tight">
+                Master Universal Account
+              </p>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-snug">
+                One master account for everything: Buy, Rent, Sell, Host, or Announce across Ethiopia.
+              </p>
             </div>
-
-            {accountType !== 'buyer' && (
-              <div className="p-3 bg-zinc-50 dark:bg-white/[0.03] border border-zinc-200 dark:border-white/10 rounded-2xl space-y-2 mt-2">
-                <div className="flex items-center justify-between">
-                  <label className={LBL_CLS}>Primary Posting Focus (Can list both anytime)</label>
-                  <span className="text-[9px] font-bold text-[#1769E0] dark:text-[#38A5FF] bg-[#1769E0]/10 px-2 py-0.5 rounded-full">
-                    Unified Account
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => { setSellerPref('sale'); setAccountType('seller'); }}
-                    className={`py-2 px-2 rounded-xl text-center border text-xs font-bold transition-all ${
-                      sellerPref === 'sale' && accountType === 'seller'
-                        ? 'bg-[#1769E0] text-white border-[#1769E0] shadow-sm'
-                        : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:border-[#1769E0]/40'
-                    }`}
-                  >
-                    🛍️ Sell Goods
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => { setSellerPref('rent'); setAccountType('landlord'); }}
-                    className={`py-2 px-2 rounded-xl text-center border text-xs font-bold transition-all ${
-                      sellerPref === 'rent' || accountType === 'landlord'
-                        ? 'bg-teal-600 text-white border-teal-600 shadow-sm'
-                        : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:border-teal-300'
-                    }`}
-                  >
-                    🏠 Rent Properties
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => { setSellerPref('both'); setAccountType('seller'); }}
-                    className={`py-2 px-2 rounded-xl text-center border text-xs font-bold transition-all ${
-                      sellerPref === 'both' && accountType === 'seller'
-                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
-                        : 'bg-white dark:bg-zinc-800 border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:border-indigo-300'
-                    }`}
-                  >
-                    🔄 Both (Sell & Rent)
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
 
           <PhoneField
@@ -759,16 +620,16 @@ function AuthContent() {
 
           <div>
             <label className={LBL_CLS}>
-              <Building2 size={9} className="inline mr-1" />{u.business_name_label}{' '}
+              <Building2 size={9} className="inline mr-1" />{u.business_name_label || 'Business / Store / Brand Name'}{' '}
               <span className="normal-case font-normal text-zinc-400 dark:text-white/30">
-                ({accountType === 'buyer' ? u.optional_label : (accountType === 'seller' ? (u.shop_store_name || 'Shop / Store Name') : (u.agency_host_name || 'Agency / Host Name'))})
+                ({u.optional_label || 'optional'})
               </span>
             </label>
             <div className="relative">
               <Building2 size={13} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-white/30 pointer-events-none" />
               <input
                 className={INPUT_CLS + ' pl-10'}
-                placeholder={accountType === 'seller' ? (u.shop_store_placeholder || 'Your Shop or Store Name (optional)') : accountType === 'landlord' ? (u.agency_host_placeholder || 'Your Property or Agency Name (optional)') : (u.business_name_placeholder || 'Business Name (optional)')}
+                placeholder={u.business_name_placeholder || 'Business, shop, or agency name (optional)'}
                 value={regForm.business_name}
                 onChange={setReg('business_name')}
               />

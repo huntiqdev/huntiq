@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Healthcare & Medicine",
-        "am": "ጤናና ሕክምና",
-        "om": "Fayyaa fi Qorichaa",
-        "ti": "ጥዕናን ሕክምናን"
+        "en": "Healthcare",
+        "am": "ጤና",
+        "om": "Fayyaa",
+        "ti": "ጥዕና"
       },
       "slug": "healthcare-medicine",
       "description": "Medical equipment, supplies, pharmaceuticals, healthcare services, and medical facilities.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Fayyaa fi Qorichaa",
+        "Healthcare & Medicine",
+        "Medicine",
+        "ጤናና ሕክምና",
+        "ጥዕናን ሕክምናን"
+      ],
       "redirects": []
     },
     {
@@ -59,10 +65,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Ambulance & Emergency Medical",
-        "am": "የአምቡላንስና የአደጋ ህክምና",
-        "om": "Ambulaansii fi Balaa",
-        "ti": "ኣምቡላንስን ሕክምና ኣደጋን"
+        "en": "Ambulance",
+        "am": "የአምቡላንስ",
+        "om": "Ambulaansii",
+        "ti": "ኣምቡላንስ"
       },
       "slug": "ambulance-emergency-services",
       "description": "",
@@ -76,7 +82,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ambulaansii fi Balaa",
+        "Ambulance & Emergency Medical",
+        "Emergency Medical",
+        "ኣምቡላንስን ሕክምና ኣደጋን",
+        "የአምቡላንስና የአደጋ ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -196,10 +208,10 @@
       "parent_code": "ambulance-emergency-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Ambulance & Emergency Medical",
-        "am": "ሌሎች የአምቡላንስና የአደጋ ህክምና",
-        "om": "Ambulaansii fi Balaa Biroo",
-        "ti": "ካልኦት ኣምቡላንስን ሕክምና ኣደጋን"
+        "en": "Other Ambulance",
+        "am": "ሌሎች የአምቡላንስ",
+        "om": "Ambulaansii",
+        "ti": "ካልኦት ኣምቡላንስ"
       },
       "slug": "other-ambulance-emergency-services",
       "description": null,
@@ -213,7 +225,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ambulaansii fi Balaa Biroo",
+        "Emergency Medical",
+        "Other Ambulance & Emergency Medical",
+        "ሌሎች የአምቡላንስና የአደጋ ህክምና",
+        "ካልኦት ኣምቡላንስን ሕክምና ኣደጋን"
+      ],
       "redirects": []
     },
     {
@@ -222,10 +240,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Dental Equipment & Instruments",
-        "am": "የጥርስ እቃዎችና መሳሪያዎች",
+        "en": "Dental Equipment",
+        "am": "የጥርስ እቃዎች",
         "om": "Meeshaalee Ilkoo",
-        "ti": "ናይ ጥርሲ ኣቑሑን መሳርሒታትን"
+        "ti": "ናይ ጥርሲ ኣቑሑ"
       },
       "slug": "dental-equipment",
       "description": "",
@@ -239,7 +257,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dental Equipment & Instruments",
+        "Instruments",
+        "ናይ ጥርሲ ኣቑሑን መሳርሒታትን",
+        "የጥርስ እቃዎችና መሳሪያዎች"
+      ],
       "redirects": []
     },
     {
@@ -352,10 +375,10 @@
       "parent_code": "dental-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Dental Equipment & Instruments",
-        "am": "ሌሎች የጥርስ እቃዎችና መሳሪያዎች",
+        "en": "Other Dental Equipment",
+        "am": "ሌሎች የጥርስ እቃዎች",
         "om": "Meeshaalee Ilkoo Biroo",
-        "ti": "ካልኦት ናይ ጥርሲ ኣቑሑን መሳርሒታትን"
+        "ti": "ካልኦት ናይ ጥርሲ ኣቑሑ"
       },
       "slug": "other-dental-equipment",
       "description": null,
@@ -369,7 +392,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Instruments",
+        "Other Dental Equipment & Instruments",
+        "ሌሎች የጥርስ እቃዎችና መሳሪያዎች",
+        "ካልኦት ናይ ጥርሲ ኣቑሑን መሳርሒታትን"
+      ],
       "redirects": []
     },
     {
@@ -378,10 +406,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Diagnostic & Imaging Equipment",
-        "am": "የምርመራና የምስል እቃዎች",
+        "en": "Diagnostic Equipment",
+        "am": "የምርመራ",
         "om": "Meeshaalee Qorannoo",
-        "ti": "ናይ መመርመሪን ምስልን ኣቑሑ"
+        "ti": "ናይ መመርመሪ"
       },
       "slug": "diagnostic-imaging-equipment",
       "description": "",
@@ -395,7 +423,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Diagnostic & Imaging Equipment",
+        "Imaging Equipment",
+        "ናይ መመርመሪን ምስልን ኣቑሑ",
+        "የምርመራና የምስል እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -508,10 +541,10 @@
       "parent_code": "diagnostic-imaging-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Diagnostic & Imaging Equipment",
-        "am": "ሌሎች የምርመራና የምስል እቃዎች",
+        "en": "Other Diagnostic Equipment",
+        "am": "ሌሎች የምርመራ",
         "om": "Meeshaalee Qorannoo Biroo",
-        "ti": "ካልኦት ናይ መመርመሪን ምስልን ኣቑሑ"
+        "ti": "ካልኦት ናይ መመርመሪ"
       },
       "slug": "other-diagnostic-imaging-equipment",
       "description": null,
@@ -525,7 +558,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Imaging Equipment",
+        "Other Diagnostic & Imaging Equipment",
+        "ሌሎች የምርመራና የምስል እቃዎች",
+        "ካልኦት ናይ መመርመሪን ምስልን ኣቑሑ"
+      ],
       "redirects": []
     },
     {
@@ -534,10 +572,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Healthcare Services & Facilities",
-        "am": "የጤና አገልግሎትና መገልገያዎች",
+        "en": "Healthcare Services",
+        "am": "የጤ",
         "om": "Tajaajila Fayyaa",
-        "ti": "ኣገልግሎትን መገልገያታትን ጥዕና"
+        "ti": "ኣገልግሎት"
       },
       "slug": "healthcare-services-facilities",
       "description": "",
@@ -551,7 +589,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Facilities",
+        "Healthcare Services & Facilities",
+        "ኣገልግሎትን መገልገያታትን ጥዕና",
+        "የጤና አገልግሎትና መገልገያዎች"
+      ],
       "redirects": []
     },
     {
@@ -664,10 +707,10 @@
       "parent_code": "healthcare-services-facilities",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Healthcare Services & Facilities",
-        "am": "ሌሎች የጤና አገልግሎትና መገልገያዎች",
+        "en": "Other Healthcare Services",
+        "am": "ሌሎች የጤ",
         "om": "Tajaajila Fayyaa Biroo",
-        "ti": "ካልኦት ኣገልግሎትን መገልገያታትን ጥዕና"
+        "ti": "ካልኦት ኣገልግሎት"
       },
       "slug": "other-healthcare-services-facilities",
       "description": null,
@@ -681,7 +724,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Facilities",
+        "Other Healthcare Services & Facilities",
+        "ሌሎች የጤና አገልግሎትና መገልገያዎች",
+        "ካልኦት ኣገልግሎትን መገልገያታትን ጥዕና"
+      ],
       "redirects": []
     },
     {
@@ -794,10 +842,10 @@
       "parent_code": "elderly-home-care",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Commercial 4-Burner Gas & Electric Stoves",
-        "am": "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "om": "Istoovii Gaasii fi Eleektiriikaa 4",
-        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "en": "Commercial 4-Burner Gas",
+        "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
+        "om": "Istoovii Gaasii",
+        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝ"
       },
       "slug": "elderly-home-care-commercial-4-burner-gas-electric-s77_2",
       "description": null,
@@ -811,7 +859,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial 4-Burner Gas & Electric Stoves",
+        "Electric Stoves",
+        "Istoovii Gaasii fi Eleektiriikaa 4",
+        "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+      ],
       "redirects": []
     },
     {
@@ -820,10 +874,10 @@
       "parent_code": "elderly-home-care",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Heavy-Duty Food Processors & Coffee Grinders",
-        "am": "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
-        "om": "Maashinii Daakuu fi Bunaa Cimaa",
-        "ti": "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን"
+        "en": "Heavy-Duty Food Processors",
+        "am": "ከባድ የቤት ውስጥ መፍጫዎች",
+        "om": "Maashinii Daakuu",
+        "ti": "ከቢድ ናይ ገዛ መፍሓይ"
       },
       "slug": "elderly-home-care-heavy-duty-food-processors-coffe-s77_3",
       "description": null,
@@ -837,7 +891,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Coffee Grinders",
+        "Heavy-Duty Food Processors & Coffee Grinders",
+        "Maashinii Daakuu fi Bunaa Cimaa",
+        "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+      ],
       "redirects": []
     },
     {
@@ -950,10 +1010,10 @@
       "parent_code": "home-nursing",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Commercial 4-Burner Gas & Electric Stoves",
-        "am": "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "om": "Istoovii Gaasii fi Eleektiriikaa 4",
-        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "en": "Commercial 4-Burner Gas",
+        "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
+        "om": "Istoovii Gaasii",
+        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝ"
       },
       "slug": "home-nursing-commercial-4-burner-gas-electric-stov-s78_2",
       "description": null,
@@ -967,7 +1027,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial 4-Burner Gas & Electric Stoves",
+        "Electric Stoves",
+        "Istoovii Gaasii fi Eleektiriikaa 4",
+        "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+      ],
       "redirects": []
     },
     {
@@ -976,10 +1042,10 @@
       "parent_code": "home-nursing",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Heavy-Duty Food Processors & Coffee Grinders",
-        "am": "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
-        "om": "Maashinii Daakuu fi Bunaa Cimaa",
-        "ti": "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን"
+        "en": "Heavy-Duty Food Processors",
+        "am": "ከባድ የቤት ውስጥ መፍጫዎች",
+        "om": "Maashinii Daakuu",
+        "ti": "ከቢድ ናይ ገዛ መፍሓይ"
       },
       "slug": "home-nursing-heavy-duty-food-processors-coffee-gri-s78_3",
       "description": null,
@@ -994,12 +1060,16 @@
       "meta_title": null,
       "meta_description": null,
       "aliases": [
+        "Coffee Grinders",
+        "Heavy-Duty Food Processors & Coffee Grinders",
+        "Maashinii Daakuu fi Bunaa Cimaa",
+        "dirilii",
+        "drill",
         "rotary drill",
         "ቦረቦሬ",
-        "dirilii",
-        "ድሪል",
-        "ድሪል",
-        "drill"
+        "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "ድሪል"
       ],
       "redirects": []
     },
@@ -1146,10 +1216,10 @@
       "parent_code": "physiotherapy-home",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Commercial 4-Burner Gas & Electric Stoves",
-        "am": "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "om": "Istoovii Gaasii fi Eleektiriikaa 4",
-        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "en": "Commercial 4-Burner Gas",
+        "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
+        "om": "Istoovii Gaasii",
+        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝ"
       },
       "slug": "physiotherapy-home-commercial-4-burner-gas-electri-s79_2",
       "description": null,
@@ -1164,11 +1234,15 @@
       "meta_title": null,
       "meta_description": null,
       "aliases": [
-        "ድሪል",
+        "Commercial 4-Burner Gas & Electric Stoves",
+        "Electric Stoves",
+        "Istoovii Gaasii fi Eleektiriikaa 4",
         "dirilii",
         "drill",
-        "ቦረቦሬ",
         "rotary drill",
+        "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
+        "ቦረቦሬ",
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
         "ድሪል"
       ],
       "redirects": []
@@ -1179,10 +1253,10 @@
       "parent_code": "physiotherapy-home",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Heavy-Duty Food Processors & Coffee Grinders",
-        "am": "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
-        "om": "Maashinii Daakuu fi Bunaa Cimaa",
-        "ti": "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን"
+        "en": "Heavy-Duty Food Processors",
+        "am": "ከባድ የቤት ውስጥ መፍጫዎች",
+        "om": "Maashinii Daakuu",
+        "ti": "ከቢድ ናይ ገዛ መፍሓይ"
       },
       "slug": "physiotherapy-home-heavy-duty-food-processors-coff-s79_3",
       "description": null,
@@ -1196,7 +1270,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Coffee Grinders",
+        "Heavy-Duty Food Processors & Coffee Grinders",
+        "Maashinii Daakuu fi Bunaa Cimaa",
+        "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1337,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Hospital PPE & Infection Control",
-        "am": "የሆስፒታል PPEና የተወሰነ በሽታ መከላከያ",
-        "om": "PPE fi Eegumsa",
-        "ti": "PPE ሆስፒታልን ምክልኻስ በሽታን"
+        "en": "Hospital PPE",
+        "am": "የሆስፒታል PPE",
+        "om": "PPE",
+        "ti": "PPE ሆስፒታል"
       },
       "slug": "hospital-ppe-infection-control",
       "description": "",
@@ -1274,7 +1354,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hospital PPE & Infection Control",
+        "Infection Control",
+        "PPE fi Eegumsa",
+        "PPE ሆስፒታልን ምክልኻስ በሽታን",
+        "የሆስፒታል PPEና የተወሰነ በሽታ መከላከያ"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1473,10 @@
       "parent_code": "hospital-ppe-infection-control",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Hospital PPE & Infection Control",
-        "am": "ሌሎች የሆስፒታል PPEና የተወሰነ በሽታ መከላከያ",
-        "om": "PPE fi Eegumsa Biroo",
-        "ti": "ካልኦት PPE ሆስፒታልን ምክልኻስ በሽታን"
+        "en": "Other Hospital PPE",
+        "am": "ሌሎች የሆስፒታል PPE",
+        "om": "PPE",
+        "ti": "ካልኦት PPE ሆስፒታል"
       },
       "slug": "other-hospital-ppe-infection-control",
       "description": null,
@@ -1404,7 +1490,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Infection Control",
+        "Other Hospital PPE & Infection Control",
+        "PPE fi Eegumsa Biroo",
+        "ሌሎች የሆስፒታል PPEና የተወሰነ በሽታ መከላከያ",
+        "ካልኦት PPE ሆስፒታልን ምክልኻስ በሽታን"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1505,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Laboratory Instruments & Reagents",
-        "am": "የዳሸታ መሳሪያዎችና ኬሚካሎች",
+        "en": "Laboratory Instruments",
+        "am": "የዳሸታ መሳሪያዎች",
         "om": "Meeshaalee Laboratorii",
-        "ti": "ናይ ላብራቶሪ ኣቑሑን ኬሚካላትን"
+        "ti": "ናይ ላብራቶሪ ኣቑሑ"
       },
       "slug": "laboratory-instruments",
       "description": "",
@@ -1430,7 +1522,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Laboratory Instruments & Reagents",
+        "Reagents",
+        "ናይ ላብራቶሪ ኣቑሑን ኬሚካላትን",
+        "የዳሸታ መሳሪያዎችና ኬሚካሎች"
+      ],
       "redirects": []
     },
     {
@@ -1543,10 +1640,10 @@
       "parent_code": "laboratory-instruments",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Laboratory Instruments & Reagents",
-        "am": "ሌሎች የዳሸታ መሳሪያዎችና ኬሚካሎች",
+        "en": "Other Laboratory Instruments",
+        "am": "ሌሎች የዳሸታ መሳሪያዎች",
         "om": "Meeshaalee Laboratorii Biroo",
-        "ti": "ካልኦት ናይ ላብራቶሪ ኣቑሑን ኬሚካላትን"
+        "ti": "ካልኦት ናይ ላብራቶሪ ኣቑሑ"
       },
       "slug": "other-laboratory-instruments",
       "description": null,
@@ -1560,7 +1657,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Laboratory Instruments & Reagents",
+        "Reagents",
+        "ሌሎች የዳሸታ መሳሪያዎችና ኬሚካሎች",
+        "ካልኦት ናይ ላብራቶሪ ኣቑሑን ኬሚካላትን"
+      ],
       "redirects": []
     },
     {
@@ -1569,8 +1671,8 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Medical Consumables & Disposables",
-        "am": "የህክምና አጠቃላይ እቃዎች",
+        "en": "Medical Consumables",
+        "am": "የህክም",
         "om": "Meeshaalee Fayyaa",
         "ti": "ናይ ሕክምና ኣቑሑ ምጥቃት"
       },
@@ -1586,7 +1688,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Disposables",
+        "Medical Consumables & Disposables",
+        "የህክምና አጠቃላይ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -1595,10 +1701,10 @@
       "parent_code": "medical-consumables-disposables",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Bandages & Dressings",
-        "am": "ባንደጅና መሸፊኛ",
+        "en": "Bandages",
+        "am": "ባንደጅ",
         "om": "Bandaajii",
-        "ti": "ባንደጅን መሸፊኛን"
+        "ti": "ባንደጅ"
       },
       "slug": "bandages-dressings",
       "description": "",
@@ -1612,7 +1718,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bandages & Dressings",
+        "Dressings",
+        "ባንደጅና መሸፊኛ",
+        "ባንደጅን መሸፊኛን"
+      ],
       "redirects": []
     },
     {
@@ -1673,10 +1784,10 @@
       "parent_code": "medical-consumables-disposables",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Syringes & Needles",
-        "am": "ስሪንጅና እስር",
-        "om": "Siringijii fi Ibsaa",
-        "ti": "ስሪንጅን እስርን"
+        "en": "Syringes",
+        "am": "ስሪንጅ",
+        "om": "Siringijii",
+        "ti": "ስሪንጅ"
       },
       "slug": "syringes-needles",
       "description": "",
@@ -1690,7 +1801,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Needles",
+        "Siringijii fi Ibsaa",
+        "Syringes & Needles",
+        "ስሪንጅና እስር",
+        "ስሪንጅን እስርን"
+      ],
       "redirects": []
     },
     {
@@ -1699,8 +1816,8 @@
       "parent_code": "medical-consumables-disposables",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Medical Consumables & Disposables",
-        "am": "ሌሎች የህክምና አጠቃላይ እቃዎች",
+        "en": "Other Medical Consumables",
+        "am": "ሌሎች የህክም",
         "om": "Meeshaalee Fayyaa Biroo",
         "ti": "ካልኦት ናይ ሕክምና ኣቑሑ ምጥቃት"
       },
@@ -1716,7 +1833,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Disposables",
+        "Other Medical Consumables & Disposables",
+        "ሌሎች የህክምና አጠቃላይ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -1907,10 +2028,10 @@
       "parent_code": "mental-health-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Counseling & Therapy",
-        "am": "ምክርና ሕክምና",
-        "om": "Gorsa fi Fayyaa Hinnaa",
-        "ti": "ምክሪን ሕክምናን"
+        "en": "Counseling",
+        "am": "ምክር",
+        "om": "Gorsa",
+        "ti": "ምክሪ"
       },
       "slug": "counseling-therapy",
       "description": "",
@@ -1924,7 +2045,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Counseling & Therapy",
+        "Gorsa fi Fayyaa Hinnaa",
+        "Therapy",
+        "ምክሪን ሕክምናን",
+        "ምክርና ሕክምና"
+      ],
       "redirects": []
     },
     {
@@ -2037,10 +2164,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Mobility Aids & Rehabilitation Equipment",
-        "am": "የእንቅስቃሴ እገዛና የመልስ እቃዎች",
+        "en": "Mobility Aids Equipment",
+        "am": "የእንቅስቃሴ እገዛ",
         "om": "Meeshaalee Sochii",
-        "ti": "ናይ ንእስነት እገዛን ምምራዕን ኣቑሑ"
+        "ti": "ናይ ንእስነት እገዛ"
       },
       "slug": "mobility-aids-rehabilitation",
       "description": "",
@@ -2054,7 +2181,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Mobility Aids & Rehabilitation Equipment",
+        "Rehabilitation Equipment",
+        "ናይ ንእስነት እገዛን ምምራዕን ኣቑሑ",
+        "የእንቅስቃሴ እገዛና የመልስ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -2063,10 +2195,10 @@
       "parent_code": "mobility-aids-rehabilitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Crutches & Canes",
-        "am": "ቁላዎችና ሰናዎች",
-        "om": "Dukkanaa fi Jabeessaa",
-        "ti": "ቁላን ሰናን"
+        "en": "Crutches",
+        "am": "ቁላዎች",
+        "om": "Dukkanaa",
+        "ti": "ቁላ"
       },
       "slug": "crutches-canes",
       "description": "",
@@ -2080,7 +2212,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Canes",
+        "Crutches & Canes",
+        "Dukkanaa fi Jabeessaa",
+        "ቁላን ሰናን",
+        "ቁላዎችና ሰናዎች"
+      ],
       "redirects": []
     },
     {
@@ -2167,10 +2305,10 @@
       "parent_code": "mobility-aids-rehabilitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Mobility Aids & Rehabilitation Equipment",
-        "am": "ሌሎች የእንቅስቃሴ እገዛና የመልስ እቃዎች",
+        "en": "Other Mobility Aids Equipment",
+        "am": "ሌሎች የእንቅስቃሴ እገዛ",
         "om": "Meeshaalee Sochii Biroo",
-        "ti": "ካልኦት ናይ ንእስነት እገዛን ምምራዕን ኣቑሑ"
+        "ti": "ካልኦት ናይ ንእስነት እገዛ"
       },
       "slug": "other-mobility-aids-rehabilitation",
       "description": null,
@@ -2184,7 +2322,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Mobility Aids & Rehabilitation Equipment",
+        "Rehabilitation Equipment",
+        "ሌሎች የእንቅስቃሴ እገዛና የመልስ እቃዎች",
+        "ካልኦት ናይ ንእስነት እገዛን ምምራዕን ኣቑሑ"
+      ],
       "redirects": []
     },
     {
@@ -2193,7 +2336,7 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Ophthalmic & Optical Equipment",
+        "en": "Ophthalmic Equipment",
         "am": "የአይን እቃዎች",
         "om": "Meeshaalee Ija",
         "ti": "ናይ እዒ ኣቑሑ"
@@ -2210,7 +2353,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ophthalmic & Optical Equipment",
+        "Optical Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2323,7 +2469,7 @@
       "parent_code": "ophthalmic-optical-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Ophthalmic & Optical Equipment",
+        "en": "Other Ophthalmic Equipment",
         "am": "ሌሎች የአይን እቃዎች",
         "om": "Meeshaalee Ija Biroo",
         "ti": "ካልኦት ናይ እዒ ኣቑሑ"
@@ -2340,7 +2486,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Optical Equipment",
+        "Other Ophthalmic & Optical Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2505,10 +2654,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Pharmaceuticals & Medicines",
-        "am": "መድኃኒቶችና ፋርማሲዎች",
-        "om": "Qoricha fi Farmasii",
-        "ti": "መድኃኒትን ፋርማሲን"
+        "en": "Pharmaceuticals",
+        "am": "መድኃኒቶች",
+        "om": "Qoricha",
+        "ti": "መድኃኒት"
       },
       "slug": "pharmaceuticals-medicines",
       "description": "",
@@ -2522,7 +2671,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Medicines",
+        "Pharmaceuticals & Medicines",
+        "Qoricha fi Farmasii",
+        "መድኃኒትን ፋርማሲን",
+        "መድኃኒቶችና ፋርማሲዎች"
+      ],
       "redirects": []
     },
     {
@@ -2635,10 +2790,10 @@
       "parent_code": "pharmaceuticals-medicines",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Pharmaceuticals & Medicines",
-        "am": "ሌሎች መድኃኒቶችና ፋርማሲዎች",
-        "om": "Qoricha fi Farmasii Biroo",
-        "ti": "ካልኦት መድኃኒትን ፋርማሲን"
+        "en": "Other Pharmaceuticals",
+        "am": "ሌሎች መድኃኒቶች",
+        "om": "Qoricha",
+        "ti": "ካልኦት መድኃኒት"
       },
       "slug": "other-pharmaceuticals-medicines",
       "description": null,
@@ -2652,7 +2807,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Medicines",
+        "Other Pharmaceuticals & Medicines",
+        "Qoricha fi Farmasii Biroo",
+        "ሌሎች መድኃኒቶችና ፋርማሲዎች",
+        "ካልኦት መድኃኒትን ፋርማሲን"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +2822,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Physiotherapy & Rehabilitation Gear",
-        "am": "የፊዚዮቴራፒና የመልስ እቃዎች",
+        "en": "Physiotherapy Gear",
+        "am": "የፊዚዮቴራፒ",
         "om": "Meeshaalee Fayyaa",
-        "ti": "ናይ ፊዚዮቴራፒን ምምራዕን ኣቑሑ"
+        "ti": "ናይ ፊዚዮቴራፒ"
       },
       "slug": "physiotherapy-rehabilitation",
       "description": "",
@@ -2678,7 +2839,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Physiotherapy & Rehabilitation Gear",
+        "Rehabilitation Gear",
+        "ናይ ፊዚዮቴራፒን ምምራዕን ኣቑሑ",
+        "የፊዚዮቴራፒና የመልስ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -2791,10 +2957,10 @@
       "parent_code": "physiotherapy-rehabilitation",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Physiotherapy & Rehabilitation Gear",
-        "am": "ሌሎች የፊዚዮቴራፒና የመልስ እቃዎች",
+        "en": "Other Physiotherapy Gear",
+        "am": "ሌሎች የፊዚዮቴራፒ",
         "om": "Meeshaalee Fayyaa Biroo",
-        "ti": "ካልኦት ናይ ፊዚዮቴራፒን ምምራዕን ኣቑሑ"
+        "ti": "ካልኦት ናይ ፊዚዮቴራፒ"
       },
       "slug": "other-physiotherapy-rehabilitation",
       "description": null,
@@ -2808,7 +2974,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Physiotherapy & Rehabilitation Gear",
+        "Rehabilitation Gear",
+        "ሌሎች የፊዚዮቴራፒና የመልስ እቃዎች",
+        "ካልኦት ናይ ፊዚዮቴራፒን ምምራዕን ኣቑሑ"
+      ],
       "redirects": []
     },
     {
@@ -2973,10 +3144,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Telemedicine & Remote Health",
-        "am": "ቴሌሜስና የሩቅ ጤና",
+        "en": "Telemedicine",
+        "am": "ቴሌሜስ",
         "om": "Telemedicine",
-        "ti": "ቴሌሜዲሲንን ሩሕ ጥዕናን"
+        "ti": "ቴሌሜዲሲን"
       },
       "slug": "telemedicine-services",
       "description": "",
@@ -2990,7 +3161,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Remote Health",
+        "Telemedicine & Remote Health",
+        "ቴሌሜስና የሩቅ ጤና",
+        "ቴሌሜዲሲንን ሩሕ ጥዕናን"
+      ],
       "redirects": []
     },
     {
@@ -3103,10 +3279,10 @@
       "parent_code": "telemedicine-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Telemedicine & Remote Health",
-        "am": "ሌሎች ቴሌሜስና የሩቅ ጤና",
+        "en": "Other Telemedicine",
+        "am": "ሌሎች ቴሌሜስ",
         "om": "Telemedicine Biroo",
-        "ti": "ካልኦት ቴሌሜዲሲንን ሩሕ ጥዕናን"
+        "ti": "ካልኦት ቴሌሜዲሲን"
       },
       "slug": "other-telemedicine-services",
       "description": null,
@@ -3120,7 +3296,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Telemedicine & Remote Health",
+        "Remote Health",
+        "ሌሎች ቴሌሜስና የሩቅ ጤና",
+        "ካልኦት ቴሌሜዲሲንን ሩሕ ጥዕናን"
+      ],
       "redirects": []
     },
     {
@@ -3129,10 +3310,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Traditional & Herbal Medicine",
-        "am": "ባህላዊና የእፅ መድኃኒት",
+        "en": "Traditional",
+        "am": "ባህላዊ",
         "om": "Qoricha Aadaa",
-        "ti": "ባህላዊን ዕፅን መድኃኒት"
+        "ti": "ባህላዊ"
       },
       "slug": "traditional-medicine",
       "description": "",
@@ -3146,7 +3327,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Herbal Medicine",
+        "Traditional & Herbal Medicine",
+        "ባህላዊና የእፅ መድኃኒት",
+        "ባህላዊን ዕፅን መድኃኒት"
+      ],
       "redirects": []
     },
     {
@@ -3259,10 +3445,10 @@
       "parent_code": "traditional-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Traditional & Herbal Medicine",
-        "am": "ሌሎች ባህላዊና የእፅ መድኃኒት",
+        "en": "Other Traditional",
+        "am": "ሌሎች ባህላዊ",
         "om": "Qoricha Aadaa Biroo",
-        "ti": "ካልኦት ባህላዊን ዕፅን መድኃኒት"
+        "ti": "ካልኦት ባህላዊ"
       },
       "slug": "other-traditional-medicine",
       "description": null,
@@ -3276,7 +3462,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Herbal Medicine",
+        "Other Traditional & Herbal Medicine",
+        "ሌሎች ባህላዊና የእፅ መድኃኒት",
+        "ካልኦት ባህላዊን ዕፅን መድኃኒት"
+      ],
       "redirects": []
     },
     {
@@ -3285,10 +3476,10 @@
       "parent_code": "healthcare-medicine",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Healthcare & Medicine",
-        "am": "ሌሎች ጤናና ሕክምና",
-        "om": "Fayyaa fi Qorichaa Biroo",
-        "ti": "ካልኦት ጥዕናን ሕክምናን"
+        "en": "Other Healthcare",
+        "am": "ሌሎች ጤና",
+        "om": "Fayyaa",
+        "ti": "ካልኦት ጥዕና"
       },
       "slug": "other-healthcare-medicine",
       "description": null,
@@ -3302,7 +3493,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Fayyaa fi Qorichaa Biroo",
+        "Medicine",
+        "Other Healthcare & Medicine",
+        "ሌሎች ጤናና ሕክምና",
+        "ካልኦት ጥዕናን ሕክምናን"
+      ],
       "redirects": []
     }
   ]

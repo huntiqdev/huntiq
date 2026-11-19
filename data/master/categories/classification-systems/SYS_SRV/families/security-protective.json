@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "security-protective",
       "names": {
-        "en": "Security & Protective Services",
-        "am": "ደህንነትና ጥበቃ አገልግሎት",
-        "om": "Nageenya fi Eegumsa",
-        "ti": "ደኅንነትን ጥበቃን ኣገልግሎት"
+        "en": "Security Services",
+        "am": "ደህንነት",
+        "om": "Nageenya",
+        "ti": "ደኅንነት"
       },
       "description": "Security services, CCTV, guarding, tactical equipment, ballistic defense, and surveillance.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Nageenya fi Eegumsa",
+        "Protective Services",
+        "Security & Protective Services",
+        "ደህንነትና ጥበቃ አገልግሎት",
+        "ደኅንነትን ጥበቃን ኣገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +67,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "alarm-monitoring-services",
       "names": {
-        "en": "Alarm & Monitoring Services",
-        "am": "የማስነበቂያና የመከታተል አገልግሎት",
+        "en": "Alarm Services",
+        "am": "የማስነበቂያ",
         "om": "Tajaajila Hordoffii",
-        "ti": "ኣገልግሎት ነብሪን ምከታተልን"
+        "ti": "ኣገልግሎት ነብሪ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +83,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Alarm & Monitoring Services",
+        "Monitoring Services",
+        "ኣገልግሎት ነብሪን ምከታተልን",
+        "የማስነበቂያና የመከታተል አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +98,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "cctv-surveillance-systems",
       "names": {
-        "en": "CCTV & Surveillance Systems",
-        "am": "CCTVና የቁጥጥር ካሜራ ስርዓቶች",
-        "om": "CCTV fi Sistimii Hordoffii",
-        "ti": "CCTVን ስርዓት ምቁጣጥጥን"
+        "en": "CCTV Systems",
+        "am": "CCTV",
+        "om": "CCTV",
+        "ti": "CCTV"
       },
       "description": "",
       "level": 1,
@@ -103,7 +114,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "CCTV & Surveillance Systems",
+        "CCTV fi Sistimii Hordoffii",
+        "CCTVና የቁጥጥር ካሜራ ስርዓቶች",
+        "CCTVን ስርዓት ምቁጣጥጥን",
+        "Surveillance Systems"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +208,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "tactical-ballistic-equipment",
       "names": {
-        "en": "Tactical & Ballistic Defense Supplies",
-        "am": "የታክቲካልና የጥበቃ እቃዎች",
+        "en": "Tactical Supplies",
+        "am": "የታክቲካል",
         "om": "Meeshaalee Taktikaalaa",
-        "ti": "ናይ ታክቲካልን ባሊስቲክን ኣቑሑ"
+        "ti": "ናይ ታክቲካል"
       },
       "description": "",
       "level": 1,
@@ -207,7 +224,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ballistic Defense Supplies",
+        "Tactical & Ballistic Defense Supplies",
+        "ናይ ታክቲካልን ባሊስቲክን ኣቑሑ",
+        "የታክቲካልና የጥበቃ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +239,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-security-protective-services",
       "names": {
-        "en": "Specialized & Custom Security & Protective Services",
-        "am": "ልዩና ብጁ Security & Protective Services",
-        "om": "Kan Addaa fi Filatamaa Security & Protective Services",
-        "ti": "ፍሉይን ዝተዳለወን Security & Protective Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -233,7 +255,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Security",
+        "Kan Addaa fi Filatamaa Security & Protective Services",
+        "Protective Services",
+        "Specialized & Custom Security & Protective Services",
+        "ልዩና ብጁ Security & Protective Services",
+        "ፍሉይን ዝተዳለወን Security & Protective Services"
+      ],
       "redirects": []
     },
     {
@@ -919,7 +948,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "shields-barriers",
       "names": {
-        "en": "Shields & Barriers",
+        "en": "Shields",
         "am": "ሰ ሰ5",
         "om": "Daangaa Eegumsa",
         "ti": "ሰ5 ሰ"
@@ -935,7 +964,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barriers",
+        "Shields & Barriers"
+      ],
       "redirects": []
     },
     {
@@ -971,10 +1003,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-access-control-systems",
       "names": {
-        "en": "Specialized & Custom Access Control Systems",
-        "am": "ልዩና ብጁ Access Control Systems",
-        "om": "Kan Addaa fi Filatamaa Access Control Systems",
-        "ti": "ፍሉይን ዝተዳለወን Access Control Systems"
+        "en": "Specialized Systems",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -987,7 +1019,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Access Control Systems",
+        "Kan Addaa fi Filatamaa Access Control Systems",
+        "Specialized & Custom Access Control Systems",
+        "ልዩና ብጁ Access Control Systems",
+        "ፍሉይን ዝተዳለወን Access Control Systems"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1035,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-alarm-monitoring-services",
       "names": {
-        "en": "Specialized & Custom Alarm & Monitoring Services",
-        "am": "ልዩና ብጁ Alarm & Monitoring Services",
-        "om": "Kan Addaa fi Filatamaa Alarm & Monitoring Services",
-        "ti": "ፍሉይን ዝተዳለወን Alarm & Monitoring Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1013,7 +1051,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Alarm",
+        "Kan Addaa fi Filatamaa Alarm & Monitoring Services",
+        "Monitoring Services",
+        "Specialized & Custom Alarm & Monitoring Services",
+        "ልዩና ብጁ Alarm & Monitoring Services",
+        "ፍሉይን ዝተዳለወን Alarm & Monitoring Services"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1068,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-cctv-surveillance-systems",
       "names": {
-        "en": "Specialized & Custom CCTV & Surveillance Systems",
-        "am": "ልዩና ብጁ CCTV & Surveillance Systems",
-        "om": "Kan Addaa fi Filatamaa CCTV & Surveillance Systems",
-        "ti": "ፍሉይን ዝተዳለወን CCTV & Surveillance Systems"
+        "en": "Specialized Systems",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1039,7 +1084,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom CCTV",
+        "Kan Addaa fi Filatamaa CCTV & Surveillance Systems",
+        "Specialized & Custom CCTV & Surveillance Systems",
+        "Surveillance Systems",
+        "ልዩና ብጁ CCTV & Surveillance Systems",
+        "ፍሉይን ዝተዳለወን CCTV & Surveillance Systems"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1101,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-cybersecurity-consulting",
       "names": {
-        "en": "Specialized & Custom Cybersecurity Consulting",
-        "am": "ልዩና ብጁ Cybersecurity Consulting",
-        "om": "Kan Addaa fi Filatamaa Cybersecurity Consulting",
-        "ti": "ፍሉይን ዝተዳለወን Cybersecurity Consulting"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1065,7 +1117,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cybersecurity Consulting",
+        "Kan Addaa fi Filatamaa Cybersecurity Consulting",
+        "Specialized & Custom Cybersecurity Consulting",
+        "ልዩና ብጁ Cybersecurity Consulting",
+        "ፍሉይን ዝተዳለወን Cybersecurity Consulting"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1133,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-private-investigation-services",
       "names": {
-        "en": "Specialized & Custom Private Investigation Services",
-        "am": "ልዩና ብጁ Private Investigation Services",
-        "om": "Kan Addaa fi Filatamaa Private Investigation Services",
-        "ti": "ፍሉይን ዝተዳለወን Private Investigation Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1091,7 +1149,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Private Investigation Services",
+        "Kan Addaa fi Filatamaa Private Investigation Services",
+        "Specialized & Custom Private Investigation Services",
+        "ልዩና ብጁ Private Investigation Services",
+        "ፍሉይን ዝተዳለወን Private Investigation Services"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1165,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-security-guarding-services",
       "names": {
-        "en": "Specialized & Custom Security Guarding Services",
-        "am": "ልዩና ብጁ Security Guarding Services",
-        "om": "Kan Addaa fi Filatamaa Security Guarding Services",
-        "ti": "ፍሉይን ዝተዳለወን Security Guarding Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1117,7 +1181,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Security Guarding Services",
+        "Kan Addaa fi Filatamaa Security Guarding Services",
+        "Specialized & Custom Security Guarding Services",
+        "ልዩና ብጁ Security Guarding Services",
+        "ፍሉይን ዝተዳለወን Security Guarding Services"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1197,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-tactical-ballistic-defense-supplies",
       "names": {
-        "en": "Specialized & Custom Tactical & Ballistic Defense Supplies",
-        "am": "ልዩና ብጁ Tactical & Ballistic Defense Supplies",
-        "om": "Kan Addaa fi Filatamaa Tactical & Ballistic Defense Supplies",
-        "ti": "ፍሉይን ዝተዳለወን Tactical & Ballistic Defense Supplies"
+        "en": "Specialized Supplies",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1143,7 +1213,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ballistic Defense Supplies",
+        "Custom Tactical",
+        "Kan Addaa fi Filatamaa Tactical & Ballistic Defense Supplies",
+        "Specialized & Custom Tactical & Ballistic Defense Supplies",
+        "ልዩና ብጁ Tactical & Ballistic Defense Supplies",
+        "ፍሉይን ዝተዳለወን Tactical & Ballistic Defense Supplies"
+      ],
       "redirects": []
     }
   ]

@@ -9,5 +9,22 @@
   "description": "Service providers, contractors, professional trades, repair and personal services",
   "icon": "Briefcase",
   "display_order": 1,
-  "primary_root_slug": "services"
+  "primary_root_slug": "services",
+  "total_families": 13,
+  "total_categories": 1702,
+  "families": [
+    "business-professional-services",
+    "cleaning-facility-management",
+    "education-training",
+    "events-exhibitions",
+    "hospitality-accommodation",
+    "legal-regulatory",
+    "logistics-supply-chain",
+    "personal-household-services",
+    "security-protective",
+    "services",
+    "tourism-travel",
+    "waste-management-recycling",
+    "water-sanitation"
+  ]
 }

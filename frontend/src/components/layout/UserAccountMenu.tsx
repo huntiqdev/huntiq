@@ -17,6 +17,7 @@ import {
   PlusCircle,
   Shield,
   Layers,
+  HelpCircle,
 } from 'lucide-react';
 
 export function UserAccountMenu() {
@@ -55,13 +56,21 @@ export function UserAccountMenu() {
 
   if (!user) {
     return (
-      <Link
-        href="/auth"
-        className="flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full text-xs font-black uppercase tracking-wider text-[#1769E0] dark:text-[#38A5FF] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-all border border-[#1769E0]/30 tap-bounce active:scale-95"
-      >
-        <User size={14} />
-        <span>{u.tab_sign_in || 'Sign In'}</span>
-      </Link>
+      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <Link
+          href="/auth"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 min-h-[36px] rounded-full text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:text-[#1769E0] dark:hover:text-[#38A5FF] hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all border border-zinc-200 dark:border-zinc-800 tap-bounce active:scale-95 whitespace-nowrap"
+        >
+          <User size={13} className="text-zinc-500" />
+          <span>{u.tab_sign_in || 'Sign In'}</span>
+        </Link>
+        <Link
+          href="/auth?tab=register"
+          className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 min-h-[36px] rounded-full text-xs font-black text-white bg-[#1769E0] hover:bg-[#1055BD] transition-all shadow-xs shadow-[#1769E0]/20 tap-bounce active:scale-95 whitespace-nowrap"
+        >
+          <span>{u.tab_register || 'Register'}</span>
+        </Link>
+      </div>
     );
   }
 
@@ -251,6 +260,14 @@ export function UserAccountMenu() {
               >
                 <PlusCircle size={15} />
                 <span>{u.create_new_listing || 'Create New Listing'}</span>
+              </Link>
+              <Link
+                href="/help"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              >
+                <HelpCircle size={15} />
+                <span>{u.help_center || 'Help Center'}</span>
               </Link>
               <button
                 type="button"

@@ -4,8 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"sort"
+	"strings"
 	"time"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 )
@@ -161,6 +164,11 @@ func (r *MasterDataRepo) UpsertLocationBatch(ctx context.Context, nodes []models
 	}
 	defer tx.Rollback(ctx)
 
+	// Sort locations by Level ASC to guarantee parent locations are inserted before children
+	sort.SliceStable(nodes, func(i, j int) bool {
+		return nodes[i].Level < nodes[j].Level
+	})
+
 	upsertSQL := `
 		INSERT INTO location_hierarchy (
 			id, parent_id, location_type, name_en, name_am, name_om, name_ti,
@@ -200,27 +208,45 @@ func (r *MasterDataRepo) UpsertLocationBatch(ctx context.Context, nodes []models
 			updated_at = NOW();
 	`
 
-	for _, n := range nodes {
-		var lat, lng, minLat, maxLat, minLng, maxLng *float64
-		if n.Coordinates != nil {
-			lat = n.Coordinates.Latitude
-			lng = n.Coordinates.Longitude
-			if n.Coordinates.BBox != nil {
-				minLat = n.Coordinates.BBox.MinLat
-				maxLat = n.Coordinates.BBox.MaxLat
-				minLng = n.Coordinates.BBox.MinLng
-				maxLng = n.Coordinates.BBox.MaxLng
+	batchSize := 200
+	for i := 0; i < len(nodes); i += batchSize {
+		end := i + batchSize
+		if end > len(nodes) {
+			end = len(nodes)
+		}
+		chunk := nodes[i:end]
+
+		batch := &pgx.Batch{}
+		for _, n := range chunk {
+			var lat, lng, minLat, maxLat, minLng, maxLng *float64
+			if n.Coordinates != nil {
+				lat = n.Coordinates.Latitude
+				lng = n.Coordinates.Longitude
+				if n.Coordinates.BBox != nil {
+					minLat = n.Coordinates.BBox.MinLat
+					maxLat = n.Coordinates.BBox.MaxLat
+					minLng = n.Coordinates.BBox.MinLng
+					maxLng = n.Coordinates.BBox.MaxLng
+				}
 			}
+
+			batch.Queue(upsertSQL,
+				n.ID, n.ParentID, n.Type, n.Names.En, n.Names.Am, n.Names.Om, n.Names.Ti,
+				n.Slug, n.Code, n.Level, n.DisplayOrder, n.IsActive, n.IsLeaf, n.IsDeprecated,
+				n.ReplacedByID, lat, lng, minLat, maxLat, minLng, maxLng,
+				n.Aliases, n.Source, n.VerificationStatus,
+			)
 		}
 
-		_, err := tx.Exec(ctx, upsertSQL,
-			n.ID, n.ParentID, n.Type, n.Names.En, n.Names.Am, n.Names.Om, n.Names.Ti,
-			n.Slug, n.Code, n.Level, n.DisplayOrder, n.IsActive, n.IsLeaf, n.IsDeprecated,
-			n.ReplacedByID, lat, lng, minLat, maxLat, minLng, maxLng,
-			n.Aliases, n.Source, n.VerificationStatus,
-		)
-		if err != nil {
-			return fmt.Errorf("failed to upsert location ID %d (%s): %w", n.ID, n.Slug, err)
+		br := tx.SendBatch(ctx, batch)
+		for j := 0; j < len(chunk); j++ {
+			if _, err := br.Exec(); err != nil {
+				br.Close()
+				return fmt.Errorf("failed to upsert location chunk %d-%d: %w", i, end, err)
+			}
+		}
+		if err := br.Close(); err != nil {
+			return fmt.Errorf("failed closing location batch %d-%d: %w", i, end, err)
 		}
 	}
 
@@ -233,6 +259,11 @@ func (r *MasterDataRepo) UpsertCategoryBatch(ctx context.Context, nodes []models
 		return fmt.Errorf("failed to begin transaction: %w", err)
 	}
 	defer tx.Rollback(ctx)
+
+	// Sort categories by Level ASC to guarantee parent categories are inserted before children
+	sort.SliceStable(nodes, func(i, j int) bool {
+		return nodes[i].Level < nodes[j].Level
+	})
 
 	upsertSQL := `
 		INSERT INTO category_hierarchy (
@@ -266,21 +297,82 @@ func (r *MasterDataRepo) UpsertCategoryBatch(ctx context.Context, nodes []models
 			updated_at = NOW();
 	`
 
-	for _, c := range nodes {
-		i18nBytes, _ := json.Marshal(map[string]string{
-			"en": c.Names.En,
-			"am": c.Names.Am,
-			"om": c.Names.Om,
-			"ti": c.Names.Ti,
-		})
+	batchSize := 500
+	for i := 0; i < len(nodes); i += batchSize {
+		end := i + batchSize
+		if end > len(nodes) {
+			end = len(nodes)
+		}
+		chunk := nodes[i:end]
 
-		_, err := tx.Exec(ctx, upsertSQL,
-			c.ID, c.ParentID, c.ClassificationSystemCode, c.Names.En, c.Names.Am, c.Names.Om, c.Names.Ti,
-			c.Slug, c.Description, c.Level, c.DisplayOrder, c.Icon, c.ImageURL,
-			c.IsActive, c.IsLeaf, c.IsArchived, c.MetaTitle, c.MetaDescription, string(i18nBytes),
-		)
-		if err != nil {
-			return fmt.Errorf("failed to upsert category ID %d (%s): %w", c.ID, c.Slug, err)
+		batch := &pgx.Batch{}
+		for _, c := range chunk {
+			i18nBytes, _ := json.Marshal(map[string]string{
+				"en": c.Names.En,
+				"am": c.Names.Am,
+				"om": c.Names.Om,
+				"ti": c.Names.Ti,
+			})
+
+			batch.Queue(upsertSQL,
+				c.ID, c.ParentID, c.ClassificationSystemCode, c.Names.En, c.Names.Am, c.Names.Om, c.Names.Ti,
+				c.Slug, c.Description, c.Level, c.DisplayOrder, c.Icon, c.ImageURL,
+				c.IsActive, c.IsLeaf, c.IsArchived, c.MetaTitle, c.MetaDescription, string(i18nBytes),
+			)
+		}
+
+		br := tx.SendBatch(ctx, batch)
+		for j := 0; j < len(chunk); j++ {
+			if _, err := br.Exec(); err != nil {
+				br.Close()
+				return fmt.Errorf("failed to upsert category chunk %d-%d: %w", i, end, err)
+			}
+		}
+		if err := br.Close(); err != nil {
+			return fmt.Errorf("failed closing category batch %d-%d: %w", i, end, err)
+		}
+	}
+
+	// Synchronize category search aliases
+	aliasBatch := &pgx.Batch{}
+	aliasCount := 0
+	aliasUpsertSQL := `
+		INSERT INTO category_aliases (category_id, alias, language)
+		VALUES ($1, $2, 'en')
+		ON CONFLICT (category_id, alias) DO NOTHING;
+	`
+	for _, c := range nodes {
+		for _, a := range c.Aliases {
+			aClean := strings.TrimSpace(a)
+			if aClean != "" && !strings.EqualFold(aClean, c.Names.En) {
+				aliasBatch.Queue(aliasUpsertSQL, c.ID, aClean)
+				aliasCount++
+				if aliasCount%500 == 0 {
+					br := tx.SendBatch(ctx, aliasBatch)
+					for k := 0; k < aliasBatch.Len(); k++ {
+						if _, err := br.Exec(); err != nil {
+							br.Close()
+							return fmt.Errorf("failed to upsert category alias: %w", err)
+						}
+					}
+					if err := br.Close(); err != nil {
+						return fmt.Errorf("failed closing alias batch: %w", err)
+					}
+					aliasBatch = &pgx.Batch{}
+				}
+			}
+		}
+	}
+	if aliasBatch.Len() > 0 {
+		br := tx.SendBatch(ctx, aliasBatch)
+		for k := 0; k < aliasBatch.Len(); k++ {
+			if _, err := br.Exec(); err != nil {
+				br.Close()
+				return fmt.Errorf("failed to upsert final category aliases: %w", err)
+			}
+		}
+		if err := br.Close(); err != nil {
+			return fmt.Errorf("failed closing final alias batch: %w", err)
 		}
 	}
 

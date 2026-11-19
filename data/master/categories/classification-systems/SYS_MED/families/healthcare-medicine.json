@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "healthcare-medicine",
       "names": {
-        "en": "Healthcare & Medicine",
-        "am": "ጤናና ሕክምና",
-        "om": "Fayyaa fi Qorichaa",
-        "ti": "ጥዕናን ሕክምናን"
+        "en": "Healthcare",
+        "am": "ጤና",
+        "om": "Fayyaa",
+        "ti": "ጥዕና"
       },
       "description": "Medical equipment, supplies, pharmaceuticals, healthcare services, and medical facilities.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Fayyaa fi Qorichaa",
+        "Healthcare & Medicine",
+        "Medicine",
+        "ጤናና ሕክምና",
+        "ጥዕናን ሕክምናን"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +41,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "ambulance-emergency-services",
       "names": {
-        "en": "Ambulance & Emergency Medical",
-        "am": "የአምቡላንስና የአደጋ ህክምና",
-        "om": "Ambulaansii fi Balaa",
-        "ti": "ኣምቡላንስን ሕክምና ኣደጋን"
+        "en": "Ambulance",
+        "am": "የአምቡላንስ",
+        "om": "Ambulaansii",
+        "ti": "ኣምቡላንስ"
       },
       "description": "",
       "level": 1,
@@ -51,7 +57,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ambulaansii fi Balaa",
+        "Ambulance & Emergency Medical",
+        "Emergency Medical",
+        "ኣምቡላንስን ሕክምና ኣደጋን",
+        "የአምቡላንስና የአደጋ ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +73,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "dental-equipment",
       "names": {
-        "en": "Dental Equipment & Instruments",
-        "am": "የጥርስ እቃዎችና መሳሪያዎች",
+        "en": "Dental Equipment",
+        "am": "የጥርስ እቃዎች",
         "om": "Meeshaalee Ilkoo",
-        "ti": "ናይ ጥርሲ ኣቑሑን መሳርሒታትን"
+        "ti": "ናይ ጥርሲ ኣቑሑ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +89,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dental Equipment & Instruments",
+        "Instruments",
+        "ናይ ጥርሲ ኣቑሑን መሳርሒታትን",
+        "የጥርስ እቃዎችና መሳሪያዎች"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +104,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "diagnostic-imaging-equipment",
       "names": {
-        "en": "Diagnostic & Imaging Equipment",
-        "am": "የምርመራና የምስል እቃዎች",
+        "en": "Diagnostic Equipment",
+        "am": "የምርመራ",
         "om": "Meeshaalee Qorannoo",
-        "ti": "ናይ መመርመሪን ምስልን ኣቑሑ"
+        "ti": "ናይ መመርመሪ"
       },
       "description": "",
       "level": 1,
@@ -103,7 +120,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Diagnostic & Imaging Equipment",
+        "Imaging Equipment",
+        "ናይ መመርመሪን ምስልን ኣቑሑ",
+        "የምርመራና የምስል እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +135,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "healthcare-services-facilities",
       "names": {
-        "en": "Healthcare Services & Facilities",
-        "am": "የጤና አገልግሎትና መገልገያዎች",
+        "en": "Healthcare Services",
+        "am": "የጤ",
         "om": "Tajaajila Fayyaa",
-        "ti": "ኣገልግሎትን መገልገያታትን ጥዕና"
+        "ti": "ኣገልግሎት"
       },
       "description": "",
       "level": 1,
@@ -129,7 +151,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Facilities",
+        "Healthcare Services & Facilities",
+        "ኣገልግሎትን መገልገያታትን ጥዕና",
+        "የጤና አገልግሎትና መገልገያዎች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +192,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "hospital-ppe-infection-control",
       "names": {
-        "en": "Hospital PPE & Infection Control",
-        "am": "የሆስፒታል PPEና የተወሰነ በሽታ መከላከያ",
-        "om": "PPE fi Eegumsa",
-        "ti": "PPE ሆስፒታልን ምክልኻስ በሽታን"
+        "en": "Hospital PPE",
+        "am": "የሆስፒታል PPE",
+        "om": "PPE",
+        "ti": "PPE ሆስፒታል"
       },
       "description": "",
       "level": 1,
@@ -181,7 +208,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hospital PPE & Infection Control",
+        "Infection Control",
+        "PPE fi Eegumsa",
+        "PPE ሆስፒታልን ምክልኻስ በሽታን",
+        "የሆስፒታል PPEና የተወሰነ በሽታ መከላከያ"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +224,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "laboratory-instruments",
       "names": {
-        "en": "Laboratory Instruments & Reagents",
-        "am": "የዳሸታ መሳሪያዎችና ኬሚካሎች",
+        "en": "Laboratory Instruments",
+        "am": "የዳሸታ መሳሪያዎች",
         "om": "Meeshaalee Laboratorii",
-        "ti": "ናይ ላብራቶሪ ኣቑሑን ኬሚካላትን"
+        "ti": "ናይ ላብራቶሪ ኣቑሑ"
       },
       "description": "",
       "level": 1,
@@ -207,7 +240,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Laboratory Instruments & Reagents",
+        "Reagents",
+        "ናይ ላብራቶሪ ኣቑሑን ኬሚካላትን",
+        "የዳሸታ መሳሪያዎችና ኬሚካሎች"
+      ],
       "redirects": []
     },
     {
@@ -217,8 +255,8 @@
       "classification_system_code": "SYS_MED",
       "slug": "medical-consumables-disposables",
       "names": {
-        "en": "Medical Consumables & Disposables",
-        "am": "የህክምና አጠቃላይ እቃዎች",
+        "en": "Medical Consumables",
+        "am": "የህክም",
         "om": "Meeshaalee Fayyaa",
         "ti": "ናይ ሕክምና ኣቑሑ ምጥቃት"
       },
@@ -233,7 +271,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Disposables",
+        "Medical Consumables & Disposables",
+        "የህክምና አጠቃላይ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +337,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "mobility-aids-rehabilitation",
       "names": {
-        "en": "Mobility Aids & Rehabilitation Equipment",
-        "am": "የእንቅስቃሴ እገዛና የመልስ እቃዎች",
+        "en": "Mobility Aids Equipment",
+        "am": "የእንቅስቃሴ እገዛ",
         "om": "Meeshaalee Sochii",
-        "ti": "ናይ ንእስነት እገዛን ምምራዕን ኣቑሑ"
+        "ti": "ናይ ንእስነት እገዛ"
       },
       "description": "",
       "level": 1,
@@ -311,7 +353,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Mobility Aids & Rehabilitation Equipment",
+        "Rehabilitation Equipment",
+        "ናይ ንእስነት እገዛን ምምራዕን ኣቑሑ",
+        "የእንቅስቃሴ እገዛና የመልስ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -321,7 +368,7 @@
       "classification_system_code": "SYS_MED",
       "slug": "ophthalmic-optical-equipment",
       "names": {
-        "en": "Ophthalmic & Optical Equipment",
+        "en": "Ophthalmic Equipment",
         "am": "የአይን እቃዎች",
         "om": "Meeshaalee Ija",
         "ti": "ናይ እዒ ኣቑሑ"
@@ -337,7 +384,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ophthalmic & Optical Equipment",
+        "Optical Equipment"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +423,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "pharmaceuticals-medicines",
       "names": {
-        "en": "Pharmaceuticals & Medicines",
-        "am": "መድኃኒቶችና ፋርማሲዎች",
-        "om": "Qoricha fi Farmasii",
-        "ti": "መድኃኒትን ፋርማሲን"
+        "en": "Pharmaceuticals",
+        "am": "መድኃኒቶች",
+        "om": "Qoricha",
+        "ti": "መድኃኒት"
       },
       "description": "",
       "level": 1,
@@ -389,7 +439,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Medicines",
+        "Pharmaceuticals & Medicines",
+        "Qoricha fi Farmasii",
+        "መድኃኒትን ፋርማሲን",
+        "መድኃኒቶችና ፋርማሲዎች"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +455,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "physiotherapy-rehabilitation",
       "names": {
-        "en": "Physiotherapy & Rehabilitation Gear",
-        "am": "የፊዚዮቴራፒና የመልስ እቃዎች",
+        "en": "Physiotherapy Gear",
+        "am": "የፊዚዮቴራፒ",
         "om": "Meeshaalee Fayyaa",
-        "ti": "ናይ ፊዚዮቴራፒን ምምራዕን ኣቑሑ"
+        "ti": "ናይ ፊዚዮቴራፒ"
       },
       "description": "",
       "level": 1,
@@ -415,7 +471,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Physiotherapy & Rehabilitation Gear",
+        "Rehabilitation Gear",
+        "ናይ ፊዚዮቴራፒን ምምራዕን ኣቑሑ",
+        "የፊዚዮቴራፒና የመልስ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +512,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "telemedicine-services",
       "names": {
-        "en": "Telemedicine & Remote Health",
-        "am": "ቴሌሜስና የሩቅ ጤና",
+        "en": "Telemedicine",
+        "am": "ቴሌሜስ",
         "om": "Telemedicine",
-        "ti": "ቴሌሜዲሲንን ሩሕ ጥዕናን"
+        "ti": "ቴሌሜዲሲን"
       },
       "description": "",
       "level": 1,
@@ -467,7 +528,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Remote Health",
+        "Telemedicine & Remote Health",
+        "ቴሌሜስና የሩቅ ጤና",
+        "ቴሌሜዲሲንን ሩሕ ጥዕናን"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +543,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "traditional-medicine",
       "names": {
-        "en": "Traditional & Herbal Medicine",
-        "am": "ባህላዊና የእፅ መድኃኒት",
+        "en": "Traditional",
+        "am": "ባህላዊ",
         "om": "Qoricha Aadaa",
-        "ti": "ባህላዊን ዕፅን መድኃኒት"
+        "ti": "ባህላዊ"
       },
       "description": "",
       "level": 1,
@@ -493,7 +559,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Herbal Medicine",
+        "Traditional & Herbal Medicine",
+        "ባህላዊና የእፅ መድኃኒት",
+        "ባህላዊን ዕፅን መድኃኒት"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +600,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "diagnostic-laboratory-services",
       "names": {
-        "en": "Diagnostic & Laboratory Services",
-        "am": "የምርመራና የላቦራቶሪ አገልግሎቶች",
-        "om": "Tajaajila Qorannoo fi Laaboraatorii",
-        "ti": "ናይ መርመራን ላቦራቶሪን ኣገልግሎታት"
+        "en": "Diagnostic Services",
+        "am": "የምርመራ",
+        "om": "Tajaajila Qorannoo",
+        "ti": "ናይ መርመራ"
       },
       "description": null,
       "level": 1,
@@ -545,7 +616,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Diagnostic & Laboratory Services",
+        "Laboratory Services",
+        "Tajaajila Qorannoo fi Laaboraatorii",
+        "ናይ መርመራን ላቦራቶሪን ኣገልግሎታት",
+        "የምርመራና የላቦራቶሪ አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +632,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-healthcare-medicine",
       "names": {
-        "en": "Specialized & Custom Healthcare & Medicine",
-        "am": "ልዩና ብጁ Healthcare & Medicine",
-        "om": "Kan Addaa fi Filatamaa Healthcare & Medicine",
-        "ti": "ፍሉይን ዝተዳለወን Healthcare & Medicine"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -571,7 +648,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Healthcare",
+        "Kan Addaa fi Filatamaa Healthcare & Medicine",
+        "Medicine",
+        "Specialized & Custom Healthcare & Medicine",
+        "ልዩና ብጁ Healthcare & Medicine",
+        "ፍሉይን ዝተዳለወን Healthcare & Medicine"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1393,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "bandages-dressings",
       "names": {
-        "en": "Bandages & Dressings",
-        "am": "ባንደጅና መሸፊኛ",
+        "en": "Bandages",
+        "am": "ባንደጅ",
         "om": "Bandaajii",
-        "ti": "ባንደጅን መሸፊኛን"
+        "ti": "ባንደጅ"
       },
       "description": "",
       "level": 2,
@@ -1325,7 +1409,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bandages & Dressings",
+        "Dressings",
+        "ባንደጅና መሸፊኛ",
+        "ባንደጅን መሸፊኛን"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1476,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "syringes-needles",
       "names": {
-        "en": "Syringes & Needles",
-        "am": "ስሪንጅና እስር",
-        "om": "Siringijii fi Ibsaa",
-        "ti": "ስሪንጅን እስርን"
+        "en": "Syringes",
+        "am": "ስሪንጅ",
+        "om": "Siringijii",
+        "ti": "ስሪንጅ"
       },
       "description": "",
       "level": 2,
@@ -1403,7 +1492,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Needles",
+        "Siringijii fi Ibsaa",
+        "Syringes & Needles",
+        "ስሪንጅና እስር",
+        "ስሪንጅን እስርን"
+      ],
       "redirects": []
     },
     {
@@ -1517,10 +1612,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "counseling-therapy",
       "names": {
-        "en": "Counseling & Therapy",
-        "am": "ምክርና ሕክምና",
-        "om": "Gorsa fi Fayyaa Hinnaa",
-        "ti": "ምክሪን ሕክምናን"
+        "en": "Counseling",
+        "am": "ምክር",
+        "om": "Gorsa",
+        "ti": "ምክሪ"
       },
       "description": "",
       "level": 2,
@@ -1533,7 +1628,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Counseling & Therapy",
+        "Gorsa fi Fayyaa Hinnaa",
+        "Therapy",
+        "ምክሪን ሕክምናን",
+        "ምክርና ሕክምና"
+      ],
       "redirects": []
     },
     {
@@ -1621,10 +1722,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "crutches-canes",
       "names": {
-        "en": "Crutches & Canes",
-        "am": "ቁላዎችና ሰናዎች",
-        "om": "Dukkanaa fi Jabeessaa",
-        "ti": "ቁላን ሰናን"
+        "en": "Crutches",
+        "am": "ቁላዎች",
+        "om": "Dukkanaa",
+        "ti": "ቁላ"
       },
       "description": "",
       "level": 2,
@@ -1637,7 +1738,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Canes",
+        "Crutches & Canes",
+        "Dukkanaa fi Jabeessaa",
+        "ቁላን ሰናን",
+        "ቁላዎችና ሰናዎች"
+      ],
       "redirects": []
     },
     {
@@ -2453,10 +2560,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "general-internal-medicine",
       "names": {
-        "en": "General & Internal Medicine",
-        "am": "ጠቅላላና የውስጥ ደዌ ህክምና",
-        "om": "Yaala Waliigalaa fi Keessoo",
-        "ti": "ሓፈሻውን ናይ ውሽጢ ሕማማት ሕክምና"
+        "en": "General",
+        "am": "ጠቅላላ",
+        "om": "Yaala Waliigalaa",
+        "ti": "ሓፈሻው"
       },
       "description": null,
       "level": 2,
@@ -2469,7 +2576,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "General & Internal Medicine",
+        "Internal Medicine",
+        "Yaala Waliigalaa fi Keessoo",
+        "ሓፈሻውን ናይ ውሽጢ ሕማማት ሕክምና",
+        "ጠቅላላና የውስጥ ደዌ ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -2479,10 +2592,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "pediatrics-maternal-health",
       "names": {
-        "en": "Pediatrics & Maternal Health",
-        "am": "የህፃናትና የእናቶች ጤና አገልግሎት",
-        "om": "Fayyaa Haadholii fi Daa'immanii",
-        "ti": "ናይ ቆልዑን ኣዴታትን ጥዕና ኣገልግሎት"
+        "en": "Pediatrics",
+        "am": "የህፃናት",
+        "om": "Fayyaa Haadholii",
+        "ti": "ናይ ቆልዑ"
       },
       "description": null,
       "level": 2,
@@ -2495,7 +2608,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Fayyaa Haadholii fi Daa'immanii",
+        "Maternal Health",
+        "Pediatrics & Maternal Health",
+        "ናይ ቆልዑን ኣዴታትን ጥዕና ኣገልግሎት",
+        "የህፃናትና የእናቶች ጤና አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -2505,10 +2624,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "surgery-orthopedics-trauma",
       "names": {
-        "en": "Surgery, Orthopedics & Trauma",
-        "am": "የቀዶ-ህክምና፣ የአጥንትና አደጋ ህክምና",
-        "om": "Yaala Baqaqsanii Yaaluu fi Lafee",
-        "ti": "ናይ መጥባሕቲ፣ ዓጽምን ሓደጋን ሕክምና"
+        "en": "Surgery",
+        "am": "የቀዶ-ህክምና፣ የአጥንት",
+        "om": "Yaala Baqaqsanii Yaaluu",
+        "ti": "ናይ መጥባሕቲ፣ ዓጽም"
       },
       "description": null,
       "level": 2,
@@ -2521,7 +2640,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Orthopedics",
+        "Surgery, Orthopedics & Trauma",
+        "Trauma",
+        "Yaala Baqaqsanii Yaaluu fi Lafee",
+        "ናይ መጥባሕቲ፣ ዓጽምን ሓደጋን ሕክምና",
+        "የቀዶ-ህክምና፣ የአጥንትና አደጋ ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -2531,10 +2657,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "clinical-pathology-blood-panels",
       "names": {
-        "en": "Clinical Pathology & Blood Panels",
-        "am": "የክሊኒካል ፓቶሎጂና የደም ምርመራዎች",
-        "om": "Qorannoo Dhiigaa fi Laaboraatorii",
-        "ti": "ናይ ደም መርመራታትን ፓቶሎጂን"
+        "en": "Clinical Pathology",
+        "am": "የክሊኒካል ፓቶሎጂ",
+        "om": "Qorannoo Dhiigaa",
+        "ti": "ናይ ደም መርመራታት"
       },
       "description": null,
       "level": 2,
@@ -2547,7 +2673,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Blood Panels",
+        "Clinical Pathology & Blood Panels",
+        "Qorannoo Dhiigaa fi Laaboraatorii",
+        "ናይ ደም መርመራታትን ፓቶሎጂን",
+        "የክሊኒካል ፓቶሎጂና የደም ምርመራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2557,10 +2689,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "medical-imaging-radiology",
       "names": {
-        "en": "Medical Imaging & Radiology",
-        "am": "የህክምና ኢሜጂንግና የራዲዮሎጂ ምርመራ",
-        "om": "Raadiyooloojii fi Fakkii Yaalaa",
-        "ti": "ናይ ሕክምና ራዲዮሎጂን ስእላዊ መርመራን"
+        "en": "Medical Imaging",
+        "am": "የህክም",
+        "om": "Raadiyooloojii",
+        "ti": "ናይ ሕክምና ራዲዮሎጂ"
       },
       "description": null,
       "level": 2,
@@ -2573,7 +2705,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Medical Imaging & Radiology",
+        "Raadiyooloojii fi Fakkii Yaalaa",
+        "Radiology",
+        "ናይ ሕክምና ራዲዮሎጂን ስእላዊ መርመራን",
+        "የህክምና ኢሜጂንግና የራዲዮሎጂ ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -2583,10 +2721,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-medical-consumables-disposables",
       "names": {
-        "en": "Specialized & Custom Medical Consumables & Disposables",
-        "am": "ልዩና ብጁ Medical Consumables & Disposables",
-        "om": "Kan Addaa fi Filatamaa Medical Consumables & Disposables",
-        "ti": "ፍሉይን ዝተዳለወን Medical Consumables & Disposables"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2599,7 +2737,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Medical Consumables",
+        "Disposables",
+        "Kan Addaa fi Filatamaa Medical Consumables & Disposables",
+        "Specialized & Custom Medical Consumables & Disposables",
+        "ልዩና ብጁ Medical Consumables & Disposables",
+        "ፍሉይን ዝተዳለወን Medical Consumables & Disposables"
+      ],
       "redirects": []
     },
     {
@@ -2609,10 +2754,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-ambulance-emergency-medical",
       "names": {
-        "en": "Specialized & Custom Ambulance & Emergency Medical",
-        "am": "ልዩና ብጁ Ambulance & Emergency Medical",
-        "om": "Kan Addaa fi Filatamaa Ambulance & Emergency Medical",
-        "ti": "ፍሉይን ዝተዳለወን Ambulance & Emergency Medical"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2625,7 +2770,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Ambulance",
+        "Emergency Medical",
+        "Kan Addaa fi Filatamaa Ambulance & Emergency Medical",
+        "Specialized & Custom Ambulance & Emergency Medical",
+        "ልዩና ብጁ Ambulance & Emergency Medical",
+        "ፍሉይን ዝተዳለወን Ambulance & Emergency Medical"
+      ],
       "redirects": []
     },
     {
@@ -2635,10 +2787,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-dental-equipment-instruments",
       "names": {
-        "en": "Specialized & Custom Dental Equipment & Instruments",
-        "am": "ልዩና ብጁ Dental Equipment & Instruments",
-        "om": "Kan Addaa fi Filatamaa Dental Equipment & Instruments",
-        "ti": "ፍሉይን ዝተዳለወን Dental Equipment & Instruments"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2651,7 +2803,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Dental Equipment",
+        "Instruments",
+        "Kan Addaa fi Filatamaa Dental Equipment & Instruments",
+        "Specialized & Custom Dental Equipment & Instruments",
+        "ልዩና ብጁ Dental Equipment & Instruments",
+        "ፍሉይን ዝተዳለወን Dental Equipment & Instruments"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +2820,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-diagnostic-imaging-equipment",
       "names": {
-        "en": "Specialized & Custom Diagnostic & Imaging Equipment",
-        "am": "ልዩና ብጁ Diagnostic & Imaging Equipment",
-        "om": "Kan Addaa fi Filatamaa Diagnostic & Imaging Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Diagnostic & Imaging Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2677,7 +2836,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Diagnostic",
+        "Imaging Equipment",
+        "Kan Addaa fi Filatamaa Diagnostic & Imaging Equipment",
+        "Specialized & Custom Diagnostic & Imaging Equipment",
+        "ልዩና ብጁ Diagnostic & Imaging Equipment",
+        "ፍሉይን ዝተዳለወን Diagnostic & Imaging Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2687,10 +2853,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-healthcare-services-facilities",
       "names": {
-        "en": "Specialized & Custom Healthcare Services & Facilities",
-        "am": "ልዩና ብጁ Healthcare Services & Facilities",
-        "om": "Kan Addaa fi Filatamaa Healthcare Services & Facilities",
-        "ti": "ፍሉይን ዝተዳለወን Healthcare Services & Facilities"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2703,7 +2869,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Healthcare Services",
+        "Facilities",
+        "Kan Addaa fi Filatamaa Healthcare Services & Facilities",
+        "Specialized & Custom Healthcare Services & Facilities",
+        "ልዩና ብጁ Healthcare Services & Facilities",
+        "ፍሉይን ዝተዳለወን Healthcare Services & Facilities"
+      ],
       "redirects": []
     },
     {
@@ -2713,10 +2886,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-home-healthcare-services",
       "names": {
-        "en": "Specialized & Custom Home Healthcare Services",
-        "am": "ልዩና ብጁ Home Healthcare Services",
-        "om": "Kan Addaa fi Filatamaa Home Healthcare Services",
-        "ti": "ፍሉይን ዝተዳለወን Home Healthcare Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2729,7 +2902,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Home Healthcare Services",
+        "Kan Addaa fi Filatamaa Home Healthcare Services",
+        "Specialized & Custom Home Healthcare Services",
+        "ልዩና ብጁ Home Healthcare Services",
+        "ፍሉይን ዝተዳለወን Home Healthcare Services"
+      ],
       "redirects": []
     },
     {
@@ -2739,10 +2918,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-hospital-ppe-infection-control",
       "names": {
-        "en": "Specialized & Custom Hospital PPE & Infection Control",
-        "am": "ልዩና ብጁ Hospital PPE & Infection Control",
-        "om": "Kan Addaa fi Filatamaa Hospital PPE & Infection Control",
-        "ti": "ፍሉይን ዝተዳለወን Hospital PPE & Infection Control"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2755,7 +2934,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Hospital PPE",
+        "Infection Control",
+        "Kan Addaa fi Filatamaa Hospital PPE & Infection Control",
+        "Specialized & Custom Hospital PPE & Infection Control",
+        "ልዩና ብጁ Hospital PPE & Infection Control",
+        "ፍሉይን ዝተዳለወን Hospital PPE & Infection Control"
+      ],
       "redirects": []
     },
     {
@@ -2765,10 +2951,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-laboratory-instruments-reagents",
       "names": {
-        "en": "Specialized & Custom Laboratory Instruments & Reagents",
-        "am": "ልዩና ብጁ Laboratory Instruments & Reagents",
-        "om": "Kan Addaa fi Filatamaa Laboratory Instruments & Reagents",
-        "ti": "ፍሉይን ዝተዳለወን Laboratory Instruments & Reagents"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2781,7 +2967,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Laboratory Instruments",
+        "Kan Addaa fi Filatamaa Laboratory Instruments & Reagents",
+        "Reagents",
+        "Specialized & Custom Laboratory Instruments & Reagents",
+        "ልዩና ብጁ Laboratory Instruments & Reagents",
+        "ፍሉይን ዝተዳለወን Laboratory Instruments & Reagents"
+      ],
       "redirects": []
     },
     {
@@ -2791,10 +2984,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-medical-waste-disposal",
       "names": {
-        "en": "Specialized & Custom Medical Waste Disposal",
-        "am": "ልዩና ብጁ Medical Waste Disposal",
-        "om": "Kan Addaa fi Filatamaa Medical Waste Disposal",
-        "ti": "ፍሉይን ዝተዳለወን Medical Waste Disposal"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2807,7 +3000,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Medical Waste Disposal",
+        "Kan Addaa fi Filatamaa Medical Waste Disposal",
+        "Specialized & Custom Medical Waste Disposal",
+        "ልዩና ብጁ Medical Waste Disposal",
+        "ፍሉይን ዝተዳለወን Medical Waste Disposal"
+      ],
       "redirects": []
     },
     {
@@ -2817,10 +3016,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-mental-health-services",
       "names": {
-        "en": "Specialized & Custom Mental Health Services",
-        "am": "ልዩና ብጁ Mental Health Services",
-        "om": "Kan Addaa fi Filatamaa Mental Health Services",
-        "ti": "ፍሉይን ዝተዳለወን Mental Health Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2833,7 +3032,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Mental Health Services",
+        "Kan Addaa fi Filatamaa Mental Health Services",
+        "Specialized & Custom Mental Health Services",
+        "ልዩና ብጁ Mental Health Services",
+        "ፍሉይን ዝተዳለወን Mental Health Services"
+      ],
       "redirects": []
     },
     {
@@ -2843,10 +3048,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-mobility-aids-rehabilitation-equipment",
       "names": {
-        "en": "Specialized & Custom Mobility Aids & Rehabilitation Equipment",
-        "am": "ልዩና ብጁ Mobility Aids & Rehabilitation Equipment",
-        "om": "Kan Addaa fi Filatamaa Mobility Aids & Rehabilitation Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Mobility Aids & Rehabilitation Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2859,7 +3064,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Mobility Aids",
+        "Kan Addaa fi Filatamaa Mobility Aids & Rehabilitation Equipment",
+        "Rehabilitation Equipment",
+        "Specialized & Custom Mobility Aids & Rehabilitation Equipment",
+        "ልዩና ብጁ Mobility Aids & Rehabilitation Equipment",
+        "ፍሉይን ዝተዳለወን Mobility Aids & Rehabilitation Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2869,10 +3081,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-ophthalmic-optical-equipment",
       "names": {
-        "en": "Specialized & Custom Ophthalmic & Optical Equipment",
-        "am": "ልዩና ብጁ Ophthalmic & Optical Equipment",
-        "om": "Kan Addaa fi Filatamaa Ophthalmic & Optical Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Ophthalmic & Optical Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2885,7 +3097,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Ophthalmic",
+        "Kan Addaa fi Filatamaa Ophthalmic & Optical Equipment",
+        "Optical Equipment",
+        "Specialized & Custom Ophthalmic & Optical Equipment",
+        "ልዩና ብጁ Ophthalmic & Optical Equipment",
+        "ፍሉይን ዝተዳለወን Ophthalmic & Optical Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2895,10 +3114,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-patient-monitoring-equipment",
       "names": {
-        "en": "Specialized & Custom Patient Monitoring Equipment",
-        "am": "ልዩና ብጁ Patient Monitoring Equipment",
-        "om": "Kan Addaa fi Filatamaa Patient Monitoring Equipment",
-        "ti": "ፍሉይን ዝተዳለወን Patient Monitoring Equipment"
+        "en": "Specialized Equipment",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2911,7 +3130,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Patient Monitoring Equipment",
+        "Kan Addaa fi Filatamaa Patient Monitoring Equipment",
+        "Specialized & Custom Patient Monitoring Equipment",
+        "ልዩና ብጁ Patient Monitoring Equipment",
+        "ፍሉይን ዝተዳለወን Patient Monitoring Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2921,10 +3146,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-pharmaceuticals-medicines",
       "names": {
-        "en": "Specialized & Custom Pharmaceuticals & Medicines",
-        "am": "ልዩና ብጁ Pharmaceuticals & Medicines",
-        "om": "Kan Addaa fi Filatamaa Pharmaceuticals & Medicines",
-        "ti": "ፍሉይን ዝተዳለወን Pharmaceuticals & Medicines"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2937,7 +3162,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Pharmaceuticals",
+        "Kan Addaa fi Filatamaa Pharmaceuticals & Medicines",
+        "Medicines",
+        "Specialized & Custom Pharmaceuticals & Medicines",
+        "ልዩና ብጁ Pharmaceuticals & Medicines",
+        "ፍሉይን ዝተዳለወን Pharmaceuticals & Medicines"
+      ],
       "redirects": []
     },
     {
@@ -2947,10 +3179,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-physiotherapy-rehabilitation-gear",
       "names": {
-        "en": "Specialized & Custom Physiotherapy & Rehabilitation Gear",
-        "am": "ልዩና ብጁ Physiotherapy & Rehabilitation Gear",
-        "om": "Kan Addaa fi Filatamaa Physiotherapy & Rehabilitation Gear",
-        "ti": "ፍሉይን ዝተዳለወን Physiotherapy & Rehabilitation Gear"
+        "en": "Specialized Gear",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2963,7 +3195,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Physiotherapy",
+        "Kan Addaa fi Filatamaa Physiotherapy & Rehabilitation Gear",
+        "Rehabilitation Gear",
+        "Specialized & Custom Physiotherapy & Rehabilitation Gear",
+        "ልዩና ብጁ Physiotherapy & Rehabilitation Gear",
+        "ፍሉይን ዝተዳለወን Physiotherapy & Rehabilitation Gear"
+      ],
       "redirects": []
     },
     {
@@ -2973,10 +3212,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-surgical-instruments",
       "names": {
-        "en": "Specialized & Custom Surgical Instruments",
-        "am": "ልዩና ብጁ Surgical Instruments",
-        "om": "Kan Addaa fi Filatamaa Surgical Instruments",
-        "ti": "ፍሉይን ዝተዳለወን Surgical Instruments"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -2989,7 +3228,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Surgical Instruments",
+        "Kan Addaa fi Filatamaa Surgical Instruments",
+        "Specialized & Custom Surgical Instruments",
+        "ልዩና ብጁ Surgical Instruments",
+        "ፍሉይን ዝተዳለወን Surgical Instruments"
+      ],
       "redirects": []
     },
     {
@@ -2999,10 +3244,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-telemedicine-remote-health",
       "names": {
-        "en": "Specialized & Custom Telemedicine & Remote Health",
-        "am": "ልዩና ብጁ Telemedicine & Remote Health",
-        "om": "Kan Addaa fi Filatamaa Telemedicine & Remote Health",
-        "ti": "ፍሉይን ዝተዳለወን Telemedicine & Remote Health"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3015,7 +3260,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Telemedicine",
+        "Kan Addaa fi Filatamaa Telemedicine & Remote Health",
+        "Remote Health",
+        "Specialized & Custom Telemedicine & Remote Health",
+        "ልዩና ብጁ Telemedicine & Remote Health",
+        "ፍሉይን ዝተዳለወን Telemedicine & Remote Health"
+      ],
       "redirects": []
     },
     {
@@ -3025,10 +3277,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-traditional-herbal-medicine",
       "names": {
-        "en": "Specialized & Custom Traditional & Herbal Medicine",
-        "am": "ልዩና ብጁ Traditional & Herbal Medicine",
-        "om": "Kan Addaa fi Filatamaa Traditional & Herbal Medicine",
-        "ti": "ፍሉይን ዝተዳለወን Traditional & Herbal Medicine"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -3041,7 +3293,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Traditional",
+        "Herbal Medicine",
+        "Kan Addaa fi Filatamaa Traditional & Herbal Medicine",
+        "Specialized & Custom Traditional & Herbal Medicine",
+        "ልዩና ብጁ Traditional & Herbal Medicine",
+        "ፍሉይን ዝተዳለወን Traditional & Herbal Medicine"
+      ],
       "redirects": []
     },
     {
@@ -3077,8 +3336,8 @@
       "classification_system_code": "SYS_MED",
       "slug": "cardiology-heart-disease-consultation",
       "names": {
-        "en": "Cardiology & Heart Disease Consultation",
-        "am": "የልብና የደም ዝውውር ህክምና ምርመራ",
+        "en": "Cardiology",
+        "am": "የልብ",
         "om": "Qorannoo Dhibee Onnee",
         "ti": "ናይ ልቢ ሕማማት መርመራ"
       },
@@ -3093,7 +3352,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cardiology & Heart Disease Consultation",
+        "Heart Disease Consultation",
+        "የልብና የደም ዝውውር ህክምና ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -3103,9 +3366,9 @@
       "classification_system_code": "SYS_MED",
       "slug": "pulmonology-respiratory-care",
       "names": {
-        "en": "Pulmonology & Respiratory Care",
-        "am": "የሳንባና የመተንፈሻ አካላት ህክምና",
-        "om": "Yaala Sombaa fi Qilleensaa",
+        "en": "Pulmonology",
+        "am": "የሳንባ",
+        "om": "Yaala Sombaa",
         "ti": "ናይ ሳንቡእ ሕክምና"
       },
       "description": null,
@@ -3119,7 +3382,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Pulmonology & Respiratory Care",
+        "Respiratory Care",
+        "Yaala Sombaa fi Qilleensaa",
+        "የሳንባና የመተንፈሻ አካላት ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3129,10 +3397,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "gastroenterology-digestive-health",
       "names": {
-        "en": "Gastroenterology & Digestive Health",
-        "am": "የጨጓራና የምግብ መፈጨት አካላት ህክምና",
-        "om": "Yaala Garaachaa fi Mar'umaanii",
-        "ti": "ናይ ከስዐን መፍረዲ ምግቢን ሕክምና"
+        "en": "Gastroenterology",
+        "am": "የጨጓራ",
+        "om": "Yaala Garaachaa",
+        "ti": "ናይ ከስዐ"
       },
       "description": null,
       "level": 3,
@@ -3145,7 +3413,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digestive Health",
+        "Gastroenterology & Digestive Health",
+        "Yaala Garaachaa fi Mar'umaanii",
+        "ናይ ከስዐን መፍረዲ ምግቢን ሕክምና",
+        "የጨጓራና የምግብ መፈጨት አካላት ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3155,10 +3429,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "nephrology-renal-dialysis-services",
       "names": {
-        "en": "Nephrology & Renal Dialysis Services",
-        "am": "የኩላሊት ህክምናና የዳያሊሲስ አገልግሎት",
-        "om": "Yaala Kalee fi Daayalaasisi",
-        "ti": "ናይ ኵላሊት ሕክምናን ዳያሊሲስን"
+        "en": "Nephrology Services",
+        "am": "የኩላሊት ህክምና",
+        "om": "Yaala Kalee",
+        "ti": "ናይ ኵላሊት ሕክምና"
       },
       "description": null,
       "level": 3,
@@ -3171,7 +3445,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Nephrology & Renal Dialysis Services",
+        "Renal Dialysis Services",
+        "Yaala Kalee fi Daayalaasisi",
+        "ናይ ኵላሊት ሕክምናን ዳያሊሲስን",
+        "የኩላሊት ህክምናና የዳያሊሲስ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -3181,10 +3461,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "endocrinology-diabetes-management",
       "names": {
-        "en": "Endocrinology & Diabetes Management",
-        "am": "የስኳርና የሆርሞን እጢዎች ህክምና",
-        "om": "Yaala Sukkaaraa fi Hormoonii",
-        "ti": "ናይ ሽኮርያን ሆርሞንን ሕክምና"
+        "en": "Endocrinology",
+        "am": "የስኳር",
+        "om": "Yaala Sukkaaraa",
+        "ti": "ናይ ሽኮርያ"
       },
       "description": null,
       "level": 3,
@@ -3197,7 +3477,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Diabetes Management",
+        "Endocrinology & Diabetes Management",
+        "Yaala Sukkaaraa fi Hormoonii",
+        "ናይ ሽኮርያን ሆርሞንን ሕክምና",
+        "የስኳርና የሆርሞን እጢዎች ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3207,8 +3493,8 @@
       "classification_system_code": "SYS_MED",
       "slug": "pediatric-wellness-growth-screening",
       "names": {
-        "en": "Pediatric Wellness & Growth Screening",
-        "am": "የህፃናት እድገት ክትትልና ምርመራ",
+        "en": "Pediatric Wellness",
+        "am": "የህፃናት እድገት ክትትል",
         "om": "Hordoffii Guddina Daa'immanii",
         "ti": "ናይ ቆልዑ ዕብየት ምክትታል"
       },
@@ -3223,7 +3509,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Growth Screening",
+        "Pediatric Wellness & Growth Screening",
+        "የህፃናት እድገት ክትትልና ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -3233,8 +3523,8 @@
       "classification_system_code": "SYS_MED",
       "slug": "pediatric-vaccinations-immunizations",
       "names": {
-        "en": "Pediatric Vaccinations & Immunizations",
-        "am": "የህፃናት ክትባቶችና የበሽታ መከላከያዎች",
+        "en": "Pediatric Vaccinations",
+        "am": "የህፃናት ክትባቶች",
         "om": "Talaallii Daa'immanii",
         "ti": "ናይ ቆልዑ ክታበታት"
       },
@@ -3249,7 +3539,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Immunizations",
+        "Pediatric Vaccinations & Immunizations",
+        "የህፃናት ክትባቶችና የበሽታ መከላከያዎች"
+      ],
       "redirects": []
     },
     {
@@ -3259,10 +3553,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "obstetrics-antenatal-checkups",
       "names": {
-        "en": "Obstetrics & Antenatal Checkups",
-        "am": "የእርግዝና ክትትልና የወሊድ አገልግሎት",
-        "om": "Hordoffii Ulfaa fi Deessisuu",
-        "ti": "ናይ ጥንሲ ምክትታልን ሕርሲን"
+        "en": "Obstetrics",
+        "am": "የእርግዝ",
+        "om": "Hordoffii Ulfaa",
+        "ti": "ናይ ጥንሲ ምክትታል"
       },
       "description": null,
       "level": 3,
@@ -3275,7 +3569,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Antenatal Checkups",
+        "Hordoffii Ulfaa fi Deessisuu",
+        "Obstetrics & Antenatal Checkups",
+        "ናይ ጥንሲ ምክትታልን ሕርሲን",
+        "የእርግዝና ክትትልና የወሊድ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -3285,10 +3585,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "gynecological-ultrasound-health-care",
       "names": {
-        "en": "Gynecological Ultrasound & Health Care",
-        "am": "የማህፀን አልትራሳውንድና የሴቶች ጤና",
-        "om": "Altraasawundii fi Fayyaa Dubartootaa",
-        "ti": "ናይ ማህጸን ኣልትራሳውንድን ጥዕናን"
+        "en": "Gynecological Ultrasound",
+        "am": "የማህፀን አልትራሳውንድ",
+        "om": "Altraasawundii",
+        "ti": "ናይ ማህጸ"
       },
       "description": null,
       "level": 3,
@@ -3301,7 +3601,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Altraasawundii fi Fayyaa Dubartootaa",
+        "Gynecological Ultrasound & Health Care",
+        "Health Care",
+        "ናይ ማህጸን ኣልትራሳውንድን ጥዕናን",
+        "የማህፀን አልትራሳውንድና የሴቶች ጤና"
+      ],
       "redirects": []
     },
     {
@@ -3311,8 +3617,8 @@
       "classification_system_code": "SYS_MED",
       "slug": "postnatal-care-lactation-support",
       "names": {
-        "en": "Postnatal Care & Lactation Support",
-        "am": "ከወሊድ በኋላ የእናትና ህፃን እንክብካቤ",
+        "en": "Postnatal Care",
+        "am": "ከወሊድ በኋላ የእናት",
         "om": "Kunuunsa Deessumsa Boodaa",
         "ti": "ናይ ድሕሪ ሕርሲ ክንክን"
       },
@@ -3327,7 +3633,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Lactation Support",
+        "Postnatal Care & Lactation Support",
+        "ከወሊድ በኋላ የእናትና ህፃን እንክብካቤ"
+      ],
       "redirects": []
     },
     {
@@ -3363,10 +3673,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "orthopedic-joint-bone-fracture-treatment",
       "names": {
-        "en": "Orthopedic Joint & Bone Fracture Treatment",
-        "am": "የአጥንት መሰበርና የመገጣጠሚያ ህክምና",
-        "om": "Yaala Cabiinsa Lafee fi Buusaa",
-        "ti": "ናይ ዓጽሚ ስብራትን መላገብን ሕክምና"
+        "en": "Orthopedic Joint",
+        "am": "የአጥንት መሰበር",
+        "om": "Yaala Cabiinsa Lafee",
+        "ti": "ናይ ዓጽሚ ስብራት"
       },
       "description": null,
       "level": 3,
@@ -3379,7 +3689,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bone Fracture Treatment",
+        "Orthopedic Joint & Bone Fracture Treatment",
+        "Yaala Cabiinsa Lafee fi Buusaa",
+        "ናይ ዓጽሚ ስብራትን መላገብን ሕክምና",
+        "የአጥንት መሰበርና የመገጣጠሚያ ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3389,10 +3705,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "spine-neurosurgical-procedures",
       "names": {
-        "en": "Spine & Neurosurgical Procedures",
-        "am": "የአከርካሪ አጥንትና የነርቭ ቀዶ-ህክምና",
-        "om": "Baqaqsanii Yaaluu Ribee fi Lafee Dugdaa",
-        "ti": "ናይ ስፓይንን ነርቭን መጥባሕቲ"
+        "en": "Spine",
+        "am": "የአከርካሪ አጥንት",
+        "om": "Baqaqsanii Yaaluu Ribee",
+        "ti": "ናይ ስፓይን"
       },
       "description": null,
       "level": 3,
@@ -3405,7 +3721,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Baqaqsanii Yaaluu Ribee fi Lafee Dugdaa",
+        "Neurosurgical Procedures",
+        "Spine & Neurosurgical Procedures",
+        "ናይ ስፓይንን ነርቭን መጥባሕቲ",
+        "የአከርካሪ አጥንትና የነርቭ ቀዶ-ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3415,9 +3737,9 @@
       "classification_system_code": "SYS_MED",
       "slug": "plastic-reconstructive-surgery",
       "names": {
-        "en": "Plastic & Reconstructive Surgery",
-        "am": "የፕላስቲክና የቆዳ መልሶ ግንባታ ቀዶ-ህክምና",
-        "om": "Yaala Pilaastikii fi Qodaa",
+        "en": "Plastic",
+        "am": "የፕላስቲክ",
+        "om": "Yaala Pilaastikii",
         "ti": "ናይ ፕላስቲክ መጥባሕቲ"
       },
       "description": null,
@@ -3431,7 +3753,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Plastic & Reconstructive Surgery",
+        "Reconstructive Surgery",
+        "Yaala Pilaastikii fi Qodaa",
+        "የፕላስቲክና የቆዳ መልሶ ግንባታ ቀዶ-ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3441,9 +3768,9 @@
       "classification_system_code": "SYS_MED",
       "slug": "trauma-emergency-casualty-resuscitation",
       "names": {
-        "en": "Trauma & Emergency Casualty Resuscitation",
-        "am": "የድንገተኛ አደጋና የተጎጂዎች ህክምና",
-        "om": "Yaala Balaa Tasaa fi Qabannoo",
+        "en": "Trauma",
+        "am": "የድንገተኛ አደጋ",
+        "om": "Yaala Balaa Tasaa",
         "ti": "ናይ ህጹጽ ሓደጋታት ሕክምና"
       },
       "description": null,
@@ -3457,7 +3784,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Emergency Casualty Resuscitation",
+        "Trauma & Emergency Casualty Resuscitation",
+        "Yaala Balaa Tasaa fi Qabannoo",
+        "የድንገተኛ አደጋና የተጎጂዎች ህክምና"
+      ],
       "redirects": []
     },
     {
@@ -3519,10 +3851,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "lipid-panel-cholesterol-profiling",
       "names": {
-        "en": "Lipid Panel & Cholesterol Profiling",
-        "am": "የኮሌስትሮልና የስብ መጠን ምርመራ",
-        "om": "Qorannoo Koolestroolii fi Qibaabaa",
-        "ti": "ናይ ኮለስትሮልን ስብሕን መርመራ"
+        "en": "Lipid Panel",
+        "am": "የኮሌስትሮል",
+        "om": "Qorannoo Koolestroolii",
+        "ti": "ናይ ኮለስትሮል"
       },
       "description": null,
       "level": 3,
@@ -3535,7 +3867,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cholesterol Profiling",
+        "Lipid Panel & Cholesterol Profiling",
+        "Qorannoo Koolestroolii fi Qibaabaa",
+        "ናይ ኮለስትሮልን ስብሕን መርመራ",
+        "የኮሌስትሮልና የስብ መጠን ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -3545,10 +3883,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "liver-renal-function-tests-lft-rft",
       "names": {
-        "en": "Liver & Renal Function Tests (LFT/RFT)",
-        "am": "የጉበትና የኩላሊት ስራ ምርመራ",
-        "om": "Qorannoo Hojii Tiruu fi Kalee",
-        "ti": "ናይ ጉበትን ኵላሊትን ስራሕ መርመራ"
+        "en": "Liver",
+        "am": "የጉበት",
+        "om": "Qorannoo Hojii Tiruu",
+        "ti": "ናይ ጉበት"
       },
       "description": null,
       "level": 3,
@@ -3561,7 +3899,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Liver & Renal Function Tests (LFT/RFT)",
+        "Qorannoo Hojii Tiruu fi Kalee",
+        "Renal Function Tests (LFT/RFT)",
+        "ናይ ጉበትን ኵላሊትን ስራሕ መርመራ",
+        "የጉበትና የኩላሊት ስራ ምርመራ"
+      ],
       "redirects": []
     },
     {
@@ -3623,10 +3967,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "digital-chest-skeletal-x-ray",
       "names": {
-        "en": "Digital Chest & Skeletal X-Ray",
-        "am": "ዲጂታል የደረትና የአጥንት ኤክስ-ሬይ",
-        "om": "Eksireeyii Qomaa fi Lafee Dijitaalaa",
-        "ti": "ናይ ኣፍ-ልብን ዓጽምን ዲጂታል ኤክስ-ሬይ"
+        "en": "Digital Chest",
+        "am": "ዲጂታል የደረት",
+        "om": "Eksireeyii Qomaa",
+        "ti": "ናይ ኣፍ-ልብ"
       },
       "description": null,
       "level": 3,
@@ -3639,7 +3983,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Chest & Skeletal X-Ray",
+        "Eksireeyii Qomaa fi Lafee Dijitaalaa",
+        "Skeletal X-Ray",
+        "ናይ ኣፍ-ልብን ዓጽምን ዲጂታል ኤክስ-ሬይ",
+        "ዲጂታል የደረትና የአጥንት ኤክስ-ሬይ"
+      ],
       "redirects": []
     },
     {
@@ -3883,10 +4233,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "elderly-home-care-commercial-4-burner-gas-electric-s77_2",
       "names": {
-        "en": "Commercial 4-Burner Gas & Electric Stoves",
-        "am": "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "om": "Istoovii Gaasii fi Eleektiriikaa 4",
-        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "en": "Commercial 4-Burner Gas",
+        "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
+        "om": "Istoovii Gaasii",
+        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝ"
       },
       "description": null,
       "level": 3,
@@ -3899,7 +4249,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial 4-Burner Gas & Electric Stoves",
+        "Electric Stoves",
+        "Istoovii Gaasii fi Eleektiriikaa 4",
+        "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+      ],
       "redirects": []
     },
     {
@@ -3909,10 +4265,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "home-nursing-commercial-4-burner-gas-electric-stov-s78_2",
       "names": {
-        "en": "Commercial 4-Burner Gas & Electric Stoves",
-        "am": "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "om": "Istoovii Gaasii fi Eleektiriikaa 4",
-        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "en": "Commercial 4-Burner Gas",
+        "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
+        "om": "Istoovii Gaasii",
+        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝ"
       },
       "description": null,
       "level": 3,
@@ -3925,7 +4281,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial 4-Burner Gas & Electric Stoves",
+        "Electric Stoves",
+        "Istoovii Gaasii fi Eleektiriikaa 4",
+        "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+      ],
       "redirects": []
     },
     {
@@ -3935,10 +4297,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "physiotherapy-home-commercial-4-burner-gas-electri-s79_2",
       "names": {
-        "en": "Commercial 4-Burner Gas & Electric Stoves",
-        "am": "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "om": "Istoovii Gaasii fi Eleektiriikaa 4",
-        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "en": "Commercial 4-Burner Gas",
+        "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
+        "om": "Istoovii Gaasii",
+        "ti": "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝ"
       },
       "description": null,
       "level": 3,
@@ -3951,7 +4313,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial 4-Burner Gas & Electric Stoves",
+        "Electric Stoves",
+        "Istoovii Gaasii fi Eleektiriikaa 4",
+        "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+      ],
       "redirects": []
     },
     {
@@ -3961,10 +4329,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "elderly-home-care-heavy-duty-food-processors-coffe-s77_3",
       "names": {
-        "en": "Heavy-Duty Food Processors & Coffee Grinders",
-        "am": "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
-        "om": "Maashinii Daakuu fi Bunaa Cimaa",
-        "ti": "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን"
+        "en": "Heavy-Duty Food Processors",
+        "am": "ከባድ የቤት ውስጥ መፍጫዎች",
+        "om": "Maashinii Daakuu",
+        "ti": "ከቢድ ናይ ገዛ መፍሓይ"
       },
       "description": null,
       "level": 3,
@@ -3977,7 +4345,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Coffee Grinders",
+        "Heavy-Duty Food Processors & Coffee Grinders",
+        "Maashinii Daakuu fi Bunaa Cimaa",
+        "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+      ],
       "redirects": []
     },
     {
@@ -3987,10 +4361,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "home-nursing-heavy-duty-food-processors-coffee-gri-s78_3",
       "names": {
-        "en": "Heavy-Duty Food Processors & Coffee Grinders",
-        "am": "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
-        "om": "Maashinii Daakuu fi Bunaa Cimaa",
-        "ti": "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን"
+        "en": "Heavy-Duty Food Processors",
+        "am": "ከባድ የቤት ውስጥ መፍጫዎች",
+        "om": "Maashinii Daakuu",
+        "ti": "ከቢድ ናይ ገዛ መፍሓይ"
       },
       "description": null,
       "level": 3,
@@ -4003,7 +4377,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Coffee Grinders",
+        "Heavy-Duty Food Processors & Coffee Grinders",
+        "Maashinii Daakuu fi Bunaa Cimaa",
+        "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+      ],
       "redirects": []
     },
     {
@@ -4013,10 +4393,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "physiotherapy-home-heavy-duty-food-processors-coff-s79_3",
       "names": {
-        "en": "Heavy-Duty Food Processors & Coffee Grinders",
-        "am": "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
-        "om": "Maashinii Daakuu fi Bunaa Cimaa",
-        "ti": "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን"
+        "en": "Heavy-Duty Food Processors",
+        "am": "ከባድ የቤት ውስጥ መፍጫዎች",
+        "om": "Maashinii Daakuu",
+        "ti": "ከቢድ ናይ ገዛ መፍሓይ"
       },
       "description": null,
       "level": 3,
@@ -4029,7 +4409,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Coffee Grinders",
+        "Heavy-Duty Food Processors & Coffee Grinders",
+        "Maashinii Daakuu fi Bunaa Cimaa",
+        "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+      ],
       "redirects": []
     },
     {
@@ -4039,10 +4425,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-elderly-home-care",
       "names": {
-        "en": "Specialized & Custom Elderly Home Care",
-        "am": "ልዩና ብጁ Elderly Home Care",
-        "om": "Kan Addaa fi Filatamaa Elderly Home Care",
-        "ti": "ፍሉይን ዝተዳለወን Elderly Home Care"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4055,7 +4441,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Elderly Home Care",
+        "Kan Addaa fi Filatamaa Elderly Home Care",
+        "Specialized & Custom Elderly Home Care",
+        "ልዩና ብጁ Elderly Home Care",
+        "ፍሉይን ዝተዳለወን Elderly Home Care"
+      ],
       "redirects": []
     },
     {
@@ -4065,10 +4457,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-home-nursing",
       "names": {
-        "en": "Specialized & Custom Home Nursing",
-        "am": "ልዩና ብጁ Home Nursing",
-        "om": "Kan Addaa fi Filatamaa Home Nursing",
-        "ti": "ፍሉይን ዝተዳለወን Home Nursing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4081,7 +4473,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Home Nursing",
+        "Kan Addaa fi Filatamaa Home Nursing",
+        "Specialized & Custom Home Nursing",
+        "ልዩና ብጁ Home Nursing",
+        "ፍሉይን ዝተዳለወን Home Nursing"
+      ],
       "redirects": []
     },
     {
@@ -4091,10 +4489,10 @@
       "classification_system_code": "SYS_MED",
       "slug": "specialized-custom-home-physiotherapy",
       "names": {
-        "en": "Specialized & Custom Home Physiotherapy",
-        "am": "ልዩና ብጁ Home Physiotherapy",
-        "om": "Kan Addaa fi Filatamaa Home Physiotherapy",
-        "ti": "ፍሉይን ዝተዳለወን Home Physiotherapy"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4107,7 +4505,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Home Physiotherapy",
+        "Kan Addaa fi Filatamaa Home Physiotherapy",
+        "Specialized & Custom Home Physiotherapy",
+        "ልዩና ብጁ Home Physiotherapy",
+        "ፍሉይን ዝተዳለወን Home Physiotherapy"
+      ],
       "redirects": []
     }
   ]

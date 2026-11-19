@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Cleaning & Facility Management",
-        "am": "ጽዳትና መገናኛ አስተዳደር",
-        "om": "Qulqullinsa fi Bulchiinsa",
-        "ti": "ጽዳዕን ኣመሓዳሪኣ መገናኺያን"
+        "en": "Cleaning",
+        "am": "ጽዳት",
+        "om": "Qulqullinsa",
+        "ti": "ጽዳዕ"
       },
       "slug": "cleaning-facility-management",
       "description": "Commercial cleaning, fumigation, janitorial services, and facility management.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cleaning & Facility Management",
+        "Facility Management",
+        "Qulqullinsa fi Bulchiinsa",
+        "ጽዳትና መገናኛ አስተዳደር",
+        "ጽዳዕን ኣመሓዳሪኣ መገናኺያን"
+      ],
       "redirects": []
     },
     {
@@ -137,10 +143,10 @@
       "parent_code": "carpentry-maintenance",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Heavy-Duty Cargo & Delivery Three-Wheelers",
+        "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
-        "om": "Baajaajii Fe’umsaa fi Daldalaa",
-        "ti": "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "om": "Baajaajii Fe’umsaa",
+        "ti": "ናይ ጽዕነት"
       },
       "slug": "carpentry-maintenance-heavy-duty-cargo-delivery-th-s19_1",
       "description": null,
@@ -154,7 +160,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Baajaajii Fe’umsaa fi Daldalaa",
+        "Delivery Three-Wheelers",
+        "Heavy-Duty Cargo & Delivery Three-Wheelers",
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+      ],
       "redirects": []
     },
     {
@@ -345,7 +356,7 @@
       "parent_code": "cleaning-facility-management",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Cleaning Equipment & Supplies",
+        "en": "Cleaning Equipment",
         "am": "የጽዳት እቃዎቸ",
         "om": "Meeshaalee Qulqullinsaa",
         "ti": "ናይ ጽዳዕ ኣቑሑ"
@@ -362,7 +373,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cleaning Equipment & Supplies",
+        "Supplies"
+      ],
       "redirects": []
     },
     {
@@ -397,7 +411,7 @@
       "parent_code": "cleaning-equipment-supplies",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Mops & Brooms",
+        "en": "Mops",
         "am": "ሞ ምር",
         "om": "Meeshaalee Qulqullinsaa",
         "ti": "ምር ሞ"
@@ -414,7 +428,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms",
+        "Mops & Brooms"
+      ],
       "redirects": []
     },
     {
@@ -475,7 +492,7 @@
       "parent_code": "cleaning-equipment-supplies",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Cleaning Equipment & Supplies",
+        "en": "Other Cleaning Equipment",
         "am": "ሌሎች የጽዳት እቃዎቸ",
         "om": "Meeshaalee Qulqullinsaa Biroo",
         "ti": "ካልኦት ናይ ጽዳዕ ኣቑሑ"
@@ -492,7 +509,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Cleaning Equipment & Supplies",
+        "Supplies"
+      ],
       "redirects": []
     },
     {
@@ -839,10 +859,10 @@
       "parent_code": "post-construction-cleaning",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "slug": "post-construction-cleaning-condominium-housing-uni-s39_3",
       "description": null,
@@ -856,7 +876,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+      ],
       "redirects": []
     },
     {
@@ -1073,10 +1099,10 @@
       "parent_code": "building-operations",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "slug": "building-operations-condominium-housing-units-20-8-s40_3",
       "description": null,
@@ -1091,12 +1117,16 @@
       "meta_title": null,
       "meta_description": null,
       "aliases": [
-        "ባጃጅ",
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "auto rickshaw",
+        "baajaaj",
         "bajaj",
         "tuk tuk",
         "ባጃጅ",
-        "baajaaj",
-        "auto rickshaw"
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
       ],
       "redirects": []
     },
@@ -1236,10 +1266,10 @@
       "parent_code": "cleaning-facility-management",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Fumigation & Pest Control",
-        "am": "የተባባሪ መከላከያና ፀረ-ተባባይ",
-        "om": "Faansii fi Inib",
-        "ti": "ፈይምግሽን ምክልኻስ ኣእንስላትን"
+        "en": "Fumigation",
+        "am": "የተባባሪ መከላከያ",
+        "om": "Faansii",
+        "ti": "ፈይምግሽ"
       },
       "slug": "fumigation-pest-control",
       "description": "",
@@ -1253,7 +1283,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Faansii fi Inib",
+        "Fumigation & Pest Control",
+        "Pest Control",
+        "የተባባሪ መከላከያና ፀረ-ተባባይ",
+        "ፈይምግሽን ምክልኻስ ኣእንስላትን"
+      ],
       "redirects": []
     },
     {
@@ -1366,10 +1402,10 @@
       "parent_code": "fumigation-pest-control",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Fumigation & Pest Control",
-        "am": "ሌሎች የተባባሪ መከላከያና ፀረ-ተባባይ",
-        "om": "Faansii fi Inib Biroo",
-        "ti": "ካልኦት ፈይምግሽን ምክልኻስ ኣእንስላትን"
+        "en": "Other Fumigation",
+        "am": "ሌሎች የተባባሪ መከላከያ",
+        "om": "Faansii",
+        "ti": "ካልኦት ፈይምግሽ"
       },
       "slug": "other-fumigation-pest-control",
       "description": null,
@@ -1383,7 +1419,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Faansii fi Inib Biroo",
+        "Other Fumigation & Pest Control",
+        "Pest Control",
+        "ሌሎች የተባባሪ መከላከያና ፀረ-ተባባይ",
+        "ካልኦት ፈይምግሽን ምክልኻስ ኣእንስላትን"
+      ],
       "redirects": []
     },
     {
@@ -1548,7 +1590,7 @@
       "parent_code": "cleaning-facility-management",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Laundry & Linen Services",
+        "en": "Laundry Services",
         "am": "የልብስ ማጠቢ አገልግሎቶች",
         "om": "Tajaajila Xurii",
         "ti": "ኣገልግሎት ምጥባዕ ኣልባሳት"
@@ -1565,7 +1607,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Laundry & Linen Services",
+        "Linen Services"
+      ],
       "redirects": []
     },
     {
@@ -1678,7 +1723,7 @@
       "parent_code": "laundry-linen-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Laundry & Linen Services",
+        "en": "Other Laundry Services",
         "am": "ሌሎች የልብስ ማጠቢ አገልግሎቶች",
         "om": "Tajaajila Xurii Biroo",
         "ti": "ካልኦት ኣገልግሎት ምጥባዕ ኣልባሳት"
@@ -1695,7 +1740,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Linen Services",
+        "Other Laundry & Linen Services"
+      ],
       "redirects": []
     },
     {
@@ -1867,10 +1915,10 @@
       "parent_code": "construction-waste",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "slug": "construction-waste-condominium-housing-units-20-80-s41_3",
       "description": null,
@@ -1884,7 +1932,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+      ],
       "redirects": []
     },
     {
@@ -2153,10 +2207,10 @@
       "parent_code": "cleaning-facility-management",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Cleaning & Facility Management",
-        "am": "ሌሎች ጽዳትና መገናኛ አስተዳደር",
-        "om": "Qulqullinsa fi Bulchiinsa Biroo",
-        "ti": "ካልኦት ጽዳዕን ኣመሓዳሪኣ መገናኺያን"
+        "en": "Other Cleaning",
+        "am": "ሌሎች ጽዳት",
+        "om": "Qulqullinsa",
+        "ti": "ካልኦት ጽዳዕ"
       },
       "slug": "other-cleaning-facility-management",
       "description": null,
@@ -2170,7 +2224,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Facility Management",
+        "Other Cleaning & Facility Management",
+        "Qulqullinsa fi Bulchiinsa Biroo",
+        "ሌሎች ጽዳትና መገናኛ አስተዳደር",
+        "ካልኦት ጽዳዕን ኣመሓዳሪኣ መገናኺያን"
+      ],
       "redirects": []
     }
   ]

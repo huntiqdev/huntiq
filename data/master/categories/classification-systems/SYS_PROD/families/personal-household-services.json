@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Personal & Household Services",
-        "am": "የግልና የቤት አገልግሎቶች",
-        "om": "Tajaajila Dhuunfaa fi Mana",
-        "ti": "ናይ ግልን ናይ ገዛን ኣገልግሎትን"
+        "en": "Personal Services",
+        "am": "የግል",
+        "om": "Tajaajila Dhuunfaa",
+        "ti": "ናይ ግል"
       },
       "slug": "personal-household-services",
       "description": "Domestic services, personal services, household maintenance, and lifestyle services.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Household Services",
+        "Personal & Household Services",
+        "Tajaajila Dhuunfaa fi Mana",
+        "ናይ ግልን ናይ ገዛን ኣገልግሎትን",
+        "የግልና የቤት አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -59,10 +65,10 @@
       "parent_code": "personal-household-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Childcare & Daycare Services",
+        "en": "Childcare Services",
         "am": "የህጻናት እንክብካቤ",
         "om": "Tajaajila Da'immanii",
-        "ti": "ኣገልግሎት ክንክን ህጻናት"
+        "ti": "ኣገልግሎት ክንክ"
       },
       "slug": "childcare-services",
       "description": "",
@@ -76,7 +82,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Childcare & Daycare Services",
+        "Daycare Services",
+        "ኣገልግሎት ክንክን ህጻናት"
+      ],
       "redirects": []
     },
     {
@@ -189,10 +199,10 @@
       "parent_code": "childcare-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Childcare & Daycare Services",
+        "en": "Other Childcare Services",
         "am": "ሌሎች የህጻናት እንክብካቤ",
         "om": "Tajaajila Da'immanii Biroo",
-        "ti": "ካልኦት ኣገልግሎት ክንክን ህጻናት"
+        "ti": "ካልኦት ኣገልግሎት ክንክ"
       },
       "slug": "other-childcare-services",
       "description": null,
@@ -206,7 +216,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Daycare Services",
+        "Other Childcare & Daycare Services",
+        "ካልኦት ኣገልግሎት ክንክን ህጻናት"
+      ],
       "redirects": []
     },
     {
@@ -683,10 +697,10 @@
       "parent_code": "personal-household-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Home Maintenance & Repair",
-        "am": "የቤት ጥገናና እንክብካቤ",
-        "om": "Suphaa fi Eegumsa Mana",
-        "ti": "ጥገናን ክንክንን ገዛ"
+        "en": "Home Maintenance",
+        "am": "የቤት ጥገና",
+        "om": "Suphaa",
+        "ti": "ጥገና"
       },
       "slug": "home-maintenance-repair",
       "description": "",
@@ -700,7 +714,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Home Maintenance & Repair",
+        "Repair",
+        "Suphaa fi Eegumsa Mana",
+        "የቤት ጥገናና እንክብካቤ",
+        "ጥገናን ክንክንን ገዛ"
+      ],
       "redirects": []
     },
     {
@@ -813,10 +833,10 @@
       "parent_code": "home-maintenance-repair",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Home Maintenance & Repair",
-        "am": "ሌሎች የቤት ጥገናና እንክብካቤ",
-        "om": "Suphaa fi Eegumsa Mana Biroo",
-        "ti": "ካልኦት ጥገናን ክንክንን ገዛ"
+        "en": "Other Home Maintenance",
+        "am": "ሌሎች የቤት ጥገና",
+        "om": "Suphaa",
+        "ti": "ካልኦት ጥገና"
       },
       "slug": "other-home-maintenance-repair",
       "description": null,
@@ -830,7 +850,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Home Maintenance & Repair",
+        "Repair",
+        "Suphaa fi Eegumsa Mana Biroo",
+        "ሌሎች የቤት ጥገናና እንክብካቤ",
+        "ካልኦት ጥገናን ክንክንን ገዛ"
+      ],
       "redirects": []
     },
     {
@@ -1619,10 +1645,10 @@
       "parent_code": "personal-household-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Personal & Household Services",
-        "am": "ሌሎች የግልና የቤት አገልግሎቶች",
-        "om": "Tajaajila Dhuunfaa fi Mana Biroo",
-        "ti": "ካልኦት ናይ ግልን ናይ ገዛን ኣገልግሎትን"
+        "en": "Other Personal Services",
+        "am": "ሌሎች የግል",
+        "om": "Tajaajila Dhuunfaa",
+        "ti": "ካልኦት ናይ ግል"
       },
       "slug": "other-personal-household-services",
       "description": null,
@@ -1636,7 +1662,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Household Services",
+        "Other Personal & Household Services",
+        "Tajaajila Dhuunfaa fi Mana Biroo",
+        "ሌሎች የግልና የቤት አገልግሎቶች",
+        "ካልኦት ናይ ግልን ናይ ገዛን ኣገልግሎትን"
+      ],
       "redirects": []
     }
   ]

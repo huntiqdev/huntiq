@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "tourism-travel",
       "names": {
-        "en": "Tourism & Travel",
-        "am": "ቱሪዝምና ጉዞ",
+        "en": "Tourism",
+        "am": "ቱሪዝም",
         "om": "Faala imalaa",
-        "ti": "ቱሪዝምን ጉዕዞን"
+        "ti": "ቱሪዝም"
       },
       "description": "Tour packages, travel services, heritage tourism, eco-tourism, and travel agency services.",
       "level": 0,
@@ -25,7 +25,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Tourism & Travel",
+        "Travel",
+        "ቱሪዝምና ጉዞ",
+        "ቱሪዝምን ጉዕዞን"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +40,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "eco-adventure-tourism",
       "names": {
-        "en": "Eco & Adventure Tourism",
-        "am": "የኢኮና ጀብዱ ቱሪዝም",
+        "en": "Eco",
+        "am": "የኢኮ",
         "om": "Faala Uumamaa",
-        "ti": "ኢኮን ጀብደን ቱሪዝምን"
+        "ti": "ኢኮ"
       },
       "description": "",
       "level": 1,
@@ -51,7 +56,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Adventure Tourism",
+        "Eco & Adventure Tourism",
+        "ኢኮን ጀብደን ቱሪዝምን",
+        "የኢኮና ጀብዱ ቱሪዝም"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +71,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "heritage-cultural-tourism",
       "names": {
-        "en": "Heritage & Cultural Tourism",
-        "am": "የቅርስና የባህል ቱሪዝም",
+        "en": "Heritage",
+        "am": "የቅርስ",
         "om": "Faala Aadaa",
-        "ti": "ቱሪዝም ቅርስን ባህልን"
+        "ti": "ቱሪዝም ቅርስ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +87,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cultural Tourism",
+        "Heritage & Cultural Tourism",
+        "ቱሪዝም ቅርስን ባህልን",
+        "የቅርስና የባህል ቱሪዝም"
+      ],
       "redirects": []
     },
     {
@@ -113,7 +128,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "pilgrimage-tourism",
       "names": {
-        "en": "Pilgrimage & Religious Tourism",
+        "en": "Pilgrimage",
         "am": "የአምልኮ ጉዞ ቱሪዝም",
         "om": "Faala Amantii",
         "ti": "ቱሪዝም ሃይማኖት"
@@ -129,7 +144,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Pilgrimage & Religious Tourism",
+        "Religious Tourism"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +157,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "ticketing-reservation-services",
       "names": {
-        "en": "Ticketing & Reservation Services",
-        "am": "የቲኬትና የቦታ ማስያዣ አገልግሎት",
+        "en": "Ticketing Services",
+        "am": "የቲኬት",
         "om": "Tajaajila Tikeetii",
-        "ti": "ኣገልግሎት ቲኬትን ምዕጻንን"
+        "ti": "ኣገልግሎት ቲኬት"
       },
       "description": "",
       "level": 1,
@@ -155,7 +173,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Reservation Services",
+        "Ticketing & Reservation Services",
+        "ኣገልግሎት ቲኬትን ምዕጻንን",
+        "የቲኬትና የቦታ ማስያዣ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +188,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "tour-packages-services",
       "names": {
-        "en": "Tour Packages & Services",
-        "am": "የጉዞ ጥቅሎችና አገልግሎት",
+        "en": "Tour Packages",
+        "am": "የጉዞ ጥቅሎች",
         "om": "Tajaajila Imalaa",
-        "ti": "ጥቅሎታትን ኣገልግሎትን ጉዕዞ"
+        "ti": "ጥቅሎታት"
       },
       "description": "",
       "level": 1,
@@ -181,7 +204,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Services",
+        "Tour Packages & Services",
+        "የጉዞ ጥቅሎችና አገልግሎት",
+        "ጥቅሎታትን ኣገልግሎትን ጉዕዞ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +245,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-tourism-travel",
       "names": {
-        "en": "Specialized & Custom Tourism & Travel",
-        "am": "ልዩና ብጁ Tourism & Travel",
-        "om": "Kan Addaa fi Filatamaa Tourism & Travel",
-        "ti": "ፍሉይን ዝተዳለወን Tourism & Travel"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -233,7 +261,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tourism",
+        "Kan Addaa fi Filatamaa Tourism & Travel",
+        "Specialized & Custom Tourism & Travel",
+        "Travel",
+        "ልዩና ብጁ Tourism & Travel",
+        "ፍሉይን ዝተዳለወን Tourism & Travel"
+      ],
       "redirects": []
     },
     {
@@ -971,10 +1006,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-eco-adventure-tourism",
       "names": {
-        "en": "Specialized & Custom Eco & Adventure Tourism",
-        "am": "ልዩና ብጁ Eco & Adventure Tourism",
-        "om": "Kan Addaa fi Filatamaa Eco & Adventure Tourism",
-        "ti": "ፍሉይን ዝተዳለወን Eco & Adventure Tourism"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -987,7 +1022,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Adventure Tourism",
+        "Custom Eco",
+        "Kan Addaa fi Filatamaa Eco & Adventure Tourism",
+        "Specialized & Custom Eco & Adventure Tourism",
+        "ልዩና ብጁ Eco & Adventure Tourism",
+        "ፍሉይን ዝተዳለወን Eco & Adventure Tourism"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1039,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-heritage-cultural-tourism",
       "names": {
-        "en": "Specialized & Custom Heritage & Cultural Tourism",
-        "am": "ልዩና ብጁ Heritage & Cultural Tourism",
-        "om": "Kan Addaa fi Filatamaa Heritage & Cultural Tourism",
-        "ti": "ፍሉይን ዝተዳለወን Heritage & Cultural Tourism"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1013,7 +1055,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cultural Tourism",
+        "Custom Heritage",
+        "Kan Addaa fi Filatamaa Heritage & Cultural Tourism",
+        "Specialized & Custom Heritage & Cultural Tourism",
+        "ልዩና ብጁ Heritage & Cultural Tourism",
+        "ፍሉይን ዝተዳለወን Heritage & Cultural Tourism"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1072,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-medical-tourism",
       "names": {
-        "en": "Specialized & Custom Medical Tourism",
-        "am": "ልዩና ብጁ Medical Tourism",
-        "om": "Kan Addaa fi Filatamaa Medical Tourism",
-        "ti": "ፍሉይን ዝተዳለወን Medical Tourism"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1039,7 +1088,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Medical Tourism",
+        "Kan Addaa fi Filatamaa Medical Tourism",
+        "Specialized & Custom Medical Tourism",
+        "ልዩና ብጁ Medical Tourism",
+        "ፍሉይን ዝተዳለወን Medical Tourism"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1104,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-pilgrimage-religious-tourism",
       "names": {
-        "en": "Specialized & Custom Pilgrimage & Religious Tourism",
-        "am": "ልዩና ብጁ Pilgrimage & Religious Tourism",
-        "om": "Kan Addaa fi Filatamaa Pilgrimage & Religious Tourism",
-        "ti": "ፍሉይን ዝተዳለወን Pilgrimage & Religious Tourism"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1065,7 +1120,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Pilgrimage",
+        "Kan Addaa fi Filatamaa Pilgrimage & Religious Tourism",
+        "Religious Tourism",
+        "Specialized & Custom Pilgrimage & Religious Tourism",
+        "ልዩና ብጁ Pilgrimage & Religious Tourism",
+        "ፍሉይን ዝተዳለወን Pilgrimage & Religious Tourism"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1137,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-ticketing-reservation-services",
       "names": {
-        "en": "Specialized & Custom Ticketing & Reservation Services",
-        "am": "ልዩና ብጁ Ticketing & Reservation Services",
-        "om": "Kan Addaa fi Filatamaa Ticketing & Reservation Services",
-        "ti": "ፍሉይን ዝተዳለወን Ticketing & Reservation Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1091,7 +1153,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Ticketing",
+        "Kan Addaa fi Filatamaa Ticketing & Reservation Services",
+        "Reservation Services",
+        "Specialized & Custom Ticketing & Reservation Services",
+        "ልዩና ብጁ Ticketing & Reservation Services",
+        "ፍሉይን ዝተዳለወን Ticketing & Reservation Services"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1170,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-tour-packages-services",
       "names": {
-        "en": "Specialized & Custom Tour Packages & Services",
-        "am": "ልዩና ብጁ Tour Packages & Services",
-        "om": "Kan Addaa fi Filatamaa Tour Packages & Services",
-        "ti": "ፍሉይን ዝተዳለወን Tour Packages & Services"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1117,7 +1186,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tour Packages",
+        "Kan Addaa fi Filatamaa Tour Packages & Services",
+        "Services",
+        "Specialized & Custom Tour Packages & Services",
+        "ልዩና ብጁ Tour Packages & Services",
+        "ፍሉይን ዝተዳለወን Tour Packages & Services"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1203,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-travel-agency-services",
       "names": {
-        "en": "Specialized & Custom Travel Agency Services",
-        "am": "ልዩና ብጁ Travel Agency Services",
-        "om": "Kan Addaa fi Filatamaa Travel Agency Services",
-        "ti": "ፍሉይን ዝተዳለወን Travel Agency Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1143,7 +1219,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Travel Agency Services",
+        "Kan Addaa fi Filatamaa Travel Agency Services",
+        "Specialized & Custom Travel Agency Services",
+        "ልዩና ብጁ Travel Agency Services",
+        "ፍሉይን ዝተዳለወን Travel Agency Services"
+      ],
       "redirects": []
     }
   ]

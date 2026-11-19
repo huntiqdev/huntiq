@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "property",
       "names": {
-        "en": "Property & Real Estate (Legacy)",
-        "am": "ቤቶችና ይዞታዎች",
-        "om": "Qabeenya fi Manneen",
-        "ti": "ገዛውን ንብረትን"
+        "en": "Property",
+        "am": "ቤቶች",
+        "om": "Qabeenya",
+        "ti": "ገዛው"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Property & Real Estate (Legacy)",
+        "Qabeenya fi Manneen",
+        "Real Estate (Legacy)",
+        "ቤቶችና ይዞታዎች",
+        "ገዛውን ንብረትን"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +93,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "apartments",
       "names": {
-        "en": "Apartments & Condos",
+        "en": "Apartments",
         "am": "ኮንዶሚኒየም",
         "om": "Appaartaamaa",
-        "ti": "ኮንዶሚኒየምን ኣፓርትማን"
+        "ti": "ኮንዶሚኒየም"
       },
       "description": null,
       "level": 1,
@@ -103,7 +109,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Apartments & Condos",
+        "Condos",
+        "ኮንዶሚኒየምን ኣፓርትማን"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +149,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "land-plots",
       "names": {
-        "en": "Land & Plots",
+        "en": "Land",
         "am": "ቦታዎች",
         "om": "Lafa",
-        "ti": "መሬትን ቦታታትን"
+        "ti": "መሬት"
       },
       "description": null,
       "level": 1,
@@ -155,7 +165,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Land & Plots",
+        "Plots",
+        "መሬትን ቦታታትን"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +205,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-apartments-condos",
       "names": {
-        "en": "Specialized & Custom Apartments & Condos",
-        "am": "ልዩና ብጁ Apartments & Condos",
-        "om": "Kan Addaa fi Filatamaa Apartments & Condos",
-        "ti": "ፍሉይን ዝተዳለወን Apartments & Condos"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -207,7 +221,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Condos",
+        "Custom Apartments",
+        "Kan Addaa fi Filatamaa Apartments & Condos",
+        "Specialized & Custom Apartments & Condos",
+        "ልዩና ብጁ Apartments & Condos",
+        "ፍሉይን ዝተዳለወን Apartments & Condos"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +264,10 @@
       "classification_system_code": "SYS_PRM",
       "slug": "specialized-custom-furnished-apartments-for-rent",
       "names": {
-        "en": "Specialized & Custom Furnished Apartments for Rent",
-        "am": "ልዩና ብጁ Furnished Apartments for Rent",
-        "om": "Kan Addaa fi Filatamaa Furnished Apartments for Rent",
-        "ti": "ፍሉይን ዝተዳለወን Furnished Apartments for Rent"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -259,7 +280,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Furnished Apartments for Rent",
+        "Kan Addaa fi Filatamaa Furnished Apartments for Rent",
+        "Specialized & Custom Furnished Apartments for Rent",
+        "ልዩና ብጁ Furnished Apartments for Rent",
+        "ፍሉይን ዝተዳለወን Furnished Apartments for Rent"
+      ],
       "redirects": []
     }
   ]

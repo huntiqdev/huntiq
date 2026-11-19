@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "tobacco-regulated-substances",
       "names": {
-        "en": "Tobacco & Regulated Substances",
-        "am": "ትምባሆና ቁጥጥር ስር ያሉ ቁሳቁስ",
-        "om": "Sigaaraa fi Qabiyyee To'atame",
-        "ti": "ትምባሆን ዝቁጸር ሃብትን"
+        "en": "Tobacco",
+        "am": "ትምባሆ",
+        "om": "Sigaaraa",
+        "ti": "ትምባሆ"
       },
       "description": "Admin-controlled category. Tobacco, cigarettes, chat, alcohol regulation, firearms (licensed), and controlled goods.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Regulated Substances",
+        "Sigaaraa fi Qabiyyee To'atame",
+        "Tobacco & Regulated Substances",
+        "ትምባሆና ቁጥጥር ስር ያሉ ቁሳቁስ",
+        "ትምባሆን ዝቁጸር ሃብትን"
+      ],
       "redirects": []
     },
     {
@@ -35,7 +41,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "chat-khat-trade",
       "names": {
-        "en": "Chat & Khat Trade",
+        "en": "Chat",
         "am": "ጫት ንግድ",
         "om": "Daldala Caatii",
         "ti": "ንግዲ ጫት"
@@ -51,7 +57,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chat & Khat Trade",
+        "Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +70,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "cigarettes-tobacco-products",
       "names": {
-        "en": "Cigarettes & Tobacco Products",
-        "am": "ሲጋሮችና ትምባሆ ምርቶች",
-        "om": "Sigaaraa fi Tambaakoo",
-        "ti": "ሲጋሮታትን ትምባሆ ምፍራይን"
+        "en": "Cigarettes Products",
+        "am": "ሲጋሮች",
+        "om": "Sigaaraa",
+        "ti": "ሲጋሮታት"
       },
       "description": "",
       "level": 1,
@@ -77,7 +86,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cigarettes & Tobacco Products",
+        "Sigaaraa fi Tambaakoo",
+        "Tobacco Products",
+        "ሲጋሮታትን ትምባሆ ምፍራይን",
+        "ሲጋሮችና ትምባሆ ምርቶች"
+      ],
       "redirects": []
     },
     {
@@ -555,7 +570,7 @@
       "classification_system_code": "SYS_PROD",
       "slug": "cleaning-maintenance-ammo",
       "names": {
-        "en": "Cleaning & Maintenance",
+        "en": "Cleaning",
         "am": "ሰ ምዳ8",
         "om": "Qulqullina Meeshaa",
         "ti": "ምዳ8 ሰ"
@@ -571,7 +586,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cleaning & Maintenance",
+        "Maintenance"
+      ],
       "redirects": []
     },
     {
@@ -945,10 +963,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-chat-khat-trade",
       "names": {
-        "en": "Specialized & Custom Chat & Khat Trade",
-        "am": "ልዩና ብጁ Chat & Khat Trade",
-        "om": "Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -961,7 +979,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Khat Trade",
+        "Specialized & Custom Chat & Khat Trade",
+        "ልዩና ብጁ Chat & Khat Trade",
+        "ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -971,10 +996,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-regulated-alcohol-distribution",
       "names": {
-        "en": "Specialized & Custom Regulated Alcohol Distribution",
-        "am": "ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -987,7 +1012,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution",
+        "Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Specialized & Custom Regulated Alcohol Distribution",
+        "ልዩና ብጁ Regulated Alcohol Distribution",
+        "ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1028,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-cigarettes-tobacco-products",
       "names": {
-        "en": "Specialized & Custom Cigarettes & Tobacco Products",
-        "am": "ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Specialized Products",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1013,7 +1044,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Specialized & Custom Cigarettes & Tobacco Products",
+        "Tobacco Products",
+        "ልዩና ብጁ Cigarettes & Tobacco Products",
+        "ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1061,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-controlled-substances-research",
       "names": {
-        "en": "Specialized & Custom Controlled Substances Research",
-        "am": "ልዩና ብጁ Controlled Substances Research",
-        "om": "Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1039,7 +1077,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research",
+        "Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Specialized & Custom Controlled Substances Research",
+        "ልዩና ብጁ Controlled Substances Research",
+        "ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1093,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-licensed-ammunition-supply",
       "names": {
-        "en": "Specialized & Custom Licensed Ammunition Supply",
-        "am": "ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1065,7 +1109,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply",
+        "Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Specialized & Custom Licensed Ammunition Supply",
+        "ልዩና ብጁ Licensed Ammunition Supply",
+        "ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -1075,10 +1125,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-licensed-firearms-trade",
       "names": {
-        "en": "Specialized & Custom Licensed Firearms Trade",
-        "am": "ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1091,7 +1141,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade",
+        "Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Specialized & Custom Licensed Firearms Trade",
+        "ልዩና ብጁ Licensed Firearms Trade",
+        "ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1157,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-custom-tobacco-growing",
       "names": {
-        "en": "Specialized & Custom Tobacco Growing",
-        "am": "ልዩና ብጁ Tobacco Growing",
-        "om": "Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1117,7 +1173,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing",
+        "Kan Addaa fi Filatamaa Tobacco Growing",
+        "Specialized & Custom Tobacco Growing",
+        "ልዩና ብጁ Tobacco Growing",
+        "ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -1127,10 +1189,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-chat-khat-trade-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Chat & Khat Trade Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Chat & Khat Trade",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1143,7 +1205,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Khat Trade Unit",
+        "Premium Grade Certified Specialized & Custom Chat & Khat Trade Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Chat & Khat Trade",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1153,10 +1222,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-chat-khat-trade-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Chat & Khat Trade Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Chat & Khat Trade መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1169,7 +1238,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Heavy-Duty Commercial Specialized & Custom Chat & Khat Trade Component",
+        "Khat Trade Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Chat & Khat Trade",
+        "ጠንካራ የንግድ ልዩና ብጁ Chat & Khat Trade መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -1179,10 +1255,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-chat-khat-trade-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Chat & Khat Trade Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1195,7 +1271,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Eco-Friendly Energy-Saving Specialized & Custom Chat & Khat Trade Model",
+        "Khat Trade Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Chat & Khat Trade",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1205,10 +1288,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-chat-khat-trade-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Chat & Khat Trade Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Chat & Khat Trade ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1221,7 +1304,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Custom Chat",
+        "Khat Trade Assembly",
+        "Standard Industrial Specialized & Custom Chat & Khat Trade Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Chat & Khat Trade ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1321,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-chat-khat-trade-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Chat & Khat Trade System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Chat & Khat Trade ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1247,7 +1337,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Chat & Khat Trade System",
+        "Custom Chat",
+        "Khat Trade System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Chat & Khat Trade ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1354,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-chat-khat-trade-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Chat & Khat Trade Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Chat & Khat Trade ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1273,7 +1370,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Digital Automated Specialized & Custom Chat & Khat Trade Module",
+        "Khat Trade Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Chat & Khat Trade ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1387,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-chat-khat-trade-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Chat & Khat Trade Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1299,7 +1403,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "High-Capacity Multi-Function Specialized & Custom Chat & Khat Trade Device",
+        "Khat Trade Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Chat & Khat Trade",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1420,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-chat-khat-trade-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Chat & Khat Trade Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1325,7 +1436,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Khat Trade Fixture",
+        "Reinforced Weatherproof Specialized & Custom Chat & Khat Trade Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Chat & Khat Trade",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1453,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-chat-khat-trade-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Chat & Khat Trade Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Chat & Khat Trade ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1351,7 +1469,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Khat Trade Hardware",
+        "Precision Engineered Specialized & Custom Chat & Khat Trade Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Chat & Khat Trade ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1486,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-chat-khat-trade-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Chat & Khat Trade Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Chat & Khat Trade ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1377,7 +1502,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Custom Fabricated Specialized & Custom Chat & Khat Trade Pack",
+        "Khat Trade Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Chat & Khat Trade ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1519,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-chat-khat-trade-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Chat & Khat Trade Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Chat & Khat Trade ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1403,7 +1535,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Khat Trade Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Universal Compatible Specialized & Custom Chat & Khat Trade Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Chat & Khat Trade ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1552,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-chat-khat-trade-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Chat & Khat Trade Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Chat & Khat Trade መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1429,7 +1568,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Khat Trade Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Professional Grade Specialized & Custom Chat & Khat Trade Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Chat & Khat Trade መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1585,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-chat-khat-trade-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Chat & Khat Trade Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Chat & Khat Trade መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1455,7 +1601,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Khat Trade Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Specialized Laboratory Specialized & Custom Chat & Khat Trade Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Chat & Khat Trade መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1465,10 +1618,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-chat-khat-trade-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Chat & Khat Trade Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Chat & Khat Trade ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1481,7 +1634,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "High-Speed Synchronized Specialized & Custom Chat & Khat Trade Unit",
+        "Khat Trade Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Chat & Khat Trade",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Chat & Khat Trade ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -1491,10 +1651,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-chat-khat-trade",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Chat & Khat Trade",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -1507,7 +1667,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Khat Trade",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Chat & Khat Trade",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Chat & Khat Trade",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1517,10 +1684,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-chat-khat-trade-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Chat & Khat Trade Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Chat & Khat Trade ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1533,7 +1700,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Khat Trade Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Thermal Insulated Specialized & Custom Chat & Khat Trade Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Chat & Khat Trade ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1543,10 +1717,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-chat-khat-trade",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Chat & Khat Trade",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1559,7 +1733,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Khat Trade",
+        "Wireless Smart Integrated Specialized & Custom Chat & Khat Trade",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Chat & Khat Trade",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1569,10 +1750,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-chat-khat-trade",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Chat & Khat Trade",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1585,7 +1766,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Heavy Mechanical Calibration Specialized & Custom Chat & Khat Trade",
+        "Khat Trade",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Chat & Khat Trade",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1595,10 +1783,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-chat-khat-trade-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Chat & Khat Trade Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Chat & Khat Trade",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1611,7 +1799,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Chat",
+        "Ergonomic Safety Specialized & Custom Chat & Khat Trade Gear",
+        "Khat Trade Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Chat & Khat Trade",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1621,10 +1816,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-chat-khat-trade-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Chat & Khat Trade Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Chat & Khat Trade ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Chat & Khat Trade",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Chat & Khat Trade"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1637,7 +1832,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Chat & Khat Trade",
+        "Custom Chat",
+        "Khat Trade Station",
+        "Modular Expandable Specialized & Custom Chat & Khat Trade Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Chat & Khat Trade ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Chat & Khat Trade"
+      ],
       "redirects": []
     },
     {
@@ -1647,10 +1849,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-regulated-alcohol-distribution-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Regulated Alcohol Distribution Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1663,7 +1865,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Premium Grade Certified Specialized & Custom Regulated Alcohol Distribution Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1673,10 +1881,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-regulated-alcohol-distribution-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Regulated Alcohol Distribution Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Regulated Alcohol Distribution መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1689,7 +1897,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Component",
+        "Heavy-Duty Commercial Specialized & Custom Regulated Alcohol Distribution Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution",
+        "ጠንካራ የንግድ ልዩና ብጁ Regulated Alcohol Distribution መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -1699,10 +1913,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-regulated-alcohol-distribution-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Regulated Alcohol Distribution Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1715,7 +1929,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Regulated Alcohol Distribution Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1725,10 +1945,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-regulated-alcohol-distribution-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Regulated Alcohol Distribution Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Regulated Alcohol Distribution ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1741,7 +1961,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Custom Regulated Alcohol Distribution Assembly",
+        "Standard Industrial Specialized & Custom Regulated Alcohol Distribution Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Regulated Alcohol Distribution ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1751,10 +1977,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-regulated-alcohol-distribution-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Regulated Alcohol Distribution System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Regulated Alcohol Distribution ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1767,7 +1993,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Regulated Alcohol Distribution System",
+        "Custom Regulated Alcohol Distribution System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Regulated Alcohol Distribution ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1777,10 +2009,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-regulated-alcohol-distribution-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Regulated Alcohol Distribution Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Regulated Alcohol Distribution ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1793,7 +2025,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Module",
+        "Digital Automated Specialized & Custom Regulated Alcohol Distribution Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Regulated Alcohol Distribution ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1803,10 +2041,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-regulated-alcohol-distribution-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Regulated Alcohol Distribution Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1819,7 +2057,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Device",
+        "High-Capacity Multi-Function Specialized & Custom Regulated Alcohol Distribution Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Regulated Alcohol Distribution",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1829,10 +2073,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-regulated-alcohol-distribution-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Regulated Alcohol Distribution Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1845,7 +2089,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Reinforced Weatherproof Specialized & Custom Regulated Alcohol Distribution Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Regulated Alcohol Distribution",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1855,10 +2105,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-regulated-alcohol-distribution-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Regulated Alcohol Distribution Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Regulated Alcohol Distribution ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1871,7 +2121,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Precision Engineered Specialized & Custom Regulated Alcohol Distribution Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Regulated Alcohol Distribution ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1881,10 +2137,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-regulated-alcohol-distribution-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Regulated Alcohol Distribution Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Regulated Alcohol Distribution ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1897,7 +2153,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Regulated Alcohol Distribution Pack",
+        "Custom Regulated Alcohol Distribution Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Regulated Alcohol Distribution ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1907,10 +2169,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-regulated-alcohol-distribution-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Regulated Alcohol Distribution Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Regulated Alcohol Distribution ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1923,7 +2185,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Universal Compatible Specialized & Custom Regulated Alcohol Distribution Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Regulated Alcohol Distribution ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1933,10 +2201,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-regulated-alcohol-distribution-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Regulated Alcohol Distribution Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Regulated Alcohol Distribution መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1949,7 +2217,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Professional Grade Specialized & Custom Regulated Alcohol Distribution Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Regulated Alcohol Distribution መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1959,10 +2233,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-regulated-alcohol-distribution-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Regulated Alcohol Distribution Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Regulated Alcohol Distribution መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -1975,7 +2249,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Specialized Laboratory Specialized & Custom Regulated Alcohol Distribution Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Regulated Alcohol Distribution መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -1985,10 +2265,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-regulated-alcohol-distribution-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Regulated Alcohol Distribution Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Regulated Alcohol Distribution ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2001,7 +2281,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Unit",
+        "High-Speed Synchronized Specialized & Custom Regulated Alcohol Distribution Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Regulated Alcohol Distribution ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -2011,10 +2297,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-regulated-alcohol-distribution",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Regulated Alcohol Distribution",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -2027,7 +2313,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Regulated Alcohol Distribution",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Regulated Alcohol Distribution",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -2037,10 +2329,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-regulated-alcohol-distribution-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Regulated Alcohol Distribution Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Regulated Alcohol Distribution ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2053,7 +2345,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Thermal Insulated Specialized & Custom Regulated Alcohol Distribution Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Regulated Alcohol Distribution ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -2063,10 +2361,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-regulated-alcohol-distribution",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Regulated Alcohol Distribution",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2079,7 +2377,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Wireless Smart Integrated Specialized & Custom Regulated Alcohol Distribution",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Regulated Alcohol Distribution",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -2089,10 +2393,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-regulated-alcohol-distribution",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Regulated Alcohol Distribution",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2105,7 +2409,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution",
+        "Heavy Mechanical Calibration Specialized & Custom Regulated Alcohol Distribution",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Regulated Alcohol Distribution",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -2115,10 +2425,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-regulated-alcohol-distribution-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Regulated Alcohol Distribution Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Regulated Alcohol Distribution",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2131,7 +2441,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Regulated Alcohol Distribution Gear",
+        "Ergonomic Safety Specialized & Custom Regulated Alcohol Distribution Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Regulated Alcohol Distribution",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -2141,10 +2457,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-regulated-alcohol-distribution-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Regulated Alcohol Distribution Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Regulated Alcohol Distribution ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2157,7 +2473,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Regulated Alcohol Distribution",
+        "Custom Regulated Alcohol Distribution Station",
+        "Modular Expandable Specialized & Custom Regulated Alcohol Distribution Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Regulated Alcohol Distribution ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Regulated Alcohol Distribution"
+      ],
       "redirects": []
     },
     {
@@ -2167,10 +2489,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-cigarettes-tobacco-products-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Cigarettes & Tobacco Products Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2183,7 +2505,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Premium Grade Certified Specialized & Custom Cigarettes & Tobacco Products Unit",
+        "Tobacco Products Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2193,10 +2522,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-cigarettes-tobacco-products-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Cigarettes & Tobacco Products Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Cigarettes & Tobacco Products መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2209,7 +2538,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Heavy-Duty Commercial Specialized & Custom Cigarettes & Tobacco Products Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Component",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products",
+        "ጠንካራ የንግድ ልዩና ብጁ Cigarettes & Tobacco Products መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -2219,10 +2555,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-cigarettes-tobacco-products-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Cigarettes & Tobacco Products Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2235,7 +2571,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Eco-Friendly Energy-Saving Specialized & Custom Cigarettes & Tobacco Products Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Model",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2245,10 +2588,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-cigarettes-tobacco-products-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Cigarettes & Tobacco Products Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Cigarettes & Tobacco Products ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2261,7 +2604,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Custom Cigarettes",
+        "Standard Industrial Specialized & Custom Cigarettes & Tobacco Products Assembly",
+        "Tobacco Products Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Cigarettes & Tobacco Products ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2271,10 +2621,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-cigarettes-tobacco-products-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Cigarettes & Tobacco Products System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Cigarettes & Tobacco Products ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2287,7 +2637,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Cigarettes & Tobacco Products System",
+        "Custom Cigarettes",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products System",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Cigarettes & Tobacco Products ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2297,10 +2654,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-cigarettes-tobacco-products-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Cigarettes & Tobacco Products Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Cigarettes & Tobacco Products ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2313,7 +2670,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Digital Automated Specialized & Custom Cigarettes & Tobacco Products Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Module",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Cigarettes & Tobacco Products ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2323,10 +2687,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-cigarettes-tobacco-products-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Cigarettes & Tobacco Products Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2339,7 +2703,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "High-Capacity Multi-Function Specialized & Custom Cigarettes & Tobacco Products Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Device",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Cigarettes & Tobacco Products",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2349,10 +2720,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-cigarettes-tobacco-products-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Cigarettes & Tobacco Products Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2365,7 +2736,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Reinforced Weatherproof Specialized & Custom Cigarettes & Tobacco Products Fixture",
+        "Tobacco Products Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2375,10 +2753,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-cigarettes-tobacco-products-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Cigarettes & Tobacco Products Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Cigarettes & Tobacco Products ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2391,7 +2769,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Precision Engineered Specialized & Custom Cigarettes & Tobacco Products Hardware",
+        "Tobacco Products Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Cigarettes & Tobacco Products ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2401,10 +2786,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-cigarettes-tobacco-products-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Cigarettes & Tobacco Products Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Cigarettes & Tobacco Products ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2417,7 +2802,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Custom Fabricated Specialized & Custom Cigarettes & Tobacco Products Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Pack",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Cigarettes & Tobacco Products ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2427,10 +2819,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-cigarettes-tobacco-products-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Cigarettes & Tobacco Products Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Cigarettes & Tobacco Products ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2443,7 +2835,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Kit",
+        "Universal Compatible Specialized & Custom Cigarettes & Tobacco Products Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Cigarettes & Tobacco Products ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2453,10 +2852,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-cigarettes-tobacco-products-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Cigarettes & Tobacco Products Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Cigarettes & Tobacco Products መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2469,7 +2868,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Professional Grade Specialized & Custom Cigarettes & Tobacco Products Tooling",
+        "Tobacco Products Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Cigarettes & Tobacco Products መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2479,10 +2885,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-cigarettes-tobacco-products-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Cigarettes & Tobacco Products Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Cigarettes & Tobacco Products መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2495,7 +2901,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Specialized Laboratory Specialized & Custom Cigarettes & Tobacco Products Tester",
+        "Tobacco Products Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Cigarettes & Tobacco Products መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2505,10 +2918,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-cigarettes-tobacco-products-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Cigarettes & Tobacco Products Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Cigarettes & Tobacco Products ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2521,7 +2934,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "High-Speed Synchronized Specialized & Custom Cigarettes & Tobacco Products Unit",
+        "Tobacco Products Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Cigarettes & Tobacco Products ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -2531,10 +2951,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-cigarettes-tobacco-products",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Cigarettes & Tobacco Products",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Stainless Steel Corrosion-Resistant Specialized Products",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -2547,7 +2967,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Cigarettes & Tobacco Products",
+        "Tobacco Products",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Cigarettes & Tobacco Products",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2557,10 +2984,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-cigarettes-tobacco-products-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Cigarettes & Tobacco Products Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Cigarettes & Tobacco Products ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2573,7 +3000,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Thermal Insulated Specialized & Custom Cigarettes & Tobacco Products Panel",
+        "Tobacco Products Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Cigarettes & Tobacco Products ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2583,10 +3017,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-cigarettes-tobacco-products",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Cigarettes & Tobacco Products",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Wireless Smart Integrated Specialized Products",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2599,7 +3033,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products",
+        "Wireless Smart Integrated Specialized & Custom Cigarettes & Tobacco Products",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Cigarettes & Tobacco Products",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2609,10 +3050,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-cigarettes-tobacco-products",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Cigarettes & Tobacco Products",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Heavy Mechanical Calibration Specialized Products",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2625,7 +3066,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Heavy Mechanical Calibration Specialized & Custom Cigarettes & Tobacco Products",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2635,10 +3083,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-cigarettes-tobacco-products-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Cigarettes & Tobacco Products Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Cigarettes & Tobacco Products",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2651,7 +3099,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cigarettes",
+        "Ergonomic Safety Specialized & Custom Cigarettes & Tobacco Products Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Tobacco Products Gear",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Cigarettes & Tobacco Products",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +3116,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-cigarettes-tobacco-products-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Cigarettes & Tobacco Products Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Cigarettes & Tobacco Products ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2677,7 +3132,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Cigarettes & Tobacco Products",
+        "Custom Cigarettes",
+        "Modular Expandable Specialized & Custom Cigarettes & Tobacco Products Station",
+        "Tobacco Products Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Cigarettes & Tobacco Products ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Cigarettes & Tobacco Products"
+      ],
       "redirects": []
     },
     {
@@ -2687,10 +3149,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-controlled-substances-research-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Controlled Substances Research Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Controlled Substances Research",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2703,7 +3165,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Premium Grade Certified Specialized & Custom Controlled Substances Research Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Controlled Substances Research",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2713,10 +3181,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-controlled-substances-research-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Controlled Substances Research Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Controlled Substances Research መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2729,7 +3197,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Component",
+        "Heavy-Duty Commercial Specialized & Custom Controlled Substances Research Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Controlled Substances Research",
+        "ጠንካራ የንግድ ልዩና ብጁ Controlled Substances Research መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -2739,10 +3213,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-controlled-substances-research-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Controlled Substances Research Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Controlled Substances Research",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2755,7 +3229,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Controlled Substances Research Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Controlled Substances Research",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2765,10 +3245,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-controlled-substances-research-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Controlled Substances Research Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Controlled Substances Research ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2781,7 +3261,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Custom Controlled Substances Research Assembly",
+        "Standard Industrial Specialized & Custom Controlled Substances Research Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Controlled Substances Research ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2791,10 +3277,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-controlled-substances-research-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Controlled Substances Research System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Controlled Substances Research ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2807,7 +3293,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Controlled Substances Research System",
+        "Custom Controlled Substances Research System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Controlled Substances Research ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2817,10 +3309,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-controlled-substances-research-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Controlled Substances Research Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Controlled Substances Research ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2833,7 +3325,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Module",
+        "Digital Automated Specialized & Custom Controlled Substances Research Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Controlled Substances Research ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2843,10 +3341,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-controlled-substances-research-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Controlled Substances Research Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Controlled Substances Research",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2859,7 +3357,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Device",
+        "High-Capacity Multi-Function Specialized & Custom Controlled Substances Research Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Controlled Substances Research",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2869,10 +3373,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-controlled-substances-research-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Controlled Substances Research Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Controlled Substances Research",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2885,7 +3389,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Reinforced Weatherproof Specialized & Custom Controlled Substances Research Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Controlled Substances Research",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2895,10 +3405,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-controlled-substances-research-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Controlled Substances Research Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Controlled Substances Research ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2911,7 +3421,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Precision Engineered Specialized & Custom Controlled Substances Research Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Controlled Substances Research ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2921,10 +3437,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-controlled-substances-research-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Controlled Substances Research Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Controlled Substances Research ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2937,7 +3453,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Pack",
+        "Custom Fabricated Specialized & Custom Controlled Substances Research Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Controlled Substances Research ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2947,10 +3469,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-controlled-substances-research-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Controlled Substances Research Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Controlled Substances Research ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2963,7 +3485,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Universal Compatible Specialized & Custom Controlled Substances Research Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Controlled Substances Research ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2973,10 +3501,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-controlled-substances-research-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Controlled Substances Research Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Controlled Substances Research መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -2989,7 +3517,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Professional Grade Specialized & Custom Controlled Substances Research Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Controlled Substances Research መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -2999,10 +3533,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-controlled-substances-research-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Controlled Substances Research Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Controlled Substances Research መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3015,7 +3549,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Specialized Laboratory Specialized & Custom Controlled Substances Research Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Controlled Substances Research መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3025,10 +3565,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-controlled-substances-research-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Controlled Substances Research Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Controlled Substances Research ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3041,7 +3581,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Unit",
+        "High-Speed Synchronized Specialized & Custom Controlled Substances Research Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Controlled Substances Research",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Controlled Substances Research ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -3051,10 +3597,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-controlled-substances-research",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Controlled Substances Research",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Controlled Substances Research",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -3067,7 +3613,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Controlled Substances Research",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Controlled Substances Research",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3077,10 +3629,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-controlled-substances-research-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Controlled Substances Research Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Controlled Substances Research ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3093,7 +3645,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Thermal Insulated Specialized & Custom Controlled Substances Research Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Controlled Substances Research ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3103,10 +3661,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-controlled-substances-research",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Controlled Substances Research",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Controlled Substances Research",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3119,7 +3677,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Wireless Smart Integrated Specialized & Custom Controlled Substances Research",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Controlled Substances Research",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3129,10 +3693,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-controlled-substances-research",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Controlled Substances Research",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Controlled Substances Research",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3145,7 +3709,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research",
+        "Heavy Mechanical Calibration Specialized & Custom Controlled Substances Research",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Controlled Substances Research",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3155,10 +3725,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-controlled-substances-research-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Controlled Substances Research Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Controlled Substances Research",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3171,7 +3741,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Controlled Substances Research Gear",
+        "Ergonomic Safety Specialized & Custom Controlled Substances Research Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Controlled Substances Research",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Controlled Substances Research",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3181,10 +3757,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-controlled-substances-research-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Controlled Substances Research Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Controlled Substances Research ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Controlled Substances Research",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Controlled Substances Research"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3197,7 +3773,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Controlled Substances Research",
+        "Custom Controlled Substances Research Station",
+        "Modular Expandable Specialized & Custom Controlled Substances Research Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Controlled Substances Research ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Controlled Substances Research"
+      ],
       "redirects": []
     },
     {
@@ -3207,10 +3789,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-licensed-ammunition-supply-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Licensed Ammunition Supply Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3223,7 +3805,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Premium Grade Certified Specialized & Custom Licensed Ammunition Supply Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Licensed Ammunition Supply",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3233,10 +3821,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-licensed-ammunition-supply-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Licensed Ammunition Supply Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Licensed Ammunition Supply መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3249,7 +3837,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Component",
+        "Heavy-Duty Commercial Specialized & Custom Licensed Ammunition Supply Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Licensed Ammunition Supply",
+        "ጠንካራ የንግድ ልዩና ብጁ Licensed Ammunition Supply መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -3259,10 +3853,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-licensed-ammunition-supply-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Licensed Ammunition Supply Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3275,7 +3869,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Licensed Ammunition Supply Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Licensed Ammunition Supply",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3285,10 +3885,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-licensed-ammunition-supply-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Licensed Ammunition Supply Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Licensed Ammunition Supply ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3301,7 +3901,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Custom Licensed Ammunition Supply Assembly",
+        "Standard Industrial Specialized & Custom Licensed Ammunition Supply Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Licensed Ammunition Supply ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3311,10 +3917,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-licensed-ammunition-supply-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Licensed Ammunition Supply System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Licensed Ammunition Supply ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3327,7 +3933,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Licensed Ammunition Supply System",
+        "Custom Licensed Ammunition Supply System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Licensed Ammunition Supply ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3337,10 +3949,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-licensed-ammunition-supply-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Licensed Ammunition Supply Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Licensed Ammunition Supply ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3353,7 +3965,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Module",
+        "Digital Automated Specialized & Custom Licensed Ammunition Supply Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Licensed Ammunition Supply ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3363,10 +3981,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-licensed-ammunition-supply-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Licensed Ammunition Supply Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3379,7 +3997,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Device",
+        "High-Capacity Multi-Function Specialized & Custom Licensed Ammunition Supply Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Licensed Ammunition Supply",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3389,10 +4013,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-licensed-ammunition-supply-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Licensed Ammunition Supply Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3405,7 +4029,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Reinforced Weatherproof Specialized & Custom Licensed Ammunition Supply Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Licensed Ammunition Supply",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3415,10 +4045,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-licensed-ammunition-supply-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Licensed Ammunition Supply Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Licensed Ammunition Supply ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3431,7 +4061,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Precision Engineered Specialized & Custom Licensed Ammunition Supply Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Licensed Ammunition Supply ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3441,10 +4077,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-licensed-ammunition-supply-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Licensed Ammunition Supply Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Licensed Ammunition Supply ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3457,7 +4093,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Licensed Ammunition Supply Pack",
+        "Custom Licensed Ammunition Supply Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Licensed Ammunition Supply ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3467,10 +4109,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-licensed-ammunition-supply-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Licensed Ammunition Supply Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Licensed Ammunition Supply ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3483,7 +4125,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Universal Compatible Specialized & Custom Licensed Ammunition Supply Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Licensed Ammunition Supply ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3493,10 +4141,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-licensed-ammunition-supply-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Licensed Ammunition Supply Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Licensed Ammunition Supply መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3509,7 +4157,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Professional Grade Specialized & Custom Licensed Ammunition Supply Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Licensed Ammunition Supply መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3519,10 +4173,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-licensed-ammunition-supply-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Licensed Ammunition Supply Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Licensed Ammunition Supply መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3535,7 +4189,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Specialized Laboratory Specialized & Custom Licensed Ammunition Supply Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Licensed Ammunition Supply መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3545,10 +4205,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-licensed-ammunition-supply-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Licensed Ammunition Supply Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Licensed Ammunition Supply ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3561,7 +4221,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Unit",
+        "High-Speed Synchronized Specialized & Custom Licensed Ammunition Supply Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Licensed Ammunition Supply",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Licensed Ammunition Supply ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -3571,10 +4237,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-licensed-ammunition-supply",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Licensed Ammunition Supply",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -3587,7 +4253,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Licensed Ammunition Supply",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Licensed Ammunition Supply",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3597,10 +4269,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-licensed-ammunition-supply-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Licensed Ammunition Supply Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Licensed Ammunition Supply ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3613,7 +4285,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Thermal Insulated Specialized & Custom Licensed Ammunition Supply Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Licensed Ammunition Supply ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3623,10 +4301,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-licensed-ammunition-supply",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Licensed Ammunition Supply",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3639,7 +4317,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Wireless Smart Integrated Specialized & Custom Licensed Ammunition Supply",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Licensed Ammunition Supply",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3649,10 +4333,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-licensed-ammunition-supply",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Licensed Ammunition Supply",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3665,7 +4349,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply",
+        "Heavy Mechanical Calibration Specialized & Custom Licensed Ammunition Supply",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Licensed Ammunition Supply",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3675,10 +4365,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-licensed-ammunition-supply-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Licensed Ammunition Supply Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Licensed Ammunition Supply",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3691,7 +4381,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Ammunition Supply Gear",
+        "Ergonomic Safety Specialized & Custom Licensed Ammunition Supply Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Licensed Ammunition Supply",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3701,10 +4397,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-licensed-ammunition-supply-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Licensed Ammunition Supply Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Licensed Ammunition Supply ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Licensed Ammunition Supply",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3717,7 +4413,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Licensed Ammunition Supply",
+        "Custom Licensed Ammunition Supply Station",
+        "Modular Expandable Specialized & Custom Licensed Ammunition Supply Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Licensed Ammunition Supply ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Licensed Ammunition Supply"
+      ],
       "redirects": []
     },
     {
@@ -3727,10 +4429,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-licensed-firearms-trade-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Licensed Firearms Trade Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3743,7 +4445,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Premium Grade Certified Specialized & Custom Licensed Firearms Trade Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Licensed Firearms Trade",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3753,10 +4461,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-licensed-firearms-trade-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Licensed Firearms Trade Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Licensed Firearms Trade መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3769,7 +4477,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Component",
+        "Heavy-Duty Commercial Specialized & Custom Licensed Firearms Trade Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Licensed Firearms Trade",
+        "ጠንካራ የንግድ ልዩና ብጁ Licensed Firearms Trade መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -3779,10 +4493,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-licensed-firearms-trade-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Licensed Firearms Trade Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3795,7 +4509,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Licensed Firearms Trade Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Licensed Firearms Trade",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3805,10 +4525,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-licensed-firearms-trade-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Licensed Firearms Trade Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Licensed Firearms Trade ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3821,7 +4541,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Custom Licensed Firearms Trade Assembly",
+        "Standard Industrial Specialized & Custom Licensed Firearms Trade Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Licensed Firearms Trade ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3831,10 +4557,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-licensed-firearms-trade-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Licensed Firearms Trade System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Licensed Firearms Trade ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3847,7 +4573,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Licensed Firearms Trade System",
+        "Custom Licensed Firearms Trade System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Licensed Firearms Trade ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3857,10 +4589,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-licensed-firearms-trade-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Licensed Firearms Trade Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Licensed Firearms Trade ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3873,7 +4605,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Module",
+        "Digital Automated Specialized & Custom Licensed Firearms Trade Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Licensed Firearms Trade ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3883,10 +4621,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-licensed-firearms-trade-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Licensed Firearms Trade Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3899,7 +4637,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Device",
+        "High-Capacity Multi-Function Specialized & Custom Licensed Firearms Trade Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Licensed Firearms Trade",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3909,10 +4653,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-licensed-firearms-trade-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Licensed Firearms Trade Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3925,7 +4669,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Reinforced Weatherproof Specialized & Custom Licensed Firearms Trade Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Licensed Firearms Trade",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3935,10 +4685,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-licensed-firearms-trade-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Licensed Firearms Trade Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Licensed Firearms Trade ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3951,7 +4701,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Precision Engineered Specialized & Custom Licensed Firearms Trade Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Licensed Firearms Trade ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3961,10 +4717,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-licensed-firearms-trade-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Licensed Firearms Trade Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Licensed Firearms Trade ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -3977,7 +4733,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Licensed Firearms Trade Pack",
+        "Custom Licensed Firearms Trade Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Licensed Firearms Trade ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -3987,10 +4749,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-licensed-firearms-trade-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Licensed Firearms Trade Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Licensed Firearms Trade ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4003,7 +4765,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Universal Compatible Specialized & Custom Licensed Firearms Trade Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Licensed Firearms Trade ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4013,10 +4781,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-licensed-firearms-trade-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Licensed Firearms Trade Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Licensed Firearms Trade መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4029,7 +4797,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Professional Grade Specialized & Custom Licensed Firearms Trade Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Licensed Firearms Trade መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4039,10 +4813,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-licensed-firearms-trade-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Licensed Firearms Trade Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Licensed Firearms Trade መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4055,7 +4829,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Specialized Laboratory Specialized & Custom Licensed Firearms Trade Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Licensed Firearms Trade መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4065,10 +4845,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-licensed-firearms-trade-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Licensed Firearms Trade Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Licensed Firearms Trade ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4081,7 +4861,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Unit",
+        "High-Speed Synchronized Specialized & Custom Licensed Firearms Trade Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Licensed Firearms Trade",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Licensed Firearms Trade ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -4091,10 +4877,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-licensed-firearms-trade",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Licensed Firearms Trade",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -4107,7 +4893,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Licensed Firearms Trade",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Licensed Firearms Trade",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4117,10 +4909,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-licensed-firearms-trade-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Licensed Firearms Trade Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Licensed Firearms Trade ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4133,7 +4925,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Thermal Insulated Specialized & Custom Licensed Firearms Trade Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Licensed Firearms Trade ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4143,10 +4941,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-licensed-firearms-trade",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Licensed Firearms Trade",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4159,7 +4957,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Wireless Smart Integrated Specialized & Custom Licensed Firearms Trade",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Licensed Firearms Trade",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4169,10 +4973,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-licensed-firearms-trade",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Licensed Firearms Trade",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4185,7 +4989,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade",
+        "Heavy Mechanical Calibration Specialized & Custom Licensed Firearms Trade",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Licensed Firearms Trade",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4195,10 +5005,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-licensed-firearms-trade-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Licensed Firearms Trade Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Licensed Firearms Trade",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4211,7 +5021,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Licensed Firearms Trade Gear",
+        "Ergonomic Safety Specialized & Custom Licensed Firearms Trade Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Licensed Firearms Trade",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4221,10 +5037,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-licensed-firearms-trade-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Licensed Firearms Trade Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Licensed Firearms Trade ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Licensed Firearms Trade",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4237,7 +5053,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Licensed Firearms Trade",
+        "Custom Licensed Firearms Trade Station",
+        "Modular Expandable Specialized & Custom Licensed Firearms Trade Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Licensed Firearms Trade ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Licensed Firearms Trade"
+      ],
       "redirects": []
     },
     {
@@ -4247,10 +5069,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "premium-grade-certified-specialized-custom-tobacco-growing-unit",
       "names": {
-        "en": "Premium Grade Certified Specialized & Custom Tobacco Growing Unit",
-        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Tobacco Growing",
-        "om": "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Premium Grade Certified Specialized",
+        "am": "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩ",
+        "om": "Kan Qulqullina Olaanaa Kan Addaa",
+        "ti": "ብሉጽ ዝተረጋገጸ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4263,7 +5085,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Unit",
+        "Kan Qulqullina Olaanaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "Premium Grade Certified Specialized & Custom Tobacco Growing Unit",
+        "ብሉጽ ዝተረጋገጸ ፍሉይን ዝተዳለወን Tobacco Growing",
+        "ከፍተኛ ጥራት ያለው የተመሰከረለት ልዩና ብጁ Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4273,10 +5101,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-duty-commercial-specialized-custom-tobacco-growing-component",
       "names": {
-        "en": "Heavy-Duty Commercial Specialized & Custom Tobacco Growing Component",
-        "am": "ጠንካራ የንግድ ልዩና ብጁ Tobacco Growing መለዋወጫ",
-        "om": "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Heavy-Duty Commercial Specialized",
+        "am": "ጠንካራ የንግድ ልዩ",
+        "om": "Meeshaa Hojii Cimaa Kan Addaa",
+        "ti": "ከቢድ ናይ ንግዲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4289,7 +5117,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Component",
+        "Heavy-Duty Commercial Specialized & Custom Tobacco Growing Component",
+        "Meeshaa Hojii Cimaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ከቢድ ናይ ንግዲ ፍሉይን ዝተዳለወን Tobacco Growing",
+        "ጠንካራ የንግድ ልዩና ብጁ Tobacco Growing መለዋወጫ"
+      ],
       "redirects": []
     },
     {
@@ -4299,10 +5133,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "eco-friendly-energy-saving-specialized-custom-tobacco-growing-model",
       "names": {
-        "en": "Eco-Friendly Energy-Saving Specialized & Custom Tobacco Growing Model",
-        "am": "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Tobacco Growing",
-        "om": "Qusataa Humnaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Eco-Friendly Energy-Saving Specialized",
+        "am": "ኃይል ቆጣቢ",
+        "om": "Qusataa Humnaa Kan Addaa",
+        "ti": "ሓይሊ ዝቑጥብ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4315,7 +5149,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Model",
+        "Eco-Friendly Energy-Saving Specialized & Custom Tobacco Growing Model",
+        "Qusataa Humnaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ሓይሊ ዝቑጥብ ፍሉይን ዝተዳለወን Tobacco Growing",
+        "ኃይል ቆጣቢና ለአካባቢ ተስማሚ ልዩና ብጁ Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4325,10 +5165,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "standard-industrial-specialized-custom-tobacco-growing-assembly",
       "names": {
-        "en": "Standard Industrial Specialized & Custom Tobacco Growing Assembly",
-        "am": "መደበኛ የኢንዱስትሪ ልዩና ብጁ Tobacco Growing ስብስብ",
-        "om": "Asambilii Indaastirii Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Standard Industrial Specialized",
+        "am": "መደበኛ የኢንዱስትሪ ልዩ",
+        "om": "Asambilii Indaastirii Kan Addaa",
+        "ti": "ስሩዕ ናይ ኢንዱስትሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4341,7 +5181,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asambilii Indaastirii Kan Addaa fi Filatamaa Tobacco Growing",
+        "Custom Tobacco Growing Assembly",
+        "Standard Industrial Specialized & Custom Tobacco Growing Assembly",
+        "መደበኛ የኢንዱስትሪ ልዩና ብጁ Tobacco Growing ስብስብ",
+        "ስሩዕ ናይ ኢንዱስትሪ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4351,10 +5197,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "compact-portable-specialized-custom-tobacco-growing-system",
       "names": {
-        "en": "Compact Portable Specialized & Custom Tobacco Growing System",
-        "am": "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Tobacco Growing ስርዓት",
-        "om": "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Compact Portable Specialized",
+        "am": "ቀላል",
+        "om": "Sirna Salphaa",
+        "ti": "ተንቀሳቓሲ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4367,7 +5213,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Compact Portable Specialized & Custom Tobacco Growing System",
+        "Custom Tobacco Growing System",
+        "Sirna Salphaa fi Socho'aa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ቀላልና ተንቀሳቃሽ ልዩና ብጁ Tobacco Growing ስርዓት",
+        "ተንቀሳቓሲ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4377,10 +5229,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "digital-automated-specialized-custom-tobacco-growing-module",
       "names": {
-        "en": "Digital Automated Specialized & Custom Tobacco Growing Module",
-        "am": "ዲጂታል አውቶሜትድ ልዩና ብጁ Tobacco Growing ሞጁል",
-        "om": "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Digital Automated Specialized",
+        "am": "ዲጂታል አውቶሜትድ ልዩ",
+        "om": "Moojiyulii Dijitaalaa Kan Addaa",
+        "ti": "ዲጂታል ኣውቶሜትድ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4393,7 +5245,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Module",
+        "Digital Automated Specialized & Custom Tobacco Growing Module",
+        "Moojiyulii Dijitaalaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ዲጂታል አውቶሜትድ ልዩና ብጁ Tobacco Growing ሞጁል",
+        "ዲጂታል ኣውቶሜትድ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4403,10 +5261,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-capacity-multi-function-specialized-custom-tobacco-growing-device",
       "names": {
-        "en": "High-Capacity Multi-Function Specialized & Custom Tobacco Growing Device",
-        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Tobacco Growing",
-        "om": "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "High-Capacity Multi-Function Specialized",
+        "am": "ከፍተኛ አቅም ያለው ሁለገብ ልዩ",
+        "om": "Meeshaa Dandeettii Guddaa Kan Addaa",
+        "ti": "ዓብዪ ዓቕሚ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4419,7 +5277,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Device",
+        "High-Capacity Multi-Function Specialized & Custom Tobacco Growing Device",
+        "Meeshaa Dandeettii Guddaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ከፍተኛ አቅም ያለው ሁለገብ ልዩና ብጁ Tobacco Growing",
+        "ዓብዪ ዓቕሚ ዘለዎ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4429,10 +5293,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "reinforced-weatherproof-specialized-custom-tobacco-growing-fixture",
       "names": {
-        "en": "Reinforced Weatherproof Specialized & Custom Tobacco Growing Fixture",
-        "am": "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Tobacco Growing",
-        "om": "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Reinforced Weatherproof Specialized",
+        "am": "አየር የማይበግረው የተጠናከረ ልዩ",
+        "om": "Kan Qilleensa Dandamatu Kan Addaa",
+        "ti": "ንኵነታት ኣየር ዝጻወር ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4445,7 +5309,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Fixture",
+        "Kan Qilleensa Dandamatu Kan Addaa fi Filatamaa Tobacco Growing",
+        "Reinforced Weatherproof Specialized & Custom Tobacco Growing Fixture",
+        "ንኵነታት ኣየር ዝጻወር ፍሉይን ዝተዳለወን Tobacco Growing",
+        "አየር የማይበግረው የተጠናከረ ልዩና ብጁ Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4455,10 +5325,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "precision-engineered-specialized-custom-tobacco-growing-hardware",
       "names": {
-        "en": "Precision Engineered Specialized & Custom Tobacco Growing Hardware",
-        "am": "በትክክለኛነት የተሰራ ልዩና ብጁ Tobacco Growing ሃርድዌር",
-        "om": "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Precision Engineered Specialized",
+        "am": "በትክክለኛነት የተሰራ ልዩ",
+        "om": "Haardiweerii Qulqullinaa Kan Addaa",
+        "ti": "ብልክዕ ዝተሰርሐ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4471,7 +5341,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Hardware",
+        "Haardiweerii Qulqullinaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "Precision Engineered Specialized & Custom Tobacco Growing Hardware",
+        "በትክክለኛነት የተሰራ ልዩና ብጁ Tobacco Growing ሃርድዌር",
+        "ብልክዕ ዝተሰርሐ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4481,10 +5357,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "custom-fabricated-specialized-custom-tobacco-growing-pack",
       "names": {
-        "en": "Custom Fabricated Specialized & Custom Tobacco Growing Pack",
-        "am": "ብጁ የተዘጋጀ የልዩና ብጁ Tobacco Growing ጥቅል",
-        "om": "Paakii Addaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Custom Fabricated Specialized",
+        "am": "ብጁ የተዘጋጀ የልዩ",
+        "om": "Paakii Addaa Kan Addaa",
+        "ti": "ብፍሉይ ዝተዳለወ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4497,7 +5373,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fabricated Specialized & Custom Tobacco Growing Pack",
+        "Custom Tobacco Growing Pack",
+        "Paakii Addaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ብጁ የተዘጋጀ የልዩና ብጁ Tobacco Growing ጥቅል",
+        "ብፍሉይ ዝተዳለወ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4507,10 +5389,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "universal-compatible-specialized-custom-tobacco-growing-kit",
       "names": {
-        "en": "Universal Compatible Specialized & Custom Tobacco Growing Kit",
-        "am": "ሁለንተናዊ የሚስማማ የልዩና ብጁ Tobacco Growing ኪት",
-        "om": "Kiitii Waliigalaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Universal Compatible Specialized",
+        "am": "ሁለንተናዊ የሚስማማ የልዩ",
+        "om": "Kiitii Waliigalaa Kan Addaa",
+        "ti": "ንኹሉ ዝሰማማዕ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4523,7 +5405,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Kit",
+        "Kiitii Waliigalaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "Universal Compatible Specialized & Custom Tobacco Growing Kit",
+        "ሁለንተናዊ የሚስማማ የልዩና ብጁ Tobacco Growing ኪት",
+        "ንኹሉ ዝሰማማዕ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4533,10 +5421,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "professional-grade-specialized-custom-tobacco-growing-tooling",
       "names": {
-        "en": "Professional Grade Specialized & Custom Tobacco Growing Tooling",
-        "am": "ሙያዊ ደረጃ ያለው የልዩና ብጁ Tobacco Growing መሣሪያ",
-        "om": "Meeshaa Ogummaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Professional Grade Specialized",
+        "am": "ሙያዊ ደረጃ ያለው የልዩ",
+        "om": "Meeshaa Ogummaa Kan Addaa",
+        "ti": "ሞያዊ ደረጃ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4549,7 +5437,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Tooling",
+        "Meeshaa Ogummaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "Professional Grade Specialized & Custom Tobacco Growing Tooling",
+        "ሙያዊ ደረጃ ያለው የልዩና ብጁ Tobacco Growing መሣሪያ",
+        "ሞያዊ ደረጃ ዘለዎ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4559,10 +5453,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "specialized-laboratory-specialized-custom-tobacco-growing-tester",
       "names": {
-        "en": "Specialized Laboratory Specialized & Custom Tobacco Growing Tester",
-        "am": "ልዩ የላቦራቶሪ ልዩና ብጁ Tobacco Growing መመርመሪያ",
-        "om": "Meeshaa Qorannoo Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Specialized Laboratory Specialized",
+        "am": "ልዩ የላቦራቶሪ ልዩ",
+        "om": "Meeshaa Qorannoo Kan Addaa",
+        "ti": "ናይ ላቦራቶሪ መመርመሪ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4575,7 +5469,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Tester",
+        "Meeshaa Qorannoo Kan Addaa fi Filatamaa Tobacco Growing",
+        "Specialized Laboratory Specialized & Custom Tobacco Growing Tester",
+        "ልዩ የላቦራቶሪ ልዩና ብጁ Tobacco Growing መመርመሪያ",
+        "ናይ ላቦራቶሪ መመርመሪ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4585,10 +5485,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "high-speed-synchronized-specialized-custom-tobacco-growing-unit",
       "names": {
-        "en": "High-Speed Synchronized Specialized & Custom Tobacco Growing Unit",
-        "am": "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Tobacco Growing ክፍል",
-        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "High-Speed Synchronized Specialized",
+        "am": "ከፍተኛ ፍጥነት ያለው ልዩ",
+        "om": "Yuunitii Saffisa Ol'aanaa Kan Addaa",
+        "ti": "ልዑል ቅልጣፈ ዘለዎ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4601,7 +5501,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Unit",
+        "High-Speed Synchronized Specialized & Custom Tobacco Growing Unit",
+        "Yuunitii Saffisa Ol'aanaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ልዑል ቅልጣፈ ዘለዎ ፍሉይን ዝተዳለወን Tobacco Growing",
+        "ከፍተኛ ፍጥነት ያለው ልዩና ብጁ Tobacco Growing ክፍል"
+      ],
       "redirects": []
     },
     {
@@ -4611,10 +5517,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "stainless-steel-corrosion-resistant-specialized-custom-tobacco-growing",
       "names": {
-        "en": "Stainless Steel Corrosion-Resistant Specialized & Custom Tobacco Growing",
-        "am": "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Tobacco Growing",
-        "om": "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Stainless Steel Corrosion-Resistant Specialized",
+        "am": "ከማይዝግ ብረት የተሰራ ልዩ",
+        "om": "Sibila Hin Xuraofne Kan Addaa",
+        "ti": "ዘይመጽእ ሓጺ"
       },
       "description": null,
       "level": 3,
@@ -4627,7 +5533,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing",
+        "Sibila Hin Xuraofne Kan Addaa fi Filatamaa Tobacco Growing",
+        "Stainless Steel Corrosion-Resistant Specialized & Custom Tobacco Growing",
+        "ከማይዝግ ብረት የተሰራ ልዩና ብጁ Tobacco Growing",
+        "ዘይመጽእ ሓጺን ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4637,10 +5549,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "thermal-insulated-specialized-custom-tobacco-growing-panel",
       "names": {
-        "en": "Thermal Insulated Specialized & Custom Tobacco Growing Panel",
-        "am": "ሙቀት መከላከያ ያለው የልዩና ብጁ Tobacco Growing ፓነል",
-        "om": "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Thermal Insulated Specialized",
+        "am": "ሙቀት መከላከያ ያለው የልዩ",
+        "om": "Paanaalii Ho'a Ittisu Kan Addaa",
+        "ti": "ሙቐት መከላኸሊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4653,7 +5565,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Panel",
+        "Paanaalii Ho'a Ittisu Kan Addaa fi Filatamaa Tobacco Growing",
+        "Thermal Insulated Specialized & Custom Tobacco Growing Panel",
+        "ሙቀት መከላከያ ያለው የልዩና ብጁ Tobacco Growing ፓነል",
+        "ሙቐት መከላኸሊ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4663,10 +5581,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "wireless-smart-integrated-specialized-custom-tobacco-growing",
       "names": {
-        "en": "Wireless Smart Integrated Specialized & Custom Tobacco Growing",
-        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Tobacco Growing",
-        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Wireless Smart Integrated Specialized",
+        "am": "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩ",
+        "om": "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa",
+        "ti": "ዘይብሉ ሽቦ ዘመናዊ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4679,7 +5597,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing",
+        "Kan Qunnamtii Shiboo Hin Qabne Kan Addaa fi Filatamaa Tobacco Growing",
+        "Wireless Smart Integrated Specialized & Custom Tobacco Growing",
+        "ሽቦ አልባ ዘመናዊ የተቀናጀ ልዩና ብጁ Tobacco Growing",
+        "ዘይብሉ ሽቦ ዘመናዊ ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4689,10 +5613,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "heavy-mechanical-calibration-specialized-custom-tobacco-growing",
       "names": {
-        "en": "Heavy Mechanical Calibration Specialized & Custom Tobacco Growing",
-        "am": "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Tobacco Growing",
-        "om": "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Heavy Mechanical Calibration Specialized",
+        "am": "ከባድ መካኒካል ማስተካከያ ልዩ",
+        "om": "Sirreeffama Mekaaniikaa Kan Addaa",
+        "ti": "ናይ መካኒካል ምዕራይ ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4705,7 +5629,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing",
+        "Heavy Mechanical Calibration Specialized & Custom Tobacco Growing",
+        "Sirreeffama Mekaaniikaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ናይ መካኒካል ምዕራይ ፍሉይን ዝተዳለወን Tobacco Growing",
+        "ከባድ መካኒካል ማስተካከያ ልዩና ብጁ Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4715,10 +5645,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "ergonomic-safety-specialized-custom-tobacco-growing-gear",
       "names": {
-        "en": "Ergonomic Safety Specialized & Custom Tobacco Growing Gear",
-        "am": "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Tobacco Growing",
-        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Ergonomic Safety Specialized Gear",
+        "am": "ምቹ",
+        "om": "Meeshaa Eegumsaa Mijaawaa Kan Addaa",
+        "ti": "ምቹእ ናይ ድሕንነት ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4731,7 +5661,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Tobacco Growing Gear",
+        "Ergonomic Safety Specialized & Custom Tobacco Growing Gear",
+        "Meeshaa Eegumsaa Mijaawaa Kan Addaa fi Filatamaa Tobacco Growing",
+        "ምቹና ደህንነቱ የተጠበቀ ልዩና ብጁ Tobacco Growing",
+        "ምቹእ ናይ ድሕንነት ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     },
     {
@@ -4741,10 +5677,10 @@
       "classification_system_code": "SYS_PROD",
       "slug": "modular-expandable-specialized-custom-tobacco-growing-station",
       "names": {
-        "en": "Modular Expandable Specialized & Custom Tobacco Growing Station",
-        "am": "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Tobacco Growing ጣቢያ",
-        "om": "Buufata Babal'ifamu Kan Addaa fi Filatamaa Tobacco Growing",
-        "ti": "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Tobacco Growing"
+        "en": "Modular Expandable Specialized",
+        "am": "ተገጣጣሚ",
+        "om": "Buufata Babal'ifamu Kan Addaa",
+        "ti": "ክሰፍሕ ዝኽእል ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -4757,7 +5693,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Buufata Babal'ifamu Kan Addaa fi Filatamaa Tobacco Growing",
+        "Custom Tobacco Growing Station",
+        "Modular Expandable Specialized & Custom Tobacco Growing Station",
+        "ተገጣጣሚና የሚሰፋ የልዩና ብጁ Tobacco Growing ጣቢያ",
+        "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Tobacco Growing"
+      ],
       "redirects": []
     }
   ]

@@ -6,6 +6,7 @@
 -- ============================================================================
 
 -- Table Columns for platform_settings
+ALTER TABLE platform_settings ADD COLUMN IF NOT EXISTS key character varying(100) UNIQUE;
 ALTER TABLE platform_settings ADD COLUMN IF NOT EXISTS value text DEFAULT ''::text NOT NULL;
 ALTER TABLE platform_settings ADD COLUMN IF NOT EXISTS value_type character varying(20) DEFAULT 'string'::character varying NOT NULL;
 ALTER TABLE platform_settings ADD COLUMN IF NOT EXISTS category character varying(50) DEFAULT 'features'::character varying NOT NULL;

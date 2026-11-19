@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Security & Protective Services",
-        "am": "ደህንነትና ጥበቃ አገልግሎት",
-        "om": "Nageenya fi Eegumsa",
-        "ti": "ደኅንነትን ጥበቃን ኣገልግሎት"
+        "en": "Security Services",
+        "am": "ደህንነት",
+        "om": "Nageenya",
+        "ti": "ደኅንነት"
       },
       "slug": "security-protective",
       "description": "Security services, CCTV, guarding, tactical equipment, ballistic defense, and surveillance.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Nageenya fi Eegumsa",
+        "Protective Services",
+        "Security & Protective Services",
+        "ደህንነትና ጥበቃ አገልግሎት",
+        "ደኅንነትን ጥበቃን ኣገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -215,10 +221,10 @@
       "parent_code": "security-protective",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Alarm & Monitoring Services",
-        "am": "የማስነበቂያና የመከታተል አገልግሎት",
+        "en": "Alarm Services",
+        "am": "የማስነበቂያ",
         "om": "Tajaajila Hordoffii",
-        "ti": "ኣገልግሎት ነብሪን ምከታተልን"
+        "ti": "ኣገልግሎት ነብሪ"
       },
       "slug": "alarm-monitoring-services",
       "description": "",
@@ -232,7 +238,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Alarm & Monitoring Services",
+        "Monitoring Services",
+        "ኣገልግሎት ነብሪን ምከታተልን",
+        "የማስነበቂያና የመከታተል አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -345,10 +356,10 @@
       "parent_code": "alarm-monitoring-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Alarm & Monitoring Services",
-        "am": "ሌሎች የማስነበቂያና የመከታተል አገልግሎት",
+        "en": "Other Alarm Services",
+        "am": "ሌሎች የማስነበቂያ",
         "om": "Tajaajila Hordoffii Biroo",
-        "ti": "ካልኦት ኣገልግሎት ነብሪን ምከታተልን"
+        "ti": "ካልኦት ኣገልግሎት ነብሪ"
       },
       "slug": "other-alarm-monitoring-services",
       "description": null,
@@ -362,7 +373,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Monitoring Services",
+        "Other Alarm & Monitoring Services",
+        "ሌሎች የማስነበቂያና የመከታተል አገልግሎት",
+        "ካልኦት ኣገልግሎት ነብሪን ምከታተልን"
+      ],
       "redirects": []
     },
     {
@@ -371,10 +387,10 @@
       "parent_code": "security-protective",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "CCTV & Surveillance Systems",
-        "am": "CCTVና የቁጥጥር ካሜራ ስርዓቶች",
-        "om": "CCTV fi Sistimii Hordoffii",
-        "ti": "CCTVን ስርዓት ምቁጣጥጥን"
+        "en": "CCTV Systems",
+        "am": "CCTV",
+        "om": "CCTV",
+        "ti": "CCTV"
       },
       "slug": "cctv-surveillance-systems",
       "description": "",
@@ -388,7 +404,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "CCTV & Surveillance Systems",
+        "CCTV fi Sistimii Hordoffii",
+        "CCTVና የቁጥጥር ካሜራ ስርዓቶች",
+        "CCTVን ስርዓት ምቁጣጥጥን",
+        "Surveillance Systems"
+      ],
       "redirects": []
     },
     {
@@ -501,10 +523,10 @@
       "parent_code": "cctv-surveillance-systems",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other CCTV & Surveillance Systems",
-        "am": "ሌሎች CCTVና የቁጥጥር ካሜራ ስርዓቶች",
-        "om": "CCTV fi Sistimii Hordoffii Biroo",
-        "ti": "ካልኦት CCTVን ስርዓት ምቁጣጥጥን"
+        "en": "Other CCTV Systems",
+        "am": "ሌሎች CCTV",
+        "om": "CCTV",
+        "ti": "ካልኦት CCTV"
       },
       "slug": "other-cctv-surveillance-systems",
       "description": null,
@@ -518,7 +540,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "CCTV fi Sistimii Hordoffii Biroo",
+        "Other CCTV & Surveillance Systems",
+        "Surveillance Systems",
+        "ሌሎች CCTVና የቁጥጥር ካሜራ ስርዓቶች",
+        "ካልኦት CCTVን ስርዓት ምቁጣጥጥን"
+      ],
       "redirects": []
     },
     {
@@ -995,10 +1023,10 @@
       "parent_code": "security-protective",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Tactical & Ballistic Defense Supplies",
-        "am": "የታክቲካልና የጥበቃ እቃዎች",
+        "en": "Tactical Supplies",
+        "am": "የታክቲካል",
         "om": "Meeshaalee Taktikaalaa",
-        "ti": "ናይ ታክቲካልን ባሊስቲክን ኣቑሑ"
+        "ti": "ናይ ታክቲካል"
       },
       "slug": "tactical-ballistic-equipment",
       "description": "",
@@ -1012,7 +1040,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ballistic Defense Supplies",
+        "Tactical & Ballistic Defense Supplies",
+        "ናይ ታክቲካልን ባሊስቲክን ኣቑሑ",
+        "የታክቲካልና የጥበቃ እቃዎች"
+      ],
       "redirects": []
     },
     {
@@ -1073,7 +1106,7 @@
       "parent_code": "tactical-ballistic-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Shields & Barriers",
+        "en": "Shields",
         "am": "ሰ ሰ5",
         "om": "Daangaa Eegumsa",
         "ti": "ሰ5 ሰ"
@@ -1090,7 +1123,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barriers",
+        "Shields & Barriers"
+      ],
       "redirects": []
     },
     {
@@ -1125,10 +1161,10 @@
       "parent_code": "tactical-ballistic-equipment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Tactical & Ballistic Defense Supplies",
-        "am": "ሌሎች የታክቲካልና የጥበቃ እቃዎች",
+        "en": "Other Tactical Supplies",
+        "am": "ሌሎች የታክቲካል",
         "om": "Meeshaalee Taktikaalaa Biroo",
-        "ti": "ካልኦት ናይ ታክቲካልን ባሊስቲክን ኣቑሑ"
+        "ti": "ካልኦት ናይ ታክቲካል"
       },
       "slug": "other-tactical-ballistic-equipment",
       "description": null,
@@ -1142,7 +1178,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ballistic Defense Supplies",
+        "Other Tactical & Ballistic Defense Supplies",
+        "ሌሎች የታክቲካልና የጥበቃ እቃዎች",
+        "ካልኦት ናይ ታክቲካልን ባሊስቲክን ኣቑሑ"
+      ],
       "redirects": []
     },
     {
@@ -1151,10 +1192,10 @@
       "parent_code": "security-protective",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Security & Protective Services",
-        "am": "ሌሎች ደህንነትና ጥበቃ አገልግሎት",
-        "om": "Nageenya fi Eegumsa Biroo",
-        "ti": "ካልኦት ደኅንነትን ጥበቃን ኣገልግሎት"
+        "en": "Other Security Services",
+        "am": "ሌሎች ደህንነት",
+        "om": "Nageenya",
+        "ti": "ካልኦት ደኅንነት"
       },
       "slug": "other-security-protective",
       "description": null,
@@ -1168,7 +1209,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Nageenya fi Eegumsa Biroo",
+        "Other Security & Protective Services",
+        "Protective Services",
+        "ሌሎች ደህንነትና ጥበቃ አገልግሎት",
+        "ካልኦት ደኅንነትን ጥበቃን ኣገልግሎት"
+      ],
       "redirects": []
     }
   ]

@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "cleaning-facility-management",
       "names": {
-        "en": "Cleaning & Facility Management",
-        "am": "ጽዳትና መገናኛ አስተዳደር",
-        "om": "Qulqullinsa fi Bulchiinsa",
-        "ti": "ጽዳዕን ኣመሓዳሪኣ መገናኺያን"
+        "en": "Cleaning",
+        "am": "ጽዳት",
+        "om": "Qulqullinsa",
+        "ti": "ጽዳዕ"
       },
       "description": "Commercial cleaning, fumigation, janitorial services, and facility management.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cleaning & Facility Management",
+        "Facility Management",
+        "Qulqullinsa fi Bulchiinsa",
+        "ጽዳትና መገናኛ አስተዳደር",
+        "ጽዳዕን ኣመሓዳሪኣ መገናኺያን"
+      ],
       "redirects": []
     },
     {
@@ -61,7 +67,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "cleaning-equipment-supplies",
       "names": {
-        "en": "Cleaning Equipment & Supplies",
+        "en": "Cleaning Equipment",
         "am": "የጽዳት እቃዎቸ",
         "om": "Meeshaalee Qulqullinsaa",
         "ti": "ናይ ጽዳዕ ኣቑሑ"
@@ -77,7 +83,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cleaning Equipment & Supplies",
+        "Supplies"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +174,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "fumigation-pest-control",
       "names": {
-        "en": "Fumigation & Pest Control",
-        "am": "የተባባሪ መከላከያና ፀረ-ተባባይ",
-        "om": "Faansii fi Inib",
-        "ti": "ፈይምግሽን ምክልኻስ ኣእንስላትን"
+        "en": "Fumigation",
+        "am": "የተባባሪ መከላከያ",
+        "om": "Faansii",
+        "ti": "ፈይምግሽ"
       },
       "description": "",
       "level": 1,
@@ -181,7 +190,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Faansii fi Inib",
+        "Fumigation & Pest Control",
+        "Pest Control",
+        "የተባባሪ መከላከያና ፀረ-ተባባይ",
+        "ፈይምግሽን ምክልኻስ ኣእንስላትን"
+      ],
       "redirects": []
     },
     {
@@ -217,7 +232,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "laundry-linen-services",
       "names": {
-        "en": "Laundry & Linen Services",
+        "en": "Laundry Services",
         "am": "የልብስ ማጠቢ አገልግሎቶች",
         "om": "Tajaajila Xurii",
         "ti": "ኣገልግሎት ምጥባዕ ኣልባሳት"
@@ -233,7 +248,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Laundry & Linen Services",
+        "Linen Services"
+      ],
       "redirects": []
     },
     {
@@ -295,10 +313,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-cleaning-facility-management",
       "names": {
-        "en": "Specialized & Custom Cleaning & Facility Management",
-        "am": "ልዩና ብጁ Cleaning & Facility Management",
-        "om": "Kan Addaa fi Filatamaa Cleaning & Facility Management",
-        "ti": "ፍሉይን ዝተዳለወን Cleaning & Facility Management"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -311,7 +329,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cleaning",
+        "Facility Management",
+        "Kan Addaa fi Filatamaa Cleaning & Facility Management",
+        "Specialized & Custom Cleaning & Facility Management",
+        "ልዩና ብጁ Cleaning & Facility Management",
+        "ፍሉይን ዝተዳለወን Cleaning & Facility Management"
+      ],
       "redirects": []
     },
     {
@@ -451,7 +476,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "mops-brooms",
       "names": {
-        "en": "Mops & Brooms",
+        "en": "Mops",
         "am": "ሞ ምር",
         "om": "Meeshaalee Qulqullinsaa",
         "ti": "ምር ሞ"
@@ -467,7 +492,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms",
+        "Mops & Brooms"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1389,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-building-maintenance-services",
       "names": {
-        "en": "Specialized & Custom Building Maintenance Services",
-        "am": "ልዩና ብጁ Building Maintenance Services",
-        "om": "Kan Addaa fi Filatamaa Building Maintenance Services",
-        "ti": "ፍሉይን ዝተዳለወን Building Maintenance Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1405,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Building Maintenance Services",
+        "Kan Addaa fi Filatamaa Building Maintenance Services",
+        "Specialized & Custom Building Maintenance Services",
+        "ልዩና ብጁ Building Maintenance Services",
+        "ፍሉይን ዝተዳለወን Building Maintenance Services"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1421,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-cleaning-equipment-supplies",
       "names": {
-        "en": "Specialized & Custom Cleaning Equipment & Supplies",
-        "am": "ልዩና ብጁ Cleaning Equipment & Supplies",
-        "om": "Kan Addaa fi Filatamaa Cleaning Equipment & Supplies",
-        "ti": "ፍሉይን ዝተዳለወን Cleaning Equipment & Supplies"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1437,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cleaning Equipment",
+        "Kan Addaa fi Filatamaa Cleaning Equipment & Supplies",
+        "Specialized & Custom Cleaning Equipment & Supplies",
+        "Supplies",
+        "ልዩና ብጁ Cleaning Equipment & Supplies",
+        "ፍሉይን ዝተዳለወን Cleaning Equipment & Supplies"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1454,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-commercial-cleaning-services",
       "names": {
-        "en": "Specialized & Custom Commercial Cleaning Services",
-        "am": "ልዩና ብጁ Commercial Cleaning Services",
-        "om": "Kan Addaa fi Filatamaa Commercial Cleaning Services",
-        "ti": "ፍሉይን ዝተዳለወን Commercial Cleaning Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1470,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Commercial Cleaning Services",
+        "Kan Addaa fi Filatamaa Commercial Cleaning Services",
+        "Specialized & Custom Commercial Cleaning Services",
+        "ልዩና ብጁ Commercial Cleaning Services",
+        "ፍሉይን ዝተዳለወን Commercial Cleaning Services"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1486,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-deep-cleaning-services",
       "names": {
-        "en": "Specialized & Custom Deep Cleaning Services",
-        "am": "ልዩና ብጁ Deep Cleaning Services",
-        "om": "Kan Addaa fi Filatamaa Deep Cleaning Services",
-        "ti": "ፍሉይን ዝተዳለወን Deep Cleaning Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1502,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Deep Cleaning Services",
+        "Kan Addaa fi Filatamaa Deep Cleaning Services",
+        "Specialized & Custom Deep Cleaning Services",
+        "ልዩና ብጁ Deep Cleaning Services",
+        "ፍሉይን ዝተዳለወን Deep Cleaning Services"
+      ],
       "redirects": []
     },
     {
@@ -1465,10 +1518,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-facility-management-services",
       "names": {
-        "en": "Specialized & Custom Facility Management Services",
-        "am": "ልዩና ብጁ Facility Management Services",
-        "om": "Kan Addaa fi Filatamaa Facility Management Services",
-        "ti": "ፍሉይን ዝተዳለወን Facility Management Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1481,7 +1534,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Facility Management Services",
+        "Kan Addaa fi Filatamaa Facility Management Services",
+        "Specialized & Custom Facility Management Services",
+        "ልዩና ብጁ Facility Management Services",
+        "ፍሉይን ዝተዳለወን Facility Management Services"
+      ],
       "redirects": []
     },
     {
@@ -1491,10 +1550,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-fumigation-pest-control",
       "names": {
-        "en": "Specialized & Custom Fumigation & Pest Control",
-        "am": "ልዩና ብጁ Fumigation & Pest Control",
-        "om": "Kan Addaa fi Filatamaa Fumigation & Pest Control",
-        "ti": "ፍሉይን ዝተዳለወን Fumigation & Pest Control"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1507,7 +1566,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Fumigation",
+        "Kan Addaa fi Filatamaa Fumigation & Pest Control",
+        "Pest Control",
+        "Specialized & Custom Fumigation & Pest Control",
+        "ልዩና ብጁ Fumigation & Pest Control",
+        "ፍሉይን ዝተዳለወን Fumigation & Pest Control"
+      ],
       "redirects": []
     },
     {
@@ -1517,10 +1583,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-janitorial-services",
       "names": {
-        "en": "Specialized & Custom Janitorial Services",
-        "am": "ልዩና ብጁ Janitorial Services",
-        "om": "Kan Addaa fi Filatamaa Janitorial Services",
-        "ti": "ፍሉይን ዝተዳለወን Janitorial Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1533,7 +1599,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Janitorial Services",
+        "Kan Addaa fi Filatamaa Janitorial Services",
+        "Specialized & Custom Janitorial Services",
+        "ልዩና ብጁ Janitorial Services",
+        "ፍሉይን ዝተዳለወን Janitorial Services"
+      ],
       "redirects": []
     },
     {
@@ -1543,10 +1615,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-laundry-linen-services",
       "names": {
-        "en": "Specialized & Custom Laundry & Linen Services",
-        "am": "ልዩና ብጁ Laundry & Linen Services",
-        "om": "Kan Addaa fi Filatamaa Laundry & Linen Services",
-        "ti": "ፍሉይን ዝተዳለወን Laundry & Linen Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1559,7 +1631,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Laundry",
+        "Kan Addaa fi Filatamaa Laundry & Linen Services",
+        "Linen Services",
+        "Specialized & Custom Laundry & Linen Services",
+        "ልዩና ብጁ Laundry & Linen Services",
+        "ፍሉይን ዝተዳለወን Laundry & Linen Services"
+      ],
       "redirects": []
     },
     {
@@ -1569,10 +1648,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-waste-removal-services",
       "names": {
-        "en": "Specialized & Custom Waste Removal Services",
-        "am": "ልዩና ብጁ Waste Removal Services",
-        "om": "Kan Addaa fi Filatamaa Waste Removal Services",
-        "ti": "ፍሉይን ዝተዳለወን Waste Removal Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1585,7 +1664,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Waste Removal Services",
+        "Kan Addaa fi Filatamaa Waste Removal Services",
+        "Specialized & Custom Waste Removal Services",
+        "ልዩና ብጁ Waste Removal Services",
+        "ፍሉይን ዝተዳለወን Waste Removal Services"
+      ],
       "redirects": []
     },
     {
@@ -1595,10 +1680,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-window-cleaning-services",
       "names": {
-        "en": "Specialized & Custom Window Cleaning Services",
-        "am": "ልዩና ብጁ Window Cleaning Services",
-        "om": "Kan Addaa fi Filatamaa Window Cleaning Services",
-        "ti": "ፍሉይን ዝተዳለወን Window Cleaning Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1611,7 +1696,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Window Cleaning Services",
+        "Kan Addaa fi Filatamaa Window Cleaning Services",
+        "Specialized & Custom Window Cleaning Services",
+        "ልዩና ብጁ Window Cleaning Services",
+        "ፍሉይን ዝተዳለወን Window Cleaning Services"
+      ],
       "redirects": []
     },
     {
@@ -2661,7 +2752,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "commercial-grade-mops-brooms-unit",
       "names": {
-        "en": "Commercial Grade Mops & Brooms Unit",
+        "en": "Commercial Grade Mops",
         "am": "የንግድ ደረጃ ሞ ምር ክፍል",
         "om": "Qooda Daldalaa Meeshaalee Qulqullinsaa",
         "ti": "ናይ ንግዲ ደረጃ ምር ሞ"
@@ -2677,7 +2768,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Unit",
+        "Commercial Grade Mops & Brooms Unit"
+      ],
       "redirects": []
     },
     {
@@ -2687,7 +2781,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "high-performance-mops-brooms-equipment",
       "names": {
-        "en": "High-Performance Mops & Brooms Equipment",
+        "en": "High-Performance Mops Equipment",
         "am": "ከፍተኛ አፈፃፀም ያለው ሞ ምር መሣሪያ",
         "om": "Meeshaa Hojii Cimaa Meeshaalee Qulqullinsaa",
         "ti": "ልዑል ብቕዓት ዘለዎ ምር ሞ"
@@ -2703,7 +2797,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Equipment",
+        "High-Performance Mops & Brooms Equipment"
+      ],
       "redirects": []
     },
     {
@@ -2713,7 +2810,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "automated-precision-mops-brooms-device",
       "names": {
-        "en": "Automated Precision Mops & Brooms Device",
+        "en": "Automated Precision Mops",
         "am": "አውቶሜትድ ትክክለኛ ሞ ምር መሣሪያ",
         "om": "Meeshaa Qulqullinaa Ootomaatikii Meeshaalee Qulqullinsaa",
         "ti": "ኣውቶሜትድ ትክክለኛ ምር ሞ"
@@ -2729,7 +2826,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Automated Precision Mops & Brooms Device",
+        "Brooms Device"
+      ],
       "redirects": []
     },
     {
@@ -2739,7 +2839,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "standard-industrial-mops-brooms-kit",
       "names": {
-        "en": "Standard Industrial Mops & Brooms Kit",
+        "en": "Standard Industrial Mops",
         "am": "መደበኛ የኢንዱስትሪ ሞ ምር ኪት",
         "om": "Kiitii Indaastirii Meeshaalee Qulqullinsaa",
         "ti": "ስሩዕ ናይ ኢንዱስትሪ ምር ሞ"
@@ -2755,7 +2855,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Kit",
+        "Standard Industrial Mops & Brooms Kit"
+      ],
       "redirects": []
     },
     {
@@ -2765,7 +2868,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "energy-efficient-mops-brooms-assembly",
       "names": {
-        "en": "Energy-Efficient Mops & Brooms Assembly",
+        "en": "Energy-Efficient Mops",
         "am": "ኃይል ቆጣቢ ሞ ምር ስብስብ",
         "om": "Asambilii Qusataa Humnaa Meeshaalee Qulqullinsaa",
         "ti": "ሓይሊ ዝቑጥብ ምር ሞ"
@@ -2781,7 +2884,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Assembly",
+        "Energy-Efficient Mops & Brooms Assembly"
+      ],
       "redirects": []
     },
     {
@@ -2791,7 +2897,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-heavy-mops-brooms-fixture",
       "names": {
-        "en": "Specialized Heavy Mops & Brooms Fixture",
+        "en": "Specialized Heavy Mops",
         "am": "ልዩ ከባድ ሞ ምር መገጣጠሚያ",
         "om": "Qabduu Cimaa Meeshaalee Qulqullinsaa",
         "ti": "ፍሉይ ከቢድ ምር ሞ"
@@ -2807,7 +2913,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Fixture",
+        "Specialized Heavy Mops & Brooms Fixture"
+      ],
       "redirects": []
     },
     {
@@ -2817,7 +2926,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "compact-modular-mops-brooms-system",
       "names": {
-        "en": "Compact Modular Mops & Brooms System",
+        "en": "Compact Modular Mops",
         "am": "ቀላል ተገጣጣሚ ሞ ምር ስርዓት",
         "om": "Sirna Socho'aa Meeshaalee Qulqullinsaa",
         "ti": "ተገጣጣሚ ምር ሞ"
@@ -2833,7 +2942,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms System",
+        "Compact Modular Mops & Brooms System"
+      ],
       "redirects": []
     },
     {
@@ -2843,7 +2955,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "reinforced-weather-resistant-mops-brooms",
       "names": {
-        "en": "Reinforced Weather-Resistant Mops & Brooms",
+        "en": "Reinforced Weather-Resistant Mops",
         "am": "የአየር ንብረት ተከላካይ ሞ ምር",
         "om": "Kan Qilleensa Dandamatu Meeshaalee Qulqullinsaa",
         "ti": "ንኵነታት ኣየር ዝጻወር ምር ሞ"
@@ -2859,7 +2971,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms",
+        "Reinforced Weather-Resistant Mops & Brooms"
+      ],
       "redirects": []
     },
     {
@@ -2869,7 +2984,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "digital-intelligent-mops-brooms-module",
       "names": {
-        "en": "Digital Intelligent Mops & Brooms Module",
+        "en": "Digital Intelligent Mops",
         "am": "ዲጂታል ዘመናዊ ሞ ምር ሞጁል",
         "om": "Moojiyulii Sammu-qabeessa Meeshaalee Qulqullinsaa",
         "ti": "ዲጂታል ብልሒ ዘለዎ ምር ሞ"
@@ -2885,7 +3000,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Module",
+        "Digital Intelligent Mops & Brooms Module"
+      ],
       "redirects": []
     },
     {
@@ -2895,7 +3013,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "custom-fabricated-mops-brooms-component",
       "names": {
-        "en": "Custom Fabricated Mops & Brooms Component",
+        "en": "Custom Fabricated Mops",
         "am": "ብጁ የተሰራ ሞ ምር አካል",
         "om": "Kutaa Addaa Meeshaalee Qulqullinsaa",
         "ti": "ብፍሉይ ዝተዳለወ ምር ሞ"
@@ -2911,7 +3029,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brooms Component",
+        "Custom Fabricated Mops & Brooms Component"
+      ],
       "redirects": []
     },
     {
@@ -11085,10 +11206,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "carpentry-maintenance-heavy-duty-cargo-delivery-th-s19_1",
       "names": {
-        "en": "Heavy-Duty Cargo & Delivery Three-Wheelers",
+        "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
-        "om": "Baajaajii Fe’umsaa fi Daldalaa",
-        "ti": "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "om": "Baajaajii Fe’umsaa",
+        "ti": "ናይ ጽዕነት"
       },
       "description": null,
       "level": 3,
@@ -11101,7 +11222,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Baajaajii Fe’umsaa fi Daldalaa",
+        "Delivery Three-Wheelers",
+        "Heavy-Duty Cargo & Delivery Three-Wheelers",
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+      ],
       "redirects": []
     },
     {
@@ -11319,10 +11445,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "post-construction-cleaning-condominium-housing-uni-s39_3",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "description": null,
       "level": 3,
@@ -11335,7 +11461,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+      ],
       "redirects": []
     },
     {
@@ -11345,10 +11477,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "building-operations-condominium-housing-units-20-8-s40_3",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "description": null,
       "level": 3,
@@ -11361,7 +11493,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+      ],
       "redirects": []
     },
     {
@@ -11371,10 +11509,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "construction-waste-condominium-housing-units-20-80-s41_3",
       "names": {
-        "en": "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
-        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
-        "om": "Mana Kondoominiyeemii 20/80 fi 40/60",
-        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን"
+        "en": "Condominium Housing Units 20/80",
+        "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
+        "om": "Mana Kondoominiyeemii 20/80",
+        "ti": "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80"
       },
       "description": null,
       "level": 3,
@@ -11387,7 +11525,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "40/60 for Sale/Rent",
+        "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
+        "Mana Kondoominiyeemii 20/80 fi 40/60",
+        "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+      ],
       "redirects": []
     },
     {
@@ -11397,10 +11541,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-carpentry-maintenance",
       "names": {
-        "en": "Specialized & Custom Carpentry Maintenance",
-        "am": "ልዩና ብጁ Carpentry Maintenance",
-        "om": "Kan Addaa fi Filatamaa Carpentry Maintenance",
-        "ti": "ፍሉይን ዝተዳለወን Carpentry Maintenance"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -11413,7 +11557,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Carpentry Maintenance",
+        "Kan Addaa fi Filatamaa Carpentry Maintenance",
+        "Specialized & Custom Carpentry Maintenance",
+        "ልዩና ብጁ Carpentry Maintenance",
+        "ፍሉይን ዝተዳለወን Carpentry Maintenance"
+      ],
       "redirects": []
     },
     {
@@ -11423,10 +11573,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-post-construction-cleaning",
       "names": {
-        "en": "Specialized & Custom Post-Construction Cleaning",
-        "am": "ልዩና ብጁ Post-Construction Cleaning",
-        "om": "Kan Addaa fi Filatamaa Post-Construction Cleaning",
-        "ti": "ፍሉይን ዝተዳለወን Post-Construction Cleaning"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -11439,7 +11589,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Post-Construction Cleaning",
+        "Kan Addaa fi Filatamaa Post-Construction Cleaning",
+        "Specialized & Custom Post-Construction Cleaning",
+        "ልዩና ብጁ Post-Construction Cleaning",
+        "ፍሉይን ዝተዳለወን Post-Construction Cleaning"
+      ],
       "redirects": []
     },
     {
@@ -11449,10 +11605,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-building-operations",
       "names": {
-        "en": "Specialized & Custom Building Operations",
-        "am": "ልዩና ብጁ Building Operations",
-        "om": "Kan Addaa fi Filatamaa Building Operations",
-        "ti": "ፍሉይን ዝተዳለወን Building Operations"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -11465,7 +11621,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Building Operations",
+        "Kan Addaa fi Filatamaa Building Operations",
+        "Specialized & Custom Building Operations",
+        "ልዩና ብጁ Building Operations",
+        "ፍሉይን ዝተዳለወን Building Operations"
+      ],
       "redirects": []
     },
     {
@@ -11475,10 +11637,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-construction-waste-removal",
       "names": {
-        "en": "Specialized & Custom Construction Waste Removal",
-        "am": "ልዩና ብጁ Construction Waste Removal",
-        "om": "Kan Addaa fi Filatamaa Construction Waste Removal",
-        "ti": "ፍሉይን ዝተዳለወን Construction Waste Removal"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 3,
@@ -11491,7 +11653,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Construction Waste Removal",
+        "Kan Addaa fi Filatamaa Construction Waste Removal",
+        "Specialized & Custom Construction Waste Removal",
+        "ልዩና ብጁ Construction Waste Removal",
+        "ፍሉይን ዝተዳለወን Construction Waste Removal"
+      ],
       "redirects": []
     }
   ]

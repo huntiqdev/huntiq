@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "tenders-business-opportunities",
       "names": {
-        "en": "Tenders & Business Opportunities",
-        "am": "የጨረታዎችና የቢዝነስ እድሎች",
-        "om": "Caalbaasiiwwan fi Carraawwan Daldalaa",
-        "ti": "ናይ ጨረታታትን ንግዲ ዕድላትን"
+        "en": "Tenders",
+        "am": "የጨረታዎች",
+        "om": "Caalbaasiiwwan",
+        "ti": "ናይ ጨረታታት"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Opportunities",
+        "Caalbaasiiwwan fi Carraawwan Daldalaa",
+        "Tenders & Business Opportunities",
+        "ናይ ጨረታታትን ንግዲ ዕድላትን",
+        "የጨረታዎችና የቢዝነስ እድሎች"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +41,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "public-sector-government-tenders",
       "names": {
-        "en": "Public Sector & Government Tenders",
-        "am": "የመንግስትና የህዝብ ዘርፍ ጨረታዎች",
+        "en": "Public Sector",
+        "am": "የመንግስት",
         "om": "Caalbaasiiwwan Mootummaa",
-        "ti": "ናይ መንግስትን ህዝባዊ ትካላትን ጨረታታት"
+        "ti": "ናይ መንግስት"
       },
       "description": null,
       "level": 1,
@@ -51,7 +57,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Government Tenders",
+        "Public Sector & Government Tenders",
+        "ናይ መንግስትን ህዝባዊ ትካላትን ጨረታታት",
+        "የመንግስትና የህዝብ ዘርፍ ጨረታዎች"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +72,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "ngo-un-development-procurement",
       "names": {
-        "en": "NGO, UN & Development Procurement",
-        "am": "የኤንጂኦ፣ የተመድና የልማት ድርጅቶች ጨረታዎች",
-        "om": "Caalbaasii Dhaabbilee Tole-ooltotaa fi UN",
-        "ti": "ናይ ገበርቲ ሰናይ፣ ውድብ ሕቡራት ሃገራትን ጨረታታት"
+        "en": "NGO",
+        "am": "የኤንጂኦ፣ የተመድ",
+        "om": "Caalbaasii Dhaabbilee Tole-ooltotaa",
+        "ti": "ናይ ገበርቲ ሰናይ፣ ውድብ ሕቡራት ሃገራት"
       },
       "description": null,
       "level": 1,
@@ -77,7 +88,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Caalbaasii Dhaabbilee Tole-ooltotaa fi UN",
+        "Development Procurement",
+        "NGO, UN & Development Procurement",
+        "UN",
+        "ናይ ገበርቲ ሰናይ፣ ውድብ ሕቡራት ሃገራትን ጨረታታት",
+        "የኤንጂኦ፣ የተመድና የልማት ድርጅቶች ጨረታዎች"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +105,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "commercial-contracts-franchises",
       "names": {
-        "en": "Commercial Contracts & Franchises",
-        "am": "የንግድ ኮንትራቶችና የፍራንቻይዝ መብቶች",
-        "om": "Waliigaltee Daldalaa fi Mirga Firaanchayizii",
-        "ti": "ናይ ንግዲ ውዕላትን ፍራንቻይዝ መሰላትን"
+        "en": "Commercial Contracts",
+        "am": "የንግድ ኮንትራቶች",
+        "om": "Waliigaltee Daldalaa",
+        "ti": "ናይ ንግዲ ውዕላት"
       },
       "description": null,
       "level": 1,
@@ -103,7 +121,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Commercial Contracts & Franchises",
+        "Franchises",
+        "Waliigaltee Daldalaa fi Mirga Firaanchayizii",
+        "ናይ ንግዲ ውዕላትን ፍራንቻይዝ መሰላትን",
+        "የንግድ ኮንትራቶችና የፍራንቻይዝ መብቶች"
+      ],
       "redirects": []
     },
     {
@@ -113,8 +137,8 @@
       "classification_system_code": "SYS_OPP",
       "slug": "federal-regional-infrastructure-bids",
       "names": {
-        "en": "Federal & Regional Infrastructure Bids",
-        "am": "የፌዴራልና ክልላዊ የመሰረተ-ልማት ጨረታዎች",
+        "en": "Federal",
+        "am": "የፌዴራል",
         "om": "Caalbaasii Ijaarsa Bu'uura Misoomaa",
         "ti": "ናይ መሰረተ-ልምዓት ህንጸት ጨረታታት"
       },
@@ -129,7 +153,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Federal & Regional Infrastructure Bids",
+        "Regional Infrastructure Bids",
+        "የፌዴራልና ክልላዊ የመሰረተ-ልማት ጨረታዎች"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +167,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "educational-healthcare-procurement",
       "names": {
-        "en": "Educational & Healthcare Procurement",
-        "am": "የትምህርትና የጤና ዘርፍ ግዢ ጨረታዎች",
-        "om": "Bittaa Meeshaalee Barnootaa fi Fayyaa",
-        "ti": "ናይ ትምህርትን ጥዕናን ዕድጊ ጨረታታት"
+        "en": "Educational",
+        "am": "የትምህርት",
+        "om": "Bittaa Meeshaalee Barnootaa",
+        "ti": "ናይ ትምህርት"
       },
       "description": null,
       "level": 2,
@@ -155,7 +183,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bittaa Meeshaalee Barnootaa fi Fayyaa",
+        "Educational & Healthcare Procurement",
+        "Healthcare Procurement",
+        "ናይ ትምህርትን ጥዕናን ዕድጊ ጨረታታት",
+        "የትምህርትና የጤና ዘርፍ ግዢ ጨረታዎች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +199,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "government-it-digital-systems",
       "names": {
-        "en": "Government IT & Digital Systems",
-        "am": "የመንግስት የኢንፎርሜሽን ቴክኖሎጂና ዲጂታል ስርዓቶች",
-        "om": "Sirna Dijitaalaa fi Teeknoolojii Mootummaa",
-        "ti": "ናይ መንግስቲ ቴክኖሎጂን ዲጂታል ስርዓታትን"
+        "en": "Government IT Systems",
+        "am": "የመንግስት የኢንፎርሜሽን ቴክኖሎጂ",
+        "om": "Sirna Dijitaalaa",
+        "ti": "ናይ መንግስቲ ቴክኖሎጂ"
       },
       "description": null,
       "level": 2,
@@ -181,7 +215,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Systems",
+        "Government IT & Digital Systems",
+        "Sirna Dijitaalaa fi Teeknoolojii Mootummaa",
+        "ናይ መንግስቲ ቴክኖሎጂን ዲጂታል ስርዓታትን",
+        "የመንግስት የኢንፎርሜሽን ቴክኖሎጂና ዲጂታል ስርዓቶች"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +231,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "emergency-relief-humanitarian-logistics",
       "names": {
-        "en": "Emergency Relief & Humanitarian Logistics",
-        "am": "የአስቸኳይ ጊዜ እርዳታና የሰብአዊ ሎጂስቲክስ",
-        "om": "Tajaajila Fe'umsaa fi Gargaarsa Namoomaa",
-        "ti": "ናይ ህጹጽ ረድኤትን ሰብኣዊ ሎጂስቲክስን"
+        "en": "Emergency Relief",
+        "am": "የአስቸኳይ ጊዜ እርዳታ",
+        "om": "Tajaajila Fe'umsaa",
+        "ti": "ናይ ህጹጽ ረድኤት"
       },
       "description": null,
       "level": 2,
@@ -207,7 +247,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Emergency Relief & Humanitarian Logistics",
+        "Humanitarian Logistics",
+        "Tajaajila Fe'umsaa fi Gargaarsa Namoomaa",
+        "ናይ ህጹጽ ረድኤትን ሰብኣዊ ሎጂስቲክስን",
+        "የአስቸኳይ ጊዜ እርዳታና የሰብአዊ ሎጂስቲክስ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +263,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "wash-community-development-projects",
       "names": {
-        "en": "WASH & Community Development Projects",
-        "am": "የውሃ፣ ሳኒቴሽንና ማህበረሰብ ልማት ፕሮጀክቶች",
-        "om": "Pirojektoota Bishaanii fi Qulqullinaa (WASH)",
-        "ti": "ናይ ማይን ጽሬትን ማሕበረሰባዊ ልምዓት ፕሮጀክትታት"
+        "en": "WASH",
+        "am": "የውሃ፣ ሳኒቴሽን",
+        "om": "Pirojektoota Bishaanii",
+        "ti": "ናይ ማይ"
       },
       "description": null,
       "level": 2,
@@ -233,7 +279,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Community Development Projects",
+        "Pirojektoota Bishaanii fi Qulqullinaa (WASH)",
+        "WASH & Community Development Projects",
+        "ናይ ማይን ጽሬትን ማሕበረሰባዊ ልምዓት ፕሮጀክትታት",
+        "የውሃ፣ ሳኒቴሽንና ማህበረሰብ ልማት ፕሮጀክቶች"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +295,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "sole-distributorship-regional-dealerships",
       "names": {
-        "en": "Sole Distributorship & Regional Dealerships",
-        "am": "ብቸኛ አከፋፋይነትና ክልላዊ የውክልና መብቶች",
-        "om": "Mirga Raabsaa Qofaa fi Bakka-bu'ummaa",
-        "ti": "ናይ በይነኻ ምከፋፋልን ውክልናን መሰላት"
+        "en": "Sole Distributorship",
+        "am": "ብቸኛ አከፋፋይነት",
+        "om": "Mirga Raabsaa Qofaa",
+        "ti": "ናይ በይነኻ ምከፋፋል"
       },
       "description": null,
       "level": 2,
@@ -259,7 +311,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Mirga Raabsaa Qofaa fi Bakka-bu'ummaa",
+        "Regional Dealerships",
+        "Sole Distributorship & Regional Dealerships",
+        "ብቸኛ አከፋፋይነትና ክልላዊ የውክልና መብቶች",
+        "ናይ በይነኻ ምከፋፋልን ውክልናን መሰላት"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +327,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "business-partnerships-joint-ventures",
       "names": {
-        "en": "Business Partnerships & Joint Ventures",
-        "am": "የንግድ አጋርነትና የጋራ ኢንቨስትመንት ጥሪዎች",
-        "om": "Waliigaltee Hojii Gamtaa fi Invastimantii",
-        "ti": "ናይ ንግዲ ሽርክነትን ሓባራዊ ኢንቨስትመንትን"
+        "en": "Business Partnerships",
+        "am": "የንግድ አጋርነት",
+        "om": "Waliigaltee Hojii Gamtaa",
+        "ti": "ናይ ንግዲ ሽርክነት"
       },
       "description": null,
       "level": 2,
@@ -285,7 +343,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Partnerships & Joint Ventures",
+        "Joint Ventures",
+        "Waliigaltee Hojii Gamtaa fi Invastimantii",
+        "ናይ ንግዲ ሽርክነትን ሓባራዊ ኢንቨስትመንትን",
+        "የንግድ አጋርነትና የጋራ ኢንቨስትመንት ጥሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -321,8 +385,8 @@
       "classification_system_code": "SYS_OPP",
       "slug": "bridge-engineering-river-crossing-works",
       "names": {
-        "en": "Bridge Engineering & River Crossing Works",
-        "am": "የድልድይ ኢንጂነሪንግና የወንዝ መሻገሪያ ስራዎች",
+        "en": "Bridge Engineering",
+        "am": "የድልድይ ኢንጂነሪንግ",
         "om": "Hojiiwwan Ijaarsa Riqichaa",
         "ti": "ናይ ድልድል ህንጸት ስራሕቲ"
       },
@@ -337,7 +401,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bridge Engineering & River Crossing Works",
+        "River Crossing Works",
+        "የድልድይ ኢንጂነሪንግና የወንዝ መሻገሪያ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -347,9 +415,9 @@
       "classification_system_code": "SYS_OPP",
       "slug": "urban-drainage-flood-protection-works",
       "names": {
-        "en": "Urban Drainage & Flood Protection Works",
-        "am": "የከተማ የፍሳሽ ማስወገጃና የጎርፍ መከላከያ ስራዎች",
-        "om": "Ijaarsa Bo'oo fi Eegumsa Balaa Loolaa",
+        "en": "Urban Drainage",
+        "am": "የከተማ የፍሳሽ ማስወገጃ",
+        "om": "Ijaarsa Bo'oo",
         "ti": "ናይ ፈሳሲ መወገዲ መስመራት ህንጸት"
       },
       "description": null,
@@ -363,7 +431,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Flood Protection Works",
+        "Ijaarsa Bo'oo fi Eegumsa Balaa Loolaa",
+        "Urban Drainage & Flood Protection Works",
+        "የከተማ የፍሳሽ ማስወገጃና የጎርፍ መከላከያ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -373,10 +446,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "deep-water-well-drilling-pumping-station-bids",
       "names": {
-        "en": "Deep Water Well Drilling & Pumping Station Bids",
-        "am": "የጥልቅ የውሃ ጉድጓድ ቁፋሮና የፓምፕ ጣቢያ ግንባታ",
+        "en": "Deep Water Well Drilling",
+        "am": "የጥልቅ የውሃ ጉድጓድ ቁፋሮ",
         "om": "Qophii Boolla Bishaan Gad-fagoo",
-        "ti": "ናይ ማይ ዒላታት ምኹዓትን ፓምፕን ጨረታ"
+        "ti": "ናይ ማይ ዒላታት ምኹዓት"
       },
       "description": null,
       "level": 3,
@@ -389,7 +462,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Deep Water Well Drilling & Pumping Station Bids",
+        "Pumping Station Bids",
+        "ናይ ማይ ዒላታት ምኹዓትን ፓምፕን ጨረታ",
+        "የጥልቅ የውሃ ጉድጓድ ቁፋሮና የፓምፕ ጣቢያ ግንባታ"
+      ],
       "redirects": []
     },
     {
@@ -399,8 +477,8 @@
       "classification_system_code": "SYS_OPP",
       "slug": "rural-electrification-power-grid-expansion",
       "names": {
-        "en": "Rural Electrification & Power Grid Expansion",
-        "am": "የገጠር ኤሌክትሪፊኬሽንና የኃይል ማከፋፈያ መስመር",
+        "en": "Rural Electrification",
+        "am": "የገጠር ኤሌክትሪፊኬሽን",
         "om": "Tamsaasa Humna Elektiriikii Baadiyyaa",
         "ti": "ናይ ገጠር ኤሌክትሪክ ምስፋሕ ጨረታ"
       },
@@ -415,7 +493,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Power Grid Expansion",
+        "Rural Electrification & Power Grid Expansion",
+        "የገጠር ኤሌክትሪፊኬሽንና የኃይል ማከፋፈያ መስመር"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +533,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "school-textbooks-printing-delivery",
       "names": {
-        "en": "School Textbooks Printing & Delivery",
-        "am": "የትምህርት መጻሕፍት ህትመትና አቅርቦት",
-        "om": "Maxxansa fi Dhiyeessa Kitaabota Barnootaa",
-        "ti": "ናይ መጻሕፍቲ ሕትመትን ቀረብን ጨረታ"
+        "en": "School Textbooks Printing",
+        "am": "የትምህርት መጻሕፍት ህትመት",
+        "om": "Maxxansa",
+        "ti": "ናይ መጻሕፍቲ ሕትመት"
       },
       "description": null,
       "level": 3,
@@ -467,7 +549,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Delivery",
+        "Maxxansa fi Dhiyeessa Kitaabota Barnootaa",
+        "School Textbooks Printing & Delivery",
+        "ናይ መጻሕፍቲ ሕትመትን ቀረብን ጨረታ",
+        "የትምህርት መጻሕፍት ህትመትና አቅርቦት"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +617,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "ambulance-emergency-medical-vehicles-supply",
       "names": {
-        "en": "Ambulance & Emergency Medical Vehicles Supply",
-        "am": "የአምቡላንስና የአደጋ ጊዜ የህክምና ተሽከርካሪዎች",
-        "om": "Dhiyeessa Ambulaansii fi Konkolaattota Yaalaa",
-        "ti": "ናይ ኣምቡላንስን ህጹጽ ረድኤት መካይንን ቀረብ"
+        "en": "Ambulance",
+        "am": "የአምቡላንስ",
+        "om": "Dhiyeessa Ambulaansii",
+        "ti": "ናይ ኣምቡላንስ"
       },
       "description": null,
       "level": 3,
@@ -545,7 +633,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ambulance & Emergency Medical Vehicles Supply",
+        "Dhiyeessa Ambulaansii fi Konkolaattota Yaalaa",
+        "Emergency Medical Vehicles Supply",
+        "ናይ ኣምቡላንስን ህጹጽ ረድኤት መካይንን ቀረብ",
+        "የአምቡላንስና የአደጋ ጊዜ የህክምና ተሽከርካሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +649,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "national-identity-biometric-system-bids",
       "names": {
-        "en": "National Identity & Biometric System Bids",
-        "am": "የብሔራዊ መታወቂያና ባዮሜትሪክ ስርዓት ጨረታ",
-        "om": "Sirna Eenyummaa fi Baayomeetiriikii",
-        "ti": "ናይ ሃገራዊ መታወቕን ባዮሜትሪክን ጨረታ"
+        "en": "National Identity",
+        "am": "የብሔራዊ መታወቂያ",
+        "om": "Sirna Eenyummaa",
+        "ti": "ናይ ሃገራዊ መታወቕ"
       },
       "description": null,
       "level": 3,
@@ -571,7 +665,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Biometric System Bids",
+        "National Identity & Biometric System Bids",
+        "Sirna Eenyummaa fi Baayomeetiriikii",
+        "ናይ ሃገራዊ መታወቕን ባዮሜትሪክን ጨረታ",
+        "የብሔራዊ መታወቂያና ባዮሜትሪክ ስርዓት ጨረታ"
+      ],
       "redirects": []
     },
     {
@@ -581,10 +681,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "customs-revenue-management-software",
       "names": {
-        "en": "Customs & Revenue Management Software",
-        "am": "የጉምሩክና ገቢዎች አስተዳደር ሶፍትዌር",
-        "om": "Sooftiweerii Bulchiinsa Galii fi Gumurukii",
-        "ti": "ናይ ጉምሩክን ኣታዊታትን ምሕደራ ሶፍትዌር"
+        "en": "Customs",
+        "am": "የጉምሩክ",
+        "om": "Sooftiweerii Bulchiinsa Galii",
+        "ti": "ናይ ጉምሩክ"
       },
       "description": null,
       "level": 3,
@@ -597,7 +697,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Customs & Revenue Management Software",
+        "Revenue Management Software",
+        "Sooftiweerii Bulchiinsa Galii fi Gumurukii",
+        "ናይ ጉምሩክን ኣታዊታትን ምሕደራ ሶፍትዌር",
+        "የጉምሩክና ገቢዎች አስተዳደር ሶፍትዌር"
+      ],
       "redirects": []
     },
     {
@@ -633,10 +739,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "data-center-hardware-server-infrastructure",
       "names": {
-        "en": "Data Center Hardware & Server Infrastructure",
-        "am": "የዳታ ሴንተርና የሰርቨር መሰረተ-ልማት አቅርቦት",
-        "om": "Dhiyeessa Sarvarootaa fi Daataa Sentarii",
-        "ti": "ናይ ዳታ ሴንተርን ሰርቨራትን ቀረብ"
+        "en": "Data Center Hardware",
+        "am": "የዳታ ሴንተር",
+        "om": "Dhiyeessa Sarvarootaa",
+        "ti": "ናይ ዳታ ሴንተር"
       },
       "description": null,
       "level": 3,
@@ -649,7 +755,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Data Center Hardware & Server Infrastructure",
+        "Dhiyeessa Sarvarootaa fi Daataa Sentarii",
+        "Server Infrastructure",
+        "ናይ ዳታ ሴንተርን ሰርቨራትን ቀረብ",
+        "የዳታ ሴንተርና የሰርቨር መሰረተ-ልማት አቅርቦት"
+      ],
       "redirects": []
     },
     {
@@ -659,10 +771,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "government-cloud-cybersecurity-implementation",
       "names": {
-        "en": "Government Cloud & Cybersecurity Implementation",
-        "am": "የመንግስት ክላውድና የሳይበር ደህንነት ትግበራ",
-        "om": "Kilaawudii fi Eegumsa Saayibarii Mootummaa",
-        "ti": "ናይ ሳይበር ድሕንነትን ክላውድን ትግበራ"
+        "en": "Government Cloud",
+        "am": "የመንግስት ክላውድ",
+        "om": "Kilaawudii",
+        "ti": "ናይ ሳይበር ድሕንነት"
       },
       "description": null,
       "level": 3,
@@ -675,7 +787,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cybersecurity Implementation",
+        "Government Cloud & Cybersecurity Implementation",
+        "Kilaawudii fi Eegumsa Saayibarii Mootummaa",
+        "ናይ ሳይበር ድሕንነትን ክላውድን ትግበራ",
+        "የመንግስት ክላውድና የሳይበር ደህንነት ትግበራ"
+      ],
       "redirects": []
     },
     {
@@ -685,10 +803,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "emergency-grain-fortified-food-supply",
       "names": {
-        "en": "Emergency Grain & Fortified Food Supply",
-        "am": "የአስቸኳይ ጊዜ እህልና የተመጣጠነ ምግብ አቅርቦት",
-        "om": "Dhiyeessa Midhaanii fi Nyaata Madaalawaa",
-        "ti": "ናይ ህጹጽ እዋን እኽልን ምግቢን ቀረብ"
+        "en": "Emergency Grain",
+        "am": "የአስቸኳይ ጊዜ እህል",
+        "om": "Dhiyeessa Midhaanii",
+        "ti": "ናይ ህጹጽ እዋ"
       },
       "description": null,
       "level": 3,
@@ -701,7 +819,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dhiyeessa Midhaanii fi Nyaata Madaalawaa",
+        "Emergency Grain & Fortified Food Supply",
+        "Fortified Food Supply",
+        "ናይ ህጹጽ እዋን እኽልን ምግቢን ቀረብ",
+        "የአስቸኳይ ጊዜ እህልና የተመጣጠነ ምግብ አቅርቦት"
+      ],
       "redirects": []
     },
     {
@@ -711,10 +835,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "non-food-items-nfi-shelter-kit-procurement",
       "names": {
-        "en": "Non-Food Items (NFI) & Shelter Kit Procurement",
-        "am": "የምግብ ነክ ያልሆኑ ቁሳቁሶችና የመጠለያ ኪቶች",
-        "om": "Bittaa Meeshaalee Qophii Dawoo fi NFI",
-        "ti": "ናይ መዕቖቢ ኣቑሑትን ሓገዛትን ቀረብ"
+        "en": "Non-Food Items (NFI)",
+        "am": "የምግብ ነክ ያልሆኑ ቁሳቁሶች",
+        "om": "Bittaa Meeshaalee Qophii Dawoo",
+        "ti": "ናይ መዕቖቢ ኣቑሑት"
       },
       "description": null,
       "level": 3,
@@ -727,7 +851,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Bittaa Meeshaalee Qophii Dawoo fi NFI",
+        "Non-Food Items (NFI) & Shelter Kit Procurement",
+        "Shelter Kit Procurement",
+        "ናይ መዕቖቢ ኣቑሑትን ሓገዛትን ቀረብ",
+        "የምግብ ነክ ያልሆኑ ቁሳቁሶችና የመጠለያ ኪቶች"
+      ],
       "redirects": []
     },
     {
@@ -737,10 +867,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "humanitarian-4wd-fleet-lease-rental",
       "names": {
-        "en": "Humanitarian 4WD Fleet Lease & Rental",
+        "en": "Humanitarian 4WD Fleet Lease",
         "am": "ባለ 4-እግር ተሽከርካሪዎች ኪራይ ለሰብአዊ ስራዎች",
         "om": "Kiree Konkolaattota 4WD Gargaarsaa",
-        "ti": "ናይ 4WD መካይን ክራይ ንሰብኣዊ ስራሕቲ"
+        "ti": "ናይ 4WD መካይ"
       },
       "description": null,
       "level": 3,
@@ -753,7 +883,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Humanitarian 4WD Fleet Lease & Rental",
+        "Rental",
+        "ናይ 4WD መካይን ክራይ ንሰብኣዊ ስራሕቲ"
+      ],
       "redirects": []
     },
     {
@@ -763,10 +897,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "water-trucking-mobile-water-treatment-units",
       "names": {
-        "en": "Water Trucking & Mobile Water Treatment Units",
-        "am": "የቦቴ ውሃ ማጓጓዝና ተንቀሳቃሽ የውሃ ማጣሪያ ክፍሎች",
+        "en": "Water Trucking",
+        "am": "የቦቴ ውሃ ማጓጓዝ",
         "om": "Tajaajila Geejjiba Bishaan Bootee",
-        "ti": "ናይ ቦቲ ማይ ምጉዕዓዝን መጽረይን"
+        "ti": "ናይ ቦቲ ማይ ምጉዕዓዝ"
       },
       "description": null,
       "level": 3,
@@ -779,7 +913,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Mobile Water Treatment Units",
+        "Water Trucking & Mobile Water Treatment Units",
+        "ናይ ቦቲ ማይ ምጉዕዓዝን መጽረይን",
+        "የቦቴ ውሃ ማጓጓዝና ተንቀሳቃሽ የውሃ ማጣሪያ ክፍሎች"
+      ],
       "redirects": []
     },
     {
@@ -789,10 +928,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "emergency-medical-tents-field-hospitals",
       "names": {
-        "en": "Emergency Medical Tents & Field Hospitals",
-        "am": "የአደጋ ጊዜ የህክምና ድንኳኖችና የመስክ ሆስፒታሎች",
-        "om": "Dunkaana Yaala Balaa fi Hospitaala Dirree",
-        "ti": "ናይ ህጹጽ ረድኤት ድንኳናትን ሆስፒታላትን"
+        "en": "Emergency Medical Tents",
+        "am": "የአደጋ ጊዜ የህክም",
+        "om": "Dunkaana Yaala Balaa",
+        "ti": "ናይ ህጹጽ ረድኤት ድንኳናት"
       },
       "description": null,
       "level": 3,
@@ -805,7 +944,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dunkaana Yaala Balaa fi Hospitaala Dirree",
+        "Emergency Medical Tents & Field Hospitals",
+        "Field Hospitals",
+        "ናይ ህጹጽ ረድኤት ድንኳናትን ሆስፒታላትን",
+        "የአደጋ ጊዜ የህክምና ድንኳኖችና የመስክ ሆስፒታሎች"
+      ],
       "redirects": []
     },
     {
@@ -815,10 +960,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "community-hand-pump-solar-borehole-construction",
       "names": {
-        "en": "Community Hand Pump & Solar Borehole Construction",
-        "am": "የእጅ ፓምፕና የፀሐይ ብርሃን የውሃ ጉድጓድ ግንባታ",
+        "en": "Community Hand Pump",
+        "am": "የእጅ ፓምፕ",
         "om": "Ijaarsa Boolla Bishaan Aduwaa Hawaasaa",
-        "ti": "ናይ ማሕበረሰብ ማይ ዒላታትን ፓምፕን ህንጸት"
+        "ti": "ናይ ማሕበረሰብ ማይ ዒላታት"
       },
       "description": null,
       "level": 3,
@@ -831,7 +976,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Community Hand Pump & Solar Borehole Construction",
+        "Solar Borehole Construction",
+        "ናይ ማሕበረሰብ ማይ ዒላታትን ፓምፕን ህንጸት",
+        "የእጅ ፓምፕና የፀሐይ ብርሃን የውሃ ጉድጓድ ግንባታ"
+      ],
       "redirects": []
     },
     {
@@ -893,10 +1043,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "irrigation-canal-rehabilitation-masonry-bids",
       "names": {
-        "en": "Irrigation Canal Rehabilitation & Masonry Bids",
-        "am": "የመስኖ ቦዮች እድሳትና ግንባታ ጨረታ",
+        "en": "Irrigation Canal Rehabilitation",
+        "am": "የመስኖ ቦዮች እድሳት",
         "om": "Haareffama Bo'oo Jallisiifi Ijaarsaa",
-        "ti": "ናይ መስኖ መስመራት ጽገናን ህንጸትን"
+        "ti": "ናይ መስኖ መስመራት ጽገና"
       },
       "description": null,
       "level": 3,
@@ -909,7 +1059,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Irrigation Canal Rehabilitation & Masonry Bids",
+        "Masonry Bids",
+        "ናይ መስኖ መስመራት ጽገናን ህንጸትን",
+        "የመስኖ ቦዮች እድሳትና ግንባታ ጨረታ"
+      ],
       "redirects": []
     },
     {
@@ -997,10 +1152,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "fmcg-packaged-foods-regional-distribution",
       "names": {
-        "en": "FMCG & Packaged Foods Regional Distribution",
-        "am": "የታሸጉ ምግቦችና የፍጆታ እቃዎች ክልላዊ አከፋፋይነት",
-        "om": "Raabsaa Nyaata Qophaa'ee fi Meeshaalee",
-        "ti": "ናይ ዝተዓሸጉ ምግብታትን ፍጆታን ምከፋፋል"
+        "en": "FMCG",
+        "am": "የታሸጉ ምግቦች",
+        "om": "Raabsaa Nyaata Qophaa'ee",
+        "ti": "ናይ ዝተዓሸጉ ምግብታት"
       },
       "description": null,
       "level": 3,
@@ -1013,7 +1168,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "FMCG & Packaged Foods Regional Distribution",
+        "Packaged Foods Regional Distribution",
+        "Raabsaa Nyaata Qophaa'ee fi Meeshaalee",
+        "ናይ ዝተዓሸጉ ምግብታትን ፍጆታን ምከፋፋል",
+        "የታሸጉ ምግቦችና የፍጆታ እቃዎች ክልላዊ አከፋፋይነት"
+      ],
       "redirects": []
     },
     {
@@ -1049,8 +1210,8 @@
       "classification_system_code": "SYS_OPP",
       "slug": "solar-renewable-energy-equipment-dealership",
       "names": {
-        "en": "Solar & Renewable Energy Equipment Dealership",
-        "am": "የታዳሽ ኃይል መሣሪያዎች የውክልና መብት",
+        "en": "Solar",
+        "am": "የታዳሽ ኃይል መሣሪያዎች የውክል",
         "om": "Bakka-bu'ummaa Meeshaalee Aduwaa",
         "ti": "ናይ ጸሓይ ሓይሊ መሳርሒታት ውክልና"
       },
@@ -1065,7 +1226,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Renewable Energy Equipment Dealership",
+        "Solar & Renewable Energy Equipment Dealership",
+        "የታዳሽ ኃይል መሣሪያዎች የውክልና መብት"
+      ],
       "redirects": []
     },
     {
@@ -1153,10 +1318,10 @@
       "classification_system_code": "SYS_OPP",
       "slug": "mineral-exploration-mining-joint-venture",
       "names": {
-        "en": "Mineral Exploration & Mining Joint Venture",
-        "am": "የማዕድን ፍለጋና ማውጣት የጋራ አጋርነት",
+        "en": "Mineral Exploration",
+        "am": "የማዕድን ፍለጋ",
         "om": "Waliigaltee Gamtaa Qorannoo Albuudaa",
-        "ti": "ናይ ማዕድን ምፍላሽን ምውጻእን ሽርክነት"
+        "ti": "ናይ ማዕድ"
       },
       "description": null,
       "level": 3,
@@ -1169,7 +1334,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Mineral Exploration & Mining Joint Venture",
+        "Mining Joint Venture",
+        "ናይ ማዕድን ምፍላሽን ምውጻእን ሽርክነት",
+        "የማዕድን ፍለጋና ማውጣት የጋራ አጋርነት"
+      ],
       "redirects": []
     },
     {
@@ -1179,7 +1349,7 @@
       "classification_system_code": "SYS_OPP",
       "slug": "tech-startup-angel-growth-capital-equity-call",
       "names": {
-        "en": "Tech Startup Angel & Growth Capital Equity Call",
+        "en": "Tech Startup Angel",
         "am": "የቴክኖሎጂ ጀማሪ ድርጅቶች የፍትሃዊ ድርሻ ኢንቨስትመንት",
         "om": "Invastimantii Dhaabbilee Teeknoolojii",
         "ti": "ናይ ቴክኖሎጂ ጀመርቲ ትካላት ወፍሪ"
@@ -1195,7 +1365,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Growth Capital Equity Call",
+        "Tech Startup Angel & Growth Capital Equity Call"
+      ],
       "redirects": []
     }
   ]

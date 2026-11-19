@@ -1,14 +1,12 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { Category, ProductFilters } from '@/types';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ProductFilters } from '@/types';
 import { LocationSelector, LocationValue } from '@/components/location/LocationSelector';
 import { useLocale } from '@/hooks/useLocale';
-import { api } from '@/lib/api';
 import { SlidersHorizontal, RotateCcw } from 'lucide-react';
 
 interface Props {
-  categories: Category[];
   onFilter: (f: ProductFilters) => void;
 }
 
@@ -17,68 +15,38 @@ const CONDITIONS = [
   { value: 'used', labelKey: 'condition_used' },
 ] as const;
 
-export function FilterSidebar({ categories, onFilter }: Props) {
-  const { t, locale } = useLocale();
+export function FilterSidebar({ onFilter }: Props) {
+  const { t } = useLocale();
   const router = useRouter();
-  const [categoryId, setCategoryId] = useState('');
-  const [subcategory, setSubcategory] = useState('');
-  const [item, setItem] = useState('');
+  const searchParams = useSearchParams();
+
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [condition, setCondition] = useState('');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
   const [locationQuery, setLocationQuery] = useState<LocationValue>({});
 
-  // Dynamic child categories loaded from database hierarchy
-  const [loadedChildren, setLoadedChildren] = useState<Category[]>([]);
+  // Sync with searchParams if URL changes externally
+  useEffect(() => {
+    const type = searchParams.get('type');
+    if (type === 'sale' || type === 'rent' || type === 'all') {
+      setListingType(type);
+    }
+    const cond = searchParams.get('condition');
+    if (cond) setCondition(cond);
+    const minP = searchParams.get('min_price');
+    if (minP) setMinPrice(minP);
+    const maxP = searchParams.get('max_price');
+    if (maxP) setMaxPrice(maxP);
+  }, [searchParams]);
 
   const handleLocationChange = useCallback((v: LocationValue) => {
     setLocationQuery(v);
   }, []);
 
-  const selectedCat = categories.find(c => String(c.id) === categoryId);
-  const effectiveChildren = (selectedCat?.children && selectedCat.children.length > 0)
-    ? selectedCat.children
-    : loadedChildren;
-
-  // If selectedCat already has children in the tree, use them. Otherwise fetch via API.
-  useEffect(() => {
-    let active = true;
-    if (!categoryId) {
-      const timer = setTimeout(() => {
-        if (active) {
-          setLoadedChildren([]);
-          setSubcategory('');
-          setItem('');
-        }
-      }, 0);
-      return () => { active = false; clearTimeout(timer); };
-    }
-
-    if (!selectedCat?.children || selectedCat.children.length === 0) {
-      api.getCategoryChildren(Number(categoryId), locale)
-        .then(children => {
-          if (active) setLoadedChildren(Array.isArray(children) ? children : []);
-        })
-        .catch(() => {
-          if (active) setLoadedChildren([]);
-        });
-    }
-    return () => { active = false; };
-  }, [categoryId, selectedCat, locale]);
-
-  const selectedSub = effectiveChildren.find(sc => sc.slug === subcategory || String(sc.id) === subcategory);
-  const itemOptions = selectedSub?.children ?? [];
-
   const apply = () => {
     const f: ProductFilters = {};
     if (listingType !== 'all') f.listing_type = listingType;
-    if (categoryId) {
-      f.category_id = Number(categoryId);
-      f.category_hierarchy_id = selectedSub?.id ?? Number(categoryId);
-    }
-    if (subcategory) f.subcategory = subcategory;
-    if (item) f.item = item;
     if (minPrice) f.min_price = Number(minPrice);
     if (maxPrice) f.max_price = Number(maxPrice);
     if (condition) f.condition = condition;
@@ -89,30 +57,47 @@ export function FilterSidebar({ categories, onFilter }: Props) {
     else if (locationQuery.region) f.region = locationQuery.region;
     onFilter(f);
 
-    const p = new URLSearchParams();
+    const p = new URLSearchParams(searchParams.toString());
     if (listingType !== 'all') p.set('type', listingType);
-    if (f.category_id) p.set('category_id', String(f.category_id));
-    if (f.category_hierarchy_id) p.set('category_hierarchy_id', String(f.category_hierarchy_id));
-    if (f.subcategory) p.set('subcategory', f.subcategory);
-    if (f.item) p.set('item', f.item);
+    else p.delete('type');
+
+    if (minPrice) p.set('min_price', minPrice);
+    else p.delete('min_price');
+
+    if (maxPrice) p.set('max_price', maxPrice);
+    else p.delete('max_price');
+
+    if (condition) p.set('condition', condition);
+    else p.delete('condition');
+
     if (f.location_hierarchy_id) p.set('location_hierarchy_id', String(f.location_hierarchy_id));
     if (f.woreda) p.set('woreda', f.woreda);
     else if (f.subcity) p.set('subcity', f.subcity);
     else if (f.zone) p.set('zone', f.zone);
     else if (f.region) p.set('region', f.region);
+
     router.push(`/products${p.toString() ? '?' + p.toString() : ''}`);
   };
 
   const clear = () => {
     setListingType('all');
-    setCategoryId('');
-    setSubcategory('');
-    setItem('');
     setMinPrice('');
     setMaxPrice('');
     setCondition('');
     setLocationQuery({} as LocationValue);
     onFilter({});
+
+    const p = new URLSearchParams(searchParams.toString());
+    p.delete('type');
+    p.delete('min_price');
+    p.delete('max_price');
+    p.delete('condition');
+    p.delete('location_hierarchy_id');
+    p.delete('region');
+    p.delete('zone');
+    p.delete('subcity');
+    p.delete('woreda');
+    router.push(`/products${p.toString() ? '?' + p.toString() : ''}`);
   };
 
   const cls = 'w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all';
@@ -165,65 +150,7 @@ export function FilterSidebar({ categories, onFilter }: Props) {
         </div>
       </div>
 
-      {/* Dimension 2: Product & Asset Taxonomy (Categories) */}
-      <div className="space-y-1.5">
-        <p className={lbl}>{t.ui.selectCategory}</p>
-        <select
-          className={cls}
-          value={categoryId}
-          onChange={e => {
-            setCategoryId(e.target.value);
-            setSubcategory('');
-            setItem('');
-          }}
-        >
-          <option value="">{t.categories.all}</option>
-          {categories.map(c => (
-            <option key={c.id} value={c.id}>
-              {c.name || c.name_en || c.slug}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Level 2 — Subcategory */}
-      {effectiveChildren.length > 0 && (
-        <div className="space-y-1.5">
-          <p className={lbl}>{t.ui.subCategoryLabel}</p>
-          <select
-            className={cls}
-            value={subcategory}
-            onChange={e => {
-              setSubcategory(e.target.value);
-              setItem('');
-            }}
-          >
-            <option value="">— {t.ui.subCategoryLabel} —</option>
-            {effectiveChildren.map(sub => (
-              <option key={sub.id} value={sub.slug}>
-                {sub.name || sub.name_en || sub.slug}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-
-      {/* Level 3 — Item */}
-      {itemOptions.length > 0 && (
-        <div className="space-y-1.5">
-          <p className={lbl}>{(t.ui as any).itemLabel ?? 'Specific Item'}</p>
-          <select className={cls} value={item} onChange={e => setItem(e.target.value)}>
-            <option value="">— {(t.ui as any).itemLabel ?? 'All'} —</option>
-            {itemOptions.map(it => (
-              <option key={it.id} value={it.slug}>
-                {it.name || it.name_en || it.slug}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-
-      {/* Dimension 3: Item Condition */}
+      {/* Dimension 2: Item Condition */}
       <div className="space-y-1.5">
         <p className={lbl}>{t.ui.condition}</p>
         <select className={cls} value={condition} onChange={e => setCondition(e.target.value)}>

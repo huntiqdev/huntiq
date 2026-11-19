@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Pharmaceuticals & Drug Industry",
-        "am": "ፋርማሲዩቲካልስና የመድኃኒት ኢንዱስትሪ",
-        "om": "Industirii Qoricha fi Farmaasiitii",
-        "ti": "ፋርማሲዩቲካልስን ኢንዱስትሪ መድኃኒትን"
+        "en": "Pharmaceuticals",
+        "am": "ፋርማሲዩቲካልስ",
+        "om": "Industirii Qoricha",
+        "ti": "ፋርማሲዩቲካልስ"
       },
       "slug": "pharmaceuticals-drug-industry",
       "description": "Drug manufacturing, pharmaceutical distribution, medical supplies production, and regulatory services.",
@@ -50,7 +50,13 @@
       "is_archived": true,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Drug Industry",
+        "Industirii Qoricha fi Farmaasiitii",
+        "Pharmaceuticals & Drug Industry",
+        "ፋርማሲዩቲካልስና የመድኃኒት ኢንዱስትሪ",
+        "ፋርማሲዩቲካልስን ኢንዱስትሪ መድኃኒትን"
+      ],
       "redirects": []
     },
     {
@@ -839,9 +845,9 @@
       "parent_code": "pharmaceuticals-drug-industry",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Herbal & Traditional Medicines",
+        "en": "Herbal",
         "am": "ባህላዊ ቅጠላ መድኃኒቶች",
-        "om": "Qoricha Aadaa fi Biqiltootaa",
+        "om": "Qoricha Aadaa",
         "ti": "ሓምሊ ባህላዊ መድኃኒት"
       },
       "slug": "herbal-traditional-medicines",
@@ -856,7 +862,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Herbal & Traditional Medicines",
+        "Qoricha Aadaa fi Biqiltootaa",
+        "Traditional Medicines"
+      ],
       "redirects": []
     },
     {
@@ -969,9 +979,9 @@
       "parent_code": "herbal-traditional-medicines",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Herbal & Traditional Medicines",
+        "en": "Other Herbal",
         "am": "ሌሎች ባህላዊ ቅጠላ መድኃኒቶች",
-        "om": "Qoricha Aadaa fi Biqiltootaa Biroo",
+        "om": "Qoricha Aadaa",
         "ti": "ካልኦት ሓምሊ ባህላዊ መድኃኒት"
       },
       "slug": "other-herbal-traditional-medicines",
@@ -986,7 +996,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Herbal & Traditional Medicines",
+        "Qoricha Aadaa fi Biqiltootaa Biroo",
+        "Traditional Medicines"
+      ],
       "redirects": []
     },
     {

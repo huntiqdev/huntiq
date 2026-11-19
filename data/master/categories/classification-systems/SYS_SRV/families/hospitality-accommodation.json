@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "hospitality-accommodation",
       "names": {
-        "en": "Hospitality & Accommodation",
-        "am": "እንግዳ ተቀባይነትና መስመር",
-        "om": "Kan Dhaabbatee fi Tajaajila",
-        "ti": "መስተንን እንግዳ ተቀባይነትን"
+        "en": "Hospitality",
+        "am": "እንግዳ ተቀባይነት",
+        "om": "Kan Dhaabbatee",
+        "ti": "መስተን"
       },
       "description": "Hotels, lodges, guest houses, restaurants, catering, and hospitality services.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accommodation",
+        "Hospitality & Accommodation",
+        "Kan Dhaabbatee fi Tajaajila",
+        "መስተንን እንግዳ ተቀባይነትን",
+        "እንግዳ ተቀባይነትና መስመር"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +41,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "conference-venues",
       "names": {
-        "en": "Conference & Meeting Venues",
-        "am": "የስብሰባና ጉባኤ ቦታዎች",
+        "en": "Conference",
+        "am": "የስብሰባ",
         "om": "Bakka Waliigaltee",
-        "ti": "ቦታታት ስብሓን ጉባኤን"
+        "ti": "ቦታታት ስብሓ"
       },
       "description": "",
       "level": 1,
@@ -51,7 +57,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Conference & Meeting Venues",
+        "Meeting Venues",
+        "ቦታታት ስብሓን ጉባኤን",
+        "የስብሰባና ጉባኤ ቦታዎች"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +72,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "eco-lodges-resorts",
       "names": {
-        "en": "Eco-Lodges & Resorts",
-        "am": "ኢኮ-ሎጅና ሪሰርቶች",
-        "om": "Loojii fi Resorts",
-        "ti": "ኢኮ-ሎጅን ሪሰርትን"
+        "en": "Eco-Lodges",
+        "am": "ኢኮ-ሎጅ",
+        "om": "Loojii",
+        "ti": "ኢኮ-ሎጅ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +88,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Eco-Lodges & Resorts",
+        "Loojii fi Resorts",
+        "Resorts",
+        "ኢኮ-ሎጅና ሪሰርቶች",
+        "ኢኮ-ሎጅን ሪሰርትን"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +130,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "food-beverage-services",
       "names": {
-        "en": "Food & Beverage Services",
-        "am": "የምግብና መጠጥ አገልግሎት",
+        "en": "Food Services",
+        "am": "የምግብ",
         "om": "Tajaajila Nyaataa",
-        "ti": "ኣገልግሎት ምግቢን መስተን"
+        "ti": "ኣገልግሎት ምግቢ"
       },
       "description": "",
       "level": 1,
@@ -129,7 +146,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Beverage Services",
+        "Food & Beverage Services",
+        "ኣገልግሎት ምግቢን መስተን",
+        "የምግብና መጠጥ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +213,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "hotels-guest-houses",
       "names": {
-        "en": "Hotels & Guest Houses",
-        "am": "ሆቴሎችና የእንግዳ ቤቶች",
-        "om": "Hoteela fi Mana Yaabbii",
-        "ti": "ሆቴላትን ቤታት እንግዳን"
+        "en": "Hotels",
+        "am": "ሆቴሎች",
+        "om": "Hoteela",
+        "ti": "ሆቴላት"
       },
       "description": "",
       "level": 1,
@@ -207,7 +229,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guest Houses",
+        "Hoteela fi Mana Yaabbii",
+        "Hotels & Guest Houses",
+        "ሆቴላትን ቤታት እንግዳን",
+        "ሆቴሎችና የእንግዳ ቤቶች"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +245,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "restaurant-services",
       "names": {
-        "en": "Restaurant & Catering Services",
-        "am": "የሬስቶራንትና የካቲሪንግ አገልግሎት",
+        "en": "Restaurant Services",
+        "am": "የሬስቶራንት",
         "om": "Tajaajila Mana Nyaataa",
-        "ti": "ኣገልግሎት ሬስቶራንትን ካቲሪንግን"
+        "ti": "ኣገልግሎት ሬስቶራንት"
       },
       "description": "",
       "level": 1,
@@ -233,7 +261,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Catering Services",
+        "Restaurant & Catering Services",
+        "ኣገልግሎት ሬስቶራንትን ካቲሪንግን",
+        "የሬስቶራንትና የካቲሪንግ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -243,7 +276,7 @@
       "classification_system_code": "SYS_SRV",
       "slug": "spa-wellness-hotel",
       "names": {
-        "en": "Hotel Spa & Wellness",
+        "en": "Hotel Spa",
         "am": "ሆቴል ስፓ",
         "om": "Spa Hoteelaa",
         "ti": "ስፓ ሆቴል"
@@ -259,7 +292,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hotel Spa & Wellness",
+        "Wellness"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +305,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-hospitality-accommodation",
       "names": {
-        "en": "Specialized & Custom Hospitality & Accommodation",
-        "am": "ልዩና ብጁ Hospitality & Accommodation",
-        "om": "Kan Addaa fi Filatamaa Hospitality & Accommodation",
-        "ti": "ፍሉይን ዝተዳለወን Hospitality & Accommodation"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -285,7 +321,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accommodation",
+        "Custom Hospitality",
+        "Kan Addaa fi Filatamaa Hospitality & Accommodation",
+        "Specialized & Custom Hospitality & Accommodation",
+        "ልዩና ብጁ Hospitality & Accommodation",
+        "ፍሉይን ዝተዳለወን Hospitality & Accommodation"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1274,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-conference-meeting-venues",
       "names": {
-        "en": "Specialized & Custom Conference & Meeting Venues",
-        "am": "ልዩና ብጁ Conference & Meeting Venues",
-        "om": "Kan Addaa fi Filatamaa Conference & Meeting Venues",
-        "ti": "ፍሉይን ዝተዳለወን Conference & Meeting Venues"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1290,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Conference",
+        "Kan Addaa fi Filatamaa Conference & Meeting Venues",
+        "Meeting Venues",
+        "Specialized & Custom Conference & Meeting Venues",
+        "ልዩና ብጁ Conference & Meeting Venues",
+        "ፍሉይን ዝተዳለወን Conference & Meeting Venues"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1307,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-eco-lodges-resorts",
       "names": {
-        "en": "Specialized & Custom Eco-Lodges & Resorts",
-        "am": "ልዩና ብጁ Eco-Lodges & Resorts",
-        "om": "Kan Addaa fi Filatamaa Eco-Lodges & Resorts",
-        "ti": "ፍሉይን ዝተዳለወን Eco-Lodges & Resorts"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1323,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Eco-Lodges",
+        "Kan Addaa fi Filatamaa Eco-Lodges & Resorts",
+        "Resorts",
+        "Specialized & Custom Eco-Lodges & Resorts",
+        "ልዩና ብጁ Eco-Lodges & Resorts",
+        "ፍሉይን ዝተዳለወን Eco-Lodges & Resorts"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1340,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-event-catering",
       "names": {
-        "en": "Specialized & Custom Event Catering",
-        "am": "ልዩና ብጁ Event Catering",
-        "om": "Kan Addaa fi Filatamaa Event Catering",
-        "ti": "ፍሉይን ዝተዳለወን Event Catering"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1299,7 +1356,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Event Catering",
+        "Kan Addaa fi Filatamaa Event Catering",
+        "Specialized & Custom Event Catering",
+        "ልዩና ብጁ Event Catering",
+        "ፍሉይን ዝተዳለወን Event Catering"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1372,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-food-beverage-services",
       "names": {
-        "en": "Specialized & Custom Food & Beverage Services",
-        "am": "ልዩና ብጁ Food & Beverage Services",
-        "om": "Kan Addaa fi Filatamaa Food & Beverage Services",
-        "ti": "ፍሉይን ዝተዳለወን Food & Beverage Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1325,7 +1388,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Beverage Services",
+        "Custom Food",
+        "Kan Addaa fi Filatamaa Food & Beverage Services",
+        "Specialized & Custom Food & Beverage Services",
+        "ልዩና ብጁ Food & Beverage Services",
+        "ፍሉይን ዝተዳለወን Food & Beverage Services"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1405,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-food-delivery-platforms",
       "names": {
-        "en": "Specialized & Custom Food Delivery Platforms",
-        "am": "ልዩና ብጁ Food Delivery Platforms",
-        "om": "Kan Addaa fi Filatamaa Food Delivery Platforms",
-        "ti": "ፍሉይን ዝተዳለወን Food Delivery Platforms"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1351,7 +1421,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Food Delivery Platforms",
+        "Kan Addaa fi Filatamaa Food Delivery Platforms",
+        "Specialized & Custom Food Delivery Platforms",
+        "ልዩና ብጁ Food Delivery Platforms",
+        "ፍሉይን ዝተዳለወን Food Delivery Platforms"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1437,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-hospitality-management-services",
       "names": {
-        "en": "Specialized & Custom Hospitality Management Services",
-        "am": "ልዩና ብጁ Hospitality Management Services",
-        "om": "Kan Addaa fi Filatamaa Hospitality Management Services",
-        "ti": "ፍሉይን ዝተዳለወን Hospitality Management Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1453,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Hospitality Management Services",
+        "Kan Addaa fi Filatamaa Hospitality Management Services",
+        "Specialized & Custom Hospitality Management Services",
+        "ልዩና ብጁ Hospitality Management Services",
+        "ፍሉይን ዝተዳለወን Hospitality Management Services"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1469,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-hotels-guest-houses",
       "names": {
-        "en": "Specialized & Custom Hotels & Guest Houses",
-        "am": "ልዩና ብጁ Hotels & Guest Houses",
-        "om": "Kan Addaa fi Filatamaa Hotels & Guest Houses",
-        "ti": "ፍሉይን ዝተዳለወን Hotels & Guest Houses"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1485,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Hotels",
+        "Guest Houses",
+        "Kan Addaa fi Filatamaa Hotels & Guest Houses",
+        "Specialized & Custom Hotels & Guest Houses",
+        "ልዩና ብጁ Hotels & Guest Houses",
+        "ፍሉይን ዝተዳለወን Hotels & Guest Houses"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1502,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-restaurant-catering-services",
       "names": {
-        "en": "Specialized & Custom Restaurant & Catering Services",
-        "am": "ልዩና ብጁ Restaurant & Catering Services",
-        "om": "Kan Addaa fi Filatamaa Restaurant & Catering Services",
-        "ti": "ፍሉይን ዝተዳለወን Restaurant & Catering Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1518,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Catering Services",
+        "Custom Restaurant",
+        "Kan Addaa fi Filatamaa Restaurant & Catering Services",
+        "Specialized & Custom Restaurant & Catering Services",
+        "ልዩና ብጁ Restaurant & Catering Services",
+        "ፍሉይን ዝተዳለወን Restaurant & Catering Services"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1535,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-hotel-spa-wellness",
       "names": {
-        "en": "Specialized & Custom Hotel Spa & Wellness",
-        "am": "ልዩና ብጁ Hotel Spa & Wellness",
-        "om": "Kan Addaa fi Filatamaa Hotel Spa & Wellness",
-        "ti": "ፍሉይን ዝተዳለወን Hotel Spa & Wellness"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1551,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Hotel Spa",
+        "Kan Addaa fi Filatamaa Hotel Spa & Wellness",
+        "Specialized & Custom Hotel Spa & Wellness",
+        "Wellness",
+        "ልዩና ብጁ Hotel Spa & Wellness",
+        "ፍሉይን ዝተዳለወን Hotel Spa & Wellness"
+      ],
       "redirects": []
     }
   ]

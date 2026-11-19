@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Workforce & Employment",
-        "am": "የሰው ኃይልና ቅጥር",
-        "om": "Hojii fi Qacarraa",
-        "ti": "ስራሕን ምቑጻርን"
+        "en": "Workforce",
+        "am": "የሰው ኃይል",
+        "om": "Hojii",
+        "ti": "ስራሕ"
       },
       "slug": "workforce-employment",
       "description": "Jobs, recruitment, freelance/gigs, professional roles, career services, and employment.",
@@ -50,7 +50,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Employment",
+        "Hojii fi Qacarraa",
+        "Workforce & Employment",
+        "ስራሕን ምቑጻርን",
+        "የሰው ኃይልና ቅጥር"
+      ],
       "redirects": []
     },
     {
@@ -59,10 +65,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Administrative & Clerical Jobs",
-        "am": "የአስተዳደርና የቢሮ ስራዎች",
+        "en": "Administrative Jobs",
+        "am": "የአስተዳደር",
         "om": "Hojii Waajjiraa",
-        "ti": "ስራሕ ኣመሓዳሪኣን ቢሮን"
+        "ti": "ስራሕ ኣመሓዳሪኣ"
       },
       "slug": "administrative-clerical-jobs",
       "description": "",
@@ -76,7 +82,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Admin Work",
+        "Administrative & Clerical Jobs",
+        "Clerical Jobs",
+        "Office Jobs",
+        "ስራሕ ኣመሓዳሪኣን ቢሮን",
+        "የአስተዳደርና የቢሮ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -189,10 +202,10 @@
       "parent_code": "administrative-clerical-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Administrative & Clerical Jobs",
-        "am": "ሌሎች የአስተዳደርና የቢሮ ስራዎች",
+        "en": "Other Administrative Jobs",
+        "am": "ሌሎች የአስተዳደር",
         "om": "Hojii Waajjiraa Biroo",
-        "ti": "ካልኦት ስራሕ ኣመሓዳሪኣን ቢሮን"
+        "ti": "ካልኦት ስራሕ ኣመሓዳሪኣ"
       },
       "slug": "other-administrative-clerical-jobs",
       "description": null,
@@ -206,7 +219,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Clerical Jobs",
+        "Other Administrative & Clerical Jobs",
+        "ሌሎች የአስተዳደርና የቢሮ ስራዎች",
+        "ካልኦት ስራሕ ኣመሓዳሪኣን ቢሮን"
+      ],
       "redirects": []
     },
     {
@@ -215,8 +233,8 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Agriculture & Farming Jobs",
-        "am": "የግብርና ስራዎች",
+        "en": "Agriculture Jobs",
+        "am": "የግብር",
         "om": "Hojii Qonnaa",
         "ti": "ስራሕ ሕርሻን"
       },
@@ -232,7 +250,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Agricultural Work",
+        "Agriculture & Farming Jobs",
+        "Farm Labor",
+        "Farming Jobs",
+        "የግብርና ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -345,8 +369,8 @@
       "parent_code": "agriculture-farming-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Agriculture & Farming Jobs",
-        "am": "ሌሎች የግብርና ስራዎች",
+        "en": "Other Agriculture Jobs",
+        "am": "ሌሎች የግብር",
         "om": "Hojii Qonnaa Biroo",
         "ti": "ካልኦት ስራሕ ሕርሻን"
       },
@@ -362,7 +386,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Farming Jobs",
+        "Other Agriculture & Farming Jobs",
+        "ሌሎች የግብርና ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -371,10 +399,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Creative & Design Jobs",
+        "en": "Creative Jobs",
         "am": "የፈጠራ ስራዎች",
         "om": "Hojii Diisaayinii",
-        "ti": "ስራሕ ፈጠራን ዲዛይንን"
+        "ti": "ስራሕ ፈጠራ"
       },
       "slug": "creative-design-jobs",
       "description": "",
@@ -388,7 +416,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Creative & Design Jobs",
+        "Design Jobs",
+        "Designers",
+        "Graphic Design",
+        "ስራሕ ፈጠራን ዲዛይንን"
+      ],
       "redirects": []
     },
     {
@@ -501,10 +535,10 @@
       "parent_code": "creative-design-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Creative & Design Jobs",
+        "en": "Other Creative Jobs",
         "am": "ሌሎች የፈጠራ ስራዎች",
         "om": "Hojii Diisaayinii Biroo",
-        "ti": "ካልኦት ስራሕ ፈጠራን ዲዛይንን"
+        "ti": "ካልኦት ስራሕ ፈጠራ"
       },
       "slug": "other-creative-design-jobs",
       "description": null,
@@ -518,7 +552,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Design Jobs",
+        "Other Creative & Design Jobs",
+        "ካልኦት ስራሕ ፈጠራን ዲዛይንን"
+      ],
       "redirects": []
     },
     {
@@ -553,7 +591,7 @@
       "parent_code": "domestic-worker-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Cooks & Housekeepers",
+        "en": "Cooks",
         "am": "ምግብ አብሳዮ",
         "om": "Qopheessota Nyaataa",
         "ti": "ሓጣቢ ምግቢ"
@@ -570,7 +608,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chefs",
+        "Cooks & Housekeepers",
+        "Housekeepers",
+        "Kitchen Staff"
+      ],
       "redirects": []
     },
     {
@@ -631,7 +674,7 @@
       "parent_code": "domestic-worker-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Nannies & Babysitters",
+        "en": "Nannies",
         "am": "የህፃን ጠባቂዎ",
         "om": "Kunuunsota Daa'immanii",
         "ti": "ሓቓጠቲ ህጻናት"
@@ -648,7 +691,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Au Pairs",
+        "Babysitters",
+        "Childcare",
+        "Nannies & Babysitters"
+      ],
       "redirects": []
     },
     {
@@ -683,10 +731,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Engineering & Construction Jobs",
-        "am": "የምህንገርና ግንባታ ስራዎች",
+        "en": "Engineering Jobs",
+        "am": "የምህንገር",
         "om": "Hojii Ijaarsaa",
-        "ti": "ስራሕ ምህንገርን ህንጣን"
+        "ti": "ስራሕ ምህንገር"
       },
       "slug": "engineering-construction-jobs",
       "description": "",
@@ -700,7 +748,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Civil Engineering",
+        "Construction Jobs",
+        "Engineering & Construction Jobs",
+        "Site Workers",
+        "ስራሕ ምህንገርን ህንጣን",
+        "የምህንገርና ግንባታ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -813,10 +868,10 @@
       "parent_code": "engineering-construction-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Engineering & Construction Jobs",
-        "am": "ሌሎች የምህንገርና ግንባታ ስራዎች",
+        "en": "Other Engineering Jobs",
+        "am": "ሌሎች የምህንገር",
         "om": "Hojii Ijaarsaa Biroo",
-        "ti": "ካልኦት ስራሕ ምህንገርን ህንጣን"
+        "ti": "ካልኦት ስራሕ ምህንገር"
       },
       "slug": "other-engineering-construction-jobs",
       "description": null,
@@ -830,7 +885,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Construction Jobs",
+        "Other Engineering & Construction Jobs",
+        "ሌሎች የምህንገርና ግንባታ ስራዎች",
+        "ካልኦት ስራሕ ምህንገርን ህንጣን"
+      ],
       "redirects": []
     },
     {
@@ -839,10 +899,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Finance & Accounting Jobs",
-        "am": "የፋይናንስና ስሌት ስራዎች",
+        "en": "Finance Jobs",
+        "am": "የፋይናንስ",
         "om": "Hojii Maallaqaa",
-        "ti": "ስራሕ ፋይናንስን ስሌትን"
+        "ti": "ስራሕ ፋይናንስ"
       },
       "slug": "finance-accounting-jobs",
       "description": "",
@@ -856,7 +916,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accountants",
+        "Accounting Jobs",
+        "Bookkeeping",
+        "Finance & Accounting Jobs",
+        "ስራሕ ፋይናንስን ስሌትን",
+        "የፋይናንስና ስሌት ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -1073,10 +1140,10 @@
       "parent_code": "finance-accounting-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Finance & Accounting Jobs",
-        "am": "ሌሎች የፋይናንስና ስሌት ስራዎች",
+        "en": "Other Finance Jobs",
+        "am": "ሌሎች የፋይናንስ",
         "om": "Hojii Maallaqaa Biroo",
-        "ti": "ካልኦት ስራሕ ፋይናንስን ስሌትን"
+        "ti": "ካልኦት ስራሕ ፋይናንስ"
       },
       "slug": "other-finance-accounting-jobs",
       "description": null,
@@ -1090,7 +1157,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Accounting Jobs",
+        "Other Finance & Accounting Jobs",
+        "ሌሎች የፋይናንስና ስሌት ስራዎች",
+        "ካልኦት ስራሕ ፋይናንስን ስሌትን"
+      ],
       "redirects": []
     },
     {
@@ -1099,10 +1171,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Freelance & Digital Gigs",
-        "am": "ፍሪላንስና ዲጂታል ስራዎች",
-        "om": "Freelance fi Gig",
-        "ti": "ፍሪላንስን ዲጂታልን ጊግን"
+        "en": "Freelance",
+        "am": "ፍሪላንስ",
+        "om": "Freelance",
+        "ti": "ፍሪላንስ"
       },
       "slug": "freelance-gigs-digital",
       "description": "",
@@ -1116,7 +1188,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Gigs",
+        "Freelance & Digital Gigs",
+        "Freelance fi Gig",
+        "ፍሪላንስና ዲጂታል ስራዎች",
+        "ፍሪላንስን ዲጂታልን ጊግን"
+      ],
       "redirects": []
     },
     {
@@ -1229,10 +1307,10 @@
       "parent_code": "freelance-gigs-digital",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Freelance & Digital Gigs",
-        "am": "ሌሎች ፍሪላንስና ዲጂታል ስራዎች",
-        "om": "Freelance fi Gig Biroo",
-        "ti": "ካልኦት ፍሪላንስን ዲጂታልን ጊግን"
+        "en": "Other Freelance",
+        "am": "ሌሎች ፍሪላንስ",
+        "om": "Freelance",
+        "ti": "ካልኦት ፍሪላንስ"
       },
       "slug": "other-freelance-gigs-digital",
       "description": null,
@@ -1246,7 +1324,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Gigs",
+        "Freelance fi Gig Biroo",
+        "Other Freelance & Digital Gigs",
+        "ሌሎች ፍሪላንስና ዲጂታል ስራዎች",
+        "ካልኦት ፍሪላንስን ዲጂታልን ጊግን"
+      ],
       "redirects": []
     },
     {
@@ -1411,10 +1495,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Healthcare & Medical Jobs",
-        "am": "የጤናና ህክምና ስራዎች",
+        "en": "Healthcare Jobs",
+        "am": "የጤና",
         "om": "Hojii Fayyaa",
-        "ti": "ስራሕ ጥዕናን ሕክምናን"
+        "ti": "ስራሕ ጥዕና"
       },
       "slug": "healthcare-medical-jobs",
       "description": "",
@@ -1428,7 +1512,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Healthcare & Medical Jobs",
+        "Medical Jobs",
+        "ስራሕ ጥዕናን ሕክምናን",
+        "የጤናና ህክምና ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -1437,8 +1526,8 @@
       "parent_code": "healthcare-medical-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Doctors & Physicians",
-        "am": "ሐኪሞችና ሐኪሞች",
+        "en": "Doctors",
+        "am": "ሐኪሞች",
         "om": "Doktarota",
         "ti": "ሐኪማት"
       },
@@ -1454,7 +1543,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Doctors & Physicians",
+        "Medical Doctors",
+        "Physicians",
+        "Specialists",
+        "ሐኪሞችና ሐኪሞች"
+      ],
       "redirects": []
     },
     {
@@ -1541,10 +1636,10 @@
       "parent_code": "healthcare-medical-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Healthcare & Medical Jobs",
-        "am": "ሌሎች የጤናና ህክምና ስራዎች",
+        "en": "Other Healthcare Jobs",
+        "am": "ሌሎች የጤና",
         "om": "Hojii Fayyaa Biroo",
-        "ti": "ካልኦት ስራሕ ጥዕናን ሕክምናን"
+        "ti": "ካልኦት ስራሕ ጥዕና"
       },
       "slug": "other-healthcare-medical-jobs",
       "description": null,
@@ -1558,7 +1653,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Medical Jobs",
+        "Other Healthcare & Medical Jobs",
+        "ሌሎች የጤናና ህክምና ስራዎች",
+        "ካልኦት ስራሕ ጥዕናን ሕክምናን"
+      ],
       "redirects": []
     },
     {
@@ -1567,10 +1667,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Hospitality & Culinary Jobs",
-        "am": "የእንግዳ ተቀባይነትና የምግብ ስራ ሰራተኞች",
+        "en": "Hospitality Jobs",
+        "am": "የእንግዳ ተቀባይነት",
         "om": "Hojii Mana Nyaataa",
-        "ti": "ስራሕ መስተንን ምግቢን"
+        "ti": "ስራሕ መስተን"
       },
       "slug": "hospitality-culinary-jobs",
       "description": "",
@@ -1584,7 +1684,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Culinary Jobs",
+        "Hospitality & Culinary Jobs",
+        "ስራሕ መስተንን ምግቢን",
+        "የእንግዳ ተቀባይነትና የምግብ ስራ ሰራተኞች"
+      ],
       "redirects": []
     },
     {
@@ -1593,10 +1698,10 @@
       "parent_code": "hospitality-culinary-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Chefs & Cooks",
-        "am": "ሼፎችና ምግብ አብሳዮ",
+        "en": "Chefs",
+        "am": "ሼፎች",
         "om": "Qopheessota Nyaataa",
-        "ti": "ሼፎታትን ሓጣቢ ምግቢን"
+        "ti": "ሼፎታት"
       },
       "slug": "chefs-cooks",
       "description": "",
@@ -1610,7 +1715,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Chefs & Cooks",
+        "Cooks",
+        "Head Chefs",
+        "Line Cooks",
+        "ሼፎታትን ሓጣቢ ምግቢን",
+        "ሼፎችና ምግብ አብሳዮ"
+      ],
       "redirects": []
     },
     {
@@ -1671,7 +1783,7 @@
       "parent_code": "hospitality-culinary-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Waiters & Waitresses",
+        "en": "Waitstaff",
         "am": "ዌተሮ",
         "om": "Waayitarota",
         "ti": "ዌተራት"
@@ -1688,7 +1800,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Servers",
+        "Waiters",
+        "Waiters & Waitresses",
+        "Waitresses"
+      ],
       "redirects": []
     },
     {
@@ -1697,10 +1814,10 @@
       "parent_code": "hospitality-culinary-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Hospitality & Culinary Jobs",
-        "am": "ሌሎች የእንግዳ ተቀባይነትና የምግብ ስራ ሰራተኞች",
+        "en": "Other Hospitality Jobs",
+        "am": "ሌሎች የእንግዳ ተቀባይነት",
         "om": "Hojii Mana Nyaataa Biroo",
-        "ti": "ካልኦት ስራሕ መስተንን ምግቢን"
+        "ti": "ካልኦት ስራሕ መስተን"
       },
       "slug": "other-hospitality-culinary-jobs",
       "description": null,
@@ -1714,7 +1831,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Culinary Jobs",
+        "Other Hospitality & Culinary Jobs",
+        "ሌሎች የእንግዳ ተቀባይነትና የምግብ ስራ ሰራተኞች",
+        "ካልኦት ስራሕ መስተንን ምግቢን"
+      ],
       "redirects": []
     },
     {
@@ -1723,7 +1845,7 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Internship & Apprenticeship",
+        "en": "Internship",
         "am": "የመማር ልምምድ",
         "om": "Leenjii Hojii",
         "ti": "ልምምዲ ስራሕ"
@@ -1740,7 +1862,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Apprenticeship",
+        "Internship & Apprenticeship"
+      ],
       "redirects": []
     },
     {
@@ -1853,7 +1978,7 @@
       "parent_code": "internship-apprenticeship",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Internship & Apprenticeship",
+        "en": "Other Internship",
         "am": "ሌሎች የመማር ልምምድ",
         "om": "Leenjii Hojii Biroo",
         "ti": "ካልኦት ልምምዲ ስራሕ"
@@ -1870,7 +1995,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Apprenticeship",
+        "Other Internship & Apprenticeship"
+      ],
       "redirects": []
     },
     {
@@ -1879,10 +2007,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Recruitment & Staffing Services",
-        "am": "የቅጥርና ሰራተኛ አቅርቦት አገልግሎት",
-        "om": "Qacarraa fi Hojii",
-        "ti": "ኣገልግሎት ምቑጻርን ሰራተኛን ምእታን"
+        "en": "Recruitment Services",
+        "am": "የቅጥር",
+        "om": "Qacarraa",
+        "ti": "ኣገልግሎት ምቑጻር"
       },
       "slug": "recruitment-staffing-services",
       "description": "",
@@ -1896,7 +2024,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Qacarraa fi Hojii",
+        "Recruitment & Staffing Services",
+        "Staffing Services",
+        "ኣገልግሎት ምቑጻርን ሰራተኛን ምእታን",
+        "የቅጥርና ሰራተኛ አቅርቦት አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -2009,10 +2143,10 @@
       "parent_code": "recruitment-staffing-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Recruitment & Staffing Services",
-        "am": "ሌሎች የቅጥርና ሰራተኛ አቅርቦት አገልግሎት",
-        "om": "Qacarraa fi Hojii Biroo",
-        "ti": "ካልኦት ኣገልግሎት ምቑጻርን ሰራተኛን ምእታን"
+        "en": "Other Recruitment Services",
+        "am": "ሌሎች የቅጥር",
+        "om": "Qacarraa",
+        "ti": "ካልኦት ኣገልግሎት ምቑጻር"
       },
       "slug": "other-recruitment-staffing-services",
       "description": null,
@@ -2026,7 +2160,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Recruitment & Staffing Services",
+        "Qacarraa fi Hojii Biroo",
+        "Staffing Services",
+        "ሌሎች የቅጥርና ሰራተኛ አቅርቦት አገልግሎት",
+        "ካልኦት ኣገልግሎት ምቑጻርን ሰራተኛን ምእታን"
+      ],
       "redirects": []
     },
     {
@@ -2035,10 +2175,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Sales & Marketing Jobs",
-        "am": "የሽያጭና የግብይት ስራዎች",
+        "en": "Sales Jobs",
+        "am": "የሽያጭ",
         "om": "Hojii Gurgurtaa",
-        "ti": "ስራሕ ሽያጭን ግብይትን"
+        "ti": "ስራሕ ሽያጭ"
       },
       "slug": "sales-marketing-jobs",
       "description": "",
@@ -2052,7 +2192,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Development",
+        "Marketing Jobs",
+        "Promotions",
+        "Sales & Marketing Jobs",
+        "ስራሕ ሽያጭን ግብይትን",
+        "የሽያጭና የግብይት ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2165,10 +2312,10 @@
       "parent_code": "sales-marketing-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Sales & Marketing Jobs",
-        "am": "ሌሎች የሽያጭና የግብይት ስራዎች",
+        "en": "Other Sales Jobs",
+        "am": "ሌሎች የሽያጭ",
         "om": "Hojii Gurgurtaa Biroo",
-        "ti": "ካልኦት ስራሕ ሽያጭን ግብይትን"
+        "ti": "ካልኦት ስራሕ ሽያጭ"
       },
       "slug": "other-sales-marketing-jobs",
       "description": null,
@@ -2182,7 +2329,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Marketing Jobs",
+        "Other Sales & Marketing Jobs",
+        "ሌሎች የሽያጭና የግብይት ስራዎች",
+        "ካልኦት ስራሕ ሽያጭን ግብይትን"
+      ],
       "redirects": []
     },
     {
@@ -2191,7 +2343,7 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Security & Guard Jobs",
+        "en": "Security Jobs",
         "am": "የጥበቃ ስራዎች",
         "om": "Hojii Eegumsa",
         "ti": "ስራሕ ጥበቃ"
@@ -2208,7 +2360,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guard Jobs",
+        "Security & Guard Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2321,7 +2476,7 @@
       "parent_code": "security-guard-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Security & Guard Jobs",
+        "en": "Other Security Jobs",
         "am": "ሌሎች የጥበቃ ስራዎች",
         "om": "Hojii Eegumsa Biroo",
         "ti": "ካልኦት ስራሕ ጥበቃ"
@@ -2338,7 +2493,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guard Jobs",
+        "Other Security & Guard Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2503,7 +2661,7 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Teaching & Education Jobs",
+        "en": "Teaching Jobs",
         "am": "የትምህርት ስራዎች",
         "om": "Hojii Barnootaa",
         "ti": "ስራሕ ትምህርቲ"
@@ -2520,7 +2678,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Education Jobs",
+        "Teaching & Education Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2633,7 +2794,7 @@
       "parent_code": "teaching-education-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Teaching & Education Jobs",
+        "en": "Other Teaching Jobs",
         "am": "ሌሎች የትምህርት ስራዎች",
         "om": "Hojii Barnootaa Biroo",
         "ti": "ካልኦት ስራሕ ትምህርቲ"
@@ -2650,7 +2811,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Education Jobs",
+        "Other Teaching & Education Jobs"
+      ],
       "redirects": []
     },
     {
@@ -2659,10 +2823,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Technology & IT Jobs",
-        "am": "የቴክኖሎጂና አይቲ ስራዎች",
+        "en": "Technology Jobs",
+        "am": "የቴክኖሎጂ",
         "om": "Hojii Teknoolojii",
-        "ti": "ስራሕ ቴክኖሎጂን ITን"
+        "ti": "ስራሕ ቴክኖሎጂ"
       },
       "slug": "technology-it-jobs",
       "description": "",
@@ -2676,7 +2840,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "IT Jobs",
+        "Technology & IT Jobs",
+        "ስራሕ ቴክኖሎጂን ITን",
+        "የቴክኖሎጂና አይቲ ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2789,10 +2958,10 @@
       "parent_code": "technology-it-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Technology & IT Jobs",
-        "am": "ሌሎች የቴክኖሎጂና አይቲ ስራዎች",
+        "en": "Other Technology Jobs",
+        "am": "ሌሎች የቴክኖሎጂ",
         "om": "Hojii Teknoolojii Biroo",
-        "ti": "ካልኦት ስራሕ ቴክኖሎጂን ITን"
+        "ti": "ካልኦት ስራሕ ቴክኖሎጂ"
       },
       "slug": "other-technology-it-jobs",
       "description": null,
@@ -2806,7 +2975,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "IT Jobs",
+        "Other Technology & IT Jobs",
+        "ሌሎች የቴክኖሎጂና አይቲ ስራዎች",
+        "ካልኦት ስራሕ ቴክኖሎጂን ITን"
+      ],
       "redirects": []
     },
     {
@@ -2815,10 +2989,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Transport & Logistics Jobs",
-        "am": "የትራንስፖርትና አቅርቦት ስራዎች",
+        "en": "Transport Jobs",
+        "am": "የትራንስፖርት",
         "om": "Hojii Geejjibaa",
-        "ti": "ስራሕ መጓዓዝያን ሎጂስቲክስን"
+        "ti": "ስራሕ መጓዓዝያ"
       },
       "slug": "transport-logistics-jobs",
       "description": "",
@@ -2832,7 +3006,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Logistics Jobs",
+        "Transport & Logistics Jobs",
+        "ስራሕ መጓዓዝያን ሎጂስቲክስን",
+        "የትራንስፖርትና አቅርቦት ስራዎች"
+      ],
       "redirects": []
     },
     {
@@ -2945,10 +3124,10 @@
       "parent_code": "transport-logistics-jobs",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Transport & Logistics Jobs",
-        "am": "ሌሎች የትራንስፖርትና አቅርቦት ስራዎች",
+        "en": "Other Transport Jobs",
+        "am": "ሌሎች የትራንስፖርት",
         "om": "Hojii Geejjibaa Biroo",
-        "ti": "ካልኦት ስራሕ መጓዓዝያን ሎጂስቲክስን"
+        "ti": "ካልኦት ስራሕ መጓዓዝያ"
       },
       "slug": "other-transport-logistics-jobs",
       "description": null,
@@ -2962,7 +3141,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Logistics Jobs",
+        "Other Transport & Logistics Jobs",
+        "ሌሎች የትራንስፖርትና አቅርቦት ስራዎች",
+        "ካልኦት ስራሕ መጓዓዝያን ሎጂስቲክስን"
+      ],
       "redirects": []
     },
     {
@@ -2971,10 +3155,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Digital Content Creators & Social Influencers",
-        "am": "የዲጂታል ይዘት አዘጋጆችና የማህበራዊ ሚዲያ ተፅዕኖ ፈጣሪዎች",
-        "om": "Uumtoota Qabiyyee Dijitaalaa fi Dhiibbaa Hawaasaa",
-        "ti": "ዲጂታል ትሕዝቶ ኣዳለውትን ናይ ማሕበራዊ ሚድያ ጽልዋ ፈጠርትን"
+        "en": "Digital Content Creators",
+        "am": "የዲጂታል ይዘት አዘጋጆች",
+        "om": "Uumtoota Qabiyyee Dijitaalaa",
+        "ti": "ዲጂታል ትሕዝቶ ኣዳለውት"
       },
       "slug": "digital-creators-influencers",
       "description": "Professional video content creators, comedy influencers, digital brand ambassadors, and podcasters",
@@ -2988,7 +3172,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Content Creators & Social Influencers",
+        "Social Influencers",
+        "Uumtoota Qabiyyee Dijitaalaa fi Dhiibbaa Hawaasaa",
+        "የዲጂታል ይዘት አዘጋጆችና የማህበራዊ ሚዲያ ተፅዕኖ ፈጣሪዎች",
+        "ዲጂታል ትሕዝቶ ኣዳለውትን ናይ ማሕበራዊ ሚድያ ጽልዋ ፈጠርትን"
+      ],
       "redirects": []
     },
     {
@@ -2997,10 +3187,10 @@
       "parent_code": "digital-creators-influencers",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Short-Form Video & Comedy Content Creators",
-        "am": "የአጭር ቪዲዮና አስቂኝ ይዘት ፈጣሪዎች",
-        "om": "Uumtoota Viidiyoo Gabaabaa fi Qoosaa",
-        "ti": "ናይ ሓጺር ቪድዮን ቀልድን ትሕዝቶ ፈጠርቲ"
+        "en": "Short-Form Video",
+        "am": "የአጭር ቪዲዮ",
+        "om": "Uumtoota Viidiyoo Gabaabaa",
+        "ti": "ናይ ሓጺር ቪድዮ"
       },
       "slug": "social-video-content-creators",
       "description": "TikTok, YouTube Shorts, and Instagram Reels creative producers specializing in comedy and viral storytelling",
@@ -3014,7 +3204,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Comedy Content Creators",
+        "Short-Form Video & Comedy Content Creators",
+        "Uumtoota Viidiyoo Gabaabaa fi Qoosaa",
+        "ናይ ሓጺር ቪድዮን ቀልድን ትሕዝቶ ፈጠርቲ",
+        "የአጭር ቪዲዮና አስቂኝ ይዘት ፈጣሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -3023,10 +3219,10 @@
       "parent_code": "social-video-content-creators",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "TikTok & Instagram Comedy Skit Creators",
-        "am": "የቲክቶክና ኢንስታግራም አስቂኝ ድራማ ፈጣሪዎች",
-        "om": "Uumtoota Diraamaa Qoosaa TikTok fi Instagram",
-        "ti": "ናይ ቲክቶክን ኢንስታግራምን ናይ ቀልዲ ድራማ ፈጠርቲ"
+        "en": "TikTok",
+        "am": "የቲክቶክ",
+        "om": "Uumtoota Diraamaa Qoosaa TikTok",
+        "ti": "ናይ ቲክቶክ"
       },
       "slug": "tiktok-comedy-skit-creators",
       "description": "Short-form comedic entertainers and sketch artists available for digital brand sponsorships and ads",
@@ -3040,7 +3236,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Instagram Comedy Skit Creators",
+        "TikTok & Instagram Comedy Skit Creators",
+        "Uumtoota Diraamaa Qoosaa TikTok fi Instagram",
+        "ናይ ቲክቶክን ኢንስታግራምን ናይ ቀልዲ ድራማ ፈጠርቲ",
+        "የቲክቶክና ኢንስታግራም አስቂኝ ድራማ ፈጣሪዎች"
+      ],
       "redirects": []
     },
     {
@@ -3049,10 +3251,10 @@
       "parent_code": "social-video-content-creators",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Short-Form Video & Comedy Content Creators",
-        "am": "ሌሎች የአጭር ቪዲዮና አስቂኝ ይዘት ፈጣሪዎች",
-        "om": "Uumtoota Viidiyoo Gabaabaa fi Qoosaa Biroo",
-        "ti": "ካልኦት ናይ ሓጺር ቪድዮን ቀልድን ትሕዝቶ ፈጠርቲ"
+        "en": "Other Short-Form Video",
+        "am": "ሌሎች የአጭር ቪዲዮ",
+        "om": "Uumtoota Viidiyoo Gabaabaa",
+        "ti": "ካልኦት ናይ ሓጺር ቪድዮ"
       },
       "slug": "other-social-video-content-creators",
       "description": null,
@@ -3066,7 +3268,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Comedy Content Creators",
+        "Other Short-Form Video & Comedy Content Creators",
+        "Uumtoota Viidiyoo Gabaabaa fi Qoosaa Biroo",
+        "ሌሎች የአጭር ቪዲዮና አስቂኝ ይዘት ፈጣሪዎች",
+        "ካልኦት ናይ ሓጺር ቪድዮን ቀልድን ትሕዝቶ ፈጠርቲ"
+      ],
       "redirects": []
     },
     {
@@ -3075,10 +3283,10 @@
       "parent_code": "digital-creators-influencers",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Digital Content Creators & Social Influencers",
-        "am": "ሌሎች የዲጂታል ይዘት አዘጋጆችና የማህበራዊ ሚዲያ ተፅዕኖ ፈጣሪዎች",
-        "om": "Uumtoota Qabiyyee Dijitaalaa fi Dhiibbaa Hawaasaa Biroo",
-        "ti": "ካልኦት ዲጂታል ትሕዝቶ ኣዳለውትን ናይ ማሕበራዊ ሚድያ ጽልዋ ፈጠርትን"
+        "en": "Other Digital Content Creators",
+        "am": "ሌሎች የዲጂታል ይዘት አዘጋጆች",
+        "om": "Uumtoota Qabiyyee Dijitaalaa",
+        "ti": "ካልኦት ዲጂታል ትሕዝቶ ኣዳለውት"
       },
       "slug": "other-digital-creators-influencers",
       "description": null,
@@ -3092,7 +3300,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Digital Content Creators & Social Influencers",
+        "Social Influencers",
+        "Uumtoota Qabiyyee Dijitaalaa fi Dhiibbaa Hawaasaa Biroo",
+        "ሌሎች የዲጂታል ይዘት አዘጋጆችና የማህበራዊ ሚዲያ ተፅዕኖ ፈጣሪዎች",
+        "ካልኦት ዲጂታል ትሕዝቶ ኣዳለውትን ናይ ማሕበራዊ ሚድያ ጽልዋ ፈጠርትን"
+      ],
       "redirects": []
     },
     {
@@ -3101,10 +3315,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Sports Athletes, Coaches & Fitness Talents",
-        "am": "ስፖርተኞች፣ አሰልጣኞችና የአካል ብቃት ባለሙያዎች",
-        "om": "Atileetota Ispoortii, Leenjistoota fi Fayyummaa",
-        "ti": "ስፖርተኛታት፣ ኣሰልጠንትን ናይ ኣካል ብቕዓት ሞያተኛታትን"
+        "en": "Sports Athletes",
+        "am": "ስፖርተኞች፣ አሰልጣኞች",
+        "om": "Atileetota Ispoortii, Leenjistoota",
+        "ti": "ስፖርተኛታት፣ ኣሰልጠንት"
       },
       "slug": "sports-athletes-fitness-talents",
       "description": "Athletic competitors, football talents, personal fitness coaches, and distance runners for hire and scouting",
@@ -3118,7 +3332,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Atileetota Ispoortii, Leenjistoota fi Fayyummaa",
+        "Coaches",
+        "Fitness Talents",
+        "Sports Athletes, Coaches & Fitness Talents",
+        "ስፖርተኛታት፣ ኣሰልጠንትን ናይ ኣካል ብቕዓት ሞያተኛታትን",
+        "ስፖርተኞች፣ አሰልጣኞችና የአካል ብቃት ባለሙያዎች"
+      ],
       "redirects": []
     },
     {
@@ -3127,10 +3348,10 @@
       "parent_code": "sports-athletes-fitness-talents",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Football / Soccer Talents & Player Scouting CVs",
-        "am": "የእግር ኳስ ተጫዋቾች ተሰጥኦና የክለብ ምልመላ ሲቪ",
-        "om": "Dandeettii Kubbaa Miilaa fi CV Taphattootaa",
-        "ti": "ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦን ናይ ክለብ ምልመላ ሲቪን"
+        "en": "Football / Soccer Talents",
+        "am": "የእግር ኳስ ተጫዋቾች ተሰጥኦ",
+        "om": "Dandeettii Kubbaa Miilaa",
+        "ti": "ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦ"
       },
       "slug": "football-soccer-players-scouting",
       "description": "Amateur and semi-professional football players seeking club trials, academy scouting, and seasonal contracts",
@@ -3144,7 +3365,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dandeettii Kubbaa Miilaa fi CV Taphattootaa",
+        "Football / Soccer Talents & Player Scouting CVs",
+        "Player Scouting CVs",
+        "ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦን ናይ ክለብ ምልመላ ሲቪን",
+        "የእግር ኳስ ተጫዋቾች ተሰጥኦና የክለብ ምልመላ ሲቪ"
+      ],
       "redirects": []
     },
     {
@@ -3153,10 +3380,10 @@
       "parent_code": "football-soccer-players-scouting",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Attacking Center Forwards & Wingers",
-        "am": "አጥቂ አጥቂዎችና የመስመር ተጫዋቾች",
-        "om": "Taphata Fuulduraa fi Sarara Cinaa",
-        "ti": "ኣጥቃዕቲ ተጻወትትን ናይ መስመር ተጻወትትን"
+        "en": "Attacking Center Forwards",
+        "am": "አጥቂ አጥቂዎች",
+        "om": "Taphata Fuulduraa",
+        "ti": "ኣጥቃዕቲ ተጻወትት"
       },
       "slug": "attacking-strikers-and-wingers",
       "description": "Fast agile forwards, target strikers, and pace wingers with match statistics and highlight reels",
@@ -3170,7 +3397,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Attacking Center Forwards & Wingers",
+        "Taphata Fuulduraa fi Sarara Cinaa",
+        "Wingers",
+        "አጥቂ አጥቂዎችና የመስመር ተጫዋቾች",
+        "ኣጥቃዕቲ ተጻወትትን ናይ መስመር ተጻወትትን"
+      ],
       "redirects": []
     },
     {
@@ -3179,10 +3412,10 @@
       "parent_code": "football-soccer-players-scouting",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Football / Soccer Talents & Player Scouting CVs",
-        "am": "ሌሎች የእግር ኳስ ተጫዋቾች ተሰጥኦና የክለብ ምልመላ ሲቪ",
-        "om": "Dandeettii Kubbaa Miilaa fi CV Taphattootaa Biroo",
-        "ti": "ካልኦት ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦን ናይ ክለብ ምልመላ ሲቪን"
+        "en": "Other Football / Soccer Talents",
+        "am": "ሌሎች የእግር ኳስ ተጫዋቾች ተሰጥኦ",
+        "om": "Dandeettii Kubbaa Miilaa",
+        "ti": "ካልኦት ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦ"
       },
       "slug": "other-football-soccer-players-scouting",
       "description": null,
@@ -3196,7 +3429,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dandeettii Kubbaa Miilaa fi CV Taphattootaa Biroo",
+        "Other Football / Soccer Talents & Player Scouting CVs",
+        "Player Scouting CVs",
+        "ሌሎች የእግር ኳስ ተጫዋቾች ተሰጥኦና የክለብ ምልመላ ሲቪ",
+        "ካልኦት ናይ ኩዕሶ እግሪ ተጻወትቲ ተውህቦን ናይ ክለብ ምልመላ ሲቪን"
+      ],
       "redirects": []
     },
     {
@@ -3205,10 +3444,10 @@
       "parent_code": "sports-athletes-fitness-talents",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Sports Athletes, Coaches & Fitness Talents",
-        "am": "ሌሎች ስፖርተኞች፣ አሰልጣኞችና የአካል ብቃት ባለሙያዎች",
-        "om": "Atileetota Ispoortii, Leenjistoota fi Fayyummaa Biroo",
-        "ti": "ካልኦት ስፖርተኛታት፣ ኣሰልጠንትን ናይ ኣካል ብቕዓት ሞያተኛታትን"
+        "en": "Other Sports Athletes",
+        "am": "ሌሎች ስፖርተኞች፣ አሰልጣኞች",
+        "om": "Atileetota Ispoortii, Leenjistoota",
+        "ti": "ካልኦት ስፖርተኛታት፣ ኣሰልጠንት"
       },
       "slug": "other-sports-athletes-fitness-talents",
       "description": null,
@@ -3222,7 +3461,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Atileetota Ispoortii, Leenjistoota fi Fayyummaa Biroo",
+        "Coaches",
+        "Fitness Talents",
+        "Other Sports Athletes, Coaches & Fitness Talents",
+        "ሌሎች ስፖርተኞች፣ አሰልጣኞችና የአካል ብቃት ባለሙያዎች",
+        "ካልኦት ስፖርተኛታት፣ ኣሰልጠንትን ናይ ኣካል ብቕዓት ሞያተኛታትን"
+      ],
       "redirects": []
     },
     {
@@ -3231,10 +3477,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Software Development & Tech Freelancers",
-        "am": "የሶፍትዌር አልሚዎችና የቴክኖሎጂ ፍሪላንሰሮች",
-        "om": "Misoonsa Sooftiweerii fi Hojjattoota Teeknooloojii",
-        "ti": "ናይ ሶፍትዌር ምዕባለን ናይ ቴክኖሎጂ ፍሪላንሰራትን"
+        "en": "Software Development",
+        "am": "የሶፍትዌር አልሚዎች",
+        "om": "Misoonsa Sooftiweerii",
+        "ti": "ናይ ሶፍትዌር ምዕባለ"
       },
       "slug": "software-engineering-it-freelance",
       "description": "Full-stack web developers, mobile app engineers, and cloud architects for contract and full-time hiring",
@@ -3248,7 +3494,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Misoonsa Sooftiweerii fi Hojjattoota Teeknooloojii",
+        "Software Development & Tech Freelancers",
+        "Tech Freelancers",
+        "ናይ ሶፍትዌር ምዕባለን ናይ ቴክኖሎጂ ፍሪላንሰራትን",
+        "የሶፍትዌር አልሚዎችና የቴክኖሎጂ ፍሪላንሰሮች"
+      ],
       "redirects": []
     },
     {
@@ -3257,10 +3509,10 @@
       "parent_code": "software-engineering-it-freelance",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Full-Stack Web & Mobile App Engineers",
-        "am": "የሙሉ መስመር ድረ-ገፅና የሞባይል አፕሊኬሽን መሃንዲሶች",
-        "om": "Injinariiwwan Weebsaayitii fi Mobaayilaa Guutuu",
-        "ti": "ናይ ድረ-ገጽን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "en": "Full-Stack Web",
+        "am": "የሙሉ መስመር ድረ-ገፅ",
+        "om": "Injinariiwwan Weebsaayitii",
+        "ti": "ናይ ድረ-ገጽ"
       },
       "slug": "fullstack-web-mobile-developers",
       "description": "Engineers skilled in React, Next.js, Node.js, Go, Python, Flutter, and PostgreSQL databases",
@@ -3274,7 +3526,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Full-Stack Web & Mobile App Engineers",
+        "Injinariiwwan Weebsaayitii fi Mobaayilaa Guutuu",
+        "Mobile App Engineers",
+        "ናይ ድረ-ገጽን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "የሙሉ መስመር ድረ-ገፅና የሞባይል አፕሊኬሽን መሃንዲሶች"
+      ],
       "redirects": []
     },
     {
@@ -3283,10 +3541,10 @@
       "parent_code": "fullstack-web-mobile-developers",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Senior Next.js & Golang Cloud Architecture Specialists",
-        "am": "ከፍተኛ የኔክስት.ጄኤስ እና የጎላንግ ክላውድ ሲስተም ባለሙያዎች",
-        "om": "Ogeeyyii Sadarkaa Olaanaa Next.js fi Golang",
-        "ti": "ላዕለዎት ናይ Next.jsን Golangን ክላውድ ሞያተኛታት"
+        "en": "Senior Next.js",
+        "am": "ከፍተኛ የኔክስት.ጄኤስ",
+        "om": "Ogeeyyii Sadarkaa Olaanaa Next.js",
+        "ti": "ላዕለዎት ናይ Next.js"
       },
       "slug": "senior-react-golang-architects",
       "description": "5+ years experienced engineers capable of delivering high-concurrency microservices, fintech integrations, and portals",
@@ -3300,7 +3558,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Golang Cloud Architecture Specialists",
+        "Ogeeyyii Sadarkaa Olaanaa Next.js fi Golang",
+        "Senior Next.js & Golang Cloud Architecture Specialists",
+        "ላዕለዎት ናይ Next.jsን Golangን ክላውድ ሞያተኛታት",
+        "ከፍተኛ የኔክስት.ጄኤስ እና የጎላንግ ክላውድ ሲስተም ባለሙያዎች"
+      ],
       "redirects": []
     },
     {
@@ -3309,10 +3573,10 @@
       "parent_code": "fullstack-web-mobile-developers",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Full-Stack Web & Mobile App Engineers",
-        "am": "ሌሎች የሙሉ መስመር ድረ-ገፅና የሞባይል አፕሊኬሽን መሃንዲሶች",
-        "om": "Injinariiwwan Weebsaayitii fi Mobaayilaa Guutuu Biroo",
-        "ti": "ካልኦት ናይ ድረ-ገጽን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "en": "Other Full-Stack Web",
+        "am": "ሌሎች የሙሉ መስመር ድረ-ገፅ",
+        "om": "Injinariiwwan Weebsaayitii",
+        "ti": "ካልኦት ናይ ድረ-ገጽ"
       },
       "slug": "other-fullstack-web-mobile-developers",
       "description": null,
@@ -3326,7 +3590,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Injinariiwwan Weebsaayitii fi Mobaayilaa Guutuu Biroo",
+        "Mobile App Engineers",
+        "Other Full-Stack Web & Mobile App Engineers",
+        "ሌሎች የሙሉ መስመር ድረ-ገፅና የሞባይል አፕሊኬሽን መሃንዲሶች",
+        "ካልኦት ናይ ድረ-ገጽን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+      ],
       "redirects": []
     },
     {
@@ -3335,10 +3605,10 @@
       "parent_code": "software-engineering-it-freelance",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Software Development & Tech Freelancers",
-        "am": "ሌሎች የሶፍትዌር አልሚዎችና የቴክኖሎጂ ፍሪላንሰሮች",
-        "om": "Misoonsa Sooftiweerii fi Hojjattoota Teeknooloojii Biroo",
-        "ti": "ካልኦት ናይ ሶፍትዌር ምዕባለን ናይ ቴክኖሎጂ ፍሪላንሰራትን"
+        "en": "Other Software Development",
+        "am": "ሌሎች የሶፍትዌር አልሚዎች",
+        "om": "Misoonsa Sooftiweerii",
+        "ti": "ካልኦት ናይ ሶፍትዌር ምዕባለ"
       },
       "slug": "other-software-engineering-it-freelance",
       "description": null,
@@ -3352,7 +3622,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Misoonsa Sooftiweerii fi Hojjattoota Teeknooloojii Biroo",
+        "Other Software Development & Tech Freelancers",
+        "Tech Freelancers",
+        "ሌሎች የሶፍትዌር አልሚዎችና የቴክኖሎጂ ፍሪላንሰሮች",
+        "ካልኦት ናይ ሶፍትዌር ምዕባለን ናይ ቴክኖሎጂ ፍሪላንሰራትን"
+      ],
       "redirects": []
     },
     {
@@ -3361,10 +3637,10 @@
       "parent_code": "workforce-employment",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Workforce & Employment",
-        "am": "ሌሎች የሰው ኃይልና ቅጥር",
-        "om": "Hojii fi Qacarraa Biroo",
-        "ti": "ካልኦት ስራሕን ምቑጻርን"
+        "en": "Other Workforce",
+        "am": "ሌሎች የሰው ኃይል",
+        "om": "Hojii",
+        "ti": "ካልኦት ስራሕ"
       },
       "slug": "other-workforce-employment",
       "description": null,
@@ -3378,7 +3654,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Employment",
+        "Hojii fi Qacarraa Biroo",
+        "Other Workforce & Employment",
+        "ሌሎች የሰው ኃይልና ቅጥር",
+        "ካልኦት ስራሕን ምቑጻርን"
+      ],
       "redirects": []
     }
   ]

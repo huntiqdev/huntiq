@@ -9,5 +9,11 @@
   "description": "Medical clinics, pharmaceuticals, clinical testing, specialized healthcare and medical supplies",
   "icon": "Activity",
   "display_order": 4,
-  "primary_root_slug": "healthcare-medicine"
+  "primary_root_slug": "healthcare-medicine",
+  "total_families": 2,
+  "total_categories": 213,
+  "families": [
+    "healthcare-medicine",
+    "pharmaceuticals-drug-industry"
+  ]
 }

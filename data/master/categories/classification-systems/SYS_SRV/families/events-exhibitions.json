@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "events-exhibitions",
       "names": {
-        "en": "Events & Exhibitions",
-        "am": "ዝግጅቶችና ትንኮች",
-        "om": "Waliigaltee fi Hojii",
-        "ti": "ዝግጅታትን ምርምራትን"
+        "en": "Events",
+        "am": "ዝግጅቶች",
+        "om": "Waliigaltee",
+        "ti": "ዝግጅታት"
       },
       "description": "Event staging, AV production, exhibitions, conferences, and event management services.",
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Events & Exhibitions",
+        "Exhibitions",
+        "Waliigaltee fi Hojii",
+        "ዝግጅታትን ምርምራትን",
+        "ዝግጅቶችና ትንኮች"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +67,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "conference-meeting-services",
       "names": {
-        "en": "Conference & Meeting Services",
-        "am": "የስብሰባና የጉባኤ አገልግሎት",
+        "en": "Conference Services",
+        "am": "የስብሰባ",
         "om": "Tajaajila Waliigaltee",
-        "ti": "ኣገልግሎት ስብሓን ጉባኤን"
+        "ti": "ኣገልግሎት ስብሓ"
       },
       "description": "",
       "level": 1,
@@ -77,7 +83,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Conference & Meeting Services",
+        "Meeting Services",
+        "ኣገልግሎት ስብሓን ጉባኤን",
+        "የስብሰባና የጉባኤ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +150,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "event-planning-management",
       "names": {
-        "en": "Event Planning & Management",
-        "am": "የዝግጅት አቀዳመትና አስተዳደር",
+        "en": "Event Planning",
+        "am": "የዝግጅት አቀዳመት",
         "om": "Akaakuu Waliigaltee",
-        "ti": "ምሕዳስን ኣመሓዳሪኣን ዝግጅትን"
+        "ti": "ምሕዳስ"
       },
       "description": "",
       "level": 1,
@@ -155,7 +166,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Event Planning & Management",
+        "Management",
+        "ምሕዳስን ኣመሓዳሪኣን ዝግጅትን",
+        "የዝግጅት አቀዳመትና አስተዳደር"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +181,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "event-staging-services",
       "names": {
-        "en": "Event Staging & Production Services",
-        "am": "የዝግጅት ምርትና የመድረክ አገልግሎት",
+        "en": "Event Staging Services",
+        "am": "የዝግጅት ምርት",
         "om": "Tajaajila Waliigaltee",
-        "ti": "ኣገልግሎት ምፍራይ ዝግጅትን ስታጅን"
+        "ti": "ኣገልግሎት ምፍራይ ዝግጅት"
       },
       "description": "",
       "level": 1,
@@ -181,7 +197,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Event Staging & Production Services",
+        "Production Services",
+        "ኣገልግሎት ምፍራይ ዝግጅትን ስታጅን",
+        "የዝግጅት ምርትና የመድረክ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +212,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "exhibition-trade-show-services",
       "names": {
-        "en": "Exhibition & Trade Show Services",
-        "am": "የትንኮችና የንግድ ማሳያ አገልግሎት",
+        "en": "Exhibition Services",
+        "am": "የትንኮች",
         "om": "Waliigaltee Daldalaa",
-        "ti": "ኣገልግሎት ምርምራትን ነጋዲ ምርኣይን"
+        "ti": "ኣገልግሎት ምርምራት"
       },
       "description": "",
       "level": 1,
@@ -207,7 +228,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Exhibition & Trade Show Services",
+        "Trade Show Services",
+        "ኣገልግሎት ምርምራትን ነጋዲ ምርኣይን",
+        "የትንኮችና የንግድ ማሳያ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +295,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-events-exhibitions",
       "names": {
-        "en": "Specialized & Custom Events & Exhibitions",
-        "am": "ልዩና ብጁ Events & Exhibitions",
-        "om": "Kan Addaa fi Filatamaa Events & Exhibitions",
-        "ti": "ፍሉይን ዝተዳለወን Events & Exhibitions"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 1,
@@ -285,7 +311,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Events",
+        "Exhibitions",
+        "Kan Addaa fi Filatamaa Events & Exhibitions",
+        "Specialized & Custom Events & Exhibitions",
+        "ልዩና ብጁ Events & Exhibitions",
+        "ፍሉይን ዝተዳለወን Events & Exhibitions"
+      ],
       "redirects": []
     },
     {
@@ -867,9 +900,9 @@
       "classification_system_code": "SYS_SRV",
       "slug": "sound-lighting-events",
       "names": {
-        "en": "Sound & Lighting",
+        "en": "Sound",
         "am": "ድ ዝ",
-        "om": "Ibsaa fi Sagalee",
+        "om": "Ibsaa",
         "ti": "ዝ ድ"
       },
       "description": "",
@@ -883,7 +916,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ibsaa fi Sagalee",
+        "Lighting",
+        "Sound & Lighting"
+      ],
       "redirects": []
     },
     {
@@ -1231,10 +1268,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-audiovisual-production-services",
       "names": {
-        "en": "Specialized & Custom Audiovisual Production Services",
-        "am": "ልዩና ብጁ Audiovisual Production Services",
-        "om": "Kan Addaa fi Filatamaa Audiovisual Production Services",
-        "ti": "ፍሉይን ዝተዳለወን Audiovisual Production Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1247,7 +1284,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Audiovisual Production Services",
+        "Kan Addaa fi Filatamaa Audiovisual Production Services",
+        "Specialized & Custom Audiovisual Production Services",
+        "ልዩና ብጁ Audiovisual Production Services",
+        "ፍሉይን ዝተዳለወን Audiovisual Production Services"
+      ],
       "redirects": []
     },
     {
@@ -1257,10 +1300,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-conference-meeting-services",
       "names": {
-        "en": "Specialized & Custom Conference & Meeting Services",
-        "am": "ልዩና ብጁ Conference & Meeting Services",
-        "om": "Kan Addaa fi Filatamaa Conference & Meeting Services",
-        "ti": "ፍሉይን ዝተዳለወን Conference & Meeting Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1273,7 +1316,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Conference",
+        "Kan Addaa fi Filatamaa Conference & Meeting Services",
+        "Meeting Services",
+        "Specialized & Custom Conference & Meeting Services",
+        "ልዩና ብጁ Conference & Meeting Services",
+        "ፍሉይን ዝተዳለወን Conference & Meeting Services"
+      ],
       "redirects": []
     },
     {
@@ -1283,10 +1333,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-corporate-event-services",
       "names": {
-        "en": "Specialized & Custom Corporate Event Services",
-        "am": "ልዩና ብጁ Corporate Event Services",
-        "om": "Kan Addaa fi Filatamaa Corporate Event Services",
-        "ti": "ፍሉይን ዝተዳለወን Corporate Event Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1299,7 +1349,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Corporate Event Services",
+        "Kan Addaa fi Filatamaa Corporate Event Services",
+        "Specialized & Custom Corporate Event Services",
+        "ልዩና ብጁ Corporate Event Services",
+        "ፍሉይን ዝተዳለወን Corporate Event Services"
+      ],
       "redirects": []
     },
     {
@@ -1309,10 +1365,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-cultural-event-management",
       "names": {
-        "en": "Specialized & Custom Cultural Event Management",
-        "am": "ልዩና ብጁ Cultural Event Management",
-        "om": "Kan Addaa fi Filatamaa Cultural Event Management",
-        "ti": "ፍሉይን ዝተዳለወን Cultural Event Management"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1325,7 +1381,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Cultural Event Management",
+        "Kan Addaa fi Filatamaa Cultural Event Management",
+        "Specialized & Custom Cultural Event Management",
+        "ልዩና ብጁ Cultural Event Management",
+        "ፍሉይን ዝተዳለወን Cultural Event Management"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1397,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-event-planning-management",
       "names": {
-        "en": "Specialized & Custom Event Planning & Management",
-        "am": "ልዩና ብጁ Event Planning & Management",
-        "om": "Kan Addaa fi Filatamaa Event Planning & Management",
-        "ti": "ፍሉይን ዝተዳለወን Event Planning & Management"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1351,7 +1413,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Event Planning",
+        "Kan Addaa fi Filatamaa Event Planning & Management",
+        "Management",
+        "Specialized & Custom Event Planning & Management",
+        "ልዩና ብጁ Event Planning & Management",
+        "ፍሉይን ዝተዳለወን Event Planning & Management"
+      ],
       "redirects": []
     },
     {
@@ -1361,10 +1430,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-event-staging-production-services",
       "names": {
-        "en": "Specialized & Custom Event Staging & Production Services",
-        "am": "ልዩና ብጁ Event Staging & Production Services",
-        "om": "Kan Addaa fi Filatamaa Event Staging & Production Services",
-        "ti": "ፍሉይን ዝተዳለወን Event Staging & Production Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1377,7 +1446,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Event Staging",
+        "Kan Addaa fi Filatamaa Event Staging & Production Services",
+        "Production Services",
+        "Specialized & Custom Event Staging & Production Services",
+        "ልዩና ብጁ Event Staging & Production Services",
+        "ፍሉይን ዝተዳለወን Event Staging & Production Services"
+      ],
       "redirects": []
     },
     {
@@ -1387,10 +1463,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-exhibition-trade-show-services",
       "names": {
-        "en": "Specialized & Custom Exhibition & Trade Show Services",
-        "am": "ልዩና ብጁ Exhibition & Trade Show Services",
-        "om": "Kan Addaa fi Filatamaa Exhibition & Trade Show Services",
-        "ti": "ፍሉይን ዝተዳለወን Exhibition & Trade Show Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1403,7 +1479,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Exhibition",
+        "Kan Addaa fi Filatamaa Exhibition & Trade Show Services",
+        "Specialized & Custom Exhibition & Trade Show Services",
+        "Trade Show Services",
+        "ልዩና ብጁ Exhibition & Trade Show Services",
+        "ፍሉይን ዝተዳለወን Exhibition & Trade Show Services"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1496,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-sports-event-management",
       "names": {
-        "en": "Specialized & Custom Sports Event Management",
-        "am": "ልዩና ብጁ Sports Event Management",
-        "om": "Kan Addaa fi Filatamaa Sports Event Management",
-        "ti": "ፍሉይን ዝተዳለወን Sports Event Management"
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1429,7 +1512,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Sports Event Management",
+        "Kan Addaa fi Filatamaa Sports Event Management",
+        "Specialized & Custom Sports Event Management",
+        "ልዩና ብጁ Sports Event Management",
+        "ፍሉይን ዝተዳለወን Sports Event Management"
+      ],
       "redirects": []
     },
     {
@@ -1439,10 +1528,10 @@
       "classification_system_code": "SYS_SRV",
       "slug": "specialized-custom-wedding-planning-services",
       "names": {
-        "en": "Specialized & Custom Wedding Planning Services",
-        "am": "ልዩና ብጁ Wedding Planning Services",
-        "om": "Kan Addaa fi Filatamaa Wedding Planning Services",
-        "ti": "ፍሉይን ዝተዳለወን Wedding Planning Services"
+        "en": "Specialized Services",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
       },
       "description": null,
       "level": 2,
@@ -1455,7 +1544,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Custom Wedding Planning Services",
+        "Kan Addaa fi Filatamaa Wedding Planning Services",
+        "Specialized & Custom Wedding Planning Services",
+        "ልዩና ብጁ Wedding Planning Services",
+        "ፍሉይን ዝተዳለወን Wedding Planning Services"
+      ],
       "redirects": []
     }
   ]

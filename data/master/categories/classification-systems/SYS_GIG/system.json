@@ -9,5 +9,10 @@
   "description": "On-demand task marketplace, micro-jobs, freelance digital projects and piecework",
   "icon": "Clock",
   "display_order": 3,
-  "primary_root_slug": "services"
+  "primary_root_slug": "services",
+  "total_families": 1,
+  "total_categories": 103,
+  "families": [
+    "freelance-gig-services"
+  ]
 }

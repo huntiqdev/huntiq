@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -8,10 +8,10 @@ import { api } from '@/lib/api';
 import { Category, Product, ProductFilters } from '@/types';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
-import { FilterSidebar } from '@/components/public/FilterSidebar';
+import { LocationSelector } from '@/components/location/LocationSelector';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
-import { resolveCategoryTitle } from '@/lib/taxonomy';
+import { resolveCategoryTitle, findCategoryPath, getCategoryEmoji } from '@/lib/taxonomy';
 import { useAuth } from '@/context/AuthContext';
 import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
@@ -113,7 +113,6 @@ function ProductsContent() {
   const [retryKey, setRetryKey] = useState(0);
   const [filters, setFilters] = useState<ProductFilters>({});
   const [visibleCount, setVisibleCount] = useState(24);
-  const [filterOpen, setFilterOpen] = useState(false);
   const [activeCatId, setActiveCatId] = useState<number | undefined>();
   const [activeSub, setActiveSub] = useState<string | undefined>();
   const [activeItem, setActiveItem] = useState<string | undefined>();
@@ -124,14 +123,24 @@ function ProductsContent() {
   const [activeCondition, setActiveCondition] = useState<'all' | 'new' | 'used'>('all');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
 
-  // Master Filter State: Price & Proximity
+  // Filter State: Price & Proximity
   const [minPriceInput, setMinPriceInput] = useState<string>('');
   const [maxPriceInput, setMaxPriceInput] = useState<string>('');
   const [activeMinPrice, setActiveMinPrice] = useState<number | undefined>(undefined);
   const [activeMaxPrice, setActiveMaxPrice] = useState<number | undefined>(undefined);
-  const [pricePopoverOpen, setPricePopoverOpen] = useState(false);
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [isLocating, setIsLocating] = useState(false);
+
+  // Slide-over Filter Drawer State & Drafts
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
+  const [drawerType, setDrawerType] = useState<'all' | 'sale' | 'rent'>('all');
+  const [drawerCondition, setDrawerCondition] = useState<'all' | 'new' | 'used'>('all');
+  const [drawerMinPrice, setDrawerMinPrice] = useState<string>('');
+  const [drawerMaxPrice, setDrawerMaxPrice] = useState<string>('');
+  const [drawerRegion, setDrawerRegion] = useState<string>('');
+  const [drawerZone, setDrawerZone] = useState<string>('');
+  const [drawerSubcity, setDrawerSubcity] = useState<string>('');
+  const [drawerWoreda, setDrawerWoreda] = useState<string>('');
 
   useEffect(() => {
     api.getCategoryTree(locale)
@@ -164,38 +173,21 @@ function ProductsContent() {
 
     if (search) f.search = search;
 
-    const findCategoryInTree = (nodes: Category[], slugOrId: string | number): Category | undefined => {
-      for (const n of nodes) {
-        if (typeof slugOrId === 'number' && n.id === slugOrId) return n;
-        if (typeof slugOrId === 'string' && (n.slug === slugOrId || String(n.id) === slugOrId)) return n;
-        if (n.children && n.children.length > 0) {
-          const match = findCategoryInTree(n.children, slugOrId);
-          if (match) return match;
-        }
-      }
-      return undefined;
-    };
+    // Resolve category path from most specific identifier to least specific
+    const targetCategoryKey = item || sub || catHierarchyId || catId || catSlugParam;
+    const resolvedPath = targetCategoryKey ? findCategoryPath(categories, targetCategoryKey) : [];
+    const activeTargetNode = resolvedPath.length > 0 ? resolvedPath[resolvedPath.length - 1] : undefined;
 
-    let resolvedCatId: number | undefined;
-    if (catHierarchyId) {
-      resolvedCatId = Number(catHierarchyId);
-    } else if (catId) {
-      resolvedCatId = Number(catId);
-    } else if (catSlugParam) {
-      const found = findCategoryInTree(categories, catSlugParam);
-      resolvedCatId = found?.id;
-    }
-
-    if (resolvedCatId) {
-      f.category_id = resolvedCatId;
-      f.category_hierarchy_id = resolvedCatId;
-      setActiveCatId(resolvedCatId);
+    if (activeTargetNode) {
+      f.category_id = activeTargetNode.id;
+      f.category_hierarchy_id = activeTargetNode.id;
+      setActiveCatId(activeTargetNode.id);
     } else {
       setActiveCatId(undefined);
     }
 
-    if (sub) { f.subcategory = sub; setActiveSub(sub); } else setActiveSub(undefined);
-    if (item) { f.item = item; setActiveItem(item); } else setActiveItem(undefined);
+    if (sub) { f.subcategory = sub; setActiveSub(sub); } else { setActiveSub(undefined); }
+    if (item) { f.item = item; setActiveItem(item); } else { setActiveItem(undefined); }
 
     const woreda = searchParams.get('woreda');
     const subcity = searchParams.get('subcity');
@@ -288,23 +280,15 @@ function ProductsContent() {
       .finally(() => setLoading(false));
   }, [filters, activeCondition, listingType, activeMinPrice, activeMaxPrice, userCoords, locale, retryKey]);
 
-  const findNodeById = (nodes: Category[], id?: number): Category | undefined => {
-    if (!id) return undefined;
-    for (const n of nodes) {
-      if (n.id === id) return n;
-      if (n.children && n.children.length > 0) {
-        const found = findNodeById(n.children, id);
-        if (found) return found;
-      }
-    }
-    return undefined;
-  };
+  // Active category lineage: full path from root down to currently active node
+  const activeTargetKey = activeItem || activeSub || activeCatId || searchParams.get('item') || searchParams.get('subcategory') || searchParams.get('category_hierarchy_id') || searchParams.get('category_id') || searchParams.get('cat');
+  const activePath = useMemo(() => {
+    return findCategoryPath(categories, activeTargetKey);
+  }, [categories, activeTargetKey]);
 
-  const activeCatNode = findNodeById(categories, activeCatId);
-  const activeCatSlug = activeCatNode?.slug ?? '';
-  const subcategoryNodes = activeCatNode?.children ?? [];
-  const activeSubNode = subcategoryNodes.find(s => s.slug === activeSub || String(s.id) === activeSub);
-  const itemNodes = activeSubNode?.children ?? [];
+  const activeNode = activePath.length > 0 ? activePath[activePath.length - 1] : undefined;
+  const parentNode = activePath.length > 1 ? activePath[activePath.length - 2] : undefined;
+  const childOptions = activeNode ? (activeNode.children ?? []) : categories;
 
   const activeLocParts = formatLocationParts({ region: activeRegion, zone: activeZone, subcity: activeSubcity, woreda: activeWoreda }, locale);
   const activeLocLabel = activeLocParts.join(' › ');
@@ -312,6 +296,7 @@ function ProductsContent() {
   const buildUrl = (
     optsOrCatId?: number | {
       catId?: number;
+      catSlug?: string;
       sub?: string;
       item?: string;
       search?: string;
@@ -330,6 +315,7 @@ function ProductsContent() {
   ) => {
     let opts: {
       catId?: number;
+      catSlug?: string;
       sub?: string;
       item?: string;
       search?: string;
@@ -360,17 +346,23 @@ function ProductsContent() {
     const condToUse = opts?.overrideCond !== undefined ? opts.overrideCond : activeCondition;
     if (condToUse && condToUse !== 'all') p.set('condition', condToUse);
 
-    const catToUse = opts?.catId !== undefined ? opts.catId : activeCatId;
+    const catToUse = ('catId' in opts) ? opts.catId : activeCatId;
     if (catToUse) {
       p.set('category_id', String(catToUse));
       p.set('category_hierarchy_id', String(catToUse));
     }
 
+    const catSlugToUse = ('catSlug' in opts) ? opts.catSlug : (activePath[0]?.slug);
+    if (catSlugToUse && catToUse) p.set('cat', catSlugToUse);
+
     const subToUse = ('sub' in opts) ? opts.sub : activeSub;
-    if (subToUse) p.set('subcategory', subToUse);
+    if (subToUse && catToUse) p.set('subcategory', subToUse);
 
     const itemToUse = ('item' in opts) ? opts.item : activeItem;
-    if (itemToUse) p.set('item', itemToUse);
+    if (itemToUse && catToUse) p.set('item', itemToUse);
+
+    const searchToUse = ('search' in opts) ? opts.search : filters.search;
+    if (searchToUse) p.set('search', searchToUse);
 
     const minPToUse = opts?.minP !== undefined ? opts.minP : (activeMinPrice !== undefined ? String(activeMinPrice) : '');
     if (minPToUse) p.set('min_price', minPToUse);
@@ -392,6 +384,36 @@ function ProductsContent() {
     else if (l.region) p.set('region', l.region);
 
     return `/products${p.toString() ? '?' + p.toString() : ''}`;
+  };
+
+  const navigateToCategory = (target: Category) => {
+    const targetPath = findCategoryPath(categories, target.id);
+    const root = targetPath[0];
+    const sub = targetPath.length > 1 ? targetPath[1] : undefined;
+    const item = targetPath.length > 2 ? targetPath[2] : undefined;
+
+    setActiveCatId(target.id);
+    setActiveSub(sub?.slug);
+    setActiveItem(item?.slug);
+
+    router.push(buildUrl({
+      catId: target.id,
+      catSlug: root?.slug,
+      sub: sub?.slug,
+      item: item?.slug,
+    }));
+  };
+
+  const clearCategorySelection = () => {
+    setActiveCatId(undefined);
+    setActiveSub(undefined);
+    setActiveItem(undefined);
+    router.push(buildUrl({
+      catId: undefined,
+      catSlug: undefined,
+      sub: undefined,
+      item: undefined,
+    }));
   };
 
   const detectNearMe = () => {
@@ -416,6 +438,87 @@ function ProductsContent() {
     );
   };
 
+  const openFilterDrawer = () => {
+    setDrawerType(listingType);
+    setDrawerCondition(activeCondition);
+    setDrawerMinPrice(activeMinPrice !== undefined ? String(activeMinPrice) : (minPriceInput || ''));
+    setDrawerMaxPrice(activeMaxPrice !== undefined ? String(activeMaxPrice) : (maxPriceInput || ''));
+    setDrawerRegion(activeRegion);
+    setDrawerZone(activeZone);
+    setDrawerSubcity(activeSubcity);
+    setDrawerWoreda(activeWoreda);
+    setFilterDrawerOpen(true);
+  };
+
+  const applyDrawerFilters = () => {
+    setListingType(drawerType);
+    setActiveCondition(drawerCondition);
+    const minPVal = drawerMinPrice.trim() ? parseFloat(drawerMinPrice) : undefined;
+    const maxPVal = drawerMaxPrice.trim() ? parseFloat(drawerMaxPrice) : undefined;
+    const resolvedMin = (minPVal !== undefined && !isNaN(minPVal)) ? minPVal : undefined;
+    const resolvedMax = (maxPVal !== undefined && !isNaN(maxPVal)) ? maxPVal : undefined;
+    setActiveMinPrice(resolvedMin);
+    setActiveMaxPrice(resolvedMax);
+    setMinPriceInput(drawerMinPrice);
+    setMaxPriceInput(drawerMaxPrice);
+    setActiveRegion(drawerRegion);
+    setActiveZone(drawerZone);
+    setActiveSubcity(drawerSubcity);
+    setActiveWoreda(drawerWoreda);
+
+    setFilterDrawerOpen(false);
+    router.push(buildUrl({
+      overrideType: drawerType,
+      overrideCond: drawerCondition,
+      minP: drawerMinPrice.trim(),
+      maxP: drawerMaxPrice.trim(),
+      loc: { region: drawerRegion, zone: drawerZone, subcity: drawerSubcity, woreda: drawerWoreda },
+    }));
+  };
+
+  const resetDrawerFilters = () => {
+    setDrawerType('all');
+    setDrawerCondition('all');
+    setDrawerMinPrice('');
+    setDrawerMaxPrice('');
+    setDrawerRegion('');
+    setDrawerZone('');
+    setDrawerSubcity('');
+    setDrawerWoreda('');
+    setUserCoords(null);
+
+    setListingType('all');
+    setActiveCondition('all');
+    setActiveMinPrice(undefined);
+    setActiveMaxPrice(undefined);
+    setMinPriceInput('');
+    setMaxPriceInput('');
+    setActiveRegion('');
+    setActiveZone('');
+    setActiveSubcity('');
+    setActiveWoreda('');
+
+    setFilterDrawerOpen(false);
+    router.push(buildUrl({
+      overrideType: 'all',
+      overrideCond: 'all',
+      minP: '',
+      maxP: '',
+      coords: null,
+      loc: {},
+    }));
+  };
+
+  const activeFilterCount = useMemo(() => {
+    let count = 0;
+    if (listingType !== 'all') count++;
+    if (activeCondition !== 'all') count++;
+    if (activeMinPrice !== undefined || activeMaxPrice !== undefined) count++;
+    if (activeRegion || activeZone || activeSubcity || activeWoreda) count++;
+    if (userCoords) count++;
+    return count;
+  }, [listingType, activeCondition, activeMinPrice, activeMaxPrice, activeRegion, activeZone, activeSubcity, activeWoreda, userCoords]);
+
   const getCatDisplayName = (cat?: Category) => {
     if (!cat) return '';
     return resolveCategoryTitle(cat as any, locale) || cat.name || (cat as any).name_en || cat.slug?.replace(/_/g, ' ') || '';
@@ -436,340 +539,271 @@ function ProductsContent() {
 
   return (
     <>
-      {/* ── 3rd Row: Categories list (Compact sticky bar, single row) ── */}
-      <div className="sticky top-14 z-30 bg-white/95 dark:bg-[#091426]/95 backdrop-blur border-b border-slate-150 dark:border-slate-800">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-[2%] sm:px-[4%] lg:px-[6%]">
-          <button onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${!activeCatId ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
-              }`}>
-            <LayoutGrid size={12} /> {t.categories.all}
-          </button>
-          {categories.map(cat => (
-            <button key={cat.id}
-              onClick={() => { 
-                setActiveCatId(cat.id); 
-                setActiveSub(undefined); 
-                setActiveItem(undefined); 
-                const url = buildUrl({ catId: cat.id, sub: undefined, item: undefined });
-                router.push(url);
-              }}
-              className={`px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs transition-all shrink-0 ${activeCatId === cat.id ? 'bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`}>
-              {getCatDisplayName(cat)}
-            </button>
-          ))}
+      {/* ── Progressive Drill-Down Category Bar (Sticky) ── */}
+      <div className="sticky top-14 z-30 bg-white/95 dark:bg-[#091426]/95 backdrop-blur border-b border-slate-200/80 dark:border-slate-800 shadow-xs">
+        <div className="px-[2%] sm:px-[4%] lg:px-[6%] py-2">
+          {activeNode ? (
+            <div className="flex flex-col gap-2">
+              {/* Row 1: Lineage Breadcrumbs + Back Action + Clear */}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
+                  {/* Step back button */}
+                  <button
+                    onClick={() => {
+                      if (parentNode) {
+                        navigateToCategory(parentNode);
+                      } else {
+                        clearCategorySelection();
+                      }
+                    }}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-[#1769E0] hover:text-white dark:hover:bg-[#1769E0] text-slate-700 dark:text-slate-300 font-bold transition-all text-xs shrink-0 border border-slate-200/80 dark:border-slate-700/80"
+                    title={parentNode ? `Back to ${getCatDisplayName(parentNode)}` : 'Back to All Categories'}
+                  >
+                    <ChevronRight size={13} className="rotate-180" />
+                    <span>{parentNode ? `Back to ${getCatDisplayName(parentNode)}` : t.categories.all}</span>
+                  </button>
+
+                  <span className="text-slate-300 dark:text-slate-700 select-none">|</span>
+
+                  {/* Root link */}
+                  <button
+                    onClick={clearCategorySelection}
+                    className="font-semibold text-slate-500 hover:text-[#1769E0] dark:text-slate-400 dark:hover:text-[#38A5FF] transition-colors shrink-0 flex items-center gap-1"
+                  >
+                    <LayoutGrid size={12} />
+                    <span>{t.categories.all}</span>
+                  </button>
+
+                  {/* Active Path Breadcrumb Trail */}
+                  {activePath.map((stepNode: Category, idx: number) => {
+                    const isLast = idx === activePath.length - 1;
+                    return (
+                      <div key={stepNode.id} className="flex items-center gap-1.5 shrink-0">
+                        <ChevronRight size={11} className="text-slate-400 dark:text-slate-600" />
+                        {isLast ? (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#1769E0] text-white font-black text-xs shadow-xs">
+                            <span>{getCategoryEmoji(stepNode.slug, stepNode.icon)}</span>
+                            <span>{getCatDisplayName(stepNode)}</span>
+                          </span>
+                        ) : (
+                          <button
+                            onClick={() => navigateToCategory(stepNode)}
+                            className="font-bold text-slate-700 hover:text-[#1769E0] dark:text-slate-300 dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1"
+                          >
+                            <span>{getCategoryEmoji(stepNode.slug, stepNode.icon)}</span>
+                            <span>{getCatDisplayName(stepNode)}</span>
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Reset / Clear Button */}
+                <button
+                  onClick={clearCategorySelection}
+                  className="text-xs font-bold text-slate-400 hover:text-red-500 flex items-center gap-1 transition-colors shrink-0 px-2 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                  title="Clear category filter"
+                >
+                  <X size={13} />
+                  <span className="hidden sm:inline">{t.ui.clear_filter ?? 'Clear'}</span>
+                </button>
+              </div>
+
+              {/* Row 2: Choices BELOW the selected category */}
+              {childOptions.length > 0 ? (
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-slate-150 dark:border-slate-800">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 shrink-0 mr-1">
+                    In {getCatDisplayName(activeNode)}:
+                  </span>
+                  {childOptions.map((child: Category) => (
+                    <button
+                      key={child.id}
+                      onClick={() => navigateToCategory(child)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs bg-slate-100 dark:bg-slate-800 hover:bg-[#1769E0] hover:text-white dark:hover:bg-[#1769E0] dark:hover:text-white transition-all shrink-0 border border-slate-200/60 dark:border-slate-700/60 group"
+                    >
+                      <span className="text-sm">{getCategoryEmoji(child.slug, child.icon)}</span>
+                      <span>{getCatDisplayName(child)}</span>
+                      {child.children && child.children.length > 0 && (
+                        <span className="text-[10px] text-slate-400 group-hover:text-white/80">›</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 py-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                  <span>Browsing verified listings under <strong>{getCatDisplayName(activeNode)}</strong></span>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Root level: All root categories */
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+              <button
+                onClick={clearCategorySelection}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full whitespace-nowrap font-bold text-xs bg-[#1769E0] text-white shadow-sm shadow-[#1769E0]/25 shrink-0"
+              >
+                <LayoutGrid size={13} />
+                <span>{t.categories.all}</span>
+              </button>
+
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => navigateToCategory(cat)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap font-bold text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 hover:text-[#1769E0] transition-all shrink-0 border border-slate-200/50 dark:border-slate-700/50"
+                >
+                  <span className="text-sm">{getCategoryEmoji(cat.slug, cat.icon)}</span>
+                  <span>{getCatDisplayName(cat)}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Systematic Subcategory & Item Navigation Banner (Non-sticky, compact — never covers the mobile screen on scroll) */}
-      {activeCatNode && (
-        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2.5 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 flex flex-col gap-2 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-xs font-black">
-              {/* Back button to parent category */}
-              {(activeSub || activeItem) && (
-                <button
-                  onClick={() => {
-                    if (activeItem) {
-                      // Go back to subcategory
-                      setActiveItem(undefined);
-                      router.push(buildUrl({ catId: activeCatId, sub: activeSub, item: undefined }));
-                    } else if (activeSub) {
-                      // Go back to main category
-                      setActiveSub(undefined);
-                      router.push(buildUrl({ catId: activeCatId, sub: undefined, item: undefined }));
-                    }
-                  }}
-                  className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-[#1769E0] hover:text-[#1769E0] transition-all"
-                  title={activeItem ? "Back to " + getSubDisplayName(activeSubNode) : "Back to " + getCatDisplayName(activeCatNode)}
-                >
-                  <ChevronRight size={11} className="rotate-180" />
-                  <span className="text-[10px]">Back</span>
-                </button>
-              )}
-              
-              <span className="text-[#1769E0] dark:text-[#38A5FF] font-extrabold">{getCatDisplayName(activeCatNode)}</span>
-              {activeSubNode && (
-                <>
-                  <ChevronRight size={11} className="text-slate-400" />
-                  <span className="text-slate-800 dark:text-slate-200">{getSubDisplayName(activeSubNode)}</span>
-                </>
-              )}
-              {activeItem && (
-                <>
-                  <ChevronRight size={11} className="text-slate-400" />
-                  <span className="text-slate-600 dark:text-slate-400">{getItemDisplayName(activeItem)}</span>
-                </>
-              )}
-            </div>
-            <button
-              onClick={() => { setActiveCatId(undefined); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl()); }}
-              className="text-[11px] font-bold text-slate-400 hover:text-[#1769E0] flex items-center gap-1 transition-colors"
-            >
-              <X size={12} />
-              <span>{t.ui.clear_filter ?? 'Clear'}</span>
-            </button>
-          </div>
-
-          {subcategoryNodes.length > 0 && (
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
-              {subcategoryNodes.map(s => (
-                <button
-                  key={s.id || s.slug}
-                  onClick={() => { 
-                    const newSub = activeSub === s.slug ? undefined : s.slug;
-                    setActiveSub(newSub);
-                    setActiveItem(undefined); 
-                    const url = buildUrl({ catId: activeCatId, sub: newSub, item: undefined });
-                    router.push(url);
-                  }}
-                  className={`px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                    activeSub === s.slug
-                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm'
-                      : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-[#1769E0]'
-                  }`}
-                >
-                  {getSubDisplayName(s)}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {itemNodes.length > 0 && (
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-slate-200/60 dark:border-slate-800/60">
-              {itemNodes.map(i => (
-                <button
-                  key={i.id || i.slug}
-                  onClick={() => { setActiveItem(activeItem === i.slug ? undefined : i.slug); router.push(buildUrl(activeCatId, activeSub, activeItem === i.slug ? undefined : i.slug)); }}
-                  className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold whitespace-nowrap transition-all ${
-                    activeItem === i.slug
-                      ? 'bg-[#1769E0] text-white shadow-sm'
-                      : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-[#1769E0]'
-                  }`}
-                >
-                  {getItemDisplayName(i)}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Tier banner */}
       <TierBanner />
-
-      {/* Location filter indicator */}
-      {activeLocLabel && (
-        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-          <MapPin size={11} className="text-[#1769E0] dark:text-[#38A5FF]" />
-          <span>{t.ui.showing_results_in} <strong className="text-slate-700 dark:text-slate-300">{activeLocLabel}</strong></span>
-          <button onClick={() => { setActiveRegion(''); setActiveZone(''); setActiveSubcity(''); setActiveWoreda(''); router.push(buildUrl(activeCatId, activeSub, activeItem, filters.search, {})); }}
-            className="ml-1 text-[#1769E0] hover:underline font-bold">{t.ui.clear_filter}</button>
-        </div>
-      )}
 
       {/* Popular categories strip (clean full-width, single floating AI button used instead) */}
       {!loading && (
         <div className="px-[2%] sm:px-[4%] lg:px-[6%] pt-1">
           <PopularCategoriesStrip
             categories={categories}
-            onSelect={catId => { setActiveCatId(catId); setActiveSub(undefined); setActiveItem(undefined); router.push(buildUrl(catId)); }}
+            onSelect={catId => navigateToCategory({ id: catId } as Category)}
           />
         </div>
       )}
 
       {/* ── Page body ── */}
       <div className="max-w-screen-2xl mx-auto px-[2%] sm:px-[4%] lg:px-[6%] py-4">
-        <div className="flex gap-4">
+        {/* Products area — full-width, clean layout */}
+        <div className="w-full">
 
-          {/* Sidebar — desktop only, narrow */}
-          <aside className="hidden lg:block w-52 shrink-0">
-            <div className="sticky top-36">
-              <FilterSidebar categories={categories} onFilter={f => { setFilters(f); setFilterOpen(false); }} />
-            </div>
-          </aside>
+          {/* ── CLEAN FILTER BAR: Results & Active Chips on Left, Single "Filters" Button on Right ── */}
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl px-4 py-3 mb-4 shadow-xs flex items-center justify-between gap-3">
+            {/* Left: Results count & Active filter tags */}
+            <div className="flex items-center flex-wrap gap-2 min-w-0">
+              <p className="text-sm font-black text-zinc-800 dark:text-zinc-200 tracking-tight">
+                {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
+              </p>
 
-          {/* Products area */}
-          <div className="flex-1 min-w-0">
-
-            {/* ── MASTER FILTER BAR ── */}
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-2.5 mb-3 shadow-xs flex flex-wrap items-center justify-between gap-2.5">
-              <div className="flex flex-wrap items-center gap-2">
-                {/* 1. Transaction Master Filter: Buy / Rent / All */}
-                <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-0.5 rounded-xl border border-zinc-200/60 dark:border-zinc-700/60">
+              {/* Active filter badges with 1-click remove */}
+              {listingType !== 'all' && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800 text-xs font-bold">
+                  <span>{listingType === 'sale' ? `🛒 ${t.nav?.buy ?? 'Buy'}` : `🏠 ${t.nav?.rental ?? 'Rent'}`}</span>
                   <button
                     type="button"
                     onClick={() => { setListingType('all'); router.push(buildUrl({ overrideType: 'all' })); }}
-                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all ${
-                      listingType === 'all'
-                        ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-xs'
-                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                    }`}
+                    className="hover:text-red-500 font-black ml-0.5 cursor-pointer"
+                    title="Remove transaction filter"
                   >
-                    {(t.ui as any)?.all_modes ?? 'All'}
+                    ×
                   </button>
+                </span>
+              )}
+
+              {activeCondition !== 'all' && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-bold">
+                  <span>{activeCondition === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}</span>
                   <button
                     type="button"
-                    onClick={() => { setListingType('sale'); router.push(buildUrl({ overrideType: 'sale' })); }}
-                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all flex items-center gap-1 ${
-                      listingType === 'sale'
-                        ? 'bg-orange-600 text-white shadow-xs'
-                        : 'text-zinc-500 hover:text-orange-600'
-                    }`}
+                    onClick={() => { setActiveCondition('all'); router.push(buildUrl({ overrideCond: 'all' })); }}
+                    className="hover:text-red-500 font-black ml-0.5 cursor-pointer"
+                    title="Remove condition filter"
                   >
-                    🏷️ {t.nav?.buy ?? 'Buy'}
+                    ×
                   </button>
+                </span>
+              )}
+
+              {(activeMinPrice !== undefined || activeMaxPrice !== undefined) && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold">
+                  <span>💰 {activeMinPrice ?? 0} - {activeMaxPrice ?? '∞'} ETB</span>
                   <button
                     type="button"
-                    onClick={() => { setListingType('rent'); router.push(buildUrl({ overrideType: 'rent' })); }}
-                    className={`px-2.5 py-1 text-[11px] font-black uppercase rounded-lg transition-all flex items-center gap-1 ${
-                      listingType === 'rent'
-                        ? 'bg-teal-600 text-white shadow-xs'
-                        : 'text-zinc-500 hover:text-teal-600'
-                    }`}
+                    onClick={() => {
+                      setMinPriceInput('');
+                      setMaxPriceInput('');
+                      setActiveMinPrice(undefined);
+                      setActiveMaxPrice(undefined);
+                      router.push(buildUrl({ minP: '', maxP: '' }));
+                    }}
+                    className="hover:text-red-500 font-black ml-0.5 cursor-pointer"
+                    title="Remove price filter"
                   >
-                    🏠 {t.nav?.rental ?? 'Rent'}
+                    ×
                   </button>
-                </div>
+                </span>
+              )}
 
-                {/* 2. Condition Master Filter: New / Used / All */}
-                <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-0.5 rounded-xl border border-zinc-200/60 dark:border-zinc-700/60">
-                  {(['all', 'new', 'used'] as const).map(c => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => { setActiveCondition(c); router.push(buildUrl({ overrideCond: c })); }}
-                      className={`px-2 py-1 text-[10px] font-black uppercase rounded-lg transition-all ${
-                        activeCondition === c
-                          ? c === 'new'
-                            ? 'bg-emerald-600 text-white shadow-xs'
-                            : c === 'used'
-                            ? 'bg-blue-600 text-white shadow-xs'
-                            : 'bg-zinc-700 dark:bg-zinc-200 text-white dark:text-zinc-900 shadow-xs'
-                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                      }`}
-                    >
-                      {c === 'all' ? (t.ui?.condition_all ?? 'All') : c === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}
-                    </button>
-                  ))}
-                </div>
-
-                {/* 3. Price Filter Pill (Category-scoped or Root-wide) */}
-                <div className="relative">
+              {userCoords && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs font-bold">
+                  <span>📍 {(t.ui as any)?.near_me ?? 'Near Me'}</span>
                   <button
                     type="button"
-                    onClick={() => setPricePopoverOpen(!pricePopoverOpen)}
-                    className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
-                      activeMinPrice !== undefined || activeMaxPrice !== undefined
-                        ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 border-[#1769E0] text-[#1769E0] dark:text-[#38A5FF] font-extrabold'
-                        : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-300'
-                    }`}
+                    onClick={() => { setUserCoords(null); router.push(buildUrl({ coords: null })); }}
+                    className="hover:text-red-500 font-black ml-0.5 cursor-pointer"
+                    title="Remove near me filter"
                   >
-                    <span>💰 {activeMinPrice !== undefined || activeMaxPrice !== undefined ? `${activeMinPrice ?? 0} - ${activeMaxPrice ?? '∞'} ETB` : (t.ui?.price ?? 'Price (ETB)')}</span>
-                    <ChevronDown size={11} className={pricePopoverOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                    ×
                   </button>
+                </span>
+              )}
 
-                  {pricePopoverOpen && (
-                    <div className="absolute left-0 top-full mt-2 z-50 w-64 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl space-y-2">
-                      <p className="text-[10px] font-black uppercase text-slate-500">
-                        {activeCatNode ? `${getCatDisplayName(activeCatNode)} Price (ETB)` : 'Marketplace Price Range (ETB)'}
-                      </p>
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="number"
-                          placeholder="Min"
-                          value={minPriceInput}
-                          onChange={e => setMinPriceInput(e.target.value)}
-                          className="w-1/2 px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-1 focus:ring-[#1769E0]"
-                        />
-                        <span className="text-slate-400 text-xs">-</span>
-                        <input
-                          type="number"
-                          placeholder="Max"
-                          value={maxPriceInput}
-                          onChange={e => setMaxPriceInput(e.target.value)}
-                          className="w-1/2 px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-1 focus:ring-[#1769E0]"
-                        />
-                      </div>
-                      <div className="flex items-center justify-between pt-1">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setMinPriceInput('');
-                            setMaxPriceInput('');
-                            setActiveMinPrice(undefined);
-                            setActiveMaxPrice(undefined);
-                            setPricePopoverOpen(false);
-                            router.push(buildUrl({ minP: '', maxP: '' }));
-                          }}
-                          className="text-[10px] font-bold text-slate-400 hover:text-red-500 cursor-pointer"
-                        >
-                          {(t.ui as any).reset ?? 'Reset'}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setActiveMinPrice(minPriceInput ? parseFloat(minPriceInput) : undefined);
-                            setActiveMaxPrice(maxPriceInput ? parseFloat(maxPriceInput) : undefined);
-                            setPricePopoverOpen(false);
-                            router.push(buildUrl({ minP: minPriceInput, maxP: maxPriceInput }));
-                          }}
-                          className="px-3 py-1 bg-[#1769E0] text-white rounded-lg text-xs font-bold hover:bg-[#1055BD] transition-colors cursor-pointer"
-                        >
-                          {(t.ui as any).apply ?? t.ui?.submit ?? 'Apply'}
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+              {activeLocLabel && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-xs font-bold">
+                  <MapPin size={11} />
+                  <span className="max-w-[150px] truncate">{activeLocLabel}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveRegion('');
+                      setActiveZone('');
+                      setActiveSubcity('');
+                      setActiveWoreda('');
+                      router.push(buildUrl({ loc: {} }));
+                    }}
+                    className="hover:text-red-500 font-black ml-0.5 cursor-pointer"
+                    title="Remove location filter"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
 
-                {/* 4. Proximity / Near Me Master Filter */}
+              {activeFilterCount > 1 && (
                 <button
                   type="button"
-                  onClick={detectNearMe}
-                  disabled={isLocating}
-                  className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 transition-all ${
-                    userCoords
-                      ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
-                      : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:border-teal-500'
-                  }`}
+                  onClick={resetDrawerFilters}
+                  className="text-xs font-bold text-red-500 hover:underline cursor-pointer ml-1"
                 >
-                  <Navigation size={11} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
-                  <span>
-                    {isLocating
-                      ? ((t.ui as any).locating ?? 'Locating…')
-                      : userCoords
-                      ? ((t.ui as any).nearest_to_me ?? '📍 Nearest to Me')
-                      : ((t.ui as any).near_me ?? 'Near Me')}
-                  </span>
-                  {userCoords && (
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setUserCoords(null);
-                        router.push(buildUrl({ coords: null }));
-                      }}
-                      className="ml-1 hover:text-red-500 font-black cursor-pointer"
-                    >
-                      ×
-                    </span>
-                  )}
+                  {t.ui?.clear_filter ?? 'Clear all'}
                 </button>
-              </div>
-
-              {/* Mobile Filter Toggle & Count */}
-              <div className="flex items-center gap-2">
-                <p className="text-xs font-bold text-zinc-400">
-                  {loading ? '…' : `${products.length} ${t.ui?.results_count ?? 'results'}`}
-                </p>
-                <button
-                  onClick={() => setFilterOpen(true)}
-                  className="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 font-bold text-xs hover:bg-[#1769E0] hover:text-white transition-all cursor-pointer"
-                >
-                  <SlidersHorizontal size={12} /> {t.ui?.filters ?? 'Filters'}
-                </button>
-              </div>
+              )}
             </div>
+
+            {/* Right Top Side: ONLY ONE BUTTON for Filters */}
+            <button
+              type="button"
+              onClick={openFilterDrawer}
+              className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer shadow-xs ${
+                activeFilterCount > 0
+                  ? 'bg-[#1769E0] text-white hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/25'
+                  : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:border-[#1769E0] hover:text-[#1769E0]'
+              }`}
+              aria-label="Open filters"
+            >
+              <SlidersHorizontal size={14} className={activeFilterCount > 0 ? 'text-white' : 'text-[#1769E0]'} />
+              <span>{t.ui?.filters ?? 'Filters'}</span>
+              {activeFilterCount > 0 && (
+                <span className="w-5 h-5 rounded-full bg-white text-[#1769E0] text-[10px] font-black flex items-center justify-center">
+                  {activeFilterCount}
+                </span>
+              )}
+            </button>
+          </div>
 
             {loading ? (
               <div className="flex items-center justify-center py-20"><Spinner /></div>
@@ -865,24 +899,215 @@ function ProductsContent() {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Mobile filter drawer */}
-      {filterOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setFilterOpen(false)} />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[88vh] overflow-y-auto rounded-t-3xl bg-white dark:bg-[#0E1B33] p-4 pb-[max(24px,env(safe-area-inset-bottom,24px))] shadow-2xl animate-in slide-in-from-bottom duration-200">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2 font-black text-sm">
-                <SlidersHorizontal size={15} className="text-[#1769E0]" />
-                {t.ui.filters}
+      {/* ── Slide-Over Filter Drawer ── */}
+      {filterDrawerOpen && (
+        <div className="fixed inset-0 z-50 flex justify-end">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity animate-fade-in"
+            onClick={() => setFilterDrawerOpen(false)}
+          />
+
+          {/* Side Drawer Panel */}
+          <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 shadow-2xl h-full flex flex-col z-10 border-l border-zinc-200 dark:border-zinc-800 animate-slide-in-right overflow-hidden">
+            {/* Drawer Header */}
+            <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <SlidersHorizontal size={18} className="text-[#1769E0]" />
+                <h2 className="text-base font-black text-zinc-900 dark:text-white">
+                  {t.ui?.filters ?? 'Filters'}
+                </h2>
+                {activeFilterCount > 0 && (
+                  <span className="px-2 py-0.5 rounded-full bg-[#1769E0]/10 text-[#1769E0] text-xs font-black">
+                    {activeFilterCount} active
+                  </span>
+                )}
               </div>
-              <button onClick={() => setFilterOpen(false)}
-                className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
-                <X size={16} />
+              <button
+                type="button"
+                onClick={() => setFilterDrawerOpen(false)}
+                className="p-2 rounded-xl text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                aria-label="Close filters"
+              >
+                <X size={18} />
               </button>
             </div>
-            <FilterSidebar categories={categories} onFilter={f => { setFilters(f); setFilterOpen(false); }} />
+
+            {/* Drawer Body (Scrollable) */}
+            <div className="flex-1 overflow-y-auto p-5 space-y-5">
+              {/* Filter 1: Marketplace Mode */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+                  {(t.ui as any)?.marketplace_pillar ?? 'Marketplace Mode'}
+                </label>
+                <div className="grid grid-cols-3 gap-1.5 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl">
+                  <button
+                    type="button"
+                    onClick={() => setDrawerType('all')}
+                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${
+                      drawerType === 'all'
+                        ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {(t.ui as any)?.all_modes ?? 'All'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDrawerType('sale')}
+                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                      drawerType === 'sale'
+                        ? 'bg-orange-600 text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-orange-600'
+                    }`}
+                  >
+                    🛒 {t.nav?.buy ?? 'Buy'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDrawerType('rent')}
+                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                      drawerType === 'rent'
+                        ? 'bg-teal-600 text-white shadow-xs'
+                        : 'text-zinc-500 hover:text-teal-600'
+                    }`}
+                  >
+                    🏠 {t.nav?.rental ?? 'Rent'}
+                  </button>
+                </div>
+              </div>
+
+              {/* Filter 2: Condition */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+                  {t.ui?.condition ?? 'Condition'}
+                </label>
+                <div className="grid grid-cols-3 gap-1.5 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl">
+                  {(['all', 'new', 'used'] as const).map(c => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setDrawerCondition(c)}
+                      className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${
+                        drawerCondition === c
+                          ? c === 'new'
+                            ? 'bg-emerald-600 text-white shadow-xs'
+                            : c === 'used'
+                            ? 'bg-blue-600 text-white shadow-xs'
+                            : 'bg-zinc-800 dark:bg-zinc-200 text-white dark:text-zinc-900 shadow-xs'
+                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                      }`}
+                    >
+                      {c === 'all' ? (t.ui?.condition_all ?? 'All') : c === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Filter 3: Price Range */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+                  {t.ui?.price ?? 'Price'} (ETB)
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    placeholder={t.ui?.min_price ?? 'Min ETB'}
+                    value={drawerMinPrice}
+                    onChange={e => setDrawerMinPrice(e.target.value)}
+                    className="w-1/2 px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-2 focus:ring-[#1769E0]"
+                    min={0}
+                  />
+                  <span className="text-zinc-400 font-bold">-</span>
+                  <input
+                    type="number"
+                    placeholder={t.ui?.max_price ?? 'Max ETB'}
+                    value={drawerMaxPrice}
+                    onChange={e => setDrawerMaxPrice(e.target.value)}
+                    className="w-1/2 px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-2 focus:ring-[#1769E0]"
+                    min={0}
+                  />
+                </div>
+              </div>
+
+              {/* Filter 4: Proximity / Near Me */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+                  {(t.ui as any)?.distance_label ?? 'Proximity'}
+                </label>
+                <button
+                  type="button"
+                  onClick={detectNearMe}
+                  disabled={isLocating}
+                  className={`w-full py-2.5 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    userCoords
+                      ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
+                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-teal-500'
+                  }`}
+                >
+                  <Navigation size={14} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
+                  <span>
+                    {isLocating
+                      ? ((t.ui as any).locating ?? 'Locating…')
+                      : userCoords
+                      ? ((t.ui as any).nearest_to_me ?? '📍 Nearest to Me (Active)')
+                      : ((t.ui as any).near_me ?? 'Find Listings Near Me')}
+                  </span>
+                  {userCoords && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setUserCoords(null);
+                        router.push(buildUrl({ coords: null }));
+                      }}
+                      className="ml-2 hover:text-red-500 font-black cursor-pointer text-sm"
+                    >
+                      ×
+                    </span>
+                  )}
+                </button>
+              </div>
+
+              {/* Filter 5: Location Selector */}
+              <div className="space-y-1.5">
+                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+                  {t.ui?.location_label ?? 'Location (Ethiopia)'}
+                </label>
+                <div className="p-3 bg-zinc-50 dark:bg-zinc-800/60 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                  <LocationSelector
+                    showPrecise={false}
+                    defaultValue={{ region: drawerRegion, zone: drawerZone, subcity: drawerSubcity, woreda: drawerWoreda }}
+                    onChange={(val) => {
+                      setDrawerRegion(val.region || '');
+                      setDrawerZone(val.zone || '');
+                      setDrawerSubcity(val.subcity || '');
+                      setDrawerWoreda(val.woreda || '');
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Drawer Footer Actions */}
+            <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={resetDrawerFilters}
+                className="flex-1 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-white dark:hover:bg-zinc-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <RotateCcw size={13} />
+                <span>{t.ui?.clear_filter ?? 'Reset All'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={applyDrawerFilters}
+                className="flex-1 py-2.5 rounded-xl bg-[#1769E0] text-white text-xs font-extrabold hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span>{t.ui?.submit ?? 'Apply Filters'}</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

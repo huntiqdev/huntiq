@@ -33,10 +33,10 @@
       "parent_code": null,
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Tourism & Travel",
-        "am": "ቱሪዝምና ጉዞ",
+        "en": "Tourism",
+        "am": "ቱሪዝም",
         "om": "Faala imalaa",
-        "ti": "ቱሪዝምን ጉዕዞን"
+        "ti": "ቱሪዝም"
       },
       "slug": "tourism-travel",
       "description": "Tour packages, travel services, heritage tourism, eco-tourism, and travel agency services.",
@@ -50,7 +50,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Tourism & Travel",
+        "Travel",
+        "ቱሪዝምና ጉዞ",
+        "ቱሪዝምን ጉዕዞን"
+      ],
       "redirects": []
     },
     {
@@ -59,10 +64,10 @@
       "parent_code": "tourism-travel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Eco & Adventure Tourism",
-        "am": "የኢኮና ጀብዱ ቱሪዝም",
+        "en": "Eco",
+        "am": "የኢኮ",
         "om": "Faala Uumamaa",
-        "ti": "ኢኮን ጀብደን ቱሪዝምን"
+        "ti": "ኢኮ"
       },
       "slug": "eco-adventure-tourism",
       "description": "",
@@ -76,7 +81,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Adventure Tourism",
+        "Eco & Adventure Tourism",
+        "ኢኮን ጀብደን ቱሪዝምን",
+        "የኢኮና ጀብዱ ቱሪዝም"
+      ],
       "redirects": []
     },
     {
@@ -189,10 +199,10 @@
       "parent_code": "eco-adventure-tourism",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Eco & Adventure Tourism",
-        "am": "ሌሎች የኢኮና ጀብዱ ቱሪዝም",
+        "en": "Other Eco",
+        "am": "ሌሎች የኢኮ",
         "om": "Faala Uumamaa Biroo",
-        "ti": "ካልኦት ኢኮን ጀብደን ቱሪዝምን"
+        "ti": "ካልኦት ኢኮ"
       },
       "slug": "other-eco-adventure-tourism",
       "description": null,
@@ -206,7 +216,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Adventure Tourism",
+        "Other Eco & Adventure Tourism",
+        "ሌሎች የኢኮና ጀብዱ ቱሪዝም",
+        "ካልኦት ኢኮን ጀብደን ቱሪዝምን"
+      ],
       "redirects": []
     },
     {
@@ -215,10 +230,10 @@
       "parent_code": "tourism-travel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Heritage & Cultural Tourism",
-        "am": "የቅርስና የባህል ቱሪዝም",
+        "en": "Heritage",
+        "am": "የቅርስ",
         "om": "Faala Aadaa",
-        "ti": "ቱሪዝም ቅርስን ባህልን"
+        "ti": "ቱሪዝም ቅርስ"
       },
       "slug": "heritage-cultural-tourism",
       "description": "",
@@ -232,7 +247,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cultural Tourism",
+        "Heritage & Cultural Tourism",
+        "ቱሪዝም ቅርስን ባህልን",
+        "የቅርስና የባህል ቱሪዝም"
+      ],
       "redirects": []
     },
     {
@@ -345,10 +365,10 @@
       "parent_code": "heritage-cultural-tourism",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Heritage & Cultural Tourism",
-        "am": "ሌሎች የቅርስና የባህል ቱሪዝም",
+        "en": "Other Heritage",
+        "am": "ሌሎች የቅርስ",
         "om": "Faala Aadaa Biroo",
-        "ti": "ካልኦት ቱሪዝም ቅርስን ባህልን"
+        "ti": "ካልኦት ቱሪዝም ቅርስ"
       },
       "slug": "other-heritage-cultural-tourism",
       "description": null,
@@ -362,7 +382,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Cultural Tourism",
+        "Other Heritage & Cultural Tourism",
+        "ሌሎች የቅርስና የባህል ቱሪዝም",
+        "ካልኦት ቱሪዝም ቅርስን ባህልን"
+      ],
       "redirects": []
     },
     {
@@ -527,7 +552,7 @@
       "parent_code": "tourism-travel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Pilgrimage & Religious Tourism",
+        "en": "Pilgrimage",
         "am": "የአምልኮ ጉዞ ቱሪዝም",
         "om": "Faala Amantii",
         "ti": "ቱሪዝም ሃይማኖት"
@@ -544,7 +569,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Pilgrimage & Religious Tourism",
+        "Religious Tourism"
+      ],
       "redirects": []
     },
     {
@@ -657,7 +685,7 @@
       "parent_code": "pilgrimage-tourism",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Pilgrimage & Religious Tourism",
+        "en": "Other Pilgrimage",
         "am": "ሌሎች የአምልኮ ጉዞ ቱሪዝም",
         "om": "Faala Amantii Biroo",
         "ti": "ካልኦት ቱሪዝም ሃይማኖት"
@@ -674,7 +702,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Pilgrimage & Religious Tourism",
+        "Religious Tourism"
+      ],
       "redirects": []
     },
     {
@@ -683,10 +714,10 @@
       "parent_code": "tourism-travel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Ticketing & Reservation Services",
-        "am": "የቲኬትና የቦታ ማስያዣ አገልግሎት",
+        "en": "Ticketing Services",
+        "am": "የቲኬት",
         "om": "Tajaajila Tikeetii",
-        "ti": "ኣገልግሎት ቲኬትን ምዕጻንን"
+        "ti": "ኣገልግሎት ቲኬት"
       },
       "slug": "ticketing-reservation-services",
       "description": "",
@@ -700,7 +731,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Reservation Services",
+        "Ticketing & Reservation Services",
+        "ኣገልግሎት ቲኬትን ምዕጻንን",
+        "የቲኬትና የቦታ ማስያዣ አገልግሎት"
+      ],
       "redirects": []
     },
     {
@@ -813,10 +849,10 @@
       "parent_code": "ticketing-reservation-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Ticketing & Reservation Services",
-        "am": "ሌሎች የቲኬትና የቦታ ማስያዣ አገልግሎት",
+        "en": "Other Ticketing Services",
+        "am": "ሌሎች የቲኬት",
         "om": "Tajaajila Tikeetii Biroo",
-        "ti": "ካልኦት ኣገልግሎት ቲኬትን ምዕጻንን"
+        "ti": "ካልኦት ኣገልግሎት ቲኬት"
       },
       "slug": "other-ticketing-reservation-services",
       "description": null,
@@ -830,7 +866,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Ticketing & Reservation Services",
+        "Reservation Services",
+        "ሌሎች የቲኬትና የቦታ ማስያዣ አገልግሎት",
+        "ካልኦት ኣገልግሎት ቲኬትን ምዕጻንን"
+      ],
       "redirects": []
     },
     {
@@ -839,10 +880,10 @@
       "parent_code": "tourism-travel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Tour Packages & Services",
-        "am": "የጉዞ ጥቅሎችና አገልግሎት",
+        "en": "Tour Packages",
+        "am": "የጉዞ ጥቅሎች",
         "om": "Tajaajila Imalaa",
-        "ti": "ጥቅሎታትን ኣገልግሎትን ጉዕዞ"
+        "ti": "ጥቅሎታት"
       },
       "slug": "tour-packages-services",
       "description": "",
@@ -856,7 +897,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Services",
+        "Tour Packages & Services",
+        "የጉዞ ጥቅሎችና አገልግሎት",
+        "ጥቅሎታትን ኣገልግሎትን ጉዕዞ"
+      ],
       "redirects": []
     },
     {
@@ -969,10 +1015,10 @@
       "parent_code": "tour-packages-services",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Tour Packages & Services",
-        "am": "ሌሎች የጉዞ ጥቅሎችና አገልግሎት",
+        "en": "Other Tour Packages",
+        "am": "ሌሎች የጉዞ ጥቅሎች",
         "om": "Tajaajila Imalaa Biroo",
-        "ti": "ካልኦት ጥቅሎታትን ኣገልግሎትን ጉዕዞ"
+        "ti": "ካልኦት ጥቅሎታት"
       },
       "slug": "other-tour-packages-services",
       "description": null,
@@ -986,7 +1032,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Tour Packages & Services",
+        "Services",
+        "ሌሎች የጉዞ ጥቅሎችና አገልግሎት",
+        "ካልኦት ጥቅሎታትን ኣገልግሎትን ጉዕዞ"
+      ],
       "redirects": []
     },
     {
@@ -1151,10 +1202,10 @@
       "parent_code": "tourism-travel",
       "classification_system_code": "SYS_PROD",
       "names": {
-        "en": "Other Tourism & Travel",
-        "am": "ሌሎች ቱሪዝምና ጉዞ",
+        "en": "Other Tourism",
+        "am": "ሌሎች ቱሪዝም",
         "om": "Faala imalaa Biroo",
-        "ti": "ካልኦት ቱሪዝምን ጉዕዞን"
+        "ti": "ካልኦት ቱሪዝም"
       },
       "slug": "other-tourism-travel",
       "description": null,
@@ -1168,7 +1219,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Other Tourism & Travel",
+        "Travel",
+        "ሌሎች ቱሪዝምና ጉዞ",
+        "ካልኦት ቱሪዝምን ጉዕዞን"
+      ],
       "redirects": []
     }
   ]

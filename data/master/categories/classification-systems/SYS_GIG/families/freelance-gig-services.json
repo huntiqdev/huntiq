@@ -9,10 +9,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "freelance-gig-services",
       "names": {
-        "en": "Freelance & Gig Services",
-        "am": "የፍሪላንስና የጊግ አገልግሎቶች",
-        "om": "Tajaajila Hojii Walabaa fi Giigii",
-        "ti": "ናይ ፍሪላንስን ጊግን ኣገልግሎታት"
+        "en": "Freelance Services",
+        "am": "የፍሪላንስ",
+        "om": "Tajaajila Hojii Walabaa",
+        "ti": "ናይ ፍሪላንስ"
       },
       "description": null,
       "level": 0,
@@ -25,7 +25,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Freelance & Gig Services",
+        "Gig Services",
+        "Tajaajila Hojii Walabaa fi Giigii",
+        "ናይ ፍሪላንስን ጊግን ኣገልግሎታት",
+        "የፍሪላንስና የጊግ አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -35,10 +41,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "graphic-design-creative-arts",
       "names": {
-        "en": "Graphic Design & Creative Arts",
-        "am": "የግራፊክ ዲዛይንና የፈጠራ ጥበብ",
-        "om": "Dizaayinii Giraafiksii fi Aartii",
-        "ti": "ግራፊክ ዲዛይንን ፈጠራ ስነ-ጥበብን"
+        "en": "Graphic Design",
+        "am": "የግራፊክ ዲዛይን",
+        "om": "Dizaayinii Giraafiksii",
+        "ti": "ግራፊክ ዲዛይን"
       },
       "description": null,
       "level": 1,
@@ -51,7 +57,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Creative Arts",
+        "Dizaayinii Giraafiksii fi Aartii",
+        "Graphic Design & Creative Arts",
+        "የግራፊክ ዲዛይንና የፈጠራ ጥበብ",
+        "ግራፊክ ዲዛይንን ፈጠራ ስነ-ጥበብን"
+      ],
       "redirects": []
     },
     {
@@ -61,10 +73,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "software-web-mobile-dev",
       "names": {
-        "en": "Software, Web & Mobile Dev",
-        "am": "የሶፍትዌር፣ የድረ-ገጽና የሞባይል ልማት",
-        "om": "Misooma Weebsaayitii fi Sooftiweerii",
-        "ti": "ናይ ሶፍትዌር፣ ዌብሳይትን ሞባይልን ልምዓት"
+        "en": "Software",
+        "am": "የሶፍትዌር፣ የድረ-ገጽ",
+        "om": "Misooma Weebsaayitii",
+        "ti": "ናይ ሶፍትዌር፣ ዌብሳይት"
       },
       "description": null,
       "level": 1,
@@ -77,7 +89,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Misooma Weebsaayitii fi Sooftiweerii",
+        "Mobile Dev",
+        "Software, Web & Mobile Dev",
+        "Web",
+        "ናይ ሶፍትዌር፣ ዌብሳይትን ሞባይልን ልምዓት",
+        "የሶፍትዌር፣ የድረ-ገጽና የሞባይል ልማት"
+      ],
       "redirects": []
     },
     {
@@ -87,10 +106,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "writing-translation-languages",
       "names": {
-        "en": "Writing, Translation & Languages",
-        "am": "የጽሕፈት፣ የትርጉምና የቋንቋ አገልግሎቶች",
-        "om": "Tajaajila Barreeffamaa fi Hiikkaa",
-        "ti": "ናይ ጽሕፈት፣ ትርጉምን ቋንቋን ኣገልግሎታት"
+        "en": "Writing",
+        "am": "የጽሕፈት፣ የትርጉም",
+        "om": "Tajaajila Barreeffamaa",
+        "ti": "ናይ ጽሕፈት፣ ትርጉም"
       },
       "description": null,
       "level": 1,
@@ -103,7 +122,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Languages",
+        "Tajaajila Barreeffamaa fi Hiikkaa",
+        "Translation",
+        "Writing, Translation & Languages",
+        "ናይ ጽሕፈት፣ ትርጉምን ቋንቋን ኣገልግሎታት",
+        "የጽሕፈት፣ የትርጉምና የቋንቋ አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -113,10 +139,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "digital-marketing-traffic",
       "names": {
-        "en": "Digital Marketing & Traffic",
-        "am": "ዲጂታል ማርኬቲንግና የትራፊክ አገልግሎቶች",
+        "en": "Digital Marketing",
+        "am": "ዲጂታል ማርኬቲንግ",
         "om": "Tajaajila Gabaa Dijitaalaa",
-        "ti": "ዲጂታል ማርከቲንግን ናይ ኦንላይን ዕዳጋን"
+        "ti": "ዲጂታል ማርከቲንግ"
       },
       "description": null,
       "level": 1,
@@ -129,7 +155,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Marketing & Traffic",
+        "Traffic",
+        "ዲጂታል ማርከቲንግን ናይ ኦንላይን ዕዳጋን",
+        "ዲጂታል ማርኬቲንግና የትራፊክ አገልግሎቶች"
+      ],
       "redirects": []
     },
     {
@@ -139,10 +170,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "video-audio-animation-gigs",
       "names": {
-        "en": "Video, Audio & Animation Gigs",
-        "am": "የቪዲዮ፣ ድምፅና አኒሜሽን ጊጎች",
-        "om": "Viidiyoo, Sagalee fi Animashinii",
-        "ti": "ናይ ቪድዮ፣ ድምጽን ኣኒሜሽንን ስራሕቲ"
+        "en": "Video",
+        "am": "የቪዲዮ፣ ድምፅ",
+        "om": "Viidiyoo, Sagalee",
+        "ti": "ናይ ቪድዮ፣ ድምጽ"
       },
       "description": null,
       "level": 1,
@@ -155,7 +186,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Animation Gigs",
+        "Audio",
+        "Video, Audio & Animation Gigs",
+        "Viidiyoo, Sagalee fi Animashinii",
+        "ናይ ቪድዮ፣ ድምጽን ኣኒሜሽንን ስራሕቲ",
+        "የቪዲዮ፣ ድምፅና አኒሜሽን ጊጎች"
+      ],
       "redirects": []
     },
     {
@@ -165,10 +203,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "brand-identity-logo-design",
       "names": {
-        "en": "Brand Identity & Logo Design",
-        "am": "የብራንድ መለያና ሎጎ ዲዛይን",
-        "om": "Asxaa fi Dizaayinii Loogoo",
-        "ti": "ናይ ብራንድ መለልያን ሎጎ ዲዛይንን"
+        "en": "Brand Identity",
+        "am": "የብራንድ መለያ",
+        "om": "Asxaa",
+        "ti": "ናይ ብራንድ መለልያ"
       },
       "description": null,
       "level": 2,
@@ -181,7 +219,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Asxaa fi Dizaayinii Loogoo",
+        "Brand Identity & Logo Design",
+        "Logo Design",
+        "ናይ ብራንድ መለልያን ሎጎ ዲዛይንን",
+        "የብራንድ መለያና ሎጎ ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -191,10 +235,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "digital-illustration-art",
       "names": {
-        "en": "Digital Illustration & Art",
-        "am": "ዲጂታል ስዕልና ስነ-ጥበብ",
+        "en": "Digital Illustration",
+        "am": "ዲጂታል ስዕል",
         "om": "Fakkii Dijitaalaa",
-        "ti": "ዲጂታል ስእልን ስነ-ጥበብን"
+        "ti": "ዲጂታል ስእል"
       },
       "description": null,
       "level": 2,
@@ -207,7 +251,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Art",
+        "Digital Illustration & Art",
+        "ዲጂታል ስእልን ስነ-ጥበብን",
+        "ዲጂታል ስዕልና ስነ-ጥበብ"
+      ],
       "redirects": []
     },
     {
@@ -217,10 +266,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "marketing-print-design",
       "names": {
-        "en": "Marketing & Print Design",
-        "am": "የማርኬቲንግና የህትመት ዲዛይን",
-        "om": "Dizaayinii Maxxansaa fi Beeksisaa",
-        "ti": "ናይ ማርከቲንግን ሕትመትን ዲዛይን"
+        "en": "Marketing",
+        "am": "የማርኬቲንግ",
+        "om": "Dizaayinii Maxxansaa",
+        "ti": "ናይ ማርከቲንግ"
       },
       "description": null,
       "level": 2,
@@ -233,7 +282,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dizaayinii Maxxansaa fi Beeksisaa",
+        "Marketing & Print Design",
+        "Print Design",
+        "ናይ ማርከቲንግን ሕትመትን ዲዛይን",
+        "የማርኬቲንግና የህትመት ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -243,10 +298,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "ui-ux-web-design-gigs",
       "names": {
-        "en": "UI/UX & Web Design Gigs",
-        "am": "የዩአይ/ዩኤክስና የድር ዲዛይን ጊጎች",
-        "om": "Dizaayinii UI/UX fi Weebsaayitii",
-        "ti": "ናይ ዌብሳይትን ዩአይ/ዩኤክስን ዲዛይን"
+        "en": "UI/UX",
+        "am": "የዩአይ/ዩኤክስ",
+        "om": "Dizaayinii UI/UX",
+        "ti": "ናይ ዌብሳይት"
       },
       "description": null,
       "level": 2,
@@ -259,7 +314,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dizaayinii UI/UX fi Weebsaayitii",
+        "UI/UX & Web Design Gigs",
+        "Web Design Gigs",
+        "ናይ ዌብሳይትን ዩአይ/ዩኤክስን ዲዛይን",
+        "የዩአይ/ዩኤክስና የድር ዲዛይን ጊጎች"
+      ],
       "redirects": []
     },
     {
@@ -269,10 +330,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "web-frontend-full-stack",
       "names": {
-        "en": "Web Frontend & Full Stack",
-        "am": "የድር የፊት-ለፊትና ሙሉ-ስርዓት ልማት",
+        "en": "Web Frontend",
+        "am": "የድር የፊት-ለፊት",
         "om": "Misooma Fuula Duraa Weebsaayitii",
-        "ti": "ናይ ዌብሳይት ቅድመ ባይታን ፉል-ስታክን ልምዓት"
+        "ti": "ናይ ዌብሳይት ቅድመ ባይታ"
       },
       "description": null,
       "level": 2,
@@ -285,7 +346,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Full Stack",
+        "Web Frontend & Full Stack",
+        "ናይ ዌብሳይት ቅድመ ባይታን ፉል-ስታክን ልምዓት",
+        "የድር የፊት-ለፊትና ሙሉ-ስርዓት ልማት"
+      ],
       "redirects": []
     },
     {
@@ -321,10 +387,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "backend-api-engineering",
       "names": {
-        "en": "Backend & API Engineering",
-        "am": "የጀርባና የኤፒአይ (API) ኢንጂነሪንግ",
-        "om": "Injinariingii Duubaa fi API",
-        "ti": "ናይ ባክ-ኤንድን ኤፒአይን (API) ምህንድስና"
+        "en": "Backend",
+        "am": "የጀርባ",
+        "om": "Injinariingii Duubaa",
+        "ti": "ናይ ባክ-ኤንድ"
       },
       "description": null,
       "level": 2,
@@ -337,7 +403,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "API Engineering",
+        "Backend & API Engineering",
+        "Injinariingii Duubaa fi API",
+        "ናይ ባክ-ኤንድን ኤፒአይን (API) ምህንድስና",
+        "የጀርባና የኤፒአይ (API) ኢንጂነሪንግ"
+      ],
       "redirects": []
     },
     {
@@ -347,10 +419,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "cms-e-commerce-web-gigs",
       "names": {
-        "en": "CMS & E-Commerce Web Gigs",
-        "am": "የሲኤምኤስና የኢ-ኮሜርስ ድረ-ገጾች",
-        "om": "Weebsaayitii Daldala Dijitaalaa fi CMS",
-        "ti": "ናይ ኢ-ኮሜርስን ሲኤምኤስን ዌብሳይታት"
+        "en": "CMS",
+        "am": "የሲኤምኤስ",
+        "om": "Weebsaayitii Daldala Dijitaalaa",
+        "ti": "ናይ ኢ-ኮሜርስ"
       },
       "description": null,
       "level": 2,
@@ -363,7 +435,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "CMS & E-Commerce Web Gigs",
+        "E-Commerce Web Gigs",
+        "Weebsaayitii Daldala Dijitaalaa fi CMS",
+        "ናይ ኢ-ኮሜርስን ሲኤምኤስን ዌብሳይታት",
+        "የሲኤምኤስና የኢ-ኮሜርስ ድረ-ገጾች"
+      ],
       "redirects": []
     },
     {
@@ -399,10 +477,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "copywriting-content-creation",
       "names": {
-        "en": "Copywriting & Content Creation",
-        "am": "የማስታወቂያ ጽሕፈትና የይዘት ፈጠራ",
-        "om": "Barreeffama Beeksisaa fi Qabiyyee",
-        "ti": "ናይ ማርከቲንግ ጽሕፈትን ትሕዝቶ ምድላውን"
+        "en": "Copywriting",
+        "am": "የማስታወቂያ ጽሕፈት",
+        "om": "Barreeffama Beeksisaa",
+        "ti": "ናይ ማርከቲንግ ጽሕፈት"
       },
       "description": null,
       "level": 2,
@@ -415,7 +493,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Barreeffama Beeksisaa fi Qabiyyee",
+        "Content Creation",
+        "Copywriting & Content Creation",
+        "ናይ ማርከቲንግ ጽሕፈትን ትሕዝቶ ምድላውን",
+        "የማስታወቂያ ጽሕፈትና የይዘት ፈጠራ"
+      ],
       "redirects": []
     },
     {
@@ -425,10 +509,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "academic-technical-legal-writing",
       "names": {
-        "en": "Academic, Technical & Legal Writing",
-        "am": "የአካዳሚክ፣ የቴክኒክና የህግ ጽሑፍ",
-        "om": "Barreeffama Barnootaa, Teeknikaa fi Seeraa",
-        "ti": "ናይ ኣካዳሚክ፣ ቴክኒክን ሕግን ጽሕፈት"
+        "en": "Academic",
+        "am": "የአካዳሚክ፣ የቴክኒክ",
+        "om": "Barreeffama Barnootaa, Teeknikaa",
+        "ti": "ናይ ኣካዳሚክ፣ ቴክኒክ"
       },
       "description": null,
       "level": 2,
@@ -441,7 +525,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Academic, Technical & Legal Writing",
+        "Barreeffama Barnootaa, Teeknikaa fi Seeraa",
+        "Legal Writing",
+        "Technical",
+        "ናይ ኣካዳሚክ፣ ቴክኒክን ሕግን ጽሕፈት",
+        "የአካዳሚክ፣ የቴክኒክና የህግ ጽሑፍ"
+      ],
       "redirects": []
     },
     {
@@ -451,10 +542,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "audio-transcription-subtitling",
       "names": {
-        "en": "Audio Transcription & Subtitling",
-        "am": "የድምፅ ግልባጭና የቪዲዮ የግርጌ ጽሑፍ",
-        "om": "Garagalcha Sagalee fi Sab-taayitilii",
-        "ti": "ናይ ድምጺ ምቕዳሕን ናይ ቪድዮ ትርጉም ጽሑፍን"
+        "en": "Audio Transcription",
+        "am": "የድምፅ ግልባጭ",
+        "om": "Garagalcha Sagalee",
+        "ti": "ናይ ድምጺ ምቕዳሕ"
       },
       "description": null,
       "level": 2,
@@ -467,7 +558,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Audio Transcription & Subtitling",
+        "Garagalcha Sagalee fi Sab-taayitilii",
+        "Subtitling",
+        "ናይ ድምጺ ምቕዳሕን ናይ ቪድዮ ትርጉም ጽሑፍን",
+        "የድምፅ ግልባጭና የቪዲዮ የግርጌ ጽሑፍ"
+      ],
       "redirects": []
     },
     {
@@ -477,10 +574,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "social-media-marketing-management",
       "names": {
-        "en": "Social Media Marketing & Management",
-        "am": "የማህበራዊ ሚዲያ ግብይትና አስተዳደር",
-        "om": "Hoggana fi Beeksisa Miidiyaa Hawaasaa",
-        "ti": "ናይ ማሕበራዊ ሚድያ ማርከቲንግን ምሕደራን"
+        "en": "Social Media Marketing",
+        "am": "የማህበራዊ ሚዲያ ግብይት",
+        "om": "Hoggana",
+        "ti": "ናይ ማሕበራዊ ሚድያ ማርከቲንግ"
       },
       "description": null,
       "level": 2,
@@ -493,7 +590,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Hoggana fi Beeksisa Miidiyaa Hawaasaa",
+        "Management",
+        "Social Media Marketing & Management",
+        "ናይ ማሕበራዊ ሚድያ ማርከቲንግን ምሕደራን",
+        "የማህበራዊ ሚዲያ ግብይትና አስተዳደር"
+      ],
       "redirects": []
     },
     {
@@ -529,10 +632,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "video-editing-post-production",
       "names": {
-        "en": "Video Editing & Post-Production",
-        "am": "የቪዲዮ ኤዲቲንግና የድህረ-ምርት ዝግጅት",
-        "om": "Gulaallii Viidiyoo fi Qophii Xumuraa",
-        "ti": "ናይ ቪድዮ ኤዲቲንግን ምድላውን"
+        "en": "Video Editing",
+        "am": "የቪዲዮ ኤዲቲንግ",
+        "om": "Gulaallii Viidiyoo",
+        "ti": "ናይ ቪድዮ ኤዲቲንግ"
       },
       "description": null,
       "level": 2,
@@ -545,7 +648,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Gulaallii Viidiyoo fi Qophii Xumuraa",
+        "Post-Production",
+        "Video Editing & Post-Production",
+        "ናይ ቪድዮ ኤዲቲንግን ምድላውን",
+        "የቪዲዮ ኤዲቲንግና የድህረ-ምርት ዝግጅት"
+      ],
       "redirects": []
     },
     {
@@ -555,10 +664,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "voiceover-audio-engineering",
       "names": {
-        "en": "Voiceover & Audio Engineering",
-        "am": "የድምፅ ተዋactorነትና የድምፅ ምህንድስና",
-        "om": "Sagalee fi Injinariingii Sagalee",
-        "ti": "ናይ ድምጺ ተዋስኦን ምህንድስናን"
+        "en": "Voiceover",
+        "am": "የድምፅ ተዋactorነት",
+        "om": "Sagalee",
+        "ti": "ናይ ድምጺ ተዋስኦ"
       },
       "description": null,
       "level": 2,
@@ -571,7 +680,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Audio Engineering",
+        "Sagalee fi Injinariingii Sagalee",
+        "Voiceover & Audio Engineering",
+        "ናይ ድምጺ ተዋስኦን ምህንድስናን",
+        "የድምፅ ተዋactorነትና የድምፅ ምህንድስና"
+      ],
       "redirects": []
     },
     {
@@ -607,8 +722,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "3d-mascot-character-logos",
       "names": {
-        "en": "3D Mascot & Character Logos",
-        "am": "ባለ 3D ማስኮትና ካራክተር ሎጎዎች",
+        "en": "3D Mascot",
+        "am": "ባለ 3D ማስኮት",
         "om": "Loogoo Maaskootii 3D",
         "ti": "3D ማስኮት ሎጎታት"
       },
@@ -623,7 +738,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "3D Mascot & Character Logos",
+        "Character Logos",
+        "ባለ 3D ማስኮትና ካራክተር ሎጎዎች"
+      ],
       "redirects": []
     },
     {
@@ -659,8 +778,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "typography-monogram-logos",
       "names": {
-        "en": "Typography & Monogram Logos",
-        "am": "ታይፖግራፊና ሞኖግራም ሎጎዎች",
+        "en": "Typography",
+        "am": "ታይፖግራፊ",
         "om": "Dizaayinii Loogoo Qubee",
         "ti": "ናይ ፊደላት ሞኖግራም ሎጎታት"
       },
@@ -675,7 +794,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Monogram Logos",
+        "Typography & Monogram Logos",
+        "ታይፖግራፊና ሞኖግራም ሎጎዎች"
+      ],
       "redirects": []
     },
     {
@@ -685,8 +808,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "vintage-retro-badge-logos",
       "names": {
-        "en": "Vintage & Retro Badge Logos",
-        "am": "ቪንቴጅና ሬትሮ ባጅ ሎጎዎች",
+        "en": "Vintage",
+        "am": "ቪንቴጅ",
         "om": "Loogoo Viinteejii",
         "ti": "ቪንቴጅ ባጅ ሎጎታት"
       },
@@ -701,7 +824,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Retro Badge Logos",
+        "Vintage & Retro Badge Logos",
+        "ቪንቴጅና ሬትሮ ባጅ ሎጎዎች"
+      ],
       "redirects": []
     },
     {
@@ -763,8 +890,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "nft-digital-collectible-art",
       "names": {
-        "en": "NFT & Digital Collectible Art",
-        "am": "የኤንኤፍቲና ዲጂታል ስነ-ጥበብ",
+        "en": "NFT",
+        "am": "የኤንኤፍቲ",
         "om": "Aartii Dijitaalaa NFT",
         "ti": "ናይ ኤንኤፍቲ ዲጂታል ስነ-ጥበብ"
       },
@@ -779,7 +906,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Digital Collectible Art",
+        "NFT & Digital Collectible Art",
+        "የኤንኤፍቲና ዲጂታል ስነ-ጥበብ"
+      ],
       "redirects": []
     },
     {
@@ -789,9 +920,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "comic-anime-character-design",
       "names": {
-        "en": "Comic & Anime Character Design",
-        "am": "የኮሚክና አኒሜ ገጸ-ባህሪያት ዲዛይን",
-        "om": "Dizaayinii Koomikii fi Anime",
+        "en": "Comic",
+        "am": "የኮሚክ",
+        "om": "Dizaayinii Koomikii",
         "ti": "ናይ ኮሚክ ገጸ-ባህርያት ዲዛይን"
       },
       "description": null,
@@ -805,7 +936,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Anime Character Design",
+        "Comic & Anime Character Design",
+        "Dizaayinii Koomikii fi Anime",
+        "የኮሚክና አኒሜ ገጸ-ባህሪያት ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -815,9 +951,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "concept-art-for-gaming-film",
       "names": {
-        "en": "Concept Art for Gaming & Film",
-        "am": "የጨዋታና ፊልም ኮንሰፕት ስነ-ጥበብ",
-        "om": "Aartii Yaad-rimee Fiilmii fi Geemii",
+        "en": "Concept Art for Gaming",
+        "am": "የጨዋታ",
+        "om": "Aartii Yaad-rimee Fiilmii",
         "ti": "ናይ ቪድዮ ጌም ኮንሰፕት ኣርት"
       },
       "description": null,
@@ -831,7 +967,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Aartii Yaad-rimee Fiilmii fi Geemii",
+        "Concept Art for Gaming & Film",
+        "Film",
+        "የጨዋታና ፊልም ኮንሰፕት ስነ-ጥበብ"
+      ],
       "redirects": []
     },
     {
@@ -841,10 +982,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "brochure-tri-fold-flyer-design",
       "names": {
-        "en": "Brochure & Tri-Fold Flyer Design",
-        "am": "የብሮሹርና ፍላየር ዲዛይን",
-        "om": "Dizaayinii Biroosharaa fi Filaayeeraa",
-        "ti": "ናይ ብሮሹርን ፍላየርን ዲዛይን"
+        "en": "Brochure",
+        "am": "የብሮሹር",
+        "om": "Dizaayinii Biroosharaa",
+        "ti": "ናይ ብሮሹር"
       },
       "description": null,
       "level": 3,
@@ -857,7 +998,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Brochure & Tri-Fold Flyer Design",
+        "Dizaayinii Biroosharaa fi Filaayeeraa",
+        "Tri-Fold Flyer Design",
+        "ናይ ብሮሹርን ፍላየርን ዲዛይን",
+        "የብሮሹርና ፍላየር ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -867,10 +1014,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "roll-up-banner-billboard-design",
       "names": {
-        "en": "Roll-up Banner & Billboard Design",
-        "am": "የሮል-አፕ ባነርና ቢልቦርድ ዲዛይን",
-        "om": "Dizaayinii Baanarii fi Biilboordii",
-        "ti": "ናይ ባነርን ቢልቦርድን ዲዛይን"
+        "en": "Roll-up Banner",
+        "am": "የሮል-አፕ ባነር",
+        "om": "Dizaayinii Baanarii",
+        "ti": "ናይ ባነር"
       },
       "description": null,
       "level": 3,
@@ -883,7 +1030,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Billboard Design",
+        "Dizaayinii Baanarii fi Biilboordii",
+        "Roll-up Banner & Billboard Design",
+        "ናይ ባነርን ቢልቦርድን ዲዛይን",
+        "የሮል-አፕ ባነርና ቢልቦርድ ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -919,10 +1072,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "product-packaging-label-design",
       "names": {
-        "en": "Product Packaging & Label Design",
-        "am": "የምርት ማሸጊያና ሌብል ዲዛይን",
-        "om": "Dizaayinii Qodaa fi Meeshaa Oomishaa",
-        "ti": "ናይ ምህርቲ መዐሸጊን ሌብልን ዲዛይን"
+        "en": "Product Packaging",
+        "am": "የምርት ማሸጊያ",
+        "om": "Dizaayinii Qodaa",
+        "ti": "ናይ ምህርቲ መዐሸጊ"
       },
       "description": null,
       "level": 3,
@@ -935,7 +1088,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dizaayinii Qodaa fi Meeshaa Oomishaa",
+        "Label Design",
+        "Product Packaging & Label Design",
+        "ናይ ምህርቲ መዐሸጊን ሌብልን ዲዛይን",
+        "የምርት ማሸጊያና ሌብል ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -945,9 +1104,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "business-card-stationery-design",
       "names": {
-        "en": "Business Card & Stationery Design",
-        "am": "የቢዝነስ ካርድና የጽሕፈት መሣሪያ ዲዛይን",
-        "om": "Dizaayinii Kaardii fi Waraqaa Hojii",
+        "en": "Business Card",
+        "am": "የቢዝነስ ካርድ",
+        "om": "Dizaayinii Kaardii",
         "ti": "ናይ ቢዝነስ ካርድ ዲዛይን"
       },
       "description": null,
@@ -961,7 +1120,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Card & Stationery Design",
+        "Dizaayinii Kaardii fi Waraqaa Hojii",
+        "Stationery Design",
+        "የቢዝነስ ካርድና የጽሕፈት መሣሪያ ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -1023,10 +1187,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "dashboard-saas-interface-design",
       "names": {
-        "en": "Dashboard & SaaS Interface Design",
-        "am": "የዳሽቦርድና ሳስ (SaaS) በይነገጽ ዲዛይን",
-        "om": "Dizaayinii Daashboordii fi SaaS",
-        "ti": "ናይ ዳሽቦርድን SaaS ኢንተርፌስን ዲዛይን"
+        "en": "Dashboard",
+        "am": "የዳሽቦርድ",
+        "om": "Dizaayinii Daashboordii",
+        "ti": "ናይ ዳሽቦርድ"
       },
       "description": null,
       "level": 3,
@@ -1039,7 +1203,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Dashboard & SaaS Interface Design",
+        "Dizaayinii Daashboordii fi SaaS",
+        "SaaS Interface Design",
+        "ናይ ዳሽቦርድን SaaS ኢንተርፌስን ዲዛይን",
+        "የዳሽቦርድና ሳስ (SaaS) በይነገጽ ዲዛይን"
+      ],
       "redirects": []
     },
     {
@@ -1049,10 +1219,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "design-system-component-library",
       "names": {
-        "en": "Design System & Component Library",
-        "am": "የዲዛይን ስርዓትና የኮምፖነንት ቤተ-መጽሐፍት",
-        "om": "Sirna Dizaayinii fi Kuusaa Qooda",
-        "ti": "ናይ ዲዛይን ሲስተም ዲዛይን"
+        "en": "Design System",
+        "am": "የዲዛይን ስርዓት",
+        "om": "Sirna Dizaayinii",
+        "ti": "ናይ ዲዛይ"
       },
       "description": null,
       "level": 3,
@@ -1065,7 +1235,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Component Library",
+        "Design System & Component Library",
+        "Sirna Dizaayinii fi Kuusaa Qooda",
+        "ናይ ዲዛይን ሲስተም ዲዛይን",
+        "የዲዛይን ስርዓትና የኮምፖነንት ቤተ-መጽሐፍት"
+      ],
       "redirects": []
     },
     {
@@ -1101,10 +1277,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "react-next-js-web-development",
       "names": {
-        "en": "React & Next.js Web Development",
-        "am": "የReactና Next.js የድር ልማት",
-        "om": "Misooma Weebsaayitii Riyaaktii fi Neksiti",
-        "ti": "ናይ Reactን Next.jsን ዌብሳይት ልምዓት"
+        "en": "React",
+        "am": "የReact",
+        "om": "Misooma Weebsaayitii Riyaaktii",
+        "ti": "ናይ React"
       },
       "description": null,
       "level": 3,
@@ -1117,7 +1293,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Misooma Weebsaayitii Riyaaktii fi Neksiti",
+        "Next.js Web Development",
+        "React & Next.js Web Development",
+        "ናይ Reactን Next.jsን ዌብሳይት ልምዓት",
+        "የReactና Next.js የድር ልማት"
+      ],
       "redirects": []
     },
     {
@@ -1127,8 +1309,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "vue-js-nuxt-web-applications",
       "names": {
-        "en": "Vue.js & Nuxt Web Applications",
-        "am": "የVue.jsና Nuxt የድር መተግበሪያዎች",
+        "en": "Vue.js",
+        "am": "የVue.js",
         "om": "Appilikeeshinii Weebsaayitii Vuu",
         "ti": "ናይ Vue.js ዌብሳይት ልምዓት"
       },
@@ -1143,7 +1325,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Nuxt Web Applications",
+        "Vue.js & Nuxt Web Applications",
+        "የVue.jsና Nuxt የድር መተግበሪያዎች"
+      ],
       "redirects": []
     },
     {
@@ -1335,10 +1521,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "app-store-play-store-publishing",
       "names": {
-        "en": "App Store & Play Store Publishing",
+        "en": "App Store",
         "am": "የመተግበሪያ መደብሮች ላይ ማተም",
-        "om": "Maxxansa App Istoorii fi Piley Istoorii",
-        "ti": "ናይ ኣፕ ስቶርን ፕለይ ስቶርን ምዝገባ"
+        "om": "Maxxansa App Istoorii",
+        "ti": "ናይ ኣፕ ስቶር"
       },
       "description": null,
       "level": 3,
@@ -1351,7 +1537,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "App Store & Play Store Publishing",
+        "Maxxansa App Istoorii fi Piley Istoorii",
+        "Play Store Publishing",
+        "ናይ ኣፕ ስቶርን ፕለይ ስቶርን ምዝገባ"
+      ],
       "redirects": []
     },
     {
@@ -1387,9 +1578,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "node-js-express-rest-api-build",
       "names": {
-        "en": "Node.js & Express REST API Build",
-        "am": "የNode.jsና Express REST API ግንባታ",
-        "om": "Ijaarsa API Node.js fi Ekspireesii",
+        "en": "Node.js",
+        "am": "የNode.js",
+        "om": "Ijaarsa API Node.js",
         "ti": "ናይ Node.js ኤፒአይ ህንጸት"
       },
       "description": null,
@@ -1403,7 +1594,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Express REST API Build",
+        "Ijaarsa API Node.js fi Ekspireesii",
+        "Node.js & Express REST API Build",
+        "የNode.jsና Express REST API ግንባታ"
+      ],
       "redirects": []
     },
     {
@@ -1413,10 +1609,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "python-fastapi-django-backend",
       "names": {
-        "en": "Python FastAPI & Django Backend",
-        "am": "የፓይዘን FastAPIና Django የጀርባ ስርዓት",
-        "om": "Duuba Paayisan Faasti-API fi Jaangoo",
-        "ti": "ናይ Python FastAPIን Djangoን ልምዓት"
+        "en": "Python FastAPI",
+        "am": "የፓይዘን FastAPI",
+        "om": "Duuba Paayisan Faasti-API",
+        "ti": "ናይ Python FastAPI"
       },
       "description": null,
       "level": 3,
@@ -1429,7 +1625,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Django Backend",
+        "Duuba Paayisan Faasti-API fi Jaangoo",
+        "Python FastAPI & Django Backend",
+        "ናይ Python FastAPIን Djangoን ልምዓት",
+        "የፓይዘን FastAPIና Django የጀርባ ስርዓት"
+      ],
       "redirects": []
     },
     {
@@ -1439,8 +1641,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "postgresql-database-architecture-tuning",
       "names": {
-        "en": "PostgreSQL Database Architecture & Tuning",
-        "am": "የPostgreSQL ዳታቤዝ አርክቴክቸርና ማስተካከያ",
+        "en": "PostgreSQL Database Architecture",
+        "am": "የPostgreSQL ዳታቤዝ አርክቴክቸር",
         "om": "Dizaayinii Kuusaa Deetaa Postigirees",
         "ti": "ናይ PostgreSQL ዳታቤዝ መዋቕር"
       },
@@ -1455,7 +1657,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "PostgreSQL Database Architecture & Tuning",
+        "Tuning",
+        "የPostgreSQL ዳታቤዝ አርክቴክቸርና ማስተካከያ"
+      ],
       "redirects": []
     },
     {
@@ -1465,8 +1671,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "graphql-api-design-schema-setup",
       "names": {
-        "en": "GraphQL API Design & Schema Setup",
-        "am": "የGraphQL API ዲዛይንና ስኪማ ዝግጅት",
+        "en": "GraphQL API Design",
+        "am": "የGraphQL API ዲዛይን",
         "om": "Dizaayinii API Giraaf-QL",
         "ti": "ናይ GraphQL ኤፒአይ ዲዛይን"
       },
@@ -1481,7 +1687,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "GraphQL API Design & Schema Setup",
+        "Schema Setup",
+        "የGraphQL API ዲዛይንና ስኪማ ዝግጅት"
+      ],
       "redirects": []
     },
     {
@@ -1517,7 +1727,7 @@
       "classification_system_code": "SYS_GIG",
       "slug": "woocommerce-store-setup-config",
       "names": {
-        "en": "WooCommerce Store Setup & Config",
+        "en": "WooCommerce Store Setup",
         "am": "የWooCommerce የመስመር ላይ መደብር ዝግጅት",
         "om": "Qophii Suuqii Wuukoomarsii",
         "ti": "ናይ WooCommerce ዕዳጋ ምድላው"
@@ -1533,7 +1743,10 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Config",
+        "WooCommerce Store Setup & Config"
+      ],
       "redirects": []
     },
     {
@@ -1595,10 +1808,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "website-speed-optimization-seo",
       "names": {
-        "en": "Website Speed Optimization & SEO",
-        "am": "የድረ-ገጽ ፍጥነት ማሻሻያና SEO",
-        "om": "Saffisa Weebsaayitii fi Fooyyessa SEO",
-        "ti": "ናይ ዌብሳይት ቅልጣፈን SEOን ምምሕያሽ"
+        "en": "Website Speed Optimization",
+        "am": "የድረ-ገጽ ፍጥነት ማሻሻያ",
+        "om": "Saffisa Weebsaayitii",
+        "ti": "ናይ ዌብሳይት ቅልጣፈ"
       },
       "description": null,
       "level": 3,
@@ -1611,7 +1824,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "SEO",
+        "Saffisa Weebsaayitii fi Fooyyessa SEO",
+        "Website Speed Optimization & SEO",
+        "ናይ ዌብሳይት ቅልጣፈን SEOን ምምሕያሽ",
+        "የድረ-ገጽ ፍጥነት ማሻሻያና SEO"
+      ],
       "redirects": []
     },
     {
@@ -1777,10 +1996,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "seo-blog-post-article-writing",
       "names": {
-        "en": "SEO Blog Post & Article Writing",
-        "am": "የSEO የብሎግና የጽሑፍ ዝግጅት",
-        "om": "Barreeffama Biloogii fi Barruulee SEO",
-        "ti": "ናይ SEO ብሎግን ዓንቀጻትን ጽሕፈት"
+        "en": "SEO Blog Post",
+        "am": "የSEO የብሎግ",
+        "om": "Barreeffama Biloogii",
+        "ti": "ናይ SEO ብሎግ"
       },
       "description": null,
       "level": 3,
@@ -1793,7 +2012,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Article Writing",
+        "Barreeffama Biloogii fi Barruulee SEO",
+        "SEO Blog Post & Article Writing",
+        "ናይ SEO ብሎግን ዓንቀጻትን ጽሕፈት",
+        "የSEO የብሎግና የጽሑፍ ዝግጅት"
+      ],
       "redirects": []
     },
     {
@@ -1803,8 +2028,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "website-sales-copy-landing-page-text",
       "names": {
-        "en": "Website Sales Copy & Landing Page Text",
-        "am": "የድረ-ገጽ የሽያጭ ጽሑፍና የላንዲንግ ፔጅ ጽሑፍ",
+        "en": "Website Sales Copy",
+        "am": "የድረ-ገጽ የሽያጭ ጽሑፍ",
         "om": "Barreeffama Gurgurtaa Fuula Duraa",
         "ti": "ናይ ዌብሳይት መሸጢ ጽሑፍ"
       },
@@ -1819,7 +2044,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Landing Page Text",
+        "Website Sales Copy & Landing Page Text",
+        "የድረ-ገጽ የሽያጭ ጽሑፍና የላንዲንግ ፔጅ ጽሑፍ"
+      ],
       "redirects": []
     },
     {
@@ -1829,8 +2058,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "social-media-caption-content-writing",
       "names": {
-        "en": "Social Media Caption & Content Writing",
-        "am": "የማህበራዊ ሚዲያ መግለጫና የይዘት ጽሑፍ",
+        "en": "Social Media Caption",
+        "am": "የማህበራዊ ሚዲያ መግለጫ",
         "om": "Barreeffama Qabiyyee Miidiyaa Hawaasaa",
         "ti": "ናይ ማሕበራዊ ሚድያ ጽሑፋት"
       },
@@ -1845,7 +2074,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Content Writing",
+        "Social Media Caption & Content Writing",
+        "የማህበራዊ ሚዲያ መግለጫና የይዘት ጽሑፍ"
+      ],
       "redirects": []
     },
     {
@@ -1881,9 +2114,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "email-newsletter-marketing-sequences",
       "names": {
-        "en": "Email Newsletter & Marketing Sequences",
-        "am": "የኢሜይል ጋዜጣና የግብይት መልዕክቶች",
-        "om": "Ergaa Imeelii fi Beeksisaa",
+        "en": "Email Newsletter",
+        "am": "የኢሜይል ጋዜጣ",
+        "om": "Ergaa Imeelii",
         "ti": "ናይ ኢመይል ማርከቲንግ ጽሑፋት"
       },
       "description": null,
@@ -1897,7 +2130,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Email Newsletter & Marketing Sequences",
+        "Ergaa Imeelii fi Beeksisaa",
+        "Marketing Sequences",
+        "የኢሜይል ጋዜጣና የግብይት መልዕክቶች"
+      ],
       "redirects": []
     },
     {
@@ -1907,10 +2145,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "technical-manual-api-documentation",
       "names": {
-        "en": "Technical Manual & API Documentation",
-        "am": "የቴክኒክ መመሪያና የኤፒአይ (API) ሰነድ ዝግጅት",
-        "om": "Qophii Sanada Teeknikaa fi API",
-        "ti": "ናይ ቴክኒክ መምርሒታትን ኤፒአይን ሰነዳት"
+        "en": "Technical Manual",
+        "am": "የቴክኒክ መመሪያ",
+        "om": "Qophii Sanada Teeknikaa",
+        "ti": "ናይ ቴክኒክ መምርሒታት"
       },
       "description": null,
       "level": 3,
@@ -1923,7 +2161,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "API Documentation",
+        "Qophii Sanada Teeknikaa fi API",
+        "Technical Manual & API Documentation",
+        "ናይ ቴክኒክ መምርሒታትን ኤፒአይን ሰነዳት",
+        "የቴክኒክ መመሪያና የኤፒአይ (API) ሰነድ ዝግጅት"
+      ],
       "redirects": []
     },
     {
@@ -1933,10 +2177,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "business-proposal-grant-writing",
       "names": {
-        "en": "Business Proposal & Grant Writing",
-        "am": "የቢዝነስ ፕሮፖዛልና የድጋፍ መጠየቂያ ጽሕፈት",
+        "en": "Business Proposal",
+        "am": "የቢዝነስ ፕሮፖዛል",
         "om": "Barreeffama Yaada Pirojektii Daldalaa",
-        "ti": "ናይ ቢዝነስ ፕሮፖዛልን ሓገዝ ሕቶን ጽሕፈት"
+        "ti": "ናይ ቢዝነስ ፕሮፖዛል"
       },
       "description": null,
       "level": 3,
@@ -1949,7 +2193,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Business Proposal & Grant Writing",
+        "Grant Writing",
+        "ናይ ቢዝነስ ፕሮፖዛልን ሓገዝ ሕቶን ጽሕፈት",
+        "የቢዝነስ ፕሮፖዛልና የድጋፍ መጠየቂያ ጽሕፈት"
+      ],
       "redirects": []
     },
     {
@@ -1959,10 +2208,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "legal-contract-drafting-review",
       "names": {
-        "en": "Legal Contract Drafting & Review",
-        "am": "የህግ ውል ዝግጅትና ግምገማ",
-        "om": "Qophii fi Sakatta'iinsa Waliigaltee Seeraa",
-        "ti": "ናይ ሕጊ ውዕላት ምድላውን ምግምጋምን"
+        "en": "Legal Contract Drafting",
+        "am": "የህግ ውል ዝግጅት",
+        "om": "Qophii",
+        "ti": "ናይ ሕጊ ውዕላት ምድላው"
       },
       "description": null,
       "level": 3,
@@ -1975,7 +2224,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Legal Contract Drafting & Review",
+        "Qophii fi Sakatta'iinsa Waliigaltee Seeraa",
+        "Review",
+        "ናይ ሕጊ ውዕላት ምድላውን ምግምጋምን",
+        "የህግ ውል ዝግጅትና ግምገማ"
+      ],
       "redirects": []
     },
     {
@@ -1985,9 +2240,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "research-paper-proofreading-editing",
       "names": {
-        "en": "Research Paper Proofreading & Editing",
-        "am": "የምርምር ወረቀት ማረምና ማስተካከል",
-        "om": "Sirreeffama fi Qulqulleessa Sanada Qorannoo",
+        "en": "Research Paper Proofreading",
+        "am": "የምርምር ወረቀት ማረም",
+        "om": "Sirreeffama",
         "ti": "ናይ ምርምር ጽሑፋት ምእራም"
       },
       "description": null,
@@ -2001,7 +2256,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Editing",
+        "Research Paper Proofreading & Editing",
+        "Sirreeffama fi Qulqulleessa Sanada Qorannoo",
+        "የምርምር ወረቀት ማረምና ማስተካከል"
+      ],
       "redirects": []
     },
     {
@@ -2011,10 +2271,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "resume-professional-cv-writing",
       "names": {
-        "en": "Resume & Professional CV Writing",
-        "am": "የስራ ማመልከቻ (ሲቪ)ና የሙያ ታሪክ ዝግጅት",
-        "om": "Qophii CV fi Seenaa Hojii Ogummaa",
-        "ti": "ናይ ሲቪን (CV) ስራሕ መመልከትን ምድላው"
+        "en": "Resume",
+        "am": "የስራ ማመልከቻ (ሲቪ)",
+        "om": "Qophii CV",
+        "ti": "ናይ ሲቪ"
       },
       "description": null,
       "level": 3,
@@ -2027,7 +2287,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Professional CV Writing",
+        "Qophii CV fi Seenaa Hojii Ogummaa",
+        "Resume & Professional CV Writing",
+        "ናይ ሲቪን (CV) ስራሕ መመልከትን ምድላው",
+        "የስራ ማመልከቻ (ሲቪ)ና የሙያ ታሪክ ዝግጅት"
+      ],
       "redirects": []
     },
     {
@@ -2037,10 +2303,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "amharic-audio-interview-transcription",
       "names": {
-        "en": "Amharic Audio & Interview Transcription",
-        "am": "የአማርኛ ድምፅና የቃለ-መጠይቅ ግልባጭ",
-        "om": "Garagalcha Sagalee fi Gaafannoo Amaariffaa",
-        "ti": "ናይ ኣምሓርኛ ድምጽን ቃለ-መሕትትን ምቕዳሕ"
+        "en": "Amharic Audio",
+        "am": "የአማርኛ ድምፅ",
+        "om": "Garagalcha Sagalee",
+        "ti": "ናይ ኣምሓርኛ ድምጽ"
       },
       "description": null,
       "level": 3,
@@ -2053,7 +2319,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Amharic Audio & Interview Transcription",
+        "Garagalcha Sagalee fi Gaafannoo Amaariffaa",
+        "Interview Transcription",
+        "ናይ ኣምሓርኛ ድምጽን ቃለ-መሕትትን ምቕዳሕ",
+        "የአማርኛ ድምፅና የቃለ-መጠይቅ ግልባጭ"
+      ],
       "redirects": []
     },
     {
@@ -2089,10 +2361,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "tigrinya-audio-video-transcription",
       "names": {
-        "en": "Tigrinya Audio & Video Transcription",
-        "am": "የትግርኛ የድምፅና ቪዲዮ ግልባጭ",
-        "om": "Garagalcha Sagalee fi Viidiyoo Afaan Tigrii",
-        "ti": "ናይ ትግርኛ ድምጽን ቪድዮን ምቕዳሕ"
+        "en": "Tigrinya Audio",
+        "am": "የትግርኛ የድምፅ",
+        "om": "Garagalcha Sagalee",
+        "ti": "ናይ ትግርኛ ድምጽ"
       },
       "description": null,
       "level": 3,
@@ -2105,7 +2377,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Garagalcha Sagalee fi Viidiyoo Afaan Tigrii",
+        "Tigrinya Audio & Video Transcription",
+        "Video Transcription",
+        "ናይ ትግርኛ ድምጽን ቪድዮን ምቕዳሕ",
+        "የትግርኛ የድምፅና ቪዲዮ ግልባጭ"
+      ],
       "redirects": []
     },
     {
@@ -2141,10 +2419,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "video-subtitling-closed-captioning-srt",
       "names": {
-        "en": "Video Subtitling & Closed Captioning (SRT)",
-        "am": "የቪዲዮ የግርጌ ጽሑፍና SRT ፋይል ዝግጅት",
-        "om": "Sab-taayitilii Viidiyoo fi Qophii SRT",
-        "ti": "ናይ ቪድዮ ሳብ-ታይትልን SRT ምድላውን"
+        "en": "Video Subtitling",
+        "am": "የቪዲዮ የግርጌ ጽሑፍ",
+        "om": "Sab-taayitilii Viidiyoo",
+        "ti": "ናይ ቪድዮ ሳብ-ታይትል"
       },
       "description": null,
       "level": 3,
@@ -2157,7 +2435,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Closed Captioning (SRT)",
+        "Sab-taayitilii Viidiyoo fi Qophii SRT",
+        "Video Subtitling & Closed Captioning (SRT)",
+        "ናይ ቪድዮ ሳብ-ታይትልን SRT ምድላውን",
+        "የቪዲዮ የግርጌ ጽሑፍና SRT ፋይል ዝግጅት"
+      ],
       "redirects": []
     },
     {
@@ -2167,10 +2451,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "facebook-instagram-ad-campaigns",
       "names": {
-        "en": "Facebook & Instagram Ad Campaigns",
-        "am": "የፌስቡክና ኢንስታግራም የማስታወቂያ ዘመቻዎች",
-        "om": "Duula Beeksisa Feesbuukii fi Instagiraamii",
-        "ti": "ናይ ፌስቡክን ኢንስታግራምን መወዓወዒታት"
+        "en": "Facebook",
+        "am": "የፌስቡክ",
+        "om": "Duula Beeksisa Feesbuukii",
+        "ti": "ናይ ፌስቡክ"
       },
       "description": null,
       "level": 3,
@@ -2183,7 +2467,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Duula Beeksisa Feesbuukii fi Instagiraamii",
+        "Facebook & Instagram Ad Campaigns",
+        "Instagram Ad Campaigns",
+        "ናይ ፌስቡክን ኢንስታግራምን መወዓወዒታት",
+        "የፌስቡክና ኢንስታግራም የማስታወቂያ ዘመቻዎች"
+      ],
       "redirects": []
     },
     {
@@ -2193,10 +2483,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "tiktok-organic-growth-influencer-strategy",
       "names": {
-        "en": "TikTok Organic Growth & Influencer Strategy",
-        "am": "የቲክቶክ ኦርጋኒክ እድገትና የኢንፍሉዌንሰር ስትራቴጂ",
-        "om": "Guddina Tik-Tok fi Tooftaa Beeksisaa",
-        "ti": "ናይ ቲክቶክ ምዕባለን ኢንፍሉዌንሰር ስትራተጂን"
+        "en": "TikTok Organic Growth",
+        "am": "የቲክቶክ ኦርጋኒክ እድገት",
+        "om": "Guddina Tik-Tok",
+        "ti": "ናይ ቲክቶክ ምዕባለ"
       },
       "description": null,
       "level": 3,
@@ -2209,7 +2499,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guddina Tik-Tok fi Tooftaa Beeksisaa",
+        "Influencer Strategy",
+        "TikTok Organic Growth & Influencer Strategy",
+        "ናይ ቲክቶክ ምዕባለን ኢንፍሉዌንሰር ስትራተጂን",
+        "የቲክቶክ ኦርጋኒክ እድገትና የኢንፍሉዌንሰር ስትራቴጂ"
+      ],
       "redirects": []
     },
     {
@@ -2219,10 +2515,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "telegram-channel-growth-promotion",
       "names": {
-        "en": "Telegram Channel Growth & Promotion",
-        "am": "የቴሌግራም ቻናል እድገትና ማስተዋወቅ",
-        "om": "Guddina fi Beeksisa Chaanaalii Telegiraamii",
-        "ti": "ናይ ቴሌግራም ቻነላት ምዕባለን ምውዕዋዕን"
+        "en": "Telegram Channel Growth",
+        "am": "የቴሌግራም ቻናል እድገት",
+        "om": "Guddina",
+        "ti": "ናይ ቴሌግራም ቻነላት ምዕባለ"
       },
       "description": null,
       "level": 3,
@@ -2235,7 +2531,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Guddina fi Beeksisa Chaanaalii Telegiraamii",
+        "Promotion",
+        "Telegram Channel Growth & Promotion",
+        "ናይ ቴሌግራም ቻነላት ምዕባለን ምውዕዋዕን",
+        "የቴሌግራም ቻናል እድገትና ማስተዋወቅ"
+      ],
       "redirects": []
     },
     {
@@ -2297,9 +2599,9 @@
       "classification_system_code": "SYS_GIG",
       "slug": "on-page-seo-audit-optimization",
       "names": {
-        "en": "On-Page SEO Audit & Optimization",
-        "am": "የድረ-ገጽ የውስጥ ገጽ SEO ኦዲትና ማሻሻያ",
-        "om": "Sakatta'iinsa fi Fooyyessa On-Page SEO",
+        "en": "On-Page SEO Audit",
+        "am": "የድረ-ገጽ የውስጥ ገጽ SEO ኦዲት",
+        "om": "Sakatta'iinsa",
         "ti": "ናይ ዌብሳይት ውሽጣዊ SEO ምምሕያሽ"
       },
       "description": null,
@@ -2313,7 +2615,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "On-Page SEO Audit & Optimization",
+        "Optimization",
+        "Sakatta'iinsa fi Fooyyessa On-Page SEO",
+        "የድረ-ገጽ የውስጥ ገጽ SEO ኦዲትና ማሻሻያ"
+      ],
       "redirects": []
     },
     {
@@ -2323,10 +2630,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "technical-seo-core-web-vitals-fix",
       "names": {
-        "en": "Technical SEO & Core Web Vitals Fix",
-        "am": "የቴክኒክ SEOና የኮር ዌብ ቫይታልስ ማስተካከያ",
-        "om": "Sirreeffama Teeknikaa SEO fi Saffisaa",
-        "ti": "ናይ ቴክኒክ SEOን ዌብሳይት ጸገማትን ምፍታሕ"
+        "en": "Technical SEO",
+        "am": "የቴክኒክ SEO",
+        "om": "Sirreeffama Teeknikaa SEO",
+        "ti": "ናይ ቴክኒክ SEO"
       },
       "description": null,
       "level": 3,
@@ -2339,7 +2646,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Core Web Vitals Fix",
+        "Sirreeffama Teeknikaa SEO fi Saffisaa",
+        "Technical SEO & Core Web Vitals Fix",
+        "ናይ ቴክኒክ SEOን ዌብሳይት ጸገማትን ምፍታሕ",
+        "የቴክኒክ SEOና የኮር ዌብ ቫይታልስ ማስተካከያ"
+      ],
       "redirects": []
     },
     {
@@ -2375,10 +2688,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "local-seo-google-business-profile-setup",
       "names": {
-        "en": "Local SEO & Google Business Profile Setup",
-        "am": "የአካባቢ SEOና የጉግል ቢዝነስ ፕሮፋይል",
+        "en": "Local SEO",
+        "am": "የአካባቢ SEO",
         "om": "Qophii Piroofaayilii Daldala Guugilii",
-        "ti": "ናይ ከባቢ SEOን Google Business ምድላውን"
+        "ti": "ናይ ከባቢ SEO"
       },
       "description": null,
       "level": 3,
@@ -2391,7 +2704,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Google Business Profile Setup",
+        "Local SEO & Google Business Profile Setup",
+        "ናይ ከባቢ SEOን Google Business ምድላውን",
+        "የአካባቢ SEOና የጉግል ቢዝነስ ፕሮፋይል"
+      ],
       "redirects": []
     },
     {
@@ -2401,10 +2719,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "keyword-research-competitor-analysis",
       "names": {
-        "en": "Keyword Research & Competitor Analysis",
-        "am": "የቁልፍ ቃላት ጥናትና የተፎካካሪ ትንተና",
-        "om": "Qorannoo Jechoota Ijoo fi Dorgomtootaa",
-        "ti": "ናይ ቁልፊ ቃላት መጽናዕትን መርመራን"
+        "en": "Keyword Research",
+        "am": "የቁልፍ ቃላት ጥናት",
+        "om": "Qorannoo Jechoota Ijoo",
+        "ti": "ናይ ቁልፊ ቃላት መጽናዕት"
       },
       "description": null,
       "level": 3,
@@ -2417,7 +2735,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Competitor Analysis",
+        "Keyword Research & Competitor Analysis",
+        "Qorannoo Jechoota Ijoo fi Dorgomtootaa",
+        "ናይ ቁልፊ ቃላት መጽናዕትን መርመራን",
+        "የቁልፍ ቃላት ጥናትና የተፎካካሪ ትንተና"
+      ],
       "redirects": []
     },
     {
@@ -2427,8 +2751,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "youtube-video-editing-b-roll",
       "names": {
-        "en": "YouTube Video Editing & B-Roll",
-        "am": "የዩቲዩብ ቪዲዮ ኤዲቲንግና ተጨማሪ ምስሎች",
+        "en": "YouTube Video Editing",
+        "am": "የዩቲዩብ ቪዲዮ ኤዲቲንግ",
         "om": "Gulaallii Viidiyoo Yuutuubii",
         "ti": "ናይ ዩቱብ ቪድዮታት ኤዲቲንግ"
       },
@@ -2443,7 +2767,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "B-Roll",
+        "YouTube Video Editing & B-Roll",
+        "የዩቲዩብ ቪዲዮ ኤዲቲንግና ተጨማሪ ምስሎች"
+      ],
       "redirects": []
     },
     {
@@ -2453,10 +2781,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "tiktok-reels-short-form-video-editing",
       "names": {
-        "en": "TikTok & Reels Short-Form Video Editing",
-        "am": "የቲክቶክና ሪልስ አጫጭር ቪዲዮዎች ኤዲቲንግ",
+        "en": "TikTok",
+        "am": "የቲክቶክ",
         "om": "Gulaallii Viidiyoo Gabaabaa Tik-Tok",
-        "ti": "ናይ ቲክቶክን ሪልስን ሓጸርቲ ቪድዮታት ምድላው"
+        "ti": "ናይ ቲክቶክ"
       },
       "description": null,
       "level": 3,
@@ -2469,7 +2797,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Reels Short-Form Video Editing",
+        "TikTok & Reels Short-Form Video Editing",
+        "ናይ ቲክቶክን ሪልስን ሓጸርቲ ቪድዮታት ምድላው",
+        "የቲክቶክና ሪልስ አጫጭር ቪዲዮዎች ኤዲቲንግ"
+      ],
       "redirects": []
     },
     {
@@ -2479,10 +2812,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "wedding-event-video-highlight-reel",
       "names": {
-        "en": "Wedding & Event Video Highlight Reel",
-        "am": "የሰርግና የክስተቶች የቪዲዮ ድምቀት ቅንብር",
-        "om": "Viidiyoo Cidhaa fi Sagantaalee Addaa",
-        "ti": "ናይ መርዓን በዓላትን ቪድዮ ቅንብር"
+        "en": "Wedding",
+        "am": "የሰርግ",
+        "om": "Viidiyoo Cidhaa",
+        "ti": "ናይ መርዓ"
       },
       "description": null,
       "level": 3,
@@ -2495,7 +2828,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Event Video Highlight Reel",
+        "Viidiyoo Cidhaa fi Sagantaalee Addaa",
+        "Wedding & Event Video Highlight Reel",
+        "ናይ መርዓን በዓላትን ቪድዮ ቅንብር",
+        "የሰርግና የክስተቶች የቪዲዮ ድምቀት ቅንብር"
+      ],
       "redirects": []
     },
     {
@@ -2505,10 +2844,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "color-grading-visual-effects-vfx",
       "names": {
-        "en": "Color Grading & Visual Effects (VFX)",
-        "am": "የቀለም ማስተካከልና የእይታ ውጤቶች (VFX)",
-        "om": "Sirreeffama Halluu fi Iffeektii VFX",
-        "ti": "ናይ ሕብሪ ምዕራይን ቪዥዋል ኢፌክትስን (VFX)"
+        "en": "Color Grading",
+        "am": "የቀለም ማስተካከል",
+        "om": "Sirreeffama Halluu",
+        "ti": "ናይ ሕብሪ ምዕራይ"
       },
       "description": null,
       "level": 3,
@@ -2521,7 +2860,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Color Grading & Visual Effects (VFX)",
+        "Sirreeffama Halluu fi Iffeektii VFX",
+        "Visual Effects (VFX)",
+        "ናይ ሕብሪ ምዕራይን ቪዥዋል ኢፌክትስን (VFX)",
+        "የቀለም ማስተካከልና የእይታ ውጤቶች (VFX)"
+      ],
       "redirects": []
     },
     {
@@ -2531,10 +2876,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "podcast-audio-multi-cam-video-editing",
       "names": {
-        "en": "Podcast Audio & Multi-Cam Video Editing",
-        "am": "የፖድካስት ድምፅና ባለብዙ-ካሜራ ቪዲዮ ኤዲቲንግ",
-        "om": "Gulaallii Viidiyoo fi Sagalee Poodkaastii",
-        "ti": "ናይ ፖድካስት ድምጽን ቪድዮን ምድላው"
+        "en": "Podcast Audio",
+        "am": "የፖድካስት ድምፅ",
+        "om": "Gulaallii Viidiyoo",
+        "ti": "ናይ ፖድካስት ድምጽ"
       },
       "description": null,
       "level": 3,
@@ -2547,7 +2892,13 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Gulaallii Viidiyoo fi Sagalee Poodkaastii",
+        "Multi-Cam Video Editing",
+        "Podcast Audio & Multi-Cam Video Editing",
+        "ናይ ፖድካስት ድምጽን ቪድዮን ምድላው",
+        "የፖድካስት ድምፅና ባለብዙ-ካሜራ ቪዲዮ ኤዲቲንግ"
+      ],
       "redirects": []
     },
     {
@@ -2557,8 +2908,8 @@
       "classification_system_code": "SYS_GIG",
       "slug": "amharic-voiceover-for-commercials-ads",
       "names": {
-        "en": "Amharic Voiceover for Commercials & Ads",
-        "am": "የአማርኛ ድምፅ ለማስታወቂያዎችና ፊልሞች",
+        "en": "Amharic Voiceover for Commercials",
+        "am": "የአማርኛ ድምፅ ለማስታወቂያዎች",
         "om": "Sagalee Beeksisaa Afaan Amaariffaa",
         "ti": "ናይ ኣምሓርኛ ድምጺ ንመወዓወዒታት"
       },
@@ -2573,7 +2924,11 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Ads",
+        "Amharic Voiceover for Commercials & Ads",
+        "የአማርኛ ድምፅ ለማስታወቂያዎችና ፊልሞች"
+      ],
       "redirects": []
     },
     {
@@ -2583,10 +2938,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "afaan-oromo-voiceover-for-radio-promos",
       "names": {
-        "en": "Afaan Oromo Voiceover for Radio & Promos",
-        "am": "የአፋን ኦሮሞ ድምፅ ለሬዲዮና ማስታወቂያዎች",
+        "en": "Afaan Oromo Voiceover for Radio",
+        "am": "የአፋን ኦሮሞ ድምፅ ለሬዲዮ",
         "om": "Sagalee Beeksisaa Afaan Oromoo",
-        "ti": "ናይ ኦሮምኛ ድምጺ ንሬድዮን መወዓወዒን"
+        "ti": "ናይ ኦሮምኛ ድምጺ ንሬድዮ"
       },
       "description": null,
       "level": 3,
@@ -2599,7 +2954,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Afaan Oromo Voiceover for Radio & Promos",
+        "Promos",
+        "ናይ ኦሮምኛ ድምጺ ንሬድዮን መወዓወዒን",
+        "የአፋን ኦሮሞ ድምፅ ለሬዲዮና ማስታወቂያዎች"
+      ],
       "redirects": []
     },
     {
@@ -2609,10 +2969,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "tigrinya-voiceover-for-documentaries-narration",
       "names": {
-        "en": "Tigrinya Voiceover for Documentaries & Narration",
-        "am": "የትግርኛ ድምፅ ለዶክመንተሪና ትረካዎች",
+        "en": "Tigrinya Voiceover for Documentaries",
+        "am": "የትግርኛ ድምፅ ለዶክመንተሪ",
         "om": "Sagalee Seenessa Viidiyoo Afaan Tigrii",
-        "ti": "ናይ ትግርኛ ድምጺ ንዶክመንተሪታትን ተረኽን"
+        "ti": "ናይ ትግርኛ ድምጺ ንዶክመንተሪታት"
       },
       "description": null,
       "level": 3,
@@ -2625,7 +2985,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Narration",
+        "Tigrinya Voiceover for Documentaries & Narration",
+        "ናይ ትግርኛ ድምጺ ንዶክመንተሪታትን ተረኽን",
+        "የትግርኛ ድምፅ ለዶክመንተሪና ትረካዎች"
+      ],
       "redirects": []
     },
     {
@@ -2635,10 +3000,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "audiobook-narration-character-voicing",
       "names": {
-        "en": "Audiobook Narration & Character Voicing",
-        "am": "የመጽሐፍ ንባብ ድምፅና የገጸ-ባህሪያት ድምፅ",
+        "en": "Audiobook Narration",
+        "am": "የመጽሐፍ ንባብ ድምፅ",
         "om": "Seenessa Kitaaba Sagalee",
-        "ti": "ናይ መጽሓፍ ንባብ ድምጽን ገጸ-ባህርያትን"
+        "ti": "ናይ መጽሓፍ ንባብ ድምጽ"
       },
       "description": null,
       "level": 3,
@@ -2651,7 +3016,12 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Audiobook Narration & Character Voicing",
+        "Character Voicing",
+        "ናይ መጽሓፍ ንባብ ድምጽን ገጸ-ባህርያትን",
+        "የመጽሐፍ ንባብ ድምፅና የገጸ-ባህሪያት ድምፅ"
+      ],
       "redirects": []
     },
     {
@@ -2661,10 +3031,10 @@
       "classification_system_code": "SYS_GIG",
       "slug": "audio-mixing-mastering-noise-removal",
       "names": {
-        "en": "Audio Mixing, Mastering & Noise Removal",
-        "am": "የድምፅ ቅንብር፣ ማስተሪንግና ጫጫታ ማስወገድ",
-        "om": "Qulqulleessa fi Walitti Makuu Sagalee",
-        "ti": "ናይ ድምጺ ምጽራይን ምውህሃድን (Mastering)"
+        "en": "Audio Mixing",
+        "am": "የድምፅ ቅንብር፣ ማስተሪንግ",
+        "om": "Qulqulleessa",
+        "ti": "ናይ ድምጺ ምጽራይ"
       },
       "description": null,
       "level": 3,
@@ -2677,7 +3047,14 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "Audio Mixing, Mastering & Noise Removal",
+        "Mastering",
+        "Noise Removal",
+        "Qulqulleessa fi Walitti Makuu Sagalee",
+        "ናይ ድምጺ ምጽራይን ምውህሃድን (Mastering)",
+        "የድምፅ ቅንብር፣ ማስተሪንግና ጫጫታ ማስወገድ"
+      ],
       "redirects": []
     }
   ]
