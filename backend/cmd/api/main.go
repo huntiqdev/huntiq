@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -30,6 +31,10 @@ import (
 
 func main() {
 	_ = godotenv.Load()
+	migrateOnly := flag.Bool("migrate-only", false, "Run database migrations and exit")
+	seedOnly := flag.Bool("seed-only", false, "Run master data seed and exit")
+	flag.Parse()
+
 	cfg := config.Load()
 	handlers.AppBaseURL = cfg.AppBaseURL
 
@@ -44,8 +49,26 @@ func main() {
 	}
 	defer db.Close()
 
+	if *migrateOnly {
+		if err := database.RunMigrations(context.Background(), db, ""); err != nil {
+			log.Fatalf("Migration failed: %v", err)
+		}
+		os.Exit(0)
+	}
+	if *seedOnly {
+		if err := database.VerifyOrSeed(context.Background(), db, ""); err != nil {
+			log.Fatalf("Seed failed: %v", err)
+		}
+		os.Exit(0)
+	}
+
+	// Always verify migrations and seeds on every run with auto-recovery
+	startupCtx, startupCancel := context.WithTimeout(context.Background(), 2*time.Minute)
+	if err := database.AutoMigrateAndSeed(startupCtx, db); err != nil {
+		log.Printf("[HUNTIQ DB] Warning: auto-migrate/seed encountered error: %v (continuing)", err)
+	}
+
 	// Ensure critical schema columns exist across any connected database instance
-	startupCtx, startupCancel := context.WithTimeout(context.Background(), 20*time.Second)
 	_, _ = db.Exec(startupCtx, `
 		DO $$ BEGIN
 			IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'account_entity_type') THEN
@@ -99,10 +122,22 @@ func main() {
 	`)
 	startupCancel()
 
-	if err := search.LoadSearchConfig("data/search_config.json"); err != nil {
-		if err2 := search.LoadSearchConfig("../data/search_config.json"); err2 != nil {
-			log.Printf("[INFO] Search config: default settings loaded (%v)", err)
+	searchConfigCandidates := []string{
+		"internal/database/loccatdata/search_config.json",
+		"backend/internal/database/loccatdata/search_config.json",
+		"../internal/database/loccatdata/search_config.json",
+		"../../internal/database/loccatdata/search_config.json",
+	}
+	searchLoaded := false
+	for _, sc := range searchConfigCandidates {
+		if err := search.LoadSearchConfig(sc); err == nil {
+			log.Printf("[HUNTIQ] Loaded search config from %s", sc)
+			searchLoaded = true
+			break
 		}
+	}
+	if !searchLoaded {
+		log.Printf("[INFO] Search config: default settings loaded")
 	}
 
 	// Background worker context with graceful cancellation
