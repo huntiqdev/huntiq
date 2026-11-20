@@ -59,16 +59,16 @@ export function UserAccountMenu() {
       <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
         <Link
           href="/auth"
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 min-h-[36px] rounded-full text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:text-[#1769E0] dark:hover:text-[#38A5FF] hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all border border-zinc-200 dark:border-zinc-800 tap-bounce active:scale-95 whitespace-nowrap"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 min-h-[36px] rounded-full text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:text-[#1769E0] dark:hover:text-[#38A5FF] hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all border border-zinc-200 dark:border-zinc-700 shadow-2xs tap-bounce active:scale-95 whitespace-nowrap"
         >
-          <User size={13} className="text-zinc-500" />
-          <span>{u.tab_sign_in || 'Sign In'}</span>
+          <User size={13} className="text-zinc-500 dark:text-zinc-400" />
+          <span>{u.btn_login || (u.tab_sign_in === 'ግባ' ? 'ግባ' : 'Login')}</span>
         </Link>
         <Link
           href="/auth?tab=register"
-          className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 min-h-[36px] rounded-full text-xs font-black text-white bg-[#1769E0] hover:bg-[#1055BD] transition-all shadow-xs shadow-[#1769E0]/20 tap-bounce active:scale-95 whitespace-nowrap"
+          className="hidden sm:inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 min-h-[36px] rounded-full text-xs font-black text-white bg-[#1769E0] hover:bg-[#1055BD] transition-all shadow-xs shadow-[#1769E0]/20 tap-bounce active:scale-95 whitespace-nowrap"
         >
-          <span>{u.tab_register || 'Register'}</span>
+          <span>{u.btn_signup || (u.tab_register === 'ተመዝገብ' ? 'ተመዝገብ' : 'Sign Up')}</span>
         </Link>
       </div>
     );
@@ -93,8 +93,8 @@ export function UserAccountMenu() {
           aria-label="User account menu"
         >
           <div className="w-6 h-6 rounded-full overflow-hidden bg-[#1769E0] text-white flex items-center justify-center font-black text-xs shadow-sm shadow-[#1769E0]/30 shrink-0">
-            {user.avatarURL ? (
-              <img src={user.avatarURL} alt={displayName} className="w-full h-full object-cover" />
+            {user.avatarURL || (user as any).avatar_url ? (
+              <img src={user.avatarURL || (user as any).avatar_url} alt={displayName} className="w-full h-full object-cover" />
             ) : (
               displayInitial
             )}

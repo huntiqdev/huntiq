@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export interface HuntiqLogoProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'header';
   showText?: boolean;
   subtitle?: string;
   className?: string;
@@ -15,6 +15,7 @@ export interface HuntiqLogoProps {
 const SIZE_MAP = {
   xs: { dim: 24, px: 'w-6 h-6', text: 'text-sm', sub: 'text-[8px]' },
   sm: { dim: 32, px: 'w-8 h-8', text: 'text-base', sub: 'text-[9px]' },
+  header: { dim: 44, px: 'w-11 h-11 sm:w-8.5 sm:h-8.5', text: 'text-lg sm:text-base font-black', sub: 'text-[10px] sm:text-[9px]' },
   md: { dim: 40, px: 'w-10 h-10', text: 'text-lg', sub: 'text-[10px]' },
   lg: { dim: 48, px: 'w-12 h-12', text: 'text-xl', sub: 'text-xs' },
   xl: { dim: 64, px: 'w-16 h-16', text: 'text-2xl', sub: 'text-sm' },

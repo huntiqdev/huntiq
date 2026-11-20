@@ -196,34 +196,34 @@ export function Header() {
 
       <header className="sticky top-0 z-50 w-full border-b backdrop-blur-xl bg-white/95 dark:bg-[#091426]/95 border-slate-200 dark:border-slate-800 transition-colors">
         
-        {/* ── Top Utility Row ──────────────────────────────────────────────── */}
-        <div className="hidden sm:block border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/80 dark:bg-[#070F1E]/80 text-[11px] text-slate-500 dark:text-slate-400">
+        {/* ── Top Utility Row (Visible on both mobile & desktop — places Theme & Language ABOVE login) ── */}
+        <div className="border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/90 dark:bg-[#070F1E]/90 text-[11px] text-slate-500 dark:text-slate-400">
           <div className="max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8 h-7 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
-                <Shield size={12} className="text-[#16A36A]" />
-                <span>{(t.nav as any)?.verified_ethiopian_listings ?? 'Verified Marketplace • 100% Ethiopian Listings'}</span>
-              </span>
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 truncate">
+              <Shield size={11} className="text-[#16A36A] shrink-0" />
+              <span className="truncate">{(t.nav as any)?.verified_ethiopian_listings ?? 'Verified Marketplace • 100% Ethiopian Listings'}</span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-2">
               {/* Language Selector */}
               <div className="relative">
                 <button
+                  type="button"
                   onClick={() => setLangOpen(v => !v)}
-                  className="flex items-center gap-1 hover:text-[#1769E0] transition-colors font-bold uppercase tracking-wider text-[10px]"
+                  className="flex items-center gap-1 hover:text-[#1769E0] transition-colors font-bold uppercase tracking-wider text-[10px] py-0.5 px-1.5 rounded-md hover:bg-slate-200/50 dark:hover:bg-slate-800/50 cursor-pointer"
+                  aria-label="Select language"
                 >
-                  <Globe size={12} />
+                  <Globe size={11} className="text-[#1769E0]" />
                   <span>{localeLabels[locale] ?? locale.toUpperCase()}</span>
-                  <ChevronDown size={10} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={9} className={`transition-transform ${langOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {langOpen && (
-                  <div className="absolute right-0 mt-1.5 w-40 rounded-2xl border shadow-2xl z-50 overflow-hidden bg-white dark:bg-[#0E1B33] border-slate-200 dark:border-slate-800">
+                  <div className="absolute right-0 mt-1 w-36 rounded-xl border shadow-2xl z-50 overflow-hidden bg-white dark:bg-[#0E1B33] border-slate-200 dark:border-slate-800">
                     {locales.map((l: string) => (
                       <button
                         key={l}
                         onClick={() => { setLocale(l); setLangOpen(false); }}
-                        className={`w-full text-left px-3.5 py-2 text-xs font-bold hover:bg-[#1769E0] hover:text-white transition-colors flex items-center justify-between ${
+                        className={`w-full text-left px-3 py-1.5 text-xs font-bold hover:bg-[#1769E0] hover:text-white transition-colors flex items-center justify-between cursor-pointer ${
                           locale === l ? 'text-[#1769E0] dark:text-[#38A5FF]' : 'text-slate-700 dark:text-slate-300'
                         }`}
                       >
@@ -235,13 +235,14 @@ export function Header() {
                 )}
               </div>
 
-              {/* Dark / Light Toggle */}
+              {/* Theme Changer (Dark / Light Toggle) */}
               <button
+                type="button"
                 onClick={toggleTheme}
-                className="p-1 rounded-md hover:text-[#1769E0] transition-colors"
+                className="p-1 rounded-md hover:text-[#1769E0] transition-colors flex items-center justify-center text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 cursor-pointer"
                 aria-label="Toggle dark mode"
               >
-                {mounted ? (isDark ? <Sun size={13} /> : <Moon size={13} />) : <span className="w-3.5 h-3.5 block" />}
+                {mounted ? (isDark ? <Sun size={12} className="text-amber-400" /> : <Moon size={12} className="text-slate-600" />) : <span className="w-3 h-3 block" />}
               </button>
             </div>
           </div>
@@ -250,62 +251,22 @@ export function Header() {
         {/* ── Main Header Row ──────────────────────────────────────────────── */}
         <div className="max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8 h-15 py-2 flex items-center gap-2 sm:gap-4">
 
-          {/* Logo */}
+          {/* Logo (Increased by half on mobile, sharp & clean on desktop) */}
           <HuntiqLogo
-            size="sm"
+            size="header"
             showText
             subtitle="Marketplace"
             href="/"
             priority
           />
 
-          {/* Global Search Bar (Balanced Width on Large Screens) */}
-          <div className="flex-1 min-w-0 max-w-lg lg:max-w-xl mx-2 sm:mx-6">
+          {/* Global Search Bar (Generous responsive space on all screen sizes) */}
+          <div className="flex-1 min-w-0 max-w-lg lg:max-w-xl mx-1 sm:mx-6">
             <SearchBar />
           </div>
 
-          {/* Right Header Controls */}
+          {/* Right Header Controls (Single Login on mobile, Login + Sign Up on desktop) */}
           <div className="flex items-center gap-1.5 sm:gap-2 ml-auto shrink-0">
-
-            {/* Mobile Language Selector (sm:hidden) */}
-            <div className="relative sm:hidden">
-              <button
-                type="button"
-                onClick={() => setLangOpen(v => !v)}
-                className="flex items-center gap-1 p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-black text-[11px] uppercase tracking-wider bg-slate-50 dark:bg-slate-900 tap-bounce active:scale-95"
-                aria-label="Select language"
-              >
-                <Globe size={13} className="text-[#1769E0]" />
-                <span>{locale === 'am' ? 'አማ' : locale === 'ti' ? 'ትግ' : locale.toUpperCase()}</span>
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 mt-1.5 w-40 rounded-2xl border shadow-2xl z-50 overflow-hidden bg-white dark:bg-[#0E1B33] border-slate-200 dark:border-slate-800">
-                  {locales.map((l: string) => (
-                    <button
-                      key={l}
-                      onClick={() => { setLocale(l); setLangOpen(false); }}
-                      className={`w-full text-left px-3.5 py-2 text-xs font-bold hover:bg-[#1769E0] hover:text-white transition-colors flex items-center justify-between tap-bounce ${
-                        locale === l ? 'text-[#1769E0]' : ''
-                      }`}
-                    >
-                      {localeLabels[l] ?? l.toUpperCase()}
-                      {locale === l && <span className="w-1.5 h-1.5 rounded-full bg-[#1769E0] inline-block" />}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Dark / Light Toggle (sm:hidden) */}
-            <button
-              onClick={toggleTheme}
-              className="sm:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-[#1769E0] bg-slate-50 dark:bg-slate-900 transition-colors tap-bounce active:scale-95"
-              aria-label="Toggle dark mode"
-            >
-              {mounted ? (isDark ? <Sun size={13} /> : <Moon size={13} />) : <span className="w-3.5 h-3.5 block" />}
-            </button>
-
-            {/* User Account / Role Menu */}
             <UserAccountMenu />
           </div>
         </div>

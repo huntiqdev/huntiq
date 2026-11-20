@@ -23,6 +23,7 @@ interface PortalCard {
   badgeClass: string;
   desc: string;
   href: string;
+  dedicatedUrl: string;
   icon: any;
   iconColor: string;
   borderHover: string;
@@ -32,15 +33,16 @@ interface PortalCard {
 
 const PORTALS: PortalCard[] = [
   {
-    title: 'Platform Owner',
+    title: 'Platform Owner & CEO',
     badge: 'Tier-0 Governance',
     badgeClass: 'bg-red-500/10 text-red-400 border-red-500/30',
     desc: 'Ultimate authorized platform governance, root configuration, and administrative provisioning.',
-    href: '/executive-console/login',
+    href: '/admin/owner-login',
+    dedicatedUrl: '/admin/owner-login (or /executive-console/login)',
     icon: ShieldAlert,
     iconColor: 'text-red-400 bg-red-950/40 border-red-500/20',
     borderHover: 'hover:border-red-500/50 hover:shadow-red-500/10',
-    roles: 'Platform Owner',
+    roles: 'Platform Owner, CEO',
     securityLevel: 'Passkey Required (User Verification Enforced)',
   },
   {
@@ -48,7 +50,8 @@ const PORTALS: PortalCard[] = [
     badge: 'Operations & Config',
     badgeClass: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30',
     desc: 'Platform configuration, service administration, system settings, and catalog structure management.',
-    href: '/platform-console/login',
+    href: '/admin/platform-login',
+    dedicatedUrl: '/admin/platform-login (or /platform-console/login)',
     icon: Server,
     iconColor: 'text-indigo-400 bg-indigo-950/40 border-indigo-500/20',
     borderHover: 'hover:border-indigo-500/50 hover:shadow-indigo-500/10',
@@ -60,7 +63,8 @@ const PORTALS: PortalCard[] = [
     badge: 'Security & Audit',
     badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
     desc: 'Security incident monitoring, tamper-resistant audit logs, session revocation, and access reviews.',
-    href: '/security-console/login',
+    href: '/admin/security-login',
+    dedicatedUrl: '/admin/security-login (or /security-console/login)',
     icon: ShieldCheck,
     iconColor: 'text-emerald-400 bg-emerald-950/40 border-emerald-500/20',
     borderHover: 'hover:border-emerald-500/50 hover:shadow-emerald-500/10',
@@ -72,7 +76,8 @@ const PORTALS: PortalCard[] = [
     badge: 'Operations & Support',
     badgeClass: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
     desc: 'Routine catalog management, listing moderation, seller verification, and customer inquiries.',
-    href: '/staff/login',
+    href: '/admin/staff-login',
+    dedicatedUrl: '/admin/staff-login (or /staff/login)',
     icon: Users,
     iconColor: 'text-blue-400 bg-blue-950/40 border-blue-500/20',
     borderHover: 'hover:border-blue-500/50 hover:shadow-blue-500/10',
@@ -144,6 +149,10 @@ export default function AdminPortalDirectoryPage() {
                 </p>
 
                 <div className="pt-4 border-t border-zinc-800/60 space-y-1.5 text-[11px]">
+                  <div className="flex items-center justify-between text-zinc-400">
+                    <span className="text-zinc-500 font-semibold">Direct Login:</span>
+                    <span className="font-mono text-zinc-300 text-[10px] bg-zinc-800/60 px-2 py-0.5 rounded-md">{portal.href}</span>
+                  </div>
                   <div className="flex items-center justify-between text-zinc-400">
                     <span className="text-zinc-500 font-semibold">Authorized:</span>
                     <span className="font-bold text-zinc-300">{portal.roles}</span>
