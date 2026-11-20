@@ -6,16 +6,17 @@ import { api } from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
 import {
   Settings, Save, AlertCircle, Shield, DollarSign,
-  Layers, CreditCard, Megaphone, CheckCircle2, ShieldAlert, Calculator, Fingerprint
+  Layers, CreditCard, Megaphone, CheckCircle2, ShieldAlert, Calculator, Fingerprint, Sparkles
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { IPTrackingSecurity } from '@/components/admin/enterprise/IPTrackingSecurity';
 import { FeeControlEngine } from '@/components/admin/enterprise/FeeControlEngine';
 import { AdminPasskeyManager } from '@/components/admin/enterprise/AdminPasskeyManager';
+import { AIControlCenter } from '@/components/admin/enterprise/AIControlCenter';
 
 interface SettingMeta {
   label: string;
-  category: 'general' | 'fees' | 'tiers' | 'merchants' | 'promotions';
+  category: 'general' | 'fees' | 'tiers' | 'merchants' | 'promotions' | 'ai_control';
   type: 'boolean' | 'number' | 'text';
   description?: string;
 }
@@ -61,10 +62,18 @@ const SETTING_METADATA: Record<string, SettingMeta> = {
   telebirr_payment_enabled: { label: 'Telebirr Payment Gateway', category: 'merchants', type: 'boolean', description: 'Platform-wide toggle for Telebirr automated payments' },
   telebirr_merchant_phone: { label: 'Telebirr Merchant Phone', category: 'merchants', type: 'text', description: 'Official Telebirr merchant phone number for automated listing payments' },
   telebirr_app_id: { label: 'Telebirr App ID', category: 'merchants', type: 'text', description: 'Official Ethio Telecom Telebirr Open Platform App ID' },
+
+  // HUNTIQ AI Control Center
+  ai_enabled: { label: 'Enable HUNTIQ AI', category: 'ai_control', type: 'boolean', description: 'Master toggle to enable or disable HUNTIQ AI across the platform' },
+  ai_maintenance_mode: { label: 'AI Maintenance Mode', category: 'ai_control', type: 'boolean', description: 'Temporarily pause AI queries without disabling manual mode' },
+  ai_model: { label: 'AI Model Identifier', category: 'ai_control', type: 'text', description: 'Provider model (e.g. "gemini-1.5-flash")' },
+  ai_timeout_seconds: { label: 'AI Request Timeout (Seconds)', category: 'ai_control', type: 'number', description: 'Maximum time bounded for provider response' },
+  ai_rate_limit_per_min: { label: 'AI Rate Limit (Req/Min/User)', category: 'ai_control', type: 'number', description: 'Rate limit ceiling per session to prevent quota exhaustion' },
 };
 
 const CATEGORIES = [
   { id: 'general', label: 'General & Security', icon: Shield },
+  { id: 'ai_control', label: 'HUNTIQ AI Control', icon: Sparkles },
   { id: 'passkeys', label: 'Passkeys & Biometrics', icon: Fingerprint },
   { id: 'ip_security', label: 'IP Defense Firewall', icon: ShieldAlert },
   { id: 'fee_engine', label: 'Deep Fee Engine', icon: Calculator },
@@ -189,6 +198,12 @@ export default function AdminSettingsPage() {
 
       {activeCategory === 'fee_engine' && (
         <FeeControlEngine />
+      )}
+
+      {activeCategory === 'ai_control' && (
+        <div className="mb-8">
+          <AIControlCenter />
+        </div>
       )}
 
       {/* Standard Settings View */}

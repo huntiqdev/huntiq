@@ -7,12 +7,13 @@ import {
   HelpCircle, X, ChevronRight,
   Trophy, TrendingUp, CheckCircle2,
   Package, ArrowRight,
-  Gift, Users, Wallet, ChevronLeft,
+  Gift, Users, Wallet, ChevronLeft, Sparkles,
 } from 'lucide-react';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
+import { HuntiqAIChat } from '@/components/ai/HuntiqAIChat';
 
 
 
@@ -397,6 +398,7 @@ export function HomeHero() {
   const [recentProducts, setRecentProducts] = useState<any[]>([]);
   const [rentalProducts, setRentalProducts] = useState<any[]>([]);
   const [conditionFilter, setConditionFilter] = useState<'all' | 'new' | 'used'>('all');
+  const [operatingMode, setOperatingMode] = useState<'manual' | 'ai'>('manual');
 
   useEffect(() => {
     let active = true;
@@ -441,10 +443,54 @@ export function HomeHero() {
 
   return (
     <>
-      {/* ── HERO: full-width slider, no circles ── */}
-      <section className="w-full">
-        <HeroSlider />
+      {/* ── Dual Mode Navigation Switcher ── */}
+      <section className="w-full bg-white dark:bg-zinc-900 border-b border-zinc-200/80 dark:border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-3">
+          <div className="inline-flex p-1 rounded-2xl bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 shadow-xs">
+            <button
+              onClick={() => setOperatingMode('manual')}
+              className={`flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black transition-all ${
+                operatingMode === 'manual'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+              }`}
+            >
+              <Store size={15} className="text-[#1769E0]" />
+              <span>Manual Marketplace</span>
+            </button>
+            <button
+              onClick={() => setOperatingMode('ai')}
+              className={`flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black transition-all ${
+                operatingMode === 'ai'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm'
+                  : 'text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400'
+              }`}
+            >
+              <Sparkles size={15} className={operatingMode === 'ai' ? 'text-yellow-300 animate-pulse' : 'text-blue-600'} />
+              <span>HUNTIQ AI</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-300 border border-blue-400/30 uppercase tracking-widest hidden sm:inline">
+                Made by HUNTIQ
+              </span>
+            </button>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2 text-xs text-zinc-400">
+            <Shield size={14} className="text-emerald-500" />
+            <span>Dual-Mode Marketplace · Switch anytime</span>
+          </div>
+        </div>
       </section>
+
+      {/* ── Mode Content ── */}
+      {operatingMode === 'ai' ? (
+        <section className="w-full py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-50/50 via-white to-zinc-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950">
+          <HuntiqAIChat onCloseAI={() => setOperatingMode('manual')} />
+        </section>
+      ) : (
+        <section className="w-full">
+          <HeroSlider />
+        </section>
+      )}
 
       {/* ── Everything below the fold ── */}
       <section className="relative w-full overflow-hidden">

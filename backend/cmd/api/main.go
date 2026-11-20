@@ -16,6 +16,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 
+	"github.com/your-org/used-tools-marketplace/internal/ai"
 	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/config"
 	"github.com/your-org/used-tools-marketplace/internal/database"
@@ -174,6 +175,7 @@ func main() {
 	orgRepo := repository.NewOrganizationRepo(db)
 	recoveryRepo := repository.NewRecoveryRepo(db)
 	masterDataRepo := repository.NewMasterDataRepo(db)
+	aiRepo := ai.NewAIRepository(db)
 
 	// In-memory active user cache
 	const isActiveCacheMax = 10_000
@@ -241,6 +243,15 @@ func main() {
 	identitySvc := service.NewIdentityService(identityRepo, cfg.DevMode)
 	orgSvc := service.NewOrganizationService(orgRepo)
 	masterDataSvc := service.NewMasterDataService(masterDataRepo)
+
+	// HUNTIQ AI Integration
+	aiTools := ai.NewToolRegistry(productSvc, categoryHierarchyRepo, locationHierarchyRepo, cfg.AppBaseURL)
+	geminiClient := ai.NewGeminiClient(cfg.GeminiAPIKey, cfg.GeminiModel, cfg.AITimeoutSeconds, cfg.AIMaxOutputTokens)
+	aiSvc := ai.NewAIService(geminiClient, aiRepo, cfg.AIEnabled, cfg.AIRateLimitPerMin).
+		WithSettingsGetter(func(ctx context.Context, k string) string {
+			return adminSvc.GetSetting(ctx, k)
+		}).
+		WithToolRegistry(aiTools)
 
 	txSvc.WithReferralService(referralSvc)
 	authSvc.WithReferralService(referralSvc).
@@ -373,6 +384,7 @@ func main() {
 	identityHandler := handlers.NewIdentityHandler(identitySvc)
 	organizationHandler := handlers.NewOrganizationHandler(orgSvc)
 	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
+	aiHandler := handlers.NewAIHandler(aiSvc, aiRepo)
 
 	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
@@ -448,6 +460,7 @@ func main() {
 		IdentityHandler:       identityHandler,
 		OrganizationHandler:   organizationHandler,
 		MasterDataHandler:     masterDataHandler,
+		AIHandler:             aiHandler,
 	})
 
 	// Background listener
