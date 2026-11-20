@@ -290,8 +290,14 @@ END;
 $function$;
 
 -- Triggers
-DROP TRIGGER IF EXISTS trg_update_seller_rating ON seller_reviews;
-CREATE TRIGGER trg_update_seller_rating AFTER INSERT OR UPDATE ON seller_reviews FOR EACH ROW EXECUTE FUNCTION update_seller_rating();
+DO $$ BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'seller_reviews'
+    ) THEN
+        DROP TRIGGER IF EXISTS trg_update_seller_rating ON seller_reviews;
+        CREATE TRIGGER trg_update_seller_rating AFTER INSERT OR UPDATE ON seller_reviews FOR EACH ROW EXECUTE FUNCTION update_seller_rating();
+    END IF;
+END $$;
 
 DROP TRIGGER IF EXISTS trg_snapshot_seller_tier ON products;
 CREATE TRIGGER trg_snapshot_seller_tier BEFORE INSERT ON products FOR EACH ROW EXECUTE FUNCTION snapshot_seller_tier();

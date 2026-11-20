@@ -120,11 +120,21 @@ BEGIN
 END;
 $function$;
 
-DROP TRIGGER IF EXISTS trg_update_brand_dictionary_timestamp ON brand_dictionary;
-CREATE TRIGGER trg_update_brand_dictionary_timestamp BEFORE UPDATE ON brand_dictionary FOR EACH ROW EXECUTE FUNCTION update_brand_timestamp();
+DO $$ BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'brand_dictionary'
+    ) THEN
+        DROP TRIGGER IF EXISTS trg_update_brand_dictionary_timestamp ON brand_dictionary;
+        CREATE TRIGGER trg_update_brand_dictionary_timestamp BEFORE UPDATE ON brand_dictionary FOR EACH ROW EXECUTE FUNCTION update_brand_timestamp();
+    END IF;
 
-DROP TRIGGER IF EXISTS trg_sync_brand_to_dictionary ON brands;
-CREATE TRIGGER trg_sync_brand_to_dictionary AFTER INSERT OR UPDATE ON brands FOR EACH ROW EXECUTE FUNCTION sync_brand_to_dictionary();
+    IF EXISTS (
+        SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'brands'
+    ) THEN
+        DROP TRIGGER IF EXISTS trg_sync_brand_to_dictionary ON brands;
+        CREATE TRIGGER trg_sync_brand_to_dictionary AFTER INSERT OR UPDATE ON brands FOR EACH ROW EXECUTE FUNCTION sync_brand_to_dictionary();
+    END IF;
+END $$;
 
 CREATE OR REPLACE VIEW popular_searches AS
 SELECT normalized_query,

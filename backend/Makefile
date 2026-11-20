@@ -16,7 +16,7 @@ test: ## Run tests
 	go test ./... -v
 
 migrate: ## Run database migrations
-	./scripts/migrate.sh
+	go run ./cmd/tools/migrate
 
 seed: ## Import master data
 	go run ./cmd/tools/masterdata -action=import -dry-run=false -dir=../data/master

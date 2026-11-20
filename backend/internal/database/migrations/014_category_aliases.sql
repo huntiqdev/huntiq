@@ -20,6 +20,15 @@ DO $$ BEGIN
     END IF;
 END $$;
 
+DO $$ BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.table_constraints
+        WHERE table_name = 'category_aliases' AND constraint_name = 'uq_category_aliases_cat_alias'
+    ) THEN
+        ALTER TABLE ONLY category_aliases ADD CONSTRAINT uq_category_aliases_cat_alias UNIQUE (category_id, alias);
+    END IF;
+END $$;
+
 CREATE INDEX IF NOT EXISTS idx_category_aliases_alias ON category_aliases USING btree (alias);
 
 CREATE INDEX IF NOT EXISTS idx_category_aliases_category ON category_aliases USING btree (category_id);

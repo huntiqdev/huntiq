@@ -10,13 +10,13 @@ FRONTEND="$ROOT/frontend"
 
 # Read DB config from .env if present
 DB_HOST="/tmp"
-DB_PORT="5433"
+DB_PORT="5432"
 if [ -f "$BACKEND/.env" ]; then
     DB_HOST=$(grep -E '^[[:space:]]*DB_HOST=' "$BACKEND/.env" | head -n 1 | cut -d '=' -f2- | tr -d ' "\r' || echo "/tmp")
-    DB_PORT=$(grep -E '^[[:space:]]*DB_PORT=' "$BACKEND/.env" | head -n 1 | cut -d '=' -f2- | tr -d ' "\r' || echo "5433")
+    DB_PORT=$(grep -E '^[[:space:]]*DB_PORT=' "$BACKEND/.env" | head -n 1 | cut -d '=' -f2- | tr -d ' "\r' || echo "5432")
 fi
 [ -z "$DB_HOST" ] && DB_HOST="/tmp"
-[ -z "$DB_PORT" ] && DB_PORT="5433"
+[ -z "$DB_PORT" ] && DB_PORT="5432"
 
 PIDS=()
 
@@ -41,18 +41,13 @@ in_use() {
 }
 
 start_postgres() {
-    # 1. Check primary configured host & port
+    # 1. Check primary configured host & port (5432)
     if psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
         return 0
     fi
 
-    # 2. Check alternative active daemon (5433 in /tmp vs 5432)
-    if [ "$DB_PORT" = "5432" ] && psql -h "/tmp" -p 5433 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
-        DB_HOST="/tmp"
-        DB_PORT="5433"
-        return 0
-    fi
-    if [ "$DB_PORT" = "5433" ] && psql -h "127.0.0.1" -p 5432 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
+    # 2. Check 127.0.0.1 on port 5432 if unix socket is not connected
+    if [ "$DB_HOST" != "127.0.0.1" ] && psql -h "127.0.0.1" -p 5432 -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1; then
         DB_HOST="127.0.0.1"
         DB_PORT="5432"
         return 0
@@ -83,9 +78,8 @@ cmd_native() {
     echo "✓ Database online (Port: $DB_PORT)"
 
     # Ensure database schema is migrated
-    if [ -f "$BACKEND/scripts/migrate.sh" ]; then
-        (cd "$BACKEND" && ./scripts/migrate.sh) >/dev/null 2>&1 || true
-    fi
+    echo "⚙️ Running Go database migrations..."
+    (cd "$BACKEND" && go run ./cmd/tools/migrate)
 
     if in_use 8080; then
         echo "✓ Backend API already running on :8080"

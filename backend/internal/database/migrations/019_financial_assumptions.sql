@@ -33,6 +33,15 @@ END $$;
 CREATE INDEX IF NOT EXISTS idx_financial_assumptions_scenario ON financial_assumptions USING btree (scenario_id);
 
 DO $$ BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'financial_scenarios' AND column_name = 'id' AND data_type = 'integer'
+    ) THEN
+        ALTER TABLE financial_scenarios ALTER COLUMN id TYPE character varying(50);
+    END IF;
+END $$;
+
+DO $$ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM information_schema.table_constraints
         WHERE table_name = 'financial_assumptions' AND constraint_name = 'financial_assumptions_scenario_id_fkey'
