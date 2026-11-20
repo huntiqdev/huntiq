@@ -7,6 +7,7 @@ export interface Category {
   name_or?: string;
   name_ti?: string;
   sort_order?: number;
+  display_order?: number;
   is_active?: boolean;
   parent_id?: number;
   icon?: string;

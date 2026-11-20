@@ -16,7 +16,7 @@ import { resolveCategoryTitle, findCategoryPath, getCategoryEmoji } from '@/lib/
 import { useAuth } from '@/context/AuthContext';
 import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
-  LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
+  LayoutGrid, ChevronRight, MapPin, Star,
   ShieldCheck, Sliders, ShieldAlert, Navigation, AlertTriangle, RotateCcw,
 } from 'lucide-react';
 import { formatLocationParts } from '@/lib/location';
@@ -45,61 +45,6 @@ function TierBanner() {
   );
 }
 
-// ── Popular Categories strip ──────────────────────────────────────────────────
-function PopularCategoriesStrip({ onSelect }: {
-  categories?: { id: number; name: string; slug: string }[];
-  onSelect: (catId: number) => void;
-}) {
-  const [popular, setPopular] = useState<any[]>([]);
-  const { t } = useLocale();
-
-  useEffect(() => {
-    api.getPopularCategories(7, 8).then(setPopular).catch(() => { });
-  }, []);
-
-  if (popular.length === 0) return null;
-
-  const catLabel = (slug: string) => slug.replace(/-/g, ' ');
-
-  const EMOJI: Record<string, string> = {
-    agriculture: '🌾', 'food-beverage': '🍎', electronics: '📱', 'consumer-electronics': '📱',
-    'computing-it': '💻', 'transport-mobility': '🚗', 'construction-infrastructure': '🔨',
-    'property-real-estate': '🏠', 'healthcare-medicine': '🏥', 'energy-utilities': '⚡',
-    'industrial-manufacturing': '🏭', 'clothing-apparel': '👗', 'home-appliances-kitchenware': '🍳',
-    'furniture-furnishings': '🛋️', 'beauty-personal-care': '💄', 'sports-fitness': '⚽',
-    'education-training': '📚', 'finance-insurance': '💳', 'commerce-trade': '🛒',
-    'workforce-employment': '💼', 'logistics-supply-chain': '🚚', 'other': '📦',
-  };
-
-  return (
-    <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-gradient-to-r from-orange-50/60 to-transparent dark:from-orange-950/20">
-      <div className="flex items-center gap-2 mb-2">
-        <TrendingUp size={12} className="text-orange-500" />
-        <p className="text-[10px] font-black uppercase tracking-widest text-orange-600">{t.ui.trending_this_week}</p>
-      </div>
-      <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-        {popular.map(p => (
-          <button
-            key={p.id}
-            type="button"
-            onClick={() => onSelect(p.id)}
-            className="shrink-0 flex flex-col items-center gap-1 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-100 dark:border-zinc-800 hover:border-orange-400 hover:shadow-md transition-all px-3 py-2 min-w-[64px]"
-          >
-            <span className="text-lg">{EMOJI[p.slug] ?? '📦'}</span>
-            <span className="text-[9px] font-bold text-zinc-600 dark:text-zinc-400 text-center leading-tight capitalize whitespace-nowrap">
-              {catLabel(p.slug)}
-            </span>
-            {p.activity_score > 0 && (
-              <span className="text-[8px] text-orange-500 font-black">
-                {p.new_listings > 0 ? `+${p.new_listings}` : ''}{p.order_count > 0 ? ` ${p.order_count}🛒` : ''}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ── Main page ─────────────────────────────────────────────────────────────────
 function ProductsContent() {
@@ -146,16 +91,23 @@ function ProductsContent() {
   const [drawerWoreda, setDrawerWoreda] = useState<string>('');
 
   useEffect(() => {
+    const sortCats = (list: Category[]) => [...list].sort((a, b) => {
+      const orderA = a.display_order ?? a.sort_order ?? 999;
+      const orderB = b.display_order ?? b.sort_order ?? 999;
+      if (orderA !== orderB) return orderA - orderB;
+      return (a.name || '').localeCompare(b.name || '');
+    });
+
     api.getCategoryTree(locale)
       .then(tree => {
         if (Array.isArray(tree) && tree.length > 0) {
-          setCategories(tree);
+          setCategories(sortCats(tree));
         } else {
-          api.getCategories().then(setCategories).catch(() => { });
+          api.getCategories().then(cats => setCategories(sortCats(cats))).catch(() => { });
         }
       })
       .catch(() => {
-        api.getCategories().then(setCategories).catch(() => { });
+        api.getCategories().then(cats => setCategories(sortCats(cats))).catch(() => { });
       });
   }, [locale]);
 
@@ -707,113 +659,10 @@ function ProductsContent() {
       {/* Tier banner */}
       <TierBanner />
 
-      {/* Popular categories strip (clean full-width, single floating AI button used instead) */}
-      {!loading && (
-        <div className="px-[2%] sm:px-[4%] lg:px-[6%] pt-1">
-          <PopularCategoriesStrip
-            categories={categories}
-            onSelect={catId => navigateToCategory({ id: catId } as Category)}
-          />
-        </div>
-      )}
-
       {/* ── Page body ── */}
       <div className="max-w-screen-2xl mx-auto px-[2%] sm:px-[4%] lg:px-[6%] py-4">
         {/* Products area — full-width, clean layout */}
         <div className="w-full">
-
-          {/* ── HIGH-DEMAND ETHIOPIAN RECOMMENDATION CHIPS ── */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-3 mb-1">
-            <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500 shrink-0 mr-1 flex items-center gap-1">
-              <TrendingUp size={12} className="text-[#1769E0]" />
-              {locale === 'am' ? 'ተፈላጊዎች:' : 'Trending:'}
-            </span>
-
-            {/* Basic Tools & Machinery */}
-            <button
-              type="button"
-              onClick={() => {
-                const toolsCat = categories.find(c => c.slug.includes('tool') || c.slug.includes('construction') || c.slug.includes('machinery'));
-                if (toolsCat) {
-                  navigateToCategory(toolsCat);
-                } else {
-                  router.push(buildUrl({ search: 'tools' }));
-                }
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
-            >
-              <span>🛠️</span>
-              <span>{locale === 'am' ? 'መሣሪያዎችና ማሽኖች' : 'Tools & Equipment'}</span>
-            </button>
-
-            {/* Smart Phones & Electronics */}
-            <button
-              type="button"
-              onClick={() => {
-                const elecCat = categories.find(c => c.slug.includes('electronic') || c.slug.includes('phone') || c.slug.includes('computing'));
-                if (elecCat) {
-                  navigateToCategory(elecCat);
-                } else {
-                  router.push(buildUrl({ search: 'phone' }));
-                }
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
-            >
-              <span>📱</span>
-              <span>{locale === 'am' ? 'ስልኮችና ኤሌክትሮኒክስ' : 'Electronics & Phones'}</span>
-            </button>
-
-            {/* Properties & Rentals */}
-            <button
-              type="button"
-              onClick={() => {
-                setListingType('rent');
-                router.push(buildUrl({ overrideType: 'rent' }));
-              }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs border ${
-                listingType === 'rent'
-                  ? 'bg-purple-600 text-white border-purple-600 shadow-purple-600/25'
-                  : 'bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/20'
-              }`}
-            >
-              <span>🏠</span>
-              <span>{locale === 'am' ? 'ኪራይ ቤቶችና ቦታዎች' : 'Property & Rentals'}</span>
-            </button>
-
-            {/* Vehicles & Machinery */}
-            <button
-              type="button"
-              onClick={() => {
-                const vehCat = categories.find(c => c.slug.includes('vehicle') || c.slug.includes('transport') || c.slug.includes('car'));
-                if (vehCat) {
-                  navigateToCategory(vehCat);
-                } else {
-                  router.push(buildUrl({ search: 'car' }));
-                }
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
-            >
-              <span>🚗</span>
-              <span>{locale === 'am' ? 'ተሽከርካሪዎችና ማሽኖች' : 'Vehicles & Transport'}</span>
-            </button>
-
-            {/* Agriculture & Farming */}
-            <button
-              type="button"
-              onClick={() => {
-                const agriCat = categories.find(c => c.slug.includes('agri') || c.slug.includes('farm') || c.slug.includes('food'));
-                if (agriCat) {
-                  navigateToCategory(agriCat);
-                } else {
-                  router.push(buildUrl({ search: 'agriculture' }));
-                }
-              }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-lime-500/10 hover:bg-lime-500/20 text-lime-700 dark:text-lime-300 border border-lime-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
-            >
-              <span>🌾</span>
-              <span>{locale === 'am' ? 'ግብርናና ምርቶች' : 'Agriculture & Produce'}</span>
-            </button>
-          </div>
 
           {/* ── CLEAN FILTER BAR: Results & Active Chips on Left, Sort & Filters on Right ── */}
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl px-4 py-3 mb-4 shadow-xs flex items-center justify-between gap-3">
@@ -1082,19 +931,32 @@ function ProductsContent() {
         </div>
       </div>
 
-      {/* ── Slide-Over Filter Drawer ── */}
+      {/* ── Slide-Over Filter Drawer (Large: Right slide-over; Mobile: Bottom sheet <= 50% screen, no header, compact font) ── */}
       {filterDrawerOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end">
+        <div className="fixed inset-0 z-50 flex sm:justify-end items-end sm:items-stretch">
           {/* Backdrop */}
           <div
             className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity animate-fade-in"
             onClick={() => setFilterDrawerOpen(false)}
           />
 
-          {/* Side Drawer Panel */}
-          <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 shadow-2xl h-full flex flex-col z-10 border-l border-zinc-200 dark:border-zinc-800 animate-slide-in-right overflow-hidden">
-            {/* Drawer Header */}
-            <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+          {/* Drawer / Bottom-sheet Panel */}
+          <div className="relative w-full sm:max-w-md bg-white dark:bg-zinc-900 shadow-2xl max-h-[50vh] sm:max-h-full sm:h-full rounded-t-3xl sm:rounded-none flex flex-col z-10 border-t sm:border-t-0 sm:border-l border-zinc-200 dark:border-zinc-800 animate-slide-up sm:animate-slide-in-right overflow-hidden">
+            {/* Mobile Grab Bar & Close Button (No header on mobile) */}
+            <div className="sm:hidden pt-2.5 pb-1 px-4 flex items-center justify-between shrink-0">
+              <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto" />
+              <button
+                type="button"
+                onClick={() => setFilterDrawerOpen(false)}
+                className="absolute top-2.5 right-3.5 p-1 rounded-full text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+                aria-label="Close filters"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Desktop Drawer Header (hidden on mobile) */}
+            <div className="hidden sm:flex px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 items-center justify-between shrink-0">
               <div className="flex items-center gap-2">
                 <SlidersHorizontal size={18} className="text-[#1769E0]" />
                 <h2 className="text-base font-black text-zinc-900 dark:text-white">
@@ -1116,18 +978,18 @@ function ProductsContent() {
               </button>
             </div>
 
-            {/* Drawer Body (Scrollable) */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-5">
+            {/* Drawer Body (Scrollable, compact on mobile <= 50% screen) */}
+            <div className="flex-1 overflow-y-auto px-4 py-2 sm:p-5 space-y-3 sm:space-y-4">
               {/* Filter 1: Marketplace Mode */}
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+              <div className="space-y-1">
+                <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-zinc-500">
                   {(t.ui as any)?.marketplace_pillar ?? 'Marketplace Mode'}
                 </label>
-                <div className="grid grid-cols-3 gap-1.5 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl">
+                <div className="grid grid-cols-3 gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-lg sm:rounded-xl">
                   <button
                     type="button"
                     onClick={() => setDrawerType('all')}
-                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${drawerType === 'all'
+                    className={`py-1.5 sm:py-2 text-[10px] sm:text-xs font-black uppercase rounded-md sm:rounded-lg transition-all cursor-pointer ${drawerType === 'all'
                       ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
                       : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                       }`}
@@ -1137,7 +999,7 @@ function ProductsContent() {
                   <button
                     type="button"
                     onClick={() => setDrawerType('sale')}
-                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${drawerType === 'sale'
+                    className={`py-1.5 sm:py-2 text-[10px] sm:text-xs font-black uppercase rounded-md sm:rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${drawerType === 'sale'
                       ? 'bg-orange-600 text-white shadow-xs'
                       : 'text-zinc-500 hover:text-orange-600'
                       }`}
@@ -1147,7 +1009,7 @@ function ProductsContent() {
                   <button
                     type="button"
                     onClick={() => setDrawerType('rent')}
-                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${drawerType === 'rent'
+                    className={`py-1.5 sm:py-2 text-[10px] sm:text-xs font-black uppercase rounded-md sm:rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${drawerType === 'rent'
                       ? 'bg-teal-600 text-white shadow-xs'
                       : 'text-zinc-500 hover:text-teal-600'
                       }`}
@@ -1158,17 +1020,17 @@ function ProductsContent() {
               </div>
 
               {/* Filter 2: Condition */}
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+              <div className="space-y-1">
+                <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-zinc-500">
                   {t.ui?.condition ?? 'Condition'}
                 </label>
-                <div className="grid grid-cols-3 gap-1.5 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl">
+                <div className="grid grid-cols-3 gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-lg sm:rounded-xl">
                   {(['all', 'new', 'used'] as const).map(c => (
                     <button
                       key={c}
                       type="button"
                       onClick={() => setDrawerCondition(c)}
-                      className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${drawerCondition === c
+                      className={`py-1.5 sm:py-2 text-[10px] sm:text-xs font-black uppercase rounded-md sm:rounded-lg transition-all cursor-pointer ${drawerCondition === c
                         ? c === 'new'
                           ? 'bg-emerald-600 text-white shadow-xs'
                           : c === 'used'
@@ -1184,8 +1046,8 @@ function ProductsContent() {
               </div>
 
               {/* Filter 3: Price Range */}
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+              <div className="space-y-1">
+                <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-zinc-500">
                   {t.ui?.price ?? 'Price'} (ETB)
                 </label>
                 <div className="flex items-center gap-2">
@@ -1194,7 +1056,7 @@ function ProductsContent() {
                     placeholder={t.ui?.min_price ?? 'Min ETB'}
                     value={drawerMinPrice}
                     onChange={e => setDrawerMinPrice(e.target.value)}
-                    className="w-1/2 px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-2 focus:ring-[#1769E0]"
+                    className="w-1/2 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg sm:rounded-xl outline-none focus:ring-2 focus:ring-[#1769E0]"
                     min={0}
                   />
                   <span className="text-zinc-400 font-bold">-</span>
@@ -1203,27 +1065,27 @@ function ProductsContent() {
                     placeholder={t.ui?.max_price ?? 'Max ETB'}
                     value={drawerMaxPrice}
                     onChange={e => setDrawerMaxPrice(e.target.value)}
-                    className="w-1/2 px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl outline-none focus:ring-2 focus:ring-[#1769E0]"
+                    className="w-1/2 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg sm:rounded-xl outline-none focus:ring-2 focus:ring-[#1769E0]"
                     min={0}
                   />
                 </div>
               </div>
 
               {/* Filter 4: Proximity / Near Me */}
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+              <div className="space-y-1">
+                <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-zinc-500">
                   {(t.ui as any)?.distance_label ?? 'Proximity'}
                 </label>
                 <button
                   type="button"
                   onClick={detectNearMe}
                   disabled={isLocating}
-                  className={`w-full py-2.5 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${userCoords
+                  className={`w-full py-2 sm:py-2.5 px-3 rounded-lg sm:rounded-xl border text-[11px] sm:text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${userCoords
                     ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
                     : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-teal-500'
                     }`}
                 >
-                  <Navigation size={14} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
+                  <Navigation size={13} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
                   <span>
                     {isLocating
                       ? ((t.ui as any).locating ?? 'Locating…')
@@ -1247,11 +1109,11 @@ function ProductsContent() {
               </div>
 
               {/* Filter 5: Location Selector */}
-              <div className="space-y-1.5">
-                <label className="text-[11px] font-black uppercase tracking-wider text-zinc-500">
+              <div className="space-y-1">
+                <label className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-zinc-500">
                   {t.ui?.location_label ?? 'Location (Ethiopia)'}
                 </label>
-                <div className="p-3 bg-zinc-50 dark:bg-zinc-800/60 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                <div className="p-2 sm:p-3 bg-zinc-50 dark:bg-zinc-800/60 rounded-lg sm:rounded-xl border border-zinc-200 dark:border-zinc-700">
                   <LocationSelector
                     showPrecise={false}
                     defaultValue={{ region: drawerRegion, zone: drawerZone, subcity: drawerSubcity, woreda: drawerWoreda }}
@@ -1267,20 +1129,20 @@ function ProductsContent() {
             </div>
 
             {/* Drawer Footer Actions */}
-            <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 flex items-center gap-3">
+            <div className="p-3 sm:p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80 flex items-center gap-2 sm:gap-3 shrink-0">
               <button
                 type="button"
                 onClick={resetDrawerFilters}
-                className="flex-1 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-white dark:hover:bg-zinc-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl border border-zinc-200 dark:border-zinc-700 text-[11px] sm:text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-white dark:hover:bg-zinc-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <RotateCcw size={13} />
+                <RotateCcw size={12} />
                 <span>{t.ui?.clear_filter ?? 'Reset All'}</span>
               </button>
 
               <button
                 type="button"
                 onClick={applyDrawerFilters}
-                className="flex-1 py-2.5 rounded-xl bg-[#1769E0] text-white text-xs font-extrabold hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl bg-[#1769E0] text-white text-[11px] sm:text-xs font-extrabold hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <span>{t.ui?.submit ?? 'Apply Filters'}</span>
               </button>

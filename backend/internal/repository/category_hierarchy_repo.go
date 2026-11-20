@@ -173,8 +173,11 @@ func (r *CategoryHierarchyRepo) GetRoots(ctx context.Context, lang string) ([]mo
 		return nil, err
 	}
 
-	// Canonical deterministic alphabetical sorting across environments
+	// Priority by display_order ASC first (commercial popularity), then deterministic alphabetical by active display name, with ID tie-breaker
 	sort.Slice(categories, func(i, j int) bool {
+		if categories[i].DisplayOrder != categories[j].DisplayOrder {
+			return categories[i].DisplayOrder < categories[j].DisplayOrder
+		}
 		nameI := strings.ToLower(strings.TrimSpace(categories[i].GetName(lang)))
 		nameJ := strings.ToLower(strings.TrimSpace(categories[j].GetName(lang)))
 		if nameI != nameJ {
