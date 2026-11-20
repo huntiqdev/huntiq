@@ -9,7 +9,7 @@ import { Category, Product, ProductFilters } from '@/types';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
 import { LocationSelector } from '@/components/location/LocationSelector';
-import { MasterLocationBar } from '@/components/location/MasterLocationBar';
+import { NearMeFindButton } from '@/components/location/NearMeFindButton';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
 import { resolveCategoryTitle, findCategoryPath, getCategoryEmoji } from '@/lib/taxonomy';
@@ -722,34 +722,6 @@ function ProductsContent() {
         {/* Products area — full-width, clean layout */}
         <div className="w-full">
 
-          {/* ── MASTER LOCATION BAR: Visible Ethiopia-Wide Discovery, GPS Proximity & Database Hierarchy ── */}
-          <div className="mb-3">
-            <MasterLocationBar
-              activeRegion={activeRegion}
-              activeZone={activeZone}
-              activeSubcity={activeSubcity}
-              activeWoreda={activeWoreda}
-              activeCoords={userCoords}
-              activeMaxDistance={maxDistance}
-              onLocationChange={({ region, zone, subcity, woreda, coords, maxDistance: dist, sortBy: newSort }) => {
-                setActiveRegion(region || '');
-                setActiveZone(zone || '');
-                setActiveSubcity(subcity || '');
-                setActiveWoreda(woreda || '');
-                setUserCoords(coords || null);
-                setMaxDistance(dist);
-                if (newSort) setSortBy(newSort);
-
-                router.push(buildUrl({
-                  loc: { region, zone, subcity, woreda },
-                  coords: coords || null,
-                  sort: newSort || (coords ? 'nearest' : sortBy),
-                  maxDist: dist,
-                }));
-              }}
-            />
-          </div>
-
           {/* ── HIGH-DEMAND ETHIOPIAN RECOMMENDATION CHIPS ── */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-3 mb-1">
             <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500 shrink-0 mr-1 flex items-center gap-1">
@@ -946,8 +918,33 @@ function ProductsContent() {
               )}
             </div>
 
-            {/* Right Side: Sleek Sort Selector + Filters Drawer Button */}
-            <div className="flex items-center gap-2 shrink-0">
+            {/* Right Side: Near Me Find Button + Sleek Sort Selector + Filters Drawer Button */}
+            <div className="flex items-center gap-2 shrink-0 flex-wrap sm:flex-nowrap">
+              {/* Single "Near Me Find" Button: Automatic GPS + Manual Search */}
+              <NearMeFindButton
+                activeCoords={userCoords}
+                activeLocationLabel={activeLocLabel || activeRegion || activeSubcity}
+                activeMaxDistance={maxDistance}
+                onSearch={(coords, label, dist) => {
+                  setUserCoords(coords);
+                  setMaxDistance(dist);
+                  if (label && !coords) {
+                    router.push(buildUrl({
+                      search: label,
+                      coords: null,
+                      sort: sortBy,
+                      maxDist: dist,
+                    }));
+                  } else {
+                    router.push(buildUrl({
+                      coords: coords || null,
+                      sort: coords ? 'nearest' : sortBy,
+                      maxDist: dist,
+                    }));
+                  }
+                }}
+              />
+
               {/* Sort Selector Dropdown */}
               <div className="relative">
                 <select
