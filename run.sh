@@ -54,15 +54,18 @@ start_postgres() {
     fi
 
     echo "📦 Starting local PostgreSQL daemon ($DB_PORT)..."
-    if [ -f /tmp/pgdata/postmaster.pid ]; then
+    local pg_dir="/tmp/huntiq_pgdata"
+    [ ! -d "$pg_dir" ] && [ -d "/tmp/pgdata" ] && pg_dir="/tmp/pgdata"
+
+    if [ -f "$pg_dir/postmaster.pid" ]; then
         local pid
-        pid=$(head -n 1 /tmp/pgdata/postmaster.pid 2>/dev/null || echo "")
+        pid=$(head -n 1 "$pg_dir/postmaster.pid" 2>/dev/null || echo "")
         if [ -n "$pid" ] && ! kill -0 "$pid" 2>/dev/null; then
-            rm -f /tmp/pgdata/postmaster.pid 2>/dev/null || true
+            rm -f "$pg_dir/postmaster.pid" 2>/dev/null || true
         fi
     fi
-    if [ -x "/usr/lib/postgresql/18/bin/postgres" ] && [ -d "/tmp/pgdata" ]; then
-        /usr/lib/postgresql/18/bin/postgres -D /tmp/pgdata -p "$DB_PORT" -k "$DB_HOST" >/tmp/postgres.log 2>&1 &
+    if [ -x "/usr/lib/postgresql/18/bin/postgres" ] && [ -d "$pg_dir" ]; then
+        /usr/lib/postgresql/18/bin/postgres -D "$pg_dir" -p "$DB_PORT" -k "$DB_HOST" >/tmp/postgres.log 2>&1 &
         PIDS+=($!)
         for _ in {1..20}; do
             psql -h "$DB_HOST" -p "$DB_PORT" -U postgres -d hulubedej_db -c "SELECT 1;" >/dev/null 2>&1 && return 0
@@ -79,7 +82,7 @@ cmd_native() {
 
     # Ensure database schema is migrated
     echo "⚙️ Running Go database migrations..."
-    (cd "$BACKEND" && go run ./cmd/tools/migrate)
+    (cd "$BACKEND" && go run ./cmd/api -migrate-only)
 
     if in_use 8080; then
         echo "✓ Backend API already running on :8080"
@@ -137,8 +140,9 @@ cmd_status() {
 case "${1:-}" in
     --docker|-d)  cmd_docker ;;
     --status|-s)  cmd_status ;;
-    --migrate)    bash "$BACKEND/scripts/migrate.sh" ;;
-    --help|-h)    echo "Usage: ./run.sh [--docker|-d | --status|-s | --migrate | --help|-h]" ;;
+    --migrate)    (cd "$BACKEND" && go run ./cmd/api -migrate-only) ;;
+    --seed)       (cd "$BACKEND" && go run ./cmd/api -seed-only) ;;
+    --help|-h)    echo "Usage: ./run.sh [--docker|-d | --status|-s | --migrate | --seed | --help|-h]" ;;
     "")           cmd_native ;;
     *)            echo "Unknown option: $1" && exit 1 ;;
 esac
