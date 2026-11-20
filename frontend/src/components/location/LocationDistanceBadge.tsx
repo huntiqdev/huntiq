@@ -53,6 +53,10 @@ export function LocationDistanceBadge({
       setErrorMsg('Geolocation not supported');
       return;
     }
+    if (window.isSecureContext === false && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      setErrorMsg('GPS requires HTTPS on mobile');
+      return;
+    }
     setChecking(true);
     setErrorMsg(null);
 

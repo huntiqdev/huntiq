@@ -96,6 +96,10 @@ export interface Product {
   publisher_role?: 'owner' | 'authorized_seller' | 'broker_agent' | 'representative' | 'government_officer';
   organization_id?: number;
   brokerage_disclosure_agreed?: boolean;
+
+  // Engagement & Trending Metrics
+  view_count?: number;
+  contact_count?: number;
   
   category?: Category;
   location?: Location;
@@ -121,7 +125,7 @@ export interface ProductFilters {
   woreda?: string;
   search?: string;
   listing_type?: 'sale' | 'rent'; // Filter by listing type
-  sort_by?: 'price_asc' | 'price_desc' | 'newest' | 'nearest';
+  sort_by?: 'trending' | 'popular' | 'views' | 'most_viewed' | 'price_asc' | 'price_desc' | 'newest' | 'nearest';
   lat?: number;
   lng?: number;
   max_distance?: number;

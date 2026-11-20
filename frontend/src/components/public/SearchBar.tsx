@@ -124,6 +124,10 @@ export function SearchBar() {
     if (r.zone) p.set('zone', r.zone);
     if (r.subcity) p.set('subcity', r.subcity);
     if (r.woreda) p.set('woreda', r.woreda);
+    if (r.latitude && r.longitude) {
+      p.set('lat', String(r.latitude));
+      p.set('lng', String(r.longitude));
+    }
     return `/products?${p.toString()}`;
   };
 

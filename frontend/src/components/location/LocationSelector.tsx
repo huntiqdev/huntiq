@@ -194,6 +194,15 @@ export function LocationSelector({
       });
       return;
     }
+    if (window.isSecureContext === false && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      setGpsFeedback({
+        type: 'error',
+        message: locale === 'am'
+          ? 'በሞባይል አውታረ መረብ የጂፒኤስ ፍተሻ HTTPS ይፈልጋል። እባክዎ አካባቢዎን ከታች በቀላሉ ይምረጡ።'
+          : 'Mobile browser GPS requires HTTPS or localhost. Please select your Region/City directly from the list below.',
+      });
+      return;
+    }
 
     setGpsLoading(true);
     setGpsFeedback(null);
@@ -225,14 +234,18 @@ export function LocationSelector({
             });
           } else {
             setGpsFeedback({
-              type: 'error',
-              message: 'Could not resolve administrative division from GPS coordinates. Please select manually.',
+              type: 'success',
+              message: locale === 'am'
+                ? 'የጂፒኤስ መጋጠሚያዎች በትክክል ተመዝግበዋል። አካባቢዎን ከታች ማሟላት ይችላሉ።'
+                : 'GPS coordinates recorded successfully. You can complete your region/area below.',
             });
           }
         } catch (err: any) {
           setGpsFeedback({
-            type: 'error',
-            message: 'Reverse geocoding service unavailable. Coordinates saved, please select region manually.',
+            type: 'success',
+            message: locale === 'am'
+              ? 'የጂፒኤስ መጋጠሚያዎች ተመዝግበዋል። ከተማ/ክልልዎን ከታች ይምረጡ።'
+              : 'GPS coordinates captured. You can select your Region/City below.',
           });
         } finally {
           setGpsLoading(false);

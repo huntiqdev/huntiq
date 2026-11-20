@@ -29,6 +29,10 @@ type Product struct {
 	Latitude     *float64 `json:"latitude,omitempty"`
 	Longitude    *float64 `json:"longitude,omitempty"`
 
+	// Engagement metrics (Trending ranking)
+	ViewCount    int `json:"view_count"`
+	ContactCount int `json:"contact_count"`
+
 	// Listing fee fields
 	ListingDurationDays    *int     `json:"listing_duration_days,omitempty"`
 	StartupFeePercent      *float64 `json:"startup_fee_percent,omitempty"`

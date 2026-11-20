@@ -21,7 +21,7 @@ type ProductFilter struct {
 	Page                int
 	Limit               int
 	ListingType         *string // 'sale' or 'rent' filter
-	SortBy              *string // 'price_asc', 'price_desc', 'newest', 'nearest'
+	SortBy              *string // 'trending', 'popular', 'views', 'most_viewed', 'price_asc', 'price_desc', 'newest', 'nearest'
 	SellerTier          *string // 'gold', 'premium', or 'gold,premium'
 	Lat                 *float64 // User/Asker latitude for nearest recommendation
 	Lng                 *float64 // User/Asker longitude for nearest recommendation

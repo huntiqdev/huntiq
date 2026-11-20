@@ -222,6 +222,14 @@ export function ProductCard({ product }: Props) {
             SALE
           </div>
 
+          {/* Trending Badge */}
+          {((product.view_count && product.view_count >= 5) || product.seller_tier === 'premium' || product.seller_tier === 'gold') && (
+            <div className="absolute top-2 left-16 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-full flex items-center gap-0.5 leading-none shadow-sm tracking-wide">
+              <span>🔥</span>
+              <span>Trending</span>
+            </div>
+          )}
+
           {/* Publisher Intermediary / Broker Badge */}
           {product.publisher_role && product.publisher_role !== 'owner' && (
             <div className="absolute top-2 right-14 bg-indigo-600/90 text-white text-[8px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
@@ -265,14 +273,21 @@ export function ProductCard({ product }: Props) {
           <p className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 text-slate-900 dark:text-slate-100 group-hover:text-[#1769E0] dark:group-hover:text-[#38A5FF] transition-colors">
             {product.title}
           </p>
-          {product.location && (
-            <LocationDistanceBadge
-              latitude={product.latitude}
-              longitude={product.longitude}
-              locationText={product.location.woreda ?? product.location.subcity ?? product.location.region ?? 'Ethiopia'}
-              className="text-[11px]"
-            />
-          )}
+          <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+            {product.location ? (
+              <LocationDistanceBadge
+                latitude={product.latitude}
+                longitude={product.longitude}
+                locationText={product.location.woreda ?? product.location.subcity ?? product.location.region ?? 'Ethiopia'}
+                className="text-[11px]"
+              />
+            ) : <span />}
+            {product.view_count !== undefined && product.view_count > 0 && (
+              <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold flex items-center gap-0.5 ml-auto">
+                👁️ {product.view_count}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 

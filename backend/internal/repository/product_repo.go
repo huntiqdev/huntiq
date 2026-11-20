@@ -57,7 +57,10 @@ const sqlProductSelectCols = `
 	       p.social_links,
 	       COALESCE(p.publisher_role, 'owner') AS publisher_role,
 	       p.organization_id,
-	       COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed
+	       COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed,
+	       p.latitude, p.longitude,
+	       COALESCE(p.view_count, 0) AS view_count,
+	       COALESCE(p.contact_count, 0) AS contact_count
 	FROM products p
 	LEFT JOIN categories c ON c.id = p.category_id
 	LEFT JOIN locations  l ON l.id = p.location_id
@@ -86,7 +89,9 @@ const sqlGetProductByID = `
 	        p.social_links,
 	        COALESCE(p.publisher_role, 'owner') AS publisher_role,
 	        p.organization_id,
-	        COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed
+	        COALESCE(p.brokerage_disclosure_agreed, false) AS brokerage_disclosure_agreed,
+	        COALESCE(p.view_count, 0) AS view_count,
+	        COALESCE(p.contact_count, 0) AS contact_count
 	 FROM products p
 	 LEFT JOIN categories c ON c.id = p.category_id
 	 LEFT JOIN locations  l ON l.id = p.location_id
@@ -394,9 +399,14 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 	offset := (f.Page - 1) * f.Limit
 	args = append(args, f.Limit, offset)
 
-	orderClause := "ORDER BY p.created_at DESC"
+	// Default ranking: verified merchant tier first, then engagement score (views + contacts), then newest
+	orderClause := "ORDER BY (CASE WHEN p.seller_tier_snapshot = 'premium' OR u.tier = 'premium' THEN 3 WHEN p.seller_tier_snapshot = 'gold' OR u.tier = 'gold' THEN 2 ELSE 1 END) DESC, (COALESCE(p.view_count, 0) * 2 + COALESCE(p.contact_count, 0) * 5) DESC, p.created_at DESC"
 	if f.SortBy != nil {
 		switch *f.SortBy {
+		case "trending", "popular":
+			orderClause = "ORDER BY (CASE WHEN p.seller_tier_snapshot = 'premium' OR u.tier = 'premium' THEN 3 WHEN p.seller_tier_snapshot = 'gold' OR u.tier = 'gold' THEN 2 ELSE 1 END) DESC, (COALESCE(p.view_count, 0) * 2 + COALESCE(p.contact_count, 0) * 5) DESC, p.created_at DESC"
+		case "views", "most_viewed":
+			orderClause = "ORDER BY COALESCE(p.view_count, 0) DESC, (CASE WHEN p.seller_tier_snapshot = 'premium' OR u.tier = 'premium' THEN 3 WHEN p.seller_tier_snapshot = 'gold' OR u.tier = 'gold' THEN 2 ELSE 1 END) DESC, p.created_at DESC"
 		case "price_asc":
 			orderClause = "ORDER BY (CASE WHEN p.listing_type = 'rent' THEN COALESCE(p.rental_price, p.price) ELSE p.price END) ASC, p.created_at DESC"
 		case "price_desc":
@@ -405,12 +415,12 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 			orderClause = "ORDER BY p.created_at DESC"
 		case "nearest":
 			if f.Lat != nil && f.Lng != nil {
-				orderClause = fmt.Sprintf("ORDER BY (CASE WHEN p.latitude IS NOT NULL AND p.longitude IS NOT NULL THEN (6371 * acos(least(1.0, greatest(-1.0, cos(radians(%f)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians(%f)) + sin(radians(%f)) * sin(radians(p.latitude)))))) ELSE 999999 END) ASC, p.created_at DESC", *f.Lat, *f.Lng, *f.Lat)
+				orderClause = fmt.Sprintf("ORDER BY (CASE WHEN p.latitude IS NOT NULL AND p.longitude IS NOT NULL THEN (6371 * acos(least(1.0, greatest(-1.0, cos(radians(%f)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians(%f)) + sin(radians(%f)) * sin(radians(p.latitude)))))) ELSE 999999 END) ASC, (COALESCE(p.view_count, 0) * 2 + COALESCE(p.contact_count, 0) * 5) DESC, p.created_at DESC", *f.Lat, *f.Lng, *f.Lat)
 			}
 		}
 	} else if f.Lat != nil && f.Lng != nil {
-		// Default proximity recommendation: prioritize products nearest to asker's coordinates
-		orderClause = fmt.Sprintf("ORDER BY (CASE WHEN p.latitude IS NOT NULL AND p.longitude IS NOT NULL THEN (6371 * acos(least(1.0, greatest(-1.0, cos(radians(%f)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians(%f)) + sin(radians(%f)) * sin(radians(p.latitude)))))) ELSE 999999 END) ASC, p.created_at DESC", *f.Lat, *f.Lng, *f.Lat)
+		// When GPS coordinates provided without explicit sort: rank nearest first, then trending engagement
+		orderClause = fmt.Sprintf("ORDER BY (CASE WHEN p.latitude IS NOT NULL AND p.longitude IS NOT NULL THEN (6371 * acos(least(1.0, greatest(-1.0, cos(radians(%f)) * cos(radians(p.latitude)) * cos(radians(p.longitude) - radians(%f)) + sin(radians(%f)) * sin(radians(p.latitude)))))) ELSE 999999 END) ASC, (COALESCE(p.view_count, 0) * 2 + COALESCE(p.contact_count, 0) * 5) DESC, p.created_at DESC", *f.Lat, *f.Lng, *f.Lat)
 	}
 
 	query := sqlProductSelectCols + "\n\tWHERE " + whereClause +
@@ -453,6 +463,8 @@ func (r *ProductRepo) ListApproved(ctx context.Context, f dto.ProductFilter) ([]
 			&p.PublisherRole,
 			&p.OrganizationID,
 			&p.BrokerageDisclosureAgreed,
+			&p.Latitude, &p.Longitude,
+			&p.ViewCount, &p.ContactCount,
 		); err != nil {
 			return nil, err
 		}
@@ -541,6 +553,8 @@ func (r *ProductRepo) GetByID(ctx context.Context, id int) (*models.Product, err
 		&p.PublisherRole,
 		&p.OrganizationID,
 		&p.BrokerageDisclosureAgreed,
+		&p.ViewCount,
+		&p.ContactCount,
 	)
 	if err != nil {
 		return nil, err

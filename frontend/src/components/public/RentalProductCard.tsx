@@ -99,6 +99,14 @@ export function RentalProductCard({ product }: Props) {
             RENT
           </div>
 
+          {/* Trending Badge */}
+          {((product.view_count && product.view_count >= 5) || product.seller_tier === 'premium' || product.seller_tier === 'gold') && (
+            <div className="absolute top-2 left-16 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-full flex items-center gap-0.5 leading-none shadow-sm tracking-wide">
+              <span>🔥</span>
+              <span>Trending</span>
+            </div>
+          )}
+
           {/* Tier badge — just below rental badge */}
           {tierBadge && (
             <div className={`absolute top-7 left-2 w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-black shadow-sm ${tierBadge.cls}`}>
@@ -153,14 +161,21 @@ export function RentalProductCard({ product }: Props) {
           <p className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2 text-zinc-900 dark:text-zinc-100 group-hover:text-teal-600 transition-colors">
             {product.title}
           </p>
-          {product.location && (
-            <LocationDistanceBadge
-              latitude={product.latitude}
-              longitude={product.longitude}
-              locationText={product.location.woreda ?? product.location.subcity ?? product.location.region ?? 'Ethiopia'}
-              className="text-[11px]"
-            />
-          )}
+          <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+            {product.location ? (
+              <LocationDistanceBadge
+                latitude={product.latitude}
+                longitude={product.longitude}
+                locationText={product.location.woreda ?? product.location.subcity ?? product.location.region ?? 'Ethiopia'}
+                className="text-[11px]"
+              />
+            ) : <span />}
+            {product.view_count !== undefined && product.view_count > 0 && (
+              <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold flex items-center gap-0.5 ml-auto">
+                👁️ {product.view_count}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </Link>

@@ -208,12 +208,12 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 	}
 	if v := c.Query("sort_by"); v != "" {
 		switch v {
-		case "price_asc", "price_desc", "newest", "nearest":
+		case "trending", "popular", "views", "most_viewed", "price_asc", "price_desc", "newest", "nearest":
 			f.SortBy = &v
 		}
 	} else if v := c.Query("sort"); v != "" {
 		switch v {
-		case "price_asc", "price_desc", "newest", "nearest":
+		case "trending", "popular", "views", "most_viewed", "price_asc", "price_desc", "newest", "nearest":
 			f.SortBy = &v
 		}
 	}

@@ -9,6 +9,7 @@ import { Category, Product, ProductFilters } from '@/types';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
 import { LocationSelector } from '@/components/location/LocationSelector';
+import { MasterLocationBar } from '@/components/location/MasterLocationBar';
 import { Spinner } from '@/components/ui/Spinner';
 import { useLocale } from '@/hooks/useLocale';
 import { resolveCategoryTitle, findCategoryPath, getCategoryEmoji } from '@/lib/taxonomy';
@@ -122,6 +123,8 @@ function ProductsContent() {
   const [activeWoreda, setActiveWoreda] = useState<string>('');
   const [activeCondition, setActiveCondition] = useState<'all' | 'new' | 'used'>('all');
   const [listingType, setListingType] = useState<'all' | 'sale' | 'rent'>('all');
+  const [sortBy, setSortBy] = useState<'trending' | 'newest' | 'nearest' | 'views' | 'price_asc' | 'price_desc'>('trending');
+  const [maxDistance, setMaxDistance] = useState<number | undefined>(undefined);
 
   // Filter State: Price & Proximity
   const [minPriceInput, setMinPriceInput] = useState<string>('');
@@ -248,6 +251,27 @@ function ProductsContent() {
       setUserCoords(null);
     }
 
+    // Sort order: Trending (default), newest, nearest, views, price_asc, price_desc
+    const sortParam = (searchParams.get('sort_by') || searchParams.get('sort')) as any;
+    if (sortParam && ['trending', 'newest', 'nearest', 'views', 'price_asc', 'price_desc'].includes(sortParam)) {
+      setSortBy(sortParam);
+      f.sort_by = sortParam;
+    } else {
+      setSortBy('trending');
+      f.sort_by = 'trending';
+    }
+
+    const maxDistParam = searchParams.get('max_distance');
+    if (maxDistParam) {
+      const d = parseFloat(maxDistParam);
+      if (!isNaN(d) && d > 0) {
+        setMaxDistance(d);
+        f.max_distance = d;
+      }
+    } else {
+      setMaxDistance(undefined);
+    }
+
     setFilters(f);
   }, [searchParams, categories]);
 
@@ -260,10 +284,14 @@ function ProductsContent() {
     if (listingType !== 'all') apiFilters.listing_type = listingType;
     if (activeMinPrice !== undefined) apiFilters.min_price = activeMinPrice;
     if (activeMaxPrice !== undefined) apiFilters.max_price = activeMaxPrice;
+    if (sortBy) apiFilters.sort_by = sortBy;
+    if (maxDistance) apiFilters.max_distance = maxDistance;
     if (userCoords) {
       apiFilters.lat = userCoords.lat;
       apiFilters.lng = userCoords.lng;
-      apiFilters.sort_by = 'nearest';
+      if (!sortBy || sortBy === 'trending') {
+        apiFilters.sort_by = 'nearest';
+      }
     }
     apiFilters.locale = locale;
     apiFilters.preferred_language = locale;
@@ -278,7 +306,7 @@ function ProductsContent() {
         setFetchError(err?.message || 'Failed to load products. Please check your network connection.');
       })
       .finally(() => setLoading(false));
-  }, [filters, activeCondition, listingType, activeMinPrice, activeMaxPrice, userCoords, locale, retryKey]);
+  }, [filters, activeCondition, listingType, activeMinPrice, activeMaxPrice, userCoords, sortBy, maxDistance, locale, retryKey]);
 
   // Active category lineage: full path from root down to currently active node
   const activeTargetKey = activeItem || activeSub || activeCatId || searchParams.get('item') || searchParams.get('subcategory') || searchParams.get('category_hierarchy_id') || searchParams.get('category_id') || searchParams.get('cat');
@@ -306,6 +334,8 @@ function ProductsContent() {
       minP?: string;
       maxP?: string;
       coords?: { lat: number; lng: number } | null;
+      sort?: string;
+      maxDist?: number;
     },
     subArg?: string,
     itemArg?: string,
@@ -325,6 +355,8 @@ function ProductsContent() {
       minP?: string;
       maxP?: string;
       coords?: { lat: number; lng: number } | null;
+      sort?: string;
+      maxDist?: number;
     } = {};
 
     if (typeof optsOrCatId === 'number') {
@@ -374,7 +406,16 @@ function ProductsContent() {
     if (coordsToUse) {
       p.set('lat', coordsToUse.lat.toFixed(6));
       p.set('lng', coordsToUse.lng.toFixed(6));
-      p.set('sort_by', 'nearest');
+    }
+
+    const sortToUse = opts?.sort !== undefined ? opts.sort : sortBy;
+    if (sortToUse && sortToUse !== 'trending') {
+      p.set('sort_by', sortToUse);
+    }
+
+    const maxDistToUse = opts?.maxDist !== undefined ? opts.maxDist : maxDistance;
+    if (maxDistToUse) {
+      p.set('max_distance', String(maxDistToUse));
     }
 
     const l = opts?.loc ?? { region: activeRegion || undefined, zone: activeZone || undefined, subcity: activeSubcity || undefined, woreda: activeWoreda || undefined };
@@ -681,7 +722,128 @@ function ProductsContent() {
         {/* Products area — full-width, clean layout */}
         <div className="w-full">
 
-          {/* ── CLEAN FILTER BAR: Results & Active Chips on Left, Single "Filters" Button on Right ── */}
+          {/* ── MASTER LOCATION BAR: Visible Ethiopia-Wide Discovery, GPS Proximity & Database Hierarchy ── */}
+          <div className="mb-3">
+            <MasterLocationBar
+              activeRegion={activeRegion}
+              activeZone={activeZone}
+              activeSubcity={activeSubcity}
+              activeWoreda={activeWoreda}
+              activeCoords={userCoords}
+              activeMaxDistance={maxDistance}
+              onLocationChange={({ region, zone, subcity, woreda, coords, maxDistance: dist, sortBy: newSort }) => {
+                setActiveRegion(region || '');
+                setActiveZone(zone || '');
+                setActiveSubcity(subcity || '');
+                setActiveWoreda(woreda || '');
+                setUserCoords(coords || null);
+                setMaxDistance(dist);
+                if (newSort) setSortBy(newSort);
+
+                router.push(buildUrl({
+                  loc: { region, zone, subcity, woreda },
+                  coords: coords || null,
+                  sort: newSort || (coords ? 'nearest' : sortBy),
+                  maxDist: dist,
+                }));
+              }}
+            />
+          </div>
+
+          {/* ── HIGH-DEMAND ETHIOPIAN RECOMMENDATION CHIPS ── */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-3 mb-1">
+            <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500 shrink-0 mr-1 flex items-center gap-1">
+              <TrendingUp size={12} className="text-[#1769E0]" />
+              {locale === 'am' ? 'ተፈላጊዎች:' : 'Trending:'}
+            </span>
+
+            {/* Basic Tools & Machinery */}
+            <button
+              type="button"
+              onClick={() => {
+                const toolsCat = categories.find(c => c.slug.includes('tool') || c.slug.includes('construction') || c.slug.includes('machinery'));
+                if (toolsCat) {
+                  navigateToCategory(toolsCat);
+                } else {
+                  router.push(buildUrl({ search: 'tools' }));
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
+            >
+              <span>🛠️</span>
+              <span>{locale === 'am' ? 'መሣሪያዎችና ማሽኖች' : 'Tools & Equipment'}</span>
+            </button>
+
+            {/* Smart Phones & Electronics */}
+            <button
+              type="button"
+              onClick={() => {
+                const elecCat = categories.find(c => c.slug.includes('electronic') || c.slug.includes('phone') || c.slug.includes('computing'));
+                if (elecCat) {
+                  navigateToCategory(elecCat);
+                } else {
+                  router.push(buildUrl({ search: 'phone' }));
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
+            >
+              <span>📱</span>
+              <span>{locale === 'am' ? 'ስልኮችና ኤሌክትሮኒክስ' : 'Electronics & Phones'}</span>
+            </button>
+
+            {/* Properties & Rentals */}
+            <button
+              type="button"
+              onClick={() => {
+                setListingType('rent');
+                router.push(buildUrl({ overrideType: 'rent' }));
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs border ${
+                listingType === 'rent'
+                  ? 'bg-purple-600 text-white border-purple-600 shadow-purple-600/25'
+                  : 'bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/20'
+              }`}
+            >
+              <span>🏠</span>
+              <span>{locale === 'am' ? 'ኪራይ ቤቶችና ቦታዎች' : 'Property & Rentals'}</span>
+            </button>
+
+            {/* Vehicles & Machinery */}
+            <button
+              type="button"
+              onClick={() => {
+                const vehCat = categories.find(c => c.slug.includes('vehicle') || c.slug.includes('transport') || c.slug.includes('car'));
+                if (vehCat) {
+                  navigateToCategory(vehCat);
+                } else {
+                  router.push(buildUrl({ search: 'car' }));
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
+            >
+              <span>🚗</span>
+              <span>{locale === 'am' ? 'ተሽከርካሪዎችና ማሽኖች' : 'Vehicles & Transport'}</span>
+            </button>
+
+            {/* Agriculture & Farming */}
+            <button
+              type="button"
+              onClick={() => {
+                const agriCat = categories.find(c => c.slug.includes('agri') || c.slug.includes('farm') || c.slug.includes('food'));
+                if (agriCat) {
+                  navigateToCategory(agriCat);
+                } else {
+                  router.push(buildUrl({ search: 'agriculture' }));
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-lime-500/10 hover:bg-lime-500/20 text-lime-700 dark:text-lime-300 border border-lime-500/20 text-xs font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer shadow-xs"
+            >
+              <span>🌾</span>
+              <span>{locale === 'am' ? 'ግብርናና ምርቶች' : 'Agriculture & Produce'}</span>
+            </button>
+          </div>
+
+          {/* ── CLEAN FILTER BAR: Results & Active Chips on Left, Sort & Filters on Right ── */}
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl px-4 py-3 mb-4 shadow-xs flex items-center justify-between gap-3">
             {/* Left: Results count & Active filter tags */}
             <div className="flex items-center flex-wrap gap-2 min-w-0">
@@ -784,24 +946,48 @@ function ProductsContent() {
               )}
             </div>
 
-            {/* Right Top Side: ONLY ONE BUTTON for Filters */}
-            <button
-              type="button"
-              onClick={openFilterDrawer}
-              className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer shadow-xs ${activeFilterCount > 0
-                ? 'bg-[#1769E0] text-white hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/25'
-                : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:border-[#1769E0] hover:text-[#1769E0]'
-                }`}
-              aria-label="Open filters"
-            >
-              <SlidersHorizontal size={14} className={activeFilterCount > 0 ? 'text-white' : 'text-[#1769E0]'} />
-              <span>{t.ui?.filters ?? 'Filters'}</span>
-              {activeFilterCount > 0 && (
-                <span className="w-5 h-5 rounded-full bg-white text-[#1769E0] text-[10px] font-black flex items-center justify-center">
-                  {activeFilterCount}
-                </span>
-              )}
-            </button>
+            {/* Right Side: Sleek Sort Selector + Filters Drawer Button */}
+            <div className="flex items-center gap-2 shrink-0">
+              {/* Sort Selector Dropdown */}
+              <div className="relative">
+                <select
+                  value={sortBy}
+                  onChange={(e) => {
+                    const newSort = e.target.value as any;
+                    setSortBy(newSort);
+                    router.push(buildUrl({ sort: newSort }));
+                  }}
+                  className="appearance-none bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl pl-3 pr-7 py-2 text-xs font-extrabold text-zinc-800 dark:text-zinc-200 outline-none focus:ring-2 focus:ring-[#1769E0] cursor-pointer shadow-xs"
+                >
+                  <option value="trending">🔥 {locale === 'am' ? 'ተፈላጊ / ምርጥ' : 'Trending'}</option>
+                  <option value="newest">🆕 {locale === 'am' ? 'አዳዲስ' : 'Newest'}</option>
+                  <option value="nearest">📍 {locale === 'am' ? 'በአቅራቢያዎ' : 'Nearest GPS'}</option>
+                  <option value="views">👁️ {locale === 'am' ? 'በጣም የታዩ' : 'Most Viewed'}</option>
+                  <option value="price_asc">💰 {locale === 'am' ? 'ዋጋ፡ ዝቅተኛ' : 'Price: Low'}</option>
+                  <option value="price_desc">💎 {locale === 'am' ? 'ዋጋ፡ ከፍተኛ' : 'Price: High'}</option>
+                </select>
+                <ChevronDown size={11} className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" />
+              </div>
+
+              {/* Filters Button */}
+              <button
+                type="button"
+                onClick={openFilterDrawer}
+                className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer shadow-xs ${activeFilterCount > 0
+                  ? 'bg-[#1769E0] text-white hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/25'
+                  : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:border-[#1769E0] hover:text-[#1769E0]'
+                  }`}
+                aria-label="Open filters"
+              >
+                <SlidersHorizontal size={14} className={activeFilterCount > 0 ? 'text-white' : 'text-[#1769E0]'} />
+                <span>{t.ui?.filters ?? 'Filters'}</span>
+                {activeFilterCount > 0 && (
+                  <span className="w-5 h-5 rounded-full bg-white text-[#1769E0] text-[10px] font-black flex items-center justify-center">
+                    {activeFilterCount}
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
 
           {loading ? (
