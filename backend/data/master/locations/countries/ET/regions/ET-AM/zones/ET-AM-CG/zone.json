@@ -1,0 +1,32 @@
+{
+  "id": 60,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-central-gondar",
+  "code": "ET-AM-CG",
+  "level": 2,
+  "path": "/1/5/60/",
+  "display_order": 24,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Central Gonder",
+    "ማዕከላዊ ጎንደር"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Central Gondar Zone",
+    "am": "ማዕከላዊ ጎንደር ዞን",
+    "om": "Gondar Giddugalaa",
+    "ti": "ዞን ማእከላይ ጎንደር"
+  },
+  "coordinates": {
+    "latitude": 12.6,
+    "longitude": 37.45,
+    "bbox": null
+  }
+}

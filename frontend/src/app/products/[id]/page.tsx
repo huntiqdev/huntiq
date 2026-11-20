@@ -9,6 +9,7 @@ import { ClientLabel } from '@/components/public/ClientLabel';
 import { ClientProductBadges } from '@/components/public/ClientProductBadges';
 import CategoryBreadcrumbs from '@/components/category/CategoryBreadcrumbs';
 import { ProductAttributes } from '@/components/public/ProductAttributes';
+import { LocationDistanceBadge } from '@/components/location/LocationDistanceBadge';
 
 export const dynamic = 'force-dynamic';
 
@@ -122,21 +123,20 @@ export default async function ProductDetailPage({ params }: Props) {
               : (product.price != null ? product.price.toLocaleString() : '—')}
           </div>
 
-          {product.location && (
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-sm opacity-60">
-                <MapPin size={14} />
-                {[product.location.woreda, product.location.subcity, product.location.zone, product.location.region]
-                  .filter(Boolean).join(', ')}
-              </div>
-              {product.kebele && (
-                <p className="text-xs opacity-50 pl-5">Kebele: {product.kebele}</p>
-              )}
-              {product.specific_area && (
-                <p className="text-xs opacity-50 pl-5">{product.specific_area}</p>
-              )}
-            </div>
-          )}
+          {/* Location & Interactive Distance Check */}
+          <div className="flex flex-col gap-1.5 py-1">
+            <LocationDistanceBadge
+              latitude={product.latitude}
+              longitude={product.longitude}
+              locationText={[product.location?.woreda, product.location?.subcity, product.location?.zone, product.location?.region].filter(Boolean).join(', ') || 'Ethiopia'}
+            />
+            {product.kebele && (
+              <p className="text-xs opacity-60 pl-2">📍 Kebele: {product.kebele}</p>
+            )}
+            {product.specific_area && (
+              <p className="text-xs opacity-60 pl-2">🏢 Specific Area: {product.specific_area}</p>
+            )}
+          </div>
 
           {product.description && (
             <div>

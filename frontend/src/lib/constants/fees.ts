@@ -12,8 +12,26 @@ export const COMPANY_PHONE = '';
 export const COMPANY_LOCATION = '';
 export const COMPANY_EMAIL = '';
 
-/** Listing duration options in days */
+export interface ListingDurationOption {
+  hours: number;
+  label: string;
+  demandTier?: 'flash' | 'urgent' | 'standard' | 'extended';
+  badge?: string;
+}
+
+/** Dynamic listing durations measured in hours with demand-based tiers */
+export const LISTING_DURATION_OPTIONS: ListingDurationOption[] = [
+  { hours: 4,   label: '4h Flash',     demandTier: 'flash',    badge: '⚡ High Demand' },
+  { hours: 24,  label: '24h Daily',    demandTier: 'urgent',   badge: '🔥 Urgent' },
+  { hours: 48,  label: '48h (2 Days)', demandTier: 'standard' },
+  { hours: 72,  label: '72h (3 Days)', demandTier: 'standard' },
+  { hours: 168, label: '1 Week',       demandTier: 'standard' },
+  { hours: 720, label: '1 Month',      demandTier: 'extended' },
+];
+
+/** Listing duration options in days (backward-compatible) */
 export const LISTING_DURATIONS: { days: number; label: string }[] = [
+  { days: 1,   label: '24 Hours' },
   { days: 2,   label: '2 Days' },
   { days: 7,   label: '1 Week' },
   { days: 30,  label: '1 Month' },
@@ -70,6 +88,7 @@ export interface FeeBreakdown {
   tier: SellerTier;
   productValue: number;
   durationDays: number;
+  durationHours?: number;
   startupPct: number;
   weeklyIncrementPct: number;
   freeWeeks: number;
@@ -84,10 +103,56 @@ export interface FeeBreakdown {
 export const FREE_WEEKS = 1;
 
 /**
+ * Calculate demand-based listing fee measured by hours.
+ * Supports custom hourly increments (e.g. 4h, 24h, 43h) with admin-controlled rate percentile.
+ */
+export function calcListingFeeHourly(
+  tier: SellerTier,
+  productValue: number,
+  durationHours: number,
+  settings?: any
+): FeeBreakdown {
+  const { startupPct, weeklyIncrementPct } = getTierFeeParams(tier, settings);
+
+  // Hourly rate percentile is configured by admin or derived dynamically (per hour = weeklyIncrementPct / 168h)
+  const hourlyRatePercentile = settings?.hourly_rate_percentile
+    ? parseFloat(settings.hourly_rate_percentile)
+    : (weeklyIncrementPct / 168);
+
+  // Demand multiplier: flash/high demand (under 24h) gets optimized demand percentile
+  let demandFactor = 1.0;
+  if (durationHours <= 4) demandFactor = 0.6; // Discounted flash micro-duration
+  else if (durationHours <= 24) demandFactor = 0.85; // Urgent daily duration
+
+  // Startup fee covers the first 24 hours; additional hours billed by rate percentile
+  const billableHours = Math.max(0, durationHours - 24);
+  const incrementalFee = billableHours * hourlyRatePercentile * demandFactor;
+  const totalFeePercent = Math.max(0.1, Math.round((startupPct + incrementalFee) * 100) / 100);
+  const totalFeeAmount  = +(productValue * totalFeePercent / 100).toFixed(2);
+  const sellerGets      = +(productValue - totalFeeAmount).toFixed(2);
+
+  const durationDays = Math.max(1, Math.ceil(durationHours / 24));
+  const totalWeeks = Math.ceil(durationDays / 7);
+  const billableWeeks = Math.max(0, totalWeeks - FREE_WEEKS);
+
+  return {
+    tier,
+    productValue,
+    durationDays,
+    durationHours,
+    startupPct,
+    weeklyIncrementPct,
+    freeWeeks: FREE_WEEKS,
+    billableWeeks,
+    totalWeeks,
+    totalFeePercent,
+    totalFeeAmount,
+    sellerGets,
+  };
+}
+
+/**
  * Calculate listing fee client-side (mirrors backend CalculateListingFeeWithSettings).
- * totalWeeks = ceil(durationDays / 7)
- * billableWeeks = max(0, totalWeeks - FREE_WEEKS)  ← first FREE_WEEKS are free
- * totalFee% = startupPct + billableWeeks * weeklyIncrementPct
  */
 export function calcListingFee(
   tier: SellerTier,
@@ -95,20 +160,5 @@ export function calcListingFee(
   durationDays: number,
   settings?: any
 ): FeeBreakdown {
-  const { startupPct, weeklyIncrementPct } = getTierFeeParams(tier, settings);
-
-  const totalWeeks = Math.ceil(durationDays / 7);
-  const billableWeeks = Math.max(0, totalWeeks - FREE_WEEKS);
-  const totalFeePercent = Math.round((startupPct + billableWeeks * weeklyIncrementPct) * 100) / 100;
-  const totalFeeAmount  = +(productValue * totalFeePercent / 100).toFixed(2);
-  const sellerGets      = +(productValue - totalFeeAmount).toFixed(2);
-  return {
-    tier, productValue, durationDays,
-    startupPct,
-    weeklyIncrementPct,
-    freeWeeks: FREE_WEEKS,
-    billableWeeks,
-    totalWeeks,
-    totalFeePercent, totalFeeAmount, sellerGets,
-  };
+  return calcListingFeeHourly(tier, productValue, durationDays * 24, settings);
 }

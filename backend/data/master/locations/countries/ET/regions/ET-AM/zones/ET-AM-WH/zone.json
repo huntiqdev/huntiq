@@ -1,0 +1,33 @@
+{
+  "id": 68,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-wag-hemra",
+  "code": "ET-AM-WH",
+  "level": 2,
+  "path": "/1/5/68/",
+  "display_order": 32,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Wag Hemra",
+    "Wag Himra",
+    "ዋግ ኽምራ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Wag Hemra Zone",
+    "am": "ዋግ ኽምራ ዞን",
+    "om": "Waag Himraa",
+    "ti": "ዞን ዋግ ኽምራ"
+  },
+  "coordinates": {
+    "latitude": 12.63,
+    "longitude": 38.98,
+    "bbox": null
+  }
+}

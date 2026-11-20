@@ -138,9 +138,9 @@ func (s *SellerService) SubmitUpgradeRequest(ctx context.Context, sellerID int, 
 	if requestedTier != "gold" && requestedTier != "premium" {
 		return 0, errors.New("requested_tier must be gold or premium")
 	}
-	validMethods := map[string]bool{"telebirr": true, "safaricom": true, "cbe": true}
+	validMethods := map[string]bool{"telebirr": true}
 	if !validMethods[paymentMethod] {
-		return 0, errors.New("payment_method must be telebirr, safaricom, or cbe")
+		return 0, errors.New("payment_method must be telebirr")
 	}
 	if payerPhone == "" {
 		return 0, errors.New("payer_phone is required")

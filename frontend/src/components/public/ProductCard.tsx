@@ -12,6 +12,7 @@ import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 import { resolveImageUrl, isUnoptimized } from '@/lib/utils/imageUrl';
 import { resolveCategoryTitle } from '@/lib/taxonomy';
+import { LocationDistanceBadge } from '@/components/location/LocationDistanceBadge';
 
 interface Props { product: Product }
 
@@ -122,12 +123,11 @@ function DetailDrawer({ product, onClose, onBuy }: {
 
           <h2 className="text-lg font-black leading-tight text-zinc-900 dark:text-zinc-100">{product.title}</h2>
 
-          {product.location && (
-            <div className="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400">
-              <MapPin size={13} className="text-orange-500 shrink-0" />
-              <span>{[product.location.woreda, product.location.subcity, product.location.region].filter(Boolean).join(', ')}</span>
-            </div>
-          )}
+          <LocationDistanceBadge
+            latitude={product.latitude}
+            longitude={product.longitude}
+            locationText={[product.location?.woreda, product.location?.subcity, product.location?.region].filter(Boolean).join(', ') || 'Ethiopia'}
+          />
 
           {product.description && (
             <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 opacity-90">{product.description}</p>
@@ -266,10 +266,12 @@ export function ProductCard({ product }: Props) {
             {product.title}
           </p>
           {product.location && (
-            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 leading-none truncate font-medium">
-              <MapPin size={10} className="shrink-0 text-[#1769E0] dark:text-[#38A5FF]" />
-              <span>{product.location.woreda ?? product.location.subcity ?? product.location.region}</span>
-            </p>
+            <LocationDistanceBadge
+              latitude={product.latitude}
+              longitude={product.longitude}
+              locationText={product.location.woreda ?? product.location.subcity ?? product.location.region ?? 'Ethiopia'}
+              className="text-[11px]"
+            />
           )}
         </div>
       </div>

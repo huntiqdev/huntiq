@@ -1,0 +1,70 @@
+[
+  {
+    "id": 311,
+    "parent_id": 30,
+    "parent_code": "OR-ADA",
+    "type": "woreda",
+    "slug": "adama-boku-district",
+    "code": "OR-ADA-BOK",
+    "level": 3,
+    "path": "/1/4/30/311/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Boku Subcity (Adama)",
+      "am": "ቦኩ ክፍለ ከተማ (አዳማ)",
+      "om": "Kutaa Magaalaa Boquu",
+      "ti": "ቦኩ ክፍለ ከተማ (ኣዳማ)"
+    },
+    "coordinates": {
+      "latitude": 8.545,
+      "longitude": 39.268,
+      "bbox": {
+        "min_lat": 8.535,
+        "max_lat": 8.555,
+        "min_lng": 39.258,
+        "max_lng": 39.278
+      }
+    }
+  },
+  {
+    "id": 312,
+    "parent_id": 30,
+    "parent_code": "OR-ADA",
+    "type": "woreda",
+    "slug": "adama-dembela-district",
+    "code": "OR-ADA-DEM",
+    "level": 3,
+    "path": "/1/4/30/312/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dembela Subcity (Adama)",
+      "am": "ደምበላ ክፍለ ከተማ (አዳማ)",
+      "om": "Kutaa Magaalaa Dambalaa",
+      "ti": "ደምበላ ክፍለ ከተማ (ኣዳማ)"
+    },
+    "coordinates": {
+      "latitude": 8.535,
+      "longitude": 39.278,
+      "bbox": {
+        "min_lat": 8.525,
+        "max_lat": 8.545,
+        "min_lng": 39.268,
+        "max_lng": 39.288
+      }
+    }
+  }
+]

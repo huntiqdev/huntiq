@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 
 interface ModalProps {
   title: string;

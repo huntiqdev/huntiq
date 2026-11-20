@@ -1,0 +1,36 @@
+{
+  "id": 28,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "city",
+  "slug": "oromia-jimma",
+  "code": "OR-JIM",
+  "level": 2,
+  "path": "/1/4/28/",
+  "display_order": 3,
+  "is_active": true,
+  "is_leaf": true,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Jima"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Jimma",
+    "am": "ጅማ",
+    "om": "Jimmaa",
+    "ti": "ጅማ"
+  },
+  "coordinates": {
+    "latitude": 7.67,
+    "longitude": 36.83,
+    "bbox": {
+      "min_lat": 7.62,
+      "max_lat": 7.73,
+      "min_lng": 36.78,
+      "max_lng": 36.9
+    }
+  }
+}

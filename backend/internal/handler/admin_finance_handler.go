@@ -124,9 +124,9 @@ var validSettingKeys = map[string]bool{
 	"gold_upgrade_price":          true,
 	"premium_upgrade_price":       true,
 	// Payment merchant numbers
-	"telebirr_merchant_phone":  true,
-	"safaricom_merchant_phone": true,
-	"cbe_account_number":       true,
+	"telebirr_merchant_phone": true,
+	"telebirr_app_id":         true,
+	"hourly_rate_percentile":  true,
 	// Registration & upgrade controls
 	"allow_normal_registration":       true,
 	"allow_buyer_registration":        true,
@@ -446,7 +446,7 @@ func (h *AdminHandler) GetPublicPaymentSettings(c *fiber.Ctx) error {
 	// Never expose sensitive admin-only settings
 	publicKeys := []string{
 		// Payment methods
-		"telebirr_merchant_phone", "safaricom_merchant_phone", "cbe_account_number",
+		"telebirr_merchant_phone", "telebirr_app_id", "hourly_rate_percentile",
 		// Tier upgrade costs
 		"gold_upgrade_price", "premium_upgrade_price",
 		"buyer_gold_upgrade_price", "buyer_premium_upgrade_price",

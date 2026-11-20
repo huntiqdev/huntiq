@@ -1,0 +1,436 @@
+[
+  {
+    "id": 16,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-bole",
+    "code": "AA-BO",
+    "level": 2,
+    "path": "/1/2/16/",
+    "display_order": 1,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bole Subcity",
+      "Bole Airport",
+      "Bole Medhanealem",
+      "Bole Atlas",
+      "Megenagna"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bole",
+      "am": "ቦሌ",
+      "om": "Boolee",
+      "ti": "ቦሌ"
+    },
+    "coordinates": {
+      "latitude": 8.995,
+      "longitude": 38.79,
+      "bbox": {
+        "min_lat": 8.94,
+        "max_lat": 9.04,
+        "min_lng": 38.75,
+        "max_lng": 38.86
+      }
+    }
+  },
+  {
+    "id": 17,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-kirkos",
+    "code": "AA-KI",
+    "level": 2,
+    "path": "/1/2/17/",
+    "display_order": 2,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kirkos Subcity",
+      "Kazanchis",
+      "Meshualekia",
+      "Meskel Square",
+      "Olympia"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kirkos",
+      "am": "ቂርቆስ",
+      "om": "Qirqoos",
+      "ti": "ቂርቆስ"
+    },
+    "coordinates": {
+      "latitude": 9.008,
+      "longitude": 38.758,
+      "bbox": {
+        "min_lat": 8.99,
+        "max_lat": 9.03,
+        "min_lng": 38.74,
+        "max_lng": 38.78
+      }
+    }
+  },
+  {
+    "id": 18,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-yeka",
+    "code": "AA-YE",
+    "level": 2,
+    "path": "/1/2/18/",
+    "display_order": 3,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Yeka Subcity",
+      "Kotebe",
+      "Ayat",
+      "CMC",
+      "Ferensay"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Yeka",
+      "am": "የካ",
+      "om": "Yakkkaa",
+      "ti": "የካ"
+    },
+    "coordinates": {
+      "latitude": 9.042,
+      "longitude": 38.805,
+      "bbox": {
+        "min_lat": 9.01,
+        "max_lat": 9.09,
+        "min_lng": 38.77,
+        "max_lng": 38.85
+      }
+    }
+  },
+  {
+    "id": 19,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-arada",
+    "code": "AA-AR",
+    "level": 2,
+    "path": "/1/2/19/",
+    "display_order": 4,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Arada Subcity",
+      "Piazza",
+      "4 Kilo",
+      "6 Kilo",
+      "Amist Kilo"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Arada",
+      "am": "አራዳ",
+      "om": "Aradaa",
+      "ti": "ኣራዳ"
+    },
+    "coordinates": {
+      "latitude": 9.035,
+      "longitude": 38.752,
+      "bbox": {
+        "min_lat": 9.02,
+        "max_lat": 9.055,
+        "min_lng": 38.735,
+        "max_lng": 38.77
+      }
+    }
+  },
+  {
+    "id": 20,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-lideta",
+    "code": "AA-LI",
+    "level": 2,
+    "path": "/1/2/20/",
+    "display_order": 5,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Lideta Subcity",
+      "Abanet",
+      "Sengatera",
+      "Mexico"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Lideta",
+      "am": "ልደታ",
+      "om": "Lidetaa",
+      "ti": "ልደታ"
+    },
+    "coordinates": {
+      "latitude": 9.012,
+      "longitude": 38.735,
+      "bbox": {
+        "min_lat": 8.995,
+        "max_lat": 9.03,
+        "min_lng": 38.715,
+        "max_lng": 38.75
+      }
+    }
+  },
+  {
+    "id": 21,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-addis-ketema",
+    "code": "AA-AK",
+    "level": 2,
+    "path": "/1/2/21/",
+    "display_order": 6,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Merkato",
+      "Addis Ketema Subcity",
+      "Autobus Tera"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Addis Ketema",
+      "am": "አዲስ ከተማ",
+      "om": "Magaalaa Haaraa",
+      "ti": "ኣዲስ ከተማ"
+    },
+    "coordinates": {
+      "latitude": 9.033,
+      "longitude": 38.73,
+      "bbox": {
+        "min_lat": 9.015,
+        "max_lat": 9.05,
+        "min_lng": 38.71,
+        "max_lng": 38.745
+      }
+    }
+  },
+  {
+    "id": 22,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-gullele",
+    "code": "AA-GU",
+    "level": 2,
+    "path": "/1/2/22/",
+    "display_order": 7,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Gullele Subcity",
+      "Shiro Meda",
+      "Entoto",
+      "Addisu Gebeya"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Gullele",
+      "am": "ጉለሌ",
+      "om": "Gullallee",
+      "ti": "ጉለሌ"
+    },
+    "coordinates": {
+      "latitude": 9.068,
+      "longitude": 38.735,
+      "bbox": {
+        "min_lat": 9.04,
+        "max_lat": 9.11,
+        "min_lng": 38.7,
+        "max_lng": 38.765
+      }
+    }
+  },
+  {
+    "id": 23,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-kolfe-keranio",
+    "code": "AA-KK",
+    "level": 2,
+    "path": "/1/2/23/",
+    "display_order": 8,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kolfe",
+      "Keranio",
+      "Tor Hailoch",
+      "Ayer Tena"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kolfe Keranio",
+      "am": "ኮልፌ ቀራኒዮ",
+      "om": "Kolfi Qaraaniyoo",
+      "ti": "ኮልፌ ቀራንዮ"
+    },
+    "coordinates": {
+      "latitude": 9.02,
+      "longitude": 38.705,
+      "bbox": {
+        "min_lat": 8.975,
+        "max_lat": 9.065,
+        "min_lng": 38.665,
+        "max_lng": 38.73
+      }
+    }
+  },
+  {
+    "id": 24,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-akaki-kality",
+    "code": "AA-AQ",
+    "level": 2,
+    "path": "/1/2/24/",
+    "display_order": 9,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Akaki",
+      "Kality",
+      "Tulu Dimtu",
+      "Koye Feche"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Akaki Kality",
+      "am": "አቃቂ ቃሊቲ",
+      "om": "Aqaaqii Qaallittii",
+      "ti": "ኣቃቂ ቃሊቲ"
+    },
+    "coordinates": {
+      "latitude": 8.91,
+      "longitude": 38.765,
+      "bbox": {
+        "min_lat": 8.84,
+        "max_lat": 8.97,
+        "min_lng": 38.71,
+        "max_lng": 38.83
+      }
+    }
+  },
+  {
+    "id": 25,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-nifas-silk-lafto",
+    "code": "AA-NL",
+    "level": 2,
+    "path": "/1/2/25/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Nefas Silk",
+      "Lafto",
+      "Jemo",
+      "Lebu",
+      "Mekanisa",
+      "Gotera"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Nifas Silk-Lafto",
+      "am": "ንፋስ ስልክ ላፍቶ",
+      "om": "Nifas Silk Laaftoo",
+      "ti": "ንፋስ ስልክ ላፍቶ"
+    },
+    "coordinates": {
+      "latitude": 8.97,
+      "longitude": 38.735,
+      "bbox": {
+        "min_lat": 8.925,
+        "max_lat": 9.015,
+        "min_lng": 38.69,
+        "max_lng": 38.765
+      }
+    }
+  },
+  {
+    "id": 26,
+    "parent_id": 2,
+    "parent_code": "ET-AA",
+    "type": "subcity",
+    "slug": "addis-ababa-lemi-kura",
+    "code": "AA-LK",
+    "level": 2,
+    "path": "/1/2/26/",
+    "display_order": 11,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Lemi Kura",
+      "Goro",
+      "Bole Arabsa",
+      "Summit"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Lemi Kura",
+      "am": "ለሚ ኩራ",
+      "om": "Lami Kuraa",
+      "ti": "ለሚ ኩራ"
+    },
+    "coordinates": {
+      "latitude": 9.015,
+      "longitude": 38.84,
+      "bbox": {
+        "min_lat": 8.97,
+        "max_lat": 9.07,
+        "min_lng": 38.8,
+        "max_lng": 38.9
+      }
+    }
+  }
+]

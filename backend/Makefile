@@ -16,13 +16,12 @@ test: ## Run tests
 	go test ./... -v
 
 migrate: ## Run database migrations
-	go run ./cmd/tools/migrate
+	go run ./internal/database/migrate
 
 seed: ## Import master data
-	go run ./cmd/tools/masterdata -action=import -dry-run=false -dir=../data/master
+	go run ./internal/database/masterdata -action=import -dry-run=false -dir=data/master
 
-clean: ## Clean build artifacts
-	rm -rf bin/
+clean: ## Clean runtime uploads
 	rm -rf uploads/products/*
 
 .DEFAULT_GOAL := help

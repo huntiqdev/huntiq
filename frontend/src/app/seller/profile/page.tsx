@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, useRef, FormEvent } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
@@ -7,15 +7,16 @@ import { Spinner } from '@/components/ui/Spinner';
 import {
   User, Phone, Mail, Building2, Star, CheckCircle, AlertCircle,
   Lock, Eye, EyeOff, TrendingUp, Plus, X, Info,
-  ShoppingBag, Home, ArrowUpRight,
+  ShoppingBag, Home, ArrowUpRight, Camera,
 } from 'lucide-react';
 import Link from 'next/link';
 import { SellerTier, getTierThresholds, getTierFeeParams } from '@/lib/constants/fees';
 import { ReferralCard } from '@/components/referral/ReferralCard';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
+import { ImageCropperModal } from '@/components/ui/ImageCropperModal';
 
 export default function SellerProfilePage() {
-  const { user, isSeller, isLandlord } = useAuth();
+  const { user, isSeller, isLandlord, updateUserProfile } = useAuth();
   const { t, locale } = useLocale();
   const u = (t as any)?.ui ?? {};
   const [profile, setProfile] = useState<any>(null);
@@ -25,6 +26,10 @@ export default function SellerProfilePage() {
   const [error, setError] = useState('');
   const [additionalPhones, setAdditionalPhones] = useState<string[]>([]);
   const [activationCap, setActivationCap] = useState<'seller' | 'landlord' | null>(null);
+
+  const avatarInputRef = useRef<HTMLInputElement>(null);
+  const [pendingAvatarFile, setPendingAvatarFile] = useState<File | null>(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
   const [pwForm, setPwForm] = useState({ current: '', next: '', confirm: '' });
   const [showPw, setShowPw] = useState({ current: false, next: false, confirm: false });
@@ -59,6 +64,40 @@ export default function SellerProfilePage() {
   const maxPhones = tierCfg.maxPhones; // 0 = none, -1 = unlimited
   const canAddPhone = maxPhones === -1 || additionalPhones.length < maxPhones;
 
+  const handleAvatarSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setError('Photo exceeds 5 MB. Please take a screenshot or crop to keep size low.');
+    }
+    setPendingAvatarFile(file);
+    e.target.value = '';
+  };
+
+  const handleAvatarCropComplete = async (croppedFile: File) => {
+    setPendingAvatarFile(null);
+    if (!user) return;
+    setUploadingAvatar(true);
+    setError('');
+    try {
+      const url = await api.uploadImage(croppedFile, user.token);
+      setProfile((p: any) => ({ ...p, avatar_url: url }));
+      await api.updateSellerProfile({
+        name: profile.name,
+        business_name: profile.business_name,
+        email: profile.email,
+        additional_phones: additionalPhones.filter(p => p.trim()),
+        avatar_url: url,
+      }, user.token);
+      updateUserProfile({ avatarURL: url });
+      setSuccess('Profile photo updated successfully!');
+    } catch (err: any) {
+      setError(err.message || 'Failed to upload photo');
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
+
   const handleProfileSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!user) return;
@@ -69,7 +108,9 @@ export default function SellerProfilePage() {
         business_name: profile.business_name,
         email: profile.email,
         additional_phones: additionalPhones.filter(p => p.trim()),
+        avatar_url: profile.avatar_url,
       }, user.token);
+      updateUserProfile({ name: profile.name, avatarURL: profile.avatar_url });
       setSuccess('Profile updated successfully!');
     } catch (err: any) { setError(err.message); }
     finally { setSaving(false); }
@@ -113,8 +154,33 @@ export default function SellerProfilePage() {
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
         <div className="bg-gradient-to-r from-[#1769E0] to-[#1055BD] px-5 py-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center text-white font-black text-xl">
-              {profile.name?.[0]?.toUpperCase() ?? 'S'}
+            <div className="relative group shrink-0">
+              <div className="w-16 h-16 rounded-full overflow-hidden bg-white/20 border-2 border-white/60 flex items-center justify-center text-white font-black text-xl shadow-md">
+                {uploadingAvatar ? (
+                  <Spinner className="w-5 h-5 text-white" />
+                ) : profile.avatar_url ? (
+                  <img src={profile.avatar_url} alt={profile.name} className="w-full h-full object-cover" />
+                ) : (
+                  profile.name?.[0]?.toUpperCase() ?? 'S'
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => avatarInputRef.current?.click()}
+                disabled={uploadingAvatar}
+                className="absolute inset-0 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-[10px] font-bold cursor-pointer"
+                title="Change circular profile photo"
+              >
+                <Camera size={16} />
+                <span>Change</span>
+              </button>
+              <input
+                ref={avatarInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleAvatarSelect}
+                className="hidden"
+              />
             </div>
             <div>
               <p className="font-black text-white text-lg">{profile.name}</p>
@@ -414,6 +480,17 @@ export default function SellerProfilePage() {
           </button>
         </form>
       </div>
+
+      {pendingAvatarFile && (
+        <ImageCropperModal
+          file={pendingAvatarFile}
+          cropShape="round"
+          aspectRatio={1}
+          maxOutputMB={5}
+          onCropComplete={handleAvatarCropComplete}
+          onClose={() => setPendingAvatarFile(null)}
+        />
+      )}
     </div>
   );
 }

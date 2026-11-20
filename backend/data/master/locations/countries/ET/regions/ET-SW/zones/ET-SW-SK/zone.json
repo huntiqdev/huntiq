@@ -1,0 +1,32 @@
+{
+  "id": 122,
+  "parent_id": 15,
+  "parent_code": "ET-SW",
+  "type": "zone",
+  "slug": "southwest-ethiopia-sheka",
+  "code": "ET-SW-SK",
+  "level": 2,
+  "path": "/1/15/122/",
+  "display_order": 89,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Sheka Zone",
+    "ሼካ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Sheka Zone",
+    "am": "ሼካ ዞን",
+    "om": "Shakkichoo",
+    "ti": "ዞን ሼካ"
+  },
+  "coordinates": {
+    "latitude": 7.35,
+    "longitude": 35.45,
+    "bbox": null
+  }
+}

@@ -9,8 +9,6 @@ export interface SearchMeta {
 
 export interface PublicPaymentSettings {
   telebirr_merchant_phone: string;
-  safaricom_merchant_phone: string;
-  cbe_account_number: string;
   gold_upgrade_price: string;
   premium_upgrade_price: string;
   buyer_gold_upgrade_price: string;

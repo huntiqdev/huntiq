@@ -1,0 +1,37 @@
+{
+  "id": 10,
+  "parent_id": 1,
+  "parent_code": "ET",
+  "type": "region",
+  "slug": "benishangul-gumuz",
+  "code": "ET-BE",
+  "level": 1,
+  "path": "/1/10/",
+  "display_order": 9,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Benishangul",
+    "Gumuz"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Benishangul-Gumuz",
+    "am": "ቤንሻንጉል ጉሙዝ",
+    "om": "Beniishaangul Gumuz",
+    "ti": "ቤኒሻንጉል ጉሙዝ"
+  },
+  "coordinates": {
+    "latitude": 10.5,
+    "longitude": 35.5,
+    "bbox": {
+      "min_lat": 9.2,
+      "max_lat": 12.0,
+      "min_lng": 34.1,
+      "max_lng": 37.0
+    }
+  }
+}

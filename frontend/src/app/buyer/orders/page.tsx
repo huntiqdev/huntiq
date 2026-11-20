@@ -70,6 +70,11 @@ export default function BuyerOrdersPage() {
         </button>
       </div>
 
+      <div className="p-3 bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/50 rounded-2xl text-xs text-blue-800 dark:text-blue-300 flex items-center gap-2">
+        <span className="text-base">📢</span>
+        <span>Central Announcement Platform: Verified sellers and landlords contact you directly by phone or message to finalize transactions.</span>
+      </div>
+
       {/* Status filter */}
       <div className="flex gap-1.5 flex-wrap">
         {statuses.map(s => (

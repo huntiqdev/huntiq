@@ -213,6 +213,13 @@ var settingNumericKeys = map[string]bool{
 	"max_image_size_mb": true,
 	// Currency & payment
 	"currency_tolerance": true,
+	// Dynamic demand & security
+	"hourly_rate_percentile":   true,
+	"jwt_grace_period_ms":      true,
+	"session_check_interval_ms": true,
+	"otp_length":               true,
+	"retry_max_attempts":       true,
+	"search_debounce_ms":       true,
 }
 
 // settingBooleanKeys is the set of platform_settings keys whose values must be "true" or "false".

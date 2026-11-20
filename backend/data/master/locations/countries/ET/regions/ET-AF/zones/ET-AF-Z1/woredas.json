@@ -1,0 +1,102 @@
+[
+  {
+    "id": 371,
+    "parent_id": 90,
+    "parent_code": "ET-AF-Z1",
+    "type": "woreda",
+    "slug": "afar-awsi-rasu-dubti-town",
+    "code": "AF-Z1-DUB",
+    "level": 3,
+    "path": "/1/9/90/371/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dubti Town Administration",
+      "am": "ዱብቲ ከተማ አስተዳደር",
+      "om": "Magaalaa Dubtii",
+      "ti": "ዱብቲ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 11.73,
+      "longitude": 41.085,
+      "bbox": {
+        "min_lat": 11.72,
+        "max_lat": 11.74,
+        "min_lng": 41.075,
+        "max_lng": 41.095
+      }
+    }
+  },
+  {
+    "id": 278,
+    "parent_id": 90,
+    "parent_code": "ET-AF-Z1",
+    "type": "woreda",
+    "slug": "afar-awsi-rasu-semera",
+    "code": "AF-Z1-SEM",
+    "level": 3,
+    "path": "/1/9/90/278/",
+    "display_order": 150,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Semera Capital",
+      "Logiya Dry Port",
+      "ሰመራ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Semera-Logiya City",
+      "am": "ሰመራ-ሎጊያ ከተማ (የክልሉ መዲና)",
+      "om": "Magaalaa Samaraa-Logiyaa",
+      "ti": "ከተማ ሰመራ-ሎጊያ"
+    },
+    "coordinates": {
+      "latitude": 11.79,
+      "longitude": 41.01,
+      "bbox": null
+    }
+  },
+  {
+    "id": 279,
+    "parent_id": 90,
+    "parent_code": "ET-AF-Z1",
+    "type": "woreda",
+    "slug": "afar-awsi-rasu-asayita",
+    "code": "AF-Z1-ASA",
+    "level": 3,
+    "path": "/1/9/90/279/",
+    "display_order": 151,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Asaita",
+      "Aussa Sultanate",
+      "አሳይታ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Asayita Woreda",
+      "am": "አሳይታ ወረዳ",
+      "om": "Aanaa Asayita",
+      "ti": "ኣሳይታ"
+    },
+    "coordinates": {
+      "latitude": 11.57,
+      "longitude": 41.43,
+      "bbox": null
+    }
+  }
+]

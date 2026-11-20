@@ -1,0 +1,70 @@
+[
+  {
+    "id": 407,
+    "parent_id": 91,
+    "parent_code": "ET-AF-Z2",
+    "type": "woreda",
+    "slug": "afar-kilbet-rasu-berhale",
+    "code": "AF-Z2-BER",
+    "level": 3,
+    "path": "/1/9/91/407/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Berhale District Center",
+      "am": "በርሃሌ ወረዳ ማዕከል",
+      "om": "Barhaalee Gidduugaleessa",
+      "ti": "በርሓለ ወረዳ ማእከል"
+    },
+    "coordinates": {
+      "latitude": 13.85,
+      "longitude": 40.02,
+      "bbox": {
+        "min_lat": 13.83,
+        "max_lat": 13.87,
+        "min_lng": 40.0,
+        "max_lng": 40.04
+      }
+    }
+  },
+  {
+    "id": 408,
+    "parent_id": 91,
+    "parent_code": "ET-AF-Z2",
+    "type": "woreda",
+    "slug": "afar-kilbet-rasu-dalol",
+    "code": "AF-Z2-DAL",
+    "level": 3,
+    "path": "/1/9/91/408/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dallol Mining District",
+      "am": "ዳሎል የማዕድን ወረዳ",
+      "om": "Dallool Gidduugaleessa",
+      "ti": "ዳሎል ማዕድን ወረዳ"
+    },
+    "coordinates": {
+      "latitude": 14.24,
+      "longitude": 40.3,
+      "bbox": {
+        "min_lat": 14.22,
+        "max_lat": 14.26,
+        "min_lng": 40.28,
+        "max_lng": 40.32
+      }
+    }
+  }
+]

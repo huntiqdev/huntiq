@@ -1,0 +1,70 @@
+[
+  {
+    "id": 383,
+    "parent_id": 99,
+    "parent_code": "ET-GA-NU",
+    "type": "woreda",
+    "slug": "gambela-nuer-lare",
+    "code": "GA-NU-LAR",
+    "level": 3,
+    "path": "/1/11/99/383/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Lare Woreda",
+      "am": "ላሬ ወረዳ",
+      "om": "Laaree Woreda",
+      "ti": "ላሬ ወረዳ"
+    },
+    "coordinates": {
+      "latitude": 8.355,
+      "longitude": 33.97,
+      "bbox": {
+        "min_lat": 8.345,
+        "max_lat": 8.365,
+        "min_lng": 33.96,
+        "max_lng": 33.98
+      }
+    }
+  },
+  {
+    "id": 412,
+    "parent_id": 99,
+    "parent_code": "ET-GA-NU",
+    "type": "woreda",
+    "slug": "gambela-nuer-akobo",
+    "code": "GA-NU-AKO",
+    "level": 3,
+    "path": "/1/11/99/412/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Akobo Border Woreda",
+      "am": "አኮቦ ድንበር ወረዳ",
+      "om": "Akooboo Aanaa",
+      "ti": "ኣኮቦ ወረዳ"
+    },
+    "coordinates": {
+      "latitude": 7.78,
+      "longitude": 33.02,
+      "bbox": {
+        "min_lat": 7.76,
+        "max_lat": 7.8,
+        "min_lng": 33.0,
+        "max_lng": 33.04
+      }
+    }
+  }
+]

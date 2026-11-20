@@ -1,0 +1,36 @@
+{
+  "id": 27,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "city",
+  "slug": "oromia-shashemene",
+  "code": "OR-SHA",
+  "level": 2,
+  "path": "/1/4/27/",
+  "display_order": 4,
+  "is_active": true,
+  "is_leaf": true,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Shashamane"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Shashemene",
+    "am": "ሻሸመኔ",
+    "om": "Shaashamannee",
+    "ti": "ሻሸመኔ"
+  },
+  "coordinates": {
+    "latitude": 7.2,
+    "longitude": 38.6,
+    "bbox": {
+      "min_lat": 7.14,
+      "max_lat": 7.25,
+      "min_lng": 38.54,
+      "max_lng": 38.65
+    }
+  }
+}

@@ -1,0 +1,70 @@
+[
+  {
+    "id": 396,
+    "parent_id": 106,
+    "parent_code": "ET-CE-KM",
+    "type": "woreda",
+    "slug": "central-ethiopia-kembata-durame-town",
+    "code": "CE-KM-DUR",
+    "level": 3,
+    "path": "/1/14/106/396/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Durame Town Administration",
+      "am": "ዱራሜ ከተማ አስተዳደር",
+      "om": "Magaalaa Dulaamee",
+      "ti": "ዱራሜ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 7.24,
+      "longitude": 37.89,
+      "bbox": {
+        "min_lat": 7.23,
+        "max_lat": 7.25,
+        "min_lng": 37.88,
+        "max_lng": 37.9
+      }
+    }
+  },
+  {
+    "id": 415,
+    "parent_id": 106,
+    "parent_code": "ET-CE-KM",
+    "type": "woreda",
+    "slug": "central-ethiopia-kembata-angacha",
+    "code": "CE-KM-ANG",
+    "level": 3,
+    "path": "/1/14/106/415/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Angacha Town Administration",
+      "am": "አንጋቻ ከተማ አስተዳደር",
+      "om": "Magaalaa Angaacaa",
+      "ti": "ኣንጋቻ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 7.33,
+      "longitude": 37.85,
+      "bbox": {
+        "min_lat": 7.31,
+        "max_lat": 7.35,
+        "min_lng": 37.83,
+        "max_lng": 37.87
+      }
+    }
+  }
+]

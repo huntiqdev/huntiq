@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-11-16T10:19:18.569387+00:00",
+  "classification_systems": [
+    "SYS_PROD",
+    "SYS_SRV",
+    "SYS_EMP",
+    "SYS_GIG",
+    "SYS_MED",
+    "SYS_OPP",
+    "SYS_PRM"
+  ]
+}

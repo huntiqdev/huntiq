@@ -1,0 +1,32 @@
+{
+  "id": 43,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-bale",
+  "code": "ET-OR-BA",
+  "level": 2,
+  "path": "/1/4/43/",
+  "display_order": 7,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Bale",
+    "ባሌ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Bale Zone",
+    "am": "ባሌ ዞን",
+    "om": "Baalee",
+    "ti": "ዞን ባሌ"
+  },
+  "coordinates": {
+    "latitude": 7.0,
+    "longitude": 40.0,
+    "bbox": null
+  }
+}

@@ -72,9 +72,10 @@ export const DEFAULT_SECURITY_CONFIG: SecurityConfig = {
 };
 
 /**
- * Create a security config with backend settings merged in.
+ * Create a security config with backend admin settings merged in dynamically.
+ * All timing, retries, and security thresholds are driven by admin platform_settings.
  * 
- * @param backendSettings - Settings from /public/payment-settings endpoint
+ * @param backendSettings - Settings from platform_settings / payment-settings
  * @returns Merged security configuration
  */
 export function createSecurityConfig(backendSettings?: Record<string, string> | null): SecurityConfig {
@@ -82,18 +83,39 @@ export function createSecurityConfig(backendSettings?: Record<string, string> | 
     return DEFAULT_SECURITY_CONFIG;
   }
 
+  const parseIntSafe = (val: string | undefined, fallback: number): number => {
+    if (!val) return fallback;
+    const parsed = parseInt(val, 10);
+    return isNaN(parsed) ? fallback : parsed;
+  };
+
   return {
     ...DEFAULT_SECURITY_CONFIG,
-    
-    // Override OTP expiry from backend
-    otpExpirySeconds: backendSettings.otp_expiry_minutes 
-      ? parseInt(backendSettings.otp_expiry_minutes) * 60
+
+    // Token & Session Management controlled by Admin
+    jwtGracePeriodMs: parseIntSafe(backendSettings.jwt_grace_period_ms, DEFAULT_SECURITY_CONFIG.jwtGracePeriodMs),
+    sessionCheckIntervalMs: parseIntSafe(backendSettings.session_check_interval_ms, DEFAULT_SECURITY_CONFIG.sessionCheckIntervalMs),
+    redirectThrottleMs: parseIntSafe(backendSettings.redirect_throttle_ms, DEFAULT_SECURITY_CONFIG.redirectThrottleMs),
+
+    // OTP Security controlled by Admin
+    otpLength: parseIntSafe(backendSettings.otp_length, DEFAULT_SECURITY_CONFIG.otpLength),
+    otpExpirySeconds: backendSettings.otp_expiry_minutes
+      ? parseIntSafe(backendSettings.otp_expiry_minutes, 5) * 60
       : DEFAULT_SECURITY_CONFIG.otpExpirySeconds,
-    
-    // Override max image size from backend
-    maxImageSizeMB: backendSettings.max_image_size_mb
-      ? parseInt(backendSettings.max_image_size_mb)
-      : DEFAULT_SECURITY_CONFIG.maxImageSizeMB,
+    otpCountdownWarningSeconds: parseIntSafe(backendSettings.otp_warning_seconds, DEFAULT_SECURITY_CONFIG.otpCountdownWarningSeconds),
+
+    // Network & Retry Throttling controlled by Admin
+    retryMaxAttempts: parseIntSafe(backendSettings.retry_max_attempts, DEFAULT_SECURITY_CONFIG.retryMaxAttempts),
+    retryDelayMs: parseIntSafe(backendSettings.retry_delay_ms, DEFAULT_SECURITY_CONFIG.retryDelayMs),
+    minLoadingTimeMs: parseIntSafe(backendSettings.min_loading_time_ms, DEFAULT_SECURITY_CONFIG.minLoadingTimeMs),
+
+    // File Upload Limits controlled by Admin
+    maxImageSizeMB: parseIntSafe(backendSettings.max_image_size_mb, DEFAULT_SECURITY_CONFIG.maxImageSizeMB),
+
+    // UX Debounce Timings controlled by Admin
+    searchDebounceMs: parseIntSafe(backendSettings.search_debounce_ms, DEFAULT_SECURITY_CONFIG.searchDebounceMs),
+    locationDebounceMs: parseIntSafe(backendSettings.location_debounce_ms, DEFAULT_SECURITY_CONFIG.locationDebounceMs),
+    formSaveDebounceMs: parseIntSafe(backendSettings.form_save_debounce_ms, DEFAULT_SECURITY_CONFIG.formSaveDebounceMs),
   };
 }
 

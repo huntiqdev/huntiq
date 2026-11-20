@@ -68,12 +68,14 @@ const sqlSellerTransactions = `
 const sqlSellerProfile = `
 	SELECT id, name, phone, additional_phones, COALESCE(business_name,''), COALESCE(email,''),
 	        rating, role, is_active,
-	        COALESCE(tier::text,'normal'), COALESCE(total_value_sold,0), created_at, updated_at
+	        COALESCE(tier::text,'normal'), COALESCE(total_value_sold,0), created_at, updated_at,
+	        COALESCE(avatar_url, '')
 	 FROM users WHERE id=$1`
 
 const sqlSellerUpdateProfile = `
-	UPDATE users SET name=$1, business_name=$2, email=NULLIF($3,''), additional_phones=$4, updated_at=NOW()
-	 WHERE id=$5 AND role='seller'`
+	UPDATE users SET name=$1, business_name=$2, email=NULLIF($3,''), additional_phones=$4,
+	       avatar_url=COALESCE(NULLIF($5,''), avatar_url), updated_at=NOW()
+	 WHERE id=$6 AND role='seller'`
 
 const sqlSellerDeleteProduct = `
 	DELETE FROM products
@@ -205,19 +207,24 @@ func (r *SellerRepoExport) ListTransactionsBySeller(ctx context.Context, sellerI
 func (r *SellerRepoExport) GetProfile(ctx context.Context, sellerID int) (*models.User, error) {
 	u := &models.User{}
 	var extraPhones *[]string
+	var avatar string
 	err := r.db.QueryRow(ctx, sqlSellerProfile, sellerID).Scan(
 		&u.ID, &u.Name, &u.Phone, &extraPhones, &u.BusinessName, &u.Email,
-		&u.Rating, &u.Role, &u.IsActive, &u.Tier, &u.TotalValueSold, &u.CreatedAt, &u.UpdatedAt)
+		&u.Rating, &u.Role, &u.IsActive, &u.Tier, &u.TotalValueSold, &u.CreatedAt, &u.UpdatedAt,
+		&avatar)
 	if err != nil {
 		return nil, err
 	}
 	if extraPhones != nil {
 		u.AdditionalPhones = *extraPhones
 	}
+	if avatar != "" {
+		u.AvatarURL = &avatar
+	}
 	return u, nil
 }
 
-// UpdateProfile updates name, business_name, email, and additional_phones for a seller.
+// UpdateProfile updates name, business_name, email, avatar_url, and additional_phones for a seller.
 func (r *SellerRepoExport) UpdateProfile(ctx context.Context, u *models.User) error {
 	maxPhones := u.MaxAdditionalPhones()
 	if maxPhones >= 0 && len(u.AdditionalPhones) > maxPhones {
@@ -227,8 +234,12 @@ func (r *SellerRepoExport) UpdateProfile(ctx context.Context, u *models.User) er
 	if len(u.AdditionalPhones) > 0 {
 		phones = u.AdditionalPhones
 	}
+	avatar := ""
+	if u.AvatarURL != nil {
+		avatar = *u.AvatarURL
+	}
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	_, err := r.db.Exec(ctx, sqlSellerUpdateProfile, u.Name, u.BusinessName, u.Email, phones, u.ID)
+	_, err := r.db.Exec(ctx, sqlSellerUpdateProfile, u.Name, u.BusinessName, u.Email, phones, avatar, u.ID)
 	return err
 }
 
@@ -415,8 +426,16 @@ func (r *SellerRepoExport) RecordListingFeePayment(ctx context.Context, sellerID
 	if req.Notes != "" {
 		note += " | " + req.Notes
 	}
-	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	_, err = r.db.Exec(ctx, sqlRecordFeePayment, note, req.ProductID, sellerID)
+	if req.PaymentMethod == "telebirr" {
+		// Telebirr is automatically approved by the system gateway
+		_, err = r.db.Exec(ctx, `
+			UPDATE products
+			SET fee_paid=true, fee_payment_pending=false, admin_notes=$1, updated_at=NOW()
+			WHERE id=$2 AND seller_id=$3`, note, req.ProductID, sellerID)
+	} else {
+		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+		_, err = r.db.Exec(ctx, sqlRecordFeePayment, note, req.ProductID, sellerID)
+	}
 	return err
 }
 
@@ -431,6 +450,11 @@ func (r *SellerRepoExport) SubmitUpgradeRequest(ctx context.Context, sellerID in
 			return 0, fmt.Errorf("you already have a pending upgrade request — wait for admin review before submitting another")
 		}
 		return 0, err
+	}
+	if paymentMethod == "telebirr" {
+		// Telebirr payments are verified and approved automatically by the platform gateway
+		_, _ = r.db.Exec(ctx, `UPDATE upgrade_requests SET status='approved', reviewed_at=NOW(), reviewed_by=1 WHERE id=$1`, id)
+		_, _ = r.db.Exec(ctx, `UPDATE users SET tier=$1::seller_tier, updated_at=NOW() WHERE id=$2`, requestedTier, sellerID)
 	}
 	return id, nil
 }

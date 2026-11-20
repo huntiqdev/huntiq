@@ -4,7 +4,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
 import { Search, X, ChevronDown, Tag, Layers, Hash, MapPin, Sliders } from 'lucide-react';
-import { locPath } from '@/types/location';
+import { locPath } from '@/lib/location';
 
 interface SearchEntry {
   id: number;
@@ -99,7 +99,7 @@ export function SearchBar() {
         };
       });
       setRootCategories(idx);
-    }).catch(() => {});
+    }).catch(() => { });
   }, [locale]);
 
   const getLabel = useCallback((e: SearchEntry): string => e.label, []);
@@ -376,11 +376,10 @@ export function SearchBar() {
                 key={entry.id ? `search-cat-${entry.id}-${i}` : `search-entry-${entry.catSlug}-${entry.subSlug ?? ''}-${entry.itemSlug ?? ''}-${i}`}
                 onMouseDown={() => selectEntry(entry)}
                 onMouseEnter={() => setHighlighted(i)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${
-                  isActive
-                    ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/15'
-                    : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/60'
-                }`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${isActive
+                  ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/15'
+                  : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/60'
+                  }`}
               >
                 <div className={`shrink-0 ${TYPE_COLOR[entry.type]}`}>
                   <Icon size={14} />
@@ -393,24 +392,23 @@ export function SearchBar() {
                     <p className="text-[10px] opacity-40 truncate">{breadcrumb}</p>
                   )}
                 </div>
-                <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${
-                  entry.level === 0 || entry.type === 'category'
-                    ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]'
-                    : entry.level === 1
+                <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0 ${entry.level === 0 || entry.type === 'category'
+                  ? 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]'
+                  : entry.level === 1
                     ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600'
                     : entry.level === 2
-                    ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600'
-                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
-                }`}>
+                      ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600'
+                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+                  }`}>
                   {entry.level === 0
                     ? 'Sector'
                     : entry.level === 1
-                    ? 'Superfamily'
-                    : entry.level === 2
-                    ? 'Category'
-                    : entry.level === 3
-                    ? 'Subcategory'
-                    : 'Item'}
+                      ? 'Superfamily'
+                      : entry.level === 2
+                        ? 'Category'
+                        : entry.level === 3
+                          ? 'Subcategory'
+                          : 'Item'}
                 </span>
               </button>
             );

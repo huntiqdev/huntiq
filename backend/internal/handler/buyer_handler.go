@@ -49,8 +49,9 @@ func (h *BuyerHandler) UpdateProfile(c *fiber.Ctx) error {
 		return err
 	}
 	var body struct {
-		Name  string `json:"name"`
-		Email string `json:"email"`
+		Name      string  `json:"name"`
+		Email     string  `json:"email"`
+		AvatarURL *string `json:"avatar_url"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
@@ -58,12 +59,7 @@ func (h *BuyerHandler) UpdateProfile(c *fiber.Ctx) error {
 	if body.Name == "" {
 		return response.BadRequest(c, "name is required")
 	}
-	if body.Email != "" {
-		if !validations.ValidateEmail(body.Email) {
-			return response.BadRequest(c, "invalid email format")
-		}
-	}
-	if err := h.authSvc.UpdateBuyerProfile(c.Context(), userID, body.Name, body.Email); err != nil {
+	if err := h.authSvc.UpdateBuyerProfile(c.Context(), userID, body.Name, body.Email, body.AvatarURL); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
 	return response.OK(c, fiber.Map{"message": "profile updated"})

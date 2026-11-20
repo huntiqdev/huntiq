@@ -1,0 +1,36 @@
+{
+  "id": 36,
+  "parent_id": 8,
+  "parent_code": "ET-SO",
+  "type": "city",
+  "slug": "somali-jigjiga",
+  "code": "SO-JIG",
+  "level": 2,
+  "path": "/1/8/36/",
+  "display_order": 1,
+  "is_active": true,
+  "is_leaf": true,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Jijiga"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Jigjiga",
+    "am": "ጅግጅጋ",
+    "om": "Jigjigaa",
+    "ti": "ጅግጅጋ"
+  },
+  "coordinates": {
+    "latitude": 9.35,
+    "longitude": 42.8,
+    "bbox": {
+      "min_lat": 9.3,
+      "max_lat": 9.4,
+      "min_lng": 42.74,
+      "max_lng": 42.86
+    }
+  }
+}

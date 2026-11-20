@@ -1,0 +1,33 @@
+{
+  "id": 59,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-south-gondar",
+  "code": "ET-AM-SG",
+  "level": 2,
+  "path": "/1/5/59/",
+  "display_order": 23,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "South Gonder",
+    "Debub Gondar",
+    "ደቡብ ጎንደር"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "South Gondar Zone",
+    "am": "ደቡብ ጎንደር ዞን",
+    "om": "Gondar Kibbaa",
+    "ti": "ዞን ደቡብ ጎንደር"
+  },
+  "coordinates": {
+    "latitude": 11.85,
+    "longitude": 38.0,
+    "bbox": null
+  }
+}

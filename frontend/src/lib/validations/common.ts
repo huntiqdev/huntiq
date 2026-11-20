@@ -55,9 +55,9 @@ export function isValidPhone(phone: string): boolean {
   return isValidEthioPhone(phone);
 }
 
-/** Email validation (pattern matches backend pkg/validations/email.go) */
-export function isValidEmail(email: string): boolean {
-  return EMAIL_PATTERN.test(email.trim());
+/** Email validation is removed platform-wide — phone OTP and National ID are authoritative. */
+export function isValidEmail(_email: string): boolean {
+  return true;
 }
 
 export function isValidPrice(price: number): boolean {

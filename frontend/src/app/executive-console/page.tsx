@@ -31,7 +31,7 @@ export default function ExecutiveConsolePage() {
   // Master Filters State
   const [timeHorizon, setTimeHorizon] = useState<'24h' | '7d' | '30d' | 'q1' | 'fy2026'>('30d');
   const [regionScope, setRegionScope] = useState<'all' | 'addis' | 'bole' | 'oromia' | 'diredawa'>('all');
-  const [paymentRail, setPaymentRail] = useState<'all' | 'telebirr' | 'cbe' | 'mpesa'>('all');
+  const [paymentRail, setPaymentRail] = useState<'all' | 'telebirr'>('all');
   const [sectorScope, setSectorScope] = useState<'all' | 'realestate' | 'vehicles' | 'retail' | 'b2b'>('all');
   const [selectedVennSegment, setSelectedVennSegment] = useState<string>('all');
   const [selectedFlowNode, setSelectedFlowNode] = useState<string>('escrow');
@@ -61,7 +61,7 @@ export default function ExecutiveConsolePage() {
     if (user?.token) {
       api.adminAnalyticsOverview(user.token)
         .then(res => setLiveStats(res))
-        .catch(() => {})
+        .catch(() => { })
         .finally(() => setIsRefreshing(false));
     } else {
       setTimeout(() => setIsRefreshing(false), 500);
@@ -78,11 +78,11 @@ export default function ExecutiveConsolePage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col font-sans selection:bg-red-500/30 selection:text-red-200">
-      
+
       {/* ── TOP EXECUTIVE COMMAND BAR ── */}
       <header className="sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/80 px-4 lg:px-8 py-3.5 transition-all">
         <div className="max-w-[1720px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          
+
           <div className="flex items-center gap-3">
             <HuntiqLogo size="sm" href="/executive-console" />
             <div className="h-6 w-px bg-zinc-800 hidden sm:block" />
@@ -145,7 +145,7 @@ export default function ExecutiveConsolePage() {
       {/* ── MASTER MULTI-DIMENSIONAL FILTER TOOLBAR ── */}
       <section className="bg-zinc-900/60 border-b border-zinc-800/80 px-4 lg:px-8 py-3.5 backdrop-blur-md">
         <div className="max-w-[1720px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-          
+
           <div className="flex items-center gap-2 text-zinc-400 font-bold uppercase tracking-wider text-[11px]">
             <Filter size={14} className="text-red-400" />
             <span>Master Filters:</span>
@@ -158,11 +158,10 @@ export default function ExecutiveConsolePage() {
                 <button
                   key={t}
                   onClick={() => setTimeHorizon(t)}
-                  className={`px-3 py-1 rounded-lg font-bold uppercase text-[10px] tracking-wider transition-all ${
-                    timeHorizon === t
-                      ? 'bg-red-600 text-white shadow-md'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
+                  className={`px-3 py-1 rounded-lg font-bold uppercase text-[10px] tracking-wider transition-all ${timeHorizon === t
+                    ? 'bg-red-600 text-white shadow-md'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                    }`}
                 >
                   {t}
                 </button>
@@ -189,9 +188,7 @@ export default function ExecutiveConsolePage() {
               className="bg-zinc-950 border border-zinc-800 text-zinc-200 rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-red-500"
             >
               <option value="all">💳 All Payment Rails</option>
-              <option value="telebirr">📱 Telebirr SuperApp Direct</option>
-              <option value="cbe">🏛️ CBE Birr B2B Clearing</option>
-              <option value="mpesa">📲 Safaricom M-Pesa</option>
+              <option value="telebirr">📱 Telebirr SuperApp Direct (Automated)</option>
             </select>
 
             {/* Sector Scope Filter */}
@@ -231,10 +228,10 @@ export default function ExecutiveConsolePage() {
 
       {/* ── MAIN DASHBOARD VIEWPORT ── */}
       <main className="flex-1 max-w-[1720px] w-full mx-auto p-4 lg:p-8 space-y-8">
-        
+
         {/* 1. 3D-STYLED METRIC CARDS */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          
+
           {/* Card 1: Escrow Float Under Custody */}
           <div className="relative group overflow-hidden bg-gradient-to-br from-zinc-900/90 via-zinc-900/60 to-red-950/20 border border-zinc-800/90 hover:border-red-500/50 rounded-3xl p-6 transition-all duration-300 shadow-xl shadow-black/40 hover:-translate-y-1">
             <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-2xl group-hover:bg-red-600/20 transition-all pointer-events-none" />
@@ -315,7 +312,7 @@ export default function ExecutiveConsolePage() {
 
         {/* 2. ENTERPRISE VENN DIAGRAM & FLOWCHART ANALYTICS */}
         <section className="grid grid-cols-1 xl:grid-cols-12 gap-8">
-          
+
           {/* LEFT: 3-WAY INTERACTIVE VENN DIAGRAM (5 Cols) */}
           <div className="xl:col-span-5 bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-6 lg:p-7 flex flex-col justify-between shadow-2xl relative overflow-hidden">
             <div>
@@ -447,15 +444,14 @@ export default function ExecutiveConsolePage() {
 
               {/* FLOWCHART NODES PIPELINE */}
               <div className="space-y-4 my-2">
-                
+
                 {/* Node 1: Ingress Gateway */}
                 <div
                   onClick={() => setSelectedFlowNode('ingress')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedFlowNode === 'ingress'
-                      ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
-                      : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
-                  }`}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${selectedFlowNode === 'ingress'
+                    ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
+                    : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -481,11 +477,10 @@ export default function ExecutiveConsolePage() {
                 {/* Node 2: Central Escrow Vault */}
                 <div
                   onClick={() => setSelectedFlowNode('escrow')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedFlowNode === 'escrow'
-                      ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
-                      : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
-                  }`}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${selectedFlowNode === 'escrow'
+                    ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
+                    : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -511,11 +506,10 @@ export default function ExecutiveConsolePage() {
                 {/* Node 3: AI Inspection & Dispute Gate */}
                 <div
                   onClick={() => setSelectedFlowNode('dispute')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedFlowNode === 'dispute'
-                      ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
-                      : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
-                  }`}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${selectedFlowNode === 'dispute'
+                    ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
+                    : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -541,11 +535,10 @@ export default function ExecutiveConsolePage() {
                 {/* Node 4: Automated Split Disbursal */}
                 <div
                   onClick={() => setSelectedFlowNode('split')}
-                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
-                    selectedFlowNode === 'split'
-                      ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
-                      : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
-                  }`}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${selectedFlowNode === 'split'
+                    ? 'bg-zinc-800/90 border-red-500 shadow-lg shadow-red-500/10'
+                    : 'bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -612,7 +605,7 @@ export default function ExecutiveConsolePage() {
 
           {/* 3D-styled Visual Bars */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4">
-            
+
             {/* Stream 1 */}
             <div className="bg-zinc-950/70 border border-zinc-800 rounded-2xl p-5 relative overflow-hidden group">
               <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">Escrow Take-Rate</div>
@@ -688,7 +681,7 @@ export default function ExecutiveConsolePage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
+
             {/* Agreement 1: Telebirr SuperApp */}
             <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-6 relative flex flex-col justify-between group hover:border-sky-500/40 transition-all">
               <div>

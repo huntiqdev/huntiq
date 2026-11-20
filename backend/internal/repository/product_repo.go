@@ -259,6 +259,9 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 	} else if f.LocationID != nil {
 		args, _ = addWhere(&wb, args, " AND p.location_id = ", *f.LocationID)
 	}
+	if f.Kebele != nil && *f.Kebele != "" {
+		args, _ = addWhere(&wb, args, " AND p.kebele ILIKE ", likeWrap(*f.Kebele))
+	}
 	if f.Woreda != nil && *f.Woreda != "" {
 		args, _ = addWhere(&wb, args, " AND l.woreda ILIKE ", likeWrap(*f.Woreda))
 	} else if f.Subcity != nil && *f.Subcity != "" {

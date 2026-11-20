@@ -1,0 +1,33 @@
+{
+  "id": 62,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "zone",
+  "slug": "amhara-west-gondar",
+  "code": "ET-AM-WG",
+  "level": 2,
+  "path": "/1/5/62/",
+  "display_order": 26,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "West Gonder",
+    "Mirab Gondar",
+    "ምዕራብ ጎንደር"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Gondar Zone",
+    "am": "ምዕራብ ጎንደር ዞን",
+    "om": "Gondar Dhihaa",
+    "ti": "ዞን ምዕራብ ጎንደር"
+  },
+  "coordinates": {
+    "latitude": 12.8,
+    "longitude": 36.2,
+    "bbox": null
+  }
+}

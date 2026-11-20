@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { resolveImageUrl, isUnoptimized } from '@/lib/utils/imageUrl';
+import { LocationDistanceBadge } from '@/components/location/LocationDistanceBadge';
 
 interface Props { product: Product }
 
@@ -153,10 +154,12 @@ export function RentalProductCard({ product }: Props) {
             {product.title}
           </p>
           {product.location && (
-            <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1 leading-none truncate font-medium">
-              <MapPin size={10} className="shrink-0 text-teal-600" />
-              <span>{product.location.woreda ?? product.location.subcity ?? product.location.region}</span>
-            </p>
+            <LocationDistanceBadge
+              latitude={product.latitude}
+              longitude={product.longitude}
+              locationText={product.location.woreda ?? product.location.subcity ?? product.location.region ?? 'Ethiopia'}
+              className="text-[11px]"
+            />
           )}
         </div>
       </div>

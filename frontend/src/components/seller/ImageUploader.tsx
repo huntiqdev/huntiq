@@ -1,12 +1,13 @@
 'use client';
 import { useRef, useState, useCallback } from 'react';
-import { X, Upload, AlertCircle, Loader2, ImageOff } from 'lucide-react';
+import { X, Upload, AlertCircle, Loader2, ImageOff, Scissors } from 'lucide-react';
 import { MIN_IMAGES } from '@/lib/constants/fees';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
+import { ImageCropperModal } from '@/components/ui/ImageCropperModal';
 
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // Strictly 5 MB limit
 const ACCEPTED_MIME = ['image/jpeg', 'image/png', 'image/webp'];
 const ACCEPTED_ATTR = 'image/jpeg,image/png,image/webp';
 
@@ -32,6 +33,7 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [brokenIndexes, setBrokenIndexes] = useState<Set<number>>(new Set());
+  const [pendingCropFile, setPendingCropFile] = useState<File | null>(null);
 
   const markBroken = useCallback((i: number) => {
     setBrokenIndexes(prev => new Set(prev).add(i));
@@ -47,6 +49,23 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
     });
   };
 
+  const uploadSingleFile = async (f: File) => {
+    if (!user?.token) return;
+    setUploading(true);
+    setError('');
+    try {
+      const url = await api.uploadImage(f, user.token);
+      if (!url || typeof url !== 'string' || url.trim() === '') {
+        throw new Error('Upload failed');
+      }
+      onChange([...urls, url]);
+    } catch (e: any) {
+      setError(e.message ?? 'Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     if (!user?.token) { setError('Not authenticated'); return; }
@@ -56,7 +75,12 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
     const toUpload = Array.from(files).slice(0, remaining);
 
     for (const f of toUpload) {
-      if (f.size > MAX_FILE_SIZE) { setError(`"${f.name}" exceeds 20 MB limit`); return; }
+      if (f.size > MAX_FILE_SIZE) {
+        const sz = (f.size / (1024 * 1024)).toFixed(1);
+        setPendingCropFile(f);
+        setError(`"${f.name}" is ${sz} MB (max 5 MB). Opening crop tool to resize, or take a phone screenshot.`);
+        return;
+      }
       if (!ACCEPTED_MIME.includes(f.type)) { setError(`"${f.name}" is not a JPEG, PNG or WebP image`); return; }
       if (f.size === 0) { setError(`"${f.name}" is empty`); return; }
     }
@@ -146,14 +170,33 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
             <>
               <Upload size={20} className="text-zinc-400 dark:text-white/30" />
               <p className="text-xs font-bold text-zinc-600 dark:text-white/60">Click or drag images here</p>
-              <p className="text-[10px] text-zinc-400 dark:text-white/25">JPEG · PNG · WebP · up to 20 MB each</p>
+              <p className="text-[10px] text-zinc-400 dark:text-white/25">JPEG · PNG · WebP · Max 5 MB each</p>
             </>
           )}
         </div>
       )}
 
+      {/* Advisory tip */}
+      <p className="text-[10px] text-zinc-400 dark:text-zinc-500 leading-relaxed">
+        💡 <strong>Pro Tip:</strong> Mobile screenshots maintain crisp visual detail while keeping file sizes small (typically under 1 MB). Photos larger than 5 MB will open the crop & resize tool automatically.
+      </p>
+
       <input ref={inputRef} type="file" accept={ACCEPTED_ATTR} multiple className="hidden"
         onChange={e => handleFiles(e.target.files)} />
+
+      {/* Crop Modal when a file needs cropping or is oversized */}
+      {pendingCropFile && (
+        <ImageCropperModal
+          file={pendingCropFile}
+          cropShape="rect"
+          aspectRatio={4 / 3}
+          onCropComplete={(croppedFile) => {
+            setPendingCropFile(null);
+            uploadSingleFile(croppedFile);
+          }}
+          onClose={() => setPendingCropFile(null)}
+        />
+      )}
 
       {error && (
         <div className="flex items-center gap-2 text-xs text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2">

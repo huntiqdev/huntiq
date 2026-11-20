@@ -1,0 +1,88 @@
+{
+  "root": {
+    "id": 1012991,
+    "parent_id": null,
+    "parent_code": null,
+    "classification_system_code": "SYS_PROD",
+    "names": {
+      "en": "Other & Miscellaneous",
+      "am": "ሌሎችና ልዩ ልዩ",
+      "om": "Kanneen Biroofi Addaa",
+      "ti": "ካልኦትን ፍሉያትን"
+    },
+    "slug": "other-miscellaneous",
+    "description": null,
+    "level": 0,
+    "path": "/1012991/",
+    "display_order": 999,
+    "icon": "MoreHorizontal",
+    "image_url": null,
+    "is_active": true,
+    "is_leaf": false,
+    "is_archived": false,
+    "meta_title": null,
+    "meta_description": null,
+    "aliases": [],
+    "redirects": []
+  },
+  "total_categories": 2,
+  "categories": [
+    {
+      "id": 1012991,
+      "parent_id": null,
+      "parent_code": null,
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Other",
+        "am": "ሌሎች",
+        "om": "Kanneen Biroofi Addaa",
+        "ti": "ካልኦት"
+      },
+      "slug": "other-miscellaneous",
+      "description": null,
+      "level": 0,
+      "path": "/1012991/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Miscellaneous",
+        "Other & Miscellaneous",
+        "ሌሎችና ልዩ ልዩ",
+        "ካልኦትን ፍሉያትን"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1012992,
+      "parent_id": 1012991,
+      "parent_code": "other-miscellaneous",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "General Uncategorized Items",
+        "am": "አጠቃላይ ያልተመደቡ እቃዎች",
+        "om": "Meeshaalee Walii Galaa Hin Ramadamne",
+        "ti": "ሓፈሻዊ ዘይተመደቡ ኣቑሑት"
+      },
+      "slug": "other-general-uncategorized",
+      "description": null,
+      "level": 1,
+      "path": "/1012991/1012992/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [],
+      "redirects": []
+    }
+  ]
+}

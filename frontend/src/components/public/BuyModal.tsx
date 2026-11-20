@@ -174,8 +174,8 @@ export function BuyModal({ product, onClose }: Props) {
                 <MessageCircle size={13} className="text-blue-500 shrink-0 mt-0.5" />
                 <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
                   {isRental 
-                    ? (u.contact_landlord_call ?? 'The landlord will call you directly on the number you provide to arrange the rental agreement.') 
-                    : (u.buy_modal_seller_call ?? 'The seller will call you directly on the number you provide to arrange the purchase.')}
+                    ? 'Central Announcement Platform: The landlord will call you directly to arrange property inspection, viewing, and agreement.' 
+                    : 'Central Announcement Platform: The seller will call or message you directly to arrange viewing, negotiation, and handover.'}
                 </p>
               </div>
             )}

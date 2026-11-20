@@ -952,9 +952,9 @@ func (s *AuthService) UpgradeBuyerTier(ctx context.Context, userID int, req dto.
 	if req.PayerPhone == "" {
 		return errors.New("payer_phone is required")
 	}
-	validMethods := map[string]bool{"telebirr": true, "safaricom": true, "cbe": true}
+	validMethods := map[string]bool{"telebirr": true}
 	if !validMethods[req.PaymentMethod] {
-		return errors.New("payment_method must be telebirr, safaricom, or cbe")
+		return errors.New("payment_method must be telebirr")
 	}
 
 	// Prevent downgrade or same-tier request
@@ -1023,8 +1023,15 @@ func (s *AuthService) UpgradeBuyerTier(ctx context.Context, userID int, req dto.
 		return errors.New("payment amount exceeds the required amount for this tier and duration — please submit the exact amount")
 	}
 
-	_, err := s.repo.SubmitBuyerUpgradeRequest(ctx, userID, req.Tier, cost, req.Reference, req.PayerPhone, req.PaymentMethod, req.DurationDays)
-	return err
+	reqID, err := s.repo.SubmitBuyerUpgradeRequest(ctx, userID, req.Tier, cost, req.Reference, req.PayerPhone, req.PaymentMethod, req.DurationDays)
+	if err != nil {
+		return err
+	}
+	if req.PaymentMethod == "telebirr" {
+		// Telebirr payment is automatically approved by the system gateway
+		_ = s.repo.ApproveBuyerUpgradeRequest(ctx, reqID, 1)
+	}
+	return nil
 }
 
 // FindOrCreateSeller finds an existing seller by phone or creates a new one.
@@ -1174,9 +1181,9 @@ func isDuplicateEmail(err error) bool {
 
 // ── Buyer profile / notifications ─────────────────────────────────────────────
 
-// UpdateBuyerProfile updates a buyer's name and email.
-func (s *AuthService) UpdateBuyerProfile(ctx context.Context, userID int, name, email string) error {
-	return s.repo.UpdateBuyerProfile(ctx, userID, name, email)
+// UpdateBuyerProfile updates a buyer's name, email, and avatar.
+func (s *AuthService) UpdateBuyerProfile(ctx context.Context, userID int, name, email string, avatarURL *string) error {
+	return s.repo.UpdateBuyerProfile(ctx, userID, name, email, avatarURL)
 }
 
 // GetBuyerUpgradeRequestsByUser returns upgrade requests for a specific buyer.

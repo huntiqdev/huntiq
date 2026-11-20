@@ -20,6 +20,7 @@ type User struct {
 	TotalValueSold     float64   `json:"total_value_sold"`
 	NetProfit          float64   `json:"net_profit,omitempty"`
 	BuyerTier          string    `json:"buyer_tier"`
+	AvatarURL          *string   `json:"avatar_url,omitempty"`
 	OTPVerified        bool      `json:"otp_verified"`
 	IdentityVerified   bool      `json:"identity_verified"`
 	AccountEntityType  string    `json:"account_entity_type"` // INDIVIDUAL, COMPANY, GOVERNMENT, OTHER_LEGALLY_APPROVED_ENTITY

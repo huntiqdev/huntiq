@@ -1,0 +1,196 @@
+[
+  {
+    "id": 191,
+    "parent_id": 42,
+    "parent_code": "ET-OR-WAR",
+    "type": "woreda",
+    "slug": "oromia-west-arsi-shashemene",
+    "code": "OR-WAR-SHA",
+    "level": 3,
+    "path": "/1/4/42/191/",
+    "display_order": 63,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Shashemene",
+      "Shashamane",
+      "ሻሸመኔ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Shashemene City & Woreda",
+      "am": "ሻሸመኔ ከተማና ወረዳ (ምዕራብ አርሲ)",
+      "om": "Magaalaa fi Aanaa Shaashamannee",
+      "ti": "ሻሸመኔ"
+    },
+    "coordinates": {
+      "latitude": 7.2,
+      "longitude": 38.6,
+      "bbox": null
+    }
+  },
+  {
+    "id": 192,
+    "parent_id": 42,
+    "parent_code": "ET-OR-WAR",
+    "type": "woreda",
+    "slug": "oromia-west-arsi-arsi-negele",
+    "code": "OR-WAR-NEG",
+    "level": 3,
+    "path": "/1/4/42/192/",
+    "display_order": 64,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Arsi Negele",
+      "አርሲ ነገሌ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Arsi Negele Woreda & City",
+      "am": "አርሲ ነገሌ ወረዳና ከተማ",
+      "om": "Magaalaa fi Aanaa Arsii Nageellee",
+      "ti": "ኣርሲ ነገሌ"
+    },
+    "coordinates": {
+      "latitude": 7.35,
+      "longitude": 38.7,
+      "bbox": null
+    }
+  },
+  {
+    "id": 193,
+    "parent_id": 42,
+    "parent_code": "ET-OR-WAR",
+    "type": "woreda",
+    "slug": "oromia-west-arsi-kofele",
+    "code": "OR-WAR-KOF",
+    "level": 3,
+    "path": "/1/4/42/193/",
+    "display_order": 65,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Kofele",
+      "ኮፈሌ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Kofele Woreda",
+      "am": "ኮፈሌ ወረዳ",
+      "om": "Aanaa Kofalee",
+      "ti": "ኮፈሌ"
+    },
+    "coordinates": {
+      "latitude": 7.07,
+      "longitude": 38.78,
+      "bbox": null
+    }
+  },
+  {
+    "id": 194,
+    "parent_id": 42,
+    "parent_code": "ET-OR-WAR",
+    "type": "woreda",
+    "slug": "oromia-west-arsi-dodola",
+    "code": "OR-WAR-DOD",
+    "level": 3,
+    "path": "/1/4/42/194/",
+    "display_order": 66,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Dodola",
+      "ዶዶላ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Dodola Woreda & City",
+      "am": "ዶዶላ ወረዳና ከተማ",
+      "om": "Magaalaa fi Aanaa Doddolaa",
+      "ti": "ዶዶላ"
+    },
+    "coordinates": {
+      "latitude": 6.98,
+      "longitude": 39.18,
+      "bbox": null
+    }
+  },
+  {
+    "id": 195,
+    "parent_id": 42,
+    "parent_code": "ET-OR-WAR",
+    "type": "woreda",
+    "slug": "oromia-west-arsi-adaba",
+    "code": "OR-WAR-ADA",
+    "level": 3,
+    "path": "/1/4/42/195/",
+    "display_order": 67,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Adaba",
+      "አዳባ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Adaba Woreda",
+      "am": "አዳባ ወረዳ",
+      "om": "Aanaa Adabbaa",
+      "ti": "አዳባ"
+    },
+    "coordinates": {
+      "latitude": 7.0,
+      "longitude": 39.4,
+      "bbox": null
+    }
+  },
+  {
+    "id": 196,
+    "parent_id": 42,
+    "parent_code": "ET-OR-WAR",
+    "type": "woreda",
+    "slug": "oromia-west-arsi-nensebo",
+    "code": "OR-WAR-NEN",
+    "level": 3,
+    "path": "/1/4/42/196/",
+    "display_order": 68,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Nensebo",
+      "Werka",
+      "ነንሰቦ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Nensebo Woreda",
+      "am": "ነንሰቦ ወረዳ (ወርቃ)",
+      "om": "Aanaa Nanseboo",
+      "ti": "ነንሰቦ"
+    },
+    "coordinates": {
+      "latitude": 6.6,
+      "longitude": 39.1,
+      "bbox": null
+    }
+  }
+]

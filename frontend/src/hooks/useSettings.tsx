@@ -44,8 +44,16 @@ export interface PlatformSettings {
   
   // Payment
   telebirr_merchant_phone?: string;
-  safaricom_merchant_phone?: string;
-  cbe_account_number?: string;
+  telebirr_app_id?: string;
+  telebirr_payment_enabled?: string;
+  hourly_rate_percentile?: string;
+  
+  // Security & Dynamic Policies
+  jwt_grace_period_ms?: string;
+  session_check_interval_ms?: string;
+  otp_length?: string;
+  retry_max_attempts?: string;
+  search_debounce_ms?: string;
   
   // Upgrade pricing
   gold_upgrade_price?: string;

@@ -1,0 +1,36 @@
+[
+  {
+    "id": 397,
+    "parent_id": 124,
+    "parent_code": "ET-SW-DW",
+    "type": "woreda",
+    "slug": "southwest-ethiopia-dawro-tarcha-town",
+    "code": "SW-DW-TAR",
+    "level": 3,
+    "path": "/1/15/124/397/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Tarcha Town Administration",
+      "am": "ታርጫ ከተማ አስተዳደር",
+      "om": "Magaalaa Tarcaa",
+      "ti": "ታርጫ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 7.15,
+      "longitude": 37.17,
+      "bbox": {
+        "min_lat": 7.14,
+        "max_lat": 7.16,
+        "min_lng": 37.16,
+        "max_lng": 37.18
+      }
+    }
+  }
+]

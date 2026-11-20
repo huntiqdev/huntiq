@@ -1,0 +1,32 @@
+{
+  "id": 46,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-guji",
+  "code": "ET-OR-GU",
+  "level": 2,
+  "path": "/1/4/46/",
+  "display_order": 10,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Guji",
+    "ጉጂ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Guji Zone",
+    "am": "ጉጂ ዞን",
+    "om": "Gujii",
+    "ti": "ዞን ጉጂ"
+  },
+  "coordinates": {
+    "latitude": 5.5,
+    "longitude": 39.0,
+    "bbox": null
+  }
+}

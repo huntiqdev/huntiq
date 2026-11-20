@@ -11,10 +11,19 @@ frontend/.next/
 frontend/tsconfig.tsbuildinfo
 frontend/AGENTS.md
 
-# Go build artifacts
+# Go build artifacts and binaries
 backend/bin/
+bin/
+**/bin/
+backend/api
+api
+**/api
 backend/tmp/
+tmp/
+**/tmp/
 backend/pgdata/
+pgdata/
+**/pgdata/
 
 # OS
 .DS_Store

@@ -1,0 +1,32 @@
+{
+  "id": 72,
+  "parent_id": 6,
+  "parent_code": "ET-TI",
+  "type": "zone",
+  "slug": "tigray-east",
+  "code": "ET-TI-ET",
+  "level": 2,
+  "path": "/1/6/72/",
+  "display_order": 36,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Misraqawi Tigray",
+    "ምስራቅ ትግራይ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "East Tigray Zone",
+    "am": "ምስራቓዊ ዞን ትግራይ",
+    "om": "Tigraay Bahaa",
+    "ti": "ዞን ምስራቕ ትግራይ"
+  },
+  "coordinates": {
+    "latitude": 14.28,
+    "longitude": 39.45,
+    "bbox": null
+  }
+}

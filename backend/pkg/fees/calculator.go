@@ -23,7 +23,7 @@ type FeeResult struct {
 	TotalCost        float64 // Buyer pays (price + fees)
 }
 
-// CalculateListingFee calculates all fees for a product listing
+// CalculateListingFee calculates all fees for a product listing based on days
 func CalculateListingFee(price float64, durationDays int, config FeeConfig) FeeResult {
 	// Convert days to weeks (round up)
 	totalWeeks := int(math.Ceil(float64(durationDays) / 7.0))
@@ -46,6 +46,47 @@ func CalculateListingFee(price float64, durationDays int, config FeeConfig) FeeR
 	sellerPayout := math.Round((price-brokerFeeAmount)*100) / 100
 
 	// Total cost for buyer (price + listing fee)
+	totalCost := math.Round((price+totalFeeAmount)*100) / 100
+
+	return FeeResult{
+		TotalFeePercent:  totalFeePercent,
+		TotalFeeAmount:   totalFeeAmount,
+		BrokerFeePercent: brokerFeePercent,
+		BrokerFeeAmount:  brokerFeeAmount,
+		SellerPayout:     sellerPayout,
+		TotalCost:        totalCost,
+	}
+}
+
+// CalculateListingFeeHourly calculates demand-based fees for hourly durations.
+func CalculateListingFeeHourly(price float64, durationHours int, config FeeConfig) FeeResult {
+	if durationHours <= 0 {
+		durationHours = 24
+	}
+
+	hourlyPercentile := config.WeeklyIncrement / 168.0 // 168 hours in a week
+	demandFactor := 1.0
+	if durationHours <= 4 {
+		demandFactor = 0.6 // Discounted flash rate
+	} else if durationHours <= 24 {
+		demandFactor = 0.85 // Urgent daily rate
+	}
+
+	billableHours := float64(durationHours - 24)
+	if billableHours < 0 {
+		billableHours = 0
+	}
+
+	totalFeePercent := config.StartupFee + billableHours*hourlyPercentile*demandFactor
+	if totalFeePercent < 0.1 {
+		totalFeePercent = 0.1
+	}
+	totalFeePercent = math.Round(totalFeePercent*100) / 100
+	totalFeeAmount := math.Round(price*(totalFeePercent/100.0)*100) / 100
+
+	brokerFeePercent := config.BrokerFeeRate
+	brokerFeeAmount := math.Round(price*(brokerFeePercent/100.0)*100) / 100
+	sellerPayout := math.Round((price-brokerFeeAmount)*100) / 100
 	totalCost := math.Round((price+totalFeeAmount)*100) / 100
 
 	return FeeResult{

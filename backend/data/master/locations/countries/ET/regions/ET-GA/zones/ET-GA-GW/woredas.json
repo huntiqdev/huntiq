@@ -1,0 +1,69 @@
+[
+  {
+    "id": 379,
+    "parent_id": 97,
+    "parent_code": "ET-GA-GW",
+    "type": "woreda",
+    "slug": "gambela-town-center",
+    "code": "GA-GW-TC",
+    "level": 3,
+    "path": "/1/11/97/379/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Gambela Town Center District",
+      "am": "ጋምቤላ ከተማ ማዕከል ወረዳ",
+      "om": "Magaalaa Gambeellaa Gidduugaleessa",
+      "ti": "ጋምበላ ከተማ ማእከል ወረዳ"
+    },
+    "coordinates": {
+      "latitude": 8.25,
+      "longitude": 34.585,
+      "bbox": {
+        "min_lat": 8.24,
+        "max_lat": 8.26,
+        "min_lng": 34.575,
+        "max_lng": 34.595
+      }
+    }
+  },
+  {
+    "id": 281,
+    "parent_id": 97,
+    "parent_code": "ET-GA-GW",
+    "type": "woreda",
+    "slug": "gambela-town",
+    "code": "GA-GW-CIT",
+    "level": 3,
+    "path": "/1/11/97/281/",
+    "display_order": 155,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Gambella Town",
+      "Baro River Port",
+      "ጋምቤላ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Gambela Town & Zuria (ባሮ ወንዝ)",
+      "am": "ጋምቤላ ከተማና ዙሪያ (ባሮ ወንዝ)",
+      "om": "Magaalaa Gambellaa",
+      "ti": "ከተማ ጋምቤላ"
+    },
+    "coordinates": {
+      "latitude": 8.25,
+      "longitude": 34.58,
+      "bbox": null
+    }
+  }
+]

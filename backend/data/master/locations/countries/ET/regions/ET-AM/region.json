@@ -1,0 +1,37 @@
+{
+  "id": 5,
+  "parent_id": 1,
+  "parent_code": "ET",
+  "type": "region",
+  "slug": "amhara",
+  "code": "ET-AM",
+  "level": 1,
+  "path": "/1/5/",
+  "display_order": 4,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Amhara Region",
+    "Amhara National Regional State"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Amhara",
+    "am": "አማራ",
+    "om": "Amaara",
+    "ti": "ኣምሓራ"
+  },
+  "coordinates": {
+    "latitude": 11.59,
+    "longitude": 37.39,
+    "bbox": {
+      "min_lat": 8.8,
+      "max_lat": 13.8,
+      "min_lng": 35.2,
+      "max_lng": 40.3
+    }
+  }
+}

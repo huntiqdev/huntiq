@@ -8,7 +8,7 @@ import { SellerHelp } from '@/components/seller/SellerHelp';
 import {
   LayoutDashboard, Package, DollarSign, User,
   LogOut, Menu, ChevronRight, ShoppingBag, HelpCircle,
-  ShoppingCart, BarChart2, Bell, Home, Layers,
+  ShoppingCart, BarChart2, Bell, Home, Layers, PhoneCall,
 } from 'lucide-react';
 import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
 
@@ -16,7 +16,7 @@ import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
 const NAV_ITEMS = [
   { href: '/seller/dashboard',    labelKey: 'nav_dashboard',    icon: LayoutDashboard, minTier: 0 },
   { href: '/seller/products',     labelKey: 'nav_my_products',  icon: Package,         minTier: 0 },
-  { href: '/seller/orders',       labelKey: 'nav_orders',       icon: ShoppingCart,    minTier: 1 }, // gold+
+  { href: '/seller/orders',       labelKey: 'nav_orders',       icon: PhoneCall,       minTier: 1 }, // gold+
   { href: '/seller/transactions', labelKey: 'nav_sales',        icon: DollarSign,      minTier: 1 }, // gold+
   { href: '/seller/analytics',    labelKey: 'nav_analytics',    icon: BarChart2,       minTier: 2 }, // premium only
   { href: '/seller/profile',      labelKey: 'nav_profile',      icon: User,            minTier: 0 },
@@ -25,7 +25,7 @@ const NAV_ITEMS = [
 const NAV_LABELS: Record<string, string> = {
   nav_dashboard:   'Dashboard',
   nav_my_products: 'My Products',
-  nav_orders:      'Order Requests',
+  nav_orders:      'Inquiries & Leads',
   nav_sales:       'Sales',
   nav_analytics:   'Analytics',
   nav_profile:     'Profile',

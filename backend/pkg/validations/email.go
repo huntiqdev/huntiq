@@ -1,13 +1,8 @@
 package validations
 
-import "regexp"
-
-var emailPattern = regexp.MustCompile(`^[^\s@]+@[^\s@]+\.[^\s@]{2,}$`)
-
-// ValidateEmail validates email format
+// ValidateEmail always returns true — email validation is intentionally removed
+// across the platform because Ethiopian mobile phone verification (SMS OTP)
+// and National ID are the authoritative identity mechanisms. Email is optional.
 func ValidateEmail(email string) bool {
-	if email == "" {
-		return true // Email is optional in most cases
-	}
-	return emailPattern.MatchString(email)
+	return true
 }

@@ -1,0 +1,66 @@
+[
+  {
+    "id": 291,
+    "parent_id": 114,
+    "type": "woreda",
+    "slug": "south-ethiopia-gedeo-dilla",
+    "code": "SE-GE-DIL",
+    "level": 3,
+    "path": "/1/13/114/291/",
+    "display_order": 165,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Dilla University",
+      "ዲላ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-SE-GE",
+    "names": {
+      "en": "Dilla Woreda & City",
+      "am": "ዲላ ወረዳና ከተማ (ጌዴኦ)",
+      "om": "Magaalaa Dillaa",
+      "ti": "ዲላ"
+    },
+    "coordinates": {
+      "latitude": 6.42,
+      "longitude": 38.32,
+      "bbox": null
+    }
+  },
+  {
+    "id": 292,
+    "parent_id": 114,
+    "type": "woreda",
+    "slug": "south-ethiopia-gedeo-yirgacheffe",
+    "code": "SE-GE-YIR",
+    "level": 3,
+    "path": "/1/13/114/292/",
+    "display_order": 166,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Yirgacheffe Coffee Origin",
+      "ይርጋጨፌ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-SE-GE",
+    "names": {
+      "en": "Yirgacheffe Woreda (ይርጋጨፌ ቡና)",
+      "am": "ይርጋጨፌ ወረዳ (ዓለም አቀፍ ቡና)",
+      "om": "Aanaa Yirgaacafee",
+      "ti": "ይርጋጨፌ"
+    },
+    "coordinates": {
+      "latitude": 6.17,
+      "longitude": 38.2,
+      "bbox": null
+    }
+  }
+]

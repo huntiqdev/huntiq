@@ -1,0 +1,35 @@
+[
+  {
+    "id": 281,
+    "parent_id": 97,
+    "type": "woreda",
+    "slug": "gambela-town",
+    "code": "GA-GW-CIT",
+    "level": 3,
+    "path": "/1/11/97/281/",
+    "display_order": 155,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Gambella Town",
+      "Baro River Port",
+      "ጋምቤላ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-GA-GW",
+    "names": {
+      "en": "Gambela Town & Zuria (ባሮ ወንዝ)",
+      "am": "ጋምቤላ ከተማና ዙሪያ (ባሮ ወንዝ)",
+      "om": "Magaalaa Gambellaa",
+      "ti": "ከተማ ጋምቤላ"
+    },
+    "coordinates": {
+      "latitude": 8.25,
+      "longitude": 34.58,
+      "bbox": null
+    }
+  }
+]

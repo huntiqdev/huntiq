@@ -6,14 +6,14 @@ import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
 import {
   LayoutDashboard, User, LogOut, Menu, ChevronRight,
-  ShoppingBag, Lock, ShoppingCart, Gift, Home, Sparkles,
+  ShoppingBag, Lock, ShoppingCart, Gift, Home, Sparkles, PhoneCall,
 } from 'lucide-react';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
 
 const NAV_ITEMS = [
   { href: '/buyer/dashboard', label: 'Dashboard',      icon: LayoutDashboard, minTier: 0 },
-  { href: '/buyer/orders',    label: 'My Requests',    icon: ShoppingCart,    minTier: 0 },
+  { href: '/buyer/orders',    label: 'My Inquiries',   icon: PhoneCall,       minTier: 0 },
   { href: '/buyer/referral',  label: 'Referral',       icon: Gift,            minTier: 0 },
   { href: '/buyer/profile',   label: 'Profile',        icon: User,            minTier: 0 },
 ] as const;

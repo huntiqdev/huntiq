@@ -15,6 +15,7 @@ type ProductFilter struct {
 	Zone                *string
 	Subcity             *string
 	Woreda              *string
+	Kebele              *string
 	Condition           *string
 	Search              *string
 	Page                int

@@ -1,0 +1,32 @@
+{
+  "id": 100,
+  "parent_id": 11,
+  "parent_code": "ET-GA",
+  "type": "zone",
+  "slug": "gambela-majang",
+  "code": "ET-GA-MA",
+  "level": 2,
+  "path": "/1/11/100/",
+  "display_order": 67,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Majang Zone",
+    "ማጃንግ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Majang Zone",
+    "am": "ማጃንግ ዞን",
+    "om": "Majaang",
+    "ti": "ዞን ማጃንግ"
+  },
+  "coordinates": {
+    "latitude": 7.3,
+    "longitude": 35.1,
+    "bbox": null
+  }
+}

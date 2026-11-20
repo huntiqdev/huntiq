@@ -21,7 +21,6 @@ export function validateRegister(data: {
   const errors: RegisterErrors = {};
   if (!data.name.trim()) errors.name = 'validation_name_required';
   if (!isValidPhone(data.phone)) errors.phone = 'validation_phone_invalid';
-  if (data.email && !isValidEmail(data.email)) errors.email = 'validation_email_invalid';
   if (data.password.length < MIN_PASSWORD_LENGTH) errors.password = 'validation_password_min';
   return errors;
 }

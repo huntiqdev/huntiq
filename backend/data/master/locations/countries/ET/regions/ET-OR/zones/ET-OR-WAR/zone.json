@@ -1,0 +1,32 @@
+{
+  "id": 42,
+  "parent_id": 4,
+  "parent_code": "ET-OR",
+  "type": "zone",
+  "slug": "oromia-west-arsi",
+  "code": "ET-OR-WAR",
+  "level": 2,
+  "path": "/1/4/42/",
+  "display_order": 6,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "West Arssi",
+    "ምዕራብ አርሲ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "West Arsi Zone",
+    "am": "ምዕራብ አርሲ ዞን",
+    "om": "Arsii Dhihaa",
+    "ti": "ዞን ምዕራብ አርሲ"
+  },
+  "coordinates": {
+    "latitude": 7.2,
+    "longitude": 38.6,
+    "bbox": null
+  }
+}

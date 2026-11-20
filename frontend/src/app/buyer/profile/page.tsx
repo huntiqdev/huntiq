@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, FormEvent } from 'react';
+import { useEffect, useState, useRef, FormEvent } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
@@ -7,11 +7,12 @@ import { Spinner } from '@/components/ui/Spinner';
 import {
   Star, Crown, Phone, User, Mail, ArrowUpRight,
   Lock, Eye, EyeOff, Check, AlertCircle, Calendar,
-  ShoppingBag, Home, Sparkles,
+  ShoppingBag, Home, Sparkles, Camera,
 } from 'lucide-react';
 import Link from 'next/link';
 import { ReferralCard } from '@/components/referral/ReferralCard';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
+import { ImageCropperModal } from '@/components/ui/ImageCropperModal';
 
 const TIER_CONFIG = {
   normal:  { label: 'Normal',  icon: null,  color: 'text-zinc-500',   badge: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400' },
@@ -20,12 +21,22 @@ const TIER_CONFIG = {
 } as const;
 
 export default function BuyerProfilePage() {
-  const { user, buyerTier, isSeller, isLandlord } = useAuth();
+  const { user, buyerTier, isSeller, isLandlord, updateUserProfile } = useAuth();
   const { t, locale } = useLocale();
   const u = (t as any)?.ui ?? {};
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activationCap, setActivationCap] = useState<'seller' | 'landlord' | null>(null);
+
+  const avatarInputRef = useRef<HTMLInputElement>(null);
+  const [pendingAvatarFile, setPendingAvatarFile] = useState<File | null>(null);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editEmail, setEditEmail] = useState('');
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileError, setProfileError] = useState('');
+  const [profileSuccess, setProfileSuccess] = useState('');
 
   // Password change state
   const [pwForm, setPwForm] = useState({ current: '', next: '', confirm: '' });
@@ -37,9 +48,68 @@ export default function BuyerProfilePage() {
   useEffect(() => {
     if (!user) return;
     api.getBuyerProfile(user.token)
-      .then(setProfile)
+      .then(p => {
+        setProfile(p);
+        setEditName(p?.name || '');
+        setEditEmail(p?.email && !p.email.includes('@noemail.local') ? p.email : '');
+      })
       .finally(() => setLoading(false));
   }, [user]);
+
+  const handleAvatarSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setProfileError('Photo exceeds 5 MB. Please take a screenshot or crop before uploading.');
+    }
+    setPendingAvatarFile(file);
+    e.target.value = '';
+  };
+
+  const handleAvatarCropComplete = async (croppedFile: File) => {
+    setPendingAvatarFile(null);
+    if (!user) return;
+    setUploadingAvatar(true);
+    setProfileError('');
+    try {
+      const url = await api.uploadImage(croppedFile, user.token);
+      setProfile((p: any) => ({ ...p, avatar_url: url }));
+      await api.updateBuyerProfile({
+        name: profile?.name,
+        email: profile?.email,
+        avatar_url: url,
+      }, user.token);
+      updateUserProfile({ avatarURL: url });
+      setProfileSuccess('Profile photo updated successfully!');
+    } catch (err: any) {
+      setProfileError(err.message || 'Failed to upload photo');
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
+
+  const handleProfileSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!user) return;
+    setProfileSaving(true);
+    setProfileError('');
+    setProfileSuccess('');
+    try {
+      await api.updateBuyerProfile({
+        name: editName,
+        email: editEmail,
+        avatar_url: profile?.avatar_url,
+      }, user.token);
+      setProfile((p: any) => ({ ...p, name: editName, email: editEmail }));
+      updateUserProfile({ name: editName, avatarURL: profile?.avatar_url });
+      setProfileSuccess('Profile updated successfully!');
+      setIsEditing(false);
+    } catch (err: any) {
+      setProfileError(err.message || 'Failed to update profile');
+    } finally {
+      setProfileSaving(false);
+    }
+  };
 
   const handlePasswordChange = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,77 +144,156 @@ export default function BuyerProfilePage() {
 
       {/* Profile card */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-4">
-        {/* Avatar + tier */}
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-[#1769E0]/10 dark:bg-[#1769E0]/20 flex items-center justify-center text-[#1769E0] font-black text-xl">
-            {profile?.name?.[0]?.toUpperCase() ?? 'B'}
-          </div>
-          <div>
-            <p className="font-black text-lg text-zinc-900 dark:text-white">{profile?.name ?? '—'}</p>
-            <div className={`inline-flex items-center gap-1 text-xs font-black px-2 py-0.5 rounded-full mt-1 ${cfg.badge}`}>
-              {TierIcon && <TierIcon size={10} />}
-              {cfg.label} {u.reg_buyer_title || 'Buyer'}
-            </div>
-          </div>
-        </div>
-
-        {/* Details */}
-        <div className="space-y-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
-              <Phone size={13} className="text-zinc-500" />
+        {/* Avatar + tier + Edit toggle */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="relative group shrink-0">
+              <div className="w-16 h-16 rounded-full overflow-hidden bg-[#1769E0]/10 dark:bg-[#1769E0]/20 border-2 border-[#1769E0]/30 flex items-center justify-center text-[#1769E0] font-black text-xl shadow-sm">
+                {uploadingAvatar ? (
+                  <Spinner className="w-5 h-5 text-[#1769E0]" />
+                ) : profile?.avatar_url ? (
+                  <img src={profile.avatar_url} alt={profile.name} className="w-full h-full object-cover" />
+                ) : (
+                  profile?.name?.[0]?.toUpperCase() ?? 'B'
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => avatarInputRef.current?.click()}
+                disabled={uploadingAvatar}
+                className="absolute inset-0 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-[10px] font-bold cursor-pointer"
+                title="Change circular profile photo"
+              >
+                <Camera size={16} />
+                <span>Change</span>
+              </button>
+              <input
+                ref={avatarInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleAvatarSelect}
+                className="hidden"
+              />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{u.phone || 'Phone'}</p>
-              <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{profile?.phone ?? '—'}</p>
+              <p className="font-black text-lg text-zinc-900 dark:text-white">{profile?.name ?? '—'}</p>
+              <div className={`inline-flex items-center gap-1 text-xs font-black px-2 py-0.5 rounded-full mt-1 ${cfg.badge}`}>
+                {TierIcon && <TierIcon size={10} />}
+                {cfg.label} {u.reg_buyer_title || 'Buyer'}
+              </div>
             </div>
           </div>
+          <button
+            type="button"
+            onClick={() => setIsEditing(!isEditing)}
+            className="text-xs font-bold text-[#1769E0] hover:underline px-3 py-1.5 rounded-xl hover:bg-[#1769E0]/10 transition-colors"
+          >
+            {isEditing ? (u.cancel || 'Cancel') : (u.edit || 'Edit Profile')}
+          </button>
+        </div>
 
-          {profile?.email && !profile.email.includes('@noemail.local') && (
+        {profileSuccess && (
+          <div className="flex items-center gap-2 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl px-3 py-2">
+            <Check size={13} className="text-green-500 shrink-0" />
+            <p className="text-xs text-green-600 dark:text-green-400">{profileSuccess}</p>
+          </div>
+        )}
+        {profileError && (
+          <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-3 py-2">
+            <AlertCircle size={13} className="text-red-500 shrink-0" />
+            <p className="text-xs text-red-600 dark:text-red-400">{profileError}</p>
+          </div>
+        )}
+
+        {isEditing ? (
+          <form onSubmit={handleProfileSubmit} className="space-y-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
+            <div>
+              <label className="text-xs font-bold text-zinc-500 block mb-1">{u.full_name || 'Full Name'}</label>
+              <input
+                required
+                value={editName}
+                onChange={e => setEditName(e.target.value)}
+                className={cls}
+                placeholder="Your name"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-zinc-500 block mb-1">{u.email_label || 'Email'} (optional)</label>
+              <input
+                type="email"
+                value={editEmail}
+                onChange={e => setEditEmail(e.target.value)}
+                className={cls}
+                placeholder="name@example.com"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={profileSaving}
+              className="w-full py-2.5 rounded-xl bg-[#1769E0] text-white font-bold text-xs hover:bg-[#1055BD] transition-all disabled:opacity-50"
+            >
+              {profileSaving ? (u.saving || 'Saving…') : (u.save_changes || 'Save Changes')}
+            </button>
+          </form>
+        ) : (
+          /* Details */
+          <div className="space-y-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
-                <Mail size={13} className="text-zinc-500" />
+                <Phone size={13} className="text-zinc-500" />
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{u.email_label || 'Email'}</p>
-                <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{profile.email}</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{u.phone || 'Phone'}</p>
+                <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{profile?.phone ?? '—'}</p>
               </div>
             </div>
-          )}
 
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
-              <Calendar size={13} className="text-zinc-500" />
-            </div>
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{u.member_since_label || 'Member since'}</p>
-              <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                {profile?.created_at
-                  ? new Date(profile.created_at).toLocaleDateString(locale === 'am' ? 'am-ET' : locale === 'ti' ? 'ti-ER' : locale === 'or' ? 'om-ET' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-                  : '—'}
-              </p>
-            </div>
-          </div>
+            {profile?.email && !profile.email.includes('@noemail.local') && (
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
+                  <Mail size={13} className="text-zinc-500" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{u.email_label || 'Email'}</p>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{profile.email}</p>
+                </div>
+              </div>
+            )}
 
-          {/* Tier paid date */}
-          {profile?.buyer_tier_paid_at && tier !== 'normal' && (
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                tier === 'gold' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-purple-100 dark:bg-purple-900/30'
-              }`}>
-                {TierIcon && <TierIcon size={13} className={cfg.color} />}
+              <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center shrink-0">
+                <Calendar size={13} className="text-zinc-500" />
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">
-                  {cfg.label} {u.member_since_label || 'since'}
-                </p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{u.member_since_label || 'Member since'}</p>
                 <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                  {new Date(profile.buyer_tier_paid_at).toLocaleDateString(locale === 'am' ? 'am-ET' : locale === 'ti' ? 'ti-ER' : locale === 'or' ? 'om-ET' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  {profile?.created_at
+                    ? new Date(profile.created_at).toLocaleDateString(locale === 'am' ? 'am-ET' : locale === 'ti' ? 'ti-ER' : locale === 'or' ? 'om-ET' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                    : '—'}
                 </p>
               </div>
             </div>
-          )}
-        </div>
+
+            {/* Tier paid date */}
+            {profile?.buyer_tier_paid_at && tier !== 'normal' && (
+              <div className="flex items-center gap-3">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
+                  tier === 'gold' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-purple-100 dark:bg-purple-900/30'
+                }`}>
+                  {TierIcon && <TierIcon size={13} className={cfg.color} />}
+                </div>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">
+                    {cfg.label} {u.member_since_label || 'since'}
+                  </p>
+                  <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                    {new Date(profile.buyer_tier_paid_at).toLocaleDateString(locale === 'am' ? 'am-ET' : locale === 'ti' ? 'ti-ER' : locale === 'or' ? 'om-ET' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Marketplace Capabilities */}
@@ -341,6 +490,17 @@ export default function BuyerProfilePage() {
           </button>
         </form>
       </div>
+
+      {pendingAvatarFile && (
+        <ImageCropperModal
+          file={pendingAvatarFile}
+          cropShape="round"
+          aspectRatio={1}
+          maxOutputMB={5}
+          onCropComplete={handleAvatarCropComplete}
+          onClose={() => setPendingAvatarFile(null)}
+        />
+      )}
     </div>
   );
 }

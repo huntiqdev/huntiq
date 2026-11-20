@@ -3,7 +3,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '@/lib/api';
 import { useLocale } from '@/hooks/useLocale';
-import { I18nLocation, locName, locPath, formatLocationParts, RECOMMENDED_ETHIOPIA_HUBS, type RecommendedHub } from '@/types/location';
+import type { I18nLocation } from '@/types';
+import { locName, locPath, formatLocationParts } from '@/lib/location';
 import { Search, X, MapPin, Lock, Navigation, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export interface LocationValue {
@@ -37,7 +38,7 @@ export function LocationSelector({
   onChange,
   searchable = true,
   showPrecise = true,
-  showCoords = false,
+  showCoords = true,
   enableGpsAutofill = true,
   defaultValue = {},
 }: Props) {
@@ -256,10 +257,10 @@ export function LocationSelector({
   // Selected Breadcrumb Path - deduplicated & properly localized
   const breadcrumbParts = formatLocationParts({ region, zone, subcity, woreda, kebele }, locale);
 
-  const applyHub = (hub: RecommendedHub) => {
-    setRegion(hub.region);
-    setZone(hub.zone ?? '');
-    setSubcity(hub.subcity ?? '');
+  const applyRegion = (r: I18nLocation) => {
+    setRegion(r.en);
+    setZone('');
+    setSubcity('');
     setWoreda('');
     setKebele('');
     setSearch('');
@@ -373,19 +374,16 @@ export function LocationSelector({
             {locale === 'am' ? 'ተወዳጅ አካባቢዎች' : locale === 'ti' ? 'ተፈተውቲ ቦታታት' : locale === 'or' ? 'Bakkeewwan Filataman' : 'Popular Hubs'}
           </p>
           <div className="flex flex-wrap gap-1">
-            {RECOMMENDED_ETHIOPIA_HUBS.slice(0, 6).map(hub => {
-              const label = hub.name[locale as keyof typeof hub.name] || hub.name.en;
-              return (
-                <button
-                  key={hub.key}
-                  type="button"
-                  onClick={() => applyHub(hub)}
-                  className="text-[11px] font-bold px-2 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-[#1769E0]/10 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-all border border-zinc-200/60 dark:border-zinc-700/60 min-h-[36px] flex items-center"
-                >
-                  {label}
-                </button>
-              );
-            })}
+            {regions.slice(0, 6).map(r => (
+              <button
+                key={r.en}
+                type="button"
+                onClick={() => applyRegion(r)}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-[#1769E0]/10 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-all border border-zinc-200/60 dark:border-zinc-700/60 min-h-[36px] flex items-center"
+              >
+                {locName(r, locale)}
+              </button>
+            ))}
           </div>
         </div>
       )}
@@ -450,13 +448,13 @@ export function LocationSelector({
         />
       )}
 
-      {/* GPS coordinates — gold/premium only */}
-      {showCoords ? (
-        <div className="flex flex-col gap-1.5 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-3">
-          <p className="text-[10px] font-black uppercase tracking-widest text-yellow-700 dark:text-yellow-400 flex items-center gap-1">
-            <MapPin size={10} /> {t.ui?.gps_label ?? 'GPS Coordinates (Gold / Premium)'}
+      {/* GPS coordinates — free for all users */}
+      {showCoords && (
+        <div className="flex flex-col gap-1.5 bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 rounded-xl p-3">
+          <p className="text-[10px] font-black uppercase tracking-widest text-[#1769E0] dark:text-[#38A5FF] flex items-center gap-1">
+            <MapPin size={10} /> {t.ui?.gps_label ?? 'GPS Map Coordinates (Latitude & Longitude)'}
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="number"
               step="0.0000001"
@@ -474,15 +472,8 @@ export function LocationSelector({
               className={`${INP} flex-1`}
             />
           </div>
-          <p className="text-[10px] text-yellow-600 dark:text-yellow-500">
-            {t.ui?.gps_note ?? 'Buyers with Gold/Premium access will see a map link to your exact location.'}
-          </p>
-        </div>
-      ) : (
-        <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2">
-          <Lock size={11} className="text-zinc-400 shrink-0" />
-          <p className="text-[10px] text-zinc-400">
-            {t.ui?.gps_locked ?? 'GPS coordinates available for Gold & Premium sellers'}
+          <p className="text-[10px] text-zinc-500 dark:text-zinc-400">
+            {t.ui?.gps_note ?? 'Free Google Maps integration: automatic proximity discovery & distance tracking for all users.'}
           </p>
         </div>
       )}

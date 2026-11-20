@@ -1,0 +1,134 @@
+[
+  {
+    "id": 354,
+    "parent_id": 73,
+    "parent_code": "ET-TI-ST",
+    "type": "woreda",
+    "slug": "tigray-southern-maychew-town",
+    "code": "TI-ST-MAY",
+    "level": 3,
+    "path": "/1/6/73/354/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Maychew Town Administration",
+      "am": "ማይጨው ከተማ አስተዳደር",
+      "om": "Magaalaa Maaycaw",
+      "ti": "ማይጨው ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 12.78,
+      "longitude": 39.54,
+      "bbox": {
+        "min_lat": 12.76,
+        "max_lat": 12.8,
+        "min_lng": 39.52,
+        "max_lng": 39.56
+      }
+    }
+  },
+  {
+    "id": 355,
+    "parent_id": 73,
+    "parent_code": "ET-TI-ST",
+    "type": "woreda",
+    "slug": "tigray-southern-korem-town",
+    "code": "TI-ST-KOR",
+    "level": 3,
+    "path": "/1/6/73/355/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Korem Town Administration",
+      "am": "ኮረም ከተማ አስተዳደር",
+      "om": "Magaalaa Kooram",
+      "ti": "ኮረም ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 12.5,
+      "longitude": 39.52,
+      "bbox": {
+        "min_lat": 12.48,
+        "max_lat": 12.52,
+        "min_lng": 39.5,
+        "max_lng": 39.54
+      }
+    }
+  },
+  {
+    "id": 265,
+    "parent_id": 73,
+    "parent_code": "ET-TI-ST",
+    "type": "woreda",
+    "slug": "tigray-south-maichew",
+    "code": "TI-ST-MAI",
+    "level": 3,
+    "path": "/1/6/73/265/",
+    "display_order": 137,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Maychew",
+      "ማይጨው"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Maichew Woreda & City",
+      "am": "ማይጨው ወረዳና ከተማ",
+      "om": "Magaalaa fi Aanaa Maaycaw",
+      "ti": "ከተማ ማይጨው"
+    },
+    "coordinates": {
+      "latitude": 12.78,
+      "longitude": 39.53,
+      "bbox": null
+    }
+  },
+  {
+    "id": 266,
+    "parent_id": 73,
+    "parent_code": "ET-TI-ST",
+    "type": "woreda",
+    "slug": "tigray-south-alamata",
+    "code": "TI-ST-ALA",
+    "level": 3,
+    "path": "/1/6/73/266/",
+    "display_order": 138,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Alamata Raya",
+      "ኣላማጣ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Alamata Woreda & City (ራያ)",
+      "am": "አላማጣ ወረዳና ከተማ (ራያ)",
+      "om": "Magaalaa fi Aanaa Alaamaaxaa",
+      "ti": "ከተማ ኣላማጣ (ራያ)"
+    },
+    "coordinates": {
+      "latitude": 12.42,
+      "longitude": 39.53,
+      "bbox": null
+    }
+  }
+]

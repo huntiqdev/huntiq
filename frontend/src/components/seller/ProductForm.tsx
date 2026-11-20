@@ -502,7 +502,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       <div className="flex flex-col gap-1">
         <label className={lbl}>{t.ui.location_label}</label>
         <LocationSelector onChange={handleLocationChange} searchable showPrecise
-          showCoords={sellerTier === 'gold' || sellerTier === 'premium'}
+          showCoords={true} enableGpsAutofill={true}
           defaultValue={product ? {
             region: product.location?.region, zone: product.location?.zone,
             subcity: product.location?.subcity, woreda: product.location?.woreda,

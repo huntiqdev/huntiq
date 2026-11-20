@@ -18,7 +18,7 @@ import {
   LayoutGrid, ChevronRight, TrendingUp, MapPin, Star,
   ShieldCheck, Sliders, ShieldAlert, Navigation, AlertTriangle, RotateCcw,
 } from 'lucide-react';
-import { formatLocationParts } from '@/types/location';
+import { formatLocationParts } from '@/lib/location';
 
 // ── Tier banner shown to buyers ───────────────────────────────────────────────
 function TierBanner() {
@@ -148,11 +148,11 @@ function ProductsContent() {
         if (Array.isArray(tree) && tree.length > 0) {
           setCategories(tree);
         } else {
-          api.getCategories().then(setCategories).catch(() => {});
+          api.getCategories().then(setCategories).catch(() => { });
         }
       })
       .catch(() => {
-        api.getCategories().then(setCategories).catch(() => {});
+        api.getCategories().then(setCategories).catch(() => { });
       });
   }, [locale]);
 
@@ -788,11 +788,10 @@ function ProductsContent() {
             <button
               type="button"
               onClick={openFilterDrawer}
-              className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer shadow-xs ${
-                activeFilterCount > 0
-                  ? 'bg-[#1769E0] text-white hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/25'
-                  : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:border-[#1769E0] hover:text-[#1769E0]'
-              }`}
+              className={`shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all cursor-pointer shadow-xs ${activeFilterCount > 0
+                ? 'bg-[#1769E0] text-white hover:bg-[#1055BD] shadow-md shadow-[#1769E0]/25'
+                : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:border-[#1769E0] hover:text-[#1769E0]'
+                }`}
               aria-label="Open filters"
             >
               <SlidersHorizontal size={14} className={activeFilterCount > 0 ? 'text-white' : 'text-[#1769E0]'} />
@@ -805,100 +804,100 @@ function ProductsContent() {
             </button>
           </div>
 
-            {loading ? (
-              <div className="flex items-center justify-center py-20"><Spinner /></div>
-            ) : fetchError ? (
-              <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
-                <div className="w-14 h-14 rounded-2xl bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center justify-center shadow-md">
-                  <AlertTriangle size={28} />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
-                    {(t.ui as any).unable_to_load_listings ?? 'Unable to Load Listings'}
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{fetchError}</p>
-                </div>
+          {loading ? (
+            <div className="flex items-center justify-center py-20"><Spinner /></div>
+          ) : fetchError ? (
+            <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
+              <div className="w-14 h-14 rounded-2xl bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 flex items-center justify-center shadow-md">
+                <AlertTriangle size={28} />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
+                  {(t.ui as any).unable_to_load_listings ?? 'Unable to Load Listings'}
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{fetchError}</p>
+              </div>
+              <button
+                onClick={() => setRetryKey(k => k + 1)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
+              >
+                <RotateCcw size={14} />
+                <span>{(t.ui as any).retry ?? 'Retry'}</span>
+              </button>
+            </div>
+          ) : products.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
+              <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center">
+                <ShoppingBag size={32} />
+              </div>
+              <div>
+                <h3 className="text-base font-black text-slate-900 dark:text-slate-100">{t.ui.no_products ?? 'No listings found'}</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  {(t.ui as any).no_active_listings_match ?? 'No active listings match your current search or filter criteria.'}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2 justify-center pt-1">
                 <button
-                  onClick={() => setRetryKey(k => k + 1)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold shadow-md transition-all active:scale-95 cursor-pointer"
+                  onClick={() => {
+                    setActiveCatId(undefined);
+                    setActiveSub(undefined);
+                    setActiveItem(undefined);
+                    setActiveMinPrice(undefined);
+                    setActiveMaxPrice(undefined);
+                    setActiveCondition('all');
+                    setListingType('all');
+                    router.push('/products');
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
                 >
-                  <RotateCcw size={14} />
-                  <span>{(t.ui as any).retry ?? 'Retry'}</span>
+                  <span>{(t as any).search?.clear_filters ?? (t.ui as any).clear_filter ?? 'Clear All Filters'}</span>
                 </button>
               </div>
-            ) : products.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-16 px-4 text-center max-w-md mx-auto space-y-4">
-                <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center">
-                  <ShoppingBag size={32} />
-                </div>
-                <div>
-                  <h3 className="text-base font-black text-slate-900 dark:text-slate-100">{t.ui.no_products ?? 'No listings found'}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    {(t.ui as any).no_active_listings_match ?? 'No active listings match your current search or filter criteria.'}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-2 justify-center pt-1">
-                  <button
-                    onClick={() => {
-                      setActiveCatId(undefined);
-                      setActiveSub(undefined);
-                      setActiveItem(undefined);
-                      setActiveMinPrice(undefined);
-                      setActiveMaxPrice(undefined);
-                      setActiveCondition('all');
-                      setListingType('all');
-                      router.push('/products');
-                    }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
-                  >
-                    <span>{(t as any).search?.clear_filters ?? (t.ui as any).clear_filter ?? 'Clear All Filters'}</span>
-                  </button>
-                </div>
-                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full">
-                  <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
-                    {(t.ui as any).explore_categories ?? 'Explore Categories'}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 justify-center">
-                    {categories.slice(0, 8).map(c => (
-                      <Link
-                        key={c.id}
-                        href={`/products?category_hierarchy_id=${c.id}&cat=${c.slug}`}
-                        className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-[#1769E0] text-xs font-medium transition-colors"
-                      >
-                        {c.icon ? `${c.icon} ` : '🏷️ '}
-                        {resolveCategoryTitle(c, locale)}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-3.5">
-                  {products.slice(0, visibleCount).map(p => (
-                    p.listing_type === 'rent'
-                      ? <RentalProductCard key={p.id} product={p} />
-                      : <ProductCard key={p.id} product={p} />
+              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 w-full">
+                <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
+                  {(t.ui as any).explore_categories ?? 'Explore Categories'}
+                </p>
+                <div className="flex flex-wrap gap-1.5 justify-center">
+                  {categories.slice(0, 8).map(c => (
+                    <Link
+                      key={c.id}
+                      href={`/products?category_hierarchy_id=${c.id}&cat=${c.slug}`}
+                      className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-[#1769E0] text-xs font-medium transition-colors"
+                    >
+                      {c.icon ? `${c.icon} ` : '🏷️ '}
+                      {resolveCategoryTitle(c, locale)}
+                    </Link>
                   ))}
                 </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-3.5">
+                {products.slice(0, visibleCount).map(p => (
+                  p.listing_type === 'rent'
+                    ? <RentalProductCard key={p.id} product={p} />
+                    : <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
 
-                {products.length > visibleCount && (
-                  <div className="flex justify-center mt-8">
-                    <button onClick={() => setVisibleCount(v => v + 24)}
-                      className="flex flex-col items-center gap-2 group tap-bounce">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-30 group-hover:opacity-80 transition-opacity">
-                        {t.ui.get_more}
-                      </span>
-                      <div className="w-10 h-10 rounded-2xl bg-[#1769E0]/15 text-[#1769E0] dark:text-[#38A5FF] flex items-center justify-center group-hover:bg-[#1769E0] group-hover:text-white transition-all shadow-md">
-                        <ChevronDown size={20} />
-                      </div>
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+              {products.length > visibleCount && (
+                <div className="flex justify-center mt-8">
+                  <button onClick={() => setVisibleCount(v => v + 24)}
+                    className="flex flex-col items-center gap-2 group tap-bounce">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-30 group-hover:opacity-80 transition-opacity">
+                      {t.ui.get_more}
+                    </span>
+                    <div className="w-10 h-10 rounded-2xl bg-[#1769E0]/15 text-[#1769E0] dark:text-[#38A5FF] flex items-center justify-center group-hover:bg-[#1769E0] group-hover:text-white transition-all shadow-md">
+                      <ChevronDown size={20} />
+                    </div>
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
+      </div>
 
       {/* ── Slide-Over Filter Drawer ── */}
       {filterDrawerOpen && (
@@ -945,33 +944,30 @@ function ProductsContent() {
                   <button
                     type="button"
                     onClick={() => setDrawerType('all')}
-                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${
-                      drawerType === 'all'
-                        ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
-                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                    }`}
+                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${drawerType === 'all'
+                      ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
+                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                      }`}
                   >
                     {(t.ui as any)?.all_modes ?? 'All'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setDrawerType('sale')}
-                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
-                      drawerType === 'sale'
-                        ? 'bg-orange-600 text-white shadow-xs'
-                        : 'text-zinc-500 hover:text-orange-600'
-                    }`}
+                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${drawerType === 'sale'
+                      ? 'bg-orange-600 text-white shadow-xs'
+                      : 'text-zinc-500 hover:text-orange-600'
+                      }`}
                   >
                     🛒 {t.nav?.buy ?? 'Buy'}
                   </button>
                   <button
                     type="button"
                     onClick={() => setDrawerType('rent')}
-                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${
-                      drawerType === 'rent'
-                        ? 'bg-teal-600 text-white shadow-xs'
-                        : 'text-zinc-500 hover:text-teal-600'
-                    }`}
+                    className={`py-2 text-xs font-black uppercase rounded-lg transition-all flex items-center justify-center gap-1 cursor-pointer ${drawerType === 'rent'
+                      ? 'bg-teal-600 text-white shadow-xs'
+                      : 'text-zinc-500 hover:text-teal-600'
+                      }`}
                   >
                     🏠 {t.nav?.rental ?? 'Rent'}
                   </button>
@@ -989,15 +985,14 @@ function ProductsContent() {
                       key={c}
                       type="button"
                       onClick={() => setDrawerCondition(c)}
-                      className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${
-                        drawerCondition === c
-                          ? c === 'new'
-                            ? 'bg-emerald-600 text-white shadow-xs'
-                            : c === 'used'
+                      className={`py-2 text-xs font-black uppercase rounded-lg transition-all cursor-pointer ${drawerCondition === c
+                        ? c === 'new'
+                          ? 'bg-emerald-600 text-white shadow-xs'
+                          : c === 'used'
                             ? 'bg-blue-600 text-white shadow-xs'
                             : 'bg-zinc-800 dark:bg-zinc-200 text-white dark:text-zinc-900 shadow-xs'
-                          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
-                      }`}
+                        : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                        }`}
                     >
                       {c === 'all' ? (t.ui?.condition_all ?? 'All') : c === 'new' ? (t.ui?.condition_new_badge ?? '🆕 New') : (t.ui?.condition_used_badge ?? '♻️ Used')}
                     </button>
@@ -1040,19 +1035,18 @@ function ProductsContent() {
                   type="button"
                   onClick={detectNearMe}
                   disabled={isLocating}
-                  className={`w-full py-2.5 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    userCoords
-                      ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
-                      : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-teal-500'
-                  }`}
+                  className={`w-full py-2.5 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${userCoords
+                    ? 'bg-teal-50 dark:bg-teal-950/40 border-teal-500 text-teal-600 dark:text-teal-400 ring-1 ring-teal-500/30'
+                    : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-teal-500'
+                    }`}
                 >
                   <Navigation size={14} className={isLocating ? 'animate-spin text-teal-500' : userCoords ? 'text-teal-600 fill-teal-600' : 'text-zinc-400'} />
                   <span>
                     {isLocating
                       ? ((t.ui as any).locating ?? 'Locating…')
                       : userCoords
-                      ? ((t.ui as any).nearest_to_me ?? '📍 Nearest to Me (Active)')
-                      : ((t.ui as any).near_me ?? 'Find Listings Near Me')}
+                        ? ((t.ui as any).nearest_to_me ?? '📍 Nearest to Me (Active)')
+                        : ((t.ui as any).near_me ?? 'Find Listings Near Me')}
                   </span>
                   {userCoords && (
                     <span

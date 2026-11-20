@@ -1,0 +1,36 @@
+[
+  {
+    "id": 414,
+    "parent_id": 116,
+    "parent_code": "ET-SE-BS",
+    "type": "woreda",
+    "slug": "south-ethiopia-basketo-laska-town",
+    "code": "SE-BS-LAS",
+    "level": 3,
+    "path": "/1/13/116/414/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Laska (Basketo) Town Administration",
+      "am": "ላስካ (ባስኬቶ) ከተማ አስተዳደር",
+      "om": "Magaalaa Laaskaa",
+      "ti": "ላስካ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 6.22,
+      "longitude": 36.58,
+      "bbox": {
+        "min_lat": 6.2,
+        "max_lat": 6.24,
+        "min_lng": 36.56,
+        "max_lng": 36.6
+      }
+    }
+  }
+]

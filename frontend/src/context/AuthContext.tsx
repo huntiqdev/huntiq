@@ -11,6 +11,7 @@ export interface AuthUser {
   buyerTier: string;
   sellerPreference?: string; // sale | rent | both (sellers only)
   capabilities: string[];
+  avatarURL?: string;
   token: string;
 }
 
@@ -19,6 +20,7 @@ interface AuthContextValue {
   loading: boolean;
   login: (token: string, sessionToken?: string, profile?: { name?: string; phone?: string; [key: string]: any }) => Promise<void>;
   logout: () => Promise<void>;
+  updateUserProfile: (data: Partial<AuthUser>) => void;
   isAdmin: boolean;
   isSuperAdmin: boolean;
   isPlatformOwner: boolean;
@@ -45,7 +47,7 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue>({
-  user: null, loading: true, login: async () => {}, logout: async () => {},
+  user: null, loading: true, login: async () => {}, logout: async () => {}, updateUserProfile: () => {},
   isAdmin: false, isSuperAdmin: false,
   isPlatformOwner: false, isPlatformAdmin: false, isSecurityAdmin: false,
   isOperationsAdmin: false, isModerator: false, isSupportAgent: false,
@@ -102,6 +104,7 @@ function userFromToken(token: string, fallbackProfile?: Partial<AuthUser>): Auth
     buyerTier: p.buyer_tier ?? 'normal',
     sellerPreference: p.seller_preference,
     capabilities: caps,
+    avatarURL: (p as any).avatar_url || (fallbackProfile as any)?.avatar_url || fallbackProfile?.avatarURL,
     token,
   };
 }
@@ -338,6 +341,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (u) {
       if (profile?.name) u.name = profile.name;
       if (profile?.phone) u.phone = profile.phone;
+      if (profile?.avatar_url || profile?.avatarURL) u.avatarURL = profile.avatar_url || profile.avatarURL;
       if (typeof window !== 'undefined') {
         try {
           localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(u));
@@ -348,6 +352,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await fetchPermissions(u);
     }
   };
+
+  const updateUserProfile = useCallback((data: Partial<AuthUser>) => {
+    setUser(prev => {
+      if (!prev) return null;
+      const updated = { ...prev, ...data };
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(updated));
+        } catch {}
+      }
+      return updated;
+    });
+  }, []);
 
   const logout = async () => {
     // 1. Mark explicit logout & purge browser cache
@@ -431,7 +448,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider value={{
-      user, loading, login, logout,
+      user, loading, login, logout, updateUserProfile,
       isAdmin:  user?.role === 'admin',
       isSuperAdmin: isPlatformOwner || isSuperAdmin,
       isPlatformOwner,

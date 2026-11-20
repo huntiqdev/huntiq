@@ -1,0 +1,133 @@
+[
+  {
+    "id": 246,
+    "parent_id": 63,
+    "parent_code": "ET-AM-WJ",
+    "type": "woreda",
+    "slug": "amhara-west-gojjam-bahir-dar-city",
+    "code": "AM-WJ-BDC",
+    "level": 3,
+    "path": "/1/5/63/246/",
+    "display_order": 118,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bahir Dar City",
+      "Lake Tana",
+      "ባሕር ዳር"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bahir Dar City (ጣና ሐይቅ)",
+      "am": "ባሕር ዳር ከተማ (ጣና ሐይቅ)",
+      "om": "Magaalaa Baahir Daar",
+      "ti": "ባሕር ዳር ከተማ"
+    },
+    "coordinates": {
+      "latitude": 11.59,
+      "longitude": 37.39,
+      "bbox": null
+    }
+  },
+  {
+    "id": 247,
+    "parent_id": 63,
+    "parent_code": "ET-AM-WJ",
+    "type": "woreda",
+    "slug": "amhara-west-gojjam-finote-selam",
+    "code": "AM-WJ-FS",
+    "level": 3,
+    "path": "/1/5/63/247/",
+    "display_order": 119,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Finote Selam",
+      "ፍኖተ ሰላም"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Finote Selam Woreda & City",
+      "am": "ፍኖተ ሰላም ወረዳና ከተማ",
+      "om": "Magaalaa Finoota Salaam",
+      "ti": "ፍኖተ ሰላም"
+    },
+    "coordinates": {
+      "latitude": 10.7,
+      "longitude": 37.27,
+      "bbox": null
+    }
+  },
+  {
+    "id": 248,
+    "parent_id": 63,
+    "parent_code": "ET-AM-WJ",
+    "type": "woreda",
+    "slug": "amhara-west-gojjam-mecha",
+    "code": "AM-WJ-MEC",
+    "level": 3,
+    "path": "/1/5/63/248/",
+    "display_order": 120,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Merawi",
+      "Mecha",
+      "መርዓዊ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Mecha Woreda (መርዓዊ)",
+      "am": "ሜጫ ወረዳ (መርዓዊ)",
+      "om": "Aanaa Meexaa",
+      "ti": "ሜጫ (መርዓዊ)"
+    },
+    "coordinates": {
+      "latitude": 11.42,
+      "longitude": 37.15,
+      "bbox": null
+    }
+  },
+  {
+    "id": 249,
+    "parent_id": 63,
+    "parent_code": "ET-AM-WJ",
+    "type": "woreda",
+    "slug": "amhara-west-gojjam-bure",
+    "code": "AM-WJ-BUR",
+    "level": 3,
+    "path": "/1/5/63/249/",
+    "display_order": 121,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bure Gojjam",
+      "Bure Agro-Processing",
+      "ቡሬ ጎጃም"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bure Woreda (West Gojjam)",
+      "am": "ቡሬ ወረዳ (ምዕራብ ጎጃም)",
+      "om": "Aanaa Buree (Gojjaam)",
+      "ti": "ቡሬ (ጎጃም)"
+    },
+    "coordinates": {
+      "latitude": 10.7,
+      "longitude": 37.07,
+      "bbox": null
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "id": 328,
+    "parent_id": 56,
+    "parent_code": "ET-OR-BB",
+    "type": "woreda",
+    "slug": "oromia-buno-bedele-bedele-town",
+    "code": "OR-BB-BED",
+    "level": 3,
+    "path": "/1/4/56/328/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Bedele Town Administration",
+      "am": "በደሌ ከተማ አስተዳደር",
+      "om": "Magaalaa Baddallee",
+      "ti": "በደሌ ከተማ ምምሕዳር"
+    },
+    "coordinates": {
+      "latitude": 8.45,
+      "longitude": 36.35,
+      "bbox": {
+        "min_lat": 8.43,
+        "max_lat": 8.47,
+        "min_lng": 36.33,
+        "max_lng": 36.37
+      }
+    }
+  }
+]

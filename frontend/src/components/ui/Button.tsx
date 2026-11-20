@@ -1,7 +1,7 @@
 'use client';
 
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 
 export type ButtonVariant =

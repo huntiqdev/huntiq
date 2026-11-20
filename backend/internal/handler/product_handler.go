@@ -162,6 +162,9 @@ func (h *ProductHandler) List(c *fiber.Ctx) error {
 		f.LocationHierarchyID = &id
 	}
 	// Location hierarchy params — most specific takes precedence
+	if v := c.Query("kebele"); v != "" {
+		f.Kebele = &v
+	}
 	if v := c.Query("woreda"); v != "" {
 		f.Woreda = &v
 	} else if v := c.Query("subcity"); v != "" {

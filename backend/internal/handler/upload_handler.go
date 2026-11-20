@@ -26,7 +26,7 @@ type UploadHandler struct {
 // NewUploadHandler creates a new upload handler with configuration
 func NewUploadHandler(baseURL, uploadDir string, maxFileSizeMB int) *UploadHandler {
 	if maxFileSizeMB <= 0 {
-		maxFileSizeMB = 20 // default 20MB
+		maxFileSizeMB = 5 // default 5MB strictly enforced
 	}
 	return &UploadHandler{
 		baseURL:       baseURL,
@@ -94,7 +94,8 @@ func (h *UploadHandler) UploadImage(c *fiber.Ctx) error {
 	}
 	maxSize := int64(h.maxFileSizeMB) * 1024 * 1024
 	if file.Size > maxSize {
-		return response.BadRequest(c, fmt.Sprintf("image must be smaller than %d MB", h.maxFileSizeMB))
+		fileMB := float64(file.Size) / (1024 * 1024)
+		return response.BadRequest(c, fmt.Sprintf("Image size is %.1f MB. Maximum allowed size is %d MB. Tip: Take a screenshot of the photo or use the crop tool before uploading — screenshots maintain crisp quality and are usually under 1 MB.", fileMB, h.maxFileSizeMB))
 	}
 
 	_, ext, err := detectImageType(file)

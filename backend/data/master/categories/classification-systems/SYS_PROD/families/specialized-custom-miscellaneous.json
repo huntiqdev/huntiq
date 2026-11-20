@@ -1,0 +1,65 @@
+{
+  "classification_system": "SYS_PROD",
+  "family_slug": "specialized-custom-miscellaneous",
+  "categories": [
+    {
+      "id": 1012991,
+      "parent_id": null,
+      "parent_code": null,
+      "classification_system_code": "SYS_PROD",
+      "slug": "specialized-custom-miscellaneous",
+      "names": {
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
+      },
+      "description": null,
+      "level": 0,
+      "path": "/1012991/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Custom",
+        "Kan Addaa fi Filatamaa & Miscellaneous",
+        "Miscellaneous",
+        "Specialized & Custom & Miscellaneous",
+        "ልዩና ብጁ & Miscellaneous",
+        "ፍሉይን ዝተዳለወን & Miscellaneous"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1012992,
+      "parent_id": 1012991,
+      "parent_code": "specialized-custom-miscellaneous",
+      "classification_system_code": "SYS_PROD",
+      "slug": "other-general-uncategorized",
+      "names": {
+        "en": "General Uncategorized Items",
+        "am": "አጠቃላይ ያልተመደቡ እቃዎች",
+        "om": "Meeshaalee Walii Galaa Hin Ramadamne",
+        "ti": "ሓፈሻዊ ዘይተመደቡ ኣቑሑት"
+      },
+      "description": null,
+      "level": 1,
+      "path": "/1012991/1012992/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [],
+      "redirects": []
+    }
+  ]
+}

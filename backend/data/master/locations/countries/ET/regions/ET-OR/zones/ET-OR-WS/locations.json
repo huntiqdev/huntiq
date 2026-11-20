@@ -1,0 +1,230 @@
+[
+  {
+    "id": 162,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-ambo",
+    "code": "OR-WS-AMB",
+    "level": 3,
+    "path": "/1/4/38/162/",
+    "display_order": 34,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Ambo",
+      "Hagere Hiwot",
+      "አምቦ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Ambo Woreda & City",
+      "am": "አምቦ ወረዳና ከተማ (ምዕራብ ሸዋ)",
+      "om": "Magaalaa fi Aanaa Amboo",
+      "ti": "ኣምቦ (ምዕራብ ሸዋ)"
+    },
+    "coordinates": {
+      "latitude": 8.98,
+      "longitude": 37.85,
+      "bbox": null
+    }
+  },
+  {
+    "id": 163,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-holeta",
+    "code": "OR-WS-HOL",
+    "level": 3,
+    "path": "/1/4/38/163/",
+    "display_order": 35,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Holeta Genet",
+      "ሆለታ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Holeta City",
+      "am": "ሆለታ ከተማ (ምዕራብ ሸዋ)",
+      "om": "Magaalaa Hoolotaa",
+      "ti": "ሆለታ (ምዕራብ ሸዋ)"
+    },
+    "coordinates": {
+      "latitude": 9.05,
+      "longitude": 38.5,
+      "bbox": null
+    }
+  },
+  {
+    "id": 164,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-bako-tibe",
+    "code": "OR-WS-BAK",
+    "level": 3,
+    "path": "/1/4/38/164/",
+    "display_order": 36,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Bako",
+      "ባኮ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Bako Tibe Woreda",
+      "am": "ባኮ ጥቤ ወረዳ",
+      "om": "Aanaa Baqqo Tiibbee",
+      "ti": "ባኮ ጥቤ"
+    },
+    "coordinates": {
+      "latitude": 9.13,
+      "longitude": 37.05,
+      "bbox": null
+    }
+  },
+  {
+    "id": 165,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-ginchi-dendi",
+    "code": "OR-WS-DEN",
+    "level": 3,
+    "path": "/1/4/38/165/",
+    "display_order": 37,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Ginchi",
+      "Dendi",
+      "ጊንጪ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Ginchi / Dendi Woreda",
+      "am": "ጊንጪ / ደንዲ ወረዳ",
+      "om": "Aanaa Dandii / Giincii",
+      "ti": "ጊንጪ"
+    },
+    "coordinates": {
+      "latitude": 9.02,
+      "longitude": 38.13,
+      "bbox": null
+    }
+  },
+  {
+    "id": 166,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-jeldu",
+    "code": "OR-WS-JEL",
+    "level": 3,
+    "path": "/1/4/38/166/",
+    "display_order": 38,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Jeldu",
+      "Gojjo",
+      "ጀልዱ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Jeldu Woreda",
+      "am": "ጀልዱ ወረዳ",
+      "om": "Aanaa Jalduu",
+      "ti": "ጀልዱ"
+    },
+    "coordinates": {
+      "latitude": 9.25,
+      "longitude": 37.9,
+      "bbox": null
+    }
+  },
+  {
+    "id": 167,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-tikur-enchini",
+    "code": "OR-WS-TIK",
+    "level": 3,
+    "path": "/1/4/38/167/",
+    "display_order": 39,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Enchini",
+      "እንጪኒ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Tikur Enchini Woreda",
+      "am": "ጥቁር እንጪኒ ወረዳ",
+      "om": "Aanaa Incinnii",
+      "ti": "ጥቁር እንጪኒ"
+    },
+    "coordinates": {
+      "latitude": 8.8,
+      "longitude": 37.65,
+      "bbox": null
+    }
+  },
+  {
+    "id": 168,
+    "parent_id": 38,
+    "type": "woreda",
+    "slug": "oromia-west-shewa-ejere",
+    "code": "OR-WS-EJE",
+    "level": 3,
+    "path": "/1/4/38/168/",
+    "display_order": 40,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Addis Alem",
+      "Ejere",
+      "አዲስ አለም"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-WS",
+    "names": {
+      "en": "Ejere Woreda",
+      "am": "ኤጀሬ ወረዳ (አዲስ አለም)",
+      "om": "Aanaa Eejjeree",
+      "ti": "ኤጀሬ"
+    },
+    "coordinates": {
+      "latitude": 9.03,
+      "longitude": 38.4,
+      "bbox": null
+    }
+  }
+]

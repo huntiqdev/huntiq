@@ -1,0 +1,132 @@
+[
+  {
+    "id": 219,
+    "parent_id": 50,
+    "type": "woreda",
+    "slug": "oromia-jimma-city",
+    "code": "OR-JM-CIT",
+    "level": 3,
+    "path": "/1/4/50/219/",
+    "display_order": 91,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Jimma Town",
+      "Aba Jifar",
+      "ጅማ ከተማ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-JM",
+    "names": {
+      "en": "Jimma City (አባ ጅፋር)",
+      "am": "ጅማ ከተማ (አባ ጅፋር)",
+      "om": "Magaalaa Jimmaa",
+      "ti": "ጅማ ከተማ"
+    },
+    "coordinates": {
+      "latitude": 7.67,
+      "longitude": 36.83,
+      "bbox": null
+    }
+  },
+  {
+    "id": 220,
+    "parent_id": 50,
+    "type": "woreda",
+    "slug": "oromia-jimma-agaro",
+    "code": "OR-JM-AGA",
+    "level": 3,
+    "path": "/1/4/50/220/",
+    "display_order": 92,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Agaro Coffee",
+      "አጋሮ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-JM",
+    "names": {
+      "en": "Agaro Woreda & City",
+      "am": "አጋሮ ወረዳና ከተማ (ቡና)",
+      "om": "Magaalaa fi Aanaa Aggaaroo",
+      "ti": "ኣጋሮ"
+    },
+    "coordinates": {
+      "latitude": 7.85,
+      "longitude": 36.65,
+      "bbox": null
+    }
+  },
+  {
+    "id": 221,
+    "parent_id": 50,
+    "type": "woreda",
+    "slug": "oromia-jimma-gomma",
+    "code": "OR-JM-GOM",
+    "level": 3,
+    "path": "/1/4/50/221/",
+    "display_order": 93,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Gomma",
+      "ጎማ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-JM",
+    "names": {
+      "en": "Gomma Woreda",
+      "am": "ጎማ ወረዳ",
+      "om": "Aanaa Gommaa",
+      "ti": "ጎማ"
+    },
+    "coordinates": {
+      "latitude": 7.87,
+      "longitude": 36.63,
+      "bbox": null
+    }
+  },
+  {
+    "id": 222,
+    "parent_id": 50,
+    "type": "woreda",
+    "slug": "oromia-jimma-limmu-kosa",
+    "code": "OR-JM-LIM",
+    "level": 3,
+    "path": "/1/4/50/222/",
+    "display_order": 94,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [
+      "Limmu Kosa",
+      "Limu Coffee",
+      "ሊሙ ኮሳ"
+    ],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "parent_code": "ET-OR-JM",
+    "names": {
+      "en": "Limmu Kosa Woreda (ሊሙ ቡና)",
+      "am": "ሊሙ ኮሳ ወረዳ (ሊሙ ቡና)",
+      "om": "Aanaa Limmuu Qoxxisaa",
+      "ti": "ሊሙ ኮሳ"
+    },
+    "coordinates": {
+      "latitude": 8.17,
+      "longitude": 36.95,
+      "bbox": null
+    }
+  }
+]

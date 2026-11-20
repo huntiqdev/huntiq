@@ -6,7 +6,6 @@ import (
 	"github.com/your-org/used-tools-marketplace/internal/service"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
-	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
 
 type SellerHandler struct {
@@ -45,9 +44,9 @@ func (h *SellerHandler) PayListingFee(c *fiber.Ctx) error {
 	if req.PayerPhone == "" {
 		return response.BadRequest(c, "payer_phone is required")
 	}
-	validMethods := map[string]bool{"telebirr": true, "safaricom": true, "cbe": true}
+	validMethods := map[string]bool{"telebirr": true}
 	if !validMethods[req.PaymentMethod] {
-		return response.BadRequest(c, "payment_method must be telebirr, safaricom, or cbe")
+		return response.BadRequest(c, "payment_method must be telebirr")
 	}
 	if err := h.svc.RecordListingFeePayment(c.Context(), sellerID, req); err != nil {
 		return response.BadRequest(c, err.Error())
@@ -92,6 +91,7 @@ func (h *SellerHandler) UpdateProfile(c *fiber.Ctx) error {
 		Name             string   `json:"name"`
 		BusinessName     string   `json:"business_name"`
 		Email            string   `json:"email"`
+		AvatarURL        *string  `json:"avatar_url"`
 		AdditionalPhones []string `json:"additional_phones"`
 	}
 	if err := c.BodyParser(&body); err != nil {
@@ -99,11 +99,6 @@ func (h *SellerHandler) UpdateProfile(c *fiber.Ctx) error {
 	}
 	if body.Name == "" {
 		return response.BadRequest(c, "name is required")
-	}
-	if body.Email != "" {
-		if !validations.ValidateEmail(body.Email) {
-			return response.BadRequest(c, "invalid email format")
-		}
 	}
 
 	// Get current user to check tier
@@ -117,6 +112,7 @@ func (h *SellerHandler) UpdateProfile(c *fiber.Ctx) error {
 		Name:             body.Name,
 		BusinessName:     body.BusinessName,
 		Email:            body.Email,
+		AvatarURL:        body.AvatarURL,
 		AdditionalPhones: body.AdditionalPhones,
 		Tier:             profile.Tier, // needed for validation
 	}

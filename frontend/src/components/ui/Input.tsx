@@ -1,7 +1,7 @@
 'use client';
 
 import { InputHTMLAttributes, forwardRef } from 'react';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 import { FieldWrapper } from './FieldWrapper';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

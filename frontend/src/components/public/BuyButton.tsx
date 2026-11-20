@@ -3,12 +3,16 @@ import { useState } from 'react';
 import { Product } from '@/types';
 import { BuyModal } from './BuyModal';
 import { useLocale } from '@/hooks/useLocale';
-import { ShoppingBag, Key } from 'lucide-react';
+import { PhoneCall, MessageSquare, Key } from 'lucide-react';
 
 export function BuyButton({ product }: { product: Product }) {
   const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const isRental = product.listing_type === 'rent';
+
+  const actionLabel = isRental 
+    ? (t.ui.rent_now ?? 'Contact Landlord / Inquire') 
+    : (t.ui.contact_seller ?? 'Contact Seller / Direct Inquiry');
 
   return (
     <>
@@ -21,15 +25,15 @@ export function BuyButton({ product }: { product: Product }) {
             : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/25'
         }`}
       >
-        {isRental ? <Key size={20} /> : <ShoppingBag size={20} />}
-        {isRental ? (t.ui.rent_now ?? 'Rent / Contact Landlord') : t.ui.buy_now}
+        {isRental ? <Key size={20} /> : <PhoneCall size={20} />}
+        {actionLabel}
       </button>
 
       {/* Mobile Sticky Priority Bottom Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#091426]/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-4 py-2.5 pb-[calc(env(safe-area-inset-bottom,12px)+6px)] shadow-2xl flex items-center justify-between gap-3">
         <div className="flex flex-col min-w-0 pr-1">
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none">
-            {isRental ? (t.ui.rental_rate ?? 'Rental Rate') : (t.ui.total_price ?? 'Total Price')}
+            {isRental ? (t.ui.rental_rate ?? 'Rental Rate') : (t.ui.total_price ?? 'Listing Price')}
           </span>
           <span className={`text-base font-black truncate leading-tight mt-0.5 ${isRental ? 'text-teal-600' : 'text-[#1769E0] dark:text-[#38A5FF]'}`}>
             ETB {isRental && product.rental_price != null ? product.rental_price.toLocaleString() : (product.price != null ? product.price.toLocaleString() : '—')}
@@ -44,8 +48,8 @@ export function BuyButton({ product }: { product: Product }) {
               : 'bg-[#1769E0] hover:bg-[#1055BD] shadow-[#1769E0]/25'
           }`}
         >
-          {isRental ? <Key size={16} /> : <ShoppingBag size={16} />}
-          <span>{isRental ? (t.ui.rent_now ?? 'Rent Now') : (t.ui.buy_now ?? 'Buy Now')}</span>
+          {isRental ? <Key size={16} /> : <PhoneCall size={16} />}
+          <span>{actionLabel}</span>
         </button>
       </div>
 

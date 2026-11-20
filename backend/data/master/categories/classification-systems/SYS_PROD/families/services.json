@@ -1,0 +1,246 @@
+{
+  "root": {
+    "id": 7,
+    "parent_id": null,
+    "parent_code": null,
+    "classification_system_code": "SYS_PROD",
+    "names": {
+      "en": "Services & Trades",
+      "am": "አገልግሎቶች",
+      "om": "Tajaajiloota",
+      "ti": "ኣገልግሎታት"
+    },
+    "slug": "services",
+    "description": null,
+    "level": 0,
+    "path": "/7/",
+    "display_order": 7,
+    "icon": "Wrench",
+    "image_url": null,
+    "is_active": false,
+    "is_leaf": false,
+    "is_archived": true,
+    "meta_title": null,
+    "meta_description": null,
+    "aliases": [],
+    "redirects": []
+  },
+  "total_categories": 7,
+  "categories": [
+    {
+      "id": 7,
+      "parent_id": null,
+      "parent_code": null,
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Services",
+        "am": "አገልግሎቶች",
+        "om": "Tajaajiloota",
+        "ti": "ኣገልግሎታት"
+      },
+      "slug": "services",
+      "description": null,
+      "level": 0,
+      "path": "/7/",
+      "display_order": 7,
+      "icon": "Wrench",
+      "image_url": null,
+      "is_active": false,
+      "is_leaf": false,
+      "is_archived": true,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Contractors",
+        "Services & Trades",
+        "Technicians",
+        "Trades"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 32,
+      "parent_id": 7,
+      "parent_code": "services",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Professional Services",
+        "am": "ሙያዊ አገልግሎቶች",
+        "om": "Tajaajila Ogeessummaa",
+        "ti": "ሞያዊ ኣገልግሎታት"
+      },
+      "slug": "professional-services",
+      "description": null,
+      "level": 1,
+      "path": "/7/32/",
+      "display_order": 1,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [],
+      "redirects": []
+    },
+    {
+      "id": 33,
+      "parent_id": 7,
+      "parent_code": "services",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Repair",
+        "am": "ጥገና",
+        "om": "Suphaa",
+        "ti": "ጽገና"
+      },
+      "slug": "repair-maintenance",
+      "description": null,
+      "level": 1,
+      "path": "/7/33/",
+      "display_order": 2,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Maintenance",
+        "Repair & Maintenance",
+        "ጥገናና ዕድሳት",
+        "ጽገናን ሓፈሻዊ ፅገናን"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 3541,
+      "parent_id": 33,
+      "parent_code": "repair-maintenance",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Electrical Installation",
+        "am": "የኤሌክትሪክ መስመር ዝርጋታ",
+        "om": "Tajaajila Dhaabbii",
+        "ti": "ናይ ኤሌክትሪክ መስመር ዝርግሓ"
+      },
+      "slug": "electrical-installation-repair-trades",
+      "description": "Professional residential and commercial electrical contracting, circuit breaker panel wiring, and safety audits",
+      "level": 2,
+      "path": "/7/33/3541/",
+      "display_order": 0,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Electrical Installation & Repair Trades",
+        "Repair Trades",
+        "Tajaajila Dhaabbii fi Suphaa Sarara Elektiriikii",
+        "ናይ ኤሌክትሪክ መስመር ዝርግሓን ጽገናን ሞያዊ ኣገልግሎታት",
+        "የኤሌክትሪክ መስመር ዝርጋታና ጥገና ሙያ አገልግሎቶች"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 3558,
+      "parent_id": 3541,
+      "parent_code": "electrical-installation-repair-trades",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Residential",
+        "am": "የመኖሪያ",
+        "om": "Sarara Elektiriikii Manneen Jireenyaa",
+        "ti": "ናይ መነበሪ"
+      },
+      "slug": "residential-commercial-electrical-wiring",
+      "description": "Complete electrical rough-in and trim-out wiring, conduit pipe laying, and lighting fixture installation",
+      "level": 3,
+      "path": "/7/33/3541/3558/",
+      "display_order": 0,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Commercial Building Electrical Wiring",
+        "Residential & Commercial Building Electrical Wiring",
+        "Sarara Elektiriikii Manneen Jireenyaa fi Daldalaa",
+        "ናይ መነበሪን ንግዲን ህንጻታት ናይ ኤሌክትሪክ መስመር ዝርግሓ",
+        "የመኖሪያና የንግድ ህንፃዎች የኤሌክትሪክ መስመር ዝርጋታ"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1013756,
+      "parent_id": 3541,
+      "parent_code": "electrical-installation-repair-trades",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Other Electrical Installation",
+        "am": "ሌሎች የኤሌክትሪክ መስመር ዝርጋታ",
+        "om": "Tajaajila Dhaabbii",
+        "ti": "ካልኦት ናይ ኤሌክትሪክ መስመር ዝርግሓ"
+      },
+      "slug": "other-electrical-installation-repair-trades",
+      "description": null,
+      "level": 3,
+      "path": "/7/33/3541/1013756/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Other Electrical Installation & Repair Trades",
+        "Repair Trades",
+        "Tajaajila Dhaabbii fi Suphaa Sarara Elektiriikii Biroo",
+        "ሌሎች የኤሌክትሪክ መስመር ዝርጋታና ጥገና ሙያ አገልግሎቶች",
+        "ካልኦት ናይ ኤሌክትሪክ መስመር ዝርግሓን ጽገናን ሞያዊ ኣገልግሎታት"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1013629,
+      "parent_id": 33,
+      "parent_code": "repair-maintenance",
+      "classification_system_code": "SYS_PROD",
+      "names": {
+        "en": "Other Repair",
+        "am": "ሌሎች ጥገና",
+        "om": "Suphaa Biroo",
+        "ti": "ካልኦት ጽገና"
+      },
+      "slug": "other-repair-maintenance",
+      "description": null,
+      "level": 2,
+      "path": "/7/33/1013629/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Maintenance",
+        "Other Repair & Maintenance",
+        "ሌሎች ጥገናና ዕድሳት",
+        "ካልኦት ጽገናን ሓፈሻዊ ፅገናን"
+      ],
+      "redirects": []
+    }
+  ]
+}

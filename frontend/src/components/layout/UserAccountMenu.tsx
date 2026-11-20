@@ -89,11 +89,15 @@ export function UserAccountMenu() {
         {/* User Button */}
         <button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="flex items-center gap-2 p-1 pl-2 pr-2.5 min-h-[36px] rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 text-xs font-bold tap-bounce active:scale-95"
+          className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 min-h-[36px] rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors border border-zinc-200 dark:border-zinc-700 text-xs font-bold tap-bounce active:scale-95"
           aria-label="User account menu"
         >
-          <div className="w-6 h-6 rounded-full bg-[#1769E0] text-white flex items-center justify-center font-black text-xs shadow-sm shadow-[#1769E0]/30">
-            {displayInitial}
+          <div className="w-6 h-6 rounded-full overflow-hidden bg-[#1769E0] text-white flex items-center justify-center font-black text-xs shadow-sm shadow-[#1769E0]/30 shrink-0">
+            {user.avatarURL ? (
+              <img src={user.avatarURL} alt={displayName} className="w-full h-full object-cover" />
+            ) : (
+              displayInitial
+            )}
           </div>
           <span className="max-w-[90px] sm:max-w-[140px] truncate text-zinc-800 dark:text-zinc-200">
             {displayName}
@@ -109,22 +113,33 @@ export function UserAccountMenu() {
           <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-2xl z-50 p-3 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
             {/* User Header */}
             <div className="p-3 bg-zinc-50 dark:bg-white/[0.03] rounded-2xl mb-3 border border-zinc-200/60 dark:border-white/5">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
-                  {u.unified_identity || 'Unified Identity'}
-                </span>
-                <span className="text-[10px] bg-green-500/10 text-green-500 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <CheckCircle2 size={10} /> {u.status_active || 'Active'}
-                </span>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-full overflow-hidden bg-[#1769E0] text-white flex items-center justify-center font-black text-sm shrink-0 border border-zinc-200 dark:border-zinc-700">
+                  {user.avatarURL ? (
+                    <img src={user.avatarURL} alt={displayName} className="w-full h-full object-cover" />
+                  ) : (
+                    displayInitial
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
+                      {u.unified_identity || 'Unified Identity'}
+                    </span>
+                    <span className="text-[10px] bg-green-500/10 text-green-500 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <CheckCircle2 size={10} /> {u.status_active || 'Active'}
+                    </span>
+                  </div>
+                  <p className="text-sm font-black text-zinc-900 dark:text-white truncate">
+                    {user.name || `User #${user.id}`}
+                  </p>
+                  {user.phone && (
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium truncate">
+                      {user.phone}
+                    </p>
+                  )}
+                </div>
               </div>
-              <p className="text-sm font-black text-zinc-900 dark:text-white truncate">
-                {user.name || `User #${user.id}`}
-              </p>
-              {user.phone && (
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium truncate">
-                  {user.phone}
-                </p>
-              )}
               <div className="flex flex-wrap gap-1 mt-2">
                 {capabilities.map((cap) => (
                   <span

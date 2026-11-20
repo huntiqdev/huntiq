@@ -61,13 +61,18 @@ func scanUser(row interface {
 	Scan(...interface{}) error
 }) (*models.User, error) {
 	u := &models.User{}
+	var avatar string
 	err := row.Scan(
 		&u.ID, &u.Name, &u.Phone, &u.BusinessName, &u.Email, &u.PasswordHash,
 		&u.Rating, &u.Role, &u.AdminRole, &u.IsActive, &u.DeactivationReason,
 		&u.Tier, &u.TotalValueSold,
 		&u.BuyerTier, &u.OTPVerified, &u.SellerPreference,
 		&u.CreatedAt, &u.UpdatedAt,
+		&avatar,
 	)
+	if avatar != "" {
+		u.AvatarURL = &avatar
+	}
 	return u, err
 }
 
@@ -242,7 +247,7 @@ func (r *UserRepo) PopulateCapabilities(ctx context.Context, u *models.User) {
 
 func (r *UserRepo) GetByPhone(ctx context.Context, phone string) (*models.User, error) {
 	u, err := scanUser(r.db.QueryRow(ctx,
-		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE phone = $1 ORDER BY created_at DESC LIMIT 1", phone))
+		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE phone = $1 ORDER BY created_at DESC LIMIT 1", phone))
 	if err == nil && u != nil {
 		r.PopulateCapabilities(ctx, u)
 	}
@@ -252,7 +257,7 @@ func (r *UserRepo) GetByPhone(ctx context.Context, phone string) (*models.User, 
 // GetByPhoneAndRole returns a user matching both phone and role.
 func (r *UserRepo) GetByPhoneAndRole(ctx context.Context, phone, role string) (*models.User, error) {
 	u, err := scanUser(r.db.QueryRow(ctx,
-		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE phone = $1 AND role = $2", phone, role))
+		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE phone = $1 AND role = $2", phone, role))
 	if err == nil && u != nil {
 		r.PopulateCapabilities(ctx, u)
 	}
@@ -261,7 +266,7 @@ func (r *UserRepo) GetByPhoneAndRole(ctx context.Context, phone, role string) (*
 
 func (r *UserRepo) GetByEmail(ctx context.Context, email string) (*models.User, error) {
 	u, err := scanUser(r.db.QueryRow(ctx,
-		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE email = $1", email))
+		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE email = $1", email))
 	if err == nil && u != nil {
 		r.PopulateCapabilities(ctx, u)
 	}
@@ -296,7 +301,7 @@ func (r *UserRepo) GetAdminByEmail(ctx context.Context, email string) (*models.U
 
 func (r *UserRepo) GetByID(ctx context.Context, id int) (*models.User, error) {
 	u, err := scanUser(r.db.QueryRow(ctx,
-		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at FROM users WHERE id = $1", id))
+		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE id = $1", id))
 	if err == nil && u != nil {
 		r.PopulateCapabilities(ctx, u)
 	}
@@ -1051,18 +1056,22 @@ func (r *UserRepo) ListActivityLogs(ctx context.Context, f ActivityLogFilter) ([
 	return out, total, rows.Err()
 }
 
-// UpdateBuyerProfile updates name and email for a buyer.
-func (r *UserRepo) UpdateBuyerProfile(ctx context.Context, userID int, name, email string) error {
+// UpdateBuyerProfile updates name, email, and avatar_url for a buyer.
+func (r *UserRepo) UpdateBuyerProfile(ctx context.Context, userID int, name, email string, avatarURL *string) error {
+	avatar := ""
+	if avatarURL != nil {
+		avatar = *avatarURL
+	}
 	if email != "" {
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		_, err := r.db.Exec(ctx,
-			`UPDATE users SET name=$1, email=$2, updated_at=NOW() WHERE id=$3 AND role != 'admin'`,
-			name, email, userID)
+			`UPDATE users SET name=$1, email=$2, avatar_url=COALESCE(NULLIF($3,''), avatar_url), updated_at=NOW() WHERE id=$4 AND role != 'admin'`,
+			name, email, avatar, userID)
 		return err
 	}
 	_, err := r.db.Exec(ctx,
-		`UPDATE users SET name=$1, updated_at=NOW() WHERE id=$2 AND role != 'admin'`,
-		name, userID)
+		`UPDATE users SET name=$1, avatar_url=COALESCE(NULLIF($2,''), avatar_url), updated_at=NOW() WHERE id=$3 AND role != 'admin'`,
+		name, avatar, userID)
 	return err
 }
 

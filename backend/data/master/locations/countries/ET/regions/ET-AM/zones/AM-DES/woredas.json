@@ -1,0 +1,70 @@
+[
+  {
+    "id": 339,
+    "parent_id": 31,
+    "parent_code": "AM-DES",
+    "type": "woreda",
+    "slug": "dessie-piazza-subcity",
+    "code": "AM-DES-PZ",
+    "level": 3,
+    "path": "/1/5/31/339/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Piazza Subcity (Dessie)",
+      "am": "ፒያሳ ክፍለ ከተማ (ደሴ)",
+      "om": "Kutaa Magaalaa Piyaasaa",
+      "ti": "ፒያሳ ክፍለ ከተማ (ደሴ)"
+    },
+    "coordinates": {
+      "latitude": 11.135,
+      "longitude": 39.635,
+      "bbox": {
+        "min_lat": 11.125,
+        "max_lat": 11.145,
+        "min_lng": 39.625,
+        "max_lng": 39.645
+      }
+    }
+  },
+  {
+    "id": 340,
+    "parent_id": 31,
+    "parent_code": "AM-DES",
+    "type": "woreda",
+    "slug": "dessie-robit-subcity",
+    "code": "AM-DES-RO",
+    "level": 3,
+    "path": "/1/5/31/340/",
+    "display_order": 10,
+    "is_active": true,
+    "is_leaf": true,
+    "is_deprecated": false,
+    "replaced_by_id": null,
+    "aliases": [],
+    "source": "authoritative",
+    "verification_status": "verified",
+    "names": {
+      "en": "Robit Subcity (Dessie)",
+      "am": "ሮቢት ክፍለ ከተማ (ደሴ)",
+      "om": "Kutaa Magaalaa Roobiit",
+      "ti": "ሮቢት ክፍለ ከተማ (ደሴ)"
+    },
+    "coordinates": {
+      "latitude": 11.145,
+      "longitude": 39.645,
+      "bbox": {
+        "min_lat": 11.135,
+        "max_lat": 11.155,
+        "min_lng": 39.635,
+        "max_lng": 39.655
+      }
+    }
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "id": 124,
+  "parent_id": 15,
+  "parent_code": "ET-SW",
+  "type": "zone",
+  "slug": "southwest-ethiopia-dawro",
+  "code": "ET-SW-DW",
+  "level": 2,
+  "path": "/1/15/124/",
+  "display_order": 91,
+  "is_active": true,
+  "is_leaf": false,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Dawro Zone",
+    "ዳውሮ"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Dawro Zone",
+    "am": "ዳውሮ ዞን",
+    "om": "Daawroo",
+    "ti": "ዞን ዳውሮ"
+  },
+  "coordinates": {
+    "latitude": 7.0,
+    "longitude": 37.15,
+    "bbox": null
+  }
+}

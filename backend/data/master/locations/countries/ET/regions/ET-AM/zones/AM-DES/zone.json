@@ -1,0 +1,36 @@
+{
+  "id": 31,
+  "parent_id": 5,
+  "parent_code": "ET-AM",
+  "type": "city",
+  "slug": "amhara-dessie",
+  "code": "AM-DES",
+  "level": 2,
+  "path": "/1/5/31/",
+  "display_order": 3,
+  "is_active": true,
+  "is_leaf": true,
+  "is_deprecated": false,
+  "replaced_by_id": null,
+  "aliases": [
+    "Dese"
+  ],
+  "source": "authoritative",
+  "verification_status": "verified",
+  "names": {
+    "en": "Dessie",
+    "am": "ደሴ",
+    "om": "Dasee",
+    "ti": "ደሴ"
+  },
+  "coordinates": {
+    "latitude": 11.13,
+    "longitude": 39.63,
+    "bbox": {
+      "min_lat": 11.08,
+      "max_lat": 11.18,
+      "min_lng": 39.58,
+      "max_lng": 39.68
+    }
+  }
+}

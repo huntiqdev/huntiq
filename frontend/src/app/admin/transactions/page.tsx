@@ -97,7 +97,7 @@ export default function AdminTransactionsPage() {
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'completed' | 'pending' | 'cancelled'>('all');
-  const [methodFilter, setMethodFilter] = useState<'all' | 'telebirr' | 'safaricom' | 'cbe' | 'bank'>('all');
+  const [methodFilter, setMethodFilter] = useState<'all' | 'telebirr'>('all');
   const [typeFilter, setTypeFilter] = useState<'all' | 'listing_fee' | 'product_sale'>('all');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -532,7 +532,7 @@ export default function AdminTransactionsPage() {
 
             {/* Payment Method Filters */}
             <div className="flex items-center bg-zinc-950 border border-zinc-800 rounded-xl p-1 gap-1">
-              {(['all', 'telebirr', 'cbe', 'safaricom', 'bank'] as const).map((m) => (
+              {(['all', 'telebirr'] as const).map((m) => (
                 <button
                   key={m}
                   onClick={() => {
@@ -547,11 +547,7 @@ export default function AdminTransactionsPage() {
                 >
                   {m === 'all'
                     ? 'All Providers'
-                    : m === 'cbe'
-                    ? 'CBE'
-                    : m === 'safaricom'
-                    ? 'M-Pesa'
-                    : m}
+                    : '📱 Telebirr (Official)'}
                 </button>
               ))}
             </div>

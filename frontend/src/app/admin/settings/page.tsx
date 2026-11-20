@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
-import { 
-  Settings, Save, AlertCircle, Shield, DollarSign, 
-  Layers, CreditCard, Megaphone, CheckCircle2, ShieldAlert, Calculator, Fingerprint 
+import {
+  Settings, Save, AlertCircle, Shield, DollarSign,
+  Layers, CreditCard, Megaphone, CheckCircle2, ShieldAlert, Calculator, Fingerprint
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { IPTrackingSecurity } from '@/components/admin/enterprise/IPTrackingSecurity';
@@ -26,6 +26,11 @@ const SETTING_METADATA: Record<string, SettingMeta> = {
   otp_required: { label: 'Enforce OTP Verification', category: 'general', type: 'boolean', description: 'Require SMS/Email OTP code on registration & login' },
   otp_gateway: { label: 'OTP Gateway', category: 'general', type: 'text', description: 'Delivery method: "log" (dev mode), "sms", or "email"' },
   otp_expiry_minutes: { label: 'OTP Expiry (Minutes)', category: 'general', type: 'number', description: 'Time before an OTP code expires' },
+  otp_length: { label: 'OTP Code Length', category: 'general', type: 'number', description: 'Number of digits required in verification OTP codes (default: 6)' },
+  jwt_grace_period_ms: { label: 'JWT Grace Period (ms)', category: 'general', type: 'number', description: 'Allowed clock-skew grace period for session tokens' },
+  session_check_interval_ms: { label: 'Session Heartbeat Interval (ms)', category: 'general', type: 'number', description: 'Background poll interval to verify active auth session' },
+  retry_max_attempts: { label: 'Max Login Retry Attempts', category: 'general', type: 'number', description: 'Failed attempt threshold before client security throttle' },
+  search_debounce_ms: { label: 'Search Debounce (ms)', category: 'general', type: 'number', description: 'Client input debounce delay for responsive catalog filtering' },
   ai_recommendations_enabled: { label: 'AI Recommendations', category: 'general', type: 'boolean', description: 'Enable personalized product recommendations' },
 
   // Fees & Commissions
@@ -34,16 +39,28 @@ const SETTING_METADATA: Record<string, SettingMeta> = {
   min_referral_withdrawal: { label: 'Min Referral Withdrawal (ETB)', category: 'fees', type: 'number', description: 'Minimum balance required to request cashout' },
   max_referral_withdrawal: { label: 'Max Referral Withdrawal (ETB)', category: 'fees', type: 'number', description: 'Maximum amount allowed per withdrawal request' },
 
-  // Seller Tiers & Listings
+  // Seller Tiers & Dynamic Limits
   listing_free_weeks: { label: 'Free Listing Grace Period (Weeks)', category: 'tiers', type: 'number', description: 'Initial duration before weekly fee increments begin' },
   normal_startup_fee: { label: 'Normal Tier Startup Fee (%)', category: 'tiers', type: 'number' },
   gold_startup_fee: { label: 'Gold Tier Startup Fee (%)', category: 'tiers', type: 'number' },
   premium_startup_fee: { label: 'Premium Tier Startup Fee (%)', category: 'tiers', type: 'number' },
+  normal_max_images: { label: 'Normal Tier Max Images', category: 'tiers', type: 'number', description: 'Maximum upload photos allowed for normal seller listings' },
+  gold_max_images: { label: 'Gold Tier Max Images', category: 'tiers', type: 'number', description: 'Maximum upload photos allowed for gold tier seller listings' },
+  premium_max_images: { label: 'Premium Tier Max Images', category: 'tiers', type: 'number', description: 'Maximum upload photos allowed for premium tier seller listings' },
+  normal_max_locations: { label: 'Normal Tier Max Locations', category: 'tiers', type: 'number', description: 'Maximum coverage delivery hubs for normal tier' },
+  gold_max_locations: { label: 'Gold Tier Max Locations', category: 'tiers', type: 'number', description: 'Maximum coverage delivery hubs for gold tier' },
+  premium_max_locations: { label: 'Premium Tier Max Locations', category: 'tiers', type: 'number', description: 'Maximum coverage delivery hubs for premium tier' },
+  max_title_length: { label: 'Max Title Length', category: 'tiers', type: 'number', description: 'Maximum allowed character count for product titles' },
+  max_description_length: { label: 'Max Description Length', category: 'tiers', type: 'number', description: 'Maximum allowed character count for product descriptions' },
+  max_image_size_mb: { label: 'Max Image Size (MB)', category: 'tiers', type: 'number', description: 'Maximum file size per image upload in megabytes' },
 
-  // Merchant Payments
-  telebirr_merchant_phone: { label: 'Telebirr Merchant Phone', category: 'merchants', type: 'text', description: 'Official Telebirr phone number for listing payments' },
-  safaricom_merchant_phone: { label: 'M-PESA Merchant Phone', category: 'merchants', type: 'text', description: 'Official Safaricom M-PESA phone number' },
-  cbe_account_number: { label: 'CBE Bank Account Number', category: 'merchants', type: 'text', description: 'Commercial Bank of Ethiopia account number' },
+  // Demand & Hourly Fee Engine
+  hourly_rate_percentile: { label: 'Hourly Rate Percentile (%)', category: 'fees', type: 'number', description: 'Dynamic demand percentile billed per hour for custom listing durations' },
+
+  // Merchant Payments (Authoritative Telebirr Integration)
+  telebirr_payment_enabled: { label: 'Telebirr Payment Gateway', category: 'merchants', type: 'boolean', description: 'Platform-wide toggle for Telebirr automated payments' },
+  telebirr_merchant_phone: { label: 'Telebirr Merchant Phone', category: 'merchants', type: 'text', description: 'Official Telebirr merchant phone number for automated listing payments' },
+  telebirr_app_id: { label: 'Telebirr App ID', category: 'merchants', type: 'text', description: 'Official Ethio Telecom Telebirr Open Platform App ID' },
 };
 
 const CATEGORIES = [
@@ -60,7 +77,7 @@ const CATEGORIES = [
 export default function AdminSettingsPage() {
   const { user, isSuperAdmin, isPlatformOwner, isPlatformAdmin, hasAdminPermission, loading: authLoading } = useAuth();
   const router = useRouter();
-  
+
   const [settingsMap, setSettingsMap] = useState<Record<string, string>>({});
   const [activeCategory, setActiveCategory] = useState<string>('general');
   const [changeReason, setChangeReason] = useState('');
@@ -149,11 +166,10 @@ export default function AdminSettingsPage() {
               key={cat.id}
               type="button"
               onClick={() => setActiveCategory(cat.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all ${
-                isActive 
-                  ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/20' 
-                  : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
-              }`}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all ${isActive
+                ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/20'
+                : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                }`}
             >
               <Icon size={16} />
               {cat.label}
@@ -208,11 +224,10 @@ export default function AdminSettingsPage() {
                         <button
                           type="button"
                           onClick={() => handleChange(key, rawVal === 'true' ? 'false' : 'true')}
-                          className={`w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-between border transition-all ${
-                            rawVal === 'true'
-                              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
-                              : 'bg-zinc-950 border-zinc-800 text-zinc-500'
-                          }`}
+                          className={`w-full py-3 px-4 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-between border transition-all ${rawVal === 'true'
+                            ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                            : 'bg-zinc-950 border-zinc-800 text-zinc-500'
+                            }`}
                         >
                           <span>{rawVal === 'true' ? 'Enabled' : 'Disabled'}</span>
                         </button>

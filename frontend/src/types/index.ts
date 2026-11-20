@@ -162,7 +162,10 @@ export interface OrderRequest {
   updated_at?: string;
 }
 
-export type { I18nLocation } from './location';
+export interface I18nLocation {
+  en: string;
+  [locale: string]: string | undefined;
+}
 
 // ── Referral & Commission Types ──────────────────────────────────────────────
 
