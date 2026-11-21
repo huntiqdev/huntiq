@@ -16,8 +16,9 @@ backend/bin/
 bin/
 **/bin/
 backend/api
-api
-**/api
+/api
+backend/cmd/api/api
+!backend/cmd/api/
 backend/tmp/
 tmp/
 **/tmp/
@@ -28,6 +29,8 @@ pgdata/
 # OS
 .DS_Store
 Thumbs.db
+__pycache__/
+*.pyc
 
 # Uploads (local only)
 backend/uploads/products/
@@ -36,4 +39,7 @@ backend/uploads/*.jpeg
 backend/uploads/*.png
 backend/uploads/*.webp
 !backend/uploads/.gitkeep
+
+# Scratch directory
+scratch/
 

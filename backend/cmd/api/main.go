@@ -16,6 +16,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 
+	"github.com/your-org/used-tools-marketplace/internal/ai"
 	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/config"
 	"github.com/your-org/used-tools-marketplace/internal/database"
@@ -376,6 +377,15 @@ func main() {
 	organizationHandler := handlers.NewOrganizationHandler(orgSvc)
 	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
 
+	// ── HUNTIQ AI Supervisor ────────────────────────────────────────────────
+	pySupervisor := ai.NewPythonSupervisor(cfg.GeminiAPIKey, cfg.GeminiModel)
+	if err := pySupervisor.Start(); err != nil {
+		log.Printf("[HUNTIQ AI] Warning: failed to start Python AI supervisor: %v", err)
+	}
+	defer pySupervisor.Stop()
+	aiSvc := ai.NewAIService(pySupervisor, productRepo, searchRepo)
+	aiHandler := handlers.NewAIHandler(aiSvc)
+
 	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
 		BodyLimit:   22 * 1024 * 1024,
@@ -450,6 +460,7 @@ func main() {
 		IdentityHandler:       identityHandler,
 		OrganizationHandler:   organizationHandler,
 		MasterDataHandler:     masterDataHandler,
+		AIHandler:             aiHandler,
 	})
 
 	// Background listener with resilience for port binding

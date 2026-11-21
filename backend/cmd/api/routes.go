@@ -36,6 +36,7 @@ type AppDeps struct {
 	IdentityHandler       *handlers.IdentityHandler
 	OrganizationHandler   *handlers.OrganizationHandler
 	MasterDataHandler     *handlers.MasterDataHandler
+	AIHandler             *handlers.AIHandler
 }
 
 func registerRoutes(app *fiber.App, d *AppDeps) {
@@ -197,6 +198,21 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	api.Post("/appeals", d.BuyerHandler.CreateAccountAppeal)
 	api.Post("/contact", publicLimiter, d.BuyerHandler.SubmitContactMessage)
 	api.Get("/public/promotion", d.AdminHandler.GetPublicPromotion)
+
+	// ── HUNTIQ AI Marketplace Intelligence Route ──────────────────────
+	aiLimiter := limiter.New(limiter.Config{
+		Max:        30,
+		Expiration: 1 * time.Minute,
+		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+				"success": false,
+				"error":   "Too many AI inquiries. Please wait a moment before asking again.",
+			})
+		},
+	})
+	api.Post("/ai/chat", aiLimiter, d.MW.OptionalAuth, d.AIHandler.Chat)
+	api.Get("/ai/health", d.AIHandler.Health)
 
 	// ── Auth & Capabilities ──────────────────────────────────────────────────
 	api.Post("/auth/otp/send", otpLimiter, d.AuthHandler.SendOTP)

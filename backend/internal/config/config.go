@@ -39,6 +39,10 @@ type Config struct {
 	TelebirrAPIEndpoint string
 	TelebirrNotifyURL   string
 	TelebirrReturnURL   string
+
+	// AI Engine configuration
+	GeminiAPIKey string
+	GeminiModel  string
 }
 
 func Load() *Config {
@@ -115,6 +119,9 @@ func Load() *Config {
 		TelebirrAPIEndpoint: getEnv("TELEBIRR_API_ENDPOINT", "https://app.telebirr.et/payment"),
 		TelebirrNotifyURL:   getEnv("TELEBIRR_NOTIFY_URL", appBaseURL+"/api/telebirr/webhook"),
 		TelebirrReturnURL:   getEnv("TELEBIRR_RETURN_URL", frontendURL+"/payment/callback"),
+
+		GeminiAPIKey: getEnv("GEMINI_API_KEY", ""),
+		GeminiModel:  getEnv("GEMINI_MODEL", "gemini-3.5-flash-lite"),
 	}
 }
 
