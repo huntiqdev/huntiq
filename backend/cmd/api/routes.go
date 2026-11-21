@@ -63,6 +63,8 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 			"/api/telebirr/webhook",
 			"/api/cbe/webhook",
 			"/api/webhooks",
+			"/api/ai/chat",     // AI chat should work for anonymous users
+			"/api/ai/health",   // Health check is read-only
 		},
 	}))
 

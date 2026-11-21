@@ -23,6 +23,15 @@ func NewAIService(supervisor *PythonSupervisor, productRepo *repository.ProductR
 	}
 }
 
+func isFastDeterministicIntent(intent string) bool {
+	switch intent {
+	case "GREETING", "COMPLIMENT", "APPRECIATION", "ACKNOWLEDGEMENT", "GOODBYE", "CAPABILITY_QUESTION", "USER_PRIVACY_PROTECTION":
+		return true
+	default:
+		return false
+	}
+}
+
 func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*ChatResponse, error) {
 	trimmed := strings.TrimSpace(req.Message)
 	if trimmed == "" {
@@ -56,12 +65,12 @@ func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*Chat
 		}, nil
 	}
 
-	// 3. Fast Deterministic Greeting (< 1ms, 0 Gemini Calls)
-	if classifyRes.Intent == "GREETING" && classifyRes.InstantReply != "" {
+	// 3. Fast Deterministic Social & Informational Responses (< 1ms, 0 Gemini Calls, 0 DB Queries)
+	if isFastDeterministicIntent(classifyRes.Intent) && classifyRes.InstantReply != "" {
 		return &ChatResponse{
 			Reply:            classifyRes.InstantReply,
 			Language:         classifyRes.Language,
-			Intent:           "GREETING",
+			Intent:           classifyRes.Intent,
 			Path:             "PATH_ADVISORY",
 			IsOutOfDomain:    false,
 			FallbackUsed:     false,

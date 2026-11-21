@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-HUNTIQ AI — Master Engine
+HUNTIQ AI — Master Engine (v2.0)
 Single-file marketplace intelligence, contextual domain validation,
-four-language understanding, and Google Gemini API integration.
+four-language understanding, fast social routing, and Google Gemini API integration.
 Uses ONLY Python Standard Library (no third-party dependencies).
 """
 
@@ -28,22 +28,24 @@ logging.basicConfig(
 logger = logging.getLogger("huntiq_ai")
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 1. CENTRAL POLICY LOADER
+# 1. CENTRAL POLICY LOADER (v2.0)
 # ══════════════════════════════════════════════════════════════════════════════
 
 DEFAULT_POLICY = {
-    "policy_version": "1.0",
+    "policy_version": "2.0",
     "domain_identity": {
         "name": "HUNTIQ AI",
         "creator": "HUNTIQ",
-        "purpose": "Authoritative marketplace intelligence, discovery, and broker advisory assistant",
-        "scope": "HUNTIQ broker marketplace ecosystem in Ethiopia",
+        "purpose": "Marketplace intelligence, discovery, and commercial advisory",
+        "scope": "HUNTIQ marketplace and closely related commercial activities",
     },
     "supported_languages": ["en", "am", "ti", "or"],
     "allowed_domains": [
         "marketplace_discovery",
         "product_search",
         "product_comparison",
+        "product_purchasing_advice",
+        "technology_purchasing_advice",
         "pricing_and_valuation",
         "property_and_rentals",
         "vehicles_and_transport",
@@ -51,6 +53,8 @@ DEFAULT_POLICY = {
         "freelance_and_gigs",
         "professional_services",
         "business_opportunities_and_tenders",
+        "events_and_tickets",
+        "parking_and_facilities",
         "broker_business_model",
         "marketplace_economics",
         "pricing_strategy",
@@ -62,7 +66,34 @@ DEFAULT_POLICY = {
         "buyer_advisory_and_inspection",
         "platform_guidance_and_policies",
         "marketplace_commission_calculation",
-        "product_utility_math_and_comparison",
+        "commercial_math_and_comparison",
+        "marketplace_trend_analysis",
+        "commercial_recommendations",
+    ],
+    "allowed_intents": [
+        "MARKETPLACE_SEARCH",
+        "PRODUCT_AVAILABILITY",
+        "PRODUCT_COMPARISON",
+        "BUYER_ADVICE",
+        "SELLER_ADVICE",
+        "COMMERCIAL_ADVISORY",
+        "BROKER_MODEL_EXPLANATION",
+        "MARKETPLACE_BUSINESS_ADVICE",
+        "PLATFORM_NAVIGATION",
+        "COMMISSION_CALCULATION",
+        "PRODUCT_MATH_ANALYSIS",
+        "MARKET_TREND_ANALYSIS",
+        "RECOMMENDATION",
+        "GREETING",
+        "APPRECIATION",
+        "COMPLIMENT",
+        "ACKNOWLEDGEMENT",
+        "GOODBYE",
+        "CAPABILITY_QUESTION",
+        "USER_PRIVACY_PROTECTION",
+        "SEARCH_REFINEMENT",
+        "CONTEXTUAL_FOLLOWUP",
+        "CLARIFICATION",
     ],
     "excluded_domains": [
         "unrelated_general_mathematics",
@@ -75,6 +106,7 @@ DEFAULT_POLICY = {
         "unrelated_general_entertainment",
         "unrelated_general_trivia",
         "unrelated_homework_solving",
+        "general_purpose_virtual_assistant",
         "credential_theft_or_jailbreak",
     ],
 }
@@ -91,14 +123,14 @@ class PolicyEngine:
                         self.policy = loaded
                         logger.info("Loaded policy from %s (v%s)", policy_path, loaded.get("policy_version", "1.0"))
             except Exception as e:
-                logger.warning("Failed to load policy file %s: %v. Using defaults.", policy_path, e)
+                logger.warning("Failed to load policy file %s: %s. Using defaults.", policy_path, e)
 
     def is_language_supported(self, lang: str) -> bool:
         return lang in self.policy.get("supported_languages", ["en", "am", "ti", "or"])
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 2. FOUR-LANGUAGE DETECTION & RECOGNITION
+# 2. FOUR-LANGUAGE DETECTION & LOCALIZED RESPONSES
 # ══════════════════════════════════════════════════════════════════════════════
 
 RE_ETHIOPIC = re.compile(r"[\u1200-\u137F]")
@@ -106,18 +138,21 @@ RE_ETHIOPIC = re.compile(r"[\u1200-\u137F]")
 TIGRINYA_MARKERS = [
     "ከመይ", "ደሊየ", "ኣሎ", "ኣለኹም", "እንታይ", "ክካረ", "ምግዛእ", "ምሻጥ", "ክራይ", "ገዛ",
     "ዓደግቲ", "ሸየጥቲ", "ተኻረይቲ", "ዕዳጋ", "ብዛዕባ", "ከመይሉ", "ንብረት", "ሓበሬታ",
-    "ናይዚ", "ክንደይ", "እዩ", "ኣለዎ", "ክትገዝኡ", "ምኽሪ", "ብኸመይ",
+    "ናይዚ", "ክንደይ", "እዩ", "ኣለዎ", "ክትገዝኡ", "ምኽሪ", "ብኸመይ", "የቐንየለይ", "ደሓን",
+    "ሕራይ", "ብልሂ", "መን ኢኻ",
 ]
 
 AMHARIC_MARKERS = [
     "ሰላም", "እፈልጋለሁ", "ይፈልጋሉ", "መግዛት", "መሸጥ", "ኪራይ", "ዋጋ", "ቤት", "መኪና",
     "ስልክ", "ላፕቶፕ", "ስራ", "አዲስ አበባ", "ደላላ", "የገበያ", "ቦሌ", "ማስታወቂያ", "ተከራይ",
-    "ገዢ", "ሻጭ", "ባለሙያ", "አሳይ", "ፈልግ", "ምን", "እንዴት", "ዋጋው",
+    "ገዢ", "ሻጭ", "ባለሙያ", "አሳይ", "ፈልግ", "ምን", "እንዴት", "ዋጋው", "አመሰግናለሁ", "ጎበዝ",
+    "እሺ", "ደህና", "ማን ነህ", "ብልህ",
 ]
 
 OROMO_MARKERS = [
     "akkam", "barbaada", "barbaaddu", "biyya", "maaloo", "gatii", "mana", "konkolaataa",
     "hojii", "dilaala", "gabaa", "bittaa", "gurgurtaa", "kireeffachuu", "kireessuu", "ogeessa",
+    "galatoomi", "galatoomaa", "nagaatti", "tole", "qaruutee", "ati eenyu",
 ]
 
 
@@ -129,7 +164,7 @@ def detect_language(text: str, requested_lang: str = "") -> str:
     if not clean:
         return "en"
 
-    # Ge'ez Unicode script check
+    # Ge'ez Unicode script check (Amharic vs Tigrinya)
     if RE_ETHIOPIC.search(clean):
         lower = clean.lower()
         ti_score = sum(1 for m in TIGRINYA_MARKERS if m in lower)
@@ -184,16 +219,108 @@ def get_localized_clarification(lang: str) -> str:
 
 def get_fast_greeting(lang: str) -> str:
     if lang == "am":
-        return "ሰላም! ዛሬ በHUNTIQ ምን መፈለግ ይፈልጋሉ?"
+        return "ሰላም! ዛሬ በHUNTIQ ምን መፈለግ ይፈልጋሉ ወይም ምን እንድረዳዎ ይፈልጋሉ?"
     elif lang == "ti":
-        return "ከመይ! ሎሚ ኣብ HUNTIQ እንታይ ክትደልዩ ትደልዩ?"
+        return "ከመይ! ሎሚ ኣብ HUNTIQ እንታይ ክትደልዩ ትደልዩ ወይ እንታይ ክሕግዘኩም ትደልዩ?"
     elif lang == "or":
-        return "Akkam! Har'a HUNTIQ irratti maal barbaaduu barbaaddu?"
+        return "Akkam! Har'a HUNTIQ irratti maal barbaaduu barbaaddu ykn maaliin isin gargaaruu?"
     return "Hello! How can I help you discover marketplace listings or assist your commerce on HUNTIQ today?"
 
 
+def get_fast_compliment(lang: str) -> str:
+    if lang == "am":
+        return "አመሰግናለሁ! በHUNTIQ የገበያ ቦታ ላይ ምርጥ እቃዎችን፣ ቤቶችን፣ መኪኖችን እና የንግድ ምክሮችን እንዲያገኙ ለመርዳት ሁሌም ዝግጁ ነኝ።"
+    elif lang == "ti":
+        return "የቐንየለይ! ኣብ HUNTIQ ዕዳጋ ዝበለጹ ንብረታት፣ ኣባይቲ፣ መካይን ከምኡ'ውን ናይ ንግዲ ምኽሪ ንምርካብ ንምሕጋዝኩም ኩሉ ግዜ ድሉው እየ።"
+    elif lang == "or":
+        return "Galatoomaa! Gabaa HUNTIQ irratti meeshaalee, manneen, konkolaattota fi gorsa daldalaa akka argattan isin gargaaruuf yeroo hundumaa qophiidha."
+    return "Thank you for the kind words! I am here to help you navigate HUNTIQ's marketplace, find great deals, and provide commercial advice whenever you need it."
+
+
+def get_fast_appreciation(lang: str) -> str:
+    if lang == "am":
+        return "ምንም አይደል! ስላመሰገኑኝ ደስ ብሎኛል። በHUNTIQ ላይ ሌላ ማንኛውም የፍለጋ ወይም የገበያ ምክር ከፈለጉ በደስታ እረዳዎታለሁ።"
+    elif lang == "ti":
+        return "ገንዘብኩም ይኹን! ብጣዕሚ የቐንየለይ። ኣብ HUNTIQ ካልእ ናይ ፍለሻ ወይ ናይ ዕዳጋ ምኽሪ እንተደሊኹም ብሓጎስ ክሕግዘኩም እየ።"
+    elif lang == "or":
+        return "Homaa miti! Galatoomaa. HUNTIQ irratti barbaacha ykn gorsa daldalaa dabalataa yoo barbaaddan gammachuudhaan isin gargaara."
+    return "You are very welcome! I appreciate your kind words. Let me know if you need any other assistance with HUNTIQ listings or marketplace advisory."
+
+
+def get_fast_acknowledgement(lang: str) -> str:
+    if lang == "am":
+        return "እሺ! በHUNTIQ ላይ እቃዎችን፣ ቤቶችን ወይም አገልግሎቶችን መፈለግ ወይም የንግድ ምክር መጠየቅ ሲፈልጉ በማንኛውም ጊዜ ይጠይቁኝ።"
+    elif lang == "ti":
+        return "ሕራይ! ኣብ HUNTIQ ንብረታት ክትደልዩ ወይ ናይ ዕዳጋ ምኽሪ ክትሓቱ ምስ ትደልዩ ኣብ ዝኾነ ግዜ ሕተቱኒ።"
+    elif lang == "or":
+        return "Tole! HUNTIQ irratti meeshaalee barbaaduu ykn gorsa daldalaa argachuu yoo barbaaddan yeroo kamiyyuu na gaafadhaa."
+    return "Understood! Feel free to ask whenever you want to search listings or explore marketplace insights on HUNTIQ."
+
+
+def get_fast_capability(lang: str) -> str:
+    if lang == "am":
+        return (
+            "እኔ በHUNTIQ የተዘጋጀሁት HUNTIQ AI ነኝ። በኢትዮጵያ ውስጥ የHUNTIQ የደላላ የገበያ ቦታ ረዳትዎ ነኝ። "
+            "እቃዎችን፣ ቤቶችን፣ መኪኖችን፣ የስራ እና የሙያ አገልግሎቶችን እንዲፈልጉ፣ ዋጋና የደላላ ኮሚሽን እንዲያሰሉ፣ "
+            "እንዲሁም ለገዢዎች፣ ሻጮችና አከራዮች ተግባራዊ የገበያ ምክር እንድሰጥ ተዘጋጅቻለሁ።"
+        )
+    elif lang == "ti":
+        return (
+            "ኣነ ብHUNTIQ ዝተዳለኹ HUNTIQ AI እየ። ኣብ ኢትዮጵያ ናይ HUNTIQ ደላላ ዕዳጋ ሓጋዚኹም እየ። "
+            "ንብረታት፣ ኣባይቲ፣ መካይን፣ ስራሕን ናይ ሞያ ኣገልግሎታትን ክትደልዩ፣ ዋጋን ኮሚሽን ደላላን ክትሕስቡ፣ "
+            "ከምኡ'ውን ንዓደግቲ፣ ሸየጥትን መኻረይትን ተግባራዊ ምኽሪ ክህብ ተዳልየ ኣለኹ።"
+        )
+    elif lang == "or":
+        return (
+            "Ani HUNTIQ AI dha, kan qophaa'e HUNTIQ dhaan. Itoophiyaa keessatti gabaa dilaala HUNTIQ irratti gargaaraa keessan. "
+            "Meeshaalee, manneen, konkolaattota, hojii fi tajaajiloota ogeessaa barbaaduu, gatii fi komishinii dilaalaa shallaguu, "
+            "akkasumas bittattoota, gurgurtoota fi kireessitootaaf gorsa daldalaa kennuu nan danda'a."
+        )
+    return (
+        "I am HUNTIQ AI, created by HUNTIQ. I am your specialized broker marketplace assistant in Ethiopia. "
+        "I can help you search products, properties, vehicles, jobs, and professional services, compare options, "
+        "evaluate pricing and commissions, and provide practical advice for buyers, sellers, and landlords."
+    )
+
+
+def get_fast_goodbye(lang: str) -> str:
+    if lang == "am":
+        return "ደህና ሁኑ! HUNTIQ ን ስለተጠቀሙ አመሰግናለሁ። መልካም ቀን ይሁንልዎ፤ የገበያ እርዳታ ሲያስፈልግዎ በማንኛውም ጊዜ ይመለሱ!"
+    elif lang == "ti":
+        return "ደሓን ኩኑ! ንHUNTIQ ስለዝተጠቐምኩም የቐንየለይ። ብሩኽ መዓልቲ ይኹነልኩም፤ ናይ ዕዳጋ ሓገዝ ምስ ዘድልየኩም ኣብ ዝኾነ ግዜ ተመለሱ!"
+    elif lang == "or":
+        return "Nagaatti! HUNTIQ fayyadamuu keessaniif galatoomaa. Guyyaa gaarii qabaadhaa; gargaarsi gabaa yoo isin barbaachise yeroo kamiyyuu deebi'aa!"
+    return "Goodbye! Thank you for using HUNTIQ. Have a wonderful day, and return whenever you need marketplace assistance!"
+
+
+def get_fast_privacy(lang: str) -> str:
+    if lang == "am":
+        return (
+            "HUNTIQ የተጠቃሚዎችን የግል መረጃ እና ደህንነት በጥብቅ ይጠብቃል። "
+            "የተመዘገቡ ተጠቃሚዎችን ዝርዝር፣ የግል አካውንቶችን ወይም ማንነቶችን አልገልጽም። "
+            "ነገር ግን አጠቃላይ የገበያ መረጃዎችን፣ በይፋ የወጡ ማስታወቂያዎችን ወይም የፕላትፎርሙን አሰራር ማሳየት እችላለሁ።"
+        )
+    elif lang == "ti":
+        return (
+            "HUNTIQ ናይ ተጠቀምቲ ብሕታዊ ሓበሬታን ድሕንነትን ብጽኑዕ ይሕሉ። "
+            "ዝተመዝገቡ ተጠቀምቲ ዝርዝር ወይ ብሕታዊ መንነቶም ኣይገልጽን። "
+            "ይኹን እምበር ሓፈሻዊ ናይ ዕዳጋ ሓበሬታ፣ ብግህዶ ዝወጹ መወዓውዒታት ወይ ናይ ፕላትፎርም ኣሰራርሓ ከርእየኩም እኽእል እየ።"
+        )
+    elif lang == "or":
+        return (
+            "HUNTIQ icciitii fi nageenya fayyadamtootaa cimsee eega. "
+            "Tarree fayyadamtoota galmaa'anii, herrega dhuunfaa ykn eenyummaa isaanii hin ibsu. "
+            "Haa ta'u malee, odeeffannoo gabaa waliigalaa, beeksisa ifatti ba'e ykn hojimaata waltajjichaa isinitti agarsiisuu nan danda'a."
+        )
+    return (
+        "HUNTIQ strictly protects user privacy and account security. I do not disclose personal registration details, "
+        "user accounts, or private identities. I can, however, provide aggregate marketplace statistics, platform guidance, "
+        "or help you find publicly listed items and services."
+    )
+
+
 # ══════════════════════════════════════════════════════════════════════════════
-# 3. CONTEXTUAL DETERMINISTIC DOMAIN VALIDATION ENGINE
+# 3. REGEX DEFINITIONS & CONTEXTUAL PATTERNS
 # ══════════════════════════════════════════════════════════════════════════════
 
 # Adversarial prompt injections, secret theft, jailbreaks
@@ -204,12 +331,70 @@ RE_JAILBREAK = re.compile(
     r"show\s+me\s+(backend\s+)?credentials|database\s+passwords?|\.env\s+contents?|bypass\s+security)"
 )
 
-# Unrelated pure sciences, academic physics, chemistry, biology, pure mathematics
+# User privacy protection (Phase 15): Refuse inquiries regarding private user accounts / registrations
+RE_USER_PRIVACY = re.compile(
+    r"(?i)(who\s+(?:registered|signed\s*up|joined|created\s+an?\s+account)\s+(?:yesterday|today|recently|this\s+week)|"
+    r"list\s+(?:all\s+)?(?:registered\s+)?(?:users|accounts|members|buyers|sellers)|"
+    r"show\s+(?:me\s+)?(?:all\s+)?(?:user\s+|account\s+|member\s+)*(?:emails|phone\s+numbers|passwords|credentials|identities|personal\s+data)|"
+    r"who\s+are\s+the\s+(?:registered\s+)?users|"
+    r"(?:who|ማን|መን|eenyutu)\s+.*(?:registered|ተመዘገበ|ተመዝጊቡ|galmaa'e)|"
+    r"(?:ተጠቃሚዎችን|የተጠቃሚ)\s+(?:አሳይ|ዝርዝር|መረጃ))"
+)
+
+# Social interaction patterns (Phase 6)
+RE_GREETING = re.compile(
+    r"(?i)^(?:hello|hi|hey|good\s+(?:morning|afternoon|evening)|selam|ሰላም|ከመይ|akkam)\b[!?.]*$"
+)
+
+RE_COMPLIMENT = re.compile(
+    r"(?i)(?:^|\b)("
+    r"you\s+are\s+(?:clever|smart|helpful|awesome|great|amazing|the\s+best|genius|good)|"
+    r"you're\s+(?:clever|smart|helpful|awesome|great|amazing|the\s+best|genius|good)|"
+    r"smart\s+bot|clever\s+ai|good\s+job|nice\s+work|impressive|"
+    r"ጎበዝ|ብልህ|ጥሩ\s+ስራ|ብልሂ|qaruutee|baay'ee\s+gaarii"
+    r")(?:\s+\w+)?(?:[!?.\s]*)$"
+)
+
+RE_APPRECIATION_THANKS = re.compile(
+    r"(?i)\b("
+    r"thank\s+you(\s+so\s+much)?|thanks(\s+a\s+lot)?|i\s+appreciate\s+you|much\s+appreciated|thx|ty|"
+    r"አመሰግናለሁ|እናመሰግናለን|የቐንየለይ|galatoomi|galatoomaa"
+    r")\b[!?.]*$"
+)
+
+RE_ACKNOWLEDGEMENT = re.compile(
+    r"(?i)^(ok|okay|alright|got\s+it|understood|cool|sure|fine|nice|i\s+see|እሺ|ሕራይ|tole)\b[!?.]*$"
+)
+
+RE_CAPABILITY_OR_IDENTITY = re.compile(
+    r"(?i)\b("
+    r"who\s+are\s+you|what\s+can\s+you\s+do|who\s+created\s+you|who\s+made\s+you|"
+    r"what\s+is\s+your\s+name|what\s+is\s+huntiq\s*ai|tell\s+me\s+about\s+yourself|"
+    r"አንተ\s+ማን\s+ነህ|ማን\s+ነሽ|ማን\s+ነህ|ምን\s+መስራት\s+ትችላለህ|ምን\s+ትሰራለህ|"
+    r"መን\s+ኢኻ|እንታይ\s+ክትገብር\s+ትኽእል|ati\s+eenyu|maal\s+gochuu\s+dandeessa"
+    r")\b[!?.]*$"
+)
+
+RE_GOODBYE = re.compile(
+    r"(?i)\b("
+    r"goodbye|bye|bye\s+bye|see\s+you(\s+later)?|ciao|take\s+care|"
+    r"ደህና\s+ሁን|ደህና\s+ሁኚ|ደህና\s+ሁኑ|ቻው|ደሓን\s+ኩን|ደሓን\s+ኩኑ|nagaatti"
+    r")\b[!?.]*$"
+)
+
+# Unrelated pure sciences, academic physics, chemistry, biology
 RE_PURE_SCIENCE = re.compile(
     r"(?i)(e\s*=\s*mc\s*[\^²2]|quantum\s+mechanics|quantum\s+physics|thermodynamics|"
     r"photosynthesis|mitochondria|chemical\s+reaction|avogadro|periodic\s+table|"
-    r"speed\s+of\s+light|black\s+hole|solve\s+for\s+x|derivative\s+of|integral\s+of|"
+    r"speed\s+of\s+light|black\s+hole|derivative\s+of|integral\s+of|"
     r"quadratic\s+equation|organic\s+chemistry|dna\s+replication)"
+)
+
+# Pure ungrounded math (e.g. "Solve 25 x 37", "25 * 37", "sqrt(144)")
+RE_PURE_MATH = re.compile(
+    r"(?i)(^(?:solve|calculate|what\s+is|compute)?\s*\(?\s*\d+(?:\.\d+)?\s*[\+\-\*\/×÷\^]\s*\d+(?:\.\d+)?\s*\)?$|"
+    r"^(?:solve|calculate|what\s+is|compute)\s+\d+\s*(?:times|multiplied\s+by|plus|minus|divided\s+by)\s*\d+$|"
+    r"(?:sqrt\s*\(\d+\)|solve\s+for\s+x))"
 )
 
 # Unrelated general programming tutorials (hello world, leetcode, binary tree)
@@ -226,46 +411,55 @@ RE_GENERIC_TRIVIA = re.compile(
     r"horoscope|celebrity\s+gossip|distance\s+to\s+mars|constellation)"
 )
 
-# Marketplace Math Exceptions: allow percentage, discount, commission, engine capacity, power consumption
+# Practical marketplace math exception (discounts, commissions, power consumption, price per m²)
 RE_MARKETPLACE_MATH_EXCEPTION = re.compile(
-    r"(?i)(discount|percentage|commission|broker\s+fee|profit|margin|depreciation|"
+    r"(?i)(discount|percentage|%|commission|broker\s+fee|profit|margin|depreciation|"
     r"fuel\s+consumption|engine\s+capacity|cc\b|kilowatt|watt|power\s+consumption|"
     r"electricity\s+consumption|price\s+per\s+square|square\s+meter|m2|sqm|cost\s+per)"
 )
 
-# In-domain commercial & marketplace keywords across English, Amharic, Oromo, Tigrinya
+# Commercial & marketplace keyword signals
 MARKETPLACE_SIGNALS = [
-    # English
+    # English Commercial & General Items
     "buy", "sell", "rent", "price", "cost", "house", "apartment", "car", "vehicle",
-    "truck", "phone", "laptop", "tools", "equipment", "job", "hire", "service",
-    "electrician", "plumber", "mechanic", "tender", "gig", "contract", "listing",
-    "product", "huntiq", "account", "register", "seller", "buyer", "commission",
-    "negotiate", "discount", "demand", "supply", "wholesale", "retail", "store",
-    "deposit", "lease", "tenant", "landlord", "customer", "trust", "sales", "revenue",
+    "truck", "phone", "laptop", "pc", "computer", "hardware", "software", "ram", "ssd",
+    "processor", "core", "cpu", "screen", "monitor", "display", "specs", "specification",
+    "tools", "equipment", "job", "hire", "service", "electrician", "plumber", "mechanic",
+    "tender", "gig", "contract", "listing", "product", "huntiq", "account", "register",
+    "seller", "buyer", "commission", "negotiate", "discount", "demand", "supply",
+    "wholesale", "retail", "store", "deposit", "lease", "tenant", "landlord", "customer",
+    "trust", "sales", "revenue", "inspection", "pricing", "commercial", "property",
+    "toyota", "hyundai", "lenovo", "dell", "hp", "macbook", "iphone", "samsung", "thinkpad",
     "addis ababa", "bole", "hawassa", "adama", "dire dawa", "bahir dar", "mekelle",
     # Amharic
-    "መግዛት", "መሸጥ", "ኪራይ", "ዋጋ", "ቤት", "መኪና", "ስልክ", "ላፕቶፕ", "ስራ", "አዲስ አበባ",
-    "ደላላ", "የገበያ", "ቦሌ", "ማስታወቂያ", "ተከራይ", "ገዢ", "ሻጭ", "ባለሙያ", "ኮሚሽን", "ንግድ",
+    "መግዛት", "መሸጥ", "ኪራይ", "ዋጋ", "ቤት", "መኪና", "ስልክ", "ላፕቶፕ", "ኮምፒውተር", "ስራ",
+    "አዲስ አበባ", "ደላላ", "የገበያ", "ቦሌ", "ማስታወቂያ", "ተከራይ", "ገዢ", "ሻጭ", "ባለሙያ",
+    "ኮሚሽን", "ንግድ", "ምርመራ", "መግለጫ", "ኮምፒተር",
     # Tigrinya
-    "ምግዛእ", "ምሻጥ", "ክራይ", "ዋጋ", "ገዛ", "መኪና", "ስራሕ", "ዓደግቲ", "ሸየጥቲ", "ተኻረይቲ", "ዕዳጋ",
+    "ምግዛእ", "ምሻጥ", "ክራይ", "ዋጋ", "ገዛ", "መኪና", "ኮምፒተር", "ስራሕ", "ዓደግቲ", "ሸየጥቲ",
+    "ተኻረይቲ", "ዕዳጋ", "ኮሚሽን", "ደላላ",
     # Oromo
-    "bittaa", "gurgurtaa", "kireeffachuu", "kireessuu", "gatii", "mana", "konkolaataa", "hojii", "dilaala",
+    "bittaa", "gurgurtaa", "kireeffachuu", "kireessuu", "gatii", "mana", "konkolaataa",
+    "hojii", "dilaala", "komishinii", "kompiitara",
 ]
 
-RE_GREETING = re.compile(r"(?i)^(hello|hi|hey|good\s+(morning|afternoon|evening)|selam|ሰላም|ከመይ|akkam)\b[!?.]*$")
 RE_PRICE_UNDER = re.compile(r"(?i)(?:under|below|less\s+than|maximum|max)\s+([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:etb|birr|k)?")
 RE_PRICE_ABOVE = re.compile(r"(?i)(?:above|over|more\s+than|minimum|min)\s+([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:etb|birr|k)?")
+
+# Explicit advisory, purchasing recommendations, property valuation, comparison patterns
 RE_EXPLICIT_ADVISORY = re.compile(
     r"(?i)\b("
     r"how (can|should|do|does|to|would)|"
-    r"what (is|are|makes|should|to check)|"
+    r"what (is|are|makes|should|to check|about|spec|specs)|"
+    r"which (is|are|pc|laptop|computer|phone|car|apartment|vehicle|item|brand|model|option|one)|"
     r"why (does|is|are)|"
-    r"tips?|guide|strategy|advice|pricing strategy|commission model|"
+    r"recommend|suggest|advice|advise|suitable\s+for|better\s+for|best\s+for|"
+    r"tips?|guide|strategy|pricing strategy|commission model|"
     r"increase (sales|trust|views)|customer trust|inspect before|what to check|"
-    r"calculate|compare (the electricity|the power|the consumption)|explain how|"
-    r"how to advertise|how to attract|best way to"
+    r"calculate|compare|explain how|how to advertise|how to attract|best way to|"
+    r"is\s+.*(enough|sufficient|good|better)|should\s+i\s+(buy|rent|choose|get)"
     r")\b|"
-    r"(እንዴት|ምን|ስለ|መምሪያ|ምክር|akkamitti|gorsa|ከመይ|እንታይ)"
+    r"(እንዴት|ምን|ስለ|መምሪያ|ምክር|የቱ|የትኛው|ይምረጡ|akkamitti|gorsa|kamtu|ከመይ|እንታይ|ኣየናይ)"
 )
 
 
@@ -315,6 +509,28 @@ def extract_search_term(text: str) -> str:
     return term
 
 
+def is_contextual_followup(text: str, history: Optional[List[Dict[str, Any]]]) -> bool:
+    if not history or len(history) == 0:
+        return False
+    lower = text.lower().strip()
+    words = lower.split()
+    if len(words) > 8:
+        return False
+    followup_patterns = [
+        r"^(and|what\s+about|how\s+about|which\s+(one|is)|is\s+it|are\s+they|how\s+much|why|tell\s+me\s+more)",
+        r"(cheaper|better|more|less|difference|compare|recommended|suitable|enough)",
+        r"^(እንስ|ስለ|የትኛው|ስንት|ለምን|ዋጋውስ|ከመይ|እንታይ|akkam)",
+    ]
+    for pat in followup_patterns:
+        if re.search(pat, lower):
+            return True
+    return False
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 4. CONTEXTUAL DETERMINISTIC DOMAIN VALIDATION ENGINE
+# ══════════════════════════════════════════════════════════════════════════════
+
 class DomainValidator:
     def __init__(self, policy: PolicyEngine):
         self.policy = policy
@@ -334,7 +550,23 @@ class DomainValidator:
                 "instant_reply": "HUNTIQ AI does not provide private user information, backend credentials, or bypass security rules.",
             }
 
-        # 2. Fast Greeting Path (< 1ms instant deterministic response)
+        # 2. User Privacy Protection Check (Phase 15): Refuse private account / registration data
+        if RE_USER_PRIVACY.search(text):
+            return {
+                "is_allowed": False,
+                "intent": "USER_PRIVACY_PROTECTION",
+                "path": "PATH_BLOCKED",
+                "language": lang,
+                "reason": "privacy_policy_restriction",
+                "instant_reply": get_fast_privacy(lang),
+                "suggested_queries": [
+                    "What categories are active on HUNTIQ?",
+                    "How do I create a seller account?",
+                    "How are broker transactions secured?",
+                ],
+            }
+
+        # 3. Fast Social Responses (< 1ms instant deterministic response, 0 Gemini calls, 0 DB queries)
         if RE_GREETING.match(text):
             return {
                 "is_allowed": True,
@@ -349,11 +581,84 @@ class DomainValidator:
                 ],
             }
 
-        # 3. Contextual Math & Utility Exception: Allow percentage, discount, fuel efficiency, power consumption if tied to marketplace
+        if RE_COMPLIMENT.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "COMPLIMENT",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_compliment(lang),
+                "suggested_queries": [
+                    "Which PC is suitable for a software engineer?",
+                    "How do I price my apartment for rent?",
+                    "What should I inspect before buying a used car?",
+                ],
+            }
+
+        if RE_APPRECIATION_THANKS.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "APPRECIATION",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_appreciation(lang),
+                "suggested_queries": [
+                    "How can a seller increase sales on HUNTIQ?",
+                    "Calculate 10% commission on 100,000 ETB",
+                    "Find Toyota cars in Addis Ababa",
+                ],
+            }
+
+        if RE_ACKNOWLEDGEMENT.match(text):
+            return {
+                "is_allowed": True,
+                "intent": "ACKNOWLEDGEMENT",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_acknowledgement(lang),
+                "suggested_queries": [
+                    "Find houses for sale in Addis Ababa",
+                    "What to check when buying a used phone?",
+                ],
+            }
+
+        if RE_CAPABILITY_OR_IDENTITY.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "CAPABILITY_QUESTION",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_capability(lang),
+                "suggested_queries": [
+                    "Find laptops under 50,000 ETB",
+                    "How does broker commission work?",
+                    "Tips for renting an apartment safely",
+                ],
+            }
+
+        if RE_GOODBYE.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "GOODBYE",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_goodbye(lang),
+            }
+
+        # 4. Contextual Math & Utility Exception: Allow percentage, discount, commission, engine capacity, power consumption
         has_math_exception = bool(RE_MARKETPLACE_MATH_EXCEPTION.search(text))
 
-        # 4. Out-of-Domain Detection: Science, Generic Coding, Trivia
+        # 5. Out-of-Domain Detection: Pure Math, Academic Sciences, Generic Coding, Trivia
         if not has_math_exception:
+            if RE_PURE_MATH.search(text):
+                return {
+                    "is_allowed": False,
+                    "intent": "OUT_OF_DOMAIN",
+                    "path": "PATH_BLOCKED",
+                    "language": lang,
+                    "reason": "unrelated_general_mathematics",
+                    "instant_reply": get_localized_rejection(lang, "unrelated_general_mathematics"),
+                }
             if RE_PURE_SCIENCE.search(text):
                 return {
                     "is_allowed": False,
@@ -382,14 +687,10 @@ class DomainValidator:
                     "instant_reply": get_localized_rejection(lang, "unrelated_general_trivia"),
                 }
 
-        # 5. Check In-Domain Marketplace Signals
+        # 6. Check In-Domain Marketplace Signals & Contextual Continuity
         lower = text.lower()
         has_marketplace_signal = any(sig in lower for sig in MARKETPLACE_SIGNALS)
-
-        # 6. Check Follow-Up Context: If the user provides a short refinement and recent history was marketplace
-        is_followup = False
-        if history and len(history) > 0 and len(text.split()) <= 4:
-            is_followup = True
+        is_followup = is_contextual_followup(text, history)
 
         # 7. Ambiguity check: very short ambiguous queries without signal or context
         if not has_marketplace_signal and not has_math_exception and not is_followup:
@@ -402,7 +703,6 @@ class DomainValidator:
                     "reason": "ambiguous_input",
                     "instant_reply": get_localized_clarification(lang),
                 }
-            # Pure unrelated inquiry
             return {
                 "is_allowed": False,
                 "intent": "OUT_OF_DOMAIN",
@@ -416,13 +716,15 @@ class DomainValidator:
         min_p, max_p = extract_price_filters(text)
         search_term = extract_search_term(text)
 
-        # Distinguish Search vs Deep Advisory
-        is_advisory = bool(RE_EXPLICIT_ADVISORY.search(text)) or has_math_exception
+        # Distinguish Search vs Advisory
+        is_math_advisory = has_math_exception and bool(re.search(r"(?i)\b(calculate|compute|what\s+is|how\s+much|solve|formula|compare)\b", text))
+        is_explicit_advisory = bool(RE_EXPLICIT_ADVISORY.search(text))
+        is_advisory = is_explicit_advisory or is_math_advisory or is_followup
 
         if is_advisory:
             path = "PATH_ADVISORY"
             search_term = ""
-            if has_math_exception:
+            if is_math_advisory or (has_math_exception and not is_explicit_advisory):
                 if any(k in lower for k in ["commission", "percentage", "discount"]):
                     intent = "COMMISSION_CALCULATION"
                 else:
@@ -431,8 +733,14 @@ class DomainValidator:
                 intent = "BROKER_MODEL_EXPLANATION"
             elif any(k in lower for k in ["sell", "landlord", "advertise", "listing", "converting", "pricing"]):
                 intent = "SELLER_ADVICE"
+            elif any(k in lower for k in ["compare", "which", "difference", "versus", "vs"]):
+                intent = "PRODUCT_COMPARISON"
+            elif any(k in lower for k in ["recommend", "suggest", "suitable"]):
+                intent = "RECOMMENDATION"
             elif any(k in lower for k in ["buy", "rent", "tenant", "inspect"]):
                 intent = "BUYER_ADVICE"
+            elif is_followup:
+                intent = "CONTEXTUAL_FOLLOWUP"
             else:
                 intent = "MARKETPLACE_BUSINESS_ADVICE"
         else:
@@ -456,7 +764,7 @@ class DomainValidator:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 4. GEMINI API CLIENT (Standard Library HTTPS)
+# 5. GEMINI API CLIENT (Standard Library HTTPS)
 # ══════════════════════════════════════════════════════════════════════════════
 
 class GeminiClient:
@@ -549,19 +857,22 @@ class GeminiClient:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 5. SYSTEM PROMPT BUILDER
+# 6. SYSTEM PROMPT BUILDER
 # ══════════════════════════════════════════════════════════════════════════════
 
 def build_system_instruction(lang: str, path: str, trend_summary: str = "") -> str:
     base = (
-        "You are HUNTIQ AI — Made by HUNTIQ. You are an expert marketplace analyst and broker platform advisor.\n"
+        "You are HUNTIQ AI — Made by HUNTIQ. You are an authoritative marketplace intelligence and broker platform advisor.\n"
         "HUNTIQ is Ethiopia's premier broker marketplace connecting buyers, sellers, renters, and service providers.\n"
-        "Verified Platform Principles:\n"
-        "- HUNTIQ is a broker platform (not an inventory-holding retailer). Revenue is earned via broker commissions, seller subscriptions, and featured listings.\n"
-        "- Authoritative Data: When matching database listings are provided below, summarize them factually without inventing fake prices or specifications.\n"
-        "- Practical Marketplace Advisory: When user asks for commercial advice (e.g. how to sell faster, avoid scams, inspect a car, price a property, advertise services), provide thorough, expert, actionable guidance.\n"
-        "- Fact vs Estimate: Always distinguish real verified database prices from market estimates or general guidance.\n"
-        "- Never greet redundantly with canned introductions like 'I am HUNTIQ AI, your dedicated assistant...'. Get straight to the answer."
+        "Operational Principles:\n"
+        "1. Platform Architecture: HUNTIQ operates a broker marketplace model (not an inventory-holding retailer). Revenue is earned via broker commissions, seller subscriptions, and featured listings.\n"
+        "2. Mode A (Database Authority): When matching database listings are provided below, summarize them factually without inventing fake prices, products, or seller contact numbers.\n"
+        "3. Mode B (Marketplace & Commercial Advisory): When the user asks for purchasing advice, specifications (e.g. PC for software engineers, laptop RAM, vehicle inspection, apartment pricing, landlord advertising, broker commissions), provide thorough, expert, actionable guidance regardless of whether matching database listings exist.\n"
+        "4. Mode C (Market Intelligence): When trend signals are provided, use them to describe marketplace demand accurately.\n"
+        "5. Statistical Honesty: Distinguish views from sales, searches from purchases, and listing count from product quality. Aggregate marketplace trends reflect viewer interest and search activity, not verified transaction volume.\n"
+        "6. Architecture Transparency: You are augmented with live database listings and aggregate platform signals; never claim model retraining or weight updates.\n"
+        "7. Facts vs Estimates: Always distinguish real verified database prices from general market estimates or typical price ranges.\n"
+        "8. No Redundant Introductions: Get straight to the answer without repetitive phrases like 'I am HUNTIQ AI, your dedicated assistant...'. Keep formatting clear and professional."
     )
 
     if trend_summary:
@@ -580,7 +891,7 @@ def build_system_instruction(lang: str, path: str, trend_summary: str = "") -> s
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 6. HTTP SERVER & REQUEST HANDLER
+# 7. HTTP SERVER & REQUEST HANDLER
 # ══════════════════════════════════════════════════════════════════════════════
 
 class AIRequestHandler(http.server.BaseHTTPRequestHandler):
@@ -590,7 +901,6 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
     gemini_client: Optional[GeminiClient] = None
 
     def log_message(self, format: str, *args: Any) -> None:
-        # Suppress noisy standard HTTP logs, use structured logger
         pass
 
     def _send_json(self, status_code: int, data: Dict[str, Any]) -> None:
@@ -613,7 +923,7 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
             self._send_json(200, {
                 "status": "operational",
                 "service": "HUNTIQ AI Python Engine",
-                "version": "1.0",
+                "version": "2.0",
                 "languages": ["en", "am", "ti", "or"],
             })
             return
@@ -646,7 +956,6 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
             self._send_json(200, {"status": "shutting down"})
             def do_shutdown():
                 time.sleep(0.05)
-                self.server.shutdown()
                 os._exit(0)
             threading.Thread(target=do_shutdown, daemon=True).start()
         else:
@@ -686,13 +995,15 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
             })
             return
 
-        # 2. Instant Reply (e.g. Fast Greeting < 1ms, 0 Gemini Calls)
-        if evaluation.get("instant_reply") and evaluation.get("intent") == "GREETING":
+        # 2. Instant Reply (Fast Social Interactions < 1ms, 0 Gemini Calls, 0 DB Queries)
+        if evaluation.get("instant_reply") and evaluation.get("intent") in (
+            "GREETING", "COMPLIMENT", "APPRECIATION", "ACKNOWLEDGEMENT", "GOODBYE", "CAPABILITY_QUESTION"
+        ):
             latency_ms = int((time.time() - t0) * 1000)
             self._send_json(200, {
                 "reply": evaluation["instant_reply"],
                 "language": evaluation.get("language", "en"),
-                "intent": "GREETING",
+                "intent": evaluation.get("intent"),
                 "path": "PATH_ADVISORY",
                 "is_out_of_domain": False,
                 "fallback_used": False,
@@ -719,8 +1030,18 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
                 loc = c.get("location_name", "")
                 augmented_prompt += f"- #{cid}: {title} | Price: {price:.2f} {curr} | Category: {cat} | Location: {loc}\n"
             augmented_prompt += "Concisely explain these listings to the user and offer helpful marketplace recommendations.]"
-        elif evaluation.get("search_term") and path == "PATH_SEARCH":
-            augmented_prompt += f"\n\n[DATABASE CONTEXT: 0 matching listings found in database for '{evaluation.get('search_term')}'. Factually explain that no listings matched this exact search and suggest helpful alternative categories or widening criteria.]"
+        elif path == "PATH_SEARCH" or (evaluation.get("search_term") and not listings):
+            # Phase 7: Strict Zero-Result Handling
+            search_label = evaluation.get("search_term") or message
+            augmented_prompt += (
+                f"\n\n[DATABASE CONTEXT: 0 matching listings found in database for '{search_label}'.\n"
+                "STRICT INSTRUCTIONS:\n"
+                "1. State factually and clearly that no listings currently match this exact search on HUNTIQ.\n"
+                "2. DO NOT fabricate or hallucinate specific listings, inventory items, or fake seller names.\n"
+                "3. Provide helpful purchasing advice, recommended specifications, or what to look for when shopping for this item.\n"
+                "4. If mentioning typical price ranges, explicitly label them as general market estimates, not verified listings.\n"
+                "5. Suggest broader search terms or related categories on HUNTIQ.]"
+            )
 
         # 4. Invoke Google Gemini via Standard-Library HTTPS Client
         reply_text, tokens_used, err = self.gemini_client.generate(system_instruction, history, augmented_prompt)
@@ -758,7 +1079,7 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 7. SERVER INITIALIZATION & MAIN ENTRY
+# 8. SERVER INITIALIZATION & MAIN ENTRY
 # ══════════════════════════════════════════════════════════════════════════════
 
 class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
