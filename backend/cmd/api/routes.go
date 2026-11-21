@@ -92,8 +92,12 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 		},
 	})
 
+	maxAuth := 10
+	if d.Config != nil && d.Config.DevMode {
+		maxAuth = 120
+	}
 	authLimiter := limiter.New(limiter.Config{
-		Max:          10,
+		Max:          maxAuth,
 		Expiration:   1 * time.Minute,
 		KeyGenerator: func(c *fiber.Ctx) string { return c.IP() },
 		LimitReached: func(c *fiber.Ctx) error {
@@ -344,6 +348,11 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	admin.Get("/me", d.AdminHandler.GetMe)
 	admin.Get("/me/permissions", d.AdminHandler.GetMyPermissions)
 	admin.Put("/password", d.AdminHandler.ChangePassword)
+
+	// Multi-Computer Device Identity Governance
+	admin.Get("/devices", d.AdminAuthHandler.ListDevices)
+	admin.Post("/devices/register", d.AdminAuthHandler.RegisterDevice)
+	admin.Delete("/devices/:id", d.AdminAuthHandler.RevokeDevice)
 
 	admin.Get("/products/pending", d.MW.RequirePermission("pending"), d.AdminHandler.ListPending)
 	admin.Get("/products", d.MW.RequirePermission("products"), d.AdminHandler.ListAllProducts)

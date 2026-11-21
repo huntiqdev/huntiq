@@ -95,6 +95,7 @@ type AdminSession struct {
 	UserID             int        `json:"user_id"`
 	Portal             string     `json:"portal"`
 	Role               string     `json:"role"`
+	DeviceID           string     `json:"device_id,omitempty"`
 	IPAddress          string     `json:"ip_address"`
 	UserAgent          string     `json:"user_agent"`
 	LastActiveAt       time.Time  `json:"last_active_at"`
@@ -103,6 +104,24 @@ type AdminSession struct {
 	RevokedAt          *time.Time `json:"revoked_at,omitempty"`
 	RevocationReason   string     `json:"revocation_reason,omitempty"`
 	CreatedAt          time.Time  `json:"created_at"`
+}
+
+// AdminDeviceRegistration tracks authorized hardware computers/workstations per administrator
+type AdminDeviceRegistration struct {
+	ID               int        `json:"id"`
+	DeviceID         string     `json:"device_id"`
+	UserID           int        `json:"user_id"`
+	DeviceName       string     `json:"device_name"`
+	Browser          string     `json:"browser"`
+	OS               string     `json:"os"`
+	DeviceType       string     `json:"device_type"`
+	Status           string     `json:"status"` // active, pending_verification, revoked, suspended
+	IsTrusted        bool       `json:"is_trusted"`
+	LastIP           string     `json:"last_ip"`
+	LastActiveAt     time.Time  `json:"last_active_at"`
+	RegisteredAt     time.Time  `json:"registered_at"`
+	RevokedAt        *time.Time `json:"revoked_at,omitempty"`
+	RevocationReason string     `json:"revocation_reason,omitempty"`
 }
 
 // AuthAttempt tracks failed and successful logins for progressive rate limiting & abuse detection

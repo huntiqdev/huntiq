@@ -12,6 +12,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/service"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
 )
 
@@ -518,4 +519,72 @@ func (h *AdminAuthHandler) RevokeSessionEndpoint(c *fiber.Ctx) error {
 
 	// Default fallback: revoke current session
 	return h.Logout(c)
+}
+
+// GET /api/admin/devices — list authorized hardware computers for the authenticated administrator
+func (h *AdminAuthHandler) ListDevices(c *fiber.Ctx) error {
+	userID, ok := c.Locals("userID").(int)
+	if !ok || userID == 0 {
+		return response.Unauthorized(c, "authentication required")
+	}
+
+	devices, err := h.adminAuthSvc.ListDevices(c.Context(), userID)
+	if err != nil {
+		return response.InternalError(c, err)
+	}
+
+	return response.OK(c, fiber.Map{
+		"success": true,
+		"devices": devices,
+	})
+}
+
+// POST /api/admin/devices/register — register an authorized workstation/computer
+func (h *AdminAuthHandler) RegisterDevice(c *fiber.Ctx) error {
+	userID, ok := c.Locals("userID").(int)
+	if !ok || userID == 0 {
+		return response.Unauthorized(c, "authentication required")
+	}
+
+	var req dto.RegisterDeviceRequest
+	if err := c.BodyParser(&req); err != nil {
+		return response.BadRequest(c, "invalid request body")
+	}
+
+	ip := c.IP()
+	if ip == "" {
+		ip = "127.0.0.1"
+	}
+
+	device, err := h.adminAuthSvc.RegisterDevice(c.Context(), userID, req, ip)
+	if err != nil {
+		return response.BadRequest(c, "failed to register device: "+err.Error())
+	}
+
+	return response.OK(c, fiber.Map{
+		"success": true,
+		"device":  device,
+	})
+}
+
+// DELETE /api/admin/devices/:id — revoke an authorized device and terminate its active sessions
+func (h *AdminAuthHandler) RevokeDevice(c *fiber.Ctx) error {
+	userID, ok := c.Locals("userID").(int)
+	if !ok || userID == 0 {
+		return response.Unauthorized(c, "authentication required")
+	}
+
+	deviceID := c.Params("id")
+	if deviceID == "" {
+		return response.BadRequest(c, "device id required")
+	}
+
+	if err := h.adminAuthSvc.RevokeDevice(c.Context(), deviceID, userID, "revoked_by_admin"); err != nil {
+		return response.InternalError(c, err)
+	}
+
+	return response.OK(c, fiber.Map{
+		"success": true,
+		"message": "device revoked and associated sessions terminated",
+	})
 }

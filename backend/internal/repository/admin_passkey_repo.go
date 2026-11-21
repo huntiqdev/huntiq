@@ -193,9 +193,9 @@ func (r *AdminPasskeyRepo) GetAndConsumeChallenge(ctx context.Context, challenge
 func (r *AdminPasskeyRepo) CreateSession(ctx context.Context, s *models.AdminSession) error {
 	query := `
 		INSERT INTO admin_sessions (
-			session_token_hash, user_id, portal, role, ip_address, user_agent,
+			session_token_hash, user_id, portal, role, device_id, ip_address, user_agent,
 			last_active_at, idle_timeout_seconds, absolute_expires_at, created_at
-		) VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7, $8, NOW())
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9, NOW())
 		RETURNING id, created_at, last_active_at
 	`
 	return r.db.QueryRow(ctx, query,
@@ -203,6 +203,7 @@ func (r *AdminPasskeyRepo) CreateSession(ctx context.Context, s *models.AdminSes
 		s.UserID,
 		s.Portal,
 		s.Role,
+		s.DeviceID,
 		s.IPAddress,
 		s.UserAgent,
 		s.IdleTimeoutSeconds,
@@ -213,7 +214,7 @@ func (r *AdminPasskeyRepo) CreateSession(ctx context.Context, s *models.AdminSes
 // GetSessionByTokenHash retrieves an unrevoked, unexpired session
 func (r *AdminPasskeyRepo) GetSessionByTokenHash(ctx context.Context, tokenHash string) (*models.AdminSession, error) {
 	query := `
-		SELECT id, session_token_hash, user_id, portal, role, ip_address, user_agent,
+		SELECT id, session_token_hash, user_id, portal, role, COALESCE(device_id, ''), ip_address, user_agent,
 		       last_active_at, idle_timeout_seconds, absolute_expires_at, revoked_at,
 		       COALESCE(revocation_reason, ''), created_at
 		FROM admin_sessions
@@ -226,6 +227,7 @@ func (r *AdminPasskeyRepo) GetSessionByTokenHash(ctx context.Context, tokenHash 
 		&s.UserID,
 		&s.Portal,
 		&s.Role,
+		&s.DeviceID,
 		&s.IPAddress,
 		&s.UserAgent,
 		&s.LastActiveAt,
@@ -258,9 +260,9 @@ func (r *AdminPasskeyRepo) GetSessionByTokenHash(ctx context.Context, tokenHash 
 // GetSessionByID retrieves an unrevoked, unexpired session by primary key ID
 func (r *AdminPasskeyRepo) GetSessionByID(ctx context.Context, sessionID int) (*models.AdminSession, error) {
 	query := `
-		SELECT id, session_token_hash, user_id, portal, role, ip_address, user_agent,
-		       last_active_at, idle_timeout_seconds, absolute_expires_at, revoked_at,
-		       COALESCE(revocation_reason, ''), created_at
+		SELECT id, session_token_hash, user_id, portal, role, COALESCE(device_id, ''),
+		       ip_address, user_agent, last_active_at, idle_timeout_seconds,
+		       absolute_expires_at, revoked_at, COALESCE(revocation_reason, ''), created_at
 		FROM admin_sessions
 		WHERE id = $1 AND revoked_at IS NULL
 	`
@@ -271,6 +273,7 @@ func (r *AdminPasskeyRepo) GetSessionByID(ctx context.Context, sessionID int) (*
 		&s.UserID,
 		&s.Portal,
 		&s.Role,
+		&s.DeviceID,
 		&s.IPAddress,
 		&s.UserAgent,
 		&s.LastActiveAt,
@@ -413,4 +416,88 @@ func (r *AdminPasskeyRepo) ValidateAndConsumeReauthToken(ctx context.Context, to
 		return false, err
 	}
 	return true, nil
+}
+
+// RegisterDevice stores an authorized computer/workstation registration
+func (r *AdminPasskeyRepo) RegisterDevice(ctx context.Context, d *models.AdminDeviceRegistration) error {
+	query := `
+		INSERT INTO admin_device_registrations (
+			device_id, user_id, device_name, browser, os, device_type, status, is_trusted, last_ip, last_active_at, registered_at
+		) VALUES ($1, $2, $3, $4, $5, $6, 'active', TRUE, $7, NOW(), NOW())
+		ON CONFLICT (device_id) DO UPDATE SET
+			device_name = EXCLUDED.device_name,
+			browser = EXCLUDED.browser,
+			os = EXCLUDED.os,
+			last_ip = EXCLUDED.last_ip,
+			last_active_at = NOW(),
+			status = 'active',
+			revoked_at = NULL,
+			revocation_reason = NULL
+		RETURNING id, registered_at, last_active_at
+	`
+	return r.db.QueryRow(ctx, query,
+		d.DeviceID, d.UserID, d.DeviceName, d.Browser, d.OS, d.DeviceType, d.LastIP,
+	).Scan(&d.ID, &d.RegisteredAt, &d.LastActiveAt)
+}
+
+// ListDevicesByUserID returns all registered devices for an administrator
+func (r *AdminPasskeyRepo) ListDevicesByUserID(ctx context.Context, userID int) ([]models.AdminDeviceRegistration, error) {
+	query := `
+		SELECT id, device_id, user_id, device_name, COALESCE(browser, ''), COALESCE(os, ''),
+		       device_type, status, is_trusted, COALESCE(last_ip, ''), last_active_at, registered_at,
+		       revoked_at, COALESCE(revocation_reason, '')
+		FROM admin_device_registrations
+		WHERE user_id = $1
+		ORDER BY last_active_at DESC
+	`
+	rows, err := r.db.Query(ctx, query, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var devices []models.AdminDeviceRegistration
+	for rows.Next() {
+		var d models.AdminDeviceRegistration
+		if err := rows.Scan(
+			&d.ID, &d.DeviceID, &d.UserID, &d.DeviceName, &d.Browser, &d.OS,
+			&d.DeviceType, &d.Status, &d.IsTrusted, &d.LastIP, &d.LastActiveAt, &d.RegisteredAt,
+			&d.RevokedAt, &d.RevocationReason,
+		); err != nil {
+			return nil, err
+		}
+		devices = append(devices, d)
+	}
+	return devices, rows.Err()
+}
+
+// RevokeDevice revokes a device and terminates all its associated sessions
+func (r *AdminPasskeyRepo) RevokeDevice(ctx context.Context, deviceID string, userID int, reason string) error {
+	tx, err := r.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	// 1. Mark device revoked
+	_, err = tx.Exec(ctx, `
+		UPDATE admin_device_registrations
+		SET status = 'revoked', revoked_at = NOW(), revocation_reason = $1
+		WHERE device_id = $2 AND (user_id = $3 OR $3 = 0)
+	`, reason, deviceID, userID)
+	if err != nil {
+		return err
+	}
+
+	// 2. Invalidate all active sessions for this device
+	_, err = tx.Exec(ctx, `
+		UPDATE admin_sessions
+		SET revoked_at = NOW(), revocation_reason = 'device_revoked: ' || $1
+		WHERE device_id = $2 AND revoked_at IS NULL
+	`, reason, deviceID)
+	if err != nil {
+		return err
+	}
+
+	return tx.Commit(ctx)
 }

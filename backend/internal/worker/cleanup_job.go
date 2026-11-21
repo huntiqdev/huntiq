@@ -3,13 +3,20 @@ package jobs
 import (
 	"context"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func StartUnverifiedUserCleanup(ctx context.Context, db *pgxpool.Pool) {
+func StartUnverifiedUserCleanup(ctx context.Context, db *pgxpool.Pool, wg ...*sync.WaitGroup) {
+	if len(wg) > 0 && wg[0] != nil {
+		wg[0].Add(1)
+	}
 	go func() {
+		if len(wg) > 0 && wg[0] != nil {
+			defer wg[0].Done()
+		}
 		// Wait 5 minutes after startup before first run
 		select {
 		case <-time.After(5 * time.Minute):

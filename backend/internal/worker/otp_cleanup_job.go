@@ -3,13 +3,20 @@ package jobs
 import (
 	"context"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func StartOTPCleanup(ctx context.Context, db *pgxpool.Pool) {
+func StartOTPCleanup(ctx context.Context, db *pgxpool.Pool, wg ...*sync.WaitGroup) {
+	if len(wg) > 0 && wg[0] != nil {
+		wg[0].Add(1)
+	}
 	go func() {
+		if len(wg) > 0 && wg[0] != nil {
+			defer wg[0].Done()
+		}
 		// Wait 10 minutes after startup — lower priority than expiry and user cleanup
 		select {
 		case <-time.After(10 * time.Minute):

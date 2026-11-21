@@ -3,13 +3,20 @@ package jobs
 import (
 	"context"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func StartExpiryJob(ctx context.Context, db *pgxpool.Pool) {
+func StartExpiryJob(ctx context.Context, db *pgxpool.Pool, wg ...*sync.WaitGroup) {
+	if len(wg) > 0 && wg[0] != nil {
+		wg[0].Add(1)
+	}
 	go func() {
+		if len(wg) > 0 && wg[0] != nil {
+			defer wg[0].Done()
+		}
 		defer func() {
 			if r := recover(); r != nil {
 				log.Printf("[expiry-job] recovered from panic: %v", r) //nolint:gosec // G117: error/value from internal source, not user-controlled input

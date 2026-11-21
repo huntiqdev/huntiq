@@ -400,16 +400,32 @@ func RequirePortal(portal string) fiber.Handler {
 				return fiber.NewError(fiber.StatusForbidden, "executive portal requires Executive Governance or Platform Owner role")
 			}
 		case "platform":
-			if adminRole != models.RolePlatformOwner && adminRole != models.RolePlatformAdmin && adminRole != models.RoleOperationsAdmin &&
-				adminRole != models.LegacyRoleSuper && adminRole != models.RoleTaxonomyArchitect && adminRole != models.RoleGISLocationSpecialist {
-				return fiber.NewError(fiber.StatusForbidden, "platform console requires Platform or Operations Administrator role")
+			if adminRole != models.RolePlatformOwner && adminRole != models.RolePlatformAdmin && adminRole != models.RoleTaxonomyArchitect &&
+				adminRole != models.RoleGISLocationSpecialist && adminRole != models.RoleVIPAccountDirector && adminRole != models.LegacyRoleSuper {
+				return fiber.NewError(fiber.StatusForbidden, "platform console requires Platform Administrator role")
 			}
 		case "security":
 			if adminRole != models.RolePlatformOwner && adminRole != models.RoleSecurityAdmin && adminRole != models.RoleCISO &&
 				adminRole != models.RoleSOCAnalyst && adminRole != models.RoleFraudInvestigator && adminRole != models.RoleComplianceAuditor &&
-				adminRole != models.RoleOperationsAdmin && adminRole != models.RoleModerator && adminRole != models.RoleContentModerator &&
 				adminRole != models.LegacyRoleSuper {
-				return fiber.NewError(fiber.StatusForbidden, "security domain requires Security or Trust & Safety role")
+				return fiber.NewError(fiber.StatusForbidden, "security domain requires Security or Audit Administrator role")
+			}
+		case "operations":
+			if adminRole != models.RolePlatformOwner && adminRole != models.RoleOperationsAdmin && adminRole != models.RoleKYCVerificationOfficer &&
+				adminRole != models.RoleProductInspectionOfficer && adminRole != models.RoleDisputeRefundOfficer && adminRole != models.RoleAppealsOfficer &&
+				adminRole != models.LegacyRoleSuper {
+				return fiber.NewError(fiber.StatusForbidden, "operations console requires Operations Administrator or Officer role")
+			}
+		case "moderation":
+			if adminRole != models.RolePlatformOwner && adminRole != models.RoleContentModerator && adminRole != models.RoleModerator &&
+				adminRole != models.LegacyRoleSuper {
+				return fiber.NewError(fiber.StatusForbidden, "moderation console requires Content Moderator role")
+			}
+		case "support":
+			if adminRole != models.RolePlatformOwner && adminRole != models.RoleCustomerSupportLead && adminRole != models.RoleSupportAgent &&
+				adminRole != models.RoleGoldConcierge && adminRole != models.RolePremiumConcierge && adminRole != models.RoleRetentionSpecialist &&
+				adminRole != models.LegacyRoleSuper {
+				return fiber.NewError(fiber.StatusForbidden, "support console requires Support Agent or Customer Lead role")
 			}
 		}
 		return c.Next()

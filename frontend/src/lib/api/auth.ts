@@ -117,7 +117,7 @@ export const authApi = {
   buyerResetPassword: (phone: string, code: string, new_password: string) =>
     fetchAPI<{ message: string }>('/buyer/reset-password', { method: 'POST', body: JSON.stringify({ phone, code, new_password }) }),
 
-  adminLogin: (data: { email: string; password: string }) =>
+  adminLogin: (data: { email: string; password: string; portal?: string }) =>
     fetchAPI<{ email?: string; token?: string; session_token?: string; is_super: boolean; message: string }>('/admin/login', { method: 'POST', body: JSON.stringify(data) }),
   adminLoginVerifyOTP: (data: { email: string; code: string }) =>
     fetchAPI<{ token: string; session_token?: string }>('/admin/login/verify', { method: 'POST', body: JSON.stringify(data) }),
@@ -125,6 +125,14 @@ export const authApi = {
     fetchAPI<{ message: string }>('/admin/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
   adminResetPassword: (email: string, code: string, new_password: string) =>
     fetchAPI<{ message: string }>('/admin/reset-password', { method: 'POST', body: JSON.stringify({ email, code, new_password }) }),
+
+  // ── Multi-Computer Device Identity Governance ─────────────────────────────
+  adminListDevices: () =>
+    fetchAPI<{ success: boolean; devices: any[] }>('/admin/devices'),
+  adminRegisterDevice: (data: { device_id?: string; device_name: string; browser?: string; os?: string; device_type?: string }) =>
+    fetchAPI<{ success: boolean; device: any }>('/admin/devices/register', { method: 'POST', body: JSON.stringify(data) }),
+  adminRevokeDevice: (deviceId: string) =>
+    fetchAPI<{ success: boolean; message: string }>('/admin/devices/' + encodeURIComponent(deviceId), { method: 'DELETE' }),
 
   // ── Enterprise Passkey / WebAuthn & Session Management ─────────────────────
   adminPasskeyLoginBegin: (data: { email: string; portal: string }) =>

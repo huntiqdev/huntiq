@@ -3,13 +3,20 @@ package jobs
 import (
 	"context"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func StartCommissionConfirmJob(ctx context.Context, db *pgxpool.Pool) {
+func StartCommissionConfirmJob(ctx context.Context, db *pgxpool.Pool, wg ...*sync.WaitGroup) {
+	if len(wg) > 0 && wg[0] != nil {
+		wg[0].Add(1)
+	}
 	go func() {
+		if len(wg) > 0 && wg[0] != nil {
+			defer wg[0].Done()
+		}
 		defer func() {
 			if r := recover(); r != nil {
 				log.Printf("[commission-confirm-job] recovered from panic: %v", r) //nolint:gosec

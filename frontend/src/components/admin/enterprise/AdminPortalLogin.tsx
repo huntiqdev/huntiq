@@ -22,10 +22,10 @@ import {
 import Link from 'next/link';
 
 export interface AdminPortalLoginProps {
-  portal: 'executive' | 'platform' | 'security' | 'staff';
+  portal: 'executive' | 'platform' | 'security' | 'operations' | 'moderation' | 'support' | 'staff';
   portalTitle: string;
   portalBadge: string;
-  portalTheme: 'crimson' | 'indigo' | 'emerald' | 'orange';
+  portalTheme: 'crimson' | 'indigo' | 'emerald' | 'orange' | 'purple' | 'blue';
   portalSubtitle: string;
   portalDescription: string;
   allowPasswordMfaFallback?: boolean;
@@ -67,6 +67,24 @@ const THEME_STYLES = {
     glow: 'bg-orange-500/10',
     accentText: 'text-orange-400',
     border: 'border-orange-900/40',
+  },
+  purple: {
+    badge: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+    iconBg: 'from-purple-600 to-indigo-700 shadow-purple-600/30',
+    primaryBtn: 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-purple-600/25',
+    focusRing: 'focus:border-purple-500 focus:ring-purple-500',
+    glow: 'bg-purple-500/10',
+    accentText: 'text-purple-400',
+    border: 'border-purple-900/40',
+  },
+  blue: {
+    badge: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+    iconBg: 'from-blue-600 to-cyan-700 shadow-blue-600/30',
+    primaryBtn: 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-blue-600/25',
+    focusRing: 'focus:border-blue-500 focus:ring-blue-500',
+    glow: 'bg-blue-500/10',
+    accentText: 'text-blue-400',
+    border: 'border-blue-900/40',
   },
 };
 
@@ -177,7 +195,6 @@ export function AdminPortalLogin({
   };
 
   const getTargetRoute = (token?: string) => {
-    const adminRole = getAdminRoleFromJWT(token);
     switch (portal) {
       case 'executive':
         return '/executive-console';
@@ -185,28 +202,31 @@ export function AdminPortalLogin({
         return '/security-console';
       case 'platform':
         return '/platform-console';
+      case 'operations':
+        return '/operations-console';
+      case 'moderation':
+        return '/moderation-console';
+      case 'support':
+        return '/support-console';
       case 'staff':
       default:
+        const adminRole = getAdminRoleFromJWT(token);
         if (adminRole === 'platform_owner') return '/executive-console';
-        if (adminRole === 'security_admin') return '/security-console';
+        if (adminRole === 'security_admin' || adminRole === 'ciso') return '/security-console';
         if (adminRole === 'platform_admin') return '/platform-console';
+        if (adminRole === 'operations_admin') return '/operations-console';
+        if (adminRole === 'content_moderator') return '/moderation-console';
+        if (adminRole === 'support_agent') return '/support-console';
         return '/admin/dashboard';
     }
   };
-
-  const sampleCredentials = {
-    executive: { email: 'owner@habeshamarket.com', pass: 'Owner123!', role: 'CEO / Platform Owner' },
-    security: { email: 'security@habeshamarket.com', pass: 'Security123!', role: 'Security Administrator' },
-    platform: { email: 'platform@habeshamarket.com', pass: 'Platform123!', role: 'Platform Administrator' },
-    staff: { email: 'admin@habeshamarket.com', pass: 'Admin123!', role: 'Super Admin' },
-  }[portal] || { email: 'owner@habeshamarket.com', pass: 'Owner123!', role: 'CEO / Platform Owner' };
 
   const handlePasswordStep1 = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
-      const res = await api.adminLogin({ email: email.trim().toLowerCase(), password });
+      const res = await api.adminLogin({ email: email.trim().toLowerCase(), password, portal });
       if (res.token && res.is_super) {
         await login(res.token, res.session_token);
         router.push(getTargetRoute(res.token));
@@ -243,6 +263,12 @@ export function AdminPortalLogin({
         return <Server className="text-white" size={32} />;
       case 'security':
         return <ShieldCheck className="text-white" size={32} />;
+      case 'operations':
+        return <Cpu className="text-white" size={32} />;
+      case 'moderation':
+        return <CheckCircle2 className="text-white" size={32} />;
+      case 'support':
+        return <Users className="text-white" size={32} />;
       case 'staff':
       default:
         return <Users className="text-white" size={32} />;
@@ -288,33 +314,6 @@ export function AdminPortalLogin({
           </div>
         </div>
 
-        {/* Sample Credentials Helper (Dev & Inspection Mode) */}
-        <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3 mb-6 text-zinc-300 text-xs">
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="font-bold text-[11px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-              <KeyRound size={13} className={theme.accentText} />
-              Sample Demo Credentials
-            </span>
-            <button
-              type="button"
-              onClick={() => {
-                setEmail(sampleCredentials.email);
-                setPassword(sampleCredentials.pass);
-                setAuthMode('password');
-                setOtpStep(false);
-                setError('');
-              }}
-              className="text-[11px] font-bold px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-all border border-zinc-700 hover:border-zinc-500 shadow-sm"
-            >
-              ⚡ Fill Sample Data
-            </button>
-          </div>
-          <div className="text-[11px] text-zinc-400 font-mono bg-zinc-900/90 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
-            <span className="truncate max-w-[190px]">{sampleCredentials.email}</span>
-            <span className="text-zinc-600">/</span>
-            <span>{sampleCredentials.pass}</span>
-          </div>
-        </div>
 
         {/* Auth Mode Tabs */}
         {allowPasswordMfaFallback && (
@@ -502,12 +501,10 @@ export function AdminPortalLogin({
           </div>
         )}
 
-        {/* Directory Navigator Link */}
+        {/* Directory Footnote */}
         <div className="mt-8 pt-4 border-t border-zinc-900 flex items-center justify-between text-[11px] text-zinc-500">
           <span>HUNTIQ Privileged Security Matrix</span>
-          <Link href="/admin/login" className="text-zinc-400 hover:text-white underline transition-colors">
-            Portal Directory
-          </Link>
+          <span className="text-zinc-600 font-mono">Zero Trust Architecture</span>
         </div>
       </div>
     </div>

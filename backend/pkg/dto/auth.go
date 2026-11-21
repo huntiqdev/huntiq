@@ -21,6 +21,16 @@ type LoginRequest struct {
 	Phone    string `json:"phone"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	Portal   string `json:"portal,omitempty"` // executive | platform | security | operations | moderation | support
+	DeviceID string `json:"device_id,omitempty"`
+}
+
+type RegisterDeviceRequest struct {
+	DeviceID   string `json:"device_id"`
+	DeviceName string `json:"device_name"`
+	Browser    string `json:"browser,omitempty"`
+	OS         string `json:"os,omitempty"`
+	DeviceType string `json:"device_type,omitempty"` // desktop, laptop, mobile, workstation
 }
 
 // OTPRequest is used to request an OTP be sent to a phone number.

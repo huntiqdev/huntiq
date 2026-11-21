@@ -143,13 +143,14 @@ func main() {
 		log.Printf("[INFO] Search config: default settings loaded")
 	}
 
-	// Background worker context with graceful cancellation
+	// Background worker context with graceful cancellation and WaitGroup synchronization
 	jobCtx, cancelJobs := context.WithCancel(context.Background())
 	defer cancelJobs()
-	jobs.StartExpiryJob(jobCtx, db)
-	jobs.StartUnverifiedUserCleanup(jobCtx, db)
-	jobs.StartOTPCleanup(jobCtx, db)
-	jobs.StartCommissionConfirmJob(jobCtx, db)
+	var workerWG sync.WaitGroup
+	jobs.StartExpiryJob(jobCtx, db, &workerWG)
+	jobs.StartUnverifiedUserCleanup(jobCtx, db, &workerWG)
+	jobs.StartOTPCleanup(jobCtx, db, &workerWG)
+	jobs.StartCommissionConfirmJob(jobCtx, db, &workerWG)
 
 	// Repositories
 	productRepo := repository.NewProductRepo(db)
@@ -268,8 +269,8 @@ func main() {
 		isActiveMu.Unlock()
 		return adminAuthSvc.RevokeAllSessions(ctx, userID, reason)
 	})
-	authSvc.WithSessionCreator(func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error) {
-		rawToken, sess, err := adminAuthSvc.CreateAdminSession(ctx, userID, portal, ip, ua)
+	authSvc.WithSessionCreator(func(ctx context.Context, userID int, portal, ip, ua, deviceID string) (string, int, error) {
+		rawToken, sess, err := adminAuthSvc.CreateAdminSessionWithDevice(ctx, userID, portal, ip, ua, deviceID)
 		if err != nil {
 			return "", 0, err
 		}
@@ -492,6 +493,19 @@ func main() {
 	}
 
 	cancelJobs()
+	// Await graceful termination of background workers
+	workerDone := make(chan struct{})
+	go func() {
+		workerWG.Wait()
+		close(workerDone)
+	}()
+	select {
+	case <-workerDone:
+		log.Println("All background workers terminated cleanly.")
+	case <-time.After(5 * time.Second):
+		log.Println("Background workers shutdown reached timeout limit.")
+	}
+
 	if err := app.ShutdownWithTimeout(10 * time.Second); err != nil {
 		log.Printf("Server shutdown warning: %v", err)
 	}

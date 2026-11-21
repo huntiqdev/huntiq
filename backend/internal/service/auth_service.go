@@ -57,7 +57,7 @@ type AuthService struct {
 	orgSvc         *OrganizationService
 	otpCrypto      *security.OTPCrypto
 	settingsReader func(ctx context.Context, key string) string
-	sessionCreator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)
+	sessionCreator func(ctx context.Context, userID int, portal, ip, ua, deviceID string) (string, int, error)
 	sessionRevoker func(ctx context.Context, userID int, reason string) error
 	// cached otp_required setting — refreshed every 60s to avoid a DB hit on every login
 	otpRequiredCache    bool
@@ -148,7 +148,7 @@ func (s *AuthService) WithSettingsReader(reader func(ctx context.Context, key st
 }
 
 // WithSessionCreator injects a function to create an admin session upon successful login
-func (s *AuthService) WithSessionCreator(creator func(ctx context.Context, userID int, portal, ip, ua string) (string, int, error)) *AuthService {
+func (s *AuthService) WithSessionCreator(creator func(ctx context.Context, userID int, portal, ip, ua, deviceID string) (string, int, error)) *AuthService {
 	s.sessionCreator = creator
 	return s
 }
@@ -622,16 +622,29 @@ func (s *AuthService) AdminLoginStep1(ctx context.Context, req dto.LoginRequest,
 		var sessionID int
 		if s.sessionCreator != nil {
 			portal := "staff"
-			switch u.AdminRole {
-			case models.RolePlatformOwner, models.LegacyRoleSuper:
-				portal = "executive"
-			case models.RoleSecurityAdmin:
-				portal = "security"
-			case models.RolePlatformAdmin:
-				portal = "platform"
+			if req.Portal != "" {
+				if err := ValidatePortalAccess(u.AdminRole, req.Portal); err != nil {
+					return "", "", false, err
+				}
+				portal = req.Portal
+			} else {
+				switch u.AdminRole {
+				case models.RolePlatformOwner, models.LegacyRoleSuper:
+					portal = "executive"
+				case models.RoleSecurityAdmin, models.RoleCISO, models.RoleSOCAnalyst, models.RoleFraudInvestigator, models.RoleComplianceAuditor:
+					portal = "security"
+				case models.RolePlatformAdmin, models.RoleTaxonomyArchitect, models.RoleGISLocationSpecialist, models.RoleVIPAccountDirector:
+					portal = "platform"
+				case models.RoleOperationsAdmin, models.RoleKYCVerificationOfficer, models.RoleProductInspectionOfficer, models.RoleDisputeRefundOfficer, models.RoleAppealsOfficer:
+					portal = "operations"
+				case models.RoleContentModerator, models.RoleModerator:
+					portal = "moderation"
+				case models.RoleCustomerSupportLead, models.RoleSupportAgent, models.RoleGoldConcierge, models.RolePremiumConcierge, models.RoleRetentionSpecialist:
+					portal = "support"
+				}
 			}
 			var err error
-			sessionToken, sessionID, err = s.sessionCreator(ctx, u.ID, portal, ip, userAgent)
+			sessionToken, sessionID, err = s.sessionCreator(ctx, u.ID, portal, ip, userAgent, req.DeviceID)
 			if err != nil {
 				return "", "", false, fmt.Errorf("failed to create admin session: %w", err)
 			}
@@ -643,6 +656,13 @@ func (s *AuthService) AdminLoginStep1(ctx context.Context, req dto.LoginRequest,
 		}
 		safeGo(func() { s.recordLogin(u) })
 		return token, sessionToken, true, nil
+	}
+
+	// Portal verification before issuing OTP in production
+	if req.Portal != "" {
+		if err := ValidatePortalAccess(u.AdminRole, req.Portal); err != nil {
+			return "", "", false, err
+		}
 	}
 
 	// Mandatory MFA in production:
@@ -671,11 +691,22 @@ func (s *AuthService) AdminLoginStep2(ctx context.Context, email, code, ip, user
 	var sessionID int
 	if s.sessionCreator != nil {
 		portal := "staff"
-		if u.AdminRole == models.RolePlatformOwner || u.AdminRole == models.LegacyRoleSuper {
+		switch u.AdminRole {
+		case models.RolePlatformOwner, models.LegacyRoleSuper:
 			portal = "executive"
+		case models.RoleSecurityAdmin, models.RoleCISO, models.RoleSOCAnalyst, models.RoleFraudInvestigator, models.RoleComplianceAuditor:
+			portal = "security"
+		case models.RolePlatformAdmin, models.RoleTaxonomyArchitect, models.RoleGISLocationSpecialist, models.RoleVIPAccountDirector:
+			portal = "platform"
+		case models.RoleOperationsAdmin, models.RoleKYCVerificationOfficer, models.RoleProductInspectionOfficer, models.RoleDisputeRefundOfficer, models.RoleAppealsOfficer:
+			portal = "operations"
+		case models.RoleContentModerator, models.RoleModerator:
+			portal = "moderation"
+		case models.RoleCustomerSupportLead, models.RoleSupportAgent, models.RoleGoldConcierge, models.RolePremiumConcierge, models.RoleRetentionSpecialist:
+			portal = "support"
 		}
 		var err error
-		sessionToken, sessionID, err = s.sessionCreator(ctx, u.ID, portal, ip, userAgent)
+		sessionToken, sessionID, err = s.sessionCreator(ctx, u.ID, portal, ip, userAgent, "")
 		if err != nil {
 			return "", "", fmt.Errorf("failed to create admin session: %w", err)
 		}

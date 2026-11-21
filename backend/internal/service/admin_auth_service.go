@@ -12,6 +12,7 @@ import (
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/repository"
 	"github.com/your-org/used-tools-marketplace/internal/security"
+	"github.com/your-org/used-tools-marketplace/pkg/dto"
 )
 
 // AdminAuthService coordinates administrative authentication, passkeys, sessions, and zero-trust controls
@@ -344,12 +345,17 @@ func (s *AdminAuthService) FinishPasskeyLogin(
 
 // CreateAdminSession creates a server-side session for an administrator (from passkey or password login)
 func (s *AdminAuthService) CreateAdminSession(ctx context.Context, userID int, portal, ipAddress, userAgent string) (string, *models.AdminSession, error) {
+	return s.CreateAdminSessionWithDevice(ctx, userID, portal, ipAddress, userAgent, "")
+}
+
+// CreateAdminSessionWithDevice creates a server-side session explicitly bound to an authorized hardware device
+func (s *AdminAuthService) CreateAdminSessionWithDevice(ctx context.Context, userID int, portal, ipAddress, userAgent, deviceID string) (string, *models.AdminSession, error) {
 	user, err := s.userRepo.GetByID(ctx, userID)
 	if err != nil || user == nil || !user.IsActive || user.Role != "admin" {
 		return "", nil, errors.New("administrator account inactive or unauthorized")
 	}
 
-	idleTimeout := 1800 // 30 minutes for staff
+	idleTimeout := 1800 // 30 minutes for normal consoles
 	absLifetime := 12 * time.Hour
 	if user.AdminRole == models.RolePlatformOwner || portal == "executive" {
 		idleTimeout = 900 // 15 minutes for executive
@@ -364,6 +370,7 @@ func (s *AdminAuthService) CreateAdminSession(ctx context.Context, userID int, p
 		UserID:             user.ID,
 		Portal:             portal,
 		Role:               user.AdminRole,
+		DeviceID:           deviceID,
 		IPAddress:          ipAddress,
 		UserAgent:          userAgent,
 		IdleTimeoutSeconds: idleTimeout,
@@ -375,6 +382,53 @@ func (s *AdminAuthService) CreateAdminSession(ctx context.Context, userID int, p
 	}
 
 	return rawSessionToken, session, nil
+}
+
+// RegisterDevice registers an authorized computer/workstation for an administrator
+func (s *AdminAuthService) RegisterDevice(ctx context.Context, userID int, req dto.RegisterDeviceRequest, ip string) (*models.AdminDeviceRegistration, error) {
+	if req.DeviceID == "" {
+		req.DeviceID = GenerateRandomToken(16)
+	}
+	if req.DeviceName == "" {
+		req.DeviceName = "Authorized Workstation"
+	}
+	if req.DeviceType == "" {
+		req.DeviceType = "desktop"
+	}
+
+	device := &models.AdminDeviceRegistration{
+		DeviceID:   req.DeviceID,
+		UserID:     userID,
+		DeviceName: req.DeviceName,
+		Browser:    req.Browser,
+		OS:         req.OS,
+		DeviceType: req.DeviceType,
+		LastIP:     ip,
+	}
+
+	if err := s.passkeyRepo.RegisterDevice(ctx, device); err != nil {
+		return nil, fmt.Errorf("register device: %w", err)
+	}
+
+	return device, nil
+}
+
+// ListDevices returns all authorized hardware computers for an administrator
+func (s *AdminAuthService) ListDevices(ctx context.Context, userID int) ([]models.AdminDeviceRegistration, error) {
+	return s.passkeyRepo.ListDevicesByUserID(ctx, userID)
+}
+
+// RevokeDevice invalidates an authorized computer and terminates all its active sessions
+func (s *AdminAuthService) RevokeDevice(ctx context.Context, deviceID string, userID int, reason string) error {
+	if reason == "" {
+		reason = "revoked_by_administrator"
+	}
+	return s.passkeyRepo.RevokeDevice(ctx, deviceID, userID, reason)
+}
+
+// GenerateAdminJWT creates a token for an administrator bound to a specific server session ID
+func (s *AdminAuthService) GenerateAdminJWT(userID int, adminRole string, sessionID int, sessionToken string) (string, error) {
+	return security.GenerateAdminJWT(userID, adminRole, sessionID, sessionToken, s.jwtSecret)
 }
 
 // ValidateSessionByID validates a session by primary key ID and ensures user matches and is active
@@ -401,11 +455,6 @@ func (s *AdminAuthService) ValidateSessionByID(ctx context.Context, sessionID, u
 	_ = s.passkeyRepo.UpdateSessionActivity(ctx, session.ID)
 
 	return session, user, nil
-}
-
-// GenerateAdminJWT creates a token for an administrator bound to a specific server session ID
-func (s *AdminAuthService) GenerateAdminJWT(userID int, adminRole string, sessionID int, sessionToken string) (string, error) {
-	return security.GenerateAdminJWT(userID, adminRole, sessionID, sessionToken, s.jwtSecret)
 }
 
 // ValidatePortalAccess checks whether an admin_role can access the given portal
@@ -448,11 +497,49 @@ func ValidatePortalAccess(role, portal string) error {
 		if !allowed[role] {
 			return errors.New("unauthorized: security console requires Security Administrator role")
 		}
+	case "operations":
+		allowed := map[string]bool{
+			models.RolePlatformOwner:            true,
+			models.RoleOperationsAdmin:          true,
+			models.RoleKYCVerificationOfficer:   true,
+			models.RoleProductInspectionOfficer: true,
+			models.RoleDisputeRefundOfficer:     true,
+			models.RoleAppealsOfficer:           true,
+			models.LegacyRoleSuper:              true,
+		}
+		if !allowed[role] {
+			return errors.New("unauthorized: operations console requires Operations Administrator role")
+		}
+	case "moderation":
+		allowed := map[string]bool{
+			models.RolePlatformOwner:    true,
+			models.RoleContentModerator: true,
+			models.RoleModerator:        true,
+			models.LegacyRoleSuper:      true,
+		}
+		if !allowed[role] {
+			return errors.New("unauthorized: moderation console requires Content Moderator role")
+		}
+	case "support":
+		allowed := map[string]bool{
+			models.RolePlatformOwner:       true,
+			models.RoleCustomerSupportLead: true,
+			models.RoleSupportAgent:        true,
+			models.RoleGoldConcierge:       true,
+			models.RolePremiumConcierge:    true,
+			models.RoleRetentionSpecialist: true,
+			models.LegacyRoleSuper:         true,
+		}
+		if !allowed[role] {
+			return errors.New("unauthorized: support console requires Support Agent role")
+		}
 	case "staff":
 		// Staff portal accepts all legitimate administrative roles
 		if role == "" {
 			return errors.New("unauthorized: administrative credentials required")
 		}
+	default:
+		return errors.New("unauthorized: unknown administrative portal destination")
 	}
 	return nil
 }
