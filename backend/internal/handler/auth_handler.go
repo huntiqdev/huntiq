@@ -64,6 +64,11 @@ func (h *AuthHandler) registerUser(c *fiber.Ctx, role string) error {
 	if err := c.BodyParser(&req); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
+	phoneResult := validations.ValidateEthiopianPhone(req.Phone)
+	if !phoneResult.Valid {
+		return response.AppError(c, errors.ValPhoneInvalid())
+	}
+	req.Phone = phoneResult.Normalized
 	req.Role = role
 
 	// Validate seller_preference for sellers
@@ -638,6 +643,10 @@ func (h *AuthHandler) DevPeekOTP(c *fiber.Ctx) error {
 		return fiber.ErrNotFound
 	}
 	phone := strings.TrimSpace(c.Query("phone"))
+	phoneResult := validations.ValidateEthiopianPhone(phone)
+	if phoneResult.Valid {
+		phone = phoneResult.Normalized
+	}
 	code, err := h.svc.DevPeekOTP(c.Context(), phone)
 	if err != nil {
 		return response.NotFound(c, "no active OTP found for this phone")

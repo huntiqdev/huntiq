@@ -12,7 +12,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const { t, locale } = useLocale();
   const { user, isSeller, isBuyer } = useAuth();
   const pathname = usePathname();
-  const isAdmin = pathname.startsWith('/admin') || pathname.startsWith('/staff') || pathname.startsWith('/executive-console') || pathname.startsWith('/platform-console') || pathname.startsWith('/security-console');
+  const isAdmin = pathname.startsWith('/admin') || pathname.startsWith('/staff') || pathname.includes('-console');
   const isSellerArea = pathname.startsWith('/seller');
   const isBuyerArea = pathname.startsWith('/buyer');
 

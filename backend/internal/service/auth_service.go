@@ -166,6 +166,12 @@ func (s *AuthService) Register(ctx context.Context, req dto.RegisterRequest) (*m
 	if req.Name == "" || req.Phone == "" || req.Password == "" {
 		return nil, errors.New("name, phone and password are required")
 	}
+	phoneResult := validations.ValidateEthiopianPhone(req.Phone)
+	if !phoneResult.Valid {
+		return nil, errors.New("invalid phone number — must be a valid Ethiopian phone number")
+	}
+	req.Phone = phoneResult.Normalized
+
 	if valid, errKey := validations.ValidatePassword(req.Password); !valid {
 		return nil, errors.New(validations.PasswordErrorMessage(errKey))
 	}
