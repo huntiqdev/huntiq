@@ -13,21 +13,21 @@ import (
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 )
 
-// isAllowedImageURL accepts /uploads/ paths from our own backend only.
-// When backendBase is configured, only absolute URLs from that base are accepted —
-// relative paths are rejected to prevent mixed URL storage in the DB.
+// isAllowedImageURL accepts /uploads/ paths from our own backend (both relative and absolute).
 func (s *ProductService) isAllowedImageURL(u string) bool {
-	// If backendBase is set, require absolute URLs from our own origin only.
-	if s.backendBase != "" {
-		if strings.HasPrefix(u, s.backendBase+"/uploads/") {
-			return true
-		}
-		// Allow picsum.photos for seeded demo products only
-		return strings.HasPrefix(u, "https://picsum.photos/")
+	// Accept relative /uploads/ paths
+	if strings.HasPrefix(u, "/uploads/") {
+		return true
 	}
-	// backendBase not configured (local dev) — only accept relative /uploads/ paths.
-	// Never allow absolute URLs from unknown domains even in dev.
-	return strings.HasPrefix(u, "/uploads/")
+	// Accept absolute URLs matching backendBase, localhost, or 127.0.0.1
+	if s.backendBase != "" && strings.HasPrefix(u, s.backendBase+"/uploads/") {
+		return true
+	}
+	if strings.HasPrefix(u, "http://localhost:8080/uploads/") || strings.HasPrefix(u, "http://127.0.0.1:8080/uploads/") {
+		return true
+	}
+	// Allow picsum.photos for seeded demo products only
+	return strings.HasPrefix(u, "https://picsum.photos/")
 }
 
 type ProductService struct {

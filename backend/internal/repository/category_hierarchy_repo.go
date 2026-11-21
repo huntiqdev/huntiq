@@ -723,7 +723,7 @@ func (r *CategoryHierarchyRepo) GetCategoryStats(ctx context.Context, categoryID
 	return &cat, err
 }
 
-// ResolveCategoryByAlias queries the database stored procedure resolve_category_by_alias(term)
+// ResolveCategoryByAlias queries the database stored procedure resolve_category_by_alias(term) with SQL fallback
 func (r *CategoryHierarchyRepo) ResolveCategoryByAlias(ctx context.Context, term string) (*int, error) {
 	clean := strings.TrimSpace(term)
 	if clean == "" {
@@ -731,10 +731,27 @@ func (r *CategoryHierarchyRepo) ResolveCategoryByAlias(ctx context.Context, term
 	}
 	var catID *int
 	err := r.db.QueryRow(ctx, `SELECT public.resolve_category_by_alias($1)`, clean).Scan(&catID)
-	if err != nil {
-		return nil, err
+	if err == nil && catID != nil && *catID > 0 {
+		return catID, nil
 	}
-	return catID, nil
+	// Direct SQL fallback if procedure returns null or encountered error
+	err = r.db.QueryRow(ctx, `
+		SELECT category_id FROM category_aliases WHERE LOWER(alias) = LOWER($1) LIMIT 1
+	`, clean).Scan(&catID)
+	if err == nil && catID != nil && *catID > 0 {
+		return catID, nil
+	}
+	err = r.db.QueryRow(ctx, `
+		SELECT id FROM category_hierarchy 
+		WHERE LOWER(slug) = LOWER($1) 
+		   OR LOWER(name_en) = LOWER($1) 
+		   OR LOWER(COALESCE(name_am, '')) = LOWER($1)
+		LIMIT 1
+	`, clean).Scan(&catID)
+	if err == nil && catID != nil && *catID > 0 {
+		return catID, nil
+	}
+	return nil, nil
 }
 
 // ResolveLegacyCategoryID resolves the legacy category ID dynamically from PostgreSQL.
