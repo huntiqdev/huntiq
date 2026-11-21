@@ -942,17 +942,54 @@ func (r *UserRepo) DeleteOTPLogs(ctx context.Context, status string) (int64, err
 
 // DevPeekOTP decrypts and returns the latest active OTP for a phone — DEV ONLY.
 func (r *UserRepo) DevPeekOTP(ctx context.Context, phone string) (string, error) {
-	var encryptedCode string
-	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-	err := r.db.QueryRow(ctx, `
-		SELECT code FROM otp_codes
-		WHERE phone=$1 AND used=FALSE AND expires_at > NOW()
-		ORDER BY created_at DESC LIMIT 1`, phone,
-	).Scan(&encryptedCode)
-	if err != nil {
-		// Sanitize phone before embedding in error message to prevent log injection
-		return "", fmt.Errorf("no active OTP for %s: %w", sanitizeLog(phone), err)
+	raw := strings.TrimSpace(phone)
+	if strings.HasPrefix(raw, "251") {
+		raw = "+" + raw
 	}
+
+	// Compute phone format variants
+	pCanon := raw
+	pLocal := raw
+	pBare := raw
+
+	digits := strings.TrimLeft(raw, " +")
+	if strings.HasPrefix(digits, "251") && len(digits) >= 12 {
+		pCanon = "+" + digits
+		pBare = digits
+		pLocal = "0" + digits[3:]
+	} else if strings.HasPrefix(digits, "09") || strings.HasPrefix(digits, "07") {
+		pLocal = digits
+		pCanon = "+251" + digits[1:]
+		pBare = "251" + digits[1:]
+	} else if strings.HasPrefix(digits, "9") || strings.HasPrefix(digits, "7") {
+		pLocal = "0" + digits
+		pCanon = "+251" + digits
+		pBare = "251" + digits
+	}
+
+	var encryptedCode string
+	var matchedPhone string
+	err := r.db.QueryRow(ctx, `
+		SELECT phone, code FROM otp_codes
+		WHERE (
+			phone = $1 OR phone = $2 OR phone = $3 OR phone = $4
+			OR phone LIKE '%' || $5 || '%'
+		) AND used=FALSE AND expires_at > NOW()
+		ORDER BY created_at DESC LIMIT 1`, pCanon, pLocal, pBare, raw, digits,
+	).Scan(&matchedPhone, &encryptedCode)
+
+	if err != nil {
+		// If specific phone not found, fall back to the very latest active OTP in dev mode
+		err2 := r.db.QueryRow(ctx, `
+			SELECT phone, code FROM otp_codes
+			WHERE used=FALSE AND expires_at > NOW()
+			ORDER BY created_at DESC LIMIT 1`,
+		).Scan(&matchedPhone, &encryptedCode)
+		if err2 != nil {
+			return "", fmt.Errorf("no active OTP for %s: %w", sanitizeLog(phone), err)
+		}
+	}
+
 	if r.otpCrypto == nil {
 		return "", fmt.Errorf("OTP crypto not configured")
 	}

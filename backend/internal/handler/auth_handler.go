@@ -617,10 +617,7 @@ func (h *AuthHandler) DevPeekOTP(c *fiber.Ctx) error {
 	if !h.devMode {
 		return fiber.ErrNotFound
 	}
-	phone := c.Query("phone")
-	if phone == "" {
-		return response.BadRequest(c, "phone query param required")
-	}
+	phone := strings.TrimSpace(c.Query("phone"))
 	code, err := h.svc.DevPeekOTP(c.Context(), phone)
 	if err != nil {
 		return response.NotFound(c, "no active OTP found for this phone")

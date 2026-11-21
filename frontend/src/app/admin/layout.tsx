@@ -185,16 +185,25 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
+  // Check if current page is any administrative portal login entrypoint
+  const isLoginPage =
+    pathname === '/admin/login' ||
+    pathname.startsWith('/admin/owner-login') ||
+    pathname.startsWith('/admin/platform-login') ||
+    pathname.startsWith('/admin/security-login') ||
+    pathname.startsWith('/admin/staff-login') ||
+    pathname.startsWith('/admin/ceo-login');
+
   useEffect(() => {
-    if (!loading && (!user || !isAdmin) && pathname !== '/admin/login') {
+    if (!loading && (!user || !isAdmin) && !isLoginPage) {
       router.push('/admin/login');
     }
-  }, [user, loading, isAdmin, pathname, router]);
+  }, [user, loading, isAdmin, isLoginPage, pathname, router]);
 
   if (loading) return <div className="h-screen flex items-center justify-center bg-slate-900"><Spinner /></div>;
 
-  // Login page doesn't have the sidebar
-  if (pathname === '/admin/login') {
+  // Login pages render without the authenticated sidebar
+  if (isLoginPage) {
     return <div className="min-h-screen bg-[#091426] text-white">{children}</div>;
   }
 
