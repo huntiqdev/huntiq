@@ -82,10 +82,7 @@ func (h *BuyerHandler) ChangePassword(c *fiber.Ctx) error {
 		return response.BadRequest(c, "current_password and new_password are required")
 	}
 	if valid, errKey := validations.ValidatePassword(body.NewPassword); !valid {
-		if errKey == "password_min" {
-			return response.BadRequest(c, "new password must be at least 8 characters")
-		}
-		return response.BadRequest(c, "invalid password")
+		return response.BadRequest(c, validations.PasswordErrorMessage(errKey))
 	}
 	if err := h.authSvc.ChangePassword(c.Context(), userID, body.CurrentPassword, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())

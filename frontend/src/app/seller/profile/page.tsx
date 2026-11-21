@@ -14,6 +14,7 @@ import { SellerTier, getTierThresholds, getTierFeeParams } from '@/lib/constants
 import { ReferralCard } from '@/components/referral/ReferralCard';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import { ImageCropperModal } from '@/components/ui/ImageCropperModal';
+import PasswordStrength, { validatePasswordStrength } from '@/components/forms/PasswordStrength';
 
 export default function SellerProfilePage() {
   const { user, isSeller, isLandlord, updateUserProfile } = useAuth();
@@ -119,12 +120,17 @@ export default function SellerProfilePage() {
   const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPwError('');
-    if (pwForm.next.length < 8) { setPwError('New password must be at least 8 characters'); return; }
+    const pwCheck = validatePasswordStrength(pwForm.next);
+    if (!pwCheck.valid) { setPwError(pwCheck.message); return; }
     if (pwForm.next !== pwForm.confirm) { setPwError('Passwords do not match'); return; }
     if (!user) return;
     setPwSaving(true);
     try {
-      await api.sellerChangePassword({ current_password: pwForm.current, new_password: pwForm.next }, user.token);
+      try {
+        await api.sellerChangePassword({ current_password: pwForm.current, new_password: pwForm.next }, user.token);
+      } catch (err: any) {
+        await api.changePassword({ current_password: pwForm.current, new_password: pwForm.next }, user.token);
+      }
       setPwSuccess(true);
       setPwForm({ current: '', next: '', confirm: '' });
     } catch (err: any) { setPwError(String(err?.message ?? '').replace(/<[^>]*>/g, '')); }
@@ -471,6 +477,7 @@ export default function SellerProfilePage() {
                   {showPw[field] ? <EyeOff size={14} /> : <Eye size={14} />}
                 </button>
               </div>
+              {field === 'next' && <PasswordStrength password={pwForm.next} className="mt-2" />}
             </div>
           ))}
           {pwError && <p className="text-xs text-red-500 bg-red-50 dark:bg-red-900/20 px-3 py-2 rounded-xl">{pwError}</p>}

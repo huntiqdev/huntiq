@@ -619,8 +619,8 @@ func (h *AuthHandler) SellerChangePassword(c *fiber.Ctx) error {
 		return response.BadRequest(c, "current_password and new_password are required")
 	}
 	// Use centralized password validation
-	if valid, _ := validations.ValidatePassword(body.NewPassword); !valid {
-		return response.AppError(c, errors.ValPasswordMin())
+	if valid, errKey := validations.ValidatePassword(body.NewPassword); !valid {
+		return response.BadRequest(c, validations.PasswordErrorMessage(errKey))
 	}
 	if err := h.svc.ChangePassword(c.Context(), userID, body.CurrentPassword, body.NewPassword); err != nil {
 		return response.BadRequest(c, err.Error())

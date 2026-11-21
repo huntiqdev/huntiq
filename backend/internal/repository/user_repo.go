@@ -258,8 +258,10 @@ func (r *UserRepo) PopulateCapabilities(ctx context.Context, u *models.User) {
 }
 
 func (r *UserRepo) GetByPhone(ctx context.Context, phone string) (*models.User, error) {
+	pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 	u, err := scanUser(r.db.QueryRow(ctx,
-		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE phone = $1 ORDER BY created_at DESC LIMIT 1", phone))
+		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE (phone = $1 OR phone = $2 OR phone = $3 OR phone = $4 OR phone LIKE '%' || $5 || '%') ORDER BY created_at DESC LIMIT 1",
+		pCanon, pLocal, pBare, raw, digits))
 	if err == nil && u != nil {
 		r.PopulateCapabilities(ctx, u)
 	}
@@ -268,8 +270,10 @@ func (r *UserRepo) GetByPhone(ctx context.Context, phone string) (*models.User, 
 
 // GetByPhoneAndRole returns a user matching both phone and role.
 func (r *UserRepo) GetByPhoneAndRole(ctx context.Context, phone, role string) (*models.User, error) {
+	pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 	u, err := scanUser(r.db.QueryRow(ctx,
-		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE phone = $1 AND role = $2", phone, role))
+		"SELECT id, name, phone, COALESCE(business_name,''), COALESCE(email,''), password_hash, rating, role, COALESCE(admin_role::varchar,''), is_active, COALESCE(deactivation_reason,''), COALESCE(tier::varchar,'normal'), COALESCE(total_value_sold,0), COALESCE(buyer_tier::varchar,'normal'), COALESCE(otp_verified,false), COALESCE(seller_preference,'sale'), created_at, updated_at, COALESCE(avatar_url,'') FROM users WHERE (phone = $1 OR phone = $2 OR phone = $3 OR phone = $4 OR phone LIKE '%' || $5 || '%') AND role = $6 ORDER BY created_at DESC LIMIT 1",
+		pCanon, pLocal, pBare, raw, digits, role))
 	if err == nil && u != nil {
 		r.PopulateCapabilities(ctx, u)
 	}
@@ -514,6 +518,32 @@ func (r *UserRepo) VerifyEmailOTP(ctx context.Context, email, code, purpose stri
 	return r.verifyOTP(ctx, "", email, code, purpose, "")
 }
 
+// calcPhoneVariants computes phone format variants (canon +251..., local 09..., bare 251..., etc.)
+func calcPhoneVariants(phone string) (pCanon, pLocal, pBare, raw, digits string) {
+	raw = strings.TrimSpace(phone)
+	if strings.HasPrefix(raw, "251") {
+		raw = "+" + raw
+	}
+	pCanon = raw
+	pLocal = raw
+	pBare = raw
+	digits = strings.TrimLeft(raw, " +")
+	if strings.HasPrefix(digits, "251") && len(digits) >= 12 {
+		pCanon = "+" + digits
+		pBare = digits
+		pLocal = "0" + digits[3:]
+	} else if strings.HasPrefix(digits, "09") || strings.HasPrefix(digits, "07") {
+		pLocal = digits
+		pCanon = "+251" + digits[1:]
+		pBare = "251" + digits[1:]
+	} else if strings.HasPrefix(digits, "9") || strings.HasPrefix(digits, "7") {
+		pLocal = "0" + digits
+		pCanon = "+251" + digits
+		pBare = "251" + digits
+	}
+	return
+}
+
 func (r *UserRepo) verifyOTP(ctx context.Context, phone, email, code, purpose, role string) error {
 	// Run the full verify inside a transaction with SELECT FOR UPDATE to prevent
 	// concurrent requests from both reading the same OTP row as valid (race condition).
@@ -530,23 +560,31 @@ func (r *UserRepo) verifyOTP(ctx context.Context, phone, email, code, purpose, r
 	var lockedUntil *time.Time
 	var rowErr error
 	if phone != "" && role != "" {
+		pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		rowErr = tx.QueryRow(ctx, `
 			SELECT id, code, attempts, expires_at, locked_until
 			FROM otp_codes
-			WHERE phone=$1 AND purpose=$2 AND user_type=$3 AND used=FALSE
+			WHERE (
+				phone = $1 OR phone = $2 OR phone = $3 OR phone = $4
+				OR phone LIKE '%' || $5 || '%'
+			) AND purpose=$6 AND user_type=$7 AND used=FALSE
 			ORDER BY created_at DESC LIMIT 1
 			FOR UPDATE`,
-			phone, purpose, role).Scan(&rowID, &encryptedCode, &rowAttempts, &expiresAt, &lockedUntil)
+			pCanon, pLocal, pBare, raw, digits, purpose, role).Scan(&rowID, &encryptedCode, &rowAttempts, &expiresAt, &lockedUntil)
 	} else if phone != "" {
+		pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		rowErr = tx.QueryRow(ctx, `
 			SELECT id, code, attempts, expires_at, locked_until
 			FROM otp_codes
-			WHERE phone=$1 AND purpose=$2 AND used=FALSE
+			WHERE (
+				phone = $1 OR phone = $2 OR phone = $3 OR phone = $4
+				OR phone LIKE '%' || $5 || '%'
+			) AND purpose=$6 AND used=FALSE
 			ORDER BY created_at DESC LIMIT 1
 			FOR UPDATE`,
-			phone, purpose).Scan(&rowID, &encryptedCode, &rowAttempts, &expiresAt, &lockedUntil)
+			pCanon, pLocal, pBare, raw, digits, purpose).Scan(&rowID, &encryptedCode, &rowAttempts, &expiresAt, &lockedUntil)
 	} else {
 		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		rowErr = tx.QueryRow(ctx, `
@@ -893,8 +931,10 @@ func (r *UserRepo) UpdateUnverifiedRegistration(ctx context.Context, phone, role
 
 // SetOTPVerified marks a user's phone as OTP-verified (any role).
 func (r *UserRepo) SetOTPVerified(ctx context.Context, phone string) error {
+	pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 	_, err := r.db.Exec(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		`UPDATE users SET otp_verified=TRUE, updated_at=NOW() WHERE phone=$1`, phone)
+		`UPDATE users SET otp_verified=TRUE, updated_at=NOW() WHERE (phone=$1 OR phone=$2 OR phone=$3 OR phone=$4 OR phone LIKE '%' || $5 || '%')`,
+		pCanon, pLocal, pBare, raw, digits)
 	return err
 }
 
@@ -909,8 +949,10 @@ func (r *UserRepo) SetOTPVerifiedForRole(ctx context.Context, phone, role string
 		// Unknown type — fall back to updating all rows for this phone
 		return r.SetOTPVerified(ctx, phone)
 	}
+	pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 	_, err := r.db.Exec(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		`UPDATE users SET otp_verified=TRUE, updated_at=NOW() WHERE phone=$1 AND role=$2`, phone, dbRole)
+		`UPDATE users SET otp_verified=TRUE, updated_at=NOW() WHERE (phone=$1 OR phone=$2 OR phone=$3 OR phone=$4 OR phone LIKE '%' || $5 || '%') AND role=$6`,
+		pCanon, pLocal, pBare, raw, digits, dbRole)
 	return err
 }
 
@@ -942,30 +984,7 @@ func (r *UserRepo) DeleteOTPLogs(ctx context.Context, status string) (int64, err
 
 // DevPeekOTP decrypts and returns the latest active OTP for a phone — DEV ONLY.
 func (r *UserRepo) DevPeekOTP(ctx context.Context, phone string) (string, error) {
-	raw := strings.TrimSpace(phone)
-	if strings.HasPrefix(raw, "251") {
-		raw = "+" + raw
-	}
-
-	// Compute phone format variants
-	pCanon := raw
-	pLocal := raw
-	pBare := raw
-
-	digits := strings.TrimLeft(raw, " +")
-	if strings.HasPrefix(digits, "251") && len(digits) >= 12 {
-		pCanon = "+" + digits
-		pBare = digits
-		pLocal = "0" + digits[3:]
-	} else if strings.HasPrefix(digits, "09") || strings.HasPrefix(digits, "07") {
-		pLocal = digits
-		pCanon = "+251" + digits[1:]
-		pBare = "251" + digits[1:]
-	} else if strings.HasPrefix(digits, "9") || strings.HasPrefix(digits, "7") {
-		pLocal = "0" + digits
-		pCanon = "+251" + digits
-		pBare = "251" + digits
-	}
+	pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 
 	var encryptedCode string
 	var matchedPhone string
@@ -1012,12 +1031,16 @@ func (r *UserRepo) GetSetting(ctx context.Context, key string) (string, error) {
 // Filters to used=FALSE AND expires_at > NOW() so stale OTPs from previous sessions
 // cannot cause the wrong role row to be marked as verified.
 func (r *UserRepo) GetOTPUserType(ctx context.Context, phone string) string {
+	pCanon, pLocal, pBare, raw, digits := calcPhoneVariants(phone)
 	var userType string
 	_ = r.db.QueryRow(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 		`SELECT COALESCE(user_type,'seller') FROM otp_codes
-		 WHERE phone=$1 AND used=FALSE AND expires_at > NOW()
+		 WHERE (
+			phone = $1 OR phone = $2 OR phone = $3 OR phone = $4
+			OR phone LIKE '%' || $5 || '%'
+		 ) AND used=FALSE AND expires_at > NOW()
 		 ORDER BY created_at DESC LIMIT 1`,
-		phone).Scan(&userType)
+		pCanon, pLocal, pBare, raw, digits).Scan(&userType)
 	if userType == "" {
 		return "seller"
 	}

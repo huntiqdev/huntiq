@@ -84,6 +84,13 @@ export const authApi = {
   resetPassword: (phone: string, code: string, new_password: string) =>
     fetchAPI<{ message: string }>('/auth/reset-password', { method: 'POST', body: JSON.stringify({ phone, code, new_password }) }),
 
+  changePassword: (data: { current_password: string; new_password: string }, token?: string) =>
+    fetchAPI<any>('/auth/change-password', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    }),
+
   // Legacy endpoints maintained for backward compatibility
   sellerRegister: (data: any) =>
     fetchAPI<any>('/seller/register', { method: 'POST', body: JSON.stringify(data) }),

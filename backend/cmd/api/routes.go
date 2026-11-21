@@ -307,7 +307,8 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	seller.Post("/verification/documents", d.SellerHandler.UploadVerificationDocument)
 	seller.Post("/refunds", d.SellerHandler.CreateRefundRequest)
 
-	api.Post("/upload/image", d.MW.RequireAuth, middleware.RequireRole("seller"), uploadLimiter, handlers.UploadImage)
+	api.Post("/upload/image", d.MW.RequireAuth, uploadLimiter, handlers.UploadImage)
+	api.Put("/auth/change-password", d.MW.RequireAuth, authLimiter, d.AuthHandler.SellerChangePassword)
 	api.Post("/transactions", d.MW.RequireAuth, middleware.RequireRole("seller"), authLimiter, d.TransactionHandler.Create)
 
 	// ── Financial Wallet & Telebirr Payments ──────────────────────────────────

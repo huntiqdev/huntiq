@@ -4,6 +4,8 @@ import (
 	"encoding/base64"
 	"fmt"
 	"log"
+	"net"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -153,10 +155,19 @@ func (c *Config) IsAllowedOrigin(origin string) bool {
 			}
 		}
 	}
-	// Local development only — never allow localhost in production
+	// Local development only — allow localhost, loopback, and private LAN IP addresses for mobile testing
 	if c.DevMode {
 		if strings.HasPrefix(origin, "http://localhost:") || strings.HasPrefix(origin, "http://127.0.0.1:") {
 			return true
+		}
+		if u, err := url.Parse(origin); err == nil {
+			h := u.Hostname()
+			if h == "localhost" {
+				return true
+			}
+			if ip := net.ParseIP(h); ip != nil && (ip.IsPrivate() || ip.IsLoopback()) {
+				return true
+			}
 		}
 	}
 	return false

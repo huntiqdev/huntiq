@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { ReferralCard } from '@/components/referral/ReferralCard';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import { ImageCropperModal } from '@/components/ui/ImageCropperModal';
+import PasswordStrength, { validatePasswordStrength } from '@/components/forms/PasswordStrength';
 
 const TIER_CONFIG = {
   normal:  { label: 'Normal',  icon: null,  color: 'text-zinc-500',   badge: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400' },
@@ -115,14 +116,22 @@ export default function BuyerProfilePage() {
     e.preventDefault();
     setPwError(''); setPwSuccess('');
     if (!user) return;
-    if (pwForm.next.length < 8) { setPwError('New password must be at least 8 characters'); return; }
+    const pwCheck = validatePasswordStrength(pwForm.next);
+    if (!pwCheck.valid) { setPwError(pwCheck.message); return; }
     if (pwForm.next !== pwForm.confirm) { setPwError('Passwords do not match'); return; }
     setPwLoading(true);
     try {
-      await api.buyerChangePassword(
-        { current_password: pwForm.current, new_password: pwForm.next },
-        user.token,
-      );
+      try {
+        await api.buyerChangePassword(
+          { current_password: pwForm.current, new_password: pwForm.next },
+          user.token,
+        );
+      } catch (err: any) {
+        await api.changePassword(
+          { current_password: pwForm.current, new_password: pwForm.next },
+          user.token,
+        );
+      }
       setPwSuccess('Password updated successfully');
       setPwForm({ current: '', next: '', confirm: '' });
     } catch (err: any) {
@@ -455,6 +464,7 @@ export default function BuyerProfilePage() {
               placeholder="••••••••"
               className={cls}
             />
+            <PasswordStrength password={pwForm.next} className="mt-2" />
           </div>
           <div>
             <label className="text-xs font-bold text-zinc-500 block mb-1">{u.confirm_new_password_label || 'Confirm New Password'}</label>
