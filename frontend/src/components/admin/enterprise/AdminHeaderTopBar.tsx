@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Search, Bell, Plus, Building2, ChevronDown, Menu } from 'lucide-react';
 import { GlobalSearchModal } from './GlobalSearchModal';
 import { NotificationDrawer } from './NotificationDrawer';
+import { LanguageSelector } from '@/components/layout/LanguageSelector';
 
 interface AdminHeaderTopBarProps {
   onOpenWizard: () => void;
@@ -125,6 +126,9 @@ export function AdminHeaderTopBar({
             >
               <Search size={18} />
             </button>
+
+            {/* Language Selector */}
+            <LanguageSelector variant="pill" />
 
             {/* Quick Action Button */}
             <button

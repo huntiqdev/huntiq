@@ -35,11 +35,16 @@ function isTokenExpired(token: string): boolean {
   return payload.exp * 1000 < Date.now() - 10_000;
 }
 
-// Extract Anti-CSRF token from cookie in browser environment
+// Extract Anti-CSRF token from cookie or localStorage in browser environment
 export function getCSRFToken(): string | null {
   if (typeof document === 'undefined') return null;
   const match = document.cookie.match(/(?:^|;\s*)huntiq_csrf=([^;]+)/);
-  return match ? decodeURIComponent(match[1]) : null;
+  if (match) return decodeURIComponent(match[1]);
+  try {
+    return localStorage.getItem('huntiq_csrf');
+  } catch {
+    return null;
+  }
 }
 
 // Global refresh mutex to prevent duplicate concurrent refresh requests

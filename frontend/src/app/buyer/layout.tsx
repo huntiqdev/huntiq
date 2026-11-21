@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
+import { LanguageSelector } from '@/components/layout/LanguageSelector';
 
 const NAV_ITEMS = [
   { href: '/buyer/dashboard', label: 'Dashboard',      icon: LayoutDashboard, minTier: 0 },
@@ -251,6 +252,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
           </button>
           <span className="font-black text-[#1769E0] dark:text-[#38A5FF] text-sm">Buyer Panel</span>
           <div className="ml-auto flex items-center gap-2">
+            <LanguageSelector variant="compact" />
             {TierIcon && <TierIcon size={14} className={TIER_COLOR[buyerTier]} />}
             <span className={`text-xs font-black capitalize ${TIER_COLOR[buyerTier]}`}>{buyerTier}</span>
           </div>
@@ -262,6 +264,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
               {pathname.split('/').pop()?.replace(/-/g, ' ') || 'Dashboard'}
             </p>
           </div>
+          <LanguageSelector variant="pill" />
           <Link href="/" className="text-xs text-zinc-400 hover:text-zinc-600 transition-colors">
             View Marketplace ↗
           </Link>

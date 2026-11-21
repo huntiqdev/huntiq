@@ -213,6 +213,16 @@ func (h *AuthHandler) AdminLogin(c *fiber.Ctx) error {
 				SameSite: "Lax",
 			})
 		}
+		if csrfToken, err := service.GenerateCSRFToken(); err == nil {
+			c.Cookie(&fiber.Cookie{
+				Name:     "huntiq_csrf",
+				Value:    csrfToken,
+				Path:     "/",
+				MaxAge:   12 * 3600,
+				HTTPOnly: false,
+				SameSite: "Lax",
+			})
+		}
 		return response.OK(c, dto.AdminLoginStep1Response{
 			Token:        result,
 			SessionToken: sessionToken,
@@ -251,6 +261,16 @@ func (h *AuthHandler) AdminLoginVerifyOTP(c *fiber.Ctx) error {
 			Path:     "/",
 			MaxAge:   12 * 3600,
 			HTTPOnly: true,
+			SameSite: "Lax",
+		})
+	}
+	if csrfToken, err := service.GenerateCSRFToken(); err == nil {
+		c.Cookie(&fiber.Cookie{
+			Name:     "huntiq_csrf",
+			Value:    csrfToken,
+			Path:     "/",
+			MaxAge:   12 * 3600,
+			HTTPOnly: false,
 			SameSite: "Lax",
 		})
 	}

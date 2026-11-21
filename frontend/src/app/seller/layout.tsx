@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
 import { SellerHelp } from '@/components/seller/SellerHelp';
+import { LanguageSelector } from '@/components/layout/LanguageSelector';
 import {
   LayoutDashboard, Package, DollarSign, User,
   LogOut, Menu, ChevronRight, ShoppingBag, HelpCircle,
@@ -170,7 +171,10 @@ function SidebarContent({
       </nav>
 
       {/* Footer */}
-      <div className="px-3 py-3 border-t border-zinc-100 dark:border-zinc-800 space-y-1">
+      <div className="px-3 py-3 border-t border-zinc-100 dark:border-zinc-800 space-y-2">
+        <div className="px-1">
+          <LanguageSelector variant="full" dropDirection="up" />
+        </div>
         <Link href="/" className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
           ← Back to Marketplace
         </Link>
@@ -384,6 +388,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
             {headerTitle}
           </span>
           <div className="ml-auto flex items-center gap-2">
+            <LanguageSelector variant="compact" />
             {unreadCount > 0 && (
               <Link href="/seller/dashboard" className="relative p-2 rounded-xl text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90" aria-label="Notifications">
                 <Bell size={16} />
@@ -410,6 +415,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
               {pathname.split('/').pop()?.replace(/-/g, ' ') || 'Dashboard'}
             </p>
           </div>
+          <LanguageSelector variant="pill" />
           {unreadCount > 0 && (
             <Link href="/seller/dashboard" className="relative p-1.5 rounded-lg text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors" title={`${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}`}>
               <Bell size={16} />

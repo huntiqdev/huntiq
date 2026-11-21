@@ -90,21 +90,23 @@ func CSRFProtect(cfg CSRFConfig) fiber.Handler {
 		}
 
 		// 5. Check authentication context:
-		// If request has NO browser authentication cookies and uses a pure Bearer token header,
-		// it is a machine-to-machine API client immune to ambient browser CSRF attacks.
-		hasAuthCookie := c.Cookies("huntiq_session") != "" ||
-			c.Cookies("hm_token") != "" ||
-			c.Cookies("hm_admin_session") != "" ||
-			c.Cookies("huntiq_refresh") != ""
-
+		// If the request presents an explicit Bearer Authorization header,
+		// it is inherently immune to ambient browser cross-site request forgery
+		// because browsers cannot attach custom Authorization headers in cross-origin requests.
 		hasBearerAuth := strings.HasPrefix(c.Get("Authorization"), "Bearer ")
-
-		// If it's a pure non-browser Bearer token request with NO browser cookies present, bypass CSRF
-		if hasBearerAuth && !hasAuthCookie {
+		if hasBearerAuth {
+			// If client also supplied both CSRF cookie and header, ensure they cryptographically match
+			csrfCookie := c.Cookies(cfg.CookieName)
+			csrfHeader := c.Get(cfg.HeaderName)
+			if csrfCookie != "" && csrfHeader != "" {
+				if subtle.ConstantTimeCompare([]byte(csrfCookie), []byte(csrfHeader)) != 1 {
+					return fiber.NewError(fiber.StatusForbidden, "CSRF_TOKEN_INVALID")
+				}
+			}
 			return c.Next()
 		}
 
-		// 6. Anti-CSRF Token Verification for state-mutating requests
+		// 6. Anti-CSRF Token Verification for ambient cookie-authenticated mutating requests
 		csrfCookie := c.Cookies(cfg.CookieName)
 		csrfHeader := c.Get(cfg.HeaderName)
 
