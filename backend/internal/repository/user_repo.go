@@ -90,15 +90,23 @@ func (r *UserRepo) Create(ctx context.Context, u *models.User) (int, error) {
 	if err != nil {
 		return 0, err
 	}
+	buyerTier := u.BuyerTier
+	if buyerTier != "gold" && buyerTier != "premium" {
+		buyerTier = "normal"
+	}
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	err = r.db.QueryRow(ctx, `
-		INSERT INTO users (name, phone, business_name, email, password_hash, role, is_active, referral_code, seller_preference)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		INSERT INTO users (name, phone, business_name, email, password_hash, role, is_active, referral_code, seller_preference, buyer_tier)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::buyer_tier)
 		RETURNING id`,
-		u.Name, u.Phone, u.BusinessName, u.Email, u.PasswordHash, role, u.IsActive, refCode, sellerPref,
+		u.Name, u.Phone, u.BusinessName, u.Email, u.PasswordHash, role, u.IsActive, refCode, sellerPref, buyerTier,
 	).Scan(&id)
 	if err != nil {
 		return 0, err
+	}
+
+	if buyerTier == "gold" || buyerTier == "premium" {
+		_, _ = r.db.Exec(ctx, `UPDATE users SET buyer_tier_paid_at=NOW(), buyer_tier_expires_at=NOW() + INTERVAL '30 days' WHERE id=$1`, id)
 	}
 
 	// Always activate 'buyer' capability for all registered users
@@ -139,14 +147,18 @@ func (r *UserRepo) CreateOrGet(ctx context.Context, u *models.User) (int, error)
 	if err != nil {
 		return 0, err
 	}
+	buyerTier := u.BuyerTier
+	if buyerTier != "gold" && buyerTier != "premium" {
+		buyerTier = "normal"
+	}
 	var id int
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	err = r.db.QueryRow(ctx, `
-		INSERT INTO users (name, phone, business_name, email, password_hash, role, is_active, referral_code, seller_preference)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-		ON CONFLICT (phone, role) DO UPDATE SET updated_at = NOW()
+		INSERT INTO users (name, phone, business_name, email, password_hash, role, is_active, referral_code, seller_preference, buyer_tier)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::buyer_tier)
+		ON CONFLICT (phone, role) DO UPDATE SET buyer_tier = CASE WHEN EXCLUDED.buyer_tier != 'normal' THEN EXCLUDED.buyer_tier ELSE users.buyer_tier END, updated_at = NOW()
 		RETURNING id`,
-		u.Name, u.Phone, u.BusinessName, u.Email, u.PasswordHash, role, u.IsActive, refCode, sellerPref,
+		u.Name, u.Phone, u.BusinessName, u.Email, u.PasswordHash, role, u.IsActive, refCode, sellerPref, buyerTier,
 	).Scan(&id)
 	if err != nil {
 		return 0, err

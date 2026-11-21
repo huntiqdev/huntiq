@@ -13,7 +13,7 @@ import { ErrorBanner } from '@/components/ui/ErrorBanner';
 import type { ErrorType } from '@/lib/errors';
 import {
   ShoppingBag, Phone, Lock, User, Building2, Mail,
-  Eye, EyeOff, AlertCircle, CheckCircle2, ArrowLeft, Sparkles, Home,
+  Eye, EyeOff, AlertCircle, CheckCircle2, ArrowLeft, Sparkles, Home, Crown,
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 import PasswordStrength, { validatePasswordStrength } from '@/components/forms/PasswordStrength';
@@ -97,6 +97,7 @@ function AuthContent() {
 
   const [regPhone, setRegPhone] = useState('');
   const [regPhoneErr, setRegPhoneErr] = useState('');
+  const [selectedBuyerTier, setSelectedBuyerTier] = useState<'gold' | 'premium'>('gold');
   const [showRegPw, setShowRegPw] = useState(false);
   const [regForm, setRegForm] = useState({
     name: '',
@@ -278,6 +279,9 @@ function AuthContent() {
         role: selectedRole,
         seller_preference: selectedSellerPref,
         referral_code: refCode || undefined,
+        buyer_tier: selectedRole === 'buyer' ? selectedBuyerTier : undefined,
+        payment_method: selectedRole === 'buyer' ? 'telebirr' : undefined,
+        payment_ref: selectedRole === 'buyer' ? `TB-REG-${Date.now().toString().slice(-6)}` : undefined,
       });
 
       setRegPhone(pr.normalized);
@@ -594,6 +598,46 @@ function AuthContent() {
               </p>
             </div>
           </div>
+
+          {/* Required Buyer Privilege Tier (Normal Buyer Registration Disabled) */}
+          {!isSeller && !isRental && (
+            <div className="space-y-2 p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-2xl">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-black uppercase text-amber-500 flex items-center gap-1.5">
+                  <Crown size={13} /> Required Buyer Privilege Tier
+                </span>
+                <span className="text-[10px] text-zinc-400">Normal registration disabled</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <button
+                  type="button"
+                  onClick={() => setSelectedBuyerTier('gold')}
+                  className={`p-2.5 rounded-xl border text-left transition-all ${
+                    selectedBuyerTier === 'gold'
+                      ? 'bg-amber-500/20 border-amber-500 text-white font-bold ring-1 ring-amber-500/50'
+                      : 'bg-white/5 border-white/10 text-zinc-400'
+                  }`}
+                >
+                  <p className="font-black text-amber-400">Gold Buyer</p>
+                  <p className="text-[10px] text-zinc-300">299 ETB / mo</p>
+                  <p className="text-[9px] text-zinc-400 mt-0.5">Direct seller contact & broker discount</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedBuyerTier('premium')}
+                  className={`p-2.5 rounded-xl border text-left transition-all ${
+                    selectedBuyerTier === 'premium'
+                      ? 'bg-purple-500/20 border-purple-500 text-white font-bold ring-1 ring-purple-500/50'
+                      : 'bg-white/5 border-white/10 text-zinc-400'
+                  }`}
+                >
+                  <p className="font-black text-purple-400">Premium VIP</p>
+                  <p className="text-[10px] text-zinc-300">599 ETB / mo</p>
+                  <p className="text-[9px] text-zinc-400 mt-0.5">Off-market demand & 1-on-1 advisor</p>
+                </button>
+              </div>
+            </div>
+          )}
 
           <PhoneField
             value={regPhone}

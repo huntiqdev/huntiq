@@ -9,6 +9,11 @@ type RegisterRequest struct {
 	Role             string `json:"role"`              // seller | buyer
 	ReferralCode     string `json:"referral_code"`     // optional ?ref= code from registration link
 	SellerPreference string `json:"seller_preference"` // sale | rent | both (for sellers only)
+	BuyerTier        string `json:"buyer_tier"`        // gold | premium (required for buyers — normal is disabled)
+	PaymentMethod    string `json:"payment_method"`    // telebirr | cbe
+	PaymentRef       string `json:"payment_ref"`       // payment reference / transaction id
+	PayerPhone       string `json:"payer_phone"`       // phone used for payment
+	DurationDays     int    `json:"duration_days"`     // subscription duration (default 30)
 }
 
 type LoginRequest struct {

@@ -39,6 +39,11 @@ export const authApi = {
     role?: string;
     seller_preference?: string;
     referral_code?: string;
+    buyer_tier?: string;
+    payment_method?: string;
+    payment_ref?: string;
+    payer_phone?: string;
+    duration_days?: number;
   }) => fetchAPI<any>('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
 
   unifiedLogin: async (data: { phone?: string; email?: string; password: string }) => {

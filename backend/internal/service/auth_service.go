@@ -173,6 +173,15 @@ func (s *AuthService) Register(ctx context.Context, req dto.RegisterRequest) (*m
 	if role != "buyer" {
 		role = "seller"
 	}
+	buyerTier := strings.ToLower(strings.TrimSpace(req.BuyerTier))
+	if role == "buyer" {
+		if buyerTier != "gold" && buyerTier != "premium" {
+			return nil, errors.New("buyer registration is restricted to paid tiers: Gold Buyer or Premium Buyer — free normal registration is disabled")
+		}
+		if req.PaymentMethod == "" {
+			req.PaymentMethod = "telebirr"
+		}
+	}
 	hash, err := security.HashPassword(req.Password)
 	if err != nil {
 		return nil, err
@@ -196,8 +205,36 @@ func (s *AuthService) Register(ctx context.Context, req dto.RegisterRequest) (*m
 		Role:             role,
 		IsActive:         true,
 		SellerPreference: req.SellerPreference,
+		BuyerTier:        buyerTier,
 	}
 	id, err := s.repo.Create(ctx, u)
+	if err == nil && role == "buyer" && (buyerTier == "gold" || buyerTier == "premium") {
+		cost := 299.0
+		if buyerTier == "premium" {
+			cost = 599.0
+		}
+		ref := req.PaymentRef
+		if ref == "" {
+			ref = fmt.Sprintf("TB-REG-%d", time.Now().Unix())
+		}
+		payerPhone := req.PayerPhone
+		if payerPhone == "" {
+			payerPhone = req.Phone
+		}
+		method := req.PaymentMethod
+		if method == "" {
+			method = "telebirr"
+		}
+		dur := req.DurationDays
+		if dur <= 0 {
+			dur = 30
+		}
+		reqID, uErr := s.repo.SubmitBuyerUpgradeRequest(ctx, id, buyerTier, cost, ref, payerPhone, method, dur)
+		if uErr == nil && (method == "telebirr" || s.devMode) {
+			_ = s.repo.ApproveBuyerUpgradeRequest(ctx, reqID, 1)
+			u.BuyerTier = buyerTier
+		}
+	}
 	if err != nil {
 		if isDuplicatePhone(err) {
 			existing, lookupErr := s.repo.GetByPhoneAndRole(ctx, req.Phone, role)
@@ -1229,6 +1266,15 @@ func (s *AuthService) UnifiedRegister(ctx context.Context, req dto.RegisterReque
 	if role != "seller" {
 		role = "buyer"
 	}
+	buyerTier := strings.ToLower(strings.TrimSpace(req.BuyerTier))
+	if role == "buyer" {
+		if buyerTier != "gold" && buyerTier != "premium" {
+			return nil, "", errors.New("buyer registration is restricted to paid tiers: Gold Buyer or Premium Buyer — free normal registration is disabled")
+		}
+		if req.PaymentMethod == "" {
+			req.PaymentMethod = "telebirr"
+		}
+	}
 
 	hash, err := security.HashPassword(req.Password)
 	if err != nil {
@@ -1258,6 +1304,7 @@ func (s *AuthService) UnifiedRegister(ctx context.Context, req dto.RegisterReque
 		Role:             role,
 		IsActive:         true,
 		SellerPreference: sellerPref,
+		BuyerTier:        buyerTier,
 		Capabilities:     []string{"buyer"},
 	}
 
@@ -1269,6 +1316,33 @@ func (s *AuthService) UnifiedRegister(ctx context.Context, req dto.RegisterReque
 	}
 
 	id, err := s.repo.Create(ctx, u)
+	if err == nil && role == "buyer" && (buyerTier == "gold" || buyerTier == "premium") {
+		cost := 299.0
+		if buyerTier == "premium" {
+			cost = 599.0
+		}
+		ref := req.PaymentRef
+		if ref == "" {
+			ref = fmt.Sprintf("TB-REG-%d", time.Now().Unix())
+		}
+		payerPhone := req.PayerPhone
+		if payerPhone == "" {
+			payerPhone = req.Phone
+		}
+		method := req.PaymentMethod
+		if method == "" {
+			method = "telebirr"
+		}
+		dur := req.DurationDays
+		if dur <= 0 {
+			dur = 30
+		}
+		reqID, uErr := s.repo.SubmitBuyerUpgradeRequest(ctx, id, buyerTier, cost, ref, payerPhone, method, dur)
+		if uErr == nil && (method == "telebirr" || s.devMode) {
+			_ = s.repo.ApproveBuyerUpgradeRequest(ctx, reqID, 1)
+			u.BuyerTier = buyerTier
+		}
+	}
 	if err != nil {
 		if isDuplicatePhone(err) {
 			existing, lookupErr := s.repo.GetByPhone(ctx, req.Phone)

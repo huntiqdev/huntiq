@@ -77,6 +77,14 @@ func (h *AuthHandler) registerUser(c *fiber.Ctx, role string) error {
 		}
 	}
 
+	// Enforce Gold/Premium tier requirement for buyers
+	if role == "buyer" {
+		tier := strings.ToLower(strings.TrimSpace(req.BuyerTier))
+		if tier != "gold" && tier != "premium" {
+			return response.BadRequest(c, "buyer registration requires selecting a paid tier (Gold Buyer or Premium Buyer) — free normal registration is disabled")
+		}
+	}
+
 	if !h.svc.IsRegistrationAllowed(c.Context(), role) {
 		return response.BadRequest(c, role+" registration is currently closed — contact admin")
 	}
