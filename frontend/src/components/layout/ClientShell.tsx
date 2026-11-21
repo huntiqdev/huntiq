@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Home, Search, PlusCircle, User, Layers } from 'lucide-react';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
+import { AIAssistant } from '@/components/ai/AIAssistant';
 
 export function ClientShell({ children }: { children: React.ReactNode }) {
   const { t, locale } = useLocale();
@@ -15,9 +16,19 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const isSellerArea = pathname.startsWith('/seller');
   const isBuyerArea = pathname.startsWith('/buyer');
 
-  // Admin, console, seller, and buyer workspaces have their own dedicated full-screen layouts
-  if (isAdmin || isSellerArea || isBuyerArea) {
+  // Admin console has its own full-screen layout
+  if (isAdmin) {
     return <>{children}</>;
+  }
+
+  // Seller and Buyer workspaces
+  if (isSellerArea || isBuyerArea) {
+    return (
+      <>
+        {children}
+        <AIAssistant />
+      </>
+    );
   }
 
   const isProductDetail = pathname.startsWith('/products/') && pathname !== '/products';
@@ -37,6 +48,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="min-h-screen pb-20 md:pb-0">{children}</main>
       <Footer />
+      <AIAssistant />
 
       {/* Mobile Bottom Navigation — hidden on product detail pages to prioritize the sticky Buy/Contact CTA */}
       {!isProductDetail && (
