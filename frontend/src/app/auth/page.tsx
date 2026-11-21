@@ -113,6 +113,18 @@ function AuthContent() {
   const [forgotNewPw, setForgotNewPw] = useState('');
   const [forgotConfirmPw, setForgotConfirmPw] = useState('');
   const [showForgotPw, setShowForgotPw] = useState(false);
+  const [devOtp, setDevOtp] = useState<string>('');
+
+  const fetchDevOtp = async (phone: string) => {
+    if (!phone) return;
+    try {
+      const res = await fetch(`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(phone)}`);
+      const data = await res.json();
+      if (data.otp) {
+        setDevOtp(data.otp);
+      }
+    } catch {}
+  };
 
   useEffect(() => {
     clearErr();
@@ -372,6 +384,32 @@ function AuthContent() {
           <h1 className="text-xl font-black text-zinc-900 dark:text-white">{u.verify_phone_title}</h1>
           <p className="text-sm text-zinc-500 dark:text-white/40 mt-1">{u.code_sent_to} {regPhone}</p>
         </div>
+
+        {/* Development Environment OTP Helper */}
+        <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-amber-500">🛠️ Dev Environment Helper:</span>
+            <button
+              type="button"
+              onClick={() => fetchDevOtp(regPhone)}
+              className="text-[10px] px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded hover:bg-amber-500/30 font-medium transition-colors"
+            >
+              Fetch Dev OTP
+            </button>
+          </div>
+          <p className="text-[11px] text-zinc-400">
+            In development mode, OTP codes are logged to backend terminal or available via endpoint:
+          </p>
+          <p className="font-mono text-zinc-300">
+            GET <a href={`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(regPhone)}`} target="_blank" rel="noreferrer" className="text-[#1769E0] underline">/api/dev/otp?phone={regPhone}</a>
+          </p>
+          {devOtp && (
+            <div className="mt-1 p-1.5 bg-black/40 rounded border border-amber-500/40 text-center font-mono font-bold text-amber-300 text-sm">
+              Active OTP: {devOtp}
+            </div>
+          )}
+        </div>
+
         <OTPInput
           recipient={regPhone}
           onVerified={handleOTP}
@@ -423,6 +461,32 @@ function AuthContent() {
           <h1 className="text-xl font-black text-zinc-900 dark:text-white">{u.enter_reset_code_title}</h1>
           <p className="text-sm text-zinc-500 dark:text-white/40 mt-1">{u.code_sent_to} {forgotPhone}</p>
         </div>
+
+        {/* Development Environment OTP Helper */}
+        <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-amber-500">🛠️ Dev Environment Helper:</span>
+            <button
+              type="button"
+              onClick={() => fetchDevOtp(forgotPhone)}
+              className="text-[10px] px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded hover:bg-amber-500/30 font-medium transition-colors"
+            >
+              Fetch Dev OTP
+            </button>
+          </div>
+          <p className="text-[11px] text-zinc-400">
+            In development mode, reset OTP codes are available via:
+          </p>
+          <p className="font-mono text-zinc-300">
+            GET <a href={`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(forgotPhone)}`} target="_blank" rel="noreferrer" className="text-[#1769E0] underline">/api/dev/otp?phone={forgotPhone}</a>
+          </p>
+          {devOtp && (
+            <div className="mt-1 p-1.5 bg-black/40 rounded border border-amber-500/40 text-center font-mono font-bold text-amber-300 text-sm">
+              Active OTP: {devOtp}
+            </div>
+          )}
+        </div>
+
         <form onSubmit={handleForgotReset} className="space-y-4">
           <div>
             <label className={LBL_CLS}>{u.reset_code_label}</label>

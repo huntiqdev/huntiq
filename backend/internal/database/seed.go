@@ -200,5 +200,8 @@ func AutoMigrateAndSeed(ctx context.Context, pool *pgxpool.Pool) error {
 	if err := VerifyOrSeed(ctx, pool, ""); err != nil {
 		return fmt.Errorf("auto-seed error: %w", err)
 	}
+	if err := SeedAdmins(ctx, pool); err != nil {
+		return fmt.Errorf("seed-admins error: %w", err)
+	}
 	return nil
 }
