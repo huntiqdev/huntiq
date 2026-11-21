@@ -42,8 +42,8 @@ func LocateLoccatDataDir(custom string) string {
 func CheckSeedStatus(ctx context.Context, pool *pgxpool.Pool) (categoriesCount int, locationsCount int, isSeeded bool, err error) {
 	_ = pool.QueryRow(ctx, `SELECT count(*) FROM category_hierarchy`).Scan(&categoriesCount)
 	_ = pool.QueryRow(ctx, `SELECT count(*) FROM location_hierarchy`).Scan(&locationsCount)
-	// Fully seeded means 20,000+ categories and 400+ locations exist
-	isSeeded = categoriesCount >= 20000 && locationsCount >= 400
+	// Fully seeded means 80+ categories and 400+ locations exist
+	isSeeded = categoriesCount >= 80 && locationsCount >= 400
 	return categoriesCount, locationsCount, isSeeded, nil
 }
 
@@ -157,7 +157,7 @@ func VerifyOrSeed(ctx context.Context, pool *pgxpool.Pool, customDataDir string)
 	}
 
 	// 2. Seed Categories if missing
-	if catCount < 20000 {
+	if catCount < 80 {
 		systems, _ := getClassificationSystemDirs(dataDir)
 		for _, sys := range systems {
 			files, err := getSystemFamilyFiles(dataDir, sys)

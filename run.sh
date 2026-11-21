@@ -199,12 +199,12 @@ cmd_native() {
 
     # Wait for backend health
     local backend_ready=0
-    for _ in {1..40}; do
+    for i in {1..80}; do
         if curl -s http://127.0.0.1:8080/health >/dev/null 2>&1; then
             backend_ready=1
             break
         fi
-        sleep 0.25
+        sleep 0.5
     done
     if [ "$backend_ready" -ne 1 ]; then
         echo "❌ Backend failed to start. Log:"

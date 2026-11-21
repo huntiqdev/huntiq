@@ -99,21 +99,24 @@ func (p *PythonSupervisor) Start() error {
 
 	go func() {
 		scanner := bufio.NewScanner(stdout)
+		foundPort := false
 		for scanner.Scan() {
 			line := scanner.Text()
-			if strings.HasPrefix(line, "HUNTIQ_AI_PORT=") {
+			if !foundPort && strings.HasPrefix(line, "HUNTIQ_AI_PORT=") {
 				pStr := strings.TrimPrefix(line, "HUNTIQ_AI_PORT=")
 				port, err := strconv.Atoi(strings.TrimSpace(pStr))
 				if err == nil && port > 0 {
+					foundPort = true
 					portChan <- port
-					return
 				}
 			}
 		}
-		if err := scanner.Err(); err != nil {
-			errChan <- err
-		} else {
-			errChan <- fmt.Errorf("python process exited without publishing port")
+		if !foundPort {
+			if err := scanner.Err(); err != nil {
+				errChan <- err
+			} else {
+				errChan <- fmt.Errorf("python process exited without publishing port")
+			}
 		}
 	}()
 
