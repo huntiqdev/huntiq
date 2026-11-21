@@ -36,7 +36,6 @@ type AppDeps struct {
 	IdentityHandler       *handlers.IdentityHandler
 	OrganizationHandler   *handlers.OrganizationHandler
 	MasterDataHandler     *handlers.MasterDataHandler
-	AIHandler             *handlers.AIHandler
 }
 
 func registerRoutes(app *fiber.App, d *AppDeps) {
@@ -147,30 +146,6 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 			})
 		},
 	})
-
-	aiLimiter := limiter.New(limiter.Config{
-		Max:        d.Config.AIRateLimitPerMin,
-		Expiration: 1 * time.Minute,
-		KeyGenerator: func(c *fiber.Ctx) string {
-			if id, ok := c.Locals("userID").(int); ok && id > 0 {
-				return fmt.Sprintf("ai:%d", id)
-			}
-			return "ai:" + c.IP()
-		},
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"success": false,
-				"error":   "HUNTIQ AI request limit reached — please wait a minute and try again",
-			})
-		},
-	})
-
-	// ── HUNTIQ AI Routes ─────────────────────────────────────────────────────
-	aiGroup := api.Group("/ai")
-	aiGroup.Get("/health", d.AIHandler.Health)
-	aiGroup.Post("/chat", aiLimiter, d.AIHandler.Chat)
-	aiGroup.Get("/session/:sessionId", d.AIHandler.GetSessionHistory)
-	aiGroup.Delete("/session/:sessionId", d.AIHandler.ClearSession)
 
 	// ── Public Routes ────────────────────────────────────────────────────────
 	api.Get("/products", searchLimiter, d.MW.OptionalAuth, d.ProductHandler.List)
@@ -407,7 +382,6 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	admin.Put("/settings", d.MW.RequirePermission("settings"), d.AdminHandler.UpdateSettings)
 	admin.Put("/settings/with-reason", d.MW.RequirePermission("settings"), d.AdminHandler.UpdateSettingsWithReason)
 	admin.Get("/settings/log", d.MW.RequirePermission("settings"), d.AdminHandler.SettingsChangeLog)
-	admin.Get("/ai/metrics", d.MW.RequirePermission("settings"), d.AIHandler.AdminMetrics)
 
 	admin.Post("/users/:id/warn", d.MW.RequirePermission("sellers"), d.AdminHandler.IssueWarning)
 	admin.Put("/users/:id/ban", middleware.RequirePlatformOwner, d.AdminHandler.BanUser)

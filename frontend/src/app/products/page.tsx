@@ -663,7 +663,6 @@ function ProductsContent() {
       <div className="max-w-screen-2xl mx-auto px-[2%] sm:px-[4%] lg:px-[6%] py-4">
         {/* Products area — full-width, clean layout */}
         <div className="w-full">
-
           {/* ── CLEAN FILTER BAR: Results & Active Chips on Left, Sort & Filters on Right ── */}
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl px-4 py-3 mb-4 shadow-xs flex items-center justify-between gap-3">
             {/* Left: Results count & Active filter tags */}

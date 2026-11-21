@@ -16,7 +16,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 
-	"github.com/your-org/used-tools-marketplace/internal/ai"
 	"github.com/your-org/used-tools-marketplace/internal/cache"
 	"github.com/your-org/used-tools-marketplace/internal/config"
 	"github.com/your-org/used-tools-marketplace/internal/database"
@@ -32,6 +31,8 @@ import (
 
 func main() {
 	_ = godotenv.Load()
+	_ = godotenv.Load("backend/.env")
+	_ = godotenv.Load("../backend/.env")
 	migrateOnly := flag.Bool("migrate-only", false, "Run database migrations and exit")
 	seedOnly := flag.Bool("seed-only", false, "Run master data seed and exit")
 	flag.Parse()
@@ -175,7 +176,6 @@ func main() {
 	orgRepo := repository.NewOrganizationRepo(db)
 	recoveryRepo := repository.NewRecoveryRepo(db)
 	masterDataRepo := repository.NewMasterDataRepo(db)
-	aiRepo := ai.NewAIRepository(db)
 
 	// In-memory active user cache
 	const isActiveCacheMax = 10_000
@@ -243,15 +243,6 @@ func main() {
 	identitySvc := service.NewIdentityService(identityRepo, cfg.DevMode)
 	orgSvc := service.NewOrganizationService(orgRepo)
 	masterDataSvc := service.NewMasterDataService(masterDataRepo)
-
-	// HUNTIQ AI Integration
-	aiTools := ai.NewToolRegistry(productSvc, categoryHierarchyRepo, locationHierarchyRepo, cfg.AppBaseURL)
-	geminiClient := ai.NewGeminiClient(cfg.GeminiAPIKey, cfg.GeminiModel, cfg.AITimeoutSeconds, cfg.AIMaxOutputTokens)
-	aiSvc := ai.NewAIService(geminiClient, aiRepo, cfg.AIEnabled, cfg.AIRateLimitPerMin).
-		WithSettingsGetter(func(ctx context.Context, k string) string {
-			return adminSvc.GetSetting(ctx, k)
-		}).
-		WithToolRegistry(aiTools)
 
 	txSvc.WithReferralService(referralSvc)
 	authSvc.WithReferralService(referralSvc).
@@ -384,7 +375,6 @@ func main() {
 	identityHandler := handlers.NewIdentityHandler(identitySvc)
 	organizationHandler := handlers.NewOrganizationHandler(orgSvc)
 	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
-	aiHandler := handlers.NewAIHandler(aiSvc, aiRepo)
 
 	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
@@ -460,15 +450,23 @@ func main() {
 		IdentityHandler:       identityHandler,
 		OrganizationHandler:   organizationHandler,
 		MasterDataHandler:     masterDataHandler,
-		AIHandler:             aiHandler,
 	})
 
-	// Background listener
+	// Background listener with resilience for port binding
 	serverErr := make(chan error, 1)
 	go func() {
 		log.Printf("Server starting on port %s", cfg.AppPort)
-		if err := app.Listen(":" + cfg.AppPort); err != nil {
-			serverErr <- err
+		var listenErr error
+		for attempt := 1; attempt <= 5; attempt++ {
+			listenErr = app.Listen(":" + cfg.AppPort)
+			if listenErr == nil || !strings.Contains(listenErr.Error(), "address already in use") {
+				break
+			}
+			log.Printf("Port %s busy (attempt %d/5), waiting 1s...", cfg.AppPort, attempt)
+			time.Sleep(1 * time.Second)
+		}
+		if listenErr != nil {
+			serverErr <- listenErr
 		}
 	}()
 

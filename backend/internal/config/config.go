@@ -39,14 +39,6 @@ type Config struct {
 	TelebirrAPIEndpoint string
 	TelebirrNotifyURL   string
 	TelebirrReturnURL   string
-
-	// HUNTIQ AI Integration
-	GeminiAPIKey      string
-	GeminiModel       string
-	AIEnabled         bool
-	AITimeoutSeconds  int
-	AIMaxOutputTokens int
-	AIRateLimitPerMin int
 }
 
 func Load() *Config {
@@ -123,13 +115,6 @@ func Load() *Config {
 		TelebirrAPIEndpoint: getEnv("TELEBIRR_API_ENDPOINT", "https://app.telebirr.et/payment"),
 		TelebirrNotifyURL:   getEnv("TELEBIRR_NOTIFY_URL", appBaseURL+"/api/telebirr/webhook"),
 		TelebirrReturnURL:   getEnv("TELEBIRR_RETURN_URL", frontendURL+"/payment/callback"),
-
-		GeminiAPIKey:      getEnv("GEMINI_API_KEY", ""),
-		GeminiModel:       getEnv("GEMINI_MODEL", "gemini-1.5-flash"),
-		AIEnabled:         getEnvBool("AI_ENABLED", true),
-		AITimeoutSeconds:  getEnvInt("AI_TIMEOUT_SECONDS", 15),
-		AIMaxOutputTokens: getEnvInt("AI_MAX_OUTPUT_TOKENS", 1024),
-		AIRateLimitPerMin: getEnvInt("AI_RATE_LIMIT_PER_MIN", 30),
 	}
 }
 
@@ -233,13 +218,6 @@ func NewTestConfig() *Config {
 		RedisPassword: "",
 		RedisDB:       0,
 		EnableEthiopiaGeoBlock: false,
-
-		GeminiAPIKey:      "",
-		GeminiModel:       "gemini-1.5-flash",
-		AIEnabled:         true,
-		AITimeoutSeconds:  5,
-		AIMaxOutputTokens: 512,
-		AIRateLimitPerMin: 60,
 	}
 }
 
