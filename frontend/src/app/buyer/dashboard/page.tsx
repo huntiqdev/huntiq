@@ -9,6 +9,7 @@ import {
   CheckCircle, Clock, Sparkles, Lock, Images, PhoneCall,
   ShoppingBag, Zap,
 } from 'lucide-react';
+import { useLocale } from '@/hooks/useLocale';
 
 const TIER_COLOR: Record<string, string> = {
   normal:  'text-zinc-400',
@@ -43,6 +44,8 @@ const TIER_PERKS: Record<string, { icon: any; text: string; color: string }[]> =
 
 export default function BuyerDashboardPage() {
   const { user, buyerTier } = useAuth();
+  const { t } = useLocale();
+  const d = (t as any).dashboard ?? {};
   const [profile, setProfile] = useState<any>(null);
   const [orders, setOrders]   = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -108,7 +111,7 @@ export default function BuyerDashboardPage() {
                 {buyerTier === 'premium' ? <Crown size={16} className="text-white" /> : <Star size={16} className="text-white" />}
               </div>
               <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30">Customer Access Tier</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/30">{d.customer_access_tier ?? 'Customer Access Tier'}</p>
                 <p className="text-sm font-black text-white capitalize">{buyerTier} Member</p>
               </div>
             </div>
@@ -143,7 +146,7 @@ export default function BuyerDashboardPage() {
             <ShoppingCart size={16} />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-zinc-900 dark:text-white text-sm">My Purchases & Orders</p>
+            <p className="font-bold text-zinc-900 dark:text-white text-sm">{d.my_purchases_orders ?? 'My Purchases & Orders'}</p>
             <p className="text-xs text-zinc-400">{orders.length} total request{orders.length !== 1 ? 's' : ''}</p>
           </div>
           <ArrowUpRight size={14} className="text-zinc-300 shrink-0" />
@@ -154,8 +157,8 @@ export default function BuyerDashboardPage() {
             <Package size={16} />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-zinc-900 dark:text-white text-sm">Browse Rental Properties</p>
-            <p className="text-xs text-zinc-400">Leases & Landlord listings</p>
+            <p className="font-bold text-zinc-900 dark:text-white text-sm">{d.browse_rentals ?? 'Browse Rental Properties'}</p>
+            <p className="text-xs text-zinc-400">{d.leases_landlords ?? 'Leases & Landlord listings'}</p>
           </div>
           <ArrowUpRight size={14} className="text-zinc-300 shrink-0" />
         </Link>
@@ -164,7 +167,7 @@ export default function BuyerDashboardPage() {
       {/* Recent orders — with product title and empty state */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 dark:border-zinc-800">
-          <h2 className="font-bold text-zinc-900 dark:text-white text-sm">Recent Requests</h2>
+          <h2 className="font-bold text-zinc-900 dark:text-white text-sm">{d.recent_requests ?? 'Recent Requests'}</h2>
           {orders.length > 0 && (
             <Link href="/buyer/orders" className="text-xs text-[#1769E0] font-bold hover:underline">View all →</Link>
           )}
@@ -173,7 +176,7 @@ export default function BuyerDashboardPage() {
         {orders.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 gap-3 text-zinc-400">
             <ShoppingBag size={28} className="opacity-30" />
-            <p className="text-sm font-semibold">No order requests yet</p>
+            <p className="text-sm font-semibold">{d.no_requests_yet ?? 'No order requests yet'}</p>
             <Link href="/products"
               className="text-xs text-[#1769E0] font-bold hover:underline flex items-center gap-1">
               Browse products <ArrowUpRight size={11} />

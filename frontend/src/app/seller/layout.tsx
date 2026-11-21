@@ -6,6 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import { api } from '@/lib/api';
 import { SellerHelp } from '@/components/seller/SellerHelp';
 import { LanguageSelector } from '@/components/layout/LanguageSelector';
+import { useLocale } from '@/hooks/useLocale';
 import {
   LayoutDashboard, Package, DollarSign, User,
   LogOut, Menu, ChevronRight, ShoppingBag, HelpCircle,
@@ -51,22 +52,20 @@ function SidebarContent({
   sellerName, sellerTier, userId, pathname,
   visibleNav, lockedNav, sellerPreference, isLandlord, onClose, onHelp, onLogout,
 }: SidebarProps) {
+  const { t } = useLocale();
+  const sn = t.seller_nav;
   const TierIcon = TIER_ICON[sellerTier];
 
   const isRentMode = sellerPreference === 'rent' || (!sellerPreference && isLandlord);
   const isDualMode = sellerPreference === 'both';
 
-  const panelTitle = isRentMode
-    ? 'HUNTIQ'
-    : isDualMode
-    ? 'HUNTIQ'
-    : 'HUNTIQ';
+  const panelTitle = 'HUNTIQ';
 
   const panelSubtitle = isRentMode
-    ? 'Landlord Console'
+    ? (sn?.landlord_console ?? 'Landlord Console')
     : isDualMode
-    ? 'Provider Studio'
-    : 'Seller Studio';
+    ? (sn?.provider_studio ?? 'Provider Studio')
+    : (sn?.seller_studio ?? 'Seller Studio');
 
   const activeColor = isRentMode
     ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
@@ -82,14 +81,17 @@ function SidebarContent({
 
   const getNavLabel = (key: string) => {
     if (key === 'nav_my_products') {
-      return isRentMode ? 'Properties & Rentals' : isDualMode ? 'Listings & Products' : 'My Products';
+      return isRentMode ? (sn?.properties_rentals ?? 'Properties & Rentals') : isDualMode ? (sn?.my_products ?? 'Listings & Products') : (sn?.my_products ?? 'My Products');
     }
     if (key === 'nav_orders') {
-      return isRentMode ? 'Lease Requests' : isDualMode ? 'Orders & Bookings' : 'Order Requests';
+      return isRentMode ? (sn?.lease_requests ?? 'Lease Requests') : (sn?.orders ?? 'Order Requests');
     }
     if (key === 'nav_sales') {
-      return isRentMode ? 'Rental Income' : isDualMode ? 'Revenue & Payouts' : 'Sales';
+      return isRentMode ? (sn?.rental_income ?? 'Rental Income') : (sn?.sales ?? 'Sales');
     }
+    if (key === 'nav_dashboard') return sn?.dashboard ?? 'Dashboard';
+    if (key === 'nav_analytics') return sn?.analytics ?? 'Analytics';
+    if (key === 'nav_profile') return sn?.profile ?? 'Profile';
     return NAV_LABELS[key] || key;
   };
 
@@ -151,7 +153,9 @@ function SidebarContent({
         {/* Locked items */}
         {lockedNav.length > 0 && (
           <div className="pt-2 mt-1 border-t border-zinc-100 dark:border-zinc-800">
-            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 mb-1">Upgrade to unlock</p>
+            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 mb-1">
+              {sn?.upgrade_hint ?? 'Upgrade to unlock'}
+            </p>
             {lockedNav.map(({ labelKey, icon: Icon, minTier }) => (
               <Link key={labelKey} href="/seller/dashboard" onClick={onClose}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-zinc-300 dark:text-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-all">
@@ -176,11 +180,11 @@ function SidebarContent({
           <LanguageSelector variant="full" dropDirection="up" />
         </div>
         <Link href="/" className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
-          ← Back to Marketplace
+          ← {sn?.back_to_marketplace ?? 'Back to Marketplace'}
         </Link>
         <button onClick={onLogout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
-          <LogOut size={15} /> Sign Out
+          <LogOut size={15} /> {sn?.sign_out ?? 'Sign Out'}
         </button>
       </div>
     </div>
@@ -188,6 +192,8 @@ function SidebarContent({
 }
 
 export default function SellerLayout({ children }: { children: React.ReactNode }) {
+  const { t } = useLocale();
+  const sn = t.seller_nav;
   const { user, isSeller, isLandlord, sellerPreference, loading, logout, activateCapability } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
@@ -246,7 +252,9 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
             <Layers size={30} />
           </div>
           <div>
-            <h2 className="text-xl font-black text-zinc-900 dark:text-white">Choose Your Provider Console</h2>
+            <h2 className="text-xl font-black text-zinc-900 dark:text-white">
+              {sn?.choose_console ?? 'Choose Your Provider Console'}
+            </h2>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-sm mx-auto">
               HUNTIQ separates Goods Merchants from Rental Hosts. Activate the capability matching your operational model:
             </p>
@@ -259,7 +267,9 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
                 <div className="w-8 h-8 rounded-lg bg-[#1769E0] text-white flex items-center justify-center mb-2">
                   <ShoppingBag size={16} />
                 </div>
-                <h3 className="font-bold text-sm text-zinc-900 dark:text-white">Seller Studio</h3>
+                <h3 className="font-bold text-sm text-zinc-900 dark:text-white">
+                  {sn?.seller_studio ?? 'Seller Studio'}
+                </h3>
                 <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1">
                   For merchants selling physical goods, electronics, vehicles, and catalog inventory.
                 </p>
@@ -270,7 +280,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
                 }}
                 className="mt-4 w-full py-2.5 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl font-bold text-xs shadow-md shadow-[#1769E0]/20 transition-all cursor-pointer"
               >
-                Activate Seller
+                {sn?.activate ?? 'Activate'} {sn?.seller_studio ?? 'Seller Studio'}
               </button>
             </div>
 
@@ -280,7 +290,9 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
                 <div className="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center mb-2">
                   <Home size={16} />
                 </div>
-                <h3 className="font-bold text-sm text-zinc-900 dark:text-white">Landlord Console</h3>
+                <h3 className="font-bold text-sm text-zinc-900 dark:text-white">
+                  {sn?.landlord_console ?? 'Landlord Console'}
+                </h3>
                 <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1">
                   For property landlords, vehicle rental agencies, equipment leasing, and booking hosts.
                 </p>
@@ -291,7 +303,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
                 }}
                 className="mt-4 w-full py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl font-bold text-xs shadow-md shadow-teal-600/20 transition-all cursor-pointer"
               >
-                Activate Landlord
+                {sn?.activate ?? 'Activate'} {sn?.landlord_console ?? 'Landlord Console'}
               </button>
             </div>
           </div>

@@ -9,6 +9,7 @@ import PasswordStrength, { validatePasswordStrength } from '@/components/forms/P
 import { OTPInput } from '@/components/forms/OTPInput';
 import { ErrorBanner } from '@/components/ui/ErrorBanner';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
+import { useLocale } from '@/hooks/useLocale';
 import {
   Crown,
   Sparkles,
@@ -34,6 +35,8 @@ const LBL_CLS = 'text-[10px] font-black uppercase tracking-widest text-zinc-500 
 export default function BuyerRegisterPage() {
   const router = useRouter();
   const { user, login } = useAuth();
+  const { t } = useLocale();
+  const btf = (t as any).buyer_tier_features ?? {};
 
   const [tier, setTier] = useState<'gold' | 'premium'>('gold');
   const [duration, setDuration] = useState<number>(30);
@@ -253,8 +256,8 @@ export default function BuyerRegisterPage() {
                 <Star size={18} />
               </div>
               <div>
-                <h3 className="font-black text-base text-white">Gold Buyer</h3>
-                <p className="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Verified Trader</p>
+                <h3 className="font-black text-base text-white">{btf.gold_buyer ?? 'Gold Buyer'}</h3>
+                <p className="text-[10px] font-bold text-amber-400 uppercase tracking-widest">{btf.verified_trader ?? 'Verified Trader'}</p>
               </div>
             </div>
             <div className="mb-4">
@@ -264,7 +267,7 @@ export default function BuyerRegisterPage() {
             <ul className="text-xs text-zinc-300 space-y-2">
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-amber-400 shrink-0 mt-0.5" />
-                <span>Direct verified seller & landlord phone contacts</span>
+                <span>{btf.gold_benefit_contact ?? 'Direct verified seller & landlord phone contacts'}</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-amber-400 shrink-0 mt-0.5" />
@@ -272,11 +275,11 @@ export default function BuyerRegisterPage() {
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-amber-400 shrink-0 mt-0.5" />
-                <span>Priority SMS alerts for discounted listings</span>
+                <span>{btf.gold_benefit_sms ?? 'Priority SMS alerts for discounted listings'}</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-amber-400 shrink-0 mt-0.5" />
-                <span>Official Gold Buyer Verified Badge</span>
+                <span>{btf.gold_benefit_badge ?? 'Official Gold Buyer Verified Badge'}</span>
               </li>
             </ul>
           </div>
@@ -300,8 +303,8 @@ export default function BuyerRegisterPage() {
                 <Crown size={18} />
               </div>
               <div>
-                <h3 className="font-black text-base text-white">Premium VIP</h3>
-                <p className="text-[10px] font-bold text-purple-400 uppercase tracking-widest">Maximum Privilege</p>
+                <h3 className="font-black text-base text-white">{btf.premium_vip ?? 'Premium VIP'}</h3>
+                <p className="text-[10px] font-bold text-purple-400 uppercase tracking-widest">{btf.maximum_privilege ?? 'Maximum Privilege'}</p>
               </div>
             </div>
             <div className="mb-4">
@@ -311,7 +314,7 @@ export default function BuyerRegisterPage() {
             <ul className="text-xs text-zinc-300 space-y-2">
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-purple-400 shrink-0 mt-0.5" />
-                <span>All Gold Buyer privileges included</span>
+                <span>{btf.premium_benefit_all_gold ?? 'All Gold Buyer privileges included'}</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-purple-400 shrink-0 mt-0.5" />
@@ -323,7 +326,7 @@ export default function BuyerRegisterPage() {
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 size={13} className="text-purple-400 shrink-0 mt-0.5" />
-                <span>Free Title Deed & Vehicle Inspection Legal Checks</span>
+                <span>{btf.premium_benefit_legal_check ?? 'Free Title Deed & Vehicle Inspection Legal Checks'}</span>
               </li>
             </ul>
           </div>

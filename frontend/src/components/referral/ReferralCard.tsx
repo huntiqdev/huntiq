@@ -8,6 +8,7 @@ import {
   AlertCircle, ChevronDown, ChevronUp, Gift, Loader2,
   Wallet, Clock, DollarSign,
 } from 'lucide-react';
+import { useLocale } from '@/hooks/useLocale';
 
 interface Props { role?: 'seller' | 'buyer'; }
 
@@ -34,6 +35,8 @@ const PM_LABEL: Record<string, string> = {
 
 export function ReferralCard({ role = 'seller' }: Props) {
   const { user } = useAuth();
+  const { t } = useLocale();
+  const ref = (t as any).referral ?? {};
   const [stats, setStats] = useState<ReferralStats | null>(null);
   const [balance, setBalance] = useState<ReferralBalance | null>(null);
   const [wallet, setWallet] = useState<WalletAccount | null>(null);
@@ -219,7 +222,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
           <Gift size={18} className="text-white" />
         </div>
         <div>
-          <p className="font-black text-white text-sm">Referral Program</p>
+          <p className="font-black text-white text-sm">{ref.title ?? 'Referral Program'}</p>
           <p className="text-white/80 text-xs">Earn {commissionRate}% when your invitees make a paid action</p>
         </div>
       </div>
@@ -231,14 +234,14 @@ export function ReferralCard({ role = 'seller' }: Props) {
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 text-center">
             <div className="flex items-center justify-center gap-1 mb-1">
               <Users size={12} className="text-[#1769E0]" />
-              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide">People Invited</span>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide">{ref.people_invited ?? 'People Invited'}</span>
             </div>
             <p className="text-2xl font-black text-zinc-900 dark:text-white">{stats.invited_count}</p>
           </div>
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 text-center">
             <div className="flex items-center justify-center gap-1 mb-1">
               <TrendingUp size={12} className="text-green-500" />
-              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide">Total Earned</span>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wide">{ref.total_earned ?? 'Total Earned'}</span>
             </div>
             <p className="text-lg font-black text-zinc-900 dark:text-white">
               ETB {Number(stats.total_commission).toLocaleString()}
@@ -256,21 +259,21 @@ export function ReferralCard({ role = 'seller' }: Props) {
             <div className="grid grid-cols-4 gap-2 text-center">
               <div>
                 <p className="text-xs font-black text-zinc-900 dark:text-white">ETB {Number(wallet ? wallet.lifetime_earned : balance?.total_earned ?? 0).toLocaleString()}</p>
-                <p className="text-[9px] text-zinc-500">Lifetime</p>
+                <p className="text-[9px] text-zinc-500">{ref.lifetime ?? 'Lifetime'}</p>
               </div>
               <div>
                 <p className={`text-xs font-black ${(wallet ? wallet.available_balance : balance?.available_balance ?? 0) >= minWithdrawal ? 'text-green-600' : 'text-zinc-500'}`}>
                   ETB {Number(wallet ? wallet.available_balance : balance?.available_balance ?? 0).toLocaleString()}
                 </p>
-                <p className="text-[9px] text-zinc-500">Available</p>
+                <p className="text-[9px] text-zinc-500">{ref.available ?? 'Available'}</p>
               </div>
               <div>
                 <p className="text-xs font-black text-amber-600">ETB {Number(wallet ? wallet.reserved_balance : 0).toLocaleString()}</p>
-                <p className="text-[9px] text-zinc-500">Reserved</p>
+                <p className="text-[9px] text-zinc-500">{ref.reserved ?? 'Reserved'}</p>
               </div>
               <div>
                 <p className="text-xs font-black text-zinc-900 dark:text-white">ETB {Number(wallet ? wallet.total_withdrawn : balance?.total_withdrawn ?? 0).toLocaleString()}</p>
-                <p className="text-[9px] text-zinc-500">Withdrawn</p>
+                <p className="text-[9px] text-zinc-500">{ref.withdrawn ?? 'Withdrawn'}</p>
               </div>
             </div>
             {((wallet ? wallet.pending_balance : balance?.pending_amount ?? 0) > 0) && (
@@ -290,7 +293,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
             {!isSuspended && (wallet ? wallet.available_balance : balance?.available_balance ?? 0) >= minWithdrawal && !showWithdrawForm && (
               <button onClick={() => { setShowWithdrawForm(true); setWError(''); setWSuccess(''); }}
                 className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl bg-green-600 hover:bg-green-700 text-white text-xs font-bold transition-colors">
-                <DollarSign size={12} /> Request Withdrawal
+                <DollarSign size={12} /> {ref.request_withdrawal ?? 'Request Withdrawal'}
               </button>
             )}
             {isSuspended && (wallet ? wallet.available_balance : balance?.available_balance ?? 0) >= minWithdrawal && (
@@ -312,7 +315,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
             )}
             {!isSuspended && showWithdrawForm && (
               <form onSubmit={handleWithdraw} className="space-y-2 pt-1 border-t border-green-200 dark:border-green-800/40">
-                <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Withdrawal Request</p>
+                <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300">{ref.withdrawal_form_title ?? 'Withdrawal Request'}</p>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="text-[10px] font-bold text-zinc-500 block mb-1">
@@ -346,10 +349,10 @@ export function ReferralCard({ role = 'seller' }: Props) {
                   <button type="submit" disabled={wLoading}
                     className="flex-1 py-2 rounded-xl bg-green-600 hover:bg-green-700 text-white text-xs font-bold transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5">
                     {wLoading ? <Loader2 size={12} className="animate-spin" /> : <DollarSign size={12} />}
-                    {wLoading ? 'Submitting…' : 'Submit Request'}
+                    {wLoading ? (ref.submitting ?? 'Submitting…') : (ref.submit ?? 'Submit Request')}
                   </button>
                   <button type="button" onClick={() => { setShowWithdrawForm(false); setWError(''); }}
-                    className="px-3 py-2 text-zinc-400 hover:text-zinc-600 text-xs transition-colors">Cancel</button>
+                    className="px-3 py-2 text-zinc-400 hover:text-zinc-600 text-xs transition-colors">{ref.cancel ?? 'Cancel'}</button>
                 </div>
               </form>
             )}
@@ -359,7 +362,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
         {/* Referral link */}
         <div>
           <p className="text-[10px] font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-400 mb-1.5 flex items-center gap-1">
-            <Link2 size={9} /> Your Referral Link
+            <Link2 size={9} /> {ref.your_link ?? 'Your Referral Link'}
           </p>
           {isSuspended ? (
             <div className="flex items-start gap-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-3 py-2.5">
@@ -382,7 +385,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
                   className="flex items-center gap-1.5 px-3 py-2.5 bg-[#1769E0] hover:bg-[#1055BD] text-white rounded-xl text-xs font-bold transition-colors shrink-0"
                 >
                   {copied ? <CheckCircle2 size={13} /> : <Copy size={13} />}
-                  {copied ? 'Copied!' : 'Copy'}
+                  {copied ? (ref.copied ?? 'Copied!') : (ref.copy ?? 'Copy')}
                 </button>
               </div>
               <p className="text-[10px] text-zinc-400 mt-1">
@@ -471,7 +474,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
             <button
               onClick={() => { const next = !showWithdrawals; setShowWithdrawals(next); if (next) loadWithdrawals(); }}
               className="flex items-center justify-between w-full text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-              <span className="flex items-center gap-1.5"><Wallet size={12} /> Withdrawal History</span>
+              <span className="flex items-center gap-1.5"><Wallet size={12} /> {ref.my_withdrawals ?? 'Withdrawal History'}</span>
               {showWithdrawals ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
             </button>
             {showWithdrawals && (
@@ -514,7 +517,7 @@ export function ReferralCard({ role = 'seller' }: Props) {
               }}
               className="flex items-center justify-between w-full text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
             >
-              <span>Commission History</span>
+              <span>{ref.commissions_title ?? 'Commission History'}</span>
               {showCommissions ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
             </button>
 

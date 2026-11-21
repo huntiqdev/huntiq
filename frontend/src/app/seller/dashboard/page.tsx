@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { DEFAULT_TIER_THRESHOLDS } from '@/lib/constants/fees';
 import { TierUpgradeModal } from '@/components/seller/TierUpgradeModal';
+import { useLocale } from '@/hooks/useLocale';
 
 const TIER_CONFIG = {
   normal:  { label: 'Normal',  gradient: 'from-zinc-500 to-zinc-600',           bar: 'bg-zinc-400',   glow: '' },
@@ -64,6 +65,8 @@ function TierCard({ stats, upgradePrices, tierThresholds, onUpgrade }: {
   tierThresholds: { gold: number; premium: number };
   onUpgrade: (target: 'gold' | 'premium') => void;
 }) {
+  const { t } = useLocale();
+  const d = (t as any).dashboard ?? {};
   const tier = (stats?.tier ?? 'normal') as keyof typeof TIER_CONFIG;
   const cfg  = TIER_CONFIG[tier] ?? TIER_CONFIG.normal;
   const sold = stats?.total_value_sold ?? 0;
@@ -91,12 +94,12 @@ function TierCard({ stats, upgradePrices, tierThresholds, onUpgrade }: {
               {tier === 'premium' ? <Crown size={16} className="text-white" /> : <Star size={16} className="text-white" />}
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-white/30">Seller Tier</p>
+              <p className="text-[10px] font-black uppercase tracking-widest text-white/30">{d.seller_tier ?? 'Seller Tier'}</p>
               <p className="text-sm font-black text-white">{cfg.label}</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-[10px] text-white/30">Value Sold</p>
+            <p className="text-[10px] text-white/30">{d.value_sold ?? 'Value Sold'}</p>
             <p className="text-sm font-black text-white">ETB {sold.toLocaleString()}</p>
           </div>
         </div>
@@ -121,7 +124,7 @@ function TierCard({ stats, upgradePrices, tierThresholds, onUpgrade }: {
         {/* Locked features */}
         {locked.length > 0 && (
           <div className="space-y-1.5">
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/25">Locked features</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-white/25">{d.locked_features ?? 'Locked features'}</p>
             <div className="grid grid-cols-2 gap-1.5">
               {locked.map((f, i) => (
                 <div key={i} className="flex items-center gap-2 bg-white/[0.03] border border-white/5 rounded-xl px-2.5 py-2">
@@ -139,7 +142,7 @@ function TierCard({ stats, upgradePrices, tierThresholds, onUpgrade }: {
         {tier === 'premium' && (
           <div className="flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-xl px-3 py-2.5">
             <Sparkles size={13} className="text-purple-400 shrink-0" />
-            <p className="text-xs text-purple-300 font-semibold">Maximum tier — all features unlocked</p>
+            <p className="text-xs text-purple-300 font-semibold">{d.max_tier_unlocked ?? 'Maximum tier — all features unlocked'}</p>
           </div>
         )}
 
@@ -174,6 +177,8 @@ function TierCard({ stats, upgradePrices, tierThresholds, onUpgrade }: {
 // ── Referral Summary Card ─────────────────────────────────────────────────────
 function ReferralSummary() {
   const { user } = useAuth();
+  const { t } = useLocale();
+  const ref = (t as any).referral ?? {};
   const [stats, setStats]     = useState<any>(null);
   const [balance, setBalance] = useState<any>(null);
   const [copied, setCopied]   = useState(false);
@@ -214,7 +219,7 @@ function ReferralSummary() {
       <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2">
           <Gift size={14} className="text-orange-500" />
-          <p className="text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Referral Program</p>
+          <p className="text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-400">{ref.title ?? 'Referral Program'}</p>
         </div>
         <Link href="/seller/profile" className="text-[10px] font-bold text-orange-600 hover:underline flex items-center gap-0.5">
           Full details <ChevronRight size={10} />
@@ -227,19 +232,19 @@ function ReferralSummary() {
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-2.5 text-center">
             <Users size={12} className="text-orange-500 mx-auto mb-1" />
             <p className="text-lg font-black text-zinc-900 dark:text-white">{stats.invited_count ?? 0}</p>
-            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wide">Invited</p>
+            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wide">{ref.people_invited ?? 'Invited'}</p>
           </div>
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-2.5 text-center">
             <TrendingUp size={12} className="text-green-500 mx-auto mb-1" />
             <p className="text-sm font-black text-zinc-900 dark:text-white">ETB {earned.toLocaleString()}</p>
-            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wide">Earned</p>
+            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wide">{ref.total_earned ?? 'Earned'}</p>
           </div>
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-2.5 text-center">
             <Wallet size={12} className={`mx-auto mb-1 ${available >= 500 ? 'text-green-500' : 'text-zinc-400'}`} />
             <p className={`text-sm font-black ${available >= 500 ? 'text-green-600' : 'text-zinc-500 dark:text-zinc-400'}`}>
               ETB {available.toLocaleString()}
             </p>
-            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wide">Available</p>
+            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wide">{ref.available ?? 'Available'}</p>
           </div>
         </div>
 
@@ -266,7 +271,7 @@ function ReferralSummary() {
             <button onClick={handleCopy}
               className="flex items-center gap-1.5 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-[10px] font-bold transition-colors shrink-0">
               {copied ? <CheckCircle2 size={11} /> : <Copy size={11} />}
-              {copied ? 'Copied!' : 'Copy'}
+              {copied ? (ref.copied ?? 'Copied!') : (ref.copy ?? 'Copy')}
             </button>
           </div>
         )}
@@ -291,6 +296,9 @@ function daysRemaining(expiresAt: string | null): number | null {
 
 export default function SellerDashboardPage() {
   const { user, sellerPreference } = useAuth();
+  const { t } = useLocale();
+  const d = (t as any).dashboard ?? {};
+  const snav = (t as any).seller_nav ?? {};
   const [stats, setStats] = useState<any>(null);
   const [products, setProducts] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
@@ -303,22 +311,22 @@ export default function SellerDashboardPage() {
   // Context-aware labels based on seller_preference
   const labelMap = {
     sale: {
-      dashboard: 'Seller Dashboard',
-      products: 'My Products',
-      addButton: '+ Add Product',
-      revenue: 'Sales Revenue',
+      dashboard: snav.seller_dashboard ?? 'Seller Dashboard',
+      products: snav.my_products ?? 'My Products',
+      addButton: snav.add_product ?? '+ Add Product',
+      revenue: d.net_profit ?? 'Sales Revenue',
     },
     rent: {
-      dashboard: 'Landlord Dashboard',
-      products: 'My Properties',
-      addButton: '+ Add Property',
-      revenue: 'Rental Income',
+      dashboard: snav.landlord_console ?? 'Landlord Dashboard',
+      products: snav.my_properties ?? 'My Properties',
+      addButton: snav.add_property ?? '+ Add Property',
+      revenue: snav.rental_income ?? 'Rental Income',
     },
     both: {
-      dashboard: 'Seller/Landlord Dashboard',
-      products: 'My Listings',
-      addButton: '+ Add Listing',
-      revenue: 'Total Revenue',
+      dashboard: `${snav.seller_dashboard ?? 'Seller'} / ${snav.landlord_console ?? 'Landlord'}`,
+      products: snav.my_products ?? 'My Listings',
+      addButton: snav.add_product ?? '+ Add Listing',
+      revenue: d.net_profit ?? 'Total Revenue',
     },
   };
   const labels = labelMap[sellerPreference as keyof typeof labelMap] ?? labelMap.sale;
@@ -415,15 +423,15 @@ export default function SellerDashboardPage() {
 
       {/* KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-        <KPI icon={TrendingUp}   label="Net Profit"       value={`ETB ${(stats?.total_profit ?? 0).toLocaleString()}`}
+        <KPI icon={TrendingUp}   label={d.net_profit ?? 'Net Profit'}       value={`ETB ${(stats?.total_profit ?? 0).toLocaleString()}`}
           color="bg-orange-100 dark:bg-orange-900/30 text-orange-600" />
-        <KPI icon={Package}      label="Total Listings"   value={stats?.total_products ?? 0}
+        <KPI icon={Package}      label={snav.my_products ?? 'Total Listings'}   value={stats?.total_products ?? 0}
           color="bg-blue-100 dark:bg-blue-900/30 text-blue-600"    href="/seller/products" />
-        <KPI icon={Clock}        label="Pending Review"   value={stats?.pending ?? 0}
+        <KPI icon={Clock}        label={snav.pending_approval ?? 'Pending Review'}   value={stats?.pending ?? 0}
           color="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600" href="/seller/products" />
-        <KPI icon={CheckCircle}  label="Active Listings"  value={stats?.approved ?? 0}
+        <KPI icon={CheckCircle}  label={snav.active_listings ?? 'Active Listings'}  value={stats?.approved ?? 0}
           color="bg-green-100 dark:bg-green-900/30 text-green-600" />
-        <KPI icon={ShoppingCart} label="Order Requests"   value={pendingOrders.length}
+        <KPI icon={ShoppingCart} label={d.recent_orders ?? 'Order Requests'}   value={pendingOrders.length}
           color="bg-blue-100 dark:bg-blue-900/30 text-blue-500"    href="/seller/orders"
           alert={pendingOrders.length > 0} />
       </div>
@@ -436,7 +444,7 @@ export default function SellerDashboardPage() {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4">
           <div className="flex items-center gap-2 mb-3">
             <DollarSign size={14} className="text-orange-600" />
-            <p className="text-xs font-black uppercase tracking-widest opacity-60">Fee Summary</p>
+            <p className="text-xs font-black uppercase tracking-widest opacity-60">{d.fee_summary ?? 'Fee Summary'}</p>
           </div>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
@@ -444,11 +452,11 @@ export default function SellerDashboardPage() {
               <span className="font-black text-green-600">ETB {(stats?.total_revenue ?? 0).toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
-              <span className="opacity-50">Total Fees Paid</span>
+              <span className="opacity-50">{d.total_fees_paid ?? 'Total Fees Paid'}</span>
               <span className="font-black text-red-400">ETB {(stats?.paid_fees ?? 0).toLocaleString()}</span>
             </div>
             <div className="border-t border-white/5 pt-2 flex justify-between">
-              <span className="font-bold">Net Profit</span>
+              <span className="font-bold">{d.net_profit ?? 'Net Profit'}</span>
               <span className="font-black text-orange-500">ETB {(stats?.total_profit ?? 0).toLocaleString()}</span>
             </div>
             {(stats?.pending_revenue ?? 0) > 0 && (
@@ -458,7 +466,7 @@ export default function SellerDashboardPage() {
               </div>
             )}
             <div className="flex justify-between text-xs">
-              <span className="opacity-50">Unpaid Listing Fees</span>
+              <span className="opacity-50">{d.unpaid_listing_fees ?? 'Unpaid Listing Fees'}</span>
               <span className={`font-black ${unpaidFees > 0 ? 'text-red-500' : 'text-zinc-400'}`}>
                 ETB {unpaidFees.toLocaleString()}
               </span>
@@ -478,7 +486,7 @@ export default function SellerDashboardPage() {
       {products.length === 0 ? (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 flex flex-col items-center gap-3 text-zinc-400">
           <Package size={28} className="opacity-30" />
-          <p className="text-sm font-semibold">No listings yet</p>
+          <p className="text-sm font-semibold">{d.no_listings_yet ?? 'No listings yet'}</p>
           <Link href="/seller/products"
             className="flex items-center gap-1.5 bg-[#1769E0] hover:bg-[#1055BD] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all tap-bounce active:scale-95 shadow-md shadow-[#1769E0]/20">
             <Plus size={13} /> Add your first product
@@ -487,7 +495,7 @@ export default function SellerDashboardPage() {
       ) : products.filter(p => p.status === 'approved' && p.expires_at).length > 0 ? (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 dark:border-zinc-800">
-            <h2 className="font-bold text-zinc-900 dark:text-white">Active Listings — Time Remaining</h2>
+            <h2 className="font-bold text-zinc-900 dark:text-white">{d.active_listings_remaining ?? 'Active Listings — Time Remaining'}</h2>
             <Link href="/seller/products" className="text-xs text-[#1769E0] font-bold hover:underline">View all →</Link>
           </div>
           <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
@@ -506,7 +514,7 @@ export default function SellerDashboardPage() {
                         {days === 0 ? 'Expires today' : `${days}d left`}
                       </p>
                     ) : (
-                      <p className="text-xs text-zinc-400">No expiry</p>
+                      <p className="text-xs text-zinc-400">{d.no_expiry ?? 'No expiry'}</p>
                     )}
                     {p.total_fee_amount && (
                       <p className={`text-[10px] ${p.fee_paid ? 'text-green-500' : 'text-red-400'}`}>
@@ -525,7 +533,7 @@ export default function SellerDashboardPage() {
       {orders.length > 0 && (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 dark:border-zinc-800">
-            <h2 className="font-bold text-zinc-900 dark:text-white">Recent Order Requests</h2>
+            <h2 className="font-bold text-zinc-900 dark:text-white">{d.recent_orders ?? 'Recent Order Requests'}</h2>
             <Link href="/seller/orders" className="text-xs text-[#1769E0] font-bold hover:underline">View all →</Link>
           </div>
           <div className="divide-y divide-zinc-100 dark:divide-zinc-800">

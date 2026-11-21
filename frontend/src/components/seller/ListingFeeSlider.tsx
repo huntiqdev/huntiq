@@ -32,6 +32,7 @@ const MAX_HOURS = 8760; // 1 year in hours
 
 export function ListingFeeSlider({ price, tier = 'normal', selectedDays, onChange }: Props) {
   const { t } = useLocale();
+  const lf = (t as any).listing_fee ?? {};
   const [selectedHours, setSelectedHours] = useState(() => Math.max(4, selectedDays * 24));
   const [manualMode, setManualMode] = useState(false);
   const [manualInput, setManualInput] = useState(String(selectedHours));
@@ -174,13 +175,13 @@ export function ListingFeeSlider({ price, tier = 'normal', selectedDays, onChang
           </div>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-            <span className="opacity-50">Startup Rate</span>
+            <span className="opacity-50">{lf.startup_rate ?? 'Startup Rate'}</span>
             <span className="font-bold text-right">{breakdown.startupPct}%</span>
 
-            <span className="opacity-50">Duration Hours</span>
+            <span className="opacity-50">{lf.duration_hours ?? 'Duration Hours'}</span>
             <span className="font-bold text-right">{selectedHours} Hours</span>
 
-            <span className="opacity-50">Rate Calculation</span>
+            <span className="opacity-50">{lf.rate_calculation ?? 'Rate Calculation'}</span>
             <span className="font-bold text-right text-sky-600">
               {selectedHours <= 4 ? '⚡ Flash Discounted' : selectedHours <= 24 ? '🔥 Daily Rate' : 'Hourly Percentile'}
             </span>
@@ -188,15 +189,15 @@ export function ListingFeeSlider({ price, tier = 'normal', selectedDays, onChang
 
           <div className="border-t border-zinc-100 dark:border-zinc-800 pt-2 mt-1 space-y-1">
             <div className="flex justify-between text-xs">
-              <span className="opacity-50">Calculated Fee Rate</span>
+              <span className="opacity-50">{lf.calculated_fee_rate ?? 'Calculated Fee Rate'}</span>
               <span className="font-black text-orange-600">{breakdown.totalFeePercent}%</span>
             </div>
             <div className="flex justify-between text-xs">
-              <span className="opacity-50">Total Fee Amount</span>
+              <span className="opacity-50">{lf.total_fee_amount ?? 'Total Fee Amount'}</span>
               <span className="font-bold text-red-500">− ETB {breakdown.totalFeeAmount.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-sm font-black">
-              <span>You Receive</span>
+              <span>{lf.you_receive ?? 'You Receive'}</span>
               <span className="text-green-600">ETB {breakdown.sellerGets.toLocaleString()}</span>
             </div>
           </div>

@@ -395,6 +395,7 @@ export function HomeHero() {
   const [categoriesError, setCategoriesError] = useState<string | null>(null);
   const [settings, setSettings] = useState<any>(null);
   const [recentProducts, setRecentProducts] = useState<any[]>([]);
+  const [totalProductCount, setTotalProductCount] = useState<number | null>(null);
   const [rentalProducts, setRentalProducts] = useState<any[]>([]);
   const [conditionFilter, setConditionFilter] = useState<'all' | 'new' | 'used'>('all');
 
@@ -422,9 +423,14 @@ export function HomeHero() {
 
   useEffect(() => {
     api.getPublicPaymentSettings().then(setSettings).catch(() => {});
-    // Load recent approved listings for homepage preview
-    api.getProducts({ limit: 8, page: 1 })
-      .then(data => setRecentProducts(Array.isArray(data) ? data : []))
+    // Load recent approved listings and authoritative total count for homepage preview
+    api.getProductsWithMeta({ limit: 8, page: 1 })
+      .then(res => {
+        setRecentProducts(res?.products ?? []);
+        if (res?.meta?.total_matching !== undefined) {
+          setTotalProductCount(res.meta.total_matching);
+        }
+      })
       .catch(() => {});
 
     // Load active rental and leasing opportunities
@@ -452,12 +458,12 @@ export function HomeHero() {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center gap-12 lg:gap-16">
 
-          {/* Stats bar — values from real backend */}
+          {/* Stats bar — values from real authoritative backend */}
           <div className="w-full max-w-3xl">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
               {[
-                { v: recentProducts.length > 0 ? `${recentProducts.length}+` : '100+', l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-[#1769E0]', bg: 'bg-[#EAF3FF] dark:bg-[#1769E0]/20' },
-                { v: rootCategories.length > 0 ? `${rootCategories.length}+` : '50+', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
+                { v: totalProductCount !== null ? (totalProductCount > 0 ? `${totalProductCount}+` : '0') : (recentProducts.length > 0 ? `${recentProducts.length}+` : '—'), l: t.ui.stat_products ?? 'Products', icon: <Package size={18} />, color: 'text-[#1769E0]', bg: 'bg-[#EAF3FF] dark:bg-[#1769E0]/20' },
+                { v: rootCategories.length > 0 ? `${rootCategories.length}` : '—', l: t.ui.stat_categories ?? 'Categories', icon: <Tag size={18} />, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
                 { v: '4', l: t.ui.stat_languages ?? 'Languages', icon: <Globe size={18} />, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-900/20' },
                 { v: '100%', l: t.ui.stat_verified ?? 'Verified', icon: <CheckCircle2 size={18} />, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
               ].map(({ v, l, icon, color, bg }) => (

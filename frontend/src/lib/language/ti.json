@@ -882,7 +882,7 @@
     "upgrade_to_premium": "ናብ ፕሪሚየም ኣዕብዩ"
   },
   "footer": {
-    "copyright": "© 2026 ሓበሻ ማርኬት ። መሰሉ ብሕጊ ዝተሓለወ እዩ።",
+    "copyright": "© 2026 HUNTIQ ። መሰሉ ብሕጊ ዝተሓለወ እዩ።",
     "quick_links": "ቅልጡፍ መራኸቢታት",
     "legal": "ሕጋዊ",
     "about": "ብዛዕባና",
@@ -891,7 +891,27 @@
     "terms": "ሕግታትን ኩነታትን",
     "privacy": "ፖሊሲ ግላዊነት",
     "home": "ገዛ",
-    "tagline": "ኣብ ኢትዮጵያ ዝኾነ ነገር ንምዕዛዝ ወይ ንምሽያጥ ቀሊል መንገዲ።"
+    "tagline": "ኣብ ኢትዮጵያ ዝኾነ ነገር ንምዕዛዝ ወይ ንምሽያጥ ቀሊል መንገዲ።",
+    "verified_platform": "ዝተረጋገጸ መድረኽ",
+    "customer_support": "ኣገልግሎት ዓማዊል",
+    "faq_title": "ተደጋጋሚ ሕቶታት",
+    "support_ticket": "ናይ ደገፍ ቲኬት",
+    "buying": "ምግዛእ",
+    "all_products_sale": "ንመሸጣ ዝቐረቡ ኩሎም ኣቑሑ",
+    "brand_new_items": "ሓደስቲ ኣቑሑ",
+    "pre_owned_items": "ጽሬት ዘለዎም ዝተጠቕሙ",
+    "land_property": "መሬትን ንብረትን",
+    "buyer_protection": "ዕቝባ ዓዳጊ",
+    "selling_renting": "ምሻጥን ምኽራይን",
+    "start_selling": "ምሻጥ ጀምሩ",
+    "list_rental_property": "ክራይ / ንብረት መዝግቡ",
+    "seller_guidelines": "መምርሒ ነጋዶ",
+    "seller_dashboard": "ዳሽቦርድ ሸቃጢ",
+    "gold_premium_tiers": "ደረጃታት ወርቅን ፕሪምየምን",
+    "policies_language": "ፖሊሲታትን ቋንቋን",
+    "safety_guidelines": "መምርሒታት ድሕንነት",
+    "protected_transactions": "ድሑናት ንግዳዊ ልውውጣት",
+    "ethiopian_languages": "4 ናይ ኢትዮጵያ ቋንቋታት"
   },
   "help_page": {
     "title": "ሓገዝ ማእከል",
@@ -1070,7 +1090,18 @@
     "sales": "ሽያጣት",
     "analytics": "ትንተና",
     "profile": "ፕሮፋይል",
-    "upgrade_hint": "ኣፕግሬድ ንምምዝጋብ"
+    "upgrade_hint": "ኣፕግሬድ ንምምዝጋብ",
+    "landlord_console": "ኮንሶል ኣካራዪ",
+    "seller_studio": "ስቱዲዮ ሸቃጢ",
+    "provider_studio": "ስቱዲዮ ኣቕራቢ",
+    "properties_rentals": "ንብረታትን ክራያትን",
+    "lease_requests": "ናይ ክራይ ሕቶታት",
+    "rental_income": "ናይ ክራይ ኣታዊ",
+    "back_to_marketplace": "ናብ ዕዳጋ ተመለሱ",
+    "sign_out": "ውጻእ",
+    "choose_console": "ናይ ኣቕራቢ ኮንሶልኩም ምረጹ",
+    "active": "ንጡፍ",
+    "activate": "ኣንቅሕ"
   },
   "tier": {
     "normal": "ንቡር",
@@ -1256,5 +1287,66 @@
     "download_json": "JSON ኣውርድ",
     "reset_defaults": "ናብ ናይ መጀመርታ ምለስ",
     "save_changes": "ግምታት ዓቅብ"
+  },
+  "buyer_nav": {
+    "buyer_panel": "ፓነል ዓዳጊ",
+    "dashboard": "ዳሽቦርድ",
+    "my_inquiries": "ሕቶታተይ",
+    "referral": "ሪፈራል",
+    "profile": "መግለጺ",
+    "marketplace_capabilities": "ናይ ዕዳጋ ዓቕምታት",
+    "start_selling": "ምሻጥ ጀምሩ",
+    "list_for_rent": "ንክራይ ኣቕርቡ",
+    "upgrade_to_unlock": "ንምኽፋት ደረጃ ኣዕብዩ",
+    "upgrade_to_premium": "ናብ ፕሪምየም ደረጃ ኣዕብዩ"
+  },
+  "dashboard": {
+    "fee_summary": "መጠቃለሊ ክፍሊት",
+    "total_fees_paid": "ጠቕላላ ዝተኸፍለ ክፍሊት",
+    "net_profit": "ጽሩይ መኽሰብ",
+    "unpaid_listing_fees": "ዘይተኸፍሉ ናይ ምዝገባ ክፍሊታት",
+    "no_listings_yet": "ክሳብ ሕጂ ዝኾነ ምልክታ የለን",
+    "active_listings_remaining": "ንጡፋት ምልክታታት — ዝተረፈ ግዜ",
+    "no_expiry": "ግዜኡ ዘየብቅዕ",
+    "recent_orders": "ናይ ቀረባ ግዜ ናይ ትእዛዝ ሕቶታት",
+    "seller_tier": "ደረጃ ሸቃጢ",
+    "value_sold": "ዝተሸጠ ዋጋ",
+    "locked_features": "ዝተዓጸዉ ኣገልግሎታት",
+    "max_tier_unlocked": "ዝለዓለ ደረጃ — ኩሎም ኣገልግሎታት ተኸፊቶም",
+    "customer_access_tier": "ደረጃ መእተዊ ዓማዊል",
+    "my_purchases_orders": "ግዝአተይን ትእዛዛተይን",
+    "browse_rentals": "ናይ ክራይ ንብረታት ርኣዩ",
+    "leases_landlords": "ውዕላትን ናይ ኣካራዪ ምልክታታትን",
+    "recent_requests": "ናይ ቀረባ ግዜ ሕቶታት",
+    "no_requests_yet": "ክሳብ ሕጂ ዝኾነ ናይ ትእዛዝ ሕቶ የለን"
+  },
+  "buyer_tier_features": {
+    "gold_buyer": "ወርቂ ዓዳጊ",
+    "verified_trader": "ዝተረጋገጸ ነጋዳይ",
+    "gold_benefit_contact": "ቀጥታዊ ናይ ዝተረጋገጹ ነጋዶን ኣካረይትን ስልኪ ርክባት",
+    "gold_benefit_sms": "ዋጋ ንዝተነከየሎም ምልክታታት ናይ ቅድሚት SMS ምልክታ",
+    "gold_benefit_badge": "ወግዓዊ ናይ ወርቂ ዓዳጊ ዝተረጋገጸ ባጅ",
+    "premium_vip": "ፕሪምየም ቪኣይፒ",
+    "maximum_privilege": "ዝለዓለ መሰል",
+    "premium_benefit_all_gold": "ኩሎም ናይ ወርቂ ዓዳጊ መሰላት ተኻቲቶም",
+    "premium_benefit_legal_check": "ናጻ ናይ ዋንነት ምስክር ወረቐትን ሕጋዊ ፍተሻ ተሽከርከርትን"
+  },
+  "listing_fee": {
+    "startup_rate": "ናይ መበገሲ ተመን",
+    "duration_hours": "ናይ ጻንሒት ሰዓታት",
+    "rate_calculation": "ስሌት ዋጋ",
+    "calculated_fee_rate": "ዝተሓሰበ መጠን ተመን",
+    "total_fee_amount": "ጠቕላላ መጠን ክፍሊት",
+    "you_receive": "ዝበጽሓኩም",
+    "pay_listing_fee": "ናይ ምልክታ ክፍሊት ክፈሉ",
+    "amount_due": "ዝኽፈል መጠን",
+    "telebirr_direct": "ቴሌብር ቀጥታዊ ክፍሊት",
+    "official_payment_gateway": "ወግዓዊ ናይ ሞባይል ክፍሊት መገዲ"
+  },
+  "not_found": {
+    "return_home": "ናብ መበገሲ ተመለሱ",
+    "browse_marketplace": "ዕዳጋ ርኣዩ",
+    "page_not_found": "ገጽ ኣይተረኽበን",
+    "product_not_found": "ፍርያት ኣይተረኽበን"
   }
 }

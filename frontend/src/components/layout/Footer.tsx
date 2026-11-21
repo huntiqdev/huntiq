@@ -45,7 +45,7 @@ export function Footer() {
             <div className="pt-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF3FF] dark:bg-[#1769E0]/15 text-[#1769E0] dark:text-[#38A5FF] text-[11px] font-bold">
                 <ShieldCheck size={13} />
-                <span>Verified Platform</span>
+                <span>{t.footer?.verified_platform ?? 'Verified Platform'}</span>
               </div>
             </div>
           </div>
@@ -54,17 +54,17 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
               <HelpCircle size={13} className="text-[#1769E0]" />
-              <span>Customer Support</span>
+              <span>{t.footer?.customer_support ?? 'Customer Support'}</span>
             </h4>
             <nav className="flex flex-col gap-2">
               {[
-                { href: '/help', label: t.footer.help ?? 'Help Center' },
-                { href: '/contact', label: t.footer.contact ?? 'Contact Us' },
-                { href: '/help#faq', label: 'Frequently Asked Questions' },
-                { href: '/contact', label: 'Support Ticket' },
+                { href: '/help', label: t.footer?.help ?? 'Help Center' },
+                { href: '/contact', label: t.footer?.contact ?? 'Contact Us' },
+                { href: '/help#faq', label: t.footer?.faq_title ?? 'Frequently Asked Questions' },
+                { href: '/contact', label: t.footer?.support_ticket ?? 'Support Ticket' },
               ].map(({ href, label }) => (
                 <Link
-                  key={label}
+                  key={href + label}
                   href={href}
                   className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
@@ -79,18 +79,18 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
               <ShoppingBag size={13} className="text-[#1769E0]" />
-              <span>Buying</span>
+              <span>{t.footer?.buying ?? 'Buying'}</span>
             </h4>
             <nav className="flex flex-col gap-2">
               {[
-                { href: '/products?type=sale', label: 'All Products for Sale' },
-                { href: '/products?condition=new', label: 'Brand New Items' },
-                { href: '/products?condition=used', label: 'Quality Pre-Owned' },
-                { href: '/products?cat=property', label: 'Land & Property' },
-                { href: '/help#buyer-protection', label: 'Buyer Protection' },
+                { href: '/products?type=sale', label: t.footer?.all_products_sale ?? 'All Products for Sale' },
+                { href: '/products?condition=new', label: t.footer?.brand_new_items ?? 'Brand New Items' },
+                { href: '/products?condition=used', label: t.footer?.pre_owned_items ?? 'Quality Pre-Owned' },
+                { href: '/products?cat=property', label: t.footer?.land_property ?? 'Land & Property' },
+                { href: '/help#buyer-protection', label: t.footer?.buyer_protection ?? 'Buyer Protection' },
               ].map(({ href, label }) => (
                 <Link
-                  key={label}
+                  key={href + label}
                   href={href}
                   className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
@@ -105,18 +105,18 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
               <Store size={13} className="text-[#1769E0]" />
-              <span>Selling & Renting</span>
+              <span>{t.footer?.selling_renting ?? 'Selling & Renting'}</span>
             </h4>
             <nav className="flex flex-col gap-2">
               {[
-                { href: '/seller/product/new?type=sale', label: t.ui.start_selling ?? 'Start Selling' },
-                { href: '/seller/product/new?type=rent', label: 'List Rental / Property' },
-                { href: '/help#seller-guidelines', label: 'Seller Requirements' },
-                { href: '/seller/login', label: 'Seller Dashboard' },
-                { href: '/#tier-system', label: 'Gold & Premium Tiers' },
+                { href: '/seller/product/new?type=sale', label: t.footer?.start_selling ?? 'Start Selling' },
+                { href: '/seller/product/new?type=rent', label: t.footer?.list_rental_property ?? 'List Rental / Property' },
+                { href: '/help#seller-guidelines', label: t.footer?.seller_guidelines ?? 'Seller Requirements' },
+                { href: '/seller/login', label: t.footer?.seller_dashboard ?? 'Seller Dashboard' },
+                { href: '/#tier-system', label: t.footer?.gold_premium_tiers ?? 'Gold & Premium Tiers' },
               ].map(({ href, label }) => (
                 <Link
-                  key={label}
+                  key={href + label}
                   href={href}
                   className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
@@ -131,16 +131,16 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white flex items-center gap-1.5">
               <FileText size={13} className="text-[#1769E0]" />
-              <span>Policies & Language</span>
+              <span>{t.footer?.policies_language ?? 'Policies & Language'}</span>
             </h4>
             <nav className="flex flex-col gap-2 pb-2">
               {[
-                { href: '/terms', label: t.footer.terms ?? 'Terms & Conditions' },
-                { href: '/privacy', label: t.footer.privacy ?? 'Privacy Policy' },
-                { href: '/help#safety', label: 'Safety Guidelines' },
+                { href: '/terms', label: t.footer?.terms ?? 'Terms & Conditions' },
+                { href: '/privacy', label: t.footer?.privacy ?? 'Privacy Policy' },
+                { href: '/help#safety', label: t.footer?.safety_guidelines ?? 'Safety Guidelines' },
               ].map(({ href, label }) => (
                 <Link
-                  key={label}
+                  key={href + label}
                   href={href}
                   className="text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-[#1769E0] dark:hover:text-[#38A5FF] transition-colors flex items-center gap-1 group py-0.5"
                 >
@@ -178,11 +178,11 @@ export function Footer() {
           <div className="flex items-center gap-4 text-xs font-bold text-slate-500">
             <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
               <Shield size={12} className="text-[#16A36A]" />
-              {t.ui.secure_platform_short ?? 'Protected Transactions'}
+              {t.footer?.protected_transactions ?? t.ui?.secure_platform_short ?? 'Protected Transactions'}
             </span>
             <span className="flex items-center gap-1">
               <Globe size={12} className="text-[#1769E0]" />
-              4 Ethiopian Languages
+              {t.footer?.ethiopian_languages ?? '4 Ethiopian Languages'}
             </span>
           </div>
         </div>

@@ -11,12 +11,13 @@ import {
 import { CapabilityActivationModal } from '@/components/auth/CapabilityActivationModal';
 import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
 import { LanguageSelector } from '@/components/layout/LanguageSelector';
+import { useLocale } from '@/hooks/useLocale';
 
 const NAV_ITEMS = [
-  { href: '/buyer/dashboard', label: 'Dashboard',      icon: LayoutDashboard, minTier: 0 },
-  { href: '/buyer/orders',    label: 'My Inquiries',   icon: PhoneCall,       minTier: 0 },
-  { href: '/buyer/referral',  label: 'Referral',       icon: Gift,            minTier: 0 },
-  { href: '/buyer/profile',   label: 'Profile',        icon: User,            minTier: 0 },
+  { href: '/buyer/dashboard', key: 'dashboard', label: 'Dashboard',      icon: LayoutDashboard, minTier: 0 },
+  { href: '/buyer/orders',    key: 'my_inquiries', label: 'My Inquiries', icon: PhoneCall,       minTier: 0 },
+  { href: '/buyer/referral',  key: 'referral', label: 'Referral',       icon: Gift,            minTier: 0 },
+  { href: '/buyer/profile',   key: 'profile', label: 'Profile',        icon: User,            minTier: 0 },
 ] as const;
 
 interface BuyerSidebarProps {
@@ -39,6 +40,9 @@ function BuyerSidebarContent({
   isSeller, isLandlord, onActivateSeller, onActivateLandlord,
   onClose, onLogout,
 }: BuyerSidebarProps) {
+  const { t } = useLocale();
+  const bn = (t as any).buyer_nav ?? {};
+  const sn = t.seller_nav ?? {};
   const TierIcon = TIER_ICON[buyerTier];
   return (
     <div className="flex flex-col h-full">
@@ -50,7 +54,7 @@ function BuyerSidebarContent({
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-black text-sm text-zinc-900 dark:text-white leading-none">HUNTIQ</p>
-            <p className="text-[10px] text-zinc-400 mt-0.5 uppercase tracking-widest">Buyer Panel</p>
+            <p className="text-[10px] text-zinc-400 mt-0.5 uppercase tracking-widest">{bn.buyer_panel || 'Buyer Panel'}</p>
           </div>
         </div>
       </div>
@@ -73,8 +77,9 @@ function BuyerSidebarContent({
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto">
-        {NAV_ITEMS.filter(item => tierRank >= item.minTier).map(({ href, label, icon: Icon }) => {
+        {NAV_ITEMS.filter(item => tierRank >= item.minTier).map(({ href, key, label, icon: Icon }) => {
           const active = pathname === href;
+          const displayLabel = bn[key] || label;
           return (
             <Link key={href} href={href} onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all group ${
@@ -83,7 +88,7 @@ function BuyerSidebarContent({
                   : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800'
               }`}>
               <Icon size={16} className={active ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300'} />
-              <span className="flex-1">{label}</span>
+              <span className="flex-1">{displayLabel}</span>
               {active && <ChevronRight size={12} className="text-white/60" />}
             </Link>
           );
@@ -92,7 +97,7 @@ function BuyerSidebarContent({
         {/* Marketplace Capabilities */}
         <div className="pt-3 mt-2 border-t border-zinc-100 dark:border-zinc-800 space-y-1">
           <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 mb-1">
-            Marketplace Capabilities
+            {bn.marketplace_capabilities || 'Marketplace Capabilities'}
           </p>
 
           {isSeller ? (
@@ -102,8 +107,8 @@ function BuyerSidebarContent({
               className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-[#1769E0] dark:text-[#38A5FF] hover:bg-[#EAF3FF] dark:hover:bg-[#1769E0]/15 transition-all"
             >
               <ShoppingBag size={15} />
-              <span className="flex-1">Seller Studio</span>
-              <span className="text-[8px] bg-green-500/15 text-green-600 dark:text-green-400 font-black px-1.5 py-0.5 rounded-md">Active</span>
+              <span className="flex-1">{sn.seller_studio || 'Seller Studio'}</span>
+              <span className="text-[8px] bg-green-500/15 text-green-600 dark:text-green-400 font-black px-1.5 py-0.5 rounded-md">{sn.active || 'Active'}</span>
             </Link>
           ) : (
             <button
@@ -112,8 +117,8 @@ function BuyerSidebarContent({
               className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-all text-left"
             >
               <ShoppingBag size={15} />
-              <span className="flex-1">Start Selling</span>
-              <span className="text-[8px] bg-[#1769E0] text-white font-black px-1.5 py-0.5 rounded-md">Activate</span>
+              <span className="flex-1">{bn.start_selling || 'Start Selling'}</span>
+              <span className="text-[8px] bg-[#1769E0] text-white font-black px-1.5 py-0.5 rounded-md">{sn.activate || 'Activate'}</span>
             </button>
           )}
 
@@ -124,8 +129,8 @@ function BuyerSidebarContent({
               className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all"
             >
               <Home size={15} />
-              <span className="flex-1">Landlord Console</span>
-              <span className="text-[8px] bg-green-500/15 text-green-600 dark:text-green-400 font-black px-1.5 py-0.5 rounded-md">Active</span>
+              <span className="flex-1">{sn.landlord_console || 'Landlord Console'}</span>
+              <span className="text-[8px] bg-green-500/15 text-green-600 dark:text-green-400 font-black px-1.5 py-0.5 rounded-md">{sn.active || 'Active'}</span>
             </Link>
           ) : (
             <button
@@ -134,8 +139,8 @@ function BuyerSidebarContent({
               className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/20 transition-all text-left"
             >
               <Home size={15} />
-              <span className="flex-1">List for Rent</span>
-              <span className="text-[8px] bg-teal-600 text-white font-black px-1.5 py-0.5 rounded-md">Activate</span>
+              <span className="flex-1">{bn.list_for_rent || 'List for Rent'}</span>
+              <span className="text-[8px] bg-teal-600 text-white font-black px-1.5 py-0.5 rounded-md">{sn.activate || 'Activate'}</span>
             </button>
           )}
         </div>
@@ -143,7 +148,7 @@ function BuyerSidebarContent({
         {/* Upgrade CTA */}
         {buyerTier === 'normal' && (
           <div className="pt-2 mt-1 border-t border-zinc-100 dark:border-zinc-800">
-            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 mb-1">Upgrade to unlock</p>
+            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-3 mb-1">{bn.upgrade_to_unlock || 'Upgrade to unlock'}</p>
             <Link href="/buyer/upgrade" onClick={onClose}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-yellow-600 dark:text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-all">
               {(() => { const I = TIER_ICON['gold']; return <I size={16} className="text-yellow-500" />; })()}
@@ -157,7 +162,7 @@ function BuyerSidebarContent({
             <Link href="/buyer/upgrade" onClick={onClose}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-all">
               {(() => { const I = TIER_ICON['premium']; return <I size={16} className="text-purple-500" />; })()}
-              <span className="flex-1">Upgrade to Premium</span>
+              <span className="flex-1">{bn.upgrade_to_premium || 'Upgrade to Premium'}</span>
               <Lock size={10} className="text-purple-500 shrink-0" />
             </Link>
           </div>
@@ -165,14 +170,17 @@ function BuyerSidebarContent({
       </nav>
 
       {/* Footer */}
-      <div className="px-3 py-3 border-t border-zinc-100 dark:border-zinc-800 space-y-1">
+      <div className="px-3 py-3 border-t border-zinc-100 dark:border-zinc-800 space-y-2">
+        <div className="px-1">
+          <LanguageSelector variant="full" dropDirection="up" />
+        </div>
         <Link href="/" onClick={onClose}
           className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all">
-          ← Back to Marketplace
+          ← {sn.back_to_marketplace || 'Back to Marketplace'}
         </Link>
         <button onClick={onLogout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
-          <LogOut size={15} /> Sign Out
+          <LogOut size={15} /> {sn.sign_out || 'Sign Out'}
         </button>
       </div>
     </div>
@@ -182,6 +190,9 @@ function BuyerSidebarContent({
 const NOOP = () => {};
 
 export default function BuyerLayout({ children }: { children: React.ReactNode }) {
+  const { t } = useLocale();
+  const bn = (t as any).buyer_nav ?? {};
+  const sn = t.seller_nav ?? {};
   const { user, isBuyer, isSeller, isLandlord, loading, logout, buyerTier: jwtTier } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
@@ -250,7 +261,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
             aria-label="Open menu">
             <Menu size={18} />
           </button>
-          <span className="font-black text-[#1769E0] dark:text-[#38A5FF] text-sm">Buyer Panel</span>
+          <span className="font-black text-[#1769E0] dark:text-[#38A5FF] text-sm">{bn.buyer_panel || 'Buyer Panel'}</span>
           <div className="ml-auto flex items-center gap-2">
             <LanguageSelector variant="compact" />
             {TierIcon && <TierIcon size={14} className={TIER_COLOR[buyerTier]} />}
@@ -266,7 +277,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
           </div>
           <LanguageSelector variant="pill" />
           <Link href="/" className="text-xs text-zinc-400 hover:text-zinc-600 transition-colors">
-            View Marketplace ↗
+            {sn.back_to_marketplace || 'View Marketplace ↗'}
           </Link>
         </header>
 
