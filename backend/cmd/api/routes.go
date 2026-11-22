@@ -156,6 +156,7 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 
 	// ── Public Routes ────────────────────────────────────────────────────────
 	api.Get("/products", searchLimiter, d.MW.OptionalAuth, d.ProductHandler.List)
+	api.Get("/products/search", searchLimiter, d.MW.OptionalAuth, d.ProductHandler.List)
 	api.Get("/products/:id", d.MW.OptionalAuth, d.ProductHandler.Get)
 	api.Get("/categories", d.ProductHandler.ListCategories)
 	api.Get("/categories/roots", d.CategoryHandler.GetRoots)

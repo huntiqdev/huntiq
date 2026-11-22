@@ -4,7 +4,6 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/your-org/used-tools-marketplace/pkg/response"
 )
 
 // truncate caps a string to maxLen runes to prevent oversized DB queries.
@@ -17,11 +16,11 @@ func truncate(s string, maxLen int) string {
 }
 
 // mustUserID extracts the authenticated user's ID from Fiber locals.
-// Returns (0, error response) if the local is missing or wrong type — callers must return the error immediately.
+// Returns (0, error) if the local is missing or invalid — callers must return the error immediately.
 func mustUserID(c *fiber.Ctx) (int, error) {
 	id, ok := c.Locals("userID").(int)
-	if !ok || id == 0 {
-		return 0, response.Unauthorized(c, "unauthorized")
+	if !ok || id <= 0 {
+		return 0, fiber.NewError(fiber.StatusUnauthorized, "unauthorized")
 	}
 	return id, nil
 }
@@ -30,7 +29,7 @@ func mustUserID(c *fiber.Ctx) (int, error) {
 func parseIDParam(c *fiber.Ctx, name string) (int, error) {
 	id, err := strconv.Atoi(c.Params(name))
 	if err != nil || id <= 0 {
-		return 0, response.BadRequest(c, "invalid "+name)
+		return 0, fiber.NewError(fiber.StatusBadRequest, "invalid "+name)
 	}
 	return id, nil
 }

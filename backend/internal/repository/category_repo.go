@@ -56,10 +56,10 @@ func buildTree(flat []models.Category) []models.Category {
 func (r *CategoryRepo) List(ctx context.Context) ([]models.Category, error) {
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	rows, err := r.db.Query(ctx,
-		`SELECT id, name, slug,
-		COALESCE(name_en, name, ''), COALESCE(name_am, ''), COALESCE(name_or, ''), COALESCE(name_ti, ''),
-		COALESCE(sort_order, 0), COALESCE(is_active, true), parent_id
-		FROM categories WHERE COALESCE(is_active,true)=true ORDER BY COALESCE(sort_order,0), name`)
+		`SELECT id, name_en, slug,
+		COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
+		COALESCE(display_order, 0), COALESCE(is_active, true), parent_id
+		FROM category_hierarchy WHERE COALESCE(is_active,true)=true ORDER BY COALESCE(display_order,0), name_en`)
 	if err != nil {
 		return nil, err
 	}
@@ -81,10 +81,10 @@ func (r *CategoryRepo) List(ctx context.Context) ([]models.Category, error) {
 func (r *CategoryRepo) ListAll(ctx context.Context) ([]models.Category, error) {
 	//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	rows, err := r.db.Query(ctx,
-		`SELECT id, name, slug,
-		COALESCE(name_en, name, ''), COALESCE(name_am, ''), COALESCE(name_or, ''), COALESCE(name_ti, ''),
-		COALESCE(sort_order, 0), COALESCE(is_active, true), parent_id
-		FROM categories ORDER BY COALESCE(sort_order,0), name`)
+		`SELECT id, name_en, slug,
+		COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
+		COALESCE(display_order, 0), COALESCE(is_active, true), parent_id
+		FROM category_hierarchy ORDER BY COALESCE(display_order,0), name_en`)
 	if err != nil {
 		return nil, err
 	}
@@ -112,10 +112,10 @@ func (r *CategoryRepo) Create(ctx context.Context, c models.Category) (int, erro
 	}
 	var id int
 	err := r.db.QueryRow(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		`INSERT INTO categories (name, slug, name_en, name_am, name_or, name_ti, sort_order, is_active, parent_id)
-		 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		`INSERT INTO category_hierarchy (name_en, slug, name_am, name_om, name_ti, display_order, is_active, parent_id)
+		 VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 		 RETURNING id`,
-		c.NameEn, c.Slug, c.NameEn, c.NameAm, c.NameOr, c.NameTi, c.SortOrder, c.IsActive, c.ParentID,
+		c.NameEn, c.Slug, c.NameAm, c.NameOr, c.NameTi, c.SortOrder, c.IsActive, c.ParentID,
 	).Scan(&id)
 	return id, err
 }
@@ -129,27 +129,26 @@ func (r *CategoryRepo) Update(ctx context.Context, c models.Category) error {
 		name = c.Name
 	}
 	_, err := r.db.Exec(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		`UPDATE categories
-		 SET name=$1, slug=$2, name_en=$3, name_am=$4, name_or=$5, name_ti=$6,
-		     sort_order=$7, is_active=$8, parent_id=$9
-		 WHERE id=$10`,
-		name, c.Slug, c.NameEn, c.NameAm, c.NameOr, c.NameTi, c.SortOrder, c.IsActive, c.ParentID, c.ID,
+		`UPDATE category_hierarchy
+		 SET name_en=$1, slug=$2, name_am=$3, name_om=$4, name_ti=$5,
+		     display_order=$6, is_active=$7, parent_id=$8, updated_at=NOW()
+		 WHERE id=$9`,
+		name, c.Slug, c.NameAm, c.NameOr, c.NameTi, c.SortOrder, c.IsActive, c.ParentID, c.ID,
 	)
 	return err
 }
 
 func (r *CategoryRepo) Delete(ctx context.Context, id int) error {
-	// ON DELETE CASCADE handles children automatically
-	_, err := r.db.Exec(ctx, `DELETE FROM categories WHERE id=$1`, id) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err := r.db.Exec(ctx, `UPDATE category_hierarchy SET is_active=false, is_archived=true, updated_at=NOW() WHERE id=$1`, id) //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
 	return err
 }
 
 func (r *CategoryRepo) GetByID(ctx context.Context, id int) (*models.Category, error) {
 	row := r.db.QueryRow(ctx,
-		`SELECT id, name, slug,
-		COALESCE(name_en, name, ''), COALESCE(name_am, ''), COALESCE(name_or, ''), COALESCE(name_ti, ''),
-		COALESCE(sort_order, 0), COALESCE(is_active, true), parent_id
-		FROM categories WHERE id=$1`, id)
+		`SELECT id, name_en, slug,
+		COALESCE(name_en, ''), COALESCE(name_am, ''), COALESCE(name_om, ''), COALESCE(name_ti, ''),
+		COALESCE(display_order, 0), COALESCE(is_active, true), parent_id
+		FROM category_hierarchy WHERE id=$1`, id)
 	c, err := scanCat(row)
 	if err != nil {
 		return nil, err
