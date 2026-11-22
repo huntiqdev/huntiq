@@ -3,6 +3,7 @@ import './globals.css';
 import { ClientShell } from '@/components/layout/ClientShell';
 import { LocaleProvider } from '@/context/LocaleContext';
 import { AuthProvider } from '@/context/AuthContext';
+import Script from 'next/script';
 import { ThemeProvider } from '@/context/ThemeContext';
 
 export const viewport: Viewport = {
@@ -41,9 +42,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
+        <Script
+          id="theme-script"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeScript }}
-          suppressHydrationWarning
         />
       </head>
       <body className="bg-slate-50 dark:bg-[#091426] text-slate-900 dark:text-slate-100 transition-colors duration-200">

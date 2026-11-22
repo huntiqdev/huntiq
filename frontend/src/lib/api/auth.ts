@@ -1,4 +1,4 @@
-import { fetchAPI, API_URL, ApiError } from './core';
+import { fetchAPI, API_URL, ApiError, getCSRFToken } from './core';
 
 type UserRole = 'seller' | 'buyer';
 
@@ -11,9 +11,13 @@ async function loginAs(role: UserRole, data: any): Promise<{ token: string }> {
 }
 
 async function checkExists(role: UserRole, phone: string): Promise<boolean> {
+  const csrf = getCSRFToken();
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (csrf) headers['X-CSRF-Token'] = csrf;
   const res = await fetch(`${API_URL}/${role}/check`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    headers,
     body: JSON.stringify({ phone }),
   }).catch(() => null);
   if (!res) return false;

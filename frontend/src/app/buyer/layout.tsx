@@ -24,6 +24,7 @@ interface BuyerSidebarProps {
   buyerName: string | null;
   buyerTier: string;
   userId?: number;
+  avatarURL?: string;
   pathname: string;
   tierRank: number;
   isSeller: boolean;
@@ -36,7 +37,7 @@ interface BuyerSidebarProps {
 
 // Defined outside BuyerLayout to prevent remount on every render (avoids hydration issues)
 function BuyerSidebarContent({
-  buyerName, buyerTier, userId, pathname, tierRank,
+  buyerName, buyerTier, userId, avatarURL, pathname, tierRank,
   isSeller, isLandlord, onActivateSeller, onActivateLandlord,
   onClose, onLogout,
 }: BuyerSidebarProps) {
@@ -62,9 +63,13 @@ function BuyerSidebarContent({
       {/* Buyer info + tier badge */}
       <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#EAF3FF] dark:bg-[#1769E0]/20 flex items-center justify-center text-[#1769E0] dark:text-[#38A5FF] font-black text-sm">
-            {buyerName?.[0]?.toUpperCase() ?? 'B'}
-          </div>
+          {avatarURL ? (
+            <img src={avatarURL} alt={buyerName || 'Avatar'} className="w-8 h-8 rounded-xl object-cover ring-1 ring-zinc-300 dark:ring-zinc-700 shrink-0" />
+          ) : (
+            <div className="w-8 h-8 rounded-xl bg-[#EAF3FF] dark:bg-[#1769E0]/20 flex items-center justify-center text-[#1769E0] dark:text-[#38A5FF] font-black text-sm shrink-0">
+              {buyerName?.[0]?.toUpperCase() ?? 'B'}
+            </div>
+          )}
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300 truncate">{buyerName ?? `Buyer #${userId}`}</p>
             <div className="flex items-center gap-1 mt-0.5">
@@ -219,8 +224,13 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
   }, [user?.token, isBuyer]);
 
   if (isAuthPage) return <>{children}</>;
-  if (loading) return null;
-  if (!user) return null;
+  if (loading || !user) {
+    return (
+      <div className="flex h-screen bg-inherit dark:bg-zinc-950 overflow-hidden items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#1769E0] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   const tierRank = TIER_RANK[buyerTier] ?? 0;
   const TierIcon = TIER_ICON[buyerTier] as React.ElementType | undefined;
@@ -228,7 +238,7 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
   const handleLogout = () => { logout(); router.push('/auth'); };
 
   const sidebarProps: BuyerSidebarProps = {
-    buyerName, buyerTier, userId: user?.id, pathname, tierRank,
+    buyerName, buyerTier, userId: user?.id, avatarURL: user?.avatarURL, pathname, tierRank,
     isSeller, isLandlord,
     onActivateSeller: () => setActivationCap('seller'),
     onActivateLandlord: () => setActivationCap('landlord'),
@@ -262,8 +272,8 @@ export default function BuyerLayout({ children }: { children: React.ReactNode })
             <Menu size={18} />
           </button>
           <span className="font-black text-[#1769E0] dark:text-[#38A5FF] text-sm">{bn.buyer_panel || 'Buyer Panel'}</span>
-          <div className="ml-auto flex items-center gap-2">
-            <LanguageSelector variant="compact" />
+          <div className="ml-auto flex items-center gap-2 shrink-0">
+            <LanguageSelector variant="compact" className="shrink-0" />
             {TierIcon && <TierIcon size={14} className={TIER_COLOR[buyerTier]} />}
             <span className={`text-xs font-black capitalize ${TIER_COLOR[buyerTier]}`}>{buyerTier}</span>
           </div>

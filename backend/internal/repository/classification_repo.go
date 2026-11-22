@@ -823,7 +823,7 @@ func (r *ClassificationRepo) GetEffectiveAttributes(ctx context.Context, placeme
 				COALESCE(ad.name_ti, '') AS name_ti,
 				ad.slug,
 				ad.data_type,
-				COALESCE(ar.override_validation_rules, ad.validation_rules) AS validation_rules,
+				COALESCE(ar.override_validation_rules, ar.validation_rules, ad.validation_rules) AS validation_rules,
 				COALESCE(ar.override_unit, ad.unit, '') AS unit,
 				ar.is_required,
 				ad.is_filterable,

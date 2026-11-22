@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -15,6 +16,8 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const isAdmin = pathname.startsWith('/admin') || pathname.startsWith('/staff') || pathname.includes('-console');
   const isSellerArea = pathname.startsWith('/seller');
   const isBuyerArea = pathname.startsWith('/buyer');
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   // Admin console has its own full-screen layout
   if (isAdmin) {
@@ -26,7 +29,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
     return (
       <>
         {children}
-        <AIAssistant />
+        {mounted && <AIAssistant />}
       </>
     );
   }
@@ -48,7 +51,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="min-h-screen pb-20 md:pb-0">{children}</main>
       <Footer />
-      <AIAssistant />
+      {mounted && <AIAssistant />}
 
       {/* Mobile Bottom Navigation — hidden on product detail pages to prioritize the sticky Buy/Contact CTA */}
       {!isProductDetail && (
@@ -118,7 +121,11 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
               isProfileActive ? 'text-[#1769E0] dark:text-[#38A5FF] font-black' : 'text-slate-500 dark:text-slate-400'
             }`}
           >
-            <User size={20} className={isProfileActive ? 'fill-current' : ''} />
+            {user?.avatarURL ? (
+              <img src={user.avatarURL} alt="Profile" className="w-5 h-5 rounded-full object-cover ring-1 ring-[#1769E0]" />
+            ) : (
+              <User size={20} className={isProfileActive ? 'fill-current' : ''} />
+            )}
             <span className="text-[10px] font-bold">{t.ui?.profile ?? 'Profile'}</span>
           </Link>
         </nav>

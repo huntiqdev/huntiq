@@ -75,7 +75,7 @@ const sqlSellerProfile = `
 const sqlSellerUpdateProfile = `
 	UPDATE users SET name=$1, business_name=$2, email=NULLIF($3,''), additional_phones=$4,
 	       avatar_url=COALESCE(NULLIF($5,''), avatar_url), updated_at=NOW()
-	 WHERE id=$6 AND role='seller'`
+	 WHERE id=$6 AND role != 'admin'`
 
 const sqlSellerDeleteProduct = `
 	DELETE FROM products

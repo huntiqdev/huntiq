@@ -10,7 +10,7 @@ import { useLocale } from '@/hooks/useLocale';
 import {
   LayoutDashboard, Package, DollarSign, User,
   LogOut, Menu, ChevronRight, ShoppingBag, HelpCircle,
-  ShoppingCart, BarChart2, Bell, Home, Layers, PhoneCall,
+  ShoppingCart, BarChart2, Bell, Home, Layers, PhoneCall, Plus,
 } from 'lucide-react';
 import { TIER_RANK, TIER_ICON, TIER_COLOR } from '@/lib/constants/tiers';
 
@@ -38,6 +38,7 @@ interface SidebarProps {
   sellerName: string | null;
   sellerTier: string;
   userId?: number;
+  avatarURL?: string;
   pathname: string;
   visibleNav: typeof NAV_ITEMS[number][];
   lockedNav: typeof NAV_ITEMS[number][];
@@ -49,7 +50,7 @@ interface SidebarProps {
 }
 
 function SidebarContent({
-  sellerName, sellerTier, userId, pathname,
+  sellerName, sellerTier, userId, avatarURL, pathname,
   visibleNav, lockedNav, sellerPreference, isLandlord, onClose, onHelp, onLogout,
 }: SidebarProps) {
   const { t } = useLocale();
@@ -117,9 +118,13 @@ function SidebarContent({
       {/* Seller info + tier badge */}
       <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2.5">
-          <div className={`w-8 h-8 rounded-lg ${isRentMode ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600' : isDualMode ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600' : 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]'} flex items-center justify-center font-black text-sm`}>
-            {sellerName?.[0]?.toUpperCase() ?? (isRentMode ? 'L' : 'S')}
-          </div>
+          {avatarURL ? (
+            <img src={avatarURL} alt={sellerName || 'Avatar'} className="w-8 h-8 rounded-lg object-cover ring-1 ring-zinc-300 dark:ring-zinc-700 shrink-0" />
+          ) : (
+            <div className={`w-8 h-8 rounded-lg ${isRentMode ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600' : isDualMode ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600' : 'bg-[#EAF3FF] dark:bg-[#1769E0]/20 text-[#1769E0]'} flex items-center justify-center font-black text-sm shrink-0`}>
+              {sellerName?.[0]?.toUpperCase() ?? (isRentMode ? 'L' : 'S')}
+            </div>
+          )}
           <div className="min-w-0 flex-1">
             <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300 truncate">
               {sellerName ?? (isRentMode ? `Landlord #${userId}` : isDualMode ? `Provider #${userId}` : `Seller #${userId}`)}
@@ -237,8 +242,13 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
   }, [user?.token, isProvider, pathname]);
 
   if (isAuthPage) return <>{children}</>;
-  if (loading) return null;
-  if (!user) return null;
+  if (loading || !user) {
+    return (
+      <div className="flex h-screen bg-inherit dark:bg-zinc-950 overflow-hidden items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#1769E0] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   // If user is logged in but hasn't activated seller or landlord capability yet
   if (!isProvider) {
@@ -248,8 +258,11 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center p-4">
         <div className="max-w-lg w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-2xl text-center space-y-6">
-          <div className="w-16 h-16 bg-gradient-to-tr from-[#1769E0] to-teal-500 rounded-2xl flex items-center justify-center mx-auto text-white shadow-lg shadow-[#1769E0]/20">
-            <Layers size={30} />
+          <div className="flex items-center justify-between">
+            <div className="w-12 h-12 bg-gradient-to-tr from-[#1769E0] to-teal-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-[#1769E0]/20">
+              <Layers size={24} />
+            </div>
+            <LanguageSelector variant="pill" />
           </div>
           <div>
             <h2 className="text-xl font-black text-zinc-900 dark:text-white">
@@ -338,7 +351,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
   const lockedNav  = NAV_ITEMS.filter(item => tierRank < item.minTier);
 
   const sidebarProps: SidebarProps = {
-    sellerName, sellerTier, userId: user?.id, pathname,
+    sellerName, sellerTier, userId: user?.id, avatarURL: user?.avatarURL, pathname,
     visibleNav, lockedNav, sellerPreference, isLandlord,
     onClose:  () => setSidebarOpen(false),
     onHelp:   () => setHelpOpen(true),
@@ -390,33 +403,34 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
 
       {/* Main */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="md:hidden h-14 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-4 gap-3 shrink-0">
+        <header className="md:hidden h-14 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center px-3 gap-2 shrink-0">
           <button onClick={() => setSidebarOpen(true)}
-            className="p-2.5 rounded-xl text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-90"
+            className="p-2 rounded-xl text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors tap-bounce active:scale-90 shrink-0"
             aria-label="Open menu">
             <Menu size={18} />
           </button>
-          <span className={`font-black text-sm truncate ${isRentMode ? 'text-teal-600' : isDualMode ? 'text-indigo-600' : 'text-[#1769E0]'}`}>
+          <span className={`font-black text-xs sm:text-sm truncate min-w-0 ${isRentMode ? 'text-teal-600' : isDualMode ? 'text-indigo-600' : 'text-[#1769E0]'}`}>
             {headerTitle}
           </span>
-          <div className="ml-auto flex items-center gap-2">
-            <LanguageSelector variant="compact" />
+          <div className="ml-auto flex items-center gap-1.5 shrink-0">
+            <LanguageSelector variant="compact" className="shrink-0" />
             {unreadCount > 0 && (
-              <Link href="/seller/dashboard" className="relative p-2 rounded-xl text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90" aria-label="Notifications">
+              <Link href="/seller/dashboard" className="relative p-1.5 rounded-xl text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90 shrink-0" aria-label="Notifications">
                 <Bell size={16} />
-                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#1769E0] text-white text-[9px] font-black rounded-full flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-[#1769E0] text-white text-[8px] font-black rounded-full flex items-center justify-center">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
               </Link>
             )}
             <button onClick={() => setHelpOpen(true)}
-              className="p-2 rounded-xl text-zinc-400 hover:text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90"
+              className="p-1.5 rounded-xl text-zinc-400 hover:text-[#1769E0] hover:bg-[#1769E0]/10 dark:hover:bg-[#1769E0]/20 transition-colors tap-bounce active:scale-90 shrink-0"
               aria-label="Help">
               <HelpCircle size={16} />
             </button>
             <Link href={headerAddHref}
-              className={`flex items-center gap-1.5 text-white px-3 py-2 min-h-[36px] rounded-xl text-xs font-bold shadow-sm tap-bounce active:scale-95 ${headerColorClass}`}>
-              {headerButtonText}
+              className={`flex items-center gap-1 text-white px-2.5 py-1.5 min-h-[34px] rounded-xl text-xs font-bold shadow-sm tap-bounce active:scale-95 shrink-0 ${headerColorClass}`}>
+              <Plus size={14} className="stroke-[2.5px]" />
+              <span className="hidden xs:inline">{headerButtonText.replace('+ ', '')}</span>
             </Link>
           </div>
         </header>

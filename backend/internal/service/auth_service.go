@@ -525,7 +525,10 @@ func (s *AuthService) VerifyOTP(ctx context.Context, req dto.OTPVerifyRequest) e
 			return errors.New("invalid OTP format")
 		}
 	}
-	// Enforce purpose allowlist — prevents verifying a register OTP as a login OTP
+	// Enforce purpose allowlist — defaults to "register" if omitted
+	if req.Purpose == "" {
+		req.Purpose = "register"
+	}
 	switch req.Purpose {
 	case "register", "login", "reset_password":
 		// valid

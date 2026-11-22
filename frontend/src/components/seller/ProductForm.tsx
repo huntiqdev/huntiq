@@ -13,7 +13,7 @@ import { ImageUploader } from '@/components/seller/ImageUploader';
 import { type SellerTier, MAX_IMAGES_PER_TIER } from '@/lib/constants/fees';
 import { SELECT_CLS as cls, LABEL_CLS as lbl } from '@/lib/constants/styles';
 import CategoryTreeSelector, { type CategoryNode } from '@/components/category/CategoryTreeSelector';
-import { Check, X, RefreshCw, Layers, Globe, Sparkles, ExternalLink, CheckCircle2, Tag, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, X, RefreshCw, Layers, Globe, Sparkles, ExternalLink, CheckCircle2, Tag, ChevronDown, ChevronUp, Search, Link as LinkIcon } from 'lucide-react';
 
 interface AttributeDefinition {
   attribute_id: number;
@@ -34,6 +34,7 @@ interface CanonicalCategoryPreset {
   nameAm: string;
   icon: string;
   activeBorder: string;
+  keywords: string[];
   registeredItems: {
     title: string;
     subcategory: string;
@@ -49,6 +50,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'ስልኮች እና ታብሌቶች',
     icon: '📱',
     activeBorder: 'border-blue-500 bg-blue-50/70 dark:bg-blue-950/40 ring-2 ring-blue-500/20 text-blue-700 dark:text-blue-300',
+    keywords: ['phone', 'phones', 'iphone', 'samsung', 'mobile', 'cellphone', 'tablet', 'ipad', 'charger', 'power bank', 'ስልክ', 'ሞባይል', 'ታብሌት', 'mobayila', 'bilbila', 'accessories'],
     registeredItems: [
       { title: 'Apple iPhone 15 Pro Max', subcategory: 'Smartphones', item: 'Apple iPhone 15 Pro Max' },
       { title: 'Apple iPhone 14 Pro', subcategory: 'Smartphones', item: 'Apple iPhone 14 Pro' },
@@ -71,6 +73,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'ላፕቶፖች እና ኮምፒውተሮች',
     icon: '💻',
     activeBorder: 'border-cyan-500 bg-cyan-50/70 dark:bg-cyan-950/40 ring-2 ring-cyan-500/20 text-cyan-700 dark:text-cyan-300',
+    keywords: ['computer', 'laptop', 'macbook', 'dell', 'hp', 'lenovo', 'desktop', 'monitor', 'pc', 'ssd', 'ram', 'ላፕቶፕ', 'ኮምፒውተር', 'kompiitara'],
     registeredItems: [
       { title: 'Apple MacBook Pro M3', subcategory: 'Laptops', item: 'Apple MacBook Pro' },
       { title: 'Apple MacBook Air M2', subcategory: 'Laptops', item: 'Apple MacBook Air' },
@@ -89,6 +92,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'ተሽከርካሪዎች እና መኪናዎች',
     icon: '🚗',
     activeBorder: 'border-amber-500 bg-amber-50/70 dark:bg-amber-950/40 ring-2 ring-amber-500/20 text-amber-700 dark:text-amber-300',
+    keywords: ['car', 'cars', 'vehicle', 'vehicles', 'toyota', 'vitz', 'corolla', 'rav4', 'automobile', 'motorcycle', 'bajaj', 'truck', 'መኪና', 'ተሽከርካሪ', 'ባጃጅ', 'ሞተር', 'konkolaataa'],
     registeredItems: [
       { title: 'Toyota Vitz Compact Car', subcategory: 'Automobiles', item: 'Toyota Vitz' },
       { title: 'Toyota Corolla Executive', subcategory: 'Automobiles', item: 'Toyota Corolla' },
@@ -108,6 +112,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'አልባሳት እና ፋሽን',
     icon: '👗',
     activeBorder: 'border-rose-500 bg-rose-50/70 dark:bg-rose-950/40 ring-2 ring-rose-500/20 text-rose-700 dark:text-rose-300',
+    keywords: ['clothing', 'cloth', 'clothes', 'fashion', 'habesha', 'kemis', 'dress', 'suit', 'jeans', 'shirt', 'shoes', 'sneakers', 'jacket', 'handbag', 'አልባሳት', 'ቀሚስ', 'ሱፍ', 'ጫማ', 'uffata'],
     registeredItems: [
       { title: 'Habesha Traditional Dress (የሀበሻ ቀሚስ)', subcategory: 'Traditional', item: 'Habesha Kemis' },
       { title: "Men's Italian Formal Suit & Blazer", subcategory: 'Men Fashion', item: 'Formal Suit' },
@@ -126,6 +131,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'መጽሐፍት እና ትምህርት',
     icon: '📚',
     activeBorder: 'border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/40 ring-2 ring-emerald-500/20 text-emerald-700 dark:text-emerald-300',
+    keywords: ['book', 'books', 'education', 'textbook', 'history', 'novel', 'stationery', 'መጽሐፍ', 'ደብተር', 'ትምህርት', 'kitaaba', 'kitaabota'],
     registeredItems: [
       { title: 'Ethiopian History & Heritage Books', subcategory: 'History', item: 'History Book' },
       { title: 'High School & University Textbooks', subcategory: 'Academic', item: 'Textbook' },
@@ -144,6 +150,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'የቤት እና የቢሮ እቃዎች',
     icon: '🛋️',
     activeBorder: 'border-purple-500 bg-purple-50/70 dark:bg-purple-950/40 ring-2 ring-purple-500/20 text-purple-700 dark:text-purple-300',
+    keywords: ['furniture', 'sofa', 'bed', 'mattress', 'table', 'chair', 'desk', 'wardrobe', 'closet', 'carpet', 'decor', 'የቤት እቃዎች', 'ሶፋ', 'አልጋ', 'ጠረጴዛ', 'ወንበር', 'mi\'a'],
     registeredItems: [
       { title: 'Living Room L-Shape Fabric Sofa Set', subcategory: 'Living Room', item: 'L-Shape Sofa' },
       { title: 'Queen Size Wooden Bed with Spring Mattress', subcategory: 'Bedroom', item: 'Queen Bed' },
@@ -162,6 +169,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'ቤት እና ሪል እስቴት',
     icon: '🏠',
     activeBorder: 'border-teal-500 bg-teal-50/70 dark:bg-teal-950/40 ring-2 ring-teal-500/20 text-teal-700 dark:text-teal-300',
+    keywords: ['property', 'real estate', 'apartment', 'condo', 'condominium', 'villa', 'house', 'rent', 'rental', 'office', 'shop', 'land', 'plot', 'ቤት', 'ኪራይ', 'ኮንዶሚኒየም', 'ቪላ', 'መሬት', 'mana'],
     registeredItems: [
       { title: '2-Bedroom Modern Condominium Apartment', subcategory: 'Apartments', item: 'Condo 2-Bedroom' },
       { title: '3-Bedroom Luxury Apartment', subcategory: 'Apartments', item: 'Luxury Apartment' },
@@ -179,6 +187,7 @@ const CANONICAL_PRESETS: CanonicalCategoryPreset[] = [
     nameAm: 'መሳሪያዎች እና ማሽነሪዎች',
     icon: '🔧',
     activeBorder: 'border-slate-500 bg-slate-50/70 dark:bg-slate-900/60 ring-2 ring-slate-500/20 text-slate-700 dark:text-slate-300',
+    keywords: ['tool', 'tools', 'machinery', 'drill', 'grinder', 'welding', 'generator', 'pump', 'equipment', 'safety', 'መሳሪያ', 'ማሽን', 'meeshaalee'],
     registeredItems: [
       { title: 'Electric Power Drill & Impact Driver Set', subcategory: 'Power Tools', item: 'Electric Drill' },
       { title: 'Angle Grinder with Cutting & Grinding Discs', subcategory: 'Power Tools', item: 'Angle Grinder' },
@@ -269,6 +278,7 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   const [tierLoaded, setTierLoaded] = useState(false);
   const [selectedPresetSlug, setSelectedPresetSlug] = useState<string | null>(null);
   const [showAdvancedTree, setShowAdvancedTree] = useState(false);
+  const [categorySearch, setCategorySearch] = useState('');
 
   useEffect(() => {
     if (form.category_hierarchy_id) {
@@ -581,19 +591,19 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
       </div>
 
       {/* ── STEP 1: CHOOSE PRODUCT CATEGORY & REGISTERED NAME ── */}
-      <div className="space-y-3 p-4 bg-gradient-to-br from-blue-50/50 via-white to-slate-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 border border-blue-200/80 dark:border-zinc-800 rounded-3xl shadow-sm">
+      <div className="space-y-3.5 p-4 bg-gradient-to-br from-blue-50/60 via-white to-slate-50 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 border border-blue-200/80 dark:border-zinc-800 rounded-3xl shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <span className="w-6 h-6 rounded-full bg-[#1769E0] text-white text-xs font-black flex items-center justify-center shrink-0">1</span>
             <div>
               <h3 className="text-sm font-black text-zinc-900 dark:text-white flex items-center gap-2">
-                <span>{locale === 'am' ? 'የምርት አይነት እና ምድብ ይምረጡ' : 'Step 1: Choose Product Category & Type'}</span>
+                <span>{locale === 'am' ? 'ደረጃ 1፦ የምርት አይነት እና ምድብ ይምረጡ' : 'Step 1: Choose Product Category & Type'}</span>
                 <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">{locale === 'am' ? '(ግዴታ)' : '(Required)'}</span>
               </h3>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
                 {locale === 'am'
-                  ? 'በፍለጋ እና በማጣሪያ በቀላሉ እንዲገኝ ከተመዘገቡት ምድቦች ይምረጡ'
-                  : 'Select registered category to enable catalog search, filters, and specifications'}
+                  ? 'በፍለጋ እና በማጣሪያ በቀላሉ እንዲገኝ ይፈልጉ ወይም ከተመዘገቡት ፈጣን ምድቦች አንዱን ይምረጡ'
+                  : 'Search what you are listing or tap a popular category for instant indexing & filters'}
               </p>
             </div>
           </div>
@@ -604,41 +614,89 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           )}
         </div>
 
-        {/* Category Preset Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {CANONICAL_PRESETS.map((preset) => {
-            const isSelected = form.category_hierarchy_id === preset.id || selectedPresetSlug === preset.slug;
-            return (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => handleSelectPreset(preset)}
-                className={`p-2.5 rounded-2xl border text-left transition-all tap-bounce cursor-pointer flex flex-col justify-between min-h-[72px] ${
-                  isSelected
-                    ? preset.activeBorder
-                    : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700'
-                }`}
-              >
-                <div className="flex items-center justify-between w-full">
-                  <span className="text-2xl">{preset.icon}</span>
-                  {isSelected && <span className="w-2.5 h-2.5 rounded-full bg-[#1769E0]" />}
-                </div>
-                <div className="mt-1">
-                  <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight">
-                    {locale === 'am' ? preset.nameAm : preset.nameEn}
-                  </p>
-                  <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium">
-                    {locale === 'am' ? preset.nameEn : preset.nameAm}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
+        {/* 🔍 Unified Search What You Are Listing Input */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#1769E0]">
+            <Search size={16} />
+          </div>
+          <input
+            type="text"
+            value={categorySearch}
+            onChange={e => {
+              const val = e.target.value;
+              setCategorySearch(val);
+              if (val.trim()) {
+                const lower = val.toLowerCase().trim();
+                const match = CANONICAL_PRESETS.find(p =>
+                  p.slug.includes(lower) ||
+                  p.nameEn.toLowerCase().includes(lower) ||
+                  p.nameAm.includes(lower) ||
+                  p.keywords.some(k => k.toLowerCase().includes(lower) || lower.includes(k.toLowerCase()))
+                );
+                if (match && match.id !== form.category_hierarchy_id) {
+                  handleSelectPreset(match);
+                }
+              }
+            }}
+            placeholder={
+              locale === 'am'
+                ? 'ምን ሊሸጡ ወይም ሊያከራዩ ነው? (ለምሳሌ፦ ስልክ፣ ላፕቶፕ፣ መኪና፣ ቀሚስ፣ መጽሐፍ፣ ሶፋ፣ ቤት...)'
+                : 'Search what you are listing (e.g. Phone, Laptop, Car, Dress, Book, Sofa, Apartment, Shoes...)'
+            }
+            className="w-full pl-10 pr-9 py-2.5 bg-white dark:bg-zinc-800 border-2 border-blue-300 dark:border-blue-900/60 focus:border-[#1769E0] focus:ring-2 focus:ring-[#1769E0]/20 rounded-2xl text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-100 outline-none transition-all placeholder:text-zinc-400 shadow-xs"
+          />
+          {categorySearch && (
+            <button
+              type="button"
+              onClick={() => setCategorySearch('')}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+            >
+              <X size={14} />
+            </button>
+          )}
         </div>
 
-        {/* Registered Catalog Items Chips */}
+        {/* Category Preset 1-Click Buttons */}
+        <div className="space-y-1.5">
+          <p className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">
+            {locale === 'am' ? 'ወይም ፈጣን ዋና ምድብ ይምረጡ፦' : 'Or choose popular marketplace category:'}
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {CANONICAL_PRESETS.map((preset) => {
+              const isSelected = form.category_hierarchy_id === preset.id || selectedPresetSlug === preset.slug;
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => {
+                    handleSelectPreset(preset);
+                    if (categorySearch) setCategorySearch('');
+                  }}
+                  className={`p-2.5 rounded-2xl border text-left transition-all tap-bounce cursor-pointer flex items-center gap-2.5 min-h-[58px] ${
+                    isSelected
+                      ? preset.activeBorder
+                      : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700'
+                  }`}
+                >
+                  <span className="text-xl sm:text-2xl shrink-0">{preset.icon}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-black text-zinc-900 dark:text-white leading-tight truncate">
+                      {locale === 'am' ? preset.nameAm : preset.nameEn}
+                    </p>
+                    <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium truncate">
+                      {locale === 'am' ? preset.nameEn : preset.nameAm}
+                    </p>
+                  </div>
+                  {isSelected && <span className="w-2 h-2 rounded-full bg-[#1769E0] shrink-0" />}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Registered Catalog Items Chips (1-Click to Insert Name) */}
         {activePreset && (
-          <div className="mt-3 pt-3 border-t border-zinc-200/70 dark:border-zinc-800 space-y-2">
+          <div className="mt-2 pt-3 border-t border-zinc-200/70 dark:border-zinc-800 space-y-2">
             <div className="flex items-center justify-between">
               <p className="text-xs font-bold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
                 <Tag size={13} className="text-[#1769E0]" />
@@ -648,26 +706,31 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
                     : `Registered ${activePreset.nameEn} Catalog Names (Click to insert):`}
                 </span>
               </p>
+              <span className="text-[10px] font-semibold text-zinc-400">
+                {activePreset.registeredItems.length} {locale === 'am' ? 'እቃዎች' : 'items'}
+              </span>
             </div>
-            <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto p-1">
-              {activePreset.registeredItems.map((item, idx) => {
-                const isItemActive = form.title.startsWith(item.title) || form.item === item.item;
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => handleSelectItem(item)}
-                    className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all tap-bounce cursor-pointer flex items-center gap-1.5 border ${
-                      isItemActive
-                        ? 'bg-[#1769E0] text-white border-[#1769E0] shadow-sm shadow-[#1769E0]/20'
-                        : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-                    }`}
-                  >
-                    {isItemActive && <Check size={11} />}
-                    <span>{item.title}</span>
-                  </button>
-                );
-              })}
+            <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto p-1 bg-zinc-50/50 dark:bg-zinc-900/50 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60">
+              {activePreset.registeredItems
+                .filter(item => !categorySearch || item.title.toLowerCase().includes(categorySearch.toLowerCase()) || item.subcategory.toLowerCase().includes(categorySearch.toLowerCase()))
+                .map((item, idx) => {
+                  const isItemActive = form.title.startsWith(item.title) || form.item === item.item;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleSelectItem(item)}
+                      className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all tap-bounce cursor-pointer flex items-center gap-1.5 border ${
+                        isItemActive
+                          ? 'bg-[#1769E0] text-white border-[#1769E0] shadow-sm shadow-[#1769E0]/20'
+                          : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:border-blue-300'
+                      }`}
+                    >
+                      {isItemActive && <Check size={11} />}
+                      <span>{item.title}</span>
+                    </button>
+                  );
+                })}
             </div>
           </div>
         )}
@@ -715,8 +778,8 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
             {t.ui.title} <span className="text-red-500">*</span>
           </label>
           {form.category_hierarchy_id ? (
-            <span className="text-[11px] font-bold text-[#1769E0] dark:text-[#38A5FF]">
-              ✓ Linked to {activePreset ? (locale === 'am' ? activePreset.nameAm : activePreset.nameEn) : 'Category'}
+            <span className="text-[11px] font-bold text-[#1769E0] dark:text-[#38A5FF] flex items-center gap-1">
+              <CheckCircle2 size={12} /> Linked to {activePreset ? (locale === 'am' ? activePreset.nameAm : activePreset.nameEn) : 'Category'}
             </span>
           ) : (
             <span className="text-[11px] font-medium text-amber-600 dark:text-amber-400">
@@ -730,11 +793,22 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           value={form.title}
           onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
         />
-        <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
-          {locale === 'am'
-            ? 'ከላይ ከተመረጠው ስም በኋላ ተጨማሪ ዝርዝሮችን (መጠን፣ ከለር፣ ዓመተ-ምህረት) ማከል ይችላሉ።'
-            : 'Select a registered name above or type title, then add details (storage, condition, color, year).'}
-        </p>
+        
+        {/* Real-time Auto-Slug & Discovery Indicator */}
+        <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400 px-1">
+          <span className="flex items-center gap-1 truncate font-mono text-[10px] text-zinc-600 dark:text-zinc-400">
+            <LinkIcon size={11} className="text-[#1769E0] shrink-0" />
+            <span className="text-zinc-400">huntiq.et/products/</span>
+            <span className="font-bold text-zinc-800 dark:text-zinc-200 truncate">
+              {form.title
+                ? form.title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '') || 'listing'
+                : 'your-product-slug'}
+            </span>
+          </span>
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold shrink-0 ml-2">
+            ✓ Auto-Indexed
+          </span>
+        </div>
       </div>
 
       {isAnnouncement ? (

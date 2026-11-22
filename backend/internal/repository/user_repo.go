@@ -109,24 +109,15 @@ func (r *UserRepo) Create(ctx context.Context, u *models.User) (int, error) {
 		_, _ = r.db.Exec(ctx, `UPDATE users SET buyer_tier_paid_at=NOW(), buyer_tier_expires_at=NOW() + INTERVAL '30 days' WHERE id=$1`, id)
 	}
 
-	// Always activate 'buyer' capability for all registered users
-	_, _ = r.db.Exec(ctx, `
-		INSERT INTO user_capabilities (user_id, capability, status) 
-		VALUES ($1, 'buyer', 'active') 
-		ON CONFLICT (user_id, capability) DO NOTHING`, id)
-
-	// If registered as seller or has seller/landlord preference, activate respective capabilities
-	if role == "seller" || u.HasCapability("seller") {
-		_, _ = r.db.Exec(ctx, `
-			INSERT INTO user_capabilities (user_id, capability, status) 
-			VALUES ($1, 'seller', 'active') 
-			ON CONFLICT (user_id, capability) DO NOTHING`, id)
-	}
-	if sellerPref == "rent" || sellerPref == "both" || u.HasCapability("landlord") {
-		_, _ = r.db.Exec(ctx, `
-			INSERT INTO user_capabilities (user_id, capability, status) 
-			VALUES ($1, 'landlord', 'active') 
-			ON CONFLICT (user_id, capability) DO NOTHING`, id)
+	// In HUNTIQ marketplace: all registered accounts are granted marketplace capabilities:
+	// 'buyer', 'seller', and 'landlord' so users can seamlessly browse, buy, post items for sale, and list rentals.
+	if role != "admin" {
+		for _, cap := range []string{"buyer", "seller", "landlord"} {
+			_, _ = r.db.Exec(ctx, `
+				INSERT INTO user_capabilities (user_id, capability, status) 
+				VALUES ($1, $2, 'active') 
+				ON CONFLICT (user_id, capability) DO NOTHING`, id, cap)
+		}
 	}
 
 	return id, nil
@@ -249,11 +240,8 @@ func (r *UserRepo) PopulateCapabilities(ctx context.Context, u *models.User) {
 	caps, err := r.GetCapabilities(ctx, u.ID)
 	if err == nil && len(caps) > 0 {
 		u.Capabilities = caps
-	} else {
-		u.Capabilities = []string{"buyer"}
-		if u.Role == "seller" {
-			u.Capabilities = append(u.Capabilities, "seller")
-		}
+	} else if u.Role != "admin" {
+		u.Capabilities = []string{"buyer", "seller", "landlord"}
 	}
 }
 

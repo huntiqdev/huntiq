@@ -41,10 +41,24 @@ export function getCSRFToken(): string | null {
   const match = document.cookie.match(/(?:^|;\s*)huntiq_csrf=([^;]+)/);
   if (match) return decodeURIComponent(match[1]);
   try {
-    return localStorage.getItem('huntiq_csrf');
-  } catch {
-    return null;
-  }
+    const saved = localStorage.getItem('huntiq_csrf');
+    if (saved) {
+      document.cookie = `huntiq_csrf=${encodeURIComponent(saved)}; path=/; SameSite=Lax`;
+      return saved;
+    }
+  } catch {}
+  // Generate on-the-fly double submit token if missing
+  try {
+    if (typeof window !== 'undefined' && window.crypto) {
+      const array = new Uint8Array(16);
+      window.crypto.getRandomValues(array);
+      const token = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+      document.cookie = `huntiq_csrf=${encodeURIComponent(token)}; path=/; SameSite=Lax`;
+      try { localStorage.setItem('huntiq_csrf', token); } catch {}
+      return token;
+    }
+  } catch {}
+  return null;
 }
 
 // Global refresh mutex to prevent duplicate concurrent refresh requests

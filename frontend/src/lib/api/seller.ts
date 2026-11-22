@@ -1,4 +1,4 @@
-import { fetchAPI, authHeaders, API_URL, ApiError } from './core';
+import { fetchAPI, authHeaders, API_URL, ApiError, getCSRFToken } from './core';
 
 export const sellerApi = {
   getSellerStats: (token: string) =>
@@ -64,9 +64,13 @@ export const sellerApi = {
   uploadImage: async (file: File, token: string): Promise<string> => {
     const form = new FormData();
     form.append('image', file);
+    const csrf = getCSRFToken();
+    const headers: Record<string, string> = { Authorization: `Bearer ${token}` };
+    if (csrf) headers['X-CSRF-Token'] = csrf;
     const res = await fetch(`${API_URL}/upload/image`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers,
       body: form,
     });
     if (!res.ok) {

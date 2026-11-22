@@ -54,6 +54,17 @@ export default function BuyerProfilePage() {
         setEditName(p?.name || '');
         setEditEmail(p?.email && !p.email.includes('@noemail.local') ? p.email : '');
       })
+      .catch(() => {
+        // Fallback: initialize base profile from user context
+        setProfile({
+          name: user.name || '',
+          phone: user.phone || '',
+          email: '',
+          buyer_tier: user.buyerTier || 'normal',
+          avatar_url: user.avatarURL,
+        });
+        setEditName(user.name || '');
+      })
       .finally(() => setLoading(false));
   }, [user]);
 
@@ -170,11 +181,11 @@ export default function BuyerProfilePage() {
                 type="button"
                 onClick={() => avatarInputRef.current?.click()}
                 disabled={uploadingAvatar}
-                className="absolute inset-0 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-[10px] font-bold cursor-pointer"
+                className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white dark:bg-zinc-800 text-[#1769E0] dark:text-[#38A5FF] shadow-md flex items-center justify-center border-2 border-white dark:border-zinc-900 cursor-pointer tap-bounce active:scale-90"
                 title="Change circular profile photo"
+                aria-label="Upload profile photo"
               >
-                <Camera size={16} />
-                <span>Change</span>
+                <Camera size={13} />
               </button>
               <input
                 ref={avatarInputRef}

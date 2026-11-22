@@ -1,7 +1,9 @@
 package middleware
 
 import (
+	"crypto/rand"
 	"crypto/subtle"
+	"encoding/hex"
 	"net/url"
 	"strings"
 
@@ -31,6 +33,19 @@ func CSRFProtect(cfg CSRFConfig) fiber.Handler {
 
 		// 1. Safe HTTP methods never mutate state (RFC 7231)
 		if method == fiber.MethodGet || method == fiber.MethodHead || method == fiber.MethodOptions || method == "TRACE" {
+			// Ensure safe requests issue a CSRF cookie if not yet present
+			if c.Cookies(cfg.CookieName) == "" {
+				csrfToken := make([]byte, 16)
+				if _, err := rand.Read(csrfToken); err == nil {
+					c.Cookie(&fiber.Cookie{
+						Name:     cfg.CookieName,
+						Value:    hex.EncodeToString(csrfToken),
+						Path:     "/",
+						HTTPOnly: false,
+						SameSite: "Lax",
+					})
+				}
+			}
 			return c.Next()
 		}
 
@@ -60,20 +75,30 @@ func CSRFProtect(cfg CSRFConfig) fiber.Handler {
 			}
 		}
 
-		// 4. Public auth endpoints (login, register, forgot/reset password, OTP)
+		// 4. Public auth & verification endpoints
 		isPublicAuth := path == "/api/auth/login" ||
 			path == "/api/auth/register" ||
+			path == "/api/auth/check" ||
 			path == "/api/seller/login" ||
 			path == "/api/seller/register" ||
+			path == "/api/seller/check" ||
 			path == "/api/buyer/login" ||
 			path == "/api/buyer/register" ||
+			path == "/api/buyer/check" ||
 			path == "/api/admin/login" ||
 			path == "/api/admin/login/verify" ||
 			path == "/api/auth/otp/send" ||
 			path == "/api/auth/otp/verify" ||
+			path == "/api/auth/otp/resend" ||
 			path == "/api/auth/otp/login" ||
 			path == "/api/auth/forgot-password" ||
+			path == "/api/auth/verify-recovery-otp" ||
 			path == "/api/auth/reset-password" ||
+			path == "/api/auth/refresh" ||
+			path == "/api/seller/refresh" ||
+			path == "/api/buyer/refresh" ||
+			path == "/api/admin/refresh" ||
+			path == "/api/auth/session" ||
 			path == "/api/seller/forgot-password" ||
 			path == "/api/seller/reset-password" ||
 			path == "/api/buyer/forgot-password" ||

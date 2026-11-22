@@ -266,6 +266,14 @@ func RequireRole(role string) fiber.Handler {
 			return fiber.NewError(fiber.StatusForbidden, "insufficient permissions: admin capability required")
 		}
 
+		// In HUNTIQ broker marketplace: all registered non-admin users have unified access to marketplace capabilities (seller, buyer, landlord, renter)
+		if role == "seller" || role == "buyer" || role == "landlord" || role == "renter" {
+			userRole, _ := c.Locals("role").(string)
+			if userRole != "admin" {
+				return c.Next()
+			}
+		}
+
 		// When capability claims are present, active capabilities govern authorization
 		if claims, ok := c.Locals("claims").(*security.Claims); ok && claims != nil && len(claims.Capabilities) > 0 {
 			if claims.HasCapability(role) {
