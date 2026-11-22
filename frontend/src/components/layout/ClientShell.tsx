@@ -41,8 +41,8 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
     ? isSeller
       ? '/seller/dashboard'
       : isBuyer
-      ? '/buyer/dashboard'
-      : '/buyer/profile'
+        ? '/buyer/dashboard'
+        : '/buyer/profile'
     : '/auth';
   const isProfileActive = pathname.startsWith('/seller') || pathname.startsWith('/buyer') || pathname === '/auth';
 
@@ -62,9 +62,8 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
           {/* 1. Home */}
           <Link
             href="/"
-            className={`flex flex-col items-center gap-1 tap-bounce active:scale-95 transition-all min-w-[56px] py-1 ${
-              pathname === '/' ? 'text-[#1769E0] dark:text-[#38A5FF] font-black' : 'text-slate-500 dark:text-slate-400'
-            }`}
+            className={`flex flex-col items-center gap-1 tap-bounce active:scale-95 transition-all min-w-[56px] py-1 ${pathname === '/' ? 'text-[#1769E0] dark:text-[#38A5FF] font-black' : 'text-slate-500 dark:text-slate-400'
+              }`}
           >
             <Home size={20} className={pathname === '/' ? 'fill-current' : ''} />
             <span className="text-[10px] font-bold">
@@ -104,11 +103,10 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
           {/* 4. Buy / Rent */}
           <Link
             href="/products"
-            className={`flex flex-col items-center gap-1 tap-bounce active:scale-95 transition-all min-w-[56px] py-1 ${
-              pathname === '/products' || pathname === '/buy' || pathname === '/rent'
-                ? 'text-[#1769E0] dark:text-[#38A5FF] font-black'
-                : 'text-slate-500 dark:text-slate-400'
-            }`}
+            className={`flex flex-col items-center gap-1 tap-bounce active:scale-95 transition-all min-w-[56px] py-1 ${pathname === '/products' || pathname === '/buy' || pathname === '/rent'
+              ? 'text-[#1769E0] dark:text-[#38A5FF] font-black'
+              : 'text-slate-500 dark:text-slate-400'
+              }`}
           >
             <Search size={20} className={pathname === '/products' || pathname === '/buy' || pathname === '/rent' ? 'stroke-[2.5px]' : ''} />
             <span className="text-[10px] font-bold">{(t.nav as any)?.buy_rent ?? 'Buy / Rent'}</span>
@@ -117,9 +115,8 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
           {/* 5. Account / Profile */}
           <Link
             href={profileHref}
-            className={`flex flex-col items-center gap-1 tap-bounce active:scale-95 transition-all min-w-[56px] py-1 ${
-              isProfileActive ? 'text-[#1769E0] dark:text-[#38A5FF] font-black' : 'text-slate-500 dark:text-slate-400'
-            }`}
+            className={`flex flex-col items-center gap-1 tap-bounce active:scale-95 transition-all min-w-[56px] py-1 ${isProfileActive ? 'text-[#1769E0] dark:text-[#38A5FF] font-black' : 'text-slate-500 dark:text-slate-400'
+              }`}
           >
             {user?.avatarURL ? (
               <img src={user.avatarURL} alt="Profile" className="w-5 h-5 rounded-full object-cover ring-1 ring-[#1769E0]" />

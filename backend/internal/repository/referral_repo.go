@@ -23,11 +23,11 @@ func (r *ReferralRepo) GetStats(ctx context.Context, userID int) (*ReferralStats
 	//nolint:gosec // G201/G202: parameterized query, no user input in SQL structure
 	err := r.db.QueryRow(ctx, `
 		SELECT
-			u.referral_code,
-			u.referral_suspended,
+			COALESCE(u.referral_code, ''),
+			COALESCE(u.referral_suspended, false),
 			u.invitation_accepted_at,
-			inv.referral_code,
-			inv.name
+			COALESCE(inv.referral_code, ''),
+			COALESCE(inv.name, '')
 		FROM users u
 		LEFT JOIN users inv ON inv.id = u.invited_by
 		WHERE u.id = $1`, userID,

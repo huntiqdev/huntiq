@@ -16,8 +16,8 @@ import { ImageCropperModal } from '@/components/ui/ImageCropperModal';
 import PasswordStrength, { validatePasswordStrength } from '@/components/forms/PasswordStrength';
 
 const TIER_CONFIG = {
-  normal:  { label: 'Normal',  icon: null,  color: 'text-zinc-500',   badge: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400' },
-  gold:    { label: 'Gold',    icon: Star,  color: 'text-yellow-500', badge: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400' },
+  normal: { label: 'Normal', icon: null, color: 'text-zinc-500', badge: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400' },
+  gold: { label: 'Gold', icon: Star, color: 'text-yellow-500', badge: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400' },
   premium: { label: 'Premium', icon: Crown, color: 'text-purple-500', badge: 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400' },
 } as const;
 
@@ -297,9 +297,8 @@ export default function BuyerProfilePage() {
             {/* Tier paid date */}
             {profile?.buyer_tier_paid_at && tier !== 'normal' && (
               <div className="flex items-center gap-3">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                  tier === 'gold' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-purple-100 dark:bg-purple-900/30'
-                }`}>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${tier === 'gold' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-purple-100 dark:bg-purple-900/30'
+                  }`}>
                   {TierIcon && <TierIcon size={13} className={cfg.color} />}
                 </div>
                 <div>
@@ -420,25 +419,24 @@ export default function BuyerProfilePage() {
       )}
 
       {/* Upgrade CTA */}
-      {tier !== 'premium' && (        <Link href="/buyer/upgrade"
-          className="flex items-center justify-between bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all group">
-          <div className="flex items-center gap-3">
-            <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-              tier === 'gold' ? 'bg-purple-100 dark:bg-purple-900/30' : 'bg-yellow-100 dark:bg-yellow-900/30'
+      {tier !== 'premium' && (<Link href="/buyer/upgrade"
+        className="flex items-center justify-between bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 hover:shadow-md transition-all group">
+        <div className="flex items-center gap-3">
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${tier === 'gold' ? 'bg-purple-100 dark:bg-purple-900/30' : 'bg-yellow-100 dark:bg-yellow-900/30'
             }`}>
-              {tier === 'gold'
-                ? <Crown size={16} className="text-purple-500" />
-                : <Star size={16} className="text-yellow-500" />}
-            </div>
-            <div>
-              <p className="font-bold text-sm">{tier === 'gold' ? 'Upgrade to Premium' : 'Upgrade to Gold or Premium'}</p>
-              <p className="text-xs text-zinc-400">
-                {tier === 'gold' ? 'Unlock all seller images' : 'Unlock gold & premium seller images'}
-              </p>
-            </div>
+            {tier === 'gold'
+              ? <Crown size={16} className="text-purple-500" />
+              : <Star size={16} className="text-yellow-500" />}
           </div>
-          <ArrowUpRight size={15} className="text-zinc-400 group-hover:text-[#1769E0] transition-colors" />
-        </Link>
+          <div>
+            <p className="font-bold text-sm">{tier === 'gold' ? 'Upgrade to Premium' : 'Upgrade to Gold or Premium'}</p>
+            <p className="text-xs text-zinc-400">
+              {tier === 'gold' ? 'Unlock all seller images' : 'Unlock gold & premium seller images'}
+            </p>
+          </div>
+        </div>
+        <ArrowUpRight size={15} className="text-zinc-400 group-hover:text-[#1769E0] transition-colors" />
+      </Link>
       )}
 
       {/* Change password */}
