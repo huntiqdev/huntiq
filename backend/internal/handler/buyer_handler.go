@@ -59,6 +59,11 @@ func (h *BuyerHandler) UpdateProfile(c *fiber.Ctx) error {
 	if body.Name == "" {
 		return response.BadRequest(c, "name is required")
 	}
+	if body.AvatarURL != nil && strings.TrimSpace(*body.AvatarURL) != "" {
+		if !validations.ValidateMediaOrDocURL(*body.AvatarURL) {
+			return response.BadRequest(c, "invalid or untrusted avatar URL")
+		}
+	}
 	if err := h.authSvc.UpdateBuyerProfile(c.Context(), userID, body.Name, body.Email, body.AvatarURL); err != nil {
 		return response.BadRequest(c, err.Error())
 	}
@@ -192,17 +197,24 @@ func (h *BuyerHandler) CreateRefundRequest(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	if body.Amount <= 0 || body.Reason == "" {
+	if body.Amount <= 0 || strings.TrimSpace(body.Reason) == "" {
 		return response.BadRequest(c, "amount and reason are required")
 	}
+
+	for _, u := range body.EvidenceURLs {
+		if !validations.ValidateMediaOrDocURL(u) {
+			return response.BadRequest(c, "invalid or untrusted evidence URL: "+u)
+		}
+	}
+
 	req := &models.RefundRequest{
 		TransactionID: body.TransactionID,
 		ProductID:     body.ProductID,
 		RequesterID:   buyerID,
 		RequesterRole: "buyer",
 		Amount:        body.Amount,
-		Reason:        body.Reason,
-		Description:   body.Description,
+		Reason:        strings.TrimSpace(body.Reason),
+		Description:   strings.TrimSpace(body.Description),
 		EvidenceURLs:  body.EvidenceURLs,
 	}
 	id, err := h.adminSvc.CreateRefundRequest(c.Context(), req)
@@ -227,8 +239,14 @@ func (h *BuyerHandler) CreateAbuseReport(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	if body.Reason == "" || body.Description == "" {
+	if strings.TrimSpace(body.Reason) == "" || strings.TrimSpace(body.Description) == "" {
 		return response.BadRequest(c, "reason and description are required")
+	}
+
+	for _, u := range body.EvidenceURLs {
+		if !validations.ValidateMediaOrDocURL(u) {
+			return response.BadRequest(c, "invalid or untrusted evidence URL: "+u)
+		}
 	}
 	var reporterID *int
 	role := "anonymous"

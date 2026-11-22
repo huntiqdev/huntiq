@@ -1,11 +1,15 @@
 package handlers
 
 import (
+	"path/filepath"
+	"strings"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/service"
 	"github.com/your-org/used-tools-marketplace/pkg/dto"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
+	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
 
 type SellerHandler struct {
@@ -99,6 +103,12 @@ func (h *SellerHandler) UpdateProfile(c *fiber.Ctx) error {
 	}
 	if body.Name == "" {
 		return response.BadRequest(c, "name is required")
+	}
+
+	if body.AvatarURL != nil && strings.TrimSpace(*body.AvatarURL) != "" {
+		if !validations.ValidateMediaOrDocURL(*body.AvatarURL) {
+			return response.BadRequest(c, "invalid or untrusted avatar URL")
+		}
 	}
 
 	// Get current user to check tier
@@ -366,14 +376,25 @@ func (h *SellerHandler) UploadVerificationDocument(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	if body.DocumentType == "" || body.FileURL == "" {
+	if strings.TrimSpace(body.DocumentType) == "" || strings.TrimSpace(body.FileURL) == "" {
 		return response.BadRequest(c, "document_type and file_url are required")
 	}
+
+	// Validate file_url scheme, host, and extension to prevent Stored XSS and malicious link injection
+	if !validations.ValidateMediaOrDocURL(body.FileURL) {
+		return response.BadRequest(c, "invalid or untrusted document file_url — must be an uploaded file path or trusted HTTPS URL")
+	}
+
+	cleanFileName := filepath.Base(strings.TrimSpace(body.FileName))
+	if cleanFileName == "." || cleanFileName == "/" {
+		cleanFileName = "document"
+	}
+
 	doc := &models.SellerVerificationDocument{
 		SellerID:      sellerID,
-		DocumentType:  body.DocumentType,
-		FileURL:       body.FileURL,
-		FileName:      body.FileName,
+		DocumentType:  strings.TrimSpace(body.DocumentType),
+		FileURL:       strings.TrimSpace(body.FileURL),
+		FileName:      cleanFileName,
 		FileSizeBytes: body.FileSizeBytes,
 	}
 	id, err := h.adminSvc.CreateVerificationDocument(c.Context(), doc)
@@ -402,17 +423,24 @@ func (h *SellerHandler) CreateRefundRequest(c *fiber.Ctx) error {
 	if err := c.BodyParser(&body); err != nil {
 		return response.BadRequest(c, "invalid request body")
 	}
-	if body.Amount <= 0 || body.Reason == "" {
+	if body.Amount <= 0 || strings.TrimSpace(body.Reason) == "" {
 		return response.BadRequest(c, "amount and reason are required")
 	}
+
+	for _, u := range body.EvidenceURLs {
+		if !validations.ValidateMediaOrDocURL(u) {
+			return response.BadRequest(c, "invalid or untrusted evidence URL: "+u)
+		}
+	}
+
 	req := &models.RefundRequest{
 		TransactionID: body.TransactionID,
 		ProductID:     body.ProductID,
 		RequesterID:   sellerID,
 		RequesterRole: "seller",
 		Amount:        body.Amount,
-		Reason:        body.Reason,
-		Description:   body.Description,
+		Reason:        strings.TrimSpace(body.Reason),
+		Description:   strings.TrimSpace(body.Description),
 		EvidenceURLs:  body.EvidenceURLs,
 	}
 	id, err := h.adminSvc.CreateRefundRequest(c.Context(), req)

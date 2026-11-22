@@ -426,16 +426,10 @@ func (r *SellerRepoExport) RecordListingFeePayment(ctx context.Context, sellerID
 	if req.Notes != "" {
 		note += " | " + req.Notes
 	}
-	if req.PaymentMethod == "telebirr" {
-		// Telebirr is automatically approved by the system gateway
-		_, err = r.db.Exec(ctx, `
-			UPDATE products
-			SET fee_paid=true, fee_payment_pending=false, admin_notes=$1, updated_at=NOW()
-			WHERE id=$2 AND seller_id=$3`, note, req.ProductID, sellerID)
-	} else {
-		//nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		_, err = r.db.Exec(ctx, sqlRecordFeePayment, note, req.ProductID, sellerID)
-	}
+	// All fee payment claims submitted via this endpoint enter the pending verification queue
+	// to prevent unauthenticated/fake payment reference exploits.
+	// nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
+	_, err = r.db.Exec(ctx, sqlRecordFeePayment, note, req.ProductID, sellerID)
 	return err
 }
 

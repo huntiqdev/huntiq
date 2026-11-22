@@ -7,6 +7,7 @@ import (
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/internal/service"
 	"github.com/your-org/used-tools-marketplace/pkg/response"
+	"github.com/your-org/used-tools-marketplace/pkg/validations"
 )
 
 type OrganizationHandler struct {
@@ -40,6 +41,11 @@ func (h *OrganizationHandler) RegisterOrganization(c *fiber.Ctx) error {
 
 	if strings.TrimSpace(body.Name) == "" {
 		return response.BadRequest(c, "organization name is required")
+	}
+	if body.PublishingAuthorityEvidence != nil && strings.TrimSpace(*body.PublishingAuthorityEvidence) != "" {
+		if !validations.ValidateMediaOrDocURL(*body.PublishingAuthorityEvidence) {
+			return response.BadRequest(c, "invalid or untrusted publishing authority evidence URL")
+		}
 	}
 	if body.EntityType == "" {
 		body.EntityType = models.EntityCompany

@@ -39,6 +39,7 @@ var (
 	ValidateOrder    = validations.ValidateOrderRequest
 	ValidateLocation = validations.ValidateLocation
 	ValidateImageURL = validations.ValidateImageURL
+	ValidateMediaOrDocURL = validations.ValidateMediaOrDocURL
 	IsValidPhone     = validations.IsValidPhone
 )
 

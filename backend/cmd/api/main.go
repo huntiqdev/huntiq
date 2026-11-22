@@ -387,10 +387,29 @@ func main() {
 	aiSvc := ai.NewAIService(pySupervisor, productRepo, searchRepo)
 	aiHandler := handlers.NewAIHandler(aiSvc)
 
+	// Configure trusted reverse proxies to prevent X-Forwarded-For IP spoofing attacks (CWE-345)
+	trustedProxies := []string{
+		"127.0.0.1",
+		"::1",
+		"10.0.0.0/8",
+		"172.16.0.0/12",
+		"192.168.0.0/16",
+	}
+	if envProxies := os.Getenv("TRUSTED_PROXIES"); envProxies != "" {
+		for _, p := range strings.Split(envProxies, ",") {
+			if trimmed := strings.TrimSpace(p); trimmed != "" {
+				trustedProxies = append(trustedProxies, trimmed)
+			}
+		}
+	}
+
 	// Fiber HTTP Server
 	app := fiber.New(fiber.Config{
-		BodyLimit:   22 * 1024 * 1024,
-		ProxyHeader: fiber.HeaderXForwardedFor,
+		BodyLimit:               22 * 1024 * 1024,
+		ProxyHeader:             fiber.HeaderXForwardedFor,
+		EnableTrustedProxyCheck: true,
+		TrustedProxies:          trustedProxies,
+		EnableIPValidation:      true,
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			code := fiber.StatusInternalServerError
 			msg := "an internal error occurred"

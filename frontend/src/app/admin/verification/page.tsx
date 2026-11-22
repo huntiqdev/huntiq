@@ -6,6 +6,19 @@ import { BadgeCheck, XCircle, Clock, Eye, MessageSquare, RefreshCw } from 'lucid
 
 const STATUS_TABS = ['pending', 'approved', 'rejected'];
 
+function getSafeDocUrl(url: string | undefined | null): string {
+  if (!url || typeof url !== 'string') return '#';
+  const trimmed = url.trim();
+  const lower = trimmed.toLowerCase();
+  if (lower.startsWith('javascript:') || lower.startsWith('data:') || lower.startsWith('vbscript:') || lower.startsWith('file:')) {
+    return '#';
+  }
+  if (trimmed.startsWith('/uploads/') || trimmed.startsWith('https://') || trimmed.startsWith('http://localhost:')) {
+    return trimmed;
+  }
+  return '#';
+}
+
 export default function VerificationPage() {
   const { user } = useAuth();
   const [docs, setDocs] = useState<any[]>([]);
@@ -160,8 +173,8 @@ export default function VerificationPage() {
                 </div>
               </div>
 
-              {selected.file_url && (
-                <a href={selected.file_url} target="_blank" rel="noopener noreferrer"
+              {selected.file_url && getSafeDocUrl(selected.file_url) !== '#' && (
+                <a href={getSafeDocUrl(selected.file_url)} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-3 bg-blue-600/20 border border-blue-500/30 rounded-xl text-blue-400 text-sm hover:bg-blue-600/30 transition-colors">
                   <Eye className="w-4 h-4" /> View Document
                 </a>
