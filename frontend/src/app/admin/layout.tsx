@@ -196,7 +196,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin) && !isLoginPage) {
-      router.push('/admin/login');
+      router.push(`/staff/login?redirect=${encodeURIComponent(pathname)}`);
     }
   }, [user, loading, isAdmin, isLoginPage, pathname, router]);
 

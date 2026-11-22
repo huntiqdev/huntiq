@@ -108,7 +108,19 @@ func CSRFProtect(cfg CSRFConfig) fiber.Handler {
 			path == "/api/admin/passkeys/login/begin" ||
 			path == "/api/admin/passkeys/login/finish" ||
 			path == "/api/admin/auth/passkey/login/begin" ||
-			path == "/api/admin/auth/passkey/login/verify"
+			path == "/api/admin/auth/passkey/login/verify" ||
+			path == "/api/auth/logout" ||
+			path == "/api/auth/logout-all" ||
+			path == "/api/seller/logout" ||
+			path == "/api/buyer/logout" ||
+			path == "/api/admin/logout" ||
+			path == "/api/contact" ||
+			path == "/api/reports" ||
+			path == "/api/appeals" ||
+			path == "/api/referrals/click" ||
+			path == "/api/locations/reverse-geocode" ||
+			path == "/api/dev/otp" ||
+			path == "/api/dev/otp/decrypt"
 
 		if isPublicAuth {
 			return c.Next()

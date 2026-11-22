@@ -200,7 +200,7 @@ export default function BuyerRegisterPage() {
             <p>
               In local development, you can peek your plaintext OTP at:{' '}
               <a
-                href={`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(pr.normalized)}`}
+                href={`/api/dev/otp?phone=${encodeURIComponent(pr.normalized)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="text-[#1769E0] dark:text-[#38A5FF] underline font-mono"

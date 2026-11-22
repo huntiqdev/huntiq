@@ -269,7 +269,7 @@ func RequireRole(role string) fiber.Handler {
 		// In HUNTIQ broker marketplace: all registered non-admin users have unified access to marketplace capabilities (seller, buyer, landlord, renter)
 		if role == "seller" || role == "buyer" || role == "landlord" || role == "renter" {
 			userRole, _ := c.Locals("role").(string)
-			if userRole != "admin" {
+			if userRole != "" && userRole != "admin" {
 				return c.Next()
 			}
 		}

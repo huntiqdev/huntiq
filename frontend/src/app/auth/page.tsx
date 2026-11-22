@@ -118,10 +118,11 @@ function AuthContent() {
   const fetchDevOtp = async (phone: string) => {
     if (!phone) return;
     try {
-      const res = await fetch(`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(phone)}`);
+      const res = await fetch(`/api/dev/otp?phone=${encodeURIComponent(phone)}`);
       const data = await res.json();
-      if (data.otp) {
-        setDevOtp(data.otp);
+      const code = data?.data?.otp || data?.otp;
+      if (code) {
+        setDevOtp(code);
       }
     } catch {}
   };
@@ -401,7 +402,7 @@ function AuthContent() {
             In development mode, OTP codes are logged to backend terminal or available via endpoint:
           </p>
           <p className="font-mono text-zinc-300">
-            GET <a href={`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(regPhone)}`} target="_blank" rel="noreferrer" className="text-[#1769E0] underline">/api/dev/otp?phone={regPhone}</a>
+            GET <a href={`/api/dev/otp?phone=${encodeURIComponent(regPhone)}`} target="_blank" rel="noreferrer" className="text-[#1769E0] underline">/api/dev/otp?phone={regPhone}</a>
           </p>
           {devOtp && (
             <div className="mt-1 p-1.5 bg-black/40 rounded border border-amber-500/40 text-center font-mono font-bold text-amber-300 text-sm">
@@ -478,7 +479,7 @@ function AuthContent() {
             In development mode, reset OTP codes are available via:
           </p>
           <p className="font-mono text-zinc-300">
-            GET <a href={`http://localhost:8080/api/dev/otp?phone=${encodeURIComponent(forgotPhone)}`} target="_blank" rel="noreferrer" className="text-[#1769E0] underline">/api/dev/otp?phone={forgotPhone}</a>
+            GET <a href={`/api/dev/otp?phone=${encodeURIComponent(forgotPhone)}`} target="_blank" rel="noreferrer" className="text-[#1769E0] underline">/api/dev/otp?phone={forgotPhone}</a>
           </p>
           {devOtp && (
             <div className="mt-1 p-1.5 bg-black/40 rounded border border-amber-500/40 text-center font-mono font-bold text-amber-300 text-sm">

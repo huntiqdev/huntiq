@@ -285,6 +285,9 @@ func (h *BuyerHandler) CreateAccountAppeal(c *fiber.Ctx) error {
 	}
 	id, err := h.adminSvc.CreateAccountAppeal(c.Context(), ap)
 	if err != nil {
+		if strings.Contains(err.Error(), "user not found") || strings.Contains(err.Error(), "already pending") {
+			return response.BadRequest(c, err.Error())
+		}
 		return response.InternalError(c, err)
 	}
 	ap.ID = id
