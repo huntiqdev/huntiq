@@ -55,6 +55,59 @@ const WELCOME_MESSAGES: Record<string, string> = {
   en: 'Hello! I am HUNTIQ AI — your dedicated marketplace discovery and commercial advisory assistant. How can I help you find listings, evaluate pricing, or explore opportunities today?',
 };
 
+const ERROR_MESSAGES: Record<string, Record<string, string>> = {
+  NO_INTERNET: {
+    en: 'Your internet connection appears to be unavailable. Please reconnect and try again.',
+    am: 'የኢንተርኔት ግንኙነትዎ የለም ወይም ተቋርጧል። እባክዎ ግንኙነትዎን መልሰው ከዚያ እንደገና ይሞክሩ።',
+    or: 'Walitti hidhamiinsi interneetii keessanii hin jiru ykn citeera. Maaloo walitti hidhamiinsa keessan deebisaa, achiis irra deebi\'aa yaalaa.',
+    ti: 'ምትእስሳር ኢንተርነትካ የለን ወይ ተቛሪጹ ኣሎ። በጃኻ ምትእስሳርካ መሊስካ ኣራኽብ፣ ድሕሪኡ እንደገና ፈትን።',
+  },
+  BACKEND_UNREACHABLE: {
+    en: 'Unable to reach HUNTIQ servers. Please verify that the platform is accessible and retry.',
+    am: 'ከ HUNTIQ ሰርቨሮች ጋር መገናኘት አልተቻለም። እባክዎ ፕላትፎርሙ እንደሚሰራ አረጋግጠው እንደገና ይሞክሩ።',
+    or: 'Sarvaroota HUNTIQ waliin walqunnamuu hin dandeenye. Maaloo waltajjichi hojjetaa jiraachuu isaa mirkaneessaa irra deebi\'aa yaalaa.',
+    ti: 'ምስ HUNTIQ ሰርቨራት ክራኸብ ኣይከኣለን። በጃኹም እቲ ፕላትፎርም ይሰርሕ ምህላዉ ኣረጋጊጽኩም ደጊምኩም ፈትኑ።',
+  },
+  AI_UNAVAILABLE: {
+    en: 'HUNTIQ AI is temporarily unavailable. Your internet connection may be working, but our AI service cannot currently complete your request. Please try again shortly.',
+    am: 'HUNTIQ AI በጊዜያዊነት አይሰራም። የኢንተርኔት ግንኙነትዎ ሊሰራ ይችላል ነገር ግን የ AI አገልግሎታችን በአሁኑ ጊዜ ጥያቄዎን ማጠናቀቅ አልቻለም። እባክዎ ጥቂት ቆይተው እንደገና ይሞክሩ።',
+    or: 'HUNTIQ AI yeroof hojii ala dha. Walitti hidhamiinsi interneetii keessanii hojjechuu danda\'a, garuu tajaajilli AI keenya yeroo ammaa gaaffii keessan xumuruu hin dandeenye. Maaloo xiqqoo turee irra deebi\'aa yaalaa.',
+    ti: 'HUNTIQ AI ንግዚኡ ኣየገልግልን ኣሎ። ምትእስሳር ኢንተርነትኩም ይሰርሕ ይኸውን፣ እንተኾነ ግና ናይ AI ኣገልግሎትና ኣብዚ እዋን\'ዚ ሕቶኹም ክውድእ ኣይከኣለን። በጃኹም ጸኒሕኩም ደጊምኩም ፈትኑ።',
+  },
+  TIMEOUT: {
+    en: 'The AI request timed out. Please check your connection and retry.',
+    am: 'የ AI ጥያቄው ጊዜው አልቋል። እባክዎ ግንኙነትዎን ፈትሸው እንደገና ይሞክሩ።',
+    or: 'Gaaffiin AI yeroo fudhateera. Maaloo walitti hidhamiinsa keessan qoradhaa irra deebi\'aa yaalaa.',
+    ti: 'ናይ AI ሕቶ ግዜ ወሲዱ ተቛሪጹ። በጃኹም ምትእስሳርኩም መርሚርኩም ደጊምኩም ፈትኑ።',
+  },
+  RATE_LIMITED: {
+    en: 'Too many AI requests. Please wait a moment before asking again.',
+    am: 'በጣም ብዙ የ AI ጥያቄዎች ቀርበዋል። እባክዎ ሌላ ጥያቄ ከመጠየቅዎ በፊት ትንሽ ይጠብቁ።',
+    or: 'Gaaffileen AI baay\'ee dhiyaataniiru. Maaloo irra deebitanii gaafachuu dura xiqqoo eegaa.',
+    ti: 'ብጣዕሚ ብዙሕ ናይ AI ሕቶታት ቀሪቡ። በጃኹም ካልእ ሕቶ ቅድሚ ምሕታትኩም ሒደት ተጸበዩ።',
+  },
+  GENERIC_ERROR: {
+    en: 'An unexpected issue occurred while processing your request. Please try again.',
+    am: 'ጥያቄዎን በማስኬድ ላይ ያልተጠበቀ ችግር አጋጥሟል። እባክዎ እንደገና ይሞክሩ።',
+    or: 'Gaaffii keessan raawwachuu irratti rakkoon hin eegamne uumameera. Maaloo irra deebi\'aa yaalaa.',
+    ti: 'ሕቶኹም ኣብ ምፍጻም ዘይተጸበዮ ጸገም ኣጋጢሙ። በጃኹም ደጊምኩም ፈትኑ።',
+  },
+};
+
+const OFFLINE_BANNER: Record<string, string> = {
+  en: 'You are currently offline. Changes and messages will be sent when reconnected.',
+  am: 'በአሁኑ ጊዜ ከመስመር ውጭ ነዎት። ሲገናኙ መልዕክቶች ይላካሉ።',
+  or: 'Yeroo ammaa toora irraa ala jirtu. Yeroo walqunnamtan ergaawwan ni ergamu.',
+  ti: 'ኣብዚ እዋን ካብ መስመር ወጻኢ ኢኹም ዘለኹም። ምስ ተራኸብኩም መልእኽትታት ክስደድ እዩ።',
+};
+
+const RETRY_LABELS: Record<string, string> = {
+  en: 'Retry',
+  am: 'እንደገና ሞክር',
+  or: 'Irra deebi\'i',
+  ti: 'ደጊምካ ፈትን',
+};
+
 export function AIAssistant() {
   const { locale } = useLocale();
   const currentLang = (locale in INITIAL_SUGGESTIONS ? locale : 'en') as 'en' | 'am' | 'ti' | 'or';
@@ -64,9 +117,26 @@ export function AIAssistant() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Monitor real network status
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setIsOnline(navigator.onLine);
+
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   // Initialize with localized welcome message
   useEffect(() => {
@@ -110,6 +180,12 @@ export function AIAssistant() {
     ]);
   };
 
+  const handleRetry = (failedMsgId: string, textToRetry: string) => {
+    // Remove the failed assistant message to preserve clean context
+    setMessages((prev) => prev.filter((m) => m.id !== failedMsgId));
+    handleSend(textToRetry);
+  };
+
   const handleSend = async (textToSend?: string) => {
     const text = (textToSend || input).trim();
     if (!text || isLoading) return;
@@ -129,9 +205,14 @@ export function AIAssistant() {
     setIsLoading(true);
 
     try {
+      // Check immediate network signal
+      if (typeof navigator !== 'undefined' && !navigator.onLine) {
+        throw new Error('NO_INTERNET');
+      }
+
       // Build lightweight conversation history for Gemini (last 4 turns)
       const apiHistory = newHistory
-        .filter((m) => m.id !== 'welcome')
+        .filter((m) => m.id !== 'welcome' && !m.isError)
         .slice(-4)
         .map((m) => ({
           role: m.role === 'user' ? 'user' : 'model',
@@ -163,18 +244,35 @@ export function AIAssistant() {
         setHasUnread(true);
       }
     } catch (err: any) {
+      let code: 'NO_INTERNET' | 'BACKEND_UNREACHABLE' | 'AI_UNAVAILABLE' | 'TIMEOUT' | 'RATE_LIMITED' | 'GENERIC_ERROR' = 'GENERIC_ERROR';
+
+      const isNavOffline = typeof navigator !== 'undefined' && !navigator.onLine;
+      const errMsg = (err?.message || err?.error || '').toLowerCase();
+      const errStatus = err?.status || err?.statusCode || 0;
+
+      if (isNavOffline || errMsg === 'no_internet') {
+        code = 'NO_INTERNET';
+      } else if (errStatus === 429 || errMsg.includes('too many') || errMsg.includes('rate limit')) {
+        code = 'RATE_LIMITED';
+      } else if (errStatus === 504 || errMsg.includes('timeout') || errMsg.includes('deadline exceeded')) {
+        code = 'TIMEOUT';
+      } else if (errStatus === 502 || errStatus === 503 || errMsg.includes('engine') || errMsg.includes('gemini') || errMsg.includes('ai service') || errMsg.includes('provider')) {
+        code = 'AI_UNAVAILABLE';
+      } else if (errStatus === 0 || errMsg.includes('failed to fetch') || errMsg.includes('networkerror') || errMsg.includes('load failed')) {
+        code = 'BACKEND_UNREACHABLE';
+      }
+
+      const dict = ERROR_MESSAGES[code] || ERROR_MESSAGES.GENERIC_ERROR;
+      const localizedContent = dict[currentLang] || dict.en;
+
       const errorMsg: ChatMessage = {
         id: 'err-' + Date.now(),
         role: 'assistant',
-        content:
-          currentLang === 'am'
-            ? 'ይቅርታ፤ ከአገልጋዩ ጋር መገናኘት አልተቻለም። እባክዎ ጥቂት ቆይተው እንደገና ይሞክሩ።'
-            : currentLang === 'ti'
-            ? 'ይቕሬታ፤ ምስቲ ሰርቨር ክራኸብ ኣይከኣለን። በጃኹም ጸኒሕኩም ደጊምኩም ፈትኑ።'
-            : currentLang === 'or'
-            ? 'Dhiifama; sarvarii waliin walqunnamuu hin dandeenye. Maaloo xiqqoo turee irra deebi\'aa yaalaa.'
-            : 'Sorry, I am temporarily unable to reach the AI engine. Please try again in a few moments.',
+        content: localizedContent,
         timestamp: Date.now(),
+        isError: true,
+        errorCode: code,
+        retryText: text,
       };
       setMessages((prev) => [...prev, errorMsg]);
     } finally {
@@ -256,8 +354,12 @@ export function AIAssistant() {
                   <h3 id="huntiq-ai-title" className="text-xs sm:text-sm font-black tracking-tight text-slate-900 dark:text-white">
                     HUNTIQ AI
                   </h3>
-                  <span className="px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                    Live
+                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider border ${
+                    isOnline
+                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
+                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
+                  }`}>
+                    {isOnline ? 'Live' : 'Offline'}
                   </span>
                 </div>
                 <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
@@ -291,6 +393,14 @@ export function AIAssistant() {
             </div>
           </div>
 
+          {/* ── Offline Banner ── */}
+          {!isOnline && (
+            <div className="bg-amber-500/10 border-b border-amber-500/20 px-3.5 py-1.5 flex items-center gap-2 text-[11px] font-semibold text-amber-600 dark:text-amber-400 select-none">
+              <AlertCircle size={13} className="flex-shrink-0" />
+              <span>{OFFLINE_BANNER[currentLang] || OFFLINE_BANNER.en}</span>
+            </div>
+          )}
+
           {/* ── Messages Scroll Area ── */}
           <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3.5 overscroll-contain text-slate-800 dark:text-slate-200">
             {messages.map((m) => {
@@ -313,7 +423,9 @@ export function AIAssistant() {
                     <div
                       className={`rounded-2xl px-3.5 py-2.5 text-xs sm:text-sm leading-relaxed ${
                         isAssistant
-                          ? m.isOutOfDomain
+                          ? m.isError
+                            ? 'bg-rose-500/10 border border-rose-500/25 text-slate-800 dark:text-slate-100 rounded-bl-sm'
+                            : m.isOutOfDomain
                             ? 'bg-amber-500/10 border border-amber-500/20 text-slate-800 dark:text-slate-100 rounded-bl-sm'
                             : 'bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 rounded-bl-sm border border-slate-200/50 dark:border-slate-700/50'
                           : 'bg-gradient-to-r from-[#1769E0] to-[#207bf8] text-white rounded-br-sm shadow-sm'
@@ -328,6 +440,24 @@ export function AIAssistant() {
                       )}
 
                       <p className="whitespace-pre-wrap font-normal">{m.content}</p>
+
+                      {/* Error Card with Retry Button */}
+                      {isAssistant && m.isError && m.retryText && (
+                        <div className="mt-2.5 pt-2 border-t border-rose-500/20 flex items-center justify-between gap-2">
+                          <span className="text-[10px] text-rose-500 dark:text-rose-400 font-semibold flex items-center gap-1">
+                            <AlertCircle size={12} />
+                            {m.errorCode}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleRetry(m.id, m.retryText!)}
+                            className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-rose-500 hover:bg-rose-600 text-white text-[11px] font-bold shadow-sm transition-all active:scale-95"
+                          >
+                            <RotateCcw size={11} className="stroke-[2.5px]" />
+                            <span>{RETRY_LABELS[currentLang] || RETRY_LABELS.en}</span>
+                          </button>
+                        </div>
+                      )}
 
                       {/* ── PRODUCT LISTINGS (Non-intrusive clean cards that open on normal screen) ── */}
                       {isAssistant && m.listings && m.listings.length > 0 && (

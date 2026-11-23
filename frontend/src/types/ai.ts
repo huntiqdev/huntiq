@@ -22,6 +22,9 @@ export interface ChatMessage {
   listings?: ListingCard[];
   suggestedQueries?: string[];
   latencyMs?: number;
+  isError?: boolean;
+  errorCode?: 'NO_INTERNET' | 'BACKEND_UNREACHABLE' | 'AI_UNAVAILABLE' | 'TIMEOUT' | 'RATE_LIMITED' | 'GENERIC_ERROR';
+  retryText?: string;
 }
 
 export interface AIChatRequest {
@@ -45,4 +48,5 @@ export interface AIChatResponse {
   suggested_queries?: string[];
   listings?: ListingCard[];
   error?: string;
+  error_code?: string;
 }

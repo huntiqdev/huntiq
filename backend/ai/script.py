@@ -182,6 +182,37 @@ def detect_language(text: str, requested_lang: str = "") -> str:
 
 
 def get_localized_rejection(lang: str, reason: str = "") -> str:
+    # 1. External AI Model Provider Unavailable
+    if reason in ("service_unavailable", "provider_unavailable"):
+        if lang == "am":
+            return "HUNTIQ AI በጊዜያዊነት አይሰራም። የኢንተርኔት ግንኙነትዎ ሊሰራ ይችላል ነገር ግን የ AI አገልግሎታችን በአሁኑ ጊዜ ጥያቄዎን ማጠናቀቅ አልቻለም። እባክዎ ጥቂት ቆይተው እንደገና ይሞክሩ።"
+        elif lang == "ti":
+            return "HUNTIQ AI ንግዚኡ ኣየገልግልን ኣሎ። ምትእስሳር ኢንተርነትኩም ይሰርሕ ይኸውን፣ እንተኾነ ግና ናይ AI ኣገልግሎትና ኣብዚ እዋን'ዚ ሕቶኹም ክውድእ ኣይከኣለን። በጃኹም ጸኒሕኩም ደጊምኩም ፈትኑ።"
+        elif lang == "or":
+            return "HUNTIQ AI yeroof hojii ala dha. Walitti hidhamiinsi interneetii keessanii hojjechuu danda'a, garuu tajaajilli AI keenya yeroo ammaa gaaffii keessan xumuruu hin dandeenye. Maaloo xiqqoo turee irra deebi'aa yaalaa."
+        return "HUNTIQ AI is temporarily unavailable. Your internet connection may be working, but our AI service cannot currently complete your request. Please try again shortly."
+
+    # 2. Request Timeout
+    if reason == "timeout":
+        if lang == "am":
+            return "የ AI ጥያቄው ጊዜው አልቋል። እባክዎ ግንኙነትዎን ፈትሸው እንደገና ይሞክሩ።"
+        elif lang == "ti":
+            return "ናይ AI ሕቶ ግዜ ወሲዱ ተቛሪጹ። በጃኹም ምትእስሳርኩም መርሚርኩም ደጊምኩም ፈትኑ።"
+        elif lang == "or":
+            return "Gaaffiin AI yeroo fudhateera. Maaloo walitti hidhamiinsa keessan qoradhaa irra deebi'aa yaalaa."
+        return "The AI request timed out. Please check your connection and retry."
+
+    # 3. Rate Limited
+    if reason == "rate_limited":
+        if lang == "am":
+            return "በጣም ብዙ የ AI ጥያቄዎች ቀርበዋል። እባክዎ ሌላ ጥያቄ ከመጠየቅዎ በፊት ትንሽ ይጠብቁ።"
+        elif lang == "ti":
+            return "ብጣዕሚ ብዙሕ ናይ AI ሕቶታት ቀሪቡ። በጃኹም ካልእ ሕቶ ቅድሚ ምሕታትኩም ሒደት ተጸበዩ።"
+        elif lang == "or":
+            return "Gaaffileen AI baay'ee dhiyaataniiru. Maaloo irra deebitanii gaafachuu dura xiqqoo eegaa."
+        return "Too many AI requests. Please wait a moment before asking again."
+
+    # 4. Out-of-Domain Scope Guidance (Default)
     if lang == "am":
         return (
             "እኔ HUNTIQ AI ነኝ፤ የተዘጋጀሁት በHUNTIQ ነው። "
@@ -434,13 +465,13 @@ MARKETPLACE_SIGNALS = [
     # Amharic
     "መግዛት", "መሸጥ", "ኪራይ", "ዋጋ", "ቤት", "መኪና", "ስልክ", "ላፕቶፕ", "ኮምፒውተር", "ስራ",
     "አዲስ አበባ", "ደላላ", "የገበያ", "ቦሌ", "ማስታወቂያ", "ተከራይ", "ገዢ", "ሻጭ", "ባለሙያ",
-    "ኮሚሽን", "ንግድ", "ምርመራ", "መግለጫ", "ኮምፒተር",
+    "ኮሚሽን", "ንግድ", "ምርመራ", "መግለጫ", "ኮምፒተር", "እቃ", "እቃዎች", "ምርት", "ምርቶች", "አዲስ", "አዳዲስ", "ፈልግ", "አሳየኝ",
     # Tigrinya
     "ምግዛእ", "ምሻጥ", "ክራይ", "ዋጋ", "ገዛ", "መኪና", "ኮምፒተር", "ስራሕ", "ዓደግቲ", "ሸየጥቲ",
-    "ተኻረይቲ", "ዕዳጋ", "ኮሚሽን", "ደላላ",
+    "ተኻረይቲ", "ዕዳጋ", "ኮሚሽን", "ደላላ", "ንብረት", "ንብረታት", "ደሊየ", "ኣርእየኒ", "ሓዲሽ",
     # Oromo
     "bittaa", "gurgurtaa", "kireeffachuu", "kireessuu", "gatii", "mana", "konkolaataa",
-    "hojii", "dilaala", "komishinii", "kompiitara",
+    "hojii", "dilaala", "komishinii", "kompiitara", "meeshaa", "meeshaalee", "qabeenya", "barbaada", "barbaaddu", "argachuu",
 ]
 
 RE_PRICE_UNDER = re.compile(r"(?i)(?:under|below|less\s+than|maximum|max)\s+([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:etb|birr|k)?")
@@ -768,7 +799,7 @@ class DomainValidator:
 # ══════════════════════════════════════════════════════════════════════════════
 
 class GeminiClient:
-    def __init__(self, api_key: str, model: str = "gemini-3.5-flash-lite", timeout: int = 20):
+    def __init__(self, api_key: str, model: str = "gemini-3.5-flash-lite", timeout: int = 5):
         self.api_key = api_key
         self.model = model or "gemini-3.5-flash-lite"
         self.timeout = timeout

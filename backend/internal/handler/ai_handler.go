@@ -20,12 +20,20 @@ func NewAIHandler(svc *ai.AIService) *AIHandler {
 func (h *AIHandler) Chat(c *fiber.Ctx) error {
 	var req ai.ChatRequest
 	if err := c.BodyParser(&req); err != nil {
-		return response.BadRequest(c, "invalid JSON payload")
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success":    false,
+			"error_code": "ERR_INVALID_PAYLOAD",
+			"error":      "invalid JSON payload",
+		})
 	}
 
 	trimmed := strings.TrimSpace(req.Message)
 	if trimmed == "" {
-		return response.BadRequest(c, "message cannot be empty")
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success":    false,
+			"error_code": "ERR_EMPTY_MESSAGE",
+			"error":      "message cannot be empty",
+		})
 	}
 
 	// Truncate overly long queries (safety cap at 2000 chars)
@@ -33,7 +41,33 @@ func (h *AIHandler) Chat(c *fiber.Ctx) error {
 
 	resp, err := h.svc.ProcessQuestion(c.Context(), req)
 	if err != nil {
-		return response.InternalError(c, err)
+		errStr := err.Error()
+		if strings.Contains(errStr, "timeout") || strings.Contains(errStr, "deadline exceeded") {
+			return c.Status(fiber.StatusGatewayTimeout).JSON(fiber.Map{
+				"success":    false,
+				"error_code": "ERR_TIMEOUT",
+				"error":      "AI service request timed out",
+			})
+		}
+		if strings.Contains(errStr, "python ai engine is not running") || strings.Contains(errStr, "error contacting python ai engine") {
+			return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{
+				"success":    false,
+				"error_code": "ERR_AI_SERVICE_UNAVAILABLE",
+				"error":      "HUNTIQ AI standalone engine is currently unavailable",
+			})
+		}
+		if strings.Contains(errStr, "Gemini") || strings.Contains(errStr, "model provider") {
+			return c.Status(fiber.StatusBadGateway).JSON(fiber.Map{
+				"success":    false,
+				"error_code": "ERR_PROVIDER_UNAVAILABLE",
+				"error":      "External AI model provider is temporarily unavailable",
+			})
+		}
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success":    false,
+			"error_code": "ERR_INTERNAL",
+			"error":      errStr,
+		})
 	}
 
 	return response.OK(c, resp)
