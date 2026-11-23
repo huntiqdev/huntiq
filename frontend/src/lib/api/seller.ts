@@ -85,4 +85,12 @@ export const sellerApi = {
     const result = ('data' in json) ? json.data : json;
     return result.url as string;
   },
+  importImageFromURL: async (url: string, token: string): Promise<string> => {
+    const res = await fetchAPI<{ url: string; filename: string }>('/upload/image-url', {
+      method: 'POST',
+      body: JSON.stringify({ url }),
+      headers: authHeaders(token),
+    });
+    return res.url;
+  },
 };

@@ -8,7 +8,7 @@ import {
   LayoutDashboard, Settings, Users, Package, LogOut, FileText, Activity,
   BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin,
   DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2, Store, Receipt, X,
-  ShieldAlert, ShieldCheck, Server
+  ShieldAlert, ShieldCheck, Server, CreditCard
 } from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
@@ -83,6 +83,7 @@ function AdminSidebar({ onClose, className = '' }: AdminSidebarProps) {
     {
       title: 'FINANCE & PLANNING',
       links: [
+        { href: '/admin/payments', label: 'Payment Gateway Governance', icon: CreditCard, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('finance') || hasAdminPermission('transactions') },
         { href: '/admin/transactions', label: 'Transactions Ledger', icon: Receipt, visible: isPlatformOwner || isPlatformAdmin || isOperationsAdmin || hasAdminPermission('transactions') },
         { href: '/admin/finance', label: 'Financial Planning & FP&A', icon: TrendingUp, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit') || hasAdminPermission('finance') },
         { href: '/admin/profit', label: 'Historical Profit Analytics', icon: DollarSign, visible: isPlatformOwner || isPlatformAdmin || hasAdminPermission('profit') },

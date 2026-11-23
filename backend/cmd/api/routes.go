@@ -36,6 +36,8 @@ type AppDeps struct {
 	IdentityHandler       *handlers.IdentityHandler
 	OrganizationHandler   *handlers.OrganizationHandler
 	MasterDataHandler     *handlers.MasterDataHandler
+	PaymentHandler        *handlers.PaymentHandler
+	UploadHandler         *handlers.UploadHandler
 	AIHandler             *handlers.AIHandler
 }
 
@@ -313,8 +315,19 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	seller.Post("/refunds", d.SellerHandler.CreateRefundRequest)
 
 	api.Post("/upload/image", d.MW.RequireAuth, uploadLimiter, handlers.UploadImage)
+	api.Post("/upload/image-url", d.MW.RequireAuth, uploadLimiter, d.UploadHandler.ImportImageFromURL)
 	api.Put("/auth/change-password", d.MW.RequireAuth, authLimiter, d.AuthHandler.SellerChangePassword)
 	api.Post("/transactions", d.MW.RequireAuth, middleware.RequireRole("seller"), authLimiter, d.TransactionHandler.Create)
+
+	// ── Unified FinTech Payments & Membership Upgrades ─────────────────────────
+	api.Get("/payments/pricing", d.PaymentHandler.GetPricing)
+	api.Post("/payments/checkout", d.MW.RequireAuth, d.PaymentHandler.Checkout)
+	api.Get("/payments/orders/:orderId", d.MW.RequireAuth, d.PaymentHandler.GetOrder)
+	api.Post("/payments/verify/:orderId", d.MW.RequireAuth, d.PaymentHandler.VerifyOrder)
+	api.Post("/payments/demo/simulate", d.MW.RequireAuth, d.PaymentHandler.SimulateDemoOutcome)
+	api.Post("/payments/webhook/:provider", d.PaymentHandler.Webhook)
+	api.Post("/membership/otp/send", d.MW.RequireAuth, d.PaymentHandler.SendMembershipOTP)
+	api.Post("/membership/otp/verify", d.MW.RequireAuth, d.PaymentHandler.VerifyMembershipOTP)
 
 	// ── Financial Wallet & Telebirr Payments ──────────────────────────────────
 	api.Get("/wallet", d.MW.RequireAuth, d.WalletHandler.GetMyWallet)
@@ -534,10 +547,16 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	admin.Get("/search/popular", d.MW.RequirePermission("analytics"), d.SearchHandler.PopularSearches)
 	admin.Get("/search/zero-results", d.MW.RequirePermission("analytics"), d.SearchHandler.ZeroResultQueries)
 
+	// ── Centralized Payment Governance & Provider Operations ──────────────────
+	admin.Get("/payments/orders", d.MW.RequireAnyPermission("finance", "transactions"), d.PaymentHandler.AdminListOrders)
+	admin.Get("/payments/orders/:id", d.MW.RequireAnyPermission("finance", "transactions"), d.PaymentHandler.AdminGetOrderDetail)
+	admin.Get("/payments/providers", d.MW.RequireAnyPermission("finance", "settings"), d.PaymentHandler.AdminGetProviders)
+	admin.Put("/payments/providers/:code", middleware.RequirePlatformOwner, d.PaymentHandler.AdminUpdateProvider)
+	admin.Post("/payments/switch-mode", middleware.RequirePlatformOwner, d.PaymentHandler.AdminSwitchOperatingMode)
+	admin.Get("/sms/test-otp", d.MW.RequirePermission("otp_logs"), d.PaymentHandler.AdminTestOTP)
+
 	if d.Config.DevMode {
-		api.Get("/dev/otp", d.AuthHandler.DevPeekOTP)
-		api.Get("/dev/otp/decrypt", d.AuthHandler.DevDecryptOTP)
-		log.Println("⚠️  DEV MODE: /api/dev/otp and /api/dev/otp/decrypt endpoints enabled")
+		log.Println("ℹ️  DEV MODE active: synthetic test OTP lookups restricted to authenticated admins via /api/admin/otp-logs")
 	}
 }
 

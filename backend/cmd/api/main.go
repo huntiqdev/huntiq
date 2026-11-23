@@ -178,6 +178,7 @@ func main() {
 	orgRepo := repository.NewOrganizationRepo(db)
 	recoveryRepo := repository.NewRecoveryRepo(db)
 	masterDataRepo := repository.NewMasterDataRepo(db)
+	paymentRepo := repository.NewPaymentRepo(db)
 
 	// In-memory active user cache
 	const isActiveCacheMax = 10_000
@@ -245,6 +246,7 @@ func main() {
 	identitySvc := service.NewIdentityService(identityRepo, cfg.DevMode)
 	orgSvc := service.NewOrganizationService(orgRepo)
 	masterDataSvc := service.NewMasterDataService(masterDataRepo)
+	paymentSvc := service.NewPaymentService(paymentRepo, userRepo, smsMgr, cfg.FrontendURL)
 
 	txSvc.WithReferralService(referralSvc)
 	authSvc.WithReferralService(referralSvc).
@@ -377,6 +379,8 @@ func main() {
 	identityHandler := handlers.NewIdentityHandler(identitySvc)
 	organizationHandler := handlers.NewOrganizationHandler(orgSvc)
 	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
+	paymentHandler := handlers.NewPaymentHandler(paymentSvc, adminRepo)
+	uploadHandler := handlers.NewUploadHandler(cfg.AppBaseURL, handlers.UploadDir, 20).WithUserRepo(userRepo)
 
 	// ── HUNTIQ AI Supervisor ────────────────────────────────────────────────
 	pySupervisor := ai.NewPythonSupervisor(cfg.GeminiAPIKey, cfg.GeminiModel)
@@ -480,6 +484,8 @@ func main() {
 		IdentityHandler:       identityHandler,
 		OrganizationHandler:   organizationHandler,
 		MasterDataHandler:     masterDataHandler,
+		PaymentHandler:        paymentHandler,
+		UploadHandler:         uploadHandler,
 		AIHandler:             aiHandler,
 	})
 

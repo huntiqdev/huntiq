@@ -9,6 +9,7 @@ export interface AuthUser {
   role: string;
   adminRole: string; // normal | super (admins only)
   buyerTier: string;
+  tier?: string;
   sellerPreference?: string; // sale | rent | both (sellers only)
   capabilities: string[];
   avatarURL?: string;

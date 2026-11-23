@@ -172,6 +172,124 @@ func (p *EthioTelecomProvider) SendSMS(ctx context.Context, phone, message strin
 	}, fmt.Errorf("SMS provider returned status %d: %s", resp.StatusCode, string(respBody))
 }
 
+// FidaProvider implements the Fida SMS gateway adapter for national OTP and alerts.
+type FidaProvider struct {
+	config     *models.SMSProviderConfig
+	httpClient *http.Client
+}
+
+func NewFidaProvider(cfg *models.SMSProviderConfig) *FidaProvider {
+	return &FidaProvider{
+		config: cfg,
+		httpClient: &http.Client{
+			Timeout: 10 * time.Second,
+		},
+	}
+}
+
+func (p *FidaProvider) ProviderCode() string {
+	return "fida"
+}
+
+func (p *FidaProvider) HealthCheck(ctx context.Context) error {
+	if p.config.APIEndpoint == "" {
+		return errors.New("empty API endpoint for Fida provider")
+	}
+	return nil
+}
+
+func (p *FidaProvider) SendSMS(ctx context.Context, phone, message string) (*SMSDeliveryResult, error) {
+	if p.config.APIEndpoint == "" {
+		errCat := "configuration_missing"
+		return &SMSDeliveryResult{
+			Status:        "failed",
+			ErrorCategory: &errCat,
+		}, errors.New("Fida SMS gateway endpoint not configured")
+	}
+
+	apiKey := ""
+	clientID := ""
+	if p.config.Credentials != nil {
+		if k, ok := p.config.Credentials["api_key"].(string); ok {
+			apiKey = k
+		}
+		if c, ok := p.config.Credentials["client_id"].(string); ok {
+			clientID = c
+		}
+	}
+
+	// Controlled simulated behavior if in mock/demo credential state
+	if apiKey == "" || apiKey == "MOCK_FIDA_KEY" || strings.Contains(p.config.APIEndpoint, "demo") {
+		masked := MaskPhoneNumber(phone)
+		log.Printf("[FIDA SMS SIMULATION] To: %s | Message: %s", masked, message)
+		ref := fmt.Sprintf("FIDA-SIM-%d", time.Now().UnixNano())
+		return &SMSDeliveryResult{
+			Status:      "delivered",
+			ProviderRef: &ref,
+		}, nil
+	}
+
+	payload := map[string]interface{}{
+		"sender_id": p.config.SenderID,
+		"to":        phone,
+		"message":   message,
+		"client_id": clientID,
+	}
+
+	bodyBytes, err := json.Marshal(payload)
+	if err != nil {
+		errCat := "serialization_error"
+		return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, p.config.APIEndpoint, bytes.NewReader(bodyBytes))
+	if err != nil {
+		errCat := "request_build_error"
+		return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	if apiKey != "" {
+		req.Header.Set("Authorization", "Bearer "+apiKey)
+	}
+	if clientID != "" {
+		req.Header.Set("X-Client-ID", clientID)
+	}
+
+	resp, err := p.httpClient.Do(req)
+	if err != nil {
+		errCat := "network_timeout"
+		return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, err
+	}
+	defer resp.Body.Close()
+
+	respBody, _ := io.ReadAll(resp.Body)
+
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+		var respMap map[string]interface{}
+		_ = json.Unmarshal(respBody, &respMap)
+		ref := ""
+		if r, ok := respMap["message_id"].(string); ok {
+			ref = r
+		} else if r, ok := respMap["reference"].(string); ok {
+			ref = r
+		}
+		var pRef *string
+		if ref != "" {
+			pRef = &ref
+		}
+		return &SMSDeliveryResult{
+			Status:      "delivered",
+			ProviderRef: pRef,
+		}, nil
+	}
+
+	errCat := fmt.Sprintf("http_%d", resp.StatusCode)
+	return &SMSDeliveryResult{
+		Status:        "failed",
+		ErrorCategory: &errCat,
+	}, fmt.Errorf("Fida provider returned status %d: %s", resp.StatusCode, string(respBody))
+}
+
 // MockDevProvider logs SMS messages securely in development environments.
 type MockDevProvider struct{}
 
@@ -228,7 +346,14 @@ func (m *SMSManager) SendOTPMessage(ctx context.Context, rawPhone, otpCode, purp
 	if err == nil && cfg != nil && cfg.IsActive && cfg.APIEndpoint != "" {
 		providerCode = cfg.ProviderCode
 		providerID = cfg.ID
-		provider = NewEthioTelecomProvider(cfg)
+		switch cfg.ProviderCode {
+		case "fida":
+			provider = NewFidaProvider(cfg)
+		case "ethio_telecom":
+			provider = NewEthioTelecomProvider(cfg)
+		default:
+			provider = NewMockDevProvider()
+		}
 	} else {
 		// Fallback to mock dev provider
 		providerCode = "mock_dev"

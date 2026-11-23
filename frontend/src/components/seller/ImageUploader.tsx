@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useState, useCallback } from 'react';
-import { X, Upload, AlertCircle, Loader2, ImageOff, Scissors } from 'lucide-react';
+import Link from 'next/link';
+import { X, Upload, AlertCircle, Loader2, ImageOff, Globe, Sparkles, Lock } from 'lucide-react';
 import { MIN_IMAGES } from '@/lib/constants/fees';
 import { useLocale } from '@/hooks/useLocale';
 import { useAuth } from '@/context/AuthContext';
@@ -30,10 +31,20 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
   const { t } = useLocale();
   const { user } = useAuth();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [activeTab, setActiveTab] = useState<'upload' | 'url'>('upload');
+  const [urlInput, setUrlInput] = useState('');
+  const [urlImporting, setUrlImporting] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [brokenIndexes, setBrokenIndexes] = useState<Set<number>>(new Set());
   const [pendingCropFile, setPendingCropFile] = useState<File | null>(null);
+
+  const isPrivileged =
+    user?.role === 'admin' ||
+    user?.tier === 'gold' ||
+    user?.tier === 'premium' ||
+    user?.buyerTier === 'gold' ||
+    user?.buyerTier === 'premium';
 
   const markBroken = useCallback((i: number) => {
     setBrokenIndexes(prev => new Set(prev).add(i));
@@ -105,21 +116,84 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
     }
   };
 
+  const handleUrlImport = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user?.token) {
+      setError('Not authenticated');
+      return;
+    }
+    const cleanUrl = urlInput.trim();
+    if (!cleanUrl) return;
+
+    if (!isPrivileged) {
+      setError('Importing from URL is exclusively for Gold and Premium members');
+      return;
+    }
+
+    if (urls.length >= maxImages) {
+      setError(`Maximum ${maxImages} images reached`);
+      return;
+    }
+
+    setUrlImporting(true);
+    setError('');
+    try {
+      const uploadedUrl = await api.importImageFromURL(cleanUrl, user.token);
+      if (!uploadedUrl) throw new Error('Failed to import image');
+      onChange([...urls, uploadedUrl]);
+      setUrlInput('');
+    } catch (err: any) {
+      setError(err.message ?? 'Failed to import image from URL');
+    } finally {
+      setUrlImporting(false);
+    }
+  };
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     handleFiles(e.dataTransfer.files);
   };
 
-  const canAdd = urls.length < maxImages && !uploading;
+  const canAdd = urls.length < maxImages && !uploading && !urlImporting;
 
   return (
     <div className="space-y-3">
-      <p className="text-xs font-black uppercase tracking-wider text-zinc-500 dark:text-white/40">
-        {t.ui.upload_image ?? 'Images'}{' '}
-        <span className="text-[#1769E0] normal-case font-normal">
-          ({urls.length}/{maxImages} · {MIN_IMAGES} min)
-        </span>
-      </p>
+      <div className="flex items-center justify-between">
+        <p className="text-xs font-black uppercase tracking-wider text-zinc-500 dark:text-white/40">
+          {t.ui.upload_image ?? 'Images'}{' '}
+          <span className="text-[#1769E0] normal-case font-normal">
+            ({urls.length}/{maxImages} · {MIN_IMAGES} min)
+          </span>
+        </p>
+
+        {/* Tab Selector */}
+        <div className="inline-flex p-0.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">
+          <button
+            type="button"
+            onClick={() => setActiveTab('upload')}
+            className={`px-2.5 py-1 rounded-md transition-all ${
+              activeTab === 'upload'
+                ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-xs font-bold'
+                : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+            }`}
+          >
+            File Upload
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab('url')}
+            className={`px-2.5 py-1 rounded-md inline-flex items-center gap-1 transition-all ${
+              activeTab === 'url'
+                ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-xs font-bold'
+                : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+            }`}
+          >
+            <Globe size={11} />
+            URL Import
+            {!isPrivileged && <Lock size={10} className="text-amber-500" />}
+          </button>
+        </div>
+      </div>
 
       {urls.length > 0 && (
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
@@ -157,7 +231,7 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
         </div>
       )}
 
-      {canAdd && (
+      {canAdd && activeTab === 'upload' && (
         <div onDrop={handleDrop} onDragOver={e => e.preventDefault()}
           onClick={() => inputRef.current?.click()}
           className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-6 cursor-pointer hover:border-[#1769E0]/60 hover:bg-[#1769E0]/5 transition-all">
@@ -172,6 +246,57 @@ export function ImageUploader({ urls, onChange, maxImages = 20 }: Props) {
               <p className="text-xs font-bold text-zinc-600 dark:text-white/60">Click or drag images here</p>
               <p className="text-[10px] text-zinc-400 dark:text-white/25">JPEG · PNG · WebP · Max 5 MB each</p>
             </>
+          )}
+        </div>
+      )}
+
+      {canAdd && activeTab === 'url' && (
+        <div className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-zinc-50/60 dark:bg-zinc-900/60 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-800 dark:text-zinc-200">
+              <Globe size={14} className="text-[#1769E0]" />
+              Import Image from External Web URL
+            </div>
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-600 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+              <Sparkles size={10} /> Gold & Premium Feature
+            </span>
+          </div>
+
+          {!isPrivileged ? (
+            <div className="p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40 rounded-lg text-xs text-amber-800 dark:text-amber-300 space-y-1">
+              <p className="font-semibold flex items-center gap-1">
+                <Lock size={12} /> Member Tier Required
+              </p>
+              <p className="text-[11px] leading-relaxed">
+                Direct URL image importing with automated SSRF protection is reserved for Gold and Premium members.
+              </p>
+              <div className="pt-1">
+                <Link
+                  href="/seller/pay"
+                  className="inline-block text-[11px] font-bold text-[#1769E0] hover:underline"
+                >
+                  Upgrade to Gold/Premium →
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleUrlImport} className="flex gap-2">
+              <input
+                type="url"
+                value={urlInput}
+                onChange={e => setUrlInput(e.target.value)}
+                placeholder="https://example.com/item-photo.jpg"
+                disabled={urlImporting}
+                className="flex-1 text-xs px-3 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#1769E0]/40"
+              />
+              <button
+                type="submit"
+                disabled={urlImporting || !urlInput.trim()}
+                className="bg-[#1769E0] hover:bg-[#1055BD] text-white text-xs font-bold px-3 py-2 rounded-lg disabled:opacity-50 inline-flex items-center gap-1 min-h-[36px]"
+              >
+                {urlImporting ? <Loader2 size={13} className="animate-spin" /> : 'Fetch & Save'}
+              </button>
+            </form>
           )}
         </div>
       )}
