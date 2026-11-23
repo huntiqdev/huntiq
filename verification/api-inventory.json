@@ -1,0 +1,4580 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/products",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "searchLimiter",
+      "d.MW.OptionalAuth",
+      "d.ProductHandler.List"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/products/search",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "searchLimiter",
+      "d.MW.OptionalAuth",
+      "d.ProductHandler.List"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/products/:id",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.OptionalAuth",
+      "d.ProductHandler.Get"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.ListCategories"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/roots",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.GetRoots"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/tree",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.GetCategoryTree"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/search",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.SearchCategories"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/resolve",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.ResolveCategory"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/popular",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.PopularCategories"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/check-slug",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.CheckSlug"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/slug/:slug",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.GetCategoryBySlug"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/:id",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.GetCategory"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/:id/children",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.GetCategoryChildren"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/:id/ancestors",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.CategoryHandler.GetCategoryBreadcrumbs"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/categories/:id/attributes",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AttributeHandler.GetCategoryAttributes"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/schemes",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.ListSchemes"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/schemes/:code",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetScheme"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/schemes/:code/tree",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetTree"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/schemes/:code/roots",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetRoots"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/placements/:id",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetPlacement"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/placements/:id/children",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetChildren"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/placements/:id/attributes",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetPlacementAttributes"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/concepts",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.SearchConcepts"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/concepts/:id",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetConcept"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/concepts/:id/relationships",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.GetRelationships"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/relationship-types",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.ListRelationshipTypes"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/classification/search",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ClassificationHandler.SearchUniversal"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/attributes",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AttributeHandler.ListAttributeDefinitions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/products/:id/attributes",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.OptionalAuth",
+      "d.AttributeHandler.GetProductAttributes"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "POST",
+    "path": "/api/orders",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "publicLimiter",
+      "d.MW.OptionalAuth",
+      "d.SellerHandler.CreateOrder"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/fee-options",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.FeeOptions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/regions",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.ListRegions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/zones",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.ListZones"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/subcities",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.ListSubcities"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/woredas",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.ListWoredas"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/search",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.SearchLocations"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/locations/reverse-geocode",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.ReverseGeocode"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/tree",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.GetLocationTree"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/children",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.ListChildren"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/locations/search-hierarchy",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.LocationHandler.SearchHierarchy"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/banners",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BannerHandler.ListPublic"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/public/payment-settings",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminHandler.GetPublicPaymentSettings"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/public/settings",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminHandler.GetPublicSettings"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/reports",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.CreateAbuseReport"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/appeals",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.CreateAccountAppeal"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/contact",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "publicLimiter",
+      "d.BuyerHandler.SubmitContactMessage"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/public/promotion",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminHandler.GetPublicPromotion"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/ai/chat",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "aiLimiter",
+      "d.MW.OptionalAuth",
+      "d.AIHandler.Chat"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/ai/health",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AIHandler.Health"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/otp/send",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "otpLimiter",
+      "d.AuthHandler.SendOTP"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/otp/verify",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "otpLimiter",
+      "d.AuthHandler.VerifyOTP"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/otp/login",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.OTPLogin"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/demand",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.AuthHandler.SetDemand"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/register",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.UnifiedRegister"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.UnifiedLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/refresh",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.Refresh"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AuthHandler.Logout"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/logout-all",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.AuthHandler.LogoutAll"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/auth/me",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.AuthHandler.GetMe"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/auth/capabilities",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.AuthHandler.GetCapabilities"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/capabilities/activate",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.AuthHandler.ActivateCapability"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/forgot-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.UnifiedForgotPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/verify-recovery-otp",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.VerifyRecoveryOTP"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/reset-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.UnifiedResetPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/identity/verify",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.IdentityHandler.VerifyIdentity"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/identity/status",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.IdentityHandler.GetMyIdentityStatus"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/organizations",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.OrganizationHandler.RegisterOrganization"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/organizations/me",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.OrganizationHandler.GetMyOrganization"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/register",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.Register"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/login",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.Login"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/check",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.CheckSellerExists"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/forgot-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.SellerForgotPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/reset-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.SellerResetPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/register",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.BuyerRegister"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/login",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.BuyerLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/check",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.CheckBuyerExists"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/forgot-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.BuyerForgotPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/reset-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.BuyerResetPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/login",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.AdminLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/login/verify",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "otpLimiter",
+      "d.AuthHandler.AdminLoginVerifyOTP"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/forgot-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.AdminForgotPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/reset-password",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "authLimiter",
+      "d.AuthHandler.AdminResetPassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/passkeys/login/begin",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.BeginLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/auth/passkey/login/begin",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.BeginLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/passkeys/login/finish",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.FinishLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/auth/passkey/login/verify",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.FinishLogin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/passkeys/register/begin",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/auth/passkey/register/begin",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/passkeys/register/finish",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/auth/passkey/register/verify",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/passkeys",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/auth/passkey/list",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/passkeys/:id",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/auth/passkey/:id",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/reauth/begin",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/reauth/finish",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/auth/reauth",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/logout",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.Logout"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/auth/session/revoke",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"admin\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/stats",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.GetStats"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/fee-preview",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.FeePreview"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/products",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.SellerList"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/products/detailed",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.ListProductsDetailed"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/products",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.SellerCreate"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/seller/products/:id",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ProductHandler.SellerUpdate"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/seller/products/:id",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.DeleteProduct"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/transactions",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireSellerTier(\"gold\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/orders",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireSellerTier(\"gold\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/seller/orders/:id",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireSellerTier(\"gold\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/profile",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.GetProfile"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/seller/profile",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.UpdateProfile"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/seller/preference",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.UpdatePreference"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/seller/password",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AuthHandler.SellerChangePassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/listing-fee",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.PayListingFee"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/upgrade-tier",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.RequestUpgrade"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/upgrade-tier",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.GetUpgradeRequests"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/notifications",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.ListNotifications"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/seller/notifications/:id/read",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.MarkNotificationRead"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/referral",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetSellerStats"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/referral/commissions",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetCommissions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/referral/accept",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "referralLimiter",
+      "d.ReferralHandler.AcceptInvitation"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/referral/balance",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetBalance"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/referral/withdraw",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.RequestWithdrawal"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/referral/withdrawals",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetMyWithdrawals"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/products/:id/attributes",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AttributeHandler.SetProductAttributes"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/seller/verification/documents",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.ListVerificationDocuments"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/verification/documents",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.UploadVerificationDocument"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/seller/refunds",
+    "group": "seller",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": true,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.SellerHandler.CreateRefundRequest"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/upload/image",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "uploadLimiter",
+      "handlers.UploadImage"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "POST",
+    "path": "/api/upload/image-url",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "uploadLimiter",
+      "d.UploadHandler.ImportImageFromURL"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/auth/change-password",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "authLimiter",
+      "d.AuthHandler.SellerChangePassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/transactions",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "middleware.RequireRole(\"seller\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/payments/pricing",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.PaymentHandler.GetPricing"
+    ],
+    "test_status": "VERIFIED_PASS"
+  },
+  {
+    "method": "POST",
+    "path": "/api/payments/checkout",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.PaymentHandler.Checkout"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/payments/orders/:orderId",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.PaymentHandler.GetOrder"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/payments/verify/:orderId",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.PaymentHandler.VerifyOrder"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/payments/demo/simulate",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.PaymentHandler.SimulateDemoOutcome"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/payments/webhook/:provider",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.PaymentHandler.Webhook"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/membership/otp/send",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.PaymentHandler.SendMembershipOTP"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/membership/otp/verify",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.PaymentHandler.VerifyMembershipOTP"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/wallet",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.WalletHandler.GetMyWallet"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/wallet/ledger",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.WalletHandler.GetMyLedger"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/referrals/token-link",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.WalletHandler.GetMyReferralLink"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/referrals/click",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.WalletHandler.TrackReferralClick"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/telebirr/webhook",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.TelebirrHandler.HandleWebhook"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/telebirr/orders/:outTradeNo",
+    "group": "api",
+    "requires_auth": false,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.TelebirrHandler.GetOrderStatus"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/telebirr/orders",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.TelebirrHandler.CreateOrder"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/telebirr/my-orders",
+    "group": "api",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAuth",
+      "d.TelebirrHandler.GetUserOrders"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/upgrade-tier",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.UpgradeTier"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/upgrade-tier",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.GetUpgradeRequests"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/profile",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.GetProfile"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/buyer/profile",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.UpdateProfile"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/orders",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.GetOrders"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/buyer/password",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.ChangePassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/notifications",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.ListNotifications"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/buyer/notifications/:id/read",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.MarkNotificationRead"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/referral",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetBuyerStats"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/referral/commissions",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetCommissions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/referral/accept",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "referralLimiter",
+      "d.ReferralHandler.AcceptInvitation"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/referral/balance",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetBalance"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/referral/withdraw",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.RequestWithdrawal"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/buyer/referral/withdrawals",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.ReferralHandler.GetMyWithdrawals"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/buyer/refunds",
+    "group": "buyer",
+    "requires_auth": true,
+    "requires_admin": false,
+    "requires_seller": false,
+    "requires_buyer": true,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.BuyerHandler.CreateRefundRequest"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/me",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminHandler.GetMe"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/me/permissions",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminHandler.GetMyPermissions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/password",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminHandler.ChangePassword"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/devices",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.ListDevices"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/devices/register",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.RegisterDevice"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/devices/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.AdminAuthHandler.RevokeDevice"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/products/pending",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"pending\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/products",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"products\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/products/:id/review",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"pending\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/products/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"products\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/sellers",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"sellers\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/sellers/:id/active",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"sellers\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/locations",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/locations",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/locations/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/locations/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/location-hierarchy",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/location-hierarchy/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/location-hierarchy",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/location-hierarchy/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/location-hierarchy/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/location-hierarchy/import",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/location-hierarchy/test-geocode",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/analytics/overview",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/analytics/heatmap",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/analytics/monthly",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/analytics/gantt",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/analytics/fee-revenue",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"analytics\"",
+      "\"finance\"",
+      "\"profit\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/transactions",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"transactions\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/transactions/:id/status",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"transactions\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/profit/summary",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"profit\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/profit/by-tier",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"profit\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/profit/monthly",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"profit\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/profit/weekly",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"profit\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/profit/annual",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"profit\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/forecast",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.GetForecast"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/scenarios",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.GetScenarios"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/capacity-20m",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.GetCapacityPlanning20M"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/tax-rules",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.GetTaxRules"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/actuals",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.GetActuals"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/audit-logs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.GetAuditLogs"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/finance/assumptions",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeManage",
+      "d.FPAHandler.UpdateAssumptions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/finance/assumptions/reset",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeManage",
+      "d.FPAHandler.ResetAssumptions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/finance/export",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "financeView",
+      "d.FPAHandler.ExportForecast"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/fee-payments/pending",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"products\"",
+      "\"transactions\"",
+      "\"pending\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/fee-payments/:id/verify",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"products\"",
+      "\"transactions\"",
+      "\"pending\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/fee-payments/:id/reject",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"products\"",
+      "\"transactions\"",
+      "\"pending\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/settings",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"settings\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/settings",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"settings\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/settings/with-reason",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"settings\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/settings/log",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"settings\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/users/:id/warn",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"sellers\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/users/:id/ban",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.BanUser"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/system/health",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"operations\"",
+      "\"settings\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/system/health/repair",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformAdmin",
+      "d.AdminHandler.RepairSystemHealth"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/notifications",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"notifications\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/notifications/:id/read",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"notifications\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/notifications",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"notifications\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/categories",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/category-hierarchy",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/category-hierarchy/:id/stats",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/category-hierarchy",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/category-hierarchy/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/category-hierarchy/:id/status",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/category-hierarchy/:id/reorder",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/category-hierarchy/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/classification/schemes",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/classification/schemes",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/classification/schemes/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/classification/placements",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/classification/placements/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/classification/placements/:id/move",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/classification/placements/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/classification/concepts",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/classification/concepts/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/classification/concepts/check-duplicates",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/classification/relationships",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/classification/relationships/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/classification/placements/:id/attributes",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/classification/attribute-rules/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/classification/impact-analysis",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/classification/audit-logs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"logs\"",
+      "\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/attributes",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/attributes",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/categories/:id/attributes",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/categories/:id/attributes/:attribute_id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/masterdata/status",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"locations\"",
+      "\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/masterdata/validate",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"locations\"",
+      "\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/masterdata/import/locations",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/masterdata/import/categories",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/masterdata/export/locations",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"locations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/masterdata/export/categories",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"categories\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/admins",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.ListAdmins"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/admins",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.CreateAdmin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/admins/:id/role",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.UpdateAdminRole"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/admins/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.DeleteAdmin"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/admins/:id/permissions",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.GetAdminPermissions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/admins/:id/permissions",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.AdminHandler.SetAdminPermissions"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/banners",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"banners\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/banners",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"banners\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/banners/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"banners\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/admin/banners/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"banners\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/logs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"logs\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/otp-logs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"otp_logs\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/activity-logs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"logs\"",
+      "\"otp_logs\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/users/:id/seller-tier",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"seller_upgrades\"",
+      "\"buyer_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/users/:id/buyer-tier",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"seller_upgrades\"",
+      "\"buyer_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/users/:id/tier-history",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"premium_users\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/premium-users",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"premium_users\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/upgrade-requests",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"seller_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/upgrade-requests/:id/approve",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"seller_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/upgrade-requests/:id/reject",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"seller_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/buyer-upgrade-requests",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"buyer_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/buyer-upgrade-requests/:id/approve",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"buyer_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/buyer-upgrade-requests/:id/reject",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"buyer_upgrades\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/categories/popularity",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"category_trends\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/referral/overview",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"referrals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/referral/list",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"referrals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/referral/users/:id/suspend",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"referrals\"",
+      "\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/referral/users/:id/block",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"referrals\"",
+      "\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/referral/withdrawals",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermissionOrSuper(\"withdrawals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/referral/withdrawals/:id/approve",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermissionOrSuper(\"withdrawals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/referral/withdrawals/:id/reject",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermissionOrSuper(\"withdrawals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/referral/withdrawals/:id/paid",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermissionOrSuper(\"withdrawals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/financial/ledger",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance\"",
+      "\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/referral/policy",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance\"",
+      "\"finance:view\"",
+      "\"referrals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/referral/policy",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance:manage\"",
+      "\"platform_owner\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/sms/logs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"logs\"",
+      "\"operations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/financial/compensate",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance:manage\"",
+      "\"platform_owner\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/operations/health",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"operations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/operations/jobs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"operations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/operations/failed-jobs",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"operations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/identity/pending",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"sellers\"",
+      "\"trust_safety\"",
+      "\"operations\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/identity/:id/resolve",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"sellers\"",
+      "\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/organizations",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"sellers\"",
+      "\"operations\"",
+      "\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/organizations/:id/review",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"sellers\"",
+      "\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/verification/documents",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"seller_verification\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/verification/documents/:id/review",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"seller_verification\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/trust/reports",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/trust/reports/:id/review",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/trust/reports/:id/priority",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"trust_safety\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/refunds",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"refunds\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/refunds/:id/review",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"refunds\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/refunds/:id/processed",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"refunds\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/appeals",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"appeals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/appeals/:id/review",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"appeals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/appeals/:id/status",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"appeals\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/search/popular",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/search/zero-results",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"analytics\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/payments/orders",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance\"",
+      "\"transactions\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/payments/orders/:id",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance\"",
+      "\"transactions\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/payments/providers",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequireAnyPermission(\"finance\"",
+      "\"settings\""
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/admin/payments/providers/:code",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.PaymentHandler.AdminUpdateProvider"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/payments/switch-mode",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "middleware.RequirePlatformOwner",
+      "d.PaymentHandler.AdminSwitchOperatingMode"
+    ],
+    "test_status": "NOT_TESTED"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/sms/test-otp",
+    "group": "admin",
+    "requires_auth": true,
+    "requires_admin": true,
+    "requires_seller": false,
+    "requires_buyer": false,
+    "required_permission": null,
+    "handlers_chain": [
+      "d.MW.RequirePermission(\"otp_logs\""
+    ],
+    "test_status": "NOT_TESTED"
+  }
+]

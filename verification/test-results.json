@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "total_tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "blocked": 0
+  },
+  "tests": [
+    {
+      "test_id": "SEC-001",
+      "category": "Security",
+      "name": "Dev OTP Elimination",
+      "target": "GET /api/dev/otp",
+      "expected": "HTTP 404 Not Found",
+      "status": "PASS",
+      "evidence": "All unauthenticated dev OTP routes permanently eliminated.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "SEC-002",
+      "category": "Security",
+      "name": "SQL Injection Resistance",
+      "target": "GET /api/products?search=",
+      "expected": "Parameterized handling without SQL error leakage",
+      "status": "PASS",
+      "evidence": "Safe handling across all SQL injection payloads.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "SEC-003",
+      "category": "Security",
+      "name": "XSS Output Encoding",
+      "target": "GET /api/products",
+      "expected": "Payload sanitized or JSON encoded",
+      "status": "PASS",
+      "evidence": "No raw reflected XSS script executed.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "SEC-004",
+      "category": "Security",
+      "name": "Broken Access Control (Admin Routes)",
+      "target": "GET/POST /api/admin/*",
+      "expected": "HTTP 401 Unauthorized or 403 Forbidden",
+      "status": "PASS",
+      "evidence": "All administrative endpoints rejected unauthenticated requests.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "SEC-005",
+      "category": "Security",
+      "name": "SSRF Multi-Layer Defense",
+      "target": "POST /api/upload/image-url",
+      "expected": "HTTP 400 with SSRF validation error",
+      "status": "PASS",
+      "evidence": "All 5 internal/cloud metadata addresses successfully blocked.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "SEC-006",
+      "category": "Security",
+      "name": "IDOR Asset Isolation",
+      "target": "PUT /api/seller/products/:id",
+      "expected": "HTTP 400/403/404 Rejected",
+      "status": "PASS",
+      "evidence": "Cross-tenant edit prevented (Status: 400, error: {\"success\":false,\"error\":\"product not found\"}).",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "WF-001",
+      "category": "Workflow",
+      "name": "User Registration & Authentication",
+      "target": "POST /api/auth/otp/login",
+      "expected": "Tokens issued for seller and buyer",
+      "status": "PASS",
+      "evidence": "Complete OTP login workflow verified.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "WF-002",
+      "category": "FinTech",
+      "name": "Authoritative Pricing Query",
+      "target": "GET /api/payments/pricing",
+      "expected": "Accurate server-enforced pricing returned",
+      "status": "PASS",
+      "evidence": "Prices: {'buyer_gold_price_etb': 200, 'buyer_premium_price_etb': 500, 'listing_fee_etb': 50, 'seller_gold_price_etb': 500, 'seller_premium_price_etb': 2000}, Mode: demo",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "WF-003",
+      "category": "FinTech",
+      "name": "Seller Tier Upgrade & Auto-Activation",
+      "target": "POST /api/payments/verify/:id",
+      "expected": "Order SUCCESSFUL and user upgraded to gold",
+      "status": "PASS",
+      "evidence": "Order ORD-S-G-1795450961-EC3858F1 verified, seller tier is now gold.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "WF-004",
+      "category": "FinTech",
+      "name": "Pay-Per-Listing Fee Auto-Activation",
+      "target": "POST /api/payments/verify/:id",
+      "expected": "Product fee_paid=True and total_fee_amount set",
+      "status": "PASS",
+      "evidence": "Product 35 unblocked: fee_paid=True, fee_amount=50.00",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "WF-005",
+      "category": "Catalog",
+      "name": "Classification Attribute Lineage",
+      "target": "GET /api/classification/placements/:id/attributes",
+      "expected": "HTTP 200 with dynamic attribute taxonomy",
+      "status": "PASS",
+      "evidence": "Attributes loaded cleanly (0 fields).",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "WF-006",
+      "category": "Catalog",
+      "name": "Multilingual Search Accuracy",
+      "target": "GET /api/products?search=",
+      "expected": "HTTP 200 for English and Amharic queries",
+      "status": "PASS",
+      "evidence": "Multilingual search queries execute properly without collation or decoding errors.",
+      "timestamp": "2026-11-23T16:22:41Z"
+    },
+    {
+      "test_id": "PERF-001",
+      "category": "Performance",
+      "name": "High-Concurrency Throughput & Latency",
+      "target": "GET /api/* endpoints",
+      "expected": "0 errors, sub-500ms P95 latency",
+      "status": "PASS",
+      "evidence": "Requests: 100, Concurrency: 10, RPS: 315.9, Errors: 0, P50: 22.9ms, P90: 46.6ms, P95: 54.8ms, P99: 76.6ms",
+      "timestamp": "2026-11-23T16:22:41Z"
+    }
+  ]
+}
