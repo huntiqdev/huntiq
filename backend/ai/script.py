@@ -344,26 +344,26 @@ def get_fast_acknowledgement(lang: str) -> str:
 def get_fast_capability(lang: str) -> str:
     if lang == "am":
         return (
-            "እኔ በHUNTIQ የተዘጋጀሁት HUNTIQ AI ነኝ። በኢትዮጵያ ውስጥ የHUNTIQ የደላላ የገበያ ቦታ ረዳትዎ ነኝ። "
-            "እቃዎችን፣ ቤቶችን፣ መኪኖችን፣ የስራ እና የሙያ አገልግሎቶችን እንዲፈልጉ፣ ዋጋና የደላላ ኮሚሽን እንዲያሰሉ፣ "
-            "እንዲሁም ለገዢዎች፣ ሻጮችና አከራዮች ተግባራዊ የገበያ ምክር እንድሰጥ ተዘጋጅቻለሁ።"
+            "እኔ በHUNTIQ የተዘጋጀሁት HUNTIQ AI ነኝ። የምገኘው በኢትዮጵያ፣ አዲስ አበባ ውስጥ በ huntiq.com ላይ ነው። "
+            "የHUNTIQ የደላላ የገበያ ቦታ ረዳትዎ ሆኜ እቃዎችን፣ ቤቶችን፣ መኪኖችን፣ የስራ እና የሙያ አገልግሎቶችን እንዲፈልጉ፣ "
+            "ዋጋና የደላላ ኮሚሽን እንዲያሰሉ፣ እንዲሁም ለገዢዎች፣ ሻጮችና አከራዮች ተግባራዊ የገበያ ምክር እንድሰጥ ተዘጋጅቻለሁ።"
         )
     elif lang == "ti":
         return (
-            "ኣነ ብHUNTIQ ዝተዳለኹ HUNTIQ AI እየ። ኣብ ኢትዮጵያ ናይ HUNTIQ ደላላ ዕዳጋ ሓጋዚኹም እየ። "
+            "ኣነ ብHUNTIQ ዝተዳለኹ HUNTIQ AI እየ። ኣብ ኢትዮጵያ፣ ኣዲስ ኣበባ ኣብ huntiq.com ዝርከብ ናይ HUNTIQ ደላላ ዕዳጋ ሓጋዚኹም እየ። "
             "ንብረታት፣ ኣባይቲ፣ መካይን፣ ስራሕን ናይ ሞያ ኣገልግሎታትን ክትደልዩ፣ ዋጋን ኮሚሽን ደላላን ክትሕስቡ፣ "
             "ከምኡ'ውን ንዓደግቲ፣ ሸየጥትን መኻረይትን ተግባራዊ ምኽሪ ክህብ ተዳልየ ኣለኹ።"
         )
     elif lang == "or":
         return (
-            "Ani HUNTIQ AI dha, kan qophaa'e HUNTIQ dhaan. Itoophiyaa keessatti gabaa dilaala HUNTIQ irratti gargaaraa keessan. "
+            "Ani HUNTIQ AI dha, kan qophaa'e HUNTIQ dhaan. Itoophiyaa Finfinnee keessatti huntiq.com irratti gargaaraa gabaa dilaalaati. "
             "Meeshaalee, manneen, konkolaattota, hojii fi tajaajiloota ogeessaa barbaaduu, gatii fi komishinii dilaalaa shallaguu, "
             "akkasumas bittattoota, gurgurtoota fi kireessitootaaf gorsa daldalaa kennuu nan danda'a."
         )
     return (
-        "I am HUNTIQ AI, created by HUNTIQ. I am your specialized broker marketplace assistant in Ethiopia. "
-        "I can help you search products, properties, vehicles, jobs, and professional services, compare options, "
-        "evaluate pricing and commissions, and provide practical advice for buyers, sellers, and landlords."
+        "I am HUNTIQ AI, created by HUNTIQ. I am located digitally across Ethiopia on huntiq.com, headquartered in Addis Ababa. "
+        "I am your specialized broker marketplace assistant helping you search products, properties, vehicles, jobs, "
+        "and professional services, compare options, evaluate pricing and commissions, and provide practical market advice."
     )
 
 
@@ -427,7 +427,7 @@ RE_USER_PRIVACY = re.compile(
 
 # Social interaction patterns (Phase 6)
 RE_GREETING = re.compile(
-    r"(?i)^(?:hello|hi|hey|good\s+(?:morning|afternoon|evening)|selam|salam|tadias|tadiyas|endemin|ሰላም|ከመይ|akkam)\b[!?.]*$"
+    r"(?i)^(?:hello|halo|helo|hallo|hi|hey|hiya|howdy|hola|greetings|good\s+(?:morning|afternoon|evening|day)|selam|salam|tadias|tadiyas|endemin|ሰላም|ከመይ|akkam)\b[!?.]*$"
 )
 
 RE_COMPLIMENT = re.compile(
@@ -456,9 +456,13 @@ RE_CAPABILITY_OR_IDENTITY = re.compile(
     r"(?i)\b("
     r"who\s+are\s+you|what\s+can\s+you\s+do|who\s+created\s+you|who\s+made\s+you|"
     r"what\s+is\s+your\s+name|what\s+is\s+huntiq\s*ai|tell\s+me\s+about\s+yourself|"
+    r"where\s+are\s+you(\s+located|\s+from)?|where\s+is\s+huntiq|what\s+is\s+your\s+(?:location|address)|where\s+are\s+your\s+offices?|"
     r"ante\s+man\s+neh|anchi\s+man\s+nesh|man\s+neh|man\s+nesh|min\s+tiseralekh|min\s+tiseralesh|"
+    r"yet\s+neh|yet\s+nesh|yet\s+nachihu|yet\s+nachehu|yet\s+new|huntiq\s+yet\s+new|yet\s+new\s+huntiq|adrashe|adrashaw|"
     r"አንተ\s+ማን\s+ነህ|ማን\s+ነሽ|ማን\s+ነህ|ምን\s+መስራት\s+ትችላለህ|ምን\s+ትሰራለህ|"
-    r"መን\s+ኢኻ|እንታይ\s+ክትገብር\s+ትኽእል|ati\s+eenyu|maal\s+gochuu\s+dandeessa"
+    r"የት\s+ነህ|የት\s+ነሽ|የት\s+ናችሁ|የት\s+ነው|የት\s+ነው\s+የምትገኙት|አድራሻ|አድራሻችሁ\s+የት\s+ነው|"
+    r"ኣበይ\s+ኣለኻ|ኣበይ\s+ኣለኺ|ኣበይ\s+ኣለኹም|ኣበይ\s+ኢኻ|ኣድራሻኹም\s+ኣበይ\s+እዩ|"
+    r"መን\s+ኢኻ|እንታይ\s+ክትገብር\s+ትኽእል|ati\s+eenyu|maal\s+gochuu\s+dandeessa|eessa\s+jirta|eessa\s+jirtu|teessoon\s+keessan\s+eessa"
     r")\b[!?.]*$"
 )
 
@@ -592,18 +596,26 @@ def extract_price_filters(text: str) -> Tuple[Optional[float], Optional[float]]:
 def extract_search_term(text: str) -> str:
     clean = text.lower()
     fillers = [
-        "find me", "find", "show me", "show", "search for", "search", "looking for",
-        "i want", "i need", "can you show", "available", "please", "around", "near",
-        "in", "for sale", "for rent", "buy", "sell", "cheap", "good", "best",
+        # Inquiry and acquisition verbs
+        "give me", "give", "bring me", "bring", "get me", "get", "show me", "show",
+        "find me", "find", "search for", "search", "looking for", "look for",
+        "i want", "i need", "can you show", "can you give", "can you find",
+        "provide me", "provide", "display", "fetch me", "fetch",
+        "available", "please", "around", "near", "in", "for sale", "for rent", "buy", "sell", "cheap", "good", "best",
         # Latin Amharic conversational & inquiry fillers
         "selam", "salam", "tadias", "ere", "be natish", "benatish", "be nateh", "benateh", "natish", "nateh",
+        "sitiegn", "sitegn", "stegn", "stegni", "stugn",
         "sint new", "sinti new", "sint newu", "sint", "sinti", "snt", "wagaw sint new", "wagaw sint",
         "wagaw", "waga", "new", "newu", "newi", "ale", "alle", "alew", "allaw", "alesh", "allesh", "alu", "allu",
         "ifelgalew", "ifelgalehu", "felegku", "felegiku", "felagku", "felgku", "yifelgalu",
         "asayegn", "asayeng", "asaye", "kirey", "kira", "kire", "megzat", "meshet",
         # Ge'ez fillers
-        "ሰላም", "እፈልጋለሁ", "ይፈልጋሉ", "አሳየኝ", "ፈልግ", "ስንት ነው", "ስንት", "ነው", "ዋጋው", "ዋጋ", "አለ", "አለ ወይ", "አለህ", "አለሽ",
-        "barbaada", "ደሊየ",
+        "ሰላም", "እፈልጋለሁ", "ይፈልጋሉ", "ስጠኝ", "ስጪኝ", "ስጡኝ", "አምጣልኝ", "አምጪልኝ", "አሳየኝ", "አሳዩኝ", "አሳይ",
+        "ፈልግልኝ", "ፈልጊልኝ", "ፈልጉልኝ", "ፈልግ", "ስንት ነው", "ስንት", "ነው", "ዋጋው", "ዋጋ", "አለ", "አለ ወይ", "አለህ", "አለሽ",
+        # Oromo fillers
+        "naa kenni", "na agarsiisi", "naaf barbaadi", "barbaada", "barbaaddu",
+        # Tigrinya fillers
+        "ሃበኒ", "ኣርእየኒ", "ደሊየ", "ደሊና",
     ]
     term = clean
     for f in fillers:
@@ -795,7 +807,25 @@ class DomainValidator:
 
         # 6. Check In-Domain Marketplace Signals & Contextual Continuity
         lower = text.lower()
-        has_marketplace_signal = any(sig in lower for sig in MARKETPLACE_SIGNALS)
+        words_in_text = set(re.findall(r"\b\w+\b", lower))
+        has_marketplace_signal = False
+        for sig in MARKETPLACE_SIGNALS:
+            if RE_ETHIOPIC.search(sig):
+                if sig in lower:
+                    has_marketplace_signal = True
+                    break
+            else:
+                sig_lower = sig.lower()
+                if " " in sig_lower:
+                    if sig_lower in lower:
+                        has_marketplace_signal = True
+                        break
+                elif sig_lower in words_in_text or (sig_lower + "s") in words_in_text or (sig_lower + "es") in words_in_text:
+                    has_marketplace_signal = True
+                    break
+                elif len(sig_lower) >= 4 and any(w.startswith(sig_lower) for w in words_in_text):
+                    has_marketplace_signal = True
+                    break
         is_followup = is_contextual_followup(text, history)
 
         # 7. Ambiguity check: very short ambiguous queries without signal or context
@@ -876,9 +906,9 @@ class DomainValidator:
 # ══════════════════════════════════════════════════════════════════════════════
 
 class GeminiClient:
-    def __init__(self, api_key: str, model: str = "gemini-3.5-flash-lite", timeout: int = 5):
+    def __init__(self, api_key: str, model: str = "gemini-flash-lite-latest", timeout: float = 3.5):
         self.api_key = api_key
-        self.model = model or "gemini-3.5-flash-lite"
+        self.model = model or "gemini-flash-lite-latest"
         self.timeout = timeout
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
 
@@ -890,8 +920,6 @@ class GeminiClient:
     def generate(self, system_instruction: str, history: List[Dict[str, Any]], prompt: str) -> Tuple[str, int, Optional[str]]:
         if not self.api_key:
             return "", 0, "GEMINI_API_KEY is not configured on server"
-
-        url = f"{self.base_url}/models/{self.model}:generateContent?key={self.api_key}"
 
         contents = []
         if history:
@@ -914,15 +942,20 @@ class GeminiClient:
         }
 
         req_bytes = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
-            url,
-            data=req_bytes,
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        )
 
-        # Retry transient HTTP 429/503 errors up to 2 times
-        for attempt in range(1, 3):
+        candidate_models = [self.model]
+        if "gemini-flash-lite-latest" not in candidate_models:
+            candidate_models.append("gemini-flash-lite-latest")
+
+        last_err = None
+        for cand_model in candidate_models[:2]:
+            url = f"{self.base_url}/models/{cand_model}:generateContent?key={self.api_key}"
+            req = urllib.request.Request(
+                url,
+                data=req_bytes,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
             try:
                 with urllib.request.urlopen(req, timeout=self.timeout) as resp:
                     resp_bytes = resp.read()
@@ -930,7 +963,8 @@ class GeminiClient:
 
                     candidates = data.get("candidates", [])
                     if not candidates:
-                        return "", 0, "No response candidates returned by Gemini"
+                        last_err = "No response candidates returned by Gemini"
+                        continue
 
                     content = candidates[0].get("content", {})
                     parts = content.get("parts", [])
@@ -945,23 +979,20 @@ class GeminiClient:
                 except Exception:
                     pass
                 sanitized = self._sanitize_error(f"HTTP {e.code}: {e.reason} - {err_body}")
-
-                if e.code in (429, 503) and attempt < 2:
-                    logger.warning("Transient Gemini error (%s). Retrying in 1s...", sanitized)
-                    time.sleep(1.0)
-                    continue
-
-                return "", 0, sanitized
+                last_err = sanitized
+                continue
 
             except urllib.error.URLError as e:
                 sanitized = self._sanitize_error(f"Network error contacting Gemini: {e.reason}")
-                return "", 0, sanitized
+                last_err = sanitized
+                continue
 
             except Exception as e:
                 sanitized = self._sanitize_error(str(e))
-                return "", 0, sanitized
+                last_err = sanitized
+                continue
 
-        return "", 0, "Failed to connect to Gemini after retries"
+        return "", 0, last_err or "Failed to connect to Gemini after retries"
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1223,9 +1254,26 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
 
         if err:
             logger.error("Gemini call error: %s", err)
-            fallback = get_localized_rejection(resolved_lang, "service_unavailable")
+            search_label = evaluation.get("search_term") or message
             if listings:
-                fallback = f"I retrieved {len(listings)} verified listings from HUNTIQ for you below:"
+                if resolved_lang == "am":
+                    fallback = f"በHUNTIQ ዳታቤዝ ውስጥ ለ '{search_label}' የተገኙ {len(listings)} እቃዎች እነሆ፦"
+                elif resolved_lang == "ti":
+                    fallback = f"ኣብ HUNTIQ ዳታቤዝ ን '{search_label}' ዝተረኽቡ {len(listings)} ንብረታት እነሆ፦"
+                elif resolved_lang == "or":
+                    fallback = f"Gabaa HUNTIQ irratti '{search_label}' kan ilaallatu meeshaalee {len(listings)} argaman kunooti:"
+                else:
+                    fallback = f"Here are {len(listings)} verified listings found on HUNTIQ for '{search_label}':"
+            else:
+                if resolved_lang == "am":
+                    fallback = f"በአሁኑ ሰዓት በHUNTIQ ዳታቤዝ ውስጥ ለ '{search_label}' የቀረበ እቃ አልተገኘም። እባክዎ እንደ ኤሌክትሮኒክስ፣ መኪኖች ወይም ቤቶች ያሉ ዋና ዋና ክፍሎችን ይጎብኙ።"
+                elif resolved_lang == "ti":
+                    fallback = f"ኣብዚ እዋን'ዚ ኣብ HUNTIQ ዳታቤዝ ን '{search_label}' ዝተረኽበ ንብረት የለን። በጃኹም ከም ኤሌክትሮኒክስ፣ መካይን ወይ ኣባይቲ ዝኣመሰሉ ዋናታት ክፍሊታት ርኣዩ።"
+                elif resolved_lang == "or":
+                    fallback = f"Yeroo ammaa gabaa HUNTIQ irratti '{search_label}' kan ilaallatu meeshaan argame hin jiru. Maaloo kutaa elektirooniksii, konkolaattota ykn manneen ilaalaa."
+                else:
+                    fallback = f"We currently do not have active listings matching '{search_label}' on HUNTIQ. You can browse our Electronics, Vehicles, and Properties categories or check back soon."
+
             self._send_json(200, {
                 "reply": fallback,
                 "language": resolved_lang,
@@ -1235,7 +1283,7 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
                 "fallback_used": True,
                 "tokens_used": 0,
                 "latency_ms": latency_ms,
-                "error": err,
+                "suggested_queries": evaluation.get("suggested_queries", []),
             })
             return
 

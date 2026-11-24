@@ -123,7 +123,7 @@ func Load() *Config {
 		TelebirrReturnURL:   getEnv("TELEBIRR_RETURN_URL", frontendURL+"/payment/callback"),
 
 		GeminiAPIKey: getEnv("GEMINI_API_KEY", ""),
-		GeminiModel:  getEnv("GEMINI_MODEL", "gemini-3.5-flash-lite"),
+		GeminiModel:  getEnv("GEMINI_MODEL", "gemini-flash-lite-latest"),
 	}
 }
 

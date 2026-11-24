@@ -21,40 +21,6 @@ import { useLocale } from '@/hooks/useLocale';
 import { sendAIChat } from '@/lib/api/ai';
 import type { ChatMessage, ListingCard } from '@/types/ai';
 
-const INITIAL_SUGGESTIONS: Record<string, string[]> = {
-  am: [
-    'ላፕቶፕ ከ 50,000 ብር በታች',
-    'የሚከራይ ቤት ቦሌ',
-    'የደላላ ኮሚሽን ሞዴል እንዴት ይሰራል?',
-    'መኪና ከመግዛት በፊት ምን ልመርምር?',
-  ],
-  ti: [
-    'ላፕቶፕ ትሕቲ 50,000 ብር',
-    'ክካረ ገዛ ኣብ ቦሌ',
-    'ናይ ደላላ ኮሚሽን ከመይ ይሰርሕ?',
-    'መኪና ቅድሚ ምግዛእ እንታይ ክምርመር ኣለዎ?',
-  ],
-  or: [
-    'Kompiitara gatii 50,000 gadi',
-    'Mana kireeffamu Boolee',
-    'Dilaalli HUNTIQ akkamitti hojjeta?',
-    'Konkolaataa bituu dura maal qoradhu?',
-  ],
-  en: [
-    'Laptops under 50,000 ETB',
-    'Apartments for rent in Bole',
-    'How does the broker model work?',
-    'What should I inspect before buying a car?',
-  ],
-};
-
-const WELCOME_MESSAGES: Record<string, string> = {
-  am: 'ሰላም! እኔ HUNTIQ AI ነኝ። በHUNTIQ ላይ እቃዎችን፣ ቤቶችን፣ መኪኖችን፣ አገልግሎቶችን ለማግኘት ወይም የገበያና ንግድ ምክር ለመጠየቅ ዝግጁ ነኝ። ምን ልርዳዎት?',
-  ti: 'ከመይ! ኣነ HUNTIQ AI እየ። ኣብ HUNTIQ ንብረታት፣ ኣባይቲ፣ መካይን፣ ኣገልግሎታት ንምርካብ ወይ ናይ ዕዳጋን ንግድን ምኽሪ ንምሕታት ድሉው እየ። እንታይ ክሕግዘኩም?',
-  or: 'Akkam! Ani HUNTIQ AI dha. Gabaa HUNTIQ irratti meeshaalee, manneen, konkolaattota, tajaajiloota barbaaduuf ykn gorsa daldalaa argachuuf qophiidha. Maal isin gargaaru?',
-  en: 'Hello! I am HUNTIQ AI — your dedicated marketplace discovery and commercial advisory assistant. How can I help you find listings, evaluate pricing, or explore opportunities today?',
-};
-
 const ERROR_MESSAGES: Record<string, Record<string, string>> = {
   NO_INTERNET: {
     en: 'Your internet connection appears to be unavailable. Please reconnect and try again.',
@@ -110,7 +76,7 @@ const RETRY_LABELS: Record<string, string> = {
 
 export function AIAssistant() {
   const { locale } = useLocale();
-  const currentLang = (locale in INITIAL_SUGGESTIONS ? locale : 'en') as 'en' | 'am' | 'ti' | 'or';
+  const currentLang = (['en', 'am', 'ti', 'or'].includes(locale) ? locale : 'en') as 'en' | 'am' | 'ti' | 'or';
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -138,21 +104,6 @@ export function AIAssistant() {
     };
   }, []);
 
-  // Initialize with localized welcome message
-  useEffect(() => {
-    if (messages.length === 0) {
-      setMessages([
-        {
-          id: 'welcome',
-          role: 'assistant',
-          content: WELCOME_MESSAGES[currentLang] || WELCOME_MESSAGES.en,
-          timestamp: Date.now(),
-          suggestedQueries: INITIAL_SUGGESTIONS[currentLang] || INITIAL_SUGGESTIONS.en,
-        },
-      ]);
-    }
-  }, [currentLang, messages.length]);
-
   // Scroll to bottom on new messages
   useEffect(() => {
     if (isOpen) {
@@ -169,15 +120,7 @@ export function AIAssistant() {
   }, [isOpen]);
 
   const handleClearChat = () => {
-    setMessages([
-      {
-        id: 'welcome-' + Date.now(),
-        role: 'assistant',
-        content: WELCOME_MESSAGES[currentLang] || WELCOME_MESSAGES.en,
-        timestamp: Date.now(),
-        suggestedQueries: INITIAL_SUGGESTIONS[currentLang] || INITIAL_SUGGESTIONS.en,
-      },
-    ]);
+    setMessages([]);
   };
 
   const handleRetry = (failedMsgId: string, textToRetry: string) => {
@@ -212,7 +155,7 @@ export function AIAssistant() {
 
       // Build lightweight conversation history for Gemini (last 4 turns)
       const apiHistory = newHistory
-        .filter((m) => m.id !== 'welcome' && !m.isError)
+        .filter((m) => !m.isError)
         .slice(-4)
         .map((m) => ({
           role: m.role === 'user' ? 'user' : 'model',
@@ -403,6 +346,22 @@ export function AIAssistant() {
 
           {/* ── Messages Scroll Area ── */}
           <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3.5 overscroll-contain text-slate-800 dark:text-slate-200">
+            {messages.length === 0 && (
+              <div className="h-full min-h-[220px] flex flex-col items-center justify-center text-center p-6 text-slate-400 dark:text-slate-500 space-y-3 my-auto">
+                <div className="w-12 h-12 rounded-2xl bg-[#1769E0]/10 dark:bg-[#38A5FF]/10 text-[#1769E0] dark:text-[#38A5FF] flex items-center justify-center shadow-inner">
+                  <Sparkles size={24} />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">HUNTIQ AI</h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-[260px]">
+                    {currentLang === 'am' ? 'የሚፈልጉትን እቃ፣ መኪና፣ ቤት ወይም ማንኛውንም ጥያቄ ይጠይቁ' :
+                     currentLang === 'ti' ? 'ዝደልይዎ ንብረት፣ መኪና፣ ገዛ ወይ ዝኾነ ሕቶ ሕተቱ' :
+                     currentLang === 'or' ? 'Meeshaa, konkolaataa, mana ykn gaaffii kamiyyuu gaafadhaa' :
+                     'Ask anything about products, vehicles, properties, or marketplace advice'}
+                  </p>
+                </div>
+              </div>
+            )}
             {messages.map((m) => {
               const isAssistant = m.role === 'assistant';
 
@@ -536,29 +495,6 @@ export function AIAssistant() {
                       )}
                     </div>
                   </div>
-
-                  {/* Latency and path info */}
-                  {isAssistant && m.latencyMs !== undefined && (
-                    <span className="text-[9px] text-slate-400 dark:text-slate-500 mt-1 ml-8">
-                      {m.latencyMs}ms {m.path ? `• ${m.path}` : ''}
-                    </span>
-                  )}
-
-                  {/* ── Suggested query chips ── */}
-                  {isAssistant && m.suggestedQueries && m.suggestedQueries.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-2 ml-7 max-w-[95%]">
-                      {m.suggestedQueries.map((chip, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => handleSend(chip)}
-                          className="text-[11px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-[#1769E0] dark:text-[#38A5FF] border border-slate-200/80 dark:border-slate-700/80 transition-all hover:scale-[1.02] active:scale-95 text-left"
-                        >
-                          {chip}
-                        </button>
-                      ))}
-                    </div>
-                  )}
                 </div>
               );
             })}

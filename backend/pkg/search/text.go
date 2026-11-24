@@ -235,6 +235,9 @@ func CleanConversationalSearchTerm(q string) string {
 		"listing": true, "listings": true, "price": true, "cost": true,
 		"have": true, "has": true, "do": true, "does": true, "can": true, "will": true, "get": true, "got": true,
 		"there": true,
+		// Greetings & Conversational Interjections
+		"hello": true, "halo": true, "hi": true, "hey": true, "selam": true, "salam": true, "ere": true,
+		"ሰላም": true, "እረ": true, "ኧረ": true,
 		// Amharic
 		"አለ": true, "አሉ": true, "ነው": true, "ነበር": true, "ናት": true,
 		"ወይ": true, "ስለ": true, "ጋር": true, "ከ": true, "በ": true, "የ": true, "ወደ": true,
