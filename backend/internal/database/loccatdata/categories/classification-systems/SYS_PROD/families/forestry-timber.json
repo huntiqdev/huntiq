@@ -8341,7 +8341,7 @@
       "parent_id": 2023,
       "parent_code": "wooden-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-tools-heavy-duty-rotary-hammer-demolition-d-s32_0",
+      "slug": "wooden-tools-heavy-duty-rotary-hammer-demolition-d-s32-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -8364,7 +8364,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "wooden-tools-heavy-duty-rotary-hammer-demolition-d-s32_0"
       ],
       "redirects": []
     },
@@ -8373,7 +8374,7 @@
       "parent_id": 2022,
       "parent_code": "wooden-kitchen-items",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-kitchen-items-digital-smart-electric-injera-s75_0",
+      "slug": "wooden-kitchen-items-digital-smart-electric-injera-s75-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -8391,7 +8392,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "wooden-kitchen-items-digital-smart-electric-injera-s75_0"
+      ],
       "redirects": []
     },
     {
@@ -8399,7 +8402,7 @@
       "parent_id": 2023,
       "parent_code": "wooden-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-tools-brushless-cordless-impact-drivers-dri-s32_1",
+      "slug": "wooden-tools-brushless-cordless-impact-drivers-dri-s32-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -8419,7 +8422,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "wooden-tools-brushless-cordless-impact-drivers-dri-s32_1"
       ],
       "redirects": []
     },
@@ -8428,7 +8432,7 @@
       "parent_id": 2022,
       "parent_code": "wooden-kitchen-items",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-kitchen-items-double-door-frost-free-kitche-s75_1",
+      "slug": "wooden-kitchen-items-double-door-frost-free-kitche-s75-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -8446,7 +8450,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "wooden-kitchen-items-double-door-frost-free-kitche-s75_1"
+      ],
       "redirects": []
     },
     {
@@ -8454,7 +8460,7 @@
       "parent_id": 2023,
       "parent_code": "wooden-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-tools-high-power-angle-grinders-metal-cutte-s32_2",
+      "slug": "wooden-tools-high-power-angle-grinders-metal-cutte-s32-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -8475,7 +8481,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "wooden-tools-high-power-angle-grinders-metal-cutte-s32_2"
       ],
       "redirects": []
     },
@@ -8484,7 +8491,7 @@
       "parent_id": 2022,
       "parent_code": "wooden-kitchen-items",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-kitchen-items-commercial-4-burner-gas-elect-s75_2",
+      "slug": "wooden-kitchen-items-commercial-4-burner-gas-elect-s75-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -8507,7 +8514,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "wooden-kitchen-items-commercial-4-burner-gas-elect-s75_2"
       ],
       "redirects": []
     },
@@ -8516,7 +8524,7 @@
       "parent_id": 2023,
       "parent_code": "wooden-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-tools-silent-diesel-portable-petrol-generat-s32_3",
+      "slug": "wooden-tools-silent-diesel-portable-petrol-generat-s32-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -8539,7 +8547,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "wooden-tools-silent-diesel-portable-petrol-generat-s32_3"
       ],
       "redirects": []
     },
@@ -8548,7 +8557,7 @@
       "parent_id": 2022,
       "parent_code": "wooden-kitchen-items",
       "classification_system_code": "SYS_PROD",
-      "slug": "wooden-kitchen-items-heavy-duty-food-processors-co-s75_3",
+      "slug": "wooden-kitchen-items-heavy-duty-food-processors-co-s75-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -8571,7 +8580,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "wooden-kitchen-items-heavy-duty-food-processors-co-s75_3"
       ],
       "redirects": []
     },

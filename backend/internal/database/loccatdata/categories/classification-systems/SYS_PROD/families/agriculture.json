@@ -29667,7 +29667,7 @@
       "parent_id": 313,
       "parent_code": "tractors-farm-machinery",
       "classification_system_code": "SYS_PROD",
-      "slug": "tractors-farm-machinery-heavy-duty-rotary-hammer-d-s25_0",
+      "slug": "tractors-farm-machinery-heavy-duty-rotary-hammer-d-s25-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -29690,7 +29690,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "tractors-farm-machinery-heavy-duty-rotary-hammer-d-s25_0"
       ],
       "redirects": []
     },
@@ -29699,7 +29700,7 @@
       "parent_id": 121,
       "parent_code": "farm-infrastructure-construction",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-infrastructure-construction-high-strength-str-s36_0",
+      "slug": "farm-infrastructure-construction-high-strength-str-s36-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -29717,7 +29718,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "farm-infrastructure-construction-high-strength-str-s36_0"
+      ],
       "redirects": []
     },
     {
@@ -29725,7 +29728,7 @@
       "parent_id": 132,
       "parent_code": "coffee-processing-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-processing-trading-ethiopian-export-grade-c-s48_0",
+      "slug": "coffee-processing-trading-ethiopian-export-grade-c-s48-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29743,7 +29746,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "coffee-processing-trading-ethiopian-export-grade-c-s48_0"
+      ],
       "redirects": []
     },
     {
@@ -29751,7 +29756,7 @@
       "parent_id": 155,
       "parent_code": "grain-collection-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "grain-collection-trading-ethiopian-export-grade-co-s49_0",
+      "slug": "grain-collection-trading-ethiopian-export-grade-co-s49-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29769,7 +29774,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "grain-collection-trading-ethiopian-export-grade-co-s49_0"
+      ],
       "redirects": []
     },
     {
@@ -29777,7 +29784,7 @@
       "parent_id": 201,
       "parent_code": "crop-harvesting-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-harvesting-services-ethiopian-export-grade-co-s50_0",
+      "slug": "crop-harvesting-services-ethiopian-export-grade-co-s50-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29795,7 +29802,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "crop-harvesting-services-ethiopian-export-grade-co-s50_0"
+      ],
       "redirects": []
     },
     {
@@ -29803,7 +29812,7 @@
       "parent_id": 261,
       "parent_code": "crop-protection-pesticides",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-protection-pesticides-ethiopian-export-grade--s51_0",
+      "slug": "crop-protection-pesticides-ethiopian-export-grade-s51-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29821,7 +29830,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "crop-protection-pesticides-ethiopian-export-grade--s51_0"
+      ],
       "redirects": []
     },
     {
@@ -29829,7 +29840,7 @@
       "parent_id": 351,
       "parent_code": "coffee-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-farming-ethiopian-export-grade-coffee-beans-s52_0",
+      "slug": "coffee-farming-ethiopian-export-grade-coffee-beans-s52-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29847,7 +29858,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "coffee-farming-ethiopian-export-grade-coffee-beans-s52_0"
+      ],
       "redirects": []
     },
     {
@@ -29855,7 +29868,7 @@
       "parent_id": 358,
       "parent_code": "cotton-fiber-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cotton-fiber-crop-farming-ethiopian-export-grade-c-s53_0",
+      "slug": "cotton-fiber-crop-farming-ethiopian-export-grade-c-s53-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29873,7 +29886,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "cotton-fiber-crop-farming-ethiopian-export-grade-c-s53_0"
+      ],
       "redirects": []
     },
     {
@@ -29881,7 +29896,7 @@
       "parent_id": 421,
       "parent_code": "organic-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "organic-crop-farming-ethiopian-export-grade-coffee-s54_0",
+      "slug": "organic-crop-farming-ethiopian-export-grade-coffee-s54-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29899,7 +29914,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "organic-crop-farming-ethiopian-export-grade-coffee-s54_0"
+      ],
       "redirects": []
     },
     {
@@ -29907,7 +29924,7 @@
       "parent_id": 495,
       "parent_code": "camel-pastoral-livestock",
       "classification_system_code": "SYS_PROD",
-      "slug": "camel-pastoral-livestock-ethiopian-export-grade-co-s55_0",
+      "slug": "camel-pastoral-livestock-ethiopian-export-grade-co-s55-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29925,7 +29942,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "camel-pastoral-livestock-ethiopian-export-grade-co-s55_0"
+      ],
       "redirects": []
     },
     {
@@ -29933,7 +29952,7 @@
       "parent_id": 499,
       "parent_code": "cattle-beef-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cattle-beef-farming-ethiopian-export-grade-coffee--s56_0",
+      "slug": "cattle-beef-farming-ethiopian-export-grade-coffee-s56-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29951,7 +29970,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "cattle-beef-farming-ethiopian-export-grade-coffee--s56_0"
+      ],
       "redirects": []
     },
     {
@@ -29959,7 +29980,7 @@
       "parent_id": 521,
       "parent_code": "livestock-breeding-genetics",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-breeding-genetics-ethiopian-export-grade-s57_0",
+      "slug": "livestock-breeding-genetics-ethiopian-export-grade-s57-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -29977,7 +29998,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "livestock-breeding-genetics-ethiopian-export-grade-s57_0"
+      ],
       "redirects": []
     },
     {
@@ -29985,7 +30008,7 @@
       "parent_id": 525,
       "parent_code": "livestock-equipment-housing",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-equipment-housing-ethiopian-export-grade-s58_0",
+      "slug": "livestock-equipment-housing-ethiopian-export-grade-s58-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -30003,7 +30026,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "livestock-equipment-housing-ethiopian-export-grade-s58_0"
+      ],
       "redirects": []
     },
     {
@@ -30011,7 +30036,7 @@
       "parent_id": 533,
       "parent_code": "livestock-fattening-feedlot",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-fattening-feedlot-ethiopian-export-grade-s59_0",
+      "slug": "livestock-fattening-feedlot-ethiopian-export-grade-s59-0",
       "names": {
         "en": "Ethiopian Export Grade Coffee Beans",
         "am": "የኢትዮጵያ የወጪ ንግድ ጥራት ያላቸው የቡና ፍሬዎች",
@@ -30029,7 +30054,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "livestock-fattening-feedlot-ethiopian-export-grade-s59_0"
+      ],
       "redirects": []
     },
     {
@@ -30037,7 +30064,7 @@
       "parent_id": 116,
       "parent_code": "agricultural-transport-logistics",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-transport-logistics-verified-tiktok-s-s62_0",
+      "slug": "agricultural-transport-logistics-verified-tiktok-s-s62-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30059,7 +30086,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "agricultural-transport-logistics-verified-tiktok-s-s62_0"
       ],
       "redirects": []
     },
@@ -30068,7 +30096,7 @@
       "parent_id": 126,
       "parent_code": "post-harvest-handling-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "post-harvest-handling-services-verified-tiktok-soc-s63_0",
+      "slug": "post-harvest-handling-services-verified-tiktok-soc-s63-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30090,7 +30118,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "post-harvest-handling-services-verified-tiktok-soc-s63_0"
       ],
       "redirects": []
     },
@@ -30099,7 +30128,7 @@
       "parent_id": 184,
       "parent_code": "agricultural-extension-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-extension-services-verified-tiktok-so-s64_0",
+      "slug": "agricultural-extension-services-verified-tiktok-so-s64-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30121,7 +30150,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "agricultural-extension-services-verified-tiktok-so-s64_0"
       ],
       "redirects": []
     },
@@ -30130,7 +30160,7 @@
       "parent_id": 188,
       "parent_code": "agricultural-mechanization-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-mechanization-services-verified-tikto-s65_0",
+      "slug": "agricultural-mechanization-services-verified-tikto-s65-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30152,7 +30182,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "agricultural-mechanization-services-verified-tikto-s65_0"
       ],
       "redirects": []
     },
@@ -30161,7 +30192,7 @@
       "parent_id": 197,
       "parent_code": "contract-farming-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "contract-farming-services-verified-tiktok-social-c-s66_0",
+      "slug": "contract-farming-services-verified-tiktok-social-c-s66-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30183,7 +30214,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "contract-farming-services-verified-tiktok-social-c-s66_0"
       ],
       "redirects": []
     },
@@ -30192,7 +30224,7 @@
       "parent_id": 205,
       "parent_code": "farm-labor-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-labor-services-verified-tiktok-social-comedy--s67_0",
+      "slug": "farm-labor-services-verified-tiktok-social-comedy-s67-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30214,7 +30246,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "farm-labor-services-verified-tiktok-social-comedy--s67_0"
       ],
       "redirects": []
     },
@@ -30223,7 +30256,7 @@
       "parent_id": 213,
       "parent_code": "farm-management-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-management-services-verified-tiktok-social-co-s68_0",
+      "slug": "farm-management-services-verified-tiktok-social-co-s68-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30245,7 +30278,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "farm-management-services-verified-tiktok-social-co-s68_0"
       ],
       "redirects": []
     },
@@ -30254,7 +30288,7 @@
       "parent_id": 217,
       "parent_code": "land-preparation-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "land-preparation-services-verified-tiktok-social-c-s69_0",
+      "slug": "land-preparation-services-verified-tiktok-social-c-s69-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30276,7 +30310,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "land-preparation-services-verified-tiktok-social-c-s69_0"
       ],
       "redirects": []
     },
@@ -30285,7 +30320,7 @@
       "parent_id": 222,
       "parent_code": "seed-certification-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "seed-certification-services-verified-tiktok-social-s70_0",
+      "slug": "seed-certification-services-verified-tiktok-social-s70-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -30307,7 +30342,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "seed-certification-services-verified-tiktok-social-s70_0"
       ],
       "redirects": []
     },
@@ -30316,7 +30352,7 @@
       "parent_id": 313,
       "parent_code": "tractors-farm-machinery",
       "classification_system_code": "SYS_PROD",
-      "slug": "tractors-farm-machinery-brushless-cordless-impact--s25_1",
+      "slug": "tractors-farm-machinery-brushless-cordless-impact-s25-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -30336,7 +30372,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "tractors-farm-machinery-brushless-cordless-impact--s25_1"
       ],
       "redirects": []
     },
@@ -30345,7 +30382,7 @@
       "parent_id": 121,
       "parent_code": "farm-infrastructure-construction",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-infrastructure-construction-ribbed-high-yield-s36_1",
+      "slug": "farm-infrastructure-construction-ribbed-high-yield-s36-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -30363,7 +30400,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "farm-infrastructure-construction-ribbed-high-yield-s36_1"
+      ],
       "redirects": []
     },
     {
@@ -30371,7 +30410,7 @@
       "parent_id": 132,
       "parent_code": "coffee-processing-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-processing-trading-regional-premium-teff-qu-s48_1",
+      "slug": "coffee-processing-trading-regional-premium-teff-qu-s48-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30389,7 +30428,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "coffee-processing-trading-regional-premium-teff-qu-s48_1"
+      ],
       "redirects": []
     },
     {
@@ -30397,7 +30438,7 @@
       "parent_id": 155,
       "parent_code": "grain-collection-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "grain-collection-trading-regional-premium-teff-qui-s49_1",
+      "slug": "grain-collection-trading-regional-premium-teff-qui-s49-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30415,7 +30456,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "grain-collection-trading-regional-premium-teff-qui-s49_1"
+      ],
       "redirects": []
     },
     {
@@ -30423,7 +30466,7 @@
       "parent_id": 201,
       "parent_code": "crop-harvesting-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-harvesting-services-regional-premium-teff-qui-s50_1",
+      "slug": "crop-harvesting-services-regional-premium-teff-qui-s50-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30441,7 +30484,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "crop-harvesting-services-regional-premium-teff-qui-s50_1"
+      ],
       "redirects": []
     },
     {
@@ -30449,7 +30494,7 @@
       "parent_id": 261,
       "parent_code": "crop-protection-pesticides",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-protection-pesticides-regional-premium-teff-q-s51_1",
+      "slug": "crop-protection-pesticides-regional-premium-teff-q-s51-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30467,7 +30512,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "crop-protection-pesticides-regional-premium-teff-q-s51_1"
+      ],
       "redirects": []
     },
     {
@@ -30475,7 +30522,7 @@
       "parent_id": 351,
       "parent_code": "coffee-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-farming-regional-premium-teff-quintals-s52_1",
+      "slug": "coffee-farming-regional-premium-teff-quintals-s52-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30493,7 +30540,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "coffee-farming-regional-premium-teff-quintals-s52_1"
+      ],
       "redirects": []
     },
     {
@@ -30501,7 +30550,7 @@
       "parent_id": 358,
       "parent_code": "cotton-fiber-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cotton-fiber-crop-farming-regional-premium-teff-qu-s53_1",
+      "slug": "cotton-fiber-crop-farming-regional-premium-teff-qu-s53-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30519,7 +30568,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "cotton-fiber-crop-farming-regional-premium-teff-qu-s53_1"
+      ],
       "redirects": []
     },
     {
@@ -30527,7 +30578,7 @@
       "parent_id": 421,
       "parent_code": "organic-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "organic-crop-farming-regional-premium-teff-quintal-s54_1",
+      "slug": "organic-crop-farming-regional-premium-teff-quintal-s54-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30545,7 +30596,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "organic-crop-farming-regional-premium-teff-quintal-s54_1"
+      ],
       "redirects": []
     },
     {
@@ -30553,7 +30606,7 @@
       "parent_id": 495,
       "parent_code": "camel-pastoral-livestock",
       "classification_system_code": "SYS_PROD",
-      "slug": "camel-pastoral-livestock-regional-premium-teff-qui-s55_1",
+      "slug": "camel-pastoral-livestock-regional-premium-teff-qui-s55-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30571,7 +30624,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "camel-pastoral-livestock-regional-premium-teff-qui-s55_1"
+      ],
       "redirects": []
     },
     {
@@ -30579,7 +30634,7 @@
       "parent_id": 499,
       "parent_code": "cattle-beef-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cattle-beef-farming-regional-premium-teff-quintals-s56_1",
+      "slug": "cattle-beef-farming-regional-premium-teff-quintals-s56-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30597,7 +30652,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "cattle-beef-farming-regional-premium-teff-quintals-s56_1"
+      ],
       "redirects": []
     },
     {
@@ -30605,7 +30662,7 @@
       "parent_id": 521,
       "parent_code": "livestock-breeding-genetics",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-breeding-genetics-regional-premium-teff--s57_1",
+      "slug": "livestock-breeding-genetics-regional-premium-teff-s57-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30623,7 +30680,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "livestock-breeding-genetics-regional-premium-teff--s57_1"
+      ],
       "redirects": []
     },
     {
@@ -30631,7 +30690,7 @@
       "parent_id": 525,
       "parent_code": "livestock-equipment-housing",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-equipment-housing-regional-premium-teff--s58_1",
+      "slug": "livestock-equipment-housing-regional-premium-teff-s58-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30649,7 +30708,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "livestock-equipment-housing-regional-premium-teff--s58_1"
+      ],
       "redirects": []
     },
     {
@@ -30657,7 +30718,7 @@
       "parent_id": 533,
       "parent_code": "livestock-fattening-feedlot",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-fattening-feedlot-regional-premium-teff--s59_1",
+      "slug": "livestock-fattening-feedlot-regional-premium-teff-s59-1",
       "names": {
         "en": "Regional Premium Teff Quintals",
         "am": "የተመረጡ የክልል የጤፍ ኩንታሎች",
@@ -30675,7 +30736,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "livestock-fattening-feedlot-regional-premium-teff--s59_1"
+      ],
       "redirects": []
     },
     {
@@ -30683,7 +30746,7 @@
       "parent_id": 116,
       "parent_code": "agricultural-transport-logistics",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-transport-logistics-professional-prem-s62_1",
+      "slug": "agricultural-transport-logistics-professional-prem-s62-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30701,7 +30764,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "agricultural-transport-logistics-professional-prem-s62_1"
+      ],
       "redirects": []
     },
     {
@@ -30709,7 +30774,7 @@
       "parent_id": 126,
       "parent_code": "post-harvest-handling-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "post-harvest-handling-services-professional-premie-s63_1",
+      "slug": "post-harvest-handling-services-professional-premie-s63-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30727,7 +30792,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "post-harvest-handling-services-professional-premie-s63_1"
+      ],
       "redirects": []
     },
     {
@@ -30735,7 +30802,7 @@
       "parent_id": 184,
       "parent_code": "agricultural-extension-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-extension-services-professional-premi-s64_1",
+      "slug": "agricultural-extension-services-professional-premi-s64-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30753,7 +30820,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "agricultural-extension-services-professional-premi-s64_1"
+      ],
       "redirects": []
     },
     {
@@ -30761,7 +30830,7 @@
       "parent_id": 188,
       "parent_code": "agricultural-mechanization-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-mechanization-services-professional-p-s65_1",
+      "slug": "agricultural-mechanization-services-professional-p-s65-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30779,7 +30848,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "agricultural-mechanization-services-professional-p-s65_1"
+      ],
       "redirects": []
     },
     {
@@ -30787,7 +30858,7 @@
       "parent_id": 197,
       "parent_code": "contract-farming-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "contract-farming-services-professional-premier-lea-s66_1",
+      "slug": "contract-farming-services-professional-premier-lea-s66-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30805,7 +30876,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "contract-farming-services-professional-premier-lea-s66_1"
+      ],
       "redirects": []
     },
     {
@@ -30813,7 +30886,7 @@
       "parent_id": 205,
       "parent_code": "farm-labor-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-labor-services-professional-premier-league-fo-s67_1",
+      "slug": "farm-labor-services-professional-premier-league-fo-s67-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30831,7 +30904,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "farm-labor-services-professional-premier-league-fo-s67_1"
+      ],
       "redirects": []
     },
     {
@@ -30839,7 +30914,7 @@
       "parent_id": 213,
       "parent_code": "farm-management-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-management-services-professional-premier-leag-s68_1",
+      "slug": "farm-management-services-professional-premier-leag-s68-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30857,7 +30932,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "farm-management-services-professional-premier-leag-s68_1"
+      ],
       "redirects": []
     },
     {
@@ -30865,7 +30942,7 @@
       "parent_id": 217,
       "parent_code": "land-preparation-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "land-preparation-services-professional-premier-lea-s69_1",
+      "slug": "land-preparation-services-professional-premier-lea-s69-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30883,7 +30960,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "land-preparation-services-professional-premier-lea-s69_1"
+      ],
       "redirects": []
     },
     {
@@ -30891,7 +30970,7 @@
       "parent_id": 222,
       "parent_code": "seed-certification-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "seed-certification-services-professional-premier-l-s70_1",
+      "slug": "seed-certification-services-professional-premier-l-s70-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -30909,7 +30988,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "seed-certification-services-professional-premier-l-s70_1"
+      ],
       "redirects": []
     },
     {
@@ -30917,7 +30998,7 @@
       "parent_id": 313,
       "parent_code": "tractors-farm-machinery",
       "classification_system_code": "SYS_PROD",
-      "slug": "tractors-farm-machinery-high-power-angle-grinders--s25_2",
+      "slug": "tractors-farm-machinery-high-power-angle-grinders-s25-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -30938,7 +31019,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "tractors-farm-machinery-high-power-angle-grinders--s25_2"
       ],
       "redirects": []
     },
@@ -30947,7 +31029,7 @@
       "parent_id": 121,
       "parent_code": "farm-infrastructure-construction",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-infrastructure-construction-furnished-modern--s36_2",
+      "slug": "farm-infrastructure-construction-furnished-modern-s36-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -30965,7 +31047,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "farm-infrastructure-construction-furnished-modern--s36_2"
+      ],
       "redirects": []
     },
     {
@@ -30973,7 +31057,7 @@
       "parent_id": 132,
       "parent_code": "coffee-processing-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-processing-trading-high-yield-dairy-cattle--s48_2",
+      "slug": "coffee-processing-trading-high-yield-dairy-cattle-s48-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -30993,7 +31077,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "coffee-processing-trading-high-yield-dairy-cattle--s48_2"
       ],
       "redirects": []
     },
@@ -31002,7 +31087,7 @@
       "parent_id": 155,
       "parent_code": "grain-collection-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "grain-collection-trading-high-yield-dairy-cattle-b-s49_2",
+      "slug": "grain-collection-trading-high-yield-dairy-cattle-b-s49-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31022,7 +31107,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "grain-collection-trading-high-yield-dairy-cattle-b-s49_2"
       ],
       "redirects": []
     },
@@ -31031,7 +31117,7 @@
       "parent_id": 201,
       "parent_code": "crop-harvesting-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-harvesting-services-high-yield-dairy-cattle-b-s50_2",
+      "slug": "crop-harvesting-services-high-yield-dairy-cattle-b-s50-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31051,7 +31137,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "crop-harvesting-services-high-yield-dairy-cattle-b-s50_2"
       ],
       "redirects": []
     },
@@ -31060,7 +31147,7 @@
       "parent_id": 261,
       "parent_code": "crop-protection-pesticides",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-protection-pesticides-high-yield-dairy-cattle-s51_2",
+      "slug": "crop-protection-pesticides-high-yield-dairy-cattle-s51-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31080,7 +31167,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "crop-protection-pesticides-high-yield-dairy-cattle-s51_2"
       ],
       "redirects": []
     },
@@ -31089,7 +31177,7 @@
       "parent_id": 351,
       "parent_code": "coffee-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-farming-high-yield-dairy-cattle-breeding-co-s52_2",
+      "slug": "coffee-farming-high-yield-dairy-cattle-breeding-co-s52-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31109,7 +31197,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "coffee-farming-high-yield-dairy-cattle-breeding-co-s52_2"
       ],
       "redirects": []
     },
@@ -31118,7 +31207,7 @@
       "parent_id": 358,
       "parent_code": "cotton-fiber-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cotton-fiber-crop-farming-high-yield-dairy-cattle--s53_2",
+      "slug": "cotton-fiber-crop-farming-high-yield-dairy-cattle-s53-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31138,7 +31227,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "cotton-fiber-crop-farming-high-yield-dairy-cattle--s53_2"
       ],
       "redirects": []
     },
@@ -31147,7 +31237,7 @@
       "parent_id": 421,
       "parent_code": "organic-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "organic-crop-farming-high-yield-dairy-cattle-breed-s54_2",
+      "slug": "organic-crop-farming-high-yield-dairy-cattle-breed-s54-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31167,7 +31257,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "organic-crop-farming-high-yield-dairy-cattle-breed-s54_2"
       ],
       "redirects": []
     },
@@ -31176,7 +31267,7 @@
       "parent_id": 495,
       "parent_code": "camel-pastoral-livestock",
       "classification_system_code": "SYS_PROD",
-      "slug": "camel-pastoral-livestock-high-yield-dairy-cattle-b-s55_2",
+      "slug": "camel-pastoral-livestock-high-yield-dairy-cattle-b-s55-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31196,7 +31287,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "camel-pastoral-livestock-high-yield-dairy-cattle-b-s55_2"
       ],
       "redirects": []
     },
@@ -31205,7 +31297,7 @@
       "parent_id": 499,
       "parent_code": "cattle-beef-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cattle-beef-farming-high-yield-dairy-cattle-breedi-s56_2",
+      "slug": "cattle-beef-farming-high-yield-dairy-cattle-breedi-s56-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31225,7 +31317,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "cattle-beef-farming-high-yield-dairy-cattle-breedi-s56_2"
       ],
       "redirects": []
     },
@@ -31234,7 +31327,7 @@
       "parent_id": 521,
       "parent_code": "livestock-breeding-genetics",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-breeding-genetics-high-yield-dairy-cattl-s57_2",
+      "slug": "livestock-breeding-genetics-high-yield-dairy-cattl-s57-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31254,7 +31347,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "livestock-breeding-genetics-high-yield-dairy-cattl-s57_2"
       ],
       "redirects": []
     },
@@ -31263,7 +31357,7 @@
       "parent_id": 525,
       "parent_code": "livestock-equipment-housing",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-equipment-housing-high-yield-dairy-cattl-s58_2",
+      "slug": "livestock-equipment-housing-high-yield-dairy-cattl-s58-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31283,7 +31377,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "livestock-equipment-housing-high-yield-dairy-cattl-s58_2"
       ],
       "redirects": []
     },
@@ -31292,7 +31387,7 @@
       "parent_id": 533,
       "parent_code": "livestock-fattening-feedlot",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-fattening-feedlot-high-yield-dairy-cattl-s59_2",
+      "slug": "livestock-fattening-feedlot-high-yield-dairy-cattl-s59-2",
       "names": {
         "en": "High-Yield Dairy Cattle",
         "am": "ከፍተኛ ወተት የሚሰጡ የወተት ላሞች",
@@ -31312,7 +31407,8 @@
       "meta_description": null,
       "aliases": [
         "Breeding Cows",
-        "High-Yield Dairy Cattle & Breeding Cows"
+        "High-Yield Dairy Cattle & Breeding Cows",
+        "livestock-fattening-feedlot-high-yield-dairy-cattl-s59_2"
       ],
       "redirects": []
     },
@@ -31321,7 +31417,7 @@
       "parent_id": 116,
       "parent_code": "agricultural-transport-logistics",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-transport-logistics-full-stack-softwa-s62_2",
+      "slug": "agricultural-transport-logistics-full-stack-softwa-s62-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31344,7 +31440,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "agricultural-transport-logistics-full-stack-softwa-s62_2"
       ],
       "redirects": []
     },
@@ -31353,7 +31450,7 @@
       "parent_id": 126,
       "parent_code": "post-harvest-handling-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "post-harvest-handling-services-full-stack-software-s63_2",
+      "slug": "post-harvest-handling-services-full-stack-software-s63-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31376,7 +31473,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "post-harvest-handling-services-full-stack-software-s63_2"
       ],
       "redirects": []
     },
@@ -31385,7 +31483,7 @@
       "parent_id": 184,
       "parent_code": "agricultural-extension-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-extension-services-full-stack-softwar-s64_2",
+      "slug": "agricultural-extension-services-full-stack-softwar-s64-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31408,7 +31506,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "agricultural-extension-services-full-stack-softwar-s64_2"
       ],
       "redirects": []
     },
@@ -31417,7 +31516,7 @@
       "parent_id": 188,
       "parent_code": "agricultural-mechanization-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-mechanization-services-full-stack-sof-s65_2",
+      "slug": "agricultural-mechanization-services-full-stack-sof-s65-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31440,7 +31539,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "agricultural-mechanization-services-full-stack-sof-s65_2"
       ],
       "redirects": []
     },
@@ -31449,7 +31549,7 @@
       "parent_id": 197,
       "parent_code": "contract-farming-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "contract-farming-services-full-stack-software-engi-s66_2",
+      "slug": "contract-farming-services-full-stack-software-engi-s66-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31472,7 +31572,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "contract-farming-services-full-stack-software-engi-s66_2"
       ],
       "redirects": []
     },
@@ -31481,7 +31582,7 @@
       "parent_id": 205,
       "parent_code": "farm-labor-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-labor-services-full-stack-software-engineers--s67_2",
+      "slug": "farm-labor-services-full-stack-software-engineers-s67-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31504,7 +31605,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "farm-labor-services-full-stack-software-engineers--s67_2"
       ],
       "redirects": []
     },
@@ -31513,7 +31615,7 @@
       "parent_id": 213,
       "parent_code": "farm-management-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-management-services-full-stack-software-engin-s68_2",
+      "slug": "farm-management-services-full-stack-software-engin-s68-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31536,7 +31638,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "farm-management-services-full-stack-software-engin-s68_2"
       ],
       "redirects": []
     },
@@ -31545,7 +31648,7 @@
       "parent_id": 217,
       "parent_code": "land-preparation-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "land-preparation-services-full-stack-software-engi-s69_2",
+      "slug": "land-preparation-services-full-stack-software-engi-s69-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31568,7 +31671,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "land-preparation-services-full-stack-software-engi-s69_2"
       ],
       "redirects": []
     },
@@ -31577,7 +31681,7 @@
       "parent_id": 222,
       "parent_code": "seed-certification-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "seed-certification-services-full-stack-software-en-s70_2",
+      "slug": "seed-certification-services-full-stack-software-en-s70-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -31600,7 +31704,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "seed-certification-services-full-stack-software-en-s70_2"
       ],
       "redirects": []
     },
@@ -31609,7 +31714,7 @@
       "parent_id": 313,
       "parent_code": "tractors-farm-machinery",
       "classification_system_code": "SYS_PROD",
-      "slug": "tractors-farm-machinery-silent-diesel-portable-pet-s25_3",
+      "slug": "tractors-farm-machinery-silent-diesel-portable-pet-s25-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -31632,7 +31737,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "tractors-farm-machinery-silent-diesel-portable-pet-s25_3"
       ],
       "redirects": []
     },
@@ -31641,7 +31747,7 @@
       "parent_id": 121,
       "parent_code": "farm-infrastructure-construction",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-infrastructure-construction-condominium-housi-s36_3",
+      "slug": "farm-infrastructure-construction-condominium-housi-s36-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -31664,7 +31770,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "farm-infrastructure-construction-condominium-housi-s36_3"
       ],
       "redirects": []
     },
@@ -31673,7 +31780,7 @@
       "parent_id": 132,
       "parent_code": "coffee-processing-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-processing-trading-commercial-meat-bulls-fa-s48_3",
+      "slug": "coffee-processing-trading-commercial-meat-bulls-fa-s48-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31696,7 +31803,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "coffee-processing-trading-commercial-meat-bulls-fa-s48_3"
       ],
       "redirects": []
     },
@@ -31705,7 +31813,7 @@
       "parent_id": 155,
       "parent_code": "grain-collection-trading",
       "classification_system_code": "SYS_PROD",
-      "slug": "grain-collection-trading-commercial-meat-bulls-fat-s49_3",
+      "slug": "grain-collection-trading-commercial-meat-bulls-fat-s49-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31728,7 +31836,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "grain-collection-trading-commercial-meat-bulls-fat-s49_3"
       ],
       "redirects": []
     },
@@ -31737,7 +31846,7 @@
       "parent_id": 201,
       "parent_code": "crop-harvesting-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-harvesting-services-commercial-meat-bulls-fat-s50_3",
+      "slug": "crop-harvesting-services-commercial-meat-bulls-fat-s50-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31760,7 +31869,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "crop-harvesting-services-commercial-meat-bulls-fat-s50_3"
       ],
       "redirects": []
     },
@@ -31769,7 +31879,7 @@
       "parent_id": 261,
       "parent_code": "crop-protection-pesticides",
       "classification_system_code": "SYS_PROD",
-      "slug": "crop-protection-pesticides-commercial-meat-bulls-f-s51_3",
+      "slug": "crop-protection-pesticides-commercial-meat-bulls-f-s51-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31792,7 +31902,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "crop-protection-pesticides-commercial-meat-bulls-f-s51_3"
       ],
       "redirects": []
     },
@@ -31801,7 +31912,7 @@
       "parent_id": 351,
       "parent_code": "coffee-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "coffee-farming-commercial-meat-bulls-fattened-shee-s52_3",
+      "slug": "coffee-farming-commercial-meat-bulls-fattened-shee-s52-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31824,7 +31935,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "coffee-farming-commercial-meat-bulls-fattened-shee-s52_3"
       ],
       "redirects": []
     },
@@ -31833,7 +31945,7 @@
       "parent_id": 358,
       "parent_code": "cotton-fiber-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cotton-fiber-crop-farming-commercial-meat-bulls-fa-s53_3",
+      "slug": "cotton-fiber-crop-farming-commercial-meat-bulls-fa-s53-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31856,7 +31968,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "cotton-fiber-crop-farming-commercial-meat-bulls-fa-s53_3"
       ],
       "redirects": []
     },
@@ -31865,7 +31978,7 @@
       "parent_id": 421,
       "parent_code": "organic-crop-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "organic-crop-farming-commercial-meat-bulls-fattene-s54_3",
+      "slug": "organic-crop-farming-commercial-meat-bulls-fattene-s54-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31888,7 +32001,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "organic-crop-farming-commercial-meat-bulls-fattene-s54_3"
       ],
       "redirects": []
     },
@@ -31897,7 +32011,7 @@
       "parent_id": 495,
       "parent_code": "camel-pastoral-livestock",
       "classification_system_code": "SYS_PROD",
-      "slug": "camel-pastoral-livestock-commercial-meat-bulls-fat-s55_3",
+      "slug": "camel-pastoral-livestock-commercial-meat-bulls-fat-s55-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31920,7 +32034,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "camel-pastoral-livestock-commercial-meat-bulls-fat-s55_3"
       ],
       "redirects": []
     },
@@ -31929,7 +32044,7 @@
       "parent_id": 499,
       "parent_code": "cattle-beef-farming",
       "classification_system_code": "SYS_PROD",
-      "slug": "cattle-beef-farming-commercial-meat-bulls-fattened-s56_3",
+      "slug": "cattle-beef-farming-commercial-meat-bulls-fattened-s56-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31952,7 +32067,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "cattle-beef-farming-commercial-meat-bulls-fattened-s56_3"
       ],
       "redirects": []
     },
@@ -31961,7 +32077,7 @@
       "parent_id": 521,
       "parent_code": "livestock-breeding-genetics",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-breeding-genetics-commercial-meat-bulls--s57_3",
+      "slug": "livestock-breeding-genetics-commercial-meat-bulls-s57-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -31984,7 +32100,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "livestock-breeding-genetics-commercial-meat-bulls--s57_3"
       ],
       "redirects": []
     },
@@ -31993,7 +32110,7 @@
       "parent_id": 525,
       "parent_code": "livestock-equipment-housing",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-equipment-housing-commercial-meat-bulls--s58_3",
+      "slug": "livestock-equipment-housing-commercial-meat-bulls-s58-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -32016,7 +32133,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "livestock-equipment-housing-commercial-meat-bulls--s58_3"
       ],
       "redirects": []
     },
@@ -32025,7 +32143,7 @@
       "parent_id": 533,
       "parent_code": "livestock-fattening-feedlot",
       "classification_system_code": "SYS_PROD",
-      "slug": "livestock-fattening-feedlot-commercial-meat-bulls--s59_3",
+      "slug": "livestock-fattening-feedlot-commercial-meat-bulls-s59-3",
       "names": {
         "en": "Commercial Meat Bulls",
         "am": "ለስጋ የሚሆኑ በሬዎች",
@@ -32048,7 +32166,8 @@
         "Fattened Sheep",
         "Sangoota Foonii fi Hoolota Furdoo",
         "ለስጋ የሚሆኑ በሬዎችና የሰቡ በጎች",
-        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን"
+        "ንሥጋ ዝኾኑ ብዕራይን ዝሰበሑ ኣባጊዕን",
+        "livestock-fattening-feedlot-commercial-meat-bulls--s59_3"
       ],
       "redirects": []
     },
@@ -32057,7 +32176,7 @@
       "parent_id": 116,
       "parent_code": "agricultural-transport-logistics",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-transport-logistics-certified-buildin-s62_3",
+      "slug": "agricultural-transport-logistics-certified-buildin-s62-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32080,7 +32199,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "agricultural-transport-logistics-certified-buildin-s62_3"
       ],
       "redirects": []
     },
@@ -32089,7 +32209,7 @@
       "parent_id": 126,
       "parent_code": "post-harvest-handling-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "post-harvest-handling-services-certified-building--s63_3",
+      "slug": "post-harvest-handling-services-certified-building-s63-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32112,7 +32232,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "post-harvest-handling-services-certified-building--s63_3"
       ],
       "redirects": []
     },
@@ -32121,7 +32242,7 @@
       "parent_id": 184,
       "parent_code": "agricultural-extension-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-extension-services-certified-building-s64_3",
+      "slug": "agricultural-extension-services-certified-building-s64-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32144,7 +32265,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "agricultural-extension-services-certified-building-s64_3"
       ],
       "redirects": []
     },
@@ -32153,7 +32275,7 @@
       "parent_id": 188,
       "parent_code": "agricultural-mechanization-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "agricultural-mechanization-services-certified-buil-s65_3",
+      "slug": "agricultural-mechanization-services-certified-buil-s65-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32176,7 +32298,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "agricultural-mechanization-services-certified-buil-s65_3"
       ],
       "redirects": []
     },
@@ -32185,7 +32308,7 @@
       "parent_id": 197,
       "parent_code": "contract-farming-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "contract-farming-services-certified-building-elect-s66_3",
+      "slug": "contract-farming-services-certified-building-elect-s66-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32208,7 +32331,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "contract-farming-services-certified-building-elect-s66_3"
       ],
       "redirects": []
     },
@@ -32217,7 +32341,7 @@
       "parent_id": 205,
       "parent_code": "farm-labor-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-labor-services-certified-building-electrician-s67_3",
+      "slug": "farm-labor-services-certified-building-electrician-s67-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32240,7 +32364,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "farm-labor-services-certified-building-electrician-s67_3"
       ],
       "redirects": []
     },
@@ -32249,7 +32374,7 @@
       "parent_id": 213,
       "parent_code": "farm-management-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "farm-management-services-certified-building-electr-s68_3",
+      "slug": "farm-management-services-certified-building-electr-s68-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32272,7 +32397,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "farm-management-services-certified-building-electr-s68_3"
       ],
       "redirects": []
     },
@@ -32281,7 +32407,7 @@
       "parent_id": 217,
       "parent_code": "land-preparation-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "land-preparation-services-certified-building-elect-s69_3",
+      "slug": "land-preparation-services-certified-building-elect-s69-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32304,7 +32430,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "land-preparation-services-certified-building-elect-s69_3"
       ],
       "redirects": []
     },
@@ -32313,7 +32440,7 @@
       "parent_id": 222,
       "parent_code": "seed-certification-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "seed-certification-services-certified-building-ele-s70_3",
+      "slug": "seed-certification-services-certified-building-ele-s70-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -32336,7 +32463,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "seed-certification-services-certified-building-ele-s70_3"
       ],
       "redirects": []
     },

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, Suspense } from 'react';
 export const dynamic = 'force-dynamic';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api } from '@/lib/api';
+import { api, CategoryIntentData } from '@/lib/api';
 import { Category, Product, ProductFilters } from '@/types';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
@@ -18,6 +18,7 @@ import {
   ShoppingBag, ChevronDown, SlidersHorizontal, X,
   LayoutGrid, ChevronRight, MapPin, Star,
   ShieldCheck, Sliders, ShieldAlert, Navigation, AlertTriangle, RotateCcw,
+  Sparkles, Layers,
 } from 'lucide-react';
 import { formatLocationParts } from '@/lib/location';
 
@@ -78,6 +79,7 @@ function ProductsContent() {
   const [activeMaxPrice, setActiveMaxPrice] = useState<number | undefined>(undefined);
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [isLocating, setIsLocating] = useState(false);
+  const [categoryIntent, setCategoryIntent] = useState<CategoryIntentData | null>(null);
 
   // Slide-over Filter Drawer State & Drafts
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
@@ -143,6 +145,22 @@ function ProductsContent() {
 
     if (sub) { f.subcategory = sub; setActiveSub(sub); } else { setActiveSub(undefined); }
     if (item) { f.item = item; setActiveItem(item); } else { setActiveItem(undefined); }
+
+    // Resolve Category Intent for keyword search or category browsing
+    const queryToResolve = search?.trim() || catSlugParam || (activeTargetNode?.name);
+    if (queryToResolve && queryToResolve.length >= 2) {
+      api.resolveCategoryIntent(queryToResolve, locale)
+        .then(res => {
+          if (res && res.has_intent) {
+            setCategoryIntent(res);
+          } else {
+            setCategoryIntent(null);
+          }
+        })
+        .catch(() => setCategoryIntent(null));
+    } else {
+      setCategoryIntent(null);
+    }
 
     const woreda = searchParams.get('woreda');
     const subcity = searchParams.get('subcity');
@@ -658,6 +676,118 @@ function ProductsContent() {
 
       {/* Tier banner */}
       <TierBanner />
+
+      {/* Category Intent Auto-Discovery Ribbon (When searching terms like "phone", "electronics", "drill") */}
+      {categoryIntent && categoryIntent.has_intent && categoryIntent.category && (
+        <div className="mx-[2%] sm:mx-[4%] lg:mx-[6%] mt-3 p-4 rounded-2xl bg-gradient-to-r from-blue-50/90 to-indigo-50/90 dark:from-blue-950/40 dark:to-indigo-950/40 border border-blue-200 dark:border-blue-900/60 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                <LayoutGrid size={16} />
+              </div>
+              <div className="min-w-0">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">
+                  {categoryIntent.is_ambiguous ? 'Multi-Branch Category Intent' : 'Department Intent Auto-Browsing'}
+                </span>
+                <h2 className="text-base font-extrabold text-zinc-900 dark:text-zinc-100 truncate">
+                  {categoryIntent.breadcrumbs && categoryIntent.breadcrumbs.length > 0
+                    ? categoryIntent.breadcrumbs.map(b => b.name).join(' › ')
+                    : categoryIntent.category.name_en}
+                </h2>
+              </div>
+            </div>
+
+            {/* Quick Mode Filter: All / Buy / Rent */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => { setListingType('all'); router.push(buildUrl({ overrideType: 'all' })); }}
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                  listingType === 'all'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-blue-400'
+                }`}
+              >
+                All
+              </button>
+              <button
+                type="button"
+                onClick={() => { setListingType('sale'); router.push(buildUrl({ overrideType: 'sale' })); }}
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                  listingType === 'sale'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-blue-400'
+                }`}
+              >
+                🛍️ Buy
+              </button>
+              <button
+                type="button"
+                onClick={() => { setListingType('rent'); router.push(buildUrl({ overrideType: 'rent' })); }}
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                  listingType === 'rent'
+                    ? 'bg-blue-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-blue-400'
+                }`}
+              >
+                🔑 Rent
+              </button>
+            </div>
+          </div>
+
+          {/* 1-Tap Subcategories inside this category */}
+          {categoryIntent.children && categoryIntent.children.length > 0 && (
+            <div className="mt-3 pt-2.5 border-t border-blue-200/60 dark:border-blue-900/40">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 shrink-0 mr-1 flex items-center gap-1">
+                  <Layers size={12} className="text-blue-500" />
+                  <span>Inside {categoryIntent.category.name_en}:</span>
+                </span>
+                {categoryIntent.children.map(ch => (
+                  <button
+                    key={ch.id}
+                    type="button"
+                    onClick={() => {
+                      router.push(`/products?category_hierarchy_id=${ch.id}&cat=${ch.slug}`);
+                    }}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-full whitespace-nowrap text-xs font-semibold bg-white dark:bg-zinc-800 hover:bg-blue-100 dark:hover:bg-blue-950/60 text-zinc-800 dark:text-zinc-200 hover:text-blue-700 dark:hover:text-blue-300 border border-zinc-200 dark:border-zinc-700 shadow-2xs transition-all shrink-0"
+                  >
+                    <span>{ch.name}</span>
+                    {ch.product_count !== undefined && ch.product_count > 0 && (
+                      <span className="text-[10px] text-zinc-400">({ch.product_count})</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Ambiguous Multi-Branch Disambiguation (e.g. 'drill' in tools vs mining) */}
+          {categoryIntent.is_ambiguous && categoryIntent.alternatives && categoryIntent.alternatives.length > 0 && (
+            <div className="mt-2.5 pt-2 border-t border-amber-200/80 dark:border-amber-900/40 flex items-center gap-2 overflow-x-auto no-scrollbar">
+              <span className="text-[11px] font-bold text-amber-800 dark:text-amber-300 shrink-0 flex items-center gap-1">
+                <Sparkles size={12} className="text-amber-500" />
+                <span>Did you mean:</span>
+              </span>
+              {categoryIntent.alternatives.slice(0, 4).map(alt => (
+                <button
+                  key={alt.id}
+                  type="button"
+                  onClick={() => {
+                    router.push(`/products?category_hierarchy_id=${alt.id}&cat=${alt.slug}`);
+                  }}
+                  className="px-2.5 py-1 text-xs font-medium rounded-lg bg-amber-100/70 dark:bg-amber-950/50 hover:bg-amber-200 dark:hover:bg-amber-900/60 text-amber-900 dark:text-amber-200 border border-amber-300/80 dark:border-amber-800 transition-colors shrink-0 flex items-center gap-1"
+                >
+                  <span className="font-bold">{alt.name}</span>
+                  {alt.hierarchy && (
+                    <span className="text-[10px] opacity-75">({alt.hierarchy})</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ── Page body ── */}
       <div className="max-w-screen-2xl mx-auto px-[2%] sm:px-[4%] lg:px-[6%] py-4">

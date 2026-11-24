@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
 
@@ -42,8 +43,8 @@ func LocateLoccatDataDir(custom string) string {
 func CheckSeedStatus(ctx context.Context, pool *pgxpool.Pool) (categoriesCount int, locationsCount int, isSeeded bool, err error) {
 	_ = pool.QueryRow(ctx, `SELECT count(*) FROM category_hierarchy`).Scan(&categoriesCount)
 	_ = pool.QueryRow(ctx, `SELECT count(*) FROM location_hierarchy`).Scan(&locationsCount)
-	// Fully seeded means 80+ categories and 400+ locations exist
-	isSeeded = categoriesCount >= 80 && locationsCount >= 400
+	// Fully seeded means 20,000+ categories and 400+ locations exist
+	isSeeded = categoriesCount >= 20000 && locationsCount >= 400
 	return categoriesCount, locationsCount, isSeeded, nil
 }
 
@@ -157,8 +158,11 @@ func VerifyOrSeed(ctx context.Context, pool *pgxpool.Pool, customDataDir string)
 	}
 
 	// 2. Seed Categories if missing
-	if catCount < 80 {
+	if catCount < 20000 {
 		systems, _ := getClassificationSystemDirs(dataDir)
+		var allCategories []models.MasterCategoryNode
+		seenIDs := make(map[int]bool)
+
 		for _, sys := range systems {
 			files, err := getSystemFamilyFiles(dataDir, sys)
 			if err != nil {
@@ -175,13 +179,33 @@ func VerifyOrSeed(ctx context.Context, pool *pgxpool.Pool, customDataDir string)
 				if err := json.Unmarshal(content, &doc); err != nil || len(doc.Categories) == 0 {
 					continue
 				}
-				req := models.MasterDataImportRequest{
-					DatasetType:     "categories",
-					Version:         "2.0.0",
-					DryRun:          false,
-					CategoryRecords: doc.Categories,
+				for _, c := range doc.Categories {
+					if c.ID > 0 && !seenIDs[c.ID] {
+						seenIDs[c.ID] = true
+						allCategories = append(allCategories, c)
+					}
 				}
-				_, _ = svc.ImportCategories(ctx, req, 1, "127.0.0.1")
+			}
+		}
+
+		if len(allCategories) > 0 {
+			// Sort globally by level ASC to guarantee parents exist before children
+			sort.SliceStable(allCategories, func(i, j int) bool {
+				return allCategories[i].Level < allCategories[j].Level
+			})
+
+			log.Printf("[HUNTIQ DB] Seeding %d canonical categories across all classification systems...", len(allCategories))
+			req := models.MasterDataImportRequest{
+				DatasetType:     "categories",
+				Version:         "2.0.0",
+				DryRun:          false,
+				CategoryRecords: allCategories,
+			}
+			res, err := svc.ImportCategories(ctx, req, 1, "127.0.0.1")
+			if err != nil {
+				log.Printf("[HUNTIQ DB] Warning: category import error: %v", err)
+			} else {
+				log.Printf("[HUNTIQ DB]   ✓ Categories seeded: %d created, %d updated, %d errors", res.Created, res.Updated, res.Errors)
 			}
 		}
 	}

@@ -17,11 +17,12 @@ import (
 // Without singleflight: 1000 concurrent cache misses → 1000 database queries → connection pool exhaustion
 // With singleflight: 1000 concurrent cache misses → 1 database query (999x reduction)
 type SettingsCache struct {
-	db    *pgxpool.Pool
-	cache map[string]cachedValue
-	mu    sync.RWMutex
-	ttl   time.Duration
-	group singleflight.Group
+	db       *pgxpool.Pool
+	cache    map[string]cachedValue
+	mu       sync.RWMutex
+	ttl      time.Duration
+	group    singleflight.Group
+	stopChan chan struct{}
 }
 
 type cachedValue struct {
@@ -33,21 +34,38 @@ type cachedValue struct {
 // A background goroutine cleans expired entries every 5 minutes.
 func NewSettingsCache(db *pgxpool.Pool, ttl time.Duration) *SettingsCache {
 	sc := &SettingsCache{
-		db:    db,
-		cache: make(map[string]cachedValue),
-		ttl:   ttl,
+		db:       db,
+		cache:    make(map[string]cachedValue),
+		ttl:      ttl,
+		stopChan: make(chan struct{}),
 	}
 
-	// Background cleanup goroutine
+	// Background cleanup goroutine with cancellation
 	go func() {
 		ticker := time.NewTicker(5 * time.Minute)
 		defer ticker.Stop()
-		for range ticker.C {
-			sc.cleanup()
+		for {
+			select {
+			case <-ticker.C:
+				sc.cleanup()
+			case <-sc.stopChan:
+				return
+			}
 		}
 	}()
 
 	return sc
+}
+
+// Close gracefully stops the background cleanup goroutine.
+func (sc *SettingsCache) Close() {
+	sc.mu.Lock()
+	defer sc.mu.Unlock()
+	select {
+	case <-sc.stopChan:
+	default:
+		close(sc.stopChan)
+	}
 }
 
 // Get retrieves a setting from cache or DB. Returns empty string if not found.

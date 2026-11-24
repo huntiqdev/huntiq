@@ -113,3 +113,14 @@ func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*Chat
 func (s *AIService) Health(ctx context.Context) error {
 	return s.supervisor.healthCheck(ctx)
 }
+
+func (s *AIService) Translate(ctx context.Context, req TranslateRequest) (*TranslateResponse, error) {
+	trimmed := strings.TrimSpace(req.Text)
+	if trimmed == "" {
+		return nil, fmt.Errorf("text cannot be empty")
+	}
+	return s.supervisor.Translate(ctx, TranslateRequest{
+		Text:     trimmed,
+		FromLang: req.FromLang,
+	})
+}

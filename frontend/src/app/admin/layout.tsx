@@ -8,7 +8,7 @@ import {
   LayoutDashboard, Settings, Users, Package, LogOut, FileText, Activity,
   BadgeCheck, AlertTriangle, Scale, FolderTree, Tag, Search, MapPin,
   DollarSign, TrendingUp, Crown, ArrowUpCircle, Share2, Store, Receipt, X,
-  ShieldAlert, ShieldCheck, Server, CreditCard
+  ShieldAlert, ShieldCheck, Server, CreditCard, Headphones
 } from 'lucide-react';
 import { AdminHeaderTopBar } from '@/components/admin/enterprise/AdminHeaderTopBar';
 import { MultiStepListingWizard } from '@/components/admin/enterprise/MultiStepListingWizard';
@@ -51,6 +51,9 @@ function AdminSidebar({ onClose, className = '' }: AdminSidebarProps) {
         { href: '/executive-console', label: 'Executive Cockpit', icon: ShieldAlert, visible: isPlatformOwner || isSuperAdmin },
         { href: '/security-console', label: 'Security SOC Defense', icon: ShieldCheck, visible: isSecurityAdmin || isPlatformOwner || isSuperAdmin },
         { href: '/platform-console', label: 'Platform Infrastructure', icon: Server, visible: isPlatformAdmin || isPlatformOwner || isSuperAdmin },
+        { href: '/operations-console', label: 'Operations Command', icon: Activity, visible: isOperationsAdmin || isPlatformOwner || isSuperAdmin },
+        { href: '/moderation-console', label: 'Trust & Moderation', icon: BadgeCheck, visible: isModerator || isOperationsAdmin || isPlatformOwner || isSuperAdmin },
+        { href: '/support-console', label: 'Customer Support', icon: Headphones, visible: isSupportAgent || isPlatformOwner || isSuperAdmin },
       ],
     },
     {

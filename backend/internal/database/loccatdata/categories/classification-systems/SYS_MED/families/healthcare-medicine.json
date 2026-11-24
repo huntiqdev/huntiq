@@ -4075,7 +4075,7 @@
       "parent_id": 2143,
       "parent_code": "elderly-home-care",
       "classification_system_code": "SYS_MED",
-      "slug": "elderly-home-care-digital-smart-electric-injera-mi-s77_0",
+      "slug": "elderly-home-care-digital-smart-electric-injera-mi-s77-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -4093,7 +4093,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elderly-home-care-digital-smart-electric-injera-mi-s77_0"
+      ],
       "redirects": []
     },
     {
@@ -4101,7 +4103,7 @@
       "parent_id": 2144,
       "parent_code": "home-nursing",
       "classification_system_code": "SYS_MED",
-      "slug": "home-nursing-digital-smart-electric-injera-mitad-s-s78_0",
+      "slug": "home-nursing-digital-smart-electric-injera-mitad-s-s78-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -4119,7 +4121,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "home-nursing-digital-smart-electric-injera-mitad-s-s78_0"
+      ],
       "redirects": []
     },
     {
@@ -4127,7 +4131,7 @@
       "parent_id": 2146,
       "parent_code": "physiotherapy-home",
       "classification_system_code": "SYS_MED",
-      "slug": "physiotherapy-home-digital-smart-electric-injera-m-s79_0",
+      "slug": "physiotherapy-home-digital-smart-electric-injera-m-s79-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -4145,7 +4149,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "physiotherapy-home-digital-smart-electric-injera-m-s79_0"
+      ],
       "redirects": []
     },
     {
@@ -4153,7 +4159,7 @@
       "parent_id": 2143,
       "parent_code": "elderly-home-care",
       "classification_system_code": "SYS_MED",
-      "slug": "elderly-home-care-double-door-frost-free-kitchen-r-s77_1",
+      "slug": "elderly-home-care-double-door-frost-free-kitchen-r-s77-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -4171,7 +4177,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elderly-home-care-double-door-frost-free-kitchen-r-s77_1"
+      ],
       "redirects": []
     },
     {
@@ -4179,7 +4187,7 @@
       "parent_id": 2144,
       "parent_code": "home-nursing",
       "classification_system_code": "SYS_MED",
-      "slug": "home-nursing-double-door-frost-free-kitchen-refrig-s78_1",
+      "slug": "home-nursing-double-door-frost-free-kitchen-refrig-s78-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -4197,7 +4205,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "home-nursing-double-door-frost-free-kitchen-refrig-s78_1"
+      ],
       "redirects": []
     },
     {
@@ -4205,7 +4215,7 @@
       "parent_id": 2146,
       "parent_code": "physiotherapy-home",
       "classification_system_code": "SYS_MED",
-      "slug": "physiotherapy-home-double-door-frost-free-kitchen--s79_1",
+      "slug": "physiotherapy-home-double-door-frost-free-kitchen-s79-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -4223,7 +4233,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "physiotherapy-home-double-door-frost-free-kitchen--s79_1"
+      ],
       "redirects": []
     },
     {
@@ -4231,7 +4243,7 @@
       "parent_id": 2143,
       "parent_code": "elderly-home-care",
       "classification_system_code": "SYS_MED",
-      "slug": "elderly-home-care-commercial-4-burner-gas-electric-s77_2",
+      "slug": "elderly-home-care-commercial-4-burner-gas-electric-s77-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -4254,7 +4266,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "elderly-home-care-commercial-4-burner-gas-electric-s77_2"
       ],
       "redirects": []
     },
@@ -4263,7 +4276,7 @@
       "parent_id": 2144,
       "parent_code": "home-nursing",
       "classification_system_code": "SYS_MED",
-      "slug": "home-nursing-commercial-4-burner-gas-electric-stov-s78_2",
+      "slug": "home-nursing-commercial-4-burner-gas-electric-stov-s78-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -4286,7 +4299,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "home-nursing-commercial-4-burner-gas-electric-stov-s78_2"
       ],
       "redirects": []
     },
@@ -4295,7 +4309,7 @@
       "parent_id": 2146,
       "parent_code": "physiotherapy-home",
       "classification_system_code": "SYS_MED",
-      "slug": "physiotherapy-home-commercial-4-burner-gas-electri-s79_2",
+      "slug": "physiotherapy-home-commercial-4-burner-gas-electri-s79-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -4318,7 +4332,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "physiotherapy-home-commercial-4-burner-gas-electri-s79_2"
       ],
       "redirects": []
     },
@@ -4327,7 +4342,7 @@
       "parent_id": 2143,
       "parent_code": "elderly-home-care",
       "classification_system_code": "SYS_MED",
-      "slug": "elderly-home-care-heavy-duty-food-processors-coffe-s77_3",
+      "slug": "elderly-home-care-heavy-duty-food-processors-coffe-s77-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -4350,7 +4365,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "elderly-home-care-heavy-duty-food-processors-coffe-s77_3"
       ],
       "redirects": []
     },
@@ -4359,7 +4375,7 @@
       "parent_id": 2144,
       "parent_code": "home-nursing",
       "classification_system_code": "SYS_MED",
-      "slug": "home-nursing-heavy-duty-food-processors-coffee-gri-s78_3",
+      "slug": "home-nursing-heavy-duty-food-processors-coffee-gri-s78-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -4382,7 +4398,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "home-nursing-heavy-duty-food-processors-coffee-gri-s78_3"
       ],
       "redirects": []
     },
@@ -4391,7 +4408,7 @@
       "parent_id": 2146,
       "parent_code": "physiotherapy-home",
       "classification_system_code": "SYS_MED",
-      "slug": "physiotherapy-home-heavy-duty-food-processors-coff-s79_3",
+      "slug": "physiotherapy-home-heavy-duty-food-processors-coff-s79-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -4414,7 +4431,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "physiotherapy-home-heavy-duty-food-processors-coff-s79_3"
       ],
       "redirects": []
     },

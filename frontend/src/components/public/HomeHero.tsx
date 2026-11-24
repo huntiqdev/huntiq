@@ -13,6 +13,7 @@ import { useLocale } from '@/hooks/useLocale';
 import { api } from '@/lib/api';
 import { ProductCard } from '@/components/public/ProductCard';
 import { RentalProductCard } from '@/components/public/RentalProductCard';
+import { CategoryBrowser } from '@/components/category/CategoryBrowser';
 
 
 
@@ -252,8 +253,11 @@ function SlideBackground({ mode }: { mode: SlideMode }) {
       <img
         src={mode.mediaSrc}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
         loading="eager"
+        onError={(e) => {
+          (e.currentTarget as HTMLElement).style.display = 'none';
+        }}
       />
     );
   }
@@ -495,6 +499,9 @@ export function HomeHero() {
               <span>{t.ui.tier_rewards ?? 'Tier Rewards'}</span>
             </span>
           </div>
+
+          {/* Interactive Multi-Level Category Explorer (20,500+ Canonical Categories) */}
+          <CategoryBrowser className="w-full my-2" />
 
           {/* Featured Marketplace Listings (with condition tabs) */}
           <div className="w-full">

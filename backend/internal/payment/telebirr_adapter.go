@@ -123,7 +123,10 @@ func (a *TelebirrAdapter) ProcessWebhook(ctx context.Context, rawBody []byte, si
 	}
 
 	// Verify cryptographic signature
-	if a.config.IsProd && a.config.AppKey != "" {
+	if a.config.IsProd && a.config.AppKey == "" {
+		return nil, errors.New("telebirr app key unconfigured in production: refusing unverified webhook")
+	}
+	if a.config.AppKey != "" {
 		expectedSig := a.ComputeHMACSignature(rawBody)
 		if !hmac.Equal([]byte(sigToVerify), []byte(expectedSig)) {
 			return nil, errors.New("invalid telebirr cryptographic webhook signature")

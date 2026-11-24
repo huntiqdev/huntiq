@@ -13,6 +13,7 @@ import { ImageUploader } from '@/components/seller/ImageUploader';
 import { type SellerTier, MAX_IMAGES_PER_TIER } from '@/lib/constants/fees';
 import { SELECT_CLS as cls, LABEL_CLS as lbl } from '@/lib/constants/styles';
 import CategoryTreeSelector, { type CategoryNode } from '@/components/category/CategoryTreeSelector';
+import { translateListingText } from '@/lib/api/ai';
 import { Check, X, RefreshCw, Layers, Globe, Sparkles, ExternalLink, CheckCircle2, Tag, ChevronDown, ChevronUp, Search, Link as LinkIcon } from 'lucide-react';
 
 interface AttributeDefinition {
@@ -279,6 +280,27 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
   const [selectedPresetSlug, setSelectedPresetSlug] = useState<string | null>(null);
   const [showAdvancedTree, setShowAdvancedTree] = useState(false);
   const [categorySearch, setCategorySearch] = useState('');
+  const [translating, setTranslating] = useState(false);
+  const [translations, setTranslations] = useState<Record<string, string> | null>(null);
+
+  const handleAutoTranslate = async () => {
+    const textToTranslate = form.description.trim() || form.title.trim();
+    if (!textToTranslate) {
+      setError(locale === 'am' ? 'እባክዎ መጀመሪያ ርዕስ ወይም ዝርዝር መግለጫ ይጻፉ' : 'Please enter a title or description first to translate.');
+      return;
+    }
+    setTranslating(true);
+    try {
+      const res = await translateListingText(textToTranslate, locale);
+      if (res && res.translations) {
+        setTranslations(res.translations);
+      }
+    } catch {
+      setError('Auto-translation failed. Please try again.');
+    } finally {
+      setTranslating(false);
+    }
+  };
 
   useEffect(() => {
     if (form.category_hierarchy_id) {
@@ -379,6 +401,14 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
     } else {
       const p = parseFloat(String(form.price));
       if (!form.price || isNaN(p) || p <= 0) { setError('A valid positive price is required'); return; }
+    }
+    if (form.description.trim().length < 30) {
+      setError(
+        locale === 'am'
+          ? 'የእቃው ዝርዝር መግለጫ ቢያንስ 30 ፊደላት መሆን አለበት (ለገዢዎችና ተከራዮች የተሟላ መረጃ ለመስጠት)'
+          : 'Description must be at least 30 characters long to ensure listing quality and buyer clarity.'
+      );
+      return;
     }
     if (imageURLs.length < 2) { setError('Minimum 2 images are required'); return; }
     if (imageURLs.length > maxImages) { setError(`Your tier allows max ${maxImages} images`); return; }
@@ -656,6 +686,39 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           )}
         </div>
 
+        {/* ⚡ Instant Device / Model Quick-Match (Direct Taxonomy Insertion) */}
+        {categorySearch.trim().length >= 2 && (
+          <div className="p-3 bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60 rounded-2xl space-y-2">
+            <span className="text-[11px] font-black text-blue-800 dark:text-blue-300 flex items-center gap-1.5">
+              <Sparkles size={13} className="text-[#1769E0]" />
+              <span>{locale === 'am' ? 'የተገኙ እቃዎች እና ሞዴሎች (ጠቅ በማድረግ ርዕስና ምድብ ወዲያው ይሙሉት)፦' : 'Matching Catalog Items & Devices (Tap to auto-select):'}</span>
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {CANONICAL_PRESETS.flatMap(p => p.registeredItems.map(item => ({ ...item, preset: p })))
+                .filter(item =>
+                  item.title.toLowerCase().includes(categorySearch.toLowerCase()) ||
+                  item.item.toLowerCase().includes(categorySearch.toLowerCase()) ||
+                  item.subcategory.toLowerCase().includes(categorySearch.toLowerCase())
+                )
+                .slice(0, 10)
+                .map((matchItem, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => {
+                      handleSelectPreset(matchItem.preset);
+                      handleSelectItem(matchItem);
+                    }}
+                    className="px-2.5 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-zinc-800 border border-blue-300 dark:border-blue-700 hover:bg-[#1769E0] hover:text-white transition-all text-zinc-800 dark:text-zinc-200 shadow-xs cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>{matchItem.preset.icon}</span>
+                    <span>{matchItem.title}</span>
+                  </button>
+                ))}
+            </div>
+          </div>
+        )}
+
         {/* Category Preset 1-Click Buttons */}
         <div className="space-y-1.5">
           <p className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400">
@@ -862,15 +925,70 @@ export function ProductForm({ product, onSuccess, initialCondition, listingType 
           value={form.price} onChange={e => setForm(f => ({ ...f, price: e.target.value }))} min={1} />
       )}
 
-      <div className="flex flex-col gap-1">
-        <label className={lbl}>{t.ui.description}</label>
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-between">
+          <label className={lbl}>
+            {t.ui.description} <span className="text-red-500">*</span>
+          </label>
+          <div className="flex items-center gap-2">
+            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${form.description.trim().length >= 30 ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800' : 'bg-zinc-100 text-zinc-500 dark:bg-zinc-850 dark:text-zinc-400'}`}>
+              {form.description.trim().length}/30 min {form.description.trim().length >= 30 ? '✓' : ''}
+            </span>
+            <button
+              type="button"
+              disabled={translating}
+              onClick={handleAutoTranslate}
+              className="text-[11px] font-bold text-[#1769E0] dark:text-[#38A5FF] hover:bg-blue-50 dark:hover:bg-blue-950/40 px-2 py-0.5 rounded-lg border border-blue-200 dark:border-blue-900 flex items-center gap-1 transition-all cursor-pointer"
+            >
+              {translating ? <RefreshCw size={11} className="animate-spin" /> : <Globe size={11} />}
+              <span>{locale === 'am' ? '🌐 በ 4 ቋንቋ ተርጉም' : '🌐 Auto-Translate (4 Langs)'}</span>
+            </button>
+          </div>
+        </div>
         <textarea
-          placeholder={t.ui.description || 'Describe the item or property...'}
+          placeholder={locale === 'am' ? 'የእቃውን ወይም የቤቱን ዝርዝር ሁኔታ፣ ጥራት እና ገጽታ ቢያንስ በ30 ፊደላት ይግለጹ...' : 'Describe the item or property in detail (minimum 30 characters required)...'}
           value={form.description}
           onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
           rows={3}
-          className="w-full border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all resize-none text-zinc-900 dark:text-zinc-100"
+          className={`w-full border rounded-xl px-3.5 py-2.5 text-base sm:text-sm outline-none focus:ring-2 focus:ring-[#1769E0] focus:border-[#1769E0] bg-zinc-50 dark:bg-zinc-800 transition-all resize-none text-zinc-900 dark:text-zinc-100 ${form.description.trim().length > 0 && form.description.trim().length < 30 ? 'border-amber-300 dark:border-amber-700/60' : 'border-zinc-200 dark:border-zinc-700'}`}
         />
+
+        {/* 4-Language Translation Preview Cards */}
+        {translations && (
+          <div className="mt-2 p-3 bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-800/60 rounded-2xl space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
+                <Globe size={13} className="text-[#1769E0]" />
+                <span>Multilingual Distribution (4 Ethiopian National Languages):</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setTranslations(null)}
+                className="text-[10px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer"
+              >
+                ✕ Close
+              </button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+              <div className="p-2 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                <span className="font-bold text-zinc-500 dark:text-zinc-400 block text-[10px]">🇬🇧 English:</span>
+                <p className="text-zinc-800 dark:text-zinc-200 line-clamp-2">{translations.en}</p>
+              </div>
+              <div className="p-2 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                <span className="font-bold text-zinc-500 dark:text-zinc-400 block text-[10px]">🇪🇹 Amharic (አማርኛ):</span>
+                <p className="text-zinc-800 dark:text-zinc-200 line-clamp-2">{translations.am}</p>
+              </div>
+              <div className="p-2 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                <span className="font-bold text-zinc-500 dark:text-zinc-400 block text-[10px]">🇪🇹 Afaan Oromo:</span>
+                <p className="text-zinc-800 dark:text-zinc-200 line-clamp-2">{translations.or}</p>
+              </div>
+              <div className="p-2 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700">
+                <span className="font-bold text-zinc-500 dark:text-zinc-400 block text-[10px]">🇪🇹 Tigrinya (ትግርኛ):</span>
+                <p className="text-zinc-800 dark:text-zinc-200 line-clamp-2">{translations.ti}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Dynamic Attributes */}

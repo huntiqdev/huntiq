@@ -14900,7 +14900,7 @@
       "parent_id": 606,
       "parent_code": "mobile-vet-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vet-services-5g-flagship-smartphones-s0_0",
+      "slug": "mobile-vet-services-5g-flagship-smartphones-s0-0",
       "names": {
         "en": "5G Flagship Smartphones",
         "am": "ባለ 5ጂ ዘመናዊ ስልኮች",
@@ -14918,7 +14918,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vet-services-5g-flagship-smartphones-s0_0"
+      ],
       "redirects": []
     },
     {
@@ -14926,7 +14928,7 @@
       "parent_id": 572,
       "parent_code": "wound-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "wound-care-commercial-passenger-auto-rickshaws-s15_0",
+      "slug": "wound-care-commercial-passenger-auto-rickshaws-s15-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -14944,7 +14946,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "wound-care-commercial-passenger-auto-rickshaws-s15_0"
+      ],
       "redirects": []
     },
     {
@@ -14952,7 +14956,7 @@
       "parent_id": 590,
       "parent_code": "pet-carriers",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-carriers-commercial-passenger-auto-rickshaws-s16_0",
+      "slug": "pet-carriers-commercial-passenger-auto-rickshaws-s16-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -14970,7 +14974,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "pet-carriers-commercial-passenger-auto-rickshaws-s16_0"
+      ],
       "redirects": []
     },
     {
@@ -14978,7 +14984,7 @@
       "parent_id": 592,
       "parent_code": "pet-grooming-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-grooming-tools-heavy-duty-rotary-hammer-demoli-s26_0",
+      "slug": "pet-grooming-tools-heavy-duty-rotary-hammer-demoli-s26-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -15001,7 +15007,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "pet-grooming-tools-heavy-duty-rotary-hammer-demoli-s26_0"
       ],
       "redirects": []
     },
@@ -15010,7 +15017,7 @@
       "parent_id": 580,
       "parent_code": "herd-health-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "herd-health-services-verified-tiktok-social-comedy-s71_0",
+      "slug": "herd-health-services-verified-tiktok-social-comedy-s71-0",
       "names": {
         "en": "Verified TikTok",
         "am": "የተረጋገጡ የቲክቶክ",
@@ -15032,7 +15039,8 @@
         "Social Comedy Creators",
         "Verified TikTok & Social Comedy Creators",
         "ዝተረጋገጹ ናይ ቲክቶክን ማሕበራዊ ሚድያን ቀልዲ ፈጠርቲ",
-        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች"
+        "የተረጋገጡ የቲክቶክና ማህበራዊ ሚዲያ አስቂኝ ቪዲዮ ፈጣሪዎች",
+        "herd-health-services-verified-tiktok-social-comedy-s71_0"
       ],
       "redirects": []
     },
@@ -15041,7 +15049,7 @@
       "parent_id": 606,
       "parent_code": "mobile-vet-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vet-services-mid-range-performance-phones-s0_1",
+      "slug": "mobile-vet-services-mid-range-performance-phones-s0-1",
       "names": {
         "en": "Mid-Range Performance Phones",
         "am": "መካከለኛ ደረጃ ስልኮች",
@@ -15059,7 +15067,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vet-services-mid-range-performance-phones-s0_1"
+      ],
       "redirects": []
     },
     {
@@ -15067,7 +15077,7 @@
       "parent_id": 572,
       "parent_code": "wound-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "wound-care-heavy-duty-cargo-delivery-three-wheeler-s15_1",
+      "slug": "wound-care-heavy-duty-cargo-delivery-three-wheeler-s15-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -15089,7 +15099,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "wound-care-heavy-duty-cargo-delivery-three-wheeler-s15_1"
       ],
       "redirects": []
     },
@@ -15098,7 +15109,7 @@
       "parent_id": 590,
       "parent_code": "pet-carriers",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-carriers-heavy-duty-cargo-delivery-three-wheel-s16_1",
+      "slug": "pet-carriers-heavy-duty-cargo-delivery-three-wheel-s16-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -15120,7 +15131,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "pet-carriers-heavy-duty-cargo-delivery-three-wheel-s16_1"
       ],
       "redirects": []
     },
@@ -15129,7 +15141,7 @@
       "parent_id": 592,
       "parent_code": "pet-grooming-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-grooming-tools-brushless-cordless-impact-drive-s26_1",
+      "slug": "pet-grooming-tools-brushless-cordless-impact-drive-s26-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -15149,7 +15161,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "pet-grooming-tools-brushless-cordless-impact-drive-s26_1"
       ],
       "redirects": []
     },
@@ -15158,7 +15171,7 @@
       "parent_id": 580,
       "parent_code": "herd-health-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "herd-health-services-professional-premier-league-f-s71_1",
+      "slug": "herd-health-services-professional-premier-league-f-s71-1",
       "names": {
         "en": "Professional Premier League Football Players",
         "am": "የፕሪሚየር ሊግ ፕሮፌሽናል እግር ኳስ ተጫዋቾች",
@@ -15176,7 +15189,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "herd-health-services-professional-premier-league-f-s71_1"
+      ],
       "redirects": []
     },
     {
@@ -15184,7 +15199,7 @@
       "parent_id": 606,
       "parent_code": "mobile-vet-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vet-services-budget-long-battery-phones-s0_2",
+      "slug": "mobile-vet-services-budget-long-battery-phones-s0-2",
       "names": {
         "en": "Budget Long-Battery Phones",
         "am": "ተመጣጣኝ ባትሪ ቆጣቢ ስልኮች",
@@ -15202,7 +15217,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vet-services-budget-long-battery-phones-s0_2"
+      ],
       "redirects": []
     },
     {
@@ -15210,7 +15227,7 @@
       "parent_id": 572,
       "parent_code": "wound-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "wound-care-electric-green-mobility-e-rickshaws-s15_2",
+      "slug": "wound-care-electric-green-mobility-e-rickshaws-s15-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -15228,7 +15245,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "wound-care-electric-green-mobility-e-rickshaws-s15_2"
+      ],
       "redirects": []
     },
     {
@@ -15236,7 +15255,7 @@
       "parent_id": 590,
       "parent_code": "pet-carriers",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-carriers-electric-green-mobility-e-rickshaws-s16_2",
+      "slug": "pet-carriers-electric-green-mobility-e-rickshaws-s16-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -15254,7 +15273,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "pet-carriers-electric-green-mobility-e-rickshaws-s16_2"
+      ],
       "redirects": []
     },
     {
@@ -15262,7 +15283,7 @@
       "parent_id": 592,
       "parent_code": "pet-grooming-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-grooming-tools-high-power-angle-grinders-metal-s26_2",
+      "slug": "pet-grooming-tools-high-power-angle-grinders-metal-s26-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -15283,7 +15304,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "pet-grooming-tools-high-power-angle-grinders-metal-s26_2"
       ],
       "redirects": []
     },
@@ -15292,7 +15314,7 @@
       "parent_id": 580,
       "parent_code": "herd-health-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "herd-health-services-full-stack-software-engineers-s71_2",
+      "slug": "herd-health-services-full-stack-software-engineers-s71-2",
       "names": {
         "en": "Full-Stack Software Engineers",
         "am": "ሙሉ የሶፍትዌር",
@@ -15315,7 +15337,8 @@
         "Mobile Developers",
         "Ooggeessota Sooftiweerii fi Appilikeeshinii",
         "ሙሉ የሶፍትዌርና የሞባይል አፕሊኬሽን አልሚዎች",
-        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት"
+        "ምሉእ ናይ ሶፍትዌርን ሞባይል ኣፕሊኬሽንን መሃንድሳት",
+        "herd-health-services-full-stack-software-engineers-s71_2"
       ],
       "redirects": []
     },
@@ -15324,7 +15347,7 @@
       "parent_id": 606,
       "parent_code": "mobile-vet-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vet-services-rugged-heavy-duty-phones-s0_3",
+      "slug": "mobile-vet-services-rugged-heavy-duty-phones-s0-3",
       "names": {
         "en": "Rugged Heavy-Duty Phones",
         "am": "አስተማማኝ ጠንካራ ስልኮች",
@@ -15342,7 +15365,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vet-services-rugged-heavy-duty-phones-s0_3"
+      ],
       "redirects": []
     },
     {
@@ -15350,7 +15375,7 @@
       "parent_id": 572,
       "parent_code": "wound-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "wound-care-long-distance-passenger-minibuses-s15_3",
+      "slug": "wound-care-long-distance-passenger-minibuses-s15-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -15368,7 +15393,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "wound-care-long-distance-passenger-minibuses-s15_3"
+      ],
       "redirects": []
     },
     {
@@ -15376,7 +15403,7 @@
       "parent_id": 590,
       "parent_code": "pet-carriers",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-carriers-long-distance-passenger-minibuses-s16_3",
+      "slug": "pet-carriers-long-distance-passenger-minibuses-s16-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -15394,7 +15421,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "pet-carriers-long-distance-passenger-minibuses-s16_3"
+      ],
       "redirects": []
     },
     {
@@ -15402,7 +15431,7 @@
       "parent_id": 592,
       "parent_code": "pet-grooming-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "pet-grooming-tools-silent-diesel-portable-petrol-g-s26_3",
+      "slug": "pet-grooming-tools-silent-diesel-portable-petrol-g-s26-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -15425,7 +15454,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "pet-grooming-tools-silent-diesel-portable-petrol-g-s26_3"
       ],
       "redirects": []
     },
@@ -15434,7 +15464,7 @@
       "parent_id": 580,
       "parent_code": "herd-health-services",
       "classification_system_code": "SYS_PROD",
-      "slug": "herd-health-services-certified-building-electricia-s71_3",
+      "slug": "herd-health-services-certified-building-electricia-s71-3",
       "names": {
         "en": "Certified Building Electricians",
         "am": "የተረጋገጡ የህንፃ ኤሌክትሪክ",
@@ -15457,7 +15487,8 @@
         "Ooggeessota Eleektiriika Ijaarsaa fi Soolarii",
         "Solar Technicians",
         "ዝተረጋገጹ ናይ ህንጻ ኤሌክትሪክን ሶላርን ሞያተኛታት",
-        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች"
+        "የተረጋገጡ የህንፃ ኤሌክትሪክና ሶላር ባለሙያዎች",
+        "herd-health-services-certified-building-electricia-s71_3"
       ],
       "redirects": []
     },

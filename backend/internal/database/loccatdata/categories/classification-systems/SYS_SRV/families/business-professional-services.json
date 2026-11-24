@@ -10656,7 +10656,7 @@
       "parent_id": 824,
       "parent_code": "construction-pm",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-pm-high-strength-structural-portland--s37_0",
+      "slug": "construction-pm-high-strength-structural-portland-s37-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -10674,7 +10674,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-pm-high-strength-structural-portland--s37_0"
+      ],
       "redirects": []
     },
     {
@@ -10682,7 +10684,7 @@
       "parent_id": 824,
       "parent_code": "construction-pm",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-pm-ribbed-high-yield-rebar-reinforcem-s37_1",
+      "slug": "construction-pm-ribbed-high-yield-rebar-reinforcem-s37-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -10700,7 +10702,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-pm-ribbed-high-yield-rebar-reinforcem-s37_1"
+      ],
       "redirects": []
     },
     {
@@ -10708,7 +10712,7 @@
       "parent_id": 824,
       "parent_code": "construction-pm",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-pm-furnished-modern-residential-apart-s37_2",
+      "slug": "construction-pm-furnished-modern-residential-apart-s37-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -10726,7 +10730,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-pm-furnished-modern-residential-apart-s37_2"
+      ],
       "redirects": []
     },
     {
@@ -10734,7 +10740,7 @@
       "parent_id": 824,
       "parent_code": "construction-pm",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-pm-condominium-housing-units-20-80-40-s37_3",
+      "slug": "construction-pm-condominium-housing-units-20-80-40-s37-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -10757,7 +10763,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "construction-pm-condominium-housing-units-20-80-40-s37_3"
       ],
       "redirects": []
     },

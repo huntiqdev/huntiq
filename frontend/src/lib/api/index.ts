@@ -10,7 +10,7 @@ import { identityApi } from './identity';
 import { organizationApi } from './organization';
 import { paymentApi } from './payment';
 export { ApiError, fetchAPI, API_URL };
-export type { PublicPaymentSettings };
+export type { PublicPaymentSettings, CategoryIntentData, CategoryChildChip, CategoryIntentCandidate, IntentQuickFilters } from './public';
 export * from './classification';
 export * from './identity';
 export * from './organization';

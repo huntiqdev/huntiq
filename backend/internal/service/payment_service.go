@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"math"
 	"strings"
 	"time"
 
@@ -141,15 +142,15 @@ func (s *PaymentService) InitiateUpgradePayment(
 		if targetTierClean == "premium" {
 			basePrice = prices["buyer_premium_price_etb"]
 		}
-		amount = basePrice * (float64(durationDays) / 30.0)
+		amount = math.Round(basePrice*(float64(durationDays)/30.0)*100.0) / 100.0
 		orderTitle = fmt.Sprintf("Buyer %s Upgrade (%d Days)", strings.ToUpper(targetTierClean), durationDays)
 	} else {
 		// Seller upgrade
+		basePrice := prices["seller_gold_price_etb"]
 		if targetTierClean == "premium" {
-			amount = prices["seller_premium_price_etb"]
-		} else {
-			amount = prices["seller_gold_price_etb"]
+			basePrice = prices["seller_premium_price_etb"]
 		}
+		amount = math.Round(basePrice*(float64(durationDays)/30.0)*100.0) / 100.0
 		orderTitle = fmt.Sprintf("Seller %s Upgrade (%d Days)", strings.ToUpper(targetTierClean), durationDays)
 	}
 
@@ -492,6 +493,24 @@ func (s *PaymentService) HandleWebhook(ctx context.Context, providerCode string,
 	}
 
 	if res.Status == models.PaymentStatusSuccessful {
+		// Security: Guard against price tampering / underpayment attacks
+		if res.AmountPaid > 0 && res.AmountPaid < order.Amount {
+			failReason := fmt.Sprintf("Underpayment detected: expected %.2f %s, received %.2f %s", order.Amount, order.Currency, res.AmountPaid, res.Currency)
+			order.Status = models.PaymentStatusFailed
+			order.FailureReason = &failReason
+			_ = s.paymentRepo.UpdateOrderStatus(
+				ctx,
+				order.OrderID,
+				models.PaymentStatusFailed,
+				&res.ProviderTxID,
+				&res.PayerPhone,
+				&failReason,
+				res.RawPayload,
+				order.VerificationMetadata,
+			)
+			return nil, fmt.Errorf("payment amount mismatch: expected %.2f %s but received %.2f %s", order.Amount, order.Currency, res.AmountPaid, res.Currency)
+		}
+
 		now := time.Now()
 		order.Status = models.PaymentStatusSuccessful
 		order.VerifiedAt = &now

@@ -193,22 +193,24 @@ export default function BuyerRegisterPage() {
             loading={loading}
           />
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-zinc-400 space-y-1">
-            <p className="font-bold text-white flex items-center gap-1.5">
-              <Zap size={14} className="text-amber-400" /> Dev Mode OTP Helper
-            </p>
-            <p>
-              In local development, you can peek your plaintext OTP at:{' '}
-              <a
-                href={`/api/dev/otp?phone=${encodeURIComponent(pr.normalized)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[#1769E0] dark:text-[#38A5FF] underline font-mono"
-              >
-                /api/dev/otp?phone={pr.normalized}
-              </a>
-            </p>
-          </div>
+          {process.env.NODE_ENV === 'development' && (
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-zinc-400 space-y-1">
+              <p className="font-bold text-white flex items-center gap-1.5">
+                <Zap size={14} className="text-amber-400" /> Dev Mode OTP Helper
+              </p>
+              <p>
+                In local development, you can peek your plaintext OTP at:{' '}
+                <a
+                  href={`/api/dev/otp?phone=${encodeURIComponent(pr.normalized)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#1769E0] dark:text-[#38A5FF] underline font-mono"
+                >
+                  /api/dev/otp?phone={pr.normalized}
+                </a>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );

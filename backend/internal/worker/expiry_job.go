@@ -48,6 +48,7 @@ func safeExpire(db *pgxpool.Pool) {
 	}()
 	expire(db)
 	expireBuyerTiers(db)
+	expireSellerTiers(db)
 }
 
 func expire(db *pgxpool.Pool) {
@@ -155,6 +156,56 @@ func expireBuyerTiers(db *pgxpool.Pool) {
 				uid,
 				"Buyer Membership Expired",
 				"Your buyer membership has expired and has been reset to Normal tier. Renew to regain access.",
+			)
+		}
+	}
+	logJobSuccess(db, jobID, count)
+}
+
+func expireSellerTiers(db *pgxpool.Pool) {
+	jobID := logJobStart(db, "seller_tier_expiry")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	rows, err := db.Query(ctx,
+		`UPDATE users
+		 SET tier = 'normal', tier_expires_at = NULL, updated_at = NOW()
+		 WHERE tier != 'normal'
+		   AND tier_expires_at IS NOT NULL
+		   AND tier_expires_at < NOW()
+		 RETURNING id`)
+	if err != nil {
+		log.Printf("[expiry-job] seller tier update error: %v", err)
+		logJobFailed(db, jobID, err.Error())
+		return
+	}
+	defer rows.Close()
+
+	var expiredIDs []int
+	for rows.Next() {
+		var id int
+		if err := rows.Scan(&id); err == nil {
+			expiredIDs = append(expiredIDs, id)
+		}
+	}
+	if err := rows.Err(); err != nil {
+		log.Printf("[expiry-job] seller tier rows error: %v", err)
+		logJobFailed(db, jobID, err.Error())
+		return
+	}
+
+	count := len(expiredIDs)
+	if count > 0 {
+		log.Printf("[expiry-job] expired %d seller tiers", count)
+		notifyCtx, notifyCancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer notifyCancel()
+		for _, uid := range expiredIDs {
+			_, _ = db.Exec(notifyCtx,
+				`INSERT INTO notifications (user_id, title, message, type)
+				 VALUES ($1, $2, $3, 'warning')`,
+				uid,
+				"Seller Membership Expired",
+				"Your seller subscription tier has expired and has been reset to Normal tier. Renew to regain priority placement and higher limits.",
 			)
 		}
 	}

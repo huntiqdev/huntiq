@@ -31,6 +31,60 @@ export interface PublicPaymentSettings {
   otp_gateway: string;
 }
 
+export interface CategoryChildChip {
+  id: number;
+  parent_id?: number;
+  name: string;
+  name_en: string;
+  name_am?: string;
+  slug: string;
+  level: number;
+  is_leaf: boolean;
+  icon?: string;
+  product_count?: number;
+}
+
+export interface CategoryIntentCandidate {
+  id: number;
+  name: string;
+  name_en: string;
+  name_am?: string;
+  slug: string;
+  level: number;
+  path: string;
+  hierarchy: string;
+  breadcrumbs: Array<{ id: number; name: string; slug: string; level: number }>;
+  score: number;
+  match_source: string;
+}
+
+export interface IntentQuickFilters {
+  modes: string[];
+  locations: string[];
+  popular_tags: string[];
+}
+
+export interface CategoryIntentData {
+  has_intent: boolean;
+  is_ambiguous: boolean;
+  query: string;
+  category?: {
+    id: number;
+    parent_id?: number;
+    name_en: string;
+    name_am?: string;
+    slug: string;
+    level: number;
+    path: string;
+    icon?: string;
+    breadcrumbs?: Array<{ id: number; name: string; slug: string; level: number }>;
+  };
+  breadcrumbs?: Array<{ id: number; name: string; slug: string; level: number }>;
+  children: CategoryChildChip[];
+  alternatives: CategoryIntentCandidate[];
+  quick_filters: IntentQuickFilters;
+}
+
 export const publicApi = {
   getProductsWithMeta: (params?: Record<string, any>) => {
     // Clean undefined values and map filter keys to backend format
@@ -54,9 +108,12 @@ export const publicApi = {
   getProduct: (id: number) => fetchAPI<any>(`/products/${id}`),
   getProductAttributes: (id: number) => fetchAPI<any[]>(`/products/${id}/attributes`).then(r => r ?? []),
   getRootCategories: (lang = 'en') => fetchAPI<any[]>(`/categories/roots?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
-  getCategoryTree: (lang = 'en', depth = 4) => fetchAPI<any[]>(`/categories/tree?lang=${encodeURIComponent(lang)}&depth=${depth}`).then(r => r ?? []),
+  getCategoryTree: (lang = 'en', depth = 6) => fetchAPI<any[]>(`/categories/tree?lang=${encodeURIComponent(lang)}&depth=${depth}`).then(r => r ?? []),
   searchCategories: (q: string, lang = 'en', limit = 20) => fetchAPI<any[]>(`/categories/search?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}&limit=${limit}`).then(r => r ?? []),
+  resolveCategoryIntent: (q: string, lang = 'en') =>
+    fetchAPI<CategoryIntentData>(`/categories/intent?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}`),
   getCategoryChildren: (id: number, lang = 'en') => fetchAPI<any[]>(`/categories/${id}/children?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
+  getCategoryRelated: (id: number, lang = 'en') => fetchAPI<any[]>(`/categories/${id}/related?lang=${encodeURIComponent(lang)}`).then(r => r ?? []),
   getCategoryBySlug: (slug: string, lang = 'en') => fetchAPI<any>(`/categories/slug/${encodeURIComponent(slug)}?lang=${encodeURIComponent(lang)}`),
   getCategoryById: (id: number, lang = 'en') => fetchAPI<any>(`/categories/${id}?lang=${encodeURIComponent(lang)}`),
   checkCategorySlug: (slug: string, excludeId?: number) =>

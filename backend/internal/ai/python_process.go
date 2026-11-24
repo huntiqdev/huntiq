@@ -72,15 +72,19 @@ func (p *PythonSupervisor) Start() error {
 		"--auth-token", p.authToken,
 		"--policy", policyPath,
 	}
-	if p.geminiKey != "" {
-		args = append(args, "--gemini-key", p.geminiKey)
-	}
 	if p.geminiModel != "" {
 		args = append(args, "--gemini-model", p.geminiModel)
 	}
 
 	cmd := exec.Command(pyBin, args...)
-	cmd.Env = os.Environ()
+	env := os.Environ()
+	if p.geminiKey != "" {
+		env = append(env, "GEMINI_API_KEY="+p.geminiKey)
+	}
+	if p.geminiModel != "" {
+		env = append(env, "GEMINI_MODEL="+p.geminiModel)
+	}
+	cmd.Env = env
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -236,6 +240,46 @@ func (p *PythonSupervisor) Chat(ctx context.Context, req PythonChatRequest) (*Ch
 	}
 
 	var res ChatResponse
+	if err := json.NewDecoder(resp.Body).Decode(&res); err != nil {
+		return nil, fmt.Errorf("invalid json from python ai engine: %w", err)
+	}
+	return &res, nil
+}
+
+func (p *PythonSupervisor) Translate(ctx context.Context, req TranslateRequest) (*TranslateResponse, error) {
+	p.mu.RLock()
+	baseURL := p.baseURL
+	token := p.authToken
+	p.mu.RUnlock()
+
+	if baseURL == "" {
+		return nil, fmt.Errorf("python ai engine is not running")
+	}
+
+	bodyBytes, err := json.Marshal(req)
+	if err != nil {
+		return nil, err
+	}
+
+	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, baseURL+"/translate", bytes.NewReader(bodyBytes))
+	if err != nil {
+		return nil, err
+	}
+	httpReq.Header.Set("Content-Type", "application/json")
+	httpReq.Header.Set("X-Internal-Token", token)
+
+	resp, err := p.httpClient.Do(httpReq)
+	if err != nil {
+		return nil, fmt.Errorf("error contacting python ai engine: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		b, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("python ai engine error (%d): %s", resp.StatusCode, string(b))
+	}
+
+	var res TranslateResponse
 	if err := json.NewDecoder(resp.Body).Decode(&res); err != nil {
 		return nil, fmt.Errorf("invalid json from python ai engine: %w", err)
 	}

@@ -690,6 +690,35 @@
       "redirects": []
     },
     {
+      "id": 2000060,
+      "parent_id": 1020026,
+      "parent_code": null,
+      "classification_system_code": "SYS_GIG",
+      "slug": "web-mobile-development-gigs",
+      "names": {
+        "en": "Full-Stack Web & Mobile App Development Gigs",
+        "am": "የድረ-ገጽ እና ሞባይል መተግበሪያ ግንባታ አገልግሎት",
+        "om": "Tajaajila Hojii Weebsaayitii fi Mobaayilaa",
+        "ti": "ናይ ወብሳይትን ሞባይልን ልምዓት ኣገልግሎት"
+      },
+      "description": "",
+      "level": 2,
+      "path": "/1020000/1020026/2000060/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": "Full-Stack Web & Mobile App Development Gigs",
+      "meta_description": "Full-Stack Web & Mobile App Development Gigs",
+      "aliases": [
+        "software gig",
+        "coding gig",
+        "freelance developer"
+      ]
+    },
+    {
       "id": 1020003,
       "parent_id": 1020002,
       "parent_code": "brand-identity-logo-design",
@@ -764,7 +793,7 @@
       "icon": null,
       "image_url": null,
       "is_active": true,
-      "is_leaf": true,
+      "is_leaf": false,
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
@@ -3056,6 +3085,64 @@
         "የድምፅ ቅንብር፣ ማስተሪንግና ጫጫታ ማስወገድ"
       ],
       "redirects": []
+    },
+    {
+      "id": 2000061,
+      "parent_id": 2000060,
+      "parent_code": null,
+      "classification_system_code": "SYS_GIG",
+      "slug": "mobile-app-development-services",
+      "names": {
+        "en": "Mobile Application Development Services",
+        "am": "የሞባይል አፕሊኬሽን ልማት እና ግንባታ",
+        "om": "Hojii Mobaayil App Hojjechuu",
+        "ti": "ናይ ሞባይል ኣፕሊኬሽን ስራሕቲ"
+      },
+      "description": "",
+      "level": 3,
+      "path": "/1020000/1020026/2000060/2000061/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": "Mobile Application Development Services",
+      "meta_description": "Mobile Application Development Services",
+      "aliases": [
+        "app developer",
+        "build mobile app",
+        "ios android dev"
+      ]
+    },
+    {
+      "id": 2000062,
+      "parent_id": 2000061,
+      "parent_code": null,
+      "classification_system_code": "SYS_GIG",
+      "slug": "cross-platform-react-native-flutter-dev",
+      "names": {
+        "en": "React Native & Flutter Cross-Platform App Development",
+        "am": "ሪአክት ኔቲቭ እና ፍላተር የሞባይል መተግበሪያ ስራ",
+        "om": "Hojii Appii React Native fi Flutter",
+        "ti": "ናይ ሪአክት ኔቲቭን ፍላተርን ኣፕ ልምዓት"
+      },
+      "description": "",
+      "level": 4,
+      "path": "/1020000/1020026/2000060/2000061/2000062/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": "React Native & Flutter Cross-Platform App Development",
+      "meta_description": "React Native & Flutter Cross-Platform App Development",
+      "aliases": [
+        "flutter app",
+        "react native developer",
+        "cross platform app"
+      ]
     }
   ]
 }

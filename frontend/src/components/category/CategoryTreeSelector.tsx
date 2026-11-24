@@ -62,11 +62,10 @@ export default function CategoryTreeSelector({
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
   const [selected, setSelected] = useState<number | undefined>(value);
-  const [prevValue, setPrevValue] = useState<number | undefined>(value);
-  if (prevValue !== value) {
-    setPrevValue(value);
+
+  useEffect(() => {
     setSelected(value);
-  }
+  }, [value]);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'leaves' | 'tree'>('leaves');
@@ -80,10 +79,10 @@ export default function CategoryTreeSelector({
     try {
       let data: any[] = [];
       try {
-        // Fast initial tree fetch from canonical category hierarchy
-        data = await api.getCategoryTree(language, 3);
+        // Fast initial tree fetch from canonical category hierarchy (supporting up to 6 levels)
+        data = await api.getCategoryTree(language, 6);
       } catch {
-        data = await api.getTree(schemeCode, language, 3);
+        data = await api.getTree(schemeCode, language, 6);
       }
 
       const normalize = (n: any): CategoryNode => ({
@@ -209,7 +208,7 @@ export default function CategoryTreeSelector({
       const currentPath = [...breadcrumbs, currentName];
 
       const hasChildren = Array.isArray(node.children) && node.children.length > 0;
-      if (node.is_leaf) {
+      if (node.is_leaf || !hasChildren) {
         leaves.push({
           id: node.id,
           leafName: currentName,
@@ -220,7 +219,8 @@ export default function CategoryTreeSelector({
           count: node.count || 0,
           node,
         });
-      } else if (hasChildren) {
+      }
+      if (hasChildren) {
         const nextSubcat = breadcrumbs.length === 1 ? currentName : subcatName;
         node.children!.forEach(child => traverse(child, currentPath, rootName, nextSubcat));
       }
@@ -229,7 +229,7 @@ export default function CategoryTreeSelector({
     categories.forEach(root => {
       const rootTitle = getNodeName(root);
       const hasChildren = Array.isArray(root.children) && root.children.length > 0;
-      if (root.is_leaf) {
+      if (root.is_leaf || !hasChildren) {
         leaves.push({
           id: root.id,
           leafName: rootTitle,
@@ -239,7 +239,8 @@ export default function CategoryTreeSelector({
           count: root.count || 0,
           node: root,
         });
-      } else if (hasChildren) {
+      }
+      if (hasChildren) {
         root.children!.forEach(child => traverse(child, [rootTitle], rootTitle));
       }
     });

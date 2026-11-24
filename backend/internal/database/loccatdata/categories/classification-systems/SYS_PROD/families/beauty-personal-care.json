@@ -22146,7 +22146,7 @@
       "parent_id": 705,
       "parent_code": "mascaras",
       "classification_system_code": "SYS_PROD",
-      "slug": "mascaras-commercial-passenger-auto-rickshaws-s18_0",
+      "slug": "mascaras-commercial-passenger-auto-rickshaws-s18-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -22164,7 +22164,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mascaras-commercial-passenger-auto-rickshaws-s18_0"
+      ],
       "redirects": []
     },
     {
@@ -22172,7 +22174,7 @@
       "parent_id": 705,
       "parent_code": "mascaras",
       "classification_system_code": "SYS_PROD",
-      "slug": "mascaras-heavy-duty-cargo-delivery-three-wheelers-s18_1",
+      "slug": "mascaras-heavy-duty-cargo-delivery-three-wheelers-s18-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -22194,7 +22196,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "mascaras-heavy-duty-cargo-delivery-three-wheelers-s18_1"
       ],
       "redirects": []
     },
@@ -22203,7 +22206,7 @@
       "parent_id": 705,
       "parent_code": "mascaras",
       "classification_system_code": "SYS_PROD",
-      "slug": "mascaras-electric-green-mobility-e-rickshaws-s18_2",
+      "slug": "mascaras-electric-green-mobility-e-rickshaws-s18-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -22221,7 +22224,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mascaras-electric-green-mobility-e-rickshaws-s18_2"
+      ],
       "redirects": []
     },
     {
@@ -22229,7 +22234,7 @@
       "parent_id": 705,
       "parent_code": "mascaras",
       "classification_system_code": "SYS_PROD",
-      "slug": "mascaras-long-distance-passenger-minibuses-s18_3",
+      "slug": "mascaras-long-distance-passenger-minibuses-s18-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -22247,7 +22252,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mascaras-long-distance-passenger-minibuses-s18_3"
+      ],
       "redirects": []
     },
     {

@@ -306,6 +306,13 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 		idxTerm := len(args) + 1
 		args = append(args, cleanTerm)
 
+		brandClause := ""
+		if detectedBrand != nil && *detectedBrand != "" {
+			idxBrand := len(args) + 1
+			args = append(args, *detectedBrand)
+			brandClause = fmt.Sprintf(" OR p.attributes->>'brand' ILIKE '%%' || $%d || '%%' OR p.title ILIKE '%%' || $%d || '%%'", idxBrand, idxBrand)
+		}
+
 		if synTsQuery != "" {
 			idxSyn := len(args) + 1
 			args = append(args, synTsQuery)
@@ -314,7 +321,7 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR search_vector @@ to_tsquery('simple', $%d)
 				OR p.title ILIKE '%%' || $%d || '%%'
-				OR p.attributes::text ILIKE '%%' || $%d || '%%'
+				OR p.attributes::text ILIKE '%%' || $%d || '%%'`+brandClause+`
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
 			)`, idxTerm, idxSyn, idxTerm, idxTerm, idxTerm, idxTerm))
@@ -322,7 +329,7 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 			wb.WriteString(fmt.Sprintf(` AND (
 				search_vector @@ websearch_to_tsquery('simple', $%d)
 				OR p.title ILIKE '%%' || $%d || '%%'
-				OR p.attributes::text ILIKE '%%' || $%d || '%%'
+				OR p.attributes::text ILIKE '%%' || $%d || '%%'`+brandClause+`
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
 			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))

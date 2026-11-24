@@ -10947,7 +10947,7 @@
       "parent_id": 1494,
       "parent_code": "diesel-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "diesel-generators-heavy-duty-rotary-hammer-demolit-s28_0",
+      "slug": "diesel-generators-heavy-duty-rotary-hammer-demolit-s28-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -10970,7 +10970,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "diesel-generators-heavy-duty-rotary-hammer-demolit-s28_0"
       ],
       "redirects": []
     },
@@ -10979,7 +10980,7 @@
       "parent_id": 1495,
       "parent_code": "industrial-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "industrial-generators-heavy-duty-rotary-hammer-dem-s29_0",
+      "slug": "industrial-generators-heavy-duty-rotary-hammer-dem-s29-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -11002,7 +11003,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "industrial-generators-heavy-duty-rotary-hammer-dem-s29_0"
       ],
       "redirects": []
     },
@@ -11011,7 +11013,7 @@
       "parent_id": 1496,
       "parent_code": "petrol-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "petrol-generators-heavy-duty-rotary-hammer-demolit-s30_0",
+      "slug": "petrol-generators-heavy-duty-rotary-hammer-demolit-s30-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -11034,7 +11036,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "petrol-generators-heavy-duty-rotary-hammer-demolit-s30_0"
       ],
       "redirects": []
     },
@@ -11043,7 +11046,7 @@
       "parent_id": 1497,
       "parent_code": "standby-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "standby-generators-heavy-duty-rotary-hammer-demoli-s31_0",
+      "slug": "standby-generators-heavy-duty-rotary-hammer-demoli-s31-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -11066,7 +11069,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "standby-generators-heavy-duty-rotary-hammer-demoli-s31_0"
       ],
       "redirects": []
     },
@@ -11075,7 +11079,7 @@
       "parent_id": 1494,
       "parent_code": "diesel-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "diesel-generators-brushless-cordless-impact-driver-s28_1",
+      "slug": "diesel-generators-brushless-cordless-impact-driver-s28-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -11095,7 +11099,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "diesel-generators-brushless-cordless-impact-driver-s28_1"
       ],
       "redirects": []
     },
@@ -11104,7 +11109,7 @@
       "parent_id": 1495,
       "parent_code": "industrial-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "industrial-generators-brushless-cordless-impact-dr-s29_1",
+      "slug": "industrial-generators-brushless-cordless-impact-dr-s29-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -11124,7 +11129,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "industrial-generators-brushless-cordless-impact-dr-s29_1"
       ],
       "redirects": []
     },
@@ -11133,7 +11139,7 @@
       "parent_id": 1496,
       "parent_code": "petrol-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "petrol-generators-brushless-cordless-impact-driver-s30_1",
+      "slug": "petrol-generators-brushless-cordless-impact-driver-s30-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -11153,7 +11159,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "petrol-generators-brushless-cordless-impact-driver-s30_1"
       ],
       "redirects": []
     },
@@ -11162,7 +11169,7 @@
       "parent_id": 1497,
       "parent_code": "standby-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "standby-generators-brushless-cordless-impact-drive-s31_1",
+      "slug": "standby-generators-brushless-cordless-impact-drive-s31-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -11182,7 +11189,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "standby-generators-brushless-cordless-impact-drive-s31_1"
       ],
       "redirects": []
     },
@@ -11191,7 +11199,7 @@
       "parent_id": 1494,
       "parent_code": "diesel-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "diesel-generators-high-power-angle-grinders-metal--s28_2",
+      "slug": "diesel-generators-high-power-angle-grinders-metal-s28-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -11212,7 +11220,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "diesel-generators-high-power-angle-grinders-metal--s28_2"
       ],
       "redirects": []
     },
@@ -11221,7 +11230,7 @@
       "parent_id": 1495,
       "parent_code": "industrial-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "industrial-generators-high-power-angle-grinders-me-s29_2",
+      "slug": "industrial-generators-high-power-angle-grinders-me-s29-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -11242,7 +11251,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "industrial-generators-high-power-angle-grinders-me-s29_2"
       ],
       "redirects": []
     },
@@ -11251,7 +11261,7 @@
       "parent_id": 1496,
       "parent_code": "petrol-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "petrol-generators-high-power-angle-grinders-metal--s30_2",
+      "slug": "petrol-generators-high-power-angle-grinders-metal-s30-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -11272,7 +11282,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "petrol-generators-high-power-angle-grinders-metal--s30_2"
       ],
       "redirects": []
     },
@@ -11281,7 +11292,7 @@
       "parent_id": 1497,
       "parent_code": "standby-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "standby-generators-high-power-angle-grinders-metal-s31_2",
+      "slug": "standby-generators-high-power-angle-grinders-metal-s31-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -11302,7 +11313,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "standby-generators-high-power-angle-grinders-metal-s31_2"
       ],
       "redirects": []
     },
@@ -11311,7 +11323,7 @@
       "parent_id": 1494,
       "parent_code": "diesel-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "diesel-generators-silent-diesel-portable-petrol-ge-s28_3",
+      "slug": "diesel-generators-silent-diesel-portable-petrol-ge-s28-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -11334,7 +11346,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "diesel-generators-silent-diesel-portable-petrol-ge-s28_3"
       ],
       "redirects": []
     },
@@ -11343,7 +11356,7 @@
       "parent_id": 1495,
       "parent_code": "industrial-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "industrial-generators-silent-diesel-portable-petro-s29_3",
+      "slug": "industrial-generators-silent-diesel-portable-petro-s29-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -11366,7 +11379,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "industrial-generators-silent-diesel-portable-petro-s29_3"
       ],
       "redirects": []
     },
@@ -11375,7 +11389,7 @@
       "parent_id": 1496,
       "parent_code": "petrol-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "petrol-generators-silent-diesel-portable-petrol-ge-s30_3",
+      "slug": "petrol-generators-silent-diesel-portable-petrol-ge-s30-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -11398,7 +11412,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "petrol-generators-silent-diesel-portable-petrol-ge-s30_3"
       ],
       "redirects": []
     },
@@ -11407,7 +11422,7 @@
       "parent_id": 1497,
       "parent_code": "standby-generators",
       "classification_system_code": "SYS_PROD",
-      "slug": "standby-generators-silent-diesel-portable-petrol-g-s31_3",
+      "slug": "standby-generators-silent-diesel-portable-petrol-g-s31-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -11430,7 +11445,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "standby-generators-silent-diesel-portable-petrol-g-s31_3"
       ],
       "redirects": []
     },

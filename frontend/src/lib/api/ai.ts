@@ -13,3 +13,21 @@ export async function getAIHealth(): Promise<{ status: string; service: string }
     method: 'GET',
   });
 }
+
+export interface TranslationResult {
+  source_language: string;
+  translations: {
+    en: string;
+    am: string;
+    or: string;
+    ti: string;
+  };
+  fallback: boolean;
+}
+
+export async function translateListingText(text: string, fromLang?: string): Promise<TranslationResult> {
+  return fetchAPI<TranslationResult>('/ai/translate', {
+    method: 'POST',
+    body: JSON.stringify({ text, from_lang: fromLang }),
+  });
+}

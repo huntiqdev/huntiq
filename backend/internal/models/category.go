@@ -173,3 +173,51 @@ type CategoryFilter struct {
 	Page         int
 	Limit        int
 }
+
+// CategoryIntentCandidate represents a candidate branch in multi-source category disambiguation (e.g., 'drill')
+type CategoryIntentCandidate struct {
+	ID          int                  `json:"id"`
+	Name        string               `json:"name"`
+	NameEn      string               `json:"name_en"`
+	NameAm      string               `json:"name_am,omitempty"`
+	Slug        string               `json:"slug"`
+	Level       int                  `json:"level"`
+	Path        string               `json:"path"`
+	Hierarchy   string               `json:"hierarchy"`
+	Breadcrumbs []CategoryBreadcrumb `json:"breadcrumbs"`
+	Score       float64              `json:"score"`
+	MatchSource string               `json:"match_source"`
+}
+
+// CategoryChildChip represents an immediate 1-tap subcategory chip for category browsing
+type CategoryChildChip struct {
+	ID           int    `json:"id"`
+	ParentID     *int   `json:"parent_id,omitempty"`
+	Name         string `json:"name"`
+	NameEn       string `json:"name_en"`
+	NameAm       string `json:"name_am,omitempty"`
+	Slug         string `json:"slug"`
+	Level        int    `json:"level"`
+	IsLeaf       bool   `json:"is_leaf"`
+	Icon         string `json:"icon,omitempty"`
+	ProductCount int    `json:"product_count,omitempty"`
+}
+
+// CategoryIntentResponse provides complete discovery data for search bars, navigation ribbons, and filters
+type CategoryIntentResponse struct {
+	HasIntent    bool                      `json:"has_intent"`
+	IsAmbiguous  bool                      `json:"is_ambiguous"` // True if term spans multiple branches (e.g., 'drill')
+	Query        string                    `json:"query"`
+	Category     *CategoryHierarchy        `json:"category,omitempty"`     // Authoritative primary category
+	Breadcrumbs  []CategoryBreadcrumb      `json:"breadcrumbs,omitempty"`  // e.g. Electronics › Phones
+	Children     []CategoryChildChip       `json:"children,omitempty"`     // 1-tap subcategories inside this category
+	Alternatives []CategoryIntentCandidate `json:"alternatives,omitempty"` // Other branches if ambiguous
+	QuickFilters IntentQuickFilters        `json:"quick_filters"`
+}
+
+// IntentQuickFilters contains contextual discovery facets
+type IntentQuickFilters struct {
+	Modes       []string `json:"modes"`        // ["buy", "rent"]
+	Locations   []string `json:"locations"`    // ["Addis Ababa", "Bole", "Hawassa", "Adama"]
+	PopularTags []string `json:"popular_tags"` // High-frequency search queries in this category
+}

@@ -59,7 +59,7 @@ func (r *LocationHierarchyRepo) GetBreadcrumbs(ctx context.Context, locationID i
 	switch lang {
 	case "am":
 		nameCol = "COALESCE(NULLIF(name_am, ''), name_en)"
-	case "om":
+	case "om", "or":
 		nameCol = "COALESCE(NULLIF(name_om, ''), name_en)"
 	case "ti":
 		nameCol = "COALESCE(NULLIF(name_ti, ''), name_en)"
@@ -147,7 +147,7 @@ func (r *LocationHierarchyRepo) ListTree(ctx context.Context, lang string) ([]mo
 	switch lang {
 	case "am":
 		nameCol = "COALESCE(NULLIF(name_am, ''), name_en)"
-	case "om":
+	case "om", "or":
 		nameCol = "COALESCE(NULLIF(name_om, ''), name_en)"
 	case "ti":
 		nameCol = "COALESCE(NULLIF(name_ti, ''), name_en)"

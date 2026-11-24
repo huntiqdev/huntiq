@@ -802,3 +802,30 @@ func (s *AdminService) CreateRefundRequest(ctx context.Context, req *models.Refu
 func (s *AdminService) CreateAccountAppeal(ctx context.Context, appeal *models.AccountAppeal) (int, error) {
 	return s.repo.CreateAccountAppeal(ctx, appeal)
 }
+
+// ── Sub-Security Separation & Enterprise Telemetry ───────────────────────────
+
+func (s *AdminService) GetAdminSecurityTelemetry(ctx context.Context, adminID int, clientIP, userAgent, clientDeviceID string) (map[string]interface{}, error) {
+	return s.repo.GetAdminSecurityTelemetry(ctx, adminID, clientIP, userAgent, clientDeviceID)
+}
+
+func (s *AdminService) ListActiveAdminSessions(ctx context.Context) ([]repository.ActiveAdminSession, error) {
+	return s.repo.ListActiveAdminSessions(ctx)
+}
+
+func (s *AdminService) RevokeAdminSessionByID(ctx context.Context, sessionID, revokedByAdminID int, reason string) error {
+	return s.repo.RevokeAdminSessionByID(ctx, sessionID, revokedByAdminID, reason)
+}
+
+func (s *AdminService) ListSecurityZones(ctx context.Context) ([]repository.SecurityZone, error) {
+	return s.repo.ListSecurityZones(ctx)
+}
+
+func (s *AdminService) AssignSecurityZone(ctx context.Context, zoneCode string, targetAdminID, grantedByAdminID int, notes string) error {
+	return s.repo.AssignSecurityZone(ctx, zoneCode, targetAdminID, grantedByAdminID, notes)
+}
+
+func (s *AdminService) RevokeSecurityZone(ctx context.Context, zoneCode string, targetAdminID, revokedByAdminID int, reason string) error {
+	return s.repo.RevokeSecurityZone(ctx, zoneCode, targetAdminID, revokedByAdminID, reason)
+}
+

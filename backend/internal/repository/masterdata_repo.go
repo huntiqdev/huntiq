@@ -268,12 +268,12 @@ func (r *MasterDataRepo) UpsertCategoryBatch(ctx context.Context, nodes []models
 	upsertSQL := `
 		INSERT INTO category_hierarchy (
 			id, parent_id, classification_system_code, name_en, name_am, name_om, name_ti,
-			slug, description, level, display_order, icon, image_url,
+			slug, description, level, path, display_order, icon, image_url,
 			is_active, is_leaf, is_archived, meta_title, meta_description, i18n, updated_at
 		) VALUES (
 			$1, $2, $3, $4, $5, $6, $7,
-			$8, $9, $10, $11, $12, $13,
-			$14, $15, $16, $17, $18, $19, NOW()
+			$8, $9, $10, $11, $12, $13, $14,
+			$15, $16, $17, $18, $19, $20, NOW()
 		)
 		ON CONFLICT (id) DO UPDATE SET
 			parent_id = EXCLUDED.parent_id,
@@ -285,6 +285,7 @@ func (r *MasterDataRepo) UpsertCategoryBatch(ctx context.Context, nodes []models
 			slug = EXCLUDED.slug,
 			description = EXCLUDED.description,
 			level = EXCLUDED.level,
+			path = EXCLUDED.path,
 			display_order = EXCLUDED.display_order,
 			icon = EXCLUDED.icon,
 			image_url = EXCLUDED.image_url,
@@ -316,7 +317,7 @@ func (r *MasterDataRepo) UpsertCategoryBatch(ctx context.Context, nodes []models
 
 			batch.Queue(upsertSQL,
 				c.ID, c.ParentID, c.ClassificationSystemCode, c.Names.En, c.Names.Am, c.Names.Om, c.Names.Ti,
-				c.Slug, c.Description, c.Level, c.DisplayOrder, c.Icon, c.ImageURL,
+				c.Slug, c.Description, c.Level, c.Path, c.DisplayOrder, c.Icon, c.ImageURL,
 				c.IsActive, c.IsLeaf, c.IsArchived, c.MetaTitle, c.MetaDescription, string(i18nBytes),
 			)
 		}

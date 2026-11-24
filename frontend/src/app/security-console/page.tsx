@@ -10,9 +10,51 @@ import {
   ShieldAlert, ShieldCheck, Activity, AlertTriangle, Lock,
   RefreshCw, Filter, Globe2, Eye, Ban, Radio, Flame,
   Terminal, Server, UserX, CheckCircle2, XCircle, ArrowRight,
-  SlidersHorizontal, Download, Power, Zap, Cpu, BellRing
+  SlidersHorizontal, Download, Power, Zap, Cpu, BellRing,
+  Users, UserPlus, UserMinus, Monitor, Key, Shield, AlertCircle, Trash2
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
+
+interface SecurityZoneMember {
+  admin_id: number;
+  name: string;
+  email: string;
+  admin_role: string;
+  notes: string;
+  granted_at: string;
+}
+
+interface SecurityZone {
+  id: number;
+  code: string;
+  name: string;
+  description: string;
+  required_role: string;
+  ip_whitelist: string[];
+  require_trusted_device: boolean;
+  require_passkey: boolean;
+  is_active: boolean;
+  members: SecurityZoneMember[];
+}
+
+interface ActiveAdminSession {
+  id: number;
+  user_id: number;
+  name: string;
+  email: string;
+  admin_role: string;
+  portal: string;
+  ip_address: string;
+  device_id: string;
+  device_name: string;
+  shift_code?: string;
+  workstation_code?: string;
+  facility_location?: string;
+  is_trusted: boolean;
+  created_at: string;
+  last_active: string;
+  expires_at: string;
+}
 
 interface AttackEvent {
   id: string;
@@ -35,6 +77,17 @@ export default function SecurityConsolePage() {
   const [vectorFilter, setVectorFilter] = useState<'all' | 'bruteforce' | 'sqli' | 'ddos' | 'privilege'>('all');
   const [autoDefenseMode, setAutoDefenseMode] = useState<boolean>(true);
 
+  // Sub-Security & Enterprise Telemetry State
+  const [securityZones, setSecurityZones] = useState<SecurityZone[]>([]);
+  const [activeSessions, setActiveSessions] = useState<ActiveAdminSession[]>([]);
+  const [assignZoneModalOpen, setAssignZoneModalOpen] = useState(false);
+  const [targetZoneCode, setTargetZoneCode] = useState('SOC_DEFENSE');
+  const [targetAdminId, setTargetAdminId] = useState('');
+  const [targetNotes, setTargetNotes] = useState('');
+  const [actionSuccessMsg, setActionSuccessMsg] = useState('');
+  const [actionErrorMsg, setActionErrorMsg] = useState('');
+
+
   useEffect(() => {
     if (!authLoading) {
       const isAllowed = isPlatformOwner || isSuperAdmin || isSecurityAdmin ||
@@ -53,8 +106,75 @@ export default function SecurityConsolePage() {
     );
   }
 
+  const fetchSubSecurityData = () => {
+    if (!user?.token) return;
+    api.adminListSecurityZones(user.token)
+      .then(res => {
+        if (Array.isArray(res)) setSecurityZones(res);
+      })
+      .catch(() => {});
+
+    api.adminGetActiveAdminSessions(user.token)
+      .then(res => {
+        if (Array.isArray(res)) setActiveSessions(res);
+      })
+      .catch(() => {});
+  };
+
+  const handleAssignZoneSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user?.token || !targetAdminId) return;
+    setActionErrorMsg('');
+    setActionSuccessMsg('');
+    try {
+      await api.adminAssignSecurityZone({
+        zone_code: targetZoneCode,
+        target_admin_id: parseInt(targetAdminId, 10),
+        notes: targetNotes,
+      }, user.token);
+      setActionSuccessMsg(`Assigned Admin #${targetAdminId} to ${targetZoneCode} successfully`);
+      setTargetAdminId('');
+      setTargetNotes('');
+      setAssignZoneModalOpen(false);
+      fetchSubSecurityData();
+    } catch (err: any) {
+      setActionErrorMsg(err?.message || 'Failed to assign security zone');
+    }
+  };
+
+  const handleRevokeZone = async (zoneCode: string, targetId: number) => {
+    if (!user?.token) return;
+    if (!confirm(`Are you sure you want to revoke Admin #${targetId} from ${zoneCode}?`)) return;
+    setActionErrorMsg('');
+    setActionSuccessMsg('');
+    try {
+      await api.adminRevokeSecurityZone({
+        zone_code: zoneCode,
+        target_admin_id: targetId,
+        reason: 'Revoked by Security Administrator',
+      }, user.token);
+      setActionSuccessMsg(`Revoked Admin #${targetId} from ${zoneCode}`);
+      fetchSubSecurityData();
+    } catch (err: any) {
+      setActionErrorMsg(err?.message || 'Failed to revoke security zone');
+    }
+  };
+
+  const handleRevokeSession = async (sessionId: number, adminName: string) => {
+    if (!user?.token) return;
+    if (!confirm(`Emergency Revocation: Terminate active session #${sessionId} for ${adminName}?`)) return;
+    try {
+      await api.adminRevokeSession(sessionId, 'Emergency termination via Security Console', user.token);
+      setActionSuccessMsg(`Session #${sessionId} terminated successfully`);
+      fetchSubSecurityData();
+    } catch (err: any) {
+      setActionErrorMsg(err?.message || 'Failed to terminate session');
+    }
+  };
+
   useEffect(() => {
     if (!user?.token) return;
+    fetchSubSecurityData();
     api.adminGetLogs({ limit: 20 }, user.token)
       .then(res => {
         if (res?.logs && res.logs.length > 0) {
@@ -132,6 +252,7 @@ export default function SecurityConsolePage() {
   const handleRefresh = () => {
     setIsRefreshing(true);
     if (user?.token) {
+      fetchSubSecurityData();
       api.adminGetLogs({ limit: 20 }, user.token)
         .then(res => {
           if (res?.logs && res.logs.length > 0) {
@@ -683,7 +804,318 @@ export default function SecurityConsolePage() {
 
         </section>
 
+        {/* 4. SUB-SECURITY SEPARATION & DELEGATED ZONES */}
+        <section className="bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-zinc-800">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="p-1.5 bg-cyan-600/10 text-cyan-400 rounded-lg border border-cyan-500/20">
+                  <Shield size={18} />
+                </div>
+                <h2 className="text-lg font-black text-white tracking-tight">Sovereign Sub-Security Separation & Delegation</h2>
+              </div>
+              <p className="text-xs text-zinc-400 max-w-3xl leading-relaxed">
+                Cryptographically partitions administrative access into 5 discrete sub-security perimeters. Governed by CISO and Security Administrators to prevent cross-department privilege contagion in national financial operations.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setAssignZoneModalOpen(true)}
+                className="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-lg shadow-cyan-600/20 transition-all tap-bounce active:scale-95"
+              >
+                <UserPlus size={14} />
+                <span>Delegate Zone Access</span>
+              </button>
+            </div>
+          </div>
+
+          {actionSuccessMsg && (
+            <div className="mb-4 p-3 bg-emerald-950/60 border border-emerald-500/40 rounded-xl text-xs text-emerald-300 font-bold flex items-center justify-between">
+              <span>{actionSuccessMsg}</span>
+              <button onClick={() => setActionSuccessMsg('')} className="text-emerald-400 hover:text-white"><XCircle size={14} /></button>
+            </div>
+          )}
+
+          {actionErrorMsg && (
+            <div className="mb-4 p-3 bg-red-950/60 border border-red-500/40 rounded-xl text-xs text-red-300 font-bold flex items-center justify-between">
+              <span>{actionErrorMsg}</span>
+              <button onClick={() => setActionErrorMsg('')} className="text-red-400 hover:text-white"><XCircle size={14} /></button>
+            </div>
+          )}
+
+          {/* ZONES GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            {securityZones.map((zone) => (
+              <div
+                key={zone.code}
+                className="bg-zinc-950/70 border border-zinc-800/90 rounded-2xl p-5 flex flex-col justify-between hover:border-cyan-500/30 transition-all group"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="px-2.5 py-1 rounded-lg bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 font-mono text-[11px] font-bold">
+                      {zone.code}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-950/50 border border-emerald-500/30 text-emerald-400">
+                      Active Perimeter
+                    </span>
+                  </div>
+
+                  <h3 className="text-sm font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                    {zone.name}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                    {zone.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 text-[10px] font-mono mb-4">
+                    <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">
+                      Req: {zone.required_role || 'SOC / SEC'}
+                    </span>
+                    {zone.require_trusted_device && (
+                      <span className="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/20">
+                        Hardware Key Req
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="border-t border-zinc-800/80 pt-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                        Delegated Personnel ({zone.members?.length || 0})
+                      </span>
+                      <button
+                        onClick={() => {
+                          setTargetZoneCode(zone.code);
+                          setAssignZoneModalOpen(true);
+                        }}
+                        className="text-[10px] font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-0.5"
+                      >
+                        <UserPlus size={10} /> Add
+                      </button>
+                    </div>
+
+                    <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+                      {zone.members && zone.members.length > 0 ? (
+                        zone.members.map((m) => (
+                          <div
+                            key={m.admin_id}
+                            className="flex items-center justify-between p-2 rounded-xl bg-zinc-900 border border-zinc-800/70 text-xs"
+                          >
+                            <div className="min-w-0 pr-2">
+                              <div className="font-bold text-white text-[11px] truncate">
+                                #{m.admin_id} {m.name}
+                              </div>
+                              <div className="text-[10px] text-zinc-500 uppercase font-mono">
+                                {m.admin_role}
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => handleRevokeZone(zone.code, m.admin_id)}
+                              className="p-1 text-zinc-500 hover:text-red-400 rounded hover:bg-zinc-800 transition-colors"
+                              title="Revoke Zone Assignment"
+                            >
+                              <UserMinus size={12} />
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-[11px] text-zinc-600 italic py-1">
+                          No delegated members currently assigned
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. ENTERPRISE ADMINISTRATIVE SESSIONS & HARDWARE TELEMETRY MONITOR */}
+        <section className="bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-zinc-800">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="p-1.5 bg-emerald-600/10 text-emerald-400 rounded-lg border border-emerald-500/20">
+                  <Monitor size={18} />
+                </div>
+                <h2 className="text-lg font-black text-white tracking-tight">Active Administrative Sessions & Hardware Telemetry</h2>
+              </div>
+              <p className="text-xs text-zinc-400 max-w-3xl leading-relaxed">
+                Real-time sovereign audit matrix identifying the exact Administrator ID, IP address, hardware device fingerprint, and session signature for every active console connection.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                {activeSessions.length} Active Sessions
+              </span>
+            </div>
+          </div>
+
+          {/* SESSIONS TABLE */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs font-mono">
+              <thead>
+                <tr className="border-b border-zinc-800 text-[10px] font-black uppercase tracking-wider text-zinc-500">
+                  <th className="pb-3">Admin Identity</th>
+                  <th className="pb-3">Governance Role</th>
+                  <th className="pb-3">Shift & Terminal</th>
+                  <th className="pb-3">Client IP & Loc</th>
+                  <th className="pb-3">Hardware Device</th>
+                  <th className="pb-3">Last Active</th>
+                  <th className="pb-3 text-right">Emergency Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-800/60">
+                {activeSessions.map((s) => (
+                  <tr key={s.id} className="hover:bg-zinc-800/30 transition-colors">
+                    <td className="py-3">
+                      <div className="font-bold text-white text-xs font-sans">#{s.user_id} {s.name}</div>
+                      <div className="text-[10px] text-zinc-500">{s.email}</div>
+                    </td>
+                    <td className="py-3">
+                      <span className="px-2 py-0.5 rounded-md bg-amber-950/60 text-amber-400 border border-amber-500/30 text-[10px] uppercase font-bold">
+                        {s.admin_role}
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      <div className="flex items-center gap-1.5">
+                        <span className="px-1.5 py-0.5 rounded bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 text-[10px] font-bold">
+                          {s.shift_code || 'DAY_SHIFT'}
+                        </span>
+                        <span className="text-[10px] font-mono text-cyan-400 font-bold">
+                          {s.workstation_code || 'WS-AA-01'}
+                        </span>
+                      </div>
+                      <div className="text-[9px] text-zinc-500 truncate max-w-[140px]" title={s.facility_location}>
+                        {s.facility_location || 'HQ Command Center'}
+                      </div>
+                    </td>
+                    <td className="py-3">
+                      <div className="text-emerald-400 font-bold text-[11px]">{s.ip_address || '127.0.0.1'}</div>
+                      <div className="text-[10px] text-zinc-500 uppercase">{s.portal || 'EXECUTIVE'}</div>
+                    </td>
+                    <td className="py-3">
+                      <div className="flex items-center gap-1.5 font-sans">
+                        <Monitor size={13} className={s.is_trusted ? 'text-emerald-400' : 'text-amber-400'} />
+                        <span className={`text-[11px] font-bold ${s.is_trusted ? 'text-emerald-300' : 'text-zinc-300'}`}>
+                          {s.device_name || (s.device_id ? s.device_id.slice(0, 12) + '...' : 'Browser Session')}
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-zinc-500 font-mono">
+                        {s.is_trusted ? 'FIDO2 / Trusted Key' : 'Standard Web Session'}
+                      </div>
+                    </td>
+                    <td className="py-3 text-zinc-400 text-[11px]">
+                      {s.last_active ? new Date(s.last_active).toLocaleTimeString() : 'Active'}
+                    </td>
+                    <td className="py-3 text-right">
+                      <button
+                        onClick={() => handleRevokeSession(s.id, s.name)}
+                        className="px-2.5 py-1 rounded-lg bg-red-950/60 hover:bg-red-900 border border-red-500/40 text-red-300 font-sans text-[11px] font-bold transition-all flex items-center gap-1 ml-auto"
+                        title="Immediately terminate session and revoke JWT"
+                      >
+                        <Trash2 size={12} />
+                        Terminate
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
       </main>
+
+      {/* ── ASSIGN SUB-SECURITY ZONE MODAL ── */}
+      {assignZoneModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in">
+          <div className="w-full max-w-md bg-zinc-900 border border-cyan-500/40 rounded-3xl p-6 lg:p-7 shadow-2xl relative text-left">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-4">
+              <div className="flex items-center gap-2">
+                <Shield size={18} className="text-cyan-400" />
+                <h3 className="text-base font-bold text-white">Delegate Sub-Security Zone</h3>
+              </div>
+              <button
+                onClick={() => setAssignZoneModalOpen(false)}
+                className="text-zinc-400 hover:text-white"
+              >
+                <XCircle size={18} />
+              </button>
+            </div>
+
+            <form onSubmit={handleAssignZoneSubmit} className="space-y-4 text-xs">
+              <div>
+                <label className="text-[11px] font-black text-zinc-400 uppercase tracking-wider mb-1 block">
+                  Select Sub-Security Perimeter
+                </label>
+                <select
+                  value={targetZoneCode}
+                  onChange={(e) => setTargetZoneCode(e.target.value)}
+                  className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl px-3 py-2.5 font-mono text-xs font-bold focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                >
+                  <option value="SOC_DEFENSE">SOC_DEFENSE (Threat & Attack Defense)</option>
+                  <option value="FRAUD_AML">FRAUD_AML (Financial AML Investigation)</option>
+                  <option value="KYC_COMPLIANCE">KYC_COMPLIANCE (Identity & FIDA Regulatory)</option>
+                  <option value="GATEWAY_OPS">GATEWAY_OPS (Payment Gateway & Telecom Ops)</option>
+                  <option value="DISPUTE_ESCROW">DISPUTE_ESCROW (Dispute Resolution & Escrow)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-[11px] font-black text-zinc-400 uppercase tracking-wider mb-1 block">
+                  Target Administrator User ID
+                </label>
+                <input
+                  type="number"
+                  required
+                  placeholder="e.g. 208 (SOC Analyst)"
+                  value={targetAdminId}
+                  onChange={(e) => setTargetAdminId(e.target.value)}
+                  className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl px-3 py-2.5 font-mono text-xs focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-black text-zinc-400 uppercase tracking-wider mb-1 block">
+                  Authorization Delegation Notes
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Shift 1 Incident Commander delegation"
+                  value={targetNotes}
+                  onChange={(e) => setTargetNotes(e.target.value)}
+                  className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                />
+              </div>
+
+              <div className="pt-2 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setAssignZoneModalOpen(false)}
+                  className="flex-1 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-xs"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-cyan-600/30"
+                >
+                  Confirm Delegation
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
 
       {/* ── EMERGENCY KILLSWITCH MODAL ── */}
       {killswitchModalOpen && (

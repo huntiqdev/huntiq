@@ -15742,7 +15742,7 @@
       "parent_id": 1093,
       "parent_code": "foster-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "foster-care-commercial-passenger-auto-rickshaws-s21_0",
+      "slug": "foster-care-commercial-passenger-auto-rickshaws-s21-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -15760,7 +15760,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "foster-care-commercial-passenger-auto-rickshaws-s21_0"
+      ],
       "redirects": []
     },
     {
@@ -15768,7 +15770,7 @@
       "parent_id": 1111,
       "parent_code": "elder-day-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-day-care-commercial-passenger-auto-rickshaws-s22_0",
+      "slug": "elder-day-care-commercial-passenger-auto-rickshaws-s22-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -15786,7 +15788,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elder-day-care-commercial-passenger-auto-rickshaws-s22_0"
+      ],
       "redirects": []
     },
     {
@@ -15794,7 +15798,7 @@
       "parent_id": 1112,
       "parent_code": "elder-healthcare",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-healthcare-commercial-passenger-auto-ricksha-s23_0",
+      "slug": "elder-healthcare-commercial-passenger-auto-ricksha-s23-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -15812,7 +15816,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elder-healthcare-commercial-passenger-auto-ricksha-s23_0"
+      ],
       "redirects": []
     },
     {
@@ -15820,7 +15826,7 @@
       "parent_id": 1121,
       "parent_code": "capacity-building",
       "classification_system_code": "SYS_PROD",
-      "slug": "capacity-building-high-strength-structural-portlan-s43_0",
+      "slug": "capacity-building-high-strength-structural-portlan-s43-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -15838,7 +15844,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "capacity-building-high-strength-structural-portlan-s43_0"
+      ],
       "redirects": []
     },
     {
@@ -15846,7 +15854,7 @@
       "parent_id": 1093,
       "parent_code": "foster-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "foster-care-heavy-duty-cargo-delivery-three-wheele-s21_1",
+      "slug": "foster-care-heavy-duty-cargo-delivery-three-wheele-s21-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -15868,7 +15876,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "foster-care-heavy-duty-cargo-delivery-three-wheele-s21_1"
       ],
       "redirects": []
     },
@@ -15877,7 +15886,7 @@
       "parent_id": 1111,
       "parent_code": "elder-day-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-day-care-heavy-duty-cargo-delivery-three-whe-s22_1",
+      "slug": "elder-day-care-heavy-duty-cargo-delivery-three-whe-s22-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -15899,7 +15908,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "elder-day-care-heavy-duty-cargo-delivery-three-whe-s22_1"
       ],
       "redirects": []
     },
@@ -15908,7 +15918,7 @@
       "parent_id": 1112,
       "parent_code": "elder-healthcare",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-healthcare-heavy-duty-cargo-delivery-three-w-s23_1",
+      "slug": "elder-healthcare-heavy-duty-cargo-delivery-three-w-s23-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -15930,7 +15940,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "elder-healthcare-heavy-duty-cargo-delivery-three-w-s23_1"
       ],
       "redirects": []
     },
@@ -15939,7 +15950,7 @@
       "parent_id": 1121,
       "parent_code": "capacity-building",
       "classification_system_code": "SYS_PROD",
-      "slug": "capacity-building-ribbed-high-yield-rebar-reinforc-s43_1",
+      "slug": "capacity-building-ribbed-high-yield-rebar-reinforc-s43-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -15957,7 +15968,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "capacity-building-ribbed-high-yield-rebar-reinforc-s43_1"
+      ],
       "redirects": []
     },
     {
@@ -15965,7 +15978,7 @@
       "parent_id": 1093,
       "parent_code": "foster-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "foster-care-electric-green-mobility-e-rickshaws-s21_2",
+      "slug": "foster-care-electric-green-mobility-e-rickshaws-s21-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -15983,7 +15996,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "foster-care-electric-green-mobility-e-rickshaws-s21_2"
+      ],
       "redirects": []
     },
     {
@@ -15991,7 +16006,7 @@
       "parent_id": 1111,
       "parent_code": "elder-day-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-day-care-electric-green-mobility-e-rickshaws-s22_2",
+      "slug": "elder-day-care-electric-green-mobility-e-rickshaws-s22-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -16009,7 +16024,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elder-day-care-electric-green-mobility-e-rickshaws-s22_2"
+      ],
       "redirects": []
     },
     {
@@ -16017,7 +16034,7 @@
       "parent_id": 1112,
       "parent_code": "elder-healthcare",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-healthcare-electric-green-mobility-e-ricksha-s23_2",
+      "slug": "elder-healthcare-electric-green-mobility-e-ricksha-s23-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -16035,7 +16052,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elder-healthcare-electric-green-mobility-e-ricksha-s23_2"
+      ],
       "redirects": []
     },
     {
@@ -16043,7 +16062,7 @@
       "parent_id": 1121,
       "parent_code": "capacity-building",
       "classification_system_code": "SYS_PROD",
-      "slug": "capacity-building-furnished-modern-residential-apa-s43_2",
+      "slug": "capacity-building-furnished-modern-residential-apa-s43-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -16061,7 +16080,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "capacity-building-furnished-modern-residential-apa-s43_2"
+      ],
       "redirects": []
     },
     {
@@ -16069,7 +16090,7 @@
       "parent_id": 1093,
       "parent_code": "foster-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "foster-care-long-distance-passenger-minibuses-s21_3",
+      "slug": "foster-care-long-distance-passenger-minibuses-s21-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -16087,7 +16108,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "foster-care-long-distance-passenger-minibuses-s21_3"
+      ],
       "redirects": []
     },
     {
@@ -16095,7 +16118,7 @@
       "parent_id": 1111,
       "parent_code": "elder-day-care",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-day-care-long-distance-passenger-minibuses-s22_3",
+      "slug": "elder-day-care-long-distance-passenger-minibuses-s22-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -16113,7 +16136,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elder-day-care-long-distance-passenger-minibuses-s22_3"
+      ],
       "redirects": []
     },
     {
@@ -16121,7 +16146,7 @@
       "parent_id": 1112,
       "parent_code": "elder-healthcare",
       "classification_system_code": "SYS_PROD",
-      "slug": "elder-healthcare-long-distance-passenger-minibuses-s23_3",
+      "slug": "elder-healthcare-long-distance-passenger-minibuses-s23-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -16139,7 +16164,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "elder-healthcare-long-distance-passenger-minibuses-s23_3"
+      ],
       "redirects": []
     },
     {
@@ -16147,7 +16174,7 @@
       "parent_id": 1121,
       "parent_code": "capacity-building",
       "classification_system_code": "SYS_PROD",
-      "slug": "capacity-building-condominium-housing-units-20-80--s43_3",
+      "slug": "capacity-building-condominium-housing-units-20-80-s43-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -16170,7 +16197,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "capacity-building-condominium-housing-units-20-80--s43_3"
       ],
       "redirects": []
     },

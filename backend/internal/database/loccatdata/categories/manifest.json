@@ -1,21 +1,43 @@
 {
-  "version": "2.0.0",
-  "description": "Enterprise canonical category taxonomy with 4-language support across 7 classification systems",
-  "total_categories": 20500,
-  "classification_systems": {
-    "SYS_PROD": 18122,
-    "SYS_MED": 213,
-    "SYS_GIG": 103,
-    "SYS_OPP": 46,
-    "SYS_PRM": 140,
-    "SYS_SRV": 1702,
-    "SYS_EMP": 174
-  },
-  "languages": [
-    "en",
-    "am",
-    "om",
-    "ti"
-  ],
-  "schema": "schema.json"
+  "version": "2.1.0",
+  "total_categories": 20528,
+  "last_updated": "2026-11-24",
+  "languages": ["en", "am", "om", "ti"],
+  "classification_systems": [
+    {
+      "code": "SYS_PROD",
+      "name": "Products & Merchandise",
+      "count": 18274
+    },
+    {
+      "code": "SYS_SRV",
+      "name": "Professional & Local Services",
+      "count": 1416
+    },
+    {
+      "code": "SYS_MED",
+      "name": "Healthcare & Medical Services",
+      "count": 307
+    },
+    {
+      "code": "SYS_EMP",
+      "name": "Jobs & Employment",
+      "count": 277
+    },
+    {
+      "code": "SYS_PRM",
+      "name": "Real Estate & Property",
+      "count": 178
+    },
+    {
+      "code": "SYS_GIG",
+      "name": "Freelance & Gig Economy",
+      "count": 62
+    },
+    {
+      "code": "SYS_OPP",
+      "name": "Tenders & Business Opportunities",
+      "count": 14
+    }
+  ]
 }

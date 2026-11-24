@@ -25446,7 +25446,7 @@
       "parent_id": 1158,
       "parent_code": "mobile-apps",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-apps-5g-flagship-smartphones-s2_0",
+      "slug": "mobile-apps-5g-flagship-smartphones-s2-0",
       "names": {
         "en": "5G Flagship Smartphones",
         "am": "ባለ 5ጂ ዘመናዊ ስልኮች",
@@ -25464,7 +25464,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-apps-5g-flagship-smartphones-s2_0"
+      ],
       "redirects": []
     },
     {
@@ -25472,7 +25474,7 @@
       "parent_id": 1194,
       "parent_code": "mobile-app-development",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-app-development-5g-flagship-smartphones-s3_0",
+      "slug": "mobile-app-development-5g-flagship-smartphones-s3-0",
       "names": {
         "en": "5G Flagship Smartphones",
         "am": "ባለ 5ጂ ዘመናዊ ስልኮች",
@@ -25490,7 +25492,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-app-development-5g-flagship-smartphones-s3_0"
+      ],
       "redirects": []
     },
     {
@@ -25498,7 +25502,7 @@
       "parent_id": 1155,
       "parent_code": "reporting-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "reporting-tools-heavy-duty-rotary-hammer-demolitio-s27_0",
+      "slug": "reporting-tools-heavy-duty-rotary-hammer-demolitio-s27-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -25521,7 +25525,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "reporting-tools-heavy-duty-rotary-hammer-demolitio-s27_0"
       ],
       "redirects": []
     },
@@ -25530,7 +25535,7 @@
       "parent_id": 1158,
       "parent_code": "mobile-apps",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-apps-mid-range-performance-phones-s2_1",
+      "slug": "mobile-apps-mid-range-performance-phones-s2-1",
       "names": {
         "en": "Mid-Range Performance Phones",
         "am": "መካከለኛ ደረጃ ስልኮች",
@@ -25548,7 +25553,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-apps-mid-range-performance-phones-s2_1"
+      ],
       "redirects": []
     },
     {
@@ -25556,7 +25563,7 @@
       "parent_id": 1194,
       "parent_code": "mobile-app-development",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-app-development-mid-range-performance-phone-s3_1",
+      "slug": "mobile-app-development-mid-range-performance-phone-s3-1",
       "names": {
         "en": "Mid-Range Performance Phones",
         "am": "መካከለኛ ደረጃ ስልኮች",
@@ -25574,7 +25581,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-app-development-mid-range-performance-phone-s3_1"
+      ],
       "redirects": []
     },
     {
@@ -25582,7 +25591,7 @@
       "parent_id": 1155,
       "parent_code": "reporting-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "reporting-tools-brushless-cordless-impact-drivers--s27_1",
+      "slug": "reporting-tools-brushless-cordless-impact-drivers-s27-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -25602,7 +25611,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "reporting-tools-brushless-cordless-impact-drivers--s27_1"
       ],
       "redirects": []
     },
@@ -25611,7 +25621,7 @@
       "parent_id": 1158,
       "parent_code": "mobile-apps",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-apps-budget-long-battery-phones-s2_2",
+      "slug": "mobile-apps-budget-long-battery-phones-s2-2",
       "names": {
         "en": "Budget Long-Battery Phones",
         "am": "ተመጣጣኝ ባትሪ ቆጣቢ ስልኮች",
@@ -25629,7 +25639,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-apps-budget-long-battery-phones-s2_2"
+      ],
       "redirects": []
     },
     {
@@ -25637,7 +25649,7 @@
       "parent_id": 1194,
       "parent_code": "mobile-app-development",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-app-development-budget-long-battery-phones-s3_2",
+      "slug": "mobile-app-development-budget-long-battery-phones-s3-2",
       "names": {
         "en": "Budget Long-Battery Phones",
         "am": "ተመጣጣኝ ባትሪ ቆጣቢ ስልኮች",
@@ -25655,7 +25667,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-app-development-budget-long-battery-phones-s3_2"
+      ],
       "redirects": []
     },
     {
@@ -25663,7 +25677,7 @@
       "parent_id": 1155,
       "parent_code": "reporting-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "reporting-tools-high-power-angle-grinders-metal-cu-s27_2",
+      "slug": "reporting-tools-high-power-angle-grinders-metal-cu-s27-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -25684,7 +25698,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "reporting-tools-high-power-angle-grinders-metal-cu-s27_2"
       ],
       "redirects": []
     },
@@ -25693,7 +25708,7 @@
       "parent_id": 1158,
       "parent_code": "mobile-apps",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-apps-rugged-heavy-duty-phones-s2_3",
+      "slug": "mobile-apps-rugged-heavy-duty-phones-s2-3",
       "names": {
         "en": "Rugged Heavy-Duty Phones",
         "am": "አስተማማኝ ጠንካራ ስልኮች",
@@ -25711,7 +25726,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-apps-rugged-heavy-duty-phones-s2_3"
+      ],
       "redirects": []
     },
     {
@@ -25719,7 +25736,7 @@
       "parent_id": 1194,
       "parent_code": "mobile-app-development",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-app-development-rugged-heavy-duty-phones-s3_3",
+      "slug": "mobile-app-development-rugged-heavy-duty-phones-s3-3",
       "names": {
         "en": "Rugged Heavy-Duty Phones",
         "am": "አስተማማኝ ጠንካራ ስልኮች",
@@ -25737,7 +25754,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-app-development-rugged-heavy-duty-phones-s3_3"
+      ],
       "redirects": []
     },
     {
@@ -25745,7 +25764,7 @@
       "parent_id": 1155,
       "parent_code": "reporting-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "reporting-tools-silent-diesel-portable-petrol-gene-s27_3",
+      "slug": "reporting-tools-silent-diesel-portable-petrol-gene-s27-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -25768,7 +25787,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "reporting-tools-silent-diesel-portable-petrol-gene-s27_3"
       ],
       "redirects": []
     },

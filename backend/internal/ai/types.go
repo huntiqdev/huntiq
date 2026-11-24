@@ -66,3 +66,14 @@ type ChatResponse struct {
 	Listings         []ListingCard `json:"listings,omitempty"`
 	Error            string        `json:"error,omitempty"`
 }
+
+type TranslateRequest struct {
+	Text     string `json:"text"`
+	FromLang string `json:"from_lang,omitempty"`
+}
+
+type TranslateResponse struct {
+	SourceLanguage string            `json:"source_language"`
+	Translations   map[string]string `json:"translations"`
+	Fallback       bool              `json:"fallback"`
+}

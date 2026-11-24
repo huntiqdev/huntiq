@@ -343,7 +343,7 @@
       "icon": "",
       "image_url": null,
       "is_active": true,
-      "is_leaf": true,
+      "is_leaf": false,
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
@@ -1496,6 +1496,93 @@
         "ፍሉይን ዝተዳለወን Pharmaceutical Distribution"
       ],
       "redirects": []
+    },
+    {
+      "id": 2000050,
+      "parent_id": 2716,
+      "parent_code": null,
+      "classification_system_code": "SYS_MED",
+      "slug": "clinical-diagnostic-ultrasound-scanners",
+      "names": {
+        "en": "Clinical Diagnostic Ultrasound Scanners",
+        "am": "የክሊኒካል ምርመራ አልትራሳውንድ ስካነሮች",
+        "om": "Iskanara Altiraasaawundii Qorannoo Fayyaa",
+        "ti": "ናይ ክሊኒክ መመርመሪ ኣልትራሳውንድ"
+      },
+      "description": "",
+      "level": 3,
+      "path": "/2712/2715/2716/2000050/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": "Clinical Diagnostic Ultrasound Scanners",
+      "meta_description": "Clinical Diagnostic Ultrasound Scanners",
+      "aliases": [
+        "ultrasound scanner",
+        "sonogram machine",
+        "diagnostic imaging"
+      ]
+    },
+    {
+      "id": 2000051,
+      "parent_id": 2000050,
+      "parent_code": null,
+      "classification_system_code": "SYS_MED",
+      "slug": "handheld-point-of-care-ultrasound-pocus",
+      "names": {
+        "en": "Handheld Point-of-Care Ultrasound (POCUS)",
+        "am": "በእጅ የሚያዝ ፈጣን አልትራሳውንድ (POCUS)",
+        "om": "Altiraasaawundii Harkaa Dafee Qoratu",
+        "ti": "ብኢድ ዝተሓዝ ቀሊል ኣልትራሳውንድ (POCUS)"
+      },
+      "description": "",
+      "level": 4,
+      "path": "/2712/2715/2716/2000050/2000051/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": "Handheld Point-of-Care Ultrasound (POCUS)",
+      "meta_description": "Handheld Point-of-Care Ultrasound (POCUS)",
+      "aliases": [
+        "pocus ultrasound",
+        "handheld ultrasound probe",
+        "pocket ultrasound"
+      ]
+    },
+    {
+      "id": 2000052,
+      "parent_id": 2000050,
+      "parent_code": null,
+      "classification_system_code": "SYS_MED",
+      "slug": "color-doppler-4d-obstetric-ultrasound",
+      "names": {
+        "en": "Color Doppler 4D Obstetric Ultrasound Consoles",
+        "am": "ባለቀለም ዶፕለር 4D የማህፀን እና ልብ አልትራሳውንድ",
+        "om": "Altiraasaawundii 4D Halluu Qabu",
+        "ti": "ሕብራዊ ዶፕለር 4D ኣልትራሳውንድ"
+      },
+      "description": "",
+      "level": 4,
+      "path": "/2712/2715/2716/2000050/2000052/",
+      "display_order": 2,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": "Color Doppler 4D Obstetric Ultrasound Consoles",
+      "meta_description": "Color Doppler 4D Obstetric Ultrasound Consoles",
+      "aliases": [
+        "4d ultrasound machine",
+        "color doppler",
+        "cardiac ultrasound"
+      ]
     }
   ]
 }

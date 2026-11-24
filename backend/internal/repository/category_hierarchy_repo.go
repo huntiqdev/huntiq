@@ -754,6 +754,273 @@ func (r *CategoryHierarchyRepo) ResolveCategoryByAlias(ctx context.Context, term
 	return nil, nil
 }
 
+// GetChildrenChips retrieves direct child categories as interactive 1-tap navigation chips
+func (r *CategoryHierarchyRepo) GetChildrenChips(ctx context.Context, categoryID int, lang string) ([]models.CategoryChildChip, error) {
+	query := `
+		SELECT c.id, c.parent_id,
+		       COALESCE(c.name_en, ''), COALESCE(c.name_am, ''), COALESCE(c.name_om, ''), COALESCE(c.name_ti, ''),
+		       COALESCE(c.slug, ''), c.level, c.is_leaf, COALESCE(c.icon, ''),
+		       COALESCE(cnt.product_count, 0)::int
+		FROM category_hierarchy c
+		LEFT JOIN (
+			SELECT category_hierarchy_id, COUNT(*) as product_count
+			FROM products
+			WHERE status = 'approved'
+			GROUP BY category_hierarchy_id
+		) cnt ON c.id = cnt.category_hierarchy_id
+		WHERE c.parent_id = $1 AND c.is_active = true
+		ORDER BY c.display_order ASC, c.name_en ASC
+		LIMIT 30
+	`
+	rows, err := r.db.Query(ctx, query, categoryID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var chips []models.CategoryChildChip
+	for rows.Next() {
+		var chip models.CategoryChildChip
+		var nameEn, nameAm, nameOm, nameTi string
+		var prodCount int
+		if err := rows.Scan(
+			&chip.ID, &chip.ParentID,
+			&nameEn, &nameAm, &nameOm, &nameTi,
+			&chip.Slug, &chip.Level, &chip.IsLeaf, &chip.Icon,
+			&prodCount,
+		); err != nil {
+			continue
+		}
+		chip.ProductCount = prodCount
+		chip.NameEn = nameEn
+		chip.NameAm = nameAm
+		switch lang {
+		case "am":
+			chip.Name = nameAm
+		case "om", "or":
+			chip.Name = nameOm
+		case "ti":
+			chip.Name = nameTi
+		default:
+			chip.Name = nameEn
+		}
+		if chip.Name == "" {
+			chip.Name = nameEn
+		}
+		chips = append(chips, chip)
+	}
+	return chips, nil
+}
+
+// GetSiblingChips retrieves sibling categories when a leaf category is queried
+func (r *CategoryHierarchyRepo) GetSiblingChips(ctx context.Context, parentID, excludeID int, lang string) ([]models.CategoryChildChip, error) {
+	query := `
+		SELECT c.id, c.parent_id,
+		       COALESCE(c.name_en, ''), COALESCE(c.name_am, ''), COALESCE(c.name_om, ''), COALESCE(c.name_ti, ''),
+		       COALESCE(c.slug, ''), c.level, c.is_leaf, COALESCE(c.icon, ''),
+		       COALESCE(cnt.product_count, 0)::int
+		FROM category_hierarchy c
+		LEFT JOIN (
+			SELECT category_hierarchy_id, COUNT(*) as product_count
+			FROM products
+			WHERE status = 'approved'
+			GROUP BY category_hierarchy_id
+		) cnt ON c.id = cnt.category_hierarchy_id
+		WHERE c.parent_id = $1 AND c.id != $2 AND c.is_active = true
+		ORDER BY c.display_order ASC, c.name_en ASC
+		LIMIT 30
+	`
+	rows, err := r.db.Query(ctx, query, parentID, excludeID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var chips []models.CategoryChildChip
+	for rows.Next() {
+		var chip models.CategoryChildChip
+		var nameEn, nameAm, nameOm, nameTi string
+		var prodCount int
+		if err := rows.Scan(
+			&chip.ID, &chip.ParentID,
+			&nameEn, &nameAm, &nameOm, &nameTi,
+			&chip.Slug, &chip.Level, &chip.IsLeaf, &chip.Icon,
+			&prodCount,
+		); err != nil {
+			continue
+		}
+		chip.ProductCount = prodCount
+		chip.NameEn = nameEn
+		chip.NameAm = nameAm
+		switch lang {
+		case "am":
+			chip.Name = nameAm
+		case "om", "or":
+			chip.Name = nameOm
+		case "ti":
+			chip.Name = nameTi
+		default:
+			chip.Name = nameEn
+		}
+		if chip.Name == "" {
+			chip.Name = nameEn
+		}
+		chips = append(chips, chip)
+	}
+	return chips, nil
+}
+
+// ResolveCategoryIntent analyzes any search keyword and returns authoritative category,
+// its hierarchy breadcrumbs, 1-tap subcategories, and disambiguation alternatives.
+func (r *CategoryHierarchyRepo) ResolveCategoryIntent(ctx context.Context, term string, lang string) (*models.CategoryIntentResponse, error) {
+	clean := strings.TrimSpace(term)
+	defaultQuickFilters := models.IntentQuickFilters{
+		Modes:       []string{"buy", "rent"},
+		Locations:   []string{"Addis Ababa", "Bole", "Hawassa", "Adama", "Bahir Dar"},
+		PopularTags: []string{"Electronics", "Vehicles", "Property", "Services", "Tools"},
+	}
+
+	if clean == "" {
+		return &models.CategoryIntentResponse{
+			HasIntent:    false,
+			Query:        term,
+			QuickFilters: defaultQuickFilters,
+		}, nil
+	}
+
+	if lang == "" {
+		lang = "en"
+	}
+
+	type rawCandidate struct {
+		categoryID  int
+		nameEn      string
+		nameAm      string
+		slug        string
+		level       int
+		path        string
+		score       float64
+		matchSource string
+	}
+
+	var candidates []rawCandidate
+	rows, err := r.db.Query(ctx, `
+		SELECT out_category_id, out_name_en, out_name_am, out_slug, out_level, out_path, out_score, out_match_source
+		FROM public.resolve_category_intent_multisource($1, 8)
+	`, clean)
+	if err == nil {
+		defer rows.Close()
+		for rows.Next() {
+			var rc rawCandidate
+			if err := rows.Scan(&rc.categoryID, &rc.nameEn, &rc.nameAm, &rc.slug, &rc.level, &rc.path, &rc.score, &rc.matchSource); err == nil {
+				candidates = append(candidates, rc)
+			}
+		}
+	}
+
+	var primaryID int
+	if len(candidates) > 0 {
+		primaryID = candidates[0].categoryID
+	} else {
+		// Fallback to ResolveCategoryByAlias
+		catID, _ := r.ResolveCategoryByAlias(ctx, clean)
+		if catID != nil && *catID > 0 {
+			primaryID = *catID
+		}
+	}
+
+	if primaryID <= 0 {
+		return &models.CategoryIntentResponse{
+			HasIntent:    false,
+			Query:        clean,
+			QuickFilters: defaultQuickFilters,
+		}, nil
+	}
+
+	primaryCat, err := r.GetByID(ctx, primaryID, lang)
+	if err != nil || primaryCat == nil {
+		return &models.CategoryIntentResponse{
+			HasIntent:    false,
+			Query:        clean,
+			QuickFilters: defaultQuickFilters,
+		}, err
+	}
+
+	chips, _ := r.GetChildrenChips(ctx, primaryID, lang)
+	if len(chips) == 0 && primaryCat.ParentID != nil && *primaryCat.ParentID > 0 {
+		chips, _ = r.GetSiblingChips(ctx, *primaryCat.ParentID, primaryCat.ID, lang)
+	}
+
+	isAmbiguous := false
+	var alternatives []models.CategoryIntentCandidate
+	primaryRoot := extractRootFromPath(primaryCat.Path)
+
+	for i := 1; i < len(candidates); i++ {
+		cand := candidates[i]
+		candRoot := extractRootFromPath(cand.path)
+		if candRoot != "" && candRoot != primaryRoot && cand.score >= 60.0 {
+			isAmbiguous = true
+		}
+
+		bcs, _ := r.GetBreadcrumbs(ctx, cand.categoryID, lang)
+		var hierParts []string
+		for _, b := range bcs {
+			hierParts = append(hierParts, b.Name)
+		}
+		candName := cand.nameEn
+		if lang == "am" && cand.nameAm != "" {
+			candName = cand.nameAm
+		}
+		alternatives = append(alternatives, models.CategoryIntentCandidate{
+			ID:          cand.categoryID,
+			Name:        candName,
+			NameEn:      cand.nameEn,
+			NameAm:      cand.nameAm,
+			Slug:        cand.slug,
+			Level:       cand.level,
+			Path:        cand.path,
+			Hierarchy:   strings.Join(hierParts, " › "),
+			Breadcrumbs: bcs,
+			Score:       cand.score,
+			MatchSource: cand.matchSource,
+		})
+	}
+
+	var popularTags []string
+	for _, ch := range chips {
+		if len(popularTags) < 6 {
+			popularTags = append(popularTags, ch.Name)
+		}
+	}
+	if len(popularTags) == 0 {
+		popularTags = []string{primaryCat.NameEn}
+	}
+
+	return &models.CategoryIntentResponse{
+		HasIntent:    true,
+		IsAmbiguous:  isAmbiguous,
+		Query:        clean,
+		Category:     primaryCat,
+		Breadcrumbs:  primaryCat.Breadcrumbs,
+		Children:     chips,
+		Alternatives: alternatives,
+		QuickFilters: models.IntentQuickFilters{
+			Modes:       []string{"buy", "rent"},
+			Locations:   []string{"Addis Ababa", "Bole", "Hawassa", "Adama", "Bahir Dar"},
+			PopularTags: popularTags,
+		},
+	}, nil
+}
+
+func extractRootFromPath(path string) string {
+	trimmed := strings.Trim(path, "/")
+	parts := strings.Split(trimmed, "/")
+	if len(parts) > 0 {
+		return parts[0]
+	}
+	return ""
+}
+
 // ResolveLegacyCategoryID resolves the legacy category ID dynamically from PostgreSQL.
 // It checks if rootID exists in the categories table, or looks up by slug in the categories table,
 // or falls back to the default/other category directly from the categories table.
@@ -925,4 +1192,57 @@ func (r *CategoryHierarchyRepo) SearchCategories(ctx context.Context, term strin
 	}
 
 	return results, nil
+}
+
+// GetRelatedCategories returns cross-category discovery relationships for a given category ID
+func (r *CategoryHierarchyRepo) GetRelatedCategories(ctx context.Context, categoryID int, lang string) ([]models.CategoryHierarchy, error) {
+	query := `
+		SELECT c.id, c.parent_id,
+		       COALESCE(c.name_en, ''), COALESCE(c.name_am, ''), COALESCE(c.name_om, ''), COALESCE(c.name_ti, ''),
+		       COALESCE(c.slug, ''), COALESCE(c.description, ''), c.level, COALESCE(c.path, ''), c.display_order,
+		       COALESCE(c.icon, ''), COALESCE(c.image_url, ''), c.is_active, c.is_leaf,
+		       COALESCE(c.meta_title, ''), COALESCE(c.meta_description, ''),
+		       c.created_at, c.updated_at, COALESCE(c.i18n, '{}'::jsonb)
+		FROM category_hierarchy c
+		WHERE c.id IN (
+			SELECT target_concept_id FROM classification_relationships WHERE source_concept_id = $1 AND status = 'ACTIVE'
+			UNION
+			SELECT source_concept_id FROM classification_relationships WHERE target_concept_id = $1 AND status = 'ACTIVE'
+		)
+		  AND c.is_active = true
+		ORDER BY c.display_order ASC, c.name_en ASC
+	`
+	rows, err := r.db.Query(ctx, query, categoryID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	categories := []models.CategoryHierarchy{}
+	for rows.Next() {
+		var cat models.CategoryHierarchy
+		var i18nBytes []byte
+		err := rows.Scan(
+			&cat.ID, &cat.ParentID, &cat.NameEn, &cat.NameAm, &cat.NameOm, &cat.NameTi,
+			&cat.Slug, &cat.Description, &cat.Level, &cat.Path, &cat.DisplayOrder,
+			&cat.Icon, &cat.ImageURL, &cat.IsActive, &cat.IsLeaf, &cat.MetaTitle,
+			&cat.MetaDescription, &cat.CreatedAt, &cat.UpdatedAt, &i18nBytes,
+		)
+		if err != nil {
+			return nil, err
+		}
+		if len(i18nBytes) > 0 {
+			_ = json.Unmarshal(i18nBytes, &cat.I18N)
+		}
+		categories = append(categories, cat)
+	}
+
+	for i := range categories {
+		bcs, err := r.GetBreadcrumbs(ctx, categories[i].ID, lang)
+		if err == nil && len(bcs) > 0 {
+			categories[i].Breadcrumbs = bcs
+		}
+	}
+
+	return categories, nil
 }

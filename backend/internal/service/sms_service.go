@@ -149,6 +149,25 @@ func (p *EthioTelecomProvider) SendSMS(ctx context.Context, phone, message strin
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var respMap map[string]interface{}
 		_ = json.Unmarshal(respBody, &respMap)
+
+		// Inspect JSON response for telecom error payloads
+		if successVal, ok := respMap["success"].(bool); ok && !successVal {
+			errMsg := "unknown provider error"
+			if m, ok := respMap["message"].(string); ok && m != "" {
+				errMsg = m
+			}
+			errCat := "provider_error"
+			return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, fmt.Errorf("SMS gateway reported failure: %s", errMsg)
+		}
+		if statusVal, ok := respMap["status"].(string); ok && strings.EqualFold(statusVal, "failed") {
+			errMsg := "provider reported status: failed"
+			if m, ok := respMap["message"].(string); ok && m != "" {
+				errMsg = m
+			}
+			errCat := "provider_rejected"
+			return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, fmt.Errorf("SMS gateway rejected message: %s", errMsg)
+		}
+
 		ref := ""
 		if r, ok := respMap["message_id"].(string); ok {
 			ref = r
@@ -267,6 +286,25 @@ func (p *FidaProvider) SendSMS(ctx context.Context, phone, message string) (*SMS
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		var respMap map[string]interface{}
 		_ = json.Unmarshal(respBody, &respMap)
+
+		// Inspect JSON response for telecom error payloads
+		if successVal, ok := respMap["success"].(bool); ok && !successVal {
+			errMsg := "unknown provider error"
+			if m, ok := respMap["message"].(string); ok && m != "" {
+				errMsg = m
+			}
+			errCat := "provider_error"
+			return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, fmt.Errorf("SMS gateway reported failure: %s", errMsg)
+		}
+		if statusVal, ok := respMap["status"].(string); ok && strings.EqualFold(statusVal, "failed") {
+			errMsg := "provider reported status: failed"
+			if m, ok := respMap["message"].(string); ok && m != "" {
+				errMsg = m
+			}
+			errCat := "provider_rejected"
+			return &SMSDeliveryResult{Status: "failed", ErrorCategory: &errCat}, fmt.Errorf("SMS gateway rejected message: %s", errMsg)
+		}
+
 		ref := ""
 		if r, ok := respMap["message_id"].(string); ok {
 			ref = r

@@ -89,3 +89,35 @@ func (h *AIHandler) Health(c *fiber.Ctx) error {
 		"version": "1.0",
 	})
 }
+
+// POST /api/ai/translate
+func (h *AIHandler) Translate(c *fiber.Ctx) error {
+	var req ai.TranslateRequest
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success":    false,
+			"error_code": "ERR_INVALID_PAYLOAD",
+			"error":      "invalid JSON payload",
+		})
+	}
+
+	trimmed := strings.TrimSpace(req.Text)
+	if trimmed == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success":    false,
+			"error_code": "ERR_EMPTY_TEXT",
+			"error":      "text to translate cannot be empty",
+		})
+	}
+
+	resp, err := h.svc.Translate(c.Context(), req)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success":    false,
+			"error_code": "ERR_TRANSLATION_FAILED",
+			"error":      err.Error(),
+		})
+	}
+
+	return response.OK(c, resp)
+}

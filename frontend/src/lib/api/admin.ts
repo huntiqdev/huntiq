@@ -351,5 +351,36 @@ export const adminApi = {
     fetchAPI<any>('/admin/finance/assumptions/reset', { method: 'POST', body: JSON.stringify(data), headers: authHeaders(token) }),
   adminExportFinanceURL: (scenario = 'base', horizon = 60, format = 'csv') =>
     `/api/admin/finance/export?scenario=${scenario}&horizon=${horizon}&format=${format}`,
+
+  // ── Enterprise Sub-Security Separation & Real-Time Telemetry ──────────────
+  adminGetSecurityTelemetryMe: (token: string) =>
+    fetchAPI<any>('/admin/security/telemetry/me', { headers: authHeaders(token) }).then(r => r?.data ?? r),
+  adminGetActiveAdminSessions: (token: string) =>
+    fetchAPI<any>('/admin/security/active-sessions', { headers: authHeaders(token) }).then(r => Array.isArray(r) ? r : (r?.data ?? [])),
+  adminRevokeSession: (sessionId: number, reason: string, token: string) =>
+    fetchAPI<any>(`/admin/security/sessions/${sessionId}/revoke`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+      headers: authHeaders(token),
+    }),
+  adminListSecurityZones: (token: string) =>
+    fetchAPI<any>('/admin/security/zones', { headers: authHeaders(token) }).then(r => Array.isArray(r) ? r : (r?.data ?? [])),
+  adminAssignSecurityZone: (data: { zone_code: string; target_admin_id: number; notes?: string }, token: string) =>
+    fetchAPI<any>('/admin/security/zones/assign', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: authHeaders(token),
+    }),
+  adminRevokeSecurityZone: (data: { zone_code: string; target_admin_id: number; reason?: string }, token: string) =>
+    fetchAPI<any>('/admin/security/zones/revoke', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: authHeaders(token),
+    }),
+
+  // ── Master Data & System Integrity Status ─────────────────────────────────
+  adminMasterDataStatus: (token: string) =>
+    fetchAPI<any>('/admin/masterdata/status', { headers: authHeaders(token) }).then(r => r?.data ?? r),
 };
+
 

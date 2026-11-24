@@ -239,6 +239,18 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 		return nil, fmt.Errorf("minimum %d images required", minImages)
 	}
 
+	// ── GPS Coordinate Bounds Validation ──
+	if req.Latitude != nil {
+		if *req.Latitude < -90.0 || *req.Latitude > 90.0 {
+			return nil, errors.New("latitude must be between -90 and 90 degrees")
+		}
+	}
+	if req.Longitude != nil {
+		if *req.Longitude < -180.0 || *req.Longitude > 180.0 {
+			return nil, errors.New("longitude must be between -180 and 180 degrees")
+		}
+	}
+
 	// ── Listing type validation ──
 	listingType := req.ListingType
 	if listingType == "" {
@@ -293,6 +305,9 @@ func (s *ProductService) CreateForSeller(ctx context.Context, sellerID int, req 
 		return nil, errors.New("you already posted a similar product recently — please wait or edit the existing listing")
 	}
 
+	if len(strings.TrimSpace(req.Description)) < 30 {
+		return nil, errors.New("description must be at least 30 characters with detailed condition and specifications for buyers/tenants")
+	}
 	if len(req.Description) > maxDesc {
 		return nil, fmt.Errorf("description must be %d characters or fewer", maxDesc)
 	}
@@ -582,6 +597,9 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		}
 	}
 	if req.Description != nil {
+		if len(strings.TrimSpace(*req.Description)) < 30 {
+			return errors.New("description must be at least 30 characters with detailed condition and specifications for buyers/tenants")
+		}
 		if len(*req.Description) > maxDesc {
 			return fmt.Errorf("description must be %d characters or fewer", maxDesc)
 		}
@@ -626,8 +644,15 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 				legacyCatID = existing.CategoryID
 			}
 
-			// If a legacy CategoryID was also explicitly supplied, use it as fallback if not resolved
-			if req.CategoryID != nil && *req.CategoryID > 0 && legacyCatID == nil {
+			// If a legacy CategoryID was also explicitly supplied, verify relationship in database
+			if req.CategoryID != nil && *req.CategoryID > 0 && *req.CategoryID != *catHierarchyID {
+				isDescendant, err := s.catHierarchyRepo.IsDescendantOf(ctx, *catHierarchyID, *req.CategoryID)
+				if err != nil {
+					return fmt.Errorf("failed to validate category hierarchy relationship: %w", err)
+				}
+				if !isDescendant {
+					return errors.New("invalid category selection: subcategory does not belong to the selected parent category")
+				}
 				legacyCatID = req.CategoryID
 			}
 		} else if catHierarchyID != nil && s.catRepo != nil {
@@ -670,9 +695,15 @@ func (s *ProductService) UpdateForSeller(ctx context.Context, productID, sellerI
 		existing.SpecificArea = *req.SpecificArea
 	}
 	if req.Latitude != nil {
+		if *req.Latitude < -90.0 || *req.Latitude > 90.0 {
+			return errors.New("latitude must be between -90 and 90 degrees")
+		}
 		existing.Latitude = req.Latitude
 	}
 	if req.Longitude != nil {
+		if *req.Longitude < -180.0 || *req.Longitude > 180.0 {
+			return errors.New("longitude must be between -180 and 180 degrees")
+		}
 		existing.Longitude = req.Longitude
 	}
 	// Rental fields — only update if listing_type is 'rent'

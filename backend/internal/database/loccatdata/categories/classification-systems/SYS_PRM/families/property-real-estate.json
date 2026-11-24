@@ -597,6 +597,39 @@
       "redirects": []
     },
     {
+      "id": 1012995,
+      "parent_id": 2758,
+      "parent_code": "property-real-estate",
+      "classification_system_code": "SYS_PRM",
+      "slug": "specialized-custom-property-real-estate",
+      "names": {
+        "en": "Specialized",
+        "am": "ልዩ",
+        "om": "Kan Addaa",
+        "ti": "ፍሉይ"
+      },
+      "description": null,
+      "level": 1,
+      "path": "/2758/1012995/",
+      "display_order": 999,
+      "icon": "MoreHorizontal",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Custom Property",
+        "Kan Addaa fi Filatamaa Property & Real Estate",
+        "Real Estate",
+        "Specialized & Custom Property & Real Estate",
+        "ልዩና ብጁ Property & Real Estate",
+        "ፍሉይን ዝተዳለወን Property & Real Estate"
+      ],
+      "redirects": []
+    },
+    {
       "id": 1020227,
       "parent_id": 2758,
       "parent_code": "property-real-estate",
@@ -655,39 +688,6 @@
         "Retail",
         "ናይ ንግዲ ህንጻታትን ድኳናትን ክራይ",
         "የንግድ ቤቶች ኪራይና የችርቻሮ ቦታዎች"
-      ],
-      "redirects": []
-    },
-    {
-      "id": 1012995,
-      "parent_id": 2758,
-      "parent_code": "property-real-estate",
-      "classification_system_code": "SYS_PRM",
-      "slug": "specialized-custom-property-real-estate",
-      "names": {
-        "en": "Specialized",
-        "am": "ልዩ",
-        "om": "Kan Addaa",
-        "ti": "ፍሉይ"
-      },
-      "description": null,
-      "level": 1,
-      "path": "/2758/1012995/",
-      "display_order": 999,
-      "icon": "MoreHorizontal",
-      "image_url": null,
-      "is_active": true,
-      "is_leaf": true,
-      "is_archived": false,
-      "meta_title": null,
-      "meta_description": null,
-      "aliases": [
-        "Custom Property",
-        "Kan Addaa fi Filatamaa Property & Real Estate",
-        "Real Estate",
-        "Specialized & Custom Property & Real Estate",
-        "ልዩና ብጁ Property & Real Estate",
-        "ፍሉይን ዝተዳለወን Property & Real Estate"
       ],
       "redirects": []
     },
@@ -2042,7 +2042,7 @@
       "icon": "",
       "image_url": null,
       "is_active": true,
-      "is_leaf": true,
+      "is_leaf": false,
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
@@ -2417,134 +2417,6 @@
       "meta_title": null,
       "meta_description": null,
       "aliases": [],
-      "redirects": []
-    },
-    {
-      "id": 1020228,
-      "parent_id": 1020227,
-      "parent_code": "residential-property-sales-investments",
-      "classification_system_code": "SYS_PRM",
-      "slug": "stand-alone-villas-luxury-compounds",
-      "names": {
-        "en": "Stand-Alone Villas",
-        "am": "ቪላዎች",
-        "om": "Viilaa",
-        "ti": "ቪላታት"
-      },
-      "description": null,
-      "level": 2,
-      "path": "/2758/1020227/1020228/",
-      "display_order": 0,
-      "icon": null,
-      "image_url": null,
-      "is_active": true,
-      "is_leaf": false,
-      "is_archived": false,
-      "meta_title": null,
-      "meta_description": null,
-      "aliases": [
-        "Luxury Compounds",
-        "Stand-Alone Villas & Luxury Compounds",
-        "Viilaa fi Manneen Qananii",
-        "ቪላታትን ናይ ቅንጦት መንበሪ ገዛውትን",
-        "ቪላዎችና የቅንጦት መኖሪያ ግቢዎች"
-      ],
-      "redirects": []
-    },
-    {
-      "id": 1020234,
-      "parent_id": 1020227,
-      "parent_code": "residential-property-sales-investments",
-      "classification_system_code": "SYS_PRM",
-      "slug": "condominiums-modern-apartments",
-      "names": {
-        "en": "Condominiums",
-        "am": "ኮንዶሚኒየሞች",
-        "om": "Kondomiiniyemii",
-        "ti": "ኮንዶሚኒየማት"
-      },
-      "description": null,
-      "level": 2,
-      "path": "/2758/1020227/1020234/",
-      "display_order": 0,
-      "icon": null,
-      "image_url": null,
-      "is_active": true,
-      "is_leaf": false,
-      "is_archived": false,
-      "meta_title": null,
-      "meta_description": null,
-      "aliases": [
-        "Condominiums & Modern Apartments",
-        "Kondomiiniyemii fi Apaartaamaa",
-        "Modern Apartments",
-        "ኮንዶሚኒየማትን ዘመናዊ ኣፓርታማታትን",
-        "ኮንዶሚኒየሞችና ዘመናዊ አፓርታማዎች"
-      ],
-      "redirects": []
-    },
-    {
-      "id": 1020241,
-      "parent_id": 1020240,
-      "parent_code": "commercial-property-leasing-retail",
-      "classification_system_code": "SYS_PRM",
-      "slug": "corporate-office-spaces-headquarters",
-      "names": {
-        "en": "Corporate Office Spaces",
-        "am": "የኮርፖሬት ቢሮዎች",
-        "om": "Biroo Dhaabbilee",
-        "ti": "ናይ ትካላት ቢሮታት"
-      },
-      "description": null,
-      "level": 2,
-      "path": "/2758/1020240/1020241/",
-      "display_order": 0,
-      "icon": null,
-      "image_url": null,
-      "is_active": true,
-      "is_leaf": false,
-      "is_archived": false,
-      "meta_title": null,
-      "meta_description": null,
-      "aliases": [
-        "Biroo Dhaabbilee fi Hojii",
-        "Corporate Office Spaces & Headquarters",
-        "Headquarters",
-        "ናይ ትካላት ቢሮታትን ማእከላይ ቤት ጽሕፈትን",
-        "የኮርፖሬት ቢሮዎችና ዋና መስሪያ ቤቶች"
-      ],
-      "redirects": []
-    },
-    {
-      "id": 1020247,
-      "parent_id": 1020240,
-      "parent_code": "commercial-property-leasing-retail",
-      "classification_system_code": "SYS_PRM",
-      "slug": "retail-shops-banking-spaces",
-      "names": {
-        "en": "Retail Shops",
-        "am": "የችርቻሮ ሱቆች",
-        "om": "Suuqota Daldalaa",
-        "ti": "ናይ ንግዲ ድኳናት"
-      },
-      "description": null,
-      "level": 2,
-      "path": "/2758/1020240/1020247/",
-      "display_order": 0,
-      "icon": null,
-      "image_url": null,
-      "is_active": true,
-      "is_leaf": false,
-      "is_archived": false,
-      "meta_title": null,
-      "meta_description": null,
-      "aliases": [
-        "Banking Spaces",
-        "Retail Shops & Banking Spaces",
-        "Suuqota Daldalaa fi Baankii",
-        "ናይ ንግዲ ድኳናትን ባንክታትን ቦታታት",
-        "የችርቻሮ ሱቆችና የባንክ ማዕከላት"
-      ],
       "redirects": []
     },
     {
@@ -3142,6 +3014,134 @@
       "redirects": []
     },
     {
+      "id": 1020228,
+      "parent_id": 1020227,
+      "parent_code": "residential-property-sales-investments",
+      "classification_system_code": "SYS_PRM",
+      "slug": "stand-alone-villas-luxury-compounds",
+      "names": {
+        "en": "Stand-Alone Villas",
+        "am": "ቪላዎች",
+        "om": "Viilaa",
+        "ti": "ቪላታት"
+      },
+      "description": null,
+      "level": 2,
+      "path": "/2758/1020227/1020228/",
+      "display_order": 0,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Luxury Compounds",
+        "Stand-Alone Villas & Luxury Compounds",
+        "Viilaa fi Manneen Qananii",
+        "ቪላታትን ናይ ቅንጦት መንበሪ ገዛውትን",
+        "ቪላዎችና የቅንጦት መኖሪያ ግቢዎች"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1020234,
+      "parent_id": 1020227,
+      "parent_code": "residential-property-sales-investments",
+      "classification_system_code": "SYS_PRM",
+      "slug": "condominiums-modern-apartments",
+      "names": {
+        "en": "Condominiums",
+        "am": "ኮንዶሚኒየሞች",
+        "om": "Kondomiiniyemii",
+        "ti": "ኮንዶሚኒየማት"
+      },
+      "description": null,
+      "level": 2,
+      "path": "/2758/1020227/1020234/",
+      "display_order": 0,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Condominiums & Modern Apartments",
+        "Kondomiiniyemii fi Apaartaamaa",
+        "Modern Apartments",
+        "ኮንዶሚኒየማትን ዘመናዊ ኣፓርታማታትን",
+        "ኮንዶሚኒየሞችና ዘመናዊ አፓርታማዎች"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1020241,
+      "parent_id": 1020240,
+      "parent_code": "commercial-property-leasing-retail",
+      "classification_system_code": "SYS_PRM",
+      "slug": "corporate-office-spaces-headquarters",
+      "names": {
+        "en": "Corporate Office Spaces",
+        "am": "የኮርፖሬት ቢሮዎች",
+        "om": "Biroo Dhaabbilee",
+        "ti": "ናይ ትካላት ቢሮታት"
+      },
+      "description": null,
+      "level": 2,
+      "path": "/2758/1020240/1020241/",
+      "display_order": 0,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Biroo Dhaabbilee fi Hojii",
+        "Corporate Office Spaces & Headquarters",
+        "Headquarters",
+        "ናይ ትካላት ቢሮታትን ማእከላይ ቤት ጽሕፈትን",
+        "የኮርፖሬት ቢሮዎችና ዋና መስሪያ ቤቶች"
+      ],
+      "redirects": []
+    },
+    {
+      "id": 1020247,
+      "parent_id": 1020240,
+      "parent_code": "commercial-property-leasing-retail",
+      "classification_system_code": "SYS_PRM",
+      "slug": "retail-shops-banking-spaces",
+      "names": {
+        "en": "Retail Shops",
+        "am": "የችርቻሮ ሱቆች",
+        "om": "Suuqota Daldalaa",
+        "ti": "ናይ ንግዲ ድኳናት"
+      },
+      "description": null,
+      "level": 2,
+      "path": "/2758/1020240/1020247/",
+      "display_order": 0,
+      "icon": null,
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": null,
+      "meta_description": null,
+      "aliases": [
+        "Banking Spaces",
+        "Retail Shops & Banking Spaces",
+        "Suuqota Daldalaa fi Baankii",
+        "ናይ ንግዲ ድኳናትን ባንክታትን ቦታታት",
+        "የችርቻሮ ሱቆችና የባንክ ማዕከላት"
+      ],
+      "redirects": []
+    },
+    {
       "id": 1020229,
       "parent_id": 1020228,
       "parent_code": "stand-alone-villas-luxury-compounds",
@@ -3678,6 +3678,95 @@
         "የካፌና የምግብ ቤት ዝግጁ ቦታ"
       ],
       "redirects": []
+    },
+    {
+      "id": 2000070,
+      "parent_id": 2825,
+      "parent_code": null,
+      "classification_system_code": "SYS_PRM",
+      "slug": "addis-public-condominiums",
+      "names": {
+        "en": "Addis Ababa 40/60 & 20/80 Public Condominiums",
+        "am": "የአዲስ አበባ 40/60 እና 20/80 የጋራ መኖሪያ ኮንዶሚኒየሞች",
+        "om": "Kondominiyemii Finfinnee 40/60 fi 20/80",
+        "ti": "ናይ ኣዲስ ኣበባ 40/60ን 20/80ን ኮንዶሚኒየም"
+      },
+      "description": "",
+      "level": 3,
+      "path": "/2758/2824/2825/2000070/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": "Addis Ababa 40/60 & 20/80 Public Condominiums",
+      "meta_description": "Addis Ababa 40/60 & 20/80 Public Condominiums",
+      "aliases": [
+        "40 60 condo",
+        "20 80 condo",
+        "addis condominiyum",
+        "condo bet"
+      ]
+    },
+    {
+      "id": 2000071,
+      "parent_id": 2000070,
+      "parent_code": null,
+      "classification_system_code": "SYS_PRM",
+      "slug": "studio-1br-public-condos",
+      "names": {
+        "en": "Studio & 1-Bedroom Public Condominium Units",
+        "am": "ስቱዲዮ እና ባለ 1 መኝታ የኮንዶሚኒየም ቤቶች",
+        "om": "Kondominiyemii Stuudiyoo fi Kutaa 1",
+        "ti": "ስቱዲዮን ናይ 1 መደቀሲን ኮንዶሚኒየም"
+      },
+      "description": "",
+      "level": 4,
+      "path": "/2758/2824/2825/2000070/2000071/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": "Studio & 1-Bedroom Public Condominium Units",
+      "meta_description": "Studio & 1-Bedroom Public Condominium Units",
+      "aliases": [
+        "studio condo",
+        "1 bedroom condo",
+        "bale 1 megnita"
+      ]
+    },
+    {
+      "id": 2000072,
+      "parent_id": 2000070,
+      "parent_code": null,
+      "classification_system_code": "SYS_PRM",
+      "slug": "2br-3br-public-condos",
+      "names": {
+        "en": "2-Bedroom & 3-Bedroom Public Condominium Units",
+        "am": "ባለ 2 እና ባለ 3 መኝታ የኮንዶሚኒየም ቤቶች",
+        "om": "Kondominiyemii Kutaa 2 fi 3",
+        "ti": "ናይ 2ን 3ን መደቀሲ ኮንዶሚኒየም"
+      },
+      "description": "",
+      "level": 4,
+      "path": "/2758/2824/2825/2000070/2000072/",
+      "display_order": 2,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": "2-Bedroom & 3-Bedroom Public Condominium Units",
+      "meta_description": "2-Bedroom & 3-Bedroom Public Condominium Units",
+      "aliases": [
+        "2 bedroom condo",
+        "3 bedroom condo",
+        "bale 2 megnita",
+        "bale 3 megnita"
+      ]
     }
   ]
 }

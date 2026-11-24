@@ -2488,7 +2488,7 @@
       "parent_id": 3254,
       "parent_code": "three-wheelers-bajaj",
       "classification_system_code": "SYS_PROD",
-      "slug": "three-wheelers-bajaj-commercial-passenger-auto-ric-s12_0",
+      "slug": "three-wheelers-bajaj-commercial-passenger-auto-ric-s12-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -2506,7 +2506,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "three-wheelers-bajaj-commercial-passenger-auto-ric-s12_0"
+      ],
       "redirects": []
     },
     {
@@ -2514,7 +2516,7 @@
       "parent_id": 3254,
       "parent_code": "three-wheelers-bajaj",
       "classification_system_code": "SYS_PROD",
-      "slug": "three-wheelers-bajaj-heavy-duty-cargo-delivery-thr-s12_1",
+      "slug": "three-wheelers-bajaj-heavy-duty-cargo-delivery-thr-s12-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -2536,7 +2538,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "three-wheelers-bajaj-heavy-duty-cargo-delivery-thr-s12_1"
       ],
       "redirects": []
     },
@@ -2545,7 +2548,7 @@
       "parent_id": 3254,
       "parent_code": "three-wheelers-bajaj",
       "classification_system_code": "SYS_PROD",
-      "slug": "three-wheelers-bajaj-electric-green-mobility-e-ric-s12_2",
+      "slug": "three-wheelers-bajaj-electric-green-mobility-e-ric-s12-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -2563,7 +2566,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "three-wheelers-bajaj-electric-green-mobility-e-ric-s12_2"
+      ],
       "redirects": []
     },
     {
@@ -2571,7 +2576,7 @@
       "parent_id": 3254,
       "parent_code": "three-wheelers-bajaj",
       "classification_system_code": "SYS_PROD",
-      "slug": "three-wheelers-bajaj-long-distance-passenger-minib-s12_3",
+      "slug": "three-wheelers-bajaj-long-distance-passenger-minib-s12-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -2589,7 +2594,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "three-wheelers-bajaj-long-distance-passenger-minib-s12_3"
+      ],
       "redirects": []
     },
     {

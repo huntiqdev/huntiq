@@ -620,9 +620,7 @@ func (s *AuthService) AdminLoginStep1(ctx context.Context, req dto.LoginRequest,
 		return "", "", false, errors.New("account is inactive — contact support")
 	}
 	if !security.CheckPassword(u.PasswordHash, req.Password) {
-		if !(s.devMode && (req.Password == "Admin123!" || req.Password == "Password123!")) {
-			return "", "", false, errors.New("invalid credentials")
-		}
+		return "", "", false, errors.New("invalid credentials")
 	}
 
 	// In dev mode: allow direct access without waiting for external email OTP delivery

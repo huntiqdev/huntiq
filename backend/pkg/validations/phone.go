@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	// Ethiopian phone number patterns
-	ethioPhonePattern = regexp.MustCompile(`^(\+?251|0)?([79]\d{8})$`)
+	// Ethiopian phone number patterns (supports 09..., 07..., +251..., 00251..., 251..., or 9...)
+	ethioPhonePattern = regexp.MustCompile(`^(?:\+251|00251|251|0)?([79]\d{8})$`)
 )
 
 // PhoneResult represents the result of phone validation
@@ -34,12 +34,12 @@ func ValidateEthiopianPhone(phone string) PhoneResult {
 
 	// Match pattern
 	matches := ethioPhonePattern.FindStringSubmatch(cleaned)
-	if len(matches) < 3 {
+	if len(matches) < 2 {
 		return PhoneResult{Valid: false, Error: "phone_invalid"}
 	}
 
 	// Normalize to +251XXXXXXXXX
-	normalized := "+251" + matches[2]
+	normalized := "+251" + matches[len(matches)-1]
 
 	return PhoneResult{
 		Valid:      true,

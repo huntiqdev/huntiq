@@ -9124,7 +9124,7 @@
       "parent_id": 2224,
       "parent_code": "measuring-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "measuring-tools-heavy-duty-rotary-hammer-demolitio-s34_0",
+      "slug": "measuring-tools-heavy-duty-rotary-hammer-demolitio-s34-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -9147,7 +9147,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "measuring-tools-heavy-duty-rotary-hammer-demolitio-s34_0"
       ],
       "redirects": []
     },
@@ -9156,7 +9157,7 @@
       "parent_id": 2225,
       "parent_code": "paint-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "paint-tools-heavy-duty-rotary-hammer-demolition-dr-s35_0",
+      "slug": "paint-tools-heavy-duty-rotary-hammer-demolition-dr-s35-0",
       "names": {
         "en": "Heavy-Duty Rotary Hammer",
         "am": "ከባድ የኮንክሪት መሰርሰሪያ",
@@ -9179,7 +9180,8 @@
         "Heavy-Duty Rotary Hammer & Demolition Drills",
         "Maashinii Qotuu fi Caccabsuu Cimaa",
         "ከቢድ ናይ ኮንክሪት መወለወልን መፍረሲን ማሽን",
-        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች"
+        "ከባድ የኮንክሪት መሰርሰሪያና መስበሪያ ማሽኖች",
+        "paint-tools-heavy-duty-rotary-hammer-demolition-dr-s35_0"
       ],
       "redirects": []
     },
@@ -9188,7 +9190,7 @@
       "parent_id": 2226,
       "parent_code": "power-drills-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "power-drills-home-digital-smart-electric-injera-mi-s80_0",
+      "slug": "power-drills-home-digital-smart-electric-injera-mi-s80-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -9206,7 +9208,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "power-drills-home-digital-smart-electric-injera-mi-s80_0"
+      ],
       "redirects": []
     },
     {
@@ -9214,7 +9218,7 @@
       "parent_id": 2229,
       "parent_code": "shelving-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "shelving-home-digital-smart-electric-injera-mitad--s81_0",
+      "slug": "shelving-home-digital-smart-electric-injera-mitad-s81-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -9232,7 +9236,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "shelving-home-digital-smart-electric-injera-mitad--s81_0"
+      ],
       "redirects": []
     },
     {
@@ -9240,7 +9246,7 @@
       "parent_id": 2236,
       "parent_code": "disinfectants-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "disinfectants-home-digital-smart-electric-injera-m-s82_0",
+      "slug": "disinfectants-home-digital-smart-electric-injera-m-s82-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -9258,7 +9264,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "disinfectants-home-digital-smart-electric-injera-m-s82_0"
+      ],
       "redirects": []
     },
     {
@@ -9266,7 +9274,7 @@
       "parent_id": 2244,
       "parent_code": "ovens-stoves",
       "classification_system_code": "SYS_PROD",
-      "slug": "ovens-stoves-digital-smart-electric-injera-mitad-s-s83_0",
+      "slug": "ovens-stoves-digital-smart-electric-injera-mitad-s-s83-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -9284,7 +9292,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "ovens-stoves-digital-smart-electric-injera-mitad-s-s83_0"
+      ],
       "redirects": []
     },
     {
@@ -9292,7 +9302,7 @@
       "parent_id": 2224,
       "parent_code": "measuring-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "measuring-tools-brushless-cordless-impact-drivers--s34_1",
+      "slug": "measuring-tools-brushless-cordless-impact-drivers-s34-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -9312,7 +9322,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "measuring-tools-brushless-cordless-impact-drivers--s34_1"
       ],
       "redirects": []
     },
@@ -9321,7 +9332,7 @@
       "parent_id": 2225,
       "parent_code": "paint-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "paint-tools-brushless-cordless-impact-drivers-dril-s35_1",
+      "slug": "paint-tools-brushless-cordless-impact-drivers-dril-s35-1",
       "names": {
         "en": "Brushless Cordless Impact Drivers",
         "am": "ገመድ አልባ ባትሪ የሚሰራ ፈጣን መሰርሰሪያ ኪት",
@@ -9341,7 +9352,8 @@
       "meta_description": null,
       "aliases": [
         "Brushless Cordless Impact Drivers & Drill Kits",
-        "Drill Kits"
+        "Drill Kits",
+        "paint-tools-brushless-cordless-impact-drivers-dril-s35_1"
       ],
       "redirects": []
     },
@@ -9350,7 +9362,7 @@
       "parent_id": 2226,
       "parent_code": "power-drills-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "power-drills-home-double-door-frost-free-kitchen-r-s80_1",
+      "slug": "power-drills-home-double-door-frost-free-kitchen-r-s80-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -9368,7 +9380,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "power-drills-home-double-door-frost-free-kitchen-r-s80_1"
+      ],
       "redirects": []
     },
     {
@@ -9376,7 +9390,7 @@
       "parent_id": 2229,
       "parent_code": "shelving-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "shelving-home-double-door-frost-free-kitchen-refri-s81_1",
+      "slug": "shelving-home-double-door-frost-free-kitchen-refri-s81-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -9394,7 +9408,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "shelving-home-double-door-frost-free-kitchen-refri-s81_1"
+      ],
       "redirects": []
     },
     {
@@ -9402,7 +9418,7 @@
       "parent_id": 2236,
       "parent_code": "disinfectants-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "disinfectants-home-double-door-frost-free-kitchen--s82_1",
+      "slug": "disinfectants-home-double-door-frost-free-kitchen-s82-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -9420,7 +9436,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "disinfectants-home-double-door-frost-free-kitchen--s82_1"
+      ],
       "redirects": []
     },
     {
@@ -9428,7 +9446,7 @@
       "parent_id": 2244,
       "parent_code": "ovens-stoves",
       "classification_system_code": "SYS_PROD",
-      "slug": "ovens-stoves-double-door-frost-free-kitchen-refrig-s83_1",
+      "slug": "ovens-stoves-double-door-frost-free-kitchen-refrig-s83-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -9446,7 +9464,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "ovens-stoves-double-door-frost-free-kitchen-refrig-s83_1"
+      ],
       "redirects": []
     },
     {
@@ -9454,7 +9474,7 @@
       "parent_id": 2224,
       "parent_code": "measuring-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "measuring-tools-high-power-angle-grinders-metal-cu-s34_2",
+      "slug": "measuring-tools-high-power-angle-grinders-metal-cu-s34-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -9475,7 +9495,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "measuring-tools-high-power-angle-grinders-metal-cu-s34_2"
       ],
       "redirects": []
     },
@@ -9484,7 +9505,7 @@
       "parent_id": 2225,
       "parent_code": "paint-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "paint-tools-high-power-angle-grinders-metal-cutter-s35_2",
+      "slug": "paint-tools-high-power-angle-grinders-metal-cutter-s35-2",
       "names": {
         "en": "High-Power Angle Grinders",
         "am": "ከፍተኛ ኃይል ያላቸው የብረት መቁረጫ ግራይንደሮች",
@@ -9505,7 +9526,8 @@
       "aliases": [
         "High-Power Angle Grinders & Metal Cutters",
         "Metal Cutters",
-        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር"
+        "ልዑል ሓይሊ ዘለዎም ናይ ሓጺን መቑረጺ ግራይንደር",
+        "paint-tools-high-power-angle-grinders-metal-cutter-s35_2"
       ],
       "redirects": []
     },
@@ -9514,7 +9536,7 @@
       "parent_id": 2226,
       "parent_code": "power-drills-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "power-drills-home-commercial-4-burner-gas-electric-s80_2",
+      "slug": "power-drills-home-commercial-4-burner-gas-electric-s80-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -9537,7 +9559,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "power-drills-home-commercial-4-burner-gas-electric-s80_2"
       ],
       "redirects": []
     },
@@ -9546,7 +9569,7 @@
       "parent_id": 2229,
       "parent_code": "shelving-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "shelving-home-commercial-4-burner-gas-electric-sto-s81_2",
+      "slug": "shelving-home-commercial-4-burner-gas-electric-sto-s81-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -9569,7 +9592,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "shelving-home-commercial-4-burner-gas-electric-sto-s81_2"
       ],
       "redirects": []
     },
@@ -9578,7 +9602,7 @@
       "parent_id": 2236,
       "parent_code": "disinfectants-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "disinfectants-home-commercial-4-burner-gas-electri-s82_2",
+      "slug": "disinfectants-home-commercial-4-burner-gas-electri-s82-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -9601,7 +9625,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "disinfectants-home-commercial-4-burner-gas-electri-s82_2"
       ],
       "redirects": []
     },
@@ -9610,7 +9635,7 @@
       "parent_id": 2244,
       "parent_code": "ovens-stoves",
       "classification_system_code": "SYS_PROD",
-      "slug": "ovens-stoves-commercial-4-burner-gas-electric-stov-s83_2",
+      "slug": "ovens-stoves-commercial-4-burner-gas-electric-stov-s83-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -9633,7 +9658,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "ovens-stoves-commercial-4-burner-gas-electric-stov-s83_2"
       ],
       "redirects": []
     },
@@ -9642,7 +9668,7 @@
       "parent_id": 2224,
       "parent_code": "measuring-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "measuring-tools-silent-diesel-portable-petrol-gene-s34_3",
+      "slug": "measuring-tools-silent-diesel-portable-petrol-gene-s34-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -9665,7 +9691,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "measuring-tools-silent-diesel-portable-petrol-gene-s34_3"
       ],
       "redirects": []
     },
@@ -9674,7 +9701,7 @@
       "parent_id": 2225,
       "parent_code": "paint-tools",
       "classification_system_code": "SYS_PROD",
-      "slug": "paint-tools-silent-diesel-portable-petrol-generato-s35_3",
+      "slug": "paint-tools-silent-diesel-portable-petrol-generato-s35-3",
       "names": {
         "en": "Silent Diesel",
         "am": "ድምጽ አልባ የናፍጣ",
@@ -9697,7 +9724,8 @@
         "Portable Petrol Generators",
         "Silent Diesel & Portable Petrol Generators",
         "ድምጺ ኣልቦ ናይ ናፍጣን ቤንዚንን ጀነሬተር",
-        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች"
+        "ድምጽ አልባ የናፍጣና ቤንዚን ጄኔሬተሮች",
+        "paint-tools-silent-diesel-portable-petrol-generato-s35_3"
       ],
       "redirects": []
     },
@@ -9706,7 +9734,7 @@
       "parent_id": 2226,
       "parent_code": "power-drills-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "power-drills-home-heavy-duty-food-processors-coffe-s80_3",
+      "slug": "power-drills-home-heavy-duty-food-processors-coffe-s80-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -9729,7 +9757,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "power-drills-home-heavy-duty-food-processors-coffe-s80_3"
       ],
       "redirects": []
     },
@@ -9738,7 +9767,7 @@
       "parent_id": 2229,
       "parent_code": "shelving-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "shelving-home-heavy-duty-food-processors-coffee-gr-s81_3",
+      "slug": "shelving-home-heavy-duty-food-processors-coffee-gr-s81-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -9761,7 +9790,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "shelving-home-heavy-duty-food-processors-coffee-gr-s81_3"
       ],
       "redirects": []
     },
@@ -9770,7 +9800,7 @@
       "parent_id": 2236,
       "parent_code": "disinfectants-home",
       "classification_system_code": "SYS_PROD",
-      "slug": "disinfectants-home-heavy-duty-food-processors-coff-s82_3",
+      "slug": "disinfectants-home-heavy-duty-food-processors-coff-s82-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -9793,7 +9823,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "disinfectants-home-heavy-duty-food-processors-coff-s82_3"
       ],
       "redirects": []
     },
@@ -9802,7 +9833,7 @@
       "parent_id": 2244,
       "parent_code": "ovens-stoves",
       "classification_system_code": "SYS_PROD",
-      "slug": "ovens-stoves-heavy-duty-food-processors-coffee-gri-s83_3",
+      "slug": "ovens-stoves-heavy-duty-food-processors-coffee-gri-s83-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -9825,7 +9856,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "ovens-stoves-heavy-duty-food-processors-coffee-gri-s83_3"
       ],
       "redirects": []
     },

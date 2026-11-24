@@ -125,29 +125,41 @@ func (h *CategoryHandler) ResolveCategory(c *fiber.Ctx) error {
 		})
 	}
 	lang := c.Query("lang", "en")
-	catID, err := h.svc.ResolveCategoryByAlias(c.Context(), q)
+	intent, err := h.svc.ResolveCategoryIntent(c.Context(), q, lang)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
 			"error":   "failed to resolve category",
 		})
 	}
-	if catID == nil || *catID <= 0 {
+	if !intent.HasIntent || intent.Category == nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"success": false,
 			"error":   "no matching category found",
 		})
 	}
-	cat, err := h.svc.GetByID(c.Context(), *catID, lang)
+	return c.JSON(fiber.Map{
+		"success": true,
+		"data":    intent.Category,
+		"intent":  intent,
+	})
+}
+
+// ResolveCategoryIntent resolves full hierarchical category intent with 1-tap subcategories & disambiguation
+// GET /api/categories/intent?q=phone&lang=en
+func (h *CategoryHandler) ResolveCategoryIntent(c *fiber.Ctx) error {
+	q := c.Query("q")
+	lang := c.Query("lang", "en")
+	intent, err := h.svc.ResolveCategoryIntent(c.Context(), q, lang)
 	if err != nil {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"error":   "category not found",
+			"error":   "failed to resolve category intent",
 		})
 	}
 	return c.JSON(fiber.Map{
 		"success": true,
-		"data":    cat,
+		"data":    intent,
 	})
 }
 
@@ -282,6 +294,33 @@ func (h *CategoryHandler) GetCategoryChildren(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"success": true,
 		"data":    children,
+	})
+}
+
+// GetCategoryRelated returns related cross-discovery categories for a category
+// GET /api/categories/:id/related?lang=en
+func (h *CategoryHandler) GetCategoryRelated(c *fiber.Ctx) error {
+	idParam := c.Params("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"error":   "invalid category ID",
+		})
+	}
+
+	lang := c.Query("lang", "en")
+	related, err := h.svc.GetRelatedCategories(c.Context(), id, lang)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"error":   "failed to retrieve related categories",
+		})
+	}
+
+	return c.JSON(fiber.Map{
+		"success": true,
+		"data":    related,
 	})
 }
 

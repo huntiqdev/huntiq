@@ -435,16 +435,24 @@ func (r *PaymentRepo) ActivateTier(ctx context.Context, userID int, userRole, ta
 	if durationDays <= 0 {
 		durationDays = 30
 	}
-	expiresAt := time.Now().AddDate(0, 0, durationDays)
 
 	var oldTier string
+	var curExpiresAt *time.Time
+	var expiresAt time.Time
+
 	if userRole == "buyer" {
-		err = tx.QueryRow(ctx, `SELECT COALESCE(buyer_tier::varchar, 'normal') FROM users WHERE id = $1 FOR UPDATE`, userID).Scan(&oldTier)
+		err = tx.QueryRow(ctx, `SELECT COALESCE(buyer_tier::varchar, 'normal'), buyer_tier_expires_at FROM users WHERE id = $1 FOR UPDATE`, userID).Scan(&oldTier, &curExpiresAt)
 		if err != nil {
 			return fmt.Errorf("user not found: %w", err)
 		}
 
-		_, err = tx.Exec(ctx, `UPDATE users SET buyer_tier = $1::buyer_tier, updated_at = NOW() WHERE id = $2`, targetTierLower, userID)
+		if curExpiresAt != nil && curExpiresAt.After(time.Now()) {
+			expiresAt = curExpiresAt.AddDate(0, 0, durationDays)
+		} else {
+			expiresAt = time.Now().AddDate(0, 0, durationDays)
+		}
+
+		_, err = tx.Exec(ctx, `UPDATE users SET buyer_tier = $1::buyer_tier, buyer_tier_paid_at = NOW(), buyer_tier_expires_at = $2, updated_at = NOW() WHERE id = $3`, targetTierLower, expiresAt, userID)
 		if err != nil {
 			return fmt.Errorf("failed to update buyer tier: %w", err)
 		}
@@ -462,12 +470,18 @@ func (r *PaymentRepo) ActivateTier(ctx context.Context, userID int, userRole, ta
 			VALUES ($1, 'Buyer Membership Upgraded!', $2, 'tier_upgrade')
 		`, userID, fmt.Sprintf("Congratulations! Your buyer membership has been successfully upgraded to %s for %d days.", strings.ToUpper(targetTierLower), durationDays))
 	} else {
-		err = tx.QueryRow(ctx, `SELECT COALESCE(tier::varchar, 'normal') FROM users WHERE id = $1 FOR UPDATE`, userID).Scan(&oldTier)
+		err = tx.QueryRow(ctx, `SELECT COALESCE(tier::varchar, 'normal'), tier_expires_at FROM users WHERE id = $1 FOR UPDATE`, userID).Scan(&oldTier, &curExpiresAt)
 		if err != nil {
 			return fmt.Errorf("user not found: %w", err)
 		}
 
-		_, err = tx.Exec(ctx, `UPDATE users SET tier = $1::seller_tier, updated_at = NOW() WHERE id = $2`, targetTierLower, userID)
+		if curExpiresAt != nil && curExpiresAt.After(time.Now()) {
+			expiresAt = curExpiresAt.AddDate(0, 0, durationDays)
+		} else {
+			expiresAt = time.Now().AddDate(0, 0, durationDays)
+		}
+
+		_, err = tx.Exec(ctx, `UPDATE users SET tier = $1::seller_tier, tier_paid_at = NOW(), tier_expires_at = $2, updated_at = NOW() WHERE id = $3`, targetTierLower, expiresAt, userID)
 		if err != nil {
 			return fmt.Errorf("failed to update seller tier: %w", err)
 		}

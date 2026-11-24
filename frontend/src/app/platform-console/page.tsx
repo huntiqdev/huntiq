@@ -4,12 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { api } from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
 import {
   Server, Cpu, HardDrive, Activity, RefreshCw, Filter,
   CheckCircle2, AlertTriangle, Layers, Zap, Database,
   Globe2, ShieldCheck, ShieldAlert, FolderTree, ArrowRight,
-  Sparkles, Radio, Lock
+  Sparkles, Radio, Lock, MapPin, Terminal, Monitor, Laptop
 } from 'lucide-react';
 import { HuntiqLogo } from '@/components/ui/HuntiqLogo';
 
@@ -19,6 +20,7 @@ export default function PlatformConsolePage() {
   const [clusterFilter, setClusterFilter] = useState<'all' | 'addis' | 'bahrain' | 'edge'>('all');
   const [serviceFilter, setServiceFilter] = useState<'all' | 'api' | 'db' | 'redis' | 'search'>('all');
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [masterDataStatus, setMasterDataStatus] = useState<any>(null);
 
   useEffect(() => {
     if (!authLoading) {
@@ -30,8 +32,20 @@ export default function PlatformConsolePage() {
     }
   }, [user, authLoading, isPlatformOwner, isSuperAdmin, isPlatformAdmin, adminRole, router]);
 
+  const fetchMasterDataStatus = () => {
+    if (!user?.token) return;
+    api.adminMasterDataStatus(user.token)
+      .then((res: any) => setMasterDataStatus(res?.data || res))
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    fetchMasterDataStatus();
+  }, [user?.token]);
+
   const handleRefresh = () => {
     setIsRefreshing(true);
+    fetchMasterDataStatus();
     setTimeout(() => setIsRefreshing(false), 600);
   };
 
@@ -136,14 +150,14 @@ export default function PlatformConsolePage() {
               className="bg-zinc-950 border border-zinc-800 text-zinc-200 rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
               <option value="all">🧩 All Microservice Clusters</option>
-              <option value="api">🚀 Go Fiber Core Gateway</option>
-              <option value="db">🐘 PostgreSQL Database Cluster</option>
+              <option value="api">🚀 Go Fiber Core Gateway (Port 8080)</option>
+              <option value="db">🐘 PostgreSQL Database Cluster (Port 5432)</option>
               <option value="redis">⚡ Redis Shared Cache</option>
               <option value="search">🔍 Search Engine Cluster</option>
             </select>
 
             <div className="px-3 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-zinc-400 text-xs font-mono">
-              Postgres Active Pool: <span className="text-emerald-400 font-bold">32 / 100 Conn</span>
+              Postgres Active Pool: <span className="text-emerald-400 font-bold">25 / 100 Conn</span>
             </div>
 
             <div className="px-3 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-zinc-400 text-xs font-mono">
@@ -171,27 +185,27 @@ export default function PlatformConsolePage() {
               </div>
             </div>
             <div className="text-3xl font-black text-white tracking-tight mb-2 font-mono">
-              24 <span className="text-xs font-normal text-zinc-400">ms P99</span>
+              852 <span className="text-xs font-normal text-zinc-400">Active Handlers</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold">
               <CheckCircle2 size={14} />
-              <span>4 Pods Active • Zero Errors</span>
+              <span>Go Fiber v2.52 • Zero Errors</span>
             </div>
           </div>
 
           <div className="bg-gradient-to-br from-zinc-900/90 via-zinc-900/60 to-emerald-950/20 border border-zinc-800/90 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-black uppercase tracking-wider text-zinc-400">Database Connection Pool</span>
+              <span className="text-xs font-black uppercase tracking-wider text-zinc-400">PostgreSQL Schema Integrity</span>
               <div className="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20">
                 <Database size={20} />
               </div>
             </div>
             <div className="text-3xl font-black text-white tracking-tight mb-2 font-mono">
-              32 <span className="text-xs font-normal text-zinc-400">/ 100 Conn</span>
+              80 <span className="text-xs font-normal text-zinc-400">Base Tables</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold">
               <CheckCircle2 size={14} />
-              <span>0 Queued Waiters • 58 Tables</span>
+              <span>Migration 067 Applied • Healthy</span>
             </div>
           </div>
 
@@ -203,84 +217,94 @@ export default function PlatformConsolePage() {
               </div>
             </div>
             <div className="text-3xl font-black text-white tracking-tight mb-2 font-mono">
-              4 <span className="text-xs font-normal text-zinc-400">Levels Clamped</span>
+              5+ <span className="text-xs font-normal text-zinc-400">Levels Deep</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-amber-400 font-bold">
               <CheckCircle2 size={14} />
-              <span>1,280 Leaves • 0 Orphaned</span>
+              <span>Multi-Tier Clamped • 0 Orphaned</span>
             </div>
           </div>
 
           <div className="bg-gradient-to-br from-zinc-900/90 via-zinc-900/60 to-sky-950/20 border border-zinc-800/90 rounded-3xl p-6 shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-black uppercase tracking-wider text-zinc-400">Global CDN & Edge Delivery</span>
+              <span className="text-xs font-black uppercase tracking-wider text-zinc-400">Operational Shifts & Workstations</span>
               <div className="p-2.5 bg-sky-500/10 text-sky-400 rounded-2xl border border-sky-500/20">
-                <Globe2 size={20} />
+                <Monitor size={20} />
               </div>
             </div>
             <div className="text-3xl font-black text-white tracking-tight mb-2 font-mono">
-              99.8% <span className="text-xs font-normal text-zinc-400">Edge Hit</span>
+              13 <span className="text-xs font-normal text-zinc-400">Dedicated Terminals</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-sky-400 font-bold">
               <CheckCircle2 size={14} />
-              <span>Addis PoP Active</span>
+              <span>3 Shifts Active (24/7 Rotations)</span>
             </div>
           </div>
 
         </section>
 
-        {/* 2. CLUSTER TOPOLOGY PIPELINE */}
-        <section className="bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-6 lg:p-8 shadow-2xl">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-lg font-black text-white tracking-tight">Active Microservices Cluster Map</h2>
-              <p className="text-xs text-zinc-400 mt-1">High-availability node distribution across localized and cloud infrastructure.</p>
+        {/* 2. MASTER DATA & WORKSTATION CLUSTERS */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-6 shadow-xl space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FolderTree size={18} className="text-indigo-400" />
+                <h3 className="text-base font-bold text-white">Master Data Synchronization</h3>
+              </div>
+              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">
+                DB-Driven Synced
+              </span>
             </div>
-            <span className="px-3 py-1 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold">
-              ● All Clusters Healthy
-            </span>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Automatic validation and live database synchronization for four-language taxonomy manifests, dynamic attribute schemas, and regional boundary hierarchies.
+            </p>
+            <div className="space-y-2 text-xs font-mono">
+              <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 flex justify-between">
+                <span className="text-zinc-400">Total PostgreSQL Base Tables:</span>
+                <span className="text-emerald-400 font-bold">80 Tables</span>
+              </div>
+              <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 flex justify-between">
+                <span className="text-zinc-400">Category Depth Clamping:</span>
+                <span className="text-amber-400 font-bold">Levels 1 to 5+</span>
+              </div>
+              <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 flex justify-between">
+                <span className="text-zinc-400">Supported National Languages:</span>
+                <span className="text-cyan-400 font-bold">EN • AM • OR • TI (4 Languages)</span>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-5">
-              <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">Tier-3 Addis Ababa PoP</div>
-              <div className="text-lg font-black text-white mb-2">Core Escrow & Local Media Vault</div>
-              <p className="text-xs text-zinc-500">Low-latency direct interconnect with Ethio Telecom and Commercial Bank of Ethiopia.</p>
+          <div className="bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-6 shadow-xl space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Monitor size={18} className="text-emerald-400" />
+                <h3 className="text-base font-bold text-white">Dedicated Workstation Fleet</h3>
+              </div>
+              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-950/60 text-blue-400 border border-blue-500/30">
+                13 Terminals
+              </span>
             </div>
-            <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-5">
-              <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">AWS Middle East (Bahrain)</div>
-              <div className="text-lg font-black text-white mb-2">Primary App Cluster & Database Standby</div>
-              <p className="text-xs text-zinc-500">Auto-scaling Go Fiber workers, automated transaction rollback journal, backup replicas.</p>
-            </div>
-            <div className="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-5">
-              <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">Cloudflare Global Anycast</div>
-              <div className="text-lg font-black text-white mb-2">WAF, DDoS Shield & Asset CDN</div>
-              <p className="text-xs text-zinc-500">Zero-Trust access policies, WebAuthn edge challenges, static image cache.</p>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Physical terminals in Addis Ababa Headquarters, Bole Regional Data Hub, Hawassa, and Dire Dawa. Hardware signatures bound to individual admin sessions.
+            </p>
+            <div className="space-y-2 text-xs font-mono">
+              <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 flex justify-between">
+                <span className="text-zinc-400">Cybersecurity SOC Consoles:</span>
+                <span className="text-cyan-400 font-bold">WS-SOC-01, WS-SOC-02</span>
+              </div>
+              <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 flex justify-between">
+                <span className="text-zinc-400">KYC & Verification Terminals:</span>
+                <span className="text-blue-400 font-bold">WS-OPS-01, WS-OPS-02, WS-OPS-03</span>
+              </div>
+              <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800 flex justify-between">
+                <span className="text-zinc-400">Treasury & Escrow Desks:</span>
+                <span className="text-amber-400 font-bold">WS-FIN-01, WS-FIN-02</span>
+              </div>
             </div>
           </div>
         </section>
 
       </main>
-
-      {/* ── FOOTER ── */}
-      <footer className="border-t border-zinc-900/80 py-6 px-4 lg:px-8 mt-12 bg-zinc-950">
-        <div className="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <div className="flex items-center gap-3">
-            <Lock size={14} className="text-indigo-400" />
-            <span>HUNTIQ Platform Governance • Distributed Systems Architecture</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/platform-console/login" className="hover:text-white transition-colors">
-              Platform Authentication
-            </Link>
-            <Link href="/admin/settings" className="hover:text-white transition-colors">
-              System Settings
-            </Link>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 }
-

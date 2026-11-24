@@ -16848,7 +16848,7 @@
       "parent_id": 829,
       "parent_code": "construction-adhesives",
       "classification_system_code": "SYS_PROD",
-      "slug": "construction-adhesives-high-strength-structural-po-s38_0",
+      "slug": "construction-adhesives-high-strength-structural-po-s38-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -16866,7 +16866,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-adhesives-high-strength-structural-po-s38_0"
+      ],
       "redirects": []
     },
     {
@@ -16874,7 +16876,7 @@
       "parent_id": 829,
       "parent_code": "construction-adhesives",
       "classification_system_code": "SYS_PROD",
-      "slug": "construction-adhesives-ribbed-high-yield-rebar-rei-s38_1",
+      "slug": "construction-adhesives-ribbed-high-yield-rebar-rei-s38-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -16892,7 +16894,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-adhesives-ribbed-high-yield-rebar-rei-s38_1"
+      ],
       "redirects": []
     },
     {
@@ -16900,7 +16904,7 @@
       "parent_id": 829,
       "parent_code": "construction-adhesives",
       "classification_system_code": "SYS_PROD",
-      "slug": "construction-adhesives-furnished-modern-residentia-s38_2",
+      "slug": "construction-adhesives-furnished-modern-residentia-s38-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -16918,7 +16922,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-adhesives-furnished-modern-residentia-s38_2"
+      ],
       "redirects": []
     },
     {
@@ -16926,7 +16932,7 @@
       "parent_id": 829,
       "parent_code": "construction-adhesives",
       "classification_system_code": "SYS_PROD",
-      "slug": "construction-adhesives-condominium-housing-units-2-s38_3",
+      "slug": "construction-adhesives-condominium-housing-units-2-s38-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -16949,7 +16955,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "construction-adhesives-condominium-housing-units-2-s38_3"
       ],
       "redirects": []
     },

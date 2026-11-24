@@ -15519,6 +15519,63 @@
         "ክሰፍሕ ዝኽእል ፍሉይን ዝተዳለወን Welding & Fabrication Equipment"
       ],
       "redirects": []
+    },
+    {
+      "id": 2000040,
+      "parent_id": 1500,
+      "parent_code": null,
+      "classification_system_code": "SYS_PROD",
+      "slug": "hybrid-off-grid-solar-inverters",
+      "names": {
+        "en": "Hybrid & Off-Grid Solar Power Inverters",
+        "am": "ሃይብሪድ እና ኦፍ-ግሪድ የፀሐይ ኃይል ኢንቨርተሮች",
+        "om": "Inveertara Soolaaraa Haayibiriidii fi Of-Giriidii",
+        "ti": "ሃይብሪድን ኦፍ-ግሪድን ሶላር ኢንቨርተር"
+      },
+      "description": "",
+      "level": 3,
+      "path": "/1452/1498/1500/2000040/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": false,
+      "is_archived": false,
+      "meta_title": "Hybrid & Off-Grid Solar Power Inverters",
+      "meta_description": "Hybrid & Off-Grid Solar Power Inverters",
+      "aliases": [
+        "solar power inverter",
+        "hybrid solar inverter"
+      ]
+    },
+    {
+      "id": 2000041,
+      "parent_id": 2000040,
+      "parent_code": null,
+      "classification_system_code": "SYS_PROD",
+      "slug": "pure-sine-wave-hybrid-solar-inverters",
+      "names": {
+        "en": "Pure Sine Wave Hybrid Solar Inverters (3kW - 12kW)",
+        "am": "ንጹህ ሳይን ሞገድ ሃይብሪድ ኢንቨርተሮች (3kW - 12kW)",
+        "om": "Inveertara Saayin Weevii Qulqulluu (3kW - 12kW)",
+        "ti": "ንጹር ሳይን ዌቭ ሃይብሪድ ኢንቨርተር"
+      },
+      "description": "",
+      "level": 4,
+      "path": "/1452/1498/1500/2000040/2000041/",
+      "display_order": 1,
+      "icon": "Tag",
+      "image_url": null,
+      "is_active": true,
+      "is_leaf": true,
+      "is_archived": false,
+      "meta_title": "Pure Sine Wave Hybrid Solar Inverters (3kW - 12kW)",
+      "meta_description": "Pure Sine Wave Hybrid Solar Inverters (3kW - 12kW)",
+      "aliases": [
+        "pure sine wave inverter",
+        "5kw solar inverter",
+        "10kw solar inverter"
+      ]
     }
   ]
 }

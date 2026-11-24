@@ -265,12 +265,31 @@ func (s *CategoryHierarchyService) GetCategoryStats(ctx context.Context, categor
 	return s.repo.GetCategoryStats(ctx, categoryID)
 }
 
+// GetRelatedCategories retrieves related categories via classification relationships
+func (s *CategoryHierarchyService) GetRelatedCategories(ctx context.Context, categoryID int, lang string) ([]models.CategoryHierarchy, error) {
+	if lang == "" {
+		lang = "en"
+	}
+	return s.repo.GetRelatedCategories(ctx, categoryID, lang)
+}
+
 // ResolveCategoryByAlias resolves any user search term or product title against PostgreSQL's resolve_category_by_alias stored procedure
 func (s *CategoryHierarchyService) ResolveCategoryByAlias(ctx context.Context, term string) (*int, error) {
 	if s.repo == nil {
 		return nil, nil
 	}
 	return s.repo.ResolveCategoryByAlias(ctx, term)
+}
+
+// ResolveCategoryIntent analyzes any user query and returns complete hierarchical discovery data
+func (s *CategoryHierarchyService) ResolveCategoryIntent(ctx context.Context, term string, lang string) (*models.CategoryIntentResponse, error) {
+	if s.repo == nil {
+		return &models.CategoryIntentResponse{
+			HasIntent: false,
+			Query:     term,
+		}, nil
+	}
+	return s.repo.ResolveCategoryIntent(ctx, term, lang)
 }
 
 // ResolveLegacyCategoryID maps root category slug and ID to legacy category table ID dynamically from the database

@@ -18,7 +18,8 @@ if (backendHost) {
 
 const nextConfig = {
   async rewrites() {
-    if (process.env.NODE_ENV === 'production') return [];
+    // In Vercel deployments, vercel.json handles routing; for standalone node/docker servers, route to backendURL
+    if (process.env.VERCEL) return [];
     return [
       { source: '/api/:path*',     destination: `${backendURL}/api/:path*` },
       { source: '/uploads/:path*', destination: `${backendURL}/uploads/:path*` },

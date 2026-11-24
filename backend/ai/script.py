@@ -155,16 +155,33 @@ OROMO_MARKERS = [
     "galatoomi", "galatoomaa", "nagaatti", "tole", "qaruutee", "ati eenyu",
 ]
 
+# Transliterated / Phonetic Latin Amharic vocabulary markers
+LATIN_AMHARIC_MARKERS = [
+    # Common conversational & greeting markers
+    "selam", "salam", "tadias", "tadiyas", "endemin", "dehna", "chaw", "ciao",
+    "ere", "ebakish", "ebakeh", "benatish", "be natish", "benateh", "be nateh", "natish", "nateh",
+    "sint", "sinti", "snt", "wagaw", "waga", "wagawn", "new", "newu", "newi", "aydelem", "yellem", "yelem",
+    "min", "men", "yemin", "yemen", "endet", "endiet", "yet", "yetignaw", "yetinaw", "man", "mannew", "lemin", "lamen",
+    # Existence & Transaction verbs
+    "ale", "alle", "alew", "allaw", "allat", "alat", "alesh", "allesh", "aleh", "alleh", "alu", "allu",
+    "megzat", "megezat", "meshet", "meshat", "kirey", "kira", "kire", "akray", "akari",
+    "tekeray", "tekiray", "sheyach", "sheyax", "gej", "geji",
+    "felegku", "felegiku", "felagku", "felgku", "ifelgalew", "ifelgalehu", "yifelgalu", "tifelgaleh", "tifelgiyalesh",
+    "asayegn", "asayeng", "asaye", "astemiregn", "astemireng",
+    # Common nouns & locations
+    "mekina", "mekena", "makina", "bet", "biet", "bale", "kiffil", "kifil",
+    "suk", "souk", "delala", "gebeya", "gubea", "slik", "silik", "tiru", "teru", "qonjo", "konjo",
+    "arada", "merkato", "bole", "gerji", "cmc", "ayat", "sarbet", "kazanchis", "piassa", "megenagna", "lebu", "gotera",
+    "arba", "hamsa", "shi", "meto",
+]
+
 
 def detect_language(text: str, requested_lang: str = "") -> str:
-    if requested_lang in ("en", "am", "ti", "or"):
-        return requested_lang
-
     clean = text.strip()
     if not clean:
-        return "en"
+        return requested_lang if requested_lang in ("en", "am", "ti", "or") else "en"
 
-    # Ge'ez Unicode script check (Amharic vs Tigrinya)
+    # 1. Ge'ez Unicode script check (Amharic vs Tigrinya)
     if RE_ETHIOPIC.search(clean):
         lower = clean.lower()
         ti_score = sum(1 for m in TIGRINYA_MARKERS if m in lower)
@@ -174,11 +191,47 @@ def detect_language(text: str, requested_lang: str = "") -> str:
         return "am"
 
     lower = clean.lower()
-    for marker in OROMO_MARKERS:
-        if re.search(r"\b" + re.escape(marker) + r"\b", lower):
-            return "or"
+
+    # 2. Latin-script Amharic vs Afaan Oromo vs English
+    latin_am_score = sum(1 for m in LATIN_AMHARIC_MARKERS if re.search(r"\b" + re.escape(m) + r"\b", lower))
+    oromo_score = sum(1 for m in OROMO_MARKERS if re.search(r"\b" + re.escape(m) + r"\b", lower))
+
+    if latin_am_score > 0 and latin_am_score >= oromo_score:
+        return "am"
+
+    if oromo_score > 0:
+        return "or"
+
+    if requested_lang in ("en", "am", "ti", "or"):
+        return requested_lang
 
     return "en"
+
+
+def get_localized_suggestions(lang: str) -> List[str]:
+    if lang == "am":
+        return [
+            "ከ 50,000 ብር በታች ያሉ ላፕቶፖች",
+            "ቦሌ ውስጥ የሚከራዩ ቤቶች",
+            "የHUNTIQ የደላላ እና የገበያ ስርዓት እንዴት ይሰራል?",
+        ]
+    elif lang == "ti":
+        return [
+            "ትሕቲ 50,000 ቅርሺ ዝኾኑ ላፕቶፓት",
+            "ኣብ ቦሌ ዝካረዩ ኣባይቲ",
+            "ናይ HUNTIQ ናይ ደላላን ዕዳጋን ኣሰራርሓ ከመይ ይሰርሕ?",
+        ]
+    elif lang == "or":
+        return [
+            "Laaptooppota gatii 50,000 ETB gadii",
+            "Manneen Booleetti kireeffaman",
+            "Hojimaanni dilaala HUNTIQ akkamitti hojjeta?",
+        ]
+    return [
+        "Find laptops under 50,000 ETB",
+        "Apartments for rent in Bole",
+        "How does the HUNTIQ broker model work?",
+    ]
 
 
 def get_localized_rejection(lang: str, reason: str = "") -> str:
@@ -374,7 +427,7 @@ RE_USER_PRIVACY = re.compile(
 
 # Social interaction patterns (Phase 6)
 RE_GREETING = re.compile(
-    r"(?i)^(?:hello|hi|hey|good\s+(?:morning|afternoon|evening)|selam|ሰላም|ከመይ|akkam)\b[!?.]*$"
+    r"(?i)^(?:hello|hi|hey|good\s+(?:morning|afternoon|evening)|selam|salam|tadias|tadiyas|endemin|ሰላም|ከመይ|akkam)\b[!?.]*$"
 )
 
 RE_COMPLIMENT = re.compile(
@@ -382,6 +435,7 @@ RE_COMPLIMENT = re.compile(
     r"you\s+are\s+(?:clever|smart|helpful|awesome|great|amazing|the\s+best|genius|good)|"
     r"you're\s+(?:clever|smart|helpful|awesome|great|amazing|the\s+best|genius|good)|"
     r"smart\s+bot|clever\s+ai|good\s+job|nice\s+work|impressive|"
+    r"gobez|tiru\s+sira|teru\s+sera|konjo|qonjo|"
     r"ጎበዝ|ብልህ|ጥሩ\s+ስራ|ብልሂ|qaruutee|baay'ee\s+gaarii"
     r")(?:\s+\w+)?(?:[!?.\s]*)$"
 )
@@ -389,18 +443,20 @@ RE_COMPLIMENT = re.compile(
 RE_APPRECIATION_THANKS = re.compile(
     r"(?i)\b("
     r"thank\s+you(\s+so\s+much)?|thanks(\s+a\s+lot)?|i\s+appreciate\s+you|much\s+appreciated|thx|ty|"
+    r"amesegenalehu|ameseginalehu|betam\s+amesegenalehu|"
     r"አመሰግናለሁ|እናመሰግናለን|የቐንየለይ|galatoomi|galatoomaa"
     r")\b[!?.]*$"
 )
 
 RE_ACKNOWLEDGEMENT = re.compile(
-    r"(?i)^(ok|okay|alright|got\s+it|understood|cool|sure|fine|nice|i\s+see|እሺ|ሕራይ|tole)\b[!?.]*$"
+    r"(?i)^(ok|okay|alright|got\s+it|understood|cool|sure|fine|nice|i\s+see|eshi|ishi|እሺ|ሕራይ|tole)\b[!?.]*$"
 )
 
 RE_CAPABILITY_OR_IDENTITY = re.compile(
     r"(?i)\b("
     r"who\s+are\s+you|what\s+can\s+you\s+do|who\s+created\s+you|who\s+made\s+you|"
     r"what\s+is\s+your\s+name|what\s+is\s+huntiq\s*ai|tell\s+me\s+about\s+yourself|"
+    r"ante\s+man\s+neh|anchi\s+man\s+nesh|man\s+neh|man\s+nesh|min\s+tiseralekh|min\s+tiseralesh|"
     r"አንተ\s+ማን\s+ነህ|ማን\s+ነሽ|ማን\s+ነህ|ምን\s+መስራት\s+ትችላለህ|ምን\s+ትሰራለህ|"
     r"መን\s+ኢኻ|እንታይ\s+ክትገብር\s+ትኽእል|ati\s+eenyu|maal\s+gochuu\s+dandeessa"
     r")\b[!?.]*$"
@@ -409,6 +465,7 @@ RE_CAPABILITY_OR_IDENTITY = re.compile(
 RE_GOODBYE = re.compile(
     r"(?i)\b("
     r"goodbye|bye|bye\s+bye|see\s+you(\s+later)?|ciao|take\s+care|"
+    r"dehna\s+hun|dehna\s+huni|dehna\s+hunu|chaw|"
     r"ደህና\s+ሁን|ደህና\s+ሁኚ|ደህና\s+ሁኑ|ቻው|ደሓን\s+ኩን|ደሓን\s+ኩኑ|nagaatti"
     r")\b[!?.]*$"
 )
@@ -462,6 +519,14 @@ MARKETPLACE_SIGNALS = [
     "trust", "sales", "revenue", "inspection", "pricing", "commercial", "property",
     "toyota", "hyundai", "lenovo", "dell", "hp", "macbook", "iphone", "samsung", "thinkpad",
     "addis ababa", "bole", "hawassa", "adama", "dire dawa", "bahir dar", "mekelle",
+    # Latin Amharic Signals
+    "mekina", "mekena", "makina", "wagaw", "waga", "sint", "sinti", "snt",
+    "kirey", "kira", "kire", "akray", "akari", "tekeray", "tekiray", "megzat", "megezat", "meshet", "meshat",
+    "bet", "biet", "bale", "kiffil", "kifil", "suk", "souk", "delala", "gebeya",
+    "felagku", "felegku", "felegiku", "felgku", "ifelgalew", "ifelgalehu", "yifelgalu",
+    "ale", "alle", "alew", "allaw", "alesh", "allesh", "alu", "allu",
+    "natish", "benatish", "be natish", "nateh", "benateh", "be nateh", "ere",
+    "asayegn", "asayeng", "asaye", "slik", "silik", "sheyach", "gej",
     # Amharic
     "መግዛት", "መሸጥ", "ኪራይ", "ዋጋ", "ቤት", "መኪና", "ስልክ", "ላፕቶፕ", "ኮምፒውተር", "ስራ",
     "አዲስ አበባ", "ደላላ", "የገበያ", "ቦሌ", "ማስታወቂያ", "ተከራይ", "ገዢ", "ሻጭ", "ባለሙያ",
@@ -490,7 +555,8 @@ RE_EXPLICIT_ADVISORY = re.compile(
     r"calculate|compare|explain how|how to advertise|how to attract|best way to|"
     r"is\s+.*(enough|sufficient|good|better)|should\s+i\s+(buy|rent|choose|get)"
     r")\b|"
-    r"(እንዴት|ምን|ስለ|መምሪያ|ምክር|የቱ|የትኛው|ይምረጡ|akkamitti|gorsa|kamtu|ከመይ|እንታይ|ኣየናይ)"
+    r"(እንዴት|ምን|ስለ|መምሪያ|ምክር|የቱ|የትኛው|ይምረጡ|akkamitti|gorsa|kamtu|ከመይ|እንታይ|ኣየናይ|"
+    r"endet|endiet|min|men|sint|wagaw|waga|yetignaw|yetinaw|yemin|yemen)"
 )
 
 
@@ -529,13 +595,22 @@ def extract_search_term(text: str) -> str:
         "find me", "find", "show me", "show", "search for", "search", "looking for",
         "i want", "i need", "can you show", "available", "please", "around", "near",
         "in", "for sale", "for rent", "buy", "sell", "cheap", "good", "best",
-        "እፈልጋለሁ", "አሳየኝ", "ፈልግ", "barbaada", "ደሊየ",
+        # Latin Amharic conversational & inquiry fillers
+        "selam", "salam", "tadias", "ere", "be natish", "benatish", "be nateh", "benateh", "natish", "nateh",
+        "sint new", "sinti new", "sint newu", "sint", "sinti", "snt", "wagaw sint new", "wagaw sint",
+        "wagaw", "waga", "new", "newu", "newi", "ale", "alle", "alew", "allaw", "alesh", "allesh", "alu", "allu",
+        "ifelgalew", "ifelgalehu", "felegku", "felegiku", "felagku", "felgku", "yifelgalu",
+        "asayegn", "asayeng", "asaye", "kirey", "kira", "kire", "megzat", "meshet",
+        # Ge'ez fillers
+        "ሰላም", "እፈልጋለሁ", "ይፈልጋሉ", "አሳየኝ", "ፈልግ", "ስንት ነው", "ስንት", "ነው", "ዋጋው", "ዋጋ", "አለ", "አለ ወይ", "አለህ", "አለሽ",
+        "barbaada", "ደሊየ",
     ]
     term = clean
     for f in fillers:
-        term = term.replace(f, " ")
+        term = re.sub(r"\b" + re.escape(f) + r"\b", " ", term)
     term = RE_PRICE_UNDER.sub(" ", term)
     term = RE_PRICE_ABOVE.sub(" ", term)
+    term = re.sub(r"[?!.,;።፣፡]", " ", term)
     term = re.sub(r"\s+", " ", term).strip()
     return term
 
@@ -754,7 +829,9 @@ class DomainValidator:
 
         if is_advisory:
             path = "PATH_ADVISORY"
-            search_term = ""
+            # Keep search_term if query contains product/item signals so real DB listings can enrich advisory response
+            if any(k in lower for k in ["commission", "percentage", "register", "privacy", "who created", "who made", "system prompt"]):
+                search_term = ""
             if is_math_advisory or (has_math_exception and not is_explicit_advisory):
                 if any(k in lower for k in ["commission", "percentage", "discount"]):
                     intent = "COMMISSION_CALCULATION"
@@ -910,7 +987,14 @@ def build_system_instruction(lang: str, path: str, trend_summary: str = "") -> s
         base += f"\n\n[VERIFIED AGGREGATE MARKETPLACE SIGNALS:\n{trend_summary}\nUse these aggregate signals to provide relevant contextual guidance without claiming automatic model retraining.]"
 
     if lang == "am":
-        base += "\nRespond primarily in clear, natural Amharic (አማርኛ). Preserve brand names and technical specs accurately."
+        base += (
+            "\nLANGUAGE & LOCALIZATION DIRECTIVE (AMHARIC):\n"
+            "- You must reply in fluent, natural Amharic written primarily in standard Ge'ez Fidel script (አማርኛ).\n"
+            "- The user may communicate with you in standard Ge'ez Fidel script (አማርኛ) OR in Latin phonetic transliteration (e.g. 'selam', 'toyota vitz mekena sint new', 'ere be natish mekena ale', 'wagaw sint new', 'bale 1 kiffil bet kirey ale').\n"
+            "- You must fully understand both Latin transliteration and Ge'ez Fidel, understand colloquial phrasing (such as 'ere be natish', 'wagaw sint new', 'kirey ale'), and reply warmly and professionally in Amharic (Ge'ez Fidel).\n"
+            "- Accurately preserve international brand names, model numbers, and technical specifications (e.g. 'Toyota Vitz', 'Samsung Galaxy S24 Ultra', '16GB RAM').\n"
+            "- If database listings are provided, present their exact title, price in ETB, and location in Amharic."
+        )
     elif lang == "ti":
         base += "\nRespond primarily in clear, natural Tigrinya (ትግርኛ). Preserve brand names and technical specs accurately."
     elif lang == "or":
@@ -982,6 +1066,8 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
             self.handle_classify(data)
         elif self.path == "/chat":
             self.handle_chat(data)
+        elif self.path == "/translate":
+            self.handle_translate(data)
         elif self.path == "/shutdown":
             self.close_connection = True
             self._send_json(200, {"status": "shutting down"})
@@ -999,6 +1085,63 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
 
         res = self.validator.evaluate(message, lang, history)
         self._send_json(200, res)
+
+    def handle_translate(self, data: Dict[str, Any]) -> None:
+        text = data.get("text", "").strip()
+        if not text:
+            self._send_json(400, {"error": "text is required"})
+            return
+
+        source_lang = detect_language(text, data.get("from_lang", ""))
+        sys_inst = (
+            "You are HUNTIQ's professional multilingual translation engine for the Ethiopian commercial marketplace. "
+            "Translate the provided commercial listing title or description into English (en), Amharic (am), "
+            "Afaan Oromo (or), and Tigrinya (ti). Output ONLY valid parseable JSON with keys 'en', 'am', 'or', and 'ti'. "
+            "Keep technical specifications, brand names, numbers, and models accurately preserved."
+        )
+        prompt = f"Listing text to translate:\n\"{text}\"\n\nJSON output:"
+        reply_text, tokens, err = self.gemini_client.generate(sys_inst, [], prompt)
+
+        if err or not reply_text:
+            self._send_json(200, {
+                "source_language": source_lang,
+                "translations": {
+                    "en": text,
+                    "am": text,
+                    "or": text,
+                    "ti": text,
+                },
+                "fallback": True,
+            })
+            return
+
+        try:
+            clean_reply = reply_text.strip()
+            if clean_reply.startswith("```"):
+                clean_reply = re.sub(r"^```(?:json)?\n?", "", clean_reply)
+                clean_reply = re.sub(r"\n?```$", "", clean_reply).strip()
+            parsed = json.loads(clean_reply)
+            self._send_json(200, {
+                "source_language": source_lang,
+                "translations": {
+                    "en": parsed.get("en", text),
+                    "am": parsed.get("am", text),
+                    "or": parsed.get("or", text),
+                    "ti": parsed.get("ti", text),
+                },
+                "fallback": False,
+            })
+        except Exception:
+            self._send_json(200, {
+                "source_language": source_lang,
+                "translations": {
+                    "en": text,
+                    "am": text,
+                    "or": text,
+                    "ti": text,
+                },
+                "fallback": True,
+            })
 
     def handle_chat(self, data: Dict[str, Any]) -> None:
         message = data.get("message", "")

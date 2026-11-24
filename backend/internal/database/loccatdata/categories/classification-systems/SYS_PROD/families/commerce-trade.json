@@ -21554,7 +21554,7 @@
       "parent_id": 1005,
       "parent_code": "mobile-vendors",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vendors-5g-flagship-smartphones-s1_0",
+      "slug": "mobile-vendors-5g-flagship-smartphones-s1-0",
       "names": {
         "en": "5G Flagship Smartphones",
         "am": "ባለ 5ጂ ዘመናዊ ስልኮች",
@@ -21572,7 +21572,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vendors-5g-flagship-smartphones-s1_0"
+      ],
       "redirects": []
     },
     {
@@ -21580,7 +21582,7 @@
       "parent_id": 977,
       "parent_code": "vehicle-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "vehicle-auction-commercial-passenger-auto-rickshaw-s20_0",
+      "slug": "vehicle-auction-commercial-passenger-auto-rickshaw-s20-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -21598,7 +21600,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "vehicle-auction-commercial-passenger-auto-rickshaw-s20_0"
+      ],
       "redirects": []
     },
     {
@@ -21606,7 +21610,7 @@
       "parent_id": 976,
       "parent_code": "property-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "property-auction-high-strength-structural-portland-s42_0",
+      "slug": "property-auction-high-strength-structural-portland-s42-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -21624,7 +21628,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "property-auction-high-strength-structural-portland-s42_0"
+      ],
       "redirects": []
     },
     {
@@ -21632,7 +21638,7 @@
       "parent_id": 1005,
       "parent_code": "mobile-vendors",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vendors-mid-range-performance-phones-s1_1",
+      "slug": "mobile-vendors-mid-range-performance-phones-s1-1",
       "names": {
         "en": "Mid-Range Performance Phones",
         "am": "መካከለኛ ደረጃ ስልኮች",
@@ -21650,7 +21656,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vendors-mid-range-performance-phones-s1_1"
+      ],
       "redirects": []
     },
     {
@@ -21658,7 +21666,7 @@
       "parent_id": 977,
       "parent_code": "vehicle-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "vehicle-auction-heavy-duty-cargo-delivery-three-wh-s20_1",
+      "slug": "vehicle-auction-heavy-duty-cargo-delivery-three-wh-s20-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -21680,7 +21688,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "vehicle-auction-heavy-duty-cargo-delivery-three-wh-s20_1"
       ],
       "redirects": []
     },
@@ -21689,7 +21698,7 @@
       "parent_id": 976,
       "parent_code": "property-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "property-auction-ribbed-high-yield-rebar-reinforce-s42_1",
+      "slug": "property-auction-ribbed-high-yield-rebar-reinforce-s42-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -21707,7 +21716,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "property-auction-ribbed-high-yield-rebar-reinforce-s42_1"
+      ],
       "redirects": []
     },
     {
@@ -21715,7 +21726,7 @@
       "parent_id": 1005,
       "parent_code": "mobile-vendors",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vendors-budget-long-battery-phones-s1_2",
+      "slug": "mobile-vendors-budget-long-battery-phones-s1-2",
       "names": {
         "en": "Budget Long-Battery Phones",
         "am": "ተመጣጣኝ ባትሪ ቆጣቢ ስልኮች",
@@ -21733,7 +21744,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vendors-budget-long-battery-phones-s1_2"
+      ],
       "redirects": []
     },
     {
@@ -21741,7 +21754,7 @@
       "parent_id": 977,
       "parent_code": "vehicle-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "vehicle-auction-electric-green-mobility-e-rickshaw-s20_2",
+      "slug": "vehicle-auction-electric-green-mobility-e-rickshaw-s20-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -21759,7 +21772,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "vehicle-auction-electric-green-mobility-e-rickshaw-s20_2"
+      ],
       "redirects": []
     },
     {
@@ -21767,7 +21782,7 @@
       "parent_id": 976,
       "parent_code": "property-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "property-auction-furnished-modern-residential-apar-s42_2",
+      "slug": "property-auction-furnished-modern-residential-apar-s42-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -21785,7 +21800,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "property-auction-furnished-modern-residential-apar-s42_2"
+      ],
       "redirects": []
     },
     {
@@ -21793,7 +21810,7 @@
       "parent_id": 1005,
       "parent_code": "mobile-vendors",
       "classification_system_code": "SYS_PROD",
-      "slug": "mobile-vendors-rugged-heavy-duty-phones-s1_3",
+      "slug": "mobile-vendors-rugged-heavy-duty-phones-s1-3",
       "names": {
         "en": "Rugged Heavy-Duty Phones",
         "am": "አስተማማኝ ጠንካራ ስልኮች",
@@ -21811,7 +21828,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "mobile-vendors-rugged-heavy-duty-phones-s1_3"
+      ],
       "redirects": []
     },
     {
@@ -21819,7 +21838,7 @@
       "parent_id": 977,
       "parent_code": "vehicle-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "vehicle-auction-long-distance-passenger-minibuses-s20_3",
+      "slug": "vehicle-auction-long-distance-passenger-minibuses-s20-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -21837,7 +21856,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "vehicle-auction-long-distance-passenger-minibuses-s20_3"
+      ],
       "redirects": []
     },
     {
@@ -21845,7 +21866,7 @@
       "parent_id": 976,
       "parent_code": "property-auction",
       "classification_system_code": "SYS_PROD",
-      "slug": "property-auction-condominium-housing-units-20-80-4-s42_3",
+      "slug": "property-auction-condominium-housing-units-20-80-4-s42-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -21868,7 +21889,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "property-auction-condominium-housing-units-20-80-4-s42_3"
       ],
       "redirects": []
     },

@@ -54,6 +54,7 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 			"/api/telebirr/webhook",
 			"/api/chapa/webhook",
 			"/api/cbe/webhook",
+			"/api/payments/webhook",
 		},
 	}))
 	api.Use(middleware.CSRFProtect(middleware.CSRFConfig{
@@ -65,7 +66,9 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 			"/api/telebirr/webhook",
 			"/api/cbe/webhook",
 			"/api/webhooks",
+			"/api/payments/webhook",
 			"/api/ai/chat",     // AI chat should work for anonymous users
+			"/api/ai/translate", // Multilingual translation for listing creation
 			"/api/ai/health",   // Health check is read-only
 		},
 	}))
@@ -165,11 +168,13 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	api.Get("/categories/tree", d.CategoryHandler.GetCategoryTree)
 	api.Get("/categories/search", d.CategoryHandler.SearchCategories)
 	api.Get("/categories/resolve", d.CategoryHandler.ResolveCategory)
+	api.Get("/categories/intent", d.CategoryHandler.ResolveCategoryIntent)
 	api.Get("/categories/popular", d.ProductHandler.PopularCategories)
 	api.Get("/categories/check-slug", d.CategoryHandler.CheckSlug)
 	api.Get("/categories/slug/:slug", d.CategoryHandler.GetCategoryBySlug)
 	api.Get("/categories/:id", d.CategoryHandler.GetCategory)
 	api.Get("/categories/:id/children", d.CategoryHandler.GetCategoryChildren)
+	api.Get("/categories/:id/related", d.CategoryHandler.GetCategoryRelated)
 	api.Get("/categories/:id/ancestors", d.CategoryHandler.GetCategoryBreadcrumbs)
 	api.Get("/categories/:id/attributes", d.AttributeHandler.GetCategoryAttributes)
 
@@ -221,7 +226,14 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 		},
 	})
 	api.Post("/ai/chat", aiLimiter, d.MW.OptionalAuth, d.AIHandler.Chat)
+	api.Post("/ai/translate", aiLimiter, d.MW.OptionalAuth, d.AIHandler.Translate)
 	api.Get("/ai/health", d.AIHandler.Health)
+
+	// Dev Mode OTP Inspection (Strictly guarded by h.devMode and Config.DevMode)
+	if d.Config != nil && d.Config.DevMode {
+		api.Get("/dev/otp", d.AuthHandler.DevPeekOTP)
+		api.Get("/dev/otp/decrypt", d.AuthHandler.DevDecryptOTP)
+	}
 
 	// ── Auth & Capabilities ──────────────────────────────────────────────────
 	api.Post("/auth/otp/send", otpLimiter, d.AuthHandler.SendOTP)
@@ -488,6 +500,14 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	admin.Get("/logs", d.MW.RequireAnyPermission("logs"), d.AdminHandler.ListAdminLogs)
 	admin.Get("/otp-logs", d.MW.RequireAnyPermission("otp_logs"), d.AuthHandler.ListOTPLogs)
 	admin.Get("/activity-logs", d.MW.RequireAnyPermission("logs", "otp_logs"), d.AuthHandler.ListActivityLogs)
+
+	// ── Enterprise Sub-Security Separation & Real-Time Telemetry ──────────────
+	admin.Get("/security/telemetry/me", d.AdminHandler.GetSecurityTelemetryMe)
+	admin.Get("/security/active-sessions", d.MW.RequireAnyPermission("trust_safety", "logs", "security", "operations"), d.AdminHandler.GetActiveAdminSessions)
+	admin.Post("/security/sessions/:id/revoke", d.MW.RequireAnyPermission("trust_safety", "logs", "security"), d.AdminHandler.RevokeAdminSession)
+	admin.Get("/security/zones", d.MW.RequireAnyPermission("trust_safety", "logs", "security"), d.AdminHandler.ListSecurityZones)
+	admin.Post("/security/zones/assign", middleware.RequireSecurityAdmin, d.AdminHandler.AssignSecurityZone)
+	admin.Post("/security/zones/revoke", middleware.RequireSecurityAdmin, d.AdminHandler.RevokeSecurityZone)
 
 	admin.Put("/users/:id/seller-tier", d.MW.RequireAnyPermission("seller_upgrades", "buyer_upgrades"), d.AdminHandler.SetSellerTier)
 	admin.Put("/users/:id/buyer-tier", d.MW.RequireAnyPermission("seller_upgrades", "buyer_upgrades"), d.AdminHandler.SetBuyerTier)

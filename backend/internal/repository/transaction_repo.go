@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/your-org/used-tools-marketplace/internal/models"
 	"github.com/your-org/used-tools-marketplace/pkg/constants"
@@ -131,15 +132,49 @@ func (r *TransactionRepo) CreateAndSell(ctx context.Context, sellerID int, t *mo
 // UpdateStatus changes a transaction's status. Valid transitions:
 // pending → completed | cancelled
 func (r *TransactionRepo) UpdateStatus(ctx context.Context, txID int, status string) error {
-	tag, err := r.db.Exec(ctx, //nolint:gosec // G201/G202: all values passed as $N parameters, no user input in SQL structure
-		`UPDATE transactions SET status=$1::transaction_status, updated_at=NOW()
-		 WHERE id=$2 AND status='pending'::transaction_status`,
-		status, txID)
+	tx, err := r.db.Begin(ctx)
 	if err != nil {
 		return err
 	}
-	if tag.RowsAffected() == 0 {
-		return fmt.Errorf("transaction %d not found or already processed (only pending transactions can be updated)", txID)
+	defer tx.Rollback(ctx)
+
+	var productID, sellerID int
+	err = tx.QueryRow(ctx,
+		`SELECT product_id, seller_id FROM transactions WHERE id = $1 AND status = 'pending' FOR UPDATE`,
+		txID,
+	).Scan(&productID, &sellerID)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return fmt.Errorf("transaction %d not found or already processed (only pending transactions can be updated)", txID)
+		}
+		return err
 	}
-	return nil
+
+	_, err = tx.Exec(ctx,
+		`UPDATE transactions SET status = $1, updated_at = NOW() WHERE id = $2`,
+		status, txID,
+	)
+	if err != nil {
+		return err
+	}
+
+	if status == "cancelled" {
+		// Revert product back to approved so it can be purchased or browsed again
+		_, err = tx.Exec(ctx,
+			`UPDATE products SET status = 'approved', updated_at = NOW() WHERE id = $1 AND status = 'sold'`,
+			productID,
+		)
+		if err != nil {
+			return fmt.Errorf("failed to revert product status: %w", err)
+		}
+
+		// Notify seller
+		_, _ = tx.Exec(ctx,
+			`INSERT INTO notifications (user_id, title, message, type)
+			 VALUES ($1, 'Transaction Cancelled', 'Transaction #' || $2 || ' was cancelled. Your product listing has been returned to active status.', 'warning')`,
+			sellerID, txID,
+		)
+	}
+
+	return tx.Commit(ctx)
 }

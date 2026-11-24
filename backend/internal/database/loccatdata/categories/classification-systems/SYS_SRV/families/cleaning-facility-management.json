@@ -11100,7 +11100,7 @@
       "parent_id": 875,
       "parent_code": "carpentry-maintenance",
       "classification_system_code": "SYS_SRV",
-      "slug": "carpentry-maintenance-commercial-passenger-auto-ri-s19_0",
+      "slug": "carpentry-maintenance-commercial-passenger-auto-ri-s19-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -11118,7 +11118,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "carpentry-maintenance-commercial-passenger-auto-ri-s19_0"
+      ],
       "redirects": []
     },
     {
@@ -11126,7 +11128,7 @@
       "parent_id": 892,
       "parent_code": "post-construction-cleaning",
       "classification_system_code": "SYS_SRV",
-      "slug": "post-construction-cleaning-high-strength-structura-s39_0",
+      "slug": "post-construction-cleaning-high-strength-structura-s39-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -11144,7 +11146,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "post-construction-cleaning-high-strength-structura-s39_0"
+      ],
       "redirects": []
     },
     {
@@ -11152,7 +11156,7 @@
       "parent_id": 895,
       "parent_code": "building-operations",
       "classification_system_code": "SYS_SRV",
-      "slug": "building-operations-high-strength-structural-portl-s40_0",
+      "slug": "building-operations-high-strength-structural-portl-s40-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -11170,7 +11174,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "building-operations-high-strength-structural-portl-s40_0"
+      ],
       "redirects": []
     },
     {
@@ -11178,7 +11184,7 @@
       "parent_id": 916,
       "parent_code": "construction-waste",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-waste-high-strength-structural-portla-s41_0",
+      "slug": "construction-waste-high-strength-structural-portla-s41-0",
       "names": {
         "en": "High-Strength Structural Portland Cement",
         "am": "ከፍተኛ ጥንካሬ ያለው የፖርትላንድ ሲሚንቶ",
@@ -11196,7 +11202,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-waste-high-strength-structural-portla-s41_0"
+      ],
       "redirects": []
     },
     {
@@ -11204,7 +11212,7 @@
       "parent_id": 875,
       "parent_code": "carpentry-maintenance",
       "classification_system_code": "SYS_SRV",
-      "slug": "carpentry-maintenance-heavy-duty-cargo-delivery-th-s19_1",
+      "slug": "carpentry-maintenance-heavy-duty-cargo-delivery-th-s19-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -11226,7 +11234,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "carpentry-maintenance-heavy-duty-cargo-delivery-th-s19_1"
       ],
       "redirects": []
     },
@@ -11235,7 +11244,7 @@
       "parent_id": 892,
       "parent_code": "post-construction-cleaning",
       "classification_system_code": "SYS_SRV",
-      "slug": "post-construction-cleaning-ribbed-high-yield-rebar-s39_1",
+      "slug": "post-construction-cleaning-ribbed-high-yield-rebar-s39-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -11253,7 +11262,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "post-construction-cleaning-ribbed-high-yield-rebar-s39_1"
+      ],
       "redirects": []
     },
     {
@@ -11261,7 +11272,7 @@
       "parent_id": 895,
       "parent_code": "building-operations",
       "classification_system_code": "SYS_SRV",
-      "slug": "building-operations-ribbed-high-yield-rebar-reinfo-s40_1",
+      "slug": "building-operations-ribbed-high-yield-rebar-reinfo-s40-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -11279,7 +11290,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "building-operations-ribbed-high-yield-rebar-reinfo-s40_1"
+      ],
       "redirects": []
     },
     {
@@ -11287,7 +11300,7 @@
       "parent_id": 916,
       "parent_code": "construction-waste",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-waste-ribbed-high-yield-rebar-reinfor-s41_1",
+      "slug": "construction-waste-ribbed-high-yield-rebar-reinfor-s41-1",
       "names": {
         "en": "Ribbed High-Yield Rebar Reinforcement Steel",
         "am": "የኮንክሪት ውስጥ ባለቅርጽ ብረት ባለአርማታ",
@@ -11305,7 +11318,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-waste-ribbed-high-yield-rebar-reinfor-s41_1"
+      ],
       "redirects": []
     },
     {
@@ -11313,7 +11328,7 @@
       "parent_id": 875,
       "parent_code": "carpentry-maintenance",
       "classification_system_code": "SYS_SRV",
-      "slug": "carpentry-maintenance-electric-green-mobility-e-ri-s19_2",
+      "slug": "carpentry-maintenance-electric-green-mobility-e-ri-s19-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -11331,7 +11346,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "carpentry-maintenance-electric-green-mobility-e-ri-s19_2"
+      ],
       "redirects": []
     },
     {
@@ -11339,7 +11356,7 @@
       "parent_id": 892,
       "parent_code": "post-construction-cleaning",
       "classification_system_code": "SYS_SRV",
-      "slug": "post-construction-cleaning-furnished-modern-reside-s39_2",
+      "slug": "post-construction-cleaning-furnished-modern-reside-s39-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -11357,7 +11374,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "post-construction-cleaning-furnished-modern-reside-s39_2"
+      ],
       "redirects": []
     },
     {
@@ -11365,7 +11384,7 @@
       "parent_id": 895,
       "parent_code": "building-operations",
       "classification_system_code": "SYS_SRV",
-      "slug": "building-operations-furnished-modern-residential-a-s40_2",
+      "slug": "building-operations-furnished-modern-residential-a-s40-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -11383,7 +11402,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "building-operations-furnished-modern-residential-a-s40_2"
+      ],
       "redirects": []
     },
     {
@@ -11391,7 +11412,7 @@
       "parent_id": 916,
       "parent_code": "construction-waste",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-waste-furnished-modern-residential-ap-s41_2",
+      "slug": "construction-waste-furnished-modern-residential-ap-s41-2",
       "names": {
         "en": "Furnished Modern Residential Apartments for Rent",
         "am": "ዘመናዊ እቃ የተሟላላቸው የሚከራዩ አፓርታማዎች",
@@ -11409,7 +11430,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "construction-waste-furnished-modern-residential-ap-s41_2"
+      ],
       "redirects": []
     },
     {
@@ -11417,7 +11440,7 @@
       "parent_id": 875,
       "parent_code": "carpentry-maintenance",
       "classification_system_code": "SYS_SRV",
-      "slug": "carpentry-maintenance-long-distance-passenger-mini-s19_3",
+      "slug": "carpentry-maintenance-long-distance-passenger-mini-s19-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -11435,7 +11458,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "carpentry-maintenance-long-distance-passenger-mini-s19_3"
+      ],
       "redirects": []
     },
     {
@@ -11443,7 +11468,7 @@
       "parent_id": 892,
       "parent_code": "post-construction-cleaning",
       "classification_system_code": "SYS_SRV",
-      "slug": "post-construction-cleaning-condominium-housing-uni-s39_3",
+      "slug": "post-construction-cleaning-condominium-housing-uni-s39-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -11466,7 +11491,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "post-construction-cleaning-condominium-housing-uni-s39_3"
       ],
       "redirects": []
     },
@@ -11475,7 +11501,7 @@
       "parent_id": 895,
       "parent_code": "building-operations",
       "classification_system_code": "SYS_SRV",
-      "slug": "building-operations-condominium-housing-units-20-8-s40_3",
+      "slug": "building-operations-condominium-housing-units-20-8-s40-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -11498,7 +11524,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "building-operations-condominium-housing-units-20-8-s40_3"
       ],
       "redirects": []
     },
@@ -11507,7 +11534,7 @@
       "parent_id": 916,
       "parent_code": "construction-waste",
       "classification_system_code": "SYS_SRV",
-      "slug": "construction-waste-condominium-housing-units-20-80-s41_3",
+      "slug": "construction-waste-condominium-housing-units-20-80-s41-3",
       "names": {
         "en": "Condominium Housing Units 20/80",
         "am": "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80",
@@ -11530,7 +11557,8 @@
         "Condominium Housing Units 20/80 & 40/60 for Sale/Rent",
         "Mana Kondoominiyeemii 20/80 fi 40/60",
         "ናይ ሓባር መንበሪ ኮንዶሚኒየም ኣባይቲ 20/80ን 40/60ን",
-        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60"
+        "የጋራ መኖሪያ ኮንዶሚኒየም ቤቶች 20/80 እና 40/60",
+        "construction-waste-condominium-housing-units-20-80-s41_3"
       ],
       "redirects": []
     },

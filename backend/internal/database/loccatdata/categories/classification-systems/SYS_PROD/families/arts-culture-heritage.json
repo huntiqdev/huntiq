@@ -15552,7 +15552,7 @@
       "parent_id": 638,
       "parent_code": "woodcarving",
       "classification_system_code": "SYS_PROD",
-      "slug": "woodcarving-commercial-passenger-auto-rickshaws-s17_0",
+      "slug": "woodcarving-commercial-passenger-auto-rickshaws-s17-0",
       "names": {
         "en": "Commercial Passenger Auto-Rickshaws",
         "am": "የንግድ ተሳፋሪ ባጃጆች",
@@ -15570,7 +15570,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "woodcarving-commercial-passenger-auto-rickshaws-s17_0"
+      ],
       "redirects": []
     },
     {
@@ -15578,7 +15580,7 @@
       "parent_id": 638,
       "parent_code": "woodcarving",
       "classification_system_code": "SYS_PROD",
-      "slug": "woodcarving-heavy-duty-cargo-delivery-three-wheele-s17_1",
+      "slug": "woodcarving-heavy-duty-cargo-delivery-three-wheele-s17-1",
       "names": {
         "en": "Heavy-Duty Cargo",
         "am": "የእቃ መጫኛ የጭነት ባጃጆች",
@@ -15600,7 +15602,8 @@
         "Baajaajii Fe’umsaa fi Daldalaa",
         "Delivery Three-Wheelers",
         "Heavy-Duty Cargo & Delivery Three-Wheelers",
-        "ናይ ጽዕነትን ምብጻሕን ባጃጅ"
+        "ናይ ጽዕነትን ምብጻሕን ባጃጅ",
+        "woodcarving-heavy-duty-cargo-delivery-three-wheele-s17_1"
       ],
       "redirects": []
     },
@@ -15609,7 +15612,7 @@
       "parent_id": 638,
       "parent_code": "woodcarving",
       "classification_system_code": "SYS_PROD",
-      "slug": "woodcarving-electric-green-mobility-e-rickshaws-s17_2",
+      "slug": "woodcarving-electric-green-mobility-e-rickshaws-s17-2",
       "names": {
         "en": "Electric Green Mobility E-Rickshaws",
         "am": "የኤሌክትሪክ ባትሪ ባጃጆች",
@@ -15627,7 +15630,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "woodcarving-electric-green-mobility-e-rickshaws-s17_2"
+      ],
       "redirects": []
     },
     {
@@ -15635,7 +15640,7 @@
       "parent_id": 638,
       "parent_code": "woodcarving",
       "classification_system_code": "SYS_PROD",
-      "slug": "woodcarving-long-distance-passenger-minibuses-s17_3",
+      "slug": "woodcarving-long-distance-passenger-minibuses-s17-3",
       "names": {
         "en": "Long-Distance Passenger Minibuses",
         "am": "የረጅም ርቀት የህዝብ ማመላለሻ ሚኒባሶች",
@@ -15653,7 +15658,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "woodcarving-long-distance-passenger-minibuses-s17_3"
+      ],
       "redirects": []
     },
     {

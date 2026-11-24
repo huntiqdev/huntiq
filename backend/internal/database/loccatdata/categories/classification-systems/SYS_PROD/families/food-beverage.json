@@ -19761,7 +19761,7 @@
       "parent_id": 1846,
       "parent_code": "cloud-kitchen",
       "classification_system_code": "SYS_PROD",
-      "slug": "cloud-kitchen-digital-smart-electric-injera-mitad--s74_0",
+      "slug": "cloud-kitchen-digital-smart-electric-injera-mitad-s74-0",
       "names": {
         "en": "Digital Smart Electric Injera Mitad Systems",
         "am": "ዲጂታል ስማርት የኤሌክትሪክ የእንጀራ ምጣዶች",
@@ -19779,7 +19779,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "cloud-kitchen-digital-smart-electric-injera-mitad--s74_0"
+      ],
       "redirects": []
     },
     {
@@ -19787,7 +19789,7 @@
       "parent_id": 1846,
       "parent_code": "cloud-kitchen",
       "classification_system_code": "SYS_PROD",
-      "slug": "cloud-kitchen-double-door-frost-free-kitchen-refri-s74_1",
+      "slug": "cloud-kitchen-double-door-frost-free-kitchen-refri-s74-1",
       "names": {
         "en": "Double-Door Frost-Free Kitchen Refrigerators",
         "am": "ባለ ሁለት በር በረዶ የማይሰራባቸው የቤት ማቀዝቀዣዎች",
@@ -19805,7 +19807,9 @@
       "is_archived": false,
       "meta_title": null,
       "meta_description": null,
-      "aliases": [],
+      "aliases": [
+        "cloud-kitchen-double-door-frost-free-kitchen-refri-s74_1"
+      ],
       "redirects": []
     },
     {
@@ -19813,7 +19817,7 @@
       "parent_id": 1846,
       "parent_code": "cloud-kitchen",
       "classification_system_code": "SYS_PROD",
-      "slug": "cloud-kitchen-commercial-4-burner-gas-electric-sto-s74_2",
+      "slug": "cloud-kitchen-commercial-4-burner-gas-electric-sto-s74-2",
       "names": {
         "en": "Commercial 4-Burner Gas",
         "am": "ባለ 4-ዓይነ ምድጃ የጋዝ",
@@ -19836,7 +19840,8 @@
         "Electric Stoves",
         "Istoovii Gaasii fi Eleektiriikaa 4",
         "ባለ 4-ዓይነ ምድጃ የጋዝና የኤሌክትሪክ ማብሰያዎች",
-        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ"
+        "ናይ 4-ዓይኒ መብሰሊ ናይ ጋዝን ኤሌክትሪክን ምድጃ",
+        "cloud-kitchen-commercial-4-burner-gas-electric-sto-s74_2"
       ],
       "redirects": []
     },
@@ -19845,7 +19850,7 @@
       "parent_id": 1846,
       "parent_code": "cloud-kitchen",
       "classification_system_code": "SYS_PROD",
-      "slug": "cloud-kitchen-heavy-duty-food-processors-coffee-gr-s74_3",
+      "slug": "cloud-kitchen-heavy-duty-food-processors-coffee-gr-s74-3",
       "names": {
         "en": "Heavy-Duty Food Processors",
         "am": "ከባድ የቤት ውስጥ መፍጫዎች",
@@ -19868,7 +19873,8 @@
         "Heavy-Duty Food Processors & Coffee Grinders",
         "Maashinii Daakuu fi Bunaa Cimaa",
         "ከቢድ ናይ ገዛ መፍሓይን ናይ ቡን መፍሓይ ማሽን",
-        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች"
+        "ከባድ የቤት ውስጥ መፍጫዎችና የቡና መፍጫ ማሽኖች",
+        "cloud-kitchen-heavy-duty-food-processors-coffee-gr-s74_3"
       ],
       "redirects": []
     },
