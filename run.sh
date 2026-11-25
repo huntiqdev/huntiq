@@ -51,6 +51,7 @@ in_use() {
 
 free_port() {
     local port="$1"
+    echo "🧹 Checking and freeing port :$port..."
     if command -v fuser >/dev/null 2>&1; then
         fuser -k -9 "${port}/tcp" 2>/dev/null || true
     fi
@@ -58,13 +59,43 @@ free_port() {
         local pids
         pids=$(lsof -ti ":$port" 2>/dev/null || echo "")
         for p in $pids; do
-            kill -9 "$p" 2>/dev/null || true
+            [ -n "$p" ] && kill -9 "$p" 2>/dev/null || true
         done
     fi
     if [ "$port" = "8080" ]; then
         pkill -9 -f "huntiq_backend" 2>/dev/null || true
+        pkill -9 -f "ai/server.py" 2>/dev/null || true
+        pkill -9 -f "cmd/api" 2>/dev/null || true
+    elif [ "$port" = "3000" ]; then
+        pkill -9 -f "next-server" 2>/dev/null || true
+        pkill -9 -f "next dev" 2>/dev/null || true
     fi
-    sleep 0.3
+
+    # Wait and verify port is released
+    for _ in {1..20}; do
+        if ! in_use "$port"; then
+            break
+        fi
+        sleep 0.1
+    done
+
+    if in_use "$port"; then
+        if command -v fuser >/dev/null 2>&1; then
+            fuser -k -9 "${port}/tcp" 2>/dev/null || true
+        fi
+        sleep 0.2
+    fi
+    echo "✓ Port :$port is clear."
+}
+
+clean_stale_stack() {
+    echo "🧹 Pre-flight cleanup: terminating existing processes on :8080 and :3000..."
+    free_port 8080
+    free_port 3000
+    pkill -9 -f "huntiq_backend" 2>/dev/null || true
+    pkill -9 -f "ai/server.py" 2>/dev/null || true
+    pkill -9 -f "next-server" 2>/dev/null || true
+    echo "✓ Pre-flight cleanup completed."
 }
 
 cleanup() {
@@ -178,8 +209,7 @@ cmd_native() {
     echo "🚀 Initializing HUNTIQ Stack..."
 
     # Step 1: Clean stale processes on ports 8080 and 3000
-    free_port 8080
-    free_port 3000
+    clean_stale_stack
 
     # Step 2: Ensure PostgreSQL is up
     start_postgres
@@ -270,10 +300,7 @@ cmd_native() {
 
 cmd_stop() {
     echo "🛑 Stopping all HUNTIQ services..."
-    free_port 3000
-    free_port 8080
-    pkill -f "huntiq_backend" 2>/dev/null || true
-    pkill -f "next-server" 2>/dev/null || true
+    clean_stale_stack
     local pg_dir="/tmp/huntiq_pgdata"
     [ ! -d "$pg_dir" ] && [ -d "/tmp/pgdata" ] && pg_dir="/tmp/pgdata"
     if [ -d "$pg_dir" ] && [ -x "/usr/lib/postgresql/18/bin/pg_ctl" ]; then
