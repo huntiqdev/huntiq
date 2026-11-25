@@ -427,7 +427,12 @@ RE_USER_PRIVACY = re.compile(
 
 # Social interaction patterns (Phase 6)
 RE_GREETING = re.compile(
-    r"(?i)^(?:hello|halo|helo|hallo|hi|hey|hiya|howdy|hola|greetings|good\s+(?:morning|afternoon|evening|day)|selam|salam|tadias|tadiyas|endemin|ሰላም|ከመይ|akkam)\b[!?.]*$"
+    r"(?i)(?:^|\b)("
+    r"hello|halo|helo|hallo|hi|hey|hiya|howdy|hola|greetings|"
+    r"good\s+(?:morning|afternoon|evening|day)|"
+    r"selam|salam|tadias|tadiyas|endemin|tenayistilign|tena\s*yistilign|"
+    r"ሰላም|ጤና\s*ይስጥልኝ|እንደምን|ከመይ|akkam"
+    r")\b"
 )
 
 RE_COMPLIMENT = re.compile(
@@ -468,10 +473,30 @@ RE_CAPABILITY_OR_IDENTITY = re.compile(
 
 RE_GOODBYE = re.compile(
     r"(?i)\b("
-    r"goodbye|bye|bye\s+bye|see\s+you(\s+later)?|ciao|take\s+care|"
-    r"dehna\s+hun|dehna\s+huni|dehna\s+hunu|chaw|"
-    r"ደህና\s+ሁን|ደህና\s+ሁኚ|ደህና\s+ሁኑ|ቻው|ደሓን\s+ኩን|ደሓን\s+ኩኑ|nagaatti"
-    r")\b[!?.]*$"
+    r"good\s*bye|good\s*by|bye\s*bye|bye|cya|see\s+you(\s+later)?|see\s+ya|ciao|take\s+care|"
+    r"have\s+a\s*(?:nice|good|great|wonderful)\s*(?:day|time|night|evening|weekend)|"
+    r"have\s*anice\s*(?:day|time|night|evening)|"
+    r"good\s*night|good\s*evening|"
+    r"dehna\s+hun|dehna\s+huni|dehna\s+hunu|chaw|selam\s+kramu|"
+    r"ደህና\s*ሁን|ደህና\s*ሁኚ|ደህና\s*ሁኑ|ቻው|ደሓን\s*ኩን|ደሓን\s*ኩኑ|ሰላም\s*ኩኑ|nagaatti|guyyaa\s+gaarii"
+    r")\b"
+)
+
+RE_FRUSTRATION = re.compile(
+    r"(?i)\b("
+    r"idiot|idiut|stupid|dumb|fool|useless|bad\s*ai|worst|trash|hate\s+you|"
+    r"don'?t\s+understand|not\s+working|fail|bad\s+bot|"
+    r"ደደብ|ሞኝ|አትሰራም|የማትረባ|አይሰራም"
+    r")\b"
+)
+
+RE_SMALLTALK = re.compile(
+    r"(?i)\b("
+    r"how\s+are\s+you|how\s+are\s+you\s+doing|what'?s\s+up|how\s+is\s+it\s+going|how\s+do\s+you\s+do|"
+    r"dehna\s+neh|dehna\s+nesh|dehna\s+nachihu|endemin\s+neh|endemin\s+nesh|endiet\s+neh|endet\s+neh|"
+    r"ደህና\s+ነህ|ደህና\s+ነሽ|እንዴት\s+ነህ|እንዴት\s+ነሽ|እንዴት\s+ናችሁ|ሰላም\s+ነህ|ሰላም\s+ነሽ|"
+    r"ከመይ\s+ኣለኻ|ከመይ\s+ኣለኺ|akkam\s+jirta|akkam\s+jirtu"
+    r")\b"
 )
 
 # Unrelated pure sciences, academic physics, chemistry, biology
@@ -599,6 +624,8 @@ RE_BROWSE_ALL = re.compile(
     r"what(\s+products)?\s+(are\s+)?available|what\s+do\s+you\s+have|what\s+items\s+are\s+there|"
     r"all\s+products|all\s+listings|all\s+items|everything(\s+available)?|explore(\s+all)?|"
     r"see\s+all(\s+listings)?|catalog|list\s+all|"
+    r"(?:give|show|bring|get)\s*(?:me)?\s*(?:the\s*)?(?:products?|items?|listings?)|"
+    r"products?\s*(?:give|show|list)|"
     r"ምን\s*እቃ\s*አለ|ምን\s*አለ|ሁሉንም\s*(አሳየኝ|አሳይ|እቃዎች)?|ያሉትን\s*(እቃዎች|አሳየኝ)|ያለውን\s*አሳየኝ|"
     r"hunda\s+agarsiisi|maal\s+qabdu|meeshaa\s+hunda|waan\s+jiru\s+hunda|"
     r"እንታይ\s+ኣለኩም|ኩሉ\s+ኣርእየኒ|ዘሎ\s+ንብረት"
@@ -834,7 +861,7 @@ class DomainValidator:
             }
 
         # 3. Fast Social Responses (< 1ms instant deterministic response, 0 Gemini calls, 0 DB queries)
-        if RE_GREETING.match(text):
+        if RE_GREETING.search(text):
             return {
                 "is_allowed": True,
                 "intent": "GREETING",
@@ -876,7 +903,7 @@ class DomainValidator:
                 ],
             }
 
-        if RE_ACKNOWLEDGEMENT.match(text):
+        if RE_ACKNOWLEDGEMENT.search(text):
             return {
                 "is_allowed": True,
                 "intent": "ACKNOWLEDGEMENT",
@@ -910,6 +937,24 @@ class DomainValidator:
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_goodbye(lang),
+            }
+
+        if RE_SMALLTALK.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "SMALLTALK",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_greeting(lang),
+            }
+
+        if RE_FRUSTRATION.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "USER_FRUSTRATION",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": "I apologize for any frustration! I'm here to assist you with marketplace listings, rentals, and commerce on HUNTIQ. What product or service were you looking for?",
             }
 
         # 4. Contextual Math & Utility Exception: Allow percentage, discount, commission, engine capacity, power consumption
@@ -1065,9 +1110,9 @@ class DomainValidator:
 # ══════════════════════════════════════════════════════════════════════════════
 
 class GeminiClient:
-    def __init__(self, api_key: str, model: str = "gemini-flash-lite-latest", timeout: float = 3.5):
+    def __init__(self, api_key: str, model: str = "gemini-3.5-flash-lite", timeout: float = 10.0):
         self.api_key = api_key
-        self.model = model or "gemini-flash-lite-latest"
+        self.model = model or "gemini-3.5-flash-lite"
         self.timeout = timeout
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
 
@@ -1103,6 +1148,8 @@ class GeminiClient:
         req_bytes = json.dumps(payload).encode("utf-8")
 
         candidate_models = [self.model]
+        if "gemini-3.5-flash-lite" not in candidate_models:
+            candidate_models.append("gemini-3.5-flash-lite")
         if "gemini-flash-lite-latest" not in candidate_models:
             candidate_models.append("gemini-flash-lite-latest")
 
@@ -1367,9 +1414,9 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
             })
             return
 
-        # 2. Instant Reply (Fast Social Interactions < 1ms, 0 Gemini Calls, 0 DB Queries)
-        if evaluation.get("instant_reply") and evaluation.get("intent") in (
-            "GREETING", "COMPLIMENT", "APPRECIATION", "ACKNOWLEDGEMENT", "GOODBYE", "CAPABILITY_QUESTION"
+        # 2. Offline Fallback for Social Interactions (Only when Gemini is unavailable or not configured)
+        if not self.gemini_client.api_key and evaluation.get("instant_reply") and evaluation.get("intent") in (
+            "GREETING", "COMPLIMENT", "APPRECIATION", "ACKNOWLEDGEMENT", "GOODBYE", "CAPABILITY_QUESTION", "SMALLTALK", "USER_FRUSTRATION"
         ):
             latency_ms = int((time.time() - t0) * 1000)
             self._send_json(200, {
@@ -1378,7 +1425,7 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
                 "intent": evaluation.get("intent"),
                 "path": "PATH_ADVISORY",
                 "is_out_of_domain": False,
-                "fallback_used": False,
+                "fallback_used": True,
                 "tokens_used": 0,
                 "latency_ms": latency_ms,
                 "suggested_queries": evaluation.get("suggested_queries", []),
@@ -1438,7 +1485,11 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
         if err:
             logger.error("Gemini call error: %s", err)
             search_label = evaluation.get("search_term") or message
-            if listings:
+            if evaluation.get("instant_reply") and evaluation.get("intent") in (
+                "GREETING", "COMPLIMENT", "APPRECIATION", "ACKNOWLEDGEMENT", "GOODBYE", "CAPABILITY_QUESTION", "SMALLTALK", "USER_FRUSTRATION"
+            ):
+                fallback = evaluation["instant_reply"]
+            elif listings:
                 if evaluation.get("browse_all"):
                     if resolved_lang == "am":
                         fallback = f"በHUNTIQ ላይ ያሉ ዋና ዋና የገበያ እቃዎች እነሆ፦"

@@ -65,8 +65,8 @@ func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*Chat
 		}, nil
 	}
 
-	// 3. Fast Deterministic Social & Informational Responses (< 1ms, 0 Gemini Calls, 0 DB Queries)
-	if isFastDeterministicIntent(classifyRes.Intent) && classifyRes.InstantReply != "" {
+	// 3. Strict Security Privacy Protection (Deterministic block for user credential / PII scraping)
+	if classifyRes.Intent == "USER_PRIVACY_PROTECTION" && classifyRes.InstantReply != "" {
 		return &ChatResponse{
 			Reply:            classifyRes.InstantReply,
 			Language:         classifyRes.Language,
@@ -103,6 +103,21 @@ func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*Chat
 
 	chatRes, err := s.supervisor.Chat(ctx, pyChatReq)
 	if err != nil {
+		// Fallback to instant reply if available during supervisor/Gemini failure
+		if classifyRes.InstantReply != "" {
+			return &ChatResponse{
+				Reply:            classifyRes.InstantReply,
+				Language:         classifyRes.Language,
+				Intent:           classifyRes.Intent,
+				Path:             classifyRes.Path,
+				IsOutOfDomain:    false,
+				FallbackUsed:     true,
+				TokensUsed:       0,
+				LatencyMs:        time.Since(t0).Milliseconds(),
+				SuggestedQueries: classifyRes.SuggestedQueries,
+				Listings:         cards,
+			}, nil
+		}
 		return nil, fmt.Errorf("chat processing error: %w", err)
 	}
 
