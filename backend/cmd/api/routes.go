@@ -39,6 +39,7 @@ type AppDeps struct {
 	PaymentHandler        *handlers.PaymentHandler
 	UploadHandler         *handlers.UploadHandler
 	AIHandler             *handlers.AIHandler
+	EntityHandler         *handlers.EntityHandler
 }
 
 func registerRoutes(app *fiber.App, d *AppDeps) {
@@ -177,6 +178,9 @@ func registerRoutes(app *fiber.App, d *AppDeps) {
 	api.Get("/categories/:id/related", d.CategoryHandler.GetCategoryRelated)
 	api.Get("/categories/:id/ancestors", d.CategoryHandler.GetCategoryBreadcrumbs)
 	api.Get("/categories/:id/attributes", d.AttributeHandler.GetCategoryAttributes)
+
+	// Universal Entity Intelligence Engine (Public)
+	d.EntityHandler.RegisterRoutes(api)
 
 	// Universal Classification (Public)
 	api.Get("/classification/schemes", d.ClassificationHandler.ListSchemes)

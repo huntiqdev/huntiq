@@ -179,6 +179,7 @@ func main() {
 	recoveryRepo := repository.NewRecoveryRepo(db)
 	masterDataRepo := repository.NewMasterDataRepo(db)
 	paymentRepo := repository.NewPaymentRepo(db)
+	entityRepo := repository.NewEntityRepo(db)
 
 	// In-memory active user cache
 	const isActiveCacheMax = 10_000
@@ -247,6 +248,7 @@ func main() {
 	orgSvc := service.NewOrganizationService(orgRepo)
 	masterDataSvc := service.NewMasterDataService(masterDataRepo)
 	paymentSvc := service.NewPaymentService(paymentRepo, userRepo, smsMgr, cfg.FrontendURL)
+	entitySvc := service.NewEntityService(entityRepo)
 
 	txSvc.WithReferralService(referralSvc)
 	authSvc.WithReferralService(referralSvc).
@@ -381,6 +383,7 @@ func main() {
 	masterDataHandler := handlers.NewMasterDataHandler(masterDataSvc)
 	paymentHandler := handlers.NewPaymentHandler(paymentSvc, adminRepo)
 	uploadHandler := handlers.NewUploadHandler(cfg.AppBaseURL, handlers.UploadDir, 20).WithUserRepo(userRepo)
+	entityHandler := handlers.NewEntityHandler(entitySvc)
 
 	// ── HUNTIQ AI Supervisor ────────────────────────────────────────────────
 	pySupervisor := ai.NewPythonSupervisor(cfg.GeminiAPIKey, cfg.GeminiModel)
@@ -487,6 +490,7 @@ func main() {
 		PaymentHandler:        paymentHandler,
 		UploadHandler:         uploadHandler,
 		AIHandler:             aiHandler,
+		EntityHandler:         entityHandler,
 	})
 
 	// Background listener with resilience for port binding

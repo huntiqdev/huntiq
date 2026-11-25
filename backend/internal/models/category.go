@@ -205,14 +205,18 @@ type CategoryChildChip struct {
 
 // CategoryIntentResponse provides complete discovery data for search bars, navigation ribbons, and filters
 type CategoryIntentResponse struct {
-	HasIntent    bool                      `json:"has_intent"`
-	IsAmbiguous  bool                      `json:"is_ambiguous"` // True if term spans multiple branches (e.g., 'drill')
-	Query        string                    `json:"query"`
-	Category     *CategoryHierarchy        `json:"category,omitempty"`     // Authoritative primary category
-	Breadcrumbs  []CategoryBreadcrumb      `json:"breadcrumbs,omitempty"`  // e.g. Electronics › Phones
-	Children     []CategoryChildChip       `json:"children,omitempty"`     // 1-tap subcategories inside this category
-	Alternatives []CategoryIntentCandidate `json:"alternatives,omitempty"` // Other branches if ambiguous
-	QuickFilters IntentQuickFilters        `json:"quick_filters"`
+	HasIntent           bool                      `json:"has_intent"`
+	IsAmbiguous         bool                      `json:"is_ambiguous"` // True if term spans multiple branches (e.g., 'drill')
+	Query               string                    `json:"query"`
+	Category            *CategoryHierarchy        `json:"category,omitempty"`     // Authoritative primary category
+	Breadcrumbs         []CategoryBreadcrumb      `json:"breadcrumbs,omitempty"`  // e.g. Electronics › Phones
+	Children            []CategoryChildChip       `json:"children,omitempty"`     // 1-tap subcategories inside this category
+	Alternatives        []CategoryIntentCandidate `json:"alternatives,omitempty"` // Other branches if ambiguous
+	QuickFilters        IntentQuickFilters        `json:"quick_filters"`
+	CanonicalEntity     *CanonicalEntity          `json:"canonical_entity,omitempty"`     // Master semantic canonical entity
+	SuggestedCorrection string                    `json:"suggested_correction,omitempty"` // Typo correction (e.g., "phne" -> "Smartphone")
+	ConfidenceTier      string                    `json:"confidence_tier,omitempty"`      // HIGH, MEDIUM, LOW
+	DiscoveryPaths      []EntityDiscoveryPath     `json:"discovery_paths,omitempty"`      // Knowledge graph cross-discovery paths
 }
 
 // IntentQuickFilters contains contextual discovery facets

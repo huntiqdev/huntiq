@@ -892,6 +892,27 @@ func (r *CategoryHierarchyRepo) ResolveCategoryIntent(ctx context.Context, term 
 		lang = "en"
 	}
 
+	// 1. First probe Universal Entity Intelligence Engine for master canonical entity & typo resolution
+	var matchedEntity *models.CanonicalEntity
+	var suggestedCorrection string
+	var confidenceTier string
+	var discoveryPaths []models.EntityDiscoveryPath
+
+	entRepo := NewEntityRepo(r.db)
+	entityResults, errEnt := entRepo.ResolveCanonicalEntity(ctx, clean, lang, 5)
+	if errEnt == nil && len(entityResults) > 0 {
+		topMatch := entityResults[0]
+		if topMatch.Score >= 65.0 {
+			suggestedCorrection = topMatch.SuggestedCorrection
+			confidenceTier = topMatch.ConfidenceTier
+			fullEnt, errFull := entRepo.GetEntityByID(ctx, topMatch.EntityID)
+			if errFull == nil && fullEnt != nil {
+				matchedEntity = fullEnt
+				discoveryPaths = fullEnt.DiscoveryPaths
+			}
+		}
+	}
+
 	type rawCandidate struct {
 		categoryID  int
 		nameEn      string
@@ -919,7 +940,9 @@ func (r *CategoryHierarchyRepo) ResolveCategoryIntent(ctx context.Context, term 
 	}
 
 	var primaryID int
-	if len(candidates) > 0 {
+	if matchedEntity != nil && matchedEntity.PrimaryCategoryID != nil && *matchedEntity.PrimaryCategoryID > 0 {
+		primaryID = *matchedEntity.PrimaryCategoryID
+	} else if len(candidates) > 0 {
 		primaryID = candidates[0].categoryID
 	} else {
 		// Fallback to ResolveCategoryByAlias
@@ -931,9 +954,13 @@ func (r *CategoryHierarchyRepo) ResolveCategoryIntent(ctx context.Context, term 
 
 	if primaryID <= 0 {
 		return &models.CategoryIntentResponse{
-			HasIntent:    false,
-			Query:        clean,
-			QuickFilters: defaultQuickFilters,
+			HasIntent:           false,
+			Query:               clean,
+			QuickFilters:        defaultQuickFilters,
+			CanonicalEntity:     matchedEntity,
+			SuggestedCorrection: suggestedCorrection,
+			ConfidenceTier:      confidenceTier,
+			DiscoveryPaths:      discoveryPaths,
 		}, nil
 	}
 
@@ -997,18 +1024,22 @@ func (r *CategoryHierarchyRepo) ResolveCategoryIntent(ctx context.Context, term 
 	}
 
 	return &models.CategoryIntentResponse{
-		HasIntent:    true,
-		IsAmbiguous:  isAmbiguous,
-		Query:        clean,
-		Category:     primaryCat,
-		Breadcrumbs:  primaryCat.Breadcrumbs,
-		Children:     chips,
-		Alternatives: alternatives,
+		HasIntent:           true,
+		IsAmbiguous:         isAmbiguous,
+		Query:               clean,
+		Category:            primaryCat,
+		Breadcrumbs:         primaryCat.Breadcrumbs,
+		Children:            chips,
+		Alternatives:        alternatives,
 		QuickFilters: models.IntentQuickFilters{
 			Modes:       []string{"buy", "rent"},
 			Locations:   []string{"Addis Ababa", "Bole", "Hawassa", "Adama", "Bahir Dar"},
 			PopularTags: popularTags,
 		},
+		CanonicalEntity:     matchedEntity,
+		SuggestedCorrection: suggestedCorrection,
+		ConfidenceTier:      confidenceTier,
+		DiscoveryPaths:      discoveryPaths,
 	}, nil
 }
 
