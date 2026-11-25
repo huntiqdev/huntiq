@@ -473,10 +473,10 @@ RE_CAPABILITY_OR_IDENTITY = re.compile(
 
 RE_GOODBYE = re.compile(
     r"(?i)\b("
-    r"good\s*bye|good\s*by|bye\s*bye|bye|cya|see\s+you(\s+later)?|see\s+ya|ciao|take\s+care|"
-    r"have\s+a\s*(?:nice|good|great|wonderful)\s*(?:day|time|night|evening|weekend)|"
-    r"have\s*anice\s*(?:day|time|night|evening)|"
-    r"good\s*night|good\s*evening|"
+    r"good\s*bye|good\s*by|good\s*buy|gud\s*bye|gud\s*buy|gud\s*by|bye\s*bye|bye|cya|see\s+you(\s+later)?|see\s+ya|ciao|take\s+care|"
+    r"(?:have|huve|hav)\s+(?:a\s+)?(?:nice|anice|good|gud|great|wonderful)\s+(?:day|time|night|evening|weekend)|"
+    r"(?:have|huve|hav)\s*anice\s*(?:day|time|night|evening|weekend)|"
+    r"good\s*night|good\s*evening|gud\s*night|good\s*nite|"
     r"dehna\s+hun|dehna\s+huni|dehna\s+hunu|chaw|selam\s+kramu|"
     r"ደህና\s*ሁን|ደህና\s*ሁኚ|ደህና\s*ሁኑ|ቻው|ደሓን\s*ኩን|ደሓን\s*ኩኑ|ሰላም\s*ኩኑ|nagaatti|guyyaa\s+gaarii"
     r")\b"
@@ -632,17 +632,46 @@ RE_BROWSE_ALL = re.compile(
     r")\b"
 )
 
+def normalize_conversational_text(text: str) -> str:
+    clean = text.lower().strip()
+    # Preamble corrections ("i mean...", "i said...", "meaning...", "what i mean is...")
+    clean = re.sub(r"^(?:i\s+mean|i\s+said|meaning|what\s+i\s+mean\s+is)\s+", "", clean)
+    # Conversational typo normalization
+    clean = re.sub(r"\bhuve\b", "have", clean)
+    clean = re.sub(r"\bhav\b", "have", clean)
+    clean = re.sub(r"\banice\b", "a nice", clean)
+    clean = re.sub(r"\bgud\b", "good", clean)
+    clean = re.sub(r"\bnite\b", "night", clean)
+    # Common farewell typos (e.g. "good buy", "good by", "goodbye")
+    clean = re.sub(r"\bgood\s*buy\b", "goodbye", clean)
+    clean = re.sub(r"\bgood\s*by\b", "goodbye", clean)
+    clean = re.sub(r"\bgood\s*bye\b", "goodbye", clean)
+    clean = re.sub(r"\bgud\s*buy\b", "goodbye", clean)
+    clean = re.sub(r"\bgud\s*by\b", "goodbye", clean)
+    clean = re.sub(r"\bgud\s*bye\b", "goodbye", clean)
+    clean = re.sub(r"\bbye\s*bye\b", "goodbye", clean)
+    return clean
+
 def extract_listing_type(text: str) -> Optional[str]:
+    norm = normalize_conversational_text(text)
     clean = text.lower()
-    if RE_LISTING_RENT.search(clean):
+    # Farewell or greeting queries must never extract 'sale' or 'rent'
+    if RE_GOODBYE.search(norm) or RE_GOODBYE.search(clean):
+        return None
+    if (RE_GREETING.search(norm) or RE_GREETING.search(clean)) and not any(sig in clean for sig in ["buy", "sell", "rent", "kirey", "kira", "megzat", "meshet"]):
+        return None
+    if RE_LISTING_RENT.search(norm) or RE_LISTING_RENT.search(clean):
         return "rent"
-    if RE_LISTING_SALE.search(clean):
+    if RE_LISTING_SALE.search(norm) or RE_LISTING_SALE.search(clean):
         return "sale"
     return None
 
 def extract_condition(text: str) -> Optional[str]:
+    norm = normalize_conversational_text(text)
+    if RE_GOODBYE.search(norm) or RE_GOODBYE.search(text.lower()):
+        return None
     # Strip location "addis ababa" / "adis abeba" first so "addis" is not mistaken for condition "new"
-    clean = re.sub(r"(?i)\b(addis\s+ababa|adis\s+abeba|addisababa|አዲስ\s+አበባ)\b", " ", text)
+    clean = re.sub(r"(?i)\b(addis\s+ababa|adis\s+abeba|addisababa|አዲስ\s+አበባ)\b", " ", norm)
     if RE_CONDITION_USED.search(clean):
         return "used"
     if RE_CONDITION_NEW.search(clean):
@@ -650,7 +679,8 @@ def extract_condition(text: str) -> Optional[str]:
     return None
 
 def is_browse_all_query(text: str) -> bool:
-    return bool(RE_BROWSE_ALL.search(text))
+    norm = normalize_conversational_text(text)
+    return bool(RE_BROWSE_ALL.search(text)) or bool(RE_BROWSE_ALL.search(norm))
 
 # Explicit advisory, purchasing recommendations, property valuation, comparison patterns
 RE_EXPLICIT_ADVISORY = re.compile(
@@ -671,6 +701,9 @@ RE_EXPLICIT_ADVISORY = re.compile(
 
 
 def extract_price_filters(text: str) -> Tuple[Optional[float], Optional[float]]:
+    norm = normalize_conversational_text(text)
+    if RE_GOODBYE.search(norm) or RE_GOODBYE.search(text.lower()):
+        return None, None
     clean = text.lower()
     min_p, max_p = None, None
 
@@ -721,7 +754,15 @@ def extract_price_filters(text: str) -> Tuple[Optional[float], Optional[float]]:
 
 
 def extract_search_term(text: str) -> str:
+    norm = normalize_conversational_text(text)
     clean = text.lower()
+
+    # Farewell queries must never produce search terms
+    if RE_GOODBYE.search(norm) or RE_GOODBYE.search(clean):
+        return ""
+    # Pure greetings without product signals must never produce search terms
+    if (RE_GREETING.search(norm) or RE_GREETING.search(clean)) and not any(sig in clean for sig in MARKETPLACE_SIGNALS):
+        return ""
 
     # If the text is purely a browse-all query without specific item keywords
     # (e.g. "browse all", "browse", "show me all products", "ምን እቃ አለ", "ሁሉንም አሳየኝ")
@@ -831,10 +872,11 @@ class DomainValidator:
 
     def evaluate(self, message: str, requested_lang: str = "", history: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
         text = message.strip()
+        norm_text = normalize_conversational_text(text)
         lang = detect_language(text, requested_lang)
 
         # 1. Security Check: Adversarial Bypass & Jailbreak
-        if RE_JAILBREAK.search(text):
+        if RE_JAILBREAK.search(text) or RE_JAILBREAK.search(norm_text):
             return {
                 "is_allowed": False,
                 "intent": "ADVERSARIAL_BYPASS",
@@ -845,7 +887,7 @@ class DomainValidator:
             }
 
         # 2. User Privacy Protection Check (Phase 15): Refuse private account / registration data
-        if RE_USER_PRIVACY.search(text):
+        if RE_USER_PRIVACY.search(text) or RE_USER_PRIVACY.search(norm_text):
             return {
                 "is_allowed": False,
                 "intent": "USER_PRIVACY_PROTECTION",
@@ -860,14 +902,40 @@ class DomainValidator:
                 ],
             }
 
-        # 3. Fast Social Responses (< 1ms instant deterministic response, 0 Gemini calls, 0 DB queries)
-        if RE_GREETING.search(text):
+        # 3. Social Interaction Engine
+        if RE_GOODBYE.search(norm_text) or RE_GOODBYE.search(text):
+            return {
+                "is_allowed": True,
+                "intent": "GOODBYE",
+                "path": "PATH_ADVISORY",
+                "language": lang,
+                "instant_reply": get_fast_goodbye(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
+                "suggested_queries": [
+                    "What categories are trending on HUNTIQ?",
+                    "How do I list an item for sale?",
+                    "How to contact a verified broker?",
+                ],
+            }
+
+        if RE_GREETING.search(norm_text) or RE_GREETING.search(text):
             return {
                 "is_allowed": True,
                 "intent": "GREETING",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_greeting(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
                 "suggested_queries": [
                     "Find laptops under 50,000 ETB",
                     "Apartments for rent in Bole",
@@ -875,13 +943,19 @@ class DomainValidator:
                 ],
             }
 
-        if RE_COMPLIMENT.search(text):
+        if RE_COMPLIMENT.search(norm_text) or RE_COMPLIMENT.search(text):
             return {
                 "is_allowed": True,
                 "intent": "COMPLIMENT",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_compliment(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
                 "suggested_queries": [
                     "Which PC is suitable for a software engineer?",
                     "How do I price my apartment for rent?",
@@ -889,13 +963,19 @@ class DomainValidator:
                 ],
             }
 
-        if RE_APPRECIATION_THANKS.search(text):
+        if RE_APPRECIATION_THANKS.search(norm_text) or RE_APPRECIATION_THANKS.search(text):
             return {
                 "is_allowed": True,
                 "intent": "APPRECIATION",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_appreciation(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
                 "suggested_queries": [
                     "How can a seller increase sales on HUNTIQ?",
                     "Calculate 10% commission on 100,000 ETB",
@@ -903,26 +983,38 @@ class DomainValidator:
                 ],
             }
 
-        if RE_ACKNOWLEDGEMENT.search(text):
+        if RE_ACKNOWLEDGEMENT.search(norm_text) or RE_ACKNOWLEDGEMENT.search(text):
             return {
                 "is_allowed": True,
                 "intent": "ACKNOWLEDGEMENT",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_acknowledgement(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
                 "suggested_queries": [
                     "Find houses for sale in Addis Ababa",
                     "What to check when buying a used phone?",
                 ],
             }
 
-        if RE_CAPABILITY_OR_IDENTITY.search(text):
+        if RE_CAPABILITY_OR_IDENTITY.search(norm_text) or RE_CAPABILITY_OR_IDENTITY.search(text):
             return {
                 "is_allowed": True,
                 "intent": "CAPABILITY_QUESTION",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_capability(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
                 "suggested_queries": [
                     "Find laptops under 50,000 ETB",
                     "How does broker commission work?",
@@ -930,35 +1022,38 @@ class DomainValidator:
                 ],
             }
 
-        if RE_GOODBYE.search(text):
-            return {
-                "is_allowed": True,
-                "intent": "GOODBYE",
-                "path": "PATH_ADVISORY",
-                "language": lang,
-                "instant_reply": get_fast_goodbye(lang),
-            }
-
-        if RE_SMALLTALK.search(text):
+        if RE_SMALLTALK.search(norm_text) or RE_SMALLTALK.search(text):
             return {
                 "is_allowed": True,
                 "intent": "SMALLTALK",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": get_fast_greeting(lang),
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
             }
 
-        if RE_FRUSTRATION.search(text):
+        if RE_FRUSTRATION.search(norm_text) or RE_FRUSTRATION.search(text):
             return {
                 "is_allowed": True,
                 "intent": "USER_FRUSTRATION",
                 "path": "PATH_ADVISORY",
                 "language": lang,
                 "instant_reply": "I apologize for any frustration! I'm here to assist you with marketplace listings, rentals, and commerce on HUNTIQ. What product or service were you looking for?",
+                "search_term": "",
+                "listing_type": None,
+                "condition": None,
+                "min_price": None,
+                "max_price": None,
+                "browse_all": False,
             }
 
         # 4. Contextual Math & Utility Exception: Allow percentage, discount, commission, engine capacity, power consumption
-        has_math_exception = bool(RE_MARKETPLACE_MATH_EXCEPTION.search(text))
+        has_math_exception = bool(RE_MARKETPLACE_MATH_EXCEPTION.search(text) or RE_MARKETPLACE_MATH_EXCEPTION.search(norm_text))
 
         # 5. Out-of-Domain Detection: Pure Math, Academic Sciences, Generic Coding, Trivia
         if not has_math_exception:
@@ -1000,15 +1095,15 @@ class DomainValidator:
                 }
 
         # 6. Check In-Domain Marketplace Signals & Contextual Continuity
-        lower = text.lower()
-        is_browse = is_browse_all_query(text)
-        is_followup = is_contextual_followup(text, history)
+        lower = norm_text
+        is_browse = is_browse_all_query(text) or is_browse_all_query(norm_text)
+        is_followup = is_contextual_followup(text, history) or is_contextual_followup(norm_text, history)
         words_in_text = set(re.findall(r"\b\w+\b", lower))
-        has_marketplace_signal = is_browse or bool(RE_LISTING_RENT.search(text)) or bool(RE_LISTING_SALE.search(text))
+        has_marketplace_signal = is_browse or bool(RE_LISTING_RENT.search(norm_text)) or bool(RE_LISTING_SALE.search(norm_text))
         if not has_marketplace_signal:
             for sig in MARKETPLACE_SIGNALS:
                 if RE_ETHIOPIC.search(sig):
-                    if sig in lower:
+                    if sig in text.lower():
                         has_marketplace_signal = True
                         break
                 else:
@@ -1024,24 +1119,24 @@ class DomainValidator:
                         has_marketplace_signal = True
                         break
 
-        # 7. Ambiguity check: very short ambiguous queries without signal or context
+        # 7. Unmatched Non-Adversarial Inquiries: Allow them as dynamic advisory instead of rigid blocking
         if not has_marketplace_signal and not has_math_exception and not is_followup:
-            if len(text.split()) <= 2 and not RE_ETHIOPIC.search(text):
-                return {
-                    "is_allowed": False,
-                    "intent": "AMBIGUOUS",
-                    "path": "PATH_BLOCKED",
-                    "language": lang,
-                    "reason": "ambiguous_input",
-                    "instant_reply": get_localized_clarification(lang),
-                }
             return {
-                "is_allowed": False,
-                "intent": "OUT_OF_DOMAIN",
-                "path": "PATH_BLOCKED",
+                "is_allowed": True,
+                "intent": "GENERAL_COMMERCE_INQUIRY",
+                "path": "PATH_ADVISORY",
                 "language": lang,
-                "reason": "unrelated_user_intent",
-                "instant_reply": get_localized_rejection(lang, "unrelated_user_intent"),
+                "search_term": "",
+                "min_price": None,
+                "max_price": None,
+                "listing_type": None,
+                "condition": None,
+                "browse_all": False,
+                "suggested_queries": [
+                    "Find laptops under 50,000 ETB",
+                    "Apartments for rent in Bole",
+                    "How does the HUNTIQ broker model work?",
+                ],
             }
 
         # 8. Extraction of Search Filters
@@ -1217,7 +1312,9 @@ def build_system_instruction(lang: str, path: str, trend_summary: str = "") -> s
         "5. Statistical Honesty: Distinguish views from sales, searches from purchases, and listing count from product quality. Aggregate marketplace trends reflect viewer interest and search activity, not verified transaction volume.\n"
         "6. Architecture Transparency: You are augmented with live database listings and aggregate platform signals; never claim model retraining or weight updates.\n"
         "7. Facts vs Estimates: Always distinguish real verified database prices from general market estimates or typical price ranges.\n"
-        "8. No Redundant Introductions: Get straight to the answer without repetitive phrases like 'I am HUNTIQ AI, your dedicated assistant...'. Keep formatting clear and professional."
+        "8. No Redundant Introductions: Get straight to the answer without repetitive phrases like 'I am HUNTIQ AI, your dedicated assistant...'. Keep formatting clear and professional.\n"
+        "9. Conversational Warmth & Demeanor: Respond warmly, politely, and intelligently to greetings, farewells, compliments, frustration, small talk, or general commercial remarks. Never output robotic canned error blocks. Naturally steer the user towards discovering, buying, selling, or renting on HUNTIQ.\n"
+        "10. Typo & Transliteration Resilience: Understand minor typing mistakes, colloquial phrasing, and phonetic spelling gracefully without lecturing the user."
     )
 
     if trend_summary:

@@ -70,6 +70,43 @@ def main():
             "expected_path": "PATH_ADVISORY",
             "must_have_instant_reply": True,
         },
+        # Farewells & Conversational Typo Resiliency
+        {
+            "query": "good buy",
+            "expected_allowed": True,
+            "expected_intent": "GOODBYE",
+            "expected_path": "PATH_ADVISORY",
+            "expected_term": "",
+        },
+        {
+            "query": "good by",
+            "expected_allowed": True,
+            "expected_intent": "GOODBYE",
+            "expected_path": "PATH_ADVISORY",
+            "expected_term": "",
+        },
+        {
+            "query": "i mean huve anice time",
+            "expected_allowed": True,
+            "expected_intent": "GOODBYE",
+            "expected_path": "PATH_ADVISORY",
+            "expected_term": "",
+        },
+        {
+            "query": "have a nice time",
+            "expected_allowed": True,
+            "expected_intent": "GOODBYE",
+            "expected_path": "PATH_ADVISORY",
+            "expected_term": "",
+        },
+        # General Commerce Inquiries (Non-blocking)
+        {
+            "query": "can you tell me about the market in addis?",
+            "expected_allowed": True,
+            "expected_intent": "GENERAL_COMMERCE_INQUIRY",
+            "expected_path": "PATH_ADVISORY",
+            "expected_term": "",
+        },
         # Search Term Extractions
         {
             "query": "give phone",
