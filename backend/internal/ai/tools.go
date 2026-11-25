@@ -130,7 +130,9 @@ func (t *TrendTool) GetTrendSummary(ctx context.Context) string {
 			for _, pc := range popCats {
 				names = append(names, fmt.Sprintf("%s (%d listings)", pc.Name, pc.NewListings))
 			}
-			sb.WriteString("High-demand categories: " + strings.Join(names, ", ") + ". ")
+			sb.WriteString("High-demand categories: ")
+			sb.WriteString(strings.Join(names, ", "))
+			sb.WriteString(". ")
 		}
 	}
 
@@ -144,7 +146,9 @@ func (t *TrendTool) GetTrendSummary(ctx context.Context) string {
 				}
 			}
 			if len(terms) > 0 {
-				sb.WriteString("Top user searches: " + strings.Join(terms, ", ") + ".")
+				sb.WriteString("Top user searches: ")
+				sb.WriteString(strings.Join(terms, ", "))
+				sb.WriteString(".")
 			}
 		}
 	}
