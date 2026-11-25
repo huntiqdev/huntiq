@@ -522,7 +522,12 @@ MARKETPLACE_SIGNALS = [
     "wholesale", "retail", "store", "deposit", "lease", "tenant", "landlord", "customer",
     "trust", "sales", "revenue", "inspection", "pricing", "commercial", "property",
     "toyota", "hyundai", "lenovo", "dell", "hp", "macbook", "iphone", "samsung", "thinkpad",
+    "drill", "drills", "vitz", "corolla",
     "addis ababa", "bole", "hawassa", "adama", "dire dawa", "bahir dar", "mekelle",
+    # Colloquial Typos & Phonetic Variants
+    "phon", "fone", "phne", "smartphon", "smartfone", "sumsung", "samsong", "samsoong",
+    "vits", "toyta", "tyota", "dril", "drils", "adisabeba", "addisababa", "finfinne", "sheger",
+    "around", "k", "birr", "etb", "ብር", "ሺህ",
     # Latin Amharic Signals
     "mekina", "mekena", "makina", "wagaw", "waga", "sint", "sinti", "snt",
     "kirey", "kira", "kire", "akray", "akari", "tekeray", "tekiray", "megzat", "megezat", "meshet", "meshat",
@@ -543,8 +548,12 @@ MARKETPLACE_SIGNALS = [
     "hojii", "dilaala", "komishinii", "kompiitara", "meeshaa", "meeshaalee", "qabeenya", "barbaada", "barbaaddu", "argachuu",
 ]
 
-RE_PRICE_UNDER = re.compile(r"(?i)(?:under|below|less\s+than|maximum|max)\s+([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:etb|birr|k)?")
-RE_PRICE_ABOVE = re.compile(r"(?i)(?:above|over|more\s+than|minimum|min)\s+([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:etb|birr|k)?")
+RE_PRICE_UNDER = re.compile(r"(?i)(?:under|below|less\s+than|maximum|max|up\s+to|ከ\s*.*?በታች)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
+RE_PRICE_ABOVE = re.compile(r"(?i)(?:above|over|more\s+than|minimum|min|starting\s+from|ከ\s*.*?በላይ)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
+RE_PRICE_AROUND = re.compile(r"(?i)(?:around|about|approx(?:imately)?|roughly|close\s+to|nearby|በ?.*?አካባቢ)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
+RE_PRICE_AROUND_SUFFIX = re.compile(r"(?i)\b([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?\s*(?:around|about|approx(?:imately)?|roughly|አካባቢ)\b")
+RE_STANDALONE_PRICE_K = re.compile(r"(?i)\b([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ)\b")
+RE_STANDALONE_PRICE_CURRENCY = re.compile(r"(?i)\b([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:birr|etb|ብር)\b")
 
 # Explicit advisory, purchasing recommendations, property valuation, comparison patterns
 RE_EXPLICIT_ADVISORY = re.compile(
@@ -573,7 +582,8 @@ def extract_price_filters(text: str) -> Tuple[Optional[float], Optional[float]]:
         val_str = m_under.group(1).replace(",", "")
         try:
             val = float(val_str)
-            if "k" in m_under.group(0).lower():
+            matched_under = m_under.group(0).lower()
+            if "k" in matched_under or "thousand" in matched_under or "ሺህ" in matched_under:
                 val *= 1000
             max_p = val
         except ValueError:
@@ -584,11 +594,31 @@ def extract_price_filters(text: str) -> Tuple[Optional[float], Optional[float]]:
         val_str = m_above.group(1).replace(",", "")
         try:
             val = float(val_str)
-            if "k" in m_above.group(0).lower():
+            matched_above = m_above.group(0).lower()
+            if "k" in matched_above or "thousand" in matched_above or "ሺህ" in matched_above:
                 val *= 1000
             min_p = val
         except ValueError:
             pass
+
+    if min_p is None and max_p is None:
+        target_val = None
+        for regex in (RE_PRICE_AROUND, RE_PRICE_AROUND_SUFFIX, RE_STANDALONE_PRICE_K, RE_STANDALONE_PRICE_CURRENCY):
+            m = regex.search(clean)
+            if m:
+                val_str = m.group(1).replace(",", "")
+                try:
+                    val = float(val_str)
+                    matched_str = m.group(0).lower()
+                    if "k" in matched_str or "thousand" in matched_str or "ሺህ" in matched_str:
+                        val *= 1000
+                    target_val = val
+                    break
+                except ValueError:
+                    pass
+        if target_val and target_val > 0:
+            min_p = round(target_val * 0.80, 2)
+            max_p = round(target_val * 1.20, 2)
 
     return min_p, max_p
 
@@ -601,7 +631,12 @@ def extract_search_term(text: str) -> str:
         "find me", "find", "search for", "search", "looking for", "look for",
         "i want", "i need", "can you show", "can you give", "can you find",
         "provide me", "provide", "display", "fetch me", "fetch",
-        "available", "please", "around", "near", "in", "for sale", "for rent", "buy", "sell", "cheap", "good", "best",
+        "available", "please", "around", "about", "roughly", "approx", "near", "in", "at",
+        "for sale", "for rent", "buy", "sell", "cheap", "good", "best",
+        "birr", "etb", "k", "ብር", "ሺህ", "አካባቢ",
+        # Locations
+        "in addis ababa", "in adisabeba", "in addisababa", "in addis", "in bole",
+        "addis ababa", "adisabeba", "addisababa", "addis", "ababa", "bole", "finfinne", "sheger",
         # Latin Amharic conversational & inquiry fillers
         "selam", "salam", "tadias", "ere", "be natish", "benatish", "be nateh", "benateh", "natish", "nateh",
         "sitiegn", "sitegn", "stegn", "stegni", "stugn",
@@ -622,7 +657,31 @@ def extract_search_term(text: str) -> str:
         term = re.sub(r"\b" + re.escape(f) + r"\b", " ", term)
     term = RE_PRICE_UNDER.sub(" ", term)
     term = RE_PRICE_ABOVE.sub(" ", term)
+    term = RE_PRICE_AROUND.sub(" ", term)
+    term = RE_PRICE_AROUND_SUFFIX.sub(" ", term)
+    term = RE_STANDALONE_PRICE_K.sub(" ", term)
+    term = RE_STANDALONE_PRICE_CURRENCY.sub(" ", term)
+    term = re.sub(r"\b\d+(?:,\d+)*(?:\.\d+)?\b", " ", term)
     term = re.sub(r"[?!.,;።፣፡]", " ", term)
+
+    typo_map = {
+        "sumsung": "samsung",
+        "samsong": "samsung",
+        "samsoong": "samsung",
+        "phon": "phone",
+        "fone": "phone",
+        "phne": "phone",
+        "smartphon": "smartphone",
+        "smartfone": "smartphone",
+        "vits": "vitz",
+        "toyta": "toyota",
+        "tyota": "toyota",
+        "dril": "drill",
+        "drils": "drill",
+    }
+    tokens = term.split()
+    corrected = [typo_map.get(t, t) for t in tokens]
+    term = " ".join(corrected)
     term = re.sub(r"\s+", " ", term).strip()
     return term
 

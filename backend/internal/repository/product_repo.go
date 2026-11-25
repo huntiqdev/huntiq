@@ -49,7 +49,7 @@ const sqlProductSelectCols = `
 	       COALESCE(p.access_tier,'normal') AS required_buyer_tier,
 	       COALESCE(p.listing_type::text,'sale') AS listing_type,
 	       p.rental_price, p.rental_duration_value, p.rental_duration_unit,
-	       p.deposit_amount, p.available_from, p.available_until,
+	       p.deposit_amount, to_char(p.available_from, 'YYYY-MM-DD') AS available_from, to_char(p.available_until, 'YYYY-MM-DD') AS available_until,
 	       COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
 	       p.category_hierarchy_id,
 	       p.location_hierarchy_id,
@@ -80,9 +80,9 @@ const sqlGetProductByID = `
 	        COALESCE(u.is_active, true) AS seller_active,
 	        COALESCE(p.listing_type::text,'sale') AS listing_type,
 	        p.rental_price, p.rental_duration_value, p.rental_duration_unit,
-	        p.deposit_amount, p.available_from, p.available_until,
+	        p.deposit_amount, to_char(p.available_from, 'YYYY-MM-DD') AS available_from, to_char(p.available_until, 'YYYY-MM-DD') AS available_until,
 	        COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
-	        p.current_tenant_id, p.rented_until,
+	        p.current_tenant_id, to_char(p.rented_until, 'YYYY-MM-DD') AS rented_until,
 	        p.category_hierarchy_id,
 	        p.location_hierarchy_id,
 	        p.custom_url,
@@ -158,7 +158,7 @@ const sqlListBySeller = `
 	        p.status, COALESCE(p.admin_notes,''), p.created_at, p.updated_at,
 	        COALESCE(p.listing_type::text,'sale') AS listing_type,
 	        p.rental_price, p.rental_duration_value, p.rental_duration_unit,
-	        p.deposit_amount, p.available_from, p.available_until,
+	        p.deposit_amount, to_char(p.available_from, 'YYYY-MM-DD') AS available_from, to_char(p.available_until, 'YYYY-MM-DD') AS available_until,
 	        COALESCE(p.is_currently_rented,FALSE) AS is_currently_rented,
 	        p.listing_duration_days, p.total_fee_percent, p.total_fee_amount,
 	        COALESCE(p.fee_paid,FALSE) AS fee_paid,
@@ -178,7 +178,7 @@ const sqlGetProductByIDAndSeller = `
 	        status, COALESCE(admin_notes,''), created_at, updated_at,
 	        COALESCE(listing_type::text,'sale') AS listing_type,
 	        rental_price, rental_duration_value, rental_duration_unit,
-	        deposit_amount, available_from, available_until,
+	        deposit_amount, to_char(available_from, 'YYYY-MM-DD') AS available_from, to_char(available_until, 'YYYY-MM-DD') AS available_until,
 	        COALESCE(is_currently_rented,FALSE) AS is_currently_rented,
 	        listing_duration_days, total_fee_percent, total_fee_amount,
 	        COALESCE(fee_paid,FALSE), COALESCE(fee_payment_pending,FALSE),
@@ -324,7 +324,8 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 				OR p.attributes::text ILIKE '%%' || $%d || '%%'`+brandClause+`
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
-			)`, idxTerm, idxSyn, idxTerm, idxTerm, idxTerm, idxTerm))
+				OR p.canonical_entity_id IN (SELECT ea.entity_id FROM entity_aliases ea WHERE ea.normalized_alias = $%d OR ea.alias_text ILIKE '%%' || $%d || '%%')
+			)`, idxTerm, idxSyn, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
 		} else {
 			wb.WriteString(fmt.Sprintf(` AND (
 				search_vector @@ websearch_to_tsquery('simple', $%d)
@@ -332,7 +333,8 @@ func (r *ProductRepo) buildApprovedWhere(ctx context.Context, f dto.ProductFilte
 				OR p.attributes::text ILIKE '%%' || $%d || '%%'`+brandClause+`
 				OR p.category_hierarchy_id IN (SELECT id FROM get_category_descendants_by_term($%d))
 				OR (p.category_hierarchy_id IS NULL AND p.category_id IN (SELECT id FROM get_category_descendants_by_term($%d)))
-			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
+				OR p.canonical_entity_id IN (SELECT ea.entity_id FROM entity_aliases ea WHERE ea.normalized_alias = $%d OR ea.alias_text ILIKE '%%' || $%d || '%%')
+			)`, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm, idxTerm))
 		}
 	}
 

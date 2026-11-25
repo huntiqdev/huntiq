@@ -984,3 +984,52 @@ INSERT INTO entity_relationships (
     -- 14. Freelance Graphic Designer (Entity 17) DISCOVERABLE_THROUGH Gigs & Media
     (17, NULL, 1020099, 'DISCOVERABLE_THROUGH', 0.95, '{"primary_domain": "freelance_creative_gigs"}'::jsonb, 'Freelance creative design and brand identity services')
 ON CONFLICT DO NOTHING;
+
+-- 12. Extra Brand & Typo Aliases
+INSERT INTO entity_aliases (entity_id, alias_text, normalized_alias, language, alias_type, confidence_score, status)
+VALUES
+    (1, 'samsung', 'samsung', 'en', 'BRAND_REFERENCE', 0.95, 'ACTIVE'),
+    (1, 'sumsung', 'sumsung', 'en', 'TYPO_CORRECTION', 0.90, 'ACTIVE'),
+    (1, 'samsong', 'samsong', 'en', 'TYPO_CORRECTION', 0.90, 'ACTIVE'),
+    (1, 'phon', 'phon', 'en', 'TYPO_CORRECTION', 0.90, 'ACTIVE'),
+    (6, 'vits', 'vits', 'en', 'TYPO_CORRECTION', 0.90, 'ACTIVE'),
+    (4, 'dril', 'dril', 'en', 'TYPO_CORRECTION', 0.90, 'ACTIVE')
+ON CONFLICT (entity_id, normalized_alias, language) DO UPDATE SET
+    alias_type = EXCLUDED.alias_type,
+    confidence_score = EXCLUDED.confidence_score,
+    status = 'ACTIVE';
+
+-- 13. Map Existing Database Products to Canonical Entities
+UPDATE products SET canonical_entity_id = 1 WHERE canonical_entity_id IS NULL AND (title ILIKE '%phone%' OR title ILIKE '%samsung%' OR title ILIKE '%tecno%' OR title ILIKE '%iphone%');
+UPDATE products SET canonical_entity_id = 6 WHERE canonical_entity_id IS NULL AND title ILIKE '%vitz%';
+UPDATE products SET canonical_entity_id = 4 WHERE canonical_entity_id IS NULL AND title ILIKE '%drill%';
+
+-- 14. Resilient Multi-Entity Brand Extraction Function
+CREATE OR REPLACE FUNCTION extract_brands(p_query text)
+RETURNS TABLE(brand_id integer, brand_name character varying, match_position integer)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_norm text;
+BEGIN
+    v_norm := LOWER(TRIM(COALESCE(p_query, '')));
+    IF v_norm = '' THEN
+        RETURN;
+    END IF;
+
+    RETURN QUERY
+    SELECT 
+        ea.id AS brand_id,
+        ea.alias_text AS brand_name,
+        POSITION(LOWER(ea.normalized_alias) IN v_norm)::INT AS match_position
+    FROM entity_aliases ea
+    WHERE ea.status = 'ACTIVE'
+      AND (ea.alias_type IN ('BRAND_REFERENCE', 'MODEL_SPECIFIC') OR ea.normalized_alias IN ('samsung', 'apple', 'toyota', 'bosch', 'tecno', 'hyundai', 'lenovo', 'dell', 'hp'))
+      AND (
+          v_norm LIKE '%' || LOWER(ea.normalized_alias) || '%'
+          OR LOWER(ea.normalized_alias) LIKE '%' || v_norm || '%'
+      )
+    ORDER BY LENGTH(ea.normalized_alias) DESC
+    LIMIT 5;
+END;
+$$;

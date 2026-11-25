@@ -43,6 +43,23 @@ func (t *ProductSearchTool) SearchListings(ctx context.Context, term string, min
 		return nil, fmt.Errorf("failed to list approved products: %w", err)
 	}
 
+	// Resilient multi-token fallback: if multi-word term (e.g. "samsung phone") yields 0 rows,
+	// retry with key tokens (e.g. "samsung") within the active price filters.
+	if len(products) == 0 && strings.Contains(cleanTerm, " ") {
+		words := strings.Fields(cleanTerm)
+		for _, w := range words {
+			wClean := strings.TrimSpace(w)
+			if len(wClean) >= 3 && wClean != "phone" && wClean != "item" && wClean != "device" {
+				filter.Search = &wClean
+				fallbackProducts, errFallback := t.productRepo.ListApproved(ctx, filter)
+				if errFallback == nil && len(fallbackProducts) > 0 {
+					products = fallbackProducts
+					break
+				}
+			}
+		}
+	}
+
 	cards := make([]ListingCard, 0, len(products))
 	for _, p := range products {
 		catName := ""

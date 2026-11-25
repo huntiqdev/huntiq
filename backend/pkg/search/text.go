@@ -55,10 +55,11 @@ func ContainsGeez(s string) bool {
 }
 
 var (
-	rxPriceUnder = regexp.MustCompile(`(?i)(?:under|below|less than|max(?:imum)?|up to|ከ|በታች|hanga)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
-	rxPriceAbove = regexp.MustCompile(`(?i)(?:above|over|more than|min(?:imum)?|starting from|ከ|በላይ)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
-	rxPriceK     = regexp.MustCompile(`(?i)\b(\d+(?:,\d+)*(?:\.\d+)?)\s*k\b`)
-	rxPriceETB   = regexp.MustCompile(`(?i)\b(\d+(?:,\d+)*(?:\.\d+)?)\s*(?:etb|birr)\b`)
+	rxPriceUnder  = regexp.MustCompile(`(?i)(?:under|below|less than|max(?:imum)?|up to|ከ|በታች|hanga)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
+	rxPriceAbove  = regexp.MustCompile(`(?i)(?:above|over|more than|min(?:imum)?|starting from|ከ|በላይ)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
+	rxPriceAround = regexp.MustCompile(`(?i)(?:around|about|approx(?:imately)?|roughly|close to|አካባቢ)\s*(\d+(?:,\d+)*(?:\.\d+)?)\s*(k|thousand|ሺህ|etb|birr)?`)
+	rxPriceK      = regexp.MustCompile(`(?i)\b(\d+(?:,\d+)*(?:\.\d+)?)\s*k\b`)
+	rxPriceETB    = regexp.MustCompile(`(?i)\b(\d+(?:,\d+)*(?:\.\d+)?)\s*(?:etb|birr|ብር)\b`)
 )
 
 // GetSearchSynonyms returns cross-lingual synonyms for the given term.
@@ -172,6 +173,7 @@ func CleanConversationalSearchTerm(q string) string {
 
 	lower = rxPriceUnder.ReplaceAllString(lower, " ")
 	lower = rxPriceAbove.ReplaceAllString(lower, " ")
+	lower = rxPriceAround.ReplaceAllString(lower, " ")
 	lower = rxPriceK.ReplaceAllString(lower, " ")
 	lower = rxPriceETB.ReplaceAllString(lower, " ")
 
@@ -232,7 +234,7 @@ func CleanConversationalSearchTerm(q string) string {
 		"now": true, "me": true, "my": true, "you": true, "i": true, "we": true,
 		"please": true, "some": true, "any": true, "all": true, "only": true, "ones": true, "one": true,
 		"used": true, "new": true, "product": true, "products": true, "item": true, "items": true,
-		"listing": true, "listings": true, "price": true, "cost": true,
+		"listing": true, "listings": true, "price": true, "cost": true, "around": true, "about": true, "roughly": true, "approx": true,
 		"have": true, "has": true, "do": true, "does": true, "can": true, "will": true, "get": true, "got": true,
 		"there": true,
 		// Greetings & Conversational Interjections
@@ -241,7 +243,7 @@ func CleanConversationalSearchTerm(q string) string {
 		// Amharic
 		"አለ": true, "አሉ": true, "ነው": true, "ነበር": true, "ናት": true,
 		"ወይ": true, "ስለ": true, "ጋር": true, "ከ": true, "በ": true, "የ": true, "ወደ": true,
-		"ምን": true, "የት": true, "ዋጋ": true, "ስንት": true,
+		"ምን": true, "የት": true, "ዋጋ": true, "ስንት": true, "አካባቢ": true,
 		// Afaan Oromo
 		"fi": true, "ykn": true, "jira": true, "jiru": true, "naaf": true, "na": true,
 		"maal": true, "akkam": true, "gatii": true, "meeqa": true,
@@ -257,6 +259,9 @@ func CleanConversationalSearchTerm(q string) string {
 			if _, ok := searchConfig.EthiopianKeywordMap[candidate]; ok || ContainsGeez(candidate) {
 				w = candidate
 			}
+		}
+		if mapped, ok := searchConfig.EthiopianKeywordMap[w]; ok {
+			w = mapped
 		}
 		if !stopWords[w] && len(w) > 0 {
 			finalWords = append(finalWords, w)

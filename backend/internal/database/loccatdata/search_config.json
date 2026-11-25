@@ -4,13 +4,26 @@
     "መኪና": "car",
     "ቤት": "house",
     "ኮምፒውተር": "laptop",
-    "ቴሌቪዥን": "tv"
+    "ቴሌቪዥን": "tv",
+    "sumsung": "samsung",
+    "samsong": "samsung",
+    "phon": "phone",
+    "fone": "phone",
+    "phne": "phone",
+    "vits": "vitz",
+    "dril": "drill",
+    "drils": "drill",
+    "adisabeba": "Addis Ababa",
+    "addisababa": "Addis Ababa"
   },
   "synonym_groups": [
     [
       "phone",
       "mobile",
       "cellphone",
+      "phon",
+      "fone",
+      "phne",
       "ስልክ",
       "bilbila"
     ],
@@ -44,6 +57,11 @@
   ],
   "known_ethiopian_locations": [
     "Addis Ababa",
+    "Adisabeba",
+    "Addisababa",
+    "Bole",
+    "Finfinne",
+    "Sheger",
     "Dire Dawa",
     "Hawassa",
     "Bahir Dar",
