@@ -82,8 +82,8 @@ func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*Chat
 
 	// 4. Product Database Authority: Retrieve real database listings when path is search or filters present
 	var cards []ListingCard
-	if classifyRes.Path == "PATH_SEARCH" || classifyRes.SearchTerm != "" || classifyRes.MinPrice != nil || classifyRes.MaxPrice != nil {
-		cards, _ = s.productTool.SearchListings(ctx, classifyRes.SearchTerm, classifyRes.MinPrice, classifyRes.MaxPrice, 6)
+	if classifyRes.Path == "PATH_SEARCH" || classifyRes.BrowseAll || classifyRes.SearchTerm != "" || classifyRes.ListingType != "" || classifyRes.Condition != "" || classifyRes.MinPrice != nil || classifyRes.MaxPrice != nil {
+		cards, _ = s.productTool.SearchListings(ctx, classifyRes.SearchTerm, classifyRes.MinPrice, classifyRes.MaxPrice, classifyRes.ListingType, classifyRes.Condition, 6)
 	}
 
 	// 5. Daily Marketplace Intelligence (Top categories & searches)
@@ -96,6 +96,9 @@ func (s *AIService) ProcessQuestion(ctx context.Context, req ChatRequest) (*Chat
 		History:      req.History,
 		Listings:     cards,
 		TrendSummary: trendSummary,
+		ListingType:  classifyRes.ListingType,
+		Condition:    classifyRes.Condition,
+		BrowseAll:    classifyRes.BrowseAll,
 	}
 
 	chatRes, err := s.supervisor.Chat(ctx, pyChatReq)

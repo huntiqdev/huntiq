@@ -10,10 +10,30 @@ export class ApiError extends Error {
   }
 }
 
-export const API_URL = (() => {
-  const url = process.env.NEXT_PUBLIC_API_URL || '/api';
-  return url.replace(/\/$/, ''); // strip trailing slash
-})();
+export function getApiBaseUrl(): string {
+  const publicUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (publicUrl && (publicUrl.startsWith('http://') || publicUrl.startsWith('https://'))) {
+    return publicUrl.replace(/\/$/, '');
+  }
+
+  if (typeof window !== 'undefined') {
+    // In browser: relative '/api' works natively with current window origin
+    return (publicUrl || '/api').replace(/\/$/, '');
+  }
+
+  // In Node.js SSR / Server Components: fetch requires an absolute URL with scheme and host
+  const backendBase = process.env.BACKEND_URL || process.env.INTERNAL_API_URL || 'http://127.0.0.1:8080';
+  const subpath = (publicUrl && publicUrl.startsWith('/')) ? publicUrl : '/api';
+  return `${backendBase.replace(/\/$/, '')}${subpath.replace(/\/$/, '')}`;
+}
+
+export function resolveApiUrl(endpoint: string): string {
+  const base = getApiBaseUrl();
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return `${base}${cleanEndpoint}`;
+}
+
+export const API_URL = getApiBaseUrl();
 
 // Guard against multiple concurrent 401 redirects causing a redirect loop.
 let lastRedirect = 0;
@@ -79,7 +99,7 @@ export async function tryRefreshToken(): Promise<boolean> {
       if (csrf) {
         headers['X-CSRF-Token'] = csrf;
       }
-      const res = await fetch(`${API_URL}/auth/refresh`, {
+      const res = await fetch(resolveApiUrl('/auth/refresh'), {
         method: 'POST',
         credentials: 'include',
         headers,
@@ -171,9 +191,10 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
   let lastError: Error | null = null;
   
   // Retry loop
+  const requestUrl = resolveApiUrl(endpoint);
   for (let attempt = 0; attempt <= RETRY_CONFIG.maxRetries; attempt++) {
     try {
-      const res = await fetch(`${API_URL}${endpoint}`, fetchOptions);
+      const res = await fetch(requestUrl, fetchOptions);
       
       if (!res.ok) {
         // Handle 401 - unauthorized (attempt session rotation once before redirecting)
@@ -193,7 +214,7 @@ export async function fetchAPIWithMeta<T, M = any>(endpoint: string, options?: R
               if (newCsrf && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
                 headers['X-CSRF-Token'] = newCsrf;
               }
-              const retryRes = await fetch(`${API_URL}${endpoint}`, {
+              const retryRes = await fetch(requestUrl, {
                 ...fetchOptions,
                 headers,
               });

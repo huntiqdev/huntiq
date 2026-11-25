@@ -548,12 +548,82 @@ MARKETPLACE_SIGNALS = [
     "hojii", "dilaala", "komishinii", "kompiitara", "meeshaa", "meeshaalee", "qabeenya", "barbaada", "barbaaddu", "argachuu",
 ]
 
-RE_PRICE_UNDER = re.compile(r"(?i)(?:under|below|less\s+than|maximum|max|up\s+to|ከ\s*.*?በታች)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
-RE_PRICE_ABOVE = re.compile(r"(?i)(?:above|over|more\s+than|minimum|min|starting\s+from|ከ\s*.*?በላይ)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
-RE_PRICE_AROUND = re.compile(r"(?i)(?:around|about|approx(?:imately)?|roughly|close\s+to|nearby|በ?.*?አካባቢ)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
+RE_PRICE_UNDER = re.compile(r"(?i)(?:under|below|less\s*than|lessthan|maximum|max|up\s*to|ከ\s*.*?በታች)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
+RE_PRICE_ABOVE = re.compile(r"(?i)(?:above|over|more\s*than|morethan|minimum|min|starting\s*from|ከ\s*.*?በላይ)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
+RE_PRICE_AROUND = re.compile(r"(?i)(?:around|about|approx(?:imately)?|roughly|close\s*to|nearby|በ?.*?አካባቢ)\s*([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?")
 RE_PRICE_AROUND_SUFFIX = re.compile(r"(?i)\b([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ|birr|etb)?\s*(?:around|about|approx(?:imately)?|roughly|አካባቢ)\b")
 RE_STANDALONE_PRICE_K = re.compile(r"(?i)\b([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:k|thousand|ሺህ)\b")
 RE_STANDALONE_PRICE_CURRENCY = re.compile(r"(?i)\b([0-9]+(?:,[0-9]+)*(?:\.[0-9]+)?)\s*(?:birr|etb|ብር)\b")
+
+# Multi-parameter intent and listing filters
+RE_LISTING_RENT = re.compile(
+    r"(?i)\b("
+    r"rent|rental|rentals|for\s+rent|to\s+rent|lease|leasing|"
+    r"kirey|kira|kire|akray|akari|tekeray|tekiray|"
+    r"ኪራይ|የሚከራይ|ለኪራይ|ተከራይ|ተከራዩ|ተከራይተን|"
+    r"kireeffachuu|kireessuu|kireeffadhaa|"
+    r"ምክራይ|ዝካረይ|ንክራይ"
+    r")\b"
+)
+
+RE_LISTING_SALE = re.compile(
+    r"(?i)\b("
+    r"sell|sale|sales|for\s+sale|to\s+buy|buy|buying|purchase|purchasing|"
+    r"megzat|megezat|meshet|meshat|sheyach|gej|geji|shach|shaach|"
+    r"መሸጥ|መግዛት|የሚሸጥ|ሽያጭ|ገዢ|ሻጭ|የሚገዛ|"
+    r"bittaa|gurgurtaa|bituu|gurguruu|"
+    r"ንምግዛእ|ምሻጥ|ዝሽየጥ|ዓዳጊ|ሸያጢ"
+    r")\b"
+)
+
+RE_CONDITION_USED = re.compile(
+    r"(?i)\b("
+    r"used|second\s*hand|secondhand|pre-?owned|preowned|second-hand|"
+    r"yagelegele|aroge|yeteteqemu|yeteteqeme|yaqoye|"
+    r"የተጠቀመ|ያገለገለ|አሮጌ|የተጠቀሙ|የቆየ|ያገለገሉ|"
+    r"duraan\s+kan\s+itti\s+fayyadaman|"
+    r"ናይ\s+ቀደም|ዝተጠቕመሉ|ዝተጠቐመ"
+    r")\b"
+)
+
+RE_CONDITION_NEW = re.compile(
+    r"(?i)\b("
+    r"brand\s*new|brand-?new|fresh|unopened|sealed|"
+    r"haaraa|ሓዲሽ|ሓደሽቲ|አዳዲስ"
+    r")\b|(?<!addis\s)\b(new|adis|አዲስ)\b(?!\s*ababa)"
+)
+
+RE_BROWSE_ALL = re.compile(
+    r"(?i)\b("
+    r"browse(\s+all)?|view\s+all|show\s+(me\s+)?all(\s+(products|items|listings|things))?|"
+    r"what(\s+products)?\s+(are\s+)?available|what\s+do\s+you\s+have|what\s+items\s+are\s+there|"
+    r"all\s+products|all\s+listings|all\s+items|everything(\s+available)?|explore(\s+all)?|"
+    r"see\s+all(\s+listings)?|catalog|list\s+all|"
+    r"ምን\s*እቃ\s*አለ|ምን\s*አለ|ሁሉንም\s*(አሳየኝ|አሳይ|እቃዎች)?|ያሉትን\s*(እቃዎች|አሳየኝ)|ያለውን\s*አሳየኝ|"
+    r"hunda\s+agarsiisi|maal\s+qabdu|meeshaa\s+hunda|waan\s+jiru\s+hunda|"
+    r"እንታይ\s+ኣለኩም|ኩሉ\s+ኣርእየኒ|ዘሎ\s+ንብረት"
+    r")\b"
+)
+
+def extract_listing_type(text: str) -> Optional[str]:
+    clean = text.lower()
+    if RE_LISTING_RENT.search(clean):
+        return "rent"
+    if RE_LISTING_SALE.search(clean):
+        return "sale"
+    return None
+
+def extract_condition(text: str) -> Optional[str]:
+    # Strip location "addis ababa" / "adis abeba" first so "addis" is not mistaken for condition "new"
+    clean = re.sub(r"(?i)\b(addis\s+ababa|adis\s+abeba|addisababa|አዲስ\s+አበባ)\b", " ", text)
+    if RE_CONDITION_USED.search(clean):
+        return "used"
+    if RE_CONDITION_NEW.search(clean):
+        return "new"
+    return None
+
+def is_browse_all_query(text: str) -> bool:
+    return bool(RE_BROWSE_ALL.search(text))
 
 # Explicit advisory, purchasing recommendations, property valuation, comparison patterns
 RE_EXPLICIT_ADVISORY = re.compile(
@@ -625,6 +695,21 @@ def extract_price_filters(text: str) -> Tuple[Optional[float], Optional[float]]:
 
 def extract_search_term(text: str) -> str:
     clean = text.lower()
+
+    # If the text is purely a browse-all query without specific item keywords
+    # (e.g. "browse all", "browse", "show me all products", "ምን እቃ አለ", "ሁሉንም አሳየኝ")
+    # we return empty string so the search tool returns top catalog listings.
+    if is_browse_all_query(clean):
+        rem = RE_BROWSE_ALL.sub(" ", clean)
+        rem = RE_LISTING_RENT.sub(" ", rem)
+        rem = RE_LISTING_SALE.sub(" ", rem)
+        rem = RE_CONDITION_USED.sub(" ", rem)
+        rem = RE_CONDITION_NEW.sub(" ", rem)
+        rem = re.sub(r"(?i)\b(in|at|and|or|for|to|of|the|a|an|me|all|products|items|listings|በ|እና|ወይም|ለ)\b", " ", rem)
+        rem = re.sub(r"[?!.,;።፣፡]", " ", rem).strip()
+        if len(rem) < 2:
+            return ""
+
     fillers = [
         # Inquiry and acquisition verbs
         "give me", "give", "bring me", "bring", "get me", "get", "show me", "show",
@@ -655,6 +740,10 @@ def extract_search_term(text: str) -> str:
     term = clean
     for f in fillers:
         term = re.sub(r"\b" + re.escape(f) + r"\b", " ", term)
+    term = RE_LISTING_RENT.sub(" ", term)
+    term = RE_LISTING_SALE.sub(" ", term)
+    term = RE_CONDITION_USED.sub(" ", term)
+    term = RE_CONDITION_NEW.sub(" ", term)
     term = RE_PRICE_UNDER.sub(" ", term)
     term = RE_PRICE_ABOVE.sub(" ", term)
     term = RE_PRICE_AROUND.sub(" ", term)
@@ -662,6 +751,7 @@ def extract_search_term(text: str) -> str:
     term = RE_STANDALONE_PRICE_K.sub(" ", term)
     term = RE_STANDALONE_PRICE_CURRENCY.sub(" ", term)
     term = re.sub(r"\b\d+(?:,\d+)*(?:\.\d+)?\b", " ", term)
+    term = re.sub(r"(?i)\b(and|with|or|also|ena|ወይም|እና|fi|ምስ|ን)\b", " ", term)
     term = re.sub(r"[?!.,;።፣፡]", " ", term)
 
     typo_map = {
@@ -866,26 +956,28 @@ class DomainValidator:
 
         # 6. Check In-Domain Marketplace Signals & Contextual Continuity
         lower = text.lower()
+        is_browse = is_browse_all_query(text)
+        is_followup = is_contextual_followup(text, history)
         words_in_text = set(re.findall(r"\b\w+\b", lower))
-        has_marketplace_signal = False
-        for sig in MARKETPLACE_SIGNALS:
-            if RE_ETHIOPIC.search(sig):
-                if sig in lower:
-                    has_marketplace_signal = True
-                    break
-            else:
-                sig_lower = sig.lower()
-                if " " in sig_lower:
-                    if sig_lower in lower:
+        has_marketplace_signal = is_browse or bool(RE_LISTING_RENT.search(text)) or bool(RE_LISTING_SALE.search(text))
+        if not has_marketplace_signal:
+            for sig in MARKETPLACE_SIGNALS:
+                if RE_ETHIOPIC.search(sig):
+                    if sig in lower:
                         has_marketplace_signal = True
                         break
-                elif sig_lower in words_in_text or (sig_lower + "s") in words_in_text or (sig_lower + "es") in words_in_text:
-                    has_marketplace_signal = True
-                    break
-                elif len(sig_lower) >= 4 and any(w.startswith(sig_lower) for w in words_in_text):
-                    has_marketplace_signal = True
-                    break
-        is_followup = is_contextual_followup(text, history)
+                else:
+                    sig_lower = sig.lower()
+                    if " " in sig_lower:
+                        if sig_lower in lower:
+                            has_marketplace_signal = True
+                            break
+                    elif sig_lower in words_in_text or (sig_lower + "s") in words_in_text or (sig_lower + "es") in words_in_text:
+                        has_marketplace_signal = True
+                        break
+                    elif len(sig_lower) >= 4 and any(w.startswith(sig_lower) for w in words_in_text):
+                        has_marketplace_signal = True
+                        break
 
         # 7. Ambiguity check: very short ambiguous queries without signal or context
         if not has_marketplace_signal and not has_math_exception and not is_followup:
@@ -909,12 +1001,14 @@ class DomainValidator:
 
         # 8. Extraction of Search Filters
         min_p, max_p = extract_price_filters(text)
+        listing_type = extract_listing_type(text)
+        condition = extract_condition(text)
         search_term = extract_search_term(text)
 
         # Distinguish Search vs Advisory
         is_math_advisory = has_math_exception and bool(re.search(r"(?i)\b(calculate|compute|what\s+is|how\s+much|solve|formula|compare)\b", text))
         is_explicit_advisory = bool(RE_EXPLICIT_ADVISORY.search(text))
-        is_advisory = is_explicit_advisory or is_math_advisory or is_followup
+        is_advisory = (is_explicit_advisory or is_math_advisory or is_followup) and not is_browse
 
         if is_advisory:
             path = "PATH_ADVISORY"
@@ -942,7 +1036,10 @@ class DomainValidator:
                 intent = "MARKETPLACE_BUSINESS_ADVICE"
         else:
             path = "PATH_SEARCH"
-            intent = "MARKETPLACE_SEARCH"
+            if is_browse:
+                intent = "BROWSE_ALL"
+            else:
+                intent = "MARKETPLACE_SEARCH"
 
         return {
             "is_allowed": True,
@@ -952,6 +1049,9 @@ class DomainValidator:
             "search_term": search_term,
             "min_price": min_p,
             "max_price": max_p,
+            "listing_type": listing_type,
+            "condition": condition,
+            "browse_all": is_browse,
             "suggested_queries": [
                 "Sort by lowest price",
                 "Filter by verified location in Addis Ababa",
@@ -1244,6 +1344,14 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
         # 1. Local Domain Validation (Zero Gemini Calls for Rejected Queries)
         evaluation = self.validator.evaluate(message, lang, history)
 
+        # Merge server-passed filters if present
+        if data.get("listing_type"):
+            evaluation["listing_type"] = data["listing_type"]
+        if data.get("condition"):
+            evaluation["condition"] = data["condition"]
+        if data.get("browse_all") is not None:
+            evaluation["browse_all"] = data["browse_all"]
+
         if not evaluation.get("is_allowed", False):
             latency_ms = int((time.time() - t0) * 1000)
             self._send_json(200, {
@@ -1292,15 +1400,31 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
                 curr = c.get("currency", "ETB")
                 cat = c.get("category_name", "")
                 loc = c.get("location_name", "")
-                augmented_prompt += f"- #{cid}: {title} | Price: {price:.2f} {curr} | Category: {cat} | Location: {loc}\n"
+                cond = c.get("condition", "")
+                ltype = c.get("listing_type", "")
+                augmented_prompt += f"- #{cid}: {title} | Price: {price:.2f} {curr} | Type: {ltype} | Condition: {cond} | Category: {cat} | Location: {loc}\n"
             augmented_prompt += "Concisely explain these listings to the user and offer helpful marketplace recommendations.]"
         elif path == "PATH_SEARCH" or (evaluation.get("search_term") and not listings):
-            # Phase 7: Strict Zero-Result Handling
-            search_label = evaluation.get("search_term") or message
+            criteria = []
+            if evaluation.get("search_term"):
+                criteria.append(f"item: '{evaluation.get('search_term')}'")
+            if evaluation.get("listing_type"):
+                criteria.append(f"listing type: '{evaluation.get('listing_type')}'")
+            if evaluation.get("condition"):
+                criteria.append(f"condition: '{evaluation.get('condition')}'")
+            if evaluation.get("min_price") is not None or evaluation.get("max_price") is not None:
+                p_desc = []
+                if evaluation.get("min_price") is not None:
+                    p_desc.append(f"min {evaluation.get('min_price'):.0f} ETB")
+                if evaluation.get("max_price") is not None:
+                    p_desc.append(f"max {evaluation.get('max_price'):.0f} ETB")
+                criteria.append(f"price: {', '.join(p_desc)}")
+            crit_str = ", ".join(criteria) if criteria else message
+
             augmented_prompt += (
-                f"\n\n[DATABASE CONTEXT: 0 matching listings found in database for '{search_label}'.\n"
+                f"\n\n[DATABASE CONTEXT: 0 matching listings found in database for {crit_str}.\n"
                 "STRICT INSTRUCTIONS:\n"
-                "1. State factually and clearly that no listings currently match this exact search on HUNTIQ.\n"
+                "1. State factually and clearly that no listings currently match all of these specified criteria on HUNTIQ.\n"
                 "2. DO NOT fabricate or hallucinate specific listings, inventory items, or fake seller names.\n"
                 "3. Provide helpful purchasing advice, recommended specifications, or what to look for when shopping for this item.\n"
                 "4. If mentioning typical price ranges, explicitly label them as general market estimates, not verified listings.\n"
@@ -1315,23 +1439,44 @@ class AIRequestHandler(http.server.BaseHTTPRequestHandler):
             logger.error("Gemini call error: %s", err)
             search_label = evaluation.get("search_term") or message
             if listings:
-                if resolved_lang == "am":
-                    fallback = f"በHUNTIQ ዳታቤዝ ውስጥ ለ '{search_label}' የተገኙ {len(listings)} እቃዎች እነሆ፦"
-                elif resolved_lang == "ti":
-                    fallback = f"ኣብ HUNTIQ ዳታቤዝ ን '{search_label}' ዝተረኽቡ {len(listings)} ንብረታት እነሆ፦"
-                elif resolved_lang == "or":
-                    fallback = f"Gabaa HUNTIQ irratti '{search_label}' kan ilaallatu meeshaalee {len(listings)} argaman kunooti:"
+                if evaluation.get("browse_all"):
+                    if resolved_lang == "am":
+                        fallback = f"በHUNTIQ ላይ ያሉ ዋና ዋና የገበያ እቃዎች እነሆ፦"
+                    elif resolved_lang == "ti":
+                        fallback = f"ኣብ HUNTIQ ዘለዉ ቀንዲ ንብረታት እነሆ፦"
+                    elif resolved_lang == "or":
+                        fallback = f"Meeshaalee gabaa HUNTIQ irratti argaman kunooti:"
+                    else:
+                        fallback = f"Here are the latest active listings available on HUNTIQ:"
                 else:
-                    fallback = f"Here are {len(listings)} verified listings found on HUNTIQ for '{search_label}':"
+                    if resolved_lang == "am":
+                        fallback = f"በHUNTIQ ዳታቤዝ ውስጥ ለ '{search_label}' የተገኙ {len(listings)} እቃዎች እነሆ፦"
+                    elif resolved_lang == "ti":
+                        fallback = f"ኣብ HUNTIQ ዳታቤዝ ን '{search_label}' ዝተረኽቡ {len(listings)} ንብረታት እነሆ፦"
+                    elif resolved_lang == "or":
+                        fallback = f"Gabaa HUNTIQ irratti '{search_label}' kan ilaallatu meeshaalee {len(listings)} argaman kunooti:"
+                    else:
+                        fallback = f"Here are {len(listings)} verified listings found on HUNTIQ for '{search_label}':"
             else:
+                crit_parts = []
+                if evaluation.get("condition"):
+                    crit_parts.append(evaluation.get("condition"))
+                if evaluation.get("listing_type"):
+                    crit_parts.append(evaluation.get("listing_type"))
+                if search_label:
+                    crit_parts.append(search_label)
+                if evaluation.get("max_price") is not None:
+                    crit_parts.append(f"< {evaluation.get('max_price'):.0f} ETB")
+                crit_label = " ".join(crit_parts) if crit_parts else search_label
+
                 if resolved_lang == "am":
-                    fallback = f"በአሁኑ ሰዓት በHUNTIQ ዳታቤዝ ውስጥ ለ '{search_label}' የቀረበ እቃ አልተገኘም። እባክዎ እንደ ኤሌክትሮኒክስ፣ መኪኖች ወይም ቤቶች ያሉ ዋና ዋና ክፍሎችን ይጎብኙ።"
+                    fallback = f"በአሁኑ ሰዓት በHUNTIQ ዳታቤዝ ውስጥ ለ '{crit_label}' የቀረበ እቃ አልተገኘም። እባክዎ እንደ ኤሌክትሮኒክስ፣ መኪኖች ወይም ቤቶች ያሉ ዋና ዋና ክፍሎችን ይጎብኙ።"
                 elif resolved_lang == "ti":
-                    fallback = f"ኣብዚ እዋን'ዚ ኣብ HUNTIQ ዳታቤዝ ን '{search_label}' ዝተረኽበ ንብረት የለን። በጃኹም ከም ኤሌክትሮኒክስ፣ መካይን ወይ ኣባይቲ ዝኣመሰሉ ዋናታት ክፍሊታት ርኣዩ።"
+                    fallback = f"ኣብዚ እዋን'ዚ ኣብ HUNTIQ ዳታቤዝ ን '{crit_label}' ዝተረኽበ ንብረት የለን። በጃኹም ከም ኤሌክትሮኒክስ፣ መካይን ወይ ኣባይቲ ዝኣመሰሉ ዋናታት ክፍሊታት ርኣዩ።"
                 elif resolved_lang == "or":
-                    fallback = f"Yeroo ammaa gabaa HUNTIQ irratti '{search_label}' kan ilaallatu meeshaan argame hin jiru. Maaloo kutaa elektirooniksii, konkolaattota ykn manneen ilaalaa."
+                    fallback = f"Yeroo ammaa gabaa HUNTIQ irratti '{crit_label}' kan ilaallatu meeshaan argame hin jiru. Maaloo kutaa elektirooniksii, konkolaattota ykn manneen ilaalaa."
                 else:
-                    fallback = f"We currently do not have active listings matching '{search_label}' on HUNTIQ. You can browse our Electronics, Vehicles, and Properties categories or check back soon."
+                    fallback = f"We currently do not have active listings matching '{crit_label}' on HUNTIQ. You can browse our Electronics, Vehicles, and Properties categories or check back soon."
 
             self._send_json(200, {
                 "reply": fallback,

@@ -11,7 +11,11 @@ const BACKEND_ORIGIN = (() => {
   if (api.startsWith('http://') || api.startsWith('https://')) {
     return api.replace(/\/api$/, '');
   }
-  return '';
+  const backend = process.env.BACKEND_URL || process.env.INTERNAL_API_URL;
+  if (backend && (backend.startsWith('http://') || backend.startsWith('https://'))) {
+    return backend.replace(/\/$/, '');
+  }
+  return 'http://localhost:8080';
 })();
 
 export function resolveImageUrl(url: string | undefined | null): string {

@@ -17,7 +17,7 @@ func NewProductSearchTool(productRepo *repository.ProductRepo) *ProductSearchToo
 	return &ProductSearchTool{productRepo: productRepo}
 }
 
-func (t *ProductSearchTool) SearchListings(ctx context.Context, term string, minPrice, maxPrice *float64, limit int) ([]ListingCard, error) {
+func (t *ProductSearchTool) SearchListings(ctx context.Context, term string, minPrice, maxPrice *float64, listingType, condition string, limit int) ([]ListingCard, error) {
 	if t.productRepo == nil {
 		return nil, nil
 	}
@@ -26,11 +26,25 @@ func (t *ProductSearchTool) SearchListings(ctx context.Context, term string, min
 		limit = 6
 	}
 
+	var ltPtr *string
+	if strings.TrimSpace(listingType) != "" {
+		lt := strings.ToLower(strings.TrimSpace(listingType))
+		ltPtr = &lt
+	}
+
+	var condPtr *string
+	if strings.TrimSpace(condition) != "" {
+		c := strings.ToLower(strings.TrimSpace(condition))
+		condPtr = &c
+	}
+
 	filter := dto.ProductFilter{
-		Limit:    limit,
-		Page:     1,
-		MinPrice: minPrice,
-		MaxPrice: maxPrice,
+		Limit:       limit,
+		Page:        1,
+		MinPrice:    minPrice,
+		MaxPrice:    maxPrice,
+		ListingType: ltPtr,
+		Condition:   condPtr,
 	}
 
 	cleanTerm := strings.TrimSpace(term)
@@ -44,7 +58,7 @@ func (t *ProductSearchTool) SearchListings(ctx context.Context, term string, min
 	}
 
 	// Resilient multi-token fallback: if multi-word term (e.g. "samsung phone") yields 0 rows,
-	// retry with key tokens (e.g. "samsung") within the active price filters.
+	// retry with key tokens (e.g. "samsung") while strictly preserving active price, listing_type, and condition filters.
 	if len(products) == 0 && strings.Contains(cleanTerm, " ") {
 		words := strings.Fields(cleanTerm)
 		for _, w := range words {

@@ -21,6 +21,9 @@ type ClassifyResponse struct {
 	SearchTerm       string   `json:"search_term,omitempty"`
 	MinPrice         *float64 `json:"min_price,omitempty"`
 	MaxPrice         *float64 `json:"max_price,omitempty"`
+	ListingType      string   `json:"listing_type,omitempty"`
+	Condition        string   `json:"condition,omitempty"`
+	BrowseAll        bool     `json:"browse_all,omitempty"`
 	InstantReply     string   `json:"instant_reply,omitempty"`
 	SuggestedQueries []string `json:"suggested_queries,omitempty"`
 	Reason           string   `json:"reason,omitempty"`
@@ -45,6 +48,9 @@ type PythonChatRequest struct {
 	History      []ChatMessage `json:"history,omitempty"`
 	Listings     []ListingCard `json:"listings,omitempty"`
 	TrendSummary string        `json:"trend_summary,omitempty"`
+	ListingType  string        `json:"listing_type,omitempty"`
+	Condition    string        `json:"condition,omitempty"`
+	BrowseAll    bool          `json:"browse_all,omitempty"`
 }
 
 type ChatRequest struct {
